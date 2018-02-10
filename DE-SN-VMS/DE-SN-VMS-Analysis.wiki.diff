@@ -1,0 +1,79 @@
+4c4
+< OSM-Base Time : 2018-02-10 16:49:02 UTC<br>
+---
+> OSM-Base Time : 2018-02-10 16:25:02 UTC<br>
+16c16,17
+< Diese automatisch erstellte Auswertung enthält derzeit nur eine '''Bestandsaufnahme der in OSM gefundenen VMS-Linien'''.<br />
+---
+> Diese automatisch erstellte Auswertung enthält derzeit zum Einen eine '''Bestandsaufnahme der in OSM gefundenen VMS-Linien'''.<br />
+> Zum Anderen wurden hier manuell '''Daten aus der [[Saxony/Transportation/Verkehrsverbund Mittelsachsen|VMS-Wiki Seite''' eingepflegt.<br />
+18,19c19,20
+< Ziel ist aber die Erstellung dieser Datei aus VMS-Daten mit allen zum VMS gehörigen Linien.<br />
+< Die Liste kommt idealerweise direkt vom VMS oder mit Hilfe des VMS (copyright!).<br />
+---
+> Ziel ist aber die Erstellung dieser Datei aus VMS-Daten mit allen zum SMV gehörigen Linien.<br />
+> Die Liste kommt idealerweise direkt vom und mit Hilfe des VMS (copyright!).<br />
+25a27,33
+> kann aber auch andere regulärer Ausdrücke enthalten: z.B. "VMS|ABC|DEF|usw."<br />
+> <br />
+> == Tram ==
+> === Trambahnen in Chemnitz /Zwickau ===
+> == Bus ==
+> === Stadtverkehre Chemnitz / Zwickau ===
+> === Regionalbus ===
+45,46d52
+< | CB&nbsp;523 || 1436380 || route || train || VMS_523 || VMS || City-Bahn Chemnitz GmbH || Stollberg ||  || Glauchau ||  align="center" | ? || Route without Way(s)<br>Route without Node(s)<br>Route with Relation(s) ||  
+< |-
+427,428d432
+< | 262 || 1906407 || route_master || bus || Bus 262 || VMS ||  ||  ||  ||  ||  align="center" | ? ||  ||  
+< |-
+655,656d658
+< | 628 || 3650984 || route || bus || Bus 628: Geithain Bahnhof => Waldheim, Niedermarkt ||  ||  || Geithain, Bahnhof || Geringswalde, Markt || Waldheim, Niedermarkt ||  align="center" | 2 || 'note:de' = Variante 1/6 für Geithain->Waldheim<br>'network' is not set<br>PTv2 route: has gap(s), consists of 9 segments || PTv2 route: 'from' is not part of 'name' 
+< |-
+691,692d692
+< | 66 || 1891432 || route_master || bus || Bus 66 || VMS ||  ||  ||  ||  ||  align="center" | ? ||  ||  
+< |-
+829,830d828
+< | 770 || 5942016 || route || bus || Bus 770 ||  || VMS ||  ||  ||  ||  align="center" | ? || 'note' ~ Freiberg - Halsbach - Naundorf - Niederschöna - Oberschaar - Hetzdorf<br>'network' is not set<br>Route without Way(s)<br>Route with only 1 Node ||  
+< |-
+901,902d898
+< | 79 || 1895429 || route_master || bus || Bus 79 || VMS ||  ||  ||  ||  ||  align="center" | ? ||  ||  
+< |-
+911,912d906
+< | 86 || 1895663 || route_master || bus || Bus 86 || VMS ||  ||  ||  ||  ||  align="center" | ? ||  ||  
+< |-
+917,918d910
+< | 89 || 1895675 || route_master || bus || Bus 89 || VMS ||  ||  ||  ||  ||  align="center" | ? ||  ||  
+< |-
+925,926d916
+< | 93 || 1898980 || route_master || bus || Bus 93 || VMS ||  ||  ||  ||  ||  align="center" | ? ||  ||  
+< |-
+1029,1030d1018
+< | H || 5942018 || route || bus || Buslinie H || VMS || VMS ||  ||  ||  ||  align="center" | ? || 'note' ~ Freiberg, Busbahnhof - Tuttendorf - Halsbrücke, Wendeschleife<br>Route without Way(s)<br>Route with only 1 Node ||  
+< |-
+1098a1087,1104
+> |-
+> | 5942016 || route || bus || 770 ||  || VMS ||  ||  ||  ||  align="center" | ? || 'note' ~ Freiberg - Halsbach - Naundorf - Niederschöna - Oberschaar - Hetzdorf<br>'ref' is not set<br>'network' is not set<br>Route without Way(s)<br>Route with only 1 Node ||  
+> |-
+> | 1906407 || route_master || bus || Bus 262 || VMS ||  ||  ||  ||  ||  align="center" | ? || 'ref' is not set ||  
+> |-
+> | 3650984 || route || bus || Bus 628: Geithain Bahnhof => Waldheim, Niedermarkt ||  ||  || Geithain, Bahnhof || Geringswalde, Markt || Waldheim, Niedermarkt ||  align="center" | 2 || 'note:de' = Variante 1/6 für Geithain->Waldheim<br>'ref' is not set<br>'network' is not set<br>PTv2 route: has gap(s), consists of 9 segments || PTv2 route: 'from' is not part of 'name' 
+> |-
+> | 1891432 || route_master || bus || Bus 66 || VMS ||  ||  ||  ||  ||  align="center" | ? || 'ref' is not set ||  
+> |-
+> | 1895429 || route_master || bus || Bus 79 || VMS ||  ||  ||  ||  ||  align="center" | ? || 'ref' is not set ||  
+> |-
+> | 1895663 || route_master || bus || Bus 86 || VMS ||  ||  ||  ||  ||  align="center" | ? || 'ref' is not set ||  
+> |-
+> | 1895675 || route_master || bus || Bus 89 || VMS ||  ||  ||  ||  ||  align="center" | ? || 'ref' is not set ||  
+> |-
+> | 1898980 || route_master || bus || Bus 93 || VMS ||  ||  ||  ||  ||  align="center" | ? || 'ref' is not set ||  
+> |-
+> | 5942018 || route || bus || Buslinie H || VMS || VMS ||  ||  ||  ||  align="center" | ? || 'note' ~ Freiberg, Busbahnhof - Tuttendorf - Halsbrücke, Wendeschleife<br>'ref' is not set<br>Route without Way(s)<br>Route with only 1 Node ||  
+1164c1170
+< | 2728696 || public_transport ||  || C || Linie C (Rückfahrt) || VMS || REGIOBUS Mittelsachsen GmbH || Gärtitz ||  || Rotes Kreuz ||  align="center" |  ||  
+---
+> | 2728696 || public_transport ||  ||  || Linie C (Rückfahrt) || VMS || REGIOBUS Mittelsachsen GmbH || Gärtitz ||  || Rotes Kreuz ||  align="center" |  ||  
+1193a1200,1201
+> |-
+> | VMS || 1436380 

@@ -1,0 +1,67 @@
+#
+# Formatierung:
+#
+# Überschriften beginnen mit '=', '==', '===', '====', ... am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an
+#
+# Einfacher Text beginnt mit '-' am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an, Zeilen hier werden im Wiki mit <br /> abgeschlossen (neue Zeile).
+# Einfacher Text darf nur direkt hinter einer Überschrift stehen.
+#
+# Links: [[...|...]] sind interne Verweise im Wiki
+#        [... ...] sind externe Verweise
+#
+# Kommentare beginnen mit '#' am Anfang einer Zeile. Kommentare mittendrin werden nicht erkannt.
+#
+# Format der Datei: UNIX (LF), UTF-8
+#
+#
+# Inhalt im CSV-Format
+#
+# ref;type;comment;from;to;operator
+#
+# - ref       == tag 'ref' von route oder route_master
+# - type      == inhalt des tags 'route' bzw. 'route_master'
+# - comment   == kann Kommentar enthalten wie; Ruftaxi, Bus, Expressbus, ...  wird nicht ausgewertet, lediglich ausgegeben
+# - from      == wird nicht ausgewertet, lediglich ausgegeben
+# - to        == wird nicht ausgewertet, lediglich ausgegeben
+# - operator  == wird nicht ausgewertet, lediglich ausgegeben
+#
+
+
+= [[Saxony/Transportation/Verkehrsverbund Mittelsachsen/Analyse/DE-SN-VMS-Linien|In OSM gefundene VRS-Linien]]
+
+== Quelle
+-
+- Diese automatisch erstellte Auswertung enthält derzeit nur eine '''Bestandsaufnahme der in OSM gefundenen VMS-Linien'''.
+-
+- Ziel ist aber die Erstellung dieser Datei aus VMS-Daten mit allen zum VMS gehörigen Linien. 
+- Die Liste kommt idealerweise direkt vom VMS oder mit Hilfe des VMS (copyright!).
+-
+- bei der Analyse ist 'network' derzeit entweder
+- * "VMS"                            short form, oder
+- * "Verkehrsverbund Mittelsachsen"  long form, oder
+- * leer, d.h. nicht gesetzt
+-
+
+
+
+#= Parameter des Tools
+#== Overpass-API
+#- * http://overpass-api.de/api/interpreter?data=area[boundary=public_transport][name='Verkehrsverbund Mittelsachsen']->.L; rel(area.L)[route~'(bus|tram|train|subway|light_rail|trolleybus|ferry|monorail|aerialway|share_taxi)']->.R; rel(br.R); out; rel.R; out; rel(r.R); out; way(r.R); out; node(r.R); out; 
+#== Analyse-Skript
+#- * --network-short="VMS"
+#- * --network-long="Verkehrsverbund Mittelsachsen"
+#- * --positive-notes
+#- * --wiki
+#
+#== Siehe auch:
+#- * [[Talk:Saxony/Transportation/Verkehrsverbund Mittelsachsen/Analyse|Diskussionsseite]] dieser Seite
+#- * [[User_talk:ToniE/Transportation/Analyse#Momentane_Pr.C3.BCfungen|Momentane Prüfungen]] und deren Beudeutung
+#
+#- [[Category:Page with status]]
+#- [[Category:Train routes in Germany]]
+#- [[Category:Rapid transit in Germany]]
+#- [[Category:Public transport in Germany]]
+#- [[Category:Sachsen]]
+#- [[Category:Nahverkehr]]
+#- [[Category:DE-SN-VMS]]
+
