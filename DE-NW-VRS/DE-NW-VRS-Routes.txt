@@ -1,0 +1,646 @@
+#
+# Formatierung:
+#
+# Überschriften beginnen mit '=', '==', '===', '====', ... am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an
+#
+# Einfacher Text beginnt mit '-' am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an, Zeilen hier werden im Wiki mit <br /> abgeschlossen (neue Zeile).
+# Einfacher Text darf nur direkt hinter einer Überschrift stehen.
+#
+# Links: [[...|...]] sind interne Verweise im Wiki
+#        [... ...] sind externe Verweise
+#
+# Kommentare beginnen mit '#' am Anfang einer Zeile. Kommentare mittendrin werden nicht erkannt.
+#
+# Format der Datei: UNIX (LF), UTF-8
+#
+#
+# Inhalt im CSV-Format
+#
+# ref;type;comment;from;to;operator
+#
+# - ref       == tag 'ref' von route oder route_master
+# - type      == inhalt des tags 'route' bzw. 'route_master'
+# - comment   == kann Kommentar enthalten wie; Ruftaxi, Bus, Expressbus, ...  wird nicht ausgewertet, lediglich ausgegeben
+# - from      == wird nicht ausgewertet, lediglich ausgegeben
+# - to        == wird nicht ausgewertet, lediglich ausgegeben
+# - operator  == wird nicht ausgewertet, lediglich ausgegeben
+#
+
+
+= [[VRS/Analyse/VRS-Linien|In OSM gefundene VRS-Linien]]
+
+== Quelle
+-
+- Diese automatisch erstellte Auswertung enthält derzeit zum Einen eine '''Bestandsaufnahme der in OSM gefundenen VRS-Linien'''.
+- Zum Anderen wurden hier manuell '''Daten aus der [[VRS|VRS-Wiki Seite]]''' eingepflegt.
+-
+- Ziel ist aber die Erstellung dieser Datei aus VRS-Daten mit allen zum VRS gehörigen Linien. 
+- Die Liste kommt idealerweise direkt vom und mit Hilfe des VRS (copyright!).
+-
+- bei der Analyse ist 'network' derzeit entweder
+- * "VRS"                                             short form, oder
+- * "Verkehrsverbund Rhein-Sieg|NRW Regionalverkehr"  long form, oder
+- * leer, d.h. nicht gesetzt
+-
+- kann aber auch andere regulärer Ausdrücke enthalten: z.B. "VRS|ABC|DEF|usw."
+-
+
+
+== Zug
+
+RE1;train;;;;
+RE5;train;;;;
+RE6;train;;;;
+RE7;train;;;;
+RE8;train;;;;
+RE9;train;;;;
+RE12;train;;;;
+RE22;train;;;;
+RB22;train;;;;
+RB23;train;;;;
+RB24;train;;;;
+RB25;train;;;;
+RB26;train;;;;
+RB27;train;;;;
+RB28;train;;;;
+RB30;train;;;;
+RB38;train;;;;
+RB39;train;;;;
+RB48;train;;;;
+RB90;train;;;;
+
+== S-Bahn
+
+S6;train;;;;
+S11;train;;;;
+S12;train;;;;
+S13;train;;;;
+S19;train;;;;
+S23;train;;;;
+
+== U-Bahn/Straßenbahn
+
+1;tram;;;;
+3;tram;;;;
+4;tram;;;;
+5;tram;;;;
+7;tram;;;;
+9;tram;;;;
+12;tram;;;;
+13;tram;;;;
+15;tram;;;;
+16;tram;;;;
+17;tram;;;;
+18;tram;;;;
+61;tram;;;;
+62;tram;;;;
+63;tram;;;;
+65;tram;;;;
+66;tram;;;;
+67;tram;;;;
+68;tram;;;;
+
+== Bus
+
+=== Nachtbus
+
+N1;bus;;;;
+N2;bus;;;;
+N3;bus;;;;
+N4;bus;;;;
+N5;bus;;;;
+N6;bus;;;;
+N7;bus;;;;
+N8;bus;Existiert zweimal im VRS: Einmal in Bonn und einmal in Leichlingen!;;;
+N9;bus;;;;
+N10;bus;;;;
+N20;bus;;;;
+N21;bus;;;;
+N22;bus;;;;
+N23;bus;;;;
+N24;bus;;;;
+N25;bus;;;;
+N26;bus;;;;
+N41;bus;;;;
+N42;bus;;;;
+N43;bus;;;;
+N44;bus;;;;
+N45;bus;;;;
+N46;bus;;;;
+N47;bus;;;;
+
+=== Schnellbus
+
+SB40;bus;;;;
+SB55;bus;;;;
+SB56;bus;;;;
+SB60;bus;;;;
+SB69;bus;;;;
+SB 82;bus;;;;
+
+=== Bus 100 ...
+
+106;bus;;;;
+120;bus;;;;
+121;bus;;;;
+122;bus;;;;
+125;bus;;;;
+126;bus;;;;
+127;bus;;;;
+130;bus;;;;
+131;bus;;;;
+132;bus;;;;
+133;bus;;;;
+135;bus;;;;
+136;bus;;;;
+138;bus;;;;
+139;bus;;;;
+140;bus;;;;
+#141, 143;bus;;;;
+141;bus;;;;
+142;bus;;;;
+143;bus;;;;
+144;bus;;;;
+145;bus;;;;
+146;bus;;;;
+147;bus;;;;
+149;bus;;;;
+150;bus;;;;
+151;bus;;;;
+152;bus;;;;
+153;bus;;;;
+154;bus;;;;
+155;bus;;;;
+156;bus;;;;
+157;bus;;;;
+158;bus;;;;
+159;bus;;;;
+160;bus;;;;
+161;bus;;;;
+162;bus;;;;
+165;bus;;;;
+166;bus;;;;
+167;bus;;;;
+185;bus;;;;
+190;bus;;;;
+191;bus;;;;
+192;bus;;;;
+
+=== Bus 200 ...
+
+201;bus;;;;
+202;bus;;;;
+203;bus;;;;
+204;bus;;;;
+205;bus;;;;
+206;bus;;;;
+207;bus;;;;
+208;bus;;;;
+209;bus;;;;
+210;bus;;;;
+211;bus;;;;
+212;bus;;;;
+213;bus;;;;
+214;bus;;;;
+215;bus;;;;
+# 216;bus;;;; existiert nicht
+217;bus;;;;
+#219;bus;;;;
+220;bus;;;;
+221;bus;;;;
+222;bus;;;;
+223;bus;;;;
+224;bus;;;;
+225;bus;;;;
+#226;bus;Linie vermutlich aufgehoben;;;
+227;bus;;;;
+229;bus;;;;
+231;bus;;;;
+232;bus;;;;
+233;bus;;;;
+238;bus;;;;
+239;bus;;;;
+#239/240;bus;;;;
+240;bus;Bus AST240 läuft parallel;;;
+244;bus;;;;
+249;bus;;;;
+250;bus;;;;
+251;bus;;;;
+252;bus;;;;
+253;bus;;;;
+254;bus;;;;
+255;bus;;;;
+256;bus;;;;
+257;bus;;;;
+258;bus;;;;
+259;bus;;;;
+260;bus;;;;
+261;bus;;;;
+263;bus;;;;
+264;bus;;;;
+265;bus;;;;
+266;bus;;;;
+267;bus;;;;
+268;bus;;;;
+269;bus;;;;
+276;bus;;;;
+283;bus;;;;
+298;bus;;;;
+
+=== Bus 300 ...
+
+301;bus;;;;
+302;bus;;;;
+303;bus;;;;
+306;bus;;;;
+307;bus;;;;
+308;bus;;;;
+310;bus;;;;
+311;bus;;;;
+312;bus;;;;
+313;bus;;;;
+314;bus;;;;
+315;bus;;;;
+316;bus;;;;
+317;bus;;;;
+318;bus;;;;
+319;bus;;;;
+320;bus;;;;
+321;bus;;;;
+322;bus;;;;
+323;bus;;;;
+324;bus;;;;
+325;bus;;;;
+331;bus;;;;
+332;bus;;;;
+333;bus;;;;
+335;bus;;;;
+336;bus;;;;
+336R;bus;;;;
+337;bus;;;;
+338;bus;;;;
+339;bus;;;;
+340;bus;;;;
+341;bus;;;;
+342;bus;;;;
+343;bus;;;;
+344;bus;;;;
+346;bus;;;;
+348;bus;;;;
+347;bus;;;;
+349;bus;;;;
+361;bus;;;;
+362;bus;;;;
+363;bus;;;;
+364;bus;;;;
+365;bus;;;;
+398;bus;;;;
+399;bus;;;;
+
+=== Bus 400 ...
+
+400;bus;;;;
+#404;bus;;;;
+420;bus;;;;
+421;bus;;;;
+422;bus;;;;
+423;bus;;;;
+425;bus;;;;
+426;bus;;;;
+427;bus;;;;
+429;bus;;;;
+430;bus;;;;
+431;bus;;;;
+432;bus;;;;
+433;bus;;;;
+434;bus;;;;
+435;bus;;;;
+436;bus;;;;
+437;bus;;;;
+438;bus;;;;
+439;bus;;;;
+440;bus;;;;
+441;bus;;;;
+448;bus;;;;
+449;bus;;;;
+450;bus;;;;
+451;bus;;;;
+452;bus;;;;
+453;bus;;;;
+454;bus;;;;
+455;bus;;;;
+456;bus;;;;
+457;bus;;;;
+
+=== Bus 500 ...
+
+501/164;bus;;;;
+501/167;bus;;;;
+502;bus;;;;
+503;bus;;;;
+504;bus;;;;
+505;bus;;;;
+506;bus;;;;
+507;bus;;;;
+508;bus;;;;
+509;bus;;;;
+510;bus;;;;
+511;bus;;;;
+512;bus;;;;
+513;bus;;;;
+#514;bus;Die Linie gibt es seit dem 12.12.2010 nicht mehr;;;
+516;bus;;;;
+517;bus;;;;
+518;bus;;;;
+520;bus;;;;
+521;bus;;;;
+522;bus;;;;
+523;bus;;;;
+524;bus;;;;
+525;bus;;;;
+526;bus;;;;
+527;bus;;;;
+528;bus;;;;
+529;bus;;;;
+530;bus;;;;
+531;bus;;;;
+532;bus;;;;
+533;bus;;;;
+534;bus;;;;
+535;bus;;;;
+536;bus;;;;
+537;bus;;;;
+#538;bus;Die Linie gibt es seit dem 12.12.2010 nicht mehr;;;
+539;bus;;;;
+#540;bus;Die Linie gibt es seit dem 12.12.2010 nicht mehr;;;
+541;bus;;;;
+542;bus;;;;
+543;bus;;;;
+544;bus;;;;
+545;bus;;;;
+546;bus;;;;
+547;bus;;;;
+548;bus;;;;
+549;bus;;;;
+550/163;bus;;;;
+551;bus;;;;
+554;bus;;;;
+556;bus;;;;
+557;bus;;;;
+558;bus;;;;
+560;bus;;;;
+562;bus;;;;
+564;bus;;;;
+565;bus;;;;
+566;bus;;;;
+570;bus;;;;
+571;bus;;;;
+572;bus;;;;
+573;bus;;;;
+575;bus;;;;
+576;bus;;;;
+577;bus;;;;
+578;bus;;;;
+579;bus;;;;
+
+=== Bus 600 ...
+
+600;bus;;;;
+601;bus;;;;
+602;bus;;;;
+603;bus;;;;
+604;bus;;;;
+605;bus;;;;
+606;bus;;;;
+607;bus;;;;
+608;bus;;;;
+609;bus;;;;
+610;bus;;;;
+611;bus;;;;
+612;bus;;;;
+613;bus;;;;
+614;bus;;;;
+615;bus;;;;
+630;bus;;;;
+631;bus;;;;
+632;bus;Linie existiert nicht mehr;;;
+633;bus;;;;
+635;bus;;;;
+636;bus;;;;
+637;bus;;;;
+638;bus;;;;
+640;bus;;;;
+
+=== Bus 700 ...
+
+702;bus;;;;
+703;bus;;;;
+704;bus;;;;
+705;bus;;;;
+706;bus;;;;
+707;bus;;;;
+709;bus;;;;
+710;bus;;;;
+711;bus;;;;
+712;bus;;;;
+713;bus;;;;
+714;bus;;;;
+715;bus;;;;
+717;bus;;;;
+718;bus;;;;
+720;bus;;;;
+721;bus;;;;
+722;bus;;;;
+731;bus;;;;
+749;bus;;;;
+
+=== Bus 800 ...
+
+800;bus;;;;
+801;bus;;;;
+802;bus;;;;
+805;bus;Linie existiert seit Fahrplanwechsel 2015 nicht mehr, wurde durch Verlängerung der Linie 817 ersetzt.;;;
+806;bus;;;;
+807;bus;;;;
+808;bus;;;;
+809;bus;;;;
+810;bus;;;;
+811;bus;;;;
+812;bus;;;;
+813;bus;;;;
+814;bus;;;;
+817;bus;;;;
+818;bus;;;;
+819;bus;;;;
+820;bus;;;;
+821;bus;;;;
+822;bus;;;;
+823;bus;;;;
+824;bus;;;;
+825;bus;;;;
+826;bus;;;;
+827;bus;;;;
+TB 827;bus;;;;
+828;bus;;;;
+829;bus;;;;
+831;bus;;;;
+832;bus;;;;
+833;bus;;;;
+834;bus;;;;
+TB 835;bus;;;;
+836;bus;;;;
+837;bus;;;;
+838;bus;;;;
+839;bus;;;;
+842;bus;;;;
+843;bus;;;;
+844;bus;;;;
+845;bus;;;;
+846;bus;;;;
+848;bus;;;;
+849;bus;;;;
+852;bus;Linie gehört zum Verbund VRM;;;
+854;bus;;;;
+855;bus;;;;
+856;bus;;;;
+857;bus;;;;
+858;bus;;;;
+859;bus;;;;
+860;bus;;;;
+867;bus;;;;
+868;bus;;;;
+869;bus;;;;
+870;bus;;;;
+871;bus;;;;
+872;bus;;;;
+873;bus;;;;
+874;bus;;;;
+875;bus;;;;
+876;bus;;;;
+877;bus;;;;
+878;bus;;;;
+881;bus;siehe Abschnitt Anruf-Sammel-Taxi;;;
+882;bus;;;;
+893;bus;;;;
+894;bus;;;;
+896;bus;;;;
+897;bus;;;;
+898;bus;;;;
+899;bus;;;;
+
+=== Bus 900 ...
+
+920;bus;;;;
+921;bus;;;;
+922;bus;;;;
+923;bus;;;;
+924;bus;;;;
+930;bus;;;;
+935;bus;;;;
+939;bus;;;;
+940;bus;;;;
+941;bus;;;;
+945;bus;;;;
+955;bus;;;;
+957;bus;;;;
+960;bus;;;;
+961;bus;;;;
+962;bus;;;;
+963;bus;;;;
+964;bus;;;;
+965;bus;;;;
+966;bus;;;;
+967;bus;;;;
+968;bus;;;;
+969;bus;;;;
+970;bus;;;;
+971;bus;;;;
+974;bus;;;;
+975;bus;;;;
+976;bus;;;;
+977;bus;;;;
+978;bus;;;;
+979;bus;;;;
+980;bus;;;;
+984;bus;;;;
+985;bus;;;;
+986;bus;;;;
+987;bus;;;;
+988;bus;;;;
+990;bus;;;;
+
+=== Anruf-Sammel-Taxi
+
+- Ist das tagging mit route=bus korrekt, oder kann route=share_taxi verwendet werden?
+- Ist 'ref' eventuell ohne 'AST' gemapped?
+
+AST 180;bus;;;;
+AST 181;bus;;;;
+AST 182;bus;;;;
+AST183;bus;;;;
+TaxiBus 185;bus;;;;
+TaxiBus 186;bus;;;;
+TaxiBus 187;bus;;;;
+AST 237;bus;;;;
+TaxiBus 262;bus;;;;
+AST 417;bus;;;;
+AST 447;bus;;;;
+AST 481;bus;;;;
+TaxiBus 572;bus;;;;
+AST 580;bus;;;;
+AST 581;bus;;;;
+AST 582;bus;;;;
+AST 583;bus;;;;
+584;bus;AnrufSammelTaxi;;;
+AST 586;bus;;;;
+AST 587;bus;;;;
+AST 588;bus;;;;
+T650;bus;;;;
+T651;bus;;;;
+680;bus;;;;
+780;bus;;;;
+AST 781;bus;;;;
+AST 782;bus;;;;
+783;bus;;;;
+AST 784;bus;;;;
+AST 785;bus;;;;
+AST 786;bus;;;;
+AST 787;bus;;;;
+AST 788;bus;;;;
+AST 880;bus;;;;
+AST 883;bus;;;;
+AST 884;bus;;;;
+AST 885;bus;;;;
+AST 886;bus;;;;
+AST 887;bus;;;;
+AST 888;bus;;;;
+AST 889;bus;;;;
+AST 890;bus;;;;
+AST 881;bus;;;;
+AST 892;bus;;;;
+
+=== Bürgerbus (nicht Teil des VRS)
+
+BBO;bus;;;;
+
+#= Parameter des Tools
+#== Overpass-API
+#- * http://overpass-api.de/api/interpreter?data=area[boundary=public_transport][name='Verkehrsverbund Rhein-Sieg']->.L; rel(area.L)[route~'(bus|tram|train|subway|light_rail|trolleybus|ferry|monorail|aerialway|share_taxi)']->.R; rel(br.R); out; rel.R; out; rel(r.R); out; way(r.R); out; node(r.R); out; 
+#== Analyse-Skript
+#- * --network-short="VRS"
+#- * --network-long="Verkehrsverbund Rhein-Sieg|NRW Regionalverkehr"
+#- * --positive-notes
+#- * --wiki
+#
+#== Siehe auch:
+#- * [[Talk:VRS/Analyse|Diskussionsseite]] dieser Seite
+#- * [[User_talk:ToniE/Transportation/Analyse#Momentane_Pr.C3.BCfungen|Momentane Prüfungen]] und deren Beudeutung
+#
+#- [[Category:Page with status]]
+#- [[Category:Train routes in Germany]]
+#- [[Category:Rapid transit in Germany]]
+#- [[Category:Public transport in Germany]]
+#- [[Category:Nordrhein-Westfalen]]
+#- [[Category:Nahverkehr]]
+#- [[Category:DE-NRW-VRS]]
+

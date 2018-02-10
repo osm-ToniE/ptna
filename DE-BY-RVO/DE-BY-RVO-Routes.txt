@@ -1,0 +1,237 @@
+# ref;type;comment;from;to;operator
+#
+= [[Oberbayern/Transportation/RVO-Linien-gesamt|Regionalverkehr Oberbayern (RVO)]]
+== Busse
+
+=== 8xx
+825;bus;Oberteisendorf - Teisendorf - Saaldorf - Laufen
+828;bus;Bad Reichenhall - Unterjettenberg - Melleck Ortsmitte
+829;bus;Bad Reichenhall - Anger - Teisendorf - Rückstetten
+836;bus;Berchtesgaden - Marktschellenberg - Freilassing
+837;bus;Berchtesgaden - Maria Gern - Hintergern
+838;bus;Berchtesgaden - Dokumentation - Buchenhöhe - Christophorusschule
+839;bus;Ringlinie Berchtesgaden - Strub - Andreas-Fendt-Ring - Berchtesgaden
+840;bus;Berchtesgaden - Marktschellenberg - Salzburg
+841;bus;Jennerbahn - Königssee - Berchtesgaden - Bischofswiesen - Bad Reichenhall
+842;bus;Königssee - Berchtesgaden - Oberschönau - Untersteinn - Jennerbahn
+843;bus;Ringlinie Schönau
+845;bus;Ringlinie Ramsau "RamBus"
+846;bus;Berchtesgaden - Ramsau - Hintersee
+848;bus;Berchtesgaden - Oberau - Mautstelle Nord - Rossfeld
+849;bus;Kehlsteinbus
+852;bus;Freilassing - Saaldorf - Surheim - Laufen
+853;bus;Freilassing - Surheim - Saaldorf - Schign
+
+=== 2xxx
+2883;bus;FVO Turnbus Schongau
+
+=== 4xxx
+4317;bus;Seefeld i. T. - Weidach - Unterleutasch - Mittenwald
+4327;bus;Mittenwald - Scharnitz - Seefeld i. T. - Reith b. S. - Leithen
+4420;bus;Skibus Lenggries
+4608;bus;Mittenwald - Klais - Krün - Wallgau 
+4610;bus;München - Penzberg
+4860;bus;Skibus Spitzingsee
+
+=== 6xxx
+6207;bus;München, Hauptbahnhof - Bad Füssing
+
+=== 77xx
+7709;bus;N4 Nachtexpress: Traunstein - Ettenhausen
+7714;bus;N3 Nachtexpress: Traunstein - Ruhpolding
+7718;bus;N2 Nachtexpress: Traunstein - Tittmoning
+7722;bus;N5 Nachtexpress: Traunstein - Obing
+7742;bus;N1 Nachtexpress: Traunstein - Engelsberg
+
+=== 90xx
+9000;bus;Ortsbus Oberstdorf
+9001;bus;Ortsverkehr Holzkirchen, Linie 1 - 6
+
+=== 94xx
+9403/024;bus;Dorfen - Velden
+9406;bus;Schwindegg - Obertaufkirchen - Haag
+9407/025;bus;Taufkirchen (Vils) - Dorfen - Buchbach - Velden
+9409;bus;Dorfen - Haag - Wasserburg
+9410;bus;Gars - Haag - Hohenlinden - Forstining - München
+9411;bus;Wasserburg - Soyen - Haag - [Isen] [Obernau]
+94111;bus;[Isen] [Oberornau] Haag - Soyen - Wasserburg
+94112;bus;[Isen] [Oberornau] Haag - Soyen - Wasserburg
+9412;bus;Rettenbach - Pfaffing - Edling - Wasserburg
+9413;bus;Waldhausen - Schnaitsee - Wasserburg
+9414;bus;Wasserburg - Schonstett/Amerang - Halfing - Bad Endorf - Rosenheim
+9415;bus;Rosenheim - Vogtareuth - Griesstätt/Schonstett - Wasserburg
+9416;bus;Rosenheim - Rott am Inn - Pfaffing / Attel - Wasserburg
+9417;bus;Rechtmehring - Maitenbeth - Esbaum
+9418;bus;Stadtbus Wasserburg
+9419;bus;Amerang - Evenhausen - Wasserburg
+9420;bus;Nachtexpress Wasserburg - Edling - Pfaffing - Albaching - Rechtmehring - Haag
+9421;bus;Wasserburg - Pfaffing - Steinhöring - Ebersberg - Grafing
+9424;bus;Ortsverkehr Prien
+9425;bus;Ortsbus Bad Endorf
+9427;bus;Bad Endorf - Höslwang - Pelham - Bad Endorf
+9428;bus;Rufbus Wasserburg
+9434;bus;Stadtbus Trostberg: Kleinschwarz - Trostberg
+9436;bus;Palling - Waging
+9437;bus;Traunreut - Kirchweidach
+9438;bus;Trostberg - Obing
+9439;bus;Traunstein - Kammer - Traunreut (Otting)
+9440;bus;Traunreut - Palling
+9441;bus;Trostberg - Wasserburg
+9442;bus;Traunstein - Garching
+9443;bus;Stadtverkehr Traunstein
+9444;bus;Traunstein - Peterskirchen
+9445;bus;Seeon - Truchtlaching
+9446;bus;Rufbus Traunstein
+9449;bus;Citybus Traunreut - Traunwalchen
+9455;bus;Vario-Bus des Landkreises Traunstein
+9480;bus;Bürgerbus Amerang - Prien
+9490;bus;Rosenheim - Raubling - Neubeuern - Nußdorf - Windshausen
+9492;bus;Rosenheim - Prutting - Söchtenau - Halfing - Amerang
+9493;bus;Rosenheim - Lauterbach - Törwang - Roßholzen
+9494;bus;Rosenheim - Thansau - Rohrdorf - Frasdorf - Prien
+9495;bus;Rosenheim - Großkarolinenfeld - Ostermünchen
+9496;bus;Rosenheim - Haidholzen - Riedering - Söllhuben - Aschau
+9497;bus;Rosenheim - Stephanskirchen - Riedering - Moosen - Antwort - Prien
+9498;bus;Rosenheim - Stephanskirchen - Baierbach - Rosenheim
+9499;bus;(Riedering) Oberputting - Söllhuben - Zacking - Prien
+
+=== 95xx
+9501;bus;Ortsbus Reit im Winkl
+9502;bus;Sachrang - Aschau (Chiemgau) - Bernau - Felden
+9504;bus;Wanderbus Reit im Winkl / Unterwössen
+9505;bus;Reit im Winkl - Prien
+9506;bus;Reit im Winkl - Ruhpoldingn - Inzell
+9507;bus;Reit im Winkl - Seegatterl - Winklmoosalm
+9508;bus;Siegsdorf - Marquartstein
+9509;bus;Traunstein - Reit im Winkl
+9510;bus;Rosenheim - Prutting - Bad Endorf - Prien
+9511;bus;Bad Endorf - Eggstätt - Prien
+9512;bus;Traunstein - Ruhpolding
+9513;bus;Traunreut - Chieming
+9514;bus;Traunstein - Bergen
+9515;bus;Traunstein - Teisendorf - Freilassing
+9516;bus;Ising Kapelle - Bad Endorf
+9518;bus;Traunstein - Tittmoning (-Burghausen)
+9519;bus;(Traunstein) - Laufen
+9520;bus;Traunstein - Prien
+9522;bus;Traunstein - Schnaitsee
+9523;bus;Kienberg - Seeon (Traunstein)
+9526;bus;Traunstein - Bad Reichenhall
+9531;bus;Oberwössen - Schleching - Rottau - Grassau - Übersee Dampfersteg und zurück
+9532;bus;Dorfbus: Meisenbach - Zell - Infang - Rauschbergbahn - Grashofstraße / Dorfbus: Brandner Straße/Maiergschwendt - Brand - Unternberg
+9535;bus;Reit im Winkl - Ruhpolding - Inzell - Bad Reichenhall - Salzburg
+9550;bus;Tegernsee - Rottach-Egern - Kreuth - Achenkirch - Maurach - Pertisau
+9551;bus;Tegernsee - Rottach-Egern - Bad Wiessee - Gmund - München
+9552;bus;Ringlinie Miesbach - Fischbachau - Schliersee - Miesbach
+9553;bus;Holzkirchen - Sachsenkam - Bad Tölz - Gaißach - Lenggries
+9554;bus;Tegernsee - Gmund - Wall - Miesbach - Kreiskrankenhaus
+9555;bus;Tegernsee - Gmund - Hausham - Schliersee - Fischbachau - Bayrischzell
+9556;bus;Tegernsee - Rottach-Egern - Kreuth - Stuben
+9557;bus;Tegernsee - Rottach-Egern - Bad Wiessee - Gmund - Waakirchen - Bad Tölz
+9558;bus;Tegernsee - Gmund - Hausham - Agatharied - Miesbach - Irschenberg
+9559;bus;Ringlinie Tegernsee - Rottach-Egern - Bad Wiessee - Gmund - Tegernsee
+9560;bus;Tegernsee - Rottach-Egern - Enterrottach - Monialm - Valepp - Spitzing
+9561;bus;Holzkirchen - Weyarn - Miesbach - Kreiskrankenhaus - Schliersee
+9562;bus;Schliersee - Neuhaus - Spitzingsee
+9563;bus;Kleinhöhenkirchen - Weyarn - Wattersdorf - Miesbach
+9564;bus;Bad Tölz - Wackersberg - Arzbach - Lenggries
+9565;bus;Bad Tölz, Stadtbus 2: Bahnhof - Flinthöhe - Karwendelsiedlung - ZOB
+9566;bus;Gültig ab 10.12.17
+9567;bus;Holzkirchen - Warngau - Wall - Miesbach
+9568;bus;Holzkirchen - Otterfing - Dietramszell - Bad Tölz
+9569;bus;Bergsteigerbus (Bad Tölz) - Lenggries - Eng/Tirol
+9570;bus;Bad Tölz, Stadtbus 1: Bahnhof - ZOB - Kurviertel - Oberfischbach
+9571;bus;Rosenheim - Kolbermoor - Bad Aibling
+9572;bus;Winkl - Neuwöhr - Neubeuern - Raunling - Brannenburg
+9573;bus;Achenmühle - Nußdorf - Brannenburg - Raubling
+9574;bus;Höhenmoos - Rohrdorf - Raubling - Brannenburg
+9575;bus;Bad Tölz, Stadtbus 3: Bahnhof - Friedhof - Farchet u.z.
+9577;bus;Rosenheim - Raubling - Brannenburg - Flintsbach - Kufstein
+9578;bus;Au - Bad Feilnbach - Raubling - Rosenheim
+9579;bus;Au - Bad Feilnbach - Raubling - Brannenburg
+9580;bus;Bad Aibling - Au - Bad Feilnbach
+9581;bus;Aying - Feldkirchen - Bruckmühl - Götting - Bad Aibling
+9582;bus;Bad Aibling - Bruckmühl - Feldkirchen - Aying/Holzolling
+9585;bus;Bruckmühl - Oberholzham - Beyharting
+9586;bus;Rad- und Wanderbus Chiemseeringlinie
+9591;bus;Bad Tölz - Bad Heilbrunn - Penzberg
+9595;bus;Lenggries - Jachenau und zurück
+
+=== 96xx
+9600;bus;Weilheim - Wielenbach - Wilzhofen - Tutzing
+9601;bus;Weilheim - Huglfing - Uffing - Murnau
+9602;bus;Weilheim - Marnbach - Eberfing - Weilheim
+9604;bus;auting - Huglfing - Peißenberg und zurück
+9606;bus;Garmisch-Partenkirchen - Oberammergau - Wieskirche - Steingaden - Füssen
+9607;bus;Murnau - Ohlstadt - Ettal und zurück
+9608;bus;Garmisch-Partenkirchen - Mittenwald - Wallgau - Walchensee - Kochel
+9611;bus;Kochel - Schlehdorf - Großweil - Ohlstadt - Murnau
+9612;bus;Bad Tölz - Bad Heilbrunn - Benediktbeuern - Kochel
+9613;bus;Penzberg - Benediktbeuern - Kochel - Schlehdorf
+9614;bus;Penzberg - Iffeldorf - Seeshaupt - Bernried - Tutzing
+9615;bus;Penzberg, Stadtbus 1: Bahnhof - Heiglhof - Kirnberg
+9617;bus;Penzberg - Iffeldorf - Antdorf - Habach - Sindelsdorf - Penzberg
+9620;bus;Murnau - Riegsee - Aidling - Murnau
+9621;bus;Murnau - Seehausen - Grafenaschau
+9622;bus;Oberammergau - Ettal - Schloss Linderhof und zurück
+9625;bus;Penzberg, Stadtbus 2: Dittenried - Bahnhof - Freiheit - Maxkron
+9630;bus;Stadtverkehr Weilheim (alle Linien)
+9631;bus;Murnau - Obersöchering / Uffing - Eglfing
+9635;bus;Penzberg, Stadtbus 3: Bahnhof - Firma Roche - Neue Heimat
+9641;bus;Murnau - Seehausen - Uffing - Kirnberg
+9645;bus;Penzberg, Stadtbus 4: Direktverbindungen Firma Roche
+9649_93;bus;Ortsbus Dießen - Obermühlhausen - Dettenhofen - Dettenschwang/Wengen - Dießen
+9650;bus;Weilheim - Raisting - Dießen - Utting
+9651;bus;Weilheim - Peißenberg - Böbing - Rottenbuch - Steingaden - Füssen
+9652;bus;Weilheim - Wessobrunn - Rott - Reichling - Issing - Pürgen - Landsberg
+9653;bus;Weilheim - Wielenbach - Wilzhofen - Pähl - Herrsching
+9654;bus;Weilheim - Obersöchering - Penzberg
+9655;bus;Weilheim - Seeshaupt - Penzberg
+9656;bus;Weilheim - Peißenberg - Hohenpeißenberg - Peiting - Schongau
+9657;bus;Schongau - Altenstadt - Schwabsoien - Sachsenried - Schongau
+9659;bus;Schongau - Altenstadt - Hohenfurch - Schongau
+
+=== 97xx
+9718;bus;Füssen - Oberstdorf
+9742 (Linie 1);bus;Oberstdorf - Söllereckbahn - Riezlern - Hirschegg - Mittelberg - Baad
+9744;bus;Oberstdorf - Breitachklamm - Tiefenbach - Obermaiselstein - Bolsterlang - Fischen - Langenwang - Oberstdorf
+9745;bus;Oberstdorf - Rubi - Reichenbach - Schöllang - Sonthofen
+9746;bus;Hittisau - Balderschwang - Obermaiselstein - Fischen - Oberstdorf
+9747;bus;Sonthofen - Ofterschwang - Bolsterlang
+9748;bus;Sonthofen - Bad Hindelang - Oberjoch - Tannheim - Reutte/Tirol
+9749;bus;Bad Hindelang - Bad Oberdorf - Hinterstein
+9761 (Linie 5);bus;Unterwestegg - Riezlern - Ifen
+9762;bus;Oberstdorf - Renksteg - Skiflugschanze - Fellhornbahn - Birgsau
+9763;bus;Oberstdorf - Golfplatz - Christlessee - Spielmannsau
+9766;bus;Schöllang - Fischen - Maderhalm - Obermaiselstein
+9767;bus;Oberstdorf - Langenwang - Fischen - Sonthofen
+9772 (Linie 2);bus;Egg - Riezlern Post - Innerschwande - Schwende
+9773 (Linie 3);bus;Wäldele - Breitachbrücke - Hirschegg Walserhaus
+9774 (Linie 4);bus;Mittelberg - Höfle
+9779;bus;Hinterstein - Giebelhaus
+9781;bus;Immenstadt - Rettenberg - Kranzegg - Vorderburg - Wertach - Unterjoch - Oberjoch
+9782;bus;Immenstadt - Diepolz - Missen - Seltmans - Weitnau
+9783;bus;Immenstadt - Stein - Bräunlings - Eckarts - Niedersonthofen
+9784;bus;Immenstadt - Untermaiselstein - Rettenberg - Wolfis
+9785;bus;Oy - Wertach
+9795;bus;Kalzhofen-Oberstaufen-Weißach(Aach)-Steibis-Imbergbahn-Hochgratbahn
+
+=== 98xx
+9821;bus;Schongau - Bernbeuren - Lechbruck - Prem - Steingaden
+9822;bus;Schongau - Peiting - Rottenbuch - Echelsbacher Brücke - Steingaden
+9824;bus;Landsberg - Fuchstal - Denklingen - Schongau
+9834;bus;Landsberg - Fuchstal/Denklingen/Apfeldorf
+
+#== Siehe auch:
+#- * [[Talk:Oberbayern/Transportation/Analyse|Diskussionsseite]] dieser Seite
+#- * [[User_talk:ToniE/Transportation/Analyse#Momentane_Pr.C3.BCfungen|Momentane Prüfungen]] und deren Bedeutung
+#
+#- [[Category:Page with status]]
+#- [[Category:Train routes in Germany]]
+#- [[Category:Rapid transit in Germany]]
+#- [[Category:Public transport in Germany]]
+#- [[Category:Nahverkehr]]
+#- [[Category:Bayern]]
+#- [[Category:Oberbayern]]
+#- [[Category:DE-BY-RVO]]
+
