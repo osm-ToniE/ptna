@@ -27,7 +27,7 @@
 #
 
 
-= [[Saxony/Transportation/Verkehrsverbund Mittelsachsen/Analyse/DE-SN-VMS-Linien|In OSM gefundene VRS-Linien]]
+= [[Saxony/Transportation/Verkehrsverbund Mittelsachsen/Analyse/DE-SN-VMS-Linien|In OSM gefundene VMS-Linien]]
 
 == Quelle
 -
