@@ -8,7 +8,7 @@ WD=$PWD
 
 PATH=$PWD:$PATH
 
-for A in  NETWORKS/*
+for A in  Networks/*
 do
     
     cd $A
