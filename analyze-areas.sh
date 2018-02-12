@@ -4,6 +4,8 @@
 # analyze ÖPNV routes
 #
 
+PATH=$PWD:$PATH
+
 for A in  NETWORKS/*
 do
     

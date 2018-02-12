@@ -35,8 +35,7 @@ then
     wget "$OVERPASS_QUERY" -O $XML_FILE
 fi
 
-../analyze-routes.pl -v --wiki --check-access --check-name --check-stop-position --check-sequence --check-version --coloured-sketchline --expect-network-long --network-long-regex="$NETWORK_LONG" --network-short-regex="$NETWORK_SHORT" --lines-csv=$CSV_FILE --routes=$XML_FILE > $WIKI_FILE
-#../analyze-routes.pl -v        --positive-notes --network-long-regex="$NETWORK_LONG" --network-short-regex="$NETWORK_SHORT" --lines-csv=$CSV_FILE --routes=$XML_FILE > $HTML_FILE 
+analyze-routes.pl -v --wiki --check-access --check-name --check-stop-position --check-sequence --check-version --coloured-sketchline --expect-network-long --network-long-regex="$NETWORK_LONG" --network-short-regex="$NETWORK_SHORT" --lines-csv=$CSV_FILE --routes=$XML_FILE > $WIKI_FILE
 
 # --check-bus-stop 
 
