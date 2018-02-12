@@ -4,6 +4,8 @@
 # analyze ÖPNV routes
 #
 
+WD=$PWD
+
 PATH=$PWD:$PATH
 
 for A in  NETWORKS/*
@@ -13,7 +15,7 @@ do
 
     ./analyze-area.sh $1
 
-    cd ..
+    cd $WD
 
 done
 
