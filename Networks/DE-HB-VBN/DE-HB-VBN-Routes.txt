@@ -25,7 +25,7 @@
 # - to        == wird nicht ausgewertet, lediglich ausgegeben
 # - operator  == wird nicht ausgewertet, lediglich ausgegeben
 #
-
+# ref;type;comment;from;to;operator
 
 = [[Bremen/Transport/Analyse/DE-HB-VBN-Linien|In OSM gefundene VBN-Linien]]
 
@@ -43,12 +43,29 @@
 -
 
 
+== Tram 
+=== Tram
+1;tram;;Huchting;Bf Mahndorf;BSAG
+2;tram;;Gröpelingen;Sebaldsbrück;BSAG
+3;tram;;Gröpelingen;Weserwehr;BSAG
+4;tram;;Arsten;Lilienthal;BSAG
+6;tram;;Flughafen;Universität;BSAG
+8;tram;;Huchting;Kulenkampffallee;BSAG
+10;tram;;Gröpelingen;Sebaldsbrück;BSAG
+#
+=== Nacht-Tram
+N1;tram;;Huchting;Bf Mahndorf;BSAG
+N4;tram;;Arsten;Lilienthal;BSAG
+N10;tram;;Gröpelingen;Sebaldsbrück;BSAG
+#
+#
+
 
 #= Parameter des Tools
 #== Overpass-API
 #- * http://overpass-api.de/api/interpreter?data=area[boundary=public_transport][name='Verkehrsverbund Bremen/Niedersachsen']->.L; rel(area.L)[route~'(bus|tram|train|subway|light_rail|trolleybus|ferry|monorail|aerialway|share_taxi)']->.R; rel(br.R); out; rel.R; out; rel(r.R); out; way(r.R); out; node(r.R); out; 
 #== Analyse-Skript
-#- * --network-short="VMS"
+#- * --network-short="VBN"
 #- * --network-long="Verkehrsverbund Bremen/Niedersachsen"
 #- * --positive-notes
 #- * --wiki
@@ -64,4 +81,3 @@
 #- [[Category:Bremen]]
 #- [[Category:Nahverkehr]]
 #- [[Category:DE-HB-VBN]]
-
