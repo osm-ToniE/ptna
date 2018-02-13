@@ -26,9 +26,9 @@ Syntax highlighted code block
 [Link](url) and ![Image](src)
 ```
 
-# Head [Index](/doc/index.html)
+# Head [Index](/docs/index.html)
 
-# Head [Index](/doc/index.md)
+# Head [Index](/docs/index.md)
 
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
