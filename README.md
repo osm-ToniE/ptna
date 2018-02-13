@@ -28,6 +28,8 @@ Syntax highlighted code block
 
 # Head [Index](/doc/index.html)
 
+# Head [Index](/doc/index.md)
+
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
 ### Jekyll Themes
