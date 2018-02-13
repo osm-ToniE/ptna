@@ -1609,7 +1609,7 @@ sub analyze_relation {
             }
             else {
                 if ( $network_long_regex && $network =~ m/$network_long_regex/ ) {
-                    if ( $positive_notes || $expect_network_short ) {
+                    if ( $positive_notes || ($expect_network_short && !$expect_network_long_for) ) {
                         my $n   = '---' . $network . '---';
                         my $nlr = '---' . $network_long_regex . '---';
                         if ( $n =~ m/$nlr/ ) {
@@ -1621,7 +1621,7 @@ sub analyze_relation {
                     }
                 }
                 if ( $network_short_regex && $network =~ m/$network_short_regex/ ) {
-                    if ( $positive_notes || $expect_network_long ) {
+                    if ( $positive_notes || ($expect_network_long && !$expect_network_short_for) ) {
                         my $n   = '---' . $network . '---';
                         my $nsr = '---' . $network_short_regex . '---';
                         if ( $n =~ m/$nsr/ ) {
