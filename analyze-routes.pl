@@ -1607,23 +1607,29 @@ sub analyze_relation {
             elsif ( $expected_long =~ m/,$network,/ ) {
                 push( @{$relation_ref->{'__notes__'}}, "'network' is short form" );
             }
-            elsif ( $network_long_regex ) {
-                if ( $positive_notes || $expect_network_short ) {
-                    if ( $network =~ m/^$network_long_regex$/ ) {
-                        push( @{$relation_ref->{'__notes__'}}, "'network' is long form" );
-                    }
-                    elsif  ( $network =~ m/$network_long_regex/ ) {
-                        push( @{$relation_ref->{'__notes__'}}, "'network' matches long form" );
+            else {
+                if ( $network_long_regex && $network =~ m/$network_long_regex/ ) {
+                    if ( $positive_notes || $expect_network_short ) {
+                        my $n   = '---' . $network . '---';
+                        my $nlr = '---' . $network_long_regex . '---';
+                        if ( $n =~ m/$nlr/ ) {
+                            push( @{$relation_ref->{'__notes__'}}, "'network' is long form" );
+                        }
+                        else {
+                            push( @{$relation_ref->{'__notes__'}}, "'network' matches long form" );
+                        }
                     }
                 }
-            }
-            elsif ( $network_short_regex ) {
-                if ( $positive_notes || $expect_network_long ) {
-                    if ( $network =~ m/^$network_short_regex$/ ) {
-                        push( @{$relation_ref->{'__notes__'}}, "'network' is short form" );
-                    }
-                    elsif ( $network =~ m/$network_short_regex/ ) {
-                        push( @{$relation_ref->{'__notes__'}}, "'network' matches short form" );
+                if ( $network_short_regex && $network =~ m/$network_short_regex/ ) {
+                    if ( $positive_notes || $expect_network_long ) {
+                        my $n   = '---' . $network . '---';
+                        my $nsr = '---' . $network_short_regex . '---';
+                        if ( $n =~ m/$nsr/ ) {
+                            push( @{$relation_ref->{'__notes__'}}, "'network' is short form" );
+                        }
+                        else {
+                            push( @{$relation_ref->{'__notes__'}}, "'network' matches short form" );
+                        }
                     }
                 }
             }
