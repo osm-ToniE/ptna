@@ -33,7 +33,7 @@
 4610;bus;München - Penzberg
 4860;bus;Skibus Spitzingsee
 
-=== 6xxx
+#=== 6xxx
 #6207;bus;gehört zum RBO;München, Hauptbahnhof;ad Füssing;RBO
 
 === 77xx
