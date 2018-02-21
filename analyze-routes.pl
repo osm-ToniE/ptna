@@ -1117,7 +1117,7 @@ if ( keys( %unused_networks ) ) {
     printTableHeader();
 
     foreach my $network ( sort( keys( %unused_networks ) ) ) {
-        @relations_of_network    = sort( keys( ${unused_networks{$network}} ) );
+        @relations_of_network    = sort( keys( %{$unused_networks{$network}} ) );
         $network = $network eq '__unset_network__' ? '' : $network;
         if ( scalar @relations_of_network <= 10 ) {
             printTableLine( 'network'           =>    $network,
@@ -1785,7 +1785,7 @@ sub analyze_route_relation {
 
         if ( %restricted_access ) {
             foreach $access_restriction ( sort(keys(%restricted_access)) ) {
-                push( @{$relation_ref->{'__issues__'}}, sprintf("Route: restricted access (%s) to way(s) without 'bus'='yes', 'bus'='designated', 'psv'='yes' or ...: %s", $access_restriction, join(', ', map { printWayTemplate($_); } sort(keys($restricted_access{$access_restriction})))) );
+                push( @{$relation_ref->{'__issues__'}}, sprintf("Route: restricted access (%s) to way(s) without 'bus'='yes', 'bus'='designated', 'psv'='yes' or ...: %s", $access_restriction, join(', ', map { printWayTemplate($_); } sort(keys(%{$restricted_access{$access_restriction}})))) );
             }
         }
     }
