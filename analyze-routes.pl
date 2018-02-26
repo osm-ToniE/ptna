@@ -1334,6 +1334,9 @@ sub analyze_route_master_environment {
         
         # how many routes do we have at all for this "ref" and "route_type"?
         $number_of_routes           = scalar( keys( %{$ref_ref->{'route'}->{$route_type}} ) );
+
+        # reference to this relation, the route_master under examination
+        $relation_ref               = $ref_ref->{'route_master'}->{$route_type}->{$relation_id};
         
         # if this is a route_master and PTv2 is set, then 
         # 1. check route_master_relation number against number of 'route' relations below this ref_ref with same route_type (same number?)
@@ -1348,24 +1351,25 @@ sub analyze_route_master_environment {
             my %operators           = ();
             my $num_of_networks     = 0;
             my $num_of_operators    = 0;
+            my $temp_relation_ref   = undef;
             foreach my $rel_id ( keys( %{$ref_ref->{'route_master'}->{$route_type}} ) ) {
-                $relation_ref = $ref_ref->{'route_master'}->{$route_type}->{$rel_id};
+                $temp_relation_ref = $ref_ref->{'route_master'}->{$route_type}->{$rel_id};
                 
                 # how many routes are members of this route_master?
-                $number_of_my_routes        += scalar( @{$relation_ref->{'route_master_relation'}} );
+                $number_of_my_routes        += scalar( @{$temp_relation_ref->{'route_master_relation'}} );
                 
-                foreach my $member_ref ( @{$relation_ref->{'route_master_relation'}} ) {
+                foreach my $member_ref ( @{$temp_relation_ref->{'route_master_relation'}} ) {
                     $my_routes{$member_ref->{'ref'}} = 1;
                 }
                 
-                if ( $relation_ref->{'tag'}->{'network'} ) {
-                    $networks{$relation_ref->{'tag'}->{'network'}} = 1;
-                    #printf STDERR "analyze_route_master_environment(): network = %s\n", $relation_ref->{'tag'}->{'network'};
+                if ( $temp_relation_ref->{'tag'}->{'network'} ) {
+                    $networks{$temp_relation_ref->{'tag'}->{'network'}} = 1;
+                    #printf STDERR "analyze_route_master_environment(): network = %s\n", $temp_relation_ref->{'tag'}->{'network'};
                 }
                 
-                if ( $ref_ref->{'route_master'}->{$route_type}->{$rel_id}->{'tag'}->{'operator'} ) {
-                    $operators{$relation_ref->{'tag'}->{'operator'}} = 1;
-                    #printf STDERR "analyze_route_master_environment(): operator = %s\n", $relation_ref->{'tag'}->{'operator'};
+                if ( $temp_relation_ref->{'tag'}->{'operator'} ) {
+                    $operators{$temp_relation_ref->{'tag'}->{'operator'}} = 1;
+                    #printf STDERR "analyze_route_master_environment(): operator = %s\n", $temp_relation_ref->{'tag'}->{'operator'};
                 }
             }
             $num_of_networks  = scalar( keys ( %networks  ) );
@@ -1382,8 +1386,6 @@ sub analyze_route_master_environment {
             }
         }
         else {
-            $relation_ref               = $ref_ref->{'route_master'}->{$route_type}->{$relation_id};
-        
             # how many routes are members of this route_master?
             $number_of_my_routes        = scalar( @{$relation_ref->{'route_master_relation'}} );
         
