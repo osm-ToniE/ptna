@@ -147,7 +147,7 @@ O7;bus;MVG-Museum-Shuttle;Giesing U S;MVG-Museum;SWM/MVG
 === Express-Bus (Verbundlandkreise)
 X845;bus;ExpressBus;Fürstenfeldbruck S;Germering-Unterpfaffenhofen S;Busverkehr Südbayern
 X900;bus;ExpressBus;Starnberg Nord S;Buchenau S;Geldhauser/RVO
-X910;bus;ExpressBus in Vorbereitung;Weßling S;Klinikum Großhadern U;
+#X910;bus;ExpressBus in Vorbereitung;Weßling S;Klinikum Großhadern U;
 
 #
 === Regionalbus (Verbundlandkreise)
