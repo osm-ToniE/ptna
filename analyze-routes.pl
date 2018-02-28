@@ -457,6 +457,19 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                     $PT_relations_without_ref{$route_type}->{$relation_id}->{'tag'}->{$type}  = $route_type;
                     $relation_ref = $PT_relations_without_ref{$route_type}->{$relation_id};
                     $number_of_relations_without_ref++;
+
+                    # match_network() returns either "keep long" or "keep short" or "skip" (to do: or "suspicious")
+                    #
+                    if ( $collected_tags{'network'} ) {
+                        my $status = match_network(  $collected_tags{'network'} );
+                    
+                        if ( $status !~ m/keep/ ) {
+                            $unused_networks{$collected_tags{'network'}}->{$relation_id} = 1;
+                        }
+                    }
+                    else {
+                        $unused_networks{'__unset_network__'}->{$relation_id} = 1;
+                    }
                 }
                 
                 if ( $relation_ref ) {
