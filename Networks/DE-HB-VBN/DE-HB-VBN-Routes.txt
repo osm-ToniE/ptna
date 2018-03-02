@@ -29,13 +29,8 @@
 
 = [[Bremen/Transport/Analyse/DE-HB-VBN-Linien|In OSM gefundene VBN-Linien]]
 
-== Quelle
--
-- Diese automatisch erstellte Auswertung enthält derzeit nur eine '''Bestandsaufnahme der in OSM gefundenen VBN-Linien'''.
--
-- Ziel ist aber die Erstellung dieser Datei aus VBN-Daten mit allen zum VBN gehörigen Linien. 
-- Die Liste kommt idealerweise direkt vom VBN oder mit Hilfe des VBN (copyright!).
--
+== Hinweis
+
 - bei der Analyse ist 'network' derzeit entweder
 - * "VBN"                                   short form, oder
 - * "Verkehrsverbund Bremen/Niedersachsen"  long form, oder
