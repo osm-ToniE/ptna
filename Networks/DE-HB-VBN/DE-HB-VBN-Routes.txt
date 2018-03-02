@@ -85,10 +85,11 @@
 63;bus;HB Stadt;Hauptbahnhof;Hauptbahnhof;BSAG
 65;bus;HB Stadt;Rablinghausen/ Stromer Str.;Rablinghausen/ Stromer Str.;BSAG
 66;bus;HB Stadt;Rablinghausen;Rablinghausen;BSAG
+77;bus;HB Stadt;Vegesack;Bockhorn;BSAG
 80;bus;HB Stadt;Bf Oslebshausen;Gröpelingen;BSAG
 81;bus;HB Stadt;Gröpelingen;Industriehäfen;BSAG
 82;bus;HB Stadt;Gröpelingen;Gröpelingen;BSAG
-87;bus;HB Stadt ALT;Vegesack;Beckedorf;BSAG
+87;bus;HB Stadt;Vegesack;Beckedorf;BSAG
 90E;bus;HB Stadt;Vegesack;Neuenkirchner Weg/ SZ Sandwehen;BSAG
 90;bus;HB Stadt;Gröpelingen;Neuenkirchen;BSAG
 91;bus;HB Stadt;Rönnebeck;Gröpelingen;BSAG
