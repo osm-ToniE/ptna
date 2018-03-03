@@ -130,7 +130,6 @@ my $member                  = undef;
 my $node                    = undef;
 my $entry                   = undef;
 my $type                    = undef;
-my $key_ref                 = undef;        # equals $ref but umlauf_escape()'ed and used as key for the %PT_relations_with_ref
 my $member_index                    = 0;
 my $relation_index                  = 0;
 my $route_master_relation_index     = 0;    # counts the number of relation members in a 'route_master' which do not have 'role' ~ 'platform' (should be equal to $relation_index')
@@ -235,24 +234,37 @@ if ( $lines_csv_file ) {
         if ( -r $lines_csv_file ) {
             
             if ( open(CSV,"< $lines_csv_file") ) {
+                my $previous_entry = '';
                 
                 while ( <CSV> ) {
-                    chomp();
-                    s/\r$//;
-                    s/^\s*//;
-                    s/\s*$//;
-                    push( @lines_csv, $_ );
-                    next    if ( m/^[=#-]/ );
+                    chomp();                                # remove NewLine
+                    s/\r$//;                                # remoce 'CR'
+                    s/^\s*//;                               # remove space at the beginning
+                    s/\s*$//;                               # remove space at the end
+                    s/<pre>//;                              # remove HTML tag if this is a copy from the Wiki-Page
+                    s|</pre>||;                             # remove HTML tag if this is a copy from the Wiki-Page
+                    next    if ( !$_ );                     # ignore if line is empty
+                    push( @lines_csv, $_ );                 # store as lines of interrest
+                    next    if ( m/^[=#-]/ );               # ignore headers, text and comment lines here
+                    
+                    if ( $_ eq $previous_entry )            # ignore double entries for PT routes (not for text, headers and other stuff)
+                    {
+                        pop( @lines_csv );
+                        next;
+                    }
+
                     #printf STDERR "CSV line = %s\n", $_;
                     if ( m/$csv_separator/ ) {
                         ($ref,$route_type)              = split( $csv_separator );
                         if ( $ref && $route_type ) {
-                            $refs_of_interest{umlaut_escape($ref)}->{$route_type} = 1;
+                            $refs_of_interest{umlaut_escape($ref)}->{$route_type} = 0   unless ( defined($refs_of_interest{umlaut_escape($ref)}->{$route_type}) );
+                            $refs_of_interest{umlaut_escape($ref)}->{$route_type}++;
                             # printf STDERR "refs_of_interest{%s}->{%s}\n", umlaut_escape($ref), $route_type      if ( $verbose );
                         }
                     }
                     elsif ( m/(\S)/ ) {
-                        $refs_of_interest{umlaut_escape($_)}->{'__any__'} = 1;
+                        $refs_of_interest{umlaut_escape($_)}->{'__any__'} = 0   unless ( defined($refs_of_interest{umlaut_escape($_)}->{'__any__'}) );
+                        $refs_of_interest{umlaut_escape($_)}->{'__any__'}++;
                     }
                              
                 }
@@ -393,6 +405,7 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                     $status = 'keep';
             
                     # match_route_type() returns either "keep" or "suspicious" or "skip"
+                    # is this route_type of general interest? 'hiking', 'bicycle', ... routes are not of interest here
                     # "keep"        route_type matches exactly the supported route types            m/^'type'$/
                     # "suspicious"  route_type does not exactly match the supported route types     m/'type'/               (typo, ...?)
                     # "skip"        route_type is not handled as PT                                 "hiking", "bicycle", ...
@@ -433,7 +446,7 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                     
                     if ( $section ) {
                         if ( $section ne 'suspicious' ) {
-                            $key_ref = umlaut_escape( $ref );
+                            my $key_ref = umlaut_escape( $ref );
                             $PT_relations_with_ref{$section}->{$key_ref}->{$type}->{$route_type}->{$relation_id}->{'tag'}->{'ref'}  = $ref;
                             $PT_relations_with_ref{$section}->{$key_ref}->{$type}->{$route_type}->{$relation_id}->{'tag'}->{'type'} = $type;
                             $PT_relations_with_ref{$section}->{$key_ref}->{$type}->{$route_type}->{$relation_id}->{'tag'}->{$type}  = $route_type;
@@ -794,10 +807,17 @@ if ( $lines_csv_file ) {
     $section = 'positive';
     
     my $table_headers_printed           = 0;
-    my $working_on_ref                  = '';
+    my $working_on_entry                = '';
     my @route_types                     = ();
     my $relations_for_this_route_type   = 0;
-    
+    my $ExpectedRef                     = undef;
+    my $EscapedExpectedRef              = undef;
+    my $ExpectedRouteType               = undef;
+    my $ExpectedComment                 = undef;
+    my $ExpectedFrom                    = undef;
+    my $ExpectedTo                      = undef;
+    my $ExpectedOperator                = undef;
+
     printTableInitialization( 'name', 'type', 'relation', 'PTv', 'issues', 'notes' );
     
     foreach $entry ( @lines_csv ) {
@@ -823,50 +843,83 @@ if ( $lines_csv_file ) {
             printTableHeader();
             $table_headers_printed++;
         }
-        $ref                =  $entry;
-        $ref                =~ s/$csv_separator.*//;
-        (undef,$route_type,@rest) =  split( $csv_separator, $entry );
-        if ( $ref ) {
-            $key_ref = umlaut_escape( $ref );                                # keys of hash are umlaut_escape()'ed "ref" values
-            if ( $PT_relations_with_ref{$section}->{$key_ref} ) {
-                $relations_for_this_route_type = ($route_type) 
-                                                    ? scalar(keys(%{$PT_relations_with_ref{$section}->{$key_ref}->{'route_master'}->{$route_type}})) + 
-                                                      scalar(keys(%{$PT_relations_with_ref{$section}->{$key_ref}->{'route'}->{$route_type}})) 
-                                                    : scalar(keys(%{$PT_relations_with_ref{$section}->{$key_ref}}));
+        $ExpectedRef                        =  $entry;
+        $ExpectedRef                        =~ s/$csv_separator.*//;
+        (undef,$ExpectedRouteType,@rest)    =  split( $csv_separator, $entry );
+        $ExpectedComment  = $rest[0];
+        $ExpectedFrom     = $rest[1];
+        $ExpectedTo       = $rest[2];
+        $ExpectedOperator = $rest[3];
+        
+        if ( $ExpectedRef ) {
+            $EscapedExpectedRef = umlaut_escape( $ExpectedRef );                                # keys of hash are umlaut_escape()'ed "ref" values
+            if ( $PT_relations_with_ref{$section}->{$EscapedExpectedRef} ) {
+                $relations_for_this_route_type = ($ExpectedRouteType) 
+                                                    ? scalar(keys(%{$PT_relations_with_ref{$section}->{$EscapedExpectedRef}->{'route_master'}->{$ExpectedRouteType}})) + 
+                                                      scalar(keys(%{$PT_relations_with_ref{$section}->{$EscapedExpectedRef}->{'route'}->{$ExpectedRouteType}})) 
+                                                    : scalar(keys(%{$PT_relations_with_ref{$section}->{$EscapedExpectedRef}}));
                 if ( $relations_for_this_route_type ) {
                     foreach $type ( 'route_master', 'route' ) {
-                        if ( $PT_relations_with_ref{$section}->{$key_ref}->{$type} ) {
-                            if ( $route_type ) {
-                                @route_types = ( $route_type );
+                        if ( $PT_relations_with_ref{$section}->{$EscapedExpectedRef}->{$type} ) {
+                            if ( $ExpectedRouteType ) {
+                                @route_types = ( $ExpectedRouteType );
                             }
                             else {
-                                @route_types = sort( keys( %{$PT_relations_with_ref{$section}->{$key_ref}->{$type}} ) );
+                                @route_types = sort( keys( %{$PT_relations_with_ref{$section}->{$EscapedExpectedRef}->{$type}} ) );
                             }
-                            foreach $route_type ( @route_types ) {
-                                foreach $relation_id ( sort( { $PT_relations_with_ref{$section}->{$key_ref}->{$type}->{$route_type}->{$a}->{'tag'}->{'sort_name'} cmp 
-                                                               $PT_relations_with_ref{$section}->{$key_ref}->{$type}->{$route_type}->{$b}->{'tag'}->{'sort_name'}     } 
-                                                             keys(%{$PT_relations_with_ref{$section}->{$key_ref}->{$type}->{$route_type}})) ) {
-                                    $relation_ref = $PT_relations_with_ref{$section}->{$key_ref}->{$type}->{$route_type}->{$relation_id};
-                                    if ( $ref ne $working_on_ref ) {
-                                        printTableSubHeader( 'ref'      => $relation_ref->{'tag'}->{'ref'},     # $key_ref is umlaut_escape()'ed, let's take the real one, 
+                            foreach $ExpectedRouteType ( @route_types ) {
+                                foreach $relation_id ( sort( { $PT_relations_with_ref{$section}->{$EscapedExpectedRef}->{$type}->{$ExpectedRouteType}->{$a}->{'tag'}->{'sort_name'} cmp 
+                                                               $PT_relations_with_ref{$section}->{$EscapedExpectedRef}->{$type}->{$ExpectedRouteType}->{$b}->{'tag'}->{'sort_name'}     } 
+                                                             keys(%{$PT_relations_with_ref{$section}->{$EscapedExpectedRef}->{$type}->{$ExpectedRouteType}})) ) {
+                                    $relation_ref = $PT_relations_with_ref{$section}->{$EscapedExpectedRef}->{$type}->{$ExpectedRouteType}->{$relation_id};
+                                    if ( $entry ne $working_on_entry ) {
+                                        printTableSubHeader( 'ref'      => $relation_ref->{'tag'}->{'ref'},     # $EscapedExpectedRef is umlaut_escape()'ed, let's take the real one, 
                                                              'network'  => $relation_ref->{'tag'}->{'network'},
-                                                             'pt_type'  => $route_type,
+                                                             'pt_type'  => $ExpectedRouteType,
                                                              'colour'   => $relation_ref->{'tag'}->{'colour'},
-                                                             'Comment'  => ( $rest[0] ? $rest[0] : '' ),
-                                                             'From'     => ( $rest[1] ? $rest[1] : '' ),
-                                                             'To'       => ( $rest[2] ? $rest[2] : '' ),
-                                                             'Operator' => ( $rest[3] ? $rest[3] : '' )         );
-                                        $working_on_ref = $ref;
+                                                             'Comment'  => $ExpectedComment,
+                                                             'From'     => $ExpectedFrom,
+                                                             'To'       => $ExpectedTo,
+                                                             'Operator' => $ExpectedOperator         );
+                                        $working_on_entry = $entry;
                                     }
                                     
-                                    $status = analyze_environment( $PT_relations_with_ref{$section}->{$key_ref}, $ref, $type, $route_type, $relation_id );
+                                    @{$relation_ref->{'__issues__'}} = ();
+                                    @{$relation_ref->{'__notes__'}}  = ();
+
+                                    if ( $refs_of_interest{$EscapedExpectedRef}->{$ExpectedRouteType} > 1 )
+                                    {
+                                        #
+                                        # for this 'ref' and 'route_type' we have more than one entry in the CSV file
+                                        # i.e. there are doubled lines (example: DE-HB-VBN: bus routes 256, 261, 266, ... appear twice in different areas of the network)
+                                        # we should be able to distinguish them by their 'operator' values
+                                        # this requires the operator to be stated in the CSV file as Expected Operator and the tag 'operator' being set in the relation
+                                        #
+                                        if ( $ExpectedOperator && $relation_ref->{'tag'}->{'operator'} ) {
+                                            if ( $ExpectedOperator eq $relation_ref->{'tag'}->{'operator'} ) {
+                                                push( @{$relation_ref->{'__notes__'}}, "There is more than one public transport service for this 'ref'. 'operator' value of this relation fits to expected operator value." );
+                                            } else {
+                                                printf STDERR "%s Skipping relation %s, 'ref' %s: 'operator' does not match expected operator (%s vs %s)\n", get_time(), $relation_id, $EscapedExpectedRef, $relation_ref->{'tag'}->{'operator'}, $ExpectedOperator; 
+                                                next;
+                                            }
+                                        } else {
+                                            if ( !$ExpectedOperator && !$relation_ref->{'tag'}->{'operator'} ) {
+                                                push( @{$relation_ref->{'__notes__'}}, "There is more than one public transport service for this 'ref'. Please set 'operator' value for this relation and set operator value in the CSV file." );
+                                            } elsif ( $ExpectedOperator ) {
+                                                push( @{$relation_ref->{'__notes__'}}, "There is more than one public transport service for this 'ref'. Please set operator value in the CSV file to match the mapped opeator value (or vice versa)." );
+                                            } else {
+                                                push( @{$relation_ref->{'__notes__'}}, "There is more than one public transport service for this 'ref'. Please set 'operator' value for this relation to match an expected operator value (or vice versa)." );
+                                            }
+                                        }
+                                    }
+                                    $status = analyze_environment( $PT_relations_with_ref{$section}->{$EscapedExpectedRef}, $ExpectedRef, $type, $ExpectedRouteType, $relation_id );
     
                                     $status = analyze_relation( $relation_ref );
                                     
-                                    printTableLine( 'ref'           =>    $relation_ref->{'tag'}->{'ref'},     # $key_ref is umlaut_escape()'ed, let's take the real one
+                                    printTableLine( 'ref'           =>    $relation_ref->{'tag'}->{'ref'},     # $EscapedExpectedRef is umlaut_escape()'ed, let's take the real one
                                                     'relation'      =>    $relation_id,
                                                     'type'          =>    $type,
-                                                    'route_type'    =>    $route_type,
+                                                    'route_type'    =>    $ExpectedRouteType,
                                                     'name'          =>    $relation_ref->{'tag'}->{'name'},
                                                     'network'       =>    $relation_ref->{'tag'}->{'network'},
                                                     'operator'      =>    $relation_ref->{'tag'}->{'operator'},
@@ -887,36 +940,32 @@ if ( $lines_csv_file ) {
                     #
                     # we do not have a line which fits to the requested 'ref' and 'route_type' combination
                     #
-                    my @notes = ();
-                    if ( $ref ne $working_on_ref ) {
-                        printTableSubHeader( 'ref'      => $ref,
-                                             'Comment'  => ( $rest[0] ? $rest[0] : '' ),
-                                             'From'     => ( $rest[1] ? $rest[1] : '' ),
-                                             'To'       => ( $rest[2] ? $rest[2] : '' ),
-                                             'Operator' => ( $rest[3] ? $rest[3] : '' )         );
-                        $working_on_ref = $ref;
+                    if ( $entry ne $working_on_entry ) {
+                        printTableSubHeader( 'ref'      => $ExpectedRef,
+                                             'Comment'  => $ExpectedComment,
+                                             'From'     => $ExpectedFrom,
+                                             'To'       => $ExpectedTo,
+                                             'Operator' => $ExpectedOperator         );
+                        $working_on_entry = $entry;
                     }
-                    printTableLine( 'ref'           =>    $relation_ref->{'tag'}->{'ref'}, 
-                                    'issues'        =>    sprintf("Missing route for ref='%s' and route='%s'", $ref, $route_type),
-                                    'notes'         =>    join( '__separator__', @notes ) );
-                    }
+                    printTableLine( 'issues'        =>    sprintf("Missing route for ref='%s' and route='%s'", $ExpectedRef, $ExpectedRouteType)
+                                  );
+                }
             }
             else {
                 #
                 # we do not have a line which fits to the requested 'ref'
                 #
-                my @notes = ();
-                if ( $ref ne $working_on_ref ) {
-                    printTableSubHeader( 'ref'      => $ref,
-                                         'Comment'  => ( $rest[0] ? $rest[0] : '' ),
-                                         'From'     => ( $rest[1] ? $rest[1] : '' ),
-                                         'To'       => ( $rest[2] ? $rest[2] : '' ),
-                                         'Operator' => ( $rest[3] ? $rest[3] : '' )         );
-                    $working_on_ref = $ref;
+                if ( $entry ne $working_on_entry ) {
+                    printTableSubHeader( 'ref'      => $ExpectedRef,
+                                         'Comment'  => $ExpectedComment,
+                                         'From'     => $ExpectedFrom,
+                                         'To'       => $ExpectedTo,
+                                         'Operator' => $ExpectedOperator         );
+                    $working_on_entry = $entry;
                 }
-                printTableLine( 'ref'           =>    $ref,
-                                'issues'        =>    sprintf("Missing route for ref='%s' and route='%s'", $ref, $route_type),
-                                'notes'         =>    join( '__separator__', @notes ) );
+                printTableLine( 'issues'        =>    sprintf("Missing route for ref='%s' and route='%s'", $ExpectedRef, $ExpectedRouteType),
+                              );
             }
         }
         else {
@@ -964,27 +1013,27 @@ if ( scalar(@line_refs) ) {
     foreach $route_type ( @supported_route_types ) {
         
         $route_type_lines = 0;
-        foreach $key_ref ( @line_refs ) {
+        foreach $ref ( @line_refs ) {
             foreach $type ( 'route_master', 'route' ) {
-                $route_type_lines += scalar(keys(%{$PT_relations_with_ref{$section}->{$key_ref}->{$type}->{$route_type}}));
+                $route_type_lines += scalar(keys(%{$PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}}));
             }
         }
         if ( $route_type_lines ) {
             $help = sprintf( "== %s", ($transport_types{$route_type} ? $transport_types{$route_type} : $route_type) );
             printHeader( $help );
             printTableHeader();
-            foreach $key_ref ( @line_refs ) {
+            foreach $ref ( @line_refs ) {
                 foreach $type ( 'route_master', 'route' ) {
-                    foreach $relation_id ( sort( { $PT_relations_with_ref{$section}->{$key_ref}->{$type}->{$route_type}->{$a}->{'tag'}->{'sort_name'} cmp 
-                                                   $PT_relations_with_ref{$section}->{$key_ref}->{$type}->{$route_type}->{$b}->{'tag'}->{'sort_name'}     } 
-                                                 keys(%{$PT_relations_with_ref{$section}->{$key_ref}->{$type}->{$route_type}})) ) {
-                        $relation_ref = $PT_relations_with_ref{$section}->{$key_ref}->{$type}->{$route_type}->{$relation_id};
+                    foreach $relation_id ( sort( { $PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}->{$a}->{'tag'}->{'sort_name'} cmp 
+                                                   $PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}->{$b}->{'tag'}->{'sort_name'}     } 
+                                                 keys(%{$PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}})) ) {
+                        $relation_ref = $PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}->{$relation_id};
     
-                        # $status = analyze_environment( $PT_relations_with_ref{$section}->{$key_ref}, $relation_ref->{'tag'}->{'ref'}, $type, $route_type, $relation_id );
+                        # $status = analyze_environment( $PT_relations_with_ref{$section}->{$ref}, $relation_ref->{'tag'}->{'ref'}, $type, $route_type, $relation_id );
     
                         $status = analyze_relation( $relation_ref );
                                     
-                        printTableLine( 'ref'           =>    $relation_ref->{'tag'}->{'ref'},      # $key_ref is umlaut_escape()'ed, let's take the real one
+                        printTableLine( 'ref'           =>    $relation_ref->{'tag'}->{'ref'},
                                         'relation'      =>    $relation_id,
                                         'type'          =>    $type,
                                         'route_type'    =>    $route_type,
