@@ -90,11 +90,10 @@
 91;bus;HB Stadt;Rönnebeck;Gröpelingen;BSAG
 92;bus;HB Stadt;Rönnebeck;Gröpelingen;BSAG
 93;bus;HB Stadt;Gröpelingen;Marßel;BSAG
-94;bus;HB Stadt;Gröpelingen;Schwanewede;BSAG
-95;bus;HB Stadt;Marßel;Bockhorn;BSAG
-96;bus;HB Stadt;Bf Blumenthal;Rönnebeck;BSAG
+94;bus;HB Stadt;Marßel;Schwanewede;BSAG
+95;bus;HB Stadt;Gröpelingen;Bockhorn;BSAG
+96;bus;HB Stadt;Bf Blumenthal;Blumenthal;BSAG
 96E;bus;HB Stadt;Bf Blumenthal;Neuenkirchener Weg;BSAG
-97;bus;HB Stadt;Bf Blumenthal;Rönnebeck;BSAG
 98;bus;HB Stadt;Vegesack;Vegesack;BSAG
 101;bus;DH Nordwest;Bassum;Bremen Hbf/ZOB;Borchers-Reisen VGH Wilmering DHE
 102T;bus;DH Nordwest;Brinkum;Syke;
@@ -563,4 +562,3 @@ RB76;train;;Rotenburg (W);Minden;evb
 #- [[Category:Bremen]]
 #- [[Category:Nahverkehr]]
 #- [[Category:DE-HB-VBN]]
-
