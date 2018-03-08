@@ -111,8 +111,8 @@ N4;bus;;;;
 N5;bus;;;;
 N6;bus;;;;
 N7;bus;;;;
-N8;bus;Existiert zweimal im VRS: Hier für Bonn (bitte 'operator' setzen);;;
-N8;bus;Existiert zweimal im VRS: Hier für Leichlingen (bitte 'operator' setzen);;;
+N8;bus;Existiert zweimal im VRS: Hier für Bonn;Bonn Hauptbahnhof;Bonn Hauptbahnhof;SWB
+N8;bus;Existiert zweimal im VRS: Hier für Leichlingen;Leichlingen Bf;Kleine Heide;Wiedenhoff
 N9;bus;;;;
 N10;bus;;;;
 N20;bus;;;;
