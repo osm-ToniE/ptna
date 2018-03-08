@@ -1606,7 +1606,6 @@ sub analyze_relation {
     my $way_index                       = 0;    # counts number of all way members
     my $route_highway_index             = 0;    # counts number of ways members in a route which are not 'platforms'
     my $node_index                      = 0;
-    my $non_UTF_8                       = '';
     my @specialtags                     = ( 'comment', 'note', 'fixme', 'check_date' );
     my $specialtag                      = undef;
     my %specialtag2reporttype           = ( 'comment'       => '__notes__',
@@ -1741,15 +1740,6 @@ sub analyze_relation {
         }
         elsif ( $type eq 'route') {
             $return_code = analyze_route_relation( $relation_ref );
-        }
-        
-        #
-        # now, finally check tag values for non UTF-8 characters
-        #
-        
-        foreach my $tag (sort(keys(%{$relation_ref->{'tag'}}))) {
-            $non_UTF_8 = check_non_UTF8( $relation_ref->{$tag} );
-            push( @{$relation_ref->{'__issues__'}}, sprintf( "'%s' has wide character(s) '%s'", $tag, $non_UTF_8 ) )      if ( $non_UTF_8 );
         }
     }
 
@@ -3387,36 +3377,6 @@ sub noAccess {
     }
     printf STDERR "noAccess() : access for all for way %d\n", $way_id       if ( $debug );
     return '';
-}
-
-
-#############################################################################################
-
-sub check_non_UTF8 {
-    my $text    = shift;
-    my $ret_val = '';
-
-    if ( $text ) {
-        use bytes;
-        #$ret_val .= $1 . ','    if ( $text =~ m/(\x{c383})/   );
-        #$ret_val .= $1 . ','    if ( $text =~ m/(\x{83c2})/   );
-        #$ret_val .= $1 . ','    if ( $text =~ m/(\x{c2bc})/   );
-        #$ret_val .= $1 . ','    if ( $text =~ m/(\x{bcc2})/   );
-        #$ret_val .= $1 . ','    if ( $text =~ m/(\x96)/       );
-        #$ret_val .= $1 . ','    if ( $text =~ m/(\xc4)/       );
-        #$ret_val .= $1 . ','    if ( $text =~ m/(\xe4)/       );
-        #$ret_val .= $1 . ','    if ( $text =~ m/(\xd6)/       );
-        #$ret_val .= $1 . ','    if ( $text =~ m/(\xf6)/       );
-        #$ret_val .= $1 . ','    if ( $text =~ m/(\xdc)/       );
-        #$ret_val .= $1 . ','    if ( $text =~ m/(\xfc)/       );
-        #$ret_val .= $1 . ','    if ( $text =~ m/(\xdf)/       );
-        #$ret_val .= $1 . ','    if ( $text =~ m/(\x{2212})/   );
-        #$ret_val .= $1 . ','    if ( $text =~ m/(\x{2013})/   );
-    }
-        
-    $ret_val =~ s/,$//;
-    
-    return $ret_val;
 }
 
 
