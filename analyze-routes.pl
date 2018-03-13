@@ -22,7 +22,7 @@ use Getopt::Long;
 use XML::Simple;
 use Data::Dumper;
 
-my @supported_route_types   = ( 'train', 'subway', 'light_rail', 'tram', 'trolleybus', 'bus', 'ferry', 'monorail', 'aerialway', 'share_taxi' );
+my @supported_route_types   = ( 'train', 'subway', 'light_rail', 'tram', 'trolleybus', 'bus', 'ferry', 'monorail', 'aerialway', 'funicular', 'share_taxi' );
 my $regex_supported_route_types = join( '|', @supported_route_types );
 
 my $verbose                         = undef;
