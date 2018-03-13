@@ -3411,27 +3411,10 @@ sub printInitialHeader {
         }
         print  "Die Analyse läuft in der Regel abends zwischen 19:00 und 20:00 Uhr.<br>\n";
         print  "<br>\n";
-        print  "Die Daten im Wiki werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändet hat.<br>\n";
+        print  "Die Daten im Wiki werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändert hat.<br>\n";
         print  "\n";
         print  "Weitere Details sind auf der hier zugehörigen Diskussionsseite zu finden.<br>\n";
         print  "\n";
-        
-        if ( 0 ) {
-            print "= Hinweis =\n";
-            print  "\n";
-            print "* '''PTv2 route: using oneway parts in wrong direction: ...'''\n";
-            print "* '''PTv2 route: first way is a oneway road and ends in a 'stop_position' of this route and there is no exit. Is the route sorted in reverse order?'''\n";
-            print "** '''Diese Fehler werden derzeit (2017-06-13) von JOSM nicht erkannt!''' (Ticket: #14711)\n";
-            print "** Die Analyse hier berücksichtigt derzeit:\n";
-            print "*** oneway=yes\n";
-            print "*** oneway=-1\n";
-            print "*** junction=roundabout\n";
-            print "*** oneway:xxx=no für bus, psv\n";
-            print "*** busway=opposite_lane\n";
-            print "*** <strike>oneway=yes und busway:left=lane</strike>\n";
-            print "*** <strike>oneway=-1 und busway:right=lane</strike>\n";
-            print "\n";
-        }
     }
     else {
         #
@@ -3469,34 +3452,10 @@ sub printInitialHeader {
         }
         print  "Die Analyse läuft in der Regel abends zwischen 19:00 und 20:00 Uhr.<br>\n";
         print  "<br>\n";
-        print  "Die Daten im Wiki werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändet hat.<br>\n";
+        print  "Die Daten im Wiki werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändert hat.<br>\n";
         print  "\n";
         print  "Weitere Details sind auf der hier zugehörigen Diskussionsseite zu finden.<br>\n";
         print  "\n";
-        if ( 0 ) {
-            print  "        <h1> Hinweis </h1>\n";
-            print  "\n";
-            print  "        <ul>\n";
-            print  "            <li><strong>PTv2 route: using oneway parts in wrong direction: ...</strong></li>\n";
-            print  "            <li><strong>PTv2 route: first way is a oneway road and ends in a 'stop_position' of this route and there is no exit. Is the route sorted in reverse order?\n";
-            print  "                <ul>\n";
-            print  "                    <li><strong>Diese Fehler werden derzeit (2017-06-13) von JOSM nicht erkannt!</strong> (Ticket: #14711)</li>\n";
-            print  "                    <li>Die Analyse hier berücksichtigt derzeit:\n";
-            print  "                        <ul>\n";
-            print  "                            <li>oneway=yes</li>\n";
-            print  "                            <li>oneway=-1</li>\n";
-            print  "                            <li>junction=roundabout</li>\n";
-            print  "                            <li>oneway:xxx=no für bus, psv</li>\n";
-            print  "                            <li>busway=opposite_lane</li>\n";
-            print  "                            <li><strike>oneway=yes und busway:left=lane</strike></li>\n";
-            print  "                            <li><strike>oneway=-1 und busway:right=lane</strike></li>\n";
-            print  "                        </ul>\n";
-            print  "                    </li>\n";
-            print  "                </ul>\n";
-            print  "            </li>\n";
-            print  "        </ul>\n";
-            print  "\n";
-        }
     }
 
     $no_of_columns               = 0;
