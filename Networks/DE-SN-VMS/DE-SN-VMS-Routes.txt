@@ -87,7 +87,7 @@ C15;light_rail;;Hainichen;Chemnitz;City Bahn Chemnitz GmbH
 
 == Seilbahn ==
 
-DSB;aerial_way;Drahtseilbahn;Augustusburg;Erdmannsdorf;VMS
+DSB;funicular;Drahtseilbahn;Augustusburg;Erdmannsdorf;VMS
 
 
 
