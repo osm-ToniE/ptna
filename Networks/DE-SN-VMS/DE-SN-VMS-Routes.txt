@@ -42,6 +42,53 @@
 - * leer, d.h. nicht gesetzt
 -
 
+== Zug ==
+
+Fichtelbergbahn;train;Fichtelbergbahn;Cranzahl;Kurort Oberwiesenthal (Fichtelbergbahn);Sächsische Dampfeisenbahngesellschaft
+
+
+== Citybahn ==
+
+=== Chemnitz ===
+
+C11;light_rail;;Stollberg (Sachs);Chemnitz;City Bahn Chemnitz GmbH 
+C13;light_rail;;Burgstädt;Chemnitz;City Bahn Chemnitz GmbH 
+C14;light_rail;;Mittweida;Chemnitz;City Bahn Chemnitz GmbH 
+C15;light_rail;;Hainichen;Chemnitz;City Bahn Chemnitz GmbH 
+
+
+== Trambahn ==
+
+=== Chemnitz ===
+
+1;tram;Brückenstraße/Freie Presse - Zentralhaltestelle - Schönau;Brückenstraße/Freie Presse;Schönau;CVAG
+2;tram;Bernsdorf - Zentralhaltestelle - Brückenstraße/Freie Presse;Bernsdorf;Brückenstraße/Freie Presse;CVAG
+3;tram;Hauptbahnhof - Zentralhaltestelle - Technopark;Hauptbahnhof;Technopark;CVAG
+4;tram;Hutholz - Zentralhaltestelle - Hauptbahnhof;Hutholz;Hauptbahnhof;CVAG
+5;tram;Hutholz - Zentralhaltestelle - Gablenz;Hutholz;Gablenz;CVAG
+
+
+=== Zwickau ===
+
+3;tram;;Eckersbach;Neuplanitz;SVZ
+4;tram;;Pölbitz;Städtisches Klinikum;SVZ
+5;tram;;Hauptbahnhof;Städtisches Klinikum;SVZ
+7;tram;;Pölbitz;Hauptbahnhof;SVZ
+
+
+== Bus ==
+
+=== Chemnitz ===
+
+=== Zwickau ===
+
+=== Regionalbus ===
+
+
+== Seilbahn ==
+
+DSB;aerial_way;Drahtseilbahn;Augustusburg;Erdmannsdorf;VMS
+
 
 
 #= Parameter des Tools
@@ -64,4 +111,3 @@
 #- [[Category:Sachsen]]
 #- [[Category:Nahverkehr]]
 #- [[Category:DE-SN-VMS]]
-
