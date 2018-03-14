@@ -170,7 +170,8 @@ my %transport_types         = ( 'bus'           => 'Bus',
                                 'trolleybus'    => 'Trolley Bus',
                                 'ferry'         => 'Fähre',
                                 'monorail'      => 'Mono-Rail',
-                                'aerialway'     => 'Seilbahn'
+                                'aerialway'     => 'Seilbahn',
+                                'funicular'     => 'Drahtseilbahn'
                               );
 
 my %colour_table            = ( 'black'         => '#000000',
