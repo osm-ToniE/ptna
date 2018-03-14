@@ -21,93 +21,470 @@
 # - ref       == tag 'ref' von route oder route_master
 # - type      == inhalt des tags 'route' bzw. 'route_master'
 # - comment   == kann Kommentar enthalten wie; Ruftaxi, Bus, Expressbus, ...  wird nicht ausgewertet, lediglich ausgegeben
-# - from      == wird nicht ausgewertet, lediglich ausgegeben
-# - to        == wird nicht ausgewertet, lediglich ausgegeben
-# - operator  == wird nicht ausgewertet, lediglich ausgegeben
+# - from      == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - to        == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - operator  == wird bei mehreren Linie mit identischem ref und type Differenzierung herangezogen (Der Wert von 'operator' darf ';' enthalten)
 #
 
+= [[Saxony/Transportation/Verkehrsverbund Mittelsachsen/Analyse/DE-SN-VMS-Linien|VMS-Linien]]
 
-= [[Saxony/Transportation/Verkehrsverbund Mittelsachsen/Analyse/DE-SN-VMS-Linien|In OSM gefundene VMS-Linien]]
+- [[Category:Page with status]] [[Category:Train routes in Germany]] [[Category:Rapid transit in Germany]] [[Category:Public transport in Germany]] [[Category:Sachsen]] [[Category:Nahverkehr]] [[Category:DE-SN-VMS]]
 
 == Quelle
 -
-- Diese automatisch erstellte Auswertung enthält derzeit nur eine '''Bestandsaufnahme der in OSM gefundenen VMS-Linien'''.
+- Die folgende Liste wurde am 14.03.2018 mit freundlicher Genehmigung des VMS aus der [https://www.vms.de/fileadmin/user_upload/antraege_formulare/tbest_anlage_6_2018-02-26.pdf "Anlage 6 - Linienverzeichnis"] (Stand 26.02.2018) erstellt.
 -
-- Ziel ist aber die Erstellung dieser Datei aus VMS-Daten mit allen zum VMS gehörigen Linien. 
-- Die Liste kommt idealerweise direkt vom VMS oder mit Hilfe des VMS (copyright!).
--
-- bei der Analyse ist 'network' derzeit entweder
-- * "VMS"                            short form, oder
-- * "Verkehrsverbund Mittelsachsen"  long form, oder
-- * leer, d.h. nicht gesetzt
+- Die Sortierung hier entspricht der Sortierung im Linienverzeichnis. Eine Alternative Sortierung kann diskutiert werden.
 -
 
-== Zug ==
+== Kleiner Stadtverkehr Annaberg-Buchholz
+A;bus;Barbara-Uthmann-Ring - Markt - Buchholz;Barbara-Uthmann-Ring;Buchholz;RVE
+B;bus;Frohnau - Obere Stadt;Frohnau;Obere Stadt;RVE
+C;bus;Markt - Herzog-Georg-Ring - Erzgebirgs-Center - Markt;Markt;Markt;RVE
+D;bus;Markt - B95/Am Kätplatz - Markt;Markt;Markt;RVE
+E;bus;Stadtbus Buchholz;;;RVE
+F;bus;Cunersdorf - Buchholz;Cunersdorf;Buchholz;RVE
+G;bus;Markt - Cunersdorf;Markt;Cunersdorf;RVE
 
-Fichtelbergbahn;train;Fichtelbergbahn;Cranzahl;Kurort Oberwiesenthal (Fichtelbergbahn);Sächsische Dampfeisenbahngesellschaft
+== Kleiner Stadtverkehr Aue
+A;bus;Postplatz - Zeller Berg - Postplatz;Postplatz;Postplatz;RVE
+B;bus;Postplatz - Eichert - Postplatz;Postplatz;Postplatz;RVE
+C;bus;Postplatz - Brünlasberg - Postplatz;Postplatz;Postplatz;RVE
+D;bus;Postplatz - Neudörfel - Postplatz;Postplatz;Postplatz;RVE
+
+== Kleiner Stadtverkehr Burgstädt
+A;bus;Sportzentrum - Bahnhof - Friedhof - Heiersdorf;Sportzentrum;Heiersdorf;RBM
+B;bus;Heiersdorf - Friedhof - Bahnhof - Sportzentrum;Heiersdorf;Sportzentrum;RBM
+
+== Stadtverkehr Chemnitz
+1;tram;Brückenstraße/Freie Presse - Zentralhaltestelle - Schönau;;;CVAG
+2;tram;Bernsdorf - Zentralhaltestelle - Brückenstraße/Freie Presse;;;CVAG
+3;tram;Hauptbahnhof - Zentralhaltestelle - Technopark;;;CVAG
+4;tram;Hutholz - Zentralhaltestelle - Hauptbahnhof;;;CVAG
+5;tram;Hutholz - Zentralhaltestelle - Gablenz;;;CVAG
+21;bus;Chemnitz-Center - Zentralhaltestelle - Ebersdorf;;;CVAG
+22;bus;Zentralhaltestelle - Glösa;;;CVAG
+23;bus;Heinersdorf - Zentralhaltestelle - Neefepark;;;CVAG
+26;bus;Schönau - Hutholz;;;CVAG
+31;bus;Yorckgebiet - Zentralhaltestelle - Flemmingstraße;;;CVAG
+32;bus;Dresdner Straße - Rottluff -Reichenbrand;;;CVAG
+33;bus;Bernsdorf - Adelsberg - Schösserholz;;;CVAG
+39;bus;Klaffenbach - Hutholz / Neukirchen;;;CVAG
+41;bus;Schönau - Reichenbrand - Grüna;;;CVAG
+42;bus;Schönau - Rabenstein, Grünaer Straße;;;CVAG
+43;bus;Schösserholz / Gablenz - Rabenstein Tierpark;;;CVAG
+46;bus;Wittgensdorf, Chemnitztal - Borna;;;CVAG
+51;bus;Zentralhaltestelle - Zeisigwald, Klinik Bethanien / Yorckgebiet;;;CVAG
+52;bus;Hutholz - Chemnitzer Straße - Zentralhaltestelle;;;CVAG
+53;bus;Chemnitzer Straße - Altchemnitz - TU Campus - Technopark;;;CVAG
+56;bus;Bernsdorf - Kleinolbersdorf / Altenhain - Bernsdorf;;;CVAG
+62;bus;Flemmingstraße - Gablenz;;;CVAG
+63;bus;Borna - Ebersdorf;;;CVAG
+69;bus;Ebersdorf, Brettmühle - Bahnhof Hilbersdorf;;;CVAG
+72;bus;Rottluff - Heimgarten;;;CVAG
+73;bus;Altchemnitz - TU Campus;;;CVAG
+76;bus;Eibenberg - Einsiedel - Altchemnitz;;;CVAG
+79;bus;Küchwald - Zentralhaltestelle;;;CVAG
+82;bus;TU Campus - Schlosschemnitz - Frauenhoferstraße - TU Campus;;;CVAG
+86;bus;Niederwiesa - Euba - Chemnitz, Gablenzplatz;;;CVAG
+89;bus;Gablenz - Beutenberg - Dresdner Straße;;;CVAG
+93;bus;Neefepark - Hutholz;;;CVAG
+96;bus;Wittgensdorf, Kornweg - Röhrsdorf, Chemnitz Center;;;CVAG
+N11;bus;Zentralhaltestelle - Ebersdorf;;;CVAG
+N12;bus;Zentralhaltestelle - Yorckgebiet;;;CVAG
+N13;bus;Zentralhaltestelle - Adelsberg;;;CVAG
+N14;bus;Zentralhaltestelle - Bernsdorf;;;CVAG
+N15;bus;Zentralhaltestelle - Hutholz;;;CVAG
+N16;bus;Zentralhaltestelle - RabensteinCenter;;;CVAG
+N17;bus;Zentralhaltestelle - Talanger;;;CVAG
+N18;bus;Zentralhaltestelle - Omnibusbahnhof -Borna;;;CVAG
+== Kleiner Stadtverkehr Döbeln
+A;bus;Hauptbahnhof - Busbahnhof - (Krankenhaus -) Unnaer Str - Hauptbahnhof;;;RBM
+B;bus;Marktkauf - Busbahnhof - Muldenterasse - Technitz;;;RBM
+C;bus;Rotes Kreuz - Busbahnhof - Hauptbahnhof - Gärtitz;;;RBM
+D;bus;Busbahnhof - Ebersbach - Busbahnhof;;;RBM
+== Kleiner Stadtverkehr Flöha
+1;bus;Am Sattelgut - Busbahnhof - Lessingstraße - Gymnasium - Lärchenstraße;;;RBM
+2;bus;Am Sattelgut - Feldstraße - Am Mörbitzbach - Straße des Friedens - Busbahnhof;;;RBM
+== Kleiner Stadtverkehr Frankenberg
+D;bus;Süd - Neubaugebiet - Süd;;;RBM
+E;bus;Süd - Lützelhöhe - Süd;;;RBM
+== Stadtverkehr Freiberg
+A;bus;Busbahnhof - Olbernhauer Straße - Wasserberg - Anton-Günther-Straße - Busbahnhof;;;RBM
+B;bus;Brand-Erbisdorf - Zug - Freiberg, Busbahnhof - Freiberg, Clausthaler Straße;;;RBM
+C;bus;Busbahnhof - Meißner Ring - Uni-Gelände - Friedeburg - Wasserberg - Häuersteig - Seilerberg - Busbahnhof;;;RBM
+D;bus;Busbahnhof - Anton-Günther-Straße - Wasserberg - Olbernhauer Straße - Busbahnhof - Frauensteiner Straße - Dammstraße - Busbahnhof;;;RBM
+E;bus;Busbahnhof - Schlossplatz - Friedeburg - Schlossplatz - Busbahnhof;;;RBM
+F;bus;Freiberg, Busbahnhof (- Wasserberg) - Freiberg, Häuersteig - Brand-E., Am Goldbachtal - Brand-E.;;;RBM
+G;bus;Brand-Erbisdorf - St. Michaelis - Oberschöna;;;RBM
+H;bus;Freiberg, Busbahnhof - Tuttendorf - Halsbrücke, Wendeschleife;;;RBM
+I;bus;Tour 1: Brand-Erbisdorf - Zug - Industriegebiet Saxonia - GWG Freiberg Ost;;;RBM
+I;bus;Tour 2: Freiberg (Friedeburg - Wasserberg - Seilerberg) - Busbahnhof - Industriegebiet Saxonia - GWG - Pulvermühlenweg - Halsbrücke;;;RBM
+== Kleiner Stadtverkehr Hohenstein-Ernstthal
+1;bus;Bahnhof - Hüttengrund - Heiterer Blick - Bahnhof - Sonnenstraße - Wüstenbrand - Bahnhof;;;RVE
+2;bus;Bahnhof - Ernst-Thälmann-Siedlung - Fritz-Heckert-Siedlung - Bahnhof;;;RVE
+== Kleiner Stadtverkehr Kurort Oberwiesenthal
+A;bus;Fichtelberg-Plateau - Bahnhof - Sparingberg - Bahnhof - Fichtelberg-Plateau;;;RVE
+== Kleiner Stadtverkehr Limbach-Oberfrohna
+C1;bus;City-Bus Limbach-Oberfrohna;;;FRI
+C2;bus;City-Bus Limbach-Oberfrohna;;;FRI
+== Kleiner Stadtverkehr Lößnitz
+A;bus;Neustadt - Markt - Ostsiedlung - Neustadt;;;RVE
+== Kleiner Stadtverkehr Marienberg
+A;bus;Markt - Mooshaide - Mühlberg - Markt - Gewerbegebiet;;;RVE
+B;bus;Markt - Dörfel - Gelobtland - Gebirge - Dörfel - Markt;;;KRM
+D;bus;Marienberg - Lauterbach - Pobershau -Marienberg;;;KRM
+E;bus;Marienberg - Gebirge - Pobershau - Zöblitz - Marienberg;;;KRM
+== Kleiner Stadtverkehr Mittweida
+A;bus;Baumwollspinnerei Wendeschleife - Markt - Bahnhof;;;RBM
+B;bus;Kaufland - Lauenhainer Straße - Krankenhaus - Busbahnhof - Lauenhainer Straße - Kaufland;;;RBM
+C;bus;Lauenhain - Mittweida - Altmittweida;;;RBM
+F;bus;Baumwollspinnerei Wendeschleife - Busbahnhof - Kaufland - Bahnhof;;;RBM
+== Kleiner Stadtverkehr Rochlitz
+R;bus;Rathausstraße - Bahnhof - Obere Lindenbergstraße - Rathausstraße;;;RBM
+== Kleiner Stadtverkehr Schwarzenberg
+A;bus;Heide - Busbahnhof - Sonnenleithe - Busbahnhof - Heide;;;RVE
+B;bus;Busbahnhof - Wildenau - Neuwelt - Bermsgrün - Busbahnhof;;;RVE
+== Kleiner Stadtverkehr Stollberg
+STL;bus;Stadtlinie 1 und 2;;;RVE
+== Kleiner Stadtverkehr Zschopau
+1;bus;Hohndorf - Zschopau - Gornau, Einkaufszentrum;;;RVE
+== Stadtverkehr Zwickau
+3;tram;Eckersbach - Neuplanitz;;;SVZ
+4;tram;Pölbitz - Städtisches Klinikum;;;SVZ
+5;tram;Hauptbahnhof - Städtisches Klinikum;;;SVZ
+7;tram;Pölbitz - Hauptbahnhof;;;SVZ
+10;bus;Zwickau, Niederhohndorf / Weißenborn - Neumarkt - Hauptbahnhof - Zwickau, Planitz - Wilkau-Haßlau;;;SVZ
+13/136;bus;Neumarkt / Zentralhaltestelle - Wilkau-Haßlau - Kirchberg - Rothenkirchen;;;SVZ;RVW
+18;bus;Neumarkt - Georgenplatz - Königswalde / Hartmannsdorf;;;SVZ
+20;bus;Planitz, Markt - Rottmannsdorf / Hüttelsgrün;;;SVZ
+21;bus;Neumarkt - Georgenplatz - Brand - Weißenbrunn, Mühlensteig;;;SVZ
+22;bus;Zentralhaltestelle - (Newtonstraße -) Niederhohndorf;;;SVZ
+23/141;bus;Zwickau, Hbf - Zwickau, Oberhohndorf - Reinsdorf - Vielau - Wildenfels - Hartenstein - Langenbach;;;SVZ;RVW
+24;bus;Auerbach - Neumarkt - Pöhlau;;;SVZ
+27;bus;Städtisches Klinikum - Paulusstraße - Neuplanitz - Planitz, Markt;;;SVZ
+27 E;bus;Zwickau, Baikal - Lichtentanne, Kirche;;;SVZ
+28;bus;Dresdner Straße - Eckersbach - Weißenborn;;;SVZ
+29/181;bus;Zwickau - Lichtentanne / Schönfels - Neumark - Reichenbach;;;SVZ;RVW
+A;bus;Nachtbus: Hauptmarkt - Neumarkt - Hbf - Marienthal - Neuplanitz - Cainsdorf - Wilkau-Haßlau - Hauptmarkt;;;SVZ
+B;bus;Nachtbus: Hauptbahnhof - Neumarkt - Nordvorstadt - Eckersbach;;;SVZ
+C;bus;Nachtbus: Hauptmarkt - Neumarkt - Weißenborn;;;SVZ
+== Omnibus-Regionalverkehr
+20;bus;Greiz - Teichwolframsdorf - Seelingstädt;;;PRG
+101;bus;Glauchau, Bahnhof - Schönbörnchen, Südhang;;;RVW
+102;bus;Glauchau, Friedenshöhe - Glauchau, Bahnhof;;;RVW
+105;bus;Glauchau - Meerane;;;RVW
+106;bus;Meerane, Crotenlaide - Waldsachsen - Crimmitschau;;;RVW
+107;bus;Glauchau - Thurm;;;RVW
+108;bus;Glauchau - Lichtenstein;;;RVW
+109;bus;Glauchau - Wernsdorf - Voigtlaide;;;RVW
+110;bus;Waldenburg - Oberwiera - Meerane;;;RVW
+111;bus;Glauchau - Mosel - Zwickau;;;RVW
+112;bus;Glauchau - Waldenburg - Langenchursdorf;;;RVW
+113;bus;Hohenstein-Ernstthal - Falken - Langenchursdorf;;;RVE
+115;bus;Hohenstein-Ernstthal - St. Egidien / Bernsdorf - Lichtenstein;;;RVE
+116;bus;Hohenstein-Ernstthal - Oberlungwitz - Gersdorf - Oelsnitz (Erzgeb);;;RVE
+117;bus;Lichtenstein - Heinrichsort - Rödlitz - Lichtenstein;;;RVE;RVW
+118;bus;Lichtenstein - Lobsdorf;;;RVE
+119;bus;Glauchau - Meerane - Crimmitschau;;;RVW
+120;bus;Hohenstein-Ernstthal - Waldenburg;;;RVE
+122;bus;Hohenstein-Ernstthal - Limbach-Oberfrohna;;;RVE
+123;bus;Waldenburg - Langenchursdorf - Falken - Limbach-Oberfrohna;;;RVE
+124;bus;Hohenstein-Ernstthal - Reichenbach - Grumbach - Callenberg - Langenchursdorf;;;RVE
+125;bus;Hohenstein-Ernstthal - Wüstenbrand - Oberlungwitz - Hohenstein-Ernstthal;;;RVE
+126;bus;Chemnitz, Schönau - Hohenstein-Ernstthal;;;RVE
+128;bus;Crimmitschau, Bahnhof - Karl-Liebknecht-Siedlung - Crimmitschau Center - Crimmitschau, Bahnhof;;;RVW
+129;bus;Zwickau - Werdau - Steinpleis - Zwickau;;;RVW
+130;bus;Zwickau - Steinpleis - Fraureuth;;;RVW
+132;bus;Wilkau-Haßlau - Cunersdorf - Niedercrinitz - Kirchberg;;;RVW
+133;bus;Zwickau - Dennheritz - Meerane - Gößnitz;;;RVW
+135;bus;Zwickau - Reinsdorf - Friedrichsgrün - Vielau - Wilkau-Haßlau;;;RVW
+137;bus;Wilkau-Haßlau - Cainsdorf - Wilkau-Haßlau - Stadtzentrum - Haara - Rosenthal - Gewerbegebiet;;;RVW
+138;bus;Zwickau - Mülsen - Neuschönburg - Marienau;;;RVW
+139;bus;Zwickau - Lichtenstein;;;RVW
+140;bus;Zwickau - Mülsen - Thurm;;;RVW
+142;bus;Wildenfels - Zschocken - Thierfeld - Hartenstein;;;RVW
+143;bus;Zwickau - Ebersbrunn - Hirschfeld;;;RVW
+147;bus;Kirchberg - Bärenwalde - Obercrinitz;;;RVW
+148;bus;Wilkau-Haßlau - Culitzsch;;;RVW
+149;bus;Wildenfels - Burkersdorf - Kirchberg;;;RVW
+152;bus;Zwickau - Lichtenstein - Oberlungwitz - Chemnitz, Schönau;;;KAI;KRZ
+154;bus;Kirchberg - (Hartmannsdorf -) Giegengrün;;;RVW
+156;bus;Zwickau - Wilkau-Haßlau - Weißbach - Burkersdorf - Kirchberg;;;RVW
+157;bus;Wilkau-Haßlau - Wildenfels (- Hartenstein);;;RVW
+158;bus;Crimmitschau - Lauenhain - Crimmitschau;;;RVW
+159;bus;Zwickau - Dänkritz - Neukirchen - Crimmitschau - Frankenhausen;;;RVW
+160;bus;Fraureuth - Werdau - Crimmitschau - Gösau;;;RVW
+161;bus;Werdau - Werdau, Friedenssiedlung - Königswalde - Hartmannsdorf;;;RVW
+162;bus;Werdau - Beiersdorf - Neumark;;;RVW
+163;bus;Werdau - Leubnitz - Leubnitz, Forst - Werdau;;;RVW
+164;bus;Werdau - Langenbernsdorf - Trünzig - Langenbernsdorf - Werdau;;;RVW
+165;bus;Werdau - Langenhessen - Niederalbertsdorf - Großpillingsdorf;;;RVW
+168;bus;Stadtverkehr Werdau;;;BHW
+170;bus;Meerane - Ponitz - Crimmitschau;;;RVW
+171;bus;Crimmitschau - Langenreinsdorf - Blankenhain - Großpillingsdorf - Seelingstädt;;;RVW
+173;bus;Zwickau - Crossen - Thurm;;;RVW
+177;bus;Kirchberg - Hirschfeld - Bärenwalde;;;RVW
+182;bus;Schönau - Wildenfels - Grünau;;;RVW
+183;bus;Ortsverkehr Thalheim;;;RVE
+184;bus;Stollberg - Dorfchemnitz - Zwönitz - Kühnhaide;;;RVE
+187;bus;Oelsnitz (Erzgeb) - Neuwürschnitz;;;RVE
+190;bus;Stollberg - Thalheim - Gornsdorf - Hormersdorf;;;RVE
+191;bus;Lugau - Oberlungwitz - Hohenstein-Ernstthal;;;RVE
+192;bus;Thalheim - Jahnsdorf - Adorf - Burkhardtsdorf / Leukersdorf - Ursprung;;;RVE
+193;bus;Oberlungwitz - Lugau - Stollberg;;;RVE
+194;bus;Stollberg - Beutha - Affalter - Zwönitz;;;RVE
+195;bus;Lugau - Erlbach-Kirchberg - Oelsnitz (Erzgeb);;;RVE
+196;bus;Thalheim - Hormersdorf - Gornsdorf - Auerbach - Thum - Jahnsbach;;;RVE
+197;bus;Neuwürschnitz - Oelsnitz (Erzgeb);;;RVE
+198;bus;Stollberg - Lugau - Gersdorf;;;RVE
+199;bus;Mülsen St. Jacob - Lichtenstein - Oelsnitz (Erzgeb) - Lugau / Stollberg;;;RVE
+200;bus;Chemnitz, Hutholz - Leukersdorf - Jahnsdorf - Neukirchen - Chemnitz, Hutholz - Neukirchen;;;RVE
+201;bus;Neukirchen - Chemnitz, Hutholz - Jahnsdorf - Leukersdorf - Neukirchen - Chemnitz, Hutholz;;;RVE
+206;bus;Chemnitz - Gornau - Zschopau - Marienberg;;;RVE
+207;bus;Chemnitz - Zschopau - Marienberg - Olbernhau;;;RVE
+208;bus;Chemnitz, Altchemnitz - Einsiedel - Dittersdorf - Weißbach - Gelenau;;;RVE
+209;bus;Ortsverkehr Gelenau;;;RVE
+210;bus;Chemnitz - Thum - (Geyer -) Annaberg-Buchholz - Bärenstein - Kurort Oberwiesenthal;;;RVE
+211;bus;Chemnitz - Thalheim - Brünlos / Dorfchemnitz - Zwönitz;;;RVE
+212;bus;Thalheim - Burkhardtsdorf - Gelenau / Kemtau;;;RVE
+213;bus;Gera - Werdau - Zwickau;;;RVG
+216;bus;Zschopau - Scharfenstein - Großolbersdorf / Wolkenstein - Marienberg - Großrückerswalde;;;RVE
+217;bus;Zschopau - Scharfenstein - Wolkenstein - Streckewalde / Falkenbach - Wolkenstein;;;RVE
+230;bus;Drebach - Scharfenstein - Großrückerswalde;;;RVE
+231;bus;Zschopau - Waldkirchen - Börnichen - Wünschendorf - Lengefeld;;;RVE
+233;bus;Zschopau - Hohndorf - Großolbersdorf - Scharfenstein - Grießbach;;;RVE
+234;bus;Zschopau - Gornau - Dittmannsdorf - Erdmannsdorf - Flöha;;;RVE
+235;bus;Zschopau - Schlößchen - Weißbach - Dittersdorf - Einsiedel;;;RVE
+236;bus;Zschopau - Waldkirchen - Grünhainichen - Borstendorf - Eppendorf;;;RBM
+237;bus;Zschopau - Krumhermersdorf - Börnichen;;;RVE
+238;bus;Zschopau - Scharfenstein - Grießbach - Venusberg - Gelenau - Drebach - Thum - Ehrenfriedersdorf;;;RVE
+239;bus;Zschopau - Gornau - Gelenau - Thum - Jahnsbach;;;RVE
+240;bus;Zschopau - Wilischthal - Gelenau - Herold - Thum;;;RVE
+242;bus;Zschopau - Waldkirchen - Witzschdorf - Gornau;;;RVE
+247;bus;Meinersdorf - Gornsdorf - Thum;;;RVE
+251;bus;Chemnitz, Schönau - Oberlungwitz - Gersdorf - Lichtenstein;;;RVE;CVAG
+253;bus;Chemnitz, Schönau - Chemnitz, Reichenbrand - Chemnitz, Rabenstein - Limbach-Oberfrohna OT Rußdorf;;;RVE
+254;bus;Limbach-Oberfrohna - Chemnitz, Chemnitz Center - Chemnitz, ZH - Chemnitz, Ebersdorf;;;RVE;CVAG
+256;bus;Hohenstein-Ernstthal - Pleißa - Limbach-Oberfrohna - Bräunsdorf;;;RVE
+260;bus;Grüne Linie: Stollberg - Neuwürschnitz - Oelsnitz - Lugau - Stollberg;;;RVE
+261;bus;Grüne Linie: Stollberg - Lugau - Oelsnitz - Neuwürschnitz - Stollberg;;;RVE
+262;bus;Chemnitz - Neukirchen - Lugau - Oelsnitz (Erzgeb);;;RVE
+288;bus;Geithain - Narsdorf - Meusdorf;;;THÜSAC
+325;bus;Altenburg - Waldenburg;;;THÜSAC
+330;bus;Schwarzenberg - Rittersgrün - Tellerhäuser - Oberwiesenthal;;;RVE
+332;bus;Schwarzenberg - Markersbach;;;RVE
+333;bus;Dresden - Wilsdruff - Mohorn - Hetzdorf;;;RVD
+334;bus;Aue - Schwarzenberg - Johanngeorgenstadt;;;RVE
+334;bus;Wilsdruff - Nossen;;;VGM
+338;bus;Breitenbrunn - Crandorf - Schwarzenberg;;;TJS
+342;bus;Schwarzenberg - Beierfeld - (Bernsbach -) Grünhain - (Waschleithe -) Zwönitz;;;RVE
+343;bus;Schwarzenberg - Waschleithe - Grünhain;;;RVE
+345;bus;Schönheide Süd - Carlsfeld;;;RVE
+346;bus;Eibenstock - Wildenthal - Johanngeorgenstadt;;;RVE
+348;bus;Johanngeorgenstadt, Busplatz - Bahnhof;;;RVE
+350;bus;Johanngeorgenstadt, Busplatz - Erbgericht;;;RVE
+351;bus;Aue - Eibenstock - Schönheide;;;MEI
+353;bus;Aue - Aue, Alberoda;;;RVE
+354;bus;Eibenstock - Schönheide;;;RVE
+354;bus;Thonhausen - Heyersdorf - Crimmitschau;;;THÜSAC
+355;bus;Eibenstock - Sosa;;;RVE
+357;bus;Aue - Schneeberg, Neustädtel - Lindenau;;;RVE
+359;bus;Aue - Schneeberg - Schneeberg, Strandbad Filzteich;;;RVE
+360;bus;Aue - Schneeberg - Zwickau;;;RVE
+361;bus;Aue - Zwönitz - Thalheim;;;RVE
+362;bus;Aue - Schneeberg - Griesbacher Hang - Schneeberg - Aue;;;RVE
+363;bus;Aue - Lößnitz - Affalter - Zwönitz;;;RVE
+363;bus;Freital - Tharandt - Fördergersdorf - Grillenburg - Naundorf - Klingenberg;;;RVD
+364;bus;Wildbach - Schlema - Schneeberg - Lindenau;;;RVE
+365;bus;Aue - Schlema - Schneeberg - Schlema - Aue;;;RVE
+365;bus;Schmiedeberg - Frauenstein - Hermsdorf - Seyde;;;RVD
+366;bus;Aue - Sosa;;;RVE
+367;bus;Aue - Bockau;;;RVE
+368;bus;Aue - Lößnitz - Dittersdorf;;;RVE
+369;bus;Aue - Zschorlau - Albernau;;;RVE;TJS
+370;bus;Aue - Stützengrün - Schönheide;;;RVE
+371;bus;Aue - Eibenstock - Carlsfeld;;;RVE
+372;bus;Aue - Schneeberg - Neidhardtsthal - Eibenstock;;;RVE
+373;bus;Aue - Burkhardtsgrün - Eibenstock;;;RVE
+375;bus;Aue - Bernsbach - Beierfeld - Schwarzenberg, Sonnenleithe / Grünhain;;;RVE
+376;bus;Aue - Lauter;;;RVE
+377;bus;Zwönitz - Kühnhaide;;;RVE
+378;bus;Aue - Lößnitz, Neustadt - Alberoda - Aue;;;RVE
+379;bus;Aue - Zschorlau - Albernau - Bockau - Aue;;;RVE
+379;bus;Ruppendorf - Klingenberg - Pretzschendorf - Hartmannsdorf - Frauenstein;;;RVD
+380;bus;Aue - Stollberg;;;RVE
+385;bus;Aue - Schneeberg - Rothenkirchen ;;;RVE
+400;bus;Annaberg-Buchholz - Freiberg - Hetzdorf - Dresden;;;RBM;RVE
+411;bus;Annaberg-Buchholz - Bärenstein - Kurort Oberwiesenthal;;;RVE
+412;bus;Schlettau - Hermannsdorf - Geyer - Thum;;;RVE
+412;bus;Meißen - Krögis - Nossen;;;VGM
+413;bus;Annaberg-Buchholz - Geyer - Zwönitz - Stollberg;;;RVE
+414;bus;Kurort Oberwiesenthal - Tellerhäuser - Rittersgrün;;;RVE
+415;bus;Annaberg-Buchholz - (Crottendorf -) Schwarzenberg - Aue;;;RVE
+416;bus;Meißen - Lommatzsch - Döbeln;;;VGM
+417;bus;Annaberg-Buchholz - Crottendorf - Scheibenberg;;;RVE
+418;bus;Meißen - Miltitz - Nossen - Rüsseina;;;VGM
+419;bus;Annaberg-Buchholz - Scheibenberg - Elterlein - Schwarzbach / Zwönitz;;;RVE
+420;bus;Nossen - Lommatzsch;;;VGM
+422;bus;Oberschmiedeberg - Steinbach - Schmalzgrube - Jöhstadt - Grumbach;;;RVE
+424;bus;Zella - Nossen - Dresden;;;VGM
+428;bus;Annaberg-Buchholz - Sehma - Cranzahl - Neudorf;;;RVE
+429;bus;Jöhstadt - Bärenstein - Kurort Oberwiesenthal;;;RVE
+430;bus;Annaberg-Buchholz - Königswalde - Jöhstadt - Schmalzgrube - Grumbach - Annaberg-Buchholz;;;RVE
+431;bus;Annaberg-Buchholz - Steinbach - Satzung - Reitzenhain;;;RVE
+432;bus;Annaberg-Buchholz - Geyer - Ehrenfriedersdorf - Thum;;;RVE
+433;bus;Annaberg-Buchholz - Neundorf - Thermalbad Wiesenbad;;;RVE
+434;bus;Annaberg-Buchholz - Geyersdorf - Mildenau;;;RVE
+435;bus;Annaberg-Buchholz - Niederschmiedeberg - Oberschmiedeberg - Steinbach;;;RVE
+436;bus;Kurort Oberwiesenthal - Neudorf;;;RVE
+439;bus;Annaberg-Buchholz - Geyersdorf - Falkenbach -Streckewalde - Wolkenstein;;;RVE
+441;bus;Ehrenfriedersdorf - Geyer - Schwarzenberg;;;RVE
+452;bus;Olbernhau - Neuhausen;;;RVE
+453;bus;Olbernhau - Kurort Seiffen - Deutschneudorf - Olbernhau;;;RBM;RVE
+454;bus;Olbernhau - Pockau - Lengefeld;;;RVE
+455;bus;Kurort Seiffen - Oberseiffenbach;;;RBM
+458;bus;Olbernhau - Sayda - Dörnthal - Haselbach;;;RVE
+465;bus;Olbernhau - Sayda - Rechenberg-Bienenmühle - Frauenstein;;;RVE
+471;bus;Olbernhau - Oberneuschönberg - Olbernhau - Kleinneuschönberg - Blumenau - Olbernhau;;;RVE
+472;bus;Olbernhau - Hallbach;;;RVE
+473;bus;Olbernhau - Rungstock - Olbernhau;;;RVE
+487;bus;Satzung - Kühnhaide - Rübenau;;;RVE
+489;bus;Marienberg - Wolkenstein;;;RVE
+490;bus;Marienberg - Mildenau - Annaberg-Buchholz;;;RVE
+492;bus;Marienberg - Lengefeld - Forchheim / Wernsdorf - Brand-Erbisdorf - Freiberg;;;RVE
+493;bus;Lippersdorf - Reifland - Lengefeld;;;RVE
+494;bus;Marienberg - Niederschmiedeberg;;;RVE
+497;bus;Olbernhau - Rübenau - Reitzenhain - Marienberg;;;RVE
+499;bus;Olbernhau - Marienberg - Wolkenstein - Annaberg-Buchholz;;;RVE
+521;bus;Litvínov - Brandov - Olbernhau;;;ČSAD
+583;bus;Vejprty - Annaberg-Buchholz;;;BusLine
+585;bus;Skibus: Jirkov - Chomutov - Kurort Oberwiesenthal;;;BusLine
+616;bus;Hainichen - Roßwein;;;RBM
+620;bus;Rochlitz - Lastau - Colditz;;;RL
+622;bus;Hartha - Schönerstädt - Hausdorf - Colditz;;;RL
+626;bus;Burgstädt - Wiederau - Rochlitzer Berg - Rochlitz;;;RBM
+628;bus;Geithain - Rochlitz - Geringswalde - Hartha - Waldheim;;;RBM
+629;bus;BusBahn: Geithain - Rochlitz - (Narsdorf-) Penig - Waldenburg - Glauchau;;;RBM
+633;bus;Leisnig - Böhlen - Bröhsen - Grimma;;;RL
+636;bus;Mittweida - Ottendorf - Chemnitz, Chemnitz Center - Chemnitz, Omnibusbahnhof;;;RBM
+637;bus;Mittweida - Oberlichtenau - Auerswalde - Chemnitz;;;RBM
+638;bus;Garnsdorf - Köthensdorf - Taura - Burgstädt;;;RBM
+639;bus;Mittweida - Zschöppichen - Ottendorf - Garnsdorf - Chemnitz;;;RBM
+640;bus;Chemnitz - Frankenberg - Hainichen - Roßwein;;;RBM
+642;bus;Zschopautaler: Chemnitz - Frankenberg - Mittweida - Kriebstein;;;RBM
+650;bus;Chemnitz - Röhrsdorf, Chemnitz Center - Siemens - Hartmannsdorf - Penig;;;RBM
+652;bus;Burgstädt, Herrenhaide - Burgstädt;;;RBM
+656;bus;Limbach-Oberfrohna - Niederfrohna - Kaufungen - Wolkenburg - Kaufungen - Niederfrohna - Limbach - Oberfrohna;;;RBM
+657;bus;Mittweida - Burgstädt - Hartmannsdorf - Limbach-Oberfrohna;;;RBM
+658;bus;Hartmannsdorf - Wittgensdorf;;;RBM
+659;bus;Burgstädt - Cossen - Lunzenau;;;RBM
+661;bus;Lunzenau - Narsdorf - Rochlitz;;;RBM
+662;bus;Rochlitz Stadt - Rochlitzer Berg;;;RBM
+664;bus;Penig - Lunzenau - Langenleuba-Oberhain - Niedersteinbach - Penig;;;RBM
+666;bus;Rochlitz - Schwarzbach - Colditz;;;RBM
+669;bus;Frankenberg - Hausdorf - Langenstriegis - Hausdorf - Frankenberg;;;RBM
+671;bus;Mittweida - Schweikershain - Geringswalde;;;RBM
+672;bus;Mittweida - Hainichen - Dresden;;;RBM
+675;bus;Mittweida - Seifersbach - Frankenberg;;;RBM
+677;bus;Mittweida - Niederrossau - Hainichen;;;RBM
+678;bus;Mittweida - Kriebstein;;;RBM
+681;bus;Mittweida - Crossen - Geringswalde - Zettlitz - Rochlitz;;;RBM
+682;bus;Mittweida - Erlau - Rochlitz;;;RBM
+683;bus;Mittweida - Wiederau - Cossen - Lunzenau;;;RBM
+684;bus;Mittweida - Frankenau - Topfseifersdorf - Wiederau;;;RBM
+690;bus;Hainichen - Berbersdorf - Marbach - Nossen;;;RBM
+691;bus;Hainichen - Pappendorf - Mobendorf - Hainichen;;;RBM
+695;bus;Hainichen - Berbersdorf - Marbach - Roßwein;;;RBM
+703;bus;Augustusburg - Erdmannsdorf - Flöha - Frankenberg;;;RBM
+704;bus;Chemnitz - Augustusburg - Börnichen - Lengefeld;;;RBM
+705;bus;Chemnitz - Niederwiesa - Flöha - Augustusburg - Eppendorf;;;RBM
+706;bus;Niederwiesa - Braunsdorf - Lichtenwalde - Chemnitz, Ebersdorf;;;RBM
+710;bus;Gahlenz - Görbersdorf - Oederan - Hetzdorf - Flöha - Niederwiesa - Chemnitz;;;RBM
+711;bus;Oederan - Memmendorf - Kirchbach - Oederan;;;RBM
+712;bus;Oederan - Gahlenz - Eppendorf - Großwaltersdorf - Lippersdorf - Obersaida;;;RBM
+713;bus;Oederan - Börnichen - Schönerstadt;;;RBM
+714;bus;Oederan - Görbersdorf;;;RBM
+715;bus;Oederan - Hainichen;;;RBM
+716;bus;Oederan - Schönerstadt - Langenstriegis - Hartha - Frankenstein - Wingendorf - Kirchbach - Oederan;;;RBM
+717;bus;Stadtbus Oederan;;;RBM
+725;bus;Eppendorf - Leubsdorf - Borstendorf - Marbach - Hohenfichte - Grünberg - Augustusburg;;;RBM
+726;bus;Eppendorf - Kleinhartmannsdorf - Langenau - Brand-Erbisdorf - Freiberg;;;RBM
+727;bus;Eppendorf - Gränitz - Langenau - Brand-Erbisdorf - Freiberg;;;RBM
+729;bus;Eppendorf - Leubsdorf - Lößnitztal - Hetzdorf - Lößnitztal - Hammerleubsdorf - Eppendorf - Leubsdorf;;;RBM
+732;bus;Freiberg - Weißenborn - Lichtenberg - Oberbobritzsch - Burkersdorf - Frauenstein;;;RBM
+733;bus;Freiberg - Brand-Erbisdorf - Lichtenberg - Dittersbach - Nassau - Rechenberg-Bienenmühle - Holzhau;;;RBM
+735;bus;Freiberg - Müdisdorf - Großhartmannsdorf - Helbigsdorf - Mulda - Zethau;;;RBM
+736;bus;Neuhausen - Cämmerswalde - Clausnitz - Rechenberg-Bienenmühle - Oberholzhau;;;RBM
+737;bus;Deutschneudorf - Deutscheinsiedel - Kurort Seiffen - Neuhausen - Sayda - Freiberg;;;RBM
+738;bus;Brand-Erbisdorf - Mulda - Sayda - Rechenberg-Bienenmühle;;;RBM
+739;bus;Rechenberg-Bienenmühle - Clausnitz - Nassau - Frauenstein;;;RBM
+742;bus;Freiberg - Kleinschirma - Wegefarth - Oberschöna;;;RBM
+745;bus;Freiberg - Kleinwaltersdorf - Freiberg;;;RBM
+747;bus;Freiberg - Kleinwaltersdorf - Langhennersdorf - Bräunsdorf - Hainichen;;;RBM
+749;bus;Freiberg - Großschirma - Seifersdorf - Reichenbach;;;RBM
+750;bus;Freiberg - Nossen - Roßwein - Döbeln (Muldentaler);;;RBM
+751;bus;Siebenlehn - Obergruna - Großvoigtsberg - Großschirma - Rothenfurth - Halsbrücke;;;RBM
+755;bus;Freiberg - Großschirma - Großvoigtsberg - Obergruna - Siebenlehn - Nossen;;;RBM
+756;bus;Freiberg - Leipzig;;;RBM
+761;bus;Nossen - Hirschfeld - Neukirchen - Dittmannsdorf - Reinsberg - Burkersdorf - Bieberstein - Nossen;;;RBM
+764;bus;Halsbrücke - Krummenhennersdorf - Dittmannsdorf - Reinsberg;;;RBM
+765;bus;Halsbrücke - Bieberstein - Reinsberg - Hirschfeld - Neukirchen;;;RBM
+768;bus;Halsbrücke - Tuttendorf - Conradsdorf - Falkenberg - Niederschöna;;;RBM
+770;bus;Freiberg - Halsbach - Naundorf - Niederschöna - Oberschaar - Hetzdorf;;;RBM
+774;bus;Hilbersdorf - Halsbach - Naundorf - Niederbobritzsch;;;RBM
+775;bus;Freiberg - Hilbersdorf - Niederbobritzsch - Oberbobritzsch - Burkersdorf - Frauenstein;;;RBM
+785;bus;Freiberg - Weißenborn, OT Süßenbach;;;RBM
+786;bus;Weißenborn - Berthelsdorf - Brand-Erbisdorf;;;RBM
+886;bus;Döbeln - Mochau - Beicha - Zschochau;;;RBM
+889;bus;Döbeln - Ostrau - (Jahna) - Schrebitz;;;RBM
+892;bus;Döbeln - Lüttewitz - Choren;;;RBM
+895;bus;Döbeln - Mockritz - Großweitzschen - Leisnig;;;RBM
+901;bus;Leisnig - (Klosterbuch -) Marschwitz;;;RBM
+902;bus;Leisnig - Polkenberg - Bockelwitz - Sitten - Kleinpelsen;;;RBM
+904;bus;Döbeln - Naußlitz - Haßlau - Roßwein;;;RBM
+905;bus;Roßwein - Gleisberg - Wetterwitz - Roßwein;;;RBM
+918;bus;Waldheim - Reinsdorf;;;RBM
+919;bus;Waldheim - Grünlichtenberg - Mittweida;;;RBM
+920;bus;Waldheim - Grünlichtenberg - Arnsdorf - Hainichen;;;RBM
+921;bus;Döbeln - Ziegra - Meinsberg - Waldheim;;;RBM
+922;bus;Döbeln - Hartha - Waldheim;;;RBM
+923;bus;Döbeln - (Otzdorf -) Knobelsdorf - Waldheim;;;RBM
+924;bus;Schönberg - Waldheim - Hartha - Leisnig;;;RBM
+926;bus;Hartha - Diedenhain - Steina - Wendishain - Hartha;;;RBM
+933;bus;Döbeln - Otzdorf - Roßwein - Gleisberg;;;RBM
+951;bus;Hartha - Waldheim - Massanei - Reichenbach;;;RBM
+V-61;bus;Rodewisch - Auerbach - Bad Reiboldsgrün - Schnarrtanne - Schönheide;;;MEI
+V-64;bus;Rodewisch - Rothenkirchen - Stützengrün;;;GVG
+V-66;bus;Rodewisch - Lengenfeld - Ebersbrunn - Zwickau;;;RVB
+V-75;bus;Neumark - Reuth - Schönfels;;;RVB
+V-92;bus;Rodewisch - Lengenfeld - Stangengrün - Irfersgrün;;;GVG
+== Sonderverkehrsmittel
+Drahtseilbahn;funicular;Drahtseilbahn Augustusburg - Erdmannsdorf;;;VMS
+Fichtelbergbahn;train;Cranzahl - Kurort Oberwiesenthal;;;SDG
+== Eisenbahnen
+C11;light_rail;Stollberg (Sachs) - Chemnitz;;;CBC
+C13;light_rail;Burgstädt - Chemnitz;;;CBC
+C14;light_rail;Mittweida - Chemnitz;;;CBC
+C15;light_rail;Hainichen - Chemnitz;;;CBC
+S3;train;Dresden - Tharandt - Freiberg ;;;DB
+S5;train;Leipzig/Halle Flughafen - Leipzig - Altenburg - Gößnitz - Werdau - Zwickau;;;DB
+S 5X;train;Halle (S) Hbf - Leipzig/Halle Flughafen - Leipzig - Altenburg - Gößnitz - Werdau - Zwickau;;;DB
+RE 1-Th;train;Göttingen - Erfurt - Weimar - Gera - Jena - Gößnitz - Glauchau;;;DB
+RE 3;train;Dresden - Freiberg - Chemnitz - Zwickau - Plauen - Hof;;;MRB
+RE 6;train;Leipzig - Bad Lausick - Geithain - Burgstädt - Chemnitz;;;MRB
+RB 30;train;Dresden - Freiberg - Chemnitz - Glauchau - Zwickau;;;MRB
+RB 37;train;Gößnitz - Glauchau       ;;;EGB
+RB 45;train;Elsterwerda - Riesa - Chemnitz;;;MRB
+RB 80;train;Chemnitz - Flöha - Annaberg-Buchholz - Cranzahl - Vejprty;;;EGB
+RB 81;train;Chemnitz - Flöha - Pockau-Lengefeld - Olbernhau-Grünthal;;;EGB
+RB 89;train;Chemnitz - Thalheim - Aue;;;EGB
+RB 95;train;Zwickau - Aue - Johanngeorgenstadt;;;EGB
+RB 110;train;Leipzig - Grimma - Döbeln;;;MRB
+CB 523;train;Glauchau - Stollberg (Sachs);;;CBC
+526;train;Chemnitz - Limbach-Oberfrohna (Bahnersatzverkehr);;;CBC
+FEG;train;Freiberg - Holzhau;;;FEG
+RB 1;train;Zwickau Zentrum - Lengenfeld - Falkenstein - Klingenthal - Kraslice;;;DLB
+RB 2;train;Zwickau Zentrum - Plauen - Mehltheuer - Hof / Adorf/Vogtl. - Bad Brambach - Cheb;;;DLB
 
 
-== Citybahn ==
-
-=== Chemnitz ===
-
-C11;light_rail;;Stollberg (Sachs);Chemnitz;City Bahn Chemnitz GmbH 
-C13;light_rail;;Burgstädt;Chemnitz;City Bahn Chemnitz GmbH 
-C14;light_rail;;Mittweida;Chemnitz;City Bahn Chemnitz GmbH 
-C15;light_rail;;Hainichen;Chemnitz;City Bahn Chemnitz GmbH 
-
-
-== Trambahn ==
-
-=== Chemnitz ===
-
-1;tram;Brückenstraße/Freie Presse - Zentralhaltestelle - Schönau;Brückenstraße/Freie Presse;Schönau;CVAG
-2;tram;Bernsdorf - Zentralhaltestelle - Brückenstraße/Freie Presse;Bernsdorf;Brückenstraße/Freie Presse;CVAG
-3;tram;Hauptbahnhof - Zentralhaltestelle - Technopark;Hauptbahnhof;Technopark;CVAG
-4;tram;Hutholz - Zentralhaltestelle - Hauptbahnhof;Hutholz;Hauptbahnhof;CVAG
-5;tram;Hutholz - Zentralhaltestelle - Gablenz;Hutholz;Gablenz;CVAG
-
-
-=== Zwickau ===
-
-3;tram;;Eckersbach;Neuplanitz;SVZ
-4;tram;;Pölbitz;Städtisches Klinikum;SVZ
-5;tram;;Hauptbahnhof;Städtisches Klinikum;SVZ
-7;tram;;Pölbitz;Hauptbahnhof;SVZ
-
-
-== Bus ==
-
-=== Chemnitz ===
-
-=== Zwickau ===
-
-=== Regionalbus ===
-
-
-== Drahtseilbahn ==
-
-DSB;funicular;Drahtseilbahn;Augustusburg;Erdmannsdorf;VMS
-
-
-
-#= Parameter des Tools
-#== Overpass-API
-#- * http://overpass-api.de/api/interpreter?data=area[boundary=public_transport][name='Verkehrsverbund Mittelsachsen']->.L; rel(area.L)[route~'(bus|tram|train|subway|light_rail|trolleybus|ferry|monorail|aerialway|share_taxi)']->.R; rel(br.R); out; rel.R; out; rel(r.R); out; way(r.R); out; node(r.R); out; 
-#== Analyse-Skript
-#- * --network-short="VMS"
-#- * --network-long="Verkehrsverbund Mittelsachsen"
-#- * --positive-notes
-#- * --wiki
-#
-#== Siehe auch:
-#- * [[Talk:Saxony/Transportation/Verkehrsverbund Mittelsachsen/Analyse|Diskussionsseite]] dieser Seite
-#- * [[User_talk:ToniE/Transportation/Analyse#Momentane_Pr.C3.BCfungen|Momentane Prüfungen]] und deren Beudeutung
-#
-#- [[Category:Page with status]]
-#- [[Category:Train routes in Germany]]
-#- [[Category:Rapid transit in Germany]]
-#- [[Category:Public transport in Germany]]
-#- [[Category:Sachsen]]
-#- [[Category:Nahverkehr]]
-#- [[Category:DE-SN-VMS]]
