@@ -1,5 +1,32 @@
+#
+# Formatierung:
+#
+# Überschriften beginnen mit '=', '==', '===', '====', ... am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an
+#
+# Einfacher Text beginnt mit '-' am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an, Zeilen hier werden im Wiki mit <br /> abgeschlossen (neue Zeile).
+# Einfacher Text darf nur direkt hinter einer Überschrift stehen.
+#
+# Links: [[...|...]] sind interne Verweise im Wiki
+#        [... ...] sind externe Verweise
+#
+# Kommentare beginnen mit '#' am Anfang einer Zeile. Kommentare mittendrin werden nicht erkannt.
+#
+# Format der Datei: UNIX (LF), UTF-8
+#
+#
+# Inhalt im CSV-Format
+#
 # ref;type;comment;from;to;operator
 #
+# - ref       == tag 'ref' von route oder route_master
+# - type      == inhalt des tags 'route' bzw. 'route_master'
+# - comment   == kann Kommentar enthalten wie; Ruftaxi, Bus, Expressbus, ...  wird nicht ausgewertet, lediglich ausgegeben
+# - from      == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - to        == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - operator  == wird bei mehreren Linie mit identischem ref und type Differenzierung herangezogen (Der Wert von 'operator' darf ';' enthalten)
+#
+
+
 = [[München/Transportation/MVV-Linien-gesamt|MVV Linien]]
 == U-Bahn
 U1;subway;;Olympia-Einkaufszentrum;Mangfallplatz;SWM/MVG
@@ -462,9 +489,6 @@ AST 6003;share_taxi;Anruf-Sammel-Taxi;Freising, Bahnhof;Achering;Freisinger Park
 AST 6004;share_taxi;Anruf-Sammel-Taxi;Freising, Bahnhof;Altenhausen/Zellhausen;Freisinger Parkhaus und Verkehrs-GmbH
 #
 
-#== Siehe auch:
-#- * [[Talk:München/Transportation/Analyse|Diskussionsseite]] dieser Seite
-#- * [[User_talk:ToniE/Transportation/Analyse#Momentane_Pr.C3.BCfungen|Momentane Prüfungen]] und deren Bedeutung
 
 #- [[Category:Page with status]]
 #- [[Category:Train routes in Germany]]
