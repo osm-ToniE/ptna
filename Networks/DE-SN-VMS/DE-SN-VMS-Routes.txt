@@ -467,8 +467,8 @@ C11;light_rail;Stollberg (Sachs) - Chemnitz;;;CBC
 C13;light_rail;Burgstädt - Chemnitz;;;CBC
 C14;light_rail;Mittweida - Chemnitz;;;CBC
 C15;light_rail;Hainichen - Chemnitz;;;CBC
-S3;train;Dresden - Tharandt - Freiberg ;;;DB
-S5;train;Leipzig/Halle Flughafen - Leipzig - Altenburg - Gößnitz - Werdau - Zwickau;;;DB
+S 3;train;Dresden - Tharandt - Freiberg ;;;DB
+S 5;train;Leipzig/Halle Flughafen - Leipzig - Altenburg - Gößnitz - Werdau - Zwickau;;;DB
 S 5X;train;Halle (S) Hbf - Leipzig/Halle Flughafen - Leipzig - Altenburg - Gößnitz - Werdau - Zwickau;;;DB
 RE 1-Th;train;Göttingen - Erfurt - Weimar - Gera - Jena - Gößnitz - Glauchau;;;DB
 RE 3;train;Dresden - Freiberg - Chemnitz - Zwickau - Plauen - Hof;;;MRB
@@ -482,7 +482,7 @@ RB 89;train;Chemnitz - Thalheim - Aue;;;EGB
 RB 95;train;Zwickau - Aue - Johanngeorgenstadt;;;EGB
 RB 110;train;Leipzig - Grimma - Döbeln;;;MRB
 CB 523;train;Glauchau - Stollberg (Sachs);;;CBC
-526;train;Chemnitz - Limbach-Oberfrohna (Bahnersatzverkehr);;;CBC
+526;bus;Bahnersatzverkehr: Chemnitz - Limbach-Oberfrohna;;;CBC
 FEG;train;Freiberg - Holzhau;;;FEG
 RB 1;train;Zwickau Zentrum - Lengenfeld - Falkenstein - Klingenthal - Kraslice;;;DLB
 RB 2;train;Zwickau Zentrum - Plauen - Mehltheuer - Hof / Adorf/Vogtl. - Bad Brambach - Cheb;;;DLB
