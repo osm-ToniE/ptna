@@ -34,29 +34,13 @@
 -
 - Die folgende Liste wurde am 14.03.2018 mit freundlicher Genehmigung des VMS aus der [https://www.vms.de/fileadmin/user_upload/antraege_formulare/tbest_anlage_6_2018-02-26.pdf "Anlage 6 - Linienverzeichnis"] (Stand 26.02.2018) erstellt.
 -
-- Die Sortierung hier entspricht der Sortierung im Linienverzeichnis. Eine Alternative Sortierung kann diskutiert werden.
+- Die Analyse und Ausgabe von mehrfach vorkommenden Buslinien mit identtischem "Betreiber" wie die Linien A, B, C, ... muss noch verbessert werden.
 -
 
-== Kleiner Stadtverkehr Annaberg-Buchholz
-A;bus;Barbara-Uthmann-Ring - Markt - Buchholz;Barbara-Uthmann-Ring;Buchholz;RVE
-B;bus;Frohnau - Obere Stadt;Frohnau;Obere Stadt;RVE
-C;bus;Markt - Herzog-Georg-Ring - Erzgebirgs-Center - Markt;Markt;Markt;RVE
-D;bus;Markt - B95/Am Kätplatz - Markt;Markt;Markt;RVE
-E;bus;Stadtbus Buchholz;;;RVE
-F;bus;Cunersdorf - Buchholz;Cunersdorf;Buchholz;RVE
-G;bus;Markt - Cunersdorf;Markt;Cunersdorf;RVE
+== Stadtverkehr
 
-== Kleiner Stadtverkehr Aue
-A;bus;Postplatz - Zeller Berg - Postplatz;Postplatz;Postplatz;RVE
-B;bus;Postplatz - Eichert - Postplatz;Postplatz;Postplatz;RVE
-C;bus;Postplatz - Brünlasberg - Postplatz;Postplatz;Postplatz;RVE
-D;bus;Postplatz - Neudörfel - Postplatz;Postplatz;Postplatz;RVE
+=== Chemnitz
 
-== Kleiner Stadtverkehr Burgstädt
-A;bus;Sportzentrum - Bahnhof - Friedhof - Heiersdorf;Sportzentrum;Heiersdorf;RBM
-B;bus;Heiersdorf - Friedhof - Bahnhof - Sportzentrum;Heiersdorf;Sportzentrum;RBM
-
-== Stadtverkehr Chemnitz
 1;tram;Brückenstraße/Freie Presse - Zentralhaltestelle - Schönau;;;CVAG
 2;tram;Bernsdorf - Zentralhaltestelle - Brückenstraße/Freie Presse;;;CVAG
 3;tram;Hauptbahnhof - Zentralhaltestelle - Technopark;;;CVAG
@@ -98,18 +82,8 @@ N15;bus;Zentralhaltestelle - Hutholz;;;CVAG
 N16;bus;Zentralhaltestelle - RabensteinCenter;;;CVAG
 N17;bus;Zentralhaltestelle - Talanger;;;CVAG
 N18;bus;Zentralhaltestelle - Omnibusbahnhof -Borna;;;CVAG
-== Kleiner Stadtverkehr Döbeln
-A;bus;Hauptbahnhof - Busbahnhof - (Krankenhaus -) Unnaer Str - Hauptbahnhof;;;RBM
-B;bus;Marktkauf - Busbahnhof - Muldenterasse - Technitz;;;RBM
-C;bus;Rotes Kreuz - Busbahnhof - Hauptbahnhof - Gärtitz;;;RBM
-D;bus;Busbahnhof - Ebersbach - Busbahnhof;;;RBM
-== Kleiner Stadtverkehr Flöha
-1;bus;Am Sattelgut - Busbahnhof - Lessingstraße - Gymnasium - Lärchenstraße;;;RBM
-2;bus;Am Sattelgut - Feldstraße - Am Mörbitzbach - Straße des Friedens - Busbahnhof;;;RBM
-== Kleiner Stadtverkehr Frankenberg
-D;bus;Süd - Neubaugebiet - Süd;;;RBM
-E;bus;Süd - Lützelhöhe - Süd;;;RBM
-== Stadtverkehr Freiberg
+
+=== Freiberg
 A;bus;Busbahnhof - Olbernhauer Straße - Wasserberg - Anton-Günther-Straße - Busbahnhof;;;RBM
 B;bus;Brand-Erbisdorf - Zug - Freiberg, Busbahnhof - Freiberg, Clausthaler Straße;;;RBM
 C;bus;Busbahnhof - Meißner Ring - Uni-Gelände - Friedeburg - Wasserberg - Häuersteig - Seilerberg - Busbahnhof;;;RBM
@@ -120,36 +94,8 @@ G;bus;Brand-Erbisdorf - St. Michaelis - Oberschöna;;;RBM
 H;bus;Freiberg, Busbahnhof - Tuttendorf - Halsbrücke, Wendeschleife;;;RBM
 I;bus;Tour 1: Brand-Erbisdorf - Zug - Industriegebiet Saxonia - GWG Freiberg Ost;;;RBM
 I;bus;Tour 2: Freiberg (Friedeburg - Wasserberg - Seilerberg) - Busbahnhof - Industriegebiet Saxonia - GWG - Pulvermühlenweg - Halsbrücke;;;RBM
-== Kleiner Stadtverkehr Hohenstein-Ernstthal
-1;bus;Bahnhof - Hüttengrund - Heiterer Blick - Bahnhof - Sonnenstraße - Wüstenbrand - Bahnhof;;;RVE
-2;bus;Bahnhof - Ernst-Thälmann-Siedlung - Fritz-Heckert-Siedlung - Bahnhof;;;RVE
-== Kleiner Stadtverkehr Kurort Oberwiesenthal
-A;bus;Fichtelberg-Plateau - Bahnhof - Sparingberg - Bahnhof - Fichtelberg-Plateau;;;RVE
-== Kleiner Stadtverkehr Limbach-Oberfrohna
-C1;bus;City-Bus Limbach-Oberfrohna;;;FRI
-C2;bus;City-Bus Limbach-Oberfrohna;;;FRI
-== Kleiner Stadtverkehr Lößnitz
-A;bus;Neustadt - Markt - Ostsiedlung - Neustadt;;;RVE
-== Kleiner Stadtverkehr Marienberg
-A;bus;Markt - Mooshaide - Mühlberg - Markt - Gewerbegebiet;;;RVE
-B;bus;Markt - Dörfel - Gelobtland - Gebirge - Dörfel - Markt;;;KRM
-D;bus;Marienberg - Lauterbach - Pobershau -Marienberg;;;KRM
-E;bus;Marienberg - Gebirge - Pobershau - Zöblitz - Marienberg;;;KRM
-== Kleiner Stadtverkehr Mittweida
-A;bus;Baumwollspinnerei Wendeschleife - Markt - Bahnhof;;;RBM
-B;bus;Kaufland - Lauenhainer Straße - Krankenhaus - Busbahnhof - Lauenhainer Straße - Kaufland;;;RBM
-C;bus;Lauenhain - Mittweida - Altmittweida;;;RBM
-F;bus;Baumwollspinnerei Wendeschleife - Busbahnhof - Kaufland - Bahnhof;;;RBM
-== Kleiner Stadtverkehr Rochlitz
-R;bus;Rathausstraße - Bahnhof - Obere Lindenbergstraße - Rathausstraße;;;RBM
-== Kleiner Stadtverkehr Schwarzenberg
-A;bus;Heide - Busbahnhof - Sonnenleithe - Busbahnhof - Heide;;;RVE
-B;bus;Busbahnhof - Wildenau - Neuwelt - Bermsgrün - Busbahnhof;;;RVE
-== Kleiner Stadtverkehr Stollberg
-STL;bus;Stadtlinie 1 und 2;;;RVE
-== Kleiner Stadtverkehr Zschopau
-1;bus;Hohndorf - Zschopau - Gornau, Einkaufszentrum;;;RVE
-== Stadtverkehr Zwickau
+
+===  Zwickau
 3;tram;Eckersbach - Neuplanitz;;;SVZ
 4;tram;Pölbitz - Städtisches Klinikum;;;SVZ
 5;tram;Hauptbahnhof - Städtisches Klinikum;;;SVZ
@@ -169,6 +115,82 @@ STL;bus;Stadtlinie 1 und 2;;;RVE
 A;bus;Nachtbus: Hauptmarkt - Neumarkt - Hbf - Marienthal - Neuplanitz - Cainsdorf - Wilkau-Haßlau - Hauptmarkt;;;SVZ
 B;bus;Nachtbus: Hauptbahnhof - Neumarkt - Nordvorstadt - Eckersbach;;;SVZ
 C;bus;Nachtbus: Hauptmarkt - Neumarkt - Weißenborn;;;SVZ
+
+== Kleiner Stadtverkehr
+
+=== Annaberg-Buchholz
+A;bus;Barbara-Uthmann-Ring - Markt - Buchholz;Barbara-Uthmann-Ring;Buchholz;RVE
+B;bus;Frohnau - Obere Stadt;Frohnau;Obere Stadt;RVE
+C;bus;Markt - Herzog-Georg-Ring - Erzgebirgs-Center - Markt;Markt;Markt;RVE
+D;bus;Markt - B95/Am Kätplatz - Markt;Markt;Markt;RVE
+E;bus;Stadtbus Buchholz;;;RVE
+F;bus;Cunersdorf - Buchholz;Cunersdorf;Buchholz;RVE
+G;bus;Markt - Cunersdorf;Markt;Cunersdorf;RVE
+
+=== Aue
+A;bus;Postplatz - Zeller Berg - Postplatz;Postplatz;Postplatz;RVE
+B;bus;Postplatz - Eichert - Postplatz;Postplatz;Postplatz;RVE
+C;bus;Postplatz - Brünlasberg - Postplatz;Postplatz;Postplatz;RVE
+D;bus;Postplatz - Neudörfel - Postplatz;Postplatz;Postplatz;RVE
+
+=== Burgstädt
+A;bus;Sportzentrum - Bahnhof - Friedhof - Heiersdorf;Sportzentrum;Heiersdorf;RBM
+B;bus;Heiersdorf - Friedhof - Bahnhof - Sportzentrum;Heiersdorf;Sportzentrum;RBM
+
+=== Döbeln
+A;bus;Hauptbahnhof - Busbahnhof - (Krankenhaus -) Unnaer Str - Hauptbahnhof;;;RBM
+B;bus;Marktkauf - Busbahnhof - Muldenterasse - Technitz;;;RBM
+C;bus;Rotes Kreuz - Busbahnhof - Hauptbahnhof - Gärtitz;;;RBM
+D;bus;Busbahnhof - Ebersbach - Busbahnhof;;;RBM
+
+=== Flöha
+1;bus;Am Sattelgut - Busbahnhof - Lessingstraße - Gymnasium - Lärchenstraße;;;RBM
+2;bus;Am Sattelgut - Feldstraße - Am Mörbitzbach - Straße des Friedens - Busbahnhof;;;RBM
+
+=== Frankenberg
+D;bus;Süd - Neubaugebiet - Süd;;;RBM
+E;bus;Süd - Lützelhöhe - Süd;;;RBM
+
+=== Hohenstein-Ernstthal
+1;bus;Bahnhof - Hüttengrund - Heiterer Blick - Bahnhof - Sonnenstraße - Wüstenbrand - Bahnhof;;;RVE
+2;bus;Bahnhof - Ernst-Thälmann-Siedlung - Fritz-Heckert-Siedlung - Bahnhof;;;RVE
+
+=== Kurort Oberwiesenthal
+A;bus;Fichtelberg-Plateau - Bahnhof - Sparingberg - Bahnhof - Fichtelberg-Plateau;;;RVE
+
+=== Limbach-Oberfrohna
+C1;bus;City-Bus Limbach-Oberfrohna;;;FRI
+C2;bus;City-Bus Limbach-Oberfrohna;;;FRI
+
+=== Lößnitz
+A;bus;Neustadt - Markt - Ostsiedlung - Neustadt;;;RVE
+
+=== Marienberg
+A;bus;Markt - Mooshaide - Mühlberg - Markt - Gewerbegebiet;;;RVE
+B;bus;Markt - Dörfel - Gelobtland - Gebirge - Dörfel - Markt;;;KRM
+D;bus;Marienberg - Lauterbach - Pobershau -Marienberg;;;KRM
+E;bus;Marienberg - Gebirge - Pobershau - Zöblitz - Marienberg;;;KRM
+
+=== Mittweida
+A;bus;Baumwollspinnerei Wendeschleife - Markt - Bahnhof;;;RBM
+B;bus;Kaufland - Lauenhainer Straße - Krankenhaus - Busbahnhof - Lauenhainer Straße - Kaufland;;;RBM
+C;bus;Lauenhain - Mittweida - Altmittweida;;;RBM
+F;bus;Baumwollspinnerei Wendeschleife - Busbahnhof - Kaufland - Bahnhof;;;RBM
+
+=== Rochlitz
+R;bus;Rathausstraße - Bahnhof - Obere Lindenbergstraße - Rathausstraße;;;RBM
+
+=== Schwarzenberg
+A;bus;Heide - Busbahnhof - Sonnenleithe - Busbahnhof - Heide;;;RVE
+B;bus;Busbahnhof - Wildenau - Neuwelt - Bermsgrün - Busbahnhof;;;RVE
+
+=== Stollberg
+STL 1;bus;Stadtlinie 1;;;RVE
+STL 2;bus;Stadtlinie 2;;;RVE
+
+=== Zschopau
+1;bus;Hohndorf - Zschopau - Gornau, Einkaufszentrum;;;RVE
+
 == Omnibus-Regionalverkehr
 20;bus;Greiz - Teichwolframsdorf - Seelingstädt;;;PRG
 101;bus;Glauchau, Bahnhof - Schönbörnchen, Südhang;;;RVW
