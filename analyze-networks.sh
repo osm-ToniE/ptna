@@ -6,14 +6,14 @@
 
 WD=$PWD
 
-PATH=$PWD:$PATH
+PATH=$PWD/bin:$PATH
 
 for A in  Networks/*
 do
     
     cd $A
 
-    ./analyze-area.sh $1
+    ./analyze-network.sh $1
 
     cd $WD
 
