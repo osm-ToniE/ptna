@@ -36,7 +36,7 @@ then
 fi
 
 
-analyze-routes.pl -v --wiki --max-error=10 --check-access --check-name --check-stop-position --check-sequence --relaxed-begin-end-for="train,light_rail,tram" --coloured-sketchline --expect-network-long --expect-network-short-for="Verkehrsverbund Rhein-Sieg" --network-long-regex="$NETWORK_LONG" --network-short-regex="$NETWORK_SHORT" --lines-csv=$CSV_FILE --routes=$XML_FILE > $WIKI_FILE
+analyze-routes.pl -v --wiki --max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-wide-characters --relaxed-begin-end-for="train,light_rail,tram" --coloured-sketchline --expect-network-long --expect-network-short-for="Verkehrsverbund Rhein-Sieg" --network-long-regex="$NETWORK_LONG" --network-short-regex="$NETWORK_SHORT" --lines-csv=$CSV_FILE --routes=$XML_FILE > $WIKI_FILE
 
 if [ -f $WIKI_FILE.save ]
 then

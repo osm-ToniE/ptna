@@ -36,7 +36,7 @@ then
 fi
 
 
-analyze-routes.pl -v --wiki --max-error=10 --positive-notes --check-access --check-name --check-stop-position --check-sequence --coloured-sketchline --network-long-regex="$NETWORK_LONG" --network-short-regex="$NETWORK_SHORT" --lines-csv=$CSV_FILE --routes=$XML_FILE > $WIKI_FILE
+analyze-routes.pl -v --wiki --max-error=10 --positive-notes --check-access --check-name --check-stop-position --check-sequence --check-wide-characters --coloured-sketchline --network-long-regex="$NETWORK_LONG" --network-short-regex="$NETWORK_SHORT" --lines-csv=$CSV_FILE --routes=$XML_FILE > $WIKI_FILE
 
 if [ -f $WIKI_FILE.save ]
 then
