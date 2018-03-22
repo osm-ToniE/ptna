@@ -1571,6 +1571,18 @@ sub analyze_route_environment {
                  $relation_ptr->{'tag'}->{'network'}                                         ne $ref_ref->{'route_master'}->{$route_type}->{$rel_id}->{'tag'}->{'network'} ) {
                 push( @{$relation_ptr->{'__issues__'}}, sprintf("'network' of Route does not fit to 'network' of Route-Master: %s", printRelationTemplate($rel_id)) );
             }
+            if ( $relation_ptr->{'tag'}->{'colour'} ) {
+                if ( $ref_ref->{'route_master'}->{$route_type}->{$rel_id}->{'tag'}->{'colour'} ) {
+                    if ( $relation_ptr->{'tag'}->{'colour'} ne $ref_ref->{'route_master'}->{$route_type}->{$rel_id}->{'tag'}->{'colour'} ) {
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf("'colour' of Route does not fit to 'colour' of Route-Master: %s", printRelationTemplate($rel_id)) );
+                    }
+                } else {
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf("'colour' of Route is set but 'colour' of Route-Master is not set: %s", printRelationTemplate($rel_id)) );
+                }
+            }
+            elsif ( $ref_ref->{'route_master'}->{$route_type}->{$rel_id}->{'tag'}->{'colour'} ) {
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf("'colour' of Route is not set but 'colour' of Route-Master is set: %s", printRelationTemplate($rel_id)) );
+            }
             foreach my $member_ref ( @{$ref_ref->{'route_master'}->{$route_type}->{$rel_id}->{'route_master_relation'}} ) {
                 if ( $relation_id == $member_ref->{'ref'} ) {
                     $is_member_of_route_masters++;
