@@ -1573,7 +1573,7 @@ sub analyze_route_environment {
             }
             if ( $relation_ptr->{'tag'}->{'colour'} ) {
                 if ( $ref_ref->{'route_master'}->{$route_type}->{$rel_id}->{'tag'}->{'colour'} ) {
-                    if ( $relation_ptr->{'tag'}->{'colour'} ne $ref_ref->{'route_master'}->{$route_type}->{$rel_id}->{'tag'}->{'colour'} ) {
+                    if ( uc($relation_ptr->{'tag'}->{'colour'}) ne uc($ref_ref->{'route_master'}->{$route_type}->{$rel_id}->{'tag'}->{'colour'}) ) {
                         push( @{$relation_ptr->{'__issues__'}}, sprintf("'colour' of Route does not fit to 'colour' of Route-Master: %s", printRelationTemplate($rel_id)) );
                     }
                 } else {
@@ -4214,10 +4214,10 @@ sub GetColourFromString {
 
     if ( $string ) {
         if ( $string =~ m/^#[A-Fa-f0-9]{6}$/ ) {
-            $ret_value= $string;
+            $ret_value= uc($string);
         }
         elsif ( $string =~ m/^#([A-Fa-f0-9])([A-Fa-f0-9])([A-Fa-f0-9])$/ ) {
-            $ret_value= "#" . $1 . $1 . $2 . $2 . $3 . $3;
+            $ret_value= uc("#" . $1 . $1 . $2 . $2 . $3 . $3);
         }
         else {
             $ret_value = ( $colour_table{$string} ) ? $colour_table{$string} : undef;
