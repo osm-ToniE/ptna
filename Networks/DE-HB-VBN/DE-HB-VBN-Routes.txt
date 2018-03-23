@@ -29,6 +29,8 @@
 
 = [[Bremen/Transport/Analyse/DE-HB-VBN-Linien|In OSM gefundene VBN-Linien]]
 
+- [[Category:Page with status]][[Category:Train routes in Germany]][[Category:Rapid transit in Germany]][[Category:Public transport in Germany]][Category:Bremen]][[Category:Nahverkehr]]
+
 == Hinweis
 
 - bei der Analyse ist 'network' derzeit entweder
@@ -542,11 +544,3 @@ RB41;train;;Bremen;Hamburg;evb
 RB58;train;;Bremen;Vechta/Osnabrück;evb
 RB76;train;;Rotenburg (W);Minden;evb
 
-
-#- [[Category:Page with status]]
-#- [[Category:Train routes in Germany]]
-#- [[Category:Rapid transit in Germany]]
-#- [[Category:Public transport in Germany]]
-#- [[Category:Bremen]]
-#- [[Category:Nahverkehr]]
-#- [[Category:DE-HB-VBN]]

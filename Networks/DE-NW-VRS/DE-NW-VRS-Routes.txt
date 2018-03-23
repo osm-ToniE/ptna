@@ -29,6 +29,9 @@
 
 = [[VRS/Analyse/VRS-Linien|In OSM gefundene VRS-Linien]]
 
+- [[Category:Page with status]][[Category:Train routes in Germany]][[Category:Rapid transit in Germany]][[Category:Public transport in Germany]][[Category:Nordrhein-Westfalen]][[Category:Nahverkehr]]
+
+
 == Quelle
 -
 - Diese automatisch erstellte Auswertung enthält derzeit zum Einen eine '''Bestandsaufnahme der in OSM gefundenen VRS-Linien'''.
@@ -625,11 +628,5 @@ AST 892;bus;;;;
 
 BBO;bus;;;;
 
-#- [[Category:Page with status]]
-#- [[Category:Train routes in Germany]]
-#- [[Category:Rapid transit in Germany]]
-#- [[Category:Public transport in Germany]]
-#- [[Category:Nordrhein-Westfalen]]
-#- [[Category:Nahverkehr]]
-#- [[Category:DE-NRW-VRS]]
+
 

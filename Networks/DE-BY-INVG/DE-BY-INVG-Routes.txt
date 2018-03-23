@@ -28,6 +28,11 @@
 
 
 = [[Ingolstadt/Transportation/INVG-Linien-gesamt|INVG Linien]]
+
+
+
+- [[Category:Page with status]][[Category:Train routes in Germany]][[Category:Rapid transit in Germany]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:Ingolstadt]]
+
 == Bus
 10;bus;;;;
 11;bus;;;;
@@ -95,13 +100,4 @@ S7;bus;;;;
 S8;bus;;;;
 S9;bus;;;;
 
-
-#- [[Category:Page with status]]
-#- [[Category:Train routes in Germany]]
-#- [[Category:Rapid transit in Germany]]
-#- [[Category:Public transport in Germany]]
-#- [[Category:Nahverkehr]]
-#- [[Category:Bayern]]
-#- [[Category:Ingolstadt]]
-#- [[Category:DE-BY-AVV]]
 

@@ -28,6 +28,9 @@
 
 
 = [[Augsburg/Transportation/AVV-Linien-gesamt|AVV Linien]]
+
+- [[Category:Page with status]][[Category:Train routes in Germany]][[Category:Rapid transit in Germany]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:Augsburg]]
+
 == Tram
 === Straßenbahn
 1;tram;;Lechhausen Neuer Ostfriedhof;Göggingen;
@@ -231,15 +234,5 @@ AST 620;bus;;Augsburg West P+R;Kreppen;
 AST 628;bus;;Pfersee;Leitershofen;
 AST 641;bus;;Leitershofen;;
 AST 642;bus;;Stadtbergen;Deuringen;
-
-
-#- [[Category:Page with status]]
-#- [[Category:Train routes in Germany]]
-#- [[Category:Rapid transit in Germany]]
-#- [[Category:Public transport in Germany]]
-#- [[Category:Nahverkehr]]
-#- [[Category:Bayern]]
-#- [[Category:Augsburg]]
-#- [[Category:DE-BY-AVV]]
 
 
