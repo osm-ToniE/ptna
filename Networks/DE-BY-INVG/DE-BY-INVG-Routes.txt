@@ -42,29 +42,34 @@
 18;bus;;;;
 20;bus;;;;
 21;bus;;;;
+22;bus;;;;
 25;bus;;;;
 26;bus;;;;
 30;bus;;;;
 31;bus;;;;
-33;bus;;;;
 40;bus;;;;
 41;bus;;;;
-44;bus;;;;
+44/44;bus;;;;
 45;bus;;;;
 50;bus;;;;
 51;bus;;;;
 52;bus;;;;
 53;bus;;;;
 55;bus;;;;
+58;bus;;;;
 60;bus;;;;
 65;bus;;;;
 70;bus;;;;
 85;bus;;;;
-111;bus;;;;
+111;bus;;;;?
 #
-== Regionalbus
+== Regionalbus mit Anerkennung von INVG-Tickets im INVG-Gebiet
+9112;bus;;;;
 9221/21;bus;;;;
 9226;bus;;;;
+9223;bus;;;;
+9233;bus;;;;
+6008/07;bus;;;;
 #
 == Expressbus 
 X11;bus;;;;
@@ -87,7 +92,11 @@ N11;bus;;;;
 N12;bus;;;;
 N14;bus;;;;
 N15;bus;;;;
+N16;bus;;;;
+N18;bus;;;;
 N19;bus;;;;
+N25;bus;;;;
+N26;bus;;;;
 #
 == Schichtbus 
 S1;bus;;;;
@@ -99,5 +108,3 @@ S6;bus;;;;
 S7;bus;;;;
 S8;bus;;;;
 S9;bus;;;;
-
-
