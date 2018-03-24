@@ -108,3 +108,8 @@ S6;bus;;;;
 S7;bus;;;;
 S8;bus;;;;
 S9;bus;;;;
+#
+== kostenlose Pendelbusse zu Heimspiele FC Ingolstadt 04
+201;bus;;;;
+202;bus;;;;
+
