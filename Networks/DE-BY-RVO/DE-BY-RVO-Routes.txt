@@ -1,3 +1,4 @@
+<pre>
 #
 # Formatierung:
 #
@@ -200,15 +201,15 @@
 9612;bus;Bad Tölz - Bad Heilbrunn - Benediktbeuern - Kochel
 9613;bus;Penzberg - Benediktbeuern - Kochel - Schlehdorf
 9614;bus;Penzberg - Iffeldorf - Seeshaupt - Bernried - Tutzing
-9615;bus;Penzberg, Stadtbus 1: Bahnhof - Heiglhof - Kirnberg
+9615/1A;bus;Penzberg, Stadtbus 1: Bahnhof - Heiglhof - Kirnberg
 9617;bus;Penzberg - Iffeldorf - Antdorf - Habach - Sindelsdorf - Penzberg
 9620;bus;Murnau - Riegsee - Aidling - Murnau
 9621;bus;Murnau - Seehausen - Grafenaschau
 9622;bus;Oberammergau - Ettal - Schloss Linderhof und zurück
-9625;bus;Penzberg, Stadtbus 2: Dittenried - Bahnhof - Freiheit - Maxkron
+9625/2;bus;Penzberg, Stadtbus 2: Dittenried - Bahnhof - Freiheit - Maxkron
 9630;bus;Stadtverkehr Weilheim (alle Linien)
 9631;bus;Murnau - Obersöchering / Uffing - Eglfing
-9635;bus;Penzberg, Stadtbus 3: Bahnhof - Firma Roche - Neue Heimat
+9635/3;bus;Penzberg, Stadtbus 3: Bahnhof - Firma Roche - Neue Heimat
 9641;bus;Murnau - Seehausen - Uffing - Kirnberg
 9645;bus;Penzberg, Stadtbus 4: Direktverbindungen Firma Roche
 9649_93;bus;Ortsbus Dießen - Obermühlhausen - Dettenhofen - Dettenschwang/Wengen - Dießen
@@ -254,4 +255,4 @@
 9834;bus;Landsberg - Fuchstal/Denklingen/Apfeldorf
 
 
-
+</pre>
