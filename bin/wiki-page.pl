@@ -191,7 +191,8 @@ if ( $pull) {
                             action          => 'edit',
                             summary         => $summary,
                             title           => $page,
-                            basetimestamp   => $timestamp, # to avoid edit conflicts
+                            bot             => 'true',
+                            basetimestamp   => $timestamp,          # to avoid edit conflicts
                             text            => $text
                               } ) ) {
                 } else {
