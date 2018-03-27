@@ -16,7 +16,7 @@ do
     
     cd $A
 
-    ./analyze-network.sh $1
+    ./analyze-network.sh $*
 
     cd $WD
 
