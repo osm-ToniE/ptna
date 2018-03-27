@@ -1,0 +1,46 @@
+#
+# Formatierung:
+#
+# Überschriften beginnen mit '=', '==', '===', '====', ... am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an
+#
+# Einfacher Text beginnt mit '-' am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an, Zeilen hier werden im Wiki mit <br /> abgeschlossen (neue Zeile).
+# Einfacher Text darf nur direkt hinter einer Überschrift stehen.
+#
+# Links: [[...|...]] sind interne Verweise im Wiki
+#        [... ...] sind externe Verweise
+#
+# Kommentare beginnen mit '#' am Anfang einer Zeile. Kommentare mittendrin werden nicht erkannt.
+#
+# Format der Datei: UNIX (LF), UTF-8
+#
+#
+# Inhalt im CSV-Format
+#
+# ref;type;comment;from;to;operator
+#
+# - ref       == tag 'ref' von route oder route_master
+# - type      == inhalt des tags 'route' bzw. 'route_master'
+# - comment   == kann Kommentar enthalten wie; Ruftaxi, Bus, Expressbus, ...  wird nicht ausgewertet, lediglich ausgegeben
+# - from      == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - to        == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - operator  == wird bei mehreren Linie mit identischem ref und type Differenzierung herangezogen (Der Wert von 'operator' darf ';' enthalten)
+#
+
+= [[Kassel/Transportation/Analyse/DE-HE-NVV-Linien|NVV-Linien]]
+
+- [[Category:Page with status]] [[Category:Train routes in Germany]] [[Category:Rapid transit in Germany]] [[Category:Public transport in Germany]] [[Category:Hessen]] [[Category:Nahverkehr]] [[Category:Kassel]]
+
+- Hier folgt die Liste der NVV Linien, wenn gewünscht getrennt nach Tram, Bahn, Bus, ... oder Ort
+-
+- Die Liste ist derzeit leer!
+-
+- Was folgt ist eine '''IST-Analyse''' der in den Kreisen:
+- * Kassel
+- * Landkreis Kassel
+- * Landkreis Werra-Meißner-Kreis
+- * Landkreis Schwalm-Eder-Kreis
+- * Landkreis Waldeck-Frankenberg
+- * Landkreis Hersfeld-Rotenburg
+- gemappten Linien.
+-
+
