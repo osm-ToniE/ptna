@@ -122,35 +122,35 @@ if ( $pull) {
     
     $page = umlaut_escape( $page );
     
+    printf STDERR "%s Reading Wiki page '%s'\n", get_time(), $page;
+    
     my $ref = $mw->get_page( { title => $page } );
     
     if ( $ref ) {
         unless ( $ref->{missing} ) {
             my $timestamp = $ref->{timestamp};
+            printf STDERR "%s timestamp = %s\n", get_time(), $timestamp;
 
             if ( $file ) {
                 if ( open(OUT,">$file") ) {
-                    printf STDERR "Pulling Wiki page '%s' to file '%s'\n", $page, $file;
-                    printf STDERR "timestamp = %s\n", $timestamp;
+                    printf STDERR "%s Writing Wiki page '%s' to file '%s'\n", get_time(), $page, $file;
                     binmode OUT, ":utf8";
                     printf OUT "%s", $ref->{'*'};
                     close( OUT );
+                    printf STDERR "%s Done ... writing Wiki page '%s' to file '%s'\n", get_time(), $page, $file;
                 } else {
                     printf STDERR "%s Can't open file '%s' for writing\n", get_time(), $file;
-                    die;
                 }
             } else {
-                printf STDERR "Pulling Wiki page '%s' to STDOUT\n", $page;
-                printf STDERR "timestamp = %s\n", $timestamp;
+                printf STDERR "%s Writing Wiki page '%s' to STDOUT\n", get_time(), $page;
                 printf $ref->{'*'};
+                printf STDERR "%s Done ... writing Wiki page '%s' to STDOUT\n", get_time(), $page;
             }
         } else {
             printf STDERR "%s Wiki page '%s' does not exist\n", get_time(), $page;
-            die;
         }
     } else {
         printf STDERR "%s Reading Wiki page '%s' failed\n", get_time(), $page;
-        die;
     }
 
 } elsif ( $push ) {
@@ -165,12 +165,17 @@ if ( $pull) {
         
         $page = umlaut_escape( $page );
         
+        printf STDERR "%s Reading Wiki page info '%s'\n", get_time(), $page;
+
         my $ref = $mw->get_page( { title => $page } );
         
         if ( $ref ) {
             unless ( $ref->{missing} ) {
                 my $timestamp = $ref->{timestamp};
-              
+                printf STDERR "%s timestamp = %s\n", get_time(), $timestamp;
+                printf STDERR "%s Reading file '%s'\n", get_time(), $file;
+                printf STDERR "%s\n", $text   if ( $debug );
+
                 if ( open(IN,"<$file") ) {
                     $text = '';
                     binmode IN, ":utf8";
@@ -178,38 +183,33 @@ if ( $pull) {
                         $text .= $_;
                     }
                     close( IN );
+                    
+                    printf STDERR "%s Pushing file '%s' to Wiki page '%s' with summary '%s'\n", get_time(), $file, $page, $summary;
+                
+                    if ( $mw->edit( {
+                                action          => 'edit',
+                                summary         => $summary,
+                                title           => $page,
+                                bot             => 'true',
+                                basetimestamp   => $timestamp,          # to avoid edit conflicts
+                                text            => $text
+                                  } ) ) {
+                        printf STDERR "%s Done ... pushing file '%s' to Wiki page '%s' with summary '%s'\n", get_time(), $file, $page, $summary;
+                    } else {
+                        printf STDERR "%s Edit Wiki page failed '%s'\n", get_time(), $page;
+                    }
+
                 } else {
                     printf STDERR "%s Can't open file '%s' for reading\n", get_time(), $file;
-                    die;
-                }
-                
-             
-                printf STDERR "%s Pushing file '%s' to Wiki page '%s' with summary '%s'\n", get_time(), $file, $page, $summary;
-                printf STDERR "%s\n", $text   if ( $debug );
-                
-                if ( $mw->edit( {
-                            action          => 'edit',
-                            summary         => $summary,
-                            title           => $page,
-                            bot             => 'true',
-                            basetimestamp   => $timestamp,          # to avoid edit conflicts
-                            text            => $text
-                              } ) ) {
-                } else {
-                    printf STDERR "%s Edit Wiki page failed '%s'\n", get_time(), $page;
-                    die;
                 }
             } else {
                 printf STDERR "%s Wiki page '%s' does not exist, will not be created\n", get_time(), $page;
-                die;
             }
         } else {
             printf STDERR "%s Reading Wiki page information '%s' failed\n", get_time(), $page;
-            die;
         }
     } else {
         printf STDERR "%s Login to Wiki failed\n", get_time(), $file;
-        die;
     }
 
 }
