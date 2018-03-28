@@ -1833,7 +1833,7 @@ sub analyze_route_master_relation {
         }
     }
     else {
-        push( @{$relation_ptr->{'__issues__'}}, "'public_transport:version' is not set" )        if ( $check_version );
+        push( @{$relation_ptr->{'__notes__'}}, "'public_transport:version' is not set" )        if ( $check_version );
     }
 
     return $return_code;
