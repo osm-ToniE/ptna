@@ -3529,7 +3529,6 @@ sub printFinalFooter {
         #
         # WIKI code
         #
-        print  "\n";
     }
     else {
         #
@@ -3905,7 +3904,7 @@ sub printTableFooter {
         #
         # WIKI code
         #
-        print "|}\n\n";
+        print "|}\n";
         printf STDERR "%s Templates printed: %d\n", get_time(), $number_of_printed_templates    if ( $verbose );
     }
     else {
