@@ -1,0 +1,196 @@
+#
+# Formatierung:
+#
+# Überschriften beginnen mit '=', '==', '===', '====', ... am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an
+#
+# Einfacher Text beginnt mit '-' am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an, Zeilen hier werden im Wiki mit <br /> abgeschlossen (neue Zeile).
+# Einfacher Text darf nur direkt hinter einer Überschrift stehen.
+#
+# Links: [[...|...]] sind interne Verweise im Wiki
+#        [... ...] sind externe Verweise
+#
+# Kommentare beginnen mit '#' am Anfang einer Zeile. Kommentare mittendrin werden nicht erkannt.
+#
+# Format der Datei: UNIX (LF), UTF-8
+#
+#
+# Inhalt im CSV-Format
+#
+# ref;type;comment;from;to;operator
+#
+# - ref       == tag 'ref' von route oder route_master
+# - type      == inhalt des tags 'route' bzw. 'route_master'
+# - comment   == kann Kommentar enthalten wie; Ruftaxi, Bus, Expressbus, ...  wird nicht ausgewertet, lediglich ausgegeben
+# - from      == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - to        == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - operator  == wird bei mehreren Linie mit identischem ref und type Differenzierung herangezogen (Der Wert von 'operator' darf ';' enthalten)
+#
+
+
+= Überblick Buslinien Landshuter Regionalbusnetz (LA) allgemein 
+
+- [[Category:Page with status]][[Category:Train routes in Germany]][[Category:Rapid transit in Germany]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:Landshut]]
+
+- Verweis auf die Datei mit den [[Landshut/Transportation/Analyse/DE-BY-LA-Linien|LA Linien]] im Wiki.
+
+
+== 01x-Linien
+
+010;bus;;;;
+011;bus;;;;
+012;bus;;;;
+013;bus;;;;
+014;bus;;;;
+015;bus;;;;
+016;bus;;;;
+017;bus;;;;
+018;bus;;;;
+019;bus;;;;
+
+
+== 02x-Linien
+
+020;bus;;;;
+021;bus;;;;
+022;bus;;;;
+023;bus;;;;
+024;bus;;;;
+025;bus;;;;
+026;bus;;;;
+028;bus;;;;
+029;bus;;;;
+
+
+== 03x-Linien
+
+030;bus;;;;
+031;bus;;;;
+032;bus;;;;
+033;bus;;;;
+034;bus;;;;
+035;bus;;;;
+036;bus;;;;
+037;bus;;;;
+
+
+== 2xx-Linien
+
+201;bus;;;;
+202;bus;;;;
+203;bus;;;;
+204;bus;;;;
+205;bus;;;;
+206;bus;;;;
+207;bus;;;;
+
+
+== 3xx-Linien
+
+301;bus;;;;
+302;bus;;;;
+303;bus;;;;
+303R;bus;;;;
+304;bus;;;;
+305;bus;;;;
+306;bus;;;;
+307;bus;;;;
+308;bus;;;;
+309;bus;;;;
+310;bus;;;;
+311;bus;;;;
+312;bus;;;;
+313;bus;;;;
+314;bus;;;;
+315;bus;;;;
+316;bus;;;;
+317;bus;;;;
+
+
+== 4xx-Linien
+
+401_1;bus;;;;
+401_2;bus;;;;
+401_3;bus;;;;
+402;bus;;;;
+403;bus;;;;
+404;bus;;;;
+405;bus;;;;
+406;bus;;;;
+407;bus;;;;
+408;bus;;;;
+409;bus;;;;
+
+
+= Buslinien mit Mitgliedschaften in anderen Netzwerken (RBO; VLK; DGF; VSL; etc.)
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Regionalbus Ostbayern (RBO) (=RBO xxxx)
+
+021;bus;(=RBO 6233 =VSL 47);;;
+022;bus;(=RBO 6264 =VSL 46);;;
+031;bus;(=RBO 6051 =VLK 56);;;
+036;bus;(=RBO 6245);;;
+205;bus;(=RBO 6262);;;
+302;bus;(=RBO 6240 =VLK 11);;;
+303;bus;(=RBO 6234);;;
+303R;bus;(=RBO 8240);;;
+304;bus;(=RBO 6241);;;
+305;bus;(=RBO 6263);;;
+306;bus;(=RBO 6247);;;
+308;bus;(=RBO 6232 =DGF 11);;;
+310;bus;(=RBO 6242 =DGF 07);;;
+312;bus;(=RBO 6243);;;
+401_1;bus;(=RBO 6249_1);;;
+401_2;bus;(=RBO 6249_2);;;
+401_3;bus;(=RBO 6249_3);;;
+406;bus;(=RBO 6248);;;
+407;bus;(=RBO 6231);;;
+409;bus;(=RBO 6239);;;
+
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Kelheim (VLK) (= VLK xx)
+
+011;bus;(=VLK 63);;;
+012;bus;(=VLK 64);;;
+013;bus;(=VLK 62);;;
+015;bus;(=VLK 66);;;
+031;bus;(=VLK 56 =RBO 6051);;;
+035;bus;(=VLK 68);;;
+201;bus;(=VLK 61);;;
+202;bus;(=VLK 60);;;
+206;bus;(=VLK 65);;;
+207;bus;(=VLK 67);;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Straubinger Land (VSL) (= VSL xx)
+
+026;bus;(=VSL 41 =DGF 38);;;
+032;bus;(=VSL 40);;;
+033;bus;(=VSL 38);;;
+034;bus;(=VSL 37);;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Dingolfinger Regionalbusnetz (DGF)  (= DGF xx)
+
+017;bus;(=DGF 19);;;
+019;bus;(=DGF 37);;;
+026;bus;(=DGF 38 =VSL 41);;;
+028;bus;(=DGF 29);;;
+037;bus;(=DGF 34);;;
+308;bus;(=DGF 11 =RBO 6232);;;
+309;bus;(=DGF 30);;;
+310;bus;(=DGF 07 =RBO 6242);;;
+403;bus;(=DGF 17);;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Regensburger Verkehrsverbund (RVV)  (= RVV xxx)
+
+030;bus;(=RVV 104);;;
+
+
+= Bahnlinien (Deutsche Bahn (DB))
+
+930;train;;;;
+931;train;;;;
+932;train;;;;
+945;train;;;;
