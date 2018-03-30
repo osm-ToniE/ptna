@@ -3529,6 +3529,7 @@ sub printFinalFooter {
         #
         # WIKI code
         #
+        print "<!-- end of file -->"
     }
     else {
         #
@@ -3904,15 +3905,15 @@ sub printTableFooter {
         #
         # WIKI code
         #
-        print "|}\n";
+        print "|}\n\n";
         printf STDERR "%s Templates printed: %d\n", get_time(), $number_of_printed_templates    if ( $verbose );
     }
     else {
         #
         # HTML
         #
-        printf "%12s</tbody>\n", ' ';
-        printf "%8s</table>\n", ' ';
+        printf "%12s</tbody>\n",  ' ';
+        printf "%8s</table>\n\n", ' ';
     }
 }
 
