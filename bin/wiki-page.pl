@@ -33,6 +33,7 @@ my $push                            = undef;                    # --push
 my $username                        = undef;                    # --username=user           - alternatively use    $ENV{'WIKI_USERNAME'} instead
 my $password                        = undef;                    # --password=secret         - alternatively use    $ENV{'WIKI_PASSWORD'} instead
 my $summary                         = $SUMMARY;                 # --summary="summary for the push"
+my $watch                           = undef;
 my $wiki_url                        = $WIKI_URL;                # --wiki-url=https://wiki.openstreetmap.org/w/api.php
 my $text                            = $TEXT;
 
@@ -47,19 +48,26 @@ GetOptions( 'help'                          =>  \$help,                         
             'username=s'                    =>  \$username,                     # --username=user               - alternatively use    $ENV{'WIKI_USERNAME'} instead
             'password=s'                    =>  \$password,                     # --password=secret             - alternatively use    $ENV{'WIKI_PASSWORD'} instead
             'summary=s'                     =>  \$summary ,                     # --summary="summary for the push"
+            'watch'                         =>  \$watch,                        # --watch
             'wiki-url=s'                    =>  \$wiki_url,                     # --wiki-url=https://wiki.openstreetmap.org/w/api.php
           );
 
 
 if ( !$page ) {
     printf STDERR "Please specify the Wiki page to pull or to push to\n";
-    printf STDERR "usage: wiki-api.pl [--pull|--push] --page=<wikipage> ...\n";
+    printf STDERR "usage: wiki-page.pl [--pull|--push|--watch] --page=<wikipage> ...\n";
     exit 1;
 }
 
-if ( $pull && $push ) {
-    printf STDERR "Please specify either --pull or --push\n";
-    printf STDERR "usage: wiki-api.pl [--pull|--push] --page=<wikipage> ...\n";
+my $commands = 0;
+
+if ( $pull  ) { $commands++; } 
+if ( $push  ) { $commands++; } 
+if ( $watch ) { $commands++; } 
+
+if ( $commands > 1 ) {
+    printf STDERR "Please specify either --pull or --push or --watch\n";
+    printf STDERR "usage: wiki-page.pl [--pull|--push|--watch] --page=<wikipage> ...\n";
     exit 1;
 } elsif ( $push ) {
     if ( $username || $ENV{'WIKI_USERNAME'} ) {
@@ -68,9 +76,9 @@ if ( $pull && $push ) {
         }
     } else {
         printf STDERR "Username for Wiki not specified\n";
-        printf STDERR "usage: wiki-api.pl --push --page=<wikipage> --file=<filename> --username=<user> --password=<passwd> --summary=<summary> ...\n";
+        printf STDERR "usage: wiki-page.pl --push --page=<wikipage> --file=<filename> --username=<user> --password=<passwd> --summary=<summary> ...\n";
         printf STDERR "or\n";
-        printf STDERR "WIKI_USER=<user>\nWIKI_PASSWORD=<passwd>\nwiki-api.pl --push --page=<wikipage> --file=<filename> --summary=<summary> ...\n";
+        printf STDERR "WIKI_USER=<user>\nWIKI_PASSWORD=<passwd>\nwiki-page.pl --push --page=<wikipage> --file=<filename> --summary=<summary> ...\n";
         exit 1;
     }
     if ( $password || $ENV{'WIKI_PASSWORD'} ) {
@@ -79,9 +87,9 @@ if ( $pull && $push ) {
         }
     } else {
         printf STDERR "Password for User '%s' for Wiki not specified\n", $username;
-        printf STDERR "usage: wiki-api.pl --push --page=<wikipage> --file=<filename> --username=<user> --password=<passwd> --summary=<summary> ...\n";
+        printf STDERR "usage: wiki-page.pl --push --page=<wikipage> --file=<filename> --username=<user> --password=<passwd> --summary=<summary> ...\n";
         printf STDERR "or\n";
-        printf STDERR "WIKI_USER=<user>\nWIKI_PASSWORD=<passwd>\nwiki-api.pl --push --page=<wikipage> --file=<filename> --summary=<summary> ...\n";
+        printf STDERR "WIKI_USER=<user>\nWIKI_PASSWORD=<passwd>\nwiki-page.pl --push --page=<wikipage> --file=<filename> --summary=<summary> ...\n";
         exit 1;
     }
     if ( $file && -f $file && -r $file ) {
@@ -92,17 +100,19 @@ if ( $pull && $push ) {
         } else {
             printf STDERR "Filename not specified\n";
         }
-        printf STDERR "usage: wiki-api.pl --push --page=<wikipage> --file=<filename> --username=<user> --password=<passwd> --summary=<summary> ...\n";
+        printf STDERR "usage: wiki-page.pl --push --page=<wikipage> --file=<filename> --username=<user> --password=<passwd> --summary=<summary> ...\n";
         printf STDERR "or\n";
-        printf STDERR "WIKI_USER=<user>\nWIKI_PASSWORD=<passwd>\nwiki-api.pl --push --page=<wikipage> --file=<filename> --summary=<summary> ...\n";
+        printf STDERR "WIKI_USER=<user>\nWIKI_PASSWORD=<passwd>\nwiki-page.pl --push --page=<wikipage> --file=<filename> --summary=<summary> ...\n";
         exit 1;
     }
 
 } elsif ( $pull ) {
     ;
+} elsif ( $watch ) {
+    ;
 } else {
-    printf STDERR "Please specify either --pull or --push\n\n", $username;
-    printf STDERR "usage: wiki-api.pl [--pull|--push] --page=<wikipage> ...\n";
+    printf STDERR "Please specify either --pull or --push or --watch\n\n", $username;
+    printf STDERR "usage: wiki-page.pl [--pull|--push|--watch] --page=<wikipage> ...\n";
     exit 1;
 }
 
@@ -212,6 +222,19 @@ if ( $pull) {
         printf STDERR "%s Login to Wiki failed\n", get_time(), $file;
     }
 
+} elsif ( $watch ) {
+    $mw = MediaWiki::API->new();
+    
+    $mw->{config}->{api_url}    = $wiki_url;
+    $mw->{config}->{on_error}   = \&on_error;
+    
+    $page = umlaut_escape( $page );
+    
+    printf STDERR "%s Setting 'watch' on Wiki page '%s'\n", get_time(), $page;
+    
+    # my $ref = $mw->get_page( { title => $page } );
+    
+    
 }
   
   
