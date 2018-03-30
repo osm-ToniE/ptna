@@ -1,3 +1,4 @@
+<pre>
 #
 # Formatierung:
 #
@@ -27,97 +28,133 @@
 #
 
 
-= Überblick Buslinien Landshuter Regionalbusnetz (LA) allgemein 
+= Überblick Buslinien Landshuter Stadt- und Regionalbusnetz (LA) allgemein 
 
 - [[Category:Page with status]][[Category:Train routes in Germany]][[Category:Rapid transit in Germany]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:Landshut]]
 
 - Verweis auf die Datei mit den [[Landshut/Transportation/Analyse/DE-BY-LA-Linien|LA Linien]] im Wiki.
 
 
-== 01x-Linien
+== Landshut Stadt
 
-010;bus;;;;
-011;bus;;;;
-012;bus;;;;
-013;bus;;;;
-014;bus;;;;
-015;bus;;;;
+1;bus;;;;
+2;bus;;;;
+3;bus;;;;
+4;bus;;;;
+5;bus;;;;
+6;bus;;;;
+7;bus;;;;
+7A;bus;;;;
+8;bus;;;;
+9;bus;;;;
+10;bus;;;;
+11;bus;;;;
+12;bus;;;;
+14;bus;;;;
+101;bus;;;;
+102;bus;;;;
+103;bus;;;;
+104;bus;;;;
+105;bus;;;;
+106;bus;;;;
+107;bus;;;;
+108;bus;;;;
+109;bus;;;;
+110;bus;;;;
+X2;bus;;;;
+X3;bus;;;;
+X6;bus;;;;
+X10;bus;;;;
+X33;bus;;;;
+
+
+
+== Landshut Region
+
+=== 01x-Linien
+
+LA 010;bus;;;;
+011/63;bus;;;;
+012/64;bus;;;;
+013/62;bus;;;;
+LA 014;bus;;;;
+015/66;bus;;;;
 016;bus;;;;
-017;bus;;;;
-018;bus;;;;
-019;bus;;;;
+017/19;bus;;;;
+LA 018/33;bus;;;;
+019/32;bus;;;;
 
 
-== 02x-Linien
+=== 02x-Linien
 
-020;bus;;;;
+LA 020;bus;;;;
 021;bus;;;;
 022;bus;;;;
-023;bus;;;;
+LA 023/23;bus;;;;
 024;bus;;;;
 025;bus;;;;
-026;bus;;;;
-028;bus;;;;
-029;bus;;;;
+026/41/38;bus;;;;
+LA 028/29;bus;;;;
+LA 029 ;bus;;;;
 
 
-== 03x-Linien
+=== 03x-Linien
 
-030;bus;;;;
-031;bus;;;;
-032;bus;;;;
-033;bus;;;;
-034;bus;;;;
-035;bus;;;;
+104/30;bus;;;;
+6051/56/031;bus;;;;
+LA 032/VSL 40;bus;;;;
+LA 033/VSL 38;bus;;;;
+LA 034/37;bus;;;;
+035/68;bus;;;;
 036;bus;;;;
 037;bus;;;;
 
 
-== 2xx-Linien
+=== 2xx-Linien
 
-201;bus;;;;
-202;bus;;;;
-203;bus;;;;
-204;bus;;;;
+201/61;bus;;;;
+202/60;bus;;;;
+LA 203;bus;;;;
+LA 204;bus;;;;
 205;bus;;;;
-206;bus;;;;
-207;bus;;;;
+206/65;bus;;;;
+207/67;bus;;;;
 
 
-== 3xx-Linien
+=== 3xx-Linien
 
-301;bus;;;;
+LA 301;bus;;;;
 302;bus;;;;
 303;bus;;;;
-303R;bus;;;;
+8240/303R;bus;;;;
 304;bus;;;;
 305;bus;;;;
 306;bus;;;;
 307;bus;;;;
 308;bus;;;;
-309;bus;;;;
+309/30;bus;;;;
 310;bus;;;;
-311;bus;;;;
+LA 311;bus;;;;
 312;bus;;;;
-313;bus;;;;
-314;bus;;;;
-315;bus;;;;
+LA 313;bus;;;;
+LA 314;bus;;;;
+LA 315;bus;;;;
 316;bus;;;;
 317;bus;;;;
 
 
-== 4xx-Linien
+=== 4xx-Linien
 
 401_1;bus;;;;
 401_2;bus;;;;
 401_3;bus;;;;
-402;bus;;;;
-403;bus;;;;
-404;bus;;;;
-405;bus;;;;
+LA 402;bus;;;;
+403/17;bus;;;;
+LA 404;bus;;;;
+LA 405;bus;;;;
 406;bus;;;;
-407;bus;;;;
-408;bus;;;;
+6231/407;bus;;;;
+LA 408;bus;;;;
 409;bus;;;;
 
 
@@ -127,12 +164,12 @@
 
 021;bus;(=RBO 6233 =VSL 47);;;
 022;bus;(=RBO 6264 =VSL 46);;;
-031;bus;(=RBO 6051 =VLK 56);;;
+6051/56/031;bus;(=RBO 6051 =VLK 56);;;
 036;bus;(=RBO 6245);;;
 205;bus;(=RBO 6262);;;
 302;bus;(=RBO 6240 =VLK 11);;;
 303;bus;(=RBO 6234);;;
-303R;bus;(=RBO 8240);;;
+8240/303R;bus;(=RBO 8240);;;
 304;bus;(=RBO 6241);;;
 305;bus;(=RBO 6263);;;
 306;bus;(=RBO 6247);;;
@@ -143,49 +180,55 @@
 401_2;bus;(=RBO 6249_2);;;
 401_3;bus;(=RBO 6249_3);;;
 406;bus;(=RBO 6248);;;
-407;bus;(=RBO 6231);;;
+6231/407;bus;(=RBO 6231);;;
 409;bus;(=RBO 6239);;;
 
 
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Kelheim (VLK) (= VLK xx)
 
-011;bus;(=VLK 63);;;
-012;bus;(=VLK 64);;;
-013;bus;(=VLK 62);;;
-015;bus;(=VLK 66);;;
-031;bus;(=VLK 56 =RBO 6051);;;
-035;bus;(=VLK 68);;;
-201;bus;(=VLK 61);;;
-202;bus;(=VLK 60);;;
-206;bus;(=VLK 65);;;
-207;bus;(=VLK 67);;;
+011/63;bus;(=VLK 63);;;
+012/64;bus;(=VLK 64);;;
+013/62;bus;(=VLK 62);;;
+015/66;bus;(=VLK 66);;;
+6051/56/031;bus;(=VLK 56 =RBO 6051);;;
+035/68;bus;(=VLK 68);;;
+201/61;bus;(=VLK 61);;;
+202/60;bus;(=VLK 60);;;
+206/65;bus;(=VLK 65);;;
+207/67;bus;(=VLK 67);;;
 
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Straubinger Land (VSL) (= VSL xx)
 
-026;bus;(=VSL 41 =DGF 38);;;
-032;bus;(=VSL 40);;;
-033;bus;(=VSL 38);;;
-034;bus;(=VSL 37);;;
+026/41/38;bus;(=VSL 41 =DGF 38);;;
+LA 032/VSL 40;bus;(=VSL 40);;;
+LA 033/VSL 38;bus;(=VSL 38);;;
+LA 034/37;bus;(=VSL 37);;;
 
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Dingolfinger Regionalbusnetz (DGF)  (= DGF xx)
 
-017;bus;(=DGF 19);;;
-019;bus;(=DGF 37);;;
-026;bus;(=DGF 38 =VSL 41);;;
-028;bus;(=DGF 29);;;
+017/19;bus;(=DGF 19);;;
+019/32;bus;(=DGF 37);;;
+026/41/38;bus;(=DGF 38 =VSL 41);;;
+LA 028/29;bus;(=DGF 29);;;
 037;bus;(=DGF 34);;;
 308;bus;(=DGF 11 =RBO 6232);;;
-309;bus;(=DGF 30);;;
+309/30;bus;(=DGF 30);;;
 310;bus;(=DGF 07 =RBO 6242);;;
-403;bus;(=DGF 17);;;
+403/17;bus;(=DGF 17);;;
 
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Regensburger Verkehrsverbund (RVV)  (= RVV xxx)
 
-030;bus;(=RVV 104);;;
+104/30;bus;(=RVV 104);;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Regionalbus Oberbayern (RVO) (= RVO xxxx)
+
+024;bus;(=RVO 9403);;;
+025;bus;(=RVO 9407);;;
 
 
 = Bahnlinien (Deutsche Bahn (DB))
@@ -194,3 +237,4 @@
 931;train;;;;
 932;train;;;;
 945;train;;;;
+</pre>
