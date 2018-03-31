@@ -210,7 +210,7 @@
 9631;bus;Murnau - Obersöchering / Uffing - Eglfing
 9635/3;bus;Penzberg, Stadtbus 3: Bahnhof - Firma Roche - Neue Heimat
 9641;bus;Murnau - Seehausen - Uffing - Kirnberg
-9645;bus;Penzberg, Stadtbus 4: Direktverbindungen Firma Roche
+9645/4;bus;Penzberg, Stadtbus 4: Direktverbindungen Firma Roche
 9649_93;bus;Ortsbus Dießen - Obermühlhausen - Dettenhofen - Dettenschwang/Wengen - Dießen
 9650;bus;Weilheim - Raisting - Dießen - Utting
 9651;bus;Weilheim - Peißenberg - Böbing - Rottenbuch - Steingaden - Füssen

@@ -1,3 +1,4 @@
+<pre>
 #
 # Formatierung:
 #
@@ -40,6 +41,4 @@
 -
 #
 #ref;type;comment;from;to;operator
-
-
-
+</pre>
