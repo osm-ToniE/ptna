@@ -14,7 +14,7 @@ WIKI_ANALYSIS_PAGE="VRS/Analyse"
 WIKI_ROUTES_PAGE="VRS/Analyse/VRS-Linien"
 WIKI_FILE_DIFF="196"
 
-ANALYSIS_OPTIONS="-v --wiki --max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-wide-characters --relaxed-begin-end-for='train,light_rail,tram_ --coloured-sketchline --expect-network-long --expect-network-short-for='Verkehrsverbund Rhein-Sieg'"
+ANALYSIS_OPTIONS="-v --wiki --max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-wide-characters --relaxed-begin-end-for='train,light_rail,tram' --coloured-sketchline --expect-network-long --expect-network-short-for='Verkehrsverbund Rhein-Sieg'"
 
 # --positive-notes
 # --check-bus-stop 
