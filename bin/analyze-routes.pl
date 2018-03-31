@@ -27,8 +27,8 @@ my $regex_supported_route_types = join( '|', @supported_route_types );
 
 my $verbose                         = undef;
 my $debug                           = undef;
-my $routes_xml_file                 = undef;
-my $lines_csv_file                  = undef;
+my $osm_xml_file                    = undef;
+my $routes_file                     = undef;
 my $relaxed_begin_end_for           = undef;
 my $network_long_regex              = undef;
 my $network_short_regex             = undef;
@@ -76,14 +76,14 @@ GetOptions( 'help'                          =>  \$help,                         
             'expect-network-long-for=s'     =>  \$expect_network_long_for,      # --expect-network-long-for="Münchner Verkehrs- und Tarifverbund|Biberger Bürgerbus"         note if 'network' is not long form for ...
             'expect-network-short'          =>  \$expect_network_short,         # --expect-network-short            note if 'network' is not short form in general
             'expect-network-short-for=s'    =>  \$expect_network_short_for,     # --expect-network-short-for='BOB'        note if 'network' is not short form for ...
-            'lines-csv-file=s'              =>  \$lines_csv_file,               # --lines-csv-file=zzz              CSV file with a list of the network lines
+            'routes-file=s'                 =>  \$routes_file,                  # --routes-file=zzz                 CSV file with a list of routes of the of the network
             'max-error=i'                   =>  \$max_error,                    # --max-error=10                    limit number of templates printed for identical error messages
             'network-long-regex=s'          =>  \$network_long_regex,           # --network-long-regex='Münchner Verkehrs- und Tarifverbund|Grünwald|Bayerische Oberlandbahn'
             'network-short-regex=s'         =>  \$network_short_regex,          # --network-short-regex='MVV|BOB'
             'operator-regex=s'              =>  \$operator_regex,               # --operator-regex='MVG|Münchner'
             'positive-notes'                =>  \$positive_notes,               # --positive-notes                  print positive information for notes, if e.g. something is fulfilled
             'relaxed-begin-end-for=s'       =>  \$relaxed_begin_end_for,        # --relaxed-begin-end-for=...       for train/tram/light_rail: first/last stop position does not have to be on first/last node of way, but within first/last way
-            'routes-xml-file=s'             =>  \$routes_xml_file,              # --route-xml-file=yyy              XML output of Overpass APU query
+            'osm-xml-file=s'                =>  \$osm_xml_file,                 # --osm-xml-file=yyy                XML output of Overpass APU query
             'separator=s'                   =>  \$csv_separator,                # --separator=';'                   separator in the CSV file
             'show-options'                  =>  \$show_options,                 # --show-options                    print a section with all options and their values
             'strict-network'                =>  \$strict_network,               # --strict-network                  do not consider empty network tags
@@ -91,8 +91,13 @@ GetOptions( 'help'                          =>  \$help,                         
             'wiki'                          =>  \$print_wiki,                   # --wiki                            prepare outut for WIKI instead of HTML
           );
 
+if ( $verbose ) {
+    printf STDERR "%s analyze-routes.pl -v --network-long-regex='%s' --network-short-regex='%s'\n", get_time (), $network_long_regex, $network_short_regex;
+}
+
+
 my $routes_xml              = undef;
-my @lines_csv               = ();
+my @routes_csv              = ();
 my %refs_of_interest        = ();
 my %collected_tags          = ();
 my $key                     = undef;
@@ -204,10 +209,10 @@ my %colour_table            = ( 'black'         => '#000000',
 #
 #############################################################################################
 
-if ( $routes_xml_file ) {
-    printf STDERR "%s Reading %s\n", get_time(), $routes_xml_file     if ( $verbose );
-    $routes_xml  = XMLin( $routes_xml_file,  ForceArray => 1 );
-    printf STDERR "%s %s read\n", get_time(), $routes_xml_file        if ( $verbose );
+if ( $osm_xml_file ) {
+    printf STDERR "%s Reading %s\n", get_time(), $osm_xml_file     if ( $verbose );
+    $routes_xml  = XMLin( $osm_xml_file,  ForceArray => 1 );
+    printf STDERR "%s %s read\n", get_time(), $osm_xml_file        if ( $verbose );
     # print Dumper( $routes_xml )        ; #                               if ( $debug   );
 
     $xml_has_relations  = 1  if ( $routes_xml->{'relation'} );   
@@ -216,7 +221,7 @@ if ( $routes_xml_file ) {
 }
 
 if ( $xml_has_relations == 0 ) {
-    printf STDERR "No relations found in XML file %s - exiting\n", $routes_xml_file;
+    printf STDERR "No relations found in XML file %s - exiting\n", $osm_xml_file;
     
     exit 1;
 }
@@ -231,15 +236,15 @@ if ( $xml_has_relations == 0 ) {
 my @pre_print   = ();
 my @post_print  = ();
 
-if ( $lines_csv_file ) {
+if ( $routes_file ) {
     
-    printf STDERR "%s Reading %s\n", get_time(), $lines_csv_file                   if ( $verbose );
+    printf STDERR "%s Reading %s\n", get_time(), $routes_file                   if ( $verbose );
     
-    if ( -f $lines_csv_file ) {
+    if ( -f $routes_file ) {
         
-        if ( -r $lines_csv_file ) {
+        if ( -r $routes_file ) {
             
-            if ( open(CSV,"< $lines_csv_file") ) {
+            if ( open(CSV,"< $routes_file") ) {
                 my $previous_entry = '';
                 
                 while ( <CSV> ) {
@@ -258,12 +263,12 @@ if ( $lines_csv_file ) {
                         push( @post_print, $1 );                    # anything after '>' shall be printed after all other stuff
                         next;
                     }
-                    push( @lines_csv, $_ );                         # store as lines of interrest
+                    push( @routes_csv, $_ );                         # store as lines of interrest
                     next    if ( m/^[=#-]/ );                       # ignore headers, text and comment lines here in this analysis
                     
                     if ( $_ eq $previous_entry )                    # ignore double entries for PT routes (not for text, headers and other stuff)
                     {
-                        pop( @lines_csv );
+                        pop( @routes_csv );
                         next;
                     }
 
@@ -283,19 +288,19 @@ if ( $lines_csv_file ) {
                              
                 }
                 close( CSV );
-                printf STDERR "%s %s read\n", get_time(), $lines_csv_file                           if ( $verbose );
-                #print Dumper( @lines_csv )                                                         if ( $debug   );
+                printf STDERR "%s %s read\n", get_time(), $routes_file                           if ( $verbose );
+                #print Dumper( @routes_csv )                                                         if ( $debug   );
             }
             else {
-                printf STDERR "%s Could not open %s: %s\n", get_time(), $lines_csv_file, $!;
+                printf STDERR "%s Could not open %s: %s\n", get_time(), $routes_file, $!;
             }
         }
         else {
-            printf STDERR "%s No read access for file %s\n", get_time(), $lines_csv_file;
+            printf STDERR "%s No read access for file %s\n", get_time(), $routes_file;
         }
     }
     else {
-           printf STDERR "%s %s is not a file\n", get_time(), $lines_csv_file;
+           printf STDERR "%s %s is not a file\n", get_time(), $routes_file;
     }
 }
 
@@ -816,7 +821,7 @@ printInitialHeader( 'Public Transportation - OpenStreetMap', $osm_base, $areas  
 printf STDERR "%s Printing positives\n", get_time()       if ( $verbose );
 $number_of_positive_relations= 0;
 
-if ( $lines_csv_file ) {
+if ( $routes_file ) {
     
     $section = 'positive';
     
@@ -834,7 +839,7 @@ if ( $lines_csv_file ) {
 
     printTableInitialization( 'name', 'type', 'relation', 'PTv', 'issues', 'notes' );
     
-    foreach $entry ( @lines_csv ) {
+    foreach $entry ( @routes_csv ) {
         next if ( $entry !~ m/\S/ );
         next if ( $entry =~ m/^#/ );
         if ( $entry =~ m/^=/ ) {
@@ -1016,7 +1021,7 @@ if ( scalar(@line_refs) ) {
     
     printTableInitialization( 'ref', 'relation', 'type', 'route_type', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'issues', 'notes' );
 
-    if ( $lines_csv_file ) {
+    if ( $routes_file ) {
         printBigHeader( 'Andere ÖPNV Linien' );
     }
     else {
