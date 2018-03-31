@@ -1,0 +1,217 @@
+<pre>
+#
+# Formatierung:
+#
+# Überschriften beginnen mit '=', '==', '===', '====', ... am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an
+#
+# Einfacher Text beginnt mit '-' am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an, Zeilen hier werden im Wiki mit <br /> abgeschlossen (neue Zeile).
+# Einfacher Text darf nur direkt hinter einer Überschrift stehen.
+#
+# Links: [[...|...]] sind interne Verweise im Wiki
+#        [... ...] sind externe Verweise
+#
+# Kommentare beginnen mit '#' am Anfang einer Zeile. Kommentare mittendrin werden nicht erkannt.
+#
+# Format der Datei: UNIX (LF), UTF-8
+#
+#
+# Inhalt im CSV-Format
+#
+# ref;type;comment;from;to;operator
+#
+# - ref       == tag 'ref' von route oder route_master
+# - type      == inhalt des tags 'route' bzw. 'route_master'
+# - comment   == kann Kommentar enthalten wie; Ruftaxi, Bus, Expressbus, ...  wird nicht ausgewertet, lediglich ausgegeben
+# - from      == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - to        == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - operator  == wird bei mehreren Linie mit identischem ref und type Differenzierung herangezogen (Der Wert von 'operator' darf ';' enthalten)
+#
+
+
+= Überblick Buslinien Regensburger Verkehrsverbund (RVV) 
+
+- [[Category:Page with status]][[Category:Train routes in Germany]][[Category:Rapid transit in Germany]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:Regensburg]]
+
+- Verweis auf die Datei mit den [[Regensburg/Transportation/Analyse/DE-BY-RVV-Linien|RVV Linien]] im Wiki.
+
+
+== Buslinien mit Buchstaben
+
+A;bus;;;;
+Dult;bus;;;;
+D;bus;;;;
+
+
+== Campuslinien
+
+C1;bus;;;;
+C2;bus;;;;
+C4;bus;;;;
+C6;bus;;;;
+
+
+== Express-Linien
+
+X1;bus;;;;
+X4;bus;;;;
+X6;bus;;;;
+X9;bus;;;;
+
+
+== Linien mit einstelliger Nummer
+
+1;bus;;;;
+1A;bus;;;;
+2A;bus;;;;
+2B;bus;;;;
+3;bus;;;;
+4;bus;;;;
+4A;bus;;;;
+5;bus;;;;
+5A;bus;;;;
+6;bus;;;;
+6S;bus;;;;
+7;bus;;;;
+8;bus;;;;
+8A;bus;;;;
+8B;bus;;;;
+9;bus;;;;
+
+
+== 1x-Linien
+
+10;bus;;;;
+11;bus;;;;
+11A;bus;;;;
+12;bus;;;;
+13;bus;;;;
+14;bus;;;;
+15;bus;;;;
+16;bus;;;;
+17;bus;;;;
+19;bus;;;;
+
+
+== 2x-Linien
+
+20;bus;;;;
+21;bus;;;;
+22;bus;;;;
+23;bus;;;;
+24;bus;;;;
+25;bus;;;;
+26;bus;;;;
+27;bus;;;;
+28;bus;;;;
+29;bus;;;;
+
+
+== 3x-Linien
+
+30;bus;;;;
+31;bus;;;;
+32;bus;;;;
+33;bus;;;;
+34;bus;;;;
+35;bus;;;;
+36;bus;;;;
+37;bus;;;;
+
+
+== 4x-Linien
+
+41;bus;;;;
+41S;bus;;;;  ?
+42;bus;;;;
+43;bus;;;;
+
+
+== 6x-Linien
+
+63;bus;;;;
+66;bus;;;;
+68;bus;;;;
+69;bus;;;;
+
+
+== 7x-Linien
+
+70;bus;;;;
+71;bus;;;;
+72;bus;;;;
+73;bus;;;;
+74;bus;;;;
+75;bus;;;;
+76;bus;;;;
+77;bus;;;;
+78;bus;;;;
+79;bus;;;;
+
+
+== 8x-Linien
+
+80;bus;;;;
+
+
+== 10x-Linien
+
+101;bus;;;;
+102;bus;;;;
+103;bus;;;;
+104;bus;;;;
+105;bus;;;;
+106;bus;;;;
+107;bus;;;;
+108;bus;;;;
+109;bus;;;;
+
+
+== 11x-Linien
+
+110;bus;;;;
+111;bus;;;;
+112;bus;;;;
+115;bus;;;;
+116;bus;;;;
+
+
+== 12x-Linien
+
+127;bus;;;;
+
+
+= 14x-Linien
+
+141;bus;;;;
+142;bus;;;;
+
+
+== Nachtbuslinien
+
+N1;bus;;;;
+N5;bus;;;;
+N6;bus;;;;
+N8;bus;;;;
+N9;bus;;;;
+N10;bus;;;;
+N13;bus;;;;
+N16;bus;;;;
+N21/N24;bus;;;;
+N26/N27;bus;;;;
+N28;bus;;;;
+N30/N33;bus;;;;
+N31;bus;;;;
+N34;bus;;;;
+N41;bus;;;;
+
+
+= Bahnlinien (Deutsche Bahn (DB))
+
+855;train;;;;
+870;train;;;;
+880;train;;;;
+
+930;train;;;;
+933;train;;;;
+
+</pre>

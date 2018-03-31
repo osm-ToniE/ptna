@@ -1,0 +1,244 @@
+<pre>
+#
+# Formatierung:
+#
+# Überschriften beginnen mit '=', '==', '===', '====', ... am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an
+#
+# Einfacher Text beginnt mit '-' am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an, Zeilen hier werden im Wiki mit <br /> abgeschlossen (neue Zeile).
+# Einfacher Text darf nur direkt hinter einer Überschrift stehen.
+#
+# Links: [[...|...]] sind interne Verweise im Wiki
+#        [... ...] sind externe Verweise
+#
+# Kommentare beginnen mit '#' am Anfang einer Zeile. Kommentare mittendrin werden nicht erkannt.
+#
+# Format der Datei: UNIX (LF), UTF-8
+#
+#
+# Inhalt im CSV-Format
+#
+# ref;type;comment;from;to;operator
+#
+# - ref       == tag 'ref' von route oder route_master
+# - type      == inhalt des tags 'route' bzw. 'route_master'
+# - comment   == kann Kommentar enthalten wie; Ruftaxi, Bus, Expressbus, ...  wird nicht ausgewertet, lediglich ausgegeben
+# - from      == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - to        == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - operator  == wird bei mehreren Linie mit identischem ref und type Differenzierung herangezogen (Der Wert von 'operator' darf ';' enthalten)
+#
+
+
+= Überblick Buslinien Verkehrsgemeinschaft Landkreis Kelheim (VLK) allgemein 
+
+- [[Category:Page with status]][[Category:Train routes in Germany]][[Category:Rapid transit in Germany]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:Kelheim]]
+
+- Verweis auf die Datei mit den [[Kelheim/Transportation/Analyse/DE-BY-VLK-Linien|VLK Linien]] im Wiki
+
+
+== 1xx-Linien
+
+1;bus;;;;
+10;bus;;;;
+100;bus;;;;
+10a;bus;;;;
+11;bus;;;;
+12;bus;;;;
+13;bus;;;;
+16;bus;;;;
+17;bus;;;;
+19;bus;;;;
+
+
+== 2x-Linien
+
+2;bus;;;;
+21;bus;;;;
+22;bus;;;;
+28;bus;;;;
+29;bus;;;;
+025;bus;;;;
+026;bus;;;;
+028;bus;;;;
+029;bus;;;;
+
+
+== 3x-Linien
+
+3;bus;;;;
+30;bus;;;;
+31;bus;;;;
+32;bus;;;;
+33;bus;;;;
+34;bus;;;;
+37;bus;;;;
+38;bus;;;;
+39;bus;;;;
+
+
+== 4x-Linien
+
+4;bus;;;;
+42;bus;;;;
+43;bus;;;;
+44;bus;;;;
+45;bus;;;;
+46;bus;;;;
+47;bus;;;;
+48;bus;;;;
+49;bus;;;;
+
+
+== 5x-Linien
+
+5;bus;;;;
+50;bus;;;;
+51;bus;;;;
+53;bus;;;;
+54;bus;;;;
+55;bus;;;;
+56;bus;;;;
+58;bus;;;;
+59;bus;;;;
+
+
+== 6x-Linien
+
+6;bus;;;;
+60;bus;;;;
+61;bus;;;;
+62;bus;;;;
+63;bus;;;;
+64;bus;;;;
+65;bus;;;;
+67;bus;;;;
+68;bus;;;;
+69;bus;;;;
+
+
+== 7x-Linien
+
+7;bus;;;;
+70;bus;;;;
+71;bus;;;;
+
+
+== 8x-Linien
+
+8;bus;;;;
+80;bus;;;;
+81;bus;;;;
+84;bus;;;;
+87;bus;;;;
+
+
+
+= Buslinien mit Mitgliedschaften in anderen Netzwerken (RBO; LA; RVV; RBA; etc.)
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Regionalbus Ostbayern (RBO) (=RBO xxxx)
+
+ 1;bus;(=RBO 6022);;;
+10;bus;(=RBO 6018);;;
+10a;bus;(=RBO 6057);;;
+11;bus;(=RBO 6240 = LA 302);;;
+12;bus;(=RBO 6023);;;
+15;bus;(=RBO 7530);;;
+17;bus;(=RBO 6012);;;
+
+ 2;bus;(=RBO 6036);;;
+28;bus;(=RBO 6028);;;
+29;bus;(=RBO 6029);;; ?
+
+ 3;bus;(=RBO 6035);;;
+34;bus;(=RBO 6034);;;
+37;bus;(=RBO 6037);;;
+38;bus;(=RBO 6040);;;
+39;bus;(=RBO 6039);;;
+
+ 4;bus;(=RBO 6038);;;
+42;bus;(=RBO 6042);;;
+43;bus;(=RBO 6043);;;
+44;bus;(=RBO 6044);;;
+45;bus;(=RBO 6045);;;
+46;bus;(=RBO 6046);;;
+47;bus;(=RBO 6047);;;
+48;bus;(=RBO 6048);;;
+49;bus;(=RBO 6049);;;
+
+ 5;bus;(=RBO 6052);;;
+53;bus;(=RBO 6053);;;
+54;bus;(=RBO 6041);;;
+55;bus;(=RBO 6055);;;
+56;bus;(=RBO 6051 = LA 031);;;
+58;bus;(=RBO 6058);;;
+59;bus;(=RBO 6059);;;
+
+ 6;bus;(=RBO 6009);;;
+ 7;bus;(=RBO 6008);;;
+ 8;bus;(=RBO 6016);;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Landshuter Regionalbusnetz (LA) (= LA xxx)
+
+56;bus;(=LA 031 =RBO 6051);;;
+60;bus;(=LA 202);;;
+61;bus;(=LA 201);;;
+62;bus;(=LA 013);;;
+63;bus;(=LA 011);;;
+64;bus;(=LA 012);;;
+65;bus;(=LA 206);;;
+66;bus;(=LA 015);;;
+67;bus;(=LA 207);;;
+68;bus;(=LA 035);;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Münchener Verkehrsverbund (MVV)  (= MVV xxx)
+
+50;bus;(=MVV 602 + MVV 603);;;
+51;bus;(=MVV 683);;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Regensburger Verkehrsverbund (RVV)  (= RVV xxx)
+
+16;bus;(=RVV 16);;;
+29;bus;(=RVV 20);;; ?
+31;bus;(=RVV 22);;;
+32;bus;(=RVV 25);;;
+33;bus;(=RVV 66);;;
+69;bus;(=RVV 69);;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Regionalbus Augsburg (RBA) (= RBA xxxx)
+
+21;bus;(=RBA 9221);;;
+22;bus;(=RBA 9222);;;
+
+
+== Buslinien, in denen im RVV-Gebiet RVV-Tickets gelten
+
+ 7;bus;(=RBO 6008);;;
+16;bus;(=RVV 16);;;
+29;bus;(=RVV 20);;; 
+31;bus;(=RVV 22);;;
+32;bus;(=RVV 25);;;
+33;bus;(=RVV 66);;;
+69;bus;(=RVV 69);;;
+
+
+
+== Buslinien, in denen im INVG-Gebiet INVG-Tickets gelten
+
+ 7;bus;(=RBO 6008);;;
+21;bus;(=RBA 9221);;;
+
+
+== Freizeitbuslinien (Linien mit Fahrradmitnahme möglich)
+
+ 8;bus;(=RBO 6016);;;
+22;bus;(=RBA 9222);;;  ?
+29;Bus;(=RBO 6029);;;
+30;Bus;(=RBO 6030);;;
+
+
+
+</pre>
