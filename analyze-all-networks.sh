@@ -11,7 +11,7 @@ PATH=$PWD/bin:$PATH
 for A in  Networks/*
 do
     echo
-    echo $A
+    echo $(date "+%Y-%m-%d %H:%M:%S") "$A"
     echo
     
     cd $A

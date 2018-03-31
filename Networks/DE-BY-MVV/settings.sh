@@ -14,7 +14,7 @@ WIKI_ANALYSIS_PAGE="München/Transportation/Analyse"
 WIKI_ROUTES_PAGE="München/Transportation/MVV-Linien-gesamt"
 WIKI_FILE_DIFF="196"
 
-ANALYSIS_OPTIONS="-v --wiki --check-access --check-name --check-stop-position --check-sequence --check-version --check-wide-characters --coloured-sketchline --expect-network-long --network-long-regex='$NETWORK_LONG' --network-short-regex='$NETWORK_SHORT' --lines-csv=$ROUTES_FILE --routes=$OSM_XML_FILE"
+ANALYSIS_OPTIONS="-v --wiki --check-access --check-name --check-stop-position --check-sequence --check-version --check-wide-characters --coloured-sketchline --expect-network-long"
 
 # --max-error=
 # --check-bus-stop 

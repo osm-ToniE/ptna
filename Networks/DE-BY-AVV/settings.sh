@@ -14,7 +14,7 @@ WIKI_ANALYSIS_PAGE="Augsburg/Transportation/Analyse"
 WIKI_ROUTES_PAGE="Augsburg/Transportation/AVV-Linien-gesamt"
 WIKI_FILE_DIFF="100"
 
-ANALYSIS_OPTIONS="-v --wiki --check-access --check-name --check-stop-position --check-sequence --check-version --check-wide-characters --positive-notes --coloured-sketchline --network-long-regex="$NETWORK_LONG" --network-short-regex="$NETWORK_SHORT" --lines-csv=$CSV_FILE --routes=$XML_FILE"
+ANALYSIS_OPTIONS="-v --wiki --check-access --check-name --check-stop-position --check-sequence --check-version --check-wide-characters --positive-notes --coloured-sketchline"
 
 # --max-error=
 # --check-bus-stop 

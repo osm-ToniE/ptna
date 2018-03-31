@@ -10,11 +10,11 @@ OVERPASS_QUERY="http://overpass-api.de/api/interpreter?data=area[boundary=public
 NETWORK_LONG="Verkehrsverbund Rhein-Neckar"
 NETWORK_SHORT="VRN"
 
-WIKI_ANALYSIS_PAGE="Verkehrsverbund Rhein-Neckar/Analyse"
-WIKI_ROUTES_PAGE="Verkehrsverbund Rhein-Neckar/Analyse/DE-RP-VRN-Linien"
+WIKI_ANALYSIS_PAGE="Verkehrsverbund_Rhein-Neckar/Analyse"
+WIKI_ROUTES_PAGE="Verkehrsverbund_Rhein-Neckar/Analyse/DE-RP-VRN-Linien"
 WIKI_FILE_DIFF="196"
 
-ANALYSIS_OPTIONS="-v --wiki --max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-wide-characters --positive-notes --coloured-sketchline --network-long-regex="$NETWORK_LONG" --network-short-regex="$NETWORK_SHORT" --routes=$XML_FILE"
+ANALYSIS_OPTIONS="-v --wiki --max-error=10 --check-stop-position --check-sequence --coloured-sketchline"
 
 # --check-bus-stop 
 # --expect-network-long
@@ -22,4 +22,4 @@ ANALYSIS_OPTIONS="-v --wiki --max-error=10 --check-access --check-name --check-s
 # --expect-network-short-for=
 # --expect-network-long-for=
 # --relaxed-begin-end-for=
-
+# --check-wide-characters --positive-notes --check-access --check-name 

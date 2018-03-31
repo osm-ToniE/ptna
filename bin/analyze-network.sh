@@ -60,7 +60,7 @@ done
 
 if [ "$clean" = "true" ]
 then
-    echo "Removing temporary files"
+    echo $(date "+%Y-%m-%d %H:%M:%S") "Removing temporary files"
     rm -f $OSM_XML_FILE $WIKI_FILE $WIKI_FILE.old $WIKI_FILE.diff
 fi
 
@@ -70,7 +70,7 @@ fi
 
 if [ "$overpassquery" = "true" ]
 then
-    echo "Calling wget for '$PREFIX'"
+    echo $(date "+%Y-%m-%d %H:%M:%S") "Calling wget for '$PREFIX'"
     wget "$OVERPASS_QUERY" -O $OSM_XML_FILE
 fi
 
@@ -80,15 +80,29 @@ fi
 
 if [ "$analyze" = "true" ]
 then
-    analyze-routes.pl $ANALYSIS_OPTIONS > $WIKI_FILE
+    echo $(date "+%Y-%m-%d %H:%M:%S")  "Analyze $PREFIX"
     
-    if [ -s "$WIKI_FILE" ]
+    if [ -f $ROUTES_FILE -a -f $OSM_XML_FILE ]
     then
-        echo "Analysis succeeded, '$WIKI_FILE' created"
+        if [ -s $ROUTES_FILE -a -s $OSM_XML_FILE ]
+        then
+        
+            analyze-routes.pl $ANALYSIS_OPTIONS --network-long-regex="$NETWORK_LONG" --network-short-regex="$NETWORK_SHORT" --routes-file=$ROUTES_FILE --osm-xml-file=$OSM_XML_FILE > $WIKI_FILE
+    
+            if [ -s "$WIKI_FILE" ]
+            then
+                echo $(date "+%Y-%m-%d %H:%M:%S") "Analysis succeeded, '$WIKI_FILE' created"
+            else
+                echo $(date "+%Y-%m-%d %H:%M:%S") "'$WIKI_FILE' is empty"
+            fi
+            ls -l $WIKI_FILE
+        else
+            echo $(date "+%Y-%m-%d %H:%M:%S") "'$ROUTES_FILE' or '$OSM_XML_FILE' is empty"
+            ls -l $WIKI_FILE
+       fi
     else
-        echo "'$WIKI_FILE' is empty"
+        echo $(date "+%Y-%m-%d %H:%M:%S") "'$ROUTES_FILE' or '$OSM_XML_FILE' does not exist"
     fi
-    ls -l $WIKI_FILE
 fi
 
 #
@@ -97,27 +111,42 @@ fi
 
 if [ "$uploadtowiki" = "true" ]
 then
-    if [ -s $WIKI_FILE ]
-    then
-        echo "Reading old Wiki analysis page '$WIKI_ANALYSIS_PAGE'"
-        wiki-page.pl --pull --page=$WIKI_ANALYSIS_PAGE --file=$WIKI_FILE.old
-        
-        diff $WIKI_FILE $WIKI_FILE.old > $WIKI_FILE.diff
-        
-        ls -l $WIKI_FILE.diff
-        
-        diffsize=$(ls -l $WIKI_FILE.diff 2> /dev/null | awk '{print $5}')
-    
-        if [ "$diffsize" -gt "$WIKI_FILE_DIFF" ]
+    echo $(date "+%Y-%m-%d %H:%M:%S")  "Upload '$WIKI_FILE' to Wiki page '$WIKI_ANALYSIS_PAGE'"
+
+    if [ -f $WIKI_FILE ]
+    then 
+        if [ -s $WIKI_FILE ]
         then
-            echo "Writing new Wiki analysis page '$WIKI_ANALYSIS_PAGE'"
-            wiki-page.pl --push --page=$WIKI_ANALYSIS_PAGE --file=$WIKI_FILE --summary="automatic update by analyze-routes"
+            filesize=$(ls -l $WIKI_FILE 2> /dev/null | awk '{print $5}')
+            
+            if [ "$filesize" -lt 2000000 ]
+            then
+                echo $(date "+%Y-%m-%d %H:%M:%S") "Reading old Wiki analysis page '$WIKI_ANALYSIS_PAGE'"
+                wiki-page.pl --pull --page=$WIKI_ANALYSIS_PAGE --file=$WIKI_FILE.old
+                
+                diff $WIKI_FILE $WIKI_FILE.old > $WIKI_FILE.diff
+                
+                ls -l $WIKI_FILE.diff
+                
+                diffsize=$(ls -l $WIKI_FILE.diff 2> /dev/null | awk '{print $5}')
+            
+                if [ "$diffsize" -gt "$WIKI_FILE_DIFF" ]
+                then
+                    echo $(date "+%Y-%m-%d %H:%M:%S") "Writing new Wiki analysis page '$WIKI_ANALYSIS_PAGE'"
+                    wiki-page.pl --push --page=$WIKI_ANALYSIS_PAGE --file=$WIKI_FILE --summary="automatic update by analyze-routes"
+                else
+                    echo $(date "+%Y-%m-%d %H:%M:%S") "No changes"
+                fi
+            else
+                echo $(date "+%Y-%m-%d %H:%M:%S") "'$WIKI_FILE' is too large"
+                ls -l $WIKI_FILE
+            fi
         else
-            echo "No changes"
+            echo $(date "+%Y-%m-%d %H:%M:%S") $WIKI_FILE is empty
+            ls -l $WIKI_FILE
         fi
     else
-        echo $WIKI_FILE is empty
-        ls -l $WIKI_FILE
+        echo $(date "+%Y-%m-%d %H:%M:%S") $WIKI_FILE does not exist
     fi
 fi
 
@@ -127,8 +156,9 @@ fi
 
 if [ "$getroutes" = "true" ]
 then
-    echo "Reading Routes Wiki page '$WIKI_ROUTES_PAGE'"
-    wiki-page.pl --pull --page=$WIKI_ROUTES_PAGE --file=$CSV_FILE
+    echo $(date "+%Y-%m-%d %H:%M:%S") "Reading Routes Wiki page '$WIKI_ROUTES_PAGE' to file '%ROUTES_FILE'"
+    wiki-page.pl --pull --page=$WIKI_ROUTES_PAGE --file=$ROUTES_FILE
+    ls -l $ROUTES_FILE
 fi
 
 #
@@ -137,8 +167,18 @@ fi
 
 if [ "$pushroutes" = "true" ]
 then
-    echo "Writing Routes file '$CSV_FILE' to Wiki page '$WIKI_ROUTES_PAGE'"
-    wiki-page.pl --push --page=$WIKI_ROUTES_PAGE --file=$CSV_FILE --summary="update by analyze-routes"
+    if [ -f $ROUTES_FILE ]
+    then
+        if [ -s $ROUTES_FILE ]
+        then
+            echo $(date "+%Y-%m-%d %H:%M:%S") "Writing Routes file '$ROUTES_FILE' to Wiki page '$WIKI_ROUTES_PAGE'"
+            wiki-page.pl --push --page=$WIKI_ROUTES_PAGE --file=$ROUTES_FILE --summary="update by analyze-routes"
+        else
+            echo $(date "+%Y-%m-%d %H:%M:%S") $ROUTES_FILE is empty
+        fi
+    else
+        echo $(date "+%Y-%m-%d %H:%M:%S") $ROUTES_FILE does not exist
+    fi
 fi
 
 #
@@ -147,8 +187,8 @@ fi
 
 if [ "$watchroutes" = "true" ]
 then
-    echo "Setting 'watch' on Wiki page '$WIKI_ROUTES_PAGE'"
-    echo wiki-page.pl --watch --page=$WIKI_ROUTES_PAGE
+    echo $(date "+%Y-%m-%d %H:%M:%S") "Setting 'watch' on Wiki page '$WIKI_ROUTES_PAGE'"
+    wiki-page.pl --watch --page=$WIKI_ROUTES_PAGE
 fi
 
 
