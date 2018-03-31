@@ -109,7 +109,28 @@ if ( $commands > 1 ) {
 } elsif ( $pull ) {
     ;
 } elsif ( $watch ) {
-    ;
+    if ( $username || $ENV{'WIKI_USERNAME'} ) {
+        if ( !$username ) {
+            $username = $ENV{'WIKI_USERNAME'};
+        }
+    } else {
+        printf STDERR "Username for Wiki not specified\n";
+        printf STDERR "usage: wiki-page.pl --push --page=<wikipage> --file=<filename> --username=<user> --password=<passwd> --summary=<summary> ...\n";
+        printf STDERR "or\n";
+        printf STDERR "WIKI_USER=<user>\nWIKI_PASSWORD=<passwd>\nwiki-page.pl --push --page=<wikipage> --file=<filename> --summary=<summary> ...\n";
+        exit 1;
+    }
+    if ( $password || $ENV{'WIKI_PASSWORD'} ) {
+        if ( !$password ) {
+            $password = $ENV{'WIKI_PASSWORD'};
+        }
+    } else {
+        printf STDERR "Password for User '%s' for Wiki not specified\n", $username;
+        printf STDERR "usage: wiki-page.pl --push --page=<wikipage> --file=<filename> --username=<user> --password=<passwd> --summary=<summary> ...\n";
+        printf STDERR "or\n";
+        printf STDERR "WIKI_USER=<user>\nWIKI_PASSWORD=<passwd>\nwiki-page.pl --push --page=<wikipage> --file=<filename> --summary=<summary> ...\n";
+        exit 1;
+    }
 } else {
     printf STDERR "Please specify either --pull or --push or --watch\n\n", $username;
     printf STDERR "usage: wiki-page.pl [--pull|--push|--watch] --page=<wikipage> ...\n";
@@ -137,7 +158,7 @@ if ( $pull) {
     my $ref = $mw->get_page( { title => $page } );
     
     if ( $ref ) {
-        unless ( $ref->{missing} ) {
+        unless ( $ref->{missing} && $ref->{timestamp} ) {
             my $timestamp = $ref->{timestamp};
             printf STDERR "%s timestamp = %s\n", get_time(), $timestamp;
 
@@ -180,7 +201,7 @@ if ( $pull) {
         my $ref = $mw->get_page( { title => $page } );
         
         if ( $ref ) {
-            unless ( $ref->{missing} ) {
+            unless ( $ref->{missing} && $ref->{timestamp} ) {
                 my $timestamp = $ref->{timestamp};
                 printf STDERR "%s timestamp = %s\n", get_time(), $timestamp;
                 printf STDERR "%s Reading file '%s'\n", get_time(), $file;
@@ -228,12 +249,21 @@ if ( $pull) {
     $mw->{config}->{api_url}    = $wiki_url;
     $mw->{config}->{on_error}   = \&on_error;
     
-    $page = umlaut_escape( $page );
-    
-    printf STDERR "%s Setting 'watch' on Wiki page '%s'\n", get_time(), $page;
-    
-    # my $ref = $mw->get_page( { title => $page } );
-    
+    # log in to the wiki
+    if ( $mw->login( { lgname => $username, lgpassword => $password } ) ) {
+        
+        $page = umlaut_escape( $page );
+        
+        printf STDERR "%s Setting 'watch' on Wiki page '%s'\n", get_time(), $page;
+        
+        if ( $mw->edit( { action => 'watch', title => $page } ) ) {
+            printf STDERR "%s 'watch' set on Wiki page '%s'\n", get_time(), $page;
+        } else {
+            printf STDERR "%s Setting 'watch' on Wiki page '%s' failed\n", get_time(), $page;
+        }
+    } else {
+        printf STDERR "%s Login to Wiki failed\n", get_time(), $file;
+    }
     
 }
   
