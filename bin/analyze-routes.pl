@@ -3502,6 +3502,8 @@ sub printInitialHeader {
         print  "\n";
         print  "Weitere Details sind auf der hier zugehörigen Diskussionsseite zu finden.<br>\n";
         print  "\n";
+        print  "Eine Erläuterung der Fehlertexte ist auf der Seite von [[User:ToniE/analyze-routes#Momentane_Prüfungen|analyze-routes]] zu finden.<br>\n";
+        print  "\n";
     }
     else {
         #
@@ -3542,6 +3544,8 @@ sub printInitialHeader {
         print  "Die Daten im Wiki werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändert hat.<br>\n";
         print  "\n";
         print  "Weitere Details sind auf der hier zugehörigen Diskussionsseite zu finden.<br>\n";
+        print  "\n";
+        print  "Eine Erläuterung der Fehlertexte ist auf der Seite von <a href='https://wiki.openstreetmap.org/wiki/User:ToniE/analyze-routes#Momentane_Prüfungen'>analyze-routes</a> zu finden.<br>\n";
         print  "\n";
     }
 
