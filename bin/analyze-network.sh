@@ -61,7 +61,7 @@ done
 if [ "$clean" = "true" ]
 then
     echo $(date "+%Y-%m-%d %H:%M:%S") "Removing temporary files"
-    rm -f $OSM_XML_FILE $WIKI_FILE $WIKI_FILE.old $WIKI_FILE.diff
+    rm -f $OSM_XML_FILE $WIKI_FILE $WIKI_FILE.old $WIKI_FILE.diff $WIKI_FILE.save $WIKI_FILE.save.diff
 fi
 
 #
