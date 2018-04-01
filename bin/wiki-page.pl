@@ -158,9 +158,9 @@ if ( $pull) {
     my $ref = $mw->get_page( { title => $page } );
     
     if ( $ref ) {
-        unless ( $ref->{missing} && $ref->{timestamp} ) {
+        if ( $ref->{'*'} ) {
             my $timestamp = $ref->{timestamp};
-            printf STDERR "%s timestamp = %s\n", get_time(), $timestamp;
+            printf STDERR "%s timestamp = %s\n", get_time(), ($timestamp ? $timestamp : '?');
 
             if ( $file ) {
                 if ( open(OUT,">$file") ) {
@@ -178,7 +178,7 @@ if ( $pull) {
                 printf STDERR "%s Done ... writing Wiki page '%s' to STDOUT\n", get_time(), $page;
             }
         } else {
-            printf STDERR "%s Wiki page '%s' does not exist\n", get_time(), $page;
+            printf STDERR "%s Wiki page '%s' does not exist (no contents)\n", get_time(), $page;
         }
     } else {
         printf STDERR "%s Reading Wiki page '%s' failed\n", get_time(), $page;
@@ -201,9 +201,9 @@ if ( $pull) {
         my $ref = $mw->get_page( { title => $page } );
         
         if ( $ref ) {
-            unless ( $ref->{missing} && $ref->{timestamp} ) {
+            if ( $ref->{'*'} ) {
                 my $timestamp = $ref->{timestamp};
-                printf STDERR "%s timestamp = %s\n", get_time(), $timestamp;
+                printf STDERR "%s timestamp = %s\n", get_time(), ($timestamp ? $timestamp : '?');
                 printf STDERR "%s Reading file '%s'\n", get_time(), $file;
                 printf STDERR "%s\n", $text   if ( $debug );
 
@@ -234,7 +234,7 @@ if ( $pull) {
                     printf STDERR "%s Can't open file '%s' for reading\n", get_time(), $file;
                 }
             } else {
-                printf STDERR "%s Wiki page '%s' does not exist, will not be created\n", get_time(), $page;
+                printf STDERR "%s Wiki page '%s' does not exist (no contents), will not be created\n", get_time(), $page;
             }
         } else {
             printf STDERR "%s Reading Wiki page information '%s' failed\n", get_time(), $page;
