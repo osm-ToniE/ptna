@@ -92,7 +92,34 @@ GetOptions( 'help'                          =>  \$help,                         
           );
 
 if ( $verbose ) {
-    printf STDERR "%s analyze-routes.pl -v --network-long-regex='%s' --network-short-regex='%s'\n", get_time (), $network_long_regex, $network_short_regex;
+    printf STDERR "%s analyze-routes.pl -v\n", get_time();
+    printf STDERR "%20s--wiki\n",                         ' '                                 if ( $print_wiki                  );
+    printf STDERR "%20s--check-access\n",                 ' '                                 if ( $check_access                );
+    printf STDERR "%20s--check-bus-stop\n",               ' '                                 if ( $check_bus_stop              );
+    printf STDERR "%20s--check-name\n",                   ' '                                 if ( $check_name                  );
+    printf STDERR "%20s--check-platform\n",               ' '                                 if ( $check_platform              );
+    printf STDERR "%20s--check-roundabouts\n",            ' '                                 if ( $check_roundabouts           );
+    printf STDERR "%20s--check-sequence\n",               ' '                                 if ( $check_sequence              );
+    printf STDERR "%20s--check-stop-position\n",          ' '                                 if ( $check_stop_position         );
+    printf STDERR "%20s--check-version\n",                ' '                                 if ( $check_version               );
+    printf STDERR "%20s--check-wide-characters\n",        ' '                                 if ( $check_wide_characters       );
+    printf STDERR "%20s--coloured-sketchline\n",          ' '                                 if ( $coloured_sketchline         );
+    printf STDERR "%20s--expect-network-long\n",          ' '                                 if ( $expect_network_long         );
+    printf STDERR "%20s--expect-network-short\n",         ' '                                 if ( $expect_network_short        );
+    printf STDERR "%20s--positive-notes\n",               ' '                                 if ( $positive_notes              );
+    printf STDERR "%20s--show-options\n",                 ' '                                 if ( $show_options                );
+    printf STDERR "%20s--strict-network\n",               ' '                                 if ( $strict_network              );
+    printf STDERR "%20s--strict-operator\n",              ' '                                 if ( $strict_operator             );
+    printf STDERR "%20s--network-long-regex='%s'\n",      ' ', $network_long_regex            if ( $network_long_regex          );
+    printf STDERR "%20s--network-short-regex='%s'\n",     ' ', $network_short_regex           if ( $network_short_regex         );
+    printf STDERR "%20s--operator-regex='%s'\n",          ' ', $operator_regex                if ( $operator_regex              );
+    printf STDERR "%20s--expect-network-long-for='%s'\n", ' ', $expect_network_long_for       if ( $expect_network_long_for     );
+    printf STDERR "%20s--expect-network-short-for='%s'\n",' ', $expect_network_short_for      if ( $expect_network_short_for    );
+    printf STDERR "%20s--max-error='%s'\n",               ' ', $max_error                     if ( $max_error                   );
+    printf STDERR "%20s--relaxed-begin-end-for='%s'\n",   ' ', $relaxed_begin_end_for         if ( $relaxed_begin_end_for       );
+    printf STDERR "%20s--separator='%s'\n",               ' ', $csv_separator                 if ( $csv_separator               );
+    printf STDERR "%20s--routes-file='%s'\n",             ' ', $routes_file                   if ( $routes_file                 );
+    printf STDERR "%20s--osm-xml-file='%s'\n",            ' ', $osm_xml_file                  if ( $osm_xml_file                );
 }
 
 
