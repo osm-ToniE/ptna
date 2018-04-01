@@ -235,7 +235,7 @@
 9761 (Linie 5);bus;Unterwestegg - Riezlern - Ifen
 9762;bus;Oberstdorf - Renksteg - Skiflugschanze - Fellhornbahn - Birgsau
 9763;bus;Oberstdorf - Golfplatz - Christlessee - Spielmannsau
-9766;bus;Schöllang - Fischen - Maderhalm - Obermaiselstein
+9766/66;bus;Schöllang - Fischen - Maderhalm - Obermaiselstein
 9767;bus;Oberstdorf - Langenwang - Fischen - Sonthofen
 9772 (Linie 2);bus;Egg - Riezlern Post - Innerschwande - Schwende
 9773 (Linie 3);bus;Wäldele - Breitachbrücke - Hirschegg Walserhaus
