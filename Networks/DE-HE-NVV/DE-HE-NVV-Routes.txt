@@ -77,5 +77,4 @@ RT 5;tram;eventuell eingestellt/verändert;Kassel;Melsungen;RBK
 
 === 500 .. 599
 
-
 </pre>

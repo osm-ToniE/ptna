@@ -1,3 +1,4 @@
+<pre>
 #
 # Formatierung:
 #
@@ -234,5 +235,4 @@ AST 620;bus;;Augsburg West P+R;Kreppen;
 AST 628;bus;;Pfersee;Leitershofen;
 AST 641;bus;;Leitershofen;;
 AST 642;bus;;Stadtbergen;Deuringen;
-
-
+</pre>

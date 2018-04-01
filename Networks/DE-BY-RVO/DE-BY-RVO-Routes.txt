@@ -1,3 +1,4 @@
+<pre>
 #
 # Formatierung:
 #
@@ -252,3 +253,4 @@
 9822;bus;Schongau - Peiting - Rottenbuch - Echelsbacher Brücke - Steingaden
 9824;bus;Landsberg - Fuchstal - Denklingen - Schongau
 9834;bus;Landsberg - Fuchstal/Denklingen/Apfeldorf
+</pre>

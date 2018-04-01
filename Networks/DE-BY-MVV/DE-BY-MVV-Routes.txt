@@ -1,3 +1,4 @@
+<pre>
 #
 # Formatierung:
 #
@@ -492,6 +493,4 @@ AST 6002;share_taxi;Anruf-Sammel-Taxi;Freising, Bahnhof;Sünzhausen;Freisinger P
 AST 6003;share_taxi;Anruf-Sammel-Taxi;Freising, Bahnhof;Achering;Freisinger Parkhaus und Verkehrs-GmbH
 AST 6004;share_taxi;Anruf-Sammel-Taxi;Freising, Bahnhof;Altenhausen/Zellhausen;Freisinger Parkhaus und Verkehrs-GmbH
 #
-
-
-
+</pre>

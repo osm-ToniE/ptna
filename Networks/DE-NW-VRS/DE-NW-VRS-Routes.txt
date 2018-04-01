@@ -1,3 +1,4 @@
+<pre>
 #
 # Formatierung:
 #
@@ -627,6 +628,4 @@ AST 892;bus;;;;
 === Bürgerbus (nicht Teil des VRS)
 
 BBO;bus;;;;
-
-
-
+</pre>
