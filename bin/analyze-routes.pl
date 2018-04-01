@@ -1805,7 +1805,7 @@ sub analyze_relation {
         if ( $check_wide_characters ) {
             if ( $relation_ptr->{'tag'} ) {
 #                printf STDERR "Relation %s: checking tag ", $relation_id;
-                foreach my $tag ( sort( keys( $relation_ptr->{'tag'} ) ) ) {
+                foreach my $tag ( sort( keys( %{$relation_ptr->{'tag'}} ) ) ) {
                     next if ( $tag eq 'sort_name' );
 #                    printf STDERR "'%s' ", $tag;
                     $wide_characters = '';
