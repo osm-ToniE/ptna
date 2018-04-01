@@ -87,7 +87,7 @@ then
         if [ -s $ROUTES_FILE -a -s $OSM_XML_FILE ]
         then
         
-            analyze-routes.pl $ANALYSIS_OPTIONS --network-long-regex="$NETWORK_LONG" --network-short-regex="$NETWORK_SHORT" --routes-file=$ROUTES_FILE --osm-xml-file=$OSM_XML_FILE > $WIKI_FILE
+            analyze-routes.pl $ANALYSIS_OPTIONS --expect-network-short-for="$EXPECT_NETWORK_SHORT_FOR" --expect-network-long-for="$EXPECT_NETWORK_LONG_FOR" --network-long-regex="$NETWORK_LONG" --network-short-regex="$NETWORK_SHORT" --routes-file=$ROUTES_FILE --osm-xml-file=$OSM_XML_FILE > $WIKI_FILE
     
             if [ -s "$WIKI_FILE" ]
             then
