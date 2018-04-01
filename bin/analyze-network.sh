@@ -86,19 +86,33 @@ then
     then
         if [ -s $ROUTES_FILE -a -s $OSM_XML_FILE ]
         then
-        
-            analyze-routes.pl $ANALYSIS_OPTIONS --expect-network-short-for="$EXPECT_NETWORK_SHORT_FOR" --expect-network-long-for="$EXPECT_NETWORK_LONG_FOR" --network-long-regex="$NETWORK_LONG" --network-short-regex="$NETWORK_SHORT" --routes-file=$ROUTES_FILE --osm-xml-file=$OSM_XML_FILE > $WIKI_FILE
+            rm -f $WIKI_FILE.save.diff
+
+            if [ -f "$WIKI_FILE" -a -s "$WIKI_FILE" ]
+            then
+                mv $WIKI_FILE $WIKI_FILE.save
+            fi
+            
+            analyze-routes.pl $ANALYSIS_OPTIONS --expect-network-short-for="$EXPECT_NETWORK_SHORT_FOR" --expect-network-long-for="$EXPECT_NETWORK_LONG_FOR" --network-long-regex="$NETWORK_LONG" --network-short-regex="$NETWORK_SHORT" --operator-regex="$OPERATOR_REGEX" --routes-file=$ROUTES_FILE --osm-xml-file=$OSM_XML_FILE > $WIKI_FILE
     
             if [ -s "$WIKI_FILE" ]
             then
                 echo $(date "+%Y-%m-%d %H:%M:%S") "Analysis succeeded, '$WIKI_FILE' created"
+                echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WIKI_FILE)
+
+                if [ -f "$WIKI_FILE.save" -a -s "$WIKI_FILE.save" ]
+                then                
+                    diff $WIKI_FILE $WIKI_FILE.save > $WIKI_FILE.save.diff
+                    echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WIKI_FILE.save.diff)
+                else
+                    rm -f $WIKI_FILE.save
+                fi
             else
                 echo $(date "+%Y-%m-%d %H:%M:%S") "'$WIKI_FILE' is empty"
             fi
-            ls -l $WIKI_FILE
         else
             echo $(date "+%Y-%m-%d %H:%M:%S") "'$ROUTES_FILE' or '$OSM_XML_FILE' is empty"
-            ls -l $WIKI_FILE
+            echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WIKI_FILE)
        fi
     else
         echo $(date "+%Y-%m-%d %H:%M:%S") "'$ROUTES_FILE' or '$OSM_XML_FILE' does not exist"
@@ -124,11 +138,17 @@ then
                 echo $(date "+%Y-%m-%d %H:%M:%S") "Reading old Wiki analysis page '$WIKI_ANALYSIS_PAGE'"
                 wiki-page.pl --pull --page=$WIKI_ANALYSIS_PAGE --file=$WIKI_FILE.old
                 
-                diff $WIKI_FILE $WIKI_FILE.old > $WIKI_FILE.diff
+                if [ -f "$WIKI_FILE.old" ]
+                then
+                    diff $WIKI_FILE $WIKI_FILE.old > $WIKI_FILE.diff
                 
-                ls -l $WIKI_FILE.diff
+                    echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WIKI_FILE.diff)
                 
-                diffsize=$(ls -l $WIKI_FILE.diff 2> /dev/null | awk '{print $5}')
+                    diffsize=$(ls -l $WIKI_FILE.diff 2> /dev/null | awk '{print $5}')
+                else
+                    diffsize=100000
+                    rm -f $WIKI_FILE.diff
+                fi
             
                 if [ "$diffsize" -gt "$WIKI_FILE_DIFF" ]
                 then
@@ -139,11 +159,11 @@ then
                 fi
             else
                 echo $(date "+%Y-%m-%d %H:%M:%S") "'$WIKI_FILE' is too large"
-                ls -l $WIKI_FILE
+                echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WIKI_FILE)
             fi
         else
             echo $(date "+%Y-%m-%d %H:%M:%S") $WIKI_FILE is empty
-            ls -l $WIKI_FILE
+            echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WIKI_FILE)
         fi
     else
         echo $(date "+%Y-%m-%d %H:%M:%S") $WIKI_FILE does not exist
@@ -158,7 +178,7 @@ if [ "$getroutes" = "true" ]
 then
     echo $(date "+%Y-%m-%d %H:%M:%S") "Reading Routes Wiki page '$WIKI_ROUTES_PAGE' to file '%ROUTES_FILE'"
     wiki-page.pl --pull --page=$WIKI_ROUTES_PAGE --file=$ROUTES_FILE
-    ls -l $ROUTES_FILE
+    echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $ROUTES_FILE)
 fi
 
 #
