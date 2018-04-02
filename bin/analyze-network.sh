@@ -176,7 +176,7 @@ fi
 
 if [ "$getroutes" = "true" ]
 then
-    echo $(date "+%Y-%m-%d %H:%M:%S") "Reading Routes Wiki page '$WIKI_ROUTES_PAGE' to file '%ROUTES_FILE'"
+    echo $(date "+%Y-%m-%d %H:%M:%S") "Reading Routes Wiki page '$WIKI_ROUTES_PAGE' to file '$ROUTES_FILE'"
     wiki-page.pl --pull --page=$WIKI_ROUTES_PAGE --file=$ROUTES_FILE
     echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $ROUTES_FILE)
 fi
