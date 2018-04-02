@@ -1,0 +1,200 @@
+<pre>
+#
+# Formatierung:
+#
+# Überschriften beginnen mit '=', '==', '===', '====', ... am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an
+#
+# Einfacher Text beginnt mit '-' am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an, Zeilen hier werden im Wiki mit <br /> abgeschlossen (neue Zeile).
+# Einfacher Text darf nur direkt hinter einer Überschrift stehen.
+#
+# Links: [[...|...]] sind interne Verweise im Wiki
+#        [... ...] sind externe Verweise
+#
+# Kommentare beginnen mit '#' am Anfang einer Zeile. Kommentare mittendrin werden nicht erkannt.
+#
+# Format der Datei: UNIX (LF), UTF-8
+#
+#
+# Inhalt im CSV-Format
+#
+# ref;type;comment;from;to;operator
+#
+# - ref       == tag 'ref' von route oder route_master
+# - type      == inhalt des tags 'route' bzw. 'route_master'
+# - comment   == kann Kommentar enthalten wie; Ruftaxi, Bus, Expressbus, ...  wird nicht ausgewertet, lediglich ausgegeben
+# - from      == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - to        == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - operator  == wird bei mehreren Linie mit identischem ref und type Differenzierung herangezogen (Der Wert von 'operator' darf ';' enthalten)
+#
+
+
+= Überblick Buslinien Dingolfinger Regionalbusnetz (DGF) allgemein 
+
+- [[Category:Page with status]][[Category:Train routes in Germany]][[Category:Rapid transit in Germany]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:Dingolfing]]
+
+- Verweis auf die Datei mit den [[Dingolfing/Transportation/Analyse/DE-BY-DGF-Linien|DGF Linien]] im Wiki
+
+
+== Stadtbusse Dingolfing
+
+Roter Dingo;bus;;;;
+Gelber Dingo;bus;;;;
+Grüner Dingo;bus;;;;
+Blauer Dingo;bus;;;;
+
+
+== Regionalbusse Landkreis Dingolfing
+
+== 0x-Linien
+
+01;bus;;;;
+02;bus;;;;
+03;bus;;;;
+04;bus;;;;
+05;bus;;;;
+06;bus;;;;
+07;bus;;;;
+08;bus;;;;
+09;bus;;;;
+
+
+== 1x-Linien
+
+10;bus;;;;
+11;bus;;;;
+12;bus;;;;
+13;bus;;;;
+14;bus;;;;
+15;bus;;;;
+15a;bus;;;;
+15b;bus;;;;
+16;bus;;;;
+16a;bus;;;;
+17;bus;;;;
+18;bus;;;;
+19;bus;;;;
+
+
+== 2x-Linien
+
+20;bus;;;;
+21;bus;;;;
+22;bus;;;;
+23;bus;;;;
+24;bus;;;;
+25;bus;;;;
+26;bus;;;;
+27;bus;;;;
+28;bus;;;;
+29;bus;;;;
+
+
+== 3x-Linien
+
+30;bus;;;;
+31;bus;;;;
+32;bus;;;;
+33;bus;;;;
+34;bus;;;;
+35;bus;;;;
+36;bus;;;;
+38;bus;;;;
+39;bus;;;;
+
+
+== 4x-Linien
+
+40;bus;;;;
+41;bus;;;;
+42;bus;;;;
+43;bus;;;;
+44;bus;;;;
+45;bus;;;;
+46;bus;;;;
+
+
+== Disco/Freizeitbuslinien
+
+1;bus;;;;
+2;bus;;;;
+3;bus;;;;
+4;bus;;;;
+
+
+= Buslinien mit Mitgliedschaften in anderen Netzwerken (RBO; LA; VSL; VLD; VGRI etc.)
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Regionalbus Ostbayern (RBO) (=RBO xxxx)
+
+01;bus;(=RBO 6218);;;
+02;bus;(=RBO 6236);;;
+03;bus;(=RBO 6235);;;
+04;bus;(=RBO 6150);;;
+05;bus;(=RBO 6152);;;
+06;bus;(=RBO 6151);;;
+07;bus;(=RBO 6242 =LA 310);;;
+08;bus;(=RBO 6237 =VSL 51);;;
+09;bus;(=RBO 6154);;;
+
+10;bus;(=RBO 7630);;;
+11;bus;(=RBO 6232 =LA 308);;;
+13;bus;(=RBO 6097 =VSL 21);;;
+
+40;bus;(=RBO 7639);;;
+41;bus;(=RBO 6153);;;
+43;bus;(=RBO 7631);;;
+45;bus;(=RBO 7544);;;
+46;bus;(=RBO 6259);;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Landshuter Regionalbusnetz (LA) (= LA xxx)
+
+07;bus;(=LA 310 =RBO 6242);;;
+
+11;bus;(=LA 308 =RBO 6232);;;
+17;bus;(=LA 403);;;
+19;bus;(=LA 017);;;
+
+23;bus;(=LA 023);;;
+29;bus;(=LA 028);;;
+
+30;bus;(=LA 309);;;
+32;bus;(=LA 019);;;
+34;bus;(=LA 037);;;
+38;bus;(=LA 026 =VSL 41);;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Straubinger Land (VSL)  (= VSL xx)
+
+08;bus;(=VSL 51 =RBO 6237);;;
+
+12;bus;(=VSL 23);;;
+13;bus;(=VSL 21 =RBO 6097);;;
+
+24;bus;(=VSL 24);;;
+28;bus;(=VSL 28);;;
+
+38;bus;(=VSL 41 =LA 026);;;
+
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Rottal-Inn (VGRI) (=RBO xxxx)
+
+01;bus(=RBO 6218);;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Deggendorf (=RBO xxxx)
+
+02;bus(=RBO 6236);;;
+03;bus(=RBO 6235);;;
+04;bus(=RBO 6130);;;
+05;bus(=RBO 6152);;;
+06;bus(=RBO 6151);;;
+08;bus(=RBO 6237 =VSL 51);;;
+09;bus(=RBO 6154);;;
+
+10;bus(=RBO 7630);;;
+
+41;bus(=RBO 6153);;;
+
+</pre>

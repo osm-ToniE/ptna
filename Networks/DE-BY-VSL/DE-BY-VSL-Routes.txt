@@ -1,0 +1,192 @@
+<pre>
+#
+# Formatierung:
+#
+# Überschriften beginnen mit '=', '==', '===', '====', ... am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an
+#
+# Einfacher Text beginnt mit '-' am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an, Zeilen hier werden im Wiki mit <br /> abgeschlossen (neue Zeile).
+# Einfacher Text darf nur direkt hinter einer Überschrift stehen.
+#
+# Links: [[...|...]] sind interne Verweise im Wiki
+#        [... ...] sind externe Verweise
+#
+# Kommentare beginnen mit '#' am Anfang einer Zeile. Kommentare mittendrin werden nicht erkannt.
+#
+# Format der Datei: UNIX (LF), UTF-8
+#
+#
+# Inhalt im CSV-Format
+#
+# ref;type;comment;from;to;operator
+#
+# - ref       == tag 'ref' von route oder route_master
+# - type      == inhalt des tags 'route' bzw. 'route_master'
+# - comment   == kann Kommentar enthalten wie; Ruftaxi, Bus, Expressbus, ...  wird nicht ausgewertet, lediglich ausgegeben
+# - from      == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - to        == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - operator  == wird bei mehreren Linie mit identischem ref und type Differenzierung herangezogen (Der Wert von 'operator' darf ';' enthalten)
+#
+
+
+= Überblick Buslinien Verkehrsgemeinschaft Straubinger Land (VSL) allgemein 
+
+- [[Category:Page with status]][[Category:Train routes in Germany]][[Category:Rapid transit in Germany]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:Straubing]]
+
+- Verweis auf die Datei mit den [[Straubing/Transportation/Analyse/DE-BY-VSL-Linien|VSL Linien]] im Wiki
+
+
+== Stadtbusse Straubing
+
+1;bus;;;;
+2(=normaler Stadtbus);bus;;;;
+2(=Taxibus);bus;;;;
+3;bus;;;;
+5(Taxibus);bus;;;;
+6;bus;;;;
+9(Pendelbus);bus;;;;
+10(Taxibus);bus;;;;
+11(Taxibus);bus;;;;
+
+
+== Regionalbusse Landkreis Straubing
+
+== 0x-Linien
+
+03;bus;;;;
+04;bus;;;;
+05;bus;;;;
+06;bus;;;;
+07;bus;;;;
+08;bus;;;;
+09;bus;;;;
+
+
+== 1x-Linien
+
+10;bus;;;;
+11;bus;;;;
+12;bus;;;;
+13;bus;;;;
+14;bus;;;;
+15;bus;;;;
+16;bus;;;;
+17;bus;;;;
+18;bus;;;;
+19;bus;;;;
+
+
+== 2x-Linien
+
+20;bus;;;;
+21;bus;;;;
+22;bus;;;;
+23;bus;;;;
+24;bus;;;;
+25;bus;;;;
+26;bus;;;;
+27;bus;;;;
+28;bus;;;;
+29;bus;;;;
+
+
+== 3x-Linien
+
+30;bus;;;;
+31;bus;;;;
+32;bus;;;;
+33;bus;;;;
+34;bus;;;;
+35;bus;;;;
+36;bus;;;;
+37;bus;;;;
+38;bus;;;;
+39;bus;;;;
+
+
+== 4x-Linien
+
+40;bus;;;;
+41;bus;;;;
+42;bus;;;;
+43;bus;;;;
+44;bus;;;;
+45;bus;;;;
+46;bus;;;;
+47;bus;;;;
+48;bus;;;;
+49;bus;;;;
+
+
+== 5x-Linien
+
+50;bus;;;;
+51;bus;;;;
+
+
+= Buslinien mit Mitgliedschaften in anderen Netzwerken (RBO; LA; DGF; VLD; VLC; RVV etc.)
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Regionalbus Ostbayern (RBO) (=RBO xxxx)
+
+03;bus;(=RBO 6060);;;
+04;bus;(=RBO 6095);;;
+09;bus;(=RBO 6098 =VLC 710);;;
+
+10;bus;(=RBO 6091);;;
+11;bus;(=RBO 6090 =VLC 619);;;
+15;bus;(=RBO 6096);;;
+
+21;bus;(=RBO 6097);;;
+25;bus;(=RBO 6024 =RVV 33 im RVV-Gebiet);;;
+
+39;bus;(=RBO 6092);;;
+
+46;bus;(=RBO 6264 =LA 022);;;
+47;bus;(=RBO 6233 =LA 021);;;
+48;bus;(=RBO 7592);;;
+51;bus;(=RBO 6237 =DGF 08);;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Landshuter Regionalbusnetz (LA) (= LA xxx)
+
+37;bus;(=LA 034);;;
+38;bus;(=LA 033);;;
+40;bus;(=LA 032);;;
+41;bus;(=LA 026 =DGF 38);;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Dingolfinger Regionalbusnetz (DGF) (= DGF xx)
+
+21;bus;(=DGF 13 =RBO 6097);;;
+23;bus;(=DGF 12)
+24;bus;(=DGF 24)
+28;bus;(=DGF 28)
+
+51;bus;(=DGF 08 =RBO 6237);;;
+
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Regensburger Verkehrsverbund (RVV) (=RVV xxx)
+
+25;bus;(=RVV 33(nur im RVV-Gebiet) =RBO 6024);;;
+43;bus;(=RVV 103);;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Deggendorf (VLD) (=RBO xxxx)
+
+48;bus(=RBO 7592);;;
+51;bus(=RBO 6237 =DGF 08);;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Cham (VLC) (=VLC xxx)
+
+09;bus;(=VLC 710 =RBO 6098);;;
+11;bus;(=VLC 619 =RBO 6090);;;
+
+
+== Buslinien zum Netzwerk Landkreis Regen (Arberland Verkehr) (=RBO xxxx)
+
+05;bus(=RBO 6095);;;
+15;bus(=RBO 6096);;;
+
+</pre>
