@@ -512,6 +512,9 @@ Tram 8;tram;;;;
 598;bus;;;;
 599;bus;;;;
 
+= [[Nürnberg/Transportation/Analyse-2|Teil 2 der Analyse des VGN]]
+- Hier trennen <!-- cut here -->
+= Teil 2 der Analyse des VGN =
 
 == 6xx-Linien
 
