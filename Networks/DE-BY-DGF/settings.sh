@@ -7,7 +7,7 @@
 PREFIX="DE-BY-DGF"
 
 OVERPASS_QUERY="http://overpass-api.de/api/interpreter?data=area[boundary=administrative][admin_level=6][name~'Dingolfing']->.L; rel(area.L)[route~'(bus|tram|train|subway|light_rail|trolleybus|ferry|monorail|aerialway|share_taxi|funicular)']->.R; rel(br.R); out; rel.R; out; rel(r.R); out; way(r.R); out; node(r.R); out;"
-NETWORK_LONG="Dingolfing"
+NETWORK_LONG="Dingolfinger Regionalbusnetz"
 NETWORK_SHORT="DGF"
 
 WIKI_ANALYSIS_PAGE="Dingolfing/Transportation/Analyse"
