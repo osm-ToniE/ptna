@@ -223,7 +223,7 @@
 9657;bus;Schongau - Altenstadt - Schwabsoien - Sachsenried - Schongau
 9659;bus;Schongau - Altenstadt - Hohenfurch - Schongau
 
-=== 97xx
+=== 97xx RVA?
 9718;bus;Füssen - Oberstdorf
 9742 (Linie 1);bus;Oberstdorf - Söllereckbahn - Riezlern - Hirschegg - Mittelberg - Baad
 9744;bus;Oberstdorf - Breitachklamm - Tiefenbach - Obermaiselstein - Bolsterlang - Fischen - Langenwang - Oberstdorf

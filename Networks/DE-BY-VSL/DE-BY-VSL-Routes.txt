@@ -38,14 +38,14 @@
 == Stadtbusse Straubing
 
 1;bus;;;;
-2(=normaler Stadtbus);bus;;;;
-2(=Taxibus);bus;;;;
+2;bus;(=normaler Stadtbus);;;
+2TB;bus;(=Taxibus);;;
 3;bus;;;;
-5(Taxibus);bus;;;;
+5TB;bus;(Taxibus);;;
 6;bus;;;;
-9(Pendelbus);bus;;;;
-10(Taxibus);bus;;;;
-11(Taxibus);bus;;;;
+9;bus;(Pendelbus);;;
+10TB;bus;(Taxibus);;;
+11TB;bus;(Taxibus);;;
 
 
 == Regionalbusse Landkreis Straubing

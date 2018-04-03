@@ -41,4 +41,70 @@
 -
 #
 #ref;type;comment;from;to;operator
+
+== S-Bahn
+
+S1;train;;;;
+S2;train;;;;
+S3;train;;;;
+S4;train;;;;
+S5;train;;;;
+S51;train;;;;
+
+== Stadtbahn Heilbronn
+
+S41;train;;;;
+S42;train;;;;
+
+== Regional_Express
+
+== Regional-Bahn
+
+== Stadtbahn
+
+4:light_rail;;;;
+4A:light_rail;;;;
+4X:light_rail;;;;
+5:light_rail;;;;
+5X:light_rail;;;;
+
+== Straßenbahn
+
+=== Ludwigshafen / Mannheim
+
+=== Heidelberg
+
+== Buslinien
+
+=== Kaiserslautern (10x und 11x)
+
+101;bus;;;;
+102;bus;;;;
+103;bus;;;;
+104;bus;;;;
+105;bus;;;;
+106;bus;;;;
+107;bus;;;;
+108;bus;;;;
+111;bus;;;;
+112;bus;;;;
+114;bus;;;;
+115;bus;;;;
+116;bus;;;;
+117;bus;;;;
+
+=== Landkreis Kaiserslautern Nord und West (13x - 17x)
+
+=== 5xx
+
+=== 6xx
+
+=== Wiesloch (70x)
+
+=== Sinsheim (76x bis 79x und 741)
+
+= [[Verkehrsverbund_Rhein-Neckar/Analyse-2|Teil 2 der Analyse des VRN]]
+- Hier trennen <!-- cut here -->
+= Teil 2 der Analyse des VRN
+
 </pre>
