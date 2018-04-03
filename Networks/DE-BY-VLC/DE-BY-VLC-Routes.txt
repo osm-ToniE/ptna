@@ -1,0 +1,233 @@
+<pre>
+#
+# Formatierung:
+#
+# Überschriften beginnen mit '=', '==', '===', '====', ... am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an
+#
+# Einfacher Text beginnt mit '-' am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an, Zeilen hier werden im Wiki mit <br /> abgeschlossen (neue Zeile).
+# Einfacher Text darf nur direkt hinter einer Überschrift stehen.
+#
+# Links: [[...|...]] sind interne Verweise im Wiki
+#        [... ...] sind externe Verweise
+#
+# Kommentare beginnen mit '#' am Anfang einer Zeile. Kommentare mittendrin werden nicht erkannt.
+#
+# Format der Datei: UNIX (LF), UTF-8
+#
+#
+# Inhalt im CSV-Format
+#
+# ref;type;comment;from;to;operator
+#
+# - ref       == tag 'ref' von route oder route_master
+# - type      == inhalt des tags 'route' bzw. 'route_master'
+# - comment   == kann Kommentar enthalten wie; Ruftaxi, Bus, Expressbus, ...  wird nicht ausgewertet, lediglich ausgegeben
+# - from      == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - to        == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - operator  == wird bei mehreren Linie mit identischem ref und type Differenzierung herangezogen (Der Wert von 'operator' darf ';' enthalten)
+#
+
+
+= Überblick Buslinien Verkehrsgemeinschaft Landkreis Cham (VLC) allgemein
+
+- [[Category:Page with status]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:Cham]]
+
+- Verweis auf die Datei mit den [[Cham/Transportation/Analyse/DE-BY-VLC-Linien|VLC Linien]] im Wiki.
+
+
+== Stadtbusse (=1xx-Linien)
+
+100;bus;;;;
+101;bus;;;;
+102;bus;;;;
+103;bus;;;;
+104;bus;;;;
+
+
+== Regionallinien
+
+== 1xx-Linien
+
+140;bus;;;;
+160;bus;;;;
+180;bus;;;;
+181;bus;;;;
+182;bus;;;;
+
+
+== 2xx-Linien
+
+200;bus;;;;
+210;bus;;;;
+211;bus;;;;
+218;bus;;;;
+219;bus;;;;
+220;bus;;;;
+221;bus;;;;
+225;bus;;;;
+228;bus;;;;
+229;bus;;;;
+230;bus;;;;
+232;bus;;;;
+280;bus;;;;
+282;bus;;;;
+285;bus;;;;
+290;bus;;;;
+
+
+== 3xx-Linien
+
+310;bus;;;;
+319;bus;;;;
+320;bus;;;;
+330;bus;;;;
+350;bus;;;;
+
+
+== 4xx-Linien
+
+410;bus;;;;
+420;bus;;;;
+430;bus;;;;
+431;bus;;;;
+450;bus;;;;
+481;bus;;;;
+490;bus;;;;
+491;bus;;;;
+496;bus;;;;
+
+
+== 5xx-Linien
+
+510;bus;;;;
+519;bus;;;;
+520;bus;Wanderbus von Jun.-Sep.;;;
+589;bus;;;;
+590;bus;;;;
+
+
+== 6xx-Linien
+
+610;bus;;;;
+611;bus;;;;
+612;bus;;;;
+615;bus;;;;
+616;bus;Skibus;;;
+617;bus;Saisonbus;;;
+618;bus;Wanderbus, von 15.05-31.10.;;;
+619;bus;;;;
+620;bus;;;;
+650;bus;;;;
+680;bus;;;;
+682;bus;Rufbus;;;
+690;bus;;;;
+
+
+== 7xx-Linien
+
+710;bus;;;;
+
+
+== 8xx-Linien
+
+810;bus;;;;
+810a;bus;;;;
+818;bus;;;;
+820;bus;;;;
+
+
+== Disco-Busse (von Okt.-Apr.)
+
+D298;bus;;;;
+D299;bus;;;;
+D399;bus;;;;
+D499;bus;;;;
+
+
+== Buslinien mit Mitgliedschaften zu anderen Netzwerken (RBO, RVV, VSL, ect.)
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Regionalbus Ostbayern (RBO)  (RBO xxxx)
+
+180;bus;(=RBO 6180);;;
+
+410;bus;(=RBO 6078);;;
+420;bus;(=RBO 6069);;;
+450;bus;(=RBO 6079);;;
+490;bus;(=RBO 6076);;;
+491;bus;(=RBO 6296);;;
+
+511;bus;(=RBO 6511);;;
+520;bus;(=RBO 520);;;
+519;bus;(=RBO 6074);;;
+589;bus;(=RBO 7597);;;
+590;bus;(=RBO 6080);;;
+
+610;bus;(=RBO 6067);;;
+611;bus;(=RBO 6068);;;
+612;bus;(=RBO 6073);;;
+615;bus;(=RBO 6066);;;
+616;bus;(=RBO 6080)(ist ein Teil von Linie 590(RBO 6080);;;
+618;bus;(=RBO 6065);;;
+619;bus;(=RBO 6090 =VSL 11);;;
+620;bus;(=RBO 6070);;;
+650;bus;(=RBO 6071);;;
+680;bus;(=RBO 6188);;;
+682;bus;(=RBO 8216);;;
+690;bus;(=RBO 6196);;;
+
+710;bus;(=RBO 6098 =VSL 09);;;
+
+810;bus;(=RBO 6072 =RVV 5 im RVV-Gebiet);;;
+810a;bus;(=RBO 6072)(ist ein Teil von Linie 810(RBO 6072));;;
+818;bus;(=RBO 6004 = RVV 34 im RVV-Gebiet)
+
+D499;bus;(=RBO 6499);;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Regensburger Verkehrsverbund (RVV) (RVV xx) 
+
+229;bus;(=RVV 43);;;
+810;bus;(=RVV 5  im RVV-Gebiet =RBO 6072);;;
+818;bus;(=RVV 34 im RVV-Gebiet =RBO 6004);;;
+820;bus;(=RVV 37);;;
+
+
+== Grenzüberschreitende Linien nach Tschechien
+
+519;bus;(=RBO 6074);;;
+520;bus;(=RBO 520);;;
+618;bus;(=RBO 6065);;;
+
+
+== Verbindungen in den Landkreis Schwandorf
+
+221;bus;;;
+228;bus;;;
+285;bus;;;
+
+319;bus;;;
+320;bus;;;
+350;bus;;;
+
+410;bus;(=RBO 6078);;;
+430;bus;;;
+490;bus;(=RBO 6076);;;
+491;bus;(=RBO 6296);;;
+
+
+== Buslinien mit Mitgliedschaft Verkehrsgemeinschaft Straubinger Land (VSL) (VSL xx)
+
+619;bus;(=VSL 11 =RBO 6090);;;
+710;bus;(=VSL 09 =RBO 6098);;;
+
+
+== Vebindungen in den Landkreis Regen (Arberland Verkehr)
+
+590;bus;(=RBO 6080);;;
+616;bus;(=RBO 6080);;;
+618;bus;(=RBO 6065);;;
+680;bus;(=RBO 6196);;;
+690;bus;(=RBO 6188);;;
+
+<pre/>
