@@ -48,7 +48,7 @@ S1;train;;;;
 S2;train;;;;
 S3;train;;;;
 S4;train;;;;
-S 5;train;;;;
+S5;train;;;;
 S51;train;;;;
 
 == Stadtbahn Heilbronn
@@ -62,28 +62,17 @@ S42;train;;;;
 
 == Stadtbahn
 
-4;light_rail;;;;
-4A;light_rail;;;;
-4X;light_rail;;;;
-5;light_rail;;;;
-5X;light_rail;;;;
+4:light_rail;;;;
+4A:light_rail;;;;
+4X:light_rail;;;;
+5:light_rail;;;;
+5X:light_rail;;;;
 
 == Straßenbahn
 
-1;tram;;;;
-2;tram;;;;
-3;tram;;;;
-6;tram;;;;
-6A;tram;;;;
-7;tram;;;;
-8;tram;;;;
-9;tram;;;;
-10;tram;;;;
-21;tram;;;;
-22;tram;;;;
-23;tram;;;;
-24;tram;;;;
-26;tram;;;;
+=== Ludwigshafen / Mannheim
+
+=== Heidelberg
 
 == Buslinien
 
@@ -105,21 +94,6 @@ S42;train;;;;
 117;bus;;;;
 
 === Landkreis Kaiserslautern Nord und West (13x - 17x)
-
-- [[Verkehrsverbund_Rhein-Neckar/Analyse/DE-RP-VRN-Linien|Hier im Wiki]] bitte die Buslinien nach folgendem Schema eintragen:
--
-- ref;bus;comment;from;to;operator
--
--z.B.
--
-- 134;bus;;;;
-- 160;bus;;;;
-- 170;bus;;;;
-- 171;bus;;;;
--
-134;bus;;;;
-160;bus;;;;
-
 
 === 5xx
 
