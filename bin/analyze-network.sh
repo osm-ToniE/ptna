@@ -78,6 +78,17 @@ fi
 # 
 #
 
+if [ "$getroutes" = "true" ]
+then
+    echo $(date "+%Y-%m-%d %H:%M:%S") "Reading Routes Wiki page '$WIKI_ROUTES_PAGE' to file '$ROUTES_FILE'"
+    wiki-page.pl --pull --page=$WIKI_ROUTES_PAGE --file=$ROUTES_FILE
+    echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $ROUTES_FILE)
+fi
+
+#
+# 
+#
+
 if [ "$analyze" = "true" ]
 then
     echo $(date "+%Y-%m-%d %H:%M:%S")  "Analyze $PREFIX"
@@ -133,7 +144,7 @@ then
         then
             filesize=$(ls -l $WIKI_FILE 2> /dev/null | awk '{print $5}')
             
-            if [ "$filesize" -lt 2000000 ]
+            if [ "$filesize" -lt 1900000 ]
             then
                 echo $(date "+%Y-%m-%d %H:%M:%S") "Reading old Wiki analysis page '$WIKI_ANALYSIS_PAGE'"
                 wiki-page.pl --pull --page=$WIKI_ANALYSIS_PAGE --file=$WIKI_FILE.old
@@ -168,17 +179,6 @@ then
     else
         echo $(date "+%Y-%m-%d %H:%M:%S") $WIKI_FILE does not exist
     fi
-fi
-
-#
-# 
-#
-
-if [ "$getroutes" = "true" ]
-then
-    echo $(date "+%Y-%m-%d %H:%M:%S") "Reading Routes Wiki page '$WIKI_ROUTES_PAGE' to file '$ROUTES_FILE'"
-    wiki-page.pl --pull --page=$WIKI_ROUTES_PAGE --file=$ROUTES_FILE
-    echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $ROUTES_FILE)
 fi
 
 #
