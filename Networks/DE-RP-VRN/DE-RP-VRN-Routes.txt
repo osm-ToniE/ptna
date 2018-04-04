@@ -48,7 +48,7 @@ S1;train;;;;
 S2;train;;;;
 S3;train;;;;
 S4;train;;;;
-S5;train;;;;
+S 5;train;;;;
 S51;train;;;;
 
 == Stadtbahn Heilbronn
@@ -62,11 +62,11 @@ S42;train;;;;
 
 == Stadtbahn
 
-4:light_rail;;;;
-4A:light_rail;;;;
-4X:light_rail;;;;
-5:light_rail;;;;
-5X:light_rail;;;;
+4;light_rail;;;;
+4A;light_rail;;;;
+4X;light_rail;;;;
+5;light_rail;;;;
+5;light_rail;;;;
 
 == Straßenbahn
 
