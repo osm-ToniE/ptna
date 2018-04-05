@@ -44,9 +44,9 @@
 11;bus;;;;
 12;bus;;;;
 13;bus;;;;
-16;bus;;;;
+16/16;bus;;;;
 17;bus;;;;
-19;bus;;;;
+19/19;bus;;;;
 
 
 == 2x-Linien
@@ -66,8 +66,8 @@
 
 3;bus;;;;
 30;bus;;;;
-31;bus;;;;
-32;bus;;;;
+22/31;bus;;;;
+25/32;bus;;;;
 33;bus;;;;
 34;bus;;;;
 37;bus;;;;
@@ -104,31 +104,31 @@
 == 6x-Linien
 
 6;bus;;;;
-60;bus;;;;
-61;bus;;;;
-62;bus;;;;
-63;bus;;;;
-64;bus;;;;
-65;bus;;;;
-67;bus;;;;
-68;bus;;;;
-69;bus;;;;
+202/60;bus;;;;
+201/61;bus;;;;
+013/62;bus;;;;
+011/63;bus;;;;
+012/64;bus;;;;
+206/65;bus;;;;
+207/67;bus;;;;
+035/68;bus;;;;
+69/69;bus;;;;
 
 
 == 7x-Linien
 
 7;bus;;;;
-70;bus;;;;
-71;bus;;;;
+VLK 70;bus;;;;
+VLK 71;bus;;;;
 
 
 == 8x-Linien
 
 8;bus;;;;
-80;bus;;;;
-81;bus;;;;
-84;bus;;;;
-87;bus;;;;
+VLK 80;bus;;;;
+VLK 81;bus;;;;
+VLK 84;bus;;;;
+VLK 87;bus;;;;
 
 
 
@@ -181,15 +181,15 @@
 == Buslinien mit Mitgliedschaft zum Netzwerk Landshuter Regionalbusnetz (LA) (= LA xxx)
 
 56;bus;(=LA 031 =RBO 6051);;;
-60;bus;(=LA 202);;;
-61;bus;(=LA 201);;;
-62;bus;(=LA 013);;;
-63;bus;(=LA 011);;;
-64;bus;(=LA 012);;;
-65;bus;(=LA 206);;;
-66;bus;(=LA 015);;;
-67;bus;(=LA 207);;;
-68;bus;(=LA 035);;;
+202/60;bus;(=LA 202);;;
+201/61;bus;(=LA 201);;;
+013/62;bus;(=LA 013);;;
+011/63;bus;(=LA 011);;;
+012/64;bus;(=LA 012);;;
+206/65;bus;(=LA 206);;;
+015/66;bus;(=LA 015);;;
+207/67;bus;(=LA 207);;;
+035/68;bus;(=LA 035);;;
 
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Münchener Verkehrsverbund (MVV)  (= MVV xxx)
@@ -200,12 +200,12 @@
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Regensburger Verkehrsverbund (RVV)  (= RVV xxx)
 
-16;bus;(=RVV 16);;;
+16/16;bus;(=RVV 16);;;
 29;bus;(=RVV 20);;; ?
-31;bus;(=RVV 22);;;
-32;bus;(=RVV 25);;;
+22/31;bus;(=RVV 22);;;
+25/32;bus;(=RVV 25);;;
 33;bus;(=RVV 66);;;
-69;bus;(=RVV 69);;;
+69/69;bus;(=RVV 69);;;
 
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Regionalbus Augsburg (RBA) (= RBA xxxx)
@@ -217,12 +217,12 @@
 == Buslinien, in denen im RVV-Gebiet RVV-Tickets gelten
 
  7;bus;(=RBO 6008);;;
-16;bus;(=RVV 16);;;
+16/16;bus;(=RVV 16);;;
 29;bus;(=RVV 20);;; 
-31;bus;(=RVV 22);;;
-32;bus;(=RVV 25);;;
+22/31;bus;(=RVV 22);;;
+25/32;bus;(=RVV 25);;;
 33;bus;(=RVV 66);;;
-69;bus;(=RVV 69);;;
+69/69;bus;(=RVV 69);;;
 
 
 

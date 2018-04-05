@@ -49,6 +49,7 @@
 843;bus;Ringlinie Schönau
 845;bus;Ringlinie Ramsau "RamBus"
 846;bus;Berchtesgaden - Ramsau - Hintersee
+847/611;bus;Hintersee - Weißbach b. L. Gemeindeamt (ALM Erlebnis Bus)
 848;bus;Berchtesgaden - Oberau - Mautstelle Nord - Rossfeld
 849;bus;Kehlsteinbus
 852;bus;Freilassing - Saaldorf - Surheim - Laufen

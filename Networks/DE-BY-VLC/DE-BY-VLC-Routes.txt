@@ -66,7 +66,7 @@
 221;bus;;;;
 225;bus;;;;
 228;bus;;;;
-229;bus;;;;
+43/229;bus;;;;
 230;bus;;;;
 232;bus;;;;
 280;bus;;;;
@@ -133,7 +133,7 @@
 810;bus;;;;
 810a;bus;;;;
 818;bus;;;;
-820;bus;;;;
+37/820;bus;;;;
 
 
 == Disco-Busse (von Okt.-Apr.)
@@ -187,10 +187,10 @@ D499;bus;(=RBO 6499);;;
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Regensburger Verkehrsverbund (RVV) (RVV xx) 
 
-229;bus;(=RVV 43);;;
+43/229;bus;(=RVV 43);;;
 810;bus;(=RVV 5  im RVV-Gebiet =RBO 6072);;;
 818;bus;(=RVV 34 im RVV-Gebiet =RBO 6004);;;
-820;bus;(=RVV 37);;;
+37/820;bus;(=RVV 37);;;
 
 
 == Grenzüberschreitende Linien nach Tschechien

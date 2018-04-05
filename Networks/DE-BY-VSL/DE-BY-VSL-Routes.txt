@@ -98,17 +98,17 @@
 34;bus;;;;
 35;bus;;;;
 36;bus;;;;
-37;bus;;;;
-38;bus;;;;
+034/37;bus;;;;
+033/VSL 38;bus;;;;
 39;bus;;;;
 
 
 == 4x-Linien
 
-40;bus;;;;
-41;bus;;;;
+032/40;bus;;;;
+026/41/38;bus;;;;
 42;bus;;;;
-43;bus;;;;
+103/43;bus;;;;
 44;bus;;;;
 45;bus;;;;
 46;bus;;;;
@@ -149,10 +149,10 @@
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Landshuter Regionalbusnetz (LA) (= LA xxx)
 
-37;bus;(=LA 034);;;
-38;bus;(=LA 033);;;
-40;bus;(=LA 032);;;
-41;bus;(=LA 026 =DGF 38);;;
+034/37;bus;(=LA 034);;;
+033/38;bus;(=LA 033);;;
+032/40;bus;(=LA 032);;;
+026/41/38;bus;(=LA 026 =DGF 38);;;
 
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Dingolfinger Regionalbusnetz (DGF) (= DGF xx)
@@ -169,7 +169,7 @@
 == Buslinien mit Mitgliedschaft zum Netzwerk Regensburger Verkehrsverbund (RVV) (=RVV xxx)
 
 25;bus;(=RVV 33(nur im RVV-Gebiet) =RBO 6024);;;
-43;bus;(=RVV 103);;;
+103/43;bus;(=RVV 103);;;
 
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Deggendorf (VLD) (=RBO xxxx)
