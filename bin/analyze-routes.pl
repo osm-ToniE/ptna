@@ -77,16 +77,16 @@ GetOptions( 'help'                          =>  \$help,                         
             'check-wide-characters'         =>  \$check_wide_characters,        # --check-wide-characters           check for wide charaters in relation tags
             'coloured-sketchline'           =>  \$coloured_sketchline,          # --coloured-sketchline             force SketchLine to print coloured icons
             'expect-network-long'           =>  \$expect_network_long,          # --expect-network-long             note if 'network' is not long form in general
-            'expect-network-long-for=s'     =>  \$expect_network_long_for,      # --expect-network-long-for="Münchner Verkehrs- und Tarifverbund|Biberger Bürgerbus"         note if 'network' is not long form for ...
+            'expect-network-long-for:s'     =>  \$expect_network_long_for,      # --expect-network-long-for="Münchner Verkehrs- und Tarifverbund|Biberger Bürgerbus"         note if 'network' is not long form for ...
             'expect-network-short'          =>  \$expect_network_short,         # --expect-network-short            note if 'network' is not short form in general
-            'expect-network-short-for=s'    =>  \$expect_network_short_for,     # --expect-network-short-for='BOB'        note if 'network' is not short form for ...
+            'expect-network-short-for:s'    =>  \$expect_network_short_for,     # --expect-network-short-for='BOB'        note if 'network' is not short form for ...
             'routes-file=s'                 =>  \$routes_file,                  # --routes-file=zzz                 CSV file with a list of routes of the of the network
             'max-error=i'                   =>  \$max_error,                    # --max-error=10                    limit number of templates printed for identical error messages
-            'network-long-regex=s'          =>  \$network_long_regex,           # --network-long-regex='Münchner Verkehrs- und Tarifverbund|Grünwald|Bayerische Oberlandbahn'
-            'network-short-regex=s'         =>  \$network_short_regex,          # --network-short-regex='MVV|BOB'
-            'operator-regex=s'              =>  \$operator_regex,               # --operator-regex='MVG|Münchner'
+            'network-long-regex:s'          =>  \$network_long_regex,           # --network-long-regex='Münchner Verkehrs- und Tarifverbund|Grünwald|Bayerische Oberlandbahn'
+            'network-short-regex:s'         =>  \$network_short_regex,          # --network-short-regex='MVV|BOB'
+            'operator-regex:s'              =>  \$operator_regex,               # --operator-regex='MVG|Münchner'
             'positive-notes'                =>  \$positive_notes,               # --positive-notes                  print positive information for notes, if e.g. something is fulfilled
-            'relaxed-begin-end-for=s'       =>  \$relaxed_begin_end_for,        # --relaxed-begin-end-for=...       for train/tram/light_rail: first/last stop position does not have to be on first/last node of way, but within first/last way
+            'relaxed-begin-end-for:s'       =>  \$relaxed_begin_end_for,        # --relaxed-begin-end-for=...       for train/tram/light_rail: first/last stop position does not have to be on first/last node of way, but within first/last way
             'osm-xml-file=s'                =>  \$osm_xml_file,                 # --osm-xml-file=yyy                XML output of Overpass APU query
             'separator=s'                   =>  \$csv_separator,                # --separator=';'                   separator in the CSV file
             'show-options'                  =>  \$show_options,                 # --show-options                    print a section with all options and their values
