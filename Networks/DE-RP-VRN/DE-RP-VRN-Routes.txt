@@ -66,7 +66,6 @@ S42;train;;;;
 4A;light_rail;;;;
 4X;light_rail;;;;
 5;light_rail;;;;
-5;light_rail;;;;
 
 == Straßenbahn
 
