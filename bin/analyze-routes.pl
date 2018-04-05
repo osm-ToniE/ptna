@@ -17,10 +17,14 @@ use strict;
 #
 ####################################################################################################################
 
+use utf8;
+binmode STDOUT, ":utf8";
+binmode STDERR, ":utf8";
 
 use Getopt::Long;
 use XML::Simple;
 use Data::Dumper;
+use Encode;
 
 my @supported_route_types   = ( 'train', 'subway', 'light_rail', 'tram', 'trolleybus', 'bus', 'ferry', 'monorail', 'aerialway', 'funicular', 'share_taxi' );
 my $regex_supported_route_types = join( '|', @supported_route_types );
@@ -90,6 +94,12 @@ GetOptions( 'help'                          =>  \$help,                         
             'strict-operator'               =>  \$strict_operator,              # --strict-operator                 do not consider empty operator tags
             'wiki'                          =>  \$print_wiki,                   # --wiki                            prepare outut for WIKI instead of HTML
           );
+
+$network_long_regex         = decode('utf8', $network_long_regex )          if ( $network_long_regex          );
+$network_short_regex        = decode('utf8', $network_short_regex )         if ( $network_short_regex         );
+$operator_regex             = decode('utf8', $operator_regex )              if ( $operator_regex              );
+$expect_network_long_for    = decode('utf8', $expect_network_long_for )     if ( $expect_network_long_for     );
+$expect_network_short_for   = decode('utf8', $expect_network_short_for )    if ( $expect_network_short_for    );
 
 if ( $verbose ) {
     printf STDERR "%s analyze-routes.pl -v\n", get_time();
@@ -272,6 +282,7 @@ if ( $routes_file ) {
         if ( -r $routes_file ) {
             
             if ( open(CSV,"< $routes_file") ) {
+                binmode CSV, ":utf8";
                 my $previous_entry = '';
                 
                 while ( <CSV> ) {
@@ -303,14 +314,14 @@ if ( $routes_file ) {
                     if ( m/$csv_separator/ ) {
                         ($ref,$route_type)              = split( $csv_separator );
                         if ( $ref && $route_type ) {
-                            $refs_of_interest{umlaut_escape($ref)}->{$route_type} = 0   unless ( defined($refs_of_interest{umlaut_escape($ref)}->{$route_type}) );
-                            $refs_of_interest{umlaut_escape($ref)}->{$route_type}++;
-                            # printf STDERR "refs_of_interest{%s}->{%s}\n", umlaut_escape($ref), $route_type      if ( $verbose );
+                            $refs_of_interest{$ref}->{$route_type} = 0   unless ( defined($refs_of_interest{$ref}->{$route_type}) );
+                            $refs_of_interest{$ref}->{$route_type}++;
+                            # printf STDERR "refs_of_interest{%s}->{%s}\n", $ref, $route_type      if ( $verbose );
                         }
                     }
                     elsif ( m/(\S)/ ) {
-                        $refs_of_interest{umlaut_escape($_)}->{'__any__'} = 0   unless ( defined($refs_of_interest{umlaut_escape($_)}->{'__any__'}) );
-                        $refs_of_interest{umlaut_escape($_)}->{'__any__'}++;
+                        $refs_of_interest{$_}->{'__any__'} = 0   unless ( defined($refs_of_interest{$_}->{'__any__'}) );
+                        $refs_of_interest{$_}->{'__any__'}++;
                     }
                              
                 }
@@ -484,7 +495,7 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                     #
                     if ( $status =~ m/keep/ ) { $status = match_ref_and_pt_type( $ref, $route_type ); }
                                 
-                    printf STDERR "%-15s: ref=%-10s\ttype=%15s\tnetwork=%s\toperator=%s\tRelation: %d\n", $status, $ref, $type, umlaut_escape($collected_tags{'network'}), umlaut_escape($collected_tags{'operator'}), $relation_id   if ( $debug );
+                    printf STDERR "%-15s: ref=%-10s\ttype=%15s\tnetwork=%s\toperator=%s\tRelation: %d\n", $status, $ref, $type, $collected_tags{'network'}, $collected_tags{'operator'}, $relation_id   if ( $debug );
                     
                     $section = undef;
                     if ( $status =~ m/(positive|negative|skip|suspicious)/ ) {
@@ -493,7 +504,7 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                     
                     if ( $section ) {
                         if ( $section ne 'suspicious' ) {
-                            my $ue_ref = umlaut_escape( $ref );
+                            my $ue_ref = $ref;
                             $PT_relations_with_ref{$section}->{$ue_ref}->{$type}->{$route_type}->{$relation_id}->{'tag'}->{'ref'}  = $ref;
                             $PT_relations_with_ref{$section}->{$ue_ref}->{$type}->{$route_type}->{$relation_id}->{'tag'}->{'type'} = $type;
                             $PT_relations_with_ref{$section}->{$ue_ref}->{$type}->{$route_type}->{$relation_id}->{'tag'}->{$type}  = $route_type;
@@ -857,7 +868,6 @@ if ( $routes_file ) {
     my @route_types                     = ();
     my $relations_for_this_route_type   = 0;
     my $ExpectedRef                     = undef;
-    my $EscapedExpectedRef              = undef;
     my $ExpectedRouteType               = undef;
     my $ExpectedComment                 = undef;
     my $ExpectedFrom                    = undef;
@@ -898,28 +908,27 @@ if ( $routes_file ) {
         $ExpectedOperator = $rest[3];
         
         if ( $ExpectedRef ) {
-            $EscapedExpectedRef = umlaut_escape( $ExpectedRef );                                # keys of hash are umlaut_escape()'ed "ref" values
-            if ( $PT_relations_with_ref{$section}->{$EscapedExpectedRef} ) {
+            if ( $PT_relations_with_ref{$section}->{$ExpectedRef} ) {
                 $relations_for_this_route_type = ($ExpectedRouteType) 
-                                                    ? scalar(keys(%{$PT_relations_with_ref{$section}->{$EscapedExpectedRef}->{'route_master'}->{$ExpectedRouteType}})) + 
-                                                      scalar(keys(%{$PT_relations_with_ref{$section}->{$EscapedExpectedRef}->{'route'}->{$ExpectedRouteType}})) 
-                                                    : scalar(keys(%{$PT_relations_with_ref{$section}->{$EscapedExpectedRef}}));
+                                                    ? scalar(keys(%{$PT_relations_with_ref{$section}->{$ExpectedRef}->{'route_master'}->{$ExpectedRouteType}})) + 
+                                                      scalar(keys(%{$PT_relations_with_ref{$section}->{$ExpectedRef}->{'route'}->{$ExpectedRouteType}})) 
+                                                    : scalar(keys(%{$PT_relations_with_ref{$section}->{$ExpectedRef}}));
                 if ( $relations_for_this_route_type ) {
                     foreach $type ( 'route_master', 'route' ) {
-                        if ( $PT_relations_with_ref{$section}->{$EscapedExpectedRef}->{$type} ) {
+                        if ( $PT_relations_with_ref{$section}->{$ExpectedRef}->{$type} ) {
                             if ( $ExpectedRouteType ) {
                                 @route_types = ( $ExpectedRouteType );
                             }
                             else {
-                                @route_types = sort( keys( %{$PT_relations_with_ref{$section}->{$EscapedExpectedRef}->{$type}} ) );
+                                @route_types = sort( keys( %{$PT_relations_with_ref{$section}->{$ExpectedRef}->{$type}} ) );
                             }
                             foreach $ExpectedRouteType ( @route_types ) {
-                                foreach $relation_id ( sort( { $PT_relations_with_ref{$section}->{$EscapedExpectedRef}->{$type}->{$ExpectedRouteType}->{$a}->{'tag'}->{'sort_name'} cmp 
-                                                               $PT_relations_with_ref{$section}->{$EscapedExpectedRef}->{$type}->{$ExpectedRouteType}->{$b}->{'tag'}->{'sort_name'}     } 
-                                                             keys(%{$PT_relations_with_ref{$section}->{$EscapedExpectedRef}->{$type}->{$ExpectedRouteType}})) ) {
-                                    $relation_ptr = $PT_relations_with_ref{$section}->{$EscapedExpectedRef}->{$type}->{$ExpectedRouteType}->{$relation_id};
+                                foreach $relation_id ( sort( { $PT_relations_with_ref{$section}->{$ExpectedRef}->{$type}->{$ExpectedRouteType}->{$a}->{'tag'}->{'sort_name'} cmp 
+                                                               $PT_relations_with_ref{$section}->{$ExpectedRef}->{$type}->{$ExpectedRouteType}->{$b}->{'tag'}->{'sort_name'}     } 
+                                                             keys(%{$PT_relations_with_ref{$section}->{$ExpectedRef}->{$type}->{$ExpectedRouteType}})) ) {
+                                    $relation_ptr = $PT_relations_with_ref{$section}->{$ExpectedRef}->{$type}->{$ExpectedRouteType}->{$relation_id};
                                     if ( $entry ne $working_on_entry ) {
-                                        printTableSubHeader( 'ref'      => $relation_ptr->{'tag'}->{'ref'},     # $EscapedExpectedRef is umlaut_escape()'ed, let's take the real one, 
+                                        printTableSubHeader( 'ref'      => $relation_ptr->{'tag'}->{'ref'},
                                                              'network'  => $relation_ptr->{'tag'}->{'network'},
                                                              'pt_type'  => $ExpectedRouteType,
                                                              'colour'   => $relation_ptr->{'tag'}->{'colour'},
@@ -933,7 +942,7 @@ if ( $routes_file ) {
                                     @{$relation_ptr->{'__issues__'}} = ();
                                     @{$relation_ptr->{'__notes__'}}  = ();
 
-                                    if ( $refs_of_interest{$EscapedExpectedRef}->{$ExpectedRouteType} > 1 )
+                                    if ( $refs_of_interest{$ExpectedRef}->{$ExpectedRouteType} > 1 )
                                     {
                                         #
                                         # for this 'ref' and 'route_type' we have more than one entry in the CSV file
@@ -945,7 +954,7 @@ if ( $routes_file ) {
                                             if ( $ExpectedOperator eq $relation_ptr->{'tag'}->{'operator'} ) {
                                                 push( @{$relation_ptr->{'__notes__'}}, "There is more than one public transport service for this 'ref'. 'operator' value of this relation fits to expected operator value." );
                                             } else {
-                                                printf STDERR "%s Skipping relation %s, 'ref' %s: 'operator' does not match expected operator (%s vs %s)\n", get_time(), $relation_id, $EscapedExpectedRef, $relation_ptr->{'tag'}->{'operator'}, $ExpectedOperator; 
+                                                printf STDERR "%s Skipping relation %s, 'ref' %s: 'operator' does not match expected operator (%s vs %s)\n", get_time(), $relation_id, $ExpectedRef, $relation_ptr->{'tag'}->{'operator'}, $ExpectedOperator; 
                                                 next;
                                             }
                                         } else {
@@ -958,11 +967,11 @@ if ( $routes_file ) {
                                             }
                                         }
                                     }
-                                    $status = analyze_environment( $PT_relations_with_ref{$section}->{$EscapedExpectedRef}, $ExpectedRef, $type, $ExpectedRouteType, $relation_id );
+                                    $status = analyze_environment( $PT_relations_with_ref{$section}->{$ExpectedRef}, $ExpectedRef, $type, $ExpectedRouteType, $relation_id );
     
                                     $status = analyze_relation( $relation_ptr, $relation_id );
                                     
-                                    printTableLine( 'ref'           =>    $relation_ptr->{'tag'}->{'ref'},     # $EscapedExpectedRef is umlaut_escape()'ed, let's take the real one
+                                    printTableLine( 'ref'           =>    $relation_ptr->{'tag'}->{'ref'},
                                                     'relation'      =>    $relation_id,
                                                     'type'          =>    $type,
                                                     'route_type'    =>    $ExpectedRouteType,
@@ -1317,7 +1326,6 @@ sub match_network {
     my $network = shift;
 
     if ( $network ) {
-        $network = umlaut_escape( $network );
         if ( $network_long_regex || $network_short_regex ) {
             if ( $network_long_regex  && $network =~ m/$network_long_regex/ ) {
                 return 'keep long';
@@ -1348,7 +1356,6 @@ sub match_operator {
     my $operator = shift;
 
     if ( $operator ) {
-        $operator = umlaut_escape( $operator );
         if ( $operator_regex ) {
             if ( $operator !~ m/$operator_regex/   ) {
                 printf STDERR "%s Skipping operator: %s\n", get_time(), $operator        if ( $debug );
@@ -1372,12 +1379,10 @@ sub match_operator {
 sub match_ref_and_pt_type {
     my $ref             = shift;
     my $pt_type         = shift;
-    my $key_ref         = undef;             
 
     if ( $ref && $pt_type ) {
-        $key_ref = umlaut_escape( $ref );
-        return 'keep positive'      if ( $refs_of_interest{$key_ref}->{$pt_type} );
-        return 'keep positive'      if ( $refs_of_interest{$key_ref}->{__any__}  );
+        return 'keep positive'      if ( $refs_of_interest{$ref}->{$pt_type} );
+        return 'keep positive'      if ( $refs_of_interest{$ref}->{__any__}  );
     }
     else {
         printf STDERR "%s Skipping unset ref or unset type: %s/%s\n", get_time()        if ( $verbose );
@@ -1711,15 +1716,13 @@ sub analyze_relation {
         
         push( @{$relation_ptr->{'__issues__'}}, "'name' is not set" )       unless ( $relation_ptr->{'tag'}->{'name'} );
 
-        $network = umlaut_escape( $relation_ptr->{'tag'}->{'network'} );
+        $network = $relation_ptr->{'tag'}->{'network'};
         if ( $network ) {
             my $expected_long  = $expect_network_long_for  || '';
             my $expected_short = $expect_network_short_for || '';
 
-            $expected_long  =  umlaut_escape( $expected_long );
             $expected_long  =~ s/;/,/g;
             $expected_long  =  ',' . $expected_long . ',';
-            $expected_short =  umlaut_escape( $expected_short );
             $expected_short =~ s/;/,/g;
             $expected_short =  ',' . $expected_short . ',';
 
@@ -1802,7 +1805,7 @@ sub analyze_relation {
             $return_code = analyze_route_relation( $relation_ptr );
         }
         
-        if ( $check_wide_characters ) {
+        if ( 0  ) { #$check_wide_characters ) {
             if ( $relation_ptr->{'tag'} ) {
 #                printf STDERR "Relation %s: checking tag ", $relation_id;
                 foreach my $tag ( sort( keys( %{$relation_ptr->{'tag'}} ) ) ) {
@@ -1986,16 +1989,16 @@ sub analyze_ptv2_route_relation {
     if ( $check_name ) {
         if ( $relation_ptr->{'tag'}->{'name'} ) {
             my $preconditions_failed = 0;
-            my $uml_name = umlaut_escape( $relation_ptr->{'tag'}->{'name'} ); 
-            my $uml_ref  = umlaut_escape( $relation_ptr->{'tag'}->{'ref'}  ); 
-            my $uml_from = umlaut_escape( $relation_ptr->{'tag'}->{'from'} ); 
-            my $uml_to   = umlaut_escape( $relation_ptr->{'tag'}->{'to'} ); 
-            my $uml_via  = umlaut_escape( $relation_ptr->{'tag'}->{'via'} );
+            my $name = $relation_ptr->{'tag'}->{'name'}; 
+            my $ref  = $relation_ptr->{'tag'}->{'ref'}; 
+            my $from = $relation_ptr->{'tag'}->{'from'}; 
+            my $to   = $relation_ptr->{'tag'}->{'to'}; 
+            my $via  = $relation_ptr->{'tag'}->{'via'};
             #
             # we do not use =~ m/.../ here because the strings may contain special regex characters such as ( ) [ ] and so on
             #
-            if ( $uml_ref ) {
-                if ( index($uml_name,$uml_ref) == -1 ) {
+            if ( $ref ) {
+                if ( index($name,$ref) == -1 ) {
                     push( @{$relation_ptr->{'__notes__'}}, "PTv2 route: 'ref' is not part of 'name'" );
                     $preconditions_failed++;
                     $return_code++;
@@ -2007,8 +2010,8 @@ sub analyze_ptv2_route_relation {
                 $preconditions_failed++;
                 $return_code++;
             }
-            if ( $uml_from ) {
-                if ( index($uml_name,$uml_from) == -1 ) {
+            if ( $from ) {
+                if ( index($name,$from) == -1 ) {
                     push( @{$relation_ptr->{'__notes__'}}, "PTv2 route: 'from' is not part of 'name'" );
                     $preconditions_failed++;
                     $return_code++;
@@ -2019,8 +2022,8 @@ sub analyze_ptv2_route_relation {
                 $preconditions_failed++;
                 $return_code++;
             }
-            if ( $uml_to ) {
-                if ( index($uml_name,$uml_to) == -1 ) {
+            if ( $to ) {
+                if ( index($name,$to) == -1 ) {
                     push( @{$relation_ptr->{'__notes__'}}, "PTv2 route: 'to' is not part of 'name'" );
                     $preconditions_failed++;
                     $return_code++;
@@ -2031,12 +2034,12 @@ sub analyze_ptv2_route_relation {
                 $preconditions_failed++;
                 $return_code++;
             }
-            if ( $uml_name =~ m/<=>/ ) {
+            if ( $name =~ m/<=>/ ) {
                 push( @{$relation_ptr->{'__notes__'}}, "PTv2 route: 'name' includes deprecated '<=>'" );
                 $preconditions_failed++;
                 $return_code++;
             }
-            if ( $uml_name =~ m/==>/ ) {
+            if ( $name =~ m/==>/ ) {
                 push( @{$relation_ptr->{'__notes__'}}, "PTv2 route: 'name' includes deprecated '==>'" );
                 #$preconditions_failed++;
                 $return_code++;
@@ -2049,15 +2052,15 @@ sub analyze_ptv2_route_relation {
                 my $i_long         = 0;
                 my $i_short        = 0;
                 my $num_of_arrows  = 0;
-                $num_of_arrows++    while ( $uml_name =~ m/=>/g );
+                $num_of_arrows++    while ( $name =~ m/=>/g );
                 if ( $num_of_arrows < 2 ) {
                     # well, 'name' should then include 'ref' and only 'from' and 'to' (no 'via')
-                    $expected_long  = $uml_ref . ': ' . $uml_from . ' => ' . $uml_to;   # this is how it really should be: with blank around '=>'
-                    $expected_short = $uml_ref . ': ' . $uml_from . '=>'   . $uml_to;   # some people ommit the blank around the '=>', be relaxed with that
-                    $i_long        = index( $uml_name, $expected_long  );
-                    $i_short       = index( $uml_name, $expected_short );
-                    if ( ($i_long  == -1 || length($uml_name) > $i_long  + length($expected_long))  &&
-                         ($i_short == -1 || length($uml_name) > $i_short + length($expected_short))    ) {
+                    $expected_long  = $ref . ': ' . $from . ' => ' . $to;   # this is how it really should be: with blank around '=>'
+                    $expected_short = $ref . ': ' . $from . '=>'   . $to;   # some people ommit the blank around the '=>', be relaxed with that
+                    $i_long        = index( $name, $expected_long  );
+                    $i_short       = index( $name, $expected_short );
+                    if ( ($i_long  == -1 || length($name) > $i_long  + length($expected_long))  &&
+                         ($i_short == -1 || length($name) > $i_short + length($expected_short))    ) {
                         # no match or 'name' is longer than expected
                         push( @{$relation_ptr->{'__notes__'}}, "PTv2 route: 'name' should (at least) be of the form '... ref: from => to'" );
                         $return_code++;
@@ -2065,23 +2068,23 @@ sub analyze_ptv2_route_relation {
                 }
                 else {
                     # there is more than one '=>' in the 'name' value, so 'name' includes via stops
-                    if ( $uml_via ) {
-                        my @via_values = split( ";", $uml_via );
+                    if ( $via ) {
+                        my @via_values = split( ";", $via );
                         $preconditions_failed = 0;
                         foreach my $via_value ( @via_values ) {
-                            if ( index($uml_name,$via_value) == -1 ) {
+                            if ( index($name,$via_value) == -1 ) {
                                 push( @{$relation_ptr->{'__notes__'}}, sprintf("PTv2 route: 'via' is set: via-part = '%s' is not part of 'name' (separate multiple 'via' values by ';', without blanks)",$via_value) );
                                 $preconditions_failed++;
                                 $return_code++;
                             }
                         }
                         if ( $preconditions_failed == 0 ){
-                            $expected_long  = $uml_ref . ': ' . $uml_from . ' => ' . join(' => ',@via_values) .' => ' . $uml_to;   # this is how it really should be: with blank around '=>'
-                            $expected_short = $uml_ref . ': ' . $uml_from . '=>'   . join('=>' ,@via_values)  .'=>'   . $uml_to;   # some people ommit the blank around the '=>', be relaxed with that
-                            $i_long         = index( $uml_name, $expected_long );
-                            $i_short        = index( $uml_name, $expected_short );
-                            if ( ($i_long  == -1 || length($uml_name) > $i_long + length($expected_long)) && 
-                                 ($i_short == -1 || length($uml_name) > $i_short + length($expected_short))    ) {
+                            $expected_long  = $ref . ': ' . $from . ' => ' . join(' => ',@via_values) .' => ' . $to;   # this is how it really should be: with blank around '=>'
+                            $expected_short = $ref . ': ' . $from . '=>'   . join('=>' ,@via_values)  .'=>'   . $to;   # some people ommit the blank around the '=>', be relaxed with that
+                            $i_long         = index( $name, $expected_long );
+                            $i_short        = index( $name, $expected_short );
+                            if ( ($i_long  == -1 || length($name) > $i_long + length($expected_long)) && 
+                                 ($i_short == -1 || length($name) > $i_short + length($expected_short))    ) {
                                 # no match or 'name' is longer than expected
                                 if ( $num_of_arrows == 2 ) {
                                     push( @{$relation_ptr->{'__notes__'}}, "PTv2 route: 'via' is set: 'name' should be of the form '... ref: from => via => to'" );
@@ -3848,10 +3851,10 @@ sub printTableSubHeader {
     my $csv_text        = '';       # some information comming from the CSV input file
 
     if ( $ref && $network ) {
-        $ref_text = printSketchLineTemplate( umlaut_escape( $ref ), umlaut_escape( $network ), $pt_type, $colour );
+        $ref_text = printSketchLineTemplate( $ref, $network, $pt_type, $colour );
     }
     elsif ( $ref ) {
-        $ref_text = umlaut_escape( $ref );
+        $ref_text = $ref;
     }
 
     $csv_text .= sprintf( "%s: %s; ", ( $column_name{'Comment'}  ? $column_name{'Comment'}  : 'Comment' ),  $hash{'Comment'}  )  if ( $hash{'Comment'}  );
@@ -3893,7 +3896,6 @@ sub printTableLine {
         for ( $i = 0; $i < $no_of_columns; $i++ ) {
             $val =  $hash{$columns[$i]} || '';
             $val =~ s/__separator__/<br>/g;
-            $val = umlaut_escape($val);
             if ( $columns[$i] eq "relation" ) {
                 $val = printRelationTemplate( $val );
             }
@@ -3914,7 +3916,6 @@ sub printTableLine {
         printf  "%16s<tr data-ref=\"%s\" class=\"line\">", ' ', $ref;
         for ( $i = 0; $i < $no_of_columns; $i++ ) {
             $val =  $hash{$columns[$i]} || '';
-            $val = umlaut_escape($val);
             if ( $columns[$i] eq "relation" ) {
                 printf "<td class=\"relation\">%s</td>", printRelationTemplate($val);
             }
@@ -4165,24 +4166,6 @@ sub printSketchLineTemplate {
         $text           = sprintf( "<a href=\"https://overpass-api.de/api/sketch-line?ref=%s\&amp;network=%s\&amp;style=wuppertal%s%s\" title=\"Sketch-Line\">%s</a>", $ref_escaped, uri_escape($network), $colour_string, $pt_string, $ref ); # some manual expansion of the template
     }
     
-    return $text;
-}
-
-
-#############################################################################################
-
-sub umlaut_escape {
-    my $text = shift;
-    if ( $text ) {
-        $text    =~ s/\xc4/Ä/g;
-        $text    =~ s/\xe4/ä/g;
-        $text    =~ s/\xd6/Ö/g;
-        $text    =~ s/\xf6/ö/g;
-        $text    =~ s/\xdc/Ü/g;
-        $text    =~ s/\xfc/ü/g;
-        $text    =~ s/\xdf/ß/g;
-        $text    =~ s/\xc3\xbc/ü/g;
-    }
     return $text;
 }
 
