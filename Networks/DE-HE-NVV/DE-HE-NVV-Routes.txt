@@ -29,7 +29,7 @@
 
 = [[Kassel/Transportation/Analyse/DE-HE-NVV-Linien|NVV-Linien]]
 
-- [[Category:Page with status]] [[Category:Train routes in Germany]] [[Category:Rapid transit in Germany]] [[Category:Public transport in Germany]] [[Category:Hessen]] [[Category:Nahverkehr]] [[Category:Kassel]]
+- [[Category:Page with status]][[Category:Train routes in Germany]] [[Category:Public transport in Germany]][[Category:Hessen]][[Category:Nahverkehr]][[Category:Kassel]]
 
 -
 - Die Analyse erfolgt für die Kreise:

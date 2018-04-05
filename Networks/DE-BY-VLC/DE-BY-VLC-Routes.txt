@@ -114,7 +114,7 @@
 615;bus;;;;
 616;bus;Skibus;;;
 617;bus;Saisonbus;;;
-618;bus;Wanderbus, von 15.05-31.10.;;;
+618;bus;Wanderbus von 15.05-31.10.;;;
 619;bus;;;;
 620;bus;;;;
 650;bus;;;;

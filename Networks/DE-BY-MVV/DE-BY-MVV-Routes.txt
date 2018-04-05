@@ -31,7 +31,7 @@
 = [[München/Transportation/MVV-Linien-gesamt|MVV Linien]]
 
 
-- [[Category:Page with status]][[Category:Train routes in Germany]][[Category:Rapid transit in Germany]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:München]]
+- [[Category:Page with status]][[Category:Train routes in Germany]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:München]]
 
 == U-Bahn
 U1;subway;;Olympia-Einkaufszentrum;Mangfallplatz;SWM/MVG

@@ -30,7 +30,7 @@
 
 = Überblick Buslinien Verkehrsgemeinschaft Landkreis Kelheim (VLK) allgemein 
 
-- [[Category:Page with status]][[Category:Train routes in Germany]][[Category:Rapid transit in Germany]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:Kelheim]]
+- [[Category:Page with status]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:Kelheim]]
 
 - Verweis auf die Datei mit den [[Kelheim/Transportation/Analyse/DE-BY-VLK-Linien|VLK Linien]] im Wiki
 
@@ -147,7 +147,7 @@ VLK 87;bus;;;;
 
  2;bus;(=RBO 6036);;;
 28;bus;(=RBO 6028);;;
-29;bus;(=RBO 6029);;; ?
+29;bus;(=RBO 6029);;;
 
  3;bus;(=RBO 6035);;;
 34;bus;(=RBO 6034);;;

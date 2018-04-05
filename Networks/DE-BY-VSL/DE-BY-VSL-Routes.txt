@@ -30,7 +30,7 @@
 
 = Überblick Buslinien Verkehrsgemeinschaft Straubinger Land (VSL) allgemein 
 
-- [[Category:Page with status]][[Category:Train routes in Germany]][[Category:Rapid transit in Germany]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:Straubing]]
+- [[Category:Page with status]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:Straubing]]
 
 - Verweis auf die Datei mit den [[Straubing/Transportation/Analyse/DE-BY-VSL-Linien|VSL Linien]] im Wiki
 
