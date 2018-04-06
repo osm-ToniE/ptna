@@ -168,7 +168,7 @@ LA 408;bus;;;;
 036;bus;(=RBO 6245);;;
 205;bus;(=RBO 6262);;;
 302;bus;(=RBO 6240 =VLK 11);;;
-303;bus;(=RBO 6234);;;
+6234/303;bus; Landshut - Rottenburg(=RBO 6234);;;
 8240/303R;bus;(=RBO 8240);;;
 304;bus;(=RBO 6241);;;
 305;bus;(=RBO 6263);;;

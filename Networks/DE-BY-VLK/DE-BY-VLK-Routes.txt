@@ -37,24 +37,24 @@
 
 == 1xx-Linien
 
-1;bus;;;;
-10;bus;;;;
+6022/01;bus;;;;
+6018/10;bus;;;;
 100;bus;;;;
 10a;bus;;;;
 11;bus;;;;
-12;bus;;;;
+6023/12;bus;;;;
 13;bus;;;;
 16/16;bus;;;;
-17;bus;;;;
+6012/17;bus;;;;
 19/19;bus;;;;
 
 
 == 2x-Linien
 
-2;bus;;;;
+6036/02;bus;;;;
 21;bus;;;;
 22;bus;;;;
-28;bus;;;;
+6028/28;bus;;;;
 29;bus;;;;
 025;bus;;;;
 026;bus;;;;
@@ -64,20 +64,20 @@
 
 == 3x-Linien
 
-3;bus;;;;
+6035/03;bus;;;;
 30;bus;;;;
 22/31;bus;;;;
 25/32;bus;;;;
 33;bus;;;;
-34;bus;;;;
-37;bus;;;;
+6034/34;bus;;;;
+6037/37;bus;;;;
 38;bus;;;;
 39;bus;;;;
 
 
 == 4x-Linien
 
-4;bus;;;;
+6038/04;bus;;;;
 42;bus;;;;
 43;bus;;;;
 44;bus;;;;
@@ -91,7 +91,7 @@
 == 5x-Linien
 
 5;bus;;;;
-50;bus;;;;
+602/50;bus;;;;
 51;bus;;;;
 53;bus;;;;
 54;bus;;;;
@@ -103,7 +103,7 @@
 
 == 6x-Linien
 
-6;bus;;;;
+6009/06;bus;;;;
 202/60;bus;;;;
 201/61;bus;;;;
 013/62;bus;;;;
@@ -117,14 +117,14 @@
 
 == 7x-Linien
 
-7;bus;;;;
+6008/07;bus;;;;
 VLK 70;bus;;;;
 VLK 71;bus;;;;
 
 
 == 8x-Linien
 
-8;bus;;;;
+6016/08;bus;;;;
 VLK 80;bus;;;;
 VLK 81;bus;;;;
 VLK 84;bus;;;;
@@ -137,25 +137,25 @@ VLK 87;bus;;;;
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Regionalbus Ostbayern (RBO) (=RBO xxxx)
 
- 1;bus;(=RBO 6022);;;
-10;bus;(=RBO 6018);;;
+6022/01;bus;(=RBO 6022);;;
+6018/10;bus;(=RBO 6018);;;
 10a;bus;(=RBO 6057);;;
 11;bus;(=RBO 6240 = LA 302);;;
-12;bus;(=RBO 6023);;;
+6023/12;bus;(=RBO 6023);;;
 15;bus;(=RBO 7530);;;
-17;bus;(=RBO 6012);;;
+6012/17;bus;(=RBO 6012);;;
 
- 2;bus;(=RBO 6036);;;
-28;bus;(=RBO 6028);;;
+6036/02;bus;(=RBO 6036);;;
+6028/28;bus;(=RBO 6028);;;
 29;bus;(=RBO 6029);;;
 
- 3;bus;(=RBO 6035);;;
-34;bus;(=RBO 6034);;;
-37;bus;(=RBO 6037);;;
+6035/03;bus;(=RBO 6035);;;
+6034/34;bus;(=RBO 6034);;;
+6037/37;bus;(=RBO 6037);;;
 38;bus;(=RBO 6040);;;
 39;bus;(=RBO 6039);;;
 
- 4;bus;(=RBO 6038);;;
+6038/04;bus;(=RBO 6038);;;
 42;bus;(=RBO 6042);;;
 43;bus;(=RBO 6043);;;
 44;bus;(=RBO 6044);;;
@@ -173,9 +173,9 @@ VLK 87;bus;;;;
 58;bus;(=RBO 6058);;;
 59;bus;(=RBO 6059);;;
 
- 6;bus;(=RBO 6009);;;
- 7;bus;(=RBO 6008);;;
- 8;bus;(=RBO 6016);;;
+6009/06;bus;(=RBO 6009);;;
+6008/07;bus;(=RBO 6008);;;
+6016/08;bus;(=RBO 6016);;;
 
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Landshuter Regionalbusnetz (LA) (= LA xxx)
@@ -194,7 +194,7 @@ VLK 87;bus;;;;
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Münchener Verkehrsverbund (MVV)  (= MVV xxx)
 
-50;bus;(=MVV 602 + MVV 603);;;
+602/50;bus;(=MVV 602 + MVV 603);;;
 51;bus;(=MVV 683);;;
 
 

@@ -90,7 +90,7 @@
 420;bus;;;;
 430;bus;;;;
 431;bus;;;;
-450;bus;;;;
+6079/450;bus;;;;
 481;bus;;;;
 490;bus;;;;
 491;bus;;;;
@@ -100,10 +100,10 @@
 == 5xx-Linien
 
 510;bus;;;;
-519;bus;;;;
+6074/519/400320;bus;;;;
 520;bus;Wanderbus von Jun.-Sep.;;;
 589;bus;;;;
-590;bus;;;;
+6080/590;bus;;;;
 
 
 == 6xx-Linien
@@ -114,23 +114,23 @@
 615;bus;;;;
 616;bus;Skibus;;;
 617;bus;Saisonbus;;;
-618;bus;Wanderbus von 15.05-31.10.;;;
+6065/618;bus;Wanderbus von 15.05-31.10.;;;
 619;bus;;;;
 620;bus;;;;
 650;bus;;;;
 680;bus;;;;
 682;bus;Rufbus;;;
-690;bus;;;;
+6196/690;bus;;;;
 
 
 == 7xx-Linien
 
-710;bus;;;;
+6098/9/710;bus;;;;
 
 
 == 8xx-Linien
 
-810;bus;;;;
+6072/810;bus;;;;
 810a;bus;;;;
 818;bus;;;;
 37/820;bus;;;;
@@ -153,32 +153,32 @@ D499;bus;;;;
 
 410;bus;(=RBO 6078);;;
 420;bus;(=RBO 6069);;;
-450;bus;(=RBO 6079);;;
+6079/450;bus;(=RBO 6079);;;
 490;bus;(=RBO 6076);;;
 491;bus;(=RBO 6296);;;
 
 511;bus;(=RBO 6511);;;
 520;bus;(=RBO 520);;;
-519;bus;(=RBO 6074);;;
+6074/519/400320;bus;(=RBO 6074);;;
 589;bus;(=RBO 7597);;;
-590;bus;(=RBO 6080);;;
+6080/590;bus;(=RBO 6080);;;
 
 610;bus;(=RBO 6067);;;
 611;bus;(=RBO 6068);;;
 612;bus;(=RBO 6073);;;
 615;bus;(=RBO 6066);;;
 616;bus;(=RBO 6080)(ist ein Teil von Linie 590(RBO 6080);;;
-618;bus;(=RBO 6065);;;
+6065/618;bus;(=RBO 6065);;;
 619;bus;(=RBO 6090 =VSL 11);;;
 620;bus;(=RBO 6070);;;
 650;bus;(=RBO 6071);;;
 680;bus;(=RBO 6188);;;
 682;bus;(=RBO 8216);;;
-690;bus;(=RBO 6196);;;
+6196/690;bus;(=RBO 6196);;;
 
-710;bus;(=RBO 6098 =VSL 09);;;
+6098/9/710;bus;(=RBO 6098 =VSL 09);;;
 
-810;bus;(=RBO 6072 =RVV 5 im RVV-Gebiet);;;
+6072/810;bus;(=RBO 6072 =RVV 5 im RVV-Gebiet);;;
 810a;bus;(=RBO 6072)(ist ein Teil von Linie 810(RBO 6072));;;
 818;bus;(=RBO 6004 = RVV 34 im RVV-Gebiet)
 
