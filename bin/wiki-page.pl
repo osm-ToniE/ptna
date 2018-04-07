@@ -12,6 +12,8 @@ use Getopt::Long;
 
 use MediaWiki::API;
 
+use Encode;
+
 
 my $WIKI_URL    = 'https://wiki.openstreetmap.org/w/api.php';
 my $PAGE        = "Sandbox";
@@ -52,6 +54,8 @@ GetOptions( 'help'                          =>  \$help,                         
             'wiki-url=s'                    =>  \$wiki_url,                     # --wiki-url=https://wiki.openstreetmap.org/w/api.php
           );
 
+$page       = decode('utf8', $page    ) if ( $page    );
+$summary    = decode('utf8', $summary ) if ( $summary );
 
 if ( !$page ) {
     printf STDERR "Please specify the Wiki page to pull or to push to\n";
@@ -151,8 +155,6 @@ if ( $pull) {
     $mw->{config}->{api_url}    = $wiki_url;
     $mw->{config}->{on_error}   = \&on_error;
     
-    $page = umlaut_escape( $page );
-    
     printf STDERR "%s Reading Wiki page '%s'\n", get_time(), $page;
     
     my $ref = $mw->get_page( { title => $page } );
@@ -193,8 +195,6 @@ if ( $pull) {
     
     # log in to the wiki
     if ( $mw->login( { lgname => $username, lgpassword => $password } ) ) {
-        
-        $page = umlaut_escape( $page );
         
         printf STDERR "%s Reading Wiki page info '%s'\n", get_time(), $page;
 
@@ -252,8 +252,6 @@ if ( $pull) {
     # log in to the wiki
     if ( $mw->login( { lgname => $username, lgpassword => $password } ) ) {
         
-        $page = umlaut_escape( $page );
-        
         printf STDERR "%s Setting 'watch' on Wiki page '%s'\n", get_time(), $page;
         
         if ( $mw->edit( { action => 'watch', title => $page } ) ) {
@@ -268,8 +266,6 @@ if ( $pull) {
 }
   
   
-  
-  
 #############################################################################################
 #
 #
@@ -281,28 +277,6 @@ sub on_error {
   printf STDERR "Error details: " . $mw->{error}->{details} . "\n";
   printf STDERR "Error stacktrace: " . $mw->{error}->{stacktrace}."\n";
   die;
-}
-
-
-#############################################################################################
-#
-#
-#
-#############################################################################################
-
-sub umlaut_escape {
-    my $text = shift;
-    if ( $text ) {
-        $text    =~ s/\xc4/Ä/g;
-        $text    =~ s/\xe4/ä/g;
-        $text    =~ s/\xd6/Ö/g;
-        $text    =~ s/\xf6/ö/g;
-        $text    =~ s/\xdc/Ü/g;
-        $text    =~ s/\xfc/ü/g;
-        $text    =~ s/\xdf/ß/g;
-        $text    =~ s/\xc3\xbc/ü/g;
-    }
-    return $text;
 }
 
 
