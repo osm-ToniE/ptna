@@ -14,7 +14,7 @@ WIKI_ANALYSIS_PAGE="Verkehrsverbund_Rhein-Neckar/Analyse"
 WIKI_ROUTES_PAGE="Verkehrsverbund_Rhein-Neckar/Analyse/DE-RP-VRN-Linien"
 WIKI_FILE_DIFF="196"
 
-ANALYSIS_OPTIONS="-v --wiki --max-error=10 --check-access --check-stop-position --check-sequence --check-wide-characters --positive-notes --check-name --coloured-sketchline"
+ANALYSIS_OPTIONS="-v --wiki --max-error=10 --check-access --check-stop-position --check-sequence --check-wide-characters --positive-notes --check-name --multiple-ref-type-entries=analyze --coloured-sketchline"
 
 # --check-bus-stop 
 # --expect-network-long

@@ -16,7 +16,7 @@ WIKI_ANALYSIS_PAGE="VRS/Analyse"
 WIKI_ROUTES_PAGE="VRS/Analyse/VRS-Linien"
 WIKI_FILE_DIFF="196"
 
-ANALYSIS_OPTIONS="-v --wiki --max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-wide-characters --relaxed-begin-end-for=train,light_rail,tram --coloured-sketchline --expect-network-long"
+ANALYSIS_OPTIONS="-v --wiki --max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-wide-characters --multiple-ref-type-entries=analyze --relaxed-begin-end-for=train,light_rail,tram --coloured-sketchline --expect-network-long"
 
 # --positive-notes
 # --check-bus-stop 

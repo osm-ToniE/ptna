@@ -14,7 +14,7 @@ WIKI_ANALYSIS_PAGE="Kassel/Transportation/Analyse"
 WIKI_ROUTES_PAGE="Kassel/Transportation/Analyse/DE-HE-NVV-Linien"
 WIKI_FILE_DIFF="196"
 
-ANALYSIS_OPTIONS="--v --wiki --check-access --check-name --check-stop-position --check-sequence --check-version --check-wide-characters --positive-notes --coloured-sketchline --expect-network-long"
+ANALYSIS_OPTIONS="--v --wiki --check-access --check-name --check-stop-position --check-sequence --check-version --check-wide-characters --multiple-ref-type-entries=analyze --positive-notes --coloured-sketchline --expect-network-long"
 
 # --max-error=
 # --check-bus-stop 
