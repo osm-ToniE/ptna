@@ -50,6 +50,7 @@ my $expect_network_long             = undef;
 my $expect_network_long_for         = undef;
 my $expect_network_short            = undef;
 my $expect_network_short_for        = undef;
+my $multiple_ref_type_entries       = "analyze";
 my $show_options                    = undef;
 my $strict_network                  = undef;
 my $strict_operator                 = undef;
@@ -82,6 +83,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'expect-network-short-for:s'    =>  \$expect_network_short_for,     # --expect-network-short-for='BOB'        note if 'network' is not short form for ...
             'routes-file=s'                 =>  \$routes_file,                  # --routes-file=zzz                 CSV file with a list of routes of the of the network
             'max-error=i'                   =>  \$max_error,                    # --max-error=10                    limit number of templates printed for identical error messages
+            'multiple-ref-type-entries=s'   =>  \$multiple_ref_type_entries,    # --multiple-ref-type-entries=analyze|ignore|allow    how to handle multiple "ref;type" in routes-file
             'network-long-regex:s'          =>  \$network_long_regex,           # --network-long-regex='Münchner Verkehrs- und Tarifverbund|Grünwald|Bayerische Oberlandbahn'
             'network-short-regex:s'         =>  \$network_short_regex,          # --network-short-regex='MVV|BOB'
             'operator-regex:s'              =>  \$operator_regex,               # --operator-regex='MVG|Münchner'
@@ -103,33 +105,34 @@ $expect_network_short_for   = decode('utf8', $expect_network_short_for )    if (
 
 if ( $verbose ) {
     printf STDERR "%s analyze-routes.pl -v\n", get_time();
-    printf STDERR "%20s--wiki\n",                         ' '                                 if ( $print_wiki                  );
-    printf STDERR "%20s--check-access\n",                 ' '                                 if ( $check_access                );
-    printf STDERR "%20s--check-bus-stop\n",               ' '                                 if ( $check_bus_stop              );
-    printf STDERR "%20s--check-name\n",                   ' '                                 if ( $check_name                  );
-    printf STDERR "%20s--check-platform\n",               ' '                                 if ( $check_platform              );
-    printf STDERR "%20s--check-roundabouts\n",            ' '                                 if ( $check_roundabouts           );
-    printf STDERR "%20s--check-sequence\n",               ' '                                 if ( $check_sequence              );
-    printf STDERR "%20s--check-stop-position\n",          ' '                                 if ( $check_stop_position         );
-    printf STDERR "%20s--check-version\n",                ' '                                 if ( $check_version               );
-    printf STDERR "%20s--check-wide-characters\n",        ' '                                 if ( $check_wide_characters       );
-    printf STDERR "%20s--coloured-sketchline\n",          ' '                                 if ( $coloured_sketchline         );
-    printf STDERR "%20s--expect-network-long\n",          ' '                                 if ( $expect_network_long         );
-    printf STDERR "%20s--expect-network-short\n",         ' '                                 if ( $expect_network_short        );
-    printf STDERR "%20s--positive-notes\n",               ' '                                 if ( $positive_notes              );
-    printf STDERR "%20s--show-options\n",                 ' '                                 if ( $show_options                );
-    printf STDERR "%20s--strict-network\n",               ' '                                 if ( $strict_network              );
-    printf STDERR "%20s--strict-operator\n",              ' '                                 if ( $strict_operator             );
-    printf STDERR "%20s--network-long-regex='%s'\n",      ' ', $network_long_regex            if ( $network_long_regex          );
-    printf STDERR "%20s--network-short-regex='%s'\n",     ' ', $network_short_regex           if ( $network_short_regex         );
-    printf STDERR "%20s--operator-regex='%s'\n",          ' ', $operator_regex                if ( $operator_regex              );
-    printf STDERR "%20s--expect-network-long-for='%s'\n", ' ', $expect_network_long_for       if ( $expect_network_long_for     );
-    printf STDERR "%20s--expect-network-short-for='%s'\n",' ', $expect_network_short_for      if ( $expect_network_short_for    );
-    printf STDERR "%20s--max-error='%s'\n",               ' ', $max_error                     if ( $max_error                   );
-    printf STDERR "%20s--relaxed-begin-end-for='%s'\n",   ' ', $relaxed_begin_end_for         if ( $relaxed_begin_end_for       );
-    printf STDERR "%20s--separator='%s'\n",               ' ', $csv_separator                 if ( $csv_separator               );
-    printf STDERR "%20s--routes-file='%s'\n",             ' ', $routes_file                   if ( $routes_file                 );
-    printf STDERR "%20s--osm-xml-file='%s'\n",            ' ', $osm_xml_file                  if ( $osm_xml_file                );
+    printf STDERR "%20s--wiki\n",                          ' '                                 if ( $print_wiki                  );
+    printf STDERR "%20s--check-access\n",                  ' '                                 if ( $check_access                );
+    printf STDERR "%20s--check-bus-stop\n",                ' '                                 if ( $check_bus_stop              );
+    printf STDERR "%20s--check-name\n",                    ' '                                 if ( $check_name                  );
+    printf STDERR "%20s--check-platform\n",                ' '                                 if ( $check_platform              );
+    printf STDERR "%20s--check-roundabouts\n",             ' '                                 if ( $check_roundabouts           );
+    printf STDERR "%20s--check-sequence\n",                ' '                                 if ( $check_sequence              );
+    printf STDERR "%20s--check-stop-position\n",           ' '                                 if ( $check_stop_position         );
+    printf STDERR "%20s--check-version\n",                 ' '                                 if ( $check_version               );
+    printf STDERR "%20s--check-wide-characters\n",         ' '                                 if ( $check_wide_characters       );
+    printf STDERR "%20s--coloured-sketchline\n",           ' '                                 if ( $coloured_sketchline         );
+    printf STDERR "%20s--expect-network-long\n",           ' '                                 if ( $expect_network_long         );
+    printf STDERR "%20s--expect-network-short\n",          ' '                                 if ( $expect_network_short        );
+    printf STDERR "%20s--positive-notes\n",                ' '                                 if ( $positive_notes              );
+    printf STDERR "%20s--show-options\n",                  ' '                                 if ( $show_options                );
+    printf STDERR "%20s--strict-network\n",                ' '                                 if ( $strict_network              );
+    printf STDERR "%20s--strict-operator\n",               ' '                                 if ( $strict_operator             );
+    printf STDERR "%20s--network-long-regex='%s'\n",       ' ', $network_long_regex            if ( $network_long_regex          );
+    printf STDERR "%20s--network-short-regex='%s'\n",      ' ', $network_short_regex           if ( $network_short_regex         );
+    printf STDERR "%20s--operator-regex='%s'\n",           ' ', $operator_regex                if ( $operator_regex              );
+    printf STDERR "%20s--expect-network-long-for='%s'\n",  ' ', $expect_network_long_for       if ( $expect_network_long_for     );
+    printf STDERR "%20s--expect-network-short-for='%s'\n", ' ', $expect_network_short_for      if ( $expect_network_short_for    );
+    printf STDERR "%20s--multiple-ref-type-entries='%s'\n",' ', $multiple_ref_type_entries     if ( $multiple_ref_type_entries   );
+    printf STDERR "%20s--max-error='%s'\n",                ' ', $max_error                     if ( $max_error                   );
+    printf STDERR "%20s--relaxed-begin-end-for='%s'\n",    ' ', $relaxed_begin_end_for         if ( $relaxed_begin_end_for       );
+    printf STDERR "%20s--separator='%s'\n",                ' ', $csv_separator                 if ( $csv_separator               );
+    printf STDERR "%20s--routes-file='%s'\n",              ' ', $routes_file                   if ( $routes_file                 );
+    printf STDERR "%20s--osm-xml-file='%s'\n",             ' ', $osm_xml_file                  if ( $osm_xml_file                );
 }
 
 
@@ -283,7 +286,6 @@ if ( $routes_file ) {
             
             if ( open(CSV,"< $routes_file") ) {
                 binmode CSV, ":utf8";
-                my $previous_entry = '';
                 
                 while ( <CSV> ) {
                     chomp();                                        # remove NewLine
@@ -301,21 +303,21 @@ if ( $routes_file ) {
                         push( @post_print, $1 );                    # anything after '>' shall be printed after all other stuff
                         next;
                     }
-                    push( @routes_csv, $_ );                         # store as lines of interrest
+                    push( @routes_csv, $_ );                        # store as lines of interrest
                     next    if ( m/^[=#-]/ );                       # ignore headers, text and comment lines here in this analysis
                     
-                    if ( $_ eq $previous_entry )                    # ignore double entries for PT routes (not for text, headers and other stuff)
-                    {
-                        pop( @routes_csv );
-                        next;
-                    }
-
                     #printf STDERR "CSV line = %s\n", $_;
                     if ( m/$csv_separator/ ) {
                         ($ref,$route_type)              = split( $csv_separator );
                         if ( $ref && $route_type ) {
                             $refs_of_interest{$ref}->{$route_type} = 0   unless ( defined($refs_of_interest{$ref}->{$route_type}) );
                             $refs_of_interest{$ref}->{$route_type}++;
+                            if ( $refs_of_interest{$ref}->{$route_type} > 1 ) {
+                                if ( $multiple_ref_type_entries eq 'ignore' ) {
+                                    pop( @routes_csv );                             # ignore this entry, i.e. remove 2nd, 3rd, ... entry from list
+                                    $refs_of_interest{$ref}->{$route_type}--;
+                                } 
+                            }
                             # printf STDERR "refs_of_interest{%s}->{%s}\n", $ref, $route_type      if ( $verbose );
                         }
                     }
@@ -942,7 +944,7 @@ if ( $routes_file ) {
                                     @{$relation_ptr->{'__issues__'}} = ();
                                     @{$relation_ptr->{'__notes__'}}  = ();
 
-                                    if ( $refs_of_interest{$ExpectedRef}->{$ExpectedRouteType} > 1 )
+                                    if ( $refs_of_interest{$ExpectedRef}->{$ExpectedRouteType} > 1 && $multiple_ref_type_entries ne 'allow')
                                     {
                                         #
                                         # for this 'ref' and 'route_type' we have more than one entry in the CSV file
