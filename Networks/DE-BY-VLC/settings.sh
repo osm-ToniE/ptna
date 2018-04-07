@@ -14,7 +14,7 @@ WIKI_ANALYSIS_PAGE="Cham/Transportation/Analyse"
 WIKI_ROUTES_PAGE="Cham/Transportation/Analyse/DE-BY-VLC-Linien"
 WIKI_FILE_DIFF="196"
 
-ANALYSIS_OPTIONS="-v --wiki --max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-version --check-wide-characters --positive-notes --coloured-sketchline"
+ANALYSIS_OPTIONS="-v --wiki --max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-version --check-wide-characters --multiple-ref-type-entries=allow --positive-notes --coloured-sketchline"
 
 # --check-bus-stop 
 # --expect-network-long
