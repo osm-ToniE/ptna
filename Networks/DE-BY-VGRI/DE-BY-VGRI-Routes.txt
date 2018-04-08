@@ -1,0 +1,119 @@
+<pre>
+#
+# Formatierung:
+#
+# Überschriften beginnen mit '=', '==', '===', '====', ... am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an
+#
+# Einfacher Text beginnt mit '-' am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an, Zeilen hier werden im Wiki mit <br /> abgeschlossen (neue Zeile).
+# Einfacher Text darf nur direkt hinter einer Überschrift stehen.
+#
+# Links: [[...|...]] sind interne Verweise im Wiki
+#        [... ...] sind externe Verweise
+#
+# Kommentare beginnen mit '#' am Anfang einer Zeile. Kommentare mittendrin werden nicht erkannt.
+#
+# Format der Datei: UNIX (LF), UTF-8
+#
+#
+# Inhalt im CSV-Format
+#
+# ref;type;comment;from;to;operator
+#
+# - ref       == tag 'ref' von route oder route_master
+# - type      == inhalt des tags 'route' bzw. 'route_master'
+# - comment   == kann Kommentar enthalten wie; Ruftaxi, Bus, Expressbus, ...  wird nicht ausgewertet, lediglich ausgegeben
+# - from      == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - to        == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - operator  == wird bei mehreren Linie mit identischem ref und type Differenzierung herangezogen (Der Wert von 'operator' darf ';' enthalten)
+#
+
+
+= Überblick Buslinien Verkehrsgemeinschaft Rottal-Inn (VGRI) allgemein 
+
+- [[Category:Page with status]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:Pfarrkirchen]]
+
+- Verweis auf die Datei mit den [[Pfarrkirchen/Transportation/Analyse/DE-BY-VGRI-Linien|VGRI Linien]] im Wiki
+
+
+== Stadtbusse Pfarrkirchen
+
+Linie 1;bus;;;;
+Linie 2;bus;;;;
+9;bus;(=Käferlinie);;;
+9a;bus;(=Hasenlinie);;;
+
+
+== Regionalbusse Landkreis Rottal-Inn
+
+== RBO-Linien
+
+6205;bus;;;;
+6208;bus;;;;
+6209;bus;;;;
+
+6211;bus;;;;
+6213;bus;;;;
+6214;bus;;;;
+6215;bus;;;;
+6216;bus;;;;
+6217;bus;;;;
+6218;bus;;;;
+6219;bus;;;;
+
+6223;bus;;;;
+6229;bus;;;;
+
+7507;bus;;;;
+
+7513;bus;;;;
+
+7531;bus;;;;
+7532;bus;;;;
+7533;bus;;;;
+7534;bus;;;;
+7535;bus;;;;
+7536;Bus;;;;
+7537;bus;;;;
+7538;bus;;;;
+7539;bus;;;;
+
+7540;bus;;;;
+7541;bus;;;;
+7542;bus;;;;
+7543;bus;;;;
+7544;bus;;;;
+
+7562;bus;;;;
+
+7700;bus;;;;
+
+
+== Rufbusse
+
+8241;bus;;;;
+8242;bus;;;;
+8243;bus;;;;
+8244;bus;;;;
+
+
+== Buslinien außerhalb des VGRI
+
+7015;bus;(=autonomer Bus Bad Birnbach);;;
+7522;bus;(=Bäderbus Bad Birnbach);;;
+
+
+
+== Buslinien mit Mitgliedschaft zu anderen Busliniennetzwerken (DGF;VLMÜ; ect.)
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Dingolfinger Regionalbusnetz (DGF) (DGF xx)
+
+6218;bus;(=DGF 01);;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Mühldorf (VLMÜ)
+
+6209;bus;;;;
+
+
+</pre>

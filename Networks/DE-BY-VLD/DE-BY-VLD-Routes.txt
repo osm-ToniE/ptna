@@ -1,0 +1,174 @@
+<pre>
+#
+# Formatierung:
+#
+# Überschriften beginnen mit '=', '==', '===', '====', ... am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an
+#
+# Einfacher Text beginnt mit '-' am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an, Zeilen hier werden im Wiki mit <br /> abgeschlossen (neue Zeile).
+# Einfacher Text darf nur direkt hinter einer Überschrift stehen.
+#
+# Links: [[...|...]] sind interne Verweise im Wiki
+#        [... ...] sind externe Verweise
+#
+# Kommentare beginnen mit '#' am Anfang einer Zeile. Kommentare mittendrin werden nicht erkannt.
+#
+# Format der Datei: UNIX (LF), UTF-8
+#
+#
+# Inhalt im CSV-Format
+#
+# ref;type;comment;from;to;operator
+#
+# - ref       == tag 'ref' von route oder route_master
+# - type      == inhalt des tags 'route' bzw. 'route_master'
+# - comment   == kann Kommentar enthalten wie; Ruftaxi, Bus, Expressbus, ...  wird nicht ausgewertet, lediglich ausgegeben
+# - from      == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - to        == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - operator  == wird bei mehreren Linie mit identischem ref und type Differenzierung herangezogen (Der Wert von 'operator' darf ';' enthalten)
+#
+
+
+= Überblick Buslinien Verkehrsgemeinschaft Landkreis Deggendorf (VLD) allgemein 
+
+- [[Category:Page with status]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:Deggendorf]]
+
+- Verweis auf die Datei mit den [[Deggendorf/Transportation/Analyse/DE-BY-VLD-Linien|VLD Linien]] im Wiki
+
+
+== Stadtbusse Deggendorf
+
+Linie 1;bus;;;;
+Linie 2;bus;;;;
+Linie 3;bus;;;;
+Linie 4;bus;;;;
+
+
+== Regionalbusse Landkreis Deggendorf
+
+
+== nicht RBO Linien (4xxx)
+
+4022;bus;;;
+4023;bus;;;
+4024;bus;;;
+
+4112;bus;;;
+4113;bus;;;
+4116;bus;;;
+4117;bus;;;
+4120;bus;;;
+4122;bus;;;
+4126;bus;;;
+4127;bus;;;
+4129;bus;;;
+4136;bus;;;
+4142;bus;;;
+4154;bus;;;
+4156;bus;;;
+4160;bus;;;
+4161;bus;;;
+4162;bus;;;
+4163;bus;;;
+4164;bus;;;
+
+
+== RBO-Linien (6xxx, 7xxx)
+
+6139;bus;;;;
+6142;bus;;;;
+6143;bus;;;;
+6144;bus;;;;
+6145;bus;;;;
+6146;bus;;;;
+6147;bus;;;;
+6149;bus;;;;
+6150;bus;;;;
+6151;bus;;;;
+6152;bus;;;;
+6153;bus;;;;
+6154;bus;;;;
+6155;bus;;;;
+6156;bus;;;;
+6157;bus;;;;
+6159;bus;;;;
+
+6235;bus;;;;
+6236;bus;;;;
+6237;bus;;;;
+
+7591;bus;;;;
+7592;bus;;;;
+7593;bus;;;;
+
+7531;bus;;;;
+7532;bus;;;;
+7533;bus;;;;
+7534;bus;;;;
+7535;bus;;;;
+7536;Bus;;;;
+7537;bus;;;;
+7538;bus;;;;
+7539;bus;;;;
+
+7630;bus;;;;
+7631;bus;;;;
+7632;bus;;;;
+7633;bus;;;;
+7634;bus;;;;
+7635;bus;;;;
+7636;bus;;;;
+7637;bus;;;;
+7638;bus;;;;
+7639;bus;;;;
+7640;bus;;;;
+
+
+== RBO-Rufbusse (82xx)
+
+8221;bus;;;;
+8222;bus;;;;
+8223;bus;;;;
+8224;bus;;;;
+8225,bus;;;;
+8226;bus;;;;
+8227;bus;;;;
+8228;bus;;;;
+8229;bus;;;;
+8230;bus;;;;
+8231;bus;;;;
+
+
+== Buslinien mit Mitgliedschaft zu anderen Busliniennetzwerken (DGF;VSL;VLP;Arberland-Verkehr(Lkr. Regen) ect.)
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Dingolfinger Regionalbusnetz (DGF) (DGF xx)
+
+6236;bus;(=DGF 02);;;
+6235;bus;(=DGF 03);;;
+6150;bus;(=DGF 04);;;
+6152;bus;(=DGF 05);;;
+6151;bus;(=DGF 06);;;
+6237;bus;(=DGF 08 =VSL 51);;;
+6154;bus;(=DGF 09);;;
+7630;bus;(=DGF 10);;;
+6153;bus;(=DGF 41);;;
+7631;bus;(=DGF 43);;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Straubinger Land (VSL)
+
+6237;bus;(=VSL 51 =DGF 08);;;
+7592;bus;(=VSL 48);;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Passau (VLP)
+
+6147;bus;;;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Aberlandverkehr (Landkreis Regen)
+
+6139;bus;;;;
+
+
+</pre>

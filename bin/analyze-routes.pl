@@ -131,8 +131,8 @@ if ( $verbose ) {
     printf STDERR "%20s--max-error='%s'\n",                ' ', $max_error                     if ( $max_error                   );
     printf STDERR "%20s--relaxed-begin-end-for='%s'\n",    ' ', $relaxed_begin_end_for         if ( $relaxed_begin_end_for       );
     printf STDERR "%20s--separator='%s'\n",                ' ', $csv_separator                 if ( $csv_separator               );
-    printf STDERR "%20s--routes-file='%s'\n",              ' ', $routes_file                   if ( $routes_file                 );
-    printf STDERR "%20s--osm-xml-file='%s'\n",             ' ', $osm_xml_file                  if ( $osm_xml_file                );
+    printf STDERR "%20s--routes-file='%s'\n",              ' ', decode('utf8', $routes_file )  if ( $routes_file                 );
+    printf STDERR "%20s--osm-xml-file='%s'\n",             ' ', decode('utf8', $osm_xml_file ) if ( $osm_xml_file                );
 }
 
 
@@ -250,10 +250,10 @@ my %colour_table            = ( 'black'         => '#000000',
 #############################################################################################
 
 if ( $osm_xml_file ) {
-    printf STDERR "%s Reading %s\n", get_time(), $osm_xml_file     if ( $verbose );
+    printf STDERR "%s Reading %s\n", get_time(), decode('utf8', $osm_xml_file )    if ( $verbose );
     $routes_xml  = XMLin( $osm_xml_file,  ForceArray => 1 );
-    printf STDERR "%s %s read\n", get_time(), $osm_xml_file        if ( $verbose );
-    # print Dumper( $routes_xml )        ; #                               if ( $debug   );
+    printf STDERR "%s %s read\n", get_time(), decode('utf8', $osm_xml_file )       if ( $verbose );
+    # print Dumper( $routes_xml )        ; #                                         if ( $debug   );
 
     $xml_has_relations  = 1  if ( $routes_xml->{'relation'} );   
     $xml_has_ways       = 1  if ( $routes_xml->{'way'}      );   
@@ -261,7 +261,7 @@ if ( $osm_xml_file ) {
 }
 
 if ( $xml_has_relations == 0 ) {
-    printf STDERR "No relations found in XML file %s - exiting\n", $osm_xml_file;
+    printf STDERR "No relations found in XML file %s - exiting\n", decode('utf8', $osm_xml_file );
     
     exit 1;
 }
@@ -278,7 +278,7 @@ my @post_print  = ();
 
 if ( $routes_file ) {
     
-    printf STDERR "%s Reading %s\n", get_time(), $routes_file                   if ( $verbose );
+    printf STDERR "%s Reading %s\n", get_time(), decode('utf8', $routes_file )                  if ( $verbose );
     
     if ( -f $routes_file ) {
         
@@ -328,19 +328,19 @@ if ( $routes_file ) {
                              
                 }
                 close( CSV );
-                printf STDERR "%s %s read\n", get_time(), $routes_file                           if ( $verbose );
+                printf STDERR "%s %s read\n", get_time(), decode('utf8', $routes_file )                          if ( $verbose );
                 #print Dumper( @routes_csv )                                                         if ( $debug   );
             }
             else {
-                printf STDERR "%s Could not open %s: %s\n", get_time(), $routes_file, $!;
+                printf STDERR "%s Could not open %s: %s\n", get_time(), decode('utf8', $routes_file ), $!;
             }
         }
         else {
-            printf STDERR "%s No read access for file %s\n", get_time(), $routes_file;
+            printf STDERR "%s No read access for file %s\n", get_time(), decode('utf8', $routes_file );
         }
     }
     else {
-           printf STDERR "%s %s is not a file\n", get_time(), $routes_file;
+           printf STDERR "%s %s is not a file\n", get_time(), decode('utf8', $routes_file );
     }
 }
 
