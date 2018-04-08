@@ -40,7 +40,7 @@
 4;tram;;Oberhausen Nord P+R;Hauptbahnhof;
 6;tram;;Hauptbahnhof;Friedberg West P+R;
 === Fußballlinie
-8;tram;;Königsplatz;Fußball-Arena;
+8;tram;;Hauptbahnhof;Fußball-Arena;
 == Bus
 === Stadtbus
 21;bus;;Bärenkeller Süd;Bärenwirt/DRvS;
