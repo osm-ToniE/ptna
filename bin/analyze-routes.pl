@@ -683,7 +683,7 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
             $number_of_suspicious_relations++;
         }
         else {
-            printf STDERR "%s Susicious: unhandled type '%s' for relation id %s\n", get_time(), $type, $relation_id;
+            printf STDERR "%s Suspicious: unhandled type '%s' for relation id %s\n", get_time(), $type, $relation_id;
             $suspicious_relations{$relation_id} = 1;
             $number_of_suspicious_relations++;
         }
