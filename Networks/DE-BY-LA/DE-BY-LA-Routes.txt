@@ -24,7 +24,7 @@
 # - comment   == kann Kommentar enthalten wie; Ruftaxi, Bus, Expressbus, ...  wird nicht ausgewertet, lediglich ausgegeben
 # - from      == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
 # - to        == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
-# - operator  == wird bei mehreren Linie mit identischem ref und type Differenzierung herangezogen (Der Wert von 'operator' darf ';' enthalten)
+# - operator  == wird bei mehreren Linie mit identischem ref und type zur Differenzierung herangezogen (Der Wert von 'operator' darf ';' enthalten)
 #
 
 
@@ -35,41 +35,61 @@
 - Verweis auf die Datei mit den [[Landshut/Transportation/Analyse/DE-BY-LA-Linien|LA Linien]] im Wiki.
 
 
-== Landshut Stadt
+== Landshut Stadt (Stadtwerke Landshut)
 
-1;bus;;;;
-2;bus;;;;
-3;bus;;;;
-4;bus;;;;
-5;bus;;;;
-6;bus;;;;
-7;bus;;;;
-7A;bus;;;;
-8;bus;;;;
-9;bus;;;;
-10;bus;;;;
-11;bus;;;;
-12;bus;;;;
-14;bus;;;;
-101;bus;;;;
-102;bus;;;;
-103;bus;;;;
-104;bus;;;;
-105;bus;;;;
-106;bus;;;;
-107;bus;;;;
-108;bus;;;;
-109;bus;;;;
-110;bus;;;;
-X2;bus;;;;
-X3;bus;;;;
-X6;bus;;;;
-X10;bus;;;;
-X33;bus;;;;
+=== Expresslinien
+
+X2;bus;;;;Stadtwerke Landshut
+X3;bus;;;;Stadtwerke Landshut
+X6;bus;;;;Stadtwerke Landshut
+X10;bus;;;;Stadtwerke Landshut
+X33;bus;;;;Stadtwerke Landshut
+
+=== Airportlinie
+
+317;bus;Landshut Altstadt;München Airport Center, Untergeschoß, Haltestelle Nr. 6;Stadtwerke Landshut
+
+=== Stadtlinien
+
+1;bus;;;;Stadtwerke Landshut
+2;bus;;;;Stadtwerke Landshut
+3;bus;;;;Stadtwerke Landshut
+4;bus;;;;Stadtwerke Landshut
+5;bus;;;;Stadtwerke Landshut
+6;bus;;;;Stadtwerke Landshut
+7;bus;;;;Stadtwerke Landshut
+7A;bus;;;;Stadtwerke Landshut
+8;bus;;;;Stadtwerke Landshut
+9;bus;;;;Stadtwerke Landshut
+10;bus;;;;Stadtwerke Landshut
+11;bus;;;;Stadtwerke Landshut
+12;bus;;;;Stadtwerke Landshut
+14;bus;;;;Stadtwerke Landshut
+
+=== Abendlinien
+
+101;bus;;;;Stadtwerke Landshut
+102;bus;;;;Stadtwerke Landshut
+103;bus;;;;Stadtwerke Landshut
+104;bus;;;;Stadtwerke Landshut
+105;bus;;;;Stadtwerke Landshut
+106;bus;;;;Stadtwerke Landshut
+107;bus;;;;Stadtwerke Landshut
+108;bus;;;;Stadtwerke Landshut
+109;bus;;;;Stadtwerke Landshut
+110;bus;;;;Stadtwerke Landshut
+
+=== Studibus
+
+- tbd
+
+=== Schüler- und Berufslinien
+
+- tbd
 
 
 
-== Landshut Region
+== Landshut Region (Landshuter Regionalbusnetz)
 
 === 01x-Linien
 
