@@ -212,74 +212,74 @@
 
 === VLK-Linien (VLK = Verkehrsgemeinschaft Landkreis Kelheim)
 
-6008;bus;(=VLK 7);;;
-6009;bus;(=VLK 6);;;
-6012;bus;(=VLK 17);;;
-6016;bus;(=VLK 8);;;
-6018;bus;(=VLK 10);;;
+6008/07;bus;(=VLK 7);;;
+6009/06;bus;(=VLK 6);;;
+6012/17;bus;(=VLK 17);;;
+6016/08;bus;(=VLK 8);;;
+6018/10;bus;(=VLK 10);;;
 6020;bus;(=VLK ;;;
-6022;bus;(=VLK 1);;;
-6023;bus;(=VLK 12);;;
-6028;bus;(=VLK 28);;;
-6034;bus;(=VLK 34);;;
-6035;bus;(=VLK 3);;;
-6036;bus;(=VLK 2);;;
-6037;bus;(=VLK 37);;;
-6038;bus;(=VLK 4);;;
-6039;bus;(=VLK 39);;;
-6040;bus;(=VLK 38);;;
-6041;bus;(=VLK 54);;;
-6042;bus;(=VLK 42);;;
-6043;bus;(=VLK 43);;;
-6044;bus;(=VLK 44);;;
-6045;bus;(=VLK 45);;;
-6046;bus;(=VLK 46);;;
-6047;bus;(=VLK 47);;;
-6048;bus;(=VLK 48);;;
-6049;bus;(=VLK 49);;;
-6051;bus;(=VLK 56 =LA 031);;;
-6052;bus;(=VLK 5);;;
-6053;bus;(=VLK 53);;;
-6055;bus;(=VLK 55);;;
-6057;bus;(=VLK 10a);;;
-6058;bus;(=VLK 58);;;
-6059;bus;(=VLK 59);;;
+6022/01;bus;(=VLK 1);;;
+6023/12;bus;(=VLK 12);;;
+6028/28;bus;(=VLK 28);;;
+6034/34;bus;(=VLK 34);;;
+6035/03;bus;(=VLK 3);;;
+6036/02;bus;(=VLK 2);;;
+6037/37;bus;(=VLK 37);;;
+6038/04;bus;(=VLK 4);;;
+6039/39;bus;(=VLK 39);;;
+6040/38;bus;(=VLK 38);;;
+6041/54;bus;(=VLK 54);;;
+6042/42;bus;(=VLK 42);;;
+6043/43;bus;(=VLK 43);;;
+6044/44;bus;(=VLK 44);;;
+6045/45;bus;(=VLK 45);;;
+6046/46;bus;(=VLK 46);;;
+6047/47;bus;(=VLK 47);;;
+6048/48;bus;(=VLK 48);;;
+6049/49;bus;(=VLK 49);;;
+6051/56/031;bus;(=VLK 56 =LA 031);;;
+6052/05;bus;(=VLK 5);;;
+6053/53;bus;(=VLK 53);;;
+6055/55;bus;(=VLK 55);;;
+6057/10a;bus;(=VLK 10a);;;
+6058/58;bus;(=VLK 58);;;
+6059/59;bus;(=VLK 59);;;
 
 
 === VSL-Linien
 
-6024;bus;(=RVV 33(RBO 5033)teilweise/VSL 25);;;
+6024/25;bus;(=RVV 33(RBO 5033)teilweise/VSL 25);;;
 6060;bus;(=VSL 03);;;
 6090;bus;(=VSL 11= VLC 619);;;
 6091;bus;(=VSL 10);;;
 6092;bus;(=VSL 39);;;
 6095;bus;(=VSL 04);;;
-6096;bus;(=VSL 15);;;
+6096/15;bus;(=VSL 15);;;
 6097;bus;(=VSL 21);;;
 
 
 === VLC-Linien
 
-6065;bus;(=VLC 618);;;
+6065/618;bus;(=VLC 618);;;
 6066;bus;(=VLC 615);;;
 6067;bus;(=VLC 610);;;
 6068;bus;(=VLC 611);;;
 6069;bus;(=VLC 420);;;
 6070;bus;(=VLC 620);;;
 6071;bus;(=VLC 650);;;
-6072;bus;(=VLC 810= RVV 5 teilweise);;;
+6072/810;bus;(=VLC 810= RVV 5 teilweise);;;
 6073;bus;(=VLC 612);;;
-6074;bus;(=VLC 519 =CSAD 000020);;;
+6074/519/000020;bus;(=VLC 519 =CSAD 000020);;;
 6076;bus;(=VLC 490);;;
 6078;bus;(=VLC 410);;;
-6079;bus;(=VLC 450);;;
-6080;bus;(=VLC 590);;;
-6098;bus;(=VLC 710 =VSL 09);;;
+6079/450;bus;(=VLC 450);;;
+6080/590;bus;(=VLC 590);;;
+6098/9/710;bus;(=VLC 710 =VSL 09);;;
 
 
 === VAS-Linie
 
-6014;bus;(=VAS 51);;;
+6014/51;bus;(=VAS 51);;;
 
 
 === Linien Landkreis Schwandorf
@@ -287,7 +287,7 @@
 6013;bus;;;;
 6014;bus;;;;
 6031;bus;;;;
-6032;bus;;;;
+6032 (MH);bus;;;;
 6050;bus;;;;
 
 
@@ -307,7 +307,7 @@
 == 61xx-Linien
 
 
-=== Mitglieder zum Netzwerk Vekehrsgemeinschaft Landkreis Passau (VLP)
+=== Mitglieder zum Netzwerk Verkehrsgemeinschaft Landkreis Passau (VLP)
 
 6101;bus;;;;
 6102;bus;;;;
@@ -394,7 +394,7 @@
 6193;bus;;;;
 6194;bus;;;;
 6195;bus;;;;
-6196;bus;;;;
+6196/690;bus;;;;
 6197;bus;;;;
 6198;bus;;;;
 6199;bus;;;;
@@ -444,23 +444,24 @@
 
 === LA-Linien (LA = Landshuter Regionalbusnetz)
 
-6231;bus;(=LA 407);;;
-6232;bus;(=LA 308 =DGF 11);;;
+6231/407;bus;(=LA 407);;;
+6232/308/11;bus;(=LA 308 =DGF 11);;;
 6233;bus;(=LA 021 =VSL 47);;;
-6234;bus;(=LA 303);;;
-6239;bus;(=LA 409);;;
-6240;bus;(=LA 302 =VLK 11);;;
-6241;bus;(=LA 304);;;
-6242;bus;(=LA 310);;;
+6234/303;bus;(=LA 303);;;
+6239/409;bus;(=LA 409);;;
+6240/11/302;bus;(=LA 302 =VLK 11);;;
+6241/304;bus;(=LA 304);;;
+6242/310/07;bus;(=LA 310);;;
 6243;bus;(=LA 312);;;
-6245;bus;(=LA 036);;;
-6248;bus;(=LA 406);;;
+6245/036;bus;(=LA 036);;;
+6248/406;bus;(=LA 406);;;
+6249/401;bus;;;;
 6249_1;bus;(=LA 401_1);;;
 6249_2;bus;(=LA 401_2);;;
 6249_3;bus;(=LA 401_3);;;
-6262;bus;(=LA 205);;;
-6263;bus;(=LA 305);;;
-6264;bus;(=LA 022 =VSL 46);;;
+6262/205;bus;(=LA 205);;;
+6263/305;bus;(=LA 305);;;
+6264/022/46;bus;(=LA 022 =VSL 46);;;
 
 
 === Linien Verkehrsgemeinschaft Landkreis Mühldorf (VLMÜ)
@@ -658,7 +659,7 @@
 7136;bus;;;;
 7138;bus;;;;
 7142;bus;;;;
-7143;bus;;;;
+7143;bus;CityBus Zwiesel;;;
 7144;bus;;;;
 7145;bus;;;;
 7148;bus;;;;
@@ -715,7 +716,7 @@
 
 === VLK-Linien
 
-7530;bus;(=VLK 13);;;
+7530/13;bus;(=VLK 13);;;
 
 
 === VLP-Linien
@@ -960,6 +961,8 @@ VLC 520;bus;(=CSAD 000115);;;
 435050;bus;(CSAD-Linie);;;
 435060;bus;(CSAD-Linie);;;
 
-
+= [[Ostbayern/Transportation/Analyse-2|Teil 2 der Analyse des RBO]]
+- hier teilen <!-- cut here -->
+= Teil 2 der Analyse des RBO =
 
 </pre>
