@@ -1772,7 +1772,7 @@ sub analyze_relation {
         }
         
         if ( $positive_notes ) {
-            foreach my $special ( 'network:', 'route:', 'ref:' ) {
+            foreach my $special ( 'network:', 'route:', 'ref:', 'ref_' ) {
                 foreach my $tag ( sort(keys(%{$relation_ptr->{'tag'}})) ) {
                     if ( $tag =~ m/^$special/i ) {
                         if ( $relation_ptr->{'tag'}->{$tag} ) {
