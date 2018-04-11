@@ -182,26 +182,26 @@ LA 408;bus;;;;
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Regionalbus Ostbayern (RBO) (=RBO xxxx)
 
-021;bus;(=RBO 6233 =VSL 47);;;
-022;bus;(=RBO 6264 =VSL 46);;;
+6233/021;bus;(=RBO 6233 =VSL 47);;;
+6264/022;bus;(=RBO 6264 =VSL 46);;;
 6051/56/031;bus;(=RBO 6051 =VLK 56);;;
 6245/036;bus;(=RBO 6245);;;
-205;bus;(=RBO 6262);;;
-302;bus;(=RBO 6240 =VLK 11);;;
+6262/205;bus;(=RBO 6262);;;
+6240/302/11;bus;(=RBO 6240 =VLK 11);;;
 6234/303;bus; Landshut - Rottenburg(=RBO 6234);;;
 8240/303R;bus;(=RBO 8240);;;
 6241/304;bus;(=RBO 6241);;;
-305;bus;(=RBO 6263);;;
-306;bus;(=RBO 6247);;;
-308;bus;(=RBO 6232 =DGF 11);;;
-310;bus;(=RBO 6242 =DGF 07);;;
-312;bus;(=RBO 6243);;;
-401_1;bus;(=RBO 6249_1);;;
-401_2;bus;(=RBO 6249_2);;;
-401_3;bus;(=RBO 6249_3);;;
-406;bus;(=RBO 6248);;;
+6263/305;bus;(=RBO 6263);;;
+6247/306;bus;(=RBO 6247);;;
+6232/308/11;bus;(=RBO 6232 =DGF 11);;;
+6242/310/07;bus;(=RBO 6242 =DGF 07);;;
+6243/312;bus;(=RBO 6243);;;
+6249_1/401_1;bus;(=RBO 6249_1);;;
+6249_2/401_2;bus;(=RBO 6249_2);;;
+6249_3/401_3;bus;(=RBO 6249_3);;;
+6248/406;bus;(=RBO 6248);;;
 6231/407;bus;(=RBO 6231);;;
-409;bus;(=RBO 6239);;;
+6239/409;bus;(=RBO 6239);;;
 
 
 
