@@ -118,17 +118,17 @@
 == 7x-Linien
 
 6008/07;bus;;;;
-VLK 70;bus;;;;
-VLK 71;bus;;;;
+70;bus;;;;
+71;bus;;;;
 
 
 == 8x-Linien
 
 6016/08;bus;;;;
-VLK 80;bus;;;;
-VLK 81;bus;;;;
-VLK 84;bus;;;;
-VLK 87;bus;;;;
+80;bus;;;;
+81;bus;;;;
+84;bus;;;;
+87;bus;;;;
 
 
 
