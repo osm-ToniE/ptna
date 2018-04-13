@@ -81,11 +81,32 @@ X33;bus;;;;Stadtwerke Landshut
 
 === Studibus
 
-- tbd
+(ist eine Zusammenstellung von Linien die von und zur Hochschule Landshut)
+5xx, x33, 3, 6, 103, 106 der Stadtwerke Landshut
 
-=== Schüler- und Berufslinien
 
-- tbd
+=== Schüler-, Studenten- und Berufs''Linie'' (5xx-Linien)
+501;bus;Auloh – Realschule – Hbf;;;Stadtwerke Landshut
+503;bus;Hbf – Am Alten Viehmarkt – Am Lurzenhof;;;Stadtwerke Landshut
+504;bus;Hascherkeller – Hbf – Altstadt – Am Lurzenhof;;;Stadtwerke Landshut
+506;bus;Kumhausen – Realschule – Am Lurzenhof;;;Stadtwerke Landshut
+514;bus;Wolfgangsiedlung – Hbf – Altstadt – Am Lurzenhof;;;Stadtwerke Landshut
+518;bus;Frauenberg – Auloh – Hbf – HLG – Wirtschaftsschule;;;Stadtwerke Landshut
+519;bus;Altdorf/Kleinfeld – Hbf – Altstadt – Am Lurzenhof;;;Stadtwerke Landshut
+523;bus;Hb – Altstadt – Am Lurzenhof;;;Stadtwerke Landshut
+526;bus;Lainerbuckel – Altstadt – Am Lurzenhof;;;Stadtwerke Landshut
+530;bus;Kupfereck – Hofberg – Altstadt – Am Lurzenhof;;;Stadtwerke Landshut
+537;bus;Hbf – Kennedy-Platz – Podewilsstraße – Am Lurzenhof;;;Stadtwerke Landshut
+538;bus;Hbf – Altstadt – Am Lurzenhof;;;Stadtwerke Landshut
+541;bus;Hbf – Altstadt – Am Lurzenhof;;;Stadtwerke Landshut
+542;bus;Hbf – Altstadt – Am Lurzenhof;;;Stadtwerke Landshut
+543;bus;Hbf – Altstadt – Am Lurzenhof;;;Stadtwerke Landshut
+552;bus;Auloh – Altstadt – Hbf – Eugenbach;;;Stadtwerke Landshut
+553;bus;HLG – Hbf – Altstadt – Auloh – Frauenberg;;;Stadtwerke Landshut
+555;bus;Realschule Ergolding – Hbf – Auloh;;;Stadtwerke Landshut
+560;bus;HLG – Hbf – Altstadt – Auloh – Frauenberg;;;Stadtwerke Landshut
+578;bus;Am Lurzenhof – Altstadt – Hbf;;;Stadtwerke Landshut
+580;bus;HLG – Ländtorplatz – Messepark (Auloh/Frauenberg);;;Stadtwerke Landshut
 
 
 
@@ -183,11 +204,11 @@ LA 408;bus;;;;
 == Buslinien mit Mitgliedschaft zum Netzwerk Regionalbus Ostbayern (RBO) (=RBO xxxx)
 
 6233/021;bus;(=RBO 6233 =VSL 47);;;
-6264/022;bus;(=RBO 6264 =VSL 46);;;
+6264/022/46;bus;(=RBO 6264 =LA 022 =VSL 46);;;
 6051/56/031;bus;(=RBO 6051 =VLK 56);;;
 6245/036;bus;(=RBO 6245);;;
 6262/205;bus;(=RBO 6262);;;
-6240/302/11;bus;(=RBO 6240 =VLK 11);;;
+6240/11/302;bus;(=RBO 6240 =VLK 11);;;
 6234/303;bus; Landshut - Rottenburg(=RBO 6234);;;
 8240/303R;bus;(=RBO 8240);;;
 6241/304;bus;(=RBO 6241);;;
@@ -196,9 +217,7 @@ LA 408;bus;;;;
 6232/308/11;bus;(=RBO 6232 =DGF 11);;;
 6242/310/07;bus;(=RBO 6242 =DGF 07);;;
 6243/312;bus;(=RBO 6243);;;
-6249_1/401_1;bus;(=RBO 6249_1);;;
-6249_2/401_2;bus;(=RBO 6249_2);;;
-6249_3/401_3;bus;(=RBO 6249_3);;;
+6249/401;bus;(=RBO 6249_1, 6249_2, 6249_3 = Linie 1, 2, 3);;;
 6248/406;bus;(=RBO 6248);;;
 6231/407;bus;(=RBO 6231);;;
 6239/409;bus;(=RBO 6239);;;
@@ -247,8 +266,8 @@ LA 028/29;bus;(=DGF 29);;;
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Regionalbus Oberbayern (RVO) (= RVO xxxx)
 
-024;bus;(=RVO 9403);;;
-025;bus;(=RVO 9407);;;
+9403/024;bus;(=RVO 9403 =LA024);;;
+9407/025;bus;(=RVO 9407 =LA025);;;
 
 
 = Bahnlinien (Deutsche Bahn (DB))
