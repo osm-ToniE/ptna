@@ -29,6 +29,8 @@ ROUTES_FILE="$PREFIX-Routes.txt"
 OSM_XML_FILE="$PREFIX-Data.xml"
 WIKI_FILE="$PREFIX-Analysis.wiki"
 
+MAX_SIZE=1999000
+
 #
 # 
 #
@@ -144,7 +146,7 @@ then
         then
             filesize=$(ls -l $WIKI_FILE 2> /dev/null | awk '{print $5}')
             
-            if [ "$filesize" -lt 1900000 ]
+            if [ "$filesize" -lt $MAX_SIZE ]
             then
                 echo $(date "+%Y-%m-%d %H:%M:%S") "Reading old Wiki analysis page '$WIKI_ANALYSIS_PAGE'"
                 wiki-page.pl --pull --page=$WIKI_ANALYSIS_PAGE --file=$WIKI_FILE.old
