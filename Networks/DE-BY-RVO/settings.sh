@@ -10,11 +10,11 @@ OVERPASS_QUERY="http://overpass-api.de/api/interpreter?data=area[boundary=admini
 NETWORK_LONG="Regionalverkehr Oberbayern"
 NETWORK_SHORT="RVO"
 
-WIKI_ANALYSIS_PAGE="Oberbayern/Transportation/Analyse"
+ANALYSIS_PAGE="Oberbayern/Transportation/Analyse"
 WIKI_ROUTES_PAGE="Oberbayern/Transportation/RVO-Linien-gesamt"
-WIKI_FILE_DIFF="196"
+FILE_DIFF="196"
 
-ANALYSIS_OPTIONS="-v --wiki --check-access --check-name --check-stop-position --check-sequence --check-version --check-wide-characters --multiple-ref-type-entries=analyze --positive-notes --coloured-sketchline"
+ANALYSIS_OPTIONS="--check-access --check-name --check-stop-position --check-sequence --check-version --check-wide-characters --multiple-ref-type-entries=analyze --positive-notes --coloured-sketchline"
 
 # --max-error=
 # --check-bus-stop 

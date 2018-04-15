@@ -10,11 +10,11 @@ OVERPASS_QUERY="http://overpass-api.de/api/interpreter?data=area[boundary=admini
 NETWORK_LONG="Münchner Verkehrs- und Tarifverbund|Münchner Linien|Bayerische Oberlandbahn|Meridian|Grünwald|Gauting|Oberbiberg|Freising|Glonn"
 NETWORK_SHORT="MVV|BOB"
 
-WIKI_ANALYSIS_PAGE="München/Transportation/Analyse"
+ANALYSIS_PAGE="München/Transportation/Analyse"
 WIKI_ROUTES_PAGE="München/Transportation/MVV-Linien-gesamt"
-WIKI_FILE_DIFF="196"
+FILE_DIFF="196"
 
-ANALYSIS_OPTIONS="-v --wiki --check-access --check-name --check-stop-position --check-sequence --check-version --check-wide-characters --multiple-ref-type-entries=analyze --coloured-sketchline --expect-network-long"
+ANALYSIS_OPTIONS="--check-access --check-name --check-stop-position --check-sequence --check-version --check-wide-characters --multiple-ref-type-entries=analyze --coloured-sketchline --expect-network-long"
 
 # --max-error=
 # --check-bus-stop 

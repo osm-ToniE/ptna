@@ -10,11 +10,11 @@ OVERPASS_QUERY="http://overpass-api.de/api/interpreter?data=area[boundary=admini
 NETWORK_LONG="Stadtwerke Landshut|Landshuter Regionalbusnetz"
 NETWORK_SHORT="LA"
 
-WIKI_ANALYSIS_PAGE="Landshut/Transportation/Analyse"
+ANALYSIS_PAGE="Landshut/Transportation/Analyse"
 WIKI_ROUTES_PAGE="Landshut/Transportation/Analyse/DE-BY-LA-Linien"
-WIKI_FILE_DIFF="196"
+FILE_DIFF="196"
 
-ANALYSIS_OPTIONS="-v --wiki --check-access --check-name --check-stop-position --check-sequence --check-version --check-wide-characters --multiple-ref-type-entries=allow --positive-notes --coloured-sketchline"
+ANALYSIS_OPTIONS="--check-access --check-name --check-stop-position --check-sequence --check-version --check-wide-characters --multiple-ref-type-entries=allow --positive-notes --coloured-sketchline"
 
 # --max-error=
 # --check-bus-stop 

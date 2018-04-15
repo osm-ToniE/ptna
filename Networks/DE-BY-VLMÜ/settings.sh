@@ -10,11 +10,11 @@ OVERPASS_QUERY="http://overpass-api.de/api/interpreter?data=area[boundary=admini
 NETWORK_LONG="Verkehrsgemeinschaft Landkreis Mühldorf"
 NETWORK_SHORT="VLMÜ"
 
-WIKI_ANALYSIS_PAGE="Mühldorf/Transportation/Analyse"
+ANALYSIS_PAGE="Mühldorf/Transportation/Analyse"
 WIKI_ROUTES_PAGE="Mühldorf/Transportation/Analyse/DE-BY-VLMÜ-Linien"
-WIKI_FILE_DIFF="196"
+FILE_DIFF="196"
 
-ANALYSIS_OPTIONS="-v --wiki --max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-version --check-wide-characters --multiple-ref-type-entries=allow --positive-notes --coloured-sketchline"
+ANALYSIS_OPTIONS="--max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-version --check-wide-characters --multiple-ref-type-entries=allow --positive-notes --coloured-sketchline"
 
 # --check-bus-stop 
 # --expect-network-long

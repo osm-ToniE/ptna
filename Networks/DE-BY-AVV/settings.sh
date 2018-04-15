@@ -10,11 +10,11 @@ OVERPASS_QUERY="http://overpass-api.de/api/interpreter?data=rel(poly:'48.6177045
 NETWORK_LONG="Augsburger Verkehrs- und Tarifverbund"
 NETWORK_SHORT="AVV"
 
-WIKI_ANALYSIS_PAGE="Augsburg/Transportation/Analyse"
+ANALYSIS_PAGE="Augsburg/Transportation/Analyse"
 WIKI_ROUTES_PAGE="Augsburg/Transportation/AVV-Linien-gesamt"
-WIKI_FILE_DIFF="100"
+FILE_DIFF="100"
 
-ANALYSIS_OPTIONS="-v --wiki --check-access --check-name --check-stop-position --check-sequence --check-version --check-wide-characters --multiple-ref-type-entries=analyze --positive-notes --coloured-sketchline"
+ANALYSIS_OPTIONS="--check-access --check-name --check-stop-position --check-sequence --check-version --check-wide-characters --multiple-ref-type-entries=analyze --positive-notes --coloured-sketchline"
 
 # --max-error=
 # --check-bus-stop 
