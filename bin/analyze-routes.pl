@@ -3686,7 +3686,7 @@ sub printHintSuspiciousRelations {
         print  "            <li>solche '''Sammlungen sind Fehler''', da Relationen keinen Sammlungen darstellen sollen: <a href=\"https://wiki.openstreetmap.org/wiki/DE:Relationen/Relationen_sind_keine_Kategorien\">Relationen sind keine Kategorien</a></li>\n";
         print  "        </ul>\n";
         print  "    </li>\n";
-        print  "<ul>\n";
+        print  "</ul>\n";
         print  "\n";
     }
 }
@@ -3699,9 +3699,9 @@ sub printHintUnusedNetworks {
         #
         # WIKI code
         #
-        print  "Dieser Abschnitt listet die 'network'-Werte auf, die nicht berücksichtigt wurden.\n";
-        print  "Darunter können auch Tippfehler in ansonsten zu berücksichtigenden Werten sein.\n";
-        print  "\n";
+        print  "Dieser Abschnitt listet die 'network'-Werte auf, die nicht berücksichtigt wurden.<br />\n";
+        print  "Darunter können auch Tippfehler in ansonsten zu berücksichtigenden Werten sein.<br />\n";
+        print  "<br />\n";
     }
     else {
         #
@@ -3784,7 +3784,7 @@ sub printHeader {
                     #
                     # WIKI code
                     #
-                    printf "%s %s %s\n", $level, $header, $level;
+                    printf "%s %s %s\n", $level, $header, $levelg;
                 }
                 else {
                     #
