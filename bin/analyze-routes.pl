@@ -3483,12 +3483,22 @@ my @columns                     = ();
 my @table_columns               = ();
 my $max_templates               = 0;            # do not print more than xxx wiki-templates, set later on
 my $number_of_printed_templates = 0;
+my @html_header_anchors         = ();
+my $html_header_anchors_index   = 0;
+my @html_header_anchor_numbers  = (0,0,0,0,0,0,0);
 
 sub printInitialHeader {
     my $title       = shift;
     my $osm_base    = shift;
     my $areas       = shift;
     
+    $no_of_columns               = 0;
+    @columns                     = ();
+    @table_columns               = ();
+    $max_templates               = 700;
+    $number_of_printed_templates = 0;
+    $html_header_anchors_index   = 0;
+
     if ( $print_wiki ) {
         #
         # WIKI code
@@ -3496,7 +3506,7 @@ sub printInitialHeader {
         print  "{{TOC limit|3}}\n";
         print  "\n";
         if ( $osm_base || $areas ) {
-            print  "= Datum der Daten =\n";
+            printBigHeader( "Datum der Daten" );
             printf "OSM-Base Time : %s<br>\n", $osm_base          if ( $osm_base );
             printf "Areas Time    : %s<br>\n", $areas             if ( $areas    );
             print  "<br>\n";
@@ -3517,16 +3527,17 @@ sub printInitialHeader {
         print  "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01//EN\">\n";
         print  "<html>\n";
         print  "    <head>\n";
-        print  "        <title>OSM - Public Transport Analyse</title>\n";
+        print  "        <title>OSM - Public Transport Analysis</title>\n";
         print  "        <meta name=\"generator\" content=\"analyze-routes.pl\">\n";
         print  "        <meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\" />\n";
         print  "        <meta name=\"language\" content=\"de\" />\n";
         print  "        <meta name=\"keywords\" content=\"OSM Public Transport PTv2\" />\n";
-        print  "        <meta name=\"description\" content=\"OSM - Public Transport Analyse\" />\n";
+        print  "        <meta name=\"description\" content=\"OSM - Public Transport Analysis\" />\n";
         print  "        <style type=\"text/css\">\n";
         print  "              table { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; }\n";
         print  "              th    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }\n";
         print  "              td    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }\n";
+        print  "              ol    { list-style: none; }\n";
         print  "              img   { witdh: 20px }\n";
         print  "              .tableheaderrow   { background-color: LightSteelBlue;   }\n";
         print  "              .sketchline       { background-color: LightBlue;        }\n";
@@ -3537,8 +3548,9 @@ sub printInitialHeader {
         print  "        </style>\n";
         print  "    </head>\n";
         print  "    <body>\n";
+        print  "    <!-- split here for table of contents -->\n";
         if ( $osm_base || $areas ) {
-            print  "        <h1> Datum der Daten </h1>\n";
+            printBigHeader( "Datum der Daten" );
             printf "OSM-Base Time : %s<br>\n", $osm_base          if ( $osm_base );
             printf "Areas Time    : %s<br>\n", $areas             if ( $areas    );
             print  "\n";
@@ -3554,11 +3566,6 @@ sub printInitialHeader {
         print  "\n";
     }
 
-    $no_of_columns               = 0;
-    @columns                     = ();
-    @table_columns               = ();
-    $max_templates               = 700;
-    $number_of_printed_templates = 0;
 }
 
 
@@ -3578,6 +3585,64 @@ sub printFinalFooter {
         #
         print  "    </body>\n";
         print  "</html>\n";
+        
+        printTableOfContents();
+        
+    }
+}
+
+
+#############################################################################################
+
+sub printTableOfContents {
+    
+    if ( $print_wiki ) {
+        #
+        # WIKI code
+        #
+        ;
+    }
+    else {
+        my $toc_line        = undef;
+        my $last_level      = 0;
+        my $anchor_char     = undef;
+        my $anchor_level    = undef;
+        my $anchor_number   = undef;
+        my $anchor_text     = undef;
+        #
+        # HTML
+        #
+        print "        <!-- split here for table of contents -->\n";
+        print "        <h1>Inhaltsverzeichnis</h1>\n";
+        foreach $toc_line ( @html_header_anchors ) {
+            if ( $toc_line =~ m/^(.)_(\d+)_(\d+)\s+(.*)$/ ) {
+                $anchor_char    = $1;
+                $anchor_level   = $2;
+                $anchor_number  = $3;
+                $anchor_text    = wiki2html($4);
+                if ( $anchor_level <= $last_level ) {
+                    print "        </li>\n";
+                }
+                if ( $anchor_level < $last_level ) {
+                    while ( $anchor_level < $last_level ) {
+                        print "        </ol>\n        </li>\n";
+                        $last_level--;
+                    }
+                } else {
+                    while ( $anchor_level > $last_level ) {
+                        print "        <ol>\n";
+                        $last_level++;
+                    }
+                }
+                printf "        <li><a href=\"#%s_%s_%s\">%s</a>\n", $anchor_char, $anchor_level, $anchor_number, $anchor_text;
+            } else {
+                printf STDERR "%s Missmatch in TOC line '%s'\n", get_time(), $toc_line;
+            }
+        }
+        while ( $last_level > 0) {
+            print "        </li>\n        </ol>\n";
+            $last_level--;
+        }
     }
 }
 
@@ -3587,19 +3652,7 @@ sub printFinalFooter {
 sub printBigHeader {
     my $title    = shift;
     
-    if ( $print_wiki ) {
-        #
-        # WIKI code
-        #
-        printf "= %s =\n", $title            if ( $title );
-        print  "\n";
-    }
-    else {
-        #
-        # HTML
-        #
-        printf "%8s<h1>%s</h1>\n", ' ', wiki2html($title)            if ( $title );
-    }
+    printHeader( '= ' . $title )  if ( $title );
 }
 
 
@@ -3621,7 +3674,20 @@ sub printHintSuspiciousRelations {
         #
         # HTML
         #
-        ;
+        print  "Dieser Abschnitt enthält alle Relationen, die verdächtig sind:\n";
+        print  "<ul>\n";
+        print  "    <li>evtl. falsche 'route' oder 'route_master' Werte?\n";
+        print  "        <ul>\n";
+        print  "            <li>z.B. 'route' = 'suspended_bus' statt 'route' = 'bus'</li>\n";
+        print  "        </ul>\n";
+        print  "    </li>\n";
+        print  "    <li>aber auch 'type' = 'network', 'type' = 'set' oder 'route' = 'network', d.h. eine Sammlung aller zum 'network' gehörenden Route und Route-Master.\n";
+        print  "        <ul>\n";
+        print  "            <li>solche '''Sammlungen sind Fehler''', da Relationen keinen Sammlungen darstellen sollen: <a href=\"https://wiki.openstreetmap.org/wiki/DE:Relationen/Relationen_sind_keine_Kategorien\">Relationen sind keine Kategorien</a></li>\n";
+        print  "        </ul>\n";
+        print  "    </li>\n";
+        print  "<ul>\n";
+        print  "\n";
     }
 }
 
@@ -3642,6 +3708,9 @@ sub printHintUnusedNetworks {
         # HTML
         #
         ;
+        print  "Dieser Abschnitt listet die 'network'-Werte auf, die nicht berücksichtigt wurden.<br />\n";
+        print  "Darunter können auch Tippfehler in ansonsten zu berücksichtigenden Werten sein.<br />\n";
+        print  "<br />\n";
     }
 }
     
@@ -3722,8 +3791,41 @@ sub printHeader {
                     # HTML
                     #
                     my $level_nr = 0;
+                    my $header_numbers = '';
                     $level_nr++ while ( $level =~ m/=/g );
-                    printf "        <h%d>%s</h%d>\n", $level_nr, wiki2html($header), $level_nr;
+                    $level_nr = 6   if ( $level_nr > 6 );
+                    if ( $level_nr == 1 ) {
+                        $header_numbers = ++$html_header_anchor_numbers[1] . '.';
+                        $html_header_anchor_numbers[2] = 0;
+                        $html_header_anchor_numbers[3] = 0;
+                        $html_header_anchor_numbers[4] = 0;
+                        $html_header_anchor_numbers[5] = 0;
+                        $html_header_anchor_numbers[6] = 0;
+                    } elsif ( $level_nr == 2 ) {
+                        $header_numbers = $html_header_anchor_numbers[1] . '.' . ++$html_header_anchor_numbers[2] . '.';
+                        $html_header_anchor_numbers[3] = 0;
+                        $html_header_anchor_numbers[4] = 0;
+                        $html_header_anchor_numbers[5] = 0;
+                        $html_header_anchor_numbers[6] = 0;
+                    } elsif ( $level_nr == 3 ) {
+                        $header_numbers = $html_header_anchor_numbers[1] . '.' . $html_header_anchor_numbers[2] . '.' . ++$html_header_anchor_numbers[3] . '.';
+                        $html_header_anchor_numbers[4] = 0;
+                        $html_header_anchor_numbers[5] = 0;
+                        $html_header_anchor_numbers[6] = 0;
+                    } elsif ( $level_nr == 4 ) {
+                        $header_numbers = $html_header_anchor_numbers[1] . '.' . $html_header_anchor_numbers[2] . '.' . $html_header_anchor_numbers[3] . '.' . ++$html_header_anchor_numbers[4] . '.';
+                        $html_header_anchor_numbers[5] = 0;
+                        $html_header_anchor_numbers[6] = 0;
+                    } elsif ( $level_nr == 4 ) {
+                        $header_numbers = $html_header_anchor_numbers[1] . '.' . $html_header_anchor_numbers[2] . '.' . $html_header_anchor_numbers[3] . '.' . $html_header_anchor_numbers[4] . '.' . ++$html_header_anchor_numbers[5] . '.';
+                        $html_header_anchor_numbers[6] = 0;
+                    } elsif ( $level_nr == 6 ) {
+                        $header_numbers = $html_header_anchor_numbers[1] . '.' . $html_header_anchor_numbers[2] . '.' . $html_header_anchor_numbers[3] . '.' . $html_header_anchor_numbers[4] . '.' . $html_header_anchor_numbers[5] . '.' . ++$html_header_anchor_numbers[6] . '.';
+                    }
+                    $html_header_anchors[$html_header_anchors_index] = sprintf( "A_%d_%08d %s %s", $level_nr, $html_header_anchors_index, $header_numbers, $header );
+                    print  "        <br /><hr />\n"   if ( $level_nr == 1 );
+                    printf "        <h%d id=\"A_%d_%08d\">%s %s</h%d>\n", $level_nr, $level_nr, $html_header_anchors_index, $header_numbers, wiki2html($header), $level_nr;
+                    $html_header_anchors_index++;
                 }
                 printf STDERR "%s %s %s %s\n", get_time(), $level, $header, $level    if ( $verbose );
             }
@@ -4160,8 +4262,8 @@ sub printSketchLineTemplate {
         # HTML
         #
         if ( $bg_colour && $fg_colour && $coloured_sketchline ) {
-            $colour_string = '\&amp;bg=' . $bg_colour . '\&amp;fg='. $fg_colour;
-            $pt_string     = '\&amp;r=1'                                        if ( $pt_type eq 'train' || $pt_type eq 'light_rail'     );
+            $colour_string = "\&amp;bg=" . $bg_colour . "\&amp;fg=". $fg_colour;
+            $pt_string     = "\&amp;r=1"                                        if ( $pt_type eq 'train' || $pt_type eq 'light_rail'     );
         }
         $ref_escaped    =~ s/ /+/g;
         $network        =~ s/ /+/g;
@@ -4210,10 +4312,14 @@ sub wiki2html {
     my $text = shift;
     my $sub  = undef;
     if ( $text ) {
+        # ignore: [[Category:Nürnberg]]
+        $text =~ s/\[\[[^:]+:[^\]]+\]\]//g;
+        # convert: [[Nürnberg/Transportation/Analyse/DE-BY-VGN-Linien|VGN Linien]]
         while ( $text =~ m/\[\[([^|]+)\|([^\]]+)\]\]/g ) {
             $sub = sprintf( "<a href=\"https://wiki.openstreetmap.org/wiki/%s\">%s</a>", $1, $2 );
             $text =~ s/\[\[[^|]+\|[^\]]+\]\]/$sub/;
         }
+        # convert: [[https://example.com/index.html External Link]]
         while ( $text =~ m/\[([^ ]+) ([^\]]+)\]/g ) {
             $sub = sprintf( "<a href=\"https://wiki.openstreetmap.org/wiki/%s\">%s</a>", $1, $2 );
             $text =~ s/\[[^ ]+ [^\]]+\]/$sub/;
