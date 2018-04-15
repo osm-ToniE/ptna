@@ -958,8 +958,4 @@ VLC 520;bus;(=CSAD 000115);;;
 435050;bus;(CSAD-Linie);;;
 435060;bus;(CSAD-Linie);;;
 
-= [[Ostbayern/Transportation/Analyse-2|Teil 2 der Analyse des RBO]]
-- hier teilen <!-- cut here -->
-= Teil 2 der Analyse des RBO =
-
 </pre>
