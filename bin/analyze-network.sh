@@ -107,6 +107,7 @@ then
                 mv $HTML_FILE $HTML_FILE.save
             fi
             analyze-routes.pl --v\
+                              --title="$PREFIX" \
                               $ANALYSIS_OPTIONS \
                               --expect-network-short-for="$EXPECT_NETWORK_SHORT_FOR" \
                               --expect-network-long-for="$EXPECT_NETWORK_LONG_FOR" \

@@ -61,6 +61,7 @@ my $positive_notes                  = undef;
 my $csv_separator                   = ';';
 my $coloured_sketchline             = undef;
 my $print_wiki                      = undef;
+my $page_title                      = undef;
 
 
 GetOptions( 'help'                          =>  \$help,                         # -h or --help                      help
@@ -94,6 +95,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'show-options'                  =>  \$show_options,                 # --show-options                    print a section with all options and their values
             'strict-network'                =>  \$strict_network,               # --strict-network                  do not consider empty network tags
             'strict-operator'               =>  \$strict_operator,              # --strict-operator                 do not consider empty operator tags
+            'title=s'                       =>  \$page_title,                   # --title=...                       Title for the HTML page
             'wiki'                          =>  \$print_wiki,                   # --wiki                            prepare outut for WIKI instead of HTML
           );
 
@@ -105,6 +107,7 @@ $expect_network_short_for   = decode('utf8', $expect_network_short_for )    if (
 
 if ( $verbose ) {
     printf STDERR "%s analyze-routes.pl -v\n", get_time();
+    printf STDERR "%20s--title='%s'\n",                    ' ', $page_title                    if ( $page_title                  );
     printf STDERR "%20s--wiki\n",                          ' '                                 if ( $print_wiki                  );
     printf STDERR "%20s--check-access\n",                  ' '                                 if ( $check_access                );
     printf STDERR "%20s--check-bus-stop\n",                ' '                                 if ( $check_bus_stop              );
@@ -849,7 +852,7 @@ if ( $xml_has_nodes ) {
 #
 #############################################################################################
 
-printInitialHeader( 'Public Transportation - OpenStreetMap', $osm_base, $areas  ); 
+printInitialHeader( $page_title, $osm_base, $areas  ); 
 
 
 #############################################################################################
@@ -3527,7 +3530,7 @@ sub printInitialHeader {
         print  "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01//EN\">\n";
         print  "<html>\n";
         print  "    <head>\n";
-        print  "        <title>OSM - Public Transport Analysis</title>\n";
+        printf "        <title>%sOSM - Public Transport Analysis</title>\n", ($title ? $title . ' - ' : '');
         print  "        <meta name=\"generator\" content=\"analyze-routes.pl\">\n";
         print  "        <meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\" />\n";
         print  "        <meta name=\"language\" content=\"de\" />\n";
@@ -3608,18 +3611,20 @@ sub printTableOfContents {
         my $anchor_char     = undef;
         my $anchor_level    = undef;
         my $anchor_number   = undef;
-        my $anchor_text     = undef;
+        my $header_number   = undef;
+        my $header_text     = undef;
         #
         # HTML
         #
         print "        <!-- split here for table of contents -->\n";
         print "        <h1>Inhaltsverzeichnis</h1>\n";
         foreach $toc_line ( @html_header_anchors ) {
-            if ( $toc_line =~ m/^(.)_(\d+)_(\d+)\s+(.*)$/ ) {
+            if ( $toc_line =~ m/^(.)_(\d+)_(\d+)\s+([0-9\.]+)\s+(.*)$/ ) {
                 $anchor_char    = $1;
                 $anchor_level   = $2;
                 $anchor_number  = $3;
-                $anchor_text    = wiki2html($4);
+                $header_number  = $4;
+                $header_text    = wiki2html($5);
                 if ( $anchor_level <= $last_level ) {
                     print "        </li>\n";
                 }
@@ -3634,7 +3639,7 @@ sub printTableOfContents {
                         $last_level++;
                     }
                 }
-                printf "        <li><a href=\"#%s_%s_%s\">%s</a>\n", $anchor_char, $anchor_level, $anchor_number, $anchor_text;
+                printf "        <li>%s <a href=\"#%s_%s_%s\">%s</a>\n", $header_number, $anchor_char, $anchor_level, $anchor_number, $header_text;
             } else {
                 printf STDERR "%s Missmatch in TOC line '%s'\n", get_time(), $toc_line;
             }
@@ -3784,7 +3789,7 @@ sub printHeader {
                     #
                     # WIKI code
                     #
-                    printf "%s %s %s\n", $level, $header, $levelg;
+                    printf "%s %s %s\n", $level, $header, $level;
                 }
                 else {
                     #
