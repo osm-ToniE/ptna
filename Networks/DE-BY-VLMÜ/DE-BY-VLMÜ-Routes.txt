@@ -30,8 +30,6 @@
 
 = Überblick Buslinien Verkehrsgemeinschaft Landkreis Mühldorf (VLMÜ) allgemein 
 
-- [[Category:Page with status]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:Mühldorf]]
-
 - Verweis auf die Datei mit den [[Mühldorf/Transportation/Analyse/DE-BY-VLMÜ-Linien|VLMÜ Linien]] im Wiki
 
 

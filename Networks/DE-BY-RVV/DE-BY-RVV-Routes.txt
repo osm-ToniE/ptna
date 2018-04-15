@@ -30,8 +30,6 @@
 
 = Überblick Buslinien Regensburger Verkehrsverbund (RVV) 
 
-- [[Category:Page with status]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:Regensburg]]
-
 - Verweis auf die Datei mit den [[Regensburg/Transportation/Analyse/DE-BY-RVV-Linien|RVV Linien]] im Wiki.
 
 

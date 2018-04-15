@@ -31,8 +31,6 @@
 = [[Oberbayern/Transportation/RVO-Linien-gesamt|Regionalverkehr Oberbayern (RVO)]]
 
 
-- [[Category:Page with status]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:Oberbayern]]
-
 == Busse
 
 === 8xx

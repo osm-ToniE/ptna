@@ -30,8 +30,6 @@
 
 = Überblick Buslinien Verkehrsgemeinschaft Landkreis Cham (VLC) allgemein
 
-- [[Category:Page with status]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:Cham]]
-
 - Verweis auf die Datei mit den [[Cham/Transportation/Analyse/DE-BY-VLC-Linien|VLC Linien]] im Wiki.
 
 

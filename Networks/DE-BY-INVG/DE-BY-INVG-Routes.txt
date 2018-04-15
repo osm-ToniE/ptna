@@ -31,9 +31,6 @@
 = [[Ingolstadt/Transportation/INVG-Linien-gesamt|INVG Linien]]
 
 
-
-- [[Category:Page with status]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:Ingolstadt]]
-
 == Bus
 10;bus;;;;
 11;bus;;;;

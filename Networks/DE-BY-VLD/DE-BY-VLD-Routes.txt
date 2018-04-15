@@ -30,8 +30,6 @@
 
 = Überblick Buslinien Verkehrsgemeinschaft Landkreis Deggendorf (VLD) allgemein 
 
-- [[Category:Page with status]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:Deggendorf]]
-
 - Verweis auf die Datei mit den [[Deggendorf/Transportation/Analyse/DE-BY-VLD-Linien|VLD Linien]] im Wiki
 
 

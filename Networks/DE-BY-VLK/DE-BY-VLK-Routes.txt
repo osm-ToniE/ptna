@@ -30,8 +30,6 @@
 
 = Überblick Buslinien Verkehrsgemeinschaft Landkreis Kelheim (VLK) allgemein 
 
-- [[Category:Page with status]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:Kelheim]]
-
 - Verweis auf die Datei mit den [[Kelheim/Transportation/Analyse/DE-BY-VLK-Linien|VLK Linien]] im Wiki
 
 

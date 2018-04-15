@@ -29,8 +29,6 @@
 
 = [[Saxony/Transportation/Verkehrsverbund Mittelsachsen/Analyse/DE-SN-VMS-Linien|VMS-Linien]]
 
-- [[Category:Page with status]][[Category:Train routes in Germany]] [[Category:Public transport in Germany]][[Category:Sachsen]][[Category:Nahverkehr]]
-
 == Quelle
 -
 - Die folgende Liste wurde am 14.03.2018 mit freundlicher Genehmigung des VMS aus der [https://www.vms.de/fileadmin/user_upload/antraege_formulare/tbest_anlage_6_2018-02-26.pdf "Anlage 6 - Linienverzeichnis"] (Stand 26.02.2018) erstellt.

@@ -30,8 +30,6 @@
 
 = Überblick Buslinien Landshuter Stadt- und Regionalbusnetz (LA) allgemein 
 
-- [[Category:Page with status]][[Category:Train routes in Germany]][[Category:Rapid transit in Germany]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:Landshut]]
-
 - Verweis auf die Datei mit den [[Landshut/Transportation/Analyse/DE-BY-LA-Linien|LA Linien]] im Wiki.
 
 

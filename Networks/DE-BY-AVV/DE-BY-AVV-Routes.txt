@@ -30,8 +30,6 @@
 
 = [[Augsburg/Transportation/AVV-Linien-gesamt|AVV Linien]]
 
-- [[Category:Page with status]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:Augsburg]]
-
 == Tram
 === Straßenbahn
 1;tram;;Lechhausen Neuer Ostfriedhof;Göggingen;

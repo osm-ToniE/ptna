@@ -30,8 +30,6 @@
 
 = Überblick Buslinien Verkehrsgemeinschaft Rottal-Inn (VGRI) allgemein 
 
-- [[Category:Page with status]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:Pfarrkirchen]]
-
 - Verweis auf die Datei mit den [[Pfarrkirchen/Transportation/Analyse/DE-BY-VGRI-Linien|VGRI Linien]] im Wiki
 
 

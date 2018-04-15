@@ -30,8 +30,6 @@
 
 = Überblick Buslinien Dingolfinger Regionalbusnetz (DGF) allgemein 
 
-- [[Category:Page with status]][[Category:Public transport in Germany]][[Category:Nahverkehr]][[Category:Bayern]][[Category:Dingolfing]]
-
 - Verweis auf die Datei mit den [[Dingolfing/Transportation/Analyse/DE-BY-DGF-Linien|DGF Linien]] im Wiki
 
 

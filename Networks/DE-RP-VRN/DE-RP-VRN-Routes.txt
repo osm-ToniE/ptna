@@ -30,8 +30,6 @@
 
 = [[Verkehrsverbund Rhein-Neckar/Transport/Analyse/DE-RP-VRN-Linien|In OSM gefundene VRN-Linien]]
 
-- [[Category:Page with status]][[Category:Train routes in Germany]][[Category:Public transport in Germany]][[Category:Nahverkehr]]
-
 == Hinweis
 
 - bei der Analyse ist 'network' derzeit entweder
