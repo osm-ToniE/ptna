@@ -7,7 +7,7 @@
 PREFIX="DE-BY-LA"
 
 OVERPASS_QUERY="http://overpass-api.de/api/interpreter?data=area[boundary=administrative][admin_level=6][name~'Landshut']->.L; rel(area.L)[route~'bus']->.R; rel(br.R); out; rel.R; out; rel(r.R); out; way(r.R); out; node(r.R); out;"
-NETWORK_LONG="Stadtwerke Landshut|Landshuter Regionalbusnetz"
+NETWORK_LONG="Landshuter Stadtbusnetz|Landshuter Regionalbusnetz"
 NETWORK_SHORT="LA"
 
 ANALYSIS_PAGE="Landshut/Transportation/Analyse"
