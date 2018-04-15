@@ -17,10 +17,11 @@ if [ -z "$PREFIX"              -o \
      -z "$ANALYSIS_PAGE"       -o \
      -z "$WIKI_ROUTES_PAGE"    -o \
      -z "$FILE_DIFF"           -o \
+     -z "$TARGET_HOST"         -o \
      -z "$ANALYSIS_OPTIONS"        ]
 then
     echo "'settings.sh' file: some variables are unset"
-    echo "Please specify: PREFIX, OVERPASS_QUERY, ANALYSIS_PAGE, WIKI_ROUTES_PAGE, FILE_DIFF, ANALYSIS_OPTIONS"
+    echo "Please specify: PREFIX, OVERPASS_QUERY, ANALYSIS_PAGE, WIKI_ROUTES_PAGE, FILE_DIFF, TARGET_HOST, ANALYSIS_OPTIONS"
     echo "... terminating"
     exit 2
 fi
@@ -29,7 +30,6 @@ ROUTES_FILE="$PREFIX-Routes.txt"
 OSM_XML_FILE="$PREFIX-Data.xml"
 HTML_FILE="$PREFIX-Analysis.html"
 
-TARGET_HOST="p8220173-osm@home34386784.1and1-data.host"
 TARGET_LOC="analyze-routes"
 
 #
