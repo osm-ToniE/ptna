@@ -102,8 +102,4 @@ S42;train;;;;
 
 === Sinsheim (76x bis 79x und 741)
 
-= [[Verkehrsverbund_Rhein-Neckar/Analyse-2|Teil 2 der Analyse des VRN]]
-- Hier trennen <!-- cut here -->
-= Teil 2 der Analyse des VRN
-
 </pre>
