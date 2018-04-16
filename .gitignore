@@ -1,0 +1,13 @@
+# ignore creates HTML pages
+*.html
+
+#ignore save and diff files
+*.html.save
+*.html.diff
+
+#ignore downloaded XML data
+*-Data.xml
+
+#currently ignore test data
+Test/*
+
