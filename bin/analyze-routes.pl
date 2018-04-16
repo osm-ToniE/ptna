@@ -34,6 +34,7 @@ my $debug                           = undef;
 my $osm_xml_file                    = undef;
 my $routes_file                     = undef;
 my $relaxed_begin_end_for           = undef;
+my $network_guid                    = undef;
 my $network_long_regex              = undef;
 my $network_short_regex             = undef;
 my $operator_regex                  = undef;
@@ -85,6 +86,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'routes-file=s'                 =>  \$routes_file,                  # --routes-file=zzz                 CSV file with a list of routes of the of the network
             'max-error=i'                   =>  \$max_error,                    # --max-error=10                    limit number of templates printed for identical error messages
             'multiple-ref-type-entries=s'   =>  \$multiple_ref_type_entries,    # --multiple-ref-type-entries=analyze|ignore|allow    how to handle multiple "ref;type" in routes-file
+            'network-guid=s'                =>  \$network_guid,                 # --network-guid='DE-BY-MVV'
             'network-long-regex:s'          =>  \$network_long_regex,           # --network-long-regex='Münchner Verkehrs- und Tarifverbund|Grünwald|Bayerische Oberlandbahn'
             'network-short-regex:s'         =>  \$network_short_regex,          # --network-short-regex='MVV|BOB'
             'operator-regex:s'              =>  \$operator_regex,               # --operator-regex='MVG|Münchner'
@@ -99,15 +101,18 @@ GetOptions( 'help'                          =>  \$help,                         
             'wiki'                          =>  \$print_wiki,                   # --wiki                            prepare outut for WIKI instead of HTML
           );
 
-$network_long_regex         = decode('utf8', $network_long_regex )          if ( $network_long_regex          );
-$network_short_regex        = decode('utf8', $network_short_regex )         if ( $network_short_regex         );
-$operator_regex             = decode('utf8', $operator_regex )              if ( $operator_regex              );
-$expect_network_long_for    = decode('utf8', $expect_network_long_for )     if ( $expect_network_long_for     );
-$expect_network_short_for   = decode('utf8', $expect_network_short_for )    if ( $expect_network_short_for    );
+$page_title                 = decode('utf8', $page_title )                  if ( $page_title                );
+$network_guid               = decode('utf8', $network_guid )                if ( $network_guid              );
+$network_long_regex         = decode('utf8', $network_long_regex )          if ( $network_long_regex        );
+$network_short_regex        = decode('utf8', $network_short_regex )         if ( $network_short_regex       );
+$operator_regex             = decode('utf8', $operator_regex )              if ( $operator_regex            );
+$expect_network_long_for    = decode('utf8', $expect_network_long_for )     if ( $expect_network_long_for   );
+$expect_network_short_for   = decode('utf8', $expect_network_short_for )    if ( $expect_network_short_for  );
 
 if ( $verbose ) {
     printf STDERR "%s analyze-routes.pl -v\n", get_time();
     printf STDERR "%20s--title='%s'\n",                    ' ', $page_title                    if ( $page_title                  );
+    printf STDERR "%20s--network-guid='%s'\n",             ' ', $network_guid                  if ( $network_guid                );
     printf STDERR "%20s--wiki\n",                          ' '                                 if ( $print_wiki                  );
     printf STDERR "%20s--check-access\n",                  ' '                                 if ( $check_access                );
     printf STDERR "%20s--check-bus-stop\n",                ' '                                 if ( $check_bus_stop              );
@@ -194,6 +199,7 @@ my $areas                           = '';
 
 my %column_name             = ( 'ref'           => 'Linie (ref=)',
                                 'relation'      => 'Relation (id=)',
+                                'relations'     => 'Relationen',                # comma separated list of relation-IDs
                                 'name'          => 'Name (name=)',
                                 'network'       => 'Netz (network=)',
                                 'operator'      => 'Betreiber (operator=)',
@@ -208,7 +214,7 @@ my %column_name             = ( 'ref'           => 'Linie (ref=)',
                                 'Comment'       => 'Kommentar',
                                 'From'          => 'Von',
                                 'To'            => 'Nach',
-                                'Operator'      => 'Betreiber'
+                                'Operator'      => 'Betreiber',
                               );
 
 my %transport_types         = ( 'bus'           => 'Bus',
@@ -456,10 +462,11 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                 $number_of_route_relations++;
                 #
                 # if 'sort_name' is defined for the relation, then the mapper's choice will be respected for printing the Wiki lists
-                # if 'sort_name' is not defined or not set, it inherits the value from 'name' plus relation-id but at least is set to the relation-id
+                # if 'sort_name' is not defined or not set, it inherits the value from 'ref_trips' and then from 'name' plus relation-id but at least is set to the relation-id
                 # this shall ensure that all route are always printed in the same order for the Wiki page, even if two routes have the name
                 #
-                $collected_tags{'sort_name'} = ( $collected_tags{'name'} ? $collected_tags{'name'} . '-' . $relation_id : $relation_id )  unless ( $collected_tags{'sort_name'} );
+                $collected_tags{'sort_name'} = $collected_tags{'ref_trips'}                                                                    unless ( $collected_tags{'sort_name'} );
+                $collected_tags{'sort_name'} = ( $collected_tags{'name'}      ? $collected_tags{'name'} . '-' . $relation_id : $relation_id )  unless ( $collected_tags{'sort_name'} );
         
                 $relation_ptr = undef;
                 
@@ -1224,7 +1231,7 @@ printf STDERR "%s Printed suspicious: %d\n", get_time(), $number_of_suspicious_r
 
 printf STDERR "%s Printing unused networks\n", get_time()       if ( $verbose );
 
-printTableInitialization( 'network', 'Relationen' );
+printTableInitialization( 'network', 'relations' );
 
 my @relations_of_network    = ();
 
@@ -1243,14 +1250,12 @@ if ( keys( %unused_networks ) ) {
         $network = $network eq '__unset_network__' ? '' : $network;
         if ( scalar @relations_of_network <= 10 ) {
             printTableLine( 'network'           =>    $network,
-                            'Relationen'        =>    join( ', ', @relations_of_network )
-#                            'Relationen'        =>    join( ', ', map { printRelationTemplate($_); } @relations_of_network )
+                            'relations'         =>    join( ',', @relations_of_network )
                           );
         }
         else {
             printTableLine( 'network'           =>    $network,
-                            'Relationen'        =>    sprintf( "%s and more ...", join( ', ', splice(@relations_of_network,0,10) ) )
-#                            'Relationen'        =>    sprintf( "%s and more ...", map { printRelationTemplate($_); } join( ', ', splice(@relations_of_network,0,10) ) )
+                            'relations'         =>    sprintf( "%s and more ...", join( ',', splice(@relations_of_network,0,10) ) )
                           );
         }
         $number_of_unused_networks++;
@@ -3487,7 +3492,6 @@ my @table_columns               = ();
 my $max_templates               = 0;            # do not print more than xxx wiki-templates, set later on
 my $number_of_printed_templates = 0;
 my @html_header_anchors         = ();
-my $html_header_anchors_index   = 0;
 my @html_header_anchor_numbers  = (0,0,0,0,0,0,0);
 
 sub printInitialHeader {
@@ -3500,7 +3504,6 @@ sub printInitialHeader {
     @table_columns               = ();
     $max_templates               = 700;
     $number_of_printed_templates = 0;
-    $html_header_anchors_index   = 0;
 
     if ( $print_wiki ) {
         #
@@ -3547,6 +3550,7 @@ sub printInitialHeader {
         print  "              .sketch           { text-align:left;  font-weight: 500; }\n";
         print  "              .csvinfo          { text-align:right; font-size: 0.8em; }\n";
         print  "              .ref              { white-space:nowrap; }\n";
+        print  "              .relation         { white-space:nowrap; }\n";
         print  "              .PTv              { text-align:center; }\n";
         print  "        </style>\n";
         print  "    </head>\n";
@@ -3608,9 +3612,7 @@ sub printTableOfContents {
     else {
         my $toc_line        = undef;
         my $last_level      = 0;
-        my $anchor_char     = undef;
         my $anchor_level    = undef;
-        my $anchor_number   = undef;
         my $header_number   = undef;
         my $header_text     = undef;
         #
@@ -3619,12 +3621,10 @@ sub printTableOfContents {
         print "        <!-- split here for table of contents -->\n";
         print "        <h1>Inhaltsverzeichnis</h1>\n";
         foreach $toc_line ( @html_header_anchors ) {
-            if ( $toc_line =~ m/^(.)_(\d+)_(\d+)\s+([0-9\.]+)\s+(.*)$/ ) {
-                $anchor_char    = $1;
-                $anchor_level   = $2;
-                $anchor_number  = $3;
-                $header_number  = $4;
-                $header_text    = wiki2html($5);
+            if ( $toc_line =~ m/^L(\d+)\s+([0-9\.]+)\s+(.*)$/ ) {
+                $anchor_level   = $1;
+                $header_number  = $2;
+                $header_text    = wiki2html($3);
                 if ( $anchor_level <= $last_level ) {
                     print "        </li>\n";
                 }
@@ -3639,7 +3639,7 @@ sub printTableOfContents {
                         $last_level++;
                     }
                 }
-                printf "        <li>%s <a href=\"#%s_%s_%s\">%s</a>\n", $header_number, $anchor_char, $anchor_level, $anchor_number, $header_text;
+                printf "        <li>%s <a href=\"#A%s\">%s</a>\n", $header_number, $header_number, $header_text;
             } else {
                 printf STDERR "%s Missmatch in TOC line '%s'\n", get_time(), $toc_line;
             }
@@ -3827,10 +3827,9 @@ sub printHeader {
                     } elsif ( $level_nr == 6 ) {
                         $header_numbers = $html_header_anchor_numbers[1] . '.' . $html_header_anchor_numbers[2] . '.' . $html_header_anchor_numbers[3] . '.' . $html_header_anchor_numbers[4] . '.' . $html_header_anchor_numbers[5] . '.' . ++$html_header_anchor_numbers[6] . '.';
                     }
-                    $html_header_anchors[$html_header_anchors_index] = sprintf( "A_%d_%08d %s %s", $level_nr, $html_header_anchors_index, $header_numbers, $header );
+                    push( @html_header_anchors, sprintf( "L%d %s %s", $level_nr, $header_numbers, $header ) );
                     print  "        <br /><hr />\n"   if ( $level_nr == 1 );
-                    printf "        <h%d id=\"A_%d_%08d\">%s %s</h%d>\n", $level_nr, $level_nr, $html_header_anchors_index, $header_numbers, wiki2html($header), $level_nr;
-                    $html_header_anchors_index++;
+                    printf "        <h%d id=\"A%s\">%s %s</h%d>\n", $level_nr, $header_numbers, $header_numbers, wiki2html($header), $level_nr;
                 }
                 printf STDERR "%s %s %s %s\n", get_time(), $level, $header, $level    if ( $verbose );
             }
@@ -4028,6 +4027,14 @@ sub printTableLine {
             if ( $columns[$i] eq "relation" ) {
                 printf "<td class=\"relation\">%s</td>", printRelationTemplate($val);
             }
+            elsif ( $columns[$i] eq "relations"  ){
+                my $and_more = '';
+                if ( $val =~ m/ and more .../ ) {
+                    $and_more = ' and more ...';
+                    $val =~ s/ and more ...//;
+                }
+                printf "<td class=\"relations\">%s%s</td>", join( ', ', map { printRelationTemplate($_); } split( ',', $val ) ), $and_more;
+            }
             elsif ( $columns[$i] eq "issues"  ){
                 $val =~ s/__separator__/<br>/g;
                 printf "<td class=\"%s\">%s</td>", $columns[$i], $val;
@@ -4102,16 +4109,17 @@ sub printRelationTemplate {
             #
             my $image_url       = sprintf( "<img src=\"http://wiki.openstreetmap.org/w/images/d/d9/Mf_Relation.svg\" title=\"Relation\" alt=\"Relation\" />" );
             my $relation_url    = sprintf( "<a href=\"http://osm.org/relation/%s\" title=\"Relation\">%s</a>", $val, $val );
-            my $xml_url         = sprintf( "<a href=\"http://api.osm.org/api/0.6/relation/%s\">XML</a>", $val );
+#            my $xml_url         = sprintf( "<a href=\"http://api.osm.org/api/0.6/relation/%s\">XML</a>", $val );
             my $id_url          = sprintf( "<a href=\"http://osm.org/edit?editor=id&amp;relation=%s\">iD</a>", $val );
             my $josm_url        = sprintf( "<a href=\"http://localhost:8111/import?url=http://api.openstreetmap.org/api/0.6/relation/%s/full\">JOSM</a>", $val );
-            my $potlatch2_url   = sprintf( "<a href=\"http://osm.org/edit?editor=potlatch2&amp;zoom=11&amp;amp;relation=%s\">Potlatch2</a>", $val );
-            my $history_url     = sprintf( "<a href=\"http://osm.virtuelle-loipe.de/history/?type=relation&amp;ref=%s\">history</a>", $val );
-            my $analyze_url     = sprintf( "<a href=\"http://ra.osmsurround.org/analyze.jsp?relationId=%s\">analyze</a>", $val );
-            my $manage_url      = sprintf( "<a href=\"http://osmrm.openstreetmap.de/relation.jsp?id=%s\">manage</a>", $val );
-            my $gpx_url         = sprintf( "<a href=\"http://ra.osmsurround.org/exportRelation/gpx?relationId=%s\">gpx</a>", $val );
+#            my $potlatch2_url   = sprintf( "<a href=\"http://osm.org/edit?editor=potlatch2&amp;zoom=11&amp;amp;relation=%s\">Potlatch2</a>", $val );
+#            my $history_url     = sprintf( "<a href=\"http://osm.virtuelle-loipe.de/history/?type=relation&amp;ref=%s\">history</a>", $val );
+#            my $analyze_url     = sprintf( "<a href=\"http://ra.osmsurround.org/analyze.jsp?relationId=%s\">analyze</a>", $val );
+#            my $manage_url      = sprintf( "<a href=\"http://osmrm.openstreetmap.de/relation.jsp?id=%s\">manage</a>", $val );
+#            my $gpx_url         = sprintf( "<a href=\"http://ra.osmsurround.org/exportRelation/gpx?relationId=%s\">gpx</a>", $val );
 
-            $val = sprintf( "%s %s <small>(%s, %s, %s, %s, %s, %s, %s, %s)</small>", $image_url, $relation_url, $xml_url, $id_url, $josm_url, $potlatch2_url, $history_url, $analyze_url, $manage_url, $gpx_url );    
+#            $val = sprintf( "%s %s <small>(%s, %s, %s, %s, %s, %s, %s, %s)</small>", $image_url, $relation_url, $xml_url, $id_url, $josm_url, $potlatch2_url, $history_url, $analyze_url, $manage_url, $gpx_url );    
+            $val = sprintf( "%s %s <small>(%s, %s)</small>", $image_url, $relation_url, $id_url, $josm_url );    
         }
     }
     else {
@@ -4156,12 +4164,13 @@ sub printWayTemplate {
             #
             my $image_url       = sprintf( "<img src=\"http://wiki.openstreetmap.org/w/images/2/2a/Mf_way.svg\" title=\"Way\" alt=\"Way\" />" );
             my $way_url         = sprintf( "<a href=\"http://osm.org/way/%s\" title=\"Way\">%s</a>", $val, $val );
-            my $xml_url         = sprintf( "<a href=\"http://api.osm.org/api/0.6/way/%s\">XML</a>", $val );
+#            my $xml_url         = sprintf( "<a href=\"http://api.osm.org/api/0.6/way/%s\">XML</a>", $val );
             my $id_url          = sprintf( "<a href=\"http://osm.org/edit?editor=id&amp;way=%s\">iD</a>", $val );
             my $josm_url        = sprintf( "<a href=\"http://localhost:8111/import?url=http://api.openstreetmap.org/api/0.6/way/%s/full\">JOSM</a>", $val );
-            my $potlatch2_url   = sprintf( "<a href=\"http://osm.org/edit?editor=potlatch2&amp;zoom=11&amp;amp;way=%s\">Potlatch2</a>", $val );
+#            my $potlatch2_url   = sprintf( "<a href=\"http://osm.org/edit?editor=potlatch2&amp;zoom=11&amp;amp;way=%s\">Potlatch2</a>", $val );
 
-            $val = sprintf( "%s %s <small>(%s, %s, %s, %s)</small>", $image_url, $way_url, $xml_url, $id_url, $josm_url, $potlatch2_url );    
+#            $val = sprintf( "%s %s <small>(%s, %s, %s, %s)</small>", $image_url, $way_url, $xml_url, $id_url, $josm_url, $potlatch2_url );    
+            $val = sprintf( "%s %s <small>(%s, %s)</small>", $image_url, $way_url, $id_url, $josm_url );    
         }
     }
     else {
@@ -4206,12 +4215,13 @@ sub printNodeTemplate {
             #
             my $image_url       = sprintf( "<img src=\"http://wiki.openstreetmap.org/w/images/2/20/Mf_node.svg\" title=\"Node\" alt=\"Node\" />" );
             my $node_url        = sprintf( "<a href=\"http://osm.org/node/%s\" title=\"Node\">%s</a>", $val, $val );
-            my $xml_url         = sprintf( "<a href=\"http://api.osm.org/api/0.6/node/%s\">XML</a>", $val );
+#            my $xml_url         = sprintf( "<a href=\"http://api.osm.org/api/0.6/node/%s\">XML</a>", $val );
             my $id_url          = sprintf( "<a href=\"http://osm.org/edit?editor=id&amp;node=%s\">iD</a>", $val );
             my $josm_url        = sprintf( "<a href=\"http://localhost:8111/import?url=http://api.openstreetmap.org/api/0.6/node/%s\">JOSM</a>", $val );
-            my $potlatch2_url   = sprintf( "<a href=\"http://osm.org/edit?editor=potlatch2&amp;zoom=11&amp;amp;node=%s\">Potlatch2</a>", $val );
+#            my $potlatch2_url   = sprintf( "<a href=\"http://osm.org/edit?editor=potlatch2&amp;zoom=11&amp;amp;node=%s\">Potlatch2</a>", $val );
 
-            $val = sprintf( "%s %s <small>(%s, %s, %s, %s)</small>", $image_url, $node_url, $xml_url, $id_url, $josm_url, $potlatch2_url );    
+#            $val = sprintf( "%s %s <small>(%s, %s, %s, %s)</small>", $image_url, $node_url, $xml_url, $id_url, $josm_url, $potlatch2_url );    
+            $val = sprintf( "%s %s <small>(%s, %s)</small>", $image_url, $node_url, $id_url, $josm_url );    
         }
     }
     else {
@@ -4263,16 +4273,20 @@ sub printSketchLineTemplate {
         }
     }
     else {
+        my $span_begin    = '';
+        my $span_end      = '';
         #
         # HTML
         #
         if ( $bg_colour && $fg_colour && $coloured_sketchline ) {
             $colour_string = "\&amp;bg=" . $bg_colour . "\&amp;fg=". $fg_colour;
             $pt_string     = "\&amp;r=1"                                        if ( $pt_type eq 'train' || $pt_type eq 'light_rail'     );
+            $span_begin    = sprintf( "<span style=\"color:%s;background-color:%s;\">", $fg_colour, $bg_colour );
+            $span_end      = "</span>";
         }
         $ref_escaped    =~ s/ /+/g;
         $network        =~ s/ /+/g;
-        $text           = sprintf( "<a href=\"https://overpass-api.de/api/sketch-line?ref=%s\&amp;network=%s\&amp;style=wuppertal%s%s\" title=\"Sketch-Line\">%s</a>", $ref_escaped, uri_escape($network), $colour_string, $pt_string, $ref ); # some manual expansion of the template
+        $text           = sprintf( "%s<a href=\"https://overpass-api.de/api/sketch-line?ref=%s\&amp;network=%s\&amp;style=wuppertal%s%s\" title=\"Sketch-Line\">%s</a>%s", $span_begin, $ref_escaped, uri_escape($network), $colour_string, $pt_string, $ref, $span_end ); # some manual expansion of the template
     }
     
     return $text;
