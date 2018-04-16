@@ -27,7 +27,10 @@
 # - operator  == wird bei mehreren Linie mit identischem ref und type Differenzierung herangezogen (Der Wert von 'operator' darf ';' enthalten)
 #
 
-= [[Saxony/Transportation/Verkehrsverbund Mittelsachsen/Analyse/DE-SN-VMS-Linien|VMS-Linien]]
+
+= Überlick über die ÖPNV-Linien des Verkehrsverbundes Mittelsachsen
+
+- Verweis auf die Datei mit den [[Saxony/Transportation/Verkehrsverbund Mittelsachsen/Analyse/DE-SN-VMS-Linien|VMS-Linien]] im Wiki
 
 == Quelle
 -

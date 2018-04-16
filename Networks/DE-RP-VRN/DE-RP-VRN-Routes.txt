@@ -28,7 +28,9 @@
 #
 
 
-= [[Verkehrsverbund Rhein-Neckar/Transport/Analyse/DE-RP-VRN-Linien|In OSM gefundene VRN-Linien]]
+= Überlick über die ÖPNV-Linien des Verkehrsverbundes Rhein-Neckar
+
+- Verweis auf die Datei mit den [[Verkehrsverbund Rhein-Neckar/Analyse/DE-RP-VRN-Linien|VRN-Linien]] im Wiki
 
 == Hinweis
 

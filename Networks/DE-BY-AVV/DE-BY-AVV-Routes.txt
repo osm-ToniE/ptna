@@ -28,7 +28,9 @@
 #
 
 
-= [[Augsburg/Transportation/AVV-Linien-gesamt|AVV Linien]]
+= Überblick über die ÖPNV-Linien des Augsburger Verkehrsverbundes
+
+- Verweis auf die Datei mit den [[Augsburg/Transportation/AVV-Linien-gesamt|AVV Linien]]im Wiki
 
 == Tram
 === Straßenbahn

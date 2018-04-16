@@ -28,7 +28,9 @@
 #
 
 
-= [[VRS/Analyse/VRS-Linien|In OSM gefundene VRS-Linien]]
+= Überlick über die ÖPNV-Linien des Verkehrsverbundes Rhein-Sieg
+
+- Verweis auf die Datei mit den [[VRS/Analyse/VRS-Linien|VRS-Linien]] im Wiki
 
 == Quelle
 -

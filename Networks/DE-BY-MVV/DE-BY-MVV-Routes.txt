@@ -28,7 +28,9 @@
 #
 
 
-= [[München/Transportation/MVV-Linien-gesamt|MVV Linien]]
+= Überlick über die ÖPNV-Linien des Münchner Verkehrs- und Tarifverbundes
+
+- Verweis auf die Datei mit den [[München/Transportation/MVV-Linien-gesamt|MVV Linien]]im Wiki
 
 == U-Bahn
 U1;subway;;Olympia-Einkaufszentrum;Mangfallplatz;SWM/MVG
