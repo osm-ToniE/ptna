@@ -41,7 +41,7 @@
 -
 #
 #ref;type;comment;from;to;operator
-=== Tram
+== Tram
 1;tram;HB Straßenbahn;Huchting;Mahndorf;BSAG
 1S;tram;HB Straßenbahn;Tenever;Hauptbahnhof;BSAG
 2;tram;HB Straßenbahn;Gröpelingen;Sebaldsbrück;BSAG
@@ -52,7 +52,7 @@
 6;tram;HB Straßenbahn;Flughafen;Universität;BSAG
 8;tram;HB Straßenbahn;Huchting;Kulenkampffallee;BSAG
 10;tram;HB Straßenbahn;Gröpelingen;Sebaldsbrück;BSAG
-=== Bus
+== Bus
 20;bus;HB Stadt;Hohweg;Hauptbahnhof;BSAG
 21;bus;HB Stadt;Mercedes-Benz;Leher Feld;BSAG
 22;bus;HB Stadt;Kattenturm;Universität/Lehe;BSAG
