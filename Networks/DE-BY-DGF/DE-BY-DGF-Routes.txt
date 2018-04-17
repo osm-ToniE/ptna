@@ -45,13 +45,13 @@ Blauer Dingo;bus;;;;
 
 == 0x-Linien
 
-01;bus;;;;
-02;bus;;;;
+6218/01;bus;;;;
+6236/02;bus;;;;
 03;bus;;;;
 04;bus;;;;
 05;bus;;;;
 06;bus;;;;
-07;bus;;;;
+6242/310/07;bus;;;;
 08;bus;;;;
 09;bus;;;;
 
@@ -59,7 +59,7 @@ Blauer Dingo;bus;;;;
 == 1x-Linien
 
 10;bus;;;;
-11;bus;;;;
+6232/308/11;bus;;;;
 12;bus;;;;
 13;bus;;;;
 14;bus;;;;
@@ -68,35 +68,35 @@ Blauer Dingo;bus;;;;
 15b;bus;;;;
 16;bus;;;;
 16a;bus;;;;
-17;bus;;;;
+403/17;bus;;;;
 18;bus;;;;
-19;bus;;;;
+017/19;bus;;;;
 
 
 == 2x-Linien
 
 20;bus;;;;
 21;bus;;;;
-22;bus;;;;
-23;bus;;;;
+22/50;bus;;;;
+023/23;bus;;;;
 24;bus;;;;
 25;bus;;;;
 26;bus;;;;
 27;bus;;;;
 28;bus;;;;
-29;bus;;;;
+028/29;bus;;;;
 
 
 == 3x-Linien
 
-30;bus;;;;
+309/30;bus;;;;
 31;bus;;;;
-32;bus;;;;
-33;bus;;;;
-34;bus;;;;
+019/32;bus;;;;
+018/33;bus;;;;
+037/34;bus;;;;
 35;bus;;;;
 36;bus;;;;
-38;bus;;;;
+026/41/38;bus;;;;
 39;bus;;;;
 
 
@@ -124,13 +124,13 @@ Blauer Dingo;bus;;;;
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Regionalbus Ostbayern (RBO) (=RBO xxxx)
 
-01;bus;(=RBO 6218);;;
-02;bus;(=RBO 6236);;;
+6218/01;bus;(=RBO 6218);;;
+6236/02;bus;(=RBO 6236);;;
 03;bus;(=RBO 6235);;;
 04;bus;(=RBO 6150);;;
 05;bus;(=RBO 6152);;;
 06;bus;(=RBO 6151);;;
-07;bus;(=RBO 6242 =LA 310);;;
+6242/310/07;bus;(=RBO 6242 =LA 310);;;
 08;bus;(=RBO 6237 =VSL 51);;;
 09;bus;(=RBO 6154);;;
 
@@ -147,19 +147,17 @@ Blauer Dingo;bus;;;;
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Landshuter Regionalbusnetz (LA) (= LA xxx)
 
-07;bus;(=LA 310 =RBO 6242);;;
-
-11;bus;(=LA 308 =RBO 6232);;;
-17;bus;(=LA 403);;;
-19;bus;(=LA 017);;;
-
-23;bus;(=LA 023);;;
-29;bus;(=LA 028);;;
-
-30;bus;(=LA 309);;;
-32;bus;(=LA 019);;;
-34;bus;(=LA 037);;;
-38;bus;(=LA 026 =VSL 41);;;
+6242/310/07;bus;(=LA 310 =RBO 6242);;;
+6232/308/11;bus;(=LA 308 =RBO 6232);;;
+403/17;bus;(=LA 403);;;
+017/19;bus;(=LA 017);;;
+023/23;bus;(=LA 023);;;
+028/29;bus;(=LA 028);;;
+309/30;bus;(=LA 309);;;
+019/32;bus;(=LA 019);;;
+018/33;bus;(=LA 018);;;
+037/34;bus;(=LA 037);;;
+026/41/38;bus;(=LA 026 =VSL 41);;;
 
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Straubinger Land (VSL)  (= VSL xx)
@@ -172,13 +170,13 @@ Blauer Dingo;bus;;;;
 24;bus;(=VSL 24);;;
 28;bus;(=VSL 28);;;
 
-38;bus;(=VSL 41 =LA 026);;;
+026/41/38;bus;(=VSL 41 =LA 026);;;
 
 
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Rottal-Inn (VGRI) (=RBO xxxx)
 
-01;bus(=RBO 6218);;;
+6218/01;bus(=RBO 6218);;;
 
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Deggendorf (=RBO xxxx)

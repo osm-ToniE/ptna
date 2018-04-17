@@ -98,7 +98,7 @@
 == 5xx-Linien
 
 510;bus;;;;
-6074/519/400320;bus;;;;
+6074/519/000020;bus;;;;
 520;bus;Wanderbus von Jun.-Sep.;;;
 589;bus;;;;
 6080/590;bus;;;;
