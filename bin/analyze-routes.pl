@@ -4281,12 +4281,12 @@ sub printSketchLineTemplate {
         if ( $bg_colour && $fg_colour && $coloured_sketchline ) {
             $colour_string = "\&amp;bg=" . $bg_colour . "\&amp;fg=". $fg_colour;
             $pt_string     = "\&amp;r=1"                                        if ( $pt_type eq 'train' || $pt_type eq 'light_rail'     );
-            $span_begin    = sprintf( "<span style=\"color:%s;background-color:%s;\">", $fg_colour, $bg_colour );
-            $span_end      = "</span>";
+            $span_begin    = sprintf( "<span style=\"color:%s;background-color:%s;\">&nbsp;", $fg_colour, $bg_colour );
+            $span_end      = "&nbsp;</span>";
         }
         $ref_escaped    =~ s/ /+/g;
         $network        =~ s/ /+/g;
-        $text           = sprintf( "%s<a href=\"https://overpass-api.de/api/sketch-line?ref=%s\&amp;network=%s\&amp;style=wuppertal%s%s\" title=\"Sketch-Line\">%s</a>%s", $span_begin, $ref_escaped, uri_escape($network), $colour_string, $pt_string, $ref, $span_end ); # some manual expansion of the template
+        $text           = sprintf( "<a href=\"https://overpass-api.de/api/sketch-line?ref=%s\&amp;network=%s\&amp;style=wuppertal%s%s\" title=\"Sketch-Line\">%s%s%s</a>", $ref_escaped, uri_escape($network), $colour_string, $pt_string, $span_begin, $ref, $span_end ); # some manual expansion of the template
     }
     
     return $text;
