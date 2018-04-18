@@ -910,6 +910,7 @@ if ( $routes_file ) {
         if ( $table_headers_printed == 0 ) {
             printTableHeader();
             $table_headers_printed++;
+            $working_on_entry = '';     # we start a new table, such as if there hasn't been any entry yet
         }
         $ExpectedRef                        =  $entry;
         $ExpectedRef                        =~ s/$csv_separator.*//;
