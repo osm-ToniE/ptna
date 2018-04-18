@@ -55,7 +55,7 @@ Linie 2;bus;;;;
 6215;bus;;;;
 6216;bus;;;;
 6217;bus;;;;
-6218;bus;;;;
+6218/01;bus;;;;
 6219;bus;;;;
 
 6223;bus;;;;
@@ -106,7 +106,7 @@ Linie 2;bus;;;;
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Dingolfinger Regionalbusnetz (DGF) (DGF xx)
 
-6218;bus;(=DGF 01);;;
+6218/01;bus;(=DGF 01);;;
 
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Mühldorf (VLMÜ)
