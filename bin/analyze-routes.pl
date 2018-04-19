@@ -3411,9 +3411,14 @@ sub isClosedWay {
     my $way_id  = shift;
     
     if ( $way_id && $WAYS{$way_id} ) {
-        if ( $WAYS{$way_id}->{'first_node'} == $WAYS{$way_id}->{'last_node'} ) {
-            printf STDERR "isClosedWay() : yes for Way %d\n", $way_id       if ( $debug );
-            return 1;
+        if ( $WAYS{$way_id}->{'first_node'} && $WAYS{$way_id}->{'last_node'} ) {
+            if ( $WAYS{$way_id}->{'first_node'} == $WAYS{$way_id}->{'last_node'} ) {
+                printf STDERR "isClosedWay() : yes for Way %d\n", $way_id       if ( $debug );
+                return 1;
+            }
+        } else {
+            printf STDERR "%s WAYS{%s}->{'first_node'} is undefined\n", get_time(), $way_id     if ( !$WAYS{$way_id}->{'first_node'} );
+            printf STDERR "%s WAYS{%s}->{'last_node'}  is undefined\n", get_time(), $way_id     if ( !$WAYS{$way_id}->{'last_node'}  );
         }
     }
     printf STDERR "isClosedWay() : no for Way %d\n", $way_id       if ( $debug );
