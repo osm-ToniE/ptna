@@ -172,8 +172,8 @@
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Deggendorf (VLD) (=RBO xxxx)
 
-48;bus(=RBO 7592);;;
-51;bus(=RBO 6237 =DGF 08);;;
+48;bus;(=RBO 7592);;;
+51;bus;(=RBO 6237 =DGF 08);;;
 
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Cham (VLC) (=VLC xxx)
@@ -184,7 +184,7 @@
 
 == Buslinien zum Netzwerk Landkreis Regen (Arberland Verkehr) (=RBO xxxx)
 
-05;bus(=RBO 6095);;;
-15;bus(=RBO 6096);;;
+05;bus;(=RBO 6095);;;
+15;bus;(=RBO 6096);;;
 
 </pre>
