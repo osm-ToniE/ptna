@@ -1902,6 +1902,67 @@ sub analyze_route_relation {
     my $route_highway_index            = scalar( @{$relation_ptr->{'route_highway'}} );
     my $node_index                     = scalar( @{$relation_ptr->{'node'}} );
 
+    $relation_ptr->{'missing_way_data'}   = 0;
+    $relation_ptr->{'missing_node_data'}  = 0;
+
+    #
+    # for all WAYS  check for completeness of data
+    #
+    if ( $xml_has_ways ) {
+        my %incomplete_data_for_ways   = ();
+        foreach my $highway_ref ( @{$relation_ptr->{'way'}} ) {
+            if ( $WAYS{$highway_ref->{'ref'}} ) {
+                # way exists in downloaded data
+                # check for more
+                $incomplete_data_for_ways{$highway_ref->{'ref'}} = 1    if ( !$WAYS{$highway_ref->{'ref'}}->{'tag'} );
+                $incomplete_data_for_ways{$highway_ref->{'ref'}} = 1    if ( !$WAYS{$highway_ref->{'ref'}}->{'node_array'} || scalar @{$WAYS{$highway_ref->{'ref'}}->{'node_array'}} == 0 );
+            } else {
+                $incomplete_data_for_ways{$highway_ref->{'ref'}} = 1;
+            }
+        }
+        if ( keys(%incomplete_data_for_ways) ) {
+            my @help_array     = sort(keys(%incomplete_data_for_ways));
+            my $num_of_errors  = scalar(@help_array);
+            my $error_string   = "Error in input data: insufficient data for ways: ";
+            if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s and %d more ...", $error_string, join(', ', map { printWayTemplate($_); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+            }
+            else {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $error_string, join(', ', map { printWayTemplate($_); } @help_array )) );
+            }
+            $relation_ptr->{'missing_way_data'}   = 1;
+            printf STDERR "%s Error in input data: insufficient data for ways of route ref=%s\n", get_time(), ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref' );
+        }
+    }
+    #
+    # for all NODES  check for completeness of data
+    #
+    if ( $xml_has_nodes ) {
+        my %incomplete_data_for_nodes   = ();
+        foreach my $node_ref ( @{$relation_ptr->{'node'}} ) {
+            if ( $NODES{$node_ref->{'ref'}} ) {
+                # node exists in downloaded data
+                # check for more
+                # $incomplete_data_for_nodes{$node_ref->{'ref'}} = 1    if ( !$NODES{$node_ref->{'ref'}}->{'tag'} );
+            } else {
+                $incomplete_data_for_nodes{$node_ref->{'ref'}} = 1;
+            }
+        }
+        if ( keys(%incomplete_data_for_nodes) ) {
+            my @help_array     = sort(keys(%incomplete_data_for_nodes));
+            my $num_of_errors  = scalar(@help_array);
+            my $error_string   = "Error in input data: insufficient data for nodes: ";
+            if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s and %d more ...", $error_string, join(', ', map { printWayTemplate($_); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+            }
+            else {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $error_string, join(', ', map { printWayTemplate($_); } @help_array )) );
+            }
+            $relation_ptr->{'missing_node_data'}   = 1;
+            printf STDERR "%s Error in input data: insufficient data for nodes of route ref=%s\n", get_time(), ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref' );
+        }
+    }
+    
     push( @{$relation_ptr->{'__issues__'}}, "Route without Way(s)" )                    unless ( $route_highway_index );
     push( @{$relation_ptr->{'__issues__'}}, "Route with only 1 Way" )                   if     ( $route_highway_index == 1 && $route_type ne 'ferry' && $route_type ne 'aerialway' );
     push( @{$relation_ptr->{'__issues__'}}, "Route without Node(s)" )                   unless ( $node_index );
@@ -1916,7 +1977,12 @@ sub analyze_route_relation {
             #push( @{$relation_ptr->{'__notes__'}}, sprintf("'public_transport:version' = %s",$relation_ptr->{'tag'}->{'public_transport:version'}) )    if ( $positive_notes );
             
             if ( $relation_ptr->{'tag'}->{'public_transport:version'} == 2 ) {
-                $return_code = analyze_ptv2_route_relation( $relation_ptr );
+                
+                if ( $relation_ptr->{'missing_way_data'} == 0 && $relation_ptr->{'missing_node_data'} == 0 ) {
+                    $return_code = analyze_ptv2_route_relation( $relation_ptr );
+                } else {
+                    push( @{$relation_ptr->{'__issues__'}}, "Skipping further analysis ..." );
+                }
             }
         }
     }
@@ -1925,7 +1991,7 @@ sub analyze_route_relation {
     }
     
     #
-    # WAYS      vehicles must have access permission
+    # for WAYS used by vehicles     vehicles must have access permission
     #
     if ( $check_access && $xml_has_ways ) {
         my $access_restriction  = undef;
@@ -1946,7 +2012,7 @@ sub analyze_route_relation {
     }
 
     #
-    # WAYS      must not have "highway" = "bus_stop" set - allowed only on nodes
+    # for allWAYS      must not have "highway" = "bus_stop" set - allowed only on nodes
     #
     if ( $check_bus_stop && $xml_has_ways ) {
         my %bus_stop_ways = ();
