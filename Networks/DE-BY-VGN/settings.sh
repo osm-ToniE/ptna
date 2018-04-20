@@ -12,7 +12,7 @@ NETWORK_SHORT="VGN"
 
 ANALYSIS_PAGE="Nürnberg/Transportation/Analyse"
 WIKI_ROUTES_PAGE="Nürnberg/Transportation/Analyse/DE-BY-VGN-Linien"
-FILE_DIFF="196"
+FILE_DIFF="200"
 
 ANALYSIS_OPTIONS="--max-error=10 --check-sequence --check-access --check-name --check-stop-position --check-version --check-wide-characters --multiple-ref-type-entries=analyze --positive-notes --coloured-sketchline"
 

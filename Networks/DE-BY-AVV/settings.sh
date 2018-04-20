@@ -12,7 +12,7 @@ NETWORK_SHORT="AVV"
 
 ANALYSIS_PAGE="Augsburg/Transportation/Analyse"
 WIKI_ROUTES_PAGE="Augsburg/Transportation/AVV-Linien-gesamt"
-FILE_DIFF="100"
+FILE_DIFF="102"
 
 ANALYSIS_OPTIONS="--check-access --check-name --check-stop-position --check-sequence --check-version --check-wide-characters --multiple-ref-type-entries=analyze --positive-notes --coloured-sketchline"
 

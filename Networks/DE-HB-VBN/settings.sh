@@ -12,7 +12,7 @@ NETWORK_SHORT="VBN"
 
 ANALYSIS_PAGE="Bremen/Transport/Analyse"
 WIKI_ROUTES_PAGE="Bremen/Transport/Analyse/DE-HB-VBN-Linien"
-FILE_DIFF="196"
+FILE_DIFF="200"
 
 ANALYSIS_OPTIONS="--max-error=10 --positive-notes --check-access --check-name --check-stop-position --check-sequence --check-version --check-wide-characters --multiple-ref-type-entries=analyze --coloured-sketchline"
 

@@ -12,7 +12,7 @@ NETWORK_SHORT="INVG"
 
 ANALYSIS_PAGE="Ingolstadt/Transportation/Analyse"
 WIKI_ROUTES_PAGE="Ingolstadt/Transportation/INVG-Linien-gesamt"
-FILE_DIFF="196"
+FILE_DIFF="200"
 
 ANALYSIS_OPTIONS="--check-access --check-name --check-stop-position --check-sequence --check-version --check-wide-characters --multiple-ref-type-entries=analyze --positive-notes --coloured-sketchline"
 
