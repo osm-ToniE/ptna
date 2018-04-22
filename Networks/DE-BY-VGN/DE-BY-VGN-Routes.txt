@@ -31,6 +31,7 @@
 = Überblick Buslinien Verkehrsverbund Großraum Nürnberg (VGN) 
 
 - Verweis auf die Datei mit den [[Nürnberg/Transportation/Analyse/DE-BY-VGN-Linien|VGN Linien]] im Wiki.
+- Verweis auf mehr [[Talk:Nürnberg/Transportation/Analyse|Informationen]] im Wiki.
 
 
 == S-Bahn-Linien

@@ -31,6 +31,7 @@
 = Überblick Buslinien Landshuter Stadt- und Regionalbusnetz (LA) allgemein 
 
 - Verweis auf die Datei mit den [[Landshut/Transportation/Analyse/DE-BY-LA-Linien|LA Linien]] im Wiki.
+- Verweis auf mehr [[Talk:Landshut/Transportation/Analyse|Informationen]] im Wiki.
 
 
 == Landshut Stadt (Stadtwerke Landshut)

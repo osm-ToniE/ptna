@@ -31,6 +31,7 @@
 = Überblick Buslinien Regionalbus Ostbayern (RBO) 
 
 - Verweis auf die Datei mit den [[Ostbayern/Transportation/Analyse/DE-BY-RBO-Linien|RBO Linien]] im Wiki.
+- Verweis auf mehr [[Talk:Ostbayern/Transportation/Analyse|Informationen]] im Wiki.
 
 
 

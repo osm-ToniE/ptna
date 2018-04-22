@@ -30,7 +30,8 @@
 
 = Überblick Buslinien Verkehrsgemeinschaft Landkreis Kelheim (VLK) allgemein 
 
-- Verweis auf die Datei mit den [[Kelheim/Transportation/Analyse/DE-BY-VLK-Linien|VLK Linien]] im Wiki
+- Verweis auf die Datei mit den [[Kelheim/Transportation/Analyse/DE-BY-VLK-Linien|VLK Linien]] im Wiki.
+- Verweis auf mehr [[Talk:Kelheim/Transportation/Analyse|Informationen]] im Wiki.
 
 
 == 1xx-Linien

@@ -30,7 +30,8 @@
 
 = Überlick über die ÖPNV-Linien des Verkehrsverbund Bremen/Niedersachsen 
 
-- Verweis auf die Datei mit den [[Bremen/Transport/Analyse/DE-HB-VBN-Linien|VBN-Linien]] im Wiki
+- Verweis auf die Datei mit den [[Bremen/Transport/Analyse/DE-HB-VBN-Linien|VBN-Linien]] im Wiki.
+- Verweis auf mehr [[Talk:Bremen/Transport/Analyse|Informationen]] im Wiki.
 
 == Hinweis
 

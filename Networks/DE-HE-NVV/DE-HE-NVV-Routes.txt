@@ -29,7 +29,8 @@
 
 = Überlick über die ÖPNV-Linien des Nordhessischen VerkehrsVerbundes
 
-- Verweis auf die Datei mit den [[Kassel/Transportation/Analyse/DE-HE-NVV-Linien|NVV-Linien]] im Wiki
+- Verweis auf die Datei mit den [[Kassel/Transportation/Analyse/DE-HE-NVV-Linien|NVV-Linien]] im Wiki.
+- Verweis auf mehr [[Talk:Kassel/Transportation/Analyse|Informationen]] im Wiki.
 
 -
 - Die Analyse erfolgt für die Kreise:

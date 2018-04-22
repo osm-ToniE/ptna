@@ -31,6 +31,7 @@
 = Überblick Buslinien Regensburger Verkehrsverbund (RVV) 
 
 - Verweis auf die Datei mit den [[Regensburg/Transportation/Analyse/DE-BY-RVV-Linien|RVV Linien]] im Wiki.
+- Verweis auf mehr [[Talk:Regensburg/Transportation/Analyse|Informationen]] im Wiki.
 
 
 == Buslinien mit Buchstaben

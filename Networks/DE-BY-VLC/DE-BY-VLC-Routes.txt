@@ -31,6 +31,7 @@
 = Überblick Buslinien Verkehrsgemeinschaft Landkreis Cham (VLC) allgemein
 
 - Verweis auf die Datei mit den [[Cham/Transportation/Analyse/DE-BY-VLC-Linien|VLC Linien]] im Wiki.
+- Verweis auf mehr [[Talk:Cham/Transportation/Analyse|Informationen]] im Wiki.
 
 
 == Stadtbusse (=1xx-Linien)
