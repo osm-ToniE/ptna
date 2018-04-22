@@ -3637,9 +3637,7 @@ sub printInitialHeader {
         }
         print  "Die Analyse läuft in der Regel abends zwischen 19:00 und 20:00 Uhr.<br>\n";
         print  "<br>\n";
-        print  "Die Daten im Wiki werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändert hat.<br>\n";
-        print  "\n";
-        print  "Weitere Details sind auf der hier zugehörigen Diskussionsseite zu finden.<br>\n";
+        print  "Die Daten werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändert hat.<br>\n";
         print  "\n";
         print  "Eine Erläuterung der Fehlertexte ist auf der Seite von <a href='https://wiki.openstreetmap.org/wiki/User:ToniE/analyze-routes#Momentane_Prüfungen'>analyze-routes</a> zu finden.<br>\n";
         print  "\n";
