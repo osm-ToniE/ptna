@@ -4402,7 +4402,7 @@ sub wiki2html {
     my $sub  = undef;
     if ( $text ) {
         # ignore: [[Category:Nürnberg]]
-        $text =~ s/\[\[[^:]+:[^\]]+\]\]//g;
+        $text =~ s/\[\[Category:[^\]]+\]\]//g;
         # convert: [[Nürnberg/Transportation/Analyse/DE-BY-VGN-Linien|VGN Linien]]
         while ( $text =~ m/\[\[([^|]+)\|([^\]]+)\]\]/g ) {
             $sub = sprintf( "<a href=\"https://wiki.openstreetmap.org/wiki/%s\">%s</a>", $1, $2 );
