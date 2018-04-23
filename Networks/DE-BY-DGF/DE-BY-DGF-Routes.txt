@@ -30,8 +30,8 @@
 
 = Überblick Buslinien Dingolfinger Regionalbusnetz (DGF) allgemein 
 
-- Verweis auf die Datei mit den [[Dingolfing/Transportation/Analyse/DE-BY-DGF-Linien|DGF Linien]]im Wiki.
-- Verweis auf die Datei mit den [[Talk:Dingolfing/Transportation/Analyse|Informationen]]im Wiki.
+- Verweis auf die Datei mit den [[Dingolfing/Transportation/Analyse/DE-BY-DGF-Linien|DGF Linien]] im Wiki.
+- Verweis auf mehr [[Talk:Dingolfing/Transportation/Analyse|Informationen]] im Wiki.
 
 
 == Stadtbusse Dingolfing

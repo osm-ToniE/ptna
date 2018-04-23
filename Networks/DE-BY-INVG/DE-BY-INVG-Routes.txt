@@ -30,8 +30,8 @@
 
 = Überblick über die ÖPNV-Linien der Ingolstädter Verkehrsgesellschaft
 
-- Verweis auf die Datei mit den [[Ingolstadt/Transportation/INVG-Linien-gesamt|INVG Linien]]im Wiki.
-- Verweis auf mehr [[Talk:Ingolstadt/Transportation/Analyse|Informationen]]im Wiki.
+- Verweis auf die Datei mit den [[Ingolstadt/Transportation/INVG-Linien-gesamt|INVG Linien]] im Wiki.
+- Verweis auf mehr [[Talk:Ingolstadt/Transportation/Analyse|Informationen]] im Wiki.
 
 == Bus
 10;bus;;;;
