@@ -1901,6 +1901,7 @@ sub analyze_route_relation {
     my $way_index                      = scalar( @{$relation_ptr->{'way'}} );
     my $route_highway_index            = scalar( @{$relation_ptr->{'route_highway'}} );
     my $node_index                     = scalar( @{$relation_ptr->{'node'}} );
+    my $name                           = '';
 
     $relation_ptr->{'missing_way_data'}   = 0;
     $relation_ptr->{'missing_node_data'}  = 0;
@@ -2006,7 +2007,7 @@ sub analyze_route_relation {
 
         if ( %restricted_access ) {
             foreach $access_restriction ( sort(keys(%restricted_access)) ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf("Route: restricted access (%s) to way(s) without 'bus'='yes', 'bus'='designated', 'psv'='yes' or ...: %s", $access_restriction, join(', ', map { printWayTemplate($_); } sort(keys(%{$restricted_access{$access_restriction}})))) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("Route: restricted access (%s) to way(s) without 'bus'='yes', 'bus'='designated', 'psv'='yes' or ...: %s", $access_restriction, join(', ', map { printWayTemplate($_,(($WAYS{$_} && $WAYS{$_}->{'tag'} && $WAYS{$_}->{'tag'}->{'name'})?$WAYS{$_}->{'tag'}->{'name'}:'')); } sort(keys(%{$restricted_access{$access_restriction}})))) );
             }
         }
     }
@@ -2027,10 +2028,10 @@ sub analyze_route_relation {
             my $num_of_errors  = scalar(@help_array);
             my $error_string   = "Route: 'highway' = 'bus_stop' is set on way(s). Allowed on nodes only!: ";
             if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s and %d more ...", $error_string, join(', ', map { printWayTemplate($_); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s and %d more ...", $error_string, join(', ', map { printWayTemplate($_,(($WAYS{$_} && $WAYS{$_}->{'tag'} && $WAYS{$_}->{'tag'}->{'name'})?$WAYS{$_}->{'tag'}->{'name'}:'')); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
             }
             else {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $error_string, join(', ', map { printWayTemplate($_); } @help_array )) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $error_string, join(', ', map { printWayTemplate($_,(($WAYS{$_} && $WAYS{$_}->{'tag'} && $WAYS{$_}->{'tag'}->{'name'})?$WAYS{$_}->{'tag'}->{'name'}:'')); } @help_array )) );
             }
         }
     }
@@ -2300,7 +2301,7 @@ sub analyze_ptv2_route_relation {
         $return_code++;
     }
     if ( $relation_ptr->{'wrong_direction_oneways'} ) {
-        push( @{$relation_ptr->{'__issues__'}}, sprintf("PTv2 route: using oneway way(s) in wrong direction: %s", join(', ', map { printWayTemplate($_); } sort(keys(%{$relation_ptr->{'wrong_direction_oneways'}})))) );
+        push( @{$relation_ptr->{'__issues__'}}, sprintf("PTv2 route: using oneway way(s) in wrong direction: %s", join(', ', map { printWayTemplate($_,(($WAYS{$_} && $WAYS{$_}->{'tag'} && $WAYS{$_}->{'tag'}->{'name'})?$WAYS{$_}->{'tag'}->{'name'}:'')); } sort(keys(%{$relation_ptr->{'wrong_direction_oneways'}})))) );
         $return_code++;
     }
     
@@ -2466,10 +2467,10 @@ sub analyze_ptv2_route_relation {
             @help_array     = sort(keys(%{$role_mismatch{$role}}));
             $num_of_errors  = scalar(@help_array);
             if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf("PTv2 route: %s: %s and %d more ...", $role, join(', ', map { printNodeTemplate($_); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("PTv2 route: %s: %s and %d more ...", $role, join(', ', map { printNodeTemplate($_,(($NODES{$_} && $NODES{$_}->{'tag'} && $NODES{$_}->{'tag'}->{'name'})?$NODES{$_}->{'tag'}->{'name'}:'')); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
             }
             else {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf("PTv2 route: %s: %s", $role, join(', ', map { printNodeTemplate($_); } @help_array )) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("PTv2 route: %s: %s", $role, join(', ', map { printNodeTemplate($_,(($NODES{$_} && $NODES{$_}->{'tag'} && $NODES{$_}->{'tag'}->{'name'})?$NODES{$_}->{'tag'}->{'name'}:'')); } @help_array )) );
             }
         }
     }
@@ -2703,10 +2704,10 @@ sub analyze_ptv2_route_relation {
             @help_array     = sort(keys(%{$role_mismatch{$role}}));
             $num_of_errors  = scalar(@help_array);
             if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf("PTv2 route: %s: %s and %d more ...", $role, join(', ', map { printWayTemplate($_); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("PTv2 route: %s: %s and %d more ...", $role, join(', ', map { printWayTemplate($_,(($WAYS{$_} && $WAYS{$_}->{'tag'} && $WAYS{$_}->{'tag'}->{'name'})?$WAYS{$_}->{'tag'}->{'name'}:'')); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
             }
             else {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf("PTv2 route: %s: %s", $role, join(', ', map { printWayTemplate($_); } @help_array )) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("PTv2 route: %s: %s", $role, join(', ', map { printWayTemplate($_,(($WAYS{$_} && $WAYS{$_}->{'tag'} && $WAYS{$_}->{'tag'}->{'name'})?$WAYS{$_}->{'tag'}->{'name'}:'')); } @help_array )) );
             }
         }
     }
@@ -2769,10 +2770,10 @@ sub analyze_ptv2_route_relation {
             @help_array     = sort(keys(%{$role_mismatch{$role}}));
             $num_of_errors  = scalar(@help_array);
             if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf("PTv2 route: %s: %s and %d more ...", $role, join(', ', map { printRelationTemplate($_); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("PTv2 route: %s: %s and %d more ...", $role, join(', ', map { printRelationTemplate($_,(($RELATIONS{$_} && $RELATIONS{$_}->{'tag'} && $RELATIONS{$_}->{'tag'}->{'name'})?$RELATIONS{$_}->{'tag'}->{'name'}:'')); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
             }
             else {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf("PTv2 route: %s: %s", $role, join(', ', map { printRelationTemplate($_); } @help_array )) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("PTv2 route: %s: %s", $role, join(', ', map { printRelationTemplate($_,(($RELATIONS{$_} && $RELATIONS{$_}->{'tag'} && $RELATIONS{$_}->{'tag'}->{'name'})?$RELATIONS{$_}->{'tag'}->{'name'}:'')); } @help_array )) );
             }
         }
     }
@@ -4103,7 +4104,7 @@ sub printTableLine {
                     $and_more = ' and more ...';
                     $val =~ s/ and more ...//;
                 }
-                printf "<td class=\"relations\">%s%s</td>", join( ', ', map { printRelationTemplate($_); } split( ',', $val ) ), $and_more;
+                printf "<td class=\"relations\">%s%s</td>", join( ', ', map { printRelationTemplate($_,(($RELATIONS{$_} && $RELATIONS{$_}->{'tag'} && $RELATIONS{$_}->{'tag'}->{'ref'})?$RELATIONS{$_}->{'tag'}->{'ref'}:'')); } split( ',', $val ) ), $and_more;
             }
             elsif ( $columns[$i] eq "issues"  ){
                 $val =~ s/__separator__/<br>/g;
@@ -4144,7 +4145,8 @@ sub printTableFooter {
 #############################################################################################
 
 sub printRelationTemplate {
-    my $val = shift;
+    my $val  = shift;
+    my $info = shift;
     
     if ( $val ) {
         if ( $print_wiki ) {
@@ -4179,6 +4181,7 @@ sub printRelationTemplate {
             #
             my $image_url       = sprintf( "<img src=\"http://wiki.openstreetmap.org/w/images/d/d9/Mf_Relation.svg\" title=\"Relation\" alt=\"Relation\" />" );
             my $relation_url    = sprintf( "<a href=\"http://osm.org/relation/%s\" title=\"Relation\">%s</a>", $val, $val );
+            my $info_string     = $info ? sprintf( "'%s' ", $info ) : '';
 #            my $xml_url         = sprintf( "<a href=\"http://api.osm.org/api/0.6/relation/%s\">XML</a>", $val );
             my $id_url          = sprintf( "<a href=\"http://osm.org/edit?editor=id&amp;relation=%s\">iD</a>", $val );
             my $josm_url        = sprintf( "<a href=\"http://localhost:8111/import?url=http://api.openstreetmap.org/api/0.6/relation/%s/full\">JOSM</a>", $val );
@@ -4189,7 +4192,7 @@ sub printRelationTemplate {
 #            my $gpx_url         = sprintf( "<a href=\"http://ra.osmsurround.org/exportRelation/gpx?relationId=%s\">gpx</a>", $val );
 
 #            $val = sprintf( "%s %s <small>(%s, %s, %s, %s, %s, %s, %s, %s)</small>", $image_url, $relation_url, $xml_url, $id_url, $josm_url, $potlatch2_url, $history_url, $analyze_url, $manage_url, $gpx_url );    
-            $val = sprintf( "%s %s <small>(%s, %s)</small>", $image_url, $relation_url, $id_url, $josm_url );    
+            $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $relation_url, $id_url, $josm_url );    
         }
     }
     else {
@@ -4203,7 +4206,8 @@ sub printRelationTemplate {
 #############################################################################################
 
 sub printWayTemplate {
-    my $val = shift;
+    my $val  = shift;
+    my $info = shift;
     
     if ( $val ) {
         if ( $print_wiki ) {
@@ -4234,13 +4238,14 @@ sub printWayTemplate {
             #
             my $image_url       = sprintf( "<img src=\"http://wiki.openstreetmap.org/w/images/2/2a/Mf_way.svg\" title=\"Way\" alt=\"Way\" />" );
             my $way_url         = sprintf( "<a href=\"http://osm.org/way/%s\" title=\"Way\">%s</a>", $val, $val );
+            my $info_string     = $info ? sprintf( "'%s' ", $info ) : '';
 #            my $xml_url         = sprintf( "<a href=\"http://api.osm.org/api/0.6/way/%s\">XML</a>", $val );
             my $id_url          = sprintf( "<a href=\"http://osm.org/edit?editor=id&amp;way=%s\">iD</a>", $val );
             my $josm_url        = sprintf( "<a href=\"http://localhost:8111/import?url=http://api.openstreetmap.org/api/0.6/way/%s/full\">JOSM</a>", $val );
 #            my $potlatch2_url   = sprintf( "<a href=\"http://osm.org/edit?editor=potlatch2&amp;zoom=11&amp;amp;way=%s\">Potlatch2</a>", $val );
 
 #            $val = sprintf( "%s %s <small>(%s, %s, %s, %s)</small>", $image_url, $way_url, $xml_url, $id_url, $josm_url, $potlatch2_url );    
-            $val = sprintf( "%s %s <small>(%s, %s)</small>", $image_url, $way_url, $id_url, $josm_url );    
+            $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $way_url, $id_url, $josm_url );    
         }
     }
     else {
@@ -4254,7 +4259,8 @@ sub printWayTemplate {
 #############################################################################################
 
 sub printNodeTemplate {
-    my $val = shift;
+    my $val  = shift;
+    my $info = shift;
     
     if ( $val ) {
         if ( $print_wiki ) {
@@ -4285,13 +4291,14 @@ sub printNodeTemplate {
             #
             my $image_url       = sprintf( "<img src=\"http://wiki.openstreetmap.org/w/images/2/20/Mf_node.svg\" title=\"Node\" alt=\"Node\" />" );
             my $node_url        = sprintf( "<a href=\"http://osm.org/node/%s\" title=\"Node\">%s</a>", $val, $val );
+            my $info_string     = $info ? sprintf( "'%s' ", $info ) : '';
 #            my $xml_url         = sprintf( "<a href=\"http://api.osm.org/api/0.6/node/%s\">XML</a>", $val );
             my $id_url          = sprintf( "<a href=\"http://osm.org/edit?editor=id&amp;node=%s\">iD</a>", $val );
             my $josm_url        = sprintf( "<a href=\"http://localhost:8111/import?url=http://api.openstreetmap.org/api/0.6/node/%s\">JOSM</a>", $val );
 #            my $potlatch2_url   = sprintf( "<a href=\"http://osm.org/edit?editor=potlatch2&amp;zoom=11&amp;amp;node=%s\">Potlatch2</a>", $val );
 
 #            $val = sprintf( "%s %s <small>(%s, %s, %s, %s)</small>", $image_url, $node_url, $xml_url, $id_url, $josm_url, $potlatch2_url );    
-            $val = sprintf( "%s %s <small>(%s, %s)</small>", $image_url, $node_url, $id_url, $josm_url );    
+            $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $node_url, $id_url, $josm_url );    
         }
     }
     else {
