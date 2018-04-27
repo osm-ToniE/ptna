@@ -93,7 +93,7 @@ Linie 4;bus;;;;
 
 6235;bus;;;;
 6236;bus;;;;
-6237;bus;;;;
+6237/51/08;bus;;;;
 
 7591;bus;;;;
 7592;bus;;;;
@@ -147,7 +147,7 @@ Linie 4;bus;;;;
 6150;bus;(=DGF 04);;;
 6152;bus;(=DGF 05);;;
 6151;bus;(=DGF 06);;;
-6237;bus;(=DGF 08 =VSL 51);;;
+6237/51/08;bus;(=DGF 08 =VSL 51);;;
 6154;bus;(=DGF 09);;;
 7630;bus;(=DGF 10);;;
 6153;bus;(=DGF 41);;;
@@ -156,7 +156,7 @@ Linie 4;bus;;;;
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Straubinger Land (VSL)
 
-6237;bus;(=VSL 51 =DGF 08);;;
+6237/51/08;bus;(=VSL 51 =DGF 08);;;
 7592;bus;(=VSL 48);;;
 
 

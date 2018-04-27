@@ -254,7 +254,7 @@
 6092;bus;(=VSL 39);;;
 6095;bus;(=VSL 04);;;
 6096/15;bus;(=VSL 15);;;
-6097;bus;(=VSL 21);;;
+6097/21/13;bus;(=VSL 21);;;
 
 
 === VLC-Linien
@@ -375,8 +375,8 @@
 
 === DGF-Linien (DGF = Dingolfinger Regionalbusnetz)
 
-6150;bus;(=DGF 04);;;
-6151;bus;(=DGF 06);;;
+6150/04;bus;(=DGF 04);;;
+6151/06;bus;(=DGF 06);;;
 6152;bus;(=DGF 05);;;
 
 
@@ -471,7 +471,7 @@
 6232;bus;(=DGF 11 =LA 308);;;
 6235;bus;(=DGF 03);;;
 6236/02;bus;(=DGF 02);;;
-6237;bus;(=DGF 08 =VSL 51);;;
+6237/51/08;bus;(=DGF 08 =VSL 51);;;
 6259;bus;(=DGF 46);;;
 
 
