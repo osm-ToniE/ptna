@@ -84,7 +84,7 @@ Blauer Dingo;bus;;;;
 25;bus;;;;
 26;bus;;;;
 27;bus;;;;
-28;bus;;;;
+28/28;bus;;;;
 028/29;bus;;;;
 
 
@@ -169,7 +169,7 @@ Blauer Dingo;bus;;;;
 6097/21/13;bus;(=VSL 21 =RBO 6097);;;
 
 24/24;bus;(=VSL 24);;;
-28;bus;(=VSL 28);;;
+28/28;bus;(=VSL 28);;;
 
 026/41/38;bus;(=VSL 41 =LA 026);;;
 

@@ -51,7 +51,7 @@
 
 == 0x-Linien
 
-03;bus;;;;
+6060/03;bus;;;;
 04;bus;;;;
 05;bus;;;;
 06;bus;;;;
@@ -84,7 +84,7 @@
 6024/25;bus;;;;
 26;bus;;;;
 27;bus;;;;
-28;bus;;;;
+28/28;bus;;;;
 29;bus;;;;
 
 
@@ -128,7 +128,7 @@
 == Buslinien mit Mitgliedschaft zum Netzwerk Regionalbus Ostbayern (RBO) (=RBO xxxx)
 
 03;bus;(=RBO 6060);;;
-04;bus;(=RBO 6095);;;
+6095/04;bus;(=RBO 6095);;;
 6098/9/710;bus;(=RBO 6098 =VLC 710);;;
 
 10;bus;(=RBO 6091);;;
@@ -159,7 +159,7 @@
 6097/21/13;bus;(=DGF 13 =RBO 6097);;;
 23;bus;(=DGF 12)
 24/24;bus;(=DGF 24)
-28;bus;(=DGF 28)
+28/28;bus;(=DGF 28)
 
 6237/51/08;bus;(=DGF 08 =RBO 6237);;;
 

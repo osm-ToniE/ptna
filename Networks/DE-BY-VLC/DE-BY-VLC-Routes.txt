@@ -92,7 +92,7 @@
 6079/450;bus;;;;
 481;bus;;;;
 490;bus;;;;
-491;bus;;;;
+6296/491;bus;;;;
 496;bus;;;;
 
 
@@ -154,7 +154,7 @@ D499;bus;;;;
 420;bus;(=RBO 6069);;;
 6079/450;bus;(=RBO 6079);;;
 490;bus;(=RBO 6076);;;
-491;bus;(=RBO 6296);;;
+6296/491;bus;(=RBO 6296);;;
 
 511;bus;(=RBO 6511);;;
 520;bus;(=RBO 520);;;
@@ -212,7 +212,7 @@ D499;bus;(=RBO 6499);;;
 410;bus;(=RBO 6078);;;
 430;bus;;;
 490;bus;(=RBO 6076);;;
-491;bus;(=RBO 6296);;;
+6296/491;bus;(=RBO 6296);;;
 
 
 == Buslinien mit Mitgliedschaft Verkehrsgemeinschaft Straubinger Land (VSL) (VSL xx)

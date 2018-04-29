@@ -248,11 +248,11 @@
 === VSL-Linien
 
 6024/25;bus;(=RVV 33(RBO 5033)teilweise/VSL 25);;;
-6060;bus;(=VSL 03);;;
+6060/03;bus;(=VSL 03);;;
 6090;bus;(=VSL 11= VLC 619);;;
 6091;bus;(=VSL 10);;;
 6092;bus;(=VSL 39);;;
-6095;bus;(=VSL 04);;;
+6095/04;bus;(=VSL 04);;;
 6096/15;bus;(=VSL 15);;;
 6097/21/13;bus;(=VSL 21);;;
 
@@ -498,7 +498,7 @@
 
 === VLC-Linie
 
-6296;bus;(=VLC 491);;;
+6296/491;bus;(=VLC 491);;;
 
 
 === Linien Landkreis Tirschenreuth
