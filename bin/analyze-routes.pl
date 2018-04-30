@@ -1923,7 +1923,7 @@ sub analyze_route_relation {
         if ( keys(%incomplete_data_for_ways) ) {
             my @help_array     = sort(keys(%incomplete_data_for_ways));
             my $num_of_errors  = scalar(@help_array);
-            my $error_string   = "Error in input data: insufficient data for ways: ";
+            my $error_string   = "Error in input data: insufficient data for ways";
             if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
                 push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s and %d more ...", $error_string, join(', ', map { printWayTemplate($_); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
             }
@@ -1951,7 +1951,7 @@ sub analyze_route_relation {
         if ( keys(%incomplete_data_for_nodes) ) {
             my @help_array     = sort(keys(%incomplete_data_for_nodes));
             my $num_of_errors  = scalar(@help_array);
-            my $error_string   = "Error in input data: insufficient data for nodes: ";
+            my $error_string   = "Error in input data: insufficient data for nodes";
             if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
                 push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s and %d more ...", $error_string, join(', ', map { printWayTemplate($_); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
             }
