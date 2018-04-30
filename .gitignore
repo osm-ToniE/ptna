@@ -1,13 +1,16 @@
-# ignore creates HTML pages
+# ignore created HTML pages
 *.html
 
-#ignore save and diff files
+# ignore save and diff files
 *.html.save
 *.html.diff
 
-#ignore downloaded XML data
+# ignore log files
+*.log
+
+# ignore downloaded XML data
 *-Data.xml
 
-#currently ignore test data
-Test/*
+# currently ignore ols test data
+OldTest/*
 
