@@ -236,7 +236,7 @@ X33;bus;;;;Stadtwerke Landshut
 6249/401;bus;;;;
 402;bus;;;;
 403/17;bus;;;;
-404;bus;;;;
+404/52;bus;;;;
 405;bus;;;;
 406;bus;;;;
 6231/407;bus;;;;

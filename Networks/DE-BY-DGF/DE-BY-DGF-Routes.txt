@@ -61,7 +61,7 @@ Blauer Dingo;bus;;;;
 
 10;bus;;;;
 6232/308/11;bus;;;;
-12;bus;;;;
+23/12;bus;;;;
 6097/21/13;bus;;;;
 14;bus;;;;
 15;bus;;;;
@@ -165,7 +165,7 @@ Blauer Dingo;bus;;;;
 
 08;bus;(=VSL 51 =RBO 6237);;;
 
-12;bus;(=VSL 23);;;
+23/12;bus;(=VSL 23);;;
 6097/21/13;bus;(=VSL 21 =RBO 6097);;;
 
 24/24;bus;(=VSL 24);;;
@@ -177,21 +177,21 @@ Blauer Dingo;bus;;;;
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Rottal-Inn (VGRI) (=RBO xxxx)
 
-6218/01;bus(=RBO 6218);;;
+6218/01;bus;(=RBO 6218);;;
 
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Deggendorf (=RBO xxxx)
 
-02;bus(=RBO 6236);;;
-03;bus(=RBO 6235);;;
-6150/04;bus(=RBO 6130);;;
-05;bus(=RBO 6152);;;
-6151/06;bus(=RBO 6151);;;
-6237/51/08;bus(=RBO 6237 =VSL 51);;;
-09;bus(=RBO 6154);;;
+02;bus;(=RBO 6236);;;
+03;bus;(=RBO 6235);;;
+6150/04;bus;(=RBO 6130);;;
+05;bus;(=RBO 6152);;;
+6151/06;bus;(=RBO 6151);;;
+6237/51/08;bus;(=RBO 6237 =VSL 51);;;
+09;bus;(=RBO 6154);;;
 
-10;bus(=RBO 7630);;;
+10;bus;(=RBO 7630);;;
 
-41;bus(=RBO 6153);;;
+41;bus;(=RBO 6153);;;
 
 </pre>
