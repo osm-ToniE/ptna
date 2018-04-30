@@ -1,0 +1,2357 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' generator='JOSM'>
+  <node id='270804190' timestamp='2017-10-06T16:35:19Z' uid='3249777' user='opendcc' version='4' changeset='52688033' lat='48.2826434' lon='12.5541591' />
+  <node id='270805593' timestamp='2014-07-12T08:56:15Z' uid='166830' user='Ja_Meister!' version='3' changeset='24096664' lat='48.2515326' lon='12.5253738' />
+  <node id='270805594' timestamp='2014-07-12T08:56:15Z' uid='166830' user='Ja_Meister!' version='9' changeset='24096664' lat='48.2521522' lon='12.525504'>
+    <tag k='highway' v='traffic_signals' />
+  </node>
+  <node id='270812173' timestamp='2013-04-07T16:59:10Z' uid='166830' user='Ja_Meister!' version='7' changeset='15643186' lat='48.2519013' lon='12.5297797' />
+  <node id='270812174' timestamp='2013-04-07T16:59:09Z' uid='166830' user='Ja_Meister!' version='8' changeset='15643186' lat='48.251719' lon='12.5311805'>
+    <tag k='name' v='Mühldorf' />
+    <tag k='traffic_sign' v='city_limit' />
+  </node>
+  <node id='270812178' timestamp='2013-04-07T16:45:17Z' uid='166830' user='Ja_Meister!' version='11' changeset='15643186' lat='48.2522297' lon='12.5375919'>
+    <tag k='highway' v='traffic_signals' />
+  </node>
+  <node id='270812179' timestamp='2014-06-04T20:55:34Z' uid='195062' user='blauloke' version='7' changeset='22743367' lat='48.2530367' lon='12.5398319' />
+  <node id='270812182' timestamp='2014-05-31T07:21:28Z' uid='166830' user='Ja_Meister!' version='8' changeset='22650921' lat='48.2547511' lon='12.5441899' />
+  <node id='270812443' timestamp='2016-04-22T09:04:53Z' uid='3249777' user='opendcc' version='4' changeset='38779213' lat='48.2496682' lon='12.5243565' />
+  <node id='270812570' timestamp='2012-10-23T13:57:50Z' uid='479256' user='geodreieck4711' version='4' changeset='13605842' lat='48.2505426' lon='12.5248729' />
+  <node id='279878839' timestamp='2014-07-12T08:56:15Z' uid='166830' user='Ja_Meister!' version='6' changeset='24096664' lat='48.2519441' lon='12.5254707' />
+  <node id='279879388' timestamp='2016-11-13T19:17:00Z' uid='14390' user='BeKri' version='7' changeset='43613618' lat='48.2474446' lon='12.5236354'>
+    <tag k='highway' v='traffic_signals' />
+  </node>
+  <node id='290982091' timestamp='2016-05-01T15:52:52Z' uid='3249777' user='opendcc' version='20' changeset='39019508' lat='48.3620565' lon='12.5061912' />
+  <node id='290982092' timestamp='2016-05-01T15:52:52Z' uid='3249777' user='opendcc' version='19' changeset='39019508' lat='48.3620011' lon='12.506562' />
+  <node id='290982093' timestamp='2013-01-13T21:51:36Z' uid='834127' user='kartler175' version='20' changeset='14641618' lat='48.3622259' lon='12.5073437' />
+  <node id='290982094' timestamp='2013-01-13T21:51:36Z' uid='834127' user='kartler175' version='22' changeset='14641618' lat='48.362232' lon='12.507523' />
+  <node id='290982096' timestamp='2016-02-10T14:19:32Z' uid='43021' user='Czmartin' version='23' changeset='37125552' lat='48.3619985' lon='12.507749'>
+    <tag k='barrier' v='sally_port' />
+    <tag k='description' v='Stadttor mit Turm' />
+    <tag k='historic' v='city_gate' />
+    <tag k='maxheight' v='3' />
+    <tag k='width' v='3' />
+  </node>
+  <node id='290982098' timestamp='2017-11-16T21:28:45Z' uid='3249777' user='opendcc' version='21' changeset='53855999' lat='48.3603331' lon='12.5086904' />
+  <node id='290982100' timestamp='2011-03-24T10:10:13Z' uid='205377' user='geoMILLImeter' version='20' changeset='7654396' lat='48.359814' lon='12.5092373' />
+  <node id='290982136' timestamp='2016-07-03T14:10:25Z' uid='3249777' user='opendcc' version='24' changeset='40459226' lat='48.3597319' lon='12.5094609' />
+  <node id='290982150' timestamp='2016-07-03T14:10:25Z' uid='3249777' user='opendcc' version='23' changeset='40459226' lat='48.3596771' lon='12.509702' />
+  <node id='290982151' timestamp='2013-01-13T21:51:36Z' uid='834127' user='kartler175' version='25' changeset='14641618' lat='48.3595516' lon='12.5104415' />
+  <node id='290982172' timestamp='2013-01-13T21:51:36Z' uid='834127' user='kartler175' version='14' changeset='14641618' lat='48.3591327' lon='12.5110077' />
+  <node id='290982173' timestamp='2013-01-13T21:51:36Z' uid='834127' user='kartler175' version='14' changeset='14641618' lat='48.358908' lon='12.5111675' />
+  <node id='290982174' timestamp='2011-08-01T20:35:44Z' uid='166830' user='Ja_Meister!' version='13' changeset='8894343' lat='48.3587171' lon='12.5113631' />
+  <node id='290982175' timestamp='2016-04-26T17:02:38Z' uid='3249777' user='opendcc' version='13' changeset='38894084' lat='48.3585999' lon='12.5115332' />
+  <node id='290982176' timestamp='2016-04-26T17:02:38Z' uid='3249777' user='opendcc' version='14' changeset='38894084' lat='48.358334' lon='12.5117762' />
+  <node id='290982177' timestamp='2016-04-26T17:02:38Z' uid='3249777' user='opendcc' version='14' changeset='38894084' lat='48.3574671' lon='12.5124034' />
+  <node id='290982178' timestamp='2016-04-26T17:02:38Z' uid='3249777' user='opendcc' version='13' changeset='38894084' lat='48.3566104' lon='12.5131395' />
+  <node id='290982179' timestamp='2016-04-26T17:02:38Z' uid='3249777' user='opendcc' version='15' changeset='38894084' lat='48.3563155' lon='12.5132015' />
+  <node id='290982180' timestamp='2016-04-26T17:02:38Z' uid='3249777' user='opendcc' version='13' changeset='38894084' lat='48.3551263' lon='12.512622' />
+  <node id='290982181' timestamp='2016-04-26T17:02:38Z' uid='3249777' user='opendcc' version='13' changeset='38894084' lat='48.3549996' lon='12.5125606' />
+  <node id='290982182' timestamp='2016-04-26T17:02:38Z' uid='3249777' user='opendcc' version='14' changeset='38894084' lat='48.3541414' lon='12.5114465' />
+  <node id='290982183' timestamp='2018-03-31T04:09:46Z' uid='3249777' user='opendcc' version='15' changeset='57678980' lat='48.3531877' lon='12.511051' />
+  <node id='290982222' timestamp='2016-04-26T17:02:38Z' uid='3249777' user='opendcc' version='14' changeset='38894084' lat='48.3529932' lon='12.5109225' />
+  <node id='290982223' timestamp='2016-04-26T17:02:38Z' uid='3249777' user='opendcc' version='16' changeset='38894084' lat='48.3526793' lon='12.5105796' />
+  <node id='290982224' timestamp='2016-04-26T17:02:38Z' uid='3249777' user='opendcc' version='17' changeset='38894084' lat='48.3517691' lon='12.5094035' />
+  <node id='290982226' timestamp='2016-04-26T17:02:38Z' uid='3249777' user='opendcc' version='14' changeset='38894084' lat='48.3508142' lon='12.5093111' />
+  <node id='290982227' timestamp='2014-07-05T19:45:19Z' uid='166830' user='Ja_Meister!' version='13' changeset='23972609' lat='48.3490335' lon='12.5101169' />
+  <node id='290982228' timestamp='2016-04-26T17:02:38Z' uid='3249777' user='opendcc' version='14' changeset='38894084' lat='48.3480545' lon='12.5104689' />
+  <node id='290982229' timestamp='2008-11-24T14:08:36Z' uid='81279' user='JensH' version='12' changeset='790552' lat='48.3474741' lon='12.510439' />
+  <node id='290982230' timestamp='2015-10-22T18:25:20Z' uid='3249777' user='opendcc' version='15' changeset='34806309' lat='48.3470075' lon='12.5102371' />
+  <node id='290982231' timestamp='2015-10-22T18:25:20Z' uid='3249777' user='opendcc' version='14' changeset='34806309' lat='48.3465393' lon='12.5099698' />
+  <node id='290982232' timestamp='2015-10-22T18:25:20Z' uid='3249777' user='opendcc' version='14' changeset='34806309' lat='48.3458446' lon='12.509549' />
+  <node id='290982233' timestamp='2016-03-20T15:58:09Z' uid='3249777' user='opendcc' version='16' changeset='37958283' lat='48.3442815' lon='12.5087591'>
+    <tag k='TMC:cid_58:tabcd_1:Class' v='Point' />
+    <tag k='TMC:cid_58:tabcd_1:Direction' v='both' />
+    <tag k='TMC:cid_58:tabcd_1:LCLversion' v='14.0' />
+    <tag k='TMC:cid_58:tabcd_1:LocationCode' v='7679' />
+    <tag k='TMC:cid_58:tabcd_1:NextLocationCode' v='7680' />
+  </node>
+  <node id='290982234' timestamp='2016-04-17T18:26:17Z' uid='3249777' user='opendcc' version='14' changeset='38649106' lat='48.3431642' lon='12.5103654' />
+  <node id='290982235' timestamp='2016-04-17T18:26:17Z' uid='3249777' user='opendcc' version='14' changeset='38649106' lat='48.3429165' lon='12.5107364' />
+  <node id='290982352' timestamp='2016-04-17T18:26:17Z' uid='3249777' user='opendcc' version='14' changeset='38649106' lat='48.3421456' lon='12.5123809' />
+  <node id='290982353' timestamp='2011-08-01T20:35:46Z' uid='166830' user='Ja_Meister!' version='13' changeset='8894343' lat='48.3417913' lon='12.5130481' />
+  <node id='290982354' timestamp='2016-04-17T18:26:17Z' uid='3249777' user='opendcc' version='14' changeset='38649106' lat='48.3413869' lon='12.5135959' />
+  <node id='290982355' timestamp='2016-04-17T18:26:17Z' uid='3249777' user='opendcc' version='14' changeset='38649106' lat='48.340656' lon='12.5143596' />
+  <node id='290982356' timestamp='2016-04-17T18:26:17Z' uid='3249777' user='opendcc' version='14' changeset='38649106' lat='48.3400705' lon='12.5149863' />
+  <node id='290982357' timestamp='2016-04-30T15:30:27Z' uid='3249777' user='opendcc' version='14' changeset='39001293' lat='48.3389848' lon='12.5162333' />
+  <node id='290982359' timestamp='2016-04-17T18:26:17Z' uid='3249777' user='opendcc' version='14' changeset='38649106' lat='48.3366632' lon='12.5204309' />
+  <node id='290982361' timestamp='2016-04-17T18:26:17Z' uid='3249777' user='opendcc' version='14' changeset='38649106' lat='48.3362747' lon='12.5209446' />
+  <node id='290982362' timestamp='2016-04-17T18:26:17Z' uid='3249777' user='opendcc' version='15' changeset='38649106' lat='48.3345667' lon='12.523187' />
+  <node id='290982365' timestamp='2016-04-17T18:26:17Z' uid='3249777' user='opendcc' version='14' changeset='38649106' lat='48.33361' lon='12.5242548' />
+  <node id='290982366' timestamp='2016-04-17T18:26:17Z' uid='3249777' user='opendcc' version='8' changeset='38649106' lat='48.3331565' lon='12.5246203' />
+  <node id='290982367' timestamp='2017-09-20T04:02:11Z' uid='3249777' user='opendcc' version='14' changeset='52197549' lat='48.3310466' lon='12.5274028' />
+  <node id='290982368' timestamp='2016-04-17T18:26:17Z' uid='3249777' user='opendcc' version='14' changeset='38649106' lat='48.3307857' lon='12.5277778' />
+  <node id='290982369' timestamp='2015-12-05T11:00:10Z' uid='3249777' user='opendcc' version='14' changeset='35766371' lat='48.3301815' lon='12.52851' />
+  <node id='290982370' timestamp='2015-12-05T11:00:10Z' uid='3249777' user='opendcc' version='14' changeset='35766371' lat='48.3297158' lon='12.528968' />
+  <node id='290982371' timestamp='2017-08-10T17:30:31Z' uid='3249777' user='opendcc' version='15' changeset='51008971' lat='48.3293411' lon='12.5292716' />
+  <node id='290982372' timestamp='2017-08-10T17:30:31Z' uid='3249777' user='opendcc' version='15' changeset='51008971' lat='48.3284911' lon='12.5298239' />
+  <node id='290982373' timestamp='2017-08-10T17:30:31Z' uid='3249777' user='opendcc' version='14' changeset='51008971' lat='48.3277973' lon='12.5303036' />
+  <node id='290982374' timestamp='2011-08-01T20:35:45Z' uid='166830' user='Ja_Meister!' version='13' changeset='8894343' lat='48.3264113' lon='12.5326642' />
+  <node id='290982375' timestamp='2015-12-05T11:00:10Z' uid='3249777' user='opendcc' version='14' changeset='35766371' lat='48.3262192' lon='12.5332911' />
+  <node id='290982376' timestamp='2015-12-05T11:00:10Z' uid='3249777' user='opendcc' version='15' changeset='35766371' lat='48.3253174' lon='12.5350634' />
+  <node id='290982377' timestamp='2015-12-05T11:00:10Z' uid='3249777' user='opendcc' version='14' changeset='35766371' lat='48.3230422' lon='12.5367128' />
+  <node id='290982378' timestamp='2014-07-04T09:13:40Z' uid='166830' user='Ja_Meister!' version='14' changeset='23914795' lat='48.3215404' lon='12.5391602' />
+  <node id='290982431' timestamp='2014-07-04T09:13:40Z' uid='166830' user='Ja_Meister!' version='14' changeset='23914795' lat='48.3211657' lon='12.5412541' />
+  <node id='290982433' timestamp='2014-06-04T20:55:34Z' uid='195062' user='blauloke' version='14' changeset='22743367' lat='48.320875' lon='12.5438069' />
+  <node id='290982445' timestamp='2011-08-01T20:49:36Z' uid='166830' user='Ja_Meister!' version='13' changeset='8894343' lat='48.3207717' lon='12.5443806' />
+  <node id='290982447' timestamp='2017-07-30T14:28:35Z' uid='3249777' user='opendcc' version='14' changeset='50695091' lat='48.320413' lon='12.5458417' />
+  <node id='290982484' timestamp='2017-07-30T14:28:35Z' uid='3249777' user='opendcc' version='14' changeset='50695091' lat='48.3199722' lon='12.5475053' />
+  <node id='290982485' timestamp='2017-07-30T14:28:35Z' uid='3249777' user='opendcc' version='14' changeset='50695091' lat='48.3192417' lon='12.5505326' />
+  <node id='290982486' timestamp='2017-07-30T14:28:35Z' uid='3249777' user='opendcc' version='15' changeset='50695091' lat='48.3186429' lon='12.5533389' />
+  <node id='290982487' timestamp='2017-07-30T14:28:35Z' uid='3249777' user='opendcc' version='17' changeset='50695091' lat='48.3179539' lon='12.5550956'>
+    <tag k='name' v='Stetten' />
+    <tag k='traffic_sign' v='city_limit' />
+  </node>
+  <node id='290982488' timestamp='2017-07-30T14:28:35Z' uid='3249777' user='opendcc' version='15' changeset='50695091' lat='48.317443' lon='12.5557807' />
+  <node id='290982490' timestamp='2013-08-19T16:47:38Z' uid='166830' user='Ja_Meister!' version='14' changeset='17413864' lat='48.313215' lon='12.5589068' />
+  <node id='290982491' timestamp='2013-08-19T16:47:37Z' uid='166830' user='Ja_Meister!' version='14' changeset='17413864' lat='48.3129405' lon='12.5591721' />
+  <node id='290982492' timestamp='2013-08-19T16:47:38Z' uid='166830' user='Ja_Meister!' version='14' changeset='17413864' lat='48.3125955' lon='12.5595347' />
+  <node id='290982494' timestamp='2017-10-14T19:53:17Z' uid='3249777' user='opendcc' version='14' changeset='52936980' lat='48.3093542' lon='12.5614768' />
+  <node id='290982610' timestamp='2017-07-26T03:27:47Z' uid='3249777' user='opendcc' version='14' changeset='50574752' lat='48.3085618' lon='12.5617875' />
+  <node id='290982612' timestamp='2011-08-01T20:49:34Z' uid='166830' user='Ja_Meister!' version='14' changeset='8894343' lat='48.307298' lon='12.5619973' />
+  <node id='290982613' timestamp='2017-07-26T03:27:47Z' uid='3249777' user='opendcc' version='14' changeset='50574752' lat='48.3063195' lon='12.5618291' />
+  <node id='290982615' timestamp='2011-08-01T20:49:36Z' uid='166830' user='Ja_Meister!' version='13' changeset='8894343' lat='48.3047571' lon='12.5618332' />
+  <node id='290982617' timestamp='2015-08-03T14:24:45Z' uid='14390' user='BeKri' version='14' changeset='33071513' lat='48.3021259' lon='12.5632843' />
+  <node id='290982618' timestamp='2017-07-26T03:27:47Z' uid='3249777' user='opendcc' version='14' changeset='50574752' lat='48.3018112' lon='12.5633304' />
+  <node id='290982620' timestamp='2015-08-03T14:24:45Z' uid='14390' user='BeKri' version='14' changeset='33071513' lat='48.2997967' lon='12.5632026' />
+  <node id='290982621' timestamp='2015-08-03T14:24:45Z' uid='14390' user='BeKri' version='15' changeset='33071513' lat='48.2991466' lon='12.5633018' />
+  <node id='290982622' timestamp='2017-07-26T03:35:45Z' uid='3249777' user='opendcc' version='15' changeset='50574834' lat='48.2973449' lon='12.5636615' />
+  <node id='290982624' timestamp='2017-07-26T03:35:45Z' uid='3249777' user='opendcc' version='15' changeset='50574834' lat='48.2961779' lon='12.5634161' />
+  <node id='290982625' timestamp='2017-07-26T03:35:45Z' uid='3249777' user='opendcc' version='16' changeset='50574834' lat='48.2953469' lon='12.5629347' />
+  <node id='290982627' timestamp='2016-02-04T21:17:45Z' uid='3249777' user='opendcc' version='15' changeset='37008659' lat='48.2942861' lon='12.5618981' />
+  <node id='290982628' timestamp='2016-02-04T21:17:45Z' uid='3249777' user='opendcc' version='15' changeset='37008659' lat='48.2934698' lon='12.56116' />
+  <node id='290982665' timestamp='2017-01-22T17:04:48Z' uid='3249777' user='opendcc' version='15' changeset='45373909' lat='48.292895' lon='12.5608588' />
+  <node id='290982667' timestamp='2016-04-17T18:26:17Z' uid='3249777' user='opendcc' version='14' changeset='38649106' lat='48.2910229' lon='12.5602433' />
+  <node id='290982668' timestamp='2016-04-17T18:26:17Z' uid='3249777' user='opendcc' version='14' changeset='38649106' lat='48.289849' lon='12.5594039' />
+  <node id='290982669' timestamp='2016-04-17T18:26:17Z' uid='3249777' user='opendcc' version='14' changeset='38649106' lat='48.2893273' lon='12.5592031' />
+  <node id='290982670' timestamp='2016-04-17T18:26:17Z' uid='3249777' user='opendcc' version='17' changeset='38649106' lat='48.2866289' lon='12.5591258' />
+  <node id='290982686' timestamp='2012-11-18T23:28:10Z' uid='834127' user='kartler175' version='14' changeset='13926180' lat='48.2780591' lon='12.5533898' />
+  <node id='290982690' timestamp='2015-02-02T19:14:08Z' uid='372615' user='sennewald63' version='15' changeset='28574180' lat='48.275409' lon='12.5528763' />
+  <node id='290982691' timestamp='2012-11-18T23:28:10Z' uid='834127' user='kartler175' version='6' changeset='13926180' lat='48.2743795' lon='12.5526839'>
+    <tag k='TMC:cid_58:tabcd_1:Class' v='Point' />
+    <tag k='TMC:cid_58:tabcd_1:Direction' v='both' />
+    <tag k='TMC:cid_58:tabcd_1:LCLversion' v='8.00' />
+    <tag k='TMC:cid_58:tabcd_1:LocationCode' v='42379' />
+    <tag k='TMC:cid_58:tabcd_1:NextLocationCode' v='27571' />
+    <tag k='TMC:cid_58:tabcd_1:PrevLocationCode' v='27570' />
+  </node>
+  <node id='293586470' timestamp='2014-05-31T07:21:28Z' uid='166830' user='Ja_Meister!' version='6' changeset='22650921' lat='48.2551434' lon='12.5451965' />
+  <node id='293586472' timestamp='2016-11-08T17:23:44Z' uid='3249777' user='opendcc' version='7' changeset='43493600' lat='48.2554286' lon='12.5457985' />
+  <node id='293586474' timestamp='2016-11-08T17:23:44Z' uid='3249777' user='opendcc' version='7' changeset='43493600' lat='48.255778' lon='12.5462729' />
+  <node id='293586476' timestamp='2016-11-08T17:23:44Z' uid='3249777' user='opendcc' version='7' changeset='43493600' lat='48.2558739' lon='12.5463667' />
+  <node id='293586477' timestamp='2014-05-31T07:21:28Z' uid='166830' user='Ja_Meister!' version='6' changeset='22650921' lat='48.2563182' lon='12.5466822' />
+  <node id='293586482' timestamp='2014-05-31T07:21:28Z' uid='166830' user='Ja_Meister!' version='7' changeset='22650921' lat='48.2567048' lon='12.546818' />
+  <node id='293586486' timestamp='2014-05-31T07:21:28Z' uid='166830' user='Ja_Meister!' version='7' changeset='22650921' lat='48.2573499' lon='12.5467935' />
+  <node id='293586487' timestamp='2014-05-31T07:21:28Z' uid='166830' user='Ja_Meister!' version='7' changeset='22650921' lat='48.2577947' lon='12.5466019' />
+  <node id='293586489' timestamp='2014-05-31T07:21:28Z' uid='166830' user='Ja_Meister!' version='7' changeset='22650921' lat='48.2582196' lon='12.5463062' />
+  <node id='293586493' timestamp='2016-10-11T17:48:49Z' uid='3249777' user='opendcc' version='7' changeset='42808869' lat='48.2606978' lon='12.5438557'>
+    <tag k='highway' v='traffic_signals' />
+  </node>
+  <node id='293586498' timestamp='2014-05-31T09:13:58Z' uid='166830' user='Ja_Meister!' version='8' changeset='22652212' lat='48.2613311' lon='12.5432403' />
+  <node id='293586502' timestamp='2014-05-31T09:13:58Z' uid='166830' user='Ja_Meister!' version='8' changeset='22652212' lat='48.2616162' lon='12.5430481' />
+  <node id='293586507' timestamp='2016-02-14T10:44:04Z' uid='3249777' user='opendcc' version='8' changeset='37201355' lat='48.262012' lon='12.5429197' />
+  <node id='293586540' timestamp='2016-02-14T10:44:04Z' uid='3249777' user='opendcc' version='8' changeset='37201355' lat='48.2625436' lon='12.5429316' />
+  <node id='293586543' timestamp='2016-10-11T02:23:41Z' uid='3249777' user='opendcc' version='6' changeset='42790786' lat='48.26316' lon='12.5432541' />
+  <node id='293586546' timestamp='2014-05-31T09:13:58Z' uid='166830' user='Ja_Meister!' version='5' changeset='22652212' lat='48.2634434' lon='12.5435426' />
+  <node id='293586548' timestamp='2016-10-11T02:23:41Z' uid='3249777' user='opendcc' version='8' changeset='42790786' lat='48.2648009' lon='12.5458668' />
+  <node id='293586550' timestamp='2016-10-11T02:23:41Z' uid='3249777' user='opendcc' version='7' changeset='42790786' lat='48.2652546' lon='12.5464292' />
+  <node id='293586552' timestamp='2014-05-31T09:13:59Z' uid='166830' user='Ja_Meister!' version='6' changeset='22652212' lat='48.265836' lon='12.5468141' />
+  <node id='293586557' timestamp='2014-05-31T09:13:59Z' uid='166830' user='Ja_Meister!' version='7' changeset='22652212' lat='48.2686515' lon='12.548169' />
+  <node id='293586559' timestamp='2014-05-31T09:13:59Z' uid='166830' user='Ja_Meister!' version='7' changeset='22652212' lat='48.2693151' lon='12.5486118' />
+  <node id='293586567' timestamp='2012-11-18T23:28:10Z' uid='834127' user='kartler175' version='6' changeset='13926180' lat='48.2702913' lon='12.549504' />
+  <node id='293586578' timestamp='2013-04-07T16:45:17Z' uid='166830' user='Ja_Meister!' version='6' changeset='15643186' lat='48.2516264' lon='12.5325457' />
+  <node id='293586608' timestamp='2017-02-22T18:05:15Z' uid='3249777' user='opendcc' version='6' changeset='46314560' lat='48.2520017' lon='12.5288293' />
+  <node id='293586610' timestamp='2017-02-22T18:05:15Z' uid='3249777' user='opendcc' version='8' changeset='46314560' lat='48.2520915' lon='12.5261439' />
+  <node id='293628309' timestamp='2016-03-30T16:16:58Z' uid='3249777' user='opendcc' version='6' changeset='38171916' lat='48.2723537' lon='12.5515794' />
+  <node id='293628310' timestamp='2016-03-30T16:16:58Z' uid='3249777' user='opendcc' version='6' changeset='38171916' lat='48.2723011' lon='12.5515905' />
+  <node id='293628311' timestamp='2016-03-30T16:16:58Z' uid='3249777' user='opendcc' version='8' changeset='38171916' lat='48.2721948' lon='12.5518006' />
+  <node id='293628315' timestamp='2016-03-30T16:16:58Z' uid='3249777' user='opendcc' version='7' changeset='38171916' lat='48.2722002' lon='12.5518736' />
+  <node id='293628316' timestamp='2016-03-30T16:16:58Z' uid='3249777' user='opendcc' version='6' changeset='38171916' lat='48.2722127' lon='12.5519201' />
+  <node id='293628318' timestamp='2016-03-30T16:16:58Z' uid='3249777' user='opendcc' version='16' changeset='38171916' lat='48.2723632' lon='12.5520412' />
+  <node id='293628320' timestamp='2016-03-30T16:16:58Z' uid='3249777' user='opendcc' version='6' changeset='38171916' lat='48.2724157' lon='12.5520191' />
+  <node id='293628321' timestamp='2016-03-30T16:16:58Z' uid='3249777' user='opendcc' version='6' changeset='38171916' lat='48.2724938' lon='12.551888' />
+  <node id='293628322' timestamp='2016-03-30T16:16:58Z' uid='3249777' user='opendcc' version='7' changeset='38171916' lat='48.2725023' lon='12.5517967' />
+  <node id='293628332' timestamp='2016-03-30T16:16:58Z' uid='3249777' user='opendcc' version='6' changeset='38171916' lat='48.2724797' lon='12.5516893' />
+  <node id='293845748' timestamp='2014-05-31T07:21:28Z' uid='166830' user='Ja_Meister!' version='5' changeset='22650921' lat='48.254613' lon='12.5438457'>
+    <tag k='highway' v='traffic_signals' />
+  </node>
+  <node id='298485923' timestamp='2017-10-31T18:24:13Z' uid='3249777' user='opendcc' version='3' changeset='53403568' lat='48.2488594' lon='12.5240014' />
+  <node id='298493165' timestamp='2016-08-14T08:49:52Z' uid='3249777' user='opendcc' version='3' changeset='41442463' lat='48.2473423' lon='12.5239983' />
+  <node id='298493993' timestamp='2011-06-12T08:10:58Z' uid='166830' user='Ja_Meister!' version='2' changeset='8412322' lat='48.2459918' lon='12.5261284' />
+  <node id='298493999' timestamp='2015-12-24T18:02:28Z' uid='3249777' user='opendcc' version='4' changeset='36148816' lat='48.244742' lon='12.5268564' />
+  <node id='298494003' timestamp='2017-01-27T17:09:54Z' uid='3249777' user='opendcc' version='5' changeset='45567381' lat='48.2459095' lon='12.5271062' />
+  <node id='303907984' timestamp='2013-04-07T16:45:17Z' uid='166830' user='Ja_Meister!' version='4' changeset='15643186' lat='48.2516226' lon='12.533227' />
+  <node id='309070881' timestamp='2017-02-18T10:22:14Z' uid='3249777' user='opendcc' version='12' changeset='46188735' lat='48.2860203' lon='12.5588507'>
+    <tag k='tmc' v='DE:27571' />
+  </node>
+  <node id='314282330' timestamp='2014-07-05T19:36:27Z' uid='166830' user='Ja_Meister!' version='5' changeset='23972443' lat='48.3510668' lon='12.5092456' />
+  <node id='320917013' timestamp='2017-07-30T14:28:35Z' uid='3249777' user='opendcc' version='6' changeset='50695091' lat='48.3176954' lon='12.5554791' />
+  <node id='324328606' timestamp='2016-05-01T15:52:52Z' uid='3249777' user='opendcc' version='10' changeset='39019508' lat='48.3621377' lon='12.5058097' />
+  <node id='324328607' timestamp='2016-05-01T15:52:52Z' uid='3249777' user='opendcc' version='6' changeset='39019508' lat='48.3621333' lon='12.5060302' />
+  <node id='324328765' timestamp='2016-05-01T15:52:52Z' uid='3249777' user='opendcc' version='11' changeset='39019508' lat='48.3622406' lon='12.5060123' />
+  <node id='324328766' timestamp='2016-05-01T15:52:52Z' uid='3249777' user='opendcc' version='9' changeset='39019508' lat='48.3622648' lon='12.5059343' />
+  <node id='324328767' timestamp='2016-12-16T14:32:34Z' uid='3249777' user='opendcc' version='10' changeset='44449010' lat='48.3622466' lon='12.5058398' />
+  <node id='324328904' timestamp='2016-05-01T15:52:52Z' uid='3249777' user='opendcc' version='6' changeset='39019508' lat='48.3620946' lon='12.505937' />
+  <node id='370391447' timestamp='2016-02-10T14:19:33Z' uid='43021' user='Czmartin' version='3' changeset='37125552' lat='48.360149' lon='12.5088316' />
+  <node id='370391448' timestamp='2016-02-10T14:19:33Z' uid='43021' user='Czmartin' version='3' changeset='37125552' lat='48.3602061' lon='12.5087778' />
+  <node id='406348055' timestamp='2016-04-26T17:02:38Z' uid='3249777' user='opendcc' version='3' changeset='38894084' lat='48.359522' lon='12.5106445' />
+  <node id='406348056' timestamp='2016-04-26T17:02:38Z' uid='3249777' user='opendcc' version='3' changeset='38894084' lat='48.3594247' lon='12.5108162' />
+  <node id='420912827' timestamp='2016-03-29T21:32:51Z' uid='3249777' user='opendcc' version='5' changeset='38153642' lat='48.2790168' lon='12.5533672' />
+  <node id='424239693' timestamp='2013-04-07T16:59:09Z' uid='166830' user='Ja_Meister!' version='3' changeset='15643186' lat='48.2519591' lon='12.5293068'>
+    <tag k='highway' v='traffic_signals' />
+  </node>
+  <node id='424428542' timestamp='2013-04-07T16:59:09Z' uid='166830' user='Ja_Meister!' version='2' changeset='15643186' lat='48.2518033' lon='12.5304545' />
+  <node id='424487424' timestamp='2016-10-11T02:05:25Z' uid='3249777' user='opendcc' version='4' changeset='42790672' lat='48.2714588' lon='12.5509257' />
+  <node id='431801934' timestamp='2012-11-18T23:28:13Z' uid='834127' user='kartler175' version='2' changeset='13926180' lat='48.2679609' lon='12.5477874' />
+  <node id='431805630' timestamp='2016-09-20T19:06:22Z' uid='3249777' user='opendcc' version='3' changeset='42306832' lat='48.2771592' lon='12.5532066' />
+  <node id='431839262' timestamp='2012-11-18T23:28:14Z' uid='834127' user='kartler175' version='3' changeset='13926180' lat='48.2777965' lon='12.5533328' />
+  <node id='431839265' timestamp='2012-11-18T23:28:14Z' uid='834127' user='kartler175' version='3' changeset='13926180' lat='48.2774099' lon='12.5532593' />
+  <node id='431846346' timestamp='2016-04-16T15:04:49Z' uid='3249777' user='opendcc' version='4' changeset='38625158' lat='48.2786016' lon='12.553419' />
+  <node id='431846391' timestamp='2016-04-16T15:04:49Z' uid='3249777' user='opendcc' version='5' changeset='38625158' lat='48.278798' lon='12.5534034' />
+  <node id='431854805' timestamp='2017-10-04T03:17:30Z' uid='3249777' user='opendcc' version='9' changeset='52612827' lat='48.2852446' lon='12.5580335' />
+  <node id='431854812' timestamp='2017-09-16T09:11:55Z' uid='3249777' user='opendcc' version='7' changeset='52090066' lat='48.2842361' lon='12.5563179' />
+  <node id='431854816' timestamp='2009-07-01T21:17:56Z' uid='135809' user='Xygen' version='1' changeset='1704372' lat='48.2833572' lon='12.5550156' />
+  <node id='431854820' timestamp='2017-10-06T16:35:20Z' uid='3249777' user='opendcc' version='3' changeset='52688033' lat='48.2830773' lon='12.5546614' />
+  <node id='431854826' timestamp='2017-10-06T16:35:20Z' uid='3249777' user='opendcc' version='4' changeset='52688033' lat='48.2825107' lon='12.5540223' />
+  <node id='431854831' timestamp='2016-02-04T21:17:45Z' uid='3249777' user='opendcc' version='3' changeset='37008659' lat='48.2820302' lon='12.5535815' />
+  <node id='431854834' timestamp='2016-04-16T15:04:49Z' uid='3249777' user='opendcc' version='4' changeset='38625158' lat='48.2813541' lon='12.553159' />
+  <node id='431854841' timestamp='2014-05-31T19:51:39Z' uid='166830' user='Ja_Meister!' version='2' changeset='22662107' lat='48.280711' lon='12.5529877' />
+  <node id='431854846' timestamp='2011-08-01T20:49:36Z' uid='166830' user='Ja_Meister!' version='2' changeset='8894343' lat='48.2801681' lon='12.5530028' />
+  <node id='434506450' timestamp='2017-12-09T12:42:13Z' uid='85475' user='miche101' version='6' changeset='54484876' lat='48.334028' lon='12.5238612' />
+  <node id='469717655' timestamp='2015-10-21T19:22:31Z' uid='3249777' user='opendcc' version='4' changeset='34786188' lat='48.3027482' lon='12.5630434' />
+  <node id='496282111' timestamp='2012-11-18T23:28:14Z' uid='834127' user='kartler175' version='2' changeset='13926180' lat='48.2779072' lon='12.5533554' />
+  <node id='509302527' timestamp='2015-08-03T14:24:46Z' uid='14390' user='BeKri' version='3' changeset='33071513' lat='48.3110567' lon='12.5606442' />
+  <node id='509302543' timestamp='2016-02-21T09:43:55Z' uid='3249777' user='opendcc' version='4' changeset='37343150' lat='48.3135053' lon='12.558658' />
+  <node id='516923363' timestamp='2009-10-02T01:10:15Z' uid='104923' user='Sick219' version='1' changeset='2707015' lat='48.2906806' lon='12.5600083' />
+  <node id='520540400' timestamp='2016-04-24T19:42:32Z' uid='3249777' user='opendcc' version='3' changeset='38841028' lat='48.2460404' lon='12.5252498' />
+  <node id='520540422' timestamp='2015-12-24T18:02:28Z' uid='3249777' user='opendcc' version='4' changeset='36148816' lat='48.2452861' lon='12.527003' />
+  <node id='520540663' timestamp='2017-01-28T21:01:10Z' uid='3249777' user='opendcc' version='3' changeset='45604012' lat='48.2461037' lon='12.5240655' />
+  <node id='520540672' timestamp='2017-01-28T21:01:10Z' uid='3249777' user='opendcc' version='4' changeset='45604012' lat='48.2472934' lon='12.5242822' />
+  <node id='528064342' timestamp='2017-07-30T10:54:11Z' uid='3249777' user='opendcc' version='4' changeset='50690303' lat='48.3053119' lon='12.5617283' />
+  <node id='566128118' timestamp='2016-11-27T04:16:47Z' uid='3249777' user='opendcc' version='3' changeset='43976568' lat='48.2519914' lon='12.536537' />
+  <node id='588675717' timestamp='2015-12-05T11:00:11Z' uid='3249777' user='opendcc' version='3' changeset='35766371' lat='48.3232972' lon='12.5364994' />
+  <node id='747374131' timestamp='2016-04-26T17:02:38Z' uid='3249777' user='opendcc' version='3' changeset='38894084' lat='48.3528935' lon='12.5108371' />
+  <node id='747374164' timestamp='2016-04-26T17:02:38Z' uid='3249777' user='opendcc' version='2' changeset='38894084' lat='48.3548194' lon='12.5124417' />
+  <node id='747374169' timestamp='2016-04-26T17:02:38Z' uid='3249777' user='opendcc' version='2' changeset='38894084' lat='48.3542869' lon='12.511671' />
+  <node id='747374173' timestamp='2016-04-26T17:02:38Z' uid='3249777' user='opendcc' version='3' changeset='38894084' lat='48.3561191' lon='12.5129872' />
+  <node id='747374176' timestamp='2016-04-26T17:02:38Z' uid='3249777' user='opendcc' version='4' changeset='38894084' lat='48.3559831' lon='12.512867' />
+  <node id='747374260' timestamp='2016-12-07T10:29:14Z' uid='4045355' user='e_kloth' version='2' changeset='44231677' lat='48.361376' lon='12.5037381' />
+  <node id='747374261' timestamp='2010-05-24T19:36:08Z' uid='15035' user='grungelborz' version='1' changeset='4797576' lat='48.3615217' lon='12.5038435' />
+  <node id='747374262' timestamp='2010-05-24T19:36:08Z' uid='15035' user='grungelborz' version='1' changeset='4797576' lat='48.3616245' lon='12.5039982' />
+  <node id='747374289' timestamp='2016-04-26T17:02:39Z' uid='3249777' user='opendcc' version='3' changeset='38894084' lat='48.3563962' lon='12.5132232' />
+  <node id='747374300' timestamp='2017-06-11T15:09:50Z' uid='3249777' user='opendcc' version='4' changeset='49444671' lat='48.3581158' lon='12.511881' />
+  <node id='747374307' timestamp='2011-03-24T10:10:13Z' uid='205377' user='geoMILLImeter' version='2' changeset='7654396' lat='48.3604771' lon='12.5086018' />
+  <node id='747374309' timestamp='2017-11-16T21:28:45Z' uid='3249777' user='opendcc' version='4' changeset='53855999' lat='48.3615279' lon='12.5079725' />
+  <node id='747374313' timestamp='2017-11-16T21:28:45Z' uid='3249777' user='opendcc' version='4' changeset='53855999' lat='48.3611615' lon='12.5081981' />
+  <node id='747374525' timestamp='2016-02-07T11:10:01Z' uid='3249777' user='opendcc' version='2' changeset='37057327' lat='48.3619437' lon='12.5044508' />
+  <node id='747444580' timestamp='2016-05-01T15:52:52Z' uid='3249777' user='opendcc' version='3' changeset='39019508' lat='48.3620954' lon='12.5058993' />
+  <node id='747444583' timestamp='2013-08-12T10:56:41Z' uid='166830' user='Ja_Meister!' version='4' changeset='17314437' lat='48.362125' lon='12.5076832' />
+  <node id='748288779' timestamp='2016-02-10T14:19:33Z' uid='43021' user='Czmartin' version='4' changeset='37125552' lat='48.359916' lon='12.50907'>
+    <tag k='barrier' v='sally_port' />
+    <tag k='historic' v='city_gate' />
+  </node>
+  <node id='748288789' timestamp='2013-01-13T21:51:37Z' uid='834127' user='kartler175' version='2' changeset='14641618' lat='48.3595836' lon='12.5102249' />
+  <node id='748288795' timestamp='2013-01-13T21:51:37Z' uid='834127' user='kartler175' version='2' changeset='14641618' lat='48.3595655' lon='12.5103437'>
+    <tag k='crossing' v='traffic_signals' />
+    <tag k='highway' v='traffic_signals' />
+  </node>
+  <node id='748288929' timestamp='2016-02-07T11:10:01Z' uid='3249777' user='opendcc' version='2' changeset='37057327' lat='48.3619317' lon='12.5046155' />
+  <node id='809520226' timestamp='2017-02-18T10:22:15Z' uid='3249777' user='opendcc' version='7' changeset='46188735' lat='48.2855406' lon='12.558423' />
+  <node id='809589580' timestamp='2017-02-18T10:22:15Z' uid='3249777' user='opendcc' version='5' changeset='46188735' lat='48.285445' lon='12.5583062' />
+  <node id='1164687406' timestamp='2016-02-21T09:43:53Z' uid='3249777' user='opendcc' version='4' changeset='37343150' lat='48.3122367' lon='12.5598835' />
+  <node id='1215799801' timestamp='2011-03-24T10:10:03Z' uid='205377' user='geoMILLImeter' version='1' changeset='7654396' lat='48.3620335' lon='12.5077365' />
+  <node id='1215799818' timestamp='2011-03-24T10:10:03Z' uid='205377' user='geoMILLImeter' version='1' changeset='7654396' lat='48.3618738' lon='12.5077868' />
+  <node id='1215799874' timestamp='2013-08-12T10:56:41Z' uid='166830' user='Ja_Meister!' version='2' changeset='17314437' lat='48.3619382' lon='12.5077711' />
+  <node id='1215799876' timestamp='2016-02-10T14:19:32Z' uid='43021' user='Czmartin' version='2' changeset='37125552' lat='48.3599493' lon='12.509031' />
+  <node id='1215799887' timestamp='2011-03-24T10:10:06Z' uid='205377' user='geoMILLImeter' version='1' changeset='7654396' lat='48.3617272' lon='12.5078501' />
+  <node id='1253877680' timestamp='2015-10-22T18:25:20Z' uid='3249777' user='opendcc' version='5' changeset='34806309' lat='48.3451641' lon='12.5092792' />
+  <node id='1261655994' timestamp='2014-07-04T09:13:39Z' uid='166830' user='Ja_Meister!' version='3' changeset='23914795' lat='48.3211081' lon='12.5419367' />
+  <node id='1262273959' timestamp='2015-10-22T18:25:20Z' uid='3249777' user='opendcc' version='4' changeset='34806309' lat='48.3463227' lon='12.509851' />
+  <node id='1321432271' timestamp='2011-06-12T08:40:48Z' uid='166830' user='Ja_Meister!' version='1' changeset='8412322' lat='48.2460767' lon='12.5245593' />
+  <node id='1377328091' timestamp='2017-07-26T03:27:47Z' uid='3249777' user='opendcc' version='2' changeset='50574752' lat='48.3042032' lon='12.5620833' />
+  <node id='1382200604' timestamp='2016-04-30T15:30:27Z' uid='3249777' user='opendcc' version='2' changeset='39001293' lat='48.3386227' lon='12.5166893' />
+  <node id='1382200606' timestamp='2011-08-01T20:35:40Z' uid='166830' user='Ja_Meister!' version='1' changeset='8894343' lat='48.3379131' lon='12.5177924' />
+  <node id='1382200614' timestamp='2011-08-01T20:35:40Z' uid='166830' user='Ja_Meister!' version='1' changeset='8894343' lat='48.3374231' lon='12.5189146' />
+  <node id='1382200616' timestamp='2016-04-17T18:26:15Z' uid='3249777' user='opendcc' version='2' changeset='38649106' lat='48.3371809' lon='12.519489' />
+  <node id='1382200617' timestamp='2011-08-01T20:35:40Z' uid='166830' user='Ja_Meister!' version='1' changeset='8894343' lat='48.3350581' lon='12.5224192' />
+  <node id='1382200618' timestamp='2011-08-01T20:35:41Z' uid='166830' user='Ja_Meister!' version='1' changeset='8894343' lat='48.3355685' lon='12.5217331' />
+  <node id='1382200621' timestamp='2011-08-01T20:35:41Z' uid='166830' user='Ja_Meister!' version='1' changeset='8894343' lat='48.3321303' lon='12.5256121' />
+  <node id='1382200627' timestamp='2011-08-01T20:35:41Z' uid='166830' user='Ja_Meister!' version='1' changeset='8894343' lat='48.3325026' lon='12.5251701' />
+  <node id='1382200631' timestamp='2015-12-05T11:00:09Z' uid='3249777' user='opendcc' version='2' changeset='35766371' lat='48.3272629' lon='12.5308605' />
+  <node id='1382200633' timestamp='2017-08-10T17:30:31Z' uid='3249777' user='opendcc' version='2' changeset='51008971' lat='48.327009' lon='12.5312457' />
+  <node id='1382200635' timestamp='2017-06-11T20:21:43Z' uid='3249777' user='opendcc' version='2' changeset='49451083' lat='48.3258231' lon='12.5342875' />
+  <node id='1382200637' timestamp='2015-12-05T11:00:09Z' uid='3249777' user='opendcc' version='3' changeset='35766371' lat='48.3251322' lon='12.5352805' />
+  <node id='1382200639' timestamp='2017-06-11T20:21:43Z' uid='3249777' user='opendcc' version='3' changeset='49451083' lat='48.3256659' lon='12.5345691' />
+  <node id='1382200640' timestamp='2017-06-11T20:21:43Z' uid='3249777' user='opendcc' version='3' changeset='49451083' lat='48.3266518' lon='12.5319564' />
+  <node id='1382200647' timestamp='2016-04-26T17:02:37Z' uid='3249777' user='opendcc' version='3' changeset='38894084' lat='48.3538416' lon='12.5112517' />
+  <node id='1382200649' timestamp='2012-09-04T18:33:56Z' uid='437696' user='feisen' version='2' changeset='12985621' lat='48.3448908' lon='12.5092124' />
+  <node id='1382200659' timestamp='2012-09-04T18:33:56Z' uid='437696' user='feisen' version='2' changeset='12985621' lat='48.3437938' lon='12.5096079' />
+  <node id='1382200660' timestamp='2011-08-01T20:35:41Z' uid='166830' user='Ja_Meister!' version='1' changeset='8894343' lat='48.3426655' lon='12.5111856' />
+  <node id='1382200661' timestamp='2015-10-22T18:25:20Z' uid='3249777' user='opendcc' version='3' changeset='34806309' lat='48.3484586' lon='12.5103702' />
+  <node id='1382223117' timestamp='2016-03-29T21:32:51Z' uid='3249777' user='opendcc' version='3' changeset='38153642' lat='48.2796091' lon='12.5531577' />
+  <node id='1382223118' timestamp='2015-12-05T11:00:09Z' uid='3249777' user='opendcc' version='2' changeset='35766371' lat='48.3225372' lon='12.5372481' />
+  <node id='1382223120' timestamp='2014-07-04T09:13:39Z' uid='166830' user='Ja_Meister!' version='2' changeset='23914795' lat='48.3212231' lon='12.5406639' />
+  <node id='1382223130' timestamp='2015-12-05T11:00:10Z' uid='3249777' user='opendcc' version='2' changeset='35766371' lat='48.321919' lon='12.53825' />
+  <node id='1382223131' timestamp='2017-07-30T14:28:35Z' uid='3249777' user='opendcc' version='3' changeset='50695091' lat='48.3185427' lon='12.5537067' />
+  <node id='1382223133' timestamp='2017-07-30T14:28:35Z' uid='3249777' user='opendcc' version='3' changeset='50695091' lat='48.3183396' lon='12.5543065' />
+  <node id='1382223135' timestamp='2015-08-03T14:24:43Z' uid='14390' user='BeKri' version='2' changeset='33071513' lat='48.3170897' lon='12.5561148' />
+  <node id='1382223136' timestamp='2011-08-01T20:49:31Z' uid='166830' user='Ja_Meister!' version='1' changeset='8894343' lat='48.3166008' lon='12.5564355' />
+  <node id='1382223138' timestamp='2015-08-03T14:24:43Z' uid='14390' user='BeKri' version='2' changeset='33071513' lat='48.3160226' lon='12.5566776' />
+  <node id='1382223144' timestamp='2014-07-04T09:13:40Z' uid='166830' user='Ja_Meister!' version='2' changeset='23914795' lat='48.3214046' lon='12.5396496' />
+  <node id='1382223145' timestamp='2011-08-01T20:49:31Z' uid='166830' user='Ja_Meister!' version='1' changeset='8894343' lat='48.3156615' lon='12.5568615' />
+  <node id='1382223146' timestamp='2011-08-01T20:49:32Z' uid='166830' user='Ja_Meister!' version='1' changeset='8894343' lat='48.3149887' lon='12.5574907' />
+  <node id='1382223147' timestamp='2017-10-23T03:06:34Z' uid='3249777' user='opendcc' version='3' changeset='53166198' lat='48.3145706' lon='12.5578922' />
+  <node id='1382223148' timestamp='2011-08-01T20:49:32Z' uid='166830' user='Ja_Meister!' version='1' changeset='8894343' lat='48.31539' lon='12.5570621' />
+  <node id='1382223150' timestamp='2016-02-21T09:43:53Z' uid='3249777' user='opendcc' version='3' changeset='37343150' lat='48.3118155' lon='12.5601951' />
+  <node id='1382223155' timestamp='2017-07-26T03:27:47Z' uid='3249777' user='opendcc' version='2' changeset='50574752' lat='48.3080137' lon='12.561946' />
+  <node id='1382223161' timestamp='2017-07-26T03:35:45Z' uid='3249777' user='opendcc' version='3' changeset='50574834' lat='48.2967473' lon='12.5635955' />
+  <node id='1382223163' timestamp='2017-07-26T03:35:45Z' uid='3249777' user='opendcc' version='3' changeset='50574834' lat='48.2979812' lon='12.5636096' />
+  <node id='1382223166' timestamp='2016-02-04T21:17:44Z' uid='3249777' user='opendcc' version='2' changeset='37008659' lat='48.2947148' lon='12.5623598' />
+  <node id='1382223169' timestamp='2016-04-17T18:26:15Z' uid='3249777' user='opendcc' version='2' changeset='38649106' lat='48.2889497' lon='12.5591599' />
+  <node id='1382223171' timestamp='2016-04-17T18:26:16Z' uid='3249777' user='opendcc' version='3' changeset='38649106' lat='48.2877488' lon='12.5592015' />
+  <node id='1382223189' timestamp='2015-12-05T11:00:10Z' uid='3249777' user='opendcc' version='2' changeset='35766371' lat='48.3221235' lon='12.5378775' />
+  <node id='1389193805' timestamp='2012-11-18T23:28:09Z' uid='834127' user='kartler175' version='2' changeset='13926180' lat='48.2706767' lon='12.5499624' />
+  <node id='1389193806' timestamp='2014-05-31T09:13:58Z' uid='166830' user='Ja_Meister!' version='3' changeset='22652212' lat='48.2710071' lon='12.5503825' />
+  <node id='1389193809' timestamp='2016-11-27T04:16:47Z' uid='3249777' user='opendcc' version='3' changeset='43976568' lat='48.2518221' lon='12.535595' />
+  <node id='1389193814' timestamp='2014-05-31T09:13:58Z' uid='166830' user='Ja_Meister!' version='3' changeset='22652212' lat='48.2673757' lon='12.5475071' />
+  <node id='1389193815' timestamp='2012-11-18T23:28:09Z' uid='834127' user='kartler175' version='2' changeset='13926180' lat='48.2669706' lon='12.5473234' />
+  <node id='1389193817' timestamp='2014-05-31T09:13:58Z' uid='166830' user='Ja_Meister!' version='3' changeset='22652212' lat='48.2654654' lon='12.546602' />
+  <node id='1389193819' timestamp='2014-05-31T09:13:58Z' uid='166830' user='Ja_Meister!' version='2' changeset='22652212' lat='48.2628006' lon='12.5430151' />
+  <node id='1389193824' timestamp='2014-05-31T09:13:58Z' uid='166830' user='Ja_Meister!' version='3' changeset='22652212' lat='48.2664329' lon='12.5470853' />
+  <node id='1389193825' timestamp='2014-05-31T09:13:58Z' uid='166830' user='Ja_Meister!' version='3' changeset='22652212' lat='48.2622504' lon='12.5429032' />
+  <node id='1389193826' timestamp='2013-04-07T16:45:17Z' uid='166830' user='Ja_Meister!' version='2' changeset='15643186' lat='48.2516561' lon='12.5341136' />
+  <node id='1394073967' timestamp='2016-11-27T04:16:47Z' uid='3249777' user='opendcc' version='4' changeset='43976568' lat='48.2520917' lon='12.5370029' />
+  <node id='1646296478' timestamp='2017-02-13T05:50:23Z' uid='3249777' user='opendcc' version='9' changeset='46036828' lat='48.273366' lon='12.5524027' />
+  <node id='1646296538' timestamp='2015-02-02T19:14:07Z' uid='372615' user='sennewald63' version='3' changeset='28574180' lat='48.2756621' lon='12.5529246' />
+  <node id='1657758818' timestamp='2016-11-13T19:16:57Z' uid='14390' user='BeKri' version='3' changeset='43613618' lat='48.2476036' lon='12.523787' />
+  <node id='1657758819' timestamp='2016-11-13T19:16:57Z' uid='14390' user='BeKri' version='3' changeset='43613618' lat='48.2477229' lon='12.5238657' />
+  <node id='1657758820' timestamp='2017-10-31T18:24:13Z' uid='3249777' user='opendcc' version='2' changeset='53403568' lat='48.2486332' lon='12.5239723' />
+  <node id='1657758821' timestamp='2015-11-07T11:00:24Z' uid='3249777' user='opendcc' version='2' changeset='35146687' lat='48.2491905' lon='12.5241041' />
+  <node id='1780870996' timestamp='2015-08-03T14:24:42Z' uid='14390' user='BeKri' version='2' changeset='33071513' lat='48.3144606' lon='12.5579823'>
+    <tag k='name' v='Stetten' />
+    <tag k='traffic_sign' v='city_limit' />
+  </node>
+  <node id='1780874994' timestamp='2014-06-04T20:55:34Z' uid='195062' user='blauloke' version='4' changeset='22743367' lat='48.2602359' lon='12.5443081' />
+  <node id='1857855335' timestamp='2017-02-13T05:50:23Z' uid='3249777' user='opendcc' version='5' changeset='46036828' lat='48.2729572' lon='12.5522077' />
+  <node id='1898796283' timestamp='2012-09-04T18:33:43Z' uid='437696' user='feisen' version='1' changeset='12985621' lat='48.3440533' lon='12.509212' />
+  <node id='1898796294' timestamp='2015-07-23T10:55:48Z' uid='3012643' user='gfin' version='2' changeset='32822589' lat='48.3445966' lon='12.5090718' />
+  <node id='1898796297' timestamp='2012-09-04T18:33:43Z' uid='437696' user='feisen' version='1' changeset='12985621' lat='48.3447391' lon='12.5091542' />
+  <node id='1930497032' timestamp='2015-08-03T14:24:44Z' uid='14390' user='BeKri' version='2' changeset='33071513' lat='48.3152847' lon='12.5571675' />
+  <node id='1930497046' timestamp='2012-09-24T12:59:20Z' uid='472702' user='qaderr' version='1' changeset='13233399' lat='48.3158547' lon='12.5567525' />
+  <node id='2020721583' timestamp='2014-05-31T09:13:58Z' uid='166830' user='Ja_Meister!' version='2' changeset='22652212' lat='48.2617729' lon='12.5429822' />
+  <node id='2020721590' timestamp='2014-05-31T09:13:58Z' uid='166830' user='Ja_Meister!' version='2' changeset='22652212' lat='48.263792' lon='12.5440969' />
+  <node id='2020721591' timestamp='2016-10-11T02:23:41Z' uid='3249777' user='opendcc' version='3' changeset='42790786' lat='48.2650263' lon='12.5461867' />
+  <node id='2020721595' timestamp='2014-05-31T09:13:58Z' uid='166830' user='Ja_Meister!' version='2' changeset='22652212' lat='48.2698814' lon='12.5490831' />
+  <node id='2020721605' timestamp='2016-03-30T16:16:57Z' uid='3249777' user='opendcc' version='4' changeset='38171916' lat='48.2723264' lon='12.5520399' />
+  <node id='2020721606' timestamp='2016-03-30T16:16:57Z' uid='3249777' user='opendcc' version='4' changeset='38171916' lat='48.2722471' lon='12.5516363' />
+  <node id='2020721610' timestamp='2016-03-30T16:16:57Z' uid='3249777' user='opendcc' version='4' changeset='38171916' lat='48.2724259' lon='12.5516106' />
+  <node id='2020721634' timestamp='2016-02-14T10:44:04Z' uid='3249777' user='opendcc' version='3' changeset='37201355' lat='48.2738929' lon='12.5525594' />
+  <node id='2020721698' timestamp='2016-04-16T15:04:49Z' uid='3249777' user='opendcc' version='2' changeset='38625158' lat='48.2783095' lon='12.55342' />
+  <node id='2020721718' timestamp='2012-11-18T23:27:58Z' uid='834127' user='kartler175' version='1' changeset='13926180' lat='48.2804769' lon='12.5529758' />
+  <node id='2020721722' timestamp='2012-11-18T23:27:58Z' uid='834127' user='kartler175' version='1' changeset='13926180' lat='48.2810706' lon='12.5530547' />
+  <node id='2075181742' timestamp='2016-03-20T15:58:09Z' uid='3249777' user='opendcc' version='3' changeset='37958283' lat='48.3441532' lon='12.5090369' />
+  <node id='2075181747' timestamp='2015-07-23T10:55:48Z' uid='3012643' user='gfin' version='2' changeset='32822589' lat='48.3445316' lon='12.5090067' />
+  <node id='2097780727' timestamp='2016-11-13T19:16:59Z' uid='14390' user='BeKri' version='3' changeset='43613618' lat='48.2479985' lon='12.5239305' />
+  <node id='2097780728' timestamp='2017-02-22T18:05:16Z' uid='3249777' user='opendcc' version='2' changeset='46314560' lat='48.2483975' lon='12.5239544' />
+  <node id='2109697633' timestamp='2016-05-01T15:52:52Z' uid='3249777' user='opendcc' version='2' changeset='39019508' lat='48.3619989' lon='12.5064877' />
+  <node id='2109697634' timestamp='2016-05-01T15:52:52Z' uid='3249777' user='opendcc' version='2' changeset='39019508' lat='48.3620033' lon='12.5064026' />
+  <node id='2109697635' timestamp='2016-05-01T15:52:52Z' uid='3249777' user='opendcc' version='2' changeset='39019508' lat='48.3620527' lon='12.506804' />
+  <node id='2109697636' timestamp='2016-05-01T15:52:52Z' uid='3249777' user='opendcc' version='2' changeset='39019508' lat='48.3621012' lon='12.5059734' />
+  <node id='2109697638' timestamp='2016-05-01T15:52:52Z' uid='3249777' user='opendcc' version='2' changeset='39019508' lat='48.3621034' lon='12.5058635' />
+  <node id='2109697640' timestamp='2016-05-01T15:52:52Z' uid='3249777' user='opendcc' version='2' changeset='39019508' lat='48.3621144' lon='12.5060054' />
+  <node id='2109697641' timestamp='2016-05-01T15:52:52Z' uid='3249777' user='opendcc' version='2' changeset='39019508' lat='48.3621179' lon='12.5058328' />
+  <node id='2109697643' timestamp='2016-05-01T15:52:52Z' uid='3249777' user='opendcc' version='2' changeset='39019508' lat='48.36216' lon='12.5060473' />
+  <node id='2109697645' timestamp='2016-05-01T15:52:52Z' uid='3249777' user='opendcc' version='2' changeset='39019508' lat='48.3621679' lon='12.5057943' />
+  <node id='2109697647' timestamp='2016-05-01T15:52:52Z' uid='3249777' user='opendcc' version='2' changeset='39019508' lat='48.3621891' lon='12.50605' />
+  <node id='2109697648' timestamp='2016-05-01T15:52:52Z' uid='3249777' user='opendcc' version='2' changeset='39019508' lat='48.3621997' lon='12.5057967' />
+  <node id='2109697650' timestamp='2013-01-13T21:51:20Z' uid='834127' user='kartler175' version='1' changeset='14641618' lat='48.3622053' lon='12.5075806' />
+  <node id='2109697658' timestamp='2016-05-01T15:52:52Z' uid='3249777' user='opendcc' version='2' changeset='39019508' lat='48.362217' lon='12.5060378' />
+  <node id='2109697660' timestamp='2016-05-01T15:52:52Z' uid='3249777' user='opendcc' version='2' changeset='39019508' lat='48.3622287' lon='12.5058164' />
+  <node id='2109697662' timestamp='2013-01-13T21:51:20Z' uid='834127' user='kartler175' version='1' changeset='14641618' lat='48.3622365' lon='12.5074322' />
+  <node id='2109697664' timestamp='2016-05-01T15:52:52Z' uid='3249777' user='opendcc' version='2' changeset='39019508' lat='48.3622572' lon='12.5059764' />
+  <node id='2109697666' timestamp='2016-05-01T15:52:52Z' uid='3249777' user='opendcc' version='2' changeset='39019508' lat='48.3622627' lon='12.5058907' />
+  <node id='2242501270' timestamp='2017-09-16T09:11:55Z' uid='3249777' user='opendcc' version='2' changeset='52090066' lat='48.2846571' lon='12.5570592' />
+  <node id='2242501279' timestamp='2017-02-18T10:22:15Z' uid='3249777' user='opendcc' version='4' changeset='46188735' lat='48.2857974' lon='12.5586921' />
+  <node id='2242501282' timestamp='2016-04-17T18:26:16Z' uid='3249777' user='opendcc' version='3' changeset='38649106' lat='48.2873109' lon='12.5592208' />
+  <node id='2255748682' timestamp='2016-11-27T04:16:48Z' uid='3249777' user='opendcc' version='2' changeset='43976568' lat='48.251707' lon='12.5347181' />
+  <node id='2255748848' timestamp='2013-04-07T16:45:15Z' uid='166830' user='Ja_Meister!' version='1' changeset='15643186' lat='48.251651' lon='12.5319552' />
+  <node id='2255821386' timestamp='2013-04-07T17:21:02Z' uid='166830' user='Ja_Meister!' version='1' changeset='15643186' lat='48.251941' lon='12.5294545' />
+  <node id='2255835137' timestamp='2014-07-12T08:56:15Z' uid='166830' user='Ja_Meister!' version='2' changeset='24096664' lat='48.2509187' lon='12.5251062' />
+  <node id='2412882743' timestamp='2016-07-03T14:10:25Z' uid='3249777' user='opendcc' version='2' changeset='40459226' lat='48.359694' lon='12.5096272' />
+  <node id='2415828773' timestamp='2016-04-26T17:02:37Z' uid='3249777' user='opendcc' version='3' changeset='38894084' lat='48.3525988' lon='12.5104529' />
+  <node id='2415828777' timestamp='2016-04-26T17:02:37Z' uid='3249777' user='opendcc' version='3' changeset='38894084' lat='48.352148' lon='12.5097491' />
+  <node id='2415828778' timestamp='2013-08-12T10:56:40Z' uid='166830' user='Ja_Meister!' version='1' changeset='17314437' lat='48.3621531' lon='12.5076473' />
+  <node id='2415828781' timestamp='2016-04-26T17:02:38Z' uid='3249777' user='opendcc' version='3' changeset='38894084' lat='48.3536595' lon='12.5112048' />
+  <node id='2424379232' timestamp='2017-01-22T17:04:49Z' uid='3249777' user='opendcc' version='3' changeset='45373909' lat='48.2924497' lon='12.5607213' />
+  <node id='2424379244' timestamp='2015-10-24T07:56:02Z' uid='3249777' user='opendcc' version='3' changeset='34836281' lat='48.2915928' lon='12.560491' />
+  <node id='2889627180' timestamp='2014-05-30T18:07:42Z' uid='166830' user='Ja_Meister!' version='1' changeset='22643109' lat='48.2521806' lon='12.537407' />
+  <node id='2889664113' timestamp='2014-05-30T18:34:18Z' uid='166830' user='Ja_Meister!' version='1' changeset='22643661' lat='48.2516389' lon='12.5322451' />
+  <node id='2890755412' timestamp='2014-05-31T07:21:24Z' uid='166830' user='Ja_Meister!' version='1' changeset='22650921' lat='48.2549612' lon='12.5447372' />
+  <node id='2890755420' timestamp='2014-05-31T07:21:24Z' uid='166830' user='Ja_Meister!' version='1' changeset='22650921' lat='48.2552816' lon='12.5455227' />
+  <node id='2890755425' timestamp='2014-05-31T07:21:24Z' uid='166830' user='Ja_Meister!' version='1' changeset='22650921' lat='48.2555894' lon='12.5460436' />
+  <node id='2890755440' timestamp='2016-11-08T17:23:45Z' uid='3249777' user='opendcc' version='2' changeset='43493600' lat='48.2560955' lon='12.5465462' />
+  <node id='2890755461' timestamp='2016-09-13T06:58:44Z' uid='3249777' user='opendcc' version='2' changeset='42117151' lat='48.2564333' lon='12.5467342' />
+  <node id='2890755474' timestamp='2014-05-31T07:21:25Z' uid='166830' user='Ja_Meister!' version='1' changeset='22650921' lat='48.2568267' lon='12.5468352' />
+  <node id='2890755479' timestamp='2014-05-31T07:21:25Z' uid='166830' user='Ja_Meister!' version='1' changeset='22650921' lat='48.2569637' lon='12.5468413' />
+  <node id='2890755484' timestamp='2014-05-31T07:21:26Z' uid='166830' user='Ja_Meister!' version='1' changeset='22650921' lat='48.2571407' lon='12.5468342' />
+  <node id='2890755491' timestamp='2014-05-31T07:21:26Z' uid='166830' user='Ja_Meister!' version='1' changeset='22650921' lat='48.2575682' lon='12.546717' />
+  <node id='2890755499' timestamp='2014-05-31T07:21:26Z' uid='166830' user='Ja_Meister!' version='1' changeset='22650921' lat='48.2580069' lon='12.5464661' />
+  <node id='2890755604' timestamp='2014-05-31T07:21:26Z' uid='166830' user='Ja_Meister!' version='1' changeset='22650921' lat='48.2584385' lon='12.5461084' />
+  <node id='2890755607' timestamp='2014-05-31T07:21:26Z' uid='166830' user='Ja_Meister!' version='1' changeset='22650921' lat='48.2587365' lon='12.5458198' />
+  <node id='2890755611' timestamp='2016-11-08T17:23:45Z' uid='3249777' user='opendcc' version='2' changeset='43493600' lat='48.2591159' lon='12.5454195' />
+  <node id='2890755612' timestamp='2016-11-08T17:23:45Z' uid='3249777' user='opendcc' version='2' changeset='43493600' lat='48.2593138' lon='12.5452125' />
+  <node id='2890978915' timestamp='2014-05-31T09:13:50Z' uid='166830' user='Ja_Meister!' version='1' changeset='22652212' lat='48.2611122' lon='12.5434486' />
+  <node id='2890978922' timestamp='2014-05-31T09:13:50Z' uid='166830' user='Ja_Meister!' version='1' changeset='22652212' lat='48.2614861' lon='12.5431244' />
+  <node id='2890978932' timestamp='2014-05-31T09:13:50Z' uid='166830' user='Ja_Meister!' version='1' changeset='22652212' lat='48.2619356' lon='12.5429368' />
+  <node id='2890978957' timestamp='2014-05-31T09:13:51Z' uid='166830' user='Ja_Meister!' version='1' changeset='22652212' lat='48.2629812' lon='12.5431269' />
+  <node id='2890978970' timestamp='2014-05-31T09:13:51Z' uid='166830' user='Ja_Meister!' version='1' changeset='22652212' lat='48.2636125' lon='12.5437935' />
+  <node id='2890978977' timestamp='2014-05-31T09:13:51Z' uid='166830' user='Ja_Meister!' version='1' changeset='22652212' lat='48.2643026' lon='12.5450185' />
+  <node id='2890978998' timestamp='2014-05-31T09:13:51Z' uid='166830' user='Ja_Meister!' version='1' changeset='22652212' lat='48.2651595' lon='12.5463369' />
+  <node id='2890979108' timestamp='2014-05-31T09:13:52Z' uid='166830' user='Ja_Meister!' version='1' changeset='22652212' lat='48.2656468' lon='12.5467201' />
+  <node id='2890979127' timestamp='2014-05-31T09:13:52Z' uid='166830' user='Ja_Meister!' version='1' changeset='22652212' lat='48.2683418' lon='12.5479861' />
+  <node id='2890979134' timestamp='2014-05-31T09:13:52Z' uid='166830' user='Ja_Meister!' version='1' changeset='22652212' lat='48.2689991' lon='12.5483923' />
+  <node id='2890979141' timestamp='2014-05-31T09:13:53Z' uid='166830' user='Ja_Meister!' version='1' changeset='22652212' lat='48.2696085' lon='12.5488492' />
+  <node id='2890979148' timestamp='2014-05-31T09:13:53Z' uid='166830' user='Ja_Meister!' version='1' changeset='22652212' lat='48.2701023' lon='12.5492979' />
+  <node id='2890979181' timestamp='2016-10-11T02:05:24Z' uid='3249777' user='opendcc' version='2' changeset='42790672' lat='48.2713007' lon='12.5507379' />
+  <node id='2890979186' timestamp='2016-03-30T16:16:57Z' uid='3249777' user='opendcc' version='2' changeset='38171916' lat='48.271639' lon='12.551129' />
+  <node id='2892204655' timestamp='2014-05-31T19:51:30Z' uid='166830' user='Ja_Meister!' version='1' changeset='22662107' lat='48.2696718' lon='12.5489034' />
+  <node id='2892204673' timestamp='2016-04-16T15:04:49Z' uid='3249777' user='opendcc' version='2' changeset='38625158' lat='48.2817061' lon='12.5533373' />
+  <node id='2892204802' timestamp='2016-02-04T21:17:45Z' uid='3249777' user='opendcc' version='2' changeset='37008659' lat='48.2822283' lon='12.5537512' />
+  <node id='2892204833' timestamp='2017-09-16T09:11:55Z' uid='3249777' user='opendcc' version='2' changeset='52090066' lat='48.2837795' lon='12.5555925' />
+  <node id='2899820744' timestamp='2014-06-04T20:55:07Z' uid='195062' user='blauloke' version='1' changeset='22743367' lat='48.2538544' lon='12.5418853' />
+  <node id='2899820745' timestamp='2014-06-04T20:55:08Z' uid='195062' user='blauloke' version='1' changeset='22743367' lat='48.3210161' lon='12.5428634' />
+  <node id='2899820746' timestamp='2014-06-04T20:55:08Z' uid='195062' user='blauloke' version='1' changeset='22743367' lat='48.3246572' lon='12.535709' />
+  <node id='2903454950' timestamp='2017-02-22T18:05:16Z' uid='3249777' user='opendcc' version='2' changeset='46314560' lat='48.2520147' lon='12.5280895' />
+  <node id='2903454951' timestamp='2015-12-25T15:36:08Z' uid='3249777' user='opendcc' version='2' changeset='36160651' lat='48.2520234' lon='12.5267743' />
+  <node id='2913085312' timestamp='2016-04-26T17:02:37Z' uid='3249777' user='opendcc' version='2' changeset='38894084' lat='48.3514021' lon='12.5092547'>
+    <tag k='name' v='Neumarkt Sankt Veit' />
+    <tag k='traffic_sign' v='city_limit' />
+  </node>
+  <node id='2925086300' timestamp='2017-02-13T05:50:23Z' uid='3249777' user='opendcc' version='3' changeset='46036828' lat='48.2731033' lon='12.5522857' />
+  <node id='2925088201' timestamp='2017-02-13T05:50:23Z' uid='3249777' user='opendcc' version='2' changeset='46036828' lat='48.2732221' lon='12.5523438' />
+  <node id='2925088218' timestamp='2014-06-20T19:06:54Z' uid='2675' user='Eckhart Wörner' version='1' changeset='23050446' lat='48.2751067' lon='12.5528185' />
+  <node id='2947370647' timestamp='2014-07-04T09:13:38Z' uid='166830' user='Ja_Meister!' version='1' changeset='23914795' lat='48.3211014' lon='12.5420035' />
+  <node id='2947370648' timestamp='2014-07-04T09:13:38Z' uid='166830' user='Ja_Meister!' version='1' changeset='23914795' lat='48.3213025' lon='12.540133' />
+  <node id='2949687422' timestamp='2016-04-26T17:02:38Z' uid='3249777' user='opendcc' version='3' changeset='38894084' lat='48.3523622' lon='12.5100563' />
+  <node id='2949703286' timestamp='2015-10-22T18:25:20Z' uid='3249777' user='opendcc' version='2' changeset='34806309' lat='48.3485944' lon='12.5103163' />
+  <node id='2959628583' timestamp='2014-07-12T08:56:05Z' uid='166830' user='Ja_Meister!' version='1' changeset='24096664' lat='48.2511371' lon='12.5252261' />
+  <node id='2959628588' timestamp='2014-07-12T08:56:05Z' uid='166830' user='Ja_Meister!' version='1' changeset='24096664' lat='48.2513212' lon='12.5253104' />
+  <node id='2959628595' timestamp='2016-09-10T07:27:05Z' uid='3249777' user='opendcc' version='2' changeset='42053853' lat='48.251409' lon='12.5253399' />
+  <node id='2959628606' timestamp='2015-12-25T15:36:08Z' uid='3249777' user='opendcc' version='2' changeset='36160651' lat='48.2520133' lon='12.5270622' />
+  <node id='3207578164' timestamp='2016-04-17T18:26:17Z' uid='3249777' user='opendcc' version='2' changeset='38649106' lat='48.2868226' lon='12.5591733' />
+  <node id='3327389078' timestamp='2015-10-17T10:51:28Z' uid='3249777' user='opendcc' version='2' changeset='34691286' lat='48.2726659' lon='12.551987' />
+  <node id='3327389079' timestamp='2016-03-30T16:16:58Z' uid='3249777' user='opendcc' version='3' changeset='38171916' lat='48.2728172' lon='12.5521299' />
+  <node id='3327389080' timestamp='2015-02-02T19:12:35Z' uid='372615' user='sennewald63' version='1' changeset='28574180' lat='48.2740555' lon='12.5526004' />
+  <node id='3327389089' timestamp='2015-02-02T19:12:35Z' uid='372615' user='sennewald63' version='1' changeset='28574180' lat='48.27498' lon='12.5527951' />
+  <node id='3327389093' timestamp='2015-02-02T19:12:35Z' uid='372615' user='sennewald63' version='1' changeset='28574180' lat='48.2764933' lon='12.5530808' />
+  <node id='3586257727' timestamp='2015-10-22T18:25:21Z' uid='3249777' user='opendcc' version='2' changeset='34806309' lat='48.3455065' lon='12.5093673' />
+  <node id='3586257743' timestamp='2015-06-10T16:13:53Z' uid='29061' user='KPG' version='1' changeset='31870110' lat='48.3435468' lon='12.5099006' />
+  <node id='3679014990' timestamp='2017-07-26T03:35:45Z' uid='3249777' user='opendcc' version='2' changeset='50574834' lat='48.2957896' lon='12.5632289' />
+  <node id='3679015022' timestamp='2017-07-26T03:35:45Z' uid='3249777' user='opendcc' version='2' changeset='50574834' lat='48.296382' lon='12.5634963' />
+  <node id='3679015053' timestamp='2017-07-26T03:35:45Z' uid='3249777' user='opendcc' version='2' changeset='50574834' lat='48.2969346' lon='12.5636301' />
+  <node id='3679015202' timestamp='2015-08-03T14:24:00Z' uid='14390' user='BeKri' version='1' changeset='33071513' lat='48.2994721' lon='12.5632347' />
+  <node id='3679015246' timestamp='2015-08-03T14:24:01Z' uid='14390' user='BeKri' version='1' changeset='33071513' lat='48.3001239' lon='12.5631985' />
+  <node id='3679015279' timestamp='2017-07-26T03:27:47Z' uid='3249777' user='opendcc' version='2' changeset='50574752' lat='48.3006423' lon='12.563247' />
+  <node id='3679015292' timestamp='2017-07-26T03:27:47Z' uid='3249777' user='opendcc' version='2' changeset='50574752' lat='48.3011803' lon='12.5633182' />
+  <node id='3679015296' timestamp='2017-07-29T03:53:04Z' uid='3249777' user='opendcc' version='3' changeset='50663015' lat='48.3015756' lon='12.5633463' />
+  <node id='3679015319' timestamp='2015-08-03T14:24:03Z' uid='14390' user='BeKri' version='1' changeset='33071513' lat='48.3024478' lon='12.5631838' />
+  <node id='3679015463' timestamp='2015-08-03T14:24:05Z' uid='14390' user='BeKri' version='1' changeset='33071513' lat='48.3168101' lon='12.5563137' />
+  <node id='3768422851' timestamp='2016-11-13T19:17:03Z' uid='14390' user='BeKri' version='3' changeset='43613618' lat='48.247892' lon='12.5239237' />
+  <node id='3790149166' timestamp='2016-03-30T16:16:58Z' uid='3249777' user='opendcc' version='2' changeset='38171916' lat='48.2718296' lon='12.5513321' />
+  <node id='3790149167' timestamp='2015-10-17T10:51:21Z' uid='3249777' user='opendcc' version='1' changeset='34691286' lat='48.2720654' lon='12.5514905' />
+  <node id='3790149169' timestamp='2016-03-30T16:16:58Z' uid='3249777' user='opendcc' version='2' changeset='38171916' lat='48.272206' lon='12.5517227' />
+  <node id='3790149172' timestamp='2016-03-30T16:16:58Z' uid='3249777' user='opendcc' version='2' changeset='38171916' lat='48.2722315' lon='12.5519615' />
+  <node id='3790149173' timestamp='2016-03-30T16:16:59Z' uid='3249777' user='opendcc' version='2' changeset='38171916' lat='48.2722586' lon='12.5519988' />
+  <node id='3790149174' timestamp='2016-03-30T16:16:59Z' uid='3249777' user='opendcc' version='2' changeset='38171916' lat='48.2722765' lon='12.5516061' />
+  <node id='3790149176' timestamp='2016-03-30T16:16:59Z' uid='3249777' user='opendcc' version='2' changeset='38171916' lat='48.2724392' lon='12.5519979' />
+  <node id='3790149177' timestamp='2016-03-30T16:16:59Z' uid='3249777' user='opendcc' version='2' changeset='38171916' lat='48.2724622' lon='12.551967' />
+  <node id='3793352643' timestamp='2015-10-19T20:36:41Z' uid='3249777' user='opendcc' version='1' changeset='34743733' lat='48.2459627' lon='12.5266677' />
+  <node id='3797298545' timestamp='2017-02-18T10:22:16Z' uid='3249777' user='opendcc' version='2' changeset='46188735' lat='48.2861049' lon='12.5589001' />
+  <node id='3797298589' timestamp='2015-10-21T19:22:02Z' uid='3249777' user='opendcc' version='1' changeset='34786188' lat='48.2914113' lon='12.5604312' />
+  <node id='3798544303' timestamp='2015-10-22T18:24:48Z' uid='3249777' user='opendcc' version='1' changeset='34806309' lat='48.2798065' lon='12.5530872' />
+  <node id='3831277793' timestamp='2015-11-11T18:20:03Z' uid='3249777' user='opendcc' version='1' changeset='35245803' lat='48.2523758' lon='12.5379976' />
+  <node id='3835348053' timestamp='2017-07-26T03:27:48Z' uid='3249777' user='opendcc' version='2' changeset='50574752' lat='48.3004261' lon='12.5632227' />
+  <node id='3835349709' timestamp='2015-11-14T07:54:17Z' uid='3249777' user='opendcc' version='1' changeset='35301423' lat='48.3019561' lon='12.5633125' />
+  <node id='3878024875' timestamp='2015-12-05T10:59:57Z' uid='3249777' user='opendcc' version='1' changeset='35766371' lat='48.3212313' lon='12.5406089' />
+  <node id='3878024899' timestamp='2015-12-05T10:59:57Z' uid='3249777' user='opendcc' version='1' changeset='35766371' lat='48.3217411' lon='12.5386371' />
+  <node id='3878024908' timestamp='2015-12-05T10:59:57Z' uid='3249777' user='opendcc' version='1' changeset='35766371' lat='48.3223399' lon='12.5375303' />
+  <node id='3878024934' timestamp='2015-12-05T10:59:58Z' uid='3249777' user='opendcc' version='1' changeset='35766371' lat='48.3227656' lon='12.5369805' />
+  <node id='3878024951' timestamp='2015-12-05T10:59:58Z' uid='3249777' user='opendcc' version='1' changeset='35766371' lat='48.3235785' lon='12.5363041' />
+  <node id='3878025867' timestamp='2015-12-05T10:59:58Z' uid='3249777' user='opendcc' version='1' changeset='35766371' lat='48.3239585' lon='12.5360979' />
+  <node id='3878025918' timestamp='2015-12-05T10:59:59Z' uid='3249777' user='opendcc' version='1' changeset='35766371' lat='48.3249109' lon='12.5355011' />
+  <node id='3878026067' timestamp='2017-06-11T20:21:43Z' uid='3249777' user='opendcc' version='2' changeset='49451083' lat='48.325956' lon='12.5339972' />
+  <node id='3878026086' timestamp='2015-12-05T11:00:00Z' uid='3249777' user='opendcc' version='1' changeset='35766371' lat='48.3265463' lon='12.5322422' />
+  <node id='3878026091' timestamp='2015-12-05T11:00:00Z' uid='3249777' user='opendcc' version='1' changeset='35766371' lat='48.3268637' lon='12.5315007' />
+  <node id='3878026098' timestamp='2017-08-10T17:30:31Z' uid='3249777' user='opendcc' version='2' changeset='51008971' lat='48.3274109' lon='12.5306848' />
+  <node id='3878026100' timestamp='2017-08-10T17:30:31Z' uid='3249777' user='opendcc' version='2' changeset='51008971' lat='48.3276633' lon='12.530421' />
+  <node id='3878026102' timestamp='2017-08-10T17:30:31Z' uid='3249777' user='opendcc' version='2' changeset='51008971' lat='48.3280141' lon='12.5301311' />
+  <node id='3878026107' timestamp='2017-08-10T17:30:31Z' uid='3249777' user='opendcc' version='2' changeset='51008971' lat='48.3291204' lon='12.5294238' />
+  <node id='3878026114' timestamp='2015-12-05T11:00:00Z' uid='3249777' user='opendcc' version='1' changeset='35766371' lat='48.3299299' lon='12.5287709' />
+  <node id='3878026679' timestamp='2015-12-05T11:00:03Z' uid='3249777' user='opendcc' version='1' changeset='35766371' lat='48.3427567' lon='12.5110167' />
+  <node id='3878130633' timestamp='2016-04-17T18:26:17Z' uid='3249777' user='opendcc' version='2' changeset='38649106' lat='48.339694' lon='12.5154108' />
+  <node id='3879297090' timestamp='2015-12-06T06:13:36Z' uid='3249777' user='opendcc' version='1' changeset='35780650' lat='48.2541166' lon='12.5425629' />
+  <node id='3908467100' timestamp='2017-01-27T17:09:55Z' uid='3249777' user='opendcc' version='2' changeset='45567381' lat='48.2458878' lon='12.5271242' />
+  <node id='3909354160' timestamp='2015-12-25T15:36:04Z' uid='3249777' user='opendcc' version='1' changeset='36160651' lat='48.2520148' lon='12.5269952' />
+  <node id='3909354164' timestamp='2016-09-10T07:27:05Z' uid='3249777' user='opendcc' version='2' changeset='42053853' lat='48.2521469' lon='12.5256286' />
+  <node id='3963464462' timestamp='2016-11-13T19:17:05Z' uid='14390' user='BeKri' version='2' changeset='43613618' lat='48.2478087' lon='12.5239009' />
+  <node id='3964646907' timestamp='2016-01-24T18:12:39Z' uid='3249777' user='opendcc' version='1' changeset='36781265' lat='48.2516776' lon='12.5316338' />
+  <node id='3988853543' timestamp='2016-02-04T21:17:32Z' uid='3249777' user='opendcc' version='1' changeset='37008659' lat='48.2931643' lon='12.5609822' />
+  <node id='3988853544' timestamp='2016-02-04T21:17:32Z' uid='3249777' user='opendcc' version='1' changeset='37008659' lat='48.293749' lon='12.5613772' />
+  <node id='3988853545' timestamp='2017-07-28T16:35:24Z' uid='3249777' user='opendcc' version='2' changeset='50653771' lat='48.2941121' lon='12.5617138' />
+  <node id='3988853546' timestamp='2016-02-04T21:17:32Z' uid='3249777' user='opendcc' version='1' changeset='37008659' lat='48.2950926' lon='12.5627227' />
+  <node id='3993346359' timestamp='2016-02-07T11:09:42Z' uid='3249777' user='opendcc' version='1' changeset='37057327' lat='48.3614435' lon='12.5037561' />
+  <node id='3993346363' timestamp='2016-02-07T11:09:42Z' uid='3249777' user='opendcc' version='1' changeset='37057327' lat='48.3617993' lon='12.5048756' />
+  <node id='3993346364' timestamp='2016-02-07T11:09:42Z' uid='3249777' user='opendcc' version='1' changeset='37057327' lat='48.3618131' lon='12.5048397' />
+  <node id='3993346365' timestamp='2016-02-07T11:09:42Z' uid='3249777' user='opendcc' version='1' changeset='37057327' lat='48.3618821' lon='12.5047179' />
+  <node id='3993346366' timestamp='2016-02-07T11:09:42Z' uid='3249777' user='opendcc' version='1' changeset='37057327' lat='48.3618839' lon='12.5050777' />
+  <node id='3993346367' timestamp='2016-02-07T11:09:42Z' uid='3249777' user='opendcc' version='1' changeset='37057327' lat='48.3619621' lon='12.5045629' />
+  <node id='3993346368' timestamp='2016-02-07T11:09:42Z' uid='3249777' user='opendcc' version='1' changeset='37057327' lat='48.3619703' lon='12.5045186' />
+  <node id='3993346370' timestamp='2016-02-07T11:09:42Z' uid='3249777' user='opendcc' version='1' changeset='37057327' lat='48.361986' lon='12.5053171' />
+  <node id='3993346373' timestamp='2016-02-07T11:09:43Z' uid='3249777' user='opendcc' version='1' changeset='37057327' lat='48.3620494' lon='12.5055191' />
+  <node id='3993346375' timestamp='2016-02-07T11:09:43Z' uid='3249777' user='opendcc' version='1' changeset='37057327' lat='48.3620926' lon='12.5056852' />
+  <node id='3999207336' timestamp='2017-11-16T21:28:45Z' uid='3249777' user='opendcc' version='2' changeset='53855999' lat='48.3598918' lon='12.5091043' />
+  <node id='3999207384' timestamp='2016-02-10T14:19:24Z' uid='43021' user='Czmartin' version='1' changeset='37125552' lat='48.360053' lon='12.5089238' />
+  <node id='4005429996' timestamp='2016-02-14T10:43:59Z' uid='3249777' user='opendcc' version='1' changeset='37201355' lat='48.2621289' lon='12.5429052' />
+  <node id='4005429997' timestamp='2016-02-14T10:43:59Z' uid='3249777' user='opendcc' version='1' changeset='37201355' lat='48.2624024' lon='12.5429135' />
+  <node id='4005430003' timestamp='2016-02-14T10:43:59Z' uid='3249777' user='opendcc' version='1' changeset='37201355' lat='48.2626114' lon='12.5429502' />
+  <node id='4005430009' timestamp='2016-02-14T10:43:59Z' uid='3249777' user='opendcc' version='1' changeset='37201355' lat='48.2626732' lon='12.5429672' />
+  <node id='4005430020' timestamp='2016-02-14T10:43:59Z' uid='3249777' user='opendcc' version='1' changeset='37201355' lat='48.2628987' lon='12.5430684' />
+  <node id='4005430021' timestamp='2016-02-14T10:43:59Z' uid='3249777' user='opendcc' version='1' changeset='37201355' lat='48.2630485' lon='12.5431654' />
+  <node id='4005430022' timestamp='2016-10-11T02:23:41Z' uid='3249777' user='opendcc' version='2' changeset='42790786' lat='48.263331' lon='12.5434162' />
+  <node id='4005430028' timestamp='2016-02-14T10:44:00Z' uid='3249777' user='opendcc' version='1' changeset='37201355' lat='48.2734469' lon='12.5524295' />
+  <node id='4005430035' timestamp='2016-02-14T10:44:00Z' uid='3249777' user='opendcc' version='1' changeset='37201355' lat='48.2736069' lon='12.5524803' />
+  <node id='4017601152' timestamp='2016-02-21T09:43:36Z' uid='3249777' user='opendcc' version='1' changeset='37343150' lat='48.3114166' lon='12.5604414' />
+  <node id='4017601186' timestamp='2016-02-21T09:43:37Z' uid='3249777' user='opendcc' version='1' changeset='37343150' lat='48.3120878' lon='12.56' />
+  <node id='4017601201' timestamp='2016-02-21T09:43:37Z' uid='3249777' user='opendcc' version='1' changeset='37343150' lat='48.3123941' lon='12.5597377' />
+  <node id='4033117183' timestamp='2016-02-29T15:19:21Z' uid='3249777' user='opendcc' version='1' changeset='37523716' lat='48.2626016' lon='12.5429475' />
+  <node id='4085651476' timestamp='2016-03-29T21:32:48Z' uid='3249777' user='opendcc' version='1' changeset='38153642' lat='48.2792812' lon='12.5532762' />
+  <node id='4086746811' timestamp='2016-03-30T16:16:45Z' uid='3249777' user='opendcc' version='1' changeset='38171916' lat='48.2721946' lon='12.5518242' />
+  <node id='4086746813' timestamp='2016-03-30T16:16:45Z' uid='3249777' user='opendcc' version='1' changeset='38171916' lat='48.272204' lon='12.5515847' />
+  <node id='4086746815' timestamp='2016-03-30T16:16:45Z' uid='3249777' user='opendcc' version='1' changeset='38171916' lat='48.2722232' lon='12.5516759' />
+  <node id='4086746822' timestamp='2016-03-30T16:16:45Z' uid='3249777' user='opendcc' version='1' changeset='38171916' lat='48.2722909' lon='12.5520255' />
+  <node id='4086746826' timestamp='2016-03-30T16:16:45Z' uid='3249777' user='opendcc' version='1' changeset='38171916' lat='48.2723271' lon='12.5515815' />
+  <node id='4086746831' timestamp='2016-03-30T16:16:45Z' uid='3249777' user='opendcc' version='1' changeset='38171916' lat='48.2723901' lon='12.5520337' />
+  <node id='4086746832' timestamp='2016-03-30T16:16:45Z' uid='3249777' user='opendcc' version='1' changeset='38171916' lat='48.2723911' lon='12.5515883' />
+  <node id='4086746839' timestamp='2016-03-30T16:16:45Z' uid='3249777' user='opendcc' version='1' changeset='38171916' lat='48.272456' lon='12.5516449' />
+  <node id='4086746842' timestamp='2016-03-30T16:16:45Z' uid='3249777' user='opendcc' version='1' changeset='38171916' lat='48.2724806' lon='12.5519299' />
+  <node id='4086746849' timestamp='2016-03-30T16:16:46Z' uid='3249777' user='opendcc' version='1' changeset='38171916' lat='48.2724954' lon='12.5517409' />
+  <node id='4086746850' timestamp='2016-03-30T16:16:46Z' uid='3249777' user='opendcc' version='1' changeset='38171916' lat='48.2725011' lon='12.551843' />
+  <node id='4086746857' timestamp='2016-03-30T16:16:46Z' uid='3249777' user='opendcc' version='1' changeset='38171916' lat='48.2725389' lon='12.5518576' />
+  <node id='4117377048' timestamp='2018-04-05T16:19:58Z' uid='85475' user='miche101' version='4' changeset='57840694' lat='48.3610241' lon='12.5032235'>
+    <tag k='bus' v='yes' />
+    <tag k='bus_routes' v='500, 6209, 6231, 7515, 7517' />
+    <tag k='highway' v='bus_stop' />
+    <tag k='name' v='Neumarkt-St Veit, Bahnhof' />
+    <tag k='operator' v='RBO' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='public_transport:version' v='2' />
+  </node>
+  <node id='4125877174' timestamp='2016-04-16T12:19:51Z' uid='182281' user='tokamak' version='1' changeset='38620655' lat='48.2456275' lon='12.5270046'>
+    <tag k='bus' v='yes' />
+    <tag k='highway' v='bus_stop' />
+    <tag k='name' v='Mühldorf a.Inn, Schulzentrum' />
+    <tag k='operator' v='RBO' />
+    <tag k='public_transport:version' v='2' />
+  </node>
+  <node id='4125887652' timestamp='2017-06-17T09:51:00Z' uid='85475' user='miche101' version='3' changeset='49610757' lat='48.2805632' lon='12.5530616'>
+    <tag k='bus' v='yes' />
+    <tag k='highway' v='bus_stop' />
+    <tag k='name' v='Ödmühle' />
+    <tag k='operator' v='RBO' />
+    <tag k='public_transport' v='platform' />
+    <tag k='public_transport:version' v='2' />
+  </node>
+  <node id='4125896305' timestamp='2016-04-16T12:24:40Z' uid='182281' user='tokamak' version='1' changeset='38620809' lat='48.2841087' lon='12.5559692'>
+    <tag k='bus' v='yes' />
+    <tag k='highway' v='bus_stop' />
+    <tag k='name' v='Schoßbach, Fa. Huber' />
+    <tag k='operator' v='RBO' />
+    <tag k='public_transport:version' v='2' />
+  </node>
+  <node id='4125908456' timestamp='2016-04-16T12:26:50Z' uid='182281' user='tokamak' version='1' changeset='38620880' lat='48.3026702' lon='12.5629813'>
+    <tag k='bus' v='yes' />
+    <tag k='highway' v='bus_stop' />
+    <tag k='name' v='Güntering' />
+    <tag k='operator' v='RBO' />
+    <tag k='public_transport:version' v='2' />
+  </node>
+  <node id='4125920843' timestamp='2016-04-16T12:29:14Z' uid='182281' user='tokamak' version='1' changeset='38620945' lat='48.3163248' lon='12.5564797'>
+    <tag k='bus' v='yes' />
+    <tag k='highway' v='bus_stop' />
+    <tag k='name' v='Stetten, B299' />
+    <tag k='operator' v='RBO' />
+    <tag k='public_transport:version' v='2' />
+  </node>
+  <node id='4125922083' timestamp='2016-04-16T12:31:01Z' uid='182281' user='tokamak' version='1' changeset='38621001' lat='48.3210408' lon='12.5420948'>
+    <tag k='bus' v='yes' />
+    <tag k='highway' v='bus_stop' />
+    <tag k='name' v='Oberarbing' />
+    <tag k='operator' v='RBO' />
+    <tag k='public_transport:version' v='2' />
+  </node>
+  <node id='4125943637' timestamp='2017-10-24T14:55:47Z' uid='6121377' user='CDSG' version='2' changeset='53210684' lat='48.3568423' lon='12.5128619'>
+    <tag k='bus' v='yes' />
+    <tag k='highway' v='bus_stop' />
+    <tag k='name' v='Neumarkt St.Veit, Altött. Str.' />
+    <tag k='operator' v='RBO' />
+    <tag k='public_transport:version' v='2' />
+  </node>
+  <node id='4126339790' timestamp='2016-04-16T15:04:45Z' uid='3249777' user='opendcc' version='1' changeset='38625158' lat='48.2784656' lon='12.5534278' />
+  <node id='4126339791' timestamp='2016-04-16T15:04:45Z' uid='3249777' user='opendcc' version='1' changeset='38625158' lat='48.2786907' lon='12.5534161' />
+  <node id='4126339794' timestamp='2016-04-16T15:04:45Z' uid='3249777' user='opendcc' version='1' changeset='38625158' lat='48.2789041' lon='12.5533878' />
+  <node id='4126339796' timestamp='2016-04-16T15:04:45Z' uid='3249777' user='opendcc' version='1' changeset='38625158' lat='48.279161' lon='12.5533242' />
+  <node id='4126339803' timestamp='2016-04-16T15:04:45Z' uid='3249777' user='opendcc' version='1' changeset='38625158' lat='48.2809114' lon='12.5530211' />
+  <node id='4126339804' timestamp='2016-04-16T15:04:46Z' uid='3249777' user='opendcc' version='1' changeset='38625158' lat='48.2812334' lon='12.5531095' />
+  <node id='4126339806' timestamp='2016-04-16T15:04:46Z' uid='3249777' user='opendcc' version='1' changeset='38625158' lat='48.2815326' lon='12.5532414' />
+  <node id='4126339807' timestamp='2016-04-16T15:04:46Z' uid='3249777' user='opendcc' version='1' changeset='38625158' lat='48.2818646' lon='12.5534482' />
+  <node id='4126339808' timestamp='2016-04-16T15:04:46Z' uid='3249777' user='opendcc' version='1' changeset='38625158' lat='48.2823941' lon='12.5539097' />
+  <node id='4128470220' timestamp='2016-04-17T18:25:53Z' uid='3249777' user='opendcc' version='1' changeset='38649106' lat='48.2799901' lon='12.5530346' />
+  <node id='4128470221' timestamp='2016-04-17T18:25:53Z' uid='3249777' user='opendcc' version='1' changeset='38649106' lat='48.2803428' lon='12.5529788' />
+  <node id='4128470223' timestamp='2017-02-18T10:22:16Z' uid='3249777' user='opendcc' version='2' changeset='46188735' lat='48.2864473' lon='12.5590616' />
+  <node id='4128470224' timestamp='2016-04-17T18:25:53Z' uid='3249777' user='opendcc' version='1' changeset='38649106' lat='48.2870648' lon='12.5592075' />
+  <node id='4128470225' timestamp='2016-04-17T18:25:54Z' uid='3249777' user='opendcc' version='1' changeset='38649106' lat='48.2882815' lon='12.559157' />
+  <node id='4128470226' timestamp='2016-04-17T18:25:54Z' uid='3249777' user='opendcc' version='1' changeset='38649106' lat='48.2886196' lon='12.5591451' />
+  <node id='4128470227' timestamp='2017-07-23T15:53:20Z' uid='3249777' user='opendcc' version='2' changeset='50504991' lat='48.2896741' lon='12.5593117' />
+  <node id='4128470228' timestamp='2016-04-17T18:25:54Z' uid='3249777' user='opendcc' version='1' changeset='38649106' lat='48.2900172' lon='12.5595006' />
+  <node id='4128470229' timestamp='2016-04-17T18:25:54Z' uid='3249777' user='opendcc' version='1' changeset='38649106' lat='48.2902398' lon='12.5596667' />
+  <node id='4128470230' timestamp='2016-04-17T18:25:54Z' uid='3249777' user='opendcc' version='1' changeset='38649106' lat='48.2912534' lon='12.5603667' />
+  <node id='4128470231' timestamp='2016-04-17T18:25:54Z' uid='3249777' user='opendcc' version='1' changeset='38649106' lat='48.330491' lon='12.5281635' />
+  <node id='4128470232' timestamp='2016-04-17T18:25:54Z' uid='3249777' user='opendcc' version='1' changeset='38649106' lat='48.3318841' lon='12.5259846' />
+  <node id='4128470233' timestamp='2016-04-17T18:25:54Z' uid='3249777' user='opendcc' version='1' changeset='38649106' lat='48.3323203' lon='12.5253687' />
+  <node id='4128470234' timestamp='2016-04-17T18:25:54Z' uid='3249777' user='opendcc' version='1' changeset='38649106' lat='48.3328561' lon='12.5248592' />
+  <node id='4128470235' timestamp='2016-04-17T18:25:54Z' uid='3249777' user='opendcc' version='1' changeset='38649106' lat='48.3338951' lon='12.5240044' />
+  <node id='4128470236' timestamp='2016-04-17T18:25:54Z' uid='3249777' user='opendcc' version='1' changeset='38649106' lat='48.3343735' lon='12.5234431' />
+  <node id='4128470237' timestamp='2016-04-17T18:25:54Z' uid='3249777' user='opendcc' version='1' changeset='38649106' lat='48.3347794' lon='12.5228542' />
+  <node id='4128470238' timestamp='2016-04-17T18:25:54Z' uid='3249777' user='opendcc' version='1' changeset='38649106' lat='48.3351878' lon='12.5222154' />
+  <node id='4128470239' timestamp='2016-04-17T18:25:54Z' uid='3249777' user='opendcc' version='1' changeset='38649106' lat='48.3353098' lon='12.5220455' />
+  <node id='4128470240' timestamp='2016-04-17T18:25:54Z' uid='3249777' user='opendcc' version='1' changeset='38649106' lat='48.3360217' lon='12.5212423' />
+  <node id='4128470241' timestamp='2016-04-17T18:25:54Z' uid='3249777' user='opendcc' version='1' changeset='38649106' lat='48.3364771' lon='12.5206973' />
+  <node id='4128470242' timestamp='2016-04-17T18:25:54Z' uid='3249777' user='opendcc' version='1' changeset='38649106' lat='48.3368195' lon='12.5201821' />
+  <node id='4128470243' timestamp='2016-04-17T18:25:54Z' uid='3249777' user='opendcc' version='1' changeset='38649106' lat='48.3370192' lon='12.5198301' />
+  <node id='4128470244' timestamp='2016-04-17T18:25:54Z' uid='3249777' user='opendcc' version='1' changeset='38649106' lat='48.339284' lon='12.5158787' />
+  <node id='4128470245' timestamp='2016-04-17T18:25:54Z' uid='3249777' user='opendcc' version='1' changeset='38649106' lat='48.3410037' lon='12.5139969' />
+  <node id='4128470246' timestamp='2016-04-17T18:25:54Z' uid='3249777' user='opendcc' version='1' changeset='38649106' lat='48.3415791' lon='12.5133535' />
+  <node id='4128470247' timestamp='2016-04-17T18:25:54Z' uid='3249777' user='opendcc' version='1' changeset='38649106' lat='48.3419812' lon='12.5127235' />
+  <node id='4149668391' timestamp='2016-04-26T17:02:28Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3472575' lon='12.510363' />
+  <node id='4149668392' timestamp='2016-04-26T17:02:28Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3476919' lon='12.5104704' />
+  <node id='4149668393' timestamp='2016-04-26T17:02:28Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3479107' lon='12.5104796' />
+  <node id='4149668394' timestamp='2016-04-26T17:02:28Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3482309' lon='12.5104382' />
+  <node id='4149668395' timestamp='2016-04-26T17:02:28Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3483375' lon='12.5104098' />
+  <node id='4149668438' timestamp='2016-04-26T17:02:29Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3505041' lon='12.5094369' />
+  <node id='4149668450' timestamp='2016-04-26T17:02:29Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3509478' lon='12.5092696' />
+  <node id='4149668465' timestamp='2016-04-26T17:02:29Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3512237' lon='12.5092396' />
+  <node id='4149668469' timestamp='2016-04-26T17:02:29Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3513243' lon='12.5092437' />
+  <node id='4149668473' timestamp='2016-04-26T17:02:29Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3515458' lon='12.5092933' />
+  <node id='4149668474' timestamp='2016-04-26T17:02:30Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3516666' lon='12.5093442' />
+  <node id='4149668476' timestamp='2016-04-26T17:02:30Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3519028' lon='12.5094971' />
+  <node id='4149668478' timestamp='2016-04-26T17:02:30Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3520465' lon='12.5096293' />
+  <node id='4149668480' timestamp='2016-04-26T17:02:30Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3522634' lon='12.5098979' />
+  <node id='4149668483' timestamp='2016-04-26T17:02:30Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3525045' lon='12.5103069' />
+  <node id='4149668594' timestamp='2016-09-19T16:48:33Z' uid='3249777' user='opendcc' version='2' changeset='42274944' lat='48.3527519' lon='12.5106806' />
+  <node id='4149668609' timestamp='2016-04-26T17:02:30Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3531022' lon='12.5110024' />
+  <node id='4149668611' timestamp='2016-04-26T17:02:30Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3533795' lon='12.5111263' />
+  <node id='4149668613' timestamp='2016-04-26T17:02:30Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3535167' lon='12.5111594' />
+  <node id='4149668621' timestamp='2016-04-26T17:02:30Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3539419' lon='12.511293' />
+  <node id='4149668629' timestamp='2016-04-26T17:02:30Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3540274' lon='12.5113419' />
+  <node id='4149668633' timestamp='2016-04-26T17:02:30Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3540709' lon='12.5113708' />
+  <node id='4149668640' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3542063' lon='12.5115388' />
+  <node id='4149668642' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3543721' lon='12.5118148' />
+  <node id='4149668646' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.354504' lon='12.5120374' />
+  <node id='4149668648' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3546179' lon='12.5122114' />
+  <node id='4149668652' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3547276' lon='12.5123406' />
+  <node id='4149668653' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3549053' lon='12.5125043' />
+  <node id='4149668654' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3549571' lon='12.5125376' />
+  <node id='4149668655' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3550574' lon='12.5125964' />
+  <node id='4149668657' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3552062' lon='12.5126502' />
+  <node id='4149668658' timestamp='2016-06-14T23:20:40Z' uid='43021' user='Czmartin' version='2' changeset='40028579' lat='48.3555543' lon='12.5127478' />
+  <node id='4149668659' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3559427' lon='12.5128523' />
+  <node id='4149668660' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3560273' lon='12.5128913' />
+  <node id='4149668661' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3560579' lon='12.5129105' />
+  <node id='4149668662' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3560834' lon='12.5129348' />
+  <node id='4149668665' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3562352' lon='12.5131407' />
+  <node id='4149668667' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3562675' lon='12.5131753' />
+  <node id='4149668671' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3563529' lon='12.5132143' />
+  <node id='4149668675' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3564515' lon='12.5132188' />
+  <node id='4149668677' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3564999' lon='12.5132053' />
+  <node id='4149668678' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3565412' lon='12.5131823' />
+  <node id='4149668680' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3566793' lon='12.5130909' />
+  <node id='4149668686' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3576549' lon='12.5122357' />
+  <node id='4149668688' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3578558' lon='12.5120614' />
+  <node id='4149668789' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3579989' lon='12.5119518' />
+  <node id='4149668790' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3582235' lon='12.5118356' />
+  <node id='4149668791' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3584042' lon='12.5117353' />
+  <node id='4149668792' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3585218' lon='12.511627' />
+  <node id='4149668793' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3586543' lon='12.5114619' />
+  <node id='4149668794' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3588377' lon='12.5112229' />
+  <node id='4149668795' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3593659' lon='12.5108651' />
+  <node id='4149668796' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3594755' lon='12.5107515' />
+  <node id='4149668797' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3595045' lon='12.5107' />
+  <node id='4149668798' timestamp='2016-04-26T17:02:31Z' uid='3249777' user='opendcc' version='1' changeset='38894084' lat='48.3595413' lon='12.5105349' />
+  <node id='4157736585' timestamp='2016-04-30T15:30:24Z' uid='3249777' user='opendcc' version='1' changeset='39001293' lat='48.3377134' lon='12.5182326' />
+  <node id='4157736586' timestamp='2016-04-30T15:30:24Z' uid='3249777' user='opendcc' version='1' changeset='39001293' lat='48.3381207' lon='12.51743' />
+  <node id='4157736587' timestamp='2016-04-30T15:30:24Z' uid='3249777' user='opendcc' version='1' changeset='39001293' lat='48.3383566' lon='12.5170524' />
+  <node id='4159544167' timestamp='2016-05-01T15:52:38Z' uid='3249777' user='opendcc' version='1' changeset='39019508' lat='48.3620176' lon='12.5066463' />
+  <node id='4159544168' timestamp='2016-05-01T15:52:38Z' uid='3249777' user='opendcc' version='1' changeset='39019508' lat='48.3620209' lon='12.5063011' />
+  <node id='4159544169' timestamp='2016-05-01T15:52:38Z' uid='3249777' user='opendcc' version='1' changeset='39019508' lat='48.3621109' lon='12.5069899' />
+  <node id='4280946620' timestamp='2016-07-03T18:46:32Z' uid='3249777' user='opendcc' version='1' changeset='40464167' lat='48.3172661' lon='12.5559555' />
+  <node id='4348946257' timestamp='2017-10-31T18:24:14Z' uid='3249777' user='opendcc' version='2' changeset='53403568' lat='48.2487591' lon='12.5239869' />
+  <node id='4348946258' timestamp='2017-10-31T18:24:14Z' uid='3249777' user='opendcc' version='2' changeset='53403568' lat='48.2490739' lon='12.5240596' />
+  <node id='4349496163' timestamp='2016-08-14T08:49:09Z' uid='3249777' user='opendcc' version='1' changeset='41442463' lat='48.2473742' lon='12.5238592' />
+  <node id='4352803836' timestamp='2016-08-16T16:15:23Z' uid='3249777' user='opendcc' version='1' changeset='41493214' lat='48.2545508' lon='12.5436849' />
+  <node id='4398462800' timestamp='2016-09-13T06:58:41Z' uid='3249777' user='opendcc' version='1' changeset='42117151' lat='48.2565577' lon='12.5467809' />
+  <node id='4398462818' timestamp='2016-09-13T06:58:42Z' uid='3249777' user='opendcc' version='1' changeset='42117151' lat='48.25703' lon='12.5468408' />
+  <node id='4398462826' timestamp='2016-09-13T06:58:42Z' uid='3249777' user='opendcc' version='1' changeset='42117151' lat='48.2572312' lon='12.5468203' />
+  <node id='4398462829' timestamp='2016-09-13T06:58:42Z' uid='3249777' user='opendcc' version='1' changeset='42117151' lat='48.2574489' lon='12.5467634' />
+  <node id='4398462830' timestamp='2016-09-13T06:58:42Z' uid='3249777' user='opendcc' version='1' changeset='42117151' lat='48.2576715' lon='12.5466685' />
+  <node id='4398462831' timestamp='2016-09-13T06:58:42Z' uid='3249777' user='opendcc' version='1' changeset='42117151' lat='48.257894' lon='12.5465444' />
+  <node id='4398462833' timestamp='2016-09-13T06:58:42Z' uid='3249777' user='opendcc' version='1' changeset='42117151' lat='48.2581059' lon='12.546397' />
+  <node id='4398462834' timestamp='2016-09-13T06:58:42Z' uid='3249777' user='opendcc' version='1' changeset='42117151' lat='48.2583187' lon='12.5462218' />
+  <node id='4408389619' timestamp='2016-09-19T16:48:15Z' uid='3249777' user='opendcc' version='1' changeset='42274944' lat='48.352821' lon='12.5107558' />
+  <node id='4441469461' timestamp='2016-10-11T02:23:39Z' uid='3249777' user='opendcc' version='1' changeset='42790786' lat='48.263245' lon='12.5433287' />
+  <node id='4441469464' timestamp='2016-10-11T02:23:39Z' uid='3249777' user='opendcc' version='1' changeset='42790786' lat='48.2635354' lon='12.543673' />
+  <node id='4441469480' timestamp='2016-10-11T02:23:40Z' uid='3249777' user='opendcc' version='1' changeset='42790786' lat='48.264905' lon='12.546026' />
+  <node id='4441469486' timestamp='2016-10-11T02:23:40Z' uid='3249777' user='opendcc' version='1' changeset='42790786' lat='48.2653501' lon='12.546511' />
+  <node id='4441471665' timestamp='2016-10-11T02:05:20Z' uid='3249777' user='opendcc' version='1' changeset='42790672' lat='48.2680878' lon='12.5478536' />
+  <node id='4489051666' timestamp='2016-11-08T17:23:41Z' uid='3249777' user='opendcc' version='1' changeset='43493600' lat='48.2552193' lon='12.5453789' />
+  <node id='4489051667' timestamp='2016-11-08T17:23:41Z' uid='3249777' user='opendcc' version='1' changeset='43493600' lat='48.2553555' lon='12.5456693' />
+  <node id='4489051668' timestamp='2016-11-08T17:23:41Z' uid='3249777' user='opendcc' version='1' changeset='43493600' lat='48.2555025' lon='12.5459162' />
+  <node id='4489051669' timestamp='2016-11-08T17:23:41Z' uid='3249777' user='opendcc' version='1' changeset='43493600' lat='48.2556737' lon='12.5461529' />
+  <node id='4489051670' timestamp='2016-11-08T17:23:41Z' uid='3249777' user='opendcc' version='1' changeset='43493600' lat='48.2559866' lon='12.5464593' />
+  <node id='4489051671' timestamp='2016-11-08T17:23:41Z' uid='3249777' user='opendcc' version='1' changeset='43493600' lat='48.2562112' lon='12.5466194' />
+  <node id='4524190434' timestamp='2016-11-27T04:16:45Z' uid='3249777' user='opendcc' version='1' changeset='43976568' lat='48.2517652' lon='12.5351759' />
+  <node id='4524190435' timestamp='2016-11-27T04:16:45Z' uid='3249777' user='opendcc' version='1' changeset='43976568' lat='48.2519047' lon='12.5360935' />
+  <node id='4622587865' timestamp='2017-01-21T21:48:40Z' uid='3249777' user='opendcc' version='1' changeset='45359145' lat='48.2781996' lon='12.5534107' />
+  <node id='4623839560' timestamp='2017-01-22T17:04:47Z' uid='3249777' user='opendcc' version='1' changeset='45373909' lat='48.2930527' lon='12.5609297' />
+  <node id='4623839561' timestamp='2017-01-22T17:04:47Z' uid='3249777' user='opendcc' version='1' changeset='45373909' lat='48.2927339' lon='12.5608052' />
+  <node id='4638053992' timestamp='2017-01-27T17:09:54Z' uid='3249777' user='opendcc' version='1' changeset='45567381' lat='48.2459241' lon='12.5270875' />
+  <node id='4638053993' timestamp='2017-01-27T17:09:54Z' uid='3249777' user='opendcc' version='1' changeset='45567381' lat='48.2458704' lon='12.5271307' />
+  <node id='4638053994' timestamp='2017-01-27T17:09:54Z' uid='3249777' user='opendcc' version='1' changeset='45567381' lat='48.2458465' lon='12.5271299' />
+  <node id='4638053995' timestamp='2017-01-27T17:09:54Z' uid='3249777' user='opendcc' version='1' changeset='45567381' lat='48.2459431' lon='12.5270199' />
+  <node id='4638053996' timestamp='2017-01-27T17:09:54Z' uid='3249777' user='opendcc' version='1' changeset='45567381' lat='48.245935' lon='12.5270622' />
+  <node id='4639380383' timestamp='2017-01-28T09:12:30Z' uid='3249777' user='opendcc' version='1' changeset='45585908' lat='48.2460654' lon='12.5247735' />
+  <node id='4640607869' timestamp='2017-01-28T21:01:08Z' uid='3249777' user='opendcc' version='1' changeset='45604012' lat='48.2463018' lon='12.524098' />
+  <node id='4640607894' timestamp='2017-01-28T21:01:09Z' uid='3249777' user='opendcc' version='1' changeset='45604012' lat='48.2466991' lon='12.524163' />
+  <node id='4682804361' timestamp='2017-02-13T05:50:20Z' uid='3249777' user='opendcc' version='1' changeset='46036828' lat='48.2741884' lon='12.5526347' />
+  <node id='4691918543' timestamp='2017-02-18T10:22:05Z' uid='3249777' user='opendcc' version='1' changeset='46188735' lat='48.2863179' lon='12.5590048' />
+  <node id='4691918546' timestamp='2017-02-18T10:22:05Z' uid='3249777' user='opendcc' version='1' changeset='46188735' lat='48.2858969' lon='12.5587729' />
+  <node id='4691918547' timestamp='2017-02-18T10:22:05Z' uid='3249777' user='opendcc' version='1' changeset='46188735' lat='48.2856789' lon='12.5585695' />
+  <node id='4699673961' timestamp='2017-02-22T18:05:14Z' uid='3249777' user='opendcc' version='1' changeset='46314560' lat='48.2520419' lon='12.5265609' />
+  <node id='4699673962' timestamp='2017-02-22T18:05:14Z' uid='3249777' user='opendcc' version='1' changeset='46314560' lat='48.2520111' lon='12.5285259' />
+  <node id='4699673963' timestamp='2017-02-22T18:05:14Z' uid='3249777' user='opendcc' version='1' changeset='46314560' lat='48.2519804' lon='12.5291044' />
+  <node id='4909511972' timestamp='2017-06-11T20:21:39Z' uid='3249777' user='opendcc' version='1' changeset='49451083' lat='48.3267593' lon='12.5317148' />
+  <node id='4909511973' timestamp='2017-06-11T20:21:40Z' uid='3249777' user='opendcc' version='1' changeset='49451083' lat='48.3261536' lon='12.5334879' />
+  <node id='4909511974' timestamp='2017-06-11T20:21:40Z' uid='3249777' user='opendcc' version='1' changeset='49451083' lat='48.326075' lon='12.5337069' />
+  <node id='4909511975' timestamp='2017-06-11T20:21:40Z' uid='3249777' user='opendcc' version='1' changeset='49451083' lat='48.3254821' lon='12.5348542' />
+  <node id='4988338929' timestamp='2017-07-23T15:53:18Z' uid='3249777' user='opendcc' version='1' changeset='50504991' lat='48.2891585' lon='12.5591759' />
+  <node id='4988338930' timestamp='2017-07-23T15:53:18Z' uid='3249777' user='opendcc' version='1' changeset='50504991' lat='48.2895023' lon='12.5592455' />
+  <node id='4993763290' timestamp='2017-07-29T03:53:04Z' uid='3249777' user='opendcc' version='2' changeset='50663015' lat='48.3017201' lon='12.5633396' />
+  <node id='4993763291' timestamp='2017-07-29T03:53:04Z' uid='3249777' user='opendcc' version='2' changeset='50663015' lat='48.301407' lon='12.563341' />
+  <node id='4993763292' timestamp='2017-07-26T03:27:39Z' uid='3249777' user='opendcc' version='1' changeset='50574752' lat='48.3009524' lon='12.563291' />
+  <node id='4993764205' timestamp='2017-07-26T03:27:41Z' uid='3249777' user='opendcc' version='1' changeset='50574752' lat='48.304385' lon='12.5619841' />
+  <node id='4993764206' timestamp='2017-07-26T03:27:41Z' uid='3249777' user='opendcc' version='1' changeset='50574752' lat='48.3049094' lon='12.5617912' />
+  <node id='4993764207' timestamp='2017-07-26T03:27:41Z' uid='3249777' user='opendcc' version='1' changeset='50574752' lat='48.3045694' lon='12.5618998' />
+  <node id='4993764208' timestamp='2017-07-26T03:27:41Z' uid='3249777' user='opendcc' version='1' changeset='50574752' lat='48.303989' lon='12.5622144' />
+  <node id='4993764209' timestamp='2017-07-26T03:27:41Z' uid='3249777' user='opendcc' version='1' changeset='50574752' lat='48.3036838' lon='12.5624185' />
+  <node id='4993764210' timestamp='2017-07-26T03:27:41Z' uid='3249777' user='opendcc' version='1' changeset='50574752' lat='48.3033189' lon='12.5626881' />
+  <node id='4993764211' timestamp='2017-07-26T03:27:41Z' uid='3249777' user='opendcc' version='1' changeset='50574752' lat='48.3030075' lon='12.5628922' />
+  <node id='4993764760' timestamp='2017-07-26T03:27:44Z' uid='3249777' user='opendcc' version='1' changeset='50574752' lat='48.3082904' lon='12.5618806' />
+  <node id='4993764761' timestamp='2017-07-26T03:27:44Z' uid='3249777' user='opendcc' version='1' changeset='50574752' lat='48.3077871' lon='12.5619816' />
+  <node id='4993764762' timestamp='2017-07-26T03:27:44Z' uid='3249777' user='opendcc' version='1' changeset='50574752' lat='48.3075394' lon='12.5619994' />
+  <node id='4993764763' timestamp='2017-07-26T03:27:44Z' uid='3249777' user='opendcc' version='1' changeset='50574752' lat='48.3070546' lon='12.5619776' />
+  <node id='4993764764' timestamp='2017-07-26T03:27:44Z' uid='3249777' user='opendcc' version='1' changeset='50574752' lat='48.3068122' lon='12.5619361' />
+  <node id='4993764765' timestamp='2017-07-26T03:27:44Z' uid='3249777' user='opendcc' version='1' changeset='50574752' lat='48.3060152' lon='12.5617677' />
+  <node id='4993764766' timestamp='2017-07-26T03:27:44Z' uid='3249777' user='opendcc' version='1' changeset='50574752' lat='48.3057174' lon='12.561734' />
+  <node id='4993764767' timestamp='2017-07-30T10:54:11Z' uid='3249777' user='opendcc' version='2' changeset='50690303' lat='48.3054684' lon='12.5617218' />
+  <node id='4993764768' timestamp='2017-07-30T10:54:11Z' uid='3249777' user='opendcc' version='2' changeset='50690303' lat='48.3050475' lon='12.561761' />
+  <node id='4993776556' timestamp='2017-07-26T03:35:43Z' uid='3249777' user='opendcc' version='1' changeset='50574834' lat='48.2982157' lon='12.5635577' />
+  <node id='4993776557' timestamp='2017-07-26T03:35:43Z' uid='3249777' user='opendcc' version='1' changeset='50574834' lat='48.2978054' lon='12.5636379' />
+  <node id='4993776558' timestamp='2017-07-26T03:35:43Z' uid='3249777' user='opendcc' version='1' changeset='50574834' lat='48.297572' lon='12.5636584' />
+  <node id='4993776559' timestamp='2017-07-26T03:35:43Z' uid='3249777' user='opendcc' version='1' changeset='50574834' lat='48.2971502' lon='12.5636552' />
+  <node id='4993776560' timestamp='2017-07-26T03:35:43Z' uid='3249777' user='opendcc' version='1' changeset='50574834' lat='48.2965558' lon='12.5635514' />
+  <node id='4993776561' timestamp='2017-07-26T03:35:43Z' uid='3249777' user='opendcc' version='1' changeset='50574834' lat='48.2960325' lon='12.5633579' />
+  <node id='4993776562' timestamp='2017-07-26T03:35:43Z' uid='3249777' user='opendcc' version='1' changeset='50574834' lat='48.295573' lon='12.5630983' />
+  <node id='5000311887' timestamp='2017-07-28T16:35:19Z' uid='3249777' user='opendcc' version='1' changeset='50653771' lat='48.2946188' lon='12.5622564' />
+  <node id='5000312545' timestamp='2017-07-28T16:35:21Z' uid='3249777' user='opendcc' version='1' changeset='50653771' lat='48.2933194' lon='12.5610638' />
+  <node id='5000312546' timestamp='2017-07-28T16:35:21Z' uid='3249777' user='opendcc' version='1' changeset='50653771' lat='48.293636' lon='12.5612809' />
+  <node id='5000312547' timestamp='2017-07-28T16:35:21Z' uid='3249777' user='opendcc' version='1' changeset='50653771' lat='48.2930998' lon='12.5609519' />
+  <node id='5000312553' timestamp='2017-07-28T16:35:21Z' uid='3249777' user='opendcc' version='1' changeset='50653771' lat='48.2938778' lon='12.5614946' />
+  <node id='5002920738' timestamp='2017-07-30T10:54:11Z' uid='3249777' user='opendcc' version='1' changeset='50690303' lat='48.3056101' lon='12.561727' />
+  <node id='5002920739' timestamp='2017-07-30T10:54:11Z' uid='3249777' user='opendcc' version='1' changeset='50690303' lat='48.3051919' lon='12.5617387' />
+  <node id='5003192126' timestamp='2017-07-30T14:28:32Z' uid='3249777' user='opendcc' version='1' changeset='50695091' lat='48.3177578' lon='12.5553897' />
+  <node id='5003192133' timestamp='2017-07-30T14:28:32Z' uid='3249777' user='opendcc' version='1' changeset='50695091' lat='48.3175553' lon='12.5556553' />
+  <node id='5003192134' timestamp='2017-07-30T14:28:32Z' uid='3249777' user='opendcc' version='1' changeset='50695091' lat='48.3178351' lon='12.5552788' />
+  <node id='5003192188' timestamp='2017-07-30T14:28:33Z' uid='3249777' user='opendcc' version='1' changeset='50695091' lat='48.3181029' lon='12.5548305' />
+  <node id='5003192189' timestamp='2017-07-30T14:28:33Z' uid='3249777' user='opendcc' version='1' changeset='50695091' lat='48.3182089' lon='12.5546079' />
+  <node id='5003192190' timestamp='2017-07-30T14:28:33Z' uid='3249777' user='opendcc' version='1' changeset='50695091' lat='48.3184461' lon='12.5540271' />
+  <node id='5003192191' timestamp='2017-07-30T14:28:33Z' uid='3249777' user='opendcc' version='1' changeset='50695091' lat='48.3187799' lon='12.5527486' />
+  <node id='5003192192' timestamp='2017-07-30T14:28:33Z' uid='3249777' user='opendcc' version='1' changeset='50695091' lat='48.3195545' lon='12.5491783' />
+  <node id='5003192193' timestamp='2017-07-30T14:28:33Z' uid='3249777' user='opendcc' version='1' changeset='50695091' lat='48.3206167' lon='12.5450651' />
+  <node id='5026846178' timestamp='2017-08-10T17:30:26Z' uid='3249777' user='opendcc' version='1' changeset='51008971' lat='48.3271362' lon='12.5310515' />
+  <node id='5026846179' timestamp='2017-08-10T17:30:26Z' uid='3249777' user='opendcc' version='1' changeset='51008971' lat='48.3275332' lon='12.5305544' />
+  <node id='5026846180' timestamp='2017-08-10T17:30:26Z' uid='3249777' user='opendcc' version='1' changeset='51008971' lat='48.327911' lon='12.5302094' />
+  <node id='5026846181' timestamp='2017-08-10T17:30:26Z' uid='3249777' user='opendcc' version='1' changeset='51008971' lat='48.3282252' lon='12.5299891' />
+  <node id='5026846182' timestamp='2017-08-10T17:30:26Z' uid='3249777' user='opendcc' version='1' changeset='51008971' lat='48.3288245' lon='12.5296209' />
+  <node id='5026846185' timestamp='2017-08-10T17:30:26Z' uid='3249777' user='opendcc' version='1' changeset='51008971' lat='48.3295338' lon='12.529118' />
+  <node id='5026846186' timestamp='2017-08-10T17:30:26Z' uid='3249777' user='opendcc' version='1' changeset='51008971' lat='48.3306439' lon='12.5279715' />
+  <node id='5109044590' timestamp='2017-09-16T09:11:52Z' uid='3249777' user='opendcc' version='1' changeset='52090066' lat='48.2835625' lon='12.5552825' />
+  <node id='5109044591' timestamp='2017-09-16T09:11:52Z' uid='3249777' user='opendcc' version='1' changeset='52090066' lat='48.2843404' lon='12.5565014'>
+    <tag k='traffic_calming' v='island' />
+  </node>
+  <node id='5109044592' timestamp='2017-09-16T09:11:52Z' uid='3249777' user='opendcc' version='1' changeset='52090066' lat='48.2840369' lon='12.5559953' />
+  <node id='5109044593' timestamp='2017-09-16T09:11:52Z' uid='3249777' user='opendcc' version='1' changeset='52090066' lat='48.2849215' lon='12.5574994' />
+  <node id='5116406812' timestamp='2017-09-20T04:02:10Z' uid='3249777' user='opendcc' version='1' changeset='52197549' lat='48.3318059' lon='12.5261103' />
+  <node id='5116406813' timestamp='2017-09-20T04:02:10Z' uid='3249777' user='opendcc' version='1' changeset='52197549' lat='48.3316361' lon='12.526402' />
+  <node id='5116406814' timestamp='2017-09-20T04:02:10Z' uid='3249777' user='opendcc' version='1' changeset='52197549' lat='48.3313577' lon='12.5268911' />
+  <node id='5116406816' timestamp='2017-09-20T04:02:10Z' uid='3249777' user='opendcc' version='1' changeset='52197549' lat='48.3320445' lon='12.525736' />
+  <node id='5116411222' timestamp='2017-09-20T04:02:10Z' uid='3249777' user='opendcc' version='1' changeset='52197549' lat='48.3327715' lon='12.5249336' />
+  <node id='5146413398' timestamp='2017-10-04T03:17:26Z' uid='3249777' user='opendcc' version='1' changeset='52612827' lat='48.285282' lon='12.5580892' />
+  <node id='5146413399' timestamp='2017-10-04T03:17:26Z' uid='3249777' user='opendcc' version='1' changeset='52612827' lat='48.2853418' lon='12.5581683' />
+  <node id='5152102151' timestamp='2017-10-06T16:35:19Z' uid='3249777' user='opendcc' version='1' changeset='52688033' lat='48.2828148' lon='12.554351' />
+  <node id='5167799314' timestamp='2017-10-14T19:53:14Z' uid='3249777' user='opendcc' version='1' changeset='52936980' lat='48.3103782' lon='12.5609967' />
+  <node id='5167799315' timestamp='2017-10-14T19:53:14Z' uid='3249777' user='opendcc' version='1' changeset='52936980' lat='48.3098288' lon='12.5612649' />
+  <node id='5167799316' timestamp='2017-10-14T19:53:14Z' uid='3249777' user='opendcc' version='1' changeset='52936980' lat='48.3089118' lon='12.5616619' />
+  <node id='5182835808' timestamp='2017-10-23T03:06:30Z' uid='3249777' user='opendcc' version='1' changeset='53166198' lat='48.3147877' lon='12.5576963' />
+  <node id='5202753298' timestamp='2017-10-31T18:24:11Z' uid='3249777' user='opendcc' version='1' changeset='53403568' lat='48.2489542' lon='12.5240232' />
+  <node id='5233558933' timestamp='2017-11-16T21:28:44Z' uid='3249777' user='opendcc' version='1' changeset='53855999' lat='48.359941' lon='12.5090407' />
+  <node id='5233558935' timestamp='2017-11-16T21:28:44Z' uid='3249777' user='opendcc' version='1' changeset='53855999' lat='48.3619599' lon='12.5077632' />
+  <node id='5233558938' timestamp='2017-11-16T21:28:44Z' uid='3249777' user='opendcc' version='1' changeset='53855999' lat='48.3618066' lon='12.5078087' />
+  <node id='5236166434' timestamp='2017-11-18T10:59:24Z' uid='85475' user='miche101' version='1' changeset='53897094' lat='48.3497968' lon='12.509764' />
+  <node id='5258106419' timestamp='2017-12-01T17:57:00Z' uid='85475' user='miche101' version='1' changeset='54244427' lat='48.3393543' lon='12.5157985' />
+  <node id='5273447073' timestamp='2017-12-09T12:12:34Z' uid='85475' user='miche101' version='1' changeset='54483748' lat='48.314123' lon='12.5582211' />
+  <node id='5273467942' timestamp='2017-12-09T12:29:36Z' uid='85475' user='miche101' version='1' changeset='54484597' lat='48.3149227' lon='12.5575582' />
+  <node id='5273491588' timestamp='2017-12-09T12:45:45Z' uid='85475' user='miche101' version='1' changeset='54484955' lat='48.3189083' lon='12.5521323' />
+  <node id='5517364023' timestamp='2018-03-30T22:00:11Z' uid='3249777' user='opendcc' version='1' changeset='57674768' lat='48.3566571' lon='12.5131065' />
+  <node id='5517685472' timestamp='2018-03-31T04:09:45Z' uid='3249777' user='opendcc' version='1' changeset='57678980' lat='48.3533079' lon='12.5111046' />
+  <way id='24922549' timestamp='2017-02-22T18:05:16Z' uid='3249777' user='opendcc' version='33' changeset='46314560'>
+    <nd ref='270805594' />
+    <nd ref='3909354164' />
+    <nd ref='293586610' />
+    <nd ref='4699673961' />
+    <nd ref='2903454951' />
+    <nd ref='3909354160' />
+    <nd ref='2959628606' />
+    <tag k='highway' v='secondary' />
+    <tag k='maxspeed' v='50' />
+    <tag k='name' v='Bürgermeister-Hess-Straße' />
+    <tag k='ref' v='St 2092' />
+    <tag k='surface' v='paved' />
+    <tag k='tmc' v='DE:27570/42379' />
+  </way>
+  <way id='26769912' timestamp='2016-03-30T16:16:54Z' uid='3249777' user='opendcc' version='10' changeset='38171916'>
+    <nd ref='293628309' />
+    <nd ref='4086746826' />
+    <nd ref='293628310' />
+    <nd ref='3790149174' />
+    <nd ref='2020721606' />
+    <nd ref='4086746815' />
+    <nd ref='3790149169' />
+    <nd ref='293628311' />
+    <nd ref='4086746811' />
+    <nd ref='293628315' />
+    <nd ref='293628316' />
+    <nd ref='3790149172' />
+    <nd ref='3790149173' />
+    <nd ref='4086746822' />
+    <nd ref='2020721605' />
+    <nd ref='293628318' />
+    <nd ref='4086746831' />
+    <nd ref='293628320' />
+    <nd ref='3790149176' />
+    <nd ref='3790149177' />
+    <nd ref='4086746842' />
+    <nd ref='293628321' />
+    <nd ref='4086746850' />
+    <nd ref='293628322' />
+    <nd ref='4086746849' />
+    <nd ref='293628332' />
+    <nd ref='4086746839' />
+    <nd ref='2020721610' />
+    <nd ref='4086746832' />
+    <nd ref='293628309' />
+    <tag k='highway' v='secondary' />
+    <tag k='junction' v='roundabout' />
+    <tag k='ref' v='St 2092' />
+    <tag k='tmc' v='DE:27570/42379' />
+  </way>
+  <way id='27200854' timestamp='2017-01-27T17:09:56Z' uid='3249777' user='opendcc' version='10' changeset='45567381'>
+    <nd ref='520540422' />
+    <nd ref='4638053994' />
+    <nd ref='4638053993' />
+    <nd ref='3908467100' />
+    <nd ref='298494003' />
+    <tag k='highway' v='residential' />
+    <tag k='maxspeed' v='30' />
+    <tag k='name' v='Pilichdorfstraße' />
+  </way>
+  <way id='27217709' timestamp='2015-02-02T19:13:52Z' uid='372615' user='sennewald63' version='11' changeset='28574180'>
+    <nd ref='290982690' />
+    <nd ref='2925088218' />
+    <nd ref='3327389089' />
+    <tag k='highway' v='primary' />
+    <tag k='lanes' v='3' />
+    <tag k='lanes:backward' v='2' />
+    <tag k='maxspeed:backward' v='100' />
+    <tag k='maxspeed:forward' v='60' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:42379' />
+    <tag k='turn:lanes:backward' v='through|right' />
+  </way>
+  <way id='27217710' timestamp='2017-02-13T05:50:23Z' uid='3249777' user='opendcc' version='15' changeset='46036828'>
+    <nd ref='290982691' />
+    <nd ref='4682804361' />
+    <nd ref='3327389080' />
+    <tag k='change:lanes' v='no|no' />
+    <tag k='highway' v='primary' />
+    <tag k='lanes' v='2' />
+    <tag k='lanes:backward' v='1' />
+    <tag k='maxspeed:backward' v='100' />
+    <tag k='maxspeed:forward' v='60' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:42379' />
+  </way>
+  <way id='27692068' timestamp='2017-01-28T09:12:33Z' uid='3249777' user='opendcc' version='11' changeset='45585908'>
+    <nd ref='298494003' />
+    <nd ref='4638053992' />
+    <nd ref='4638053996' />
+    <nd ref='4638053995' />
+    <nd ref='3793352643' />
+    <nd ref='298493993' />
+    <nd ref='520540400' />
+    <nd ref='4639380383' />
+    <nd ref='1321432271' />
+    <nd ref='520540663' />
+    <tag k='highway' v='residential' />
+    <tag k='maxspeed' v='30' />
+    <tag k='name' v='Kaiser-Ludwig-Straße' />
+  </way>
+  <way id='28151133' timestamp='2014-06-12T18:18:12Z' uid='195062' user='blauloke' version='7' changeset='22894338'>
+    <nd ref='290982150' />
+    <nd ref='748288789' />
+    <tag k='bridge' v='yes' />
+    <tag k='highway' v='tertiary' />
+    <tag k='layer' v='1' />
+    <tag k='maxspeed' v='50' />
+    <tag k='name' v='Altöttinger Straße' />
+  </way>
+  <way id='28151134' timestamp='2014-06-12T18:18:13Z' uid='195062' user='blauloke' version='15' changeset='22894338'>
+    <nd ref='748288789' />
+    <nd ref='748288795' />
+    <nd ref='290982151' />
+    <tag k='highway' v='tertiary' />
+    <tag k='maxspeed' v='50' />
+    <tag k='name' v='Altöttinger Straße' />
+  </way>
+  <way id='29427954' timestamp='2014-06-12T18:18:15Z' uid='195062' user='blauloke' version='9' changeset='22894338'>
+    <nd ref='324328904' />
+    <nd ref='2109697636' />
+    <nd ref='2109697640' />
+    <nd ref='324328607' />
+    <nd ref='2109697643' />
+    <nd ref='2109697647' />
+    <nd ref='2109697658' />
+    <nd ref='324328765' />
+    <nd ref='2109697664' />
+    <nd ref='324328766' />
+    <nd ref='2109697666' />
+    <nd ref='324328767' />
+    <nd ref='2109697660' />
+    <nd ref='2109697648' />
+    <nd ref='2109697645' />
+    <nd ref='324328606' />
+    <nd ref='2109697641' />
+    <nd ref='2109697638' />
+    <nd ref='747444580' />
+    <nd ref='324328904' />
+    <tag k='highway' v='secondary' />
+    <tag k='junction' v='roundabout' />
+    <tag k='maxspeed' v='50' />
+    <tag k='ref' v='St 2086' />
+  </way>
+  <way id='35491577' timestamp='2016-05-01T15:52:46Z' uid='3249777' user='opendcc' version='14' changeset='39019508'>
+    <nd ref='324328607' />
+    <nd ref='290982091' />
+    <nd ref='4159544168' />
+    <nd ref='2109697634' />
+    <nd ref='2109697633' />
+    <nd ref='290982092' />
+    <nd ref='4159544167' />
+    <nd ref='2109697635' />
+    <nd ref='4159544169' />
+    <nd ref='290982093' />
+    <nd ref='2109697662' />
+    <nd ref='290982094' />
+    <tag k='highway' v='tertiary' />
+    <tag k='maxspeed' v='50' />
+    <tag k='name' v='Bahnhofstraße' />
+  </way>
+  <way id='36396084' timestamp='2016-11-08T17:23:46Z' uid='3249777' user='opendcc' version='13' changeset='43493600'>
+    <nd ref='270812182' />
+    <nd ref='2890755412' />
+    <nd ref='293586470' />
+    <nd ref='4489051666' />
+    <nd ref='2890755420' />
+    <nd ref='4489051667' />
+    <nd ref='293586472' />
+    <nd ref='4489051668' />
+    <nd ref='2890755425' />
+    <tag k='highway' v='secondary' />
+    <tag k='maxspeed' v='70' />
+    <tag k='name' v='Bürgermeister-Hess-Straße' />
+    <tag k='ref' v='St 2092' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:27570/42379' />
+  </way>
+  <way id='37118081' timestamp='2017-10-04T03:17:31Z' uid='3249777' user='opendcc' version='13' changeset='52612827'>
+    <nd ref='809589580' />
+    <nd ref='5146413399' />
+    <nd ref='5146413398' />
+    <tag k='bridge' v='yes' />
+    <tag k='highway' v='primary' />
+    <tag k='layer' v='1' />
+    <tag k='maxspeed' v='100' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:42379/27571' />
+  </way>
+  <way id='40427094' timestamp='2018-03-31T04:09:46Z' uid='3249777' user='opendcc' version='18' changeset='57678980'>
+    <nd ref='406348056' />
+    <nd ref='4149668795' />
+    <nd ref='290982172' />
+    <nd ref='290982173' />
+    <nd ref='4149668794' />
+    <nd ref='290982174' />
+    <nd ref='4149668793' />
+    <nd ref='290982175' />
+    <nd ref='4149668792' />
+    <nd ref='4149668791' />
+    <nd ref='290982176' />
+    <nd ref='4149668790' />
+    <nd ref='747374300' />
+    <nd ref='4149668789' />
+    <nd ref='4149668688' />
+    <nd ref='4149668686' />
+    <nd ref='290982177' />
+    <nd ref='4149668680' />
+    <nd ref='5517364023' />
+    <nd ref='290982178' />
+    <nd ref='4149668678' />
+    <nd ref='4149668677' />
+    <nd ref='4149668675' />
+    <nd ref='747374289' />
+    <nd ref='4149668671' />
+    <nd ref='290982179' />
+    <nd ref='4149668667' />
+    <nd ref='4149668665' />
+    <nd ref='747374173' />
+    <nd ref='4149668662' />
+    <nd ref='4149668661' />
+    <nd ref='4149668660' />
+    <nd ref='747374176' />
+    <nd ref='4149668659' />
+    <nd ref='4149668658' />
+    <nd ref='4149668657' />
+    <nd ref='290982180' />
+    <nd ref='4149668655' />
+    <nd ref='290982181' />
+    <nd ref='4149668654' />
+    <nd ref='4149668653' />
+    <nd ref='747374164' />
+    <nd ref='4149668652' />
+    <nd ref='4149668648' />
+    <nd ref='4149668646' />
+    <nd ref='4149668642' />
+    <nd ref='747374169' />
+    <nd ref='4149668640' />
+    <nd ref='290982182' />
+    <nd ref='4149668633' />
+    <nd ref='4149668629' />
+    <nd ref='4149668621' />
+    <nd ref='1382200647' />
+    <nd ref='2415828781' />
+    <nd ref='4149668613' />
+    <nd ref='4149668611' />
+    <nd ref='5517685472' />
+    <nd ref='290982183' />
+    <nd ref='4149668609' />
+    <nd ref='290982222' />
+    <nd ref='747374131' />
+    <nd ref='4408389619' />
+    <nd ref='4149668594' />
+    <nd ref='290982223' />
+    <nd ref='2415828773' />
+    <nd ref='4149668483' />
+    <nd ref='2949687422' />
+    <nd ref='4149668480' />
+    <nd ref='2415828777' />
+    <nd ref='4149668478' />
+    <nd ref='4149668476' />
+    <nd ref='290982224' />
+    <nd ref='4149668474' />
+    <nd ref='4149668473' />
+    <nd ref='2913085312' />
+    <tag k='highway' v='tertiary' />
+    <tag k='maxspeed' v='50' />
+    <tag k='name' v='Altöttinger Straße' />
+    <tag k='surface' v='asphalt' />
+  </way>
+  <way id='41986661' timestamp='2017-01-28T21:01:13Z' uid='3249777' user='opendcc' version='2' changeset='45604012'>
+    <nd ref='520540663' />
+    <nd ref='4640607869' />
+    <nd ref='4640607894' />
+    <nd ref='520540672' />
+    <tag k='highway' v='residential' />
+    <tag k='name' v='Schweppermannstraße' />
+  </way>
+  <way id='60230419' timestamp='2017-11-18T10:59:26Z' uid='85475' user='miche101' version='19' changeset='53897094'>
+    <nd ref='2913085312' />
+    <nd ref='4149668469' />
+    <nd ref='4149668465' />
+    <nd ref='314282330' />
+    <nd ref='4149668450' />
+    <nd ref='290982226' />
+    <nd ref='4149668438' />
+    <nd ref='5236166434' />
+    <nd ref='290982227' />
+    <nd ref='2949703286' />
+    <nd ref='1382200661' />
+    <nd ref='4149668395' />
+    <nd ref='4149668394' />
+    <nd ref='290982228' />
+    <nd ref='4149668393' />
+    <nd ref='4149668392' />
+    <nd ref='290982229' />
+    <nd ref='4149668391' />
+    <nd ref='290982230' />
+    <tag k='highway' v='tertiary' />
+    <tag k='maxspeed' v='100' />
+    <tag k='surface' v='asphalt' />
+  </way>
+  <way id='60230422' timestamp='2016-03-20T12:35:53Z' uid='354141' user='Anoniman' version='3' changeset='37954733'>
+    <nd ref='3993346363' />
+    <nd ref='3993346364' />
+    <nd ref='3993346365' />
+    <nd ref='748288929' />
+    <tag k='highway' v='service' />
+    <tag k='service' v='driveway' />
+  </way>
+  <way id='60230423' timestamp='2016-03-20T12:35:53Z' uid='354141' user='Anoniman' version='3' changeset='37954733'>
+    <nd ref='748288929' />
+    <nd ref='3993346367' />
+    <nd ref='3993346368' />
+    <nd ref='747374525' />
+    <nd ref='747374262' />
+    <nd ref='747374261' />
+    <nd ref='3993346359' />
+    <nd ref='747374260' />
+    <tag k='highway' v='service' />
+    <tag k='oneway' v='yes' />
+    <tag k='service' v='parking_aisle' />
+  </way>
+  <way id='60230431' timestamp='2017-11-16T21:28:45Z' uid='3249777' user='opendcc' version='9' changeset='53855999'>
+    <nd ref='3999207336' />
+    <nd ref='290982100' />
+    <nd ref='290982136' />
+    <nd ref='2412882743' />
+    <nd ref='290982150' />
+    <tag k='highway' v='tertiary' />
+    <tag k='maxspeed' v='50' />
+    <tag k='name' v='Am Unteren Tor' />
+  </way>
+  <way id='105578389' timestamp='2017-11-16T21:28:45Z' uid='3249777' user='opendcc' version='8' changeset='53855999'>
+    <nd ref='1215799801' />
+    <nd ref='290982096' />
+    <tag k='covered' v='yes' />
+    <tag k='highway' v='tertiary' />
+    <tag k='maxheight' v='3' />
+    <tag k='maxspeed' v='50' />
+    <tag k='name' v='Bahnhofstraße' />
+    <tag k='tunnel' v='building_passage' />
+  </way>
+  <way id='105578404' timestamp='2017-11-16T21:28:46Z' uid='3249777' user='opendcc' version='10' changeset='53855999'>
+    <nd ref='5233558935' />
+    <nd ref='1215799874' />
+    <nd ref='1215799818' />
+    <nd ref='5233558938' />
+    <nd ref='1215799887' />
+    <nd ref='747374309' />
+    <nd ref='747374313' />
+    <nd ref='747374307' />
+    <nd ref='290982098' />
+    <nd ref='370391448' />
+    <nd ref='370391447' />
+    <nd ref='3999207384' />
+    <nd ref='1215799876' />
+    <tag k='highway' v='tertiary' />
+    <tag k='maxheight' v='3' />
+    <tag k='maxspeed' v='30' />
+    <tag k='maxwidth' v='3' />
+    <tag k='name' v='Stadtplatz' />
+  </way>
+  <way id='153027598' timestamp='2014-08-02T14:58:57Z' uid='2675' user='Eckhart Wörner' version='4' changeset='24499698'>
+    <nd ref='279878839' />
+    <nd ref='270805593' />
+    <tag k='bridge' v='yes' />
+    <tag k='highway' v='secondary' />
+    <tag k='layer' v='1' />
+    <tag k='maxspeed' v='50' />
+    <tag k='name' v='Innere Neumarkter Straße' />
+    <tag k='ref' v='St 2092' />
+    <tag k='surface' v='paved' />
+    <tag k='tmc' v='DE:27570/42379' />
+  </way>
+  <way id='153027599' timestamp='2014-08-02T14:58:57Z' uid='2675' user='Eckhart Wörner' version='4' changeset='24499698'>
+    <nd ref='270805594' />
+    <nd ref='279878839' />
+    <tag k='highway' v='secondary' />
+    <tag k='maxspeed' v='50' />
+    <tag k='name' v='Innere Neumarkter Straße' />
+    <tag k='ref' v='St 2092' />
+    <tag k='surface' v='paved' />
+    <tag k='tmc' v='DE:27570/42379' />
+  </way>
+  <way id='159042907' timestamp='2017-11-16T21:28:46Z' uid='3249777' user='opendcc' version='5' changeset='53855999'>
+    <nd ref='1215799876' />
+    <nd ref='5233558933' />
+    <tag k='highway' v='tertiary' />
+    <tag k='maxheight' v='3' />
+    <tag k='maxspeed' v='50' />
+    <tag k='name' v='Stadtplatz' />
+    <tag k='ref' v='B 299' />
+  </way>
+  <way id='166647011' timestamp='2016-02-14T10:44:02Z' uid='3249777' user='opendcc' version='10' changeset='37201355'>
+    <nd ref='1780874994' />
+    <nd ref='293586493' />
+    <nd ref='2890978915' />
+    <nd ref='293586498' />
+    <nd ref='2890978922' />
+    <nd ref='293586502' />
+    <nd ref='2020721583' />
+    <nd ref='2890978932' />
+    <nd ref='293586507' />
+    <nd ref='4005429996' />
+    <nd ref='1389193825' />
+    <nd ref='4005429997' />
+    <nd ref='293586540' />
+    <tag k='highway' v='secondary' />
+    <tag k='maxspeed' v='70' />
+    <tag k='name' v='Bürgermeister-Hess-Straße' />
+    <tag k='ref' v='St 2092' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:27570/42379' />
+  </way>
+  <way id='166647012' timestamp='2016-10-11T02:23:41Z' uid='3249777' user='opendcc' version='8' changeset='42790786'>
+    <nd ref='293586546' />
+    <nd ref='4441469464' />
+    <nd ref='2890978970' />
+    <nd ref='2020721590' />
+    <nd ref='2890978977' />
+    <nd ref='293586548' />
+    <nd ref='4441469480' />
+    <nd ref='2020721591' />
+    <nd ref='2890978998' />
+    <nd ref='293586550' />
+    <nd ref='4441469486' />
+    <nd ref='1389193817' />
+    <nd ref='2890979108' />
+    <nd ref='293586552' />
+    <nd ref='1389193824' />
+    <nd ref='1389193815' />
+    <nd ref='1389193814' />
+    <nd ref='431801934' />
+    <nd ref='4441471665' />
+    <nd ref='2890979127' />
+    <nd ref='293586557' />
+    <nd ref='2890979134' />
+    <nd ref='293586559' />
+    <nd ref='2890979141' />
+    <nd ref='2892204655' />
+    <nd ref='2020721595' />
+    <nd ref='2890979148' />
+    <nd ref='293586567' />
+    <nd ref='1389193805' />
+    <tag k='highway' v='secondary' />
+    <tag k='maxspeed' v='100' />
+    <tag k='name' v='Äußere Neumarkter Straße' />
+    <tag k='ref' v='St 2092' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:27570/42379' />
+  </way>
+  <way id='166647397' timestamp='2016-01-24T18:12:41Z' uid='3249777' user='opendcc' version='7' changeset='36781265'>
+    <nd ref='2255748848' />
+    <nd ref='2889664113' />
+    <nd ref='293586578' />
+    <nd ref='303907984' />
+    <nd ref='1389193826' />
+    <nd ref='2255748682' />
+    <tag k='highway' v='secondary' />
+    <tag k='maxspeed' v='100' />
+    <tag k='name' v='Bürgermeister-Hess-Straße' />
+    <tag k='ref' v='St 2092' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:27570/42379' />
+  </way>
+  <way id='184396668' timestamp='2016-04-26T17:02:33Z' uid='3249777' user='opendcc' version='6' changeset='38894084'>
+    <nd ref='290982151' />
+    <nd ref='4149668798' />
+    <nd ref='406348055' />
+    <nd ref='4149668797' />
+    <nd ref='4149668796' />
+    <nd ref='406348056' />
+    <tag k='highway' v='tertiary' />
+    <tag k='maxspeed' v='50' />
+    <tag k='name' v='Altöttinger Straße' />
+  </way>
+  <way id='191501897' timestamp='2016-05-19T22:17:31Z' uid='182281' user='tokamak' version='8' changeset='39438717'>
+    <nd ref='2020721634' />
+    <nd ref='4005430035' />
+    <nd ref='4005430028' />
+    <tag k='change:lanes' v='no|no' />
+    <tag k='highway' v='primary' />
+    <tag k='lanes' v='2' />
+    <tag k='lanes:backward' v='1' />
+    <tag k='maxspeed:backward' v='100' />
+    <tag k='maxspeed:forward' v='60' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:42379' />
+  </way>
+  <way id='191501899' timestamp='2015-02-02T19:13:51Z' uid='372615' user='sennewald63' version='6' changeset='28574180'>
+    <nd ref='1646296538' />
+    <nd ref='290982690' />
+    <tag k='change:lanes' v='no|no' />
+    <tag k='highway' v='primary' />
+    <tag k='lanes' v='2' />
+    <tag k='lanes:backward' v='1' />
+    <tag k='maxspeed:backward' v='100' />
+    <tag k='maxspeed:forward' v='80' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:42379' />
+  </way>
+  <way id='191501900' timestamp='2015-02-02T19:13:56Z' uid='372615' user='sennewald63' version='7' changeset='28574180'>
+    <nd ref='1646296478' />
+    <nd ref='2925088201' />
+    <nd ref='2925086300' />
+    <nd ref='1857855335' />
+    <nd ref='3327389079' />
+    <tag k='change:lanes:backward' v='not_left|yes' />
+    <tag k='change:lanes:forward' v='no' />
+    <tag k='highway' v='secondary' />
+    <tag k='lanes' v='3' />
+    <tag k='lanes:backward' v='2' />
+    <tag k='maxspeed:backward' v='100' />
+    <tag k='maxspeed:forward' v='60' />
+    <tag k='ref' v='St 2092' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:27570/42379' />
+    <tag k='turn:lanes:backward' v='left|through' />
+  </way>
+  <way id='215452799' timestamp='2015-02-02T19:13:52Z' uid='372615' user='sennewald63' version='4' changeset='28574180'>
+    <nd ref='431805630' />
+    <nd ref='3327389093' />
+    <tag k='highway' v='primary' />
+    <tag k='lanes' v='2' />
+    <tag k='lanes:backward' v='1' />
+    <tag k='maxspeed:backward' v='100' />
+    <tag k='maxspeed:forward' v='80' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:42379/27571' />
+  </way>
+  <way id='215452801' timestamp='2017-10-06T16:35:20Z' uid='3249777' user='opendcc' version='9' changeset='52688033'>
+    <nd ref='5146413398' />
+    <nd ref='431854805' />
+    <nd ref='5109044593' />
+    <nd ref='2242501270' />
+    <nd ref='5109044591' />
+    <nd ref='431854812' />
+    <nd ref='5109044592' />
+    <nd ref='2892204833' />
+    <nd ref='5109044590' />
+    <nd ref='431854816' />
+    <nd ref='431854820' />
+    <nd ref='5152102151' />
+    <nd ref='270804190' />
+    <tag k='highway' v='primary' />
+    <tag k='maxspeed' v='100' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:42379/27571' />
+  </way>
+  <way id='215452802' timestamp='2015-02-02T19:13:52Z' uid='372615' user='sennewald63' version='4' changeset='28574180'>
+    <nd ref='431839265' />
+    <nd ref='431805630' />
+    <tag k='highway' v='primary' />
+    <tag k='lanes' v='2' />
+    <tag k='lanes:backward' v='1' />
+    <tag k='maxspeed:backward' v='100' />
+    <tag k='maxspeed:forward' v='80' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:42379/27571' />
+  </way>
+  <way id='215452803' timestamp='2017-02-18T10:22:19Z' uid='3249777' user='opendcc' version='5' changeset='46188735'>
+    <nd ref='309070881' />
+    <nd ref='4691918546' />
+    <nd ref='2242501279' />
+    <nd ref='4691918547' />
+    <nd ref='809520226' />
+    <nd ref='809589580' />
+    <tag k='highway' v='primary' />
+    <tag k='lanes' v='2' />
+    <tag k='maxspeed' v='100' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:42379/27571' />
+    <tag k='turn:lanes:backward' v='through;right' />
+  </way>
+  <way id='215452804' timestamp='2015-02-02T19:13:52Z' uid='372615' user='sennewald63' version='4' changeset='28574180'>
+    <nd ref='496282111' />
+    <nd ref='431839262' />
+    <nd ref='431839265' />
+    <tag k='bridge' v='yes' />
+    <tag k='highway' v='primary' />
+    <tag k='lanes' v='2' />
+    <tag k='lanes:backward' v='1' />
+    <tag k='maxspeed' v='100' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:42379/27571' />
+  </way>
+  <way id='216933057' timestamp='2017-01-21T21:48:48Z' uid='3249777' user='opendcc' version='5' changeset='45359145'>
+    <nd ref='431846346' />
+    <nd ref='4126339790' />
+    <nd ref='2020721698' />
+    <nd ref='4622587865' />
+    <nd ref='290982686' />
+    <nd ref='496282111' />
+    <tag k='highway' v='primary' />
+    <tag k='maxspeed' v='100' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:42379/27571' />
+  </way>
+  <way id='216933060' timestamp='2016-04-16T15:04:46Z' uid='3249777' user='opendcc' version='5' changeset='38625158'>
+    <nd ref='431846391' />
+    <nd ref='4126339791' />
+    <nd ref='431846346' />
+    <tag k='bridge' v='yes' />
+    <tag k='highway' v='primary' />
+    <tag k='layer' v='1' />
+    <tag k='maxspeed' v='100' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:42379/27571' />
+  </way>
+  <way id='229089009' timestamp='2016-04-16T15:04:47Z' uid='3249777' user='opendcc' version='6' changeset='38625158'>
+    <nd ref='270804190' />
+    <nd ref='431854826' />
+    <nd ref='4126339808' />
+    <nd ref='2892204802' />
+    <tag k='highway' v='primary' />
+    <tag k='maxspeed' v='100' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:42379/27571' />
+  </way>
+  <way id='229089010' timestamp='2016-04-17T18:26:05Z' uid='3249777' user='opendcc' version='5' changeset='38649106'>
+    <nd ref='431854841' />
+    <nd ref='2020721718' />
+    <nd ref='4128470221' />
+    <nd ref='431854846' />
+    <nd ref='4128470220' />
+    <nd ref='3798544303' />
+    <tag k='highway' v='primary' />
+    <tag k='maxspeed' v='100' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:42379/27571' />
+  </way>
+  <way id='234142491' timestamp='2017-12-09T12:12:52Z' uid='85475' user='miche101' version='15' changeset='54483748'>
+    <nd ref='1780870996' />
+    <nd ref='5273447073' />
+    <nd ref='509302543' />
+    <nd ref='290982490' />
+    <nd ref='290982491' />
+    <nd ref='290982492' />
+    <nd ref='4017601201' />
+    <nd ref='1164687406' />
+    <nd ref='4017601186' />
+    <nd ref='1382223150' />
+    <nd ref='4017601152' />
+    <nd ref='509302527' />
+    <nd ref='5167799314' />
+    <nd ref='5167799315' />
+    <nd ref='290982494' />
+    <nd ref='5167799316' />
+    <nd ref='290982610' />
+    <nd ref='4993764760' />
+    <nd ref='1382223155' />
+    <nd ref='4993764761' />
+    <nd ref='4993764762' />
+    <nd ref='290982612' />
+    <nd ref='4993764763' />
+    <nd ref='4993764764' />
+    <nd ref='290982613' />
+    <nd ref='4993764765' />
+    <nd ref='4993764766' />
+    <nd ref='5002920738' />
+    <nd ref='4993764767' />
+    <nd ref='528064342' />
+    <nd ref='5002920739' />
+    <nd ref='4993764768' />
+    <nd ref='4993764206' />
+    <nd ref='290982615' />
+    <nd ref='4993764207' />
+    <nd ref='4993764205' />
+    <nd ref='1377328091' />
+    <nd ref='4993764208' />
+    <nd ref='4993764209' />
+    <nd ref='4993764210' />
+    <nd ref='4993764211' />
+    <nd ref='469717655' />
+    <nd ref='3679015319' />
+    <nd ref='290982617' />
+    <nd ref='3835349709' />
+    <nd ref='290982618' />
+    <nd ref='4993763290' />
+    <nd ref='3679015296' />
+    <nd ref='4993763291' />
+    <nd ref='3679015292' />
+    <nd ref='4993763292' />
+    <nd ref='3679015279' />
+    <nd ref='3835348053' />
+    <nd ref='3679015246' />
+    <nd ref='290982620' />
+    <nd ref='3679015202' />
+    <nd ref='290982621' />
+    <nd ref='4993776556' />
+    <nd ref='1382223163' />
+    <nd ref='4993776557' />
+    <nd ref='4993776558' />
+    <nd ref='290982622' />
+    <nd ref='4993776559' />
+    <nd ref='3679015053' />
+    <nd ref='1382223161' />
+    <nd ref='4993776560' />
+    <nd ref='3679015022' />
+    <nd ref='290982624' />
+    <nd ref='4993776561' />
+    <nd ref='3679014990' />
+    <nd ref='4993776562' />
+    <nd ref='290982625' />
+    <nd ref='3988853546' />
+    <nd ref='1382223166' />
+    <nd ref='5000311887' />
+    <nd ref='290982627' />
+    <nd ref='3988853545' />
+    <nd ref='5000312553' />
+    <nd ref='3988853544' />
+    <nd ref='5000312546' />
+    <nd ref='290982628' />
+    <nd ref='5000312545' />
+    <nd ref='3988853543' />
+    <nd ref='5000312547' />
+    <nd ref='4623839560' />
+    <nd ref='290982665' />
+    <nd ref='4623839561' />
+    <nd ref='2424379232' />
+    <nd ref='2424379244' />
+    <tag k='highway' v='primary' />
+    <tag k='maxspeed' v='100' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+  </way>
+  <way id='234142492' timestamp='2017-12-09T12:29:43Z' uid='85475' user='miche101' version='7' changeset='54484597'>
+    <nd ref='290982487' />
+    <nd ref='5003192134' />
+    <nd ref='5003192126' />
+    <nd ref='320917013' />
+    <nd ref='5003192133' />
+    <nd ref='290982488' />
+    <nd ref='4280946620' />
+    <nd ref='1382223135' />
+    <nd ref='3679015463' />
+    <nd ref='1382223136' />
+    <nd ref='1382223138' />
+    <nd ref='1930497046' />
+    <nd ref='1382223145' />
+    <nd ref='1382223148' />
+    <nd ref='1930497032' />
+    <nd ref='1382223146' />
+    <nd ref='5273467942' />
+    <nd ref='5182835808' />
+    <nd ref='1382223147' />
+    <nd ref='1780870996' />
+    <tag k='highway' v='primary' />
+    <tag k='maxspeed' v='50' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+  </way>
+  <way id='234143171' timestamp='2015-12-05T11:00:05Z' uid='3249777' user='opendcc' version='4' changeset='35766371'>
+    <nd ref='1382200637' />
+    <nd ref='3878025918' />
+    <nd ref='2899820746' />
+    <nd ref='3878025867' />
+    <nd ref='3878024951' />
+    <nd ref='588675717' />
+    <nd ref='290982377' />
+    <nd ref='3878024934' />
+    <nd ref='1382223118' />
+    <nd ref='3878024908' />
+    <nd ref='1382223189' />
+    <nd ref='1382223130' />
+    <nd ref='3878024899' />
+    <nd ref='290982378' />
+    <nd ref='1382223144' />
+    <nd ref='2947370648' />
+    <nd ref='3878024875' />
+    <nd ref='1382223120' />
+    <nd ref='290982431' />
+    <nd ref='1261655994' />
+    <tag k='highway' v='primary' />
+    <tag k='maxspeed' v='80' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+  </way>
+  <way id='234143173' timestamp='2014-07-04T09:13:39Z' uid='166830' user='Ja_Meister!' version='3' changeset='23914795'>
+    <nd ref='1261655994' />
+    <nd ref='2947370647' />
+    <nd ref='2899820745' />
+    <nd ref='290982433' />
+    <tag k='highway' v='primary' />
+    <tag k='maxspeed' v='80' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+  </way>
+  <way id='283552475' timestamp='2014-06-12T18:18:14Z' uid='195062' user='blauloke' version='2' changeset='22894338'>
+    <nd ref='290982094' />
+    <nd ref='2109697650' />
+    <nd ref='2415828778' />
+    <nd ref='747444583' />
+    <nd ref='1215799801' />
+    <tag k='highway' v='tertiary' />
+    <tag k='maxspeed' v='50' />
+    <tag k='name' v='Bahnhofstraße' />
+  </way>
+  <way id='285404955' timestamp='2016-10-11T02:23:40Z' uid='3249777' user='opendcc' version='6' changeset='42790786'>
+    <nd ref='293586540' />
+    <nd ref='4033117183' />
+    <nd ref='4005430003' />
+    <nd ref='4005430009' />
+    <nd ref='1389193819' />
+    <nd ref='4005430020' />
+    <nd ref='2890978957' />
+    <nd ref='4005430021' />
+    <nd ref='293586543' />
+    <nd ref='4441469461' />
+    <nd ref='4005430022' />
+    <nd ref='293586546' />
+    <tag k='highway' v='secondary' />
+    <tag k='maxspeed' v='70' />
+    <tag k='name' v='Äußere Neumarkter Straße' />
+    <tag k='ref' v='St 2092' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:27570/42379' />
+  </way>
+  <way id='286336746' timestamp='2017-12-20T07:30:46Z' uid='5853411' user='j1scad' version='11' changeset='54778809'>
+    <nd ref='290982353' />
+    <nd ref='4128470246' />
+    <nd ref='290982354' />
+    <nd ref='4128470245' />
+    <nd ref='290982355' />
+    <nd ref='290982356' />
+    <nd ref='3878130633' />
+    <nd ref='5258106419' />
+    <nd ref='4128470244' />
+    <nd ref='290982357' />
+    <nd ref='1382200604' />
+    <nd ref='4157736587' />
+    <nd ref='4157736586' />
+    <nd ref='1382200606' />
+    <nd ref='4157736585' />
+    <nd ref='1382200614' />
+    <nd ref='1382200616' />
+    <nd ref='4128470243' />
+    <nd ref='4128470242' />
+    <nd ref='290982359' />
+    <nd ref='4128470241' />
+    <nd ref='290982361' />
+    <nd ref='4128470240' />
+    <nd ref='1382200618' />
+    <nd ref='4128470239' />
+    <nd ref='4128470238' />
+    <nd ref='1382200617' />
+    <nd ref='4128470237' />
+    <nd ref='290982362' />
+    <nd ref='4128470236' />
+    <nd ref='434506450' />
+    <nd ref='4128470235' />
+    <nd ref='290982365' />
+    <nd ref='290982366' />
+    <nd ref='4128470234' />
+    <nd ref='5116411222' />
+    <nd ref='1382200627' />
+    <nd ref='4128470233' />
+    <nd ref='1382200621' />
+    <nd ref='5116406816' />
+    <nd ref='4128470232' />
+    <nd ref='5116406812' />
+    <nd ref='5116406813' />
+    <nd ref='5116406814' />
+    <nd ref='290982367' />
+    <nd ref='290982368' />
+    <nd ref='5026846186' />
+    <nd ref='4128470231' />
+    <nd ref='290982369' />
+    <nd ref='3878026114' />
+    <nd ref='290982370' />
+    <nd ref='5026846185' />
+    <nd ref='290982371' />
+    <nd ref='3878026107' />
+    <nd ref='5026846182' />
+    <nd ref='290982372' />
+    <nd ref='5026846181' />
+    <nd ref='3878026102' />
+    <nd ref='5026846180' />
+    <nd ref='290982373' />
+    <nd ref='3878026100' />
+    <nd ref='5026846179' />
+    <nd ref='3878026098' />
+    <nd ref='1382200631' />
+    <nd ref='5026846178' />
+    <nd ref='1382200633' />
+    <nd ref='3878026091' />
+    <nd ref='4909511972' />
+    <nd ref='1382200640' />
+    <nd ref='3878026086' />
+    <nd ref='290982374' />
+    <nd ref='290982375' />
+    <nd ref='4909511973' />
+    <nd ref='4909511974' />
+    <nd ref='3878026067' />
+    <nd ref='1382200635' />
+    <nd ref='1382200639' />
+    <nd ref='4909511975' />
+    <nd ref='290982376' />
+    <nd ref='1382200637' />
+    <tag k='highway' v='primary' />
+    <tag k='lanes' v='2' />
+    <tag k='maxspeed' v='100' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+  </way>
+  <way id='286336749' timestamp='2017-12-20T07:30:46Z' uid='5853411' user='j1scad' version='4' changeset='54778809'>
+    <nd ref='290982234' />
+    <nd ref='290982235' />
+    <nd ref='3878026679' />
+    <nd ref='1382200660' />
+    <nd ref='290982352' />
+    <nd ref='4128470247' />
+    <nd ref='290982353' />
+    <tag k='highway' v='primary' />
+    <tag k='lanes' v='2' />
+    <tag k='maxspeed:backward' v='70' />
+    <tag k='maxspeed:forward' v='100' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+  </way>
+  <way id='286336755' timestamp='2017-12-09T12:45:46Z' uid='85475' user='miche101' version='3' changeset='54484955'>
+    <nd ref='290982433' />
+    <nd ref='290982445' />
+    <nd ref='5003192193' />
+    <nd ref='290982447' />
+    <nd ref='290982484' />
+    <nd ref='5003192192' />
+    <nd ref='290982485' />
+    <nd ref='5273491588' />
+    <nd ref='5003192191' />
+    <nd ref='290982486' />
+    <nd ref='1382223131' />
+    <nd ref='5003192190' />
+    <nd ref='1382223133' />
+    <nd ref='5003192189' />
+    <nd ref='5003192188' />
+    <nd ref='290982487' />
+    <tag k='highway' v='primary' />
+    <tag k='maxspeed' v='100' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+  </way>
+  <way id='286336756' timestamp='2016-11-08T17:23:48Z' uid='3249777' user='opendcc' version='4' changeset='43493600'>
+    <nd ref='2890755425' />
+    <nd ref='4489051669' />
+    <nd ref='293586474' />
+    <nd ref='293586476' />
+    <nd ref='4489051670' />
+    <nd ref='2890755440' />
+    <nd ref='4489051671' />
+    <nd ref='293586477' />
+    <nd ref='2890755461' />
+    <nd ref='4398462800' />
+    <nd ref='293586482' />
+    <nd ref='2890755474' />
+    <nd ref='2890755479' />
+    <nd ref='4398462818' />
+    <nd ref='2890755484' />
+    <nd ref='4398462826' />
+    <nd ref='293586486' />
+    <nd ref='4398462829' />
+    <nd ref='2890755491' />
+    <nd ref='4398462830' />
+    <nd ref='293586487' />
+    <nd ref='4398462831' />
+    <nd ref='2890755499' />
+    <nd ref='4398462833' />
+    <nd ref='293586489' />
+    <nd ref='4398462834' />
+    <nd ref='2890755604' />
+    <nd ref='2890755607' />
+    <nd ref='2890755611' />
+    <tag k='highway' v='secondary' />
+    <tag k='maxspeed' v='100' />
+    <tag k='name' v='Bürgermeister-Hess-Straße' />
+    <tag k='ref' v='St 2092' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:27570/42379' />
+  </way>
+  <way id='286336757' timestamp='2014-08-02T14:58:55Z' uid='2675' user='Eckhart Wörner' version='2' changeset='24499698'>
+    <nd ref='270812179' />
+    <nd ref='2899820744' />
+    <tag k='highway' v='secondary' />
+    <tag k='maxspeed' v='100' />
+    <tag k='name' v='Bürgermeister-Hess-Straße' />
+    <tag k='ref' v='St 2092' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:27570/42379' />
+  </way>
+  <way id='286336758' timestamp='2016-08-16T16:15:24Z' uid='3249777' user='opendcc' version='4' changeset='41493214'>
+    <nd ref='2899820744' />
+    <nd ref='3879297090' />
+    <nd ref='4352803836' />
+    <nd ref='293845748' />
+    <nd ref='270812182' />
+    <tag k='highway' v='secondary' />
+    <tag k='maxspeed' v='70' />
+    <tag k='name' v='Bürgermeister-Hess-Straße' />
+    <tag k='ref' v='St 2092' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:27570/42379' />
+  </way>
+  <way id='286336759' timestamp='2014-08-02T14:58:55Z' uid='2675' user='Eckhart Wörner' version='2' changeset='24499698'>
+    <nd ref='2890755611' />
+    <nd ref='2890755612' />
+    <nd ref='1780874994' />
+    <tag k='highway' v='secondary' />
+    <tag k='maxspeed:backward' v='100' />
+    <tag k='maxspeed:forward' v='70' />
+    <tag k='name' v='Bürgermeister-Hess-Straße' />
+    <tag k='ref' v='St 2092' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:27570/42379' />
+  </way>
+  <way id='286336760' timestamp='2015-11-11T18:20:04Z' uid='3249777' user='opendcc' version='3' changeset='35245803'>
+    <nd ref='1394073967' />
+    <nd ref='2889627180' />
+    <nd ref='270812178' />
+    <nd ref='3831277793' />
+    <nd ref='270812179' />
+    <tag k='highway' v='secondary' />
+    <tag k='maxspeed' v='70' />
+    <tag k='name' v='Bürgermeister-Hess-Straße' />
+    <tag k='ref' v='St 2092' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:27570/42379' />
+  </way>
+  <way id='286336761' timestamp='2016-11-27T04:16:54Z' uid='3249777' user='opendcc' version='3' changeset='43976568'>
+    <nd ref='2255748682' />
+    <nd ref='4524190434' />
+    <nd ref='1389193809' />
+    <nd ref='4524190435' />
+    <nd ref='566128118' />
+    <nd ref='1394073967' />
+    <tag k='highway' v='secondary' />
+    <tag k='maxspeed:backward' v='100' />
+    <tag k='maxspeed:forward' v='70' />
+    <tag k='name' v='Bürgermeister-Hess-Straße' />
+    <tag k='ref' v='St 2092' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:27570/42379' />
+  </way>
+  <way id='286336763' timestamp='2015-10-17T10:51:27Z' uid='3249777' user='opendcc' version='4' changeset='34691286'>
+    <nd ref='1389193805' />
+    <nd ref='1389193806' />
+    <nd ref='2890979181' />
+    <nd ref='424487424' />
+    <nd ref='2890979186' />
+    <nd ref='3790149166' />
+    <tag k='highway' v='secondary' />
+    <tag k='lanes' v='2' />
+    <tag k='lanes:backward' v='1' />
+    <tag k='maxspeed:backward' v='100' />
+    <tag k='maxspeed:forward' v='70' />
+    <tag k='ref' v='St 2092' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:27570/42379' />
+  </way>
+  <way id='287739796' timestamp='2015-06-10T16:13:56Z' uid='29061' user='KPG' version='2' changeset='31870110'>
+    <nd ref='290982230' />
+    <nd ref='290982231' />
+    <nd ref='1262273959' />
+    <nd ref='290982232' />
+    <nd ref='3586257727' />
+    <nd ref='1253877680' />
+    <tag k='highway' v='tertiary' />
+    <tag k='maxspeed:backward' v='100' />
+    <tag k='maxspeed:forward' v='70' />
+    <tag k='surface' v='asphalt' />
+  </way>
+  <way id='287739798' timestamp='2014-06-12T18:18:10Z' uid='195062' user='blauloke' version='1' changeset='22894338'>
+    <nd ref='1253877680' />
+    <nd ref='1382200649' />
+    <nd ref='1898796297' />
+    <nd ref='1898796294' />
+    <nd ref='2075181747' />
+    <nd ref='290982233' />
+    <tag k='highway' v='tertiary' />
+    <tag k='maxspeed:backward' v='100' />
+    <tag k='maxspeed:forward' v='50' />
+    <tag k='surface' v='asphalt' />
+  </way>
+  <way id='292406542' timestamp='2017-02-22T18:05:19Z' uid='3249777' user='opendcc' version='3' changeset='46314560'>
+    <nd ref='2959628606' />
+    <nd ref='2903454950' />
+    <nd ref='4699673962' />
+    <nd ref='293586608' />
+    <nd ref='4699673963' />
+    <nd ref='424239693' />
+    <nd ref='2255821386' />
+    <nd ref='270812173' />
+    <nd ref='424428542' />
+    <nd ref='270812174' />
+    <tag k='highway' v='secondary' />
+    <tag k='maxspeed' v='50' />
+    <tag k='name' v='Bürgermeister-Hess-Straße' />
+    <tag k='ref' v='St 2092' />
+    <tag k='surface' v='paved' />
+    <tag k='tmc' v='DE:27570/42379' />
+  </way>
+  <way id='314708337' timestamp='2017-02-18T10:22:20Z' uid='3249777' user='opendcc' version='4' changeset='46188735'>
+    <nd ref='290982670' />
+    <nd ref='4128470223' />
+    <nd ref='4691918543' />
+    <nd ref='3797298545' />
+    <nd ref='309070881' />
+    <tag k='highway' v='primary' />
+    <tag k='lanes' v='3' />
+    <tag k='maxspeed' v='100' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+    <tag k='turn:lanes:forward' v='left|through' />
+  </way>
+  <way id='326121629' timestamp='2015-02-02T19:12:37Z' uid='372615' user='sennewald63' version='1' changeset='28574180'>
+    <nd ref='3327389080' />
+    <nd ref='2020721634' />
+    <tag k='highway' v='primary' />
+    <tag k='lanes' v='3' />
+    <tag k='lanes:backward' v='1' />
+    <tag k='maxspeed:backward' v='100' />
+    <tag k='maxspeed:forward' v='60' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:42379' />
+    <tag k='turn:lanes:forward' v='through|right' />
+  </way>
+  <way id='326121633' timestamp='2015-02-02T19:12:37Z' uid='372615' user='sennewald63' version='1' changeset='28574180'>
+    <nd ref='3327389093' />
+    <nd ref='1646296538' />
+    <tag k='change:lanes:backward' v='no' />
+    <tag k='change:lanes:forward' v='not_left|yes' />
+    <tag k='highway' v='primary' />
+    <tag k='lanes' v='3' />
+    <tag k='lanes:backward' v='1' />
+    <tag k='maxspeed:backward' v='100' />
+    <tag k='maxspeed:forward' v='80' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:42379/27571' />
+    <tag k='turn:lanes:forward' v='left|through' />
+  </way>
+  <way id='326121638' timestamp='2016-01-24T18:12:41Z' uid='3249777' user='opendcc' version='2' changeset='36781265'>
+    <nd ref='3327389089' />
+    <nd ref='290982691' />
+    <tag k='change:lanes' v='no|no' />
+    <tag k='highway' v='primary' />
+    <tag k='lanes' v='2' />
+    <tag k='lanes:backward' v='1' />
+    <tag k='maxheight' v='default' />
+    <tag k='maxspeed:backward' v='100' />
+    <tag k='maxspeed:forward' v='60' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:42379' />
+  </way>
+  <way id='326121647' timestamp='2016-03-30T16:16:54Z' uid='3249777' user='opendcc' version='3' changeset='38171916'>
+    <nd ref='3327389079' />
+    <nd ref='3327389078' />
+    <nd ref='4086746857' />
+    <nd ref='293628322' />
+    <tag k='highway' v='secondary' />
+    <tag k='oneway' v='yes' />
+    <tag k='ref' v='St 2092' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:27570/42379' />
+  </way>
+  <way id='375669820' timestamp='2016-03-30T16:16:54Z' uid='3249777' user='opendcc' version='2' changeset='38171916'>
+    <nd ref='3790149174' />
+    <nd ref='4086746813' />
+    <nd ref='3790149167' />
+    <nd ref='3790149166' />
+    <tag k='highway' v='secondary' />
+    <tag k='oneway' v='yes' />
+    <tag k='ref' v='St 2092' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:27570/42379' />
+  </way>
+  <way id='376060031' timestamp='2016-01-24T07:59:00Z' uid='3249777' user='opendcc' version='2' changeset='36771085'>
+    <nd ref='2097780727' />
+    <nd ref='2097780728' />
+    <tag k='highway' v='secondary' />
+    <tag k='layer' v='-1' />
+    <tag k='maxheight' v='default' />
+    <tag k='maxspeed' v='50' />
+    <tag k='name' v='Innere Neumarkter Straße' />
+    <tag k='ref' v='St 2092' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:27570/42379' />
+    <tag k='tunnel' v='yes' />
+  </way>
+  <way id='376060035' timestamp='2017-10-31T18:24:15Z' uid='3249777' user='opendcc' version='4' changeset='53403568'>
+    <nd ref='2097780728' />
+    <nd ref='1657758820' />
+    <nd ref='4348946257' />
+    <nd ref='298485923' />
+    <nd ref='5202753298' />
+    <nd ref='4348946258' />
+    <nd ref='1657758821' />
+    <nd ref='270812443' />
+    <nd ref='270812570' />
+    <nd ref='2255835137' />
+    <nd ref='2959628583' />
+    <nd ref='2959628588' />
+    <nd ref='2959628595' />
+    <nd ref='270805593' />
+    <tag k='highway' v='secondary' />
+    <tag k='maxspeed' v='50' />
+    <tag k='name' v='Innere Neumarkter Straße' />
+    <tag k='ref' v='St 2092' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:27570/42379' />
+  </way>
+  <way id='376288660' timestamp='2017-07-23T15:53:22Z' uid='3249777' user='opendcc' version='3' changeset='50504991'>
+    <nd ref='3797298589' />
+    <nd ref='4128470230' />
+    <nd ref='290982667' />
+    <nd ref='516923363' />
+    <nd ref='4128470229' />
+    <nd ref='4128470228' />
+    <nd ref='290982668' />
+    <nd ref='4128470227' />
+    <nd ref='4988338930' />
+    <nd ref='290982669' />
+    <nd ref='4988338929' />
+    <nd ref='1382223169' />
+    <nd ref='4128470226' />
+    <nd ref='4128470225' />
+    <nd ref='1382223171' />
+    <nd ref='2242501282' />
+    <nd ref='4128470224' />
+    <nd ref='3207578164' />
+    <nd ref='290982670' />
+    <tag k='highway' v='primary' />
+    <tag k='maxspeed' v='100' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+  </way>
+  <way id='376288661' timestamp='2015-10-21T19:22:06Z' uid='3249777' user='opendcc' version='1' changeset='34786188'>
+    <nd ref='2424379244' />
+    <nd ref='3797298589' />
+    <tag k='bridge' v='yes' />
+    <tag k='highway' v='primary' />
+    <tag k='layer' v='1' />
+    <tag k='maxspeed' v='100' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+  </way>
+  <way id='376288662' timestamp='2015-10-21T19:22:06Z' uid='3249777' user='opendcc' version='1' changeset='34786188'>
+    <nd ref='2892204802' />
+    <nd ref='431854831' />
+    <tag k='bridge' v='yes' />
+    <tag k='highway' v='primary' />
+    <tag k='layer' v='1' />
+    <tag k='maxspeed' v='100' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:42379/27571' />
+  </way>
+  <way id='376288663' timestamp='2016-04-16T15:04:47Z' uid='3249777' user='opendcc' version='2' changeset='38625158'>
+    <nd ref='431854831' />
+    <nd ref='4126339807' />
+    <nd ref='2892204673' />
+    <nd ref='4126339806' />
+    <nd ref='431854834' />
+    <nd ref='4126339804' />
+    <nd ref='2020721722' />
+    <nd ref='4126339803' />
+    <nd ref='431854841' />
+    <tag k='highway' v='primary' />
+    <tag k='maxspeed' v='100' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:42379/27571' />
+  </way>
+  <way id='376421832' timestamp='2015-10-22T18:24:54Z' uid='3249777' user='opendcc' version='1' changeset='34806309'>
+    <nd ref='3798544303' />
+    <nd ref='1382223117' />
+    <tag k='bridge' v='yes' />
+    <tag k='highway' v='primary' />
+    <tag k='layer' v='1' />
+    <tag k='maxspeed' v='100' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:42379/27571' />
+  </way>
+  <way id='376421833' timestamp='2016-04-16T15:04:47Z' uid='3249777' user='opendcc' version='3' changeset='38625158'>
+    <nd ref='1382223117' />
+    <nd ref='4085651476' />
+    <nd ref='4126339796' />
+    <nd ref='420912827' />
+    <nd ref='4126339794' />
+    <nd ref='431846391' />
+    <tag k='highway' v='primary' />
+    <tag k='maxspeed' v='100' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:42379/27571' />
+  </way>
+  <way id='393253276' timestamp='2016-01-24T18:12:39Z' uid='3249777' user='opendcc' version='1' changeset='36781265'>
+    <nd ref='270812174' />
+    <nd ref='3964646907' />
+    <tag k='highway' v='secondary' />
+    <tag k='maxspeed' v='100' />
+    <tag k='name' v='Bürgermeister-Hess-Straße' />
+    <tag k='ref' v='St 2092' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:27570/42379' />
+  </way>
+  <way id='393253277' timestamp='2016-01-24T18:12:39Z' uid='3249777' user='opendcc' version='1' changeset='36781265'>
+    <nd ref='3964646907' />
+    <nd ref='2255748848' />
+    <tag k='highway' v='secondary' />
+    <tag k='maxheight' v='default' />
+    <tag k='maxspeed' v='100' />
+    <tag k='name' v='Bürgermeister-Hess-Straße' />
+    <tag k='ref' v='St 2092' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:27570/42379' />
+  </way>
+  <way id='410060388' timestamp='2016-04-13T15:44:38Z' uid='182281' user='tokamak' version='1' changeset='38529445'>
+    <nd ref='324328606' />
+    <nd ref='3993346375' />
+    <nd ref='3993346373' />
+    <nd ref='3993346370' />
+    <nd ref='3993346366' />
+    <nd ref='3993346363' />
+    <tag k='highway' v='secondary' />
+    <tag k='name' v='Bahnhofstraße' />
+    <tag k='ref' v='St 2086' />
+  </way>
+  <way id='410841912' timestamp='2017-12-20T07:30:46Z' uid='5853411' user='j1scad' version='2' changeset='54778809'>
+    <nd ref='290982233' />
+    <nd ref='2075181742' />
+    <nd ref='1898796283' />
+    <nd ref='1382200659' />
+    <nd ref='3586257743' />
+    <nd ref='290982234' />
+    <tag k='highway' v='primary' />
+    <tag k='lanes' v='2' />
+    <tag k='maxspeed' v='70' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+  </way>
+  <way id='410841913' timestamp='2016-08-14T08:49:40Z' uid='3249777' user='opendcc' version='2' changeset='41442463'>
+    <nd ref='279879388' />
+    <nd ref='4349496163' />
+    <nd ref='298493165' />
+    <nd ref='520540672' />
+    <tag k='highway' v='residential' />
+    <tag k='maxspeed' v='30' />
+    <tag k='name' v='Herzog-Friedrich-Straße' />
+  </way>
+  <way id='410841914' timestamp='2016-04-16T12:58:29Z' uid='182281' user='tokamak' version='1' changeset='38621897'>
+    <nd ref='279879388' />
+    <nd ref='1657758818' />
+    <nd ref='1657758819' />
+    <nd ref='3963464462' />
+    <nd ref='3768422851' />
+    <nd ref='2097780727' />
+    <tag k='highway' v='secondary' />
+    <tag k='maxspeed' v='50' />
+    <tag k='name' v='Innere Neumarkter Straße' />
+    <tag k='ref' v='St 2092' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:27570/42379' />
+  </way>
+  <way id='417290118' timestamp='2016-05-11T13:25:11Z' uid='182281' user='tokamak' version='1' changeset='39242119'>
+    <nd ref='298493999' />
+    <nd ref='520540422' />
+    <tag k='highway' v='residential' />
+    <tag k='maxspeed' v='30' />
+    <tag k='name' v='Pilichdorfstraße' />
+  </way>
+  <way id='419563227' timestamp='2017-02-13T05:50:27Z' uid='3249777' user='opendcc' version='2' changeset='46036828'>
+    <nd ref='4005430028' />
+    <nd ref='1646296478' />
+    <tag k='change:lanes' v='no|no' />
+    <tag k='highway' v='primary' />
+    <tag k='lanes' v='2' />
+    <tag k='lanes:backward' v='1' />
+    <tag k='maxspeed:backward' v='100' />
+    <tag k='maxspeed:forward' v='60' />
+    <tag k='ref' v='B 299' />
+    <tag k='surface' v='asphalt' />
+    <tag k='tmc' v='DE:42379' />
+  </way>
+  <way id='541164277' timestamp='2017-11-16T21:28:44Z' uid='3249777' user='opendcc' version='1' changeset='53855999'>
+    <nd ref='748288779' />
+    <nd ref='3999207336' />
+    <tag k='highway' v='tertiary' />
+    <tag k='maxspeed' v='50' />
+    <tag k='name' v='Am Unteren Tor' />
+    <tag k='tunnel' v='building_passage' />
+  </way>
+  <way id='541164278' timestamp='2017-11-16T21:28:44Z' uid='3249777' user='opendcc' version='1' changeset='53855999'>
+    <nd ref='5233558933' />
+    <nd ref='748288779' />
+    <tag k='highway' v='tertiary' />
+    <tag k='maxheight' v='3' />
+    <tag k='maxspeed' v='50' />
+    <tag k='name' v='Stadtplatz' />
+    <tag k='tunnel' v='building_passage' />
+  </way>
+  <way id='541164281' timestamp='2017-11-16T21:28:44Z' uid='3249777' user='opendcc' version='1' changeset='53855999'>
+    <nd ref='290982096' />
+    <nd ref='5233558935' />
+    <tag k='covered' v='yes' />
+    <tag k='highway' v='tertiary' />
+    <tag k='maxheight' v='3' />
+    <tag k='maxspeed' v='30' />
+    <tag k='maxwidth' v='3' />
+    <tag k='name' v='Stadtplatz' />
+    <tag k='tunnel' v='building_passage' />
+  </way>
+  <relation id='6143773' timestamp='2018-04-22T15:07:59Z' uid='8748' user='ToniE' version='13' changeset='58312288'>
+    <member type='node' ref='4117377048' role='stop' />
+    <member type='node' ref='4125943637' role='stop' />
+    <member type='node' ref='4125922083' role='stop' />
+    <member type='node' ref='4125920843' role='stop' />
+    <member type='node' ref='4125908456' role='stop' />
+    <member type='node' ref='4125896305' role='stop' />
+    <member type='node' ref='4125887652' role='stop' />
+    <member type='node' ref='4125877174' role='stop' />
+    <member type='way' ref='60230423' role='' />
+    <member type='way' ref='60230422' role='' />
+    <member type='way' ref='410060388' role='' />
+    <member type='way' ref='29427954' role='' />
+    <member type='way' ref='35491577' role='' />
+    <member type='way' ref='283552475' role='' />
+    <member type='way' ref='105578389' role='' />
+    <member type='way' ref='541164281' role='' />
+    <member type='way' ref='105578404' role='' />
+    <member type='way' ref='159042907' role='' />
+    <member type='way' ref='541164278' role='' />
+    <member type='way' ref='541164277' role='' />
+    <member type='way' ref='60230431' role='' />
+    <member type='way' ref='28151133' role='' />
+    <member type='way' ref='28151134' role='' />
+    <member type='way' ref='184396668' role='' />
+    <member type='way' ref='40427094' role='' />
+    <member type='way' ref='60230419' role='' />
+    <member type='way' ref='287739796' role='' />
+    <member type='way' ref='287739798' role='' />
+    <member type='way' ref='410841912' role='' />
+    <member type='way' ref='286336749' role='' />
+    <member type='way' ref='286336746' role='' />
+    <member type='way' ref='234143171' role='' />
+    <member type='way' ref='234143173' role='' />
+    <member type='way' ref='286336755' role='' />
+    <member type='way' ref='234142492' role='' />
+    <member type='way' ref='234142491' role='' />
+    <member type='way' ref='376288661' role='' />
+    <member type='way' ref='376288660' role='' />
+    <member type='way' ref='314708337' role='' />
+    <member type='way' ref='215452803' role='' />
+    <member type='way' ref='37118081' role='' />
+    <member type='way' ref='215452801' role='' />
+    <member type='way' ref='229089009' role='' />
+    <member type='way' ref='376288662' role='' />
+    <member type='way' ref='376288663' role='' />
+    <member type='way' ref='229089010' role='' />
+    <member type='way' ref='376421832' role='' />
+    <member type='way' ref='376421833' role='' />
+    <member type='way' ref='216933060' role='' />
+    <member type='way' ref='216933057' role='' />
+    <member type='way' ref='215452804' role='' />
+    <member type='way' ref='215452802' role='' />
+    <member type='way' ref='215452799' role='' />
+    <member type='way' ref='326121633' role='' />
+    <member type='way' ref='191501899' role='' />
+    <member type='way' ref='27217709' role='' />
+    <member type='way' ref='326121638' role='' />
+    <member type='way' ref='27217710' role='' />
+    <member type='way' ref='326121629' role='' />
+    <member type='way' ref='191501897' role='' />
+    <member type='way' ref='419563227' role='' />
+    <member type='way' ref='191501900' role='' />
+    <member type='way' ref='326121647' role='' />
+    <member type='way' ref='26769912' role='' />
+    <member type='way' ref='375669820' role='' />
+    <member type='way' ref='286336763' role='' />
+    <member type='way' ref='166647012' role='' />
+    <member type='way' ref='285404955' role='' />
+    <member type='way' ref='166647011' role='' />
+    <member type='way' ref='286336759' role='' />
+    <member type='way' ref='286336756' role='' />
+    <member type='way' ref='36396084' role='' />
+    <member type='way' ref='286336758' role='' />
+    <member type='way' ref='286336757' role='' />
+    <member type='way' ref='286336760' role='' />
+    <member type='way' ref='286336761' role='' />
+    <member type='way' ref='166647397' role='' />
+    <member type='way' ref='393253277' role='' />
+    <member type='way' ref='393253276' role='' />
+    <member type='way' ref='292406542' role='' />
+    <member type='way' ref='24922549' role='' />
+    <member type='way' ref='153027599' role='' />
+    <member type='way' ref='153027598' role='' />
+    <member type='way' ref='376060035' role='' />
+    <member type='way' ref='376060031' role='' />
+    <member type='way' ref='410841914' role='' />
+    <member type='way' ref='410841913' role='' />
+    <member type='way' ref='41986661' role='' />
+    <member type='way' ref='27692068' role='' />
+    <member type='way' ref='27200854' role='' />
+    <member type='way' ref='417290118' role='' />
+    <tag k='name' v='Bus RBO 6209 (006) Neumarkt St. Veit - Mühldorf' />
+    <tag k='network' v='Regionalbus Ostbayern;Verkehrsgemeinschaft Landkreis Mühldorf' />
+    <tag k='network:short' v='RBO;VLMÜ' />
+    <tag k='operator' v='RBO' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='6209' />
+    <tag k='ref_trips' v='006' />
+    <tag k='route' v='bus' />
+    <tag k='type' v='route' />
+  </relation>
+</osm>
