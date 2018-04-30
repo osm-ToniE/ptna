@@ -2089,7 +2089,7 @@ sub analyze_ptv2_route_relation {
             }
             if ( $from ) {
                 if ( index($name,$from) == -1 ) {
-                    push( @{$relation_ptr->{'__notes__'}}, "PTv2 route: 'from' is not part of 'name'" );
+                    push( @{$relation_ptr->{'__notes__'}}, sprintf("PTv2 route: 'from' = '%s' is not part of 'name'", $from) );
                     $preconditions_failed++;
                     $return_code++;
                 }
@@ -2101,7 +2101,7 @@ sub analyze_ptv2_route_relation {
             }
             if ( $to ) {
                 if ( index($name,$to) == -1 ) {
-                    push( @{$relation_ptr->{'__notes__'}}, "PTv2 route: 'to' is not part of 'name'" );
+                    push( @{$relation_ptr->{'__notes__'}}, sprintf("PTv2 route: 'to' = '%s' is not part of 'name'", $to) );
                     $preconditions_failed++;
                     $return_code++;
                 }
