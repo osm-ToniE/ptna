@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+    <head>
+        <title>OSM - Public Transport Analysis</title>
+        <meta name="generator" content="analyze-routes.pl">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="language" content="de" />
+        <meta name="keywords" content="OSM Public Transport PTv2" />
+        <meta name="description" content="OSM - Public Transport Analysis" />
+        <style type="text/css">
+              table { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; }
+              th    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+              td    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+              ol    { list-style: none; }
+              img   { witdh: 20px }
+              .tableheaderrow   { background-color: LightSteelBlue;   }
+              .sketchline       { background-color: LightBlue;        }
+              .sketch           { text-align:left;  font-weight: 500; }
+              .csvinfo          { text-align:right; font-size: 0.8em; }
+              .ref              { white-space:nowrap; }
+              .relation         { white-space:nowrap; }
+              .PTv              { text-align:center; }
+        </style>
+    </head>
+    <body>
+    <!-- split here for table of contents -->
+Die Analyse läuft in der Regel abends zwischen 19:00 und 20:00 Uhr.<br>
+<br>
+Die Daten werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändert hat.<br>
+
+Eine Erläuterung der Fehlertexte ist auf der Seite von <a href='https://wiki.openstreetmap.org/wiki/User:ToniE/analyze-routes#Momentane_Prüfungen'>analyze-routes</a> zu finden.<br>
+
+        <br /><hr />
+        <h1 id="A1.">1. ÖPNV Linien</h1>
+        <h2 id="A1.1.">1.1. Bus</h2>
+        <table class="oepnvtable" summary="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="ref">Linie (ref=)</th><th class="relation">Relation (id=)</th><th class="type">Typ (type=)</th><th class="route_type">Verkehrsmittel (route(_master)=)</th><th class="name">Name (name=)</th><th class="network">Netz (network=)</th><th class="operator">Betreiber (operator=)</th><th class="from">Von (from=)</th><th class="via">Über (via=)</th><th class="to">Nach (to=)</th><th class="PTv">PTv</th><th class="issues">Fehler</th><th class="notes">Anmerkungen</th></tr>
+            </thead>
+            <tbody>
+                <tr data-ref="6209" class="line"><td class="ref">6209</td><td class="relation"><img src="http://wiki.openstreetmap.org/w/images/d/d9/Mf_Relation.svg" title="Relation" alt="Relation" /> <a href="http://osm.org/relation/6143773" title="Relation">6143773</a> <small>(<a href="http://osm.org/edit?editor=id&amp;relation=6143773">iD</a>, <a href="http://localhost:8111/import?url=http://api.openstreetmap.org/api/0.6/relation/6143773/full">JOSM</a>)</small></td><td class="type">route</td><td class="route_type">bus</td><td class="name">Bus RBO 6209 (006) Neumarkt St. Veit - M&uuml;hldorf</td><td class="network">Regionalbus Ostbayern;Verkehrsgemeinschaft Landkreis M&uuml;hldorf</td><td class="operator">RBO</td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv">2</td><td class="issues">PTv2 route: has gap(s), consists of 2 segments<br>PTv2 route: using oneway way(s) in wrong direction: <img src="http://wiki.openstreetmap.org/w/images/2/2a/Mf_way.svg" title="Way" alt="Way" /> <a href="http://osm.org/way/60230423" title="Way">60230423</a> <small>(<a href="http://osm.org/edit?editor=id&amp;way=60230423">iD</a>, <a href="http://localhost:8111/import?url=http://api.openstreetmap.org/api/0.6/way/60230423/full">JOSM</a>)</small><br>PTv2 route: 'public_transport' = 'stop_position' is not part of way: <img src="http://wiki.openstreetmap.org/w/images/2/20/Mf_node.svg" title="Node" alt="Node" /> 'Neumarkt-St Veit, Bahnhof' <a href="http://osm.org/node/4117377048" title="Node">4117377048</a> <small>(<a href="http://osm.org/edit?editor=id&amp;node=4117377048">iD</a>, <a href="http://localhost:8111/import?url=http://api.openstreetmap.org/api/0.6/node/4117377048">JOSM</a>)</small><br>PTv2 route: 'role' = 'stop' but 'public_transport' is not set: <img src="http://wiki.openstreetmap.org/w/images/2/20/Mf_node.svg" title="Node" alt="Node" /> 'Mühldorf a.Inn, Schulzentrum' <a href="http://osm.org/node/4125877174" title="Node">4125877174</a> <small>(<a href="http://osm.org/edit?editor=id&amp;node=4125877174">iD</a>, <a href="http://localhost:8111/import?url=http://api.openstreetmap.org/api/0.6/node/4125877174">JOSM</a>)</small>, <img src="http://wiki.openstreetmap.org/w/images/2/20/Mf_node.svg" title="Node" alt="Node" /> 'Schoßbach, Fa. Huber' <a href="http://osm.org/node/4125896305" title="Node">4125896305</a> <small>(<a href="http://osm.org/edit?editor=id&amp;node=4125896305">iD</a>, <a href="http://localhost:8111/import?url=http://api.openstreetmap.org/api/0.6/node/4125896305">JOSM</a>)</small>, <img src="http://wiki.openstreetmap.org/w/images/2/20/Mf_node.svg" title="Node" alt="Node" /> 'Güntering' <a href="http://osm.org/node/4125908456" title="Node">4125908456</a> <small>(<a href="http://osm.org/edit?editor=id&amp;node=4125908456">iD</a>, <a href="http://localhost:8111/import?url=http://api.openstreetmap.org/api/0.6/node/4125908456">JOSM</a>)</small>, <img src="http://wiki.openstreetmap.org/w/images/2/20/Mf_node.svg" title="Node" alt="Node" /> 'Stetten, B299' <a href="http://osm.org/node/4125920843" title="Node">4125920843</a> <small>(<a href="http://osm.org/edit?editor=id&amp;node=4125920843">iD</a>, <a href="http://localhost:8111/import?url=http://api.openstreetmap.org/api/0.6/node/4125920843">JOSM</a>)</small>, <img src="http://wiki.openstreetmap.org/w/images/2/20/Mf_node.svg" title="Node" alt="Node" /> 'Oberarbing' <a href="http://osm.org/node/4125922083" title="Node">4125922083</a> <small>(<a href="http://osm.org/edit?editor=id&amp;node=4125922083">iD</a>, <a href="http://localhost:8111/import?url=http://api.openstreetmap.org/api/0.6/node/4125922083">JOSM</a>)</small>, <img src="http://wiki.openstreetmap.org/w/images/2/20/Mf_node.svg" title="Node" alt="Node" /> 'Neumarkt St.Veit, Altött. Str.' <a href="http://osm.org/node/4125943637" title="Node">4125943637</a> <small>(<a href="http://osm.org/edit?editor=id&amp;node=4125943637">iD</a>, <a href="http://localhost:8111/import?url=http://api.openstreetmap.org/api/0.6/node/4125943637">JOSM</a>)</small><br>PTv2 route: mismatch between 'role' = 'stop' and 'public_transport' = 'platform': <img src="http://wiki.openstreetmap.org/w/images/2/20/Mf_node.svg" title="Node" alt="Node" /> 'Ödmühle' <a href="http://osm.org/node/4125887652" title="Node">4125887652</a> <small>(<a href="http://osm.org/edit?editor=id&amp;node=4125887652">iD</a>, <a href="http://localhost:8111/import?url=http://api.openstreetmap.org/api/0.6/node/4125887652">JOSM</a>)</small></td><td class="notes">&#039;network:short&#039; = RBO;VLM&Uuml;<br>&#039;ref_trips&#039; = 006<br>PTv2 route: &#039;from&#039; is not set<br>PTv2 route: &#039;to&#039; is not set</td></tr>
+            </tbody>
+        </table>
+
+    </body>
+</html>
+        <!-- split here for table of contents -->
+        <h1>Inhaltsverzeichnis</h1>
+        <ol>
+        <li>1. <a href="#A1.">ÖPNV Linien</a>
+        <ol>
+        <li>1.1. <a href="#A1.1.">Bus</a>
+        </li>
+        </ol>
+        </li>
+        </ol>

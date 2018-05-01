@@ -2,8 +2,8 @@
 *.html
 
 # ignore save and diff files
-*.html.save
-*.html.diff
+*.save
+*.diff
 
 # ignore log files
 *.log
@@ -11,6 +11,6 @@
 # ignore downloaded XML data
 *-Data.xml
 
-# currently ignore ols test data
+# currently ignore also old test data
 OldTest/*
 
