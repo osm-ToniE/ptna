@@ -79,7 +79,7 @@
 20;bus;;;;
 6097/21/13;bus;;;;
 22;bus;;;;
-23;bus;;;;
+23/12;bus;;;;
 24/24;bus;;;;
 6024/25;bus;;;;
 26;bus;;;;
@@ -157,7 +157,7 @@
 == Buslinien mit Mitgliedschaft zum Netzwerk Dingolfinger Regionalbusnetz (DGF) (= DGF xx)
 
 6097/21/13;bus;(=DGF 13 =RBO 6097);;;
-23;bus;(=DGF 12)
+23/12;bus;(=DGF 12)
 24/24;bus;(=DGF 24)
 28/28;bus;(=DGF 28)
 

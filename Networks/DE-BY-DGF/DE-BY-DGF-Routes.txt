@@ -65,7 +65,7 @@ Blauer Dingo;bus;;;;
 6097/21/13;bus;;;;
 14;bus;;;;
 15;bus;;;;
-15a;bus;;;;
+15a/75;bus;;;;
 15b;bus;;;;
 16;bus;;;;
 16a;bus;;;;
