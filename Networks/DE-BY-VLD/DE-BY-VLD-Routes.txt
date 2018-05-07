@@ -28,18 +28,18 @@
 #
 
 
-= Überblick Buslinien Verkehrsgemeinschaft Landkreis Deggendorf (VLD) allgemein 
+= Überblick Buslinien "Verkehrsgemeinschaft Landkreis Deggendorf" (VLD) und "Stadtbusnetz Deggendorf" allgemein 
 
-- Verweis auf die Datei mit den [[Deggendorf/Transportation/Analyse/DE-BY-VLD-Linien|VLD Linien]] im Wiki.
+- Verweis auf die Datei mit den [[Deggendorf/Transportation/Analyse/DE-BY-VLD-Linien|Deggendorfer Stadt- und Landkreis-Linien]] im Wiki.
 - Verweis auf mehr [[Talk:Deggendorf/Transportation/Analyse|Informationen]] im Wiki.
 
 
-== Stadtbusse Deggendorf
+== Stadtbusnetz Deggendorf
 
-Linie 1;bus;;;;
-Linie 2;bus;;;;
-Linie 3;bus;;;;
-Linie 4;bus;;;;
+1;bus;;;;
+2;bus;;;;
+3;bus;;;;
+4;bus;;;;
 
 
 == Regionalbusse Landkreis Deggendorf

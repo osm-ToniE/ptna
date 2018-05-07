@@ -36,10 +36,10 @@
 
 == Stadtbusse Pfarrkirchen
 
-Linie 1;bus;;;;
-Linie 2;bus;;;;
-9;bus;(=Käferlinie);;;
-9a;bus;(=Hasenlinie);;;
+1;bus;;;;
+2;bus;;;;
+9;bus;Käferlinie;;;
+9a;bus;Hasenlinie;;;
 
 
 == Regionalbusse Landkreis Rottal-Inn

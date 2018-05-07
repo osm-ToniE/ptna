@@ -28,23 +28,23 @@
 #
 
 
-= Überblick Buslinien Verkehrsgemeinschaft Straubinger Land (VSL) allgemein 
+= Überblick Buslinien "Verkehrsgemeinschaft Straubinger Land" (VSL) und "Stadt-Bus-Verkehr Straubing" allgemein 
 
-- Verweis auf die Datei mit den [[Straubing/Transportation/Analyse/DE-BY-VSL-Linien|VSL Linien]] im Wiki.
+- Verweis auf die Datei mit den [[Straubing/Transportation/Analyse/DE-BY-VSL-Linien|Straubinger Stadt- und Landkreis-Linien]] im Wiki.
 - Verweis auf mehr [[Talk:Straubing/Transportation/Analyse|Informationen]] im Wiki.
 
 
 == Stadtbusse Straubing
 
 1;bus;;;;
-2;bus;(=normaler Stadtbus);;;
-2TB;bus;(=Taxibus);;;
+2;bus;normaler Stadtbus;;;
+2TB;bus;Taxibus;;;
 3;bus;;;;
-5TB;bus;(Taxibus);;;
+4;bus;;;;
 6;bus;;;;
-9;bus;(Pendelbus);;;
-10TB;bus;(Taxibus);;;
-11TB;bus;(Taxibus);;;
+9;bus;Pendelbus;;;
+10TB;bus;Taxibus;;;
+11TB;bus;Taxibus;;;
 
 
 == Regionalbusse Landkreis Straubing

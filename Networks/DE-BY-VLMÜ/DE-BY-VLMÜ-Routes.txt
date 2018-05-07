@@ -36,10 +36,10 @@
 
 == Stadtbusse Mühldorf
 
-Linie 1;bus;;;;
-Linie 2;bus;;;;
-Linie 3;bus;;;;
-Linie 4;bus;;;;
+1;bus;;;;
+2;bus;;;;
+3;bus;;;;
+4;bus;;;;
 
 
 == Regionalbusse Landkreis Mühldorf
