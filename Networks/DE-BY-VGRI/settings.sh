@@ -7,7 +7,7 @@
 PREFIX="DE-BY-VGRI"
 
 OVERPASS_QUERY="http://overpass-api.de/api/interpreter?data=area[boundary=administrative][admin_level=6][name='Landkreis Rottal-Inn'];(rel(area)[route~'(bus|tram|train|subway|light_rail|trolleybus|ferry|monorail|aerialway|share_taxi|funicular)'];rel(br);rel[type='route'](r);)->.routes;(.routes;rel(r.routes);way(r.routes);node(r.routes););out;"
-NETWORK_LONG="Verkehrsgemeinschaft Rottal-Inn;Stadtbus Pfarrkirchen"
+NETWORK_LONG="Verkehrsgemeinschaft Rottal-Inn|Stadtbus Pfarrkirchen"
 NETWORK_SHORT="VGRI"
 
 ANALYSIS_PAGE="Pfarrkirchen/Transportation/Analyse"
