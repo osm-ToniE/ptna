@@ -75,6 +75,26 @@ if [ "$overpassquery" = "true" ]
 then
     echo $(date "+%Y-%m-%d %H:%M:%S") "Calling wget for '$PREFIX'"
     wget "$OVERPASS_QUERY" -O $OSM_XML_FILE
+    echo $(date "+%Y-%m-%d %H:%M:%S") "wget returns $?"
+    
+    if [ -s $OSM_XML_FILE ]
+    then
+        echo $(date "+%Y-%m-%d %H:%M:%S") "Success for wget for '$PREFIX'"
+    else
+        echo $(date "+%Y-%m-%d %H:%M:%S") "Calling wget for '$PREFIX' a second time"
+        # try a second, but only a second time
+        sleep 60    
+        wget "$OVERPASS_QUERY" -O $OSM_XML_FILE
+        echo $(date "+%Y-%m-%d %H:%M:%S") "wget returns $?"
+        
+        if [ -s $OSM_XML_FILE ]
+        then
+            echo $(date "+%Y-%m-%d %H:%M:%S") "Success for wget for '$PREFIX'"
+        else
+            echo $(date "+%Y-%m-%d %H:%M:%S") "Failure for wget for '$PREFIX'"
+        fi
+    fi
+
 fi
 
 #
