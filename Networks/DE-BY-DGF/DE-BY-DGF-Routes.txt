@@ -48,18 +48,17 @@ Blauer Dingo;bus;;;;
 
 6218/01;bus;;;;
 6236/02;bus;;;;
-03;bus;;;;
+6235/03;bus;;;;
 6150/04;bus;;;;
 6151/06;bus;;;;
-06;bus;;;;
 6242/310/07;bus;;;;
 6237/51/08;bus;;;;
-09;bus;;;;
+6154/09;bus;;;;
 
 
 == 1x-Linien
 
-10;bus;;;;
+7630/10;bus;;;;
 6232/308/11;bus;;;;
 23/12;bus;;;;
 6097/21/13;bus;;;;
@@ -103,13 +102,13 @@ Blauer Dingo;bus;;;;
 
 == 4x-Linien
 
-40;bus;;;;
-41;bus;;;;
+7639/40;bus;;;;
+6153/41;bus;;;;
 42;bus;;;;
-43;bus;;;;
+7631/43;bus;;;;
 44;bus;;;;
 7544/45;bus;;;;
-46;bus;;;;
+6259/46;bus;;;;
 
 
 == Disco/Freizeitbuslinien
@@ -127,23 +126,22 @@ Blauer Dingo;bus;;;;
 
 6218/01;bus;(=RBO 6218);;;
 6236/02;bus;(=RBO 6236);;;
-03;bus;(=RBO 6235);;;
+6235/03;bus;(=RBO 6235);;;
 6150/04;bus;(=RBO 6150);;;
-6151/06;bus;(=RBO 6152);;;
-06;bus;(=RBO 6151);;;
+6151/06;bus;(=RBO 6151);;;
 6242/310/07;bus;(=RBO 6242 =LA 310);;;
 6237/51/08;bus;(=RBO 6237 =VSL 51);;;
-09;bus;(=RBO 6154);;;
+6154/09;bus;(=RBO 6154);;;
 
-10;bus;(=RBO 7630);;;
-11;bus;(=RBO 6232 =LA 308);;;
+7630/10;bus;(=RBO 7630);;;
+6232/308/11;bus;(=RBO 6232 =LA 308);;;
 6097/21/13;bus;(=RBO 6097 =VSL 21);;;
 
-40;bus;(=RBO 7639);;;
-41;bus;(=RBO 6153);;;
-43;bus;(=RBO 7631);;;
-45;bus;(=RBO 7544);;;
-46;bus;(=RBO 6259);;;
+7639/40;bus;(=RBO 7639);;;
+6153/41;bus;(=RBO 6153);;;
+7631/43;bus;(=RBO 7631);;;
+7544/45;bus;(=RBO 7544);;;
+6259/46;bus;(=RBO 6259);;;
 
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Landshuter Regionalbusnetz (LA) (= LA xxx)
@@ -163,7 +161,7 @@ Blauer Dingo;bus;;;;
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Straubinger Land (VSL)  (= VSL xx)
 
-08;bus;(=VSL 51 =RBO 6237);;;
+6237/51/08;bus;(=VSL 51 =RBO 6237);;;
 
 23/12;bus;(=VSL 23);;;
 6097/21/13;bus;(=VSL 21 =RBO 6097);;;
@@ -182,16 +180,16 @@ Blauer Dingo;bus;;;;
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Deggendorf (=RBO xxxx)
 
-02;bus;(=RBO 6236);;;
-03;bus;(=RBO 6235);;;
+6236/02;bus;(=RBO 6236);;;
+6235/03;bus;(=RBO 6235);;;
 6150/04;bus;(=RBO 6130);;;
-05;bus;(=RBO 6152);;;
+6152/05;bus;(=RBO 6152);;;
 6151/06;bus;(=RBO 6151);;;
 6237/51/08;bus;(=RBO 6237 =VSL 51);;;
-09;bus;(=RBO 6154);;;
+6154/09;bus;(=RBO 6154);;;
 
-10;bus;(=RBO 7630);;;
+7630/10;bus;(=RBO 7630);;;
 
-41;bus;(=RBO 6153);;;
+6153/41;bus;(=RBO 6153);;;
 
 </pre>

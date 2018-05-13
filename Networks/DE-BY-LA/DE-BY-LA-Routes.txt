@@ -177,7 +177,7 @@ X33;bus;;;;Stadtwerke Landshut
 
 020;bus;;;;
 6233/021/47;bus;;;;
-022;bus;;;;
+6264/022/46;bus;;;;
 023/23;bus;;;;
 024;bus;;;;
 025;bus;;;;
@@ -315,10 +315,5 @@ X33;bus;;;;Stadtwerke Landshut
 9407/025;bus;(=RVO 9407 =LA025);;;
 
 
-= Bahnlinien (Deutsche Bahn (DB))
 
-930;train;;;;
-931;train;;;;
-932;train;;;;
-945;train;;;;
 </pre>
