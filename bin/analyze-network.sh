@@ -180,7 +180,7 @@ fi
 
 if [ "$uploadresult" = "true" ]
 then
-    echo $(date "+%Y-%m-%d %H:%M:%S")  "Upload '$HTML_FILE' to '$ANALYSIS_PAGE'"
+    echo $(date "+%Y-%m-%d %H:%M:%S")  "Upload '$HTML_FILE' to '$TARGET_LOC/$HTML_FILE'"
 
     if [ -f $HTML_FILE ]
     then 
