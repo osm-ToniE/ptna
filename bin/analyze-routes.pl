@@ -4169,7 +4169,7 @@ sub printRelationTemplate {
                 my $relation_url    = sprintf( "[http://osm.org/relation/%s %s]", $val, $val );
                 my $xml_url         = sprintf( "[http://api.osm.org/api/0.6/relation/%s XML]", $val );
                 my $id_url          = sprintf( "[http://osm.org/edit?editor=id&relation=%s iD]", $val );
-                my $josm_url        = sprintf( "[http://localhost:8111/import?url=http://api.openstreetmap.org/api/0.6/relation/%s/full JOSM]", $val );
+                my $josm_url        = sprintf( "[http://localhost:8111/import?url=https://api.openstreetmap.org/api/0.6/relation/%s/full JOSM]", $val );
                 my $potlatch2_url   = sprintf( "[http://osm.org/edit?editor=potlatch2&zoom=11&amp;relation=%s Potlatch2]", $val );
                 my $history_url     = sprintf( "[http://osm.virtuelle-loipe.de/history/?type=relation&ref=%s history]", $val );
                 my $analyze_url     = sprintf( "[http://ra.osmsurround.org/analyze.jsp?relationId=%s analyze]", $val );
@@ -4187,7 +4187,7 @@ sub printRelationTemplate {
             my $relation_url    = sprintf( "<a href=\"http://osm.org/relation/%s\" title=\"Relation\">%s</a>", $val, $val );
             my $xml_url         = sprintf( "<a href=\"http://api.osm.org/api/0.6/relation/%s\">XML</a>", $val );
             my $id_url          = sprintf( "<a href=\"http://osm.org/edit?editor=id&amp;relation=%s\">iD</a>", $val );
-            my $josm_url        = sprintf( "<a href=\"http://localhost:8111/import?url=http://api.openstreetmap.org/api/0.6/relation/%s/full\">JOSM</a>", $val );
+            my $josm_url        = sprintf( "<a href=\"http://localhost:8111/import?url=https://api.openstreetmap.org/api/0.6/relation/%s/full\">JOSM</a>", $val );
             my $potlatch2_url   = sprintf( "<a href=\"http://osm.org/edit?editor=potlatch2&amp;zoom=11&amp;amp;relation=%s\">Potlatch2</a>", $val );
             my $history_url     = sprintf( "<a href=\"http://osm.virtuelle-loipe.de/history/?type=relation&amp;ref=%s\">history</a>", $val );
             my $analyze_url     = sprintf( "<a href=\"http://ra.osmsurround.org/analyze.jsp?relationId=%s\">analyze</a>", $val );
@@ -4238,7 +4238,7 @@ sub printWayTemplate {
                 my $way_url         = sprintf( "[http://osm.org/way/%s %s]", $val, $val );
                 my $xml_url         = sprintf( "[http://api.osm.org/api/0.6/way/%s XML]", $val );
                 my $id_url          = sprintf( "[http://osm.org/edit?editor=id&way=%s iD]", $val );
-                my $josm_url        = sprintf( "[http://localhost:8111/import?url=http://api.openstreetmap.org/api/0.6/way/%s/full JOSM]", $val );
+                my $josm_url        = sprintf( "[http://localhost:8111/import?url=https://api.openstreetmap.org/api/0.6/way/%s/full JOSM]", $val );
                 my $potlatch2_url   = sprintf( "[http://osm.org/edit?editor=potlatch2&zoom=11&amp;way=%s Potlatch2]", $val );
     
                 $val = sprintf( "%s %s <small>(%s, %s, %s, %s)</small>", $image_url, $way_url, $xml_url, $id_url, $josm_url, $potlatch2_url );    
@@ -4252,7 +4252,7 @@ sub printWayTemplate {
             my $way_url         = sprintf( "<a href=\"http://osm.org/way/%s\" title=\"Way\">%s</a>", $val, $val );
             my $xml_url         = sprintf( "<a href=\"http://api.osm.org/api/0.6/way/%s\">XML</a>", $val );
             my $id_url          = sprintf( "<a href=\"http://osm.org/edit?editor=id&amp;way=%s\">iD</a>", $val );
-            my $josm_url        = sprintf( "<a href=\"http://localhost:8111/import?url=http://api.openstreetmap.org/api/0.6/way/%s/full\">JOSM</a>", $val );
+            my $josm_url        = sprintf( "<a href=\"http://localhost:8111/import?url=https://api.openstreetmap.org/api/0.6/way/%s/full\">JOSM</a>", $val );
             my $potlatch2_url   = sprintf( "<a href=\"http://osm.org/edit?editor=potlatch2&amp;zoom=11&amp;amp;way=%s\">Potlatch2</a>", $val );
             my $info_string     = '';
             if ( $tags ) {
@@ -4299,7 +4299,7 @@ sub printNodeTemplate {
                 my $node_url        = sprintf( "[http://osm.org/node/%s %s]", $val, $val );
                 my $xml_url         = sprintf( "[http://api.osm.org/api/0.6/node/%s XML]", $val );
                 my $id_url          = sprintf( "[http://osm.org/edit?editor=id&node=%s iD]", $val );
-                my $josm_url        = sprintf( "[http://localhost:8111/import?url=http://api.openstreetmap.org/api/0.6/node/%s JOSM]", $val );
+                my $josm_url        = sprintf( "[http://localhost:8111/import?url=https://api.openstreetmap.org/api/0.6/node/%s JOSM]", $val );
                 my $potlatch2_url   = sprintf( "[http://osm.org/edit?editor=potlatch2&zoom=11&amp;node=%s Potlatch2]", $val );
     
                 $val = sprintf( "%s %s <small>(%s, %s, %s, %s)</small>", $image_url, $node_url, $xml_url, $id_url, $josm_url, $potlatch2_url );    
@@ -4312,7 +4312,7 @@ sub printNodeTemplate {
             my $image_url       = sprintf( "<img src=\"http://wiki.openstreetmap.org/w/images/2/20/Mf_node.svg\" title=\"Node\" alt=\"Node\" />" );
             my $node_url        = sprintf( "<a href=\"http://osm.org/node/%s\" title=\"Node\">%s</a>", $val, $val );
             my $id_url          = sprintf( "<a href=\"http://osm.org/edit?editor=id&amp;node=%s\">iD</a>", $val );
-            my $josm_url        = sprintf( "<a href=\"http://localhost:8111/import?url=http://api.openstreetmap.org/api/0.6/node/%s\">JOSM</a>", $val );
+            my $josm_url        = sprintf( "<a href=\"http://localhost:8111/import?url=https://api.openstreetmap.org/api/0.6/node/%s\">JOSM</a>", $val );
             my $potlatch2_url   = sprintf( "<a href=\"http://osm.org/edit?editor=potlatch2&amp;zoom=11&amp;amp;node=%s\">Potlatch2</a>", $val );
             my $info_string     = '';
             if ( $tags ) {
