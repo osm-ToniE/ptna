@@ -1745,27 +1745,47 @@ sub analyze_relation {
                 push( @{$relation_ptr->{'__notes__'}}, "'network' is short form" );
             }
             else {
-                if ( $network_long_regex && $network =~ m/$network_long_regex/ ) {
+                if ( $network_long_regex && $network =~ m/($network_long_regex)/ ) {
+                    my $match = $1;
                     if ( $positive_notes || ($expect_network_short && !$expect_network_long_for) ) {
-                        my $n   = '---' . $network . '---';
-                        my $nlr = '---' . $network_long_regex . '---';
-                        if ( $n =~ m/$nlr/ ) {
+                        if ( $network eq $match ) {
                             push( @{$relation_ptr->{'__notes__'}}, "'network' is long form" );
                         }
                         else {
                             push( @{$relation_ptr->{'__notes__'}}, "'network' matches long form" );
                         }
                     }
+                    if ( $network ne $match ) {
+                        if ( $network =~ m/;\s+$match/    ||
+                             $network =~ m/$match\s+;/    ||
+                             $network =~ m/$match\s*;\s+/   ) {
+                            push( @{$relation_ptr->{'__issues__'}}, "'network' = '$network' includes the separator value ';' (semi-colon) with sourrounding blank(s)" );
+                        }
+                        if ( $network =~ m/(,\s*)$match/    ||
+                             $network =~ m/$match(\s*,)/       ) {
+                            push( @{$relation_ptr->{'__issues__'}}, "'network' = '$network': '$1' (comma) as separator value should be replaced by ';' (semi-colon) without blank(s)" );
+                        }
+                    }
                 }
-                if ( $network_short_regex && $network =~ m/$network_short_regex/ ) {
+                if ( $network_short_regex && $network =~ m/($network_short_regex)/ ) {
+                    my $match = $1;
                     if ( $positive_notes || ($expect_network_long && !$expect_network_short_for) ) {
-                        my $n   = '---' . $network . '---';
-                        my $nsr = '---' . $network_short_regex . '---';
-                        if ( $n =~ m/$nsr/ ) {
+                        if ( $network eq $match ) {
                             push( @{$relation_ptr->{'__notes__'}}, "'network' is short form" );
                         }
                         else {
                             push( @{$relation_ptr->{'__notes__'}}, "'network' matches short form" );
+                        }
+                    }
+                    if ( $network ne $match ) {
+                        if ( $network =~ m/;\s+$match/    ||
+                             $network =~ m/$match\s+;/    ||
+                             $network =~ m/$match\s*;\s+/   ) {
+                            push( @{$relation_ptr->{'__issues__'}}, "'network' = '$network' includes the separator value ';' (semi-colon) with sourrounding blank(s)" );
+                        }
+                        if ( $network =~ m/(,\s*)$match/    ||
+                             $network =~ m/$match(\s*,)/       ) {
+                            push( @{$relation_ptr->{'__issues__'}}, "'network' = '$network': '$1' (comma) as separator value should be replaced by ';' (semi-colon) without blank(s)" );
                         }
                     }
                 }
