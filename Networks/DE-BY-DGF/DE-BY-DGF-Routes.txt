@@ -90,7 +90,7 @@ Blauer Dingo;bus;;;;
 == 3x-Linien
 
 309/30;bus;;;;
-31;bus;;;;
+#31;bus;;;; (existiert nicht mehr)
 019/32;bus;;;;
 018/33;bus;;;;
 037/34;bus;;;;

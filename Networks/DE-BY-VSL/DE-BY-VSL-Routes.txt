@@ -93,7 +93,7 @@
 30;bus;;;;
 31;bus;;;;
 32;bus;;;;
-33;bus;;;;
+4112/33;bus;;;;
 34;bus;;;;
 35;bus;;;;
 36;bus;;;;
@@ -175,6 +175,7 @@
 
 48;bus;(=RBO 7592);;;
 6237/51/08;bus;(=RBO 6237 =DGF 08);;;
+4112/33;bus;(=RBO 4112);;;
 
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Cham (VLC) (=VLC xxx)
