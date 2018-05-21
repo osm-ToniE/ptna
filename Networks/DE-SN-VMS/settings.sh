@@ -14,7 +14,7 @@ ANALYSIS_PAGE="Saxony/Transportation/Verkehrsverbund_Mittelsachsen/Analyse"
 WIKI_ROUTES_PAGE="Saxony/Transportation/Verkehrsverbund_Mittelsachsen/Analyse/DE-SN-VMS-Linien"
 FILE_DIFF="200"
 
-ANALYSIS_OPTIONS="--max-error=10 --positive-notes --check-access --check-name --check-stop-position --check-sequence --multiple-ref-type-entries=analyze --coloured-sketchline"
+ANALYSIS_OPTIONS="--max-error=10 --positive-notes --check-access --check-name --check-stop-position --check-sequence --check-osm-separator --multiple-ref-type-entries=analyze --coloured-sketchline"
 
 # --check-bus-stop 
 # --expect-network-long
