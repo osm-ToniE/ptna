@@ -14,7 +14,7 @@ ANALYSIS_PAGE="Kelheim/Transportation/Analyse"
 WIKI_ROUTES_PAGE="Kelheim/Transportation/Analyse/DE-BY-VLK-Linien"
 FILE_DIFF="200"
 
-ANALYSIS_OPTIONS="--max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-version --check-wide-characters --multiple-ref-type-entries=allow --positive-notes --coloured-sketchline"
+ANALYSIS_OPTIONS="--max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-version --check-osm-separator --check-wide-characters --multiple-ref-type-entries=allow --positive-notes --coloured-sketchline"
 
 # --check-bus-stop 
 # --expect-network-long

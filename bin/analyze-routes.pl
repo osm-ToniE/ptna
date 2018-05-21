@@ -42,6 +42,7 @@ my $check_access                    = undef;
 my $check_bus_stop                  = undef;
 my $check_name                      = undef;
 my $check_stop_position             = undef;
+my $check_osm_separator             = undef;
 my $check_platform                  = undef;
 my $check_sequence                  = undef;
 my $check_roundabouts               = undef;
@@ -72,6 +73,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'check-access'                  =>  \$check_access,                 # --check-access                    check for access restrictions on highways
             'check-bus-stop'                =>  \$check_bus_stop,               # --check-bus-stop                  check for strict highway=bus_stop on nodes only
             'check-name'                    =>  \$check_name,                   # --check-name                      check for strict name conventions (name='... ref: from => to'
+            'check-osm-separator'           =>  \$check_osm_separator,          # --check-osm-separator             check separator for '; ' (w/ blank) and ',' (comma instead of semi-colon)
             'check-platform'                =>  \$check_platform,               # --check-platform                  check for bus=yes, tram=yes, ... on platforms
             'check-roundabouts'             =>  \$check_roundabouts,            # --check-roundabouts               check for roundabouts being included completely
             'check-sequence'                =>  \$check_sequence,               # --check-sequence                  check for correct sequence of stops, platforms and ways
@@ -117,6 +119,7 @@ if ( $verbose ) {
     printf STDERR "%20s--check-access\n",                  ' '                                 if ( $check_access                );
     printf STDERR "%20s--check-bus-stop\n",                ' '                                 if ( $check_bus_stop              );
     printf STDERR "%20s--check-name\n",                    ' '                                 if ( $check_name                  );
+    printf STDERR "%20s--check-osm-separator\n",           ' '                                 if ( $check_osm_separator         );
     printf STDERR "%20s--check-platform\n",                ' '                                 if ( $check_platform              );
     printf STDERR "%20s--check-roundabouts\n",             ' '                                 if ( $check_roundabouts           );
     printf STDERR "%20s--check-sequence\n",                ' '                                 if ( $check_sequence              );
@@ -1755,15 +1758,17 @@ sub analyze_relation {
                             push( @{$relation_ptr->{'__notes__'}}, "'network' matches long form" );
                         }
                     }
-                    if ( $network ne $match ) {
-                        if ( $network =~ m/;\s+$match/    ||
-                             $network =~ m/$match\s+;/    ||
-                             $network =~ m/$match\s*;\s+/   ) {
-                            push( @{$relation_ptr->{'__issues__'}}, "'network' = '$network' includes the separator value ';' (semi-colon) with sourrounding blank(s)" );
-                        }
-                        if ( $network =~ m/(,\s*)$match/    ||
-                             $network =~ m/$match(\s*,)/       ) {
-                            push( @{$relation_ptr->{'__issues__'}}, "'network' = '$network': '$1' (comma) as separator value should be replaced by ';' (semi-colon) without blank(s)" );
+                    if ( $check_osm_separator ) {
+                        if ( $network ne $match ) {
+                            if ( $network =~ m/;\s+$match/    ||
+                                 $network =~ m/$match\s+;/    ||
+                                 $network =~ m/$match\s*;\s+/   ) {
+                                push( @{$relation_ptr->{'__issues__'}}, "'network' = '$network' includes the separator value ';' (semi-colon) with sourrounding blank(s)" );
+                            }
+                            if ( $network =~ m/(,\s*)$match/    ||
+                                 $network =~ m/$match(\s*,)/       ) {
+                                push( @{$relation_ptr->{'__issues__'}}, "'network' = '$network': '$1' (comma) as separator value should be replaced by ';' (semi-colon) without blank(s)" );
+                            }
                         }
                     }
                 }
@@ -1777,15 +1782,17 @@ sub analyze_relation {
                             push( @{$relation_ptr->{'__notes__'}}, "'network' matches short form" );
                         }
                     }
-                    if ( $network ne $match ) {
-                        if ( $network =~ m/;\s+$match/    ||
-                             $network =~ m/$match\s+;/    ||
-                             $network =~ m/$match\s*;\s+/   ) {
-                            push( @{$relation_ptr->{'__issues__'}}, "'network' = '$network' includes the separator value ';' (semi-colon) with sourrounding blank(s)" );
-                        }
-                        if ( $network =~ m/(,\s*)$match/    ||
-                             $network =~ m/$match(\s*,)/       ) {
-                            push( @{$relation_ptr->{'__issues__'}}, "'network' = '$network': '$1' (comma) as separator value should be replaced by ';' (semi-colon) without blank(s)" );
+                    if ( $check_osm_separator ) {
+                        if ( $network ne $match ) {
+                            if ( $network =~ m/;\s+$match/    ||
+                                 $network =~ m/$match\s+;/    ||
+                                 $network =~ m/$match\s*;\s+/   ) {
+                                push( @{$relation_ptr->{'__issues__'}}, "'network' = '$network' includes the separator value ';' (semi-colon) with sourrounding blank(s)" );
+                            }
+                            if ( $network =~ m/(,\s*)$match/    ||
+                                 $network =~ m/$match(\s*,)/       ) {
+                                push( @{$relation_ptr->{'__issues__'}}, "'network' = '$network': '$1' (comma) as separator value should be replaced by ';' (semi-colon) without blank(s)" );
+                            }
                         }
                     }
                 }
