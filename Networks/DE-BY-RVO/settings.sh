@@ -14,7 +14,7 @@ ANALYSIS_PAGE="Oberbayern/Transportation/Analyse"
 WIKI_ROUTES_PAGE="Oberbayern/Transportation/RVO-Linien-gesamt"
 FILE_DIFF="200"
 
-ANALYSIS_OPTIONS="--check-access --check-name --check-stop-position --check-sequence --check-version --check-osm-separator --check-wide-characters --multiple-ref-type-entries=analyze --positive-notes --coloured-sketchline"
+ANALYSIS_OPTIONS="--check-access --check-name --check-stop-position --check-sequence --check-version --check-osm-separator --multiple-ref-type-entries=analyze --positive-notes --coloured-sketchline"
 
 # --max-error=
 # --check-bus-stop 

@@ -47,7 +47,6 @@ my $check_platform                  = undef;
 my $check_sequence                  = undef;
 my $check_roundabouts               = undef;
 my $check_version                   = undef;
-my $check_wide_characters           = undef;
 my $expect_network_long             = undef;
 my $expect_network_long_for         = undef;
 my $expect_network_short            = undef;
@@ -79,7 +78,6 @@ GetOptions( 'help'                          =>  \$help,                         
             'check-sequence'                =>  \$check_sequence,               # --check-sequence                  check for correct sequence of stops, platforms and ways
             'check-stop-position'           =>  \$check_stop_position,          # --check-stop-position             check for bus=yes, tram=yes, ... on (stop_positions
             'check-version'                 =>  \$check_version,                # --check-version                   check for PTv2 on route_masters, ...
-            'check-wide-characters'         =>  \$check_wide_characters,        # --check-wide-characters           check for wide charaters in relation tags
             'coloured-sketchline'           =>  \$coloured_sketchline,          # --coloured-sketchline             force SketchLine to print coloured icons
             'expect-network-long'           =>  \$expect_network_long,          # --expect-network-long             note if 'network' is not long form in general
             'expect-network-long-for:s'     =>  \$expect_network_long_for,      # --expect-network-long-for="Münchner Verkehrs- und Tarifverbund|Biberger Bürgerbus"         note if 'network' is not long form for ...
@@ -125,7 +123,6 @@ if ( $verbose ) {
     printf STDERR "%20s--check-sequence\n",                ' '                                 if ( $check_sequence              );
     printf STDERR "%20s--check-stop-position\n",           ' '                                 if ( $check_stop_position         );
     printf STDERR "%20s--check-version\n",                 ' '                                 if ( $check_version               );
-    printf STDERR "%20s--check-wide-characters\n",         ' '                                 if ( $check_wide_characters       );
     printf STDERR "%20s--coloured-sketchline\n",           ' '                                 if ( $coloured_sketchline         );
     printf STDERR "%20s--expect-network-long\n",           ' '                                 if ( $expect_network_long         );
     printf STDERR "%20s--expect-network-short\n",          ' '                                 if ( $expect_network_short        );
@@ -1692,7 +1689,6 @@ sub analyze_relation {
                                             'check_date'    => '__notes__'
                                           );
     my $reporttype                      = undef;
-    my $wide_characters                 = '';
     
     if ( $relation_ptr ) {
         
@@ -1842,33 +1838,6 @@ sub analyze_relation {
         elsif ( $type eq 'route') {
             $return_code = analyze_route_relation( $relation_ptr );
         }
-        
-        if ( 0  ) { #$check_wide_characters ) {
-            if ( $relation_ptr->{'tag'} ) {
-#                printf STDERR "Relation %s: checking tag ", $relation_id;
-                foreach my $tag ( sort( keys( %{$relation_ptr->{'tag'}} ) ) ) {
-                    next if ( $tag eq 'sort_name' );
-#                    printf STDERR "'%s' ", $tag;
-                    $wide_characters = '';
-                    if ( defined($relation_ptr->{'tag'}->{$tag}) ) {
-                        while ( $relation_ptr->{'tag'}->{$tag} && $relation_ptr->{'tag'}->{$tag} =~ m/([\N{U+0100}-\N{U+FFFE}])/g ) {
-                            $wide_characters .= "'" . $1 . "', ";
-                            #printf STDERR "Wide character %s in tag '%s' for relation %s\n", $1, $tag, $relation_id;
-                        }
-                        if ( $wide_characters ) {
-                            $wide_characters =~ s/, $//;
-                            push( @{$relation_ptr->{'__issues__'}}, sprintf("Wide charater(s) in tag '%s': %s", $tag, $wide_characters ) );
-                        }
-                    } else {
-                        printf STDERR "Internal problem for relation: %s checking tag %s\n", $relation_id, $tag;
-                    }
-                }
-#                printf STDERR "\n";
-            } else {
-                printf STDERR "Internal problem for relation %s: relation_ptr->{'tag'}\n", $relation_id;
-            }
-        }
-
     }
 
     return $return_code;
