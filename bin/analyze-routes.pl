@@ -596,6 +596,7 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                                     ${$relation_ptr->{'route_master_relation'}}[$route_master_relation_index]->{'ref'}  = $member->{'ref'};
                                     ${$relation_ptr->{'route_master_relation'}}[$route_master_relation_index]->{'role'} = $member->{'role'};
                                     $route_master_relation_index++;
+                                    $RELATIONS{$member->{'ref'}}->{'member_of_route_master'}->{$relation_id} = 1;
                                 }
                                 if ( $type             eq 'route'     &&
                                      $member->{'role'} !~ m/^platform/    ) {
@@ -1500,7 +1501,7 @@ sub analyze_route_master_environment {
             $num_of_operators = scalar( keys ( %operators ) );
             #printf STDERR "analyze_route_master_environment(): num_of_networks = %s, num_of_operators = %s\n", $num_of_networks, $num_of_operators;
             if ( $num_of_networks < 2 && $num_of_operators < 2 ) {
-                push( @{$relation_ptr->{'__issues__'}}, "There is more than one Route-Master for this line" );
+                push( @{$relation_ptr->{'__issues__'}}, "There is more than one Route-Master" );
             }
             if ( $number_of_my_routes > $number_of_routes ) {
                 push( @{$relation_ptr->{'__issues__'}}, sprintf("Route-Masters have more Routes than actually exist (%d versus %d) in the given data set", $number_of_my_routes, $number_of_routes) );
@@ -1544,19 +1545,19 @@ sub analyze_route_master_environment {
                                 }
                                 else {
                                     # 'ref' tag is set and is same but 'network' is set and differs
-                                    push( @{$relation_ptr->{'__issues__'}}, sprintf("Route has different 'network' tag ('%s'): %s", $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}, printRelationTemplate($member_ref->{'ref'}) ) );
+                                    push( @{$relation_ptr->{'__issues__'}}, sprintf("Route has different 'network' = '%s': %s", $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}, printRelationTemplate($member_ref->{'ref'}) ) );
                                 }
                             }
                             elsif ( $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'} ) {
                                 # 'ref' tag is set and is same but 'network' is strange
-                                push( @{$relation_ptr->{'__issues__'}}, sprintf("Route has strange 'network' tag ('%s'): %s", $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}, printRelationTemplate($member_ref->{'ref'}) ) );
+                                push( @{$relation_ptr->{'__issues__'}}, sprintf("Route has strange 'network' = '%s': %s", $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}, printRelationTemplate($member_ref->{'ref'}) ) );
                                 $suspicious_relations{$member_ref->{'ref'}} = 1;
                                 $number_of_suspicious_relations++;
                             }
                         }
                         else {
                             # 'ref' tag is set but differs
-                            push( @{$relation_ptr->{'__issues__'}}, sprintf("Route has different 'ref' tag ('%s'): %s", $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'ref'}, printRelationTemplate($member_ref->{'ref'}) ) );
+                            push( @{$relation_ptr->{'__issues__'}}, sprintf("Route has different 'ref' = '%s': %s", $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'ref'}, printRelationTemplate($member_ref->{'ref'}) ) );
                         }
                     }
                     else {
@@ -1575,7 +1576,7 @@ sub analyze_route_master_environment {
         # check whether all found relations are member of this/these route master(s), tell us which one is not
         foreach my $rel_id ( sort( keys( %{$ref_ref->{'route'}->{$route_type}} ) ) ) {
             if ( !defined($my_routes{$rel_id}) ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf("Route is not member of this Router-Master: %s", printRelationTemplate($rel_id) ) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("Route is not member of Route-Master: %s", printRelationTemplate($rel_id) ) );
             }
         }
     }
@@ -1594,66 +1595,95 @@ sub analyze_route_environment {
     my $relation_id     = shift;
     my $return_code     = 0;
     
-    my $relation_ptr                = undef;
-    my $number_of_route_masters     = 0;
-    my $number_of_routes            = 0;
-    my $is_member_of_route_masters  = 0;
+    my $relation_ptr                        = undef;
+    my $number_of_direct_route_masters      = 0;
+    my $number_of_route_masters             = 0;
+    my $number_of_routes                    = 0;
+    my %direct_and_matching_route_masters   = ();
+    my $helpstring                          = '';
     
     if ( $ref_ref && $ref && $type && $type eq 'route' && $route_type && $relation_id ) {
         
         $relation_ptr = $ref_ref->{'route'}->{$route_type}->{$relation_id};
         
-        # do we have more than one route_master here for this "ref" and "route_type"?
-        $number_of_route_masters    = scalar( keys( %{$ref_ref->{'route_master'}->{$route_type}} ) );
-        
-        # how many routes do we have at all for this "ref" and "route_type"?
-        $number_of_routes           = scalar( keys( %{$ref_ref->{'route'}->{$route_type}} ) );
-        
-        # if this is a route and PTv2 is set, then 
-        # 1. check if we have more than one route here
-        # 2. if there are more than one route, check whether we have a route_master which has these routes as members
+        #
+        # 1. find all direct and matching route_masters here (also those where only 'ref' and 'route_type' match)
+        #
+        foreach my $direct_route_master_rel_id ( keys( %{$RELATIONS{$relation_id}->{'member_of_route_master'}}  ) ) {
+            $direct_and_matching_route_masters{$direct_route_master_rel_id} = 1;
+            $number_of_direct_route_masters++;
+        }
+        foreach my $indirect_route_master_rel_id ( keys( %{$ref_ref->{'route_master'}->{$route_type}} ) ) {
+            $direct_and_matching_route_masters{$indirect_route_master_rel_id} = 1;
+        }
+        $number_of_route_masters = scalar( keys ( %direct_and_matching_route_masters ) );
 
-        foreach my $rel_id ( sort( keys( %{$ref_ref->{'route_master'}->{$route_type}} ) ) ) {
-            if ( $relation_ptr->{'tag'}->{'network'}                                         &&
-                 $ref_ref->{'route_master'}->{$route_type}->{$rel_id}->{'tag'}->{'network'}  &&
-                 $relation_ptr->{'tag'}->{'network'}                                         ne $ref_ref->{'route_master'}->{$route_type}->{$rel_id}->{'tag'}->{'network'} ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf("'network' of Route does not fit to 'network' of Route-Master: %s", printRelationTemplate($rel_id)) );
+        if ( $number_of_route_masters > 1 && $number_of_direct_route_masters < $number_of_route_masters ) {
+            # number_of_direct_route_masters < y : because number_of_direct_route_masters == number_of_route_masters will be checked some lines below if number_of_direct_route_masters > 1
+            push( @{$relation_ptr->{'__issues__'}}, sprintf( "There is more than one Route-Master" ) );
+        }
+        
+        #
+        # 2. check direct environment of this route: route_master(s) where this route is member of (independent of PTv2 or not)
+        #
+
+        $number_of_routes = scalar( keys( %{$ref_ref->{'route'}->{$route_type}} ) );
+
+        if ( $number_of_direct_route_masters > 1 ) {
+            push( @{$relation_ptr->{'__issues__'}}, sprintf( "This Route is direct member of more than one Route-Master: %s", join(', ', map { printRelationTemplate($_); } sort( keys( %{$RELATIONS{$relation_id}->{'member_of_route_master'}} ) ) ) ) );
+        } else {
+            if ( $number_of_routes > 1 ) {
+                if ( $number_of_route_masters == 0 ) {
+                    push( @{$relation_ptr->{'__issues__'}}, "Multiple Routes but no Route-Master" );
+                } elsif ( $number_of_direct_route_masters == 0 ) {
+                    push( @{$relation_ptr->{'__issues__'}}, "Multiple Routes but this Route is not a member of any Route-Master" );
+                }
+            } else {
+                # only one route but ... check if there is a route_master
+                if ( $number_of_route_masters > 0 && $number_of_direct_route_masters == 0 ) {
+                    # there is at least one route_master, but this route is not a member of any
+                    push( @{$relation_ptr->{'__issues__'}}, "This Route is not a member of any Route-Master" );
+                }
+            }
+        }
+        
+        #
+        # 3. check major tags of this route and the route_masters: they should match
+        #
+
+        foreach my $route_master_rel_id ( sort( keys( %direct_and_matching_route_masters ) ) ) {
+            $helpstring = ( $RELATIONS{$relation_id}->{'member_of_route_master'}->{$route_master_rel_id} ) ? 'its' : 'this';
+            # helpstring: 'its'  if this route is a member of the current route_master
+            #             'this' if this route is not a member of the current route_master (just coincidence, 'ref' and 'route_type' match)
+            if ( $relation_ptr->{'tag'}->{'route'}   && $RELATIONS{$route_master_rel_id}->{'tag'}->{'route_master'} &&
+                 $relation_ptr->{'tag'}->{'route'}   ne $RELATIONS{$route_master_rel_id}->{'tag'}->{'route_master'}     ) {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("'route' = '%s' of Route does not fit to 'route_master' = '%s' of %s Route-Master: %s", $relation_ptr->{'tag'}->{'route'}, $RELATIONS{$route_master_rel_id}->{'tag'}->{'route_master'}, $helpstring, printRelationTemplate($route_master_rel_id)) );
+            }
+            if ( $relation_ptr->{'tag'}->{'ref'}     && $RELATIONS{$route_master_rel_id}->{'tag'}->{'ref'} &&
+                 $relation_ptr->{'tag'}->{'ref'}     ne $RELATIONS{$route_master_rel_id}->{'tag'}->{'ref'}     ) {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("'ref' = '%s' of Route does not fit to 'ref' = '%s' of %s Route-Master: %s", $relation_ptr->{'tag'}->{'ref'}, $RELATIONS{$route_master_rel_id}->{'tag'}->{'ref'}, $helpstring, printRelationTemplate($route_master_rel_id)) );
+            }
+            if ( $relation_ptr->{'tag'}->{'network'} && $RELATIONS{$route_master_rel_id}->{'tag'}->{'network'} &&
+                 $relation_ptr->{'tag'}->{'network'} ne $RELATIONS{$route_master_rel_id}->{'tag'}->{'network'}     ) {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("'network' = '%s' of Route does not fit to 'network' = '%s' of %s Route-Master: %s", $relation_ptr->{'tag'}->{'network'}, $RELATIONS{$route_master_rel_id}->{'tag'}->{'network'}, $helpstring, printRelationTemplate($route_master_rel_id)) );
             }
             if ( $relation_ptr->{'tag'}->{'colour'} ) {
-                if ( $ref_ref->{'route_master'}->{$route_type}->{$rel_id}->{'tag'}->{'colour'} ) {
-                    if ( uc($relation_ptr->{'tag'}->{'colour'}) ne uc($ref_ref->{'route_master'}->{$route_type}->{$rel_id}->{'tag'}->{'colour'}) ) {
-                        push( @{$relation_ptr->{'__issues__'}}, sprintf("'colour' of Route does not fit to 'colour' of Route-Master: %s", printRelationTemplate($rel_id)) );
+                if ( $RELATIONS{$route_master_rel_id}->{'tag'}->{'colour'} ) {
+                    if ( uc($relation_ptr->{'tag'}->{'colour'}) ne uc($RELATIONS{$route_master_rel_id}->{'tag'}->{'colour'}) ) {
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf("'colour' of Route does not fit to 'colour' of %s Route-Master: %s", $helpstring, printRelationTemplate($route_master_rel_id)) );
                     }
                 } else {
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf("'colour' of Route is set but 'colour' of Route-Master is not set: %s", printRelationTemplate($rel_id)) );
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf("'colour' of Route is set but 'colour' of %s Route-Master is not set: %s", $helpstring, printRelationTemplate($route_master_rel_id)) );
                 }
             }
-            elsif ( $ref_ref->{'route_master'}->{$route_type}->{$rel_id}->{'tag'}->{'colour'} ) {
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf("'colour' of Route is not set but 'colour' of Route-Master is set: %s", printRelationTemplate($rel_id)) );
-            }
-            foreach my $member_ref ( @{$ref_ref->{'route_master'}->{$route_type}->{$rel_id}->{'route_master_relation'}} ) {
-                if ( $relation_id == $member_ref->{'ref'} ) {
-                    $is_member_of_route_masters++;
-                }
+            elsif ( $RELATIONS{$route_master_rel_id}->{'tag'}->{'colour'} ) {
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf("'colour' of Route is not set but 'colour' of %s Route-Master is set: %s", $helpstring, printRelationTemplate($route_master_rel_id)) );
             }
         }
-        if ( $number_of_routes > 1 && $number_of_route_masters == 0 ) {
-            push( @{$relation_ptr->{'__issues__'}}, "Multiple Routes but no Route-Master" );
-        }
-        if ( $relation_ptr->{'tag'}->{'public_transport:version'} ) {
-            if ( $relation_ptr->{'tag'}->{'public_transport:version'} =~ m/^2$/ ) {
-                if ( $number_of_route_masters == 0 ) {
-                    # push( @{$relation_ptr->{'__notes__'}}, "PTv2 route: there is no Route-Master for this line in the given data set" );
-                    ;
-                }
-                elsif ( $is_member_of_route_masters == 0 ) {
-                    push( @{$relation_ptr->{'__issues__'}}, "PTv2 route: Route is not member of an existing Route-Master of this line" );
-                }
-            }
-            else {
-                if ( $number_of_routes > 1 ) {
-                    push( @{$relation_ptr->{'__issues__'}}, "Multiple Routes but 'public_transport:version' is not set to '2'" );
-                }
+
+        if ( $number_of_routes > 1 ) {
+            if ( !$relation_ptr->{'tag'}->{'public_transport:version'} || $relation_ptr->{'tag'}->{'public_transport:version'} !~ m/^2$/ ) {
+                push( @{$relation_ptr->{'__issues__'}}, "Multiple Routes but 'public_transport:version' is not set to '2'" );
             }
         }
     }
