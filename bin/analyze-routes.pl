@@ -517,10 +517,11 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                     if ( $section ) {
                         if ( $section ne 'suspicious' ) {
                             my $ue_ref = $ref;
-                            $PT_relations_with_ref{$section}->{$ue_ref}->{$type}->{$route_type}->{$relation_id}->{'tag'}->{'ref'}  = $ref;
-                            $PT_relations_with_ref{$section}->{$ue_ref}->{$type}->{$route_type}->{$relation_id}->{'tag'}->{'type'} = $type;
-                            $PT_relations_with_ref{$section}->{$ue_ref}->{$type}->{$route_type}->{$relation_id}->{'tag'}->{$type}  = $route_type;
-                            $relation_ptr = $PT_relations_with_ref{$section}->{$ue_ref}->{$type}->{$route_type}->{$relation_id};
+                            $PT_relations_with_ref{$section}->{$ue_ref}->{$type}->{$route_type}->{$relation_id} = $RELATIONS{$relation_id};
+                            $RELATIONS{$relation_id}->{'tag'}->{'ref'}  = $ref;
+                            $RELATIONS{$relation_id}->{'tag'}->{'type'} = $type;
+                            $RELATIONS{$relation_id}->{'tag'}->{$type}  = $route_type;
+                            $relation_ptr = $RELATIONS{$relation_id};
                             $number_of_positive_relations++     if ( $section eq "positive"     );
                             $number_of_negative_relations++     if ( $section eq "negative"     );
                             $number_of_skipped_relations++      if ( $section eq "skip"         );
@@ -535,9 +536,11 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                     }
                 }
                 else {
-                    $PT_relations_without_ref{$route_type}->{$relation_id}->{'tag'}->{'type'} = $type;
-                    $PT_relations_without_ref{$route_type}->{$relation_id}->{'tag'}->{$type}  = $route_type;
-                    $relation_ptr = $PT_relations_without_ref{$route_type}->{$relation_id};
+                    $PT_relations_without_ref{$route_type}->{$relation_id} = $RELATIONS{$relation_id};
+                    $RELATIONS{$relation_id}->{'tag'}->{'type'} = $type;
+                    $RELATIONS{$relation_id}->{'tag'}->{'type'} = $type;
+                    $RELATIONS{$relation_id}->{'tag'}->{$type}  = $route_type;
+                    $relation_ptr = $RELATIONS{$relation_id};
                     $number_of_relations_without_ref++;
 
                     # match_network() returns either "keep long" or "keep short" or "skip" (to do: or "suspicious")
@@ -655,8 +658,9 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
             #
             if ( $collected_tags{'public_transport'}               &&
                  $collected_tags{'public_transport'} eq 'platform'    ) {
+                $PL_MP_relations{$relation_id} = $RELATIONS{$relation_id};
                 while ( ($key,$value) = each( %collected_tags ) ) {
-                    $PL_MP_relations{$relation_id}->{'tag'}->{$key} = $value;
+                    $RELATIONS{$relation_id}->{'tag'}->{$key} = $value;
                     printf STDERR "%s PL_MP_relation->{'tag'}->{%s} = %s\n", get_time(), $relation_id, $key, $value    if ( $debug );
                 }
                 $number_of_pl_mp_relations++;
@@ -673,8 +677,9 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
             #
             if ( $collected_tags{'public_transport'}               &&
                  $collected_tags{'public_transport'} eq 'stop_area'    ) {
+                $SA_relations{$relation_id} = $RELATIONS{$relation_id};
                 while ( ($key,$value) = each( %collected_tags ) ) {
-                    $SA_relations{$relation_id}->{'tag'}->{$key} = $value;
+                    $RELATIONS{$relation_id}->{'tag'}->{$key} = $value;
                     printf STDERR "%s SA_relation->{'tag'}->{%s} = %s\n", get_time(), $relation_id, $key, $value    if ( $debug );
                 }
                 $number_of_sa_relations++;
