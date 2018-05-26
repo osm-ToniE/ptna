@@ -59,8 +59,8 @@ RE7;train;;;;
 RE8;train;;;;
 RE9;train;;;;
 RE12;train;;;;
-RE22;train;;;;
-RB22;train;;;;
+RE22/RB22;train;Eine Linie, zwei unterschiedliche Service;;;
+# RB22;train;;;;
 RB23;train;;;;
 RB24;train;;;;
 RB25;train;;;;
@@ -115,8 +115,8 @@ N4;bus;;;;
 N5;bus;;;;
 N6;bus;;;;
 N7;bus;;;;
-N8;bus;Existiert zweimal im VRS: Hier für Bonn;Bonn Hauptbahnhof;Bonn Hauptbahnhof;SWB
-N8;bus;Existiert zweimal im VRS: Hier für Leichlingen;Leichlingen Bf;Kleine Heide;Wiedenhoff
+N8;bus;Existiert zweimal im VRS: Hier Bonn - Oberkassel;Bonn Hauptbahnhof;Bonn Hauptbahnhof;SWB
+N8;bus;Existiert zweimal im VRS: Hier Leichlingen;Leichlingen Bf;Kleine Heide;Wiedenhoff
 N9;bus;;;;
 N10;bus;;;;
 N20;bus;;;;
@@ -429,7 +429,7 @@ SB 82;bus;;;;
 615;bus;;;;
 630;bus;;;;
 631;bus;;;;
-632;bus;Linie existiert nicht mehr;;;
+632;bus;Linie ist jetzt im Regelbetrieb;;;
 633;bus;;;;
 635;bus;;;;
 636;bus;;;;
@@ -458,6 +458,7 @@ SB 82;bus;;;;
 721;bus;;;;
 722;bus;;;;
 731;bus;;;;
+747;bus;Ersetzt Bus 805;Rheinbach;Oedingen;
 749;bus;;;;
 
 === Bus 800 ...
@@ -465,7 +466,7 @@ SB 82;bus;;;;
 800;bus;;;;
 801;bus;;;;
 802;bus;;;;
-805;bus;Linie existiert seit Fahrplanwechsel 2015 nicht mehr, wurde durch Verlängerung der Linie 817 ersetzt.;;;
+805;bus;Linie existiert seit Fahrplanwechsel 2015 nicht mehr, wurde durch die Linie 747 ersetzt.;;;
 806;bus;;;;
 807;bus;;;;
 808;bus;;;;
@@ -474,7 +475,7 @@ SB 82;bus;;;;
 811;bus;;;;
 812;bus;;;;
 813;bus;;;;
-814;bus;;;;
+814;bus;Nicht mehr im VRS nur noch der VRM-Teil. Änderungen sind zum 1.7.2018 zu erwarten;;;
 817;bus;;;;
 818;bus;;;;
 819;bus;;;;
@@ -500,7 +501,7 @@ TB 835;bus;;;;
 839;bus;;;;
 842;bus;;;;
 843;bus;;;;
-844;bus;;;;
+844;bus;Nicht mehr im VRS nur noch der VRM-Teil existiert. Änderungen sind zum 1.7.2018 zu erwarten;;;
 845;bus;;;;
 846;bus;;;;
 848;bus;;;;
