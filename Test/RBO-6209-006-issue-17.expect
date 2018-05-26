@@ -23,12 +23,20 @@
         </style>
     </head>
     <body>
-    <!-- split here for table of contents -->
-Die Analyse läuft in der Regel abends zwischen 19:00 und 20:00 Uhr.<br>
+        <h1>Inhaltsverzeichnis</h1>
+        <ol>
+        <li>1. <a href="#A1.">ÖPNV Linien</a>
+        <ol>
+        <li>1.1. <a href="#A1.1.">Bus</a>
+        </li>
+        </ol>
+        </li>
+        </ol>
+Die Analyse läuft in der Regel abends zwischen 19:00 und 20:00 Uhr lokaler Zeit München.<br>
 <br>
 Die Daten werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändert hat.<br>
-
-Eine Erläuterung der Fehlertexte ist auf der Seite von <a href='https://wiki.openstreetmap.org/wiki/User:ToniE/analyze-routes#Momentane_Prüfungen'>analyze-routes</a> zu finden.<br>
+<br>
+Eine Erläuterung der Fehlertexte ist auf der Seite von <a href='https://wiki.openstreetmap.org/wiki/User:ToniE/analyze-routes#Momentane_Pr.C3.BCfungen'>analyze-routes</a> zu finden.<br>
 
         <br /><hr />
         <h1 id="A1.">1. ÖPNV Linien</h1>
@@ -44,13 +52,3 @@ Eine Erläuterung der Fehlertexte ist auf der Seite von <a href='https://wiki.op
 
     </body>
 </html>
-        <!-- split here for table of contents -->
-        <h1>Inhaltsverzeichnis</h1>
-        <ol>
-        <li>1. <a href="#A1.">ÖPNV Linien</a>
-        <ol>
-        <li>1.1. <a href="#A1.1.">Bus</a>
-        </li>
-        </ol>
-        </li>
-        </ol>

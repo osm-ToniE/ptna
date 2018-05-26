@@ -64,7 +64,7 @@ done
 if [ "$clean" = "true" ]
 then
     echo $(date "+%Y-%m-%d %H:%M:%S") "Removing temporary files"
-    rm -f $OSM_XML_FILE $HTML_FILE $HTML_FILE.* xx*
+    rm -f $OSM_XML_FILE $HTML_FILE $HTML_FILE.*
 fi
 
 #
@@ -141,17 +141,6 @@ then
     
             if [ -s "$HTML_FILE" ]
             then
-                if [ $(cat "$HTML_FILE" | fgrep -c '<!-- split here for table of contents -->') -eq 2 ]
-                then
-                    rm -f xx00 xx01 xx02
-                    echo $(date "+%Y-%m-%d %H:%M:%S") "Inserting TOC into '$HTML_FILE'"
-                    csplit --silent $HTML_FILE '/<!-- split here for table of contents -->/' '{1}'
-                    if [ -f xx00 -a -f xx01 -a -f xx02 ]
-                    then
-                        cat xx00 xx02 xx01 | fgrep -v '<!-- split here for table of contents -->' > $HTML_FILE
-                        rm -f xx*
-                    fi
-                fi 
                 echo $(date "+%Y-%m-%d %H:%M:%S") "Analysis succeeded, '$HTML_FILE' created"
                 echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $HTML_FILE)
 
