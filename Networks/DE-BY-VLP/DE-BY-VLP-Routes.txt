@@ -1,0 +1,271 @@
+<pre>
+#
+# Formatierung:
+#
+# Überschriften beginnen mit '=', '==', '===', '====', ... am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an
+#
+# Einfacher Text beginnt mit '-' am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an, Zeilen hier werden im Wiki mit <br /> abgeschlossen (neue Zeile).
+# Einfacher Text darf nur direkt hinter einer Überschrift stehen.
+#
+# Links: [[...|...]] sind interne Verweise im Wiki
+#        [... ...] sind externe Verweise
+#
+# Kommentare beginnen mit '#' am Anfang einer Zeile. Kommentare mittendrin werden nicht erkannt.
+#
+# Format der Datei: UNIX (LF), UTF-8
+#
+#
+# Inhalt im CSV-Format
+#
+# ref;type;comment;from;to;operator
+#
+# - ref       == tag 'ref' von route oder route_master
+# - type      == inhalt des tags 'route' bzw. 'route_master'
+# - comment   == kann Kommentar enthalten wie; Ruftaxi, Bus, Expressbus, ...  wird nicht ausgewertet, lediglich ausgegeben
+# - from      == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - to        == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - operator  == wird bei mehreren Linie mit identischem ref und type Differenzierung herangezogen (Der Wert von 'operator' darf ';' enthalten)
+#
+
+
+= Überblick Buslinien "Verkehrsgemeinschaft Landkreis Passau" (VLP) und "Verkehrsbetriebsgesellschaft Passau" (VBP)
+
+- Verweis auf die Datei mit den [[Passau/Transportation/Analyse/DE-BY-VLP-Linien|Passauer Stadt- und Landkreis-Linien]] im Wiki.
+- Verweis auf mehr [[Talk:Passau/Transportation/Analyse|Informationen]] im Wiki.
+
+
+== Stadtbusnetz Passau - "Verkehrsbetriebsgesellschaft Passau" (VBP)
+
+
+=== Tagverkehr
+
+1;bus;;;;
+2;bus;;;;
+3;bus;;;;
+4;bus;;;;
+5;bus;;;;
+6;bus;;;;
+7;bus;;;;
+8;bus;;;;
+9;bus;;;;
+10;bus;;;;
+11;bus;;;;
+
+K1;bus;;;;
+K2;bus;;;;
+K3;bus;;;;
+K4;bus;;;;
+
+City-Bus;bus;;;;
+Oberhaus-Bus;bus;;;;
+
+
+=== Abendverkehr
+
+1;bus;;;;
+2;bus;;;;
+3;bus;;;;
+4;bus;;;;
+5;bus;;;;
+6;bus;;;;
+8;bus;;;;
+9;bus;;;;
+13;bus;;;;
+56;bus;;;;
+78;bus;;;;
+79;bus;;;;
+
+
+=== Nachtverkehr
+
+1;bus;;;;
+2;bus;(Weiter als RBO 6122);;;
+3;bus;;;;
+4;bus;(Weiter als RBO 6101);;;
+5;bus;(Weiter als RBO 6124);;;
+6;bus;(Weiter als RBO 6125);;;
+7;bus;(weiter als RBO 6148);;;
+8;bus;;;;
+9;bus;(Weiter als RBO 6196);;;
+10;bus;;;;
+
+
+== Regionalbusse Landkreis Passau - "Verkehrsgemeinschaft Landkreis Passau" (VLP)
+
+
+== RBO-Linien (6xxx, 7xxx)
+
+6101;bus;;;;
+6102;bus;;;;
+6103;bus;;;;
+6106;bus;;;;
+6107;bus;;;;
+6108;bus;;;;
+6109;bus;;;;
+6110;bus;;;;
+6111;bus;;;;
+6113;bus;;;;
+6120;bus;;;;
+6121;bus;;;;
+6124;bus;;;;
+6125;bus;;;;
+6129;bus;;;;
+6130;bus;;;;
+6131;bus;;;;
+6132;bus;;;;
+6133;bus;;;;
+6134;bus;;;;
+6135;bus;;;;
+6136;bus;;;;
+6137;bus;;;;
+6138;bus;;;;
+6141;bus;;;;
+6147;bus;;;;
+6148;bus;;;;
+6164;bus;;;;
+6165;bus;;;;
+6166;bus;;;;
+6167;bus;;;;
+6170;bus;;;;
+6171;bus;;;;
+6172;bus;;;;
+6173;bus;;;;
+6174;bus;;;;
+6175;bus;;;;
+6176;bus;;;;
+6181;bus;;;;
+6185;bus;;;;
+
+6206;bus;;;;
+6207;bus;;;;
+6209;bus;;;;
+6212;bus;;;;
+6226;bus;;;;
+6228;bus;;;;
+
+6324;bus;;;;
+6380;bus;;;;
+
+7567;bus;;;;
+7568;bus;;;;
+7569;bus;;;;
+7570;bus;;;;
+7571;bus;;;;
+7572;bus;;;;
+7573;bus;;;;
+7574;bus;;;;
+7575;bus;;;;
+7576;bus;;;;
+7577;bus;;;;
+7578;bus;;;;
+7579;bus;;;;
+7580;bus;;;;
+7581;bus;;;;
+7583;bus;;;;
+7584;bus;;;;
+7590;bus;;;;
+7599;bus;;;;
+
+7600;bus;;;;
+
+7710;bus;;;;
+7760;bus;;;;
+7761;bus;;;;
+7762;bus;;;;
+7763;bus;;;;
+7770;bus;;;;
+
+
+== RBO-Rufbusse (8xxx)
+
+8102;bus;;;;
+8106;bus;;;;
+8110;bus;;;;
+8111;bus;;;;
+8112;bus;;;;
+8124;bus;;;;
+8125;bus;;;;
+8129;bus;;;;
+8136;bus;;;;
+8138;bus;;;;
+8147;bus;;;;
+8148;bus;;;;
+8167;bus;;;;
+8170;bus;;;;
+8173;bus;;;;
+8175;bus;;;;
+8185;bus;;;;
+
+8501;bus;;;;
+8520;bus;;;;
+8568;bus;;;;
+8576;bus;;;;
+8578;bus;;;;
+8580;bus;;;;
+8583;bus;;;;
+8585;bus;;;;
+8599;bus;;;;
+
+
+Sonstige Linien außerhalb des VLP
+
+
+=== Nach Bad Griesbach
+
+7770;bus;;;;
+8770;bus;;;;
+
+
+=== Nach Bad Füssing
+
+7760;bus;;;;
+7761;bus;;;;
+7762;bus;;;;
+7763;bus;;;;
+
+
+=== Nach Rotthalmünster
+
+7585;bus;;;;
+7586;bus;;;;
+7587;bus;;;;
+7588;bus;;;;
+
+7641;bus;;;;
+7642;bus;;;;
+7643;bus;;;;
+7644;bus;;;;
+
+
+=== Sonstige Buslinien
+
+6122;bus;;;;
+6168;bus;;;;
+6169;bus;;;;
+6227;bus;;;;
+
+
+== Buslinien mit Mitgliedschaft zu anderen Busliniennetzwerken (VLD; VGRI; PAN; Freyung-Grafenau (FRG) ect.)
+
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Deggendorf (VLD)
+
+6147;bus;;;;
+6148;bus;;;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Rottal-Inn(VGRI) und sonstige Linien Landkreis Rottal-Inn (PAN)
+
+6206;bus;;;;
+6209;bus;;;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Landkreis Freyung-Grafenau (FRG xxx)
+
+6121/18;bus;(=FRG 18);;;
+6124/21;bus;(=FRG 21);;;
+6130/22;bus;(=FRG 22);;;
+
+
+</pre>

@@ -1,0 +1,207 @@
+<pre>
+#
+# Formatierung:
+#
+# Überschriften beginnen mit '=', '==', '===', '====', ... am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an
+#
+# Einfacher Text beginnt mit '-' am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an, Zeilen hier werden im Wiki mit <br /> abgeschlossen (neue Zeile).
+# Einfacher Text darf nur direkt hinter einer Überschrift stehen.
+#
+# Links: [[...|...]] sind interne Verweise im Wiki
+#        [... ...] sind externe Verweise
+#
+# Kommentare beginnen mit '#' am Anfang einer Zeile. Kommentare mittendrin werden nicht erkannt.
+#
+# Format der Datei: UNIX (LF), UTF-8
+#
+#
+# Inhalt im CSV-Format
+#
+# ref;type;comment;from;to;operator
+#
+# - ref       == tag 'ref' von route oder route_master
+# - type      == inhalt des tags 'route' bzw. 'route_master'
+# - comment   == kann Kommentar enthalten wie; Ruftaxi, Bus, Expressbus, ...  wird nicht ausgewertet, lediglich ausgegeben
+# - from      == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - to        == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - operator  == wird bei mehreren Linie mit identischem ref und type Differenzierung herangezogen (Der Wert von 'operator' darf ';' enthalten)
+#
+
+
+= Überblick Buslinien "Arberlandverkehr Landkreis Regen" (REG)
+
+- Verweis auf die Datei mit den [[Regen/Transportation/Analyse/DE-BY-REG|REG Linien]] im Wiki.
+- Verweis auf mehr [[Talk:Regen/Transportation/Analyse|Informationen]] im Wiki.
+
+
+== Zuglinien Waldbahn
+
+WBA 1;train;;;;
+WBA 2;train;;;;
+WBA 3;train;;;;
+WBA 4;train;;;;
+
+Waldbahn;train;(historische Bahn auf der Linie der WBA 4);;;
+
+
+
+== Regionalbusse Landkreis Regen
+
+
+== RBO Linien (4xxx)
+
+4116;bus;;;
+4136;bus;;;
+4142;bus;;;
+
+
+== RBO-Linien (6xxx, 7xxx)
+
+6065/618;bus;;;;
+6080/(590 + 616);bus;;;;
+6081;bus;;;;
+6085;bus;;;;
+6086;bus;;;;
+6095/04;bus;;;;
+6096/15;bus;;;;
+
+6121;bus;;;;
+6159/30;bus;;;;
+6188/680;bus;;;;
+6191;bus;;;;
+6192;bus;;;;
+6193;bus;;;;
+6194;bus;;;;
+6195;bus;;;;
+6196/690;bus;;;;
+6197;bus;;;;
+6198;bus;;;;
+6199;bus;;;;
+
+6200;bus;;;;
+6201;bus;;;;
+
+7020;bus;;;;
+7021;bus;;;;
+7025;bus;;;;
+7030;bus;;;;
+
+7122;bus;;;;
+7123;bus;;;;
+7130;bus;;;;
+7131;bus;;;;
+7132;bus;;;;
+7133;bus;;;;
+7136;bus;;;;
+7138;bus;;;;
+7142;bus;;;;
+7143;bus;;;;
+7144;bus;;;;
+7148;bus;;;;
+7149;bus;;;;
+7150;bus;;;;
+7152;bus;;;;
+7153;bus;;;;
+7160;bus;(Noch existent?);;;
+
+7710;bus;;;;
+
+8200;bus;(Bedarfsverkehr für Linien 6195,6196,6197,6199,6200 und 6201 ab 18:20 Uhr);;;
+
+
+== RBO-Rufbusse (82xx)
+
+8201;bus;;;;
+8202;bus;;;;
+8203;bus;;;;
+8204;bus;;;;
+8205;bus;;;;
+8206;bus;;;;
+8207;bus;;;;
+8208;bus;;;;
+8209;bus;;;;
+8210;bus;;;;
+8211;bus;;;;
+8212;bus;;;;
+8213;bus;;;;
+8214;bus;;;;
+8215;bus;;;;
+8216;bus;;;;
+8217;bus;;;;
+
+
+== Saisonbuslinien
+
+=== Skibusse
+
+6080;bus;;;;
+6081;bus;;;;
+6085;bus;;;;
+6191;bus;;;;
+6192;bus;;;;
+6198;bus;;;;
+
+
+=== Wander- und Ausflugsbusse
+
+6065;bus;;;;
+6080;bus;;;;
+6198;bus;;;;
+7149;bus;(Falkensteinbus);;;
+7150;bus;(Falkensteinbus);;;
+
+
+
+== Buslinien mit Mitgliedschaft zu anderen Busliniennetzwerken (VSL; VLP; FRG; VLC; VLD;  ect.)
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Straubinger Land (VSL)
+
+6095/04;bus;(=VSL 04);;;
+6096/15;bus;(=VSL 15);;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Passau (VLP)
+
+6121/18;bus;;;;
+7710;bus;;;;
+
+
+== Buslinien mit Mitgliedschaft zum Regionalbusnetz Freyung-Grafenau (FRG)
+
+6086/11;bus;(=FRG 11);;;
+6121/18;bus;(=FRG 18);;;
+6159/30;bus;(=FRG 30);;;
+6200/10;bus;(=FRG 10);;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Deggendorf (VLD)
+
+6159/30;bus;;;;
+4116;bus;;;;
+4136;bus;;;;
+4142;bus;;;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Cham (VLC)
+
+6065/618;bus;(=VLC 618);;;
+6080/(590 + 616);bus;(=VLC 590 + 616);;;
+6188;bus;(=VLC 680);;;
+6196;bus;(=VLC 690);;;
+
+
+== Buslinien mit grenzüberschreitenden Verkehr nach Tschechien
+
+6065;bus;;;;
+6081;bus;;;;
+7710;bus;;;;
+
+
+== Fernbuslinien
+
+7160;bus;(Fernbuslinie Berlin - Freyung - Berlin; noch existent?);;;
+
+
+
+</pre>
