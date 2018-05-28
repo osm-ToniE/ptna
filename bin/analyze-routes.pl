@@ -1539,9 +1539,7 @@ sub analyze_route_master_environment {
                             }
                             elsif ( $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'} ) {
                                 # 'ref' tag is set and is same but 'network' is strange
-                                push( @{$relation_ptr->{'__issues__'}}, sprintf("Route has strange 'network' = '%s': %s", $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}, printRelationTemplate($member_ref->{'ref'}) ) );
-                                $suspicious_relations{$member_ref->{'ref'}} = 1;
-                                $number_of_suspicious_relations++;
+                                push( @{$relation_ptr->{'__issues__'}}, sprintf("Route has 'network' = '%s' value which is considered as not relevant: %s", $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}, printRelationTemplate($member_ref->{'ref'}) ) );
                             }
                         }
                         else {
