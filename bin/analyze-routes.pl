@@ -162,6 +162,7 @@ my %route_ways              = ();       # all ways  of the XML file that build t
 my %platform_ways           = ();       # all ways  of the XML file that are platforms (tag: public_transport=platform)
 my %platform_nodes          = ();       # all nodes of the XML file that are platforms (tag: public_transport=platform)
 my %stop_nodes              = ();       # all nodes of the XML file that are stops (tag: public_transport=stop_position)
+my %used_networks           = ();       # 'network' values that did match
 my %unused_networks         = ();       # 'network' values that did not match
 
 
@@ -196,6 +197,7 @@ my %column_name             = ( 'ref'           => 'Linie (ref=)',
                                 'relation'      => 'Relation (id=)',
                                 'relations'     => 'Relationen',                # comma separated list of relation-IDs
                                 'name'          => 'Name (name=)',
+                                'number'        => 'Anzahl',
                                 'network'       => 'Netz (network=)',
                                 'operator'      => 'Betreiber (operator=)',
                                 'from'          => 'Von (from=)',
@@ -401,6 +403,7 @@ my $number_of_platformways              = 0;
 my $number_of_nodes                     = 0;
 my $number_of_platformnodes             = 0;
 my $number_of_stop_positions            = 0;
+my $number_of_used_networks             = 0;
 my $number_of_unused_networks           = 0;
 
 #
@@ -470,7 +473,14 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                     #
                     if ( $status =~ m/keep/ ) { $status = match_network(  $collected_tags{'network'} ); }
                     
-                    if ( $status !~ m/keep/ ) {
+                    if ( $status =~ m/keep/ ) {
+                        if ( $collected_tags{'network'} ) {
+                            $used_networks{$collected_tags{'network'}}->{$relation_id} = 1;
+                        }
+                        else {
+                            $used_networks{'__unset_network__'}->{$relation_id} = 1;
+                        }
+                    } else {
                         if ( $collected_tags{'network'} ) {
                             $unused_networks{$collected_tags{'network'}}->{$relation_id} = 1;
                         }
@@ -529,15 +539,21 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
 
                     # match_network() returns either "keep long" or "keep short" or "skip" (to do: or "suspicious")
                     #
-                    if ( $collected_tags{'network'} ) {
-                        my $status = match_network(  $collected_tags{'network'} );
-                    
-                        if ( $status !~ m/keep/ ) {
+                    my $status = match_network( $collected_tags{'network'} );
+                    if ( $status =~ m/keep/ ) {
+                        if ( $collected_tags{'network'} ) {
+                            $used_networks{$collected_tags{'network'}}->{$relation_id} = 1;
+                        }
+                        else {
+                            $used_networks{'__unset_network__'}->{$relation_id} = 1;
+                        }
+                    } else {
+                        if ( $collected_tags{'network'} ) {
                             $unused_networks{$collected_tags{'network'}}->{$relation_id} = 1;
                         }
-                    }
-                    else {
-                        $unused_networks{'__unset_network__'}->{$relation_id} = 1;
+                        else {
+                            $unused_networks{'__unset_network__'}->{$relation_id} = 1;
+                        }
                     }
                 }
                 
@@ -1220,18 +1236,54 @@ printf STDERR "%s Printed suspicious: %d\n", get_time(), $number_of_suspicious_r
 #
 #############################################################################################
 
-printf STDERR "%s Printing unused networks\n", get_time()       if ( $verbose );
+printf STDERR "%s 'network' details\n", get_time()       if ( $verbose );
 
-printTableInitialization( 'network', 'relations' );
+printTableInitialization( 'network', 'number', 'relations' );
 
 my @relations_of_network    = ();
+
+printBigHeader( "Details zu 'network'-Werten" );
+
+if ( $network_long_regex || $network_short_regex ) {
+    printHintNetworks();
+}
+
+if ( keys( %used_networks ) ) {
+    
+    $number_of_used_networks = 0;
+
+    printHeader( "== Berücksichtigte 'network' Werte" );
+    
+    printHintUsedNetworks();
+        
+    printTableHeader();
+
+    foreach my $network ( sort( keys( %used_networks ) ) ) {
+        @relations_of_network    = sort( keys( %{$used_networks{$network}} ) );
+        $network = $network eq '__unset_network__' ? '' : $network;
+        if ( scalar @relations_of_network <= 10 ) {
+            printTableLine( 'network'           =>    $network,
+                            'number'            =>    scalar @relations_of_network, 
+                            'relations'         =>    join( ',', @relations_of_network )
+                          );
+        }
+        else {
+            printTableLine( 'network'           =>    $network,
+                            'number'            =>    scalar @relations_of_network, 
+                            'relations'         =>    sprintf( "%s and more ...", join( ',', splice(@relations_of_network,0,10) ) )
+                          );
+        }
+        $number_of_used_networks++;
+    }
+    printTableFooter(); 
+}
 
 if ( keys( %unused_networks ) ) {
     
     $number_of_unused_networks = 0;
 
-    printBigHeader( "Nicht berücksichtigte 'network'-Werte" );
-
+    printHeader( "== Nicht berücksichtigte 'network' Werte" );
+    
     printHintUnusedNetworks();
         
     printTableHeader();
@@ -1241,11 +1293,13 @@ if ( keys( %unused_networks ) ) {
         $network = $network eq '__unset_network__' ? '' : $network;
         if ( scalar @relations_of_network <= 10 ) {
             printTableLine( 'network'           =>    $network,
+                            'number'            =>    scalar @relations_of_network, 
                             'relations'         =>    join( ',', @relations_of_network )
                           );
         }
         else {
             printTableLine( 'network'           =>    $network,
+                            'number'            =>    scalar @relations_of_network, 
                             'relations'         =>    sprintf( "%s and more ...", join( ',', splice(@relations_of_network,0,10) ) )
                           );
         }
@@ -1254,7 +1308,7 @@ if ( keys( %unused_networks ) ) {
     printTableFooter(); 
 }
 
-printf STDERR "%s Printed unused networks: %d\n", get_time(), $number_of_unused_networks       if ( $verbose );
+printf STDERR "%s Printed network details: used: %d, unused: %d\n", get_time(), $number_of_used_networks, $number_of_unused_networks       if ( $verbose );
 
 
 #############################################################################################
@@ -3642,6 +3696,7 @@ sub printInitialHeader {
         push( @HTML_start, "              .ref              { white-space:nowrap; }\n" );
         push( @HTML_start, "              .relation         { white-space:nowrap; }\n" );
         push( @HTML_start, "              .PTv              { text-align:center; }\n" );
+        push( @HTML_start, "              .number           { text-align:right; }\n" );
         push( @HTML_start, "        </style>\n" );
         push( @HTML_start, "    </head>\n" );
         push( @HTML_start, "    <body>\n" );
@@ -3790,6 +3845,48 @@ sub printHintSuspiciousRelations {
     }
 }
 
+
+#############################################################################################
+
+sub printHintNetworks {
+    if ( $print_wiki ) {
+        #
+        # WIKI code
+        #
+        print  "Dieser Abschnitt ...<br />\n";
+        print  "<br />\n";
+    }
+    else {
+        #
+        # HTML
+        #
+        ;
+        push( @HTML_main, "Dieser Abschnitt ...<br />\n" );
+        push( @HTML_main, "<br />\n" );
+    }
+}
+    
+
+#############################################################################################
+
+sub printHintUsedNetworks {
+    if ( $print_wiki ) {
+        #
+        # WIKI code
+        #
+        print  "Dieser Abschnitt listet die 'network'-Werte auf, die berücksichtigt wurden.<br />\n";
+        print  "<br />\n";
+    }
+    else {
+        #
+        # HTML
+        #
+        ;
+        push( @HTML_main, "Dieser Abschnitt listet die 'network'-Werte auf, die berücksichtigt wurden.<br />\n" );
+        push( @HTML_main, "<br />\n" );
+    }
+}
+    
 
 #############################################################################################
 
@@ -4105,6 +4202,9 @@ sub printTableLine {
             }
             elsif ( $columns[$i] eq "PTv" ) {
                 $val = ' align="center" | ' . $val;
+            }
+            elsif ( $columns[$i] eq "number" ) {
+                $val = ' align="right" | ' . $val;
             }
             printf " %s %s", $val, ( $i < $no_of_columns-1 ? '||' : "\n" );
         }
