@@ -28,7 +28,7 @@
 #
 
 
-= Überblick Buslinien "Verkehrsgemeinschaft Landkreis Deggendorf" (VLD) und "Stadtbusnetz Deggendorf" allgemein 
+= Überblick Buslinien "Verkehrsgemeinschaft Landkreis Deggendorf" (VLD) und "Stadtbusnetz Deggendorf und Plattling" allgemein 
 
 - Verweis auf die Datei mit den [[Deggendorf/Transportation/Analyse/DE-BY-VLD-Linien|Deggendorfer Stadt- und Landkreis-Linien]] im Wiki.
 - Verweis auf mehr [[Talk:Deggendorf/Transportation/Analyse|Informationen]] im Wiki.
@@ -40,6 +40,12 @@
 2;bus;;;;
 3;bus;;;;
 4;bus;;;;
+
+
+== Stadtbus Plattling
+
+Stadtbus Plattling;bus;;;;
+2 Anruflinientaxis nach Deggendorf;;;;
 
 
 == Regionalbusse Landkreis Deggendorf
@@ -75,13 +81,13 @@
 
 6139;bus;;;;
 6142;bus;;;;
-6143;bus;;;;
+6143/12;bus;;;;
 6144;bus;;;;
 6145;bus;;;;
 6146;bus;;;;
 6147;bus;;;;
 6148;bus;;;;
-6149;bus;;;;
+6149/16;bus;;;;
 6150/04;bus;;;;
 6151/06;bus;;;;
 6152/05;bus;;;;
@@ -90,7 +96,7 @@
 6155;bus;;;;
 6156;bus;;;;
 6157;bus;;;;
-6159;bus;;;;
+6159/30;bus;;;;
 
 6235/03;bus;;;;
 6236/02;bus;;;;
@@ -164,7 +170,16 @@
 4116;bus;;;;
 4136;bus;;;;
 4142;bus;;;;
-6159;bus;;;;
+6159/30;bus;;;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Regionalbusnetz Freyung-Grafenau (FRG xxx)
+
+6149/16;bus;(=FRG 16);;;
+6143/12;bus;(=FRG 12);;;
+6159/30;bus;(=FRG 30);;;
+4120/31;bus;(=FRG 31);;;
+
 
 
 </pre>
