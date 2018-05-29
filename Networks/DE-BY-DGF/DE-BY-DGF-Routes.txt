@@ -44,7 +44,7 @@ Blauer Dingo;bus;;;;
 
 == Regionalbusse Landkreis Dingolfing
 
-== 0x-Linien
+=== 0x-Linien
 
 6218/01;bus;;;;
 6236/02;bus;;;;
@@ -56,7 +56,7 @@ Blauer Dingo;bus;;;;
 6154/09;bus;;;;
 
 
-== 1x-Linien
+=== 1x-Linien
 
 7630/10;bus;;;;
 6232/308/11;bus;;;;
@@ -73,7 +73,7 @@ Blauer Dingo;bus;;;;
 017/19;bus;;;;
 
 
-== 2x-Linien
+=== 2x-Linien
 
 20;bus;;;;
 21;bus;;;;
@@ -87,7 +87,7 @@ Blauer Dingo;bus;;;;
 028/29;bus;;;;
 
 
-== 3x-Linien
+=== 3x-Linien
 
 309/30;bus;;;;
 #31;bus;;;; (existiert nicht mehr)
@@ -100,7 +100,7 @@ Blauer Dingo;bus;;;;
 39;bus;;;;
 
 
-== 4x-Linien
+=== 4x-Linien
 
 7639/40;bus;;;;
 6153/41;bus;;;;
@@ -111,7 +111,7 @@ Blauer Dingo;bus;;;;
 6259/46;bus;;;;
 
 
-== Disco/Freizeitbuslinien
+=== Disco/Freizeitbuslinien
 
 1;bus;;;;
 2;bus;;;;

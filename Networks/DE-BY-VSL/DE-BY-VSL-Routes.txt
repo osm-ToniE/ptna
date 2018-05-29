@@ -49,7 +49,7 @@
 
 == Regionalbusse Landkreis Straubing
 
-== 0x-Linien
+=== 0x-Linien
 
 6060/03;bus;;;;
 04;bus;;;;
@@ -60,7 +60,7 @@
 6098/9/710;bus;;;;
 
 
-== 1x-Linien
+=== 1x-Linien
 
 10;bus;;;;
 11;bus;;;;
@@ -74,7 +74,7 @@
 19;bus;;;;
 
 
-== 2x-Linien
+=== 2x-Linien
 
 20;bus;;;;
 6097/21/13;bus;;;;
@@ -88,7 +88,7 @@
 29;bus;;;;
 
 
-== 3x-Linien
+=== 3x-Linien
 
 30;bus;;;;
 31;bus;;;;
@@ -102,7 +102,7 @@
 6092/39;bus;;;;
 
 
-== 4x-Linien
+=== 4x-Linien
 
 032/40;bus;;;;
 026/41/38;bus;;;;
@@ -116,7 +116,7 @@
 49;bus;;;;
 
 
-== 5x-Linien
+=== 5x-Linien
 
 50;bus;;;;
 6237/51/08;bus;;;;

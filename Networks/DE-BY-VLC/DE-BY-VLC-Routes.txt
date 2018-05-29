@@ -45,7 +45,7 @@
 
 == Regionallinien
 
-== 1xx-Linien
+=== 1xx-Linien
 
 140;bus;;;;
 160;bus;;;;
@@ -54,7 +54,7 @@
 182;bus;;;;
 
 
-== 2xx-Linien
+=== 2xx-Linien
 
 200;bus;;;;
 210;bus;;;;
@@ -74,7 +74,7 @@
 290;bus;;;;
 
 
-== 3xx-Linien
+=== 3xx-Linien
 
 310;bus;;;;
 319;bus;;;;
@@ -83,7 +83,7 @@
 350;bus;;;;
 
 
-== 4xx-Linien
+=== 4xx-Linien
 
 410;bus;;;;
 420;bus;;;;
@@ -96,7 +96,7 @@
 496;bus;;;;
 
 
-== 5xx-Linien
+=== 5xx-Linien
 
 510;bus;;;;
 6074/519/000020;bus;;;;
@@ -105,7 +105,7 @@
 6080/590;bus;;;;
 
 
-== 6xx-Linien
+=== 6xx-Linien
 
 610;bus;;;;
 611;bus;;;;
@@ -122,12 +122,12 @@
 6196/690;bus;;;;
 
 
-== 7xx-Linien
+=== 7xx-Linien
 
 6098/9/710;bus;;;;
 
 
-== 8xx-Linien
+=== 8xx-Linien
 
 6072/810;bus;;;;
 810a;bus;;;;
@@ -135,7 +135,7 @@
 37/820;bus;;;;
 
 
-== Disco-Busse (von Okt.-Apr.)
+=== Disco-Busse (von Okt.-Apr.)
 
 D298;bus;;;;
 D299;bus;;;;
@@ -146,7 +146,7 @@ D499;bus;;;;
 == Buslinien mit Mitgliedschaften zu anderen Netzwerken (RBO, RVV, VSL, ect.)
 
 
-== Buslinien mit Mitgliedschaft zum Netzwerk Regionalbus Ostbayern (RBO)  (RBO xxxx)
+=== Buslinien mit Mitgliedschaft zum Netzwerk Regionalbus Ostbayern (RBO)  (RBO xxxx)
 
 180;bus;(=RBO 6180);;;
 
@@ -184,7 +184,7 @@ D499;bus;;;;
 D499;bus;(=RBO 6499);;;
 
 
-== Buslinien mit Mitgliedschaft zum Netzwerk Regensburger Verkehrsverbund (RVV) (RVV xx) 
+=== Buslinien mit Mitgliedschaft zum Netzwerk Regensburger Verkehrsverbund (RVV) (RVV xx) 
 
 43/229;bus;(=RVV 43);;;
 810;bus;(=RVV 5  im RVV-Gebiet =RBO 6072);;;
@@ -192,14 +192,14 @@ D499;bus;(=RBO 6499);;;
 37/820;bus;(=RVV 37);;;
 
 
-== Grenzüberschreitende Linien nach Tschechien
+=== Grenzüberschreitende Linien nach Tschechien
 
 519;bus;(=RBO 6074);;;
 520;bus;(=RBO 520);;;
 618;bus;(=RBO 6065);;;
 
 
-== Verbindungen in den Landkreis Schwandorf
+=== Verbindungen in den Landkreis Schwandorf
 
 221;bus;;;
 228;bus;;;
@@ -215,13 +215,13 @@ D499;bus;(=RBO 6499);;;
 6296/491;bus;(=RBO 6296);;;
 
 
-== Buslinien mit Mitgliedschaft Verkehrsgemeinschaft Straubinger Land (VSL) (VSL xx)
+=== Buslinien mit Mitgliedschaft Verkehrsgemeinschaft Straubinger Land (VSL) (VSL xx)
 
 619;bus;(=VSL 11 =RBO 6090);;;
 710;bus;(=VSL 09 =RBO 6098);;;
 
 
-== Vebindungen in den Landkreis Regen (Arberland Verkehr)
+=== Vebindungen in den Landkreis Regen (Arberland Verkehr)
 
 590;bus;(=RBO 6080);;;
 616;bus;(=RBO 6080);;;

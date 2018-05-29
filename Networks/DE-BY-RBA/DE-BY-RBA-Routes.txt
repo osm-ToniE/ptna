@@ -33,12 +33,6 @@
 - Verweis auf die Datei mit den [[Region Augsburg/Transportation/Analyse/DE-BY-RBA-Linien|RBA Linien]] im Wiki.
 -
 - Verweis auf mehr [[Talk: Region Augsburg/Transportation/Analyse|Informationen]] im Wiki.
--
-== Berücksichtigte 'network' Werte
-- * 'network' ist leer, nicht gesetzt
-- * 'network' enthält "'''Regionalbus Augsburg'''"
-- * 'network' enthält "'''RBA'''"
-
 
 == Linien im Bereich Augsburg (Außerhalb AVV)
 
@@ -201,7 +195,7 @@ Rufbus Dillingen - Steinheim;bus;;;;
 
 === Landkreis Donau-Ries = Verkehrsgemeinschaft Donau-Ries (VDR xxx)
 
-9105/105;bus(=VDR 105);;;
+9105/105;bus;(=VDR 105);;;
 
 
 

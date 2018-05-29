@@ -44,7 +44,7 @@
 
 == Regionalbusse Landkreis Rottal-Inn
 
-== RBO-Linien
+=== RBO-Linien
 
 6205;bus;;;;
 6208;bus;;;;
@@ -90,7 +90,7 @@
 7700;bus;;;;
 
 
-== Rufbusse
+=== Rufbusse
 
 8241;bus;;;;
 8242;bus;;;;
@@ -149,10 +149,10 @@
 7641;bus;;;;
 
 
-== Buslinien mit Mitgliedschaft zu anderen Busliniennetzwerken (DGF;VLMÜ;VLD ect.)
+== Buslinien mit Mitgliedschaft zu anderen Busliniennetzwerken (DGF; VLMÜ; VLD ect.)
 
 
-== Buslinien mit Mitgliedschaft zum Netzwerk Dingolfinger Regionalbusnetz (DGF) (DGF xx)
+=== Buslinien mit Mitgliedschaft zum Netzwerk Dingolfinger Regionalbusnetz (DGF) (DGF xx)
 
 6218/01;bus;(=DGF 01);;;
 6236/02;bus;(=DGF 02);;;
@@ -162,12 +162,12 @@
 50/22;bus;(=DGF 22);;;
 
 
-== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Mühldorf (VLMÜ)
+=== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Mühldorf (VLMÜ)
 
 6209;bus;;;;
 
 
-== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Deggendorf (VLD)
+=== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Deggendorf (VLD)
 
 6236/02;bus;;;;
 7630/10;bus;;;;

@@ -48,14 +48,14 @@ Waldbahn;train;(historische Bahn auf der Linie der WBA 4);;;
 == Regionalbusse Landkreis Regen
 
 
-== RBO Linien (4xxx)
+=== RBO Linien (4xxx)
 
 4116;bus;;;
 4136;bus;;;
 4142;bus;;;
 
 
-== RBO-Linien (6xxx, 7xxx)
+=== RBO-Linien (6xxx, 7xxx)
 
 6065/618;bus;;;;
 6080/(590 + 616);bus;;;;
@@ -109,7 +109,7 @@ Waldbahn;train;(historische Bahn auf der Linie der WBA 4);;;
 8200;bus;(Bedarfsverkehr für Linien 6195,6196,6197,6199,6200 und 6201 ab 18:20 Uhr);;;
 
 
-== RBO-Rufbusse (82xx)
+=== RBO-Rufbusse (82xx)
 
 8201;bus;;;;
 8202;bus;;;;
@@ -155,19 +155,19 @@ Waldbahn;train;(historische Bahn auf der Linie der WBA 4);;;
 == Buslinien mit Mitgliedschaft zu anderen Busliniennetzwerken (VSL; VLP; FRG; VLC; VLD;  ect.)
 
 
-== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Straubinger Land (VSL)
+=== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Straubinger Land (VSL)
 
 6095/04;bus;(=VSL 04);;;
 6096/15;bus;(=VSL 15);;;
 
 
-== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Passau (VLP)
+=== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Passau (VLP)
 
 6121/18;bus;;;;
 7710;bus;;;;
 
 
-== Buslinien mit Mitgliedschaft zum Regionalbusnetz Freyung-Grafenau (FRG)
+=== Buslinien mit Mitgliedschaft zum Regionalbusnetz Freyung-Grafenau (FRG)
 
 6086/11;bus;(=FRG 11);;;
 6121/18;bus;(=FRG 18);;;
@@ -175,7 +175,7 @@ Waldbahn;train;(historische Bahn auf der Linie der WBA 4);;;
 6200/10;bus;(=FRG 10);;;
 
 
-== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Deggendorf (VLD)
+=== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Deggendorf (VLD)
 
 6159/30;bus;;;;
 4116;bus;;;;
@@ -183,7 +183,7 @@ Waldbahn;train;(historische Bahn auf der Linie der WBA 4);;;
 4142;bus;;;;
 
 
-== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Cham (VLC)
+=== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Cham (VLC)
 
 6065/618;bus;(=VLC 618);;;
 6080/(590 + 616);bus;(=VLC 590 + 616);;;

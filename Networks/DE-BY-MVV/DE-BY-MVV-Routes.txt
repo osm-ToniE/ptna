@@ -438,14 +438,17 @@ X900;bus;ExpressBus;Starnberg Nord S;Buchenau S;Geldhauser/RVO
 904;bus;;Starnberg Nord S;Starnberg Nord S;DB Regio Bus Bayern GmbH
 906;bus;;Planegg S West;Oberbrunn;Demmelmair GmbH & Co
 907;bus;;Germering;Gauting S;Busverkehr Südbayern
-921;bus;;Herrsching S;Gilching, Gynasium;
+921;bus;;Herrsching S;Gilching, Gynasium;Geldhauser
+921V;bus;;Herrsching S;Gilching, Gymnasium;Geldhauser
 923;bus;;GP Inning/Wörthsee;Steinebach;Geldhauser
 924;bus;;Seefeld-Hechendorf;Seefeld-Hechendorf;
 928;bus;;Andechs, Kloster/Breitbrunn;Walchstadt/Gilching, Gymnasium;Geldhauser
+928V;bus;;Weßling;Breitbrunn;Geldhauser
 936;bus;;Gauting S;Fürstenried West U;Demmelmair GmbH & Co
 947;bus;;Gilching-Argelsried;Weßling S;Demmelmair GmbH & Co
 949;bus;;Gilching-Argelsried;Starnberg Nord S;Demmelmair GmbH & Co
 950;bus;;Herrsching S/Herrsching, Martinsweg;Starnberg Nord S/Oberalting;RVO/Geldhauser
+950V;bus;;Herrsching, Martinsweg;Oberalting;Geldhauser
 951;bus;;Starnberg Nord S;Herrsching S;Geldhauser/RVO
 #952;bus;;Inning, Marktplatz;Argelsried S;RVO/Geldhauser
 #953;bus;;Weßling S;Hechendorf S;RVO/Geldhauser

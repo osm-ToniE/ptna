@@ -31,17 +31,9 @@
 = Überlick über die ÖPNV-Linien des Verkehrsverbund Bremen/Niedersachsen 
 
 - Verweis auf die Datei mit den [[Bremen/Transport/Analyse/DE-HB-VBN-Linien|VBN-Linien]] im Wiki.
+-
 - Verweis auf mehr [[Talk:Bremen/Transport/Analyse|Informationen]] im Wiki.
 
-== Hinweis
-
-- bei der Analyse ist 'network' derzeit entweder
-- * "VBN"                                   short form, oder
-- * "Verkehrsverbund Bremen/Niedersachsen"  long form, oder
-- * leer, d.h. nicht gesetzt
--
-#
-#ref;type;comment;from;to;operator
 == Tram
 1;tram;HB Straßenbahn;Huchting;Mahndorf;BSAG
 1S;tram;HB Straßenbahn;Tenever;Hauptbahnhof;BSAG
@@ -54,6 +46,8 @@
 8;tram;HB Straßenbahn;Huchting;Kulenkampffallee;BSAG
 10;tram;HB Straßenbahn;Gröpelingen;Sebaldsbrück;BSAG
 == Bus
+
+=== Busse xx
 20;bus;HB Stadt;Hohweg;Hauptbahnhof;BSAG
 21;bus;HB Stadt;Mercedes-Benz;Leher Feld;BSAG
 22;bus;HB Stadt;Kattenturm;Universität/Lehe;BSAG
@@ -99,6 +93,8 @@
 96;bus;HB Stadt;Bf Blumenthal;Blumenthal;BSAG
 96E;bus;HB Stadt;Bf Blumenthal;Neuenkirchener Weg;BSAG
 98;bus;HB Stadt;Vegesack;Vegesack;BSAG
+
+=== Busse 1xx
 101;bus;DH Nordwest;Bassum;Bremen Hbf/ZOB;Borchers-Reisen VGH Wilmering DHE
 102T;bus;DH Nordwest;Brinkum;Syke;
 102;bus;DH Nordwest;Bremen Hbf;Syke;Wilmering
@@ -171,6 +167,8 @@
 187;bus;DH Nordwest Bürgerbus;Syke Banhof;Syke Banhof;VGH
 193;bus;DH Nordwest;Seckenhausen;Melchiorshausen;Weser-Ems-Bus
 194;bus;DH Nordwest;Stuhr;Syke, SZ/Hacheschuke;Weser-Ems-Bus
+
+=== Busse 2xx
 201;bus;DEL;Huchting, Roland-Center;Deichhorst, Hilversumer Straße;Delbus
 202;bus;DEL;Brendel-Süd, Gothaer Straße;Dreilinien, Schwalbenflucht/Hasbergen, Grüner Weg;Delbus
 203;bus;DEL;Stickgras, Fridtjof-Nansen-Straße;Dwoberg, Hoher Weg;Delbus
@@ -253,6 +251,8 @@
 286;bus;OL West;Achternmeer;Wardenburg;VOL
 287;bus;OL West;Wardenburg;Wardenburg;VOL
 289;bus;OL West;Oldenburg;Wardenburg;VOL
+
+=== Busse 3xx
 301;bus;OL Stadt;Eversten;Ofenerfeld;VWG
 302;bus;OL Stadt;BBS Wechloy;Borchersweg;VWG
 304;bus;OL Stadt;Ofenerdiek;Bümmerstede;VWG
@@ -334,6 +334,8 @@ S35;bus;AM West;Westerstede;Oldenburg;Gerdes
 397;bus;AM Süd;Bad Zwischenahn;Edewecht;Bruns
 398;bus;AM Süd;Bad Zwischanahn;Dänikhorst;Bruns
 399;bus;AM Süd;Bad Zwischenahn;Jaderberg;Bruns
+
+=== Busse 4xx
 401;bus;WM Nord;Nordenham;Blexen-Fähre;VBW
 402;bus;WM Nord;Esenshamm;Nordenham;VBW
 403;bus;WM Nord;Nordenham;Eckwarden;VBW
@@ -369,6 +371,8 @@ S35;bus;AM West;Westerstede;Oldenburg;Gerdes
 461;bus;WM Süd;Moorhausen;Elsfleth;Weser-Ems-Bus
 462;bus;WM Süd;Lienen;Lienen;Weser-Ems-Bus
 463;bus;WM Süd;Elsfleth;Großenmeer;Weser-Ems-Bus
+
+=== Busse 5xx
 501;bus;BHV;Bahnhofstraße;Schnellbus: H.-Plett-Str.;Bremerhaven Bus
 502;bus;BHV;Auerstraße;Heinrich-Plett-Straße;Bremerhaven Bus
 503;bus;BHV;Tiroler Straße;Heinrich-Plett-Straße;Bremerhaven Bus
@@ -386,6 +390,8 @@ S35;bus;AM West;Westerstede;Oldenburg;Gerdes
 516;bus;BHV;Carsten-Börger-Str.;Repower/Seewindstr.;
 517;bus;BHV ALT;Surheide;Veerenholzstraße;
 534;bus;CUX 6;Hoope;Hagen;
+
+=== Busse 6xx
 600;bus;;Alhorn;Lohne;Weser-Ems-Bus
 608;bus;OHZ Ost;Ostersode;Worpswede;EVB
 609;bus;OHZ Ost;Hüttendorf;Worpswede;EVB
@@ -431,6 +437,8 @@ S35;bus;AM West;Westerstede;Oldenburg;Gerdes
 685;bus;OHZ Mitte;Worpswede;Hambergen;Weser-Ems-Bus
 686;bus;OHZ Mitte;Vollersode-Giehlermühlen;Osterholz-Scharmbeck;Weser-Ems-Bus
 689;bus;;Ocholt;Veenhusen;Gerdes
+
+=== Busse 7xx
 701;bus;VER Ost;Verden;Kirchlinteln Otersen;VWE
 702;bus;VER Süd;Thedinghausen;Achim;VWE
 703;bus;VER Nord;Bassen;Achim;VWE
@@ -470,6 +478,8 @@ S35;bus;AM West;Westerstede;Oldenburg;Gerdes
 792;bus;VER Nord Bürgerbus;Achim;Baden;Weser-Ems-Bus
 793;bus;VER Nord Bürgerbus;Achim;Embsen;Weser-Ems-Bus
 794;bus;VER Nord Bürgerbus;Achim;Badenermoor;
+
+=== Busse 8xx
 802;bus;;Rotenburg;Rotenburg;
 803;bus;;Rotenburg;Rotenburg;
 827;bus;;Ostereistedt;Selsingen;EVB
@@ -488,6 +498,7 @@ S35;bus;AM West;Westerstede;Oldenburg;Gerdes
 917;bus;;Gemeindeverkehr Bösel;;Weser-Ems-Bus
 930;bus;;Löningen;Ahlhorn;Weser-Ems-Bus
 980;bus;;Ahlhorn;Lohne;
+
 == Nacht-Linien
 ML;bus;BHV;Klinikum Bremerhaven;Langen;
 N1;tram;HB Straßenbahn;Huchting;Osterholz/Weserpark;BSAG

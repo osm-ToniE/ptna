@@ -93,7 +93,7 @@ Oberhaus-Bus;bus;;;;
 == Regionalbusse Landkreis Passau - "Verkehrsgemeinschaft Landkreis Passau" (VLP)
 
 
-== RBO-Linien (6xxx, 7xxx)
+=== RBO-Linien (6xxx, 7xxx)
 
 6101;bus;;;;
 6102;bus;;;;
@@ -176,7 +176,7 @@ Oberhaus-Bus;bus;;;;
 7770;bus;;;;
 
 
-== RBO-Rufbusse (8xxx)
+=== RBO-Rufbusse (8xxx)
 
 8102;bus;;;;
 8106;bus;;;;
@@ -207,7 +207,7 @@ Oberhaus-Bus;bus;;;;
 8599;bus;;;;
 
 
-Sonstige Linien außerhalb des VLP
+== Sonstige Linien außerhalb des VLP
 
 
 === Nach Bad Griesbach
@@ -249,19 +249,19 @@ Sonstige Linien außerhalb des VLP
 
 
 
-== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Deggendorf (VLD)
+=== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Deggendorf (VLD)
 
 6147;bus;;;;
 6148;bus;;;;
 
 
-== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Rottal-Inn(VGRI) und sonstige Linien Landkreis Rottal-Inn (PAN)
+=== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Rottal-Inn(VGRI) und sonstige Linien Landkreis Rottal-Inn (PAN)
 
 6206;bus;;;;
 6209;bus;;;;
 
 
-== Buslinien mit Mitgliedschaft zum Netzwerk Landkreis Freyung-Grafenau (FRG xxx)
+=== Buslinien mit Mitgliedschaft zum Netzwerk Landkreis Freyung-Grafenau (FRG xxx)
 
 6121/18;bus;(=FRG 18);;;
 6124/21;bus;(=FRG 21);;;
