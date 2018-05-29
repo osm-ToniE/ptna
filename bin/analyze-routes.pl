@@ -44,7 +44,6 @@ my $expect_network_long_for         = undef;
 my $expect_network_short            = undef;
 my $expect_network_short_for        = undef;
 my $multiple_ref_type_entries       = "analyze";
-my $show_options                    = undef;
 my $strict_network                  = undef;
 my $strict_operator                 = undef;
 my $max_error                       = undef;
@@ -86,7 +85,6 @@ GetOptions( 'help'                          =>  \$help,                         
             'relaxed-begin-end-for:s'       =>  \$relaxed_begin_end_for,        # --relaxed-begin-end-for=...       for train/tram/light_rail: first/last stop position does not have to be on first/last node of way, but within first/last way
             'osm-xml-file=s'                =>  \$osm_xml_file,                 # --osm-xml-file=yyy                XML output of Overpass APU query
             'separator=s'                   =>  \$csv_separator,                # --separator=';'                   separator in the CSV file
-            'show-options'                  =>  \$show_options,                 # --show-options                    print a section with all options and their values
             'strict-network'                =>  \$strict_network,               # --strict-network                  do not consider empty network tags
             'strict-operator'               =>  \$strict_operator,              # --strict-operator                 do not consider empty operator tags
             'title=s'                       =>  \$page_title,                   # --title=...                       Title for the HTML page
@@ -119,7 +117,6 @@ if ( $verbose ) {
     printf STDERR "%20s--expect-network-long\n",           ' '                                 if ( $expect_network_long         );
     printf STDERR "%20s--expect-network-short\n",          ' '                                 if ( $expect_network_short        );
     printf STDERR "%20s--positive-notes\n",                ' '                                 if ( $positive_notes              );
-    printf STDERR "%20s--show-options\n",                  ' '                                 if ( $show_options                );
     printf STDERR "%20s--strict-network\n",                ' '                                 if ( $strict_network              );
     printf STDERR "%20s--strict-operator\n",               ' '                                 if ( $strict_operator             );
     printf STDERR "%20s--network-long-regex='%s'\n",       ' ', $network_long_regex            if ( $network_long_regex          );
@@ -1022,8 +1019,7 @@ if ( $routes_file ) {
                                              'Operator' => $ExpectedOperator         );
                         $working_on_entry = $entry;
                     }
-                    printTableLine( 'issues'        =>    sprintf("Missing route for ref='%s' and route='%s'", $ExpectedRef, $ExpectedRouteType)
-                                  );
+                    printTableLine( 'issues'        =>    sprintf("Missing route for ref='%s' and route='%s'", ($ExpectedRef ? $ExpectedRef : '?'), ($ExpectedRouteType ? $ExpectedRouteType : '?') ) );
                 }
             }
             else {
@@ -1038,8 +1034,7 @@ if ( $routes_file ) {
                                          'Operator' => $ExpectedOperator         );
                     $working_on_entry = $entry;
                 }
-                printTableLine( 'issues'        =>    sprintf("Missing route for ref='%s' and route='%s'", $ExpectedRef, $ExpectedRouteType),
-                              );
+                printTableLine( 'issues'        =>    sprintf("Missing route for ref='%s' and route='%s'", ($ExpectedRef ? $ExpectedRef : '?'), ($ExpectedRouteType ? $ExpectedRouteType : '?') ) );
             }
         }
         else {
@@ -1240,8 +1235,6 @@ printf STDERR "%s 'network' details\n", get_time()       if ( $verbose );
 
 printTableInitialization( 'network', 'number', 'relations' );
 
-my @relations_of_network    = ();
-
 printBigHeader( "Details zu 'network'-Werten" );
 
 if ( $network_long_regex || $network_short_regex ) {
@@ -1249,85 +1242,14 @@ if ( $network_long_regex || $network_short_regex ) {
 }
 
 if ( keys( %used_networks ) ) {
-    
-    $number_of_used_networks = 0;
-
-    printHeader( "== Berücksichtigte 'network' Werte" );
-    
     printHintUsedNetworks();
-        
-    printTableHeader();
-
-    foreach my $network ( sort( keys( %used_networks ) ) ) {
-        @relations_of_network    = sort( keys( %{$used_networks{$network}} ) );
-        $network = $network eq '__unset_network__' ? '' : $network;
-        if ( scalar @relations_of_network <= 10 ) {
-            printTableLine( 'network'           =>    $network,
-                            'number'            =>    scalar @relations_of_network, 
-                            'relations'         =>    join( ',', @relations_of_network )
-                          );
-        }
-        else {
-            printTableLine( 'network'           =>    $network,
-                            'number'            =>    scalar @relations_of_network, 
-                            'relations'         =>    sprintf( "%s and more ...", join( ',', splice(@relations_of_network,0,10) ) )
-                          );
-        }
-        $number_of_used_networks++;
-    }
-    printTableFooter(); 
 }
 
 if ( keys( %unused_networks ) ) {
-    
-    $number_of_unused_networks = 0;
-
-    printHeader( "== Nicht berücksichtigte 'network' Werte" );
-    
     printHintUnusedNetworks();
-        
-    printTableHeader();
-
-    foreach my $network ( sort( keys( %unused_networks ) ) ) {
-        @relations_of_network    = sort( keys( %{$unused_networks{$network}} ) );
-        $network = $network eq '__unset_network__' ? '' : $network;
-        if ( scalar @relations_of_network <= 10 ) {
-            printTableLine( 'network'           =>    $network,
-                            'number'            =>    scalar @relations_of_network, 
-                            'relations'         =>    join( ',', @relations_of_network )
-                          );
-        }
-        else {
-            printTableLine( 'network'           =>    $network,
-                            'number'            =>    scalar @relations_of_network, 
-                            'relations'         =>    sprintf( "%s and more ...", join( ',', splice(@relations_of_network,0,10) ) )
-                          );
-        }
-        $number_of_unused_networks++;
-    }
-    printTableFooter(); 
 }
 
-printf STDERR "%s Printed network details: used: %d, unused: %d\n", get_time(), $number_of_used_networks, $number_of_unused_networks       if ( $verbose );
-
-
-#############################################################################################
-#
-# now we print the list of all rool options and their values
-#
-#############################################################################################
-
-if ( $show_options ) {
-    printf STDERR "%s Printing tool options\n", get_time()       if ( $verbose );
-    
-    printTableInitialization( 'Option', 'Wert', 'Anmerkung' );
-    
-    printBigHeader( "Auswertungsoptionen" );
-    
-    printToolOptions();    
-    
-    printf STDERR "%s Printed tool options\n", get_time()   if ( $verbose );
-}
+printf STDERR "%s Printed network details\n", get_time()       if ( $verbose );
 
 
 #############################################################################################
@@ -3849,20 +3771,50 @@ sub printHintSuspiciousRelations {
 #############################################################################################
 
 sub printHintNetworks {
+
+    printText( "Das 'network' Tag wird nach den folgenden Werten durchsucht:\n" );
+
     if ( $print_wiki ) {
         #
         # WIKI code
         #
-        print  "Dieser Abschnitt ...<br />\n";
-        print  "<br />\n";
+        if ( $network_long_regex || $network_short_regex ) {
+            if ( $network_long_regex ) {
+                foreach my $nw ( split( '\|', $network_long_regex ) ) {
+                    printf "* %s\n", html_escape($nw);
+                }
+            }
+            if ( $network_short_regex ) {
+                foreach my $nw ( split( '\|', $network_short_regex ) ) {
+                    printf "* %s\n", html_escape($nw);
+                }
+            }
+            if ( !$strict_network ) {
+                print "* 'network' ist nicht gesetzt\n";
+            }
+        }
     }
     else {
         #
         # HTML
         #
-        ;
-        push( @HTML_main, "Dieser Abschnitt ...<br />\n" );
-        push( @HTML_main, "<br />\n" );
+        if ( $network_long_regex || $network_short_regex ) {
+            push( @HTML_main, "<ul>\n" );
+            if ( $network_long_regex ) {
+                foreach my $nw ( split( '\|', $network_long_regex ) ) {
+                    push( @HTML_main, sprintf( "    <li>%s</li>\n", html_escape($nw) ) );
+                }
+            }
+            if ( $network_short_regex ) {
+                foreach my $nw ( split( '\|', $network_short_regex ) ) {
+                    push( @HTML_main, sprintf( "    <li>%s</li>\n", html_escape($nw) ) );
+                }
+            }
+            if ( !$strict_network ) {
+                push( @HTML_main, sprintf( "    <li>'network' ist nicht gesetzt</li>\n" ) );
+            }
+            push( @HTML_main, "</ul>\n" );
+        }
     }
 }
     
@@ -3870,94 +3822,68 @@ sub printHintNetworks {
 #############################################################################################
 
 sub printHintUsedNetworks {
-    if ( $print_wiki ) {
-        #
-        # WIKI code
-        #
-        print  "Dieser Abschnitt listet die 'network'-Werte auf, die berücksichtigt wurden.<br />\n";
-        print  "<br />\n";
+
+    my @relations_of_network = ();
+    
+    printHeader( "== Berücksichtigte 'network' Werte" );
+    
+    printText( "Dieser Abschnitt listet die 'network'-Werte auf, die berücksichtigt wurden, d.h. einen der oben genannten Werte enthält.\n" );
+    printText( "\n" );
+
+    printTableHeader();
+    foreach my $network ( sort( keys( %used_networks ) ) ) {
+        @relations_of_network    = sort( keys( %{$used_networks{$network}} ) );
+        $network = $network eq '__unset_network__' ? '' : $network;
+        if ( scalar @relations_of_network <= 10 ) {
+            printTableLine( 'network'           =>    $network,
+                            'number'            =>    scalar @relations_of_network, 
+                            'relations'         =>    join( ',', @relations_of_network )
+                          );
+        }
+        else {
+            printTableLine( 'network'           =>    $network,
+                            'number'            =>    scalar @relations_of_network, 
+                            'relations'         =>    sprintf( "%s and more ...", join( ',', splice(@relations_of_network,0,10) ) )
+                          );
+        }
     }
-    else {
-        #
-        # HTML
-        #
-        ;
-        push( @HTML_main, "Dieser Abschnitt listet die 'network'-Werte auf, die berücksichtigt wurden.<br />\n" );
-        push( @HTML_main, "<br />\n" );
-    }
+    printTableFooter(); 
 }
     
 
 #############################################################################################
 
 sub printHintUnusedNetworks {
-    if ( $print_wiki ) {
-        #
-        # WIKI code
-        #
-        print  "Dieser Abschnitt listet die 'network'-Werte auf, die nicht berücksichtigt wurden.<br />\n";
-        print  "Darunter können auch Tippfehler in ansonsten zu berücksichtigenden Werten sein.<br />\n";
-        print  "<br />\n";
-    }
-    else {
-        #
-        # HTML
-        #
-        ;
-        push( @HTML_main, "Dieser Abschnitt listet die 'network'-Werte auf, die nicht berücksichtigt wurden.<br />\n" );
-        push( @HTML_main, "Darunter können auch Tippfehler in ansonsten zu berücksichtigenden Werten sein.<br />\n" );
-        push( @HTML_main, "<br />\n" );
-    }
-}
+
+    my @relations_of_network = ();
     
-
-#############################################################################################
-
-sub printToolOptions {
-
-    if ( $print_wiki ) {
-        #
-        # WIKI code
-        #
-        print  "Die Ausgabe von Fehlern und Anmerkungen kann durch eine Vielzahl von Auswertungsoptionen beeinflusst werden.<br />\n";
-        print  "Hier ist eine [[User_talk:ToniE/Transportation/Analyse#Momentane_Prüfungen|Auflistung der Texte der Fehlermeldungen und Anmerkungen]].<br />\n";
-        print  "<br />\n";
-    }
-    else {
-        #
-        # HTML
-        #
-        push( @HTML_main, "Die Ausgabe von Fehlern und Anmerkungen kann durch eine Vielzahl von Auswertungsoptionen beeinflusst werden.<br />\n" );
-        push( @HTML_main, "Hier ist eine <a href=\"https://wiki.openstreetmap.org/wiki/User_talk:ToniE/Transportation/Analyse#Momentane_Prüfungen\">Auflistung der Texte der Fehlermeldungen und Anmerkungen</a>.<br />\n" );
-        push( @HTML_main, "<br />\n" );
-    }
+    printHeader( "== Nicht berücksichtigte 'network' Werte" );
     
+    printText( "Dieser Abschnitt listet die 'network'-Werte auf, die nicht berücksichtigt wurden. " );
+    printText( "Darunter können auch Tippfehler in ansonsten zu berücksichtigenden Werten sein.\n" );
+    printText( "\n" );
+
     printTableHeader();
-    printTableLine( 'Option' => 'check-access',             'Wert' =>  ($check_access               ? 'ON' : 'OFF'),                        'Anmerkung' => 'Es werden Wege benutzt, die explizit oder implizit nicht befahren werden dürfen und wo bus="yes", bus="designated", bus="official", psv="yes", ... fehlt.' );
-    printTableLine( 'Option' => 'check-bus-stop',           'Wert' =>  ($check_bus_stop             ? 'ON' : 'OFF'),                        'Anmerkung' => 'highway="bus_stop" darf nur auf Punkten (Nodes) gesetzt werden, nicht auf Wege oder Flächen.' );
-    printTableLine( 'Option' => 'check-name',               'Wert' =>  ($check_name                 ? 'ON' : 'OFF'),                        'Anmerkung' => 'Prüfung von name="...ref: from => to" bzw. name="...ref: from => via => ... => to".' );
-    printTableLine( 'Option' => 'check-platform',           'Wert' =>  ($check_platform             ? 'ON' : 'OFF'),                        'Anmerkung' => 'Fehlendes bus="yes", tram="yes" oder share_taxi="yes" bei public_transport="platform".' );
-    printTableLine( 'Option' => 'check-roundabouts',        'Wert' =>  ($check_roundabouts          ? 'ON' : 'OFF'),                        'Anmerkung' => 'Prüfung, ob Kreisverkehre nur teilweise durchfahren werden, aber komplett in der Relation enthalten sind (JOSM prüft das nicht).' );
-    printTableLine( 'Option' => 'check-sequence',           'Wert' =>  ($check_sequence             ? 'ON' : 'OFF'),                        'Anmerkung' => 'Prüfung, ob die Wege in der Route-Relation lückenlos sind.' );
-    printTableLine( 'Option' => 'check-stop-position',      'Wert' =>  ($check_stop_position        ? 'ON' : 'OFF'),                        'Anmerkung' => 'Fehlendes bus="yes", tram="yes" oder share_taxi="yes" bei public_transport="stop_position".' );
-    printTableLine( 'Option' => 'check-version',            'Wert' =>  ($check_version              ? 'ON' : 'OFF'),                        'Anmerkung' => 'Prüfung von public_transport:version="..." bei Route-Master und Route.' );
-    printTableLine( 'Option' => 'coloured-sketchline',      'Wert' =>  ($coloured_sketchline        ? 'ON' : 'OFF'),                        'Anmerkung' => 'Die SketchLine berücksichtigt den Wert von colour="..." des Route-Master, der Route.' );
-    printTableLine( 'Option' => 'expect-network-long',      'Wert' =>  ($expect_network_long        ? 'ON' : 'OFF'),                        'Anmerkung' => 'Der Wert von network="..." wird in der langen Form erwartet (siehe network-long-regex).' );
-    printTableLine( 'Option' => 'expect-network-long-for',  'Wert' =>  ($expect_network_long_for    ? $expect_network_long_for : ''),       'Anmerkung' => 'Der Wert von network="..." wird in der langen Form erwartet, statt der hier angegebenen kurzen Form.' );
-    printTableLine( 'Option' => 'expect-network-short',     'Wert' =>  ($expect_network_short       ? 'ON' : 'OFF'),                        'Anmerkung' => 'Der Wert von network="..." wird in der kurzen Form erwartet (siehe network-short-regex).' );
-    printTableLine( 'Option' => 'expect-network-short-for', 'Wert' =>  ($expect_network_short_for   ? $expect_network_short_for : ''),      'Anmerkung' => 'Der Wert von network="..." wird in der kurzen Form erwartet, statt der hier angegebenen langen Form.' ); 
-    printTableLine( 'Option' => 'max-error',                'Wert' =>  ($max_error                  ? $max_error : ''),                     'Anmerkung' => 'Limitiert die Anzahl der Ausgabe von Nodes, Ways, Relations bei identischen Fehlermeldungen pro Route.' );
-    printTableLine( 'Option' => 'network-long-regex',       'Wert' =>  ($network_long_regex         ? ' | ' . $network_long_regex  : ''),   'Anmerkung' => 'Der Wert von network="..." der im Datensatz enthaltenen Route-Master und Routen muss diesem Muster als Langform entsprechen oder darf leer sein.' );
-    printTableLine( 'Option' => 'network-short-regex',      'Wert' =>  ($network_short_regex        ? ' | ' . $network_short_regex : ''),   'Anmerkung' => 'Der Wert von network="..." der im Datensatz enthaltenen Route-Master und Routen muss diesem Muster als Kurzform entsprechen oder darf leer sein.' );
-    printTableLine( 'Option' => 'operator-regex',           'Wert' =>  ($operator_regex             ? ' | ' . $operator_regex : ''),        'Anmerkung' => 'Der Wert von operator="..." der im Datensatz enthaltenen Route-Master und Routen muss diesem Muster entsprechen oder darf leer sein.' );
-    printTableLine( 'Option' => 'positive-notes',           'Wert' =>  ($positive_notes             ? 'ON' : 'OFF'),                        'Anmerkung' => 'Ausgabe von network:short="...", network:guid="..." und anderen Werten.' );
-    printTableLine( 'Option' => 'relaxed-begin-end-for',    'Wert' =>  ($relaxed_begin_end_for      ? $relaxed_begin_end_for : ''),         'Anmerkung' => 'Entspanntere Prüfung von Anfang und Ende einer Route bzgl. Stop-Position (zB. bei train, tram, light_rail).' );
-    printTableLine( 'Option' => 'strict-network',           'Wert' =>  ($strict_network             ? 'ON' : 'OFF'),                        'Anmerkung' => 'Keine Berücksichtigung von Route-Master oder Route bei leerem network="...".' );
-    printTableLine( 'Option' => 'strict-operator',          'Wert' =>  ($strict_operator            ? 'ON' : 'OFF'),                        'Anmerkung' => 'Keine Berücksichtigung von Route-Master oder Route bei leerem operator="...".' );
-    printTableFooter();
-    
-}
+    foreach my $network ( sort( keys( %unused_networks ) ) ) {
+        @relations_of_network    = sort( keys( %{$unused_networks{$network}} ) );
+        $network = $network eq '__unset_network__' ? '' : $network;
+        if ( scalar @relations_of_network <= 10 ) {
+            printTableLine( 'network'           =>    $network,
+                            'number'            =>    scalar @relations_of_network, 
+                            'relations'         =>    join( ',', @relations_of_network )
+                          );
+        }
+        else {
+            printTableLine( 'network'           =>    $network,
+                            'number'            =>    scalar @relations_of_network, 
+                            'relations'         =>    sprintf( "%s and more ...", join( ',', splice(@relations_of_network,0,10) ) )
+                          );
+        }
+    }
+    printTableFooter(); 
 
+}
+    
 
 #############################################################################################
 
@@ -4048,7 +3974,7 @@ sub printText {
                 #
                 push( @HTML_main, sprintf( "%s", wiki2html($text) ) );
             }
-            printf STDERR "%s %s\n", get_time(), $text    if ( $verbose );
+            #printf STDERR "%s %s\n", get_time(), $text    if ( $verbose );
         }
         push( @HTML_main, "<br />\n" );
     }
