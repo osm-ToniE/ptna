@@ -10,7 +10,7 @@ OVERPASS_QUERY="http://overpass-api.de/api/interpreter?data=area[boundary=public
 NETWORK_LONG="Verkehrsverbund Rhein-Sieg|NRW Regionalverkehr"
 NETWORK_SHORT="VRS"
 
-EXPECT_NETWORK_LONG_FOR="Verkehrsverbund Rhein-Sieg"
+EXPECT_NETWORK_SHORT_FOR="Verkehrsverbund Rhein-Sieg"
 
 ANALYSIS_PAGE="VRS/Analyse"
 WIKI_ROUTES_PAGE="VRS/Analyse/VRS-Linien"
