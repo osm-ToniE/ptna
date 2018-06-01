@@ -115,7 +115,7 @@ N4;bus;;;;
 N5;bus;;;;
 N6;bus;;;;
 N7;bus;;;;
-N8;bus;Existiert zweimal im VRS: Hier Bonn - Oberkassel;Bonn Hauptbahnhof;Bonn Hauptbahnhof;SWB
+N8;bus;Existiert zweimal im VRS: Hier Bonn - Oberkassel;Bonn Hbf;Bonn Hbf;SWB
 N8;bus;Existiert zweimal im VRS: Hier Leichlingen;Leichlingen Bf;Kleine Heide;Wiedenhoff
 N9;bus;;;;
 N10;bus;;;;
@@ -141,7 +141,7 @@ SB55;bus;;;;
 SB56;bus;;;;
 SB60;bus;;;;
 SB69;bus;;;;
-SB 82;bus;;;;
+SB82;bus;;;;
 
 === Bus 100 ...
 
