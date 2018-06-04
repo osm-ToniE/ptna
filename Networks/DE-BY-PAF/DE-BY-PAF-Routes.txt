@@ -1,0 +1,211 @@
+<pre>
+#
+# Formatierung:
+#
+# Überschriften beginnen mit '=', '==', '===', '====', ... am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an
+#
+# Einfacher Text beginnt mit '-' am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an, Zeilen hier werden im Wiki mit <br /> abgeschlossen (neue Zeile).
+# Einfacher Text darf nur direkt hinter einer Überschrift stehen.
+#
+# Links: [[...|...]] sind interne Verweise im Wiki
+#        [... ...] sind externe Verweise
+#
+# Kommentare beginnen mit '#' am Anfang einer Zeile. Kommentare mittendrin werden nicht erkannt.
+#
+# Format der Datei: UNIX (LF), UTF-8
+#
+#
+# Inhalt im CSV-Format
+#
+# ref;type;comment;from;to;operator
+#
+# - ref       == tag 'ref' von route oder route_master
+# - type      == inhalt des tags 'route' bzw. 'route_master'
+# - comment   == kann Kommentar enthalten wie; Ruftaxi, Bus, Expressbus, ...  wird nicht ausgewertet, lediglich ausgegeben
+# - from      == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - to        == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - operator  == wird bei mehreren Linie mit identischem ref und type Differenzierung herangezogen (Der Wert von 'operator' darf ';' enthalten)
+#
+
+
+= Überblick Buslinien Landkreis Pfaffenhofen an der Ilm allgemein (KEIN Regionalnetzwerk für den Landkreis vorhanden)
+
+- Verweis auf die Datei mit den [[Pfaffenhofen an der Ilm/Transportation/Analyse/DE-BY-PAF-Linien|PAF Linien]] im Wiki.
+- Verweis auf mehr [[Talk:Pfaffenhofen an der Ilm/Transportation/Analyse|Informationen]] im Wiki.
+
+
+== Stadtbusse Pfaffenhofen (Betrieben durch die Stadtwerke Pfaffenhofen)
+
+1;bus;;;;Stadtwerke Pfaffenhofen
+2;bus;;;;Stadtwerke Pfaffenhofen
+3;bus;;;;Stadtwerke Pfaffenhofen
+4;bus;;;;Stadtwerke Pfaffenhofen
+5;bus;;;;Stadtwerke Pfaffenhofen
+6;bus;;;;Stadtwerke Pfaffenhofen
+7;bus;;;;Stadtwerke Pfaffenhofen
+8;bus;;;;Stadtwerke Pfaffenhofen
+Kleinbus;bus;;;;Stadtwerke Pfaffenhofen
+Rufbus NW;bus;;;;Stadtwerke Pfaffenhofen
+Rufbus NO;bus;;;;Stadtwerke Pfaffenhofen
+
+
+== Regionalbusse Landkreis Pfaffenhofen
+
+=== INVG-Linien
+
+16;bus;;;;
+18;bus;;;;
+26;bus;;;;
+
+N16;bus;;;;
+N18;bus;;;;
+N26;bus;;;;
+
+
+
+=== RBA-Linien
+
+9153;bus;;;;
+9159;bus;;;;
+
+9201;bus;;;;
+9202;bus;;;;
+9241;bus;;;;
+9242;bus;;;;
+9243;bus;;;;
+
+9153(Rufbus);bus;Selbe Nummer wie 9153;;;
+Rufbus Manching:bus;;;;
+Rufbus Schweitenkirchen;bus;;;;
+
+
+
+=== MVV-Linien
+
+601;bus;;;;
+617;bus;;;;
+618;bus;;;;
+
+706;bus;;;;
+707;bus;;;;
+
+
+
+=== Spangler-Linien aus Landkreis Neuburg an der Donau
+
+45;bus;;;;Spangler
+46;bus;;;;Spangler
+
+
+== VLK-Linien
+
+6008/07;bus;(=VLK 07);;;
+84;bus;(=VLK 84);;;
+
+
+== RBO-Linie
+
+6008/07;bus;(=RBO 6008);;;
+
+
+== Linien Fa. Stanglmeier
+
+Linie Winden - Au am Aign - Hög - Ronnweg - Langenbruck;bus;Rufbus;;;
+Linie Rohrbach(Ilm) - Wolnzach und zurück;bus;;;;
+
+
+== Schulbuslinien Fa. Schwarz
+
+8;bus;;;;Schwarz
+9;bus;;;;Schwarz
+
+PAF 4;bus;;;;Schwarz
+
+WO 3;bus;;;;Schwarz
+WO 4;bus;;;;Schwarz
+
+
+
+== Sonstige Linien Landkreis Pfaffenhofen
+
+9203;bus;Rufbus Reichertshausen (KEINE RBA-Linie!!!);;;
+Zinsmeister;bus;Zinsmeister-Linie;;;
+Amann 001;bus;Amann-Linie;;;
+8722;bus;Lankl-Linie (ehm. Postbus-Linie);;;
+Bürgerbus Geisenfeld;bus;Rufbus;;;
+Rufbus Wolnzach - Rohrbach;bus;;;;
+
+
+
+== Buslinien mit Mitgliedschaften in anderen Netzwerken (RBO; INVG; VLK; RBA; etc.)
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Regionalbus Ostbayern (RBO) (=RBO xxxx)
+
+6008/07;bus;(=RBO 6008);;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Regionalbus Augsburg (RBA) (=RBA xxxx)
+
+9153;bus;;;;
+
+9201;bus;;;;
+9202;bus;;;;
+9241;bus;;;;
+9242;bus;;;;
+9243;bus;;;;
+
+9153(Rufbus);bus;;;;
+Rufbus Manching;;;;
+Rufbus Schweitenkirchen;;;;
+
+
+
+== Buslinien mit Mitgliedschaft zur Ingolstädter Verkehrsgesellschaft (INVG)
+
+16;bus;;;;
+18;bus;;;;
+26;bus;;;;
+
+N16;bus;;;;
+N18;bus;;;;
+N26;bus;;;;
+
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Kelheim (VLK)  (= VLK xx)
+
+6008/07;bus;(=VLK 07);;;
+
+VLK 84;bus;;;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Münchener Verkehrsverbund (MVV) (=MVV xxx) 
+
+601;bus;;;;
+617;bus;;;;
+618;bus;;;;
+
+706;bus;;;;
+707;bus;;;;
+
+
+== Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Neuburg (VGND)
+
+
+=== Spangler-Linien
+
+45;bus;;;;Spangler
+46;bus;;;;Spangler
+
+
+=== RBA-Linien
+
+9153;bus;;;;
+9153(Rufbus);bus;;;;
+9159;bus;;;;
+
+9242;bus;;;;
+
+
+</pre>
