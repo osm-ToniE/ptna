@@ -126,14 +126,14 @@ E 525;bus;;;;ELKO-Tours
 
 === VLK-Linien
 
-VLK 70;bus;;;;
-VLK 71;bus;;;;
+70;bus;;;;
+71;bus;;;;
 
 
-Sonstige Linien Landkreis Eichstätt
+=== Sonstige Linien Landkreis Eichstätt
 
-88;bus;Buchberger-Linie;;;
-Sillner;bus;Sillner-Linie;;;
+88;bus;Buchberger-Linie;;;Buchberger
+Sillner;bus;Sillner-Linie;;;Sillner
 
 
 === Freizeitbuslinien

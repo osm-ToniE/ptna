@@ -129,9 +129,9 @@ WO 4;bus;;;;Schwarz
 == Sonstige Linien Landkreis Pfaffenhofen
 
 9203;bus;Rufbus Reichertshausen (KEINE RBA-Linie!!!);;;
-Zinsmeister;bus;Zinsmeister-Linie;;;
-Amann 001;bus;Amann-Linie;;;
-8722;bus;Lankl-Linie (ehm. Postbus-Linie);;;
+Zinsmeister;bus;Zinsmeister-Linie;;;Zinsmeister
+Amann 001;bus;Amann-Linie;;;Amann
+8722;bus;Lankl-Linie (ehm. Postbus-Linie);;;Lankl
 Bürgerbus Geisenfeld;bus;Rufbus;;;
 Rufbus Wolnzach - Rohrbach;bus;;;;
 

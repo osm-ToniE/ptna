@@ -91,11 +91,12 @@ X98;bus;ExpressBus;Hauptbahnhof;Tierpark (Alemannenstraße);SWM/MVG
 55;bus;;Ostbahnhof U S R;Waldperlach/Putzbrunn;SWM/MVG
 56;bus;;Schloss Blutenburg;Fürstenried West U;SWM/MVG
 57;bus;;Neuaubing West;Laimer Platz U;SWM/MVG
-58;bus;;Hauptbahnhof U S R;Silberhornstraße U;SWM/MVG
+58;bus;Cityring Innen:Hbf Nord;Hbf Nord;SWM/MVG
 59;bus;;Ackermannbogen;Giesing U S;SWM/MVG
 60;bus;;Dülferstraße U;Dessauerstraße;SWM/MVG
 62;bus;;Rotkreuzplatz U;Ostbahnhof U S R;SWM/MVG
 63;bus;;Rotkreuzplatz U;Forstenrieder Allee U;SWM/MVG
+68;bus;Cityring Außen;Hbf;Hbf;SWM/MVG
 #
 === Nacht-Bus (München)
 N40;bus;;Kieferngarten;Klinikum Großhadern;MVG
@@ -130,13 +131,12 @@ O7;bus;MVG-Museum-Shuttle;Giesing U S;MVG-Museum;SWM/MVG
 144;bus;;Scheidplatz U;Rotkreuzplatz U;SWM/MVG
 145;bus;;Ostbahnhof U S R;Fasangarten S;SWM/MVG
 147;bus;;Giesing U S;Kiefernstraße;SWM/MVG
-148;bus;;Silberhornstraße U;Max-Weber-Platz U;SWM/MVG
-150;bus;;Hauptbahnhof Nord U S R;Tivolistraße;SWM/MVG
+149;bus;;Ostbahnhof (Post) U S R;Zamilapark;SWM/MVG
 151;bus;;Westfriedhof U;Parkstadt Solln;SWM/MVG
 153;bus;;HS München (Lothstraße);Am Harras;SWM/MVG
 154;bus;;Nordbad;Bruno-Walter-Ring;SWM/MVG
-155;bus;;Ostbahnhof U S R;Emdenstraße;SWM/MVG
-158;bus;;Im Wismat ;Amalienburgstraße;SWM/MVG
+155;bus;;Max-Weber-Platz U;Emdenstraße;SWM/MVG
+158;bus;;Im Wismat;Amalienburgstraße;SWM/MVG
 159;bus;;Lochhausen S;Pasing S R;SWM/MVG
 160;bus;;Karlsfeld, Gartenstraße;Waldfriedhof;SWM/MVG
 162;bus;;Eichelhäherstraße;Moosach U S R;SWM/MVG

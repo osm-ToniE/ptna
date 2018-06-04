@@ -32,7 +32,7 @@
 
 - Verweis auf die Datei mit den [[Region Augsburg/Transportation/Analyse/DE-BY-RBA-Linien|RBA Linien]] im Wiki.
 -
-- Verweis auf mehr [[Talk: Region Augsburg/Transportation/Analyse|Informationen]] im Wiki.
+- Verweis auf mehr [[Talk:Region Augsburg/Transportation/Analyse|Informationen]] im Wiki.
 
 == Linien im Bereich Augsburg (Außerhalb AVV)
 
