@@ -132,7 +132,7 @@ WO 4;bus;;;;Schwarz
 Zinsmeister;bus;Zinsmeister-Linie;;;Zinsmeister
 Amann 001;bus;Amann-Linie;;;Amann
 8722;bus;Lankl-Linie (ehm. Postbus-Linie);;;Lankl
-Bürgerbus Geisenfeld;bus;Rufbus;;;
+Bü-Bus Gei;bus;Rufbus;;;
 Rufbus Wolnzach - Rohrbach;bus;;;;
 
 
