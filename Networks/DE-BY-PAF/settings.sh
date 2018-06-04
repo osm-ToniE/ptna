@@ -7,7 +7,7 @@
 PREFIX="DE-BY-PAF"
 
 OVERPASS_QUERY="http://overpass-api.de/api/interpreter?data=area[boundary=administrative][admin_level=6][name='Landkreis Pfaffenhofen an der Ilm'];(rel(area)[route~'(bus|tram|train|subway|light_rail|trolleybus|ferry|monorail|aerialway|share_taxi|funicular)'];rel(br);rel[type='route'](r);)->.routes;(.routes;rel(r.routes);way(r.routes);node(r.routes););out;"
-NETWORK_LONG="Stadtbus Pfaffenhofen|Ingolstädter Verkehrsgesellschaft mbH|Regionalbus Augsburg|Münchner Verkehrs- und Tarifverbund|erkehrsgemeinschaft Landkreis Kelheim|Regionalbus Ostbayern|Spangler|Stanglmeier"
+NETWORK_LONG="Stadtbus Pfaffenhofen|Ingolstädter Verkehrsgesellschaft mbH|Regionalbus Augsburg|Münchner Verkehrs- und Tarifverbund|Verkehrsgemeinschaft Landkreis Kelheim|Regionalbus Ostbayern|Spangler|Stanglmeier"
 NETWORK_SHORT="PAF|INGV|RBA|MVV|VLK|RBO|VGND"
 
 ANALYSIS_PAGE="Pfaffenhofen an der Ilm/Transportation/Analyse"
