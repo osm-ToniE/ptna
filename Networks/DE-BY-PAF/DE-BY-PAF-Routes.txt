@@ -75,7 +75,7 @@ N26;bus;;;;
 9243;bus;;;;
 
 9153(Rufbus);bus;Selbe Nummer wie 9153;;;
-Rufbus Manching:bus;;;;
+Rufbus Manching;bus;;;;
 Rufbus Schweitenkirchen;bus;;;;
 
 
@@ -156,8 +156,8 @@ Rufbus Wolnzach - Rohrbach;bus;;;;
 9243;bus;;;;
 
 9153(Rufbus);bus;;;;
-Rufbus Manching;;;;
-Rufbus Schweitenkirchen;;;;
+Rufbus Manching;bus;;;;
+Rufbus Schweitenkirchen;bus;;;;
 
 
 
