@@ -1729,7 +1729,6 @@ sub analyze_relation {
             $expected_short =~ s/;/,/g;
             $expected_short =  ',' . $expected_short . ',';
 
-
             if ( $expected_short =~ m/,$network,/ ) {
                 push( @{$relation_ptr->{'__notes__'}}, "'network' is long form" );
             }
@@ -1739,7 +1738,15 @@ sub analyze_relation {
             else {
                 if ( $network_long_regex && $network =~ m/($network_long_regex)/ ) {
                     my $match = $1;
-                    if ( $positive_notes || ($expect_network_short && !$expect_network_long_for) ) {
+                    if ( $positive_notes ) {
+                        if ( $network eq $match ) {
+                            push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' = '%s'",$match) );
+                        }
+                        else {
+                            push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' ~ '%s'",$match) );
+                        }
+                    }
+                    elsif ( $expect_network_short && !$expect_network_long_for ) {
                         if ( $network eq $match ) {
                             push( @{$relation_ptr->{'__notes__'}}, "'network' is long form" );
                         }
@@ -1763,7 +1770,15 @@ sub analyze_relation {
                 }
                 if ( $network_short_regex && $network =~ m/($network_short_regex)/ ) {
                     my $match = $1;
-                    if ( $positive_notes || ($expect_network_long && !$expect_network_short_for) ) {
+                    if ( $positive_notes ) {
+                        if ( $network eq $match ) {
+                            push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' = '%s'",$match) );
+                        }
+                        else {
+                            push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' ~ '%s'",$match) );
+                        }
+                    }
+                    elsif ( $expect_network_long && !$expect_network_short_for ) {
                         if ( $network eq $match ) {
                             push( @{$relation_ptr->{'__notes__'}}, "'network' is short form" );
                         }
