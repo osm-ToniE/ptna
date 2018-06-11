@@ -503,7 +503,7 @@ TB 835;bus;;;;
 843;bus;;;;
 844;bus;Nicht mehr im VRS nur noch der VRM-Teil existiert. Änderungen sind zum 1.7.2018 zu erwarten;;;
 845;bus;;;;
-846;bus;;;;
+846;bus;Kein Fahrplan mehr;Rheinbach;Buschhoven;
 848;bus;;;;
 849;bus;;;;
 852;bus;Linie gehört zum Verbund VRM;;;
