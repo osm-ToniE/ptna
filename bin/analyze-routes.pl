@@ -1720,87 +1720,99 @@ sub analyze_relation {
         push( @{$relation_ptr->{'__issues__'}}, "'name' is not set" )       unless ( $relation_ptr->{'tag'}->{'name'} );
 
         $network = $relation_ptr->{'tag'}->{'network'};
+
         if ( $network ) {
-            my $expected_long  = $expect_network_long_for  || '';
-            my $expected_short = $expect_network_short_for || '';
+            my $count_error_semikolon_w_blank = 0;
+            my $count_error_comma             = 0;
+            my $match                         = '';
 
-            $expected_long  =~ s/;/,/g;
-            $expected_long  =  ',' . $expected_long . ',';
-            $expected_short =~ s/;/,/g;
-            $expected_short =  ',' . $expected_short . ',';
-
-            if ( $expected_short =~ m/,$network,/ ) {
-                push( @{$relation_ptr->{'__notes__'}}, "'network' is long form" );
-            }
-            elsif ( $expected_long =~ m/,$network,/ ) {
-                push( @{$relation_ptr->{'__notes__'}}, "'network' is short form" );
-            }
-            else {
-                if ( $network_long_regex && $network =~ m/($network_long_regex)/ ) {
-                    my $match = $1;
-                    if ( $positive_notes ) {
-                        if ( $network eq $match ) {
-                            push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' = '%s'",$match) );
-                        }
-                        else {
-                            push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' ~ '%s'",$match) );
-                        }
-                    }
-                    elsif ( $expect_network_short && !$expect_network_long_for ) {
-                        if ( $network eq $match ) {
-                            push( @{$relation_ptr->{'__notes__'}}, "'network' is long form" );
-                        }
-                        else {
-                            push( @{$relation_ptr->{'__notes__'}}, "'network' matches long form" );
-                        }
-                    }
-                    if ( $check_osm_separator ) {
-                        if ( $network ne $match ) {
-                            if ( $network =~ m/;\s+$match/    ||
-                                 $network =~ m/$match\s+;/    ||
-                                 $network =~ m/$match\s*;\s+/   ) {
-                                push( @{$relation_ptr->{'__issues__'}}, "'network' = '$network' includes the separator value ';' (semi-colon) with sourrounding blank(s)" );
+            if ( $network_short_regex ) {
+                foreach my $short_value ( split('\|',$network_short_regex) ) {
+                    if ( $network =~ m/($short_value)/ ) {
+                        $match = $1;
+                        if ( $positive_notes ) {
+                            if ( $network eq $match ) {
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' = '%s'",$match) );
                             }
-                            if ( $network =~ m/(,\s*)$match/    ||
-                                 $network =~ m/$match(\s*,)/       ) {
-                                push( @{$relation_ptr->{'__issues__'}}, "'network' = '$network': '$1' (comma) as separator value should be replaced by ';' (semi-colon) without blank(s)" );
+                            else {
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' ~ '%s'",$match) );
                             }
                         }
-                    }
-                }
-                if ( $network_short_regex && $network =~ m/($network_short_regex)/ ) {
-                    my $match = $1;
-                    if ( $positive_notes ) {
-                        if ( $network eq $match ) {
-                            push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' = '%s'",$match) );
+                        if ( $network =~ m/;\s+$match/    ||
+                             $network =~ m/$match\s+;/    ||
+                             $network =~ m/$match\s*;\s+/   ) {
+                            $count_error_semikolon_w_blank++;
                         }
-                        else {
-                            push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' ~ '%s'",$match) );
-                        }
-                    }
-                    elsif ( $expect_network_long && !$expect_network_short_for ) {
-                        if ( $network eq $match ) {
-                            push( @{$relation_ptr->{'__notes__'}}, "'network' is short form" );
-                        }
-                        else {
-                            push( @{$relation_ptr->{'__notes__'}}, "'network' matches short form" );
-                        }
-                    }
-                    if ( $check_osm_separator ) {
-                        if ( $network ne $match ) {
-                            if ( $network =~ m/;\s+$match/    ||
-                                 $network =~ m/$match\s+;/    ||
-                                 $network =~ m/$match\s*;\s+/   ) {
-                                push( @{$relation_ptr->{'__issues__'}}, "'network' = '$network' includes the separator value ';' (semi-colon) with sourrounding blank(s)" );
-                            }
-                            if ( $network =~ m/(,\s*)$match/    ||
-                                 $network =~ m/$match(\s*,)/       ) {
-                                push( @{$relation_ptr->{'__issues__'}}, "'network' = '$network': '$1' (comma) as separator value should be replaced by ';' (semi-colon) without blank(s)" );
-                            }
+                        if ( $network =~ m/(,\s*)$match/    ||
+                             $network =~ m/$match(\s*,)/       ) {
+                            $count_error_comma++;
                         }
                     }
                 }
             }
+            if ( $network_long_regex ) {
+                foreach my $long_value ( split('\|',$network_long_regex) ) {
+                    if ( $network =~ m/($long_value)/ ) {
+                        $match = $1;
+                        if ( $positive_notes ) {
+                            if ( $network eq $match ) {
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' = '%s'",$match) );
+                            }
+                            else {
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' ~ '%s'",$match) );
+                            }
+                        }
+                        if ( $network =~ m/;\s+$match/    ||
+                             $network =~ m/$match\s+;/    ||
+                             $network =~ m/$match\s*;\s+/   ) {
+                            $count_error_semikolon_w_blank++;
+                        }
+                        if ( $network =~ m/(,\s*)$match/    ||
+                             $network =~ m/$match(\s*,)/       ) {
+                            $count_error_comma++;
+                        }
+                    }
+                }
+            }
+            
+            if ( $check_osm_separator ) {
+                push( @{$relation_ptr->{'__issues__'}}, "'network' = '$network' includes the separator value ';' (semi-colon) with sourrounding blank(s)" )                 if ( $count_error_semikolon_w_blank );
+                push( @{$relation_ptr->{'__issues__'}}, "'network' = '$network': ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank(s)" )  if ( $count_error_comma             );
+            }
+
+            if ( $expect_network_short  ) {
+                my $match_short     = '';
+                my $match_long      = '';
+                my $expect_long_for = '';
+                
+                $match_short     = $1   if ( $network_short_regex     && $network =~ m/($network_short_regex)/      );
+                $match_long      = $1   if ( $network_long_regex      && $network =~ m/($network_long_regex)/       );
+                $expect_long_for = $1   if ( $expect_network_long_for && $network =~ m/($expect_network_long_for)/ );
+                
+                if ( !$expect_long_for && !$match_short && $match_long ) {
+                    if ( $network eq $match_long ) {
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' = '%s' should be short form",$match_long) );
+                    } else {
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' = '%s' should be short form",$match_long) );
+                    }
+                }
+           } elsif ( $expect_network_long  ) {
+                my $match_long       = '';
+                my $match_short      = '';
+                my $expect_short_for = '';
+                
+                $match_long       = $1   if ( $network_long_regex       && $network =~ m/($network_long_regex)/      );
+                $match_short      = $1   if ( $network_short_regex      && $network =~ m/($network_short_regex)/     );
+                $expect_short_for = $1   if ( $expect_network_short_for && $network =~ m/($expect_network_short_for)/ );
+                
+                if ( !$expect_short_for && !$match_long && $match_short ) {
+                    if ( $network eq $match_short ) {
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' = '%s' should be long form",$match_short) );
+                    } else {
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' = '%s' should be long form",$match_short) );
+                    }
+                }
+           }
         }
         else {
             push( @{$relation_ptr->{'__issues__'}}, "'network' is not set" );
