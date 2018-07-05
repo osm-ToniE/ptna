@@ -40,8 +40,10 @@ my $check_sequence                  = undef;
 my $check_roundabouts               = undef;
 my $check_version                   = undef;
 my $expect_network_long             = undef;
+my $expect_network_long_as          = undef;
 my $expect_network_long_for         = undef;
 my $expect_network_short            = undef;
+my $expect_network_short_as         = undef;
 my $expect_network_short_for        = undef;
 my $multiple_ref_type_entries       = "analyze";
 my $strict_network                  = undef;
@@ -71,9 +73,11 @@ GetOptions( 'help'                          =>  \$help,                         
             'check-version'                 =>  \$check_version,                # --check-version                   check for PTv2 on route_masters, ...
             'coloured-sketchline'           =>  \$coloured_sketchline,          # --coloured-sketchline             force SketchLine to print coloured icons
             'expect-network-long'           =>  \$expect_network_long,          # --expect-network-long             note if 'network' is not long form in general
-            'expect-network-long-for:s'     =>  \$expect_network_long_for,      # --expect-network-long-for="Münchner Verkehrs- und Tarifverbund|Biberger Bürgerbus"         note if 'network' is not long form for ...
+            'expect-network-long-as:s'      =>  \$expect_network_long_as,       # --expect-network-long-as="Münchner Verkehrs- und Tarifverbund|Biberger Bürgerbus"
+            'expect-network-long-for:s'     =>  \$expect_network_long_for,      # --expect-network-long-for="MVV|BBB"         note if 'network' is not long form for ...
             'expect-network-short'          =>  \$expect_network_short,         # --expect-network-short            note if 'network' is not short form in general
-            'expect-network-short-for:s'    =>  \$expect_network_short_for,     # --expect-network-short-for='BOB'        note if 'network' is not short form for ...
+            'expect-network-short-as:s'     =>  \$expect_network_short_as,      # --expect-network-short-as='BOB'
+            'expect-network-short-for:s'    =>  \$expect_network_short_for,     # --expect-network-short-for='Bayerische Oberlandbahn'        note if 'network' is not short form for ...
             'routes-file=s'                 =>  \$routes_file,                  # --routes-file=zzz                 CSV file with a list of routes of the of the network
             'max-error=i'                   =>  \$max_error,                    # --max-error=10                    limit number of templates printed for identical error messages
             'multiple-ref-type-entries=s'   =>  \$multiple_ref_type_entries,    # --multiple-ref-type-entries=analyze|ignore|allow    how to handle multiple "ref;type" in routes-file
@@ -96,7 +100,9 @@ $network_guid               = decode('utf8', $network_guid )                if (
 $network_long_regex         = decode('utf8', $network_long_regex )          if ( $network_long_regex        );
 $network_short_regex        = decode('utf8', $network_short_regex )         if ( $network_short_regex       );
 $operator_regex             = decode('utf8', $operator_regex )              if ( $operator_regex            );
+$expect_network_long_as     = decode('utf8', $expect_network_long_as )      if ( $expect_network_long_as    );
 $expect_network_long_for    = decode('utf8', $expect_network_long_for )     if ( $expect_network_long_for   );
+$expect_network_short_as    = decode('utf8', $expect_network_short_as )     if ( $expect_network_short_as   );
 $expect_network_short_for   = decode('utf8', $expect_network_short_for )    if ( $expect_network_short_for  );
 
 if ( $verbose ) {
@@ -122,7 +128,9 @@ if ( $verbose ) {
     printf STDERR "%20s--network-long-regex='%s'\n",       ' ', $network_long_regex            if ( $network_long_regex          );
     printf STDERR "%20s--network-short-regex='%s'\n",      ' ', $network_short_regex           if ( $network_short_regex         );
     printf STDERR "%20s--operator-regex='%s'\n",           ' ', $operator_regex                if ( $operator_regex              );
+    printf STDERR "%20s--expect-network-long-as='%s'\n",   ' ', $expect_network_long_as        if ( $expect_network_long_as      );
     printf STDERR "%20s--expect-network-long-for='%s'\n",  ' ', $expect_network_long_for       if ( $expect_network_long_for     );
+    printf STDERR "%20s--expect-network-short-as='%s'\n",  ' ', $expect_network_short_as       if ( $expect_network_short_as     );
     printf STDERR "%20s--expect-network-short-for='%s'\n", ' ', $expect_network_short_for      if ( $expect_network_short_for    );
     printf STDERR "%20s--multiple-ref-type-entries='%s'\n",' ', $multiple_ref_type_entries     if ( $multiple_ref_type_entries   );
     printf STDERR "%20s--max-error='%s'\n",                ' ', $max_error                     if ( $max_error                   );
@@ -1783,36 +1791,44 @@ sub analyze_relation {
             if ( $expect_network_short  ) {
                 my $match_short     = '';
                 my $match_long      = '';
+                my $expect_long_as  = '';
                 my $expect_long_for = '';
                 
-                $match_short     = $1   if ( $network_short_regex     && $network =~ m/($network_short_regex)/      );
-                $match_long      = $1   if ( $network_long_regex      && $network =~ m/($network_long_regex)/       );
+                $match_short     = $1   if ( $network_short_regex     && $network =~ m/($network_short_regex)/     );
+                $match_long      = $1   if ( $network_long_regex      && $network =~ m/($network_long_regex)/      );
+                $expect_long_as  = $1   if ( $expect_network_long_as  && $network =~ m/($expect_network_long_as)/  );
                 $expect_long_for = $1   if ( $expect_network_long_for && $network =~ m/($expect_network_long_for)/ );
                 
-                if ( !$expect_long_for && !$match_short && $match_long ) {
-                    if ( $network eq $match_long ) {
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' = '%s' should be short form",$match_long) );
-                    } else {
+                if ( $match_long ) {
+                    if ( $match_long ne $expect_long_as ) {
                         push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' = '%s' should be short form",$match_long) );
                     }
+                } elsif ( $match_short ) {
+                    if ( $match_short eq $expect_long_for ) {
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' = '%s' should be long form",$match_short) );
+                    }
                 }
-           } elsif ( $expect_network_long  ) {
+            } elsif ( $expect_network_long  ) {
                 my $match_long       = '';
                 my $match_short      = '';
+                my $expect_short_as  = '';
                 my $expect_short_for = '';
                 
-                $match_long       = $1   if ( $network_long_regex       && $network =~ m/($network_long_regex)/      );
-                $match_short      = $1   if ( $network_short_regex      && $network =~ m/($network_short_regex)/     );
+                $match_long       = $1   if ( $network_long_regex       && $network =~ m/($network_long_regex)/       );
+                $match_short      = $1   if ( $network_short_regex      && $network =~ m/($network_short_regex)/      );
+                $expect_short_as  = $1   if ( $expect_network_short_as  && $network =~ m/($expect_network_short_as)/  );
                 $expect_short_for = $1   if ( $expect_network_short_for && $network =~ m/($expect_network_short_for)/ );
                 
-                if ( !$expect_short_for && !$match_long && $match_short ) {
-                    if ( $network eq $match_short ) {
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' = '%s' should be long form",$match_short) );
-                    } else {
+                if ( $match_short ) {
+                    if ( $match_short ne $expect_short_as ) {
                         push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' = '%s' should be long form",$match_short) );
                     }
+                } elsif ( $match_long ) {
+                    if ( $match_long eq $expect_short_for ) {
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' = '%s' should be short form",$match_long) );
+                    }
                 }
-           }
+            }
         }
         else {
             push( @{$relation_ptr->{'__issues__'}}, "'network' is not set" );

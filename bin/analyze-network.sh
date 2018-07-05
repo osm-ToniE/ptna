@@ -130,7 +130,9 @@ then
                               --title="$PREFIX" \
                               --network-guid=$PREFIX \
                               $ANALYSIS_OPTIONS \
+                              --expect-network-short-as="$EXPECT_NETWORK_SHORT_AS" \
                               --expect-network-short-for="$EXPECT_NETWORK_SHORT_FOR" \
+                              --expect-network-long-as="$EXPECT_NETWORK_LONG_AS" \
                               --expect-network-long-for="$EXPECT_NETWORK_LONG_FOR" \
                               --network-long-regex="$NETWORK_LONG" \
                               --network-short-regex="$NETWORK_SHORT" \
