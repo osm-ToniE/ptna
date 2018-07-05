@@ -61,11 +61,11 @@ Waldbahn;train;(historische Bahn auf der Linie der WBA 4);;;
 6080/(590 + 616);bus;;;;
 6081;bus;;;;
 6085;bus;;;;
-6086;bus;;;;
-6095/04;bus;;;;
+6086/11;bus;;;;
+6093;bus;;;;
 6096/15;bus;;;;
 
-6121;bus;;;;
+6121/11;bus;;;;
 6159/30;bus;;;;
 6188/680;bus;;;;
 6191;bus;;;;
@@ -78,7 +78,7 @@ Waldbahn;train;(historische Bahn auf der Linie der WBA 4);;;
 6198;bus;;;;
 6199;bus;;;;
 
-6200;bus;;;;
+6200/10;bus;;;;
 6201;bus;;;;
 
 7020;bus;;;;
@@ -88,8 +88,8 @@ Waldbahn;train;(historische Bahn auf der Linie der WBA 4);;;
 
 7122;bus;;;;
 7123;bus;;;;
-7130;bus;;;;
-7131;bus;;;;
+7130/49;bus;;;;
+7131/50;bus;;;;
 7132;bus;;;;
 7133;bus;;;;
 7136;bus;;;;
@@ -157,8 +157,9 @@ Waldbahn;train;(historische Bahn auf der Linie der WBA 4);;;
 
 === Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Straubinger Land (VSL)
 
-6095/04;bus;(=VSL 04);;;
 6096/15;bus;(=VSL 15);;;
+7130/49;bus;(=VSL 49);;;
+7131/50;bus;(=VSL 50);;;
 
 
 === Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Passau (VLP)

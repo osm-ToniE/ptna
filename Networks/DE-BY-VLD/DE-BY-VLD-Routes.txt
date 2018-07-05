@@ -34,12 +34,12 @@
 - Verweis auf mehr [[Talk:Deggendorf/Transportation/Analyse|Informationen]] im Wiki.
 
 
-== Stadtbusnetz Deggendorf
+== Stadtbusnetz Deggendorf (gehören zum RBO-Netzwerk)
 
-1;bus;;;;
-2;bus;;;;
-3;bus;;;;
-4;bus;;;;
+1;bus;(=RBO 4001);;;
+2;bus;(=RBO 4002);;;
+3;bus;(=RBO 4003);;;
+4;bus;(=RBO 4004);;;
 
 
 == Stadtbus Plattling
@@ -51,7 +51,7 @@ Stadtbus Plattling;bus;;;;
 == Regionalbusse Landkreis Deggendorf
 
 
-=== nicht RBO Linien (4xxx)
+=== RBO Linien betrieben von Privatbusunternehmen (4xxx)
 
 4022;bus;;;
 4023;bus;;;
@@ -77,7 +77,7 @@ Stadtbus Plattling;bus;;;;
 4164;bus;;;
 
 
-=== RBO-Linien (6xxx, 7xxx)
+=== RBO-Linien mit Beteiligung von Privatbusunternehmen (6xxx, 7xxx)
 
 6139;bus;;;;
 6142;bus;;;;

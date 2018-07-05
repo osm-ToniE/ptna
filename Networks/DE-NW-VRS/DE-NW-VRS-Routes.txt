@@ -460,6 +460,7 @@ SB82;bus;;;;
 731;bus;;;;
 747;bus;Ersetzt Bus 805;Rheinbach;Oedingen;
 749;bus;;;;
+750;bus;;Meckenheim;Lüftelberg;
 
 === Bus 800 ...
 
@@ -490,6 +491,7 @@ SB82;bus;;;;
 TB 827;bus;;;;
 828;bus;;;;
 829;bus;;;;
+830;bus;;Mechernich;Zingsheim;
 831;bus;;;;
 832;bus;;;;
 833;bus;;;;
