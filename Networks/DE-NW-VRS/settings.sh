@@ -11,6 +11,7 @@ NETWORK_LONG="Verkehrsverbund Rhein-Sieg|NRW Regionalverkehr"
 NETWORK_SHORT="VRS"
 
 EXPECT_NETWORK_SHORT_FOR="Verkehrsverbund Rhein-Sieg"
+EXPECT_NETWORK_SHORT_AS="VRS"
 
 ANALYSIS_PAGE="VRS/Analyse"
 WIKI_ROUTES_PAGE="VRS/Analyse/VRS-Linien"
