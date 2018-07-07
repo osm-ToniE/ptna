@@ -36,7 +36,7 @@ TARGET_LOC="analyze-routes"
 # 
 #
 
-TEMP=$(getopt -o acghopuw --long analyze,clean,get-routes,help,overpass-query,push-routes,upload-result,watch-routes -n 'analyze-network.sh' -- "$@")
+TEMP=$(getopt -o acghoOpuw --long analyze,clean,get-routes,help,overpass-query,overpass-query-on-zero-xml,push-routes,upload-result,watch-routes -n 'analyze-network.sh' -- "$@")
 
 if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 1 ; fi
 
@@ -44,14 +44,15 @@ eval set -- "$TEMP"
 
 while true ; do
     case "$1" in
-        -a|--analyze)           analyze=true        ; shift ;;
-        -c|--clean)             clean=true          ; shift ;;
-        -g|--get-routes)        getroutes=true      ; shift ;;
-        -h|--help)              help=true           ; shift ;;
-        -o|--overpass-query)    overpassquery=true  ; shift ;;
-        -p|--push-routes)       pushroutes=true     ; shift ;;
-        -u|--upload-result)     uploadresult=true   ; shift ;;
-        -w|--watch-routes)      watchroutes=true    ; shift ;;
+        -a|--analyze)                       analyze=true        ; shift ;;
+        -c|--clean)                         clean=true          ; shift ;;
+        -g|--get-routes)                    getroutes=true      ; shift ;;
+        -h|--help)                          help=true           ; shift ;;
+        -o|--overpass-query)                overpassquery=true  ; overpassqueryonzeroxml=false ; shift ;;
+        -O|--overpass-query-on-zero-xml)    overpassqueryonzeroxml=true  ; overpassquery=false ; shift ;;
+        -p|--push-routes)                   pushroutes=true     ; shift ;;
+        -u|--upload-result)                 uploadresult=true   ; shift ;;
+        -w|--watch-routes)                  watchroutes=true    ; shift ;;
         --) shift ; break ;;
         *) echo "Internal error!" ; exit 1 ;;
     esac
@@ -65,6 +66,22 @@ if [ "$clean" = "true" ]
 then
     echo $(date "+%Y-%m-%d %H:%M:%S") "Removing temporary files"
     rm -f $OSM_XML_FILE $HTML_FILE $HTML_FILE.*
+fi
+
+#
+# 
+#
+
+if [ "$overpassqueryonzeroxml" = "true" ]
+then
+    if [ -f $OSM_XML_FILE -a -s $OSM_XML_FILE ]
+    then
+        echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE' exists, no further analysis required, terminating"
+        exit
+    else
+        echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE' does not exist or is empty, starting download"
+        overpassquery="true"
+    fi
 fi
 
 #
