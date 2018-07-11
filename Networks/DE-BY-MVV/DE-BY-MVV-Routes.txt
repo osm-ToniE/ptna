@@ -53,6 +53,7 @@ S7;train;;Wolfratshausen;Kreuzstraße;DB Regio AG/S-Bahn München
 S8;train;;Herrsching;Flughafen München;DB Regio AG/S-Bahn München
 S20;train;;Höllriegelskreuth;Geltendorf;DB Regio AG/S-Bahn München
 #
+
 == Tram 
 === Tram
 12;tram;;Scheidplatz;Romanplatz;SWM/MVG
@@ -469,9 +470,24 @@ X900;bus;ExpressBus;Starnberg Nord S;Buchenau S;Geldhauser/RVO
 #
 #
 = Nicht zum MVV gehörende Linien mit Bezug zu München
-== Regional-Bahn
-BOB;train
-Meridian;train
+== Regional-Bahn, Teilstrecken mit Anerkennung des MVV-Tarifs
+- Die Nummern hier werden beim MVV als "R xxx" angegeben, gebräuchliche Angaben sind auch "KBS xxx".
+900;train;Petershausen - Ingolstadt nicht im MVV-Tarif;München Hauptbahnhof;Ingolstadt;DB Regio
+930;train;Moosburg - Landshut nicht im MVV-Tarif;München Hauptbahnhof;Landshut;Alex;DB AG
+940;train;Markt Schwaben - Mühldorf nicht im MVV-Tarif;München Hauptbahnhof;Mühldorf;DB Regio
+#944;train;Südostbyaernbahn: Gesamtstrecke nicht im MVV-Tarif;Mühldorf (Inn);Rosenheim
+948;train;Filzenexpress;München;Wasserburg (Inn) Bahnhof;DB Regio
+950;train;Aßling - Rosenheim nicht im MVV-Tarif;München Hauptbahnhof;Rosenheim;Bayerische Oberlandbahn
+955;train;BOB: Holzkirchen - Bayrischzell nicht im MVV-Tarif;München Hauptbahnhof;Bayrischzell;Bayerische Oberlandbahn
+956;train;BOB: Holzkirchen - Lenggries nicht im MVV-Tarif;München Hauptbahnhof;Lenggries;Bayerische Oberlandbahn
+957;train;BOB: Holzkirchen - Tegernsee nicht im MVV-Tarif;München Hauptbahnhof;Tegernsee;Bayerische Oberlandbahn
+958;train;Meridian: Kreuzstraße - Rosenheim nicht im MVV-Tarif;München Hauptbahnhof;Rosenheim;Bayerische Oberlandbahn
+960;train;Tutzing - Mittenwald nicht im MVV-Tarif;München Hauptbahnhof;Mittenwald;DB Regio
+961;train;Tutzing - Kochel nicht im MVV-Tarif;München Hauptbahnhof;Kochel;DB Regio
+970;train;Geltendorf - Buchloe nicht im MVV-Tarif;München Hauptbahnhof;Buchloe;Alex;DB AG
+980;train;Althegnenberg - Augsburg nicht im MVV-Tarif;München Hauptbahnhof;Augsburg;DB Regio
+#985;train;BRB: Gesamtstrecke nicht im MVV-Tarif;Augsburg;Weilheim;Bayerische Regiobahn
+
 #
 == Bus
 === ExpressBus, derzeit ohne Anerkennung des MVV-Tarifs
@@ -481,7 +497,7 @@ X400;bus;Parsdorf Express;Messestadt-Ost U;Messestadt-Ost U;Münchner Linien Gmb
 9403/024;bus;;Wies, Abzweig;Dorfen, Bahnhof;RVO
 9407/025;bus;;Taufkirchen(Vils);Velden;RVO
 
-=== Ortsbus, zum Teil ohne Anerkennung des MVV-Tarifs
+=== Ortsbus, zum Teil mit Anerkennung des MVV-Tarifs
 Badebus;bus;Badebus;Lochhausen;Langwieder See;Münchner Linien GmbH und Co. KG
 BBB;bus;;;;BBB e.V.
 BBG;bus;;;;
