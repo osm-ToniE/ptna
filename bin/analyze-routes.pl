@@ -925,11 +925,8 @@ if ( $routes_file ) {
         }
         $ExpectedRef                        =  $entry;
         $ExpectedRef                        =~ s/$csv_separator.*//;
-        (undef,$ExpectedRouteType,@rest)    =  split( $csv_separator, $entry );
-        $ExpectedComment  = $rest[0];
-        $ExpectedFrom     = $rest[1];
-        $ExpectedTo       = $rest[2];
-        $ExpectedOperator = $rest[3];
+        (undef,$ExpectedRouteType,$ExpectedComment,$ExpectedFrom,$ExpectedTo,@rest)    =  split( $csv_separator, $entry );
+        $ExpectedOperator = join( "$csv_separator", @rest );
         
         if ( $ExpectedRef ) {
             if ( $PT_relations_with_ref{$section}->{$ExpectedRef} ) {
