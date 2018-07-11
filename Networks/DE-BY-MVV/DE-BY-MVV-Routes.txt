@@ -471,7 +471,8 @@ X900;bus;ExpressBus;Starnberg Nord S;Buchenau S;Geldhauser/RVO
 #
 = Nicht zum MVV gehörende Linien mit Bezug zu München
 == Regional-Bahn, Teilstrecken mit Anerkennung des MVV-Tarifs
-- Die Nummern hier werden beim MVV als "R xxx" angegeben, gebräuchliche Angaben sind auch "KBS xxx".
+- Die Nummern hier werden beim MVV als "R xxx" verwendet, gebräuchliche Angaben sind auch "KBS xxx".
+-
 900;train;Petershausen - Ingolstadt nicht im MVV-Tarif;München Hauptbahnhof;Ingolstadt;DB Regio
 930;train;Moosburg - Landshut nicht im MVV-Tarif;München Hauptbahnhof;Landshut;Alex;DB AG
 940;train;Markt Schwaben - Mühldorf nicht im MVV-Tarif;München Hauptbahnhof;Mühldorf;DB Regio
