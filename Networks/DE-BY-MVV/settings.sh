@@ -7,8 +7,8 @@
 PREFIX="DE-BY-MVV"
 
 OVERPASS_QUERY="http://overpass-api.de/api/interpreter?data=area[boundary=administrative][admin_level=6][name~'(Dachau|München|Ebersberg|Erding|Starnberg|Freising|Tölz|Wolfratshausen|Fürstenfeldbruck)'];(rel(area)[route~'(bus|tram|train|subway|light_rail|trolleybus|ferry|monorail|aerialway|share_taxi|funicular)'];rel(br);rel[type='route'](r);)->.routes;(.routes;rel(r.routes);way(r.routes);node(r.routes););out;"
-NETWORK_LONG="Münchner Verkehrs- und Tarifverbund|Münchner Linien|Bayerische Oberlandbahn|Meridian|Grünwald|Gauting|Oberbiberg|Freising|Glonn"
-NETWORK_SHORT="MVV|BOB"
+NETWORK_LONG="Münchner Verkehrs- und Tarifverbund|Münchner Linien|Grünwald|Gauting|Oberbiberg|Freising|Glonn"
+NETWORK_SHORT="MVV"
 
 ANALYSIS_PAGE="München/Transportation/Analyse"
 WIKI_ROUTES_PAGE="München/Transportation/MVV-Linien-gesamt"
