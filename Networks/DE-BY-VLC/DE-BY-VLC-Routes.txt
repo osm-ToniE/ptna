@@ -114,7 +114,7 @@
 616;bus;Skibus;;;
 617;bus;Saisonbus;;;
 6065/618;bus;Wanderbus von 15.05-31.10.;;;
-619;bus;;;;
+6090/11/619;bus;;;;
 620;bus;;;;
 6071/650;bus;;;;
 680;bus;;;;
@@ -177,7 +177,7 @@ D499;bus;;;;
 615;bus;(=RBO 6066);;;
 616;bus;(=RBO 6080)(ist ein Teil von Linie 590(RBO 6080);;;
 6065/618;bus;(=RBO 6065);;;
-619;bus;(=RBO 6090 =VSL 11);;;
+6090/11/619;bus;(=RBO 6090 =VSL 11);;;
 620;bus;(=RBO 6070);;;
 6071/650;bus;(=RBO 6071);;;
 680;bus;(=RBO 6188);;;
@@ -226,7 +226,7 @@ D499;bus;(=RBO 6499);;;
 
 === Buslinien mit Mitgliedschaft Verkehrsgemeinschaft Straubinger Land (VSL) (VSL xx)
 
-619;bus;(=VSL 11 =RBO 6090);;;
+6090/11/619;bus;(=VSL 11 =RBO 6090);;;
 710;bus;(=VSL 09 =RBO 6098);;;
 
 

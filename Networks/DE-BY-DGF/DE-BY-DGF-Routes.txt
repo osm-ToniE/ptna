@@ -60,7 +60,7 @@ Blauer Dingo;bus;;;;
 
 7630/10;bus;;;;
 6232/308/11;bus;;;;
-23/12;bus;;;;
+1023/23/12;bus;;;;
 6097/21/13;bus;;;;
 14;bus;;;;
 15;bus;;;;
@@ -77,7 +77,7 @@ Blauer Dingo;bus;;;;
 
 20;bus;;;;
 21;bus;;;;
-22/50;bus;;;;
+22/50/16;bus;;;;
 023/23;bus;;;;
 24/24;bus;;;;
 25;bus;;;;
@@ -163,7 +163,7 @@ Blauer Dingo;bus;;;;
 
 6237/51/08;bus;(=VSL 51 =RBO 6237);;;
 
-23/12;bus;(=VSL 23);;;
+1023/23/12;bus;(=VSL 23);;;
 6097/21/13;bus;(=VSL 21 =RBO 6097);;;
 
 24/24;bus;(=VSL 24);;;
@@ -176,7 +176,7 @@ Blauer Dingo;bus;;;;
 == Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Rottal-Inn (VGRI) (=RBO xxxx) und sonstigen Linien Landkreis Rottal-Inn (PAN xxx)
 
 6218/01;bus;(=RBO 6218);;;
-50/22;bus;(=PAN 50);;;
+22/50/16;bus;(=PAN 50, Mückenhausen=16);;;
 
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Deggendorf (VLD) (=RBO xxxx)
