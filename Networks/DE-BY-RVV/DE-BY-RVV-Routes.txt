@@ -60,21 +60,21 @@ X9;bus;;;;
 == Linien mit einstelliger Nummer
 
 1;bus;;;;
-1A;bus;;;;
+5101/1A;bus;;;;
 2A;bus;;;;
 2B;bus;;;;
 3;bus;;;;
 4;bus;;;;
 4A;bus;;;;
-5;bus;;;;
-5A;bus;;;;
+5050/5;bus;;;;
+5051/5A;bus;;;;
 6;bus;;;;
 6S;bus;;;;
 7;bus;;;;
 8;bus;;;;
 8A;bus;;;;
 8B;bus;;;;
-9;bus;;;;
+5009/9;bus;;;;
 
 
 == 1x-Linien
@@ -85,8 +85,8 @@ X9;bus;;;;
 12;bus;;;;
 13;bus;;;;
 14;bus;;;;
-15;bus;;;;
-16/16;bus;;;;
+5015/15;bus;;;;
+5016/16/16;bus;;;;
 17;bus;;;;
 19/19;bus;;;;
 
@@ -98,19 +98,19 @@ X9;bus;;;;
 22/31;bus;;;;
 23;bus;;;;
 24;bus;;;;
-25/32;bus;;;;
-26;bus;;;;
+5025/25/32;bus;;;;
+5026/26;bus;;;;
 27;bus;;;;
-28;bus;;;;
+5028/28;bus;;;;
 29;bus;;;;
 
 
 == 3x-Linien
 
-30;bus;;;;
-31;bus;;;;
+5030/30;bus;;;;
+5031/31;bus;;;;
 32;bus;;;;
-33;bus;;;;
+5033/33;bus;;;;
 34;bus;;;;
 35;bus;;;;
 36;bus;;;;
@@ -119,18 +119,18 @@ X9;bus;;;;
 
 == 4x-Linien
 
-41;bus;;;;
-Linie 41S;bus;;;;  ?
+5041/41;bus;;;;
+41S;bus;;;;
 42;bus;;;;
 43/229;bus;;;;
 
 
 == 6x-Linien
 
-63;bus;;;;
+5063/63;bus;;;;
 66/33;bus;;;;
 68;bus;;;;
-69/69;bus;;;;
+5069/69/69;bus;;;;
 
 
 == 7x-Linien
@@ -143,7 +143,7 @@ Linie 41S;bus;;;;  ?
 75;bus;;;;
 76;bus;;;;
 77;bus;;;;
-78;bus;;;;
+5078/78;bus;;;;
 79;bus;;;;
 
 
@@ -181,7 +181,7 @@ Linie 41S;bus;;;;  ?
 
 == 14x-Linien
 
-Linie 141;bus;;;;
+141;bus;;;;
 142;bus;;;;
 
 
@@ -218,31 +218,31 @@ N41;bus;;;;
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Regionalbus Ostbayern (RBO) (=RBO xxxx)
 
-1A;bus;(RBO 5101);;;
-5;bus;(=RBO 5050 innerhalb und RBO 6072 =VLC 810 + VLC 810a außerhalb des RVV-Gebiets)
-5A;bus;(=RBO 5051);;;
-9;bus;(=RBO 5009);;;
+5101/1A;bus;;;;
+5050/5;bus;(=RBO 5050 innerhalb und RBO 6072 =VLC 810 + VLC 810a außerhalb des RVV-Gebiets)
+5051/5A;bus;(=RBO 5051);;;
+5009/9;bus;(=RBO 5009);;;
 
-15;bus;(=RBO 5015);;;
-16;bus;(=RBO 5016 = VLK 16)
+5015/15;bus;(=RBO 5015);;;
+5016/16/16;bus;(=RBO 5016 = VLK 16)
 
-25;bus;(=RBO 5025 = VLK 32);;;
-26;bus;(=RBO 5026);;;
-28;bus;(=RBO 5028);;;
+5025/25/32;bus;(=RBO 5025 = VLK 32);;;
+5026/26;bus;(=RBO 5026);;;
+5028/28;bus;(=RBO 5028);;;
 
-30;bus;(=RBO 5030);;;
-31;bus;(=RBO 5031);;;
-33;bus;(=RBO 5033 innerhalb und RBO 6024 =VSL 25 außerhalb des RVV-Gebiets);;;
+5030/30;bus;(=RBO 5030);;;
+5031/31;bus;(=RBO 5031);;;
+5033/33;bus;(=RBO 5033 innerhalb und RBO 6024 =VSL 25 außerhalb des RVV-Gebiets);;;
 34;bus;(=RBO 6004 =VLC 818 außerhalb des RVV-Gebiets);;;
 35;bus;(=RBO 5035);;;
 
-41;bus;+ 41a;bus + 141;bus (=RBO 5041 zusammen);;;
+5041/41;bus;+ 41a;bus + 141;bus (=RBO 5041 zusammen);;;
 
-63;bus;(=RBO 5063);;;
-69;bus;(=RBO 5069 = VLK 69);;;
+5063/63;bus;(=RBO 5063);;;
+5069/69/69;bus;(=RBO 5069 = VLK 69);;;
 
 73;bus;(=RBO 5073);;;
-78;bus;(=RBO 5078);;;
+5078/78;bus;(=RBO 5078);;;
 
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Landshuter Regionalbusnetz (LA) (= LA xxx)
@@ -258,20 +258,20 @@ N41;bus;;;;
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Kelheim (VLK) (=VLK xx)
 
-16;bus;(=VLK 16 = RBO 5016);;;
+5016/16/16;bus;(=VLK 16 = RBO 5016);;;
 19;bus;(=VLK 19);;;
 
 20;bus;(=VLK 29);;;
 22;bus;(=VLK 31);;;
-25;bus;(=VLK 32 = RBO 5025);;;
+5025/25/32;bus;(=VLK 32 = RBO 5025);;;
 
 66;bus;(=VLK 33);;;
-69;bus;(=VLK 69 = RBO 5069);;;
+5069/69/69;bus;(=VLK 69 = RBO 5069);;;
 
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Cham (VLC) (=VLC xxx)
 
-5;bus;(=VLC 810 + VLC 810a = RBO 6072 zusammen außerhalb des RVV-Gebiets);;;
+5050/5;bus;(=VLC 810 + VLC 810a = RBO 6072 zusammen außerhalb des RVV-Gebiets);;;
 34;bus;(=VLC 818 = RBO 6004 außerhalb des RVV-Gebiets);;;
 37;bus;(=VLC 820);;;
 43;bus;(=VLC 229);;;

@@ -62,8 +62,8 @@
 
 === 1x-Linien
 
-10;bus;;;;
-11;bus;;;;
+6091/10;bus;;;;
+6090/11/619;bus;;;;
 1012/12;bus;;;;
 1013/13;bus;;;;
 1014/14;bus;;;;
@@ -135,8 +135,8 @@
 08;bus;(=RBO 1008);;;
 09;bus;(=RBO 6098 =VLC 710);;;
 
-10;bus;(=RBO 6091);;;
-11;bus;(=RBO 6090 =VLC 619);;;
+6091/10;bus;(=RBO 6091);;;
+6090/11/619;bus;(=RBO 6090 =VLC 619);;;
 12;bus;(=RBO 1012);;;
 13;bus;(=RBO 1013);;;
 14;bus;(=RBO 1014);;;
@@ -155,7 +155,7 @@
 39;bus;(=RBO 6092);;;
 
 40;bus;(=RBO 1040 =LA 032);;;
-46;bus;(=RBO 6264 =LA 022);;;
+6264/022/46;bus;(=RBO 6264 =LA 022);;;
 47;bus;(=RBO 6233 =LA 021);;;
 48;bus;(=RBO 7592);;;
 49;bus;(=RBO 7130);;;
@@ -198,7 +198,7 @@
 == Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Cham (VLC) (=VLC xxx)
 
 09;bus;(=VLC 710 =RBO 6098);;;
-11;bus;(=VLC 619 =RBO 6090);;;
+6090/11/619;bus;(=VLC 619 =RBO 6090);;;
 
 
 == Buslinien zum Netzwerk Landkreis Regen (Arberland Verkehr) (=RBO xxxx)

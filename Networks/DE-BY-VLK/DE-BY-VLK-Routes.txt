@@ -43,7 +43,7 @@
 6240/11/302;bus;;;;
 6023/12;bus;;;;
 7530/13;bus;;;;
-16/16;bus;;;;
+5016/16/16;bus;;;;
 6012/17;bus;;;;
 19/19;bus;;;;
 
@@ -66,7 +66,7 @@
 6035/03;bus;;;;
 6030/30;bus;;;;
 22/31;bus;;;;
-25/32;bus;;;;
+5025/25/32;bus;;;;
 66/33;bus;;;;
 6034/34;bus;;;;
 6037/37;bus;;;;
@@ -91,6 +91,7 @@
 
 6052/05;bus;;;;
 602/50;bus;;;;
+603/50;bus;;;;
 683/51;bus;;;;
 6053/53;bus;;;;
 6041/54;bus;;;;
@@ -111,7 +112,7 @@
 206/65;bus;;;;
 207/67;bus;;;;
 035/68;bus;;;;
-69/69;bus;;;;
+5069/69/69;bus;;;;
 
 
 == 7x-Linien
@@ -199,12 +200,12 @@
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Regensburger Verkehrsverbund (RVV)  (= RVV xxx)
 
-16/16;bus;(=RVV 16);;;
+5016/16/16;bus;(=RVV 16);;;
 29;bus;(=RVV 20)?;;;
 22/31;bus;(=RVV 22);;;
-25/32;bus;(=RVV 25);;;
+5025/25/32;bus;(=RVV 25);;;
 66/33;bus;(=RVV 66);;;
-69/69;bus;(=RVV 69);;;
+5069/69/69;bus;(=RVV 69);;;
 
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Regionalbus Augsburg (RBA) (= RBA xxxx)
@@ -216,12 +217,12 @@
 == Buslinien, in denen im RVV-Gebiet RVV-Tickets gelten
 
 7;bus;(=RBO 6008);;;
-16/16;bus;(=RVV 16);;;
+5016/16/16;bus;(=RVV 16);;;
 29;bus;(=RVV 20);;; 
 22/31;bus;(=RVV 22);;;
-25/32;bus;(=RVV 25);;;
+5025/25/32;bus;(=RVV 25);;;
 33;bus;(=RVV 66);;;
-69/69;bus;(=RVV 69);;;
+5069/69/69;bus;(=RVV 69);;;
 
 
 

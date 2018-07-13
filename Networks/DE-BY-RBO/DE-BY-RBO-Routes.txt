@@ -38,18 +38,18 @@
 == 1xxx-Linien (Mitglied zum Netzwerk VSL=Verkehrsgemeinschaft Straubinger Land )
 
 1006;bus;(=VSL 06);;;
-1007;bus;(=VSL 07);;;
-1008;bus;(=VSL 08);;;
-1012;bus;(=VSL 12);;;
-1013;bus;(=VSL 13);;;
-1014;bus;(=VSL 14);;;
-1023;bus;(=VSL 23 =DGF 12);;;
-1029;bus;(=VSL 29);;;
-1030;bus;(=VSL 30);;;
-1032;bus;(=VSL 32);;;
-1034;bus;(=VSL 34);;;
-1037;bus;(=VSL 37);;;
-1038;bus;(=VSL 38);;;
+1007/07;bus;(=VSL 07);;;
+1008/08;bus;(=VSL 08);;;
+1012/12;bus;(=VSL 12);;;
+1013/13;bus;(=VSL 13);;;
+1014/14;bus;(=VSL 14);;;
+1023/23/12;bus;(=VSL 23 =DGF 12);;;
+1029/29;bus;(=VSL 29);;;
+1030/30;bus;(=VSL 30);;;
+1032/32;bus;(=VSL 32);;;
+1034/34;bus;(=VSL 34);;;
+1037/034/37;bus;(=VSL 37);;;
+1038/033/38;bus;(=VSL 38);;;
 1040;bus;(=VSL 40);;;
 
 
@@ -184,25 +184,25 @@
 
 === RVV-Linien
 
-5009;bus;(=RVV 9);;;
-5015;bus;(=RVV 15);;;
-5016;bus;(=RVV 16 =VLK 16);;;
-5025;bus;(=RVV 25 =VLK 31);;;
-5026;bus;(=RVV 26);;;
-5028;bus;(=RVV 28, 28a, 28c);;;
-5030;bus;(=RVV 30);;;
-5031;bus;(=RVV 31);;;
-5033;bus;(=RVV 33);;;
+5009/9;bus;(=RVV 9);;;
+5015/15;bus;(=RVV 15);;;
+5016/16/16;bus;(=RVV 16 =VLK 16);;;
+5025/25/31;bus;(=RVV 25 =VLK 31);;;
+5026/26;bus;(=RVV 26);;;
+5028/28;bus;(=RVV 28, 28a, 28c);;;
+5030/20;bus;(=RVV 30);;;
+5031/31;bus;(=RVV 31);;;
+5033/33;bus;(=RVV 33);;;
 5034;bus;(=RVV 34);;;
 5035;bus;(=RVV 35);;;
-5041;bus;(=RVV 41, 41a, 141);;;
-5050;bus;(=RVV 5);;;
-5051;bus;(=RVV 5A);;;
-5063;bus;(=RVV 63);;;
-5069;bus;(=RVV 69 =VLK 69);;;
+5041/41;bus;(=RVV 41, 41a, 141);;;
+5050/5;bus;(=RVV 5);;;
+5051/5A;bus;(=RVV 5A);;;
+5063/63;bus;(=RVV 63);;;
+5069/69/69;bus;(=RVV 69 =VLK 69);;;
 5073;bus;(=RVV 73);;;
-5078;bus;(=RVV 78);;;
-5101;bus;(=RVV 1A);;;
+5078/78;bus;(=RVV 78);;;
+5101/1A;bus;(=RVV 1A);;;
 6004;bus;(=RVV 34 teilweise =VLC 818);;;
 
 

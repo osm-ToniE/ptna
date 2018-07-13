@@ -190,9 +190,9 @@ X33;bus;;;;Stadtwerke Landshut
 
 104/030;bus;;;;
 6051/56/031;bus;;;;
-032/40;bus;;;;
-033/38;bus;;;;
-034/37;bus;;;;
+1040/032/40;bus;;;;
+1038/033/38;bus;;;;
+1037/034/37;bus;;;;
 035/68;bus;;;;
 036;bus;;;;
 037/34;bus;;;;
@@ -286,9 +286,9 @@ X33;bus;;;;Stadtwerke Landshut
 == Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Straubinger Land (VSL) (= VSL xx)
 
 026/41/38;bus;(=VSL 41 =DGF 38);;;
-032/40;bus;(=VSL 40);;;
-033/38;bus;(=VSL 38);;;
-034/37;bus;(=VSL 37);;;
+1040/032/40;bus;(=VSL 40);;;
+1038/033/38;bus;(=VSL 38);;;
+1037/034/37;bus;(=VSL 37);;;
 
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Dingolfinger Regionalbusnetz (DGF)  (= DGF xx)
