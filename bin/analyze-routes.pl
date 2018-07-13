@@ -2041,7 +2041,7 @@ sub analyze_route_relation {
     }
 
     #
-    # for allWAYS      must not have "highway" = "bus_stop" set - allowed only on nodes
+    # all WAYS      must not have "highway" = "bus_stop" set - allowed only on nodes
     #
     if ( $check_bus_stop && $xml_has_ways ) {
         my %bus_stop_ways = ();
@@ -2105,13 +2105,28 @@ sub analyze_ptv2_route_relation {
             #
             if ( $ref ) {
                 if ( index($name,$ref) == -1 ) {
-                    push( @{$relation_ptr->{'__notes__'}}, "PTv2 route: 'ref' is not part of 'name'" );
-                    $preconditions_failed++;
-                    $return_code++;
+                    my $number_of_ref_colon_tags = 0;
+                    my $ref_string               = '';
+                    foreach my $tag ( sort ( keys ( %{$relation_ptr->{'tag'}} ) ) ) {
+                        if ( $tag =~ m/^ref:(\S+)$/ ) {
+                            $number_of_ref_colon_tags++;
+                            $ref_string = $1 . ' ' . $relation_ptr->{'tag'}->{$tag};
+                            if ( index($name,$ref_string) == -1 ) {
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf("PTv2 route: '%s' is not part of 'name' (derived from '%s' = '%s')",$ref_string,$tag,$relation_ptr->{'tag'}->{$tag}) );
+                                $preconditions_failed++;
+                                $return_code++;
+                            }
+                        }
+                    }
+                    if ( $number_of_ref_colon_tags == 0 ) {     # there are no 'ref:*' tags, so check 'ref' being present in 'name'
+                        push( @{$relation_ptr->{'__notes__'}}, "PTv2 route: 'ref' is not part of 'name'" );
+                        $preconditions_failed++;
+                        $return_code++;
+                    }
                 }
             }
             else {
-                # already checked, but must increase conditions_failed here
+                # already checked, but must increase preconditions_failed here
                 #push( @{$relation_ptr->{'__notes__'}}, "PTv2 route: 'ref' is not set" );
                 $preconditions_failed++;
                 $return_code++;
@@ -2160,15 +2175,15 @@ sub analyze_ptv2_route_relation {
                 my $num_of_arrows  = 0;
                 $num_of_arrows++    while ( $name =~ m/=>/g );
                 if ( $num_of_arrows < 2 ) {
-                    # well, 'name' should then include 'ref' and only 'from' and 'to' (no 'via')
-                    $expected_long  = $ref . ': ' . $from . ' => ' . $to;   # this is how it really should be: with blank around '=>'
-                    $expected_short = $ref . ': ' . $from . '=>'   . $to;   # some people ommit the blank around the '=>', be relaxed with that
+                    # well, 'name' should then include only 'from' and 'to' (no 'via')
+                    $expected_long  = ': ' . $from . ' => ' . $to;   # this is how it really should be: with blank around '=>'
+                    $expected_short = ': ' . $from .  '=>'  . $to;   # some people ommit the blank around the '=>', be relaxed with that
                     $i_long        = index( $name, $expected_long  );
                     $i_short       = index( $name, $expected_short );
                     if ( ($i_long  == -1 || length($name) > $i_long  + length($expected_long))  &&
                          ($i_short == -1 || length($name) > $i_short + length($expected_short))    ) {
                         # no match or 'name' is longer than expected
-                        push( @{$relation_ptr->{'__notes__'}}, "PTv2 route: 'name' should (at least) be of the form '... ref: from => to'" );
+                        push( @{$relation_ptr->{'__notes__'}}, "PTv2 route: 'name' should (at least) be of the form '... ref ...: from => to'" );
                         $return_code++;
                     }
                 }
@@ -2185,18 +2200,18 @@ sub analyze_ptv2_route_relation {
                             }
                         }
                         if ( $preconditions_failed == 0 ){
-                            $expected_long  = $ref . ': ' . $from . ' => ' . join(' => ',@via_values) .' => ' . $to;   # this is how it really should be: with blank around '=>'
-                            $expected_short = $ref . ': ' . $from . '=>'   . join('=>' ,@via_values)  .'=>'   . $to;   # some people ommit the blank around the '=>', be relaxed with that
+                            $expected_long  = ': ' . $from . ' => ' . join(' => ',@via_values) .' => ' . $to;   # this is how it really should be: with blank around '=>'
+                            $expected_short = ': ' . $from .  '=>'  . join('=>'  ,@via_values) . '=>'  . $to;   # some people ommit the blank around the '=>', be relaxed with that
                             $i_long         = index( $name, $expected_long );
                             $i_short        = index( $name, $expected_short );
                             if ( ($i_long  == -1 || length($name) > $i_long + length($expected_long)) && 
                                  ($i_short == -1 || length($name) > $i_short + length($expected_short))    ) {
                                 # no match or 'name' is longer than expected
                                 if ( $num_of_arrows == 2 ) {
-                                    push( @{$relation_ptr->{'__notes__'}}, "PTv2 route: 'via' is set: 'name' should be of the form '... ref: from => via => to'" );
+                                    push( @{$relation_ptr->{'__notes__'}}, "PTv2 route: 'via' is set: 'name' should be of the form '... ref ...: from => via => to'" );
                                 }
                                 else {
-                                    push( @{$relation_ptr->{'__notes__'}}, "PTv2 route: 'via' is set: 'name' should be of the form '... ref: from => via => ... => to' (separate multiple 'via' values by ';', without blanks)" );
+                                    push( @{$relation_ptr->{'__notes__'}}, "PTv2 route: 'via' is set: 'name' should be of the form '... ref ...: from => via => ... => to' (separate multiple 'via' values by ';', without blanks)" );
                                 }
                                 $return_code++;
                             }
