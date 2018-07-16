@@ -2884,26 +2884,19 @@ sub SortRouteWayNodes {
     
     printf STDERR "SortRouteWayNodes() : processing Ways:\nWays: %s\n", join( ', ', @{$relations_route_ways_ref} )     if ( $debug );
     
-    CodePoint("SortRouteWayNodes()", 0);
-    
     if ( $relation_ptr && $relations_route_ways_ref ) {
-        
-        CodePoint("SortRouteWayNodes()", 1);
         
         $number_of_ways = scalar @{$relations_route_ways_ref} ;
         if ( $number_of_ways ) {
-            CodePoint("SortRouteWayNodes()", 2);
             # we have at least one way, so we start with one segment
             $relation_ptr->{'number_of_segments'} = 1;
         }
         else {
-            CodePoint("SortRouteWayNodes()", 3);
             # no ways, no segments
             $relation_ptr->{'number_of_segments'} = 0;
         }
         
         while ( ${$relations_route_ways_ref}[$way_index] ) {
-            CodePoint("SortRouteWayNodes()", 4);
             
             $current_way_id  = ${$relations_route_ways_ref}[$way_index];
             $next_way_id     = ${$relations_route_ways_ref}[$way_index+1];
@@ -2912,31 +2905,24 @@ sub SortRouteWayNodes {
             push( @control_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
     
             if ( $next_way_id ) {
-                CodePoint("SortRouteWayNodes()", 5);
                 if ( $connecting_node_id ) {
-                    CodePoint("SortRouteWayNodes()", 6);
                     #
                     printf STDERR "SortRouteWayNodes() : Connecting Node %d\n",$connecting_node_id       if ( $debug );
                     #
                     # continue this segment with the connecting node of the previously handled way
                     #
                     if ( isClosedWay($current_way_id) ) {
-                        CodePoint("SortRouteWayNodes()", 7);
                         #
                         # no direct match, this current way is a closed way, roundabout or whatever, where first node is also last node
                         # check whether connecting node is a node of this, closed way
                         #
                         if ( ($index=IndexOfNodeInNodeArray($connecting_node_id,@{$WAYS{$current_way_id}->{'chain'}})) >= 0 ) {
-                            CodePoint("SortRouteWayNodes()", 8);
                             printf STDERR "SortRouteWayNodes() : handle Nodes of closed Way %s with Index %d:\nNodes: %s\n", $current_way_id, $index, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
-                            # ToDo: use splice() here
                             my $i = 0;
                             for ( $i = $index+1; $i <= $#{$WAYS{$current_way_id}->{'chain'}}; $i++ ) {
-                                CodePoint("SortRouteWayNodes()", 9);
                                 push( @sorted_nodes, ${$WAYS{$current_way_id}->{'chain'}}[$i] );
                             }
-                            for ( $i = 0; $i <= $index; $i++ ) {
-                                CodePoint("SortRouteWayNodes()", 10);
+                            for ( $i = 1; $i <= $index; $i++ ) {
                                 push( @sorted_nodes, ${$WAYS{$current_way_id}->{'chain'}}[$i] );
                             }
                             
@@ -2947,7 +2933,6 @@ sub SortRouteWayNodes {
                             #
                             if ( $sorted_nodes[$#sorted_nodes] == $WAYS{$next_way_id}->{'first_node'} ||
                                  $sorted_nodes[$#sorted_nodes] == $WAYS{$next_way_id}->{'last_node'}     ) {
-                                CodePoint("SortRouteWayNodes()", 11);
                                 #
                                 # perfect: this is a turnig roundabout where the 'bus' leaves where it entered the closed way, no reason to complain
                                 #
@@ -2959,7 +2944,6 @@ sub SortRouteWayNodes {
                                                                     join( ', ', @{$WAYS{$next_way_id}->{'chain'}} )     if ( $debug );
                             }
                             else {
-                                CodePoint("SortRouteWayNodes()", 12);
                                 printf STDERR "SortRouteWayNodes() : handle partially used roundabout %s at node %s for %s:\nNodes here : %s\nNodes there: %s\n",
                                                                     $current_way_id, 
                                                                     $sorted_nodes[$#sorted_nodes], 
@@ -2971,20 +2955,17 @@ sub SortRouteWayNodes {
                                 
                                 if ( isNodeInNodeArray($WAYS{$next_way_id}->{'first_node'},@{$WAYS{$current_way_id}->{'chain'}}) || 
                                      isNodeInNodeArray($WAYS{$next_way_id}->{'last_node'}, @{$WAYS{$current_way_id}->{'chain'}})     ){
-                                    CodePoint("SortRouteWayNodes()", 13);
                                     #
                                     # there is a match with first or last node of next way and some node of this roundabout
                                     # so we're deleting superflous nodes from the top of sorted_nodes until we hit the connecting node
                                     #
                                     while ( $sorted_nodes[$#sorted_nodes] != $WAYS{$next_way_id}->{'first_node'} &&
                                             $sorted_nodes[$#sorted_nodes] != $WAYS{$next_way_id}->{'last_node'}     ) {
-                                        CodePoint("SortRouteWayNodes()", 14);
                                         printf STDERR "SortRouteWayNodes() : pop() Node %s from \@sorted_nodes\n", $sorted_nodes[$#sorted_nodes]     if ( $debug );
                                         pop( @sorted_nodes );
                                     }
                                 }
                                 else {
-                                    CodePoint("SortRouteWayNodes()", 15);
                                     #
                                     # no way out, we do not have any connection between any node of this way and the next way
                                     #
@@ -2996,7 +2977,6 @@ sub SortRouteWayNodes {
                             }
                         }
                         else {
-                            CodePoint("SortRouteWayNodes()", 16);
                             printf STDERR "SortRouteWayNodes() : handle Nodes of first, closed, single Way %s:\nNodes: %s\n", $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                             push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                             push( @sorted_nodes, 0 );      # mark a gap in the sorted nodes
@@ -3005,14 +2985,11 @@ sub SortRouteWayNodes {
                         }
                     }
                     elsif ( 0 != ($entry_node_id=isOneway($current_way_id,undef)) ) {
-                        CodePoint("SortRouteWayNodes()", 17);
                         if ( $connecting_node_id == $entry_node_id ) {
-                            CodePoint("SortRouteWayNodes()", 18);
                             #
                             # perfect, entering the oneway in the right or allowed direction
                             #
                             if ( $entry_node_id == $WAYS{$current_way_id}->{'first_node'} ) {
-                                CodePoint("SortRouteWayNodes()", 19);
                                 #
                                 # perfect order for this way (oneway=yes, junction=roundabout): last node of former segment is first node of this way
                                 #
@@ -3021,7 +2998,6 @@ sub SortRouteWayNodes {
                                 push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                             }
                             else {
-                                CodePoint("SortRouteWayNodes()", 20);
                                 #
                                 # not so perfect (oneway=-1), but we can take the nodes of this way in reverse order
                                 #
@@ -3031,20 +3007,16 @@ sub SortRouteWayNodes {
                             }
                         }
                         else{
-                            CodePoint("SortRouteWayNodes()", 21);
                             if ( $connecting_node_id == $WAYS{$current_way_id}->{'last_node'}  ||
                                  $connecting_node_id == $WAYS{$current_way_id}->{'first_node'}    ) {
-                                CodePoint("SortRouteWayNodes()", 22);
                                 #
                                 # oops! entering oneway in wrong direction, copying nodes assuming we are allowd to do so
                                 #
                                 if ( $entry_node_id == $WAYS{$current_way_id}->{'first_node'} ) {
-                                    CodePoint("SortRouteWayNodes()", 23);
                                     printf STDERR "SortRouteWayNodes() : entering oneway in wrong direction Way %s:\nNodes: %s, reverse( %s )\n", $current_way_id, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
                                     push( @sorted_nodes, reverse(@{$WAYS{$current_way_id}->{'chain'}}) );
                                 }
                                 else {
-                                    CodePoint("SortRouteWayNodes()", 24);
                                     # not so perfect (oneway=-1), but we can take the nodes of this way in direct order
                                     printf STDERR "SortRouteWayNodes() : entering oneway in wrong direction Way %s:\nNodes: %s, %s\n", $current_way_id, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
                                     push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
@@ -3052,18 +3024,15 @@ sub SortRouteWayNodes {
                                 $relation_ptr->{'wrong_direction_oneways'}->{$current_way_id} = 1;
                             }
                             else {
-                                CodePoint("SortRouteWayNodes()", 25);
                                 #
                                 # no match, i.e. a gap between this (current) way and the way before
                                 #
                                 push( @sorted_nodes, 0 );      # mark a gap in the sorted nodes
                                 if ( $entry_node_id == $WAYS{$current_way_id}->{'first_node'} ) {
-                                    CodePoint("SortRouteWayNodes()", 26);
                                     printf STDERR "SortRouteWayNodes() : mark a gap before oneway Way %s:\nNodes: %s, G, %s\n", $current_way_id, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
                                     push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                                 }
                                 else {
-                                    CodePoint("SortRouteWayNodes()", 27);
                                     # not so perfect (oneway=-1), but we can take the nodes of this way in revers order
                                     printf STDERR "SortRouteWayNodes() : mark a gap before oneway Way %s:\nNodes: %s, G, reverse(%)s\n", $current_way_id, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
                                     push( @sorted_nodes, reverse(@{$WAYS{$current_way_id}->{'chain'}}) );
@@ -3075,7 +3044,6 @@ sub SortRouteWayNodes {
                         }
                     }
                     elsif ( $connecting_node_id eq $WAYS{$current_way_id}->{'first_node'} ) {
-                        CodePoint("SortRouteWayNodes()", 28);
                         #
                         # perfect order for this way: last node of former segment is first node of this way
                         #
@@ -3084,7 +3052,6 @@ sub SortRouteWayNodes {
                         push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                     }
                     elsif ( $connecting_node_id eq $WAYS{$current_way_id}->{'last_node'} ) {
-                        CodePoint("SortRouteWayNodes()", 29);
                         #
                         # not so perfect, but we can take the nodes of this way in reverse order
                         #
@@ -3093,7 +3060,6 @@ sub SortRouteWayNodes {
                         push( @sorted_nodes, reverse(@{$WAYS{$current_way_id}->{'chain'}}) );
                     }
                     else {
-                        CodePoint("SortRouteWayNodes()", 30);
                         #
                         # no match, i.e. a gap between this (current) way and the way before
                         #
@@ -3106,35 +3072,28 @@ sub SortRouteWayNodes {
                     }
                 }
                 if ( $connecting_node_id == 0 ) {
-                    CodePoint("SortRouteWayNodes()", 31);
                     #
                     printf STDERR "SortRouteWayNodes() : Connecting Node 0\n"       if ( $debug );
                     #
                     # we're at the beginning of the first or a new segment
                     #
                     if ( isClosedWay($current_way_id) ) {
-                        CodePoint("SortRouteWayNodes()", 32);
                         #
                         # no direct match, this current way is a closed way, roundabout or whatever, where first node is also last node
                         # find a node in this way which connects to the first or last node of the next way
                         #
                         if ( ($index=IndexOfNodeInNodeArray($WAYS{$next_way_id}->{'first_node'},@{$WAYS{$current_way_id}->{'chain'}})) >= 0 ||
                              ($index=IndexOfNodeInNodeArray($WAYS{$next_way_id}->{'last_node'}, @{$WAYS{$current_way_id}->{'chain'}})) >= 0    ) {
-                            CodePoint("SortRouteWayNodes()", 33);
                             printf STDERR "SortRouteWayNodes() : handle Nodes of first, closed Way %s with Index %d:\nNodes: %s\n", $current_way_id, $index, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
-                            # ToDo: use splice() here
                             my $i = 0;
                             for ( $i = $index+1; $i <= $#{$WAYS{$current_way_id}->{'chain'}}; $i++ ) {
-                                CodePoint("SortRouteWayNodes()", 34);
                                 push( @sorted_nodes, ${$WAYS{$current_way_id}->{'chain'}}[$i] );
                             }
-                            for ( $i = 0; $i <= $index; $i++ ) {
-                                CodePoint("SortRouteWayNodes()", 35);
+                            for ( $i = 1; $i <= $index; $i++ ) {
                                 push( @sorted_nodes, ${$WAYS{$current_way_id}->{'chain'}}[$i] );
                             }
                         }
                         else {
-                            CodePoint("SortRouteWayNodes()", 36);
                             printf STDERR "SortRouteWayNodes() : handle Nodes of first, closed, single Way %s:\nNodes: %s\n", $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                             push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                             push( @sorted_nodes, 0 );                   # mark a gap in the sorted nodes
@@ -3144,9 +3103,7 @@ sub SortRouteWayNodes {
                         }
                     }
                     elsif ( 0 != ($entry_node_id=isOneway($current_way_id,undef)) ) {
-                        CodePoint("SortRouteWayNodes()", 37);
                         if ( $entry_node_id == $WAYS{$current_way_id}->{'first_node'} ) {
-                            CodePoint("SortRouteWayNodes()", 38);
                             #
                             # perfect order for this way (oneway=yes, junction=roundabout): start at first node of this way
                             #
@@ -3154,7 +3111,6 @@ sub SortRouteWayNodes {
                             push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                         }
                         else {
-                            CodePoint("SortRouteWayNodes()", 39);
                             #
                             # not so perfect (oneway=-1), but we can take the nodes of this way in reverse order
                             #
@@ -3163,13 +3119,11 @@ sub SortRouteWayNodes {
                         }
                     }
                     elsif ( isClosedWay($next_way_id) ) {
-                        CodePoint("SortRouteWayNodes()", 40);
                         #
                         # no direct match, this current way shall connect to a closed way, roundabout or whatever, where first node is also last node
                         # check whether first or last node of this way is one of the nodes of the next, closed way, so that we have a connectting point
                         #
                         if ( ($index=IndexOfNodeInNodeArray($WAYS{$current_way_id}->{'last_node'},@{$WAYS{$next_way_id}->{'chain'}})) >= 0 ) {
-                            CodePoint("SortRouteWayNodes()", 41);
                             #
                             # perfect match, last node of this way is a node of the next roundabout
                             #
@@ -3177,7 +3131,6 @@ sub SortRouteWayNodes {
                             push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                         }
                         elsif ( ($index=IndexOfNodeInNodeArray($WAYS{$current_way_id}->{'first_node'},@{$WAYS{$next_way_id}->{'chain'}})) >= 0 ) {
-                            CodePoint("SortRouteWayNodes()", 42);
                             #
                             # not so perfect match, but first node of this way is a node of the next roundabout
                             # take nodes of this way in reverse order
@@ -3186,7 +3139,6 @@ sub SortRouteWayNodes {
                             push( @sorted_nodes, reverse(@{$WAYS{$current_way_id}->{'chain'}}) );
                         }
                         else {
-                            CodePoint("SortRouteWayNodes()", 43);
                             #
                             # no match at all into next, closed way, i.e. a gap between this (current) way and the next, closed way
                             # take nodes of this way in normal order and mark a gap after that
@@ -3200,7 +3152,6 @@ sub SortRouteWayNodes {
                     }
                     elsif ( $WAYS{$current_way_id}->{'last_node'} == $WAYS{$next_way_id}->{'first_node'}   ||
                             $WAYS{$current_way_id}->{'last_node'} == $WAYS{$next_way_id}->{'last_node'}       ) {
-                        CodePoint("SortRouteWayNodes()", 44);
                         #
                         # perfect order for this way: last node of this segment is first or last node of next segment
                         #
@@ -3209,7 +3160,6 @@ sub SortRouteWayNodes {
                     }
                     elsif ( $WAYS{$current_way_id}->{'first_node'} == $WAYS{$next_way_id}->{'first_node'}   ||
                             $WAYS{$current_way_id}->{'first_node'} == $WAYS{$next_way_id}->{'last_node'}       ) {
-                        CodePoint("SortRouteWayNodes()", 45);
                         #
                         # not so perfect, but we can take the nodes of this way in reverse order
                         #
@@ -3217,7 +3167,6 @@ sub SortRouteWayNodes {
                         push( @sorted_nodes, reverse(@{$WAYS{$current_way_id}->{'chain'}}) );
                     }
                     else {
-                        CodePoint("SortRouteWayNodes()", 46);
                         #
                         # no match at all, i.e. a gap between this (current) way and the next way
                         #
@@ -3230,39 +3179,31 @@ sub SortRouteWayNodes {
                 }
             }
             else {
-                CodePoint("SortRouteWayNodes()", 47);
                 #
                 # handle last way
                 #
                 if ( $connecting_node_id ) {
-                    CodePoint("SortRouteWayNodes()", 48);
                     #
                     printf STDERR "SortRouteWayNodes() : Connecting Node for last way %d\n", $connecting_node_id       if ( $debug );
                     #
                     # handle last way by appending its nodes in right order to the segment
                     #
                     if ( isClosedWay($current_way_id) ) {
-                        CodePoint("SortRouteWayNodes()", 49);
                         #
                         # no direct match, this current way is a closed way, roundabout or whatever, where first node is also last node
                         # check whether connecting node is a node of this, closed way
                         #
                         if ( ($index=IndexOfNodeInNodeArray($connecting_node_id,@{$WAYS{$current_way_id}->{'chain'}})) >= 0 ) {
-                            CodePoint("SortRouteWayNodes()", 50);
                             printf STDERR "SortRouteWayNodes() : handle Nodes of last, closed Way %s with Index %d:\nNodes: %s\n", $current_way_id, $index, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
-                            # ToDo: use splice() here
                             my $i = 0;
                             for ( $i = $index+1; $i <= $#{$WAYS{$current_way_id}->{'chain'}}; $i++ ) {
-                                CodePoint("SortRouteWayNodes()", 51);
                                 push( @sorted_nodes, ${$WAYS{$current_way_id}->{'chain'}}[$i] );
                             }
-                            for ( $i = 0; $i <= $index; $i++ ) {
-                                CodePoint("SortRouteWayNodes()", 52);
+                            for ( $i = 1; $i <= $index; $i++ ) {
                                 push( @sorted_nodes, ${$WAYS{$current_way_id}->{'chain'}}[$i] );
                             }
                         }
                         else {
-                            CodePoint("SortRouteWayNodes()", 53);
                             push( @sorted_nodes, 0 );      # mark a gap in the sorted nodes
                             printf STDERR "SortRouteWayNodes() : handle Nodes of last, closed, isolated Way %s:\nNodes: %s\n", $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                             push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
@@ -3271,14 +3212,11 @@ sub SortRouteWayNodes {
                         }
                     }
                     elsif ( 0 != ($entry_node_id=isOneway($current_way_id,undef)) ) {
-                        CodePoint("SortRouteWayNodes()", 54);
                         if ( $connecting_node_id == $entry_node_id ) {
-                            CodePoint("SortRouteWayNodes()", 55);
                             #
                             # perfect, entering the oneway in the right or allowed direction
                             #
                             if ( $entry_node_id == $WAYS{$current_way_id}->{'first_node'} ) {
-                                CodePoint("SortRouteWayNodes()", 56);
                                 #
                                 # perfect order for this way (oneway=yes, junction=roundabout): last node of former segment is first node of this way
                                 #
@@ -3287,7 +3225,6 @@ sub SortRouteWayNodes {
                                 push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                             }
                             else {
-                                CodePoint("SortRouteWayNodes()", 57);
                                 #
                                 # not so perfect (oneway=-1), but we can take the nodes of this way in reverse order
                                 #
@@ -3297,20 +3234,16 @@ sub SortRouteWayNodes {
                             }
                         }
                         else{
-                            CodePoint("SortRouteWayNodes()", 58);
                             if ( $connecting_node_id == $WAYS{$current_way_id}->{'last_node'}  ||
                                  $connecting_node_id == $WAYS{$current_way_id}->{'first_node'}    ) {
-                                CodePoint("SortRouteWayNodes()", 59);
                                 #
                                 # oops! entering oneway in wrong direction, copying nodes assuming we are allowd to do so
                                 #
                                 if ( $entry_node_id == $WAYS{$current_way_id}->{'first_node'} ) {
-                                    CodePoint("SortRouteWayNodes()", 60);
                                     printf STDERR "SortRouteWayNodes() : entering oneway in wrong direction Way %s:\nNodes: %s, reverse( %s )\n", $current_way_id, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
                                     push( @sorted_nodes, reverse(@{$WAYS{$current_way_id}->{'chain'}}) );
                                 }
                                 else {
-                                    CodePoint("SortRouteWayNodes()", 61);
                                     # not so perfect (oneway=-1), but we can take the nodes of this way in direct order
                                     printf STDERR "SortRouteWayNodes() : entering oneway in wrong direction Way %s:\nNodes: %s, %s\n", $current_way_id, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
                                     push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
@@ -3318,18 +3251,15 @@ sub SortRouteWayNodes {
                                 $relation_ptr->{'wrong_direction_oneways'}->{$current_way_id} = 1;
                             }
                             else {
-                                CodePoint("SortRouteWayNodes()", 62);
                                 #
                                 # no match, i.e. a gap between this (current) way and the way before, we will follow the oneway in the intended direction
                                 #
                                 push( @sorted_nodes, 0 );      # mark a gap in the sorted nodes
                                 if ( $entry_node_id == $WAYS{$current_way_id}->{'first_node'} ) {
-                                    CodePoint("SortRouteWayNodes()", 63);
                                     printf STDERR "SortRouteWayNodes() : mark a gap before oneway Way %s:\nNodes: %s, G, %s, G\n", $current_way_id, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
                                     push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                                 }
                                 else {
-                                    CodePoint("SortRouteWayNodes()", 64);
                                     # not so perfect (oneway=-1), but we can take the nodes of this way in reverse order
                                     printf STDERR "SortRouteWayNodes() : mark a gap before oneway Way %s:\nNodes: %s, G, reverse( %s ), G\n", $current_way_id, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
                                     push( @sorted_nodes, reverse(@{$WAYS{$current_way_id}->{'chain'}}) );
@@ -3341,20 +3271,17 @@ sub SortRouteWayNodes {
                         }
                     }
                     elsif ( $connecting_node_id eq $WAYS{$current_way_id}->{'first_node'} ) {
-                        CodePoint("SortRouteWayNodes()", 65);
                         printf STDERR "SortRouteWayNodes() : handle Nodes of last, connected Way %s:\nNodes: %s\n", $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                         pop( @sorted_nodes );     # don't add connecting node twice
                         push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                     }
                     elsif ( $connecting_node_id eq $WAYS{$current_way_id}->{'last_node'} ) {
-                        CodePoint("SortRouteWayNodes()", 66);
                         printf STDERR "SortRouteWayNodes() : handle Nodes of last, connected Way %s:\nNodes: reverse( %s )\n", $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                         pop( @sorted_nodes );     # don't add connecting node twice
                         push( @sorted_nodes, reverse(@{$WAYS{$current_way_id}->{'chain'}}) );
                     }
                     else {
                         printf STDERR "SortRouteWayNodes() : last, isolated Way %s and Node %s\n", $current_way_id, $connecting_node_id     if ( $debug );
-                        CodePoint("SortRouteWayNodes()", 67);
                         push( @sorted_nodes, 0 );      # mark a gap in the sorted nodes
                         push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                         $relation_ptr->{'number_of_segments'}++;
@@ -3362,16 +3289,13 @@ sub SortRouteWayNodes {
                     }
                 }
                 else {
-                    CodePoint("SortRouteWayNodes()", 68);
                     #
                     printf STDERR "SortRouteWayNodes() : Connecting Node for last way is ZERO\n"                if ( $debug );
                     #
                     # seems that that there was only one way at all or the last segment consists of only one way
                     #
                     if ( 0 != ($entry_node_id=isOneway($current_way_id,undef)) ) {
-                        CodePoint("SortRouteWayNodes()", 69);
                         if ( $entry_node_id == $WAYS{$current_way_id}->{'first_node'} ) {
-                            CodePoint("SortRouteWayNodes()", 70);
                             #
                             # perfect order for this way (oneway=yes, junction=roundabout): we can take the nodes of this way in this order
                             #
@@ -3380,7 +3304,6 @@ sub SortRouteWayNodes {
                             push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                         }
                         else {
-                            CodePoint("SortRouteWayNodes()", 71);
                             #
                             # not so perfect (oneway=-1), but we can take the nodes of this way in reverse order
                             #
@@ -3390,7 +3313,6 @@ sub SortRouteWayNodes {
                         }
                     }
                     else {
-                        CodePoint("SortRouteWayNodes()", 72);
                         printf STDERR "SortRouteWayNodes() : handle Nodes of last, isolated Way %s:\nNodes: %s\n", $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                         push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                     }
@@ -3413,7 +3335,6 @@ sub SortRouteWayNodes {
         
         }
     }
-    CodePoint("SortRouteWayNodes()", 73);
     
     return @sorted_nodes;
 }
@@ -4625,10 +4546,4 @@ sub get_time {
     return sprintf( "%04d-%02d-%02d %02d:%02d:%02d", $year+1900, $month+1, $day, $hour, $min, $sec ); 
 }
     
-
-#############################################################################################
-
-sub CodePoint {
-    #printf STDERR "CodePoint: %s : %d\n", shift, shift;
-}
 
