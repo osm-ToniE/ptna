@@ -128,39 +128,40 @@
 == Buslinien mit Mitgliedschaft zum Netzwerk Regionalbus Ostbayern (RBO) (=RBO xxxx)
 
 
-03;bus;(=RBO 6060);;;
-04;bus;(=RBO 6095);;;
-06;bus;(=RBO 1006);;;
-07;bus;(=RBO 1007);;;
-08;bus;(=RBO 1008);;;
-09;bus;(=RBO 6098 =VLC 710);;;
+6060/03;bus;(=RBO 6060);;;
+6095/04;bus;(=RBO 6095);;;
+1006/06;bus;(=RBO 1006);;;
+1007/07;bus;(=RBO 1007);;;
+1008/08;bus;(=RBO 1008);;;
+6098/09/710;bus;(=RBO 6098 =VLC 710);;;
 
 6091/10;bus;(=RBO 6091);;;
 6090/11/619;bus;(=RBO 6090 =VLC 619);;;
-12;bus;(=RBO 1012);;;
-13;bus;(=RBO 1013);;;
-14;bus;(=RBO 1014);;;
-15;bus;(=RBO 6096);;;
+1012/12;bus;(=RBO 1012);;;
+1013/13;bus;(=RBO 1013);;;
+1014/14;bus;(=RBO 1014);;;
+6096/15;bus;(=RBO 6096);;;
 
-21;bus;(=RBO 6097);;;
-23;bus;(=RBO 1023 =DGF 12);;;
-25;bus;(=RBO 6024 =RVV 33 im RVV-Gebiet);;;
-29;bus;(=RBO 1029);;;
+6097/21/13;bus;(=RBO 6097 =DGF 13);;;
+1023/23/12;bus;(=RBO 1023 =DGF 12);;;
+6024/25;bus;(=RBO 6024 =RVV 33 im RVV-Gebiet);;;
+1029/29;bus;(=RBO 1029);;;
 
-30;bus;(=RBO 1030);;;
-32;bus;(=RBO 1032);;;
-34;bus;(=RBO 1034);;;
-37;bus;(=RBO 1037 =LA 034);;;
-38;bus;(=RBO 1038);;;
-39;bus;(=RBO 6092);;;
+1030/30;bus;(=RBO 1030);;;
+1032/32;bus;(=RBO 1032);;;
+4112/33;bus;(=RBO 4112);;;
+1034/34;bus;(=RBO 1034);;;
+1037/034/37;bus;(=RBO 1037 =LA 034);;;
+1038/033/38;bus;(=RBO 1038 =LA 033);;;
+6092/39;bus;(=RBO 6092);;;
 
-40;bus;(=RBO 1040 =LA 032);;;
+1040/032/40;bus;(=RBO 1040 =LA 032);;;
 6264/022/46;bus;(=RBO 6264 =LA 022);;;
-47;bus;(=RBO 6233 =LA 021);;;
-48;bus;(=RBO 7592);;;
-49;bus;(=RBO 7130);;;
-50;bus;(=RBO 7131);;;
-51;bus;(=RBO 6237 =DGF 08);;;
+6233/021/47;bus;(=RBO 6233 =LA 021);;;
+7592/48;bus;(=RBO 7592);;;
+7130/49;bus;(=RBO 7130);;;
+7131/50;bus;(=RBO 7131);;;
+6237/51/08;bus;(=RBO 6237 =DGF 08);;;
 
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Landshuter Regionalbusnetz (LA) (= LA xxx)
@@ -174,9 +175,9 @@
 == Buslinien mit Mitgliedschaft zum Netzwerk Dingolfinger Regionalbusnetz (DGF) (= DGF xx)
 
 6097/21/13;bus;(=DGF 13 =RBO 6097);;;
-1023/23/12;bus;(=DGF 12)
-24/24;bus;(=DGF 24)
-28/28;bus;(=DGF 28)
+1023/23/12;bus;(=DGF 12 =RBO 1023);;;
+24/24;bus;(=DGF 24);;;
+28/28;bus;(=DGF 28);;;
 
 6237/51/08;bus;(=DGF 08 =RBO 6237);;;
 
@@ -184,27 +185,27 @@
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Regensburger Verkehrsverbund (RVV) (=RVV xxx)
 
-25;bus;(=RVV 33(nur im RVV-Gebiet) =RBO 6024);;;
+6024/25;bus;(=RVV 33(nur im RVV-Gebiet) =RBO 6024);;;
 103/43;bus;(=RVV 103);;;
 
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Deggendorf (VLD) (=RBO xxxx)
 
-48;bus;(=RBO 7592);;;
+7592/48;bus;(=RBO 7592);;;
 6237/51/08;bus;(=RBO 6237 =DGF 08);;;
 4112/33;bus;(=RBO 4112);;;
 
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Cham (VLC) (=VLC xxx)
 
-09;bus;(=VLC 710 =RBO 6098);;;
+6098/09/710;bus;(=VLC 710 =RBO 6098);;;
 6090/11/619;bus;(=VLC 619 =RBO 6090);;;
 
 
 == Buslinien zum Netzwerk Landkreis Regen (Arberland Verkehr) (=RBO xxxx)
 
-15;bus;(=RBO 6096);;;
-49;bus;(=RBO 7130);;;
-50;bus;(=RBO 7131);;;
+6096/15;bus;(=RBO 6096);;;
+7130/49;bus;(=RBO 7130);;;
+7131/50;bus;(=RBO 7131);;;
 
 </pre>

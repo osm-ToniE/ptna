@@ -74,7 +74,7 @@ N26;bus;;;;
 9242;bus;;;;
 9243;bus;;;;
 
-9153(Rufbus);bus;Selbe Nummer wie 9153;;;
+#9153(Rufbus);bus;Selbe Nummer wie 9153 und somit auch selbe 'ref';;;
 Rufbus Manching;bus;;;;
 Rufbus Schweitenkirchen;bus;;;;
 
@@ -100,7 +100,7 @@ Rufbus Schweitenkirchen;bus;;;;
 == VLK-Linien
 
 6008/07;bus;(=VLK 07);;;
-84;bus;(=VLK 84);;;
+#84;bus;(=VLK 84) - liegt weit weg vom Suchgebiet;;;
 
 
 == RBO-Linie
@@ -111,7 +111,7 @@ Rufbus Schweitenkirchen;bus;;;;
 == Linien Fa. Stanglmeier
 
 Linie Winden - Au am Aign - Hög - Ronnweg - Langenbruck;bus;Rufbus;;;
-Linie Rohrbach(Ilm) - Wolnzach und zurück;bus;;;;
+Linie 5;bus;Rohrbach(Ilm) - Wolnzach und zurück;;;;
 
 
 == Schulbuslinien Fa. Schwarz
@@ -155,7 +155,7 @@ Rufbus Wolnzach - Rohrbach;bus;;;;
 9242;bus;;;;
 9243;bus;;;;
 
-9153(Rufbus);bus;;;;
+#9153(Rufbus);bus;;;;
 Rufbus Manching;bus;;;;
 Rufbus Schweitenkirchen;bus;;;;
 
@@ -177,7 +177,7 @@ N26;bus;;;;
 
 6008/07;bus;(=VLK 07);;;
 
-VLK 84;bus;;;;
+#84;bus;liegt weit weg vom Suchgebiet;;;
 
 
 == Buslinien mit Mitgliedschaft zum Netzwerk Münchener Verkehrsverbund (MVV) (=MVV xxx) 
@@ -202,7 +202,7 @@ VLK 84;bus;;;;
 === RBA-Linien
 
 9153;bus;;;;
-9153(Rufbus);bus;;;;
+#9153(Rufbus);bus;;;;
 9159;bus;;;;
 
 9242;bus;;;;

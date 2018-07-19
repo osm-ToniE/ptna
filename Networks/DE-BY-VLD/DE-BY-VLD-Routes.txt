@@ -53,28 +53,29 @@ Stadtbus Plattling;bus;;;;
 
 === RBO Linien betrieben von Privatbusunternehmen (4xxx)
 
-4022;bus;;;
-4023;bus;;;
-4024;bus;;;
+4022;bus;;;;
+4023;bus;;;;
+4024;bus;;;;
 
-4112/33;bus;;;
-4113;bus;;;
-4116;bus;;;
-4117;bus;;;
-4120;bus;;;
-4122;bus;;;
-4126;bus;;;
-4127;bus;;;
-4129;bus;;;
-4136;bus;;;
-4142;bus;;;
-4154;bus;;;
-4156;bus;;;
-4160;bus;;;
-4161;bus;;;
-4162;bus;;;
-4163;bus;;;
-4164;bus;;;
+4112/33;bus;;;;
+4113;bus;;;;
+4116;bus;;;;
+4117;bus;;;;
+4120;bus;;;;
+4122;bus;;;;
+4123;bus;;;;
+4126;bus;;;;
+4127;bus;;;;
+4129;bus;;;;
+4136;bus;;;;
+4142;bus;;;;
+4154;bus;;;;
+4156;bus;;;;
+4160;bus;;;;
+4161;bus;;;;
+4162;bus;;;;
+4163;bus;;;;
+4164;bus;;;;
 
 
 === RBO-Linien mit Beteiligung von Privatbusunternehmen (6xxx, 7xxx)
