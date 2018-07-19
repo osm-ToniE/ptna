@@ -1200,7 +1200,7 @@ if ( scalar(@suspicious_relations) ) {
     
     $number_of_suspicious_relations = 0;
 
-    printBigHeader( 'Verdächtige Relationen' );
+    printBigHeader( 'Weitere Relationen' );
 
     printHintSuspiciousRelations();
         
@@ -3732,7 +3732,7 @@ sub printHintSuspiciousRelations {
         #
         # WIKI code
         #
-        print  "Dieser Abschnitt enthält alle Relationen, die verdächtig sind:\n";
+        print  "Dieser Abschnitt enthält weitere Relationen aus dem Umfeld der Linien:\n";
         print  "* evtl. falsche 'route' oder 'route_master' Werte?\n";
         print  "** z.B. 'route' = 'suspended_bus' statt 'route' = 'bus'\n";
         print  "* aber auch 'type' = 'network', 'type' = 'set' oder 'route' = 'network', d.h. eine Sammlung aller zum 'network' gehörenden Route und Route-Master.\n";
@@ -3743,7 +3743,7 @@ sub printHintSuspiciousRelations {
         #
         # HTML
         #
-        push( @HTML_main, "Dieser Abschnitt enthält alle Relationen, die verdächtig sind:\n" );
+        push( @HTML_main, "Dieser Abschnitt enthält weitere Relationen aus dem Umfeld der Linien:\n" );
         push( @HTML_main, "<ul>\n" );
         push( @HTML_main, "    <li>evtl. falsche 'route' oder 'route_master' Werte?\n" );
         push( @HTML_main, "        <ul>\n" );
@@ -3752,7 +3752,7 @@ sub printHintSuspiciousRelations {
         push( @HTML_main, "    </li>\n" );
         push( @HTML_main, "    <li>aber auch 'type' = 'network', 'type' = 'set' oder 'route' = 'network', d.h. eine Sammlung aller zum 'network' gehörenden Route und Route-Master.\n" );
         push( @HTML_main, "        <ul>\n" );
-        push( @HTML_main, "            <li>solche '''Sammlungen sind Fehler''', da Relationen keinen Sammlungen darstellen sollen: <a href=\"https://wiki.openstreetmap.org/wiki/DE:Relationen/Relationen_sind_keine_Kategorien\">Relationen sind keine Kategorien</a></li>\n" );
+        push( @HTML_main, "            <li>solche <em>Sammlungen sind streng genommen Fehler</em>, da Relationen keinen Sammlungen darstellen sollen: <a href=\"https://wiki.openstreetmap.org/wiki/DE:Relationen/Relationen_sind_keine_Kategorien\">Relationen sind keine Kategorien</a></li>\n" );
         push( @HTML_main, "        </ul>\n" );
         push( @HTML_main, "    </li>\n" );
         push( @HTML_main, "</ul>\n" );
