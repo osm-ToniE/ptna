@@ -41,7 +41,7 @@
 906/3;train;;;;
 908/4;train;;;;
 
-Waldbahn;train;(historische Bahn auf der Linie der WBA 4);;;
+Wanderbahn;train;(historische Bahn auf der Linie der WBA 4);;;
 
 
 

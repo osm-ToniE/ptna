@@ -7,7 +7,7 @@
 PREFIX="DE-BY-REG"
 
 OVERPASS_QUERY="http://overpass-api.de/api/interpreter?data=area[boundary=administrative][admin_level=6][name='Landkreis Regen'];(rel(area)[route~'(bus|tram|train|subway|light_rail|trolleybus|ferry|monorail|aerialway|share_taxi|funicular)'];rel(br);rel[type='route'](r);)->.routes;(.routes;<<;rel(r.routes);way(r.routes);node(r.routes););out;"
-NETWORK_LONG="Arberlandverkehr Landkreis Regen|waldbahn-Netz|Wanderbahn"
+NETWORK_LONG="Arberlandverkehr Landkreis Regen|waldbahn-Netz|Wanderbahn im Regental"
 NETWORK_SHORT="REG|WBA"
 
 ANALYSIS_PAGE="Regen/Transportation/Analyse"
