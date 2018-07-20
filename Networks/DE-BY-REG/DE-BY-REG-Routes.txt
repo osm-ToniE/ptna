@@ -36,10 +36,10 @@
 
 == Zuglinien Waldbahn
 
-WBA 1;train;;;;
-WBA 2;train;;;;
-WBA 3;train;;;;
-WBA 4;train;;;;
+905/1;train;;;;
+907/2;train;;;;
+906/3;train;;;;
+908/4;train;;;;
 
 Waldbahn;train;(historische Bahn auf der Linie der WBA 4);;;
 
