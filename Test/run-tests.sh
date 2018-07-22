@@ -1,5 +1,7 @@
 #!/bin/bash
 
+PATH=$PWD/../bin:$PATH
+
 ERRORS=0
 
 for script in *.script

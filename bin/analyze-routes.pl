@@ -397,6 +397,7 @@ my $number_of_non_pl_mp_relations       = 0;
 my $number_of_sa_relations              = 0;
 my $number_of_network_relations         = 0;
 my $number_of_positive_relations        = 0;
+my $number_of_unselected_relations      = 0;
 my $number_of_negative_relations        = 0;
 my $number_of_skipped_relations         = 0;
 my $number_of_skipped_other_relations   = 0;
@@ -580,6 +581,7 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                     @{$relation_ptr->{'role_stop'}}             = ();
                     @{$relation_ptr->{'__issues__'}}            = ();
                     @{$relation_ptr->{'__notes__'}}             = ();
+                    $relation_ptr->{'__printed__'}              = 0;
                     $member_index                    = 0;   # counts the number of all members
                     $relation_index                  = 0;   # counts the number of members which are relations (any relation: 'route' or with 'role' = 'platform', ...
                     $route_master_relation_index     = 0;   # counts the number of relation members in a 'route_master' which do not have 'role' ~ 'platform' (should be equal to $relation_index')
@@ -720,7 +722,7 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
 }   
 
 if ( $verbose ) {
-    printf STDERR "%s Relations converted: %d, route_relations: %d, platform_mp_relations: %d, non_platform_mp_relations: %d, stop_area_relations: %d, network_relations: %d, positive: %d, negative: %d, skipped unmatched: %d, skipped other: %d, w/o ref: %d, suspicious: %d\n", 
+    printf STDERR "%s Relations converted: %d, route_relations: %d, platform_mp_relations: %d, non_platform_mp_relations: %d, stop_area_relations: %d, network_relations: %d, positive: %d, unselected: %d, negative: %d, skipped unmatched: %d, skipped other: %d, w/o ref: %d, suspicious: %d\n", 
                    get_time(),             
                    $number_of_relations, 
                    $number_of_route_relations,
@@ -729,6 +731,7 @@ if ( $verbose ) {
                    $number_of_sa_relations,
                    $number_of_network_relations,
                    $number_of_positive_relations,
+                   $number_of_unselected_relations,
                    $number_of_negative_relations,
                    $number_of_skipped_relations,
                    $number_of_skipped_other_relations,
@@ -1006,6 +1009,7 @@ if ( $routes_file ) {
                                                     'issues'        =>    join( '__separator__', @{$relation_ptr->{'__issues__'}} ),
                                                     'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}}  )
                                                   );
+                                    $relation_ptr->{'__printed__'}++;
                                     $number_of_positive_relations++;
                                 }
                             }
@@ -1058,6 +1062,71 @@ printf STDERR "%s Printed positives: %d\n", get_time(), $number_of_positive_rela
 
 #############################################################################################
 #
+# now we print the list of all unselected relations/lines that could not be associated correctly (multiple entries for same ref/type values and ...)
+#
+#############################################################################################
+
+printf STDERR "%s Printing unselected\n", get_time()       if ( $verbose );
+$number_of_unselected_relations = 0;
+
+if ( $routes_file ) {
+    
+    $section = 'positive';
+    
+    my @relation_ids = ();
+
+    foreach $ref ( sort( keys( %{$PT_relations_with_ref{$section}} ) ) ) {
+        foreach $type ( sort( keys( %{$PT_relations_with_ref{$section}->{$ref}} ) ) ) {
+            foreach $route_type ( sort( keys( %{$PT_relations_with_ref{$section}->{$ref}->{$type}} ) ) ) {
+                foreach $relation_id ( sort( keys( %{$PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}} ) ) ) {
+                    if ( $PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}->{$relation_id}->{'__printed__'} < 1 ) {
+                        push( @relation_ids, $relation_id );
+                    }
+                }
+            }
+        }
+    }
+        
+    if ( scalar(@relation_ids) ) {
+    
+        printTableInitialization( 'ref', 'relation', 'type', 'route_type', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'issues', 'notes' );
+    
+        printBigHeader( 'Nicht eindeutig zugeordnete Linien' );
+        printHintUnselectedRelations();
+        printTableHeader();
+    
+        foreach $relation_id ( @relation_ids ) {
+            $relation_ptr = $RELATIONS{$relation_id};
+    
+            $status = analyze_relation( $relation_ptr, $relation_id );
+                        
+            printTableLine( 'ref'           =>    $relation_ptr->{'tag'}->{'ref'},
+                            'relation'      =>    $relation_id,
+                            'type'          =>    $relation_ptr->{'tag'}->{'type'},
+                            'route_type'    =>    $relation_ptr->{'tag'}->{$relation_ptr->{'tag'}->{'type'}},
+                            'name'          =>    $relation_ptr->{'tag'}->{'name'},
+                            'network'       =>    $relation_ptr->{'tag'}->{'network'},
+                            'operator'      =>    $relation_ptr->{'tag'}->{'operator'},
+                            'from'          =>    $relation_ptr->{'tag'}->{'from'},
+                            'via'           =>    $relation_ptr->{'tag'}->{'via'},
+                            'to'            =>    $relation_ptr->{'tag'}->{'to'},
+                            'PTv'           =>    ($relation_ptr->{'tag'}->{'public_transport:version'} ? $relation_ptr->{'tag'}->{'public_transport:version'} : '?'),
+                            'issues'        =>    join( '__separator__', @{$relation_ptr->{'__issues__'}} ),
+                            'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}} )
+                          );
+            $number_of_unselected_relations++;
+        }
+    
+        printTableFooter(); 
+    
+    }
+}
+
+printf STDERR "%s Printed unselected: %d\n", get_time(), $number_of_unselected_relations       if ( $verbose );
+
+        
+#############################################################################################
+#
 # now we print the list of all remainig relations/lines that could not be associated or when there was no csv file
 #
 #############################################################################################
@@ -1102,8 +1171,6 @@ if ( scalar(@line_refs) ) {
                                                    $PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}->{$b}->{'tag'}->{'sort_name'}     } 
                                                  keys(%{$PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}})) ) {
                         $relation_ptr = $PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}->{$relation_id};
-    
-                        # $status = analyze_environment( $PT_relations_with_ref{$section}->{$ref}, $relation_ptr->{'tag'}->{'ref'}, $type, $route_type, $relation_id );
     
                         $status = analyze_relation( $relation_ptr, $relation_id );
                                     
@@ -3722,6 +3789,58 @@ sub printBigHeader {
     my $title    = shift;
     
     printHeader( '= ' . $title )  if ( $title );
+}
+
+
+#############################################################################################
+
+sub printHintUnselectedRelations {
+    printText( "Dieser Abschnitt listet die Linien auf, die nicht eindeutig zugeordnet werden konnten." );
+    printText( "Die Liniennummern 'ref' sind in der CSV-Datei mehrfach angegeben worden.\n" );
+    printText( "Das bedeutet, dass die selbe Liniennummer im Verkehrsverbund mehrfach in verscheidenen Gemeinden/Städten vorhanden ist.\n" );
+    printText( "Um die Linien eindeutig zuordnen zu können sollte folgendes angegeben werden:\n" );
+    if ( $print_wiki ) {
+        #
+        # WIKI code
+        #
+        print  "* 'operator', sowie 'from' und 'to' sollten bei der Relation getagged sein.\n";
+        print  "** Wenn der Wert von 'operator' zur Differenzierung eindeutig ist, so müssen 'from' und 'to' nicht angegeben werden.\n";
+        print  "* 'Betreiber', sowie 'Von' und 'Nach' sollten in der CSV-Datei mit den selben Werten wie bei der Relation angegeben werden.\n";
+        print  "** Siehe hierzu die Anleitung für solche Einträge am Anfang der CSV-Datei.\n";
+        print  "\n";
+    }
+    else {
+        #
+        # HTML
+        #
+        push( @HTML_main, "<ul>\n" );
+        push( @HTML_main, "    <li>Relation:\n" );
+        push( @HTML_main, "        <ul>\n" );
+        push( @HTML_main, "            <li>'network', 'operator', sowie 'from' und 'to' sollten bei der Relation getagged sein.\n" );
+        push( @HTML_main, "                <ul>\n" );
+        push( @HTML_main, "                    <li>Wenn der Wert von 'operator' zur Differenzierung eindeutig ist, müssen 'from' und 'to' nicht angegeben werden.</li>\n" );
+        push( @HTML_main, "                </ul>\n" );
+        push( @HTML_main, "            </li>\n" );
+        push( @HTML_main, "        </ul>\n" );
+        push( @HTML_main, "    </li>\n" );
+        push( @HTML_main, "    <li>CSV-Datei:\n" );
+        push( @HTML_main, "        <ul>\n" );
+        push( @HTML_main, "            <li>'Betreiber', sowie 'Von' und 'Nach' sollten in der CSV-Datei mit den selben Werten wie bei der Relation angegeben werden.\n" );
+        push( @HTML_main, "                <ul>\n" );
+        push( @HTML_main, "                    <li>Siehe hierzu die Anleitung für solche Einträge am Anfang der CSV-Datei.</li>\n" );
+        push( @HTML_main, "                </ul>\n" );
+        push( @HTML_main, "            </li>\n" );
+        push( @HTML_main, "        </ul>\n" );
+        push( @HTML_main, "    </li>\n" );
+        push( @HTML_main, "</ul>\n" );
+        push( @HTML_main, "Beispiele aus dem VMS für 'ref;type;Kommentar;Von;Nach;Betreiber':<br /><br />\n" );
+        push( @HTML_main, "&nbsp;&nbsp;&nbsp;&nbsp;1.) A;bus;'Hinweis: Bus A fährt in Annaberg-Buchholz';Barbara-Uthmann-Ring;Buchholz;RVE<br />\n" );
+        push( @HTML_main, "&nbsp;&nbsp;&nbsp;&nbsp;2.) A;bus;'Hinweis: Bus A fährt in Aue';Postplatz;Postplatz;RVE<br />\n" );
+        push( @HTML_main, "&nbsp;&nbsp;&nbsp;&nbsp;3.) A;bus;'Hinweis: Bus A fährt in Burgstädt';Sportzentrum;Heiersdorf;RBM<br /><br />\n" );
+        push( @HTML_main, "1.) und 2.) sind nur mit Hilfe von 'Von'/'from' und 'Nach'/'to' unterscheidbar, da 'Betreiber'/'operator' identisch (='RVE') sind.<br />\n" );
+        push( @HTML_main, "1.) und 3.) sowie 2.) und 3.) sind an Hand von 'Betreiber'/'operator' unterscheidbar, die diese unterschiedlich sind (='RVE' bzw. ='RBM').<br />\n" );
+        push( @HTML_main, "<br />\n" );
+    }
 }
 
 
