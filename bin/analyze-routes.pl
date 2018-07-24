@@ -455,11 +455,12 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                 $number_of_route_relations++;
                 #
                 # if 'sort_name' is defined for the relation, then the mapper's choice will be respected for printing the Wiki lists
-                # if 'sort_name' is not defined or not set, it inherits the value from 'ref_trips' and then from 'name' plus relation-id but at least is set to the relation-id
-                # this shall ensure that all route are always printed in the same order for the Wiki page, even if two routes have the name
+                # if 'sort_name' is not defined or not set, it inherits the value from 'ref_trips' and then from 'name'
+                # finally, the relation-id is appended to ensure that all routes are always printed in the same order for the Wiki page, even if two routes have the ref_trips/name
                 #
-                $collected_tags{'sort_name'} = $collected_tags{'ref_trips'}                                                                    unless ( $collected_tags{'sort_name'} );
-                $collected_tags{'sort_name'} = ( $collected_tags{'name'}      ? $collected_tags{'name'} . '-' . $relation_id : $relation_id )  unless ( $collected_tags{'sort_name'} );
+                $collected_tags{'sort_name'} = $collected_tags{'ref_trips'}     unless ( $collected_tags{'sort_name'} );
+                $collected_tags{'sort_name'} = $collected_tags{'name'}          unless ( $collected_tags{'sort_name'} );
+                $collected_tags{'sort_name'} = $collected_tags{'sort_name'} ? $collected_tags{'sort_name'} . '-' . $relation_id : $relation_id;
         
                 $relation_ptr = undef;
                 
