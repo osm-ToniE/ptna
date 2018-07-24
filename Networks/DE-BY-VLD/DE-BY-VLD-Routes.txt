@@ -45,7 +45,7 @@
 == Stadtbus Plattling
 
 Stadtbus Plattling;bus;;;;
-2 Anruflinientaxis nach Deggendorf;;;;
+2;bus;Anruflinientaxis nach Deggendorf;;;
 
 
 == Regionalbusse Landkreis Deggendorf
