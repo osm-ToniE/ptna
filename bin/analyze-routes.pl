@@ -471,7 +471,7 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                     # is this route_type of general interest? 'hiking', 'bicycle', ... routes are not of interest here
                     # "keep"        route_type matches exactly the supported route types            m/^'type'$/
                     # "suspicious"  route_type does not exactly match the supported route types     m/'type'/               (typo, ...?)
-                    # "skip"        route_type is not handled as PT                                 "hiking", "bicycle", ...
+                    # "other"       route_type is not a valid PT route                              "coach", "hiking", "bicycle", ...
                     #
                     if ( $status =~ m/keep/ ) { $status = match_route_type( $route_type ); }
                     printf STDERR "%-15s: ref=%s\ttype=%s\troute_type=%s\tRelation: %d\n", $status, $ref, $type, $route_type, $relation_id   if ( $debug );
@@ -511,12 +511,12 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                     printf STDERR "%-15s: ref=%-10s\ttype=%15s\tnetwork=%s\toperator=%s\tRelation: %d\n", $status, $ref, $type, $collected_tags{'network'}, $collected_tags{'operator'}, $relation_id   if ( $debug );
                     
                     $section = undef;
-                    if ( $status =~ m/(positive|negative|skip|suspicious)/ ) {
+                    if ( $status =~ m/(positive|negative|skip|other|suspicious)/ ) {
                         $section= $1;
                     }
                     
                     if ( $section ) {
-                        if ( $section ne 'suspicious' ) {
+                        if ( $section eq 'positive' || $section eq 'negative' ) {
                             my $ue_ref = $ref;
                             $PT_relations_with_ref{$section}->{$ue_ref}->{$type}->{$route_type}->{$relation_id} = $RELATIONS{$relation_id};
                             $RELATIONS{$relation_id}->{'tag'}->{'ref'}  = $ref;
@@ -525,9 +525,8 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                             $relation_ptr = $RELATIONS{$relation_id};
                             $number_of_positive_relations++     if ( $section eq "positive"     );
                             $number_of_negative_relations++     if ( $section eq "negative"     );
-                            $number_of_skipped_relations++      if ( $section eq "skip"         );
                         }
-                        else {
+                        elsif ( $section eq 'other' || $section eq 'suspicious' ) {
                             $suspicious_relations{$relation_id} = 1;
                             $number_of_suspicious_relations++;
                         }
@@ -1350,23 +1349,11 @@ sub match_route_type {
                 return 'suspicious';
             }
         }
-        #if ( $route_type =~ m/^$regex_supported_route_types$/ ) {
-        #    printf STDERR "%s Keeping route_type: %s\n", get_time(), $route_type       if ( $debug );
-        #    return 'keep';
-        #}
-        #elsif ( $route_type =~ m/$regex_supported_route_types/ ) {
-        #    printf STDERR "%s Suspicious route_type: %s\n", get_time(), $route_type    if ( $debug );
-        #    return 'suspicious';
-        #}
-        #else {
-        #    printf STDERR "%s Skipping route_type: %s\n", get_time(), $route_type       if ( $debug );
-        #    return 'skip';
-        #}
     }
 
-    printf STDERR "%s Finally skipping route_type: %s\n", get_time(), $route_type       if ( $debug );
+    printf STDERR "%s Finally other route_type: %s\n", get_time(), $route_type       if ( $debug );
 
-    return 'skip';
+    return 'other';
 }
 
 
