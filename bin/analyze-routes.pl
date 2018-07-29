@@ -4309,54 +4309,57 @@ sub printRelationTemplate {
             #
             # WIKI code
             #
-            if ( $number_of_printed_templates < $max_templates ) {
-                $val = sprintf("{{Relation|%s}}", $val );
-                $number_of_printed_templates++;
-            }
-            else
-            {
-                # some manual expansion of the template
-                
-                my $image_url       = sprintf( "[[Image:Osm_element_relation.svg|20px]]" );
-                my $relation_url    = sprintf( "[http://osm.org/relation/%s %s]", $val, $val );
-                my $xml_url         = sprintf( "[http://api.osm.org/api/0.6/relation/%s XML]", $val );
-                my $id_url          = sprintf( "[http://osm.org/edit?editor=id&relation=%s iD]", $val );
-                my $josm_url        = sprintf( "[http://localhost:8111/import?url=https://api.openstreetmap.org/api/0.6/relation/%s/full JOSM]", $val );
-                my $potlatch2_url   = sprintf( "[http://osm.org/edit?editor=potlatch2&zoom=11&amp;relation=%s Potlatch2]", $val );
-                my $history_url     = sprintf( "[http://osm.virtuelle-loipe.de/history/?type=relation&ref=%s history]", $val );
-                my $analyze_url     = sprintf( "[http://ra.osmsurround.org/analyze.jsp?relationId=%s analyze]", $val );
-                my $manage_url      = sprintf( "[http://osmrm.openstreetmap.de/relation.jsp?id=%s manage]", $val );
-                my $gpx_url         = sprintf( "[http://ra.osmsurround.org/exportRelation/gpx?relationId=%s gpx]", $val );
-    
-                $val = sprintf( "%s %s <small>(%s, %s, %s, %s, %s, %s, %s, %s)</small>", $image_url, $relation_url, $xml_url, $id_url, $josm_url, $potlatch2_url, $history_url, $analyze_url, $manage_url, $gpx_url );    
+            if ( $val > 0 ) {
+                if ( $number_of_printed_templates < $max_templates ) {
+                    $val = sprintf("{{Relation|%s}}", $val );
+                    $number_of_printed_templates++;
+                }
+                else
+                {
+                    # some manual expansion of the template
+                    
+                    my $image_url       = sprintf( "[[Image:Osm_element_relation.svg|20px]]" );
+                    my $relation_url    = sprintf( "[http://osm.org/relation/%s %s]", $val, $val );
+                    my $xml_url         = sprintf( "[http://api.osm.org/api/0.6/relation/%s XML]", $val );
+                    my $id_url          = sprintf( "[http://osm.org/edit?editor=id&relation=%s iD]", $val );
+                    my $josm_url        = sprintf( "[http://localhost:8111/import?url=https://api.openstreetmap.org/api/0.6/relation/%s/full JOSM]", $val );
+                    my $potlatch2_url   = sprintf( "[http://osm.org/edit?editor=potlatch2&zoom=11&amp;relation=%s Potlatch2]", $val );
+                    my $history_url     = sprintf( "[http://osm.virtuelle-loipe.de/history/?type=relation&ref=%s history]", $val );
+                    my $analyze_url     = sprintf( "[http://ra.osmsurround.org/analyze.jsp?relationId=%s analyze]", $val );
+                    my $manage_url      = sprintf( "[http://osmrm.openstreetmap.de/relation.jsp?id=%s manage]", $val );
+                    my $gpx_url         = sprintf( "[http://ra.osmsurround.org/exportRelation/gpx?relationId=%s gpx]", $val );
+        
+                    $val = sprintf( "%s %s <small>(%s, %s, %s, %s, %s, %s, %s, %s)</small>", $image_url, $relation_url, $xml_url, $id_url, $josm_url, $potlatch2_url, $history_url, $analyze_url, $manage_url, $gpx_url );    
+                }
+            } else {
+                $val = sprintf( "[[Image:Osm_element_relation.svg|20px]] %s", $val );
             }
         }
         else {
             #
             # HTML
             #
-            my $image_url       = sprintf( "<img src=\"http://wiki.openstreetmap.org/w/images/d/d9/Mf_Relation.svg\" title=\"Relation\" alt=\"Relation\" />" );
-            my $relation_url    = sprintf( "<a href=\"http://osm.org/relation/%s\" title=\"Relation\">%s</a>", $val, $val );
-            my $xml_url         = sprintf( "<a href=\"http://api.osm.org/api/0.6/relation/%s\">XML</a>", $val );
-            my $id_url          = sprintf( "<a href=\"http://osm.org/edit?editor=id&amp;relation=%s\">iD</a>", $val );
-            my $josm_url        = sprintf( "<a href=\"http://localhost:8111/import?url=https://api.openstreetmap.org/api/0.6/relation/%s/full\">JOSM</a>", $val );
-            my $potlatch2_url   = sprintf( "<a href=\"http://osm.org/edit?editor=potlatch2&amp;zoom=11&amp;amp;relation=%s\">Potlatch2</a>", $val );
-            my $history_url     = sprintf( "<a href=\"http://osm.virtuelle-loipe.de/history/?type=relation&amp;ref=%s\">history</a>", $val );
-            my $analyze_url     = sprintf( "<a href=\"http://ra.osmsurround.org/analyze.jsp?relationId=%s\">analyze</a>", $val );
-            my $manage_url      = sprintf( "<a href=\"http://osmrm.openstreetmap.de/relation.jsp?id=%s\">manage</a>", $val );
-            my $gpx_url         = sprintf( "<a href=\"http://ra.osmsurround.org/exportRelation/gpx?relationId=%s\">gpx</a>", $val );
-            my $info_string     = '';
+            my $info_string = '';
             if ( $tags ) {
                 foreach my $tag ( split( ';', $tags ) ) {
                     if ( $RELATIONS{$val} && $RELATIONS{$val}->{'tag'} && $RELATIONS{$val}->{'tag'}->{$tag} ) {
-                        $info_string = sprintf( "'%s' ", $RELATIONS{$val}->{'tag'}->{$tag} );
+                        $info_string .= sprintf( "'%s' ", $RELATIONS{$val}->{'tag'}->{$tag} );
                         last;
                     }
                 }
             }
+            
+            my $image_url = "<img src=\"http://wiki.openstreetmap.org/w/images/d/d9/Mf_Relation.svg\" title=\"Relation\" alt=\"Relation\" />";
 
-#            $val = sprintf( "%s %s%s <small>(%s, %s, %s, %s, %s, %s, %s, %s)</small>", $image_url, $info_string, $relation_url, $xml_url, $id_url, $josm_url, $potlatch2_url, $history_url, $analyze_url, $manage_url, $gpx_url );    
-            $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $relation_url, $id_url, $josm_url );    
+            if ( $val > 0 ) {
+                my $relation_url = sprintf( "<a href=\"http://osm.org/relation/%s\" title=\"Relation\">%s</a>", $val, $val );
+                my $id_url       = sprintf( "<a href=\"http://osm.org/edit?editor=id&amp;relation=%s\">iD</a>", $val );
+                my $josm_url     = sprintf( "<a href=\"http://localhost:8111/import?url=https://api.openstreetmap.org/api/0.6/relation/%s/full\">JOSM</a>", $val );
+    
+                $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $relation_url, $id_url, $josm_url );    
+            } else {
+                $val = sprintf( "%s %s%s", $image_url, $info_string, $val );
+            }
         }
     }
     else {
@@ -4378,46 +4381,53 @@ sub printWayTemplate {
             #
             # WIKI code
             #
-            if ( 0 ) { # $number_of_printed_templates < $max_templates ) {
-                $val = sprintf("{{Way|%s}}", $val );
-                $number_of_printed_templates++;
-            }
-            else
-            {
-                # some manual expansion of the template
-                
-                my $image_url       = sprintf( "[[Image:Osm_element_way.svg|20px]]" );
-                my $way_url         = sprintf( "[http://osm.org/way/%s %s]", $val, $val );
-                my $xml_url         = sprintf( "[http://api.osm.org/api/0.6/way/%s XML]", $val );
-                my $id_url          = sprintf( "[http://osm.org/edit?editor=id&way=%s iD]", $val );
-                my $josm_url        = sprintf( "[http://localhost:8111/import?url=https://api.openstreetmap.org/api/0.6/way/%s/full JOSM]", $val );
-                my $potlatch2_url   = sprintf( "[http://osm.org/edit?editor=potlatch2&zoom=11&amp;way=%s Potlatch2]", $val );
-    
-                $val = sprintf( "%s %s <small>(%s, %s, %s, %s)</small>", $image_url, $way_url, $xml_url, $id_url, $josm_url, $potlatch2_url );    
+            if ( $val > 0 ) {
+                if ( 0 ) { # $number_of_printed_templates < $max_templates ) {
+                    $val = sprintf("{{Way|%s}}", $val );
+                    $number_of_printed_templates++;
+                }
+                else
+                {
+                    # some manual expansion of the template
+                    
+                    my $image_url       = sprintf( "[[Image:Osm_element_way.svg|20px]]" );
+                    my $way_url         = sprintf( "[http://osm.org/way/%s %s]", $val, $val );
+                    my $xml_url         = sprintf( "[http://api.osm.org/api/0.6/way/%s XML]", $val );
+                    my $id_url          = sprintf( "[http://osm.org/edit?editor=id&way=%s iD]", $val );
+                    my $josm_url        = sprintf( "[http://localhost:8111/import?url=https://api.openstreetmap.org/api/0.6/way/%s/full JOSM]", $val );
+                    my $potlatch2_url   = sprintf( "[http://osm.org/edit?editor=potlatch2&zoom=11&amp;way=%s Potlatch2]", $val );
+        
+                    $val = sprintf( "%s %s <small>(%s, %s, %s, %s)</small>", $image_url, $way_url, $xml_url, $id_url, $josm_url, $potlatch2_url );    
+                }
+            } else {
+                $val = sprintf( "[[Image:Osm_element_way.svg|20px]] %s", $val );
             }
         }
         else {
             #
             # HTML
             #
-            my $image_url       = sprintf( "<img src=\"http://wiki.openstreetmap.org/w/images/2/2a/Mf_way.svg\" title=\"Way\" alt=\"Way\" />" );
-            my $way_url         = sprintf( "<a href=\"http://osm.org/way/%s\" title=\"Way\">%s</a>", $val, $val );
-            my $xml_url         = sprintf( "<a href=\"http://api.osm.org/api/0.6/way/%s\">XML</a>", $val );
-            my $id_url          = sprintf( "<a href=\"http://osm.org/edit?editor=id&amp;way=%s\">iD</a>", $val );
-            my $josm_url        = sprintf( "<a href=\"http://localhost:8111/import?url=https://api.openstreetmap.org/api/0.6/way/%s/full\">JOSM</a>", $val );
-            my $potlatch2_url   = sprintf( "<a href=\"http://osm.org/edit?editor=potlatch2&amp;zoom=11&amp;amp;way=%s\">Potlatch2</a>", $val );
-            my $info_string     = '';
+            my $info_string = '';
             if ( $tags ) {
                 foreach my $tag ( split( ';', $tags ) ) {
                     if ( $WAYS{$val} && $WAYS{$val}->{'tag'} && $WAYS{$val}->{'tag'}->{$tag} ) {
-                        $info_string = sprintf( "'%s' ", $WAYS{$val}->{'tag'}->{$tag} );
+                        $info_string .= sprintf( "'%s' ", $WAYS{$val}->{'tag'}->{$tag} );
                         last;
                     }
                 }
             }
 
-#            $val = sprintf( "%s %s%s <small>(%s, %s, %s, %s)</small>", $image_url, $info_string, $way_url, $xml_url, $id_url, $josm_url, $potlatch2_url );    
-            $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $way_url, $id_url, $josm_url );    
+            my $image_url = "<img src=\"http://wiki.openstreetmap.org/w/images/2/2a/Mf_way.svg\" title=\"Way\" alt=\"Way\" />";
+
+            if ( $val > 0 ) {
+                my $way_url   = sprintf( "<a href=\"http://osm.org/way/%s\" title=\"Way\">%s</a>", $val, $val );
+                my $id_url    = sprintf( "<a href=\"http://osm.org/edit?editor=id&amp;way=%s\">iD</a>", $val );
+                my $josm_url  = sprintf( "<a href=\"http://localhost:8111/import?url=https://api.openstreetmap.org/api/0.6/way/%s/full\">JOSM</a>", $val );
+    
+                $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $way_url, $id_url, $josm_url );    
+            } else {
+                $val = sprintf( "%s %s%s", $image_url, $info_string, $val );
+            }
         }
     }
     else {
@@ -4439,33 +4449,32 @@ sub printNodeTemplate {
             #
             # WIKI code
             #
-            if ( 0 ) { # $number_of_printed_templates < $max_templates ) {
-                $val = sprintf("{{Node|%s}}", $val );
-                $number_of_printed_templates++;
-            }
-            else
-            {
-                # some manual expansion of the template
-                
-                my $image_url       = sprintf( "[[Image:Osm_element_node.svg|20px]]" );
-                my $node_url        = sprintf( "[http://osm.org/node/%s %s]", $val, $val );
-                my $xml_url         = sprintf( "[http://api.osm.org/api/0.6/node/%s XML]", $val );
-                my $id_url          = sprintf( "[http://osm.org/edit?editor=id&node=%s iD]", $val );
-                my $josm_url        = sprintf( "[http://localhost:8111/import?url=https://api.openstreetmap.org/api/0.6/node/%s JOSM]", $val );
-                my $potlatch2_url   = sprintf( "[http://osm.org/edit?editor=potlatch2&zoom=11&amp;node=%s Potlatch2]", $val );
-    
-                $val = sprintf( "%s %s <small>(%s, %s, %s, %s)</small>", $image_url, $node_url, $xml_url, $id_url, $josm_url, $potlatch2_url );    
+            if ( $val > 0 ) {
+                if ( 0 ) { # $number_of_printed_templates < $max_templates ) {
+                    $val = sprintf("{{Node|%s}}", $val );
+                    $number_of_printed_templates++;
+                }
+                else
+                {
+                    # some manual expansion of the template
+                    
+                    my $image_url       = sprintf( "[[Image:Osm_element_node.svg|20px]]" );
+                    my $node_url        = sprintf( "[http://osm.org/node/%s %s]", $val, $val );
+                    my $xml_url         = sprintf( "[http://api.osm.org/api/0.6/node/%s XML]", $val );
+                    my $id_url          = sprintf( "[http://osm.org/edit?editor=id&node=%s iD]", $val );
+                    my $josm_url        = sprintf( "[http://localhost:8111/import?url=https://api.openstreetmap.org/api/0.6/node/%s JOSM]", $val );
+                    my $potlatch2_url   = sprintf( "[http://osm.org/edit?editor=potlatch2&zoom=11&amp;node=%s Potlatch2]", $val );
+        
+                    $val = sprintf( "%s %s <small>(%s, %s, %s, %s)</small>", $image_url, $node_url, $xml_url, $id_url, $josm_url, $potlatch2_url );    
+                }
+            } else {
+                $val = sprintf( "[[Image:Osm_element_node.svg|20px]] %s", $val );
             }
         }
         else {
             #
             # HTML
             #
-            my $image_url       = sprintf( "<img src=\"http://wiki.openstreetmap.org/w/images/2/20/Mf_node.svg\" title=\"Node\" alt=\"Node\" />" );
-            my $node_url        = sprintf( "<a href=\"http://osm.org/node/%s\" title=\"Node\">%s</a>", $val, $val );
-            my $id_url          = sprintf( "<a href=\"http://osm.org/edit?editor=id&amp;node=%s\">iD</a>", $val );
-            my $josm_url        = sprintf( "<a href=\"http://localhost:8111/import?url=https://api.openstreetmap.org/api/0.6/node/%s\">JOSM</a>", $val );
-            my $potlatch2_url   = sprintf( "<a href=\"http://osm.org/edit?editor=potlatch2&amp;zoom=11&amp;amp;node=%s\">Potlatch2</a>", $val );
             my $info_string     = '';
             if ( $tags ) {
                 foreach my $tag ( split( ';', $tags ) ) {
@@ -4476,8 +4485,17 @@ sub printNodeTemplate {
                 }
             }
 
-#            $val = sprintf( "%s %s%s <small>(%s, %s, %s, %s)</small>", $image_url, $info_string, $node_url, $xml_url, $id_url, $josm_url, $potlatch2_url );    
-            $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $node_url, $id_url, $josm_url );    
+            my $image_url = "<img src=\"http://wiki.openstreetmap.org/w/images/2/20/Mf_node.svg\" title=\"Node\" alt=\"Node\" />";
+            
+            if ( $val > 0 ) {
+                my $node_url = sprintf( "<a href=\"http://osm.org/node/%s\" title=\"Node\">%s</a>", $val, $val );
+                my $id_url   = sprintf( "<a href=\"http://osm.org/edit?editor=id&amp;node=%s\">iD</a>", $val );
+                my $josm_url = sprintf( "<a href=\"http://localhost:8111/import?url=https://api.openstreetmap.org/api/0.6/node/%s\">JOSM</a>", $val );
+    
+                $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $node_url, $id_url, $josm_url );    
+            } else {
+                $val = sprintf( "%s %s%s", $image_url, $info_string, $val );
+            }
         }
     }
     else {
