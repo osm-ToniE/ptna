@@ -19,7 +19,7 @@ use Data::Dumper;
 use Encode;
 
 my @supported_route_types   = ( 'train', 'subway', 'light_rail', 'tram', 'trolleybus', 'bus', 'ferry', 'monorail', 'aerialway', 'funicular', 'share_taxi' );
-my $regex_supported_route_types = join( '|', @supported_route_types );
+my @well_known_route_types  = ( 'bicycle', 'mtb', 'hiking', 'road' );
 
 my $verbose                         = undef;
 my $debug                           = undef;
@@ -471,7 +471,8 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                     # is this route_type of general interest? 'hiking', 'bicycle', ... routes are not of interest here
                     # "keep"        route_type matches exactly the supported route types            m/^'type'$/
                     # "suspicious"  route_type does not exactly match the supported route types     m/'type'/               (typo, ...?)
-                    # "other"       route_type is not a valid PT route                              "coach", "hiking", "bicycle", ...
+                    # "other"       route_type is not a well known route  type                      "coach", ...
+                    # "skip"        route_type is a well known route type                           "bicycle", "mtb", "hiking", "road", ...
                     #
                     if ( $status =~ m/keep/ ) { $status = match_route_type( $route_type ); }
                     printf STDERR "%-15s: ref=%s\ttype=%s\troute_type=%s\tRelation: %d\n", $status, $ref, $type, $route_type, $relation_id   if ( $debug );
@@ -1335,7 +1336,7 @@ printf STDERR "%s Done ...\n", get_time()       if ( $verbose );
 
 sub match_route_type {
     my $route_type = shift;
-    my $rt          = undef;
+    my $rt         = undef;
 
     if ( $route_type ) {
         foreach my $rt ( @supported_route_types )
@@ -1347,6 +1348,13 @@ sub match_route_type {
             elsif ( $route_type =~ m/$rt/ ) {
                 printf STDERR "%s Suspicious route_type: %s\n", get_time(), $route_type    if ( $debug );
                 return 'suspicious';
+            }
+        }
+        foreach my $rt ( @well_known_route_types )
+        {
+            if ( $route_type eq $rt ) {
+                printf STDERR "%s Skipping route_type: %s\n", get_time(), $route_type       if ( $debug );
+                return 'skip';
             }
         }
     }
