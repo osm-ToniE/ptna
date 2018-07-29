@@ -11,6 +11,10 @@
 # ignore downloaded XML data
 *-Data.xml
 
+#ignore PDF files since we did not create them, source is 3rd-party
+*.pdf
+*.PDF
+
 # currently ignore also old test data
 OldTest/*
 
