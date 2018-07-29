@@ -472,7 +472,7 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                     # "keep"        route_type matches exactly the supported route types            m/^'type'$/
                     # "suspicious"  route_type does not exactly match the supported route types     m/'type'/               (typo, ...?)
                     # "other"       route_type is not a well known route  type                      "coach", ...
-                    # "skip"        route_type is a well known route type                           "bicycle", "mtb", "hiking", "road", ...
+                    # "well_known"  route_type is a well known route type                           "bicycle", "mtb", "hiking", "road", ...
                     #
                     if ( $status =~ m/keep/ ) { $status = match_route_type( $route_type ); }
                     printf STDERR "%-15s: ref=%s\ttype=%s\troute_type=%s\tRelation: %d\n", $status, $ref, $type, $route_type, $relation_id   if ( $debug );
@@ -488,7 +488,7 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                         else {
                             $used_networks{'__unset_network__'}->{$relation_id} = 1;
                         }
-                    } else {
+                    } elsif ( $status ne 'well_known' ) {
                         if ( $collected_tags{'network'} ) {
                             $unused_networks{$collected_tags{'network'}}->{$relation_id} = 1;
                         }
@@ -512,7 +512,7 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                     printf STDERR "%-15s: ref=%-10s\ttype=%15s\tnetwork=%s\toperator=%s\tRelation: %d\n", $status, $ref, $type, $collected_tags{'network'}, $collected_tags{'operator'}, $relation_id   if ( $debug );
                     
                     $section = undef;
-                    if ( $status =~ m/(positive|negative|skip|other|suspicious)/ ) {
+                    if ( $status =~ m/(positive|negative|skip|other|suspicious|well_known)/ ) {
                         $section= $1;
                     }
                     
@@ -1353,8 +1353,8 @@ sub match_route_type {
         foreach my $rt ( @well_known_route_types )
         {
             if ( $route_type eq $rt ) {
-                printf STDERR "%s Skipping route_type: %s\n", get_time(), $route_type       if ( $debug );
-                return 'skip';
+                printf STDERR "%s Skipping well known route_type: %s\n", get_time(), $route_type       if ( $debug );
+                return 'well_known';
             }
         }
     }
