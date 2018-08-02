@@ -14,7 +14,7 @@ ANALYSIS_PAGE="Bremen/Transport/Analyse"
 WIKI_ROUTES_PAGE="Bremen/Transport/Analyse/DE-HB-VBN-Linien"
 FILE_DIFF="204"
 
-ANALYSIS_OPTIONS="--max-error=10 --positive-notes --check-access --check-name --check-stop-position --check-sequence --check-version --check-osm-separator --multiple-ref-type-entries=analyze --coloured-sketchline"
+ANALYSIS_OPTIONS="--max-error=10 --positive-notes --check-access --check-name --check-stop-position --check-sequence --check-version --check-osm-separator --check-motorway-link --multiple-ref-type-entries=analyze --coloured-sketchline"
 
 # --check-bus-stop 
 # --expect-network-long

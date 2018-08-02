@@ -14,7 +14,7 @@ ANALYSIS_PAGE="Landshut/Transportation/Analyse"
 WIKI_ROUTES_PAGE="Landshut/Transportation/Analyse/DE-BY-LA-Linien"
 FILE_DIFF="200"
 
-ANALYSIS_OPTIONS="--check-access --check-name --check-stop-position --check-sequence --check-version --check-osm-separator --multiple-ref-type-entries=allow --positive-notes --coloured-sketchline"
+ANALYSIS_OPTIONS="--check-access --check-name --check-stop-position --check-sequence --check-version --check-osm-separator --check-motorway-link --multiple-ref-type-entries=allow --positive-notes --coloured-sketchline"
 
 # --max-error=
 # --check-bus-stop 

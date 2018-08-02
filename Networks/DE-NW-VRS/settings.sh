@@ -17,7 +17,7 @@ ANALYSIS_PAGE="VRS/Analyse"
 WIKI_ROUTES_PAGE="VRS/Analyse/VRS-Linien"
 FILE_DIFF="200"
 
-ANALYSIS_OPTIONS="--max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-osm-separator --multiple-ref-type-entries=analyze --relaxed-begin-end-for=train,light_rail,tram --coloured-sketchline --expect-network-long"
+ANALYSIS_OPTIONS="--max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-osm-separator --check-motorway-link --multiple-ref-type-entries=analyze --relaxed-begin-end-for=train,light_rail,tram --coloured-sketchline --expect-network-long"
 
 # --positive-notes
 # --check-bus-stop 

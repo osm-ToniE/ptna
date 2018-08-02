@@ -14,7 +14,7 @@ ANALYSIS_PAGE="Pfarrkirchen/Transportation/Analyse"
 WIKI_ROUTES_PAGE="Pfarrkirchen/Transportation/Analyse/DE-BY-VGRI-Linien"
 FILE_DIFF="200"
 
-ANALYSIS_OPTIONS="--max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-version --check-osm-separator --multiple-ref-type-entries=allow --positive-notes --coloured-sketchline"
+ANALYSIS_OPTIONS="--max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-version --check-osm-separator --check-motorway-link --multiple-ref-type-entries=allow --positive-notes --coloured-sketchline"
 
 # --check-bus-stop 
 # --expect-network-long
