@@ -12,7 +12,7 @@ then
     TEST=$(basename $TESTFILE .osm)   # strip '.osm' from end of file name (if exists)
     TEST=$(basename $TEST     .xml)   # strip '.xml' from end of file name (if exists)
 
-    analyze-routes.pl --max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-version --check-wide-characters \
+    analyze-routes.pl --max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-version --check-wide-characters --check-motorway-link \
                       --multiple-ref-type-entries=analyze --positive-notes --coloured-sketchline --verbose --debug \
                       --osm-xml-file=$TESTFILE > $TEST.html 2> $TEST.log
 

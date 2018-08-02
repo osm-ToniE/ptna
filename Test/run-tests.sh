@@ -4,14 +4,24 @@ PATH=$PWD/../bin:$PATH
 
 ERRORS=0
 
-for script in *.script
+for infile in *.osm *.xml
 do
-    bash ./$script
+    TEST=$(basename $infile .osm)
+    TEST=$(basename $TEST   .xml)
     
-    ERRORS=$(( $ERRORS + $? ))
+    if [ "$TEST" != '*' ]
+    then
+        if [ -e "$TEST.script" ]
+        then
+            bash ./$TEST.script $infile
+        else
+            bash ./generic.script $infile
+        fi
+        
+        ERRORS=$(( $ERRORS + $? ))
+    fi
 done
 
 echo ""
 echo "Tests ended with $ERRORS errors"
 exit $ERRORS
-
