@@ -38,6 +38,7 @@ my $check_osm_separator             = undef;
 my $check_platform                  = undef;
 my $check_sequence                  = undef;
 my $check_roundabouts               = undef;
+my $check_motorway_link             = undef;
 my $check_version                   = undef;
 my $expect_network_long             = undef;
 my $expect_network_long_as          = undef;
@@ -64,6 +65,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'debug'                         =>  \$debug,                        # --debug
             'check-access'                  =>  \$check_access,                 # --check-access                    check for access restrictions on highways
             'check-bus-stop'                =>  \$check_bus_stop,               # --check-bus-stop                  check for strict highway=bus_stop on nodes only
+            'check-motorway-link'           =>  \$check_motorway_link,          # --check-motorway-link             check for motorway_link followed/preceeded by motorway or trunk
             'check-name'                    =>  \$check_name,                   # --check-name                      check for strict name conventions (name='... ref: from => to'
             'check-osm-separator'           =>  \$check_osm_separator,          # --check-osm-separator             check separator for '; ' (w/ blank) and ',' (comma instead of semi-colon)
             'check-platform'                =>  \$check_platform,               # --check-platform                  check for bus=yes, tram=yes, ... on platforms
@@ -112,6 +114,7 @@ if ( $verbose ) {
     printf STDERR "%20s--wiki\n",                          ' '                                 if ( $print_wiki                  );
     printf STDERR "%20s--check-access\n",                  ' '                                 if ( $check_access                );
     printf STDERR "%20s--check-bus-stop\n",                ' '                                 if ( $check_bus_stop              );
+    printf STDERR "%20s--check-motorway-link\n",           ' '                                 if ( $check_motorway_link         );
     printf STDERR "%20s--check-name\n",                    ' '                                 if ( $check_name                  );
     printf STDERR "%20s--check-osm-separator\n",           ' '                                 if ( $check_osm_separator         );
     printf STDERR "%20s--check-platform\n",                ' '                                 if ( $check_platform              );
@@ -2407,7 +2410,7 @@ sub analyze_ptv2_route_relation {
         push( @{$relation_ptr->{'__issues__'}}, sprintf("PTv2 route: incorrect order of 'stop_position', 'platform' and 'way' (stop/platform after way)" ) );
         $return_code++;
     }
-    if ( $relation_ptr->{'number_of_roundabouts'} && $check_roundabouts ) {
+    if ( $check_roundabouts  && $relation_ptr->{'number_of_roundabouts'} ) {
         push( @{$relation_ptr->{'__notes__'}},  sprintf("PTv2 route: includes %d entire roundabout(s) but uses only segment(s)", $relation_ptr->{'number_of_roundabouts'}) );
         $return_code++;
     }
@@ -2415,8 +2418,11 @@ sub analyze_ptv2_route_relation {
         push( @{$relation_ptr->{'__issues__'}}, sprintf("PTv2 route: using oneway way(s) in wrong direction: %s", join(', ', map { printWayTemplate($_,'name;ref'); } sort(keys(%{$relation_ptr->{'wrong_direction_oneways'}})))) );
         $return_code++;
     }
-    
-    
+    if ( $check_motorway_link && $relation_ptr->{'expect_motorway_after'} ) {
+        push( @{$relation_ptr->{'__issues__'}}, sprintf("PTv2 route: using motorway_link way(s) without entering a motorway way: %s", join(', ', map { printWayTemplate($_,'name;ref'); } sort(keys(%{$relation_ptr->{'expect_motorway_after'}})))) );
+        $return_code++;
+    }
+
     #
     # NODES     are either Stop-Positions or Platforms, so they must have a 'role'
     #
@@ -2944,6 +2950,7 @@ sub SortRouteWayNodes {
     my $route_type                  = undef;
     my $access_restriction          = undef;
     my $number_of_ways              = 0;
+    my %expect_motorway_or_motorway_link_after = ();
     
     printf STDERR "SortRouteWayNodes() : processing Ways:\nWays: %s\n", join( ', ', @{$relations_route_ways_ref} )     if ( $debug );
     
@@ -3385,8 +3392,54 @@ sub SortRouteWayNodes {
             }
             
             $connecting_node_id = $sorted_nodes[$#sorted_nodes];
+            
+            #
+            # check whether we entered a motorway_link and did not enter motorway before entering another type of way
+            #
+            if ( $current_way_id && $WAYS{$current_way_id} && $WAYS{$current_way_id}->{'tag'} && $WAYS{$current_way_id}->{'tag'}->{'highway'} && 
+                 $next_way_id    && $WAYS{$next_way_id}    && $WAYS{$next_way_id}->{'tag'}    && $WAYS{$next_way_id}->{'tag'}->{'highway'}        ) {
+                if ( $WAYS{$next_way_id}->{'tag'}->{'highway'} eq 'motorway_link' ) {
+                    #
+                    # next way is a motorway_link - be carefull
+                    #
+                    if ( $WAYS{$current_way_id}->{'tag'}->{'highway'} eq 'motorway' || 
+                         $WAYS{$current_way_id}->{'tag'}->{'highway'} eq 'trunk'       ) {
+                        #
+                        # current way is motorway or trunk and next way is motorway_link - everthings is fine, no problem
+                        #
+                        %expect_motorway_or_motorway_link_after = ();
+                    } elsif ( $WAYS{$current_way_id}->{'tag'}->{'highway'} eq 'motorway_link' ) {
+                        #
+                        # current way is motorway_link and next way is motorway_link
+                        #
+                        if ( scalar ( keys ( %expect_motorway_or_motorway_link_after ) ) ) {
+                            #
+                            # a problem only if it has been a problem already
+                            #
+                            $expect_motorway_or_motorway_link_after{$next_way_id} = 1;
+                        }
+                    } else {
+                        #
+                        # current way is anything except motorway/motorway-link and next way is motorway_link - be carefull, start watching this
+                        #
+                        $expect_motorway_or_motorway_link_after{$next_way_id} = 1;
+                    }
+                } elsif ( $WAYS{$next_way_id}->{'tag'}->{'highway'} eq 'motorway' ||
+                          $WAYS{$next_way_id}->{'tag'}->{'highway'} eq 'trunk'       ) {
+                    if ( $WAYS{$current_way_id}->{'tag'}->{'highway'} eq 'motorway_link' ) {
+                        #
+                        # current way is motorway_link and next way is motorway or trunk - everthings is fine, no problem
+                        #
+                        %expect_motorway_or_motorway_link_after = ();
+                    }
+                }
+            }
         }
     
+        foreach my $k ( keys ( %expect_motorway_or_motorway_link_after ) ) {
+            $relation_ptr->{'expect_motorway_after'}->{$k} = 1;
+        }
+        
         if ( $debug ) {
             foreach $node_id ( @control_nodes ) {
                 $counter = isNodeInNodeArray( $node_id, @sorted_nodes );

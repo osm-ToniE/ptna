@@ -1,0 +1,44 @@
+#!/bin/bash
+
+ERRORS=0
+
+#######################################################################
+# 
+# generic script to take 1st parameter as input file for test
+
+if [ -n "$1" ]
+then
+    TESTFILE=$1
+    TEST=$(basename $TESTFILE .osm)   # strip '.osm' from end of file name (if exists)
+    TEST=$(basename $TEST     .xml)   # strip '.xml' from end of file name (if exists)
+
+    analyze-routes.pl --max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-version --check-wide-characters \
+                      --multiple-ref-type-entries=analyze --positive-notes --coloured-sketchline --verbose --debug \
+                      --osm-xml-file=$TESTFILE > $TEST.html 2> $TEST.log
+
+    if [ -e $TEST.expect -a -s $TEST.html ]
+    then
+        diff $TEST.expect $TEST.html > $TEST.diff
+    
+        if [ -s $TEST.diff ]
+        then
+            echo -e "failed with diff\t$TEST"
+            ERRORS=$(( $ERRORS + 1 ))
+        else
+            echo -e "passed\t\t\t$TEST"
+        fi
+    else
+        echo -e "failed\t\t\t$TEST"
+        ERRORS=$(( $ERRORS + 1 ))
+    fi
+
+else
+
+    echo -e "failed\t\t\tParameter: 'test file' not sprcified"
+    ERRORS=$(( $ERRORS + 1 ))
+    
+fi
+
+#######################################################################
+
+exit $ERRORS
