@@ -84,6 +84,9 @@
   <node id='-39158' action='modify' lat='48.05997454411' lon='11.6499426006' />
   <node id='-39160' action='modify' lat='48.05928558862' lon='11.64768094601' />
   <node id='-39162' action='modify' lat='48.05909612283' lon='11.64595430991' />
+  <node id='-39240' action='modify' lat='48.07305443061' lon='11.6445498203' />
+  <node id='-39242' action='modify' lat='48.06371201706' lon='11.65195885446' />
+  <node id='-39244' action='modify' lat='48.05727034314' lon='11.65175268896' />
   <way id='-39164' action='modify'>
     <nd ref='-39094' />
     <nd ref='-39088' />
@@ -260,14 +263,23 @@
     <tag k='highway' v='motorway' />
     <tag k='ref' v='A 001' />
   </way>
-  <way id='-39300' action='modify'>
+  <way id='-39218' action='modify'>
     <nd ref='-39090' />
     <nd ref='-39092' />
     <tag k='highway' v='motorway_link' />
     <tag k='oneway' v='no' />
     <tag k='ref' v='X 002' />
   </way>
-  <relation id='-39218' action='modify'>
+  <way id='-39241' action='modify'>
+    <nd ref='-39106' />
+    <nd ref='-39240' />
+    <nd ref='-39242' />
+    <nd ref='-39244' />
+    <nd ref='-39110' />
+    <tag k='highway' v='trunk' />
+    <tag k='ref' v='T 001' />
+  </way>
+  <relation id='-39220' action='modify'>
     <member type='node' ref='-39100' role='stop' />
     <member type='node' ref='-39114' role='platform' />
     <member type='node' ref='-39108' role='stop' />
@@ -291,7 +303,7 @@
     <tag k='to' v='C-Village' />
     <tag k='type' v='route' />
   </relation>
-  <relation id='-39220' action='modify'>
+  <relation id='-39222' action='modify'>
     <member type='node' ref='-39108' role='stop' />
     <member type='node' ref='-39124' role='platform' />
     <member type='node' ref='-39088' role='stop' />
@@ -319,7 +331,7 @@
     <tag k='type' v='route' />
     <tag k='via' v='B-Village' />
   </relation>
-  <relation id='-39222' action='modify'>
+  <relation id='-39224' action='modify'>
     <member type='node' ref='-39100' role='stop' />
     <member type='node' ref='-39114' role='platform' />
     <member type='node' ref='-39136' role='stop' />
@@ -345,7 +357,7 @@
     <tag k='type' v='route' />
     <tag k='via' v='D-Village' />
   </relation>
-  <relation id='-39224' action='modify'>
+  <relation id='-39226' action='modify'>
     <member type='node' ref='-39100' role='stop' />
     <member type='node' ref='-39116' role='platform' />
     <member type='node' ref='-39108' role='stop' />
@@ -368,7 +380,7 @@
     <tag k='to' v='C-Village' />
     <tag k='type' v='route' />
   </relation>
-  <relation id='-39226' action='modify'>
+  <relation id='-39228' action='modify'>
     <member type='node' ref='-39100' role='stop' />
     <member type='node' ref='-39114' role='platform' />
     <member type='node' ref='-39108' role='stop' />
@@ -394,7 +406,7 @@
     <tag k='to' v='C-Village' />
     <tag k='type' v='route' />
   </relation>
-  <relation id='-39298' action='modify'>
+  <relation id='-39230' action='modify'>
     <member type='node' ref='-39100' role='stop' />
     <member type='node' ref='-39114' role='platform' />
     <member type='node' ref='-39136' role='stop' />
@@ -405,7 +417,7 @@
     <member type='way' ref='-39194' role='' />
     <member type='way' ref='-39196' role='' />
     <member type='way' ref='-39166' role='' />
-    <member type='way' ref='-39300' role='' />
+    <member type='way' ref='-39218' role='' />
     <member type='way' ref='-39198' role='' />
     <member type='way' ref='-39216' role='' />
     <member type='way' ref='-39186' role='' />
@@ -421,5 +433,27 @@
     <tag k='to' v='C-Village' />
     <tag k='type' v='route' />
     <tag k='via' v='D-Village' />
+  </relation>
+  <relation id='-39239' action='modify'>
+    <member type='node' ref='-39100' role='stop' />
+    <member type='node' ref='-39114' role='platform' />
+    <member type='node' ref='-39108' role='stop' />
+    <member type='node' ref='-39122' role='platform' />
+    <member type='way' ref='-39180' role='' />
+    <member type='way' ref='-39200' role='' />
+    <member type='way' ref='-39182' role='' />
+    <member type='way' ref='-39241' role='' />
+    <member type='way' ref='-39186' role='' />
+    <member type='way' ref='-39192' role='' />
+    <tag k='comment' v='Test: using motorway_link, trunk, ..., motorway_link - no errors' />
+    <tag k='from' v='A-Village' />
+    <tag k='name' v='Bus 007: A-Village =&gt; C-Village' />
+    <tag k='network' v='Test' />
+    <tag k='operator' v='Test' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='007' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='C-Village' />
+    <tag k='type' v='route' />
   </relation>
 </osm>
