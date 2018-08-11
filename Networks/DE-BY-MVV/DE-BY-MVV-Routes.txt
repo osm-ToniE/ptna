@@ -257,9 +257,7 @@ X910;bus;ExpressBus;Klinikum Großhadern U;Weßling S;RVO/Geldhauser
 444;bus;;Grafing Bf S R;Schalldorf;Verkehrsbetrieb Ettenhuber GmbH
 445;bus;;Ebersberg S R;Erding S;Larcher, Markt Schwaben
 446;bus;;Markt Schwaben S R;Ebersberg S R;Larcher, Markt Schwaben
-#4460;bus;Ruftaxi (wurde am 09.12.2017 eingestellt);Ebersberg S R;Poing S Nord;Personenbeförderung Armin Tschanter
 447;bus;;Aßling, Rathaus;Grafing Bahnhof S R;Omnibusverkehr Reisberger GmbH
-#449;bus;Rufbus (wurde am 09.12.2017 eingestellt);Ebersberg S R;Poing S Nord;Larcher, Markt Schwaben
 451;bus;;Vaterstetten S;Vaterstetten S;Larcher, Markt Schwaben
 452;bus;;Vaterstetten S;Grub S Süd;Larcher, Markt Schwaben
 453;bus;;Glonn;Zorneding S;Verkehrsbetrieb Ettenhuber GmbH
@@ -391,7 +389,6 @@ X910;bus;ExpressBus;Klinikum Großhadern U;Weßling S;RVO/Geldhauser
 824;bus;;Eichenau S Süd;Eichenau S Süd;Demmelmair GmbH & Co
 825;bus;;Dünzelbach;Fürstenfeldbruck S;
 826;bus;;Grafrath S;Grafrath S;
-#827;bus;RufBus;Dünzelbach;Mammendorf S R;Neumeyr, Dünzelbach
 828;bus;;Grafrath;Egling a.d. Paar;
 829;bus;;Mammendorf S;Moorenweis;
 830;bus;;Lochhausen S;Puchheim S Nord;Waibel Bus GmbH
@@ -407,9 +404,6 @@ X910;bus;ExpressBus;Klinikum Großhadern U;Weßling S;RVO/Geldhauser
 842;bus;;Eichenau, Spechtstraße;Eichenau S Nord;Demmelmair GmbH & Co
 843;bus;;Olching S;Fürstenfeldbruck S;Enders Reisen
 844;bus;;Fürstenfeldbruck S;Eichenau S Nord;Neumeyr, Dünzelbach
-#847;bus;RufBus;Dünzelbach;Fürstenfeldbruck S;Neumeyr, Dünzelbach
-#848;bus;;Dünzelbach;Fürstenfeldbruck S;Neumeyr, Dünzelbach
-#849;bus;RufBus;Dünzelbach;Grafrath S;Neumeyr, Dünzelbach
 851;bus;;Germering-Unterpfaffenhofen S;Harthaus S;Busverkehr Südbayern
 852;bus;;Fürstenfeldbruck S;Germering, Kerschensteiner Schule;Busverkehr Südbayern
 853;bus;;Germering-Unterpfaffenhofen S;Puchheim Bf, Bgm.-Ertl-Straße;Griensteidl
@@ -425,12 +419,11 @@ X910;bus;ExpressBus;Klinikum Großhadern U;Weßling S;RVO/Geldhauser
 874;bus;;Maisach;Egenhofen, Dirlesried;RVO/Geldhauser
 889;bus;;Althegnenberg;Oberschweinbach;Enders Reisen
 8000;bus;Ruftaxi;Fürstenfeldbruck/Emmering;;Zeiler GmbH
-8200;bus;Ruftaxi;Landsberied/Jesenwang/Adelshofen/ Moorenweis;;Zeiler GmbH
+8200;bus;Ruftaxi;Landsberied/Jesenwang/Adelshofen/Moorenweis;;Zeiler GmbH
 8300;bus;Ruftaxi;Gernlinden/Olching/Puchheim/Gröbenzell;;Zeiler GmbH
 8400;bus;Ruftaxi;Alling/Schöngeising/Grafrath/Türkenfeld;;Zeiler GmbH
 8500;bus;Ruftaxi;Fürstenfeldbruck/Alling/Eichenau/Puchheim Ort/Germering-Unterpfaffenhofen;;Zeiler GmbH
-#8700;bus;Ruftaxi;Maisach/Unterschweinbach/Egenhofen/Pfaffenhofen (a. d. Glonn);;Zeiler GmbH
-8800;bus;Ruftaxi;Mammendorf/Oberschweinbach/Hattenhofen/ Althegnenberg/Mittelstetten;;Zeiler GmbH
+8800;bus;Ruftaxi;Mammendorf/Oberschweinbach/Hattenhofen/Althegnenberg/Mittelstetten;;Zeiler GmbH
 #
 ==== Landkreis Starnberg - 900 - 999
 901;bus;;Starnberg Nord S;Starnberg Nord S;Waibel Bus GmbH
@@ -451,12 +444,7 @@ X910;bus;ExpressBus;Klinikum Großhadern U;Weßling S;RVO/Geldhauser
 950;bus;;Herrsching S/Herrsching, Martinsweg;Starnberg Nord S/Oberalting;RVO/Geldhauser
 950V;bus;;Herrsching, Martinsweg;Oberalting;Geldhauser
 951;bus;;Starnberg Nord S;Herrsching S;Geldhauser/RVO
-#952;bus;;Inning, Marktplatz;Argelsried S;RVO/Geldhauser
-#953;bus;;Weßling S;Hechendorf S;RVO/Geldhauser
-#954;bus;;Seefeld;Hechendorf S;RVO/Geldhauser
 955;bus;;Weßling S;Starnberg Nord S;Demmelmair GmbH & Co
-#956;bus;;Seefeld;Etterschlag, Am Anger;Regionalverkehr Obb.
-#957;bus;;Herrsching S;Inning, Marktplatz;RVO/Geldhauser
 958;bus;;Tutzing S;Andechs, Kloster;Geldhauser/RVO
 961;bus;;Ammerland;Starnberg Nord S;DB Regio Bus Bayern GmbH
 964;bus;;Wieling;Starnberg S;Geldhauser/RVO
