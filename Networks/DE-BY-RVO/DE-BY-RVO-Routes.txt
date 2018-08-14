@@ -224,30 +224,30 @@
 9657;bus;Schongau - Altenstadt - Schwabsoien - Sachsenried - Schongau
 9659;bus;Schongau - Altenstadt - Hohenfurch - Schongau
 
-=== 97xx RVA?
-9718;bus;Füssen - Oberstdorf
-9742 (Linie 1);bus;Oberstdorf - Söllereckbahn - Riezlern - Hirschegg - Mittelberg - Baad
-9744;bus;Oberstdorf - Breitachklamm - Tiefenbach - Obermaiselstein - Bolsterlang - Fischen - Langenwang - Oberstdorf
-9745;bus;Oberstdorf - Rubi - Reichenbach - Schöllang - Sonthofen
-9746;bus;Hittisau - Balderschwang - Obermaiselstein - Fischen - Oberstdorf
-9747;bus;Sonthofen - Ofterschwang - Bolsterlang
-9748;bus;Sonthofen - Bad Hindelang - Oberjoch - Tannheim - Reutte/Tirol
-9749;bus;Bad Hindelang - Bad Oberdorf - Hinterstein
-9761 (Linie 5);bus;Unterwestegg - Riezlern - Ifen
-9762;bus;Oberstdorf - Renksteg - Skiflugschanze - Fellhornbahn - Birgsau
-9763;bus;Oberstdorf - Golfplatz - Christlessee - Spielmannsau
-9766/66;bus;Schöllang - Fischen - Maderhalm - Obermaiselstein
-9767;bus;Oberstdorf - Langenwang - Fischen - Sonthofen
-9772 (Linie 2);bus;Egg - Riezlern Post - Innerschwande - Schwende
-9773 (Linie 3);bus;Wäldele - Breitachbrücke - Hirschegg Walserhaus
-9774 (Linie 4);bus;Mittelberg - Höfle
-9779;bus;Hinterstein - Giebelhaus
-9781;bus;Immenstadt - Rettenberg - Kranzegg - Vorderburg - Wertach - Unterjoch - Oberjoch
-9782;bus;Immenstadt - Diepolz - Missen - Seltmans - Weitnau
-9783;bus;Immenstadt - Stein - Bräunlings - Eckarts - Niedersonthofen
-9784;bus;Immenstadt - Untermaiselstein - Rettenberg - Wolfis
-9785;bus;Oy - Wertach
-9795;bus;Kalzhofen-Oberstaufen-Weißach(Aach)-Steibis-Imbergbahn-Hochgratbahn
+#=== 97xx RVA?
+#9718;bus;Füssen - Oberstdorf
+#9742 (Linie 1);bus;Oberstdorf - Söllereckbahn - Riezlern - Hirschegg - Mittelberg - Baad
+#9744;bus;Oberstdorf - Breitachklamm - Tiefenbach - Obermaiselstein - Bolsterlang - Fischen - Langenwang - Oberstdorf
+#9745;bus;Oberstdorf - Rubi - Reichenbach - Schöllang - Sonthofen
+#9746;bus;Hittisau - Balderschwang - Obermaiselstein - Fischen - Oberstdorf
+#9747;bus;Sonthofen - Ofterschwang - Bolsterlang
+#9748;bus;Sonthofen - Bad Hindelang - Oberjoch - Tannheim - Reutte/Tirol
+#9749;bus;Bad Hindelang - Bad Oberdorf - Hinterstein
+#9761 (Linie 5);bus;Unterwestegg - Riezlern - Ifen
+#9762;bus;Oberstdorf - Renksteg - Skiflugschanze - Fellhornbahn - Birgsau
+#9763;bus;Oberstdorf - Golfplatz - Christlessee - Spielmannsau
+#9766/66;bus;Schöllang - Fischen - Maderhalm - Obermaiselstein
+#9767;bus;Oberstdorf - Langenwang - Fischen - Sonthofen
+#9772 (Linie 2);bus;Egg - Riezlern Post - Innerschwande - Schwende
+#9773 (Linie 3);bus;Wäldele - Breitachbrücke - Hirschegg Walserhaus
+#9774 (Linie 4);bus;Mittelberg - Höfle
+#9779;bus;Hinterstein - Giebelhaus
+#9781;bus;Immenstadt - Rettenberg - Kranzegg - Vorderburg - Wertach - Unterjoch - Oberjoch
+#9782;bus;Immenstadt - Diepolz - Missen - Seltmans - Weitnau
+#9783;bus;Immenstadt - Stein - Bräunlings - Eckarts - Niedersonthofen
+#9784;bus;Immenstadt - Untermaiselstein - Rettenberg - Wolfis
+#9785;bus;Oy - Wertach
+#9795;bus;Kalzhofen-Oberstaufen-Weißach(Aach)-Steibis-Imbergbahn-Hochgratbahn
 
 === 98xx
 9821;bus;Schongau - Bernbeuren - Lechbruck - Prem - Steingaden
