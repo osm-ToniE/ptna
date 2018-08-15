@@ -3,6 +3,8 @@
 use warnings;
 use strict;
 
+BEGIN { my $PATH = $0; $PATH =~ s|/[^/]*$||; unshift( @INC, $PATH ); }
+
 ####################################################################################################################
 #
 #
@@ -14,7 +16,8 @@ binmode STDOUT, ":utf8";
 binmode STDERR, ":utf8";
 
 use Getopt::Long;
-use XML::Simple;
+use OSM::XML       qw( parse );
+use OSM::Data      qw( %META %NODES %WAYS %RELATIONS );
 use Data::Dumper;
 use Encode;
 
@@ -147,18 +150,14 @@ if ( $verbose ) {
 my $routes_xml              = undef;
 my @routes_csv              = ();
 my %refs_of_interest        = ();
-my %collected_tags          = ();
 my $key                     = undef;
 my $value                   = undef;
 my @rest                    = ();
 
+my $xml_has_meta            = 0;        # does the XML file include META information?
 my $xml_has_relations       = 0;        # does the XML file include any relations? If not, we will exit
 my $xml_has_ways            = 0;        # does the XML file include any ways, then we can make a big analysis
 my $xml_has_nodes           = 0;        # does the XML file include any nodes, then we can make a big analysis
-
-my %NODES                   = ();       # all ways in the XML file 
-my %WAYS                    = ();       # all nodes in the XML file
-my %RELATIONS               = ();       # all relations in the XML file
 
 my %PT_relations_with_ref   = ();       # includes "positive" (the ones we are looking for) as well as "negative" (the other ones) route/route_master relations and "skip"ed relations (where 'network' or 'operator' does not fit)
 my %PT_relations_without_ref= ();       # includes any route/route_master relations without 'ref' tag
@@ -174,7 +173,6 @@ my %used_networks           = ();       # 'network' values that did match
 my %unused_networks         = ();       # 'network' values that did not match
 
 
-my $xml_hash_ref            = undef;
 my $relation_ptr            = undef;    # a pointer in Perl to a relation structure
 my $relation_id             = undef;    # the OSM ID of a relation
 my $way_id                  = undef;    # the OSM ID of a way
@@ -186,7 +184,6 @@ my $member                  = undef;
 my $node                    = undef;
 my $entry                   = undef;
 my $type                    = undef;
-my $member_index                    = 0;
 my $relation_index                  = 0;
 my $route_master_relation_index     = 0;    # counts the number of relation members in a 'route_master' which do not have 'role' ~ 'platform' (should be equal to $relation_index')
 my $route_relation_index            = 0;    # counts the number of relation members in a 'route' which are not 'platforms' (should be zero)
@@ -265,13 +262,17 @@ my %colour_table            = ( 'black'         => '#000000',
 
 if ( $osm_xml_file ) {
     printf STDERR "%s Reading %s\n", get_time(), decode('utf8', $osm_xml_file )    if ( $verbose );
-    $routes_xml  = XMLin( $osm_xml_file,  ForceArray => 1 );
-    printf STDERR "%s %s read\n", get_time(), decode('utf8', $osm_xml_file )       if ( $verbose );
-    # print Dumper( $routes_xml )        ; #                                         if ( $debug   );
-
-    $xml_has_relations  = 1  if ( $routes_xml->{'relation'} );   
-    $xml_has_ways       = 1  if ( $routes_xml->{'way'}      );   
-    $xml_has_nodes      = 1  if ( $routes_xml->{'node'}     );   
+    my $ret = parse( 'data' => $osm_xml_file, 'debug' => $debug, 'verbose' => $verbose );
+    
+    if ( $ret ) {
+        printf STDERR "%s %s read\n", get_time(), decode('utf8', $osm_xml_file )       if ( $verbose );
+        $xml_has_meta       = 1  if ( scalar(keys(%META)) );
+        $xml_has_relations  = 1  if ( scalar(keys(%RELATIONS)) );
+        $xml_has_ways       = 1  if ( scalar(keys(%WAYS))      );
+        $xml_has_nodes      = 1  if ( scalar(keys(%NODES))     );
+    } else {
+        printf STDERR "%s %s read failed with return code %s\n", get_time(), decode('utf8', $osm_xml_file ), $ret       if ( $verbose );
+    }
 }
 
 if ( $xml_has_relations == 0 ) {
@@ -356,14 +357,12 @@ if ( $routes_file ) {
 #
 #############################################################################################
 
-if ( $routes_xml->{'meta'} ) {
-    foreach my $meta ( @{$routes_xml->{'meta'}} ) {
-        if ( $meta->{'osm_base'} ) {
-            $osm_base = $meta->{'osm_base'};
-        }
-        if ( $meta->{'areas'} ) {
-            $areas = $meta->{'areas'};
-        }
+if ( $xml_has_meta ) {
+    if ( $META{'osm_base'} ) {
+        $osm_base = $META{'osm_base'};
+    }
+    if ( $META{'areas'} ) {
+        $areas = $META{'areas'};
     }
     $osm_base =~ s/T/ /g;
     $osm_base =~ s/Z/ UTC/g;
@@ -421,29 +420,12 @@ my $number_of_unused_networks           = 0;
 
 printf STDERR "%s Converting relations\n", get_time()       if ( $verbose );
 
-foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
+foreach $relation_id ( keys ( %RELATIONS ) ) {
     
     $number_of_relations++;
     
-    %collected_tags  = ();
-
-    $xml_hash_ref   = $routes_xml->{'relation'}{$relation_id};
-    
-    #
-    # convert XML data like <tag k='name' v='Ottobrunn' /> into: colletced_tags{'name'} = 'Ottobrunn'
-    foreach $tag ( @{$xml_hash_ref->{'tag'}} ) {
-        if ( $tag->{'k'} ) {
-            $collected_tags{$tag->{'k'}} = $tag->{'v'};
-        }
-    }
-
-    while ( ($key,$value) = each( %collected_tags ) ) {
-        $RELATIONS{$relation_id}->{'tag'}->{$key} = $value;
-        printf STDERR "%s RELATIONS{%s}->{'tag'}->{%s} = %s\n", get_time(), $relation_id, $key, $value    if ( $debug );
-    }
-
-    $ref        = $collected_tags{'ref'};
-    $type       = $collected_tags{'type'};
+    $ref        = $RELATIONS{$relation_id}->{'tag'}->{'ref'};
+    $type       = $RELATIONS{$relation_id}->{'tag'}->{'type'};
 
     if ( $type ) {
         #
@@ -451,7 +433,7 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
         #
         if ( $type eq 'route_master' || $type eq 'route' ) {
     
-            $route_type = $collected_tags{$collected_tags{'type'}};
+            $route_type = $RELATIONS{$relation_id}->{'tag'}->{$RELATIONS{$relation_id}->{'tag'}->{'type'}};
     
             if ( $route_type ) {    
             
@@ -461,9 +443,9 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                 # if 'sort_name' is not defined or not set, it inherits the value from 'ref_trips' and then from 'name'
                 # finally, the relation-id is appended to ensure that all routes are always printed in the same order for the Wiki page, even if two routes have the ref_trips/name
                 #
-                $collected_tags{'sort_name'} = $collected_tags{'ref_trips'}     unless ( $collected_tags{'sort_name'} );
-                $collected_tags{'sort_name'} = $collected_tags{'name'}          unless ( $collected_tags{'sort_name'} );
-                $collected_tags{'sort_name'} = $collected_tags{'sort_name'} ? $collected_tags{'sort_name'} . '-' . $relation_id : $relation_id;
+                $RELATIONS{$relation_id}->{'tag'}->{'sort_name'} = $RELATIONS{$relation_id}->{'tag'}->{'ref_trips'}     unless ( $RELATIONS{$relation_id}->{'tag'}->{'sort_name'} );
+                $RELATIONS{$relation_id}->{'tag'}->{'sort_name'} = $RELATIONS{$relation_id}->{'tag'}->{'name'}          unless ( $RELATIONS{$relation_id}->{'tag'}->{'sort_name'} );
+                $RELATIONS{$relation_id}->{'tag'}->{'sort_name'} = $RELATIONS{$relation_id}->{'tag'}->{'sort_name'} ? $RELATIONS{$relation_id}->{'tag'}->{'sort_name'} . '-' . $relation_id : $relation_id;
         
                 $relation_ptr = undef;
                 
@@ -482,18 +464,18 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                     
                     # match_network() returns either "keep long" or "keep short" or "skip"
                     #
-                    if ( $status =~ m/keep/ ) { $status = match_network(  $collected_tags{'network'} ); }
+                    if ( $status =~ m/keep/ ) { $status = match_network(  $RELATIONS{$relation_id}->{'tag'}->{'network'} ); }
                     
                     if ( $status =~ m/keep/ ) {
-                        if ( $collected_tags{'network'} ) {
-                            $used_networks{$collected_tags{'network'}}->{$relation_id} = 1;
+                        if ( $RELATIONS{$relation_id}->{'tag'}->{'network'} ) {
+                            $used_networks{$RELATIONS{$relation_id}->{'tag'}->{'network'}}->{$relation_id} = 1;
                         }
                         else {
                             $used_networks{'__unset_network__'}->{$relation_id} = 1;
                         }
                     } elsif ( $status ne 'well_known' ) {
-                        if ( $collected_tags{'network'} ) {
-                            $unused_networks{$collected_tags{'network'}}->{$relation_id} = 1;
+                        if ( $RELATIONS{$relation_id}->{'tag'}->{'network'} ) {
+                            $unused_networks{$RELATIONS{$relation_id}->{'tag'}->{'network'}}{$relation_id} = 1;
                         }
                         else {
                             $unused_networks{'__unset_network__'}->{$relation_id} = 1;
@@ -503,7 +485,7 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                     
                     # match_operator() returns either "keep" or "skip"
                     #
-                    if ( $status =~ m/keep/ ) { $status = match_operator( $collected_tags{'operator'} ); }
+                    if ( $status =~ m/keep/ ) { $status = match_operator( $RELATIONS{$relation_id}->{'tag'}->{'operator'} ); }
                                 
                     # match_ref_and_pt_type() returns "keep positive", "keep negative", "skip"
                     # "keep positive"   if $ref and $type match the %refs_of_interest (list of lines from CSV file)
@@ -512,7 +494,7 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                     #
                     if ( $status =~ m/keep/ ) { $status = match_ref_and_pt_type( $ref, $route_type ); }
                                 
-                    printf STDERR "%-15s: ref=%-10s\ttype=%15s\tnetwork=%s\toperator=%s\tRelation: %d\n", $status, $ref, $type, $collected_tags{'network'}, $collected_tags{'operator'}, $relation_id   if ( $debug );
+                    printf STDERR "%-15s: ref=%-10s\ttype=%15s\tnetwork=%s\toperator=%s\tRelation: %d\n", $status, $ref, $type, $RELATIONS{$relation_id}->{'tag'}->{'network'}, $RELATIONS{$relation_id}->{'tag'}->{'operator'}, $relation_id   if ( $debug );
                     
                     $section = undef;
                     if ( $status =~ m/(positive|negative|skip|other|suspicious|well_known)/ ) {
@@ -523,9 +505,6 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                         if ( $section eq 'positive' || $section eq 'negative' ) {
                             my $ue_ref = $ref;
                             $PT_relations_with_ref{$section}->{$ue_ref}->{$type}->{$route_type}->{$relation_id} = $RELATIONS{$relation_id};
-                            $RELATIONS{$relation_id}->{'tag'}->{'ref'}  = $ref;
-                            $RELATIONS{$relation_id}->{'tag'}->{'type'} = $type;
-                            $RELATIONS{$relation_id}->{'tag'}->{$type}  = $route_type;
                             $relation_ptr = $RELATIONS{$relation_id};
                             $number_of_positive_relations++     if ( $section eq "positive"     );
                             $number_of_negative_relations++     if ( $section eq "negative"     );
@@ -541,25 +520,22 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                 }
                 else {
                     $PT_relations_without_ref{$route_type}->{$relation_id} = $RELATIONS{$relation_id};
-                    $RELATIONS{$relation_id}->{'tag'}->{'type'} = $type;
-                    $RELATIONS{$relation_id}->{'tag'}->{'type'} = $type;
-                    $RELATIONS{$relation_id}->{'tag'}->{$type}  = $route_type;
                     $relation_ptr = $RELATIONS{$relation_id};
                     $number_of_relations_without_ref++;
 
                     # match_network() returns either "keep long" or "keep short" or "skip" (to do: or "suspicious")
                     #
-                    my $status = match_network( $collected_tags{'network'} );
+                    my $status = match_network( $RELATIONS{$relation_id}->{'tag'}->{'network'} );
                     if ( $status =~ m/keep/ ) {
-                        if ( $collected_tags{'network'} ) {
-                            $used_networks{$collected_tags{'network'}}->{$relation_id} = 1;
+                        if ( $RELATIONS{$relation_id}->{'tag'}->{'network'} ) {
+                            $used_networks{$RELATIONS{$relation_id}->{'tag'}->{'network'}}->{$relation_id} = 1;
                         }
                         else {
                             $used_networks{'__unset_network__'}->{$relation_id} = 1;
                         }
                     } else {
-                        if ( $collected_tags{'network'} ) {
-                            $unused_networks{$collected_tags{'network'}}->{$relation_id} = 1;
+                        if ( $RELATIONS{$relation_id}->{'tag'}->{'network'} ) {
+                            $unused_networks{$RELATIONS{$relation_id}->{'tag'}->{'network'}}->{$relation_id} = 1;
                         }
                         else {
                             $unused_networks{'__unset_network__'}->{$relation_id} = 1;
@@ -569,12 +545,6 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                 
                 if ( $relation_ptr ) {
         
-                    while ( ($key,$value) = each( %collected_tags ) ) {
-                        $relation_ptr->{'tag'}->{$key} = $value;
-                        printf STDERR "%s relation_ptr->{'tag'}->{%s} = %s\n", get_time(), $relation_id, $key, $value    if ( $debug );
-                    }
-        
-                    @{$relation_ptr->{'members'}}                = ();
                     @{$relation_ptr->{'relation'}}              = ();
                     @{$relation_ptr->{'route_master_relation'}} = ();
                     @{$relation_ptr->{'route_relation'}}        = ();
@@ -586,7 +556,6 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                     @{$relation_ptr->{'__issues__'}}            = ();
                     @{$relation_ptr->{'__notes__'}}             = ();
                     $relation_ptr->{'__printed__'}              = 0;
-                    $member_index                    = 0;   # counts the number of all members
                     $relation_index                  = 0;   # counts the number of members which are relations (any relation: 'route' or with 'role' = 'platform', ...
                     $route_master_relation_index     = 0;   # counts the number of relation members in a 'route_master' which do not have 'role' ~ 'platform' (should be equal to $relation_index')
                     $route_relation_index            = 0;   # counts the number of relation members in a 'route' which do not have 'role' ~ 'platform' (should be zero)
@@ -595,12 +564,8 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
                     $node_index                      = 0;   # counts the number of node members
                     $role_platform_index             = 0;   # counts the number of members which have 'role' '^platform.*'
                     $role_stop_index                 = 0;   # counts the number of members which have 'role' '^stop.*'
-                    foreach $member ( @{$xml_hash_ref->{'member'}} ) {
+                    foreach $member ( @{$relation_ptr->{'members'}} ) {
                         if ( $member->{'type'} ) {
-                            ${$relation_ptr->{'members'}}[$member_index]->{'type'} = $member->{'type'};
-                            ${$relation_ptr->{'members'}}[$member_index]->{'ref'}  = $member->{'ref'};
-                            ${$relation_ptr->{'members'}}[$member_index]->{'role'} = $member->{'role'};
-                            $member_index++;
                             if ( $member->{'type'} eq 'relation' ) {
                                 ${$relation_ptr->{'relation'}}[$relation_index]->{'ref'}  = $member->{'ref'};
                                 ${$relation_ptr->{'relation'}}[$relation_index]->{'role'} = $member->{'role'};
@@ -667,13 +632,9 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
             #
             # secondly analyze multipolygon relations
             #
-            if ( $collected_tags{'public_transport'}               &&
-                 $collected_tags{'public_transport'} eq 'platform'    ) {
+            if ( $RELATIONS{$relation_id}->{'tag'}->{'public_transport'}               &&
+                 $RELATIONS{$relation_id}->{'tag'}->{'public_transport'} eq 'platform'    ) {
                 $PL_MP_relations{$relation_id} = $RELATIONS{$relation_id};
-                while ( ($key,$value) = each( %collected_tags ) ) {
-                    $RELATIONS{$relation_id}->{'tag'}->{$key} = $value;
-                    printf STDERR "%s PL_MP_relation->{'tag'}->{%s} = %s\n", get_time(), $relation_id, $key, $value    if ( $debug );
-                }
                 $number_of_pl_mp_relations++;
             }
             else {
@@ -686,13 +647,9 @@ foreach $relation_id ( keys ( %{$routes_xml->{'relation'}} ) ) {
             #
             # thirdly analyze public_transport relations (stop_area, stop_area_group), not of interest though for the moment
             #
-            if ( $collected_tags{'public_transport'}               &&
-                 $collected_tags{'public_transport'} eq 'stop_area'    ) {
+            if ( $RELATIONS{$relation_id}->{'tag'}->{'public_transport'}               &&
+                 $RELATIONS{$relation_id}->{'tag'}->{'public_transport'} eq 'stop_area'    ) {
                 $SA_relations{$relation_id} = $RELATIONS{$relation_id};
-                while ( ($key,$value) = each( %collected_tags ) ) {
-                    $RELATIONS{$relation_id}->{'tag'}->{$key} = $value;
-                    printf STDERR "%s SA_relation->{'tag'}->{%s} = %s\n", get_time(), $relation_id, $key, $value    if ( $debug );
-                }
                 $number_of_sa_relations++;
             }
             else {
@@ -753,39 +710,20 @@ if ( $verbose ) {
 if ( $xml_has_ways ) {
     printf STDERR "%s Converting ways\n", get_time()       if ( $verbose );
     
-    foreach $way_id ( keys ( %{$routes_xml->{'way'}} ) ) {
+    foreach $way_id ( keys ( %WAYS ) ) {
         
         $number_of_ways++;
         
-        $xml_hash_ref   = $routes_xml->{'way'}{$way_id};
-        
-        #
-        # convert XML data like "<tag k='name' v='Ottobrunn' />" into: $WAYS{$way_id}->{'name'} = 'Ottobrunn'
-        #
-        foreach $tag ( @{$xml_hash_ref->{'tag'}} ) {
-            if ( $tag->{'k'} ) {
-                $WAYS{$way_id}->{'tag'}->{$tag->{'k'}} = $tag->{'v'};
-                printf STDERR "%s WAYS{%s}->{'tag'}->{%s} = %s\n", get_time(), $way_id, $tag->{'k'}, $tag->{'v'}    if ( $debug );
-            }
-        }
-        
-        @{$WAYS{$way_id}->{'chain'}} = ();
-        #
-        # push XML data like "<nd ref="3124033278"/>" to the array: $WAYS{$way_id}->{'chain'}
-        # mark ref="3124033278" as being found in an extra hash: $WAYS{$way_id}->{'node_hash'}
-        #
-        foreach $node ( @{$xml_hash_ref->{'nd'}} ) {
-            if ( $node->{'ref'} ) {
-                push( @{$WAYS{$way_id}->{'chain'}}, $node->{'ref'} );
-                printf STDERR "%s push( WAYS{%s}->{'chain'}, %s )\n", get_time(), $way_id, $node->{'ref'}    if ( $debug );
-                if ( $WAYS{$way_id}->{'node_hash'}->{$node->{'ref'}} ) {
-                    $WAYS{$way_id}->{'node_hash'}->{$node->{'ref'}}++;
+        foreach $node ( @{$WAYS{$way_id}->{'chain'}} ) {
+            if ( $node ) {
+                if ( $WAYS{$way_id}->{'node_hash'}->{$node} ) {
+                    $WAYS{$way_id}->{'node_hash'}->{$node}++;
                 }
                 else {
-                    $WAYS{$way_id}->{'node_hash'}->{$node->{'ref'}} = 1;
+                    $WAYS{$way_id}->{'node_hash'}->{$node} = 1;
                 }
-                $WAYS{$way_id}->{'first_node'} = $node->{'ref'}     unless ( $WAYS{$way_id}->{'first_node'} );
-                $WAYS{$way_id}->{'last_node'}  = $node->{'ref'};
+                $WAYS{$way_id}->{'first_node'} = $node     unless ( $WAYS{$way_id}->{'first_node'} );
+                $WAYS{$way_id}->{'last_node'}  = $node;
             }
         }
         
@@ -831,21 +769,10 @@ if ( $xml_has_ways ) {
 if ( $xml_has_nodes ) {
     printf STDERR "%s Converting nodes\n", get_time()       if ( $verbose );
     
-    foreach $node_id ( keys ( %{$routes_xml->{'node'}} ) ) {
+    foreach $node_id ( keys ( %NODES ) ) {
         
         $number_of_nodes++;
         
-        $xml_hash_ref   = $routes_xml->{'node'}{$node_id};
-        
-        #
-        # convert XML data like "<tag k='name' v='Ottobrunn' />" into: $NODES{$node_id}->{'tag'}->{'name'} = 'Ottobrunn'
-        foreach $tag ( @{$xml_hash_ref->{'tag'}} ) {
-            if ( $tag->{'k'} ) {
-                $NODES{$node_id}->{'tag'}->{$tag->{'k'}} = $tag->{'v'};
-                printf STDERR "%s NODES{%s}->{'tag'}->{%s} = %s\n", get_time(), $node_id, $tag->{'k'}, $tag->{'v'}    if ( $debug );
-            }
-        }
-
         #
         # lets categorize the node as stop_position or platform or ...
         #
