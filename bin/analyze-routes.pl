@@ -3665,8 +3665,7 @@ sub printInitialHeader {
             push( @HTML_main, "\n" );
             push( @HTML_main, "<br>\n" );
         }
-        push( @HTML_main, "Die Analyse läuft in der Regel abends zwischen 19:00 und 20:00 Uhr lokaler Zeit München.<br>\n" );
-        push( @HTML_main, "<br>\n" );
+        push( @HTML_main, "Die Analyse läuft auf einem Raspberry Pi 2 Model B in der Regel nachts zwischen 01:00 und 04:00 Uhr lokaler Zeit München.<br>\n" );
         push( @HTML_main, "Die Daten werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändert hat.<br>\n" );
         push( @HTML_main, "<br>\n" );
         push( @HTML_main, "Eine Erläuterung der Fehlertexte ist auf der Seite von <a href='https://wiki.openstreetmap.org/wiki/User:ToniE/analyze-routes#Momentane_Pr.C3.BCfungen'>analyze-routes</a> zu finden.<br>\n" );
