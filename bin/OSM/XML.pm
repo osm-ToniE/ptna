@@ -54,6 +54,7 @@ sub parse {
                     }
                     last if ( $count > 5 );
                 }
+                close( DATA );
                 my $GPO = Geo::Parse::OSM->new( $infile );
         
                 if ( $GPO ) {
@@ -75,37 +76,29 @@ sub _parse_CB {
     my $obj_type = $_[0]->{'type'};
     my $obj_id   = $_[0]->{'id'};
     
-    if ( $obj_type && $obj_id ) {
+    if ( $obj_type ) {
         if ( $obj_type eq 'node' ) {
-            
             if ( $obj_id ) {
                 _readDataInto( \%{$NODES{$obj_id}}, $_[0] )  if ( $obj_id );
             } else {
                 printf STDERR "id not set for type: %s\n",$obj_type;
             }
-            
         } elsif ( $obj_type eq 'way' ) {
-            
             if ( $obj_id ) {
                 _readDataInto( \%{$WAYS{$obj_id}}, $_[0] )  if ( $obj_id );
             } else {
                 printf STDERR "id not set for type: %s\n",$obj_type;
             }
-            
         } elsif ( $obj_type eq 'relation' ) {
             if ( $obj_id ) {
                 _readDataInto( \%{$RELATIONS{$obj_id}}, $_[0] );
             } else {
                 printf STDERR "id not set for type: %s\n",$obj_type;
             }
-            
         } elsif ( $obj_type eq 'bounds' ) {
-            
             ; # ignore
-            
         } else {
             printf STDERR "unknown type %s\n", $obj_type;
-            
         }
     } else {
         printf STDERR "type not set\n"      unless ( $obj_type );

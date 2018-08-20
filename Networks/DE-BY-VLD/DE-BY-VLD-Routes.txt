@@ -36,10 +36,10 @@
 
 == Stadtbusnetz Deggendorf (gehören zum RBO-Netzwerk)
 
-1;bus;(=RBO 4001);;;
-2;bus;(=RBO 4002);;;
-3;bus;(=RBO 4003);;;
-4;bus;(=RBO 4004);;;
+4001/1;bus;(=RBO 4001);;;
+4002/2;bus;(=RBO 4002);;;
+4003/3;bus;(=RBO 4003);;;
+4004/4;bus;(=RBO 4004);;;
 
 
 == Stadtbus Plattling
