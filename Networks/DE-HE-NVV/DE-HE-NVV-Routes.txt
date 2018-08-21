@@ -58,9 +58,9 @@
 6;tram;;Brückenhof;Ihringshäuser Straße;Kasseler Verkehrs-Gesellschaft AG
 7;tram;;Hauptbahnhof;Wolfsanger;Kasseler Verkehrs-Gesellschaft AG
 8;tram;;Hessenschanze => Kaufungen-Papierfabrik;
-RT1;tram;eventuell eingestellt/verändert;Kassel;Hümme;RTG
-RT4;tram;eventuell eingestellt/verändert;Kassel;Wolfhagen;RBK
-RT 5;tram;eventuell eingestellt/verändert;Kassel;Melsungen;RBK
+RT1;tram;;Kassel;Hümme;RTG
+RT4;tram;;Kassel;Wolfhagen;RBK
+RT5;tram;;Kassel;Melsungen;RBK
 
 == Busse
 
@@ -71,6 +71,8 @@ RT 5;tram;eventuell eingestellt/verändert;Kassel;Melsungen;RBK
 === 100 .. 199
 
 === 200 .. 299
+200;bus;;Eschwege;Hessisch Lichtenau;EOV Frölich
+290;bus;;Eschwege;Hessisch Lichtenau;EOV Frölich
 
 === 300 .. 399
 
