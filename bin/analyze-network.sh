@@ -165,7 +165,7 @@ then
 
                 if [ -f "$HTML_FILE.save" -a -s "$HTML_FILE.save" ]
                 then                
-                    diff $HTML_FILE $HTML_FILE.save > $HTML_FILE.diff
+                    diff $HTML_FILE.save $HTML_FILE > $HTML_FILE.diff
                     echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $HTML_FILE.diff)
                 else
                     rm -f $HTML_FILE.save
@@ -196,7 +196,7 @@ then
         then
             if [ -f "$HTML_FILE.save" ]
             then
-                diff $HTML_FILE $HTML_FILE.save > $HTML_FILE.diff
+                diff $HTML_FILE.save $HTML_FILE > $HTML_FILE.diff
             
                 echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $HTML_FILE.diff)
             
