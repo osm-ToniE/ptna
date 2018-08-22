@@ -79,13 +79,13 @@ sub _parse_CB {
     if ( $obj_type ) {
         if ( $obj_type eq 'node' ) {
             if ( $obj_id ) {
-                _readDataInto( \%{$NODES{$obj_id}}, $_[0] )  if ( $obj_id );
+                _readDataInto( \%{$NODES{$obj_id}}, $_[0] );
             } else {
                 printf STDERR "id not set for type: %s\n",$obj_type;
             }
         } elsif ( $obj_type eq 'way' ) {
             if ( $obj_id ) {
-                _readDataInto( \%{$WAYS{$obj_id}}, $_[0] )  if ( $obj_id );
+                _readDataInto( \%{$WAYS{$obj_id}}, $_[0] );
             } else {
                 printf STDERR "id not set for type: %s\n",$obj_type;
             }
