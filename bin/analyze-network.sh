@@ -18,10 +18,18 @@ if [ -z "$PREFIX"              -o \
      -z "$WIKI_ROUTES_PAGE"    -o \
      -z "$FILE_DIFF"           -o \
      -z "$TARGET_HOST"         -o \
+     -z "$TARGET_LOC"         -o \
      -z "$ANALYSIS_OPTIONS"        ]
 then
-    echo "'settings.sh' file: some variables are unset"
-    echo "Please specify: PREFIX, OVERPASS_QUERY, ANALYSIS_PAGE, WIKI_ROUTES_PAGE, FILE_DIFF, TARGET_HOST, ANALYSIS_OPTIONS"
+    [ -z "$TARGET_HOST"      ] && echo "Please specify: TARGET_HOST as environment variable outside the tools"
+    [ -z "$TARGET_LOC"       ] && echo "Please specify: TARGET_LOC as environment variable outside the tools"
+    echo "'settings.sh' file: unset variable(s)"
+    [ -z "$PREFIX"           ] && echo "Please specify: PREFIX"
+    [ -z "$OVERPASS_QUERY"   ] && echo "Please specify: OVERPASS_QUERY"
+    [ -z "$ANALYSIS_PAGE"    ] && echo "Please specify: ANALYSIS_PAGE"
+    [ -z "$WIKI_ROUTES_PAGE" ] && echo "Please specify: WIKI_ROUTES_PAGE"
+    [ -z "$FILE_DIFF"        ] && echo "Please specify: FILE_DIFF"
+    [ -z "$ANALYSIS_OPTIONS" ] && echo "Please specify: ANALYSIS_OPTIONS"
     echo "... terminating"
     exit 2
 fi
@@ -29,8 +37,6 @@ fi
 ROUTES_FILE="$PREFIX-Routes.txt"
 OSM_XML_FILE="$PREFIX-Data.xml"
 HTML_FILE="$PREFIX-Analysis.html"
-
-TARGET_LOC="analyze-routes"
 
 #
 # 
