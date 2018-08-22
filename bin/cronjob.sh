@@ -3,25 +3,28 @@
 #
 # analyze ÖPNV networks via cronjob
 #
+export LANG=C
 
 PATH=$PWD/bin:$PATH
 
-analyze-all-networks.sh -oau > analyze-all-networks.log 2>&1 < /dev/null
+LOGFILE=analyze-all-networks.txt
 
-emptyxml=$(ls Networks/*/*.xml | fgrep -c " 0 $(date '+%b %d') ")
+analyze-all-networks.sh -oau > $LOGFILE 2>&1 < /dev/null
 
-if [ "$emptyxml" -lt 10 ]
+emptyxml=$(ls -l Networks/*/*.xml | fgrep -c " 0 $(date '+%b %d') ")
+
+if [ "$emptyxml" -gt 0 -a "$emptyxml" -lt 10 ]
 then
     # most of the analysis succeeded, let's try a second time for the others
     
     sleep 300
     
-    analyze-all-networks.sh -Oau >> analyze-all-networks.log 2>&1 < /dev/null
+    analyze-all-networks.sh -Oau >> $LOGFILE 2>&1 < /dev/null
 fi
 
 if [ -n "$TARGET_HOST" -a -n "$TARGET_LOC" ]
 then
-    echo -e "put analyze-all-networks.log $TARGET_LOC/\nchmod 644 $TARGET_LOC/analyze-all-networks.log" | sftp -b - $TARGET_HOST
+    echo -e "put $LOGFILE $TARGET_LOC/\nchmod 644 $TARGET_LOC/$LOGFILE" | sftp -b - $TARGET_HOST
 fi
 
 
