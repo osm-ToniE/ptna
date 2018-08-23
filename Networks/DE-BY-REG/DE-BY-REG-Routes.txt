@@ -47,6 +47,11 @@ Wanderbahn;train;(historische Bahn auf der Linie der WBA 4);;;
 
 == Regionalbusse Landkreis Regen
 
+== Stadtbus Regen
+
+1;bus;;;;
+2;bus;;;;
+3;bus;;;;
 
 === RBO Linien (4xxx)
 
@@ -94,7 +99,7 @@ Wanderbahn;train;(historische Bahn auf der Linie der WBA 4);;;
 7133;bus;;;;
 7136;bus;;;;
 7138;bus;;;;
-7142;bus;;;;
+7142;bus;;Zwiesel;Ragenstein/Klautzenbach;
 7143;bus;;;;
 7144;bus;;;;
 7148;bus;;;;
