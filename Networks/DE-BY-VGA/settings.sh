@@ -12,7 +12,7 @@ NETWORK_SHORT="VGA|JVB|RBA|INVG|VGN|VLK"
 
 ANALYSIS_PAGE="Eichstätt/Transportation/Analyse"
 WIKI_ROUTES_PAGE="Eichstätt/Transportation/Analyse/DE-BY-VGA-Linien"
-FILE_DIFF="200"
+FILE_DIFF="204"
 
 ANALYSIS_OPTIONS="--max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-version --check-osm-separator --check-motorway-link --multiple-ref-type-entries=allow --positive-notes --coloured-sketchline"
 
