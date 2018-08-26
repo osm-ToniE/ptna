@@ -67,8 +67,72 @@ RT5;tram;;Kassel;Melsungen;RBK
 - noch zu definieren, Struktur als Vorschlag
 
 === 10 .. 99
+10;bus;;Rasenallee;Auestadion;KVG
+11;bus;;Vellmar;DEZ-Einkaufszentrum;KVG
+12;bus;;Leipziger Platz;Weserspitze;KVG
+13;bus;;Auestadion;Weserspitze;KVG
+14;bus;;Am Kubergraben;Königsplatz/Mauerstraße;KVG
+16;bus;;Auestadion;Rothenburg;KVG
+17;bus;;Kassel Hauptbahnhof;Dennhäuser Straße;KVG
+17E;bus;;Fuldabrück;Guxhagen;KVG
+21;bus;;Brückenhof;Druseltal;KVG
+22;bus;;Druseltal;Habichtswald;KVG
+23;bus;Bergparkbus;Wilhelmshöhe(Park);Herkules;KVG
+25;bus;;Auestadion;Rathaus/Fünffensterstraße;KVG
+26;bus;;Hasenecke;Wolfsgraben;KVG
+27;bus;;Ihringhäuser Straße;Wolfsanger;KVG
+28;bus;;Holländische Straße;Warteberg;KVG
+29;bus;;Leipziger Platz;Gartenstadt Eichwald;KVG
+30;bus;;Kassel Platz der Deutschen Einheit;Eschenrode;DB Regio Bus Mitte
+31;bus;;Sanderhausen;Heiligenrode;DB Regio Bus Mitte
+32;bus;;Kassel;Landwehrhagen;DB Regio Bus Mitte
+33;bus;;Staufenberg;Niestetal;DB Regio Bus Mitte
+34;bus;;Kaufungen;Uschlag;DB Regio Bus Mitte
+34.1;bus;DRK Klinik Oberkaufungen;;;
+35;bus;;Berghausen;Lindenberg;DB Regio Bus Mitte
+35A;bus;Ast;Berghausen;Lindenberg;DB Regio Bus Mitte
+36;bus;;Lohfelden;Berghausen;DB Regio Bus Mitte
+37;bus;;Frauenhofer Institut;Söhrewald;DB Regio Bus Mitte
+39;bus;zu löschen, Bus39 ist beim NVV nicht gelistet;;;
+40;bus;;Ihringhauser Straße;Holzhausen;Reisedienst Bonte
+42;bus;;Ihringhauser Straße;Hann. Münden;Reisedienst Bonte
+43;bus;;Obervellmar;Simmershausen;Reisedienst Bonte
+44;bus;;Holländische Straße;Obervellmar;Reisedienst Bonte
+45;bus;;Kassel;Vellmar;Reisedienst Bonte
+46;bus;;Calden;Fürstenwald;Reisedienst Bonte
+47;bus;;Vellmar Nord;Calden;Reisedienst Bonte
+48;bus;;Ihringhauser Straße;Ahnatal;Reisedienst Bonte
+49;bus;Ortsverkehr Ahnatal;Weimar;Heckershausen;Reisedienst Bonte
+50;bus;;Dennhäuser Straße;Hertinghausen;BKW Bad Wildungen
+51;bus;;Bahnhof Wilhelmshöhe;Baunatal Stadtmitte;HLB Hessenbus
+51A;bus;Ast;Hasselweg;Dönche;
+52;bus;;Martinhagen;Baunatal Stadtmitte;HLB Hessenbus
+53;bus;;Bahnhof Wilhelmshöhe;Bad Emstal;HLB Hessenbus
+54;bus;;Baunatal;Gudensberg;BKW Bad Wildungen
+55;bus;;Naumburg;Königsplatz/Mauerstraße;HLB Hessenbus
+56;bus;;Dörnhagen;Großenritte;BKW Bad Wildungen
+57;bus;Ast;Breitenbach;Elmshagen;Reisedienst Bonte
+58;bus;Ast;Großenritte;Elgershausen;Reisedienst Bonte
+59;bus;;Kassel;Bad Emstal;Reisedienst Bonte
+60;bus;StadtBus Baunatal;Stadtmitte;Baunsberg;DB Regio Bus Mitte
+61;bus;StadtBus Baunatal;Großenritte;Hertinghausen;DB Regio Bus Mitte
+62;bus;StadtBus Baunatal Ast-Verkehr;Guntershausen;Rengershausen;DB Regio Bus Mitte
+63;bus;StadtBus Baunatal;Stadtmitte;Stadtmitte;DB Regio Bus Mitte
+64;bus;StadtBus Baunatal;Hertinghausen;Stadtmitte;DB Regio Bus Mitte
+66;bus;StadtBus Baunatal Schulverkehr Friedrich-Ebert-Schule und Langenbergschule;;;DB Regio Bus Mitte
+67;bus;StadtBus Baunatal Schulverkehr Brüder-Grimm-Schule und Gesamtschulen;;;DB Regio Bus Mitte
+91;bus;Ast;Oberzwehren;Hügelweg;KVG
+92;bus;Ast;Wintertalstraße;Oberzwehren;KVG
+93;bus;Ast;Platz der Deutschen Einheit;Lossewerk;KVG
+94;bus;Ast;Rasenallee;Ahnatalstraße;KVG
+95;bus;Ast;Windhukstraße;Lindenberg;KVG
+96;bus;Ast;Wolfsgraben;Fuhrmannsbreite;KVG
+97;bus;Ast Wohnstadt Waldau;;;KVG
 
 === 100 .. 199
+100;bus;;Bahnhof Wilhelmshöhe;Calden;
+110;bus;;Bahnhof Wilhelmshöhe;Wolfhagen;
+111;bus;Stadtbus Wolfhagen;Gasterfeld;Viesebeck;HLB Hessenbus
 
 === 200 .. 299
 200;bus;;Eschwege;Hessisch Lichtenau;EOV Frölich
