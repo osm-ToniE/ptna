@@ -50,6 +50,7 @@ my $expect_network_short            = undef;
 my $expect_network_short_as         = undef;
 my $expect_network_short_for        = undef;
 my $multiple_ref_type_entries       = "analyze";
+my $ptv1_compatibility              = "no";
 my $strict_network                  = undef;
 my $strict_operator                 = undef;
 my $max_error                       = undef;
@@ -91,6 +92,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'network-short-regex:s'         =>  \$network_short_regex,          # --network-short-regex='MVV|BOB'
             'operator-regex:s'              =>  \$operator_regex,               # --operator-regex='MVG|Münchner'
             'positive-notes'                =>  \$positive_notes,               # --positive-notes                  print positive information for notes, if e.g. something is fulfilled
+            'ptv1-compatibility=s'          =>  \$ptv1_compatibility,           # --ptv1-compatibility=no|show|allow    how to handle "highway=bus_stop" in PTv2
             'relaxed-begin-end-for:s'       =>  \$relaxed_begin_end_for,        # --relaxed-begin-end-for=...       for train/tram/light_rail: first/last stop position does not have to be on first/last node of way, but within first/last way
             'osm-xml-file=s'                =>  \$osm_xml_file,                 # --osm-xml-file=yyy                XML output of Overpass APU query
             'separator=s'                   =>  \$csv_separator,                # --separator=';'                   separator in the CSV file
@@ -139,6 +141,7 @@ if ( $verbose ) {
     printf STDERR "%20s--expect-network-short-as='%s'\n",  ' ', $expect_network_short_as       if ( $expect_network_short_as     );
     printf STDERR "%20s--expect-network-short-for='%s'\n", ' ', $expect_network_short_for      if ( $expect_network_short_for    );
     printf STDERR "%20s--multiple-ref-type-entries='%s'\n",' ', $multiple_ref_type_entries     if ( $multiple_ref_type_entries   );
+    printf STDERR "%20s--ptv1-compatibility='%s'\n",       ' ', $ptv1_compatibility            if ( $ptv1_compatibility          );
     printf STDERR "%20s--max-error='%s'\n",                ' ', $max_error                     if ( $max_error                   );
     printf STDERR "%20s--relaxed-begin-end-for='%s'\n",    ' ', $relaxed_begin_end_for         if ( $relaxed_begin_end_for       );
     printf STDERR "%20s--separator='%s'\n",                ' ', $csv_separator                 if ( $csv_separator               );
@@ -146,6 +149,15 @@ if ( $verbose ) {
     printf STDERR "%20s--osm-xml-file='%s'\n",             ' ', decode('utf8', $osm_xml_file ) if ( $osm_xml_file                );
 }
 
+if ( $multiple_ref_type_entries ne 'analyze' && $multiple_ref_type_entries ne 'allow' && $multiple_ref_type_entries ne 'ignore' ) {
+    printf STDERR "%s analyze-routes.pl: wrong value for option: '--multiple_ref_type_entries' = '%s' - setting it to '--multiple_ref_type_entries' = 'analyze'\n", get_time(), $multiple_ref_type_entries;
+    $multiple_ref_type_entries = 'analyze';
+}
+
+if ( $ptv1_compatibility ne 'no' && $ptv1_compatibility ne 'allow' && $ptv1_compatibility ne 'show' ) {
+    printf STDERR "%s analyze-routes.pl: wrong value for option: '--ptv1_compatibility' = '%s' - setting it to '--ptv1_compatibility' = 'no'\n", get_time(), $ptv1_compatibility;
+    $ptv1_compatibility = 'no';
+}
 
 my $routes_xml              = undef;
 my @routes_csv              = ();
@@ -676,17 +688,8 @@ if ( $xml_has_ways ) {
         
         $number_of_ways++;
         
-        foreach $node ( @{$WAYS{$way_id}->{'chain'}} ) {
-            if ( $node ) {
-                if ( $WAYS{$way_id}->{'node_hash'}->{$node} ) {
-                    $WAYS{$way_id}->{'node_hash'}->{$node}++;
-                } else {
-                    $WAYS{$way_id}->{'node_hash'}->{$node} = 1;
-                }
-                $WAYS{$way_id}->{'first_node'} = $node     unless ( $WAYS{$way_id}->{'first_node'} );
-                $WAYS{$way_id}->{'last_node'}  = $node;
-            }
-        }
+        $WAYS{$way_id}->{'first_node'} = ${$WAYS{$way_id}->{'chain'}}[0];
+        $WAYS{$way_id}->{'last_node'}  = ${$WAYS{$way_id}->{'chain'}}[$#{$WAYS{$way_id}->{'chain'}}];
         
         #
         # lets categorize the way as member or route or platform or ...
@@ -705,13 +708,15 @@ if ( $xml_has_ways ) {
                #  $WAYS{$way_id}->{'tag'}->{'route'} =~ m/^ferry$/)                                     ) {
             $route_ways{$way_id} = $WAYS{$way_id};
             $number_of_routeways++;
-            $route_ways{$way_id}->{'is_roundabout'}   = 1   if ( $route_ways{$way_id}->{'first_node'} == $route_ways{$way_id}->{'last_node'} );
+            $WAYS{$way_id}->{'is_roundabout'}   = 1   if ( $WAYS{$way_id}->{'first_node'} == $WAYS{$way_id}->{'last_node'} );
             #printf STDERR "WAYS{%s} is a highway\n", $way_id;
         } #else {
         #    printf STDERR "Unmatched way type for way: %s\n", $way_id;
         #}
-    }
-
+        
+        map { $NODES{$_}->{'member_of_way'}->{$way_id} = 1; } @{$WAYS{$way_id}->{'chain'}};
+}
+    
     if ( $verbose ) {
         printf STDERR "%s Ways converted: %d, route_ways: %d, platform_ways: %d\n", 
                        get_time(), $number_of_ways, $number_of_routeways, $number_of_platformways;
@@ -2356,6 +2361,17 @@ sub analyze_ptv2_route_relation {
                         elsif ( $NODES{$node_ref->{'ref'}}->{'tag'}->{'public_transport'} ) {
                             $role_mismatch{"mismatch between 'role' = '".$node_ref->{'role'}."' and 'public_transport' = '".$NODES{$node_ref->{'ref'}}->{'tag'}->{'public_transport'}."'"}->{$node_ref->{'ref'}} = 1;
                             $role_mismatch_found++;
+                        } elsif ( $ptv1_compatibility ne "no"  ) {
+                            my $compatible_tag = PTv2CompatibleNodeStopTag( $node_ref->{'ref'}, $relation_ptr->{'tag'}->{'route'} );
+                            if ( $compatible_tag ) {
+                                if ( $ptv1_compatibility eq "show" ) {
+                                    $role_mismatch{"'role' = '".$node_ref->{'role'}."' and ".$compatible_tag.": consider setting 'public_transport' = 'stop_position'"}->{$node_ref->{'ref'}} = 1;
+                                    $role_mismatch_found++;
+                                }
+                            } else {
+                                $role_mismatch{"'role' = '".$node_ref->{'role'}."' but 'public_transport' is not set"}->{$node_ref->{'ref'}} = 1;
+                                $role_mismatch_found++;
+                            }
                         } else {
                             $role_mismatch{"'role' = '".$node_ref->{'role'}."' but 'public_transport' is not set"}->{$node_ref->{'ref'}} = 1;
                             $role_mismatch_found++;
@@ -2388,6 +2404,17 @@ sub analyze_ptv2_route_relation {
                         } elsif ( $NODES{$node_ref->{'ref'}}->{'tag'}->{'public_transport'} ) {
                             $role_mismatch{"mismatch between 'role' = '".$node_ref->{'role'}."' and 'public_transport' = '".$NODES{$node_ref->{'ref'}}->{'tag'}->{'public_transport'}."'"}->{$node_ref->{'ref'}} = 1;
                             $role_mismatch_found++;
+                        } elsif ( $ptv1_compatibility ne "no"  ) {
+                            my $compatible_tag = PTv2CompatibleNodePlatformTag( $node_ref->{'ref'}, $relation_ptr->{'tag'}->{'route'} );
+                            if ( $compatible_tag ) {
+                                if ( $ptv1_compatibility eq "show" ) {
+                                    $role_mismatch{"'role' = '".$node_ref->{'role'}."' and ".$compatible_tag.": consider setting 'public_transport' = 'platform'"}->{$node_ref->{'ref'}} = 1;
+                                    $role_mismatch_found++;
+                                }
+                            } else {
+                                $role_mismatch{"'role' = '".$node_ref->{'role'}."' but 'public_transport' is not set"}->{$node_ref->{'ref'}} = 1;
+                                $role_mismatch_found++;
+                            }
                         } else {
                             $role_mismatch{"'role' = '".$node_ref->{'role'}."' but 'public_transport' is not set"}->{$node_ref->{'ref'}} = 1;
                             $role_mismatch_found++;
@@ -3297,6 +3324,54 @@ sub isLastNodeInNodeArray {
     }
     printf STDERR "isLastNodeInNodeArray() returns 0 for node-ID %d\n", $node_id       if ( $debug );
     return 0;
+}
+
+
+#############################################################################################
+
+sub PTv2CompatibleNodeStopTag {
+    my $node_id         = shift;
+    my $vehicle_type    = shift;
+    
+    return '';
+}
+
+
+#############################################################################################
+
+sub PTv2CompatibleNodePlatformTag {
+    my $node_id         = shift;
+    my $vehicle_type    = shift;
+    my $ret_val         = '';
+    
+    if ( $NODES{$node_id}->{'member_of_way'} ) {
+        # this node is a member of a way,  yet don't know which type
+        if ( !defined($vehicle_type) || $vehicle_type eq 'bus' || $vehicle_type eq 'share_taxi' || $vehicle_type eq 'trolleybus' ) {
+            if ( $NODES{$node_id}->{'tag'}->{'highway'} ) {
+                if ( $NODES{$node_id}->{'tag'}->{'highway'} eq 'bus_stop' || $NODES{$node_id}->{'tag'}->{'highway'} eq 'platform' ) {
+                    foreach my $way_id ( keys (  %{$NODES{$node_id}->{'member_of_way'}} ) ) {
+                        if ( $WAYS{$way_id}->{'tag'} ) {
+                            if ( ($WAYS{$way_id}->{'tag'}->{'highway'}          && $WAYS{$way_id}->{'tag'}->{'highway'}          eq 'platform') ||
+                                 ($WAYS{$way_id}->{'tag'}->{'public_transport'} && $WAYS{$way_id}->{'tag'}->{'public_transport'} eq 'platform')    ) {
+                                     $ret_val = "'highway' = " . $NODES{$node_id}->{'tag'}->{'highway'} . "'";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    } else {
+        # this node is a solitary node
+        if ( !defined($vehicle_type) || $vehicle_type eq 'bus' || $vehicle_type eq 'share_taxi' || $vehicle_type eq 'trolleybus' ) {
+            if ( $NODES{$node_id}->{'tag'} && $NODES{$node_id}->{'tag'}->{'highway'} ) {
+                if ( $NODES{$node_id}->{'tag'}->{'highway'} eq 'bus_stop' || $NODES{$node_id}->{'tag'}->{'highway'} eq 'platform' ) {
+                    $ret_val = "'highway' = " . $NODES{$node_id}->{'tag'}->{'highway'} . "'";
+                }
+            }
+        }
+    }
+    
+    return $ret_val;
 }
 
 
