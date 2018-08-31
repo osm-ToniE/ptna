@@ -168,7 +168,7 @@ then
                 if [ -f "$HTML_FILE.save" -a -s "$HTML_FILE.save" ]
                 then                
                     diff $HTML_FILE.save $HTML_FILE > $HTML_FILE.diff
-                    echo $(date "+%Y-%m-%d %H:%M:%S") "Diff size:  " $(ls -l $HTML_FILE.diff | awk '{print $5}')
+                    echo $(date "+%Y-%m-%d %H:%M:%S") "Diff size:  " $(ls -l $HTML_FILE.diff | awk '{print $5 " " $9}')
                     echo $(date "+%Y-%m-%d %H:%M:%S") "Diff lines: " $(wc -l $HTML_FILE.diff)
                 else
                     rm -f $HTML_FILE.save
@@ -208,8 +208,8 @@ then
             then
                 diff $HTML_FILE.save $HTML_FILE > $HTML_FILE.diff
                 DIFF_LINES=$(cat $HTML_FILE.diff | wc -l)
-                echo $(date "+%Y-%m-%d %H:%M:%S") "Diff size:  " $(ls -l $HTML_FILE.diff | awk '{print $5}')
-                echo $(date "+%Y-%m-%d %H:%M:%S") "Diff lines: " $DIFF_LINES
+                echo $(date "+%Y-%m-%d %H:%M:%S") "Diff size:  " $(ls -l $HTML_FILE.diff | awk '{print $5 " " $9}')
+                echo $(date "+%Y-%m-%d %H:%M:%S") "Diff lines: " $DIFF_LINES $HTML_FILE.diff
             else
                 DIFF_LINES=$(($DIFF_LINES_BASE + 1))
                 rm -f $HTML_FILE.diff
@@ -221,7 +221,7 @@ then
                 # todo: prepare a diff with HTML output and upload this also
                 #
                 echo $(date "+%Y-%m-%d %H:%M:%S") "Writing new Analysis page '$HTML_FILE'"
-                #echo -e "put $HTML_FILE $TARGET_LOC/\nchmod 644 $TARGET_LOC/$HTML_FILE" | sftp -b - $TARGET_HOST
+                echo -e "put $HTML_FILE $TARGET_LOC/\nchmod 644 $TARGET_LOC/$HTML_FILE" | sftp -b - $TARGET_HOST
             else
                 echo $(date "+%Y-%m-%d %H:%M:%S") "No changes"
             fi
