@@ -4058,6 +4058,7 @@ sub printTableSubHeader {
     my $colour          = $hash{'colour'}  || '';
     my $ref_text        = undef;
     my $csv_text        = '';       # some information comming from the CSV input file
+    my $info            = '';
 
     if ( $ref && $network ) {
         $ref_text = printSketchLineTemplate( $ref, $network, $pt_type, $colour );
@@ -4070,6 +4071,9 @@ sub printTableSubHeader {
     $csv_text .= sprintf( "%s: %s; ", ( $column_name{'To'}       ? $column_name{'To'}       : 'To' ),       $hash{'To'}       )  if ( $hash{'To'}       );
     $csv_text .= sprintf( "%s: %s; ", ( $column_name{'Operator'} ? $column_name{'Operator'} : 'Operator' ), $hash{'Operator'} )  if ( $hash{'Operator'} );
     $csv_text =~ s/; $//;
+    
+    $info = $csv_text ? $csv_text : '???';
+    $info =~ s/\"/_/g;
 
     if ( $no_of_columns > 1 && $ref && $ref_text ) {
         if ( $print_wiki ) {
@@ -4082,7 +4086,7 @@ sub printTableSubHeader {
             #
             # HTML
             #
-            push( @HTML_main, sprintf( "%16s<tr data-ref=\"%s\" class=\"sketchline\"><td class=\"sketch\">%s</td><td class=\"csvinfo\" colspan=\"%d\">%s</td></tr>\n", ' ', $ref, $ref_text, $no_of_columns-1, html_escape($csv_text) ) );
+            push( @HTML_main, sprintf( "%16s<tr data-info=\"%s\" data-ref=\"%s\" class=\"sketchline\"><td class=\"sketch\">%s</td><td class=\"csvinfo\" colspan=\"%d\">%s</td></tr>\n", ' ', $info, $ref, $ref_text, $no_of_columns-1, html_escape($csv_text) ) );
         }
     }
 }
@@ -4119,8 +4123,10 @@ sub printTableLine {
         #
         # HTML
         #
-        my $ref = $hash{'ref'} || '???'; 
-        push( @HTML_main, sprintf( "%16s<tr data-ref=\"%s\" class=\"line\">", ' ', $ref ) );
+        my $ref  = $hash{'ref'} || '???';
+        my $info = $hash{'relation'} ? $hash{'relation'} : ( $hash{'network'} ? $hash{'network'} : $ref);
+        $info =~ s/\"/_/g;
+        push( @HTML_main, sprintf( "%16s<tr data-info=\"%s\" data-ref=\"%s\" class=\"line\">", ' ', $info, $ref ) );
         for ( $i = 0; $i < $no_of_columns; $i++ ) {
             $val =  $hash{$columns[$i]} || '';
             if ( $columns[$i] eq "relation" ) {
