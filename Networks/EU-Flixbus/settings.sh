@@ -12,7 +12,6 @@ NETWORK_SHORT=""
 
 ANALYSIS_PAGE="Europa/Transportation/Analyse"
 WIKI_ROUTES_PAGE="Europa/Transportation/Analyse/Flixbuslinien"
-FILE_DIFF="102"
 
 ANALYSIS_OPTIONS="--check-access --check-name --check-stop-position --check-sequence --check-version --check-osm-separator --check-motorway-link --max-error=10 --multiple-ref-type-entries=analyze --positive-notes --coloured-sketchline"
 

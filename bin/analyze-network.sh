@@ -14,11 +14,9 @@ fi
 
 if [ -z "$PREFIX"              -o \
      -z "$OVERPASS_QUERY"      -o \
-     -z "$ANALYSIS_PAGE"       -o \
      -z "$WIKI_ROUTES_PAGE"    -o \
-     -z "$FILE_DIFF"           -o \
      -z "$TARGET_HOST"         -o \
-     -z "$TARGET_LOC"         -o \
+     -z "$TARGET_LOC"          -o \
      -z "$ANALYSIS_OPTIONS"        ]
 then
     [ -z "$TARGET_HOST"      ] && echo "Please specify: TARGET_HOST as environment variable outside the tools"
@@ -26,9 +24,7 @@ then
     echo "'settings.sh' file: unset variable(s)"
     [ -z "$PREFIX"           ] && echo "Please specify: PREFIX"
     [ -z "$OVERPASS_QUERY"   ] && echo "Please specify: OVERPASS_QUERY"
-    [ -z "$ANALYSIS_PAGE"    ] && echo "Please specify: ANALYSIS_PAGE"
     [ -z "$WIKI_ROUTES_PAGE" ] && echo "Please specify: WIKI_ROUTES_PAGE"
-    [ -z "$FILE_DIFF"        ] && echo "Please specify: FILE_DIFF"
     [ -z "$ANALYSIS_OPTIONS" ] && echo "Please specify: ANALYSIS_OPTIONS"
     echo "... terminating"
     exit 2
@@ -172,7 +168,8 @@ then
                 if [ -f "$HTML_FILE.save" -a -s "$HTML_FILE.save" ]
                 then                
                     diff $HTML_FILE.save $HTML_FILE > $HTML_FILE.diff
-                    echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $HTML_FILE.diff)
+                    echo $(date "+%Y-%m-%d %H:%M:%S") "Diff size:  " $(ls -l $HTML_FILE.diff | awk '{print $5}')
+                    echo $(date "+%Y-%m-%d %H:%M:%S") "Diff lines: " $(wc -l $HTML_FILE.diff)
                 else
                     rm -f $HTML_FILE.save
                 fi
@@ -200,22 +197,31 @@ then
     then 
         if [ -s $HTML_FILE ]
         then
+            if [ $(echo $OVERPASS_QUERY | fgrep -c 'data=area') = 1 ]
+            then
+                DIFF_LINES_BASE=6
+            else
+                DIFF_LINES_BASE=4
+            fi
+                
             if [ -f "$HTML_FILE.save" ]
             then
                 diff $HTML_FILE.save $HTML_FILE > $HTML_FILE.diff
-            
-                echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $HTML_FILE.diff)
-            
-                diffsize=$(ls -l $HTML_FILE.diff 2> /dev/null | awk '{print $5}')
+                DIFF_LINES=$(cat $HTML_FILE.diff | wc -l)
+                echo $(date "+%Y-%m-%d %H:%M:%S") "Diff size:  " $(ls -l $HTML_FILE.diff | awk '{print $5}')
+                echo $(date "+%Y-%m-%d %H:%M:%S") "Diff lines: " $DIFF_LINES
             else
-                diffsize=100000
+                DIFF_LINES=$(($DIFF_LINES_BASE + 1))
                 rm -f $HTML_FILE.diff
             fi
         
-            if [ "$diffsize" -gt "$FILE_DIFF" ]
+            if [ "$DIFF_LINES" -gt "$DIFF_LINES_BASE" ]
             then
+                #
+                # todo: prepare a diff with HTML output and upload this also
+                #
                 echo $(date "+%Y-%m-%d %H:%M:%S") "Writing new Analysis page '$HTML_FILE'"
-                echo -e "put $HTML_FILE $TARGET_LOC/\nchmod 644 $TARGET_LOC/$HTML_FILE" | sftp -b - $TARGET_HOST
+                #echo -e "put $HTML_FILE $TARGET_LOC/\nchmod 644 $TARGET_LOC/$HTML_FILE" | sftp -b - $TARGET_HOST
             else
                 echo $(date "+%Y-%m-%d %H:%M:%S") "No changes"
             fi

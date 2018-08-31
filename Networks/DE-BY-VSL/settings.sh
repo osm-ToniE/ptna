@@ -12,7 +12,6 @@ NETWORK_SHORT="VSL"
 
 ANALYSIS_PAGE="Straubing/Transportation/Analyse"
 WIKI_ROUTES_PAGE="Straubing/Transportation/Analyse/DE-BY-VSL-Linien"
-FILE_DIFF="200"
 
 ANALYSIS_OPTIONS="--max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-version --check-osm-separator --check-motorway-link --multiple-ref-type-entries=allow --positive-notes --coloured-sketchline"
 

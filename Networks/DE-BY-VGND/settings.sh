@@ -12,7 +12,6 @@ NETWORK_SHORT="VGND|INVG|RBA|SOB"
 
 ANALYSIS_PAGE="Neuburg_an_der_Donau/Transportation/Analyse"
 WIKI_ROUTES_PAGE="Neuburg_an_der_Donau/Transportation/Analyse/DE-BY-VGND-Linien"
-FILE_DIFF="200"
 
 ANALYSIS_OPTIONS="--max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-version --check-osm-separator --check-motorway-link --multiple-ref-type-entries=allow --positive-notes --coloured-sketchline"
 

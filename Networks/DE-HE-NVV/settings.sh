@@ -12,7 +12,6 @@ NETWORK_SHORT="NVV"
 
 ANALYSIS_PAGE="Kassel/Transportation/Analyse"
 WIKI_ROUTES_PAGE="Kassel/Transportation/Analyse/DE-HE-NVV-Linien"
-FILE_DIFF="200"
 
 ANALYSIS_OPTIONS="--check-access --check-name --check-stop-position --check-sequence --check-version --check-osm-separator --check-motorway-link --multiple-ref-type-entries=analyze --positive-notes --coloured-sketchline --expect-network-short --ptv1-compatibility=allow"
 

@@ -12,7 +12,6 @@ NETWORK_SHORT="VLP|VBP"
 
 ANALYSIS_PAGE="Passau/Transportation/Analyse"
 WIKI_ROUTES_PAGE="Passau/Transportation/Analyse/DE-BY-VLP-Linien"
-FILE_DIFF="204"
 
 ANALYSIS_OPTIONS="--max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-version --check-osm-separator --check-motorway-link --multiple-ref-type-entries=allow --positive-notes --coloured-sketchline"
 

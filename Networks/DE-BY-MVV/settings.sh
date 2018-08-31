@@ -12,7 +12,6 @@ NETWORK_SHORT="MVV"
 
 ANALYSIS_PAGE="München/Transportation/Analyse"
 WIKI_ROUTES_PAGE="München/Transportation/MVV-Linien-gesamt"
-FILE_DIFF="204"
 
 ANALYSIS_OPTIONS="--check-access --check-name --check-stop-position --check-sequence --check-version --check-osm-separator --check-motorway-link --positive-notes --multiple-ref-type-entries=analyze --coloured-sketchline --expect-network-long"
 

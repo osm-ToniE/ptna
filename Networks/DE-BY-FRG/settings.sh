@@ -12,7 +12,6 @@ NETWORK_SHORT="FRG"
 
 ANALYSIS_PAGE="Freyung-Grafenau/Transportation/Analyse"
 WIKI_ROUTES_PAGE="Freyung-Grafenau/Transportation/Analyse/DE-BY-FRG-Linien"
-FILE_DIFF="200"
 
 ANALYSIS_OPTIONS="--max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-version --check-osm-separator --check-motorway-link --multiple-ref-type-entries=allow --positive-notes --coloured-sketchline"
 
