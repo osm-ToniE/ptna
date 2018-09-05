@@ -204,6 +204,9 @@ then
                 DIFF_LINES_BASE=4
             fi
                 
+            echo $(date "+%Y-%m-%d %H:%M:%S") "Reading current Analysis page from server '$HTML_FILE'"
+            echo -e "get $TARGET_LOC/$HTML_FILE $HTML_FILE.save" | sftp -b - $TARGET_HOST
+
             if [ -f "$HTML_FILE.save" ]
             then
                 diff $HTML_FILE.save $HTML_FILE > $HTML_FILE.diff
@@ -217,13 +220,25 @@ then
         
             if [ "$DIFF_LINES" -gt "$DIFF_LINES_BASE" ]
             then
-                #
-                # todo: prepare a diff with HTML output and upload this also
-                #
                 echo $(date "+%Y-%m-%d %H:%M:%S") "Writing new Analysis page '$HTML_FILE'"
                 echo -e "put $HTML_FILE $TARGET_LOC/\nchmod 644 $TARGET_LOC/$HTML_FILE" | sftp -b - $TARGET_HOST
+                
+                if [ -n "$(which htmldiff.pl)" ]
+                then
+                    HTMLDIFF_FILE="$(basename $HTML_FILE .html).diff.html"
+                    if [ -f "$HTML_FILE.diff" ]
+                    then
+                        htmldiff.pl -c $HTML_FILE.save $HTML_FILE > $HTMLDIFF_FILE 
+                    else
+                        htmldiff.pl -c $HTML_FILE $HTML_FILE > $HTMLDIFF_FILE 
+                    fi
+                    echo $(date "+%Y-%m-%d %H:%M:%S") "Writing HTML-Diff Analysis page '$HTMLDIFF_FILE'"
+                    echo -e "put $HTMLDIFF_FILE $TARGET_LOC/\nchmod 644 $TARGET_LOC/$HTMLDIFF_FILE" | sftp -b - $TARGET_HOST
+                else
+                    echo $(date "+%Y-%m-%d %H:%M:%S") "no htmldiff.pl tool: no HTML-Diff Analysis page '$HTMLDIFF_FILE'"
+                fi
             else
-                echo $(date "+%Y-%m-%d %H:%M:%S") "No changes"
+                echo $(date "+%Y-%m-%d %H:%M:%S") "No relevant changes on '$HTML_FILE'"
             fi
         else
             echo $(date "+%Y-%m-%d %H:%M:%S") $HTML_FILE is empty
