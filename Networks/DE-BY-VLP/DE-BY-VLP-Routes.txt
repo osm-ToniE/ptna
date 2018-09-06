@@ -246,8 +246,6 @@ Oberhaus-Bus;bus;;;;
 
 == Buslinien mit Mitgliedschaft zu anderen Busliniennetzwerken (VLD; VGRI; PAN; Freyung-Grafenau (FRG) ect.)
 
-6122/19;bus;;;;
-
 
 === Buslinien mit Mitgliedschaft zum Netzwerk Verkehrsgemeinschaft Landkreis Deggendorf (VLD)
 
@@ -264,6 +262,7 @@ Oberhaus-Bus;bus;;;;
 === Buslinien mit Mitgliedschaft zum Netzwerk Landkreis Freyung-Grafenau (FRG xxx)
 
 6121/18;bus;(=FRG 18);;;
+6122/19;bus;(=FRG 19);;;
 6124/21;bus;(=FRG 21);;;
 6130/22;bus;(=FRG 22);;;
 
