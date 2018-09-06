@@ -107,7 +107,7 @@
 908S;bus;;Kurlinie Bad Wörishofen (Sommer);Türkheim;
 909;bus;;Mindelheim;Buchloe;
 910;bus;;Mindelheim;Buchloe ;
-911;bus;;Mindelheim;Kaufbeuren;
+23/911;bus;;Mindelheim;Kaufbeuren;
 912;bus;;Mindelheim;Köngetried;
 913;bus;;Altensteig;Mindelheim;
 914;bus;;Mindelheim;Binkenhofen;
