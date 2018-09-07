@@ -176,7 +176,7 @@ if ( $pull) {
                 }
             } else {
                 printf STDERR "%s Writing Wiki page '%s' to STDOUT\n", get_time(), $page;
-                printf $ref->{'*'};
+                printf "%s", $ref->{'*'};
                 printf STDERR "%s Done ... writing Wiki page '%s' to STDOUT\n", get_time(), $page;
             }
         } else {
