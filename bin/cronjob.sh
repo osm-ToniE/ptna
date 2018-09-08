@@ -3,9 +3,22 @@
 #
 # analyze ÖPNV networks via cronjob
 #
+
+# source the .bashrc file in HOME directory to import variables which should not be in the source code
+#
+# $TARGET_HOST      target host: user@host for sftp command; authentication via private/public ssh keys             (TARGET_HOST=user@example.com)
+# $TARGET_LOC       target loc: directory, where to store the data with the sftp command                            (TARGET_LOC=analyze-routes)
+# $TARGET_URL       target url: $TARGET_URL/$TARGET_LOC are the location where all the analysis files can be found  (TARGET_URL=https://example.com/OSM)
+# $WIKI_USERNAME    user name to use for authentication to OSM wiki                                                 (tool used: ./bin/wiki-page.pl)
+# $WIKI_PASSWORD    password to use for authentication to OSM wiki                                                  (tool used: ./bin/wiki-page.pl)
+#
+
+source $HOME/.bashrc
+
+
 export LANG=C
 
-PATH=$PWD/bin:$PATH
+PATH=$HOME/bin:$PWD/bin:$PATH
 
 LOGFILE=analyze-all-networks.txt
 

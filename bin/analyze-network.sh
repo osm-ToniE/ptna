@@ -234,8 +234,20 @@ then
                     fi
                     echo $(date "+%Y-%m-%d %H:%M:%S") "Writing HTML-Diff Analysis page '$HTMLDIFF_FILE'"
                     echo -e "put $HTMLDIFF_FILE $TARGET_LOC/\nchmod 644 $TARGET_LOC/$HTMLDIFF_FILE" | sftp -b - $TARGET_HOST
+                    
+                    if [ -f "../analyze-routes.wiki" ]
+                    then
+                        OSM_Base_Time="$(awk '/^OSM-Base Time : / { print $4 " " $5 " " $6; }' $HTML_FILE | sed -e 's/<.*//')"
+                        Local_OSM_Base_Time="$(date --date=$OSM_Base_Time '+%d.%m.%Y %H:%M:%S')"
+                        sed -i -e "s|^.*$HTMLDIFF_FILE.*$|\|\| [$TARGET_URL/$TARGET_LOC/$HTMLDIFF_FILE $Local_OSM_Base_Time]|" ../analyze-routes.wiki
+                    fi
                 else
                     echo $(date "+%Y-%m-%d %H:%M:%S") "no htmldiff.pl tool: no HTML-Diff Analysis page '$HTMLDIFF_FILE'"
+
+                    if [ -f "../analyze-routes.wiki" ]
+                    then
+                        sed -i -e "s|^.*$HTMLDIFF_FILE.*$|\|\| <\!-- [$TARGET_URL/$TARGET_LOC/$HTMLDIFF_FILE none] -->|" ../analyze-routes.wiki
+                    fi
                 fi
             else
                 echo $(date "+%Y-%m-%d %H:%M:%S") "No relevant changes on '$HTML_FILE'"
