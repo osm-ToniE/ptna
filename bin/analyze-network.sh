@@ -238,7 +238,7 @@ then
                     if [ -f "../analyze-routes.wiki" ]
                     then
                         OSM_Base_Time="$(awk '/^OSM-Base Time : / { print $4 " " $5 " " $6; }' $HTML_FILE | sed -e 's/<.*//')"
-                        Local_OSM_Base_Time="$(date --date=$OSM_Base_Time '+%d.%m.%Y %H:%M:%S')"
+                        Local_OSM_Base_Time="$(date --date="$OSM_Base_Time" '+%d.%m.%Y %H:%M:%S')"
                         sed -i -e "s|^.*$HTMLDIFF_FILE.*$|\|\| [$TARGET_URL/$TARGET_LOC/$HTMLDIFF_FILE $Local_OSM_Base_Time]|" ../analyze-routes.wiki
                     fi
                 else
