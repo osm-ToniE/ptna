@@ -239,14 +239,14 @@ then
                     then
                         OSM_Base_Time="$(awk '/^OSM-Base Time : / { print $4 " " $5 " " $6; }' $HTML_FILE | sed -e 's/<.*//')"
                         Local_OSM_Base_Time="$(date --date="$OSM_Base_Time" '+%d.%m.%Y %H:%M:%S')"
-                        sed -i -e "s|^.*$HTMLDIFF_FILE.*$|\|\| [$TARGET_URL/$TARGET_LOC/$HTMLDIFF_FILE $Local_OSM_Base_Time]|" ../analyze-routes.wiki
+                        sed -i -e "s|^.*$HTMLDIFF_FILE.*$|\|  align=middle \| [$TARGET_URL/$TARGET_LOC/$HTMLDIFF_FILE $Local_OSM_Base_Time]|" ../analyze-routes.wiki
                     fi
                 else
                     echo $(date "+%Y-%m-%d %H:%M:%S") "no htmldiff.pl tool: no HTML-Diff Analysis page '$HTMLDIFF_FILE'"
 
                     if [ -f "../analyze-routes.wiki" ]
                     then
-                        sed -i -e "s|^.*$HTMLDIFF_FILE.*$|\|\| <\!-- [$TARGET_URL/$TARGET_LOC/$HTMLDIFF_FILE none] -->|" ../analyze-routes.wiki
+                        sed -i -e "s|^.*$HTMLDIFF_FILE.*$|\|  align=middle \| <\!-- [$TARGET_URL/$TARGET_LOC/$HTMLDIFF_FILE none] -->|" ../analyze-routes.wiki
                     fi
                 fi
             else

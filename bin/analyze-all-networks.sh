@@ -16,6 +16,8 @@ with_upload=$(echo $* | fgrep -c 'u')
 if [ "$with_upload" = '1' ]
 then
     wiki-page.pl --pull --page="User:ToniE/analyze-routes" --file=Networks/analyze-routes.wiki
+    today=$(date '+%d.%m.%Y')
+    sed -i -e "s/| Auswertung vom [0123][0-9]\.[01][0-9]\.2[0-9][0-9][0-9]/| Auswertung vom $today/" Networks/analyze-routes.wiki
 fi
 
 for A in  Networks/*
