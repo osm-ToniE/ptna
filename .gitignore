@@ -1,6 +1,9 @@
 # ignore created HTML pages
 *.html
 
+# ignore created wiki pages
+*.wiki
+
 # ignore save and diff files
 *.save
 *.diff
