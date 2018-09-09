@@ -13,7 +13,7 @@ DOW=$(date +%u)
 
 with_upload=$(echo $* | fgrep -c 'u')
 
-if [ "$with_uplaod" = '1' ]
+if [ "$with_upload" = '1' ]
 then
     wiki-page.pl --pull --page="User:ToniE/analyze-routes" --file=Networks/analyze-routes.wiki
 fi
@@ -45,7 +45,7 @@ do
     
 done
 
-if [ "$with_uplaod" = '1' ]
+if [ "$with_upload" = '1' ]
 then
     wiki-page.pl --push --page="User:ToniE/analyze-routes" --file=Networks/analyze-routes.wiki --summary="Update by automated analysis"
 fi
