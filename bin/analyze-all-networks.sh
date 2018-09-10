@@ -20,7 +20,7 @@ then
     sed -i -e "s/| Auswertung vom [0123][0-9]\.[01][0-9]\.2[0-9][0-9][0-9]/| Auswertung vom $today/" Networks/analyze-routes.wiki
 fi
 
-for A in  Networks/*
+for A in  Networks/[A-Z]*
 do
     echo
     echo $(date "+%Y-%m-%d %H:%M:%S") "$A"
@@ -36,7 +36,7 @@ do
         ANALYZE="no"
     fi
     
-    if [ "$ANALYZE" = "yes" ]
+    if [ "$ANALYZE" = "yes" -a -d $A ]
     then
         cd $A
     
