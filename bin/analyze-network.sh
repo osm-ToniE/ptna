@@ -17,10 +17,12 @@ if [ -z "$PREFIX"              -o \
      -z "$WIKI_ROUTES_PAGE"    -o \
      -z "$TARGET_HOST"         -o \
      -z "$TARGET_LOC"          -o \
+     -z "$TARGET_URL"          -o \
      -z "$ANALYSIS_OPTIONS"        ]
 then
     [ -z "$TARGET_HOST"      ] && echo "Please specify: TARGET_HOST as environment variable outside the tools"
     [ -z "$TARGET_LOC"       ] && echo "Please specify: TARGET_LOC as environment variable outside the tools"
+    [ -z "$TARGET_URL"       ] && echo "Please specify: TARGET_URL as environment variable outside the tools"
     echo "'settings.sh' file: unset variable(s)"
     [ -z "$PREFIX"           ] && echo "Please specify: PREFIX"
     [ -z "$OVERPASS_QUERY"   ] && echo "Please specify: OVERPASS_QUERY"
