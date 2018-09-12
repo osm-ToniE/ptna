@@ -183,7 +183,7 @@
 6134/59;bus;(=RBO 6134);;;
 
 
-== Buslinien mit Mitglidschaft zum Netzwerk Arberlandverkehr (Lkr. Regen) (=RBO xxxx)
+== Buslinien mit Mitgliedschaft zum Netzwerk Arberlandverkehr (Lkr. Regen) (=RBO xxxx)
 
 6086/11;bus;(=RBO 6086);;;
 6121/18;bus;(=RBO 6121);;;
