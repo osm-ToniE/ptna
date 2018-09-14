@@ -3906,32 +3906,32 @@ sub printHeader {
                     $level_nr++ while ( $level =~ m/=/g );
                     $level_nr = 6   if ( $level_nr > 6 );
                     if ( $level_nr == 1 ) {
-                        $header_numbers = ++$html_header_anchor_numbers[1] . '.';
+                        $header_numbers = ++$html_header_anchor_numbers[1];
                         $html_header_anchor_numbers[2] = 0;
                         $html_header_anchor_numbers[3] = 0;
                         $html_header_anchor_numbers[4] = 0;
                         $html_header_anchor_numbers[5] = 0;
                         $html_header_anchor_numbers[6] = 0;
                     } elsif ( $level_nr == 2 ) {
-                        $header_numbers = $html_header_anchor_numbers[1] . '.' . ++$html_header_anchor_numbers[2] . '.';
+                        $header_numbers = $html_header_anchor_numbers[1] . '.' . ++$html_header_anchor_numbers[2];
                         $html_header_anchor_numbers[3] = 0;
                         $html_header_anchor_numbers[4] = 0;
                         $html_header_anchor_numbers[5] = 0;
                         $html_header_anchor_numbers[6] = 0;
                     } elsif ( $level_nr == 3 ) {
-                        $header_numbers = $html_header_anchor_numbers[1] . '.' . $html_header_anchor_numbers[2] . '.' . ++$html_header_anchor_numbers[3] . '.';
+                        $header_numbers = $html_header_anchor_numbers[1] . '.' . $html_header_anchor_numbers[2] . '.' . ++$html_header_anchor_numbers[3];
                         $html_header_anchor_numbers[4] = 0;
                         $html_header_anchor_numbers[5] = 0;
                         $html_header_anchor_numbers[6] = 0;
                     } elsif ( $level_nr == 4 ) {
-                        $header_numbers = $html_header_anchor_numbers[1] . '.' . $html_header_anchor_numbers[2] . '.' . $html_header_anchor_numbers[3] . '.' . ++$html_header_anchor_numbers[4] . '.';
+                        $header_numbers = $html_header_anchor_numbers[1] . '.' . $html_header_anchor_numbers[2] . '.' . $html_header_anchor_numbers[3] . '.' . ++$html_header_anchor_numbers[4];
                         $html_header_anchor_numbers[5] = 0;
                         $html_header_anchor_numbers[6] = 0;
                     } elsif ( $level_nr == 4 ) {
-                        $header_numbers = $html_header_anchor_numbers[1] . '.' . $html_header_anchor_numbers[2] . '.' . $html_header_anchor_numbers[3] . '.' . $html_header_anchor_numbers[4] . '.' . ++$html_header_anchor_numbers[5] . '.';
+                        $header_numbers = $html_header_anchor_numbers[1] . '.' . $html_header_anchor_numbers[2] . '.' . $html_header_anchor_numbers[3] . '.' . $html_header_anchor_numbers[4] . '.' . ++$html_header_anchor_numbers[5];
                         $html_header_anchor_numbers[6] = 0;
                     } elsif ( $level_nr == 6 ) {
-                        $header_numbers = $html_header_anchor_numbers[1] . '.' . $html_header_anchor_numbers[2] . '.' . $html_header_anchor_numbers[3] . '.' . $html_header_anchor_numbers[4] . '.' . $html_header_anchor_numbers[5] . '.' . ++$html_header_anchor_numbers[6] . '.';
+                        $header_numbers = $html_header_anchor_numbers[1] . '.' . $html_header_anchor_numbers[2] . '.' . $html_header_anchor_numbers[3] . '.' . $html_header_anchor_numbers[4] . '.' . $html_header_anchor_numbers[5] . '.' . ++$html_header_anchor_numbers[6];
                     }
                     push( @html_header_anchors, sprintf( "L%d %s %s", $level_nr, $header_numbers, $header ) );
                     push( @HTML_main,          "        <br /><hr />\n" )   if ( $level_nr == 1 );
