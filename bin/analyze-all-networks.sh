@@ -8,9 +8,6 @@ WD=$PWD
 
 PATH=$PWD/bin:$PATH
 
-# day of week: 1 ... 7 (7 = Sunday)
-DOW=$(date +%u)
-
 with_upload=$(echo $* | fgrep -c 'u')
 
 if [ "$with_upload" = '1' ]
@@ -26,17 +23,7 @@ do
     echo $(date "+%Y-%m-%d %H:%M:%S") "$A"
     echo
     
-    ANALYZE="yes"
-    
-    NETWORK=$(basename $A)
-    AREA=${NETWORK%%-*}
-    
-    if [ "$AREA" = "EU" -a $DOW -ne 7 ]
-    then
-        ANALYZE="no"
-    fi
-    
-    if [ "$ANALYZE" = "yes" -a -d $A ]
+    if [ -d $A ]
     then
         cd $A
     
