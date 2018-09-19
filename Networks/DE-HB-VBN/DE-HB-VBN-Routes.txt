@@ -267,8 +267,6 @@
 316;bus;OL Stadt;Kloster Blankenburg;ZOB;VWG
 317;bus;OL Stadt;Ikea;ZOB;VWG
 318;bus;OL Stadt;Eversten-West;ZOB;
-319 A;bus;OL Stadt;Oldenburg, Mittelweg;Oldenburg, Schleistraße;NordBus
-319 B;bus;OL Stadt;Oldenburg, Krusenbusch;Oldenburg, Kreyenbrück;NordBus
 321;bus;OL Stadt;Kreyenbrück;ZOB;
 322;bus;OL Stadt;Thomasburg;ZOB;VWG
 323;bus;OL Stadt;Krusenbusch;Ohmstede/Wahnbek;
@@ -290,9 +288,7 @@
 342B;bus;AM Ost;Rastede;Barghorn;
 343;bus;AM Ost;Rastede;Nethen;Hanekamp
 344;bus;AM Ost;Rastede;Südbäke;Hanekamp
-345;bus;AM Ost;Varel;Jadeberg;Hanekamp
 347;bus;AM Ost Bürgerbus;Rastede;Rastede;Hanekamp
-348;bus;;Oldenburg;Zetel;Weser-Ems-Bus
 349;bus;AM Ost;Kleibrok/Rastede;Wiefelstede;
 350;bus;AM West;Oldenburg;Westerstede;Gerdes
 S35;bus;AM West;Westerstede;Oldenburg;Gerdes
@@ -319,16 +315,16 @@ S35;bus;AM West;Westerstede;Oldenburg;Gerdes
 374;bus;AM Süd;Edewecht;Rostrup;Weser-Ems-Bus
 375;bus;AM Süd;Süddorf;Bad Zwischenahn;Weser-Ems-Bus
 377;bus;AM Süd;Bad Zwischenahn;Bad Zwischenahn;Weser-Ems-Bus
-378;bus;;Bad Zwischenahn;Zetel;
 379;bus;AM Süd;Bad Zwischenahn;Oldenburg;ABB
 380;bus;AM Süd;Barßel;Oldenburg;Weser-Ems-Bus
 382;bus;AM Süd;Edewecht;Friedrichsfehn;ABB
-384;bus;AM Süd;Friedrichsfehn;Edwecht;ABB
+384;bus;AM Süd;Friedrichsfehn;Edewecht;ABB
 385;bus;AM Süd;Wittenriede;Edewecht;ABB
 386;bus;AM Süd;Hogenset;Osterscheps;ABB
 387;bus;AM Süd;Wildenloh;Bad Zwischenahn;ABB
 388;bus;AM Süd;Friedrichsfehn;Jeddeloh II;ABB
-394;bus;AM Süd Bürgerbus;Petersfehn;;
+393;bus;AM Süd;Jeddeloh I;Edewecht;
+394;bus;AM Süd Bürgerbus;Bad Zwischenahn;Petersfehn;
 395;bus;AM Süd;Bad Zwischenahn;Bad Zwischenahn;Bruns
 396;bus;AM Süd;Langebrügge;Bad Zwischenahn;Bruns
 397;bus;AM Süd;Bad Zwischenahn;Edewecht;Bruns
