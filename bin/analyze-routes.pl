@@ -2154,7 +2154,7 @@ sub analyze_ptv2_route_relation {
             printf STDERR "analyze_ptv2_route_relation() : first way is not a closed way\n"     if ( $debug );
             if ( ($entry_node_id = isOneway($first_way_id,undef)) ) {
                 printf STDERR "analyze_ptv2_route_relation() : first way is onway with entry_node_id = %d\n", $entry_node_id     if ( $debug );
-                if ( $entry_node_id = $WAYS{$first_way_id}->{'first_node'} ) {
+                if ( $entry_node_id == $WAYS{$first_way_id}->{'first_node'} ) {
                     $node_id = $WAYS{$first_way_id}->{'last_node'};
                     printf STDERR "analyze_ptv2_route_relation() : node_id = %d is 'last_node\n", $node_id     if ( $debug );
                 } else {
