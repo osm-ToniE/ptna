@@ -385,10 +385,49 @@ S35;bus;AM West;Westerstede;Oldenburg;Gerdes
 515;bus;BHV;Buschkämpen;Stadtverwaltung;
 516;bus;BHV;Carsten-Börger-Str.;Repower/Seewindstr.;
 517;bus;BHV ALT;Surheide;Veerenholzstraße;
+523;bus;;Wremen;Dorum;KVG Cuxhaven
+524;bus;;Dorum;Dorum Neufeld;KVG Cuxhaven
+525;bus;;Bad Bederkesa;Bremerhaven;KVG Cuxhaven
+526;bus;;Dorum Neufeld;Wremen;KVG Cuxhaven
+527;bus;;Krempel;Neuenwalde;KVG Cuxhaven
+528;bus;;Otterndorf;Bremerhaven;KVG Cuxhaven
+529;bus;;Bad Bederkesa;Schiffdorf;KVG Cuxhaven
+530;bus;;Hagen;Beverstedt;KVG Stade
+531;bus;;Uthlede;Schiffdorf;KVG Stade
 534;bus;CUX 6;Hoope;Hagen;
+541;bus;;Ebersdorf;Bad Bederkesa;
+542;bus;;Köhlen;Bad Bederkesa;
+543;bus;;Kührstedt;Bad Bederkesa;
+544;bus;;Steinau;Bad Bederkesa;
+545;bus;;Dorum;Bad Bederkesa;
+546;bus;;Nordholz;Dorum;
+547;bus;;Nordholz/Süd;Nordholz;
+548;bus;;Cappel/Neufeld;Nordholz;
+549;bus;;Dorum/Niederstrich;Midlum;
+550;bus;;Nordholz;Bremerhaven;
+551;bus;;Holßel;Langen;
+552;bus;;Köhlen;Köhlen;
+553;bus;;Wehden;Schiffdorf;
+554;bus;;Bad Bederkesa;Bremerhaven;
+555;bus;;Bad Bederkesa;Drangstedt;
+558;bus;;Beverstedt;Wellen;
+559;bus;;Hagen;Kirchwistedt;
+565;bus;;Hoope;Hagen;
+566;bus;;Beverstedt;Geestenseth;
+567;bus;;Beverstedt;Geestenseth;
+568;bus;;Geestenseth;Bremerhaven;
+571;bus;;Beverstedt;Hagen;
+573;bus;;Sandstedt;Hagen;
+575;bus;;Beverstedt;Bremerhaven;
+577;bus;;Wellen;Schiffdorf;
+579;bus;;Beverstedt;Loxstedt;
+580;bus;;Sandstedt;Schiffdorf;
+581;bus;;Loxstedt;Schiffdorf;
+583;bus;;Sandstedt;Loxstedt;
 
 === Busse 6xx
-600;bus;;Alhorn;Lohne;Weser-Ems-Bus
+600;bus;;Ahlhorn;Lohne;Weser-Ems-Bus
+606;bus;;Diepholz;Diepholz;Weser-Ems Bus
 608;bus;OHZ Ost;Ostersode;Worpswede;EVB
 609;bus;OHZ Ost;Hüttendorf;Worpswede;EVB
 610;bus;OHZ Ost;Neu St. Jürgen;Worpswede;EVB
@@ -488,10 +527,20 @@ S35;bus;AM West;Westerstede;Oldenburg;Gerdes
 854;bus;;Sottrum;Sottrum;
 856;bus;;Sottrum;Sottrum;
 857;bus;;Eversen;Sottrum;
-863;bus; Bürgerbus;Zeven;Steddorf;
-864;bus; Bürgerbus;Zeven;Nartum;
+863;bus;Bürgerbus;Zeven;Steddorf;
+864;bus;Bürgerbus;Zeven;Nartum;
+880;bus;;Visselhövede;Rotenburg;
+880;bus;;Visselhövede;Drögenbostel;
+881;bus;;Visselhövede;Bleckwedel;
+884;bus;;Visselhövede;Wittorf;
+885;bus;;Hastedt;Bothel;
+887;bus;;Westerwalsede;Bothel;
+888;bus;;Söhlingen;Rotenburg;
+
+=== Busse 9xx
 910;bus;;Oldenburg;Friesoythe;Weser-Ems-Bus
 917;bus;;Gemeindeverkehr Bösel;;Weser-Ems-Bus
+918;bus;;Wardenburg;Bösel;
 930;bus;;Löningen;Ahlhorn;Weser-Ems-Bus
 980;bus;;Ahlhorn;Lohne;
 
