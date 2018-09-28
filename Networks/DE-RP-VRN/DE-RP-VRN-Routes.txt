@@ -28,7 +28,7 @@
 #
 
 
-= Überlick über die ÖPNV-Linien des Verkehrsverbundes Rhein-Neckar
+= Überblick über die ÖPNV-Linien des Verkehrsverbundes Rhein-Neckar
 
 - Verweis auf die Datei mit den [[Verkehrsverbund Rhein-Neckar/Analyse/DE-RP-VRN-Linien|VRN-Linien]] im Wiki.
 - Verweis auf mehr [[Talk:Verkehrsverbund Rhein-Neckar/Analyse|Informationen]] im Wiki.

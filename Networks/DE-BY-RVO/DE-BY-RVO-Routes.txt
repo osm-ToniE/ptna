@@ -28,7 +28,7 @@
 #
 
 
-= Überlick über die Buslinien des Regionalverkehr Oberbayern
+= Überblick über die Buslinien des Regionalverkehr Oberbayern
 
 - Verweis auf die Datei mit den [[Oberbayern/Transportation/RVO-Linien-gesamt|RVO-Linien]] im Wiki.
 - Verweis auf mehr [[Talk:Oberbayern/Transportation/Analyse|Informationen]] im Wiki.

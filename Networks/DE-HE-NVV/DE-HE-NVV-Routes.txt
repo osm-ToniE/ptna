@@ -27,7 +27,7 @@
 # - operator  == wird bei mehreren Linie mit identischem ref und type Differenzierung herangezogen (Der Wert von 'operator' darf ';' enthalten)
 #
 
-= Überlick über die ÖPNV-Linien des Nordhessischen VerkehrsVerbundes
+= Überblick über die ÖPNV-Linien des Nordhessischen VerkehrsVerbundes
 
 - Verweis auf die Datei mit den [[Kassel/Transportation/Analyse/DE-HE-NVV-Linien|NVV-Linien]] im Wiki.
 - Verweis auf mehr [[Talk:Kassel/Transportation/Analyse|Informationen]] im Wiki.
