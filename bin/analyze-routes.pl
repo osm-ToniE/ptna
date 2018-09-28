@@ -21,7 +21,7 @@ use OSM::Data      qw( %META %NODES %WAYS %RELATIONS );
 use Data::Dumper;
 use Encode;
 
-my @supported_route_types   = ( 'train', 'subway', 'light_rail', 'tram', 'trolleybus', 'bus', 'ferry', 'monorail', 'aerialway', 'funicular', 'share_taxi' );
+my @supported_route_types   = ( 'train', 'subway', 'light_rail', 'tram', 'trolleybus', 'bus', 'coach', 'ferry', 'monorail', 'aerialway', 'funicular', 'share_taxi' );
 my @well_known_route_types  = ( 'bicycle', 'mtb', 'hiking', 'road' );
 
 my $verbose                         = undef;
@@ -230,6 +230,7 @@ my %column_name             = ( 'ref'           => 'Linie (ref=)',
                               );
 
 my %transport_types         = ( 'bus'           => 'Bus',
+                                'coach'         => 'Fernbus',
                                 'share_taxi'    => '(Anruf-)Sammel-Taxi',
                                 'train'         => 'Zug/S-Bahn',
                                 'tram'          => 'Tram/Straßenbahn',
@@ -2346,6 +2347,7 @@ sub analyze_ptv2_route_relation {
                             }
                             if ( $check_stop_position ) {
                                 if ( $relation_ptr->{'tag'}->{'route'} eq 'bus'        ||
+                                     $relation_ptr->{'tag'}->{'route'} eq 'coach'      ||
                                      $relation_ptr->{'tag'}->{'route'} eq 'tram'       ||
                                      $relation_ptr->{'tag'}->{'route'} eq 'share_taxi'    ) {
                                     if ( $NODES{$node_ref->{'ref'}}->{'tag'}->{$relation_ptr->{'tag'}->{'route'}}          &&
@@ -2389,6 +2391,7 @@ sub analyze_ptv2_route_relation {
                             #
                             #if ( $check_platform ) {
                             #    if ( $relation_ptr->{'tag'}->{'route'} eq 'bus'        ||
+                            #         $relation_ptr->{'tag'}->{'route'} eq 'coach'      ||
                             #         $relation_ptr->{'tag'}->{'route'} eq 'tram'       ||
                             #         $relation_ptr->{'tag'}->{'route'} eq 'share_taxi'    ) {
                             #        if ( $NODES{$node_ref->{'ref'}}->{'tag'}->{$relation_ptr->{'tag'}->{'route'}}          &&
@@ -2619,6 +2622,7 @@ sub analyze_ptv2_route_relation {
                         #
                         #if ( $check_platform ) {
                         #    if ( $relation_ptr->{'tag'}->{'route'} eq 'bus'        ||
+                        #         $relation_ptr->{'tag'}->{'route'} eq 'coach'      ||
                         #         $relation_ptr->{'tag'}->{'route'} eq 'tram'       ||
                         #         $relation_ptr->{'tag'}->{'route'} eq 'share_taxi'    ) {
                         #        if ( $WAYS{$highway_ref->{'ref'}}->{'tag'}->{$relation_ptr->{'tag'}->{'route'}}          &&
@@ -2682,6 +2686,7 @@ sub analyze_ptv2_route_relation {
                         #
                         #if ( $check_platform ) {
                         #    if ( $relation_ptr->{'tag'}->{'route'} eq 'bus'        ||
+                        #         $relation_ptr->{'tag'}->{'route'} eq 'coach'      ||
                         #         $relation_ptr->{'tag'}->{'route'} eq 'tram'       ||
                         #         $relation_ptr->{'tag'}->{'route'} eq 'share_taxi'    ) {
                         #        if ( $RELATIONS{$rel_ref->{'ref'}}->{'tag'}->{$relation_ptr->{'tag'}->{'route'}}          &&
@@ -3346,7 +3351,7 @@ sub PTv2CompatibleNodePlatformTag {
     
     if ( $NODES{$node_id}->{'member_of_way'} ) {
         # this node is a member of a way,  yet don't know which type
-        if ( !defined($vehicle_type) || $vehicle_type eq 'bus' || $vehicle_type eq 'share_taxi' || $vehicle_type eq 'trolleybus' ) {
+        if ( !defined($vehicle_type) || $vehicle_type eq 'bus' || $vehicle_type eq 'coach' || $vehicle_type eq 'share_taxi' || $vehicle_type eq 'trolleybus' ) {
             if ( $NODES{$node_id}->{'tag'}->{'highway'} ) {
                 if ( $NODES{$node_id}->{'tag'}->{'highway'} eq 'bus_stop' || $NODES{$node_id}->{'tag'}->{'highway'} eq 'platform' ) {
                     foreach my $way_id ( keys (  %{$NODES{$node_id}->{'member_of_way'}} ) ) {
@@ -3362,7 +3367,7 @@ sub PTv2CompatibleNodePlatformTag {
         }
     } else {
         # this node is a solitary node
-        if ( !defined($vehicle_type) || $vehicle_type eq 'bus' || $vehicle_type eq 'share_taxi' || $vehicle_type eq 'trolleybus' ) {
+        if ( !defined($vehicle_type) || $vehicle_type eq 'bus' || $vehicle_type eq 'coach' || $vehicle_type eq 'share_taxi' || $vehicle_type eq 'trolleybus' ) {
             if ( $NODES{$node_id}->{'tag'} && $NODES{$node_id}->{'tag'}->{'highway'} ) {
                 if ( $NODES{$node_id}->{'tag'}->{'highway'} eq 'bus_stop' || $NODES{$node_id}->{'tag'}->{'highway'} eq 'platform' ) {
                     $ret_val = "'highway' = " . $NODES{$node_id}->{'tag'}->{'highway'} . "'";
@@ -3458,7 +3463,7 @@ sub noAccess {
     
     if ( $way_id && $WAYS{$way_id} && $vehicle_type ) {
         my $way_tag_ref = $WAYS{$way_id}->{'tag'};
-        if ( $vehicle_type eq 'bus' || $vehicle_type eq 'share_taxi' || $vehicle_type eq 'trolleybus' ) {
+        if ( $vehicle_type eq 'bus' || $vehicle_type eq 'coach' || $vehicle_type eq 'share_taxi' || $vehicle_type eq 'trolleybus' ) {
             if ( ($way_tag_ref->{'bus'} && ($way_tag_ref->{'bus'} eq 'yes' || $way_tag_ref->{'bus'} eq 'designated' || $way_tag_ref->{'bus'} eq 'official')) ||
                  ($way_tag_ref->{'psv'} && ($way_tag_ref->{'psv'} eq 'yes' || $way_tag_ref->{'psv'} eq 'designated' || $way_tag_ref->{'psv'} eq 'official'))    ) {
                 ; # fine
