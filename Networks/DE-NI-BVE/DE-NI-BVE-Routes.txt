@@ -1,0 +1,57 @@
+<pre>
+#
+# Formatierung:
+#
+# Überschriften beginnen mit '=', '==', '===', '====', ... am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an
+#
+# Einfacher Text beginnt mit '-' am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an, Zeilen hier werden im Wiki mit <br /> abgeschlossen (neue Zeile).
+# Einfacher Text darf nur direkt hinter einer Überschrift stehen.
+#
+# Links: [[...|...]] sind interne Verweise im Wiki
+#        [... ...] sind externe Verweise
+#
+# Kommentare beginnen mit '#' am Anfang einer Zeile. Kommentare mittendrin werden nicht erkannt.
+#
+# Format der Datei: UNIX (LF), UTF-8
+#
+#
+# Inhalt im CSV-Format
+#
+# ref;type;comment;from;to;operator
+#
+# - ref       == tag 'ref' von route oder route_master
+# - type      == inhalt des tags 'route' bzw. 'route_master'
+# - comment   == kann Kommentar enthalten wie; Ruftaxi, Bus, Expressbus, ...  wird nicht ausgewertet, lediglich ausgegeben
+# - from      == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - to        == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - operator  == wird bei mehreren Linie mit identischem ref und type Differenzierung herangezogen (Der Wert von 'operator' darf ';' enthalten)
+#
+
+
+= Überblick über die ÖPNV-Linien des Busverkehr Emsland-Mitte/Nord
+
+- Verweis auf die Datei mit den [[Emsland-Mitte-Nord/Transport/Analyse/DE-NI-BVE-Linien|BVE-Linien]] im Wiki.
+-
+- Verweis auf mehr [[Talk:Emsland-Mitte-Nord/Transport/Analyse|Informationen]] im Wiki.
+
+
+== Bus
+
+612;bus;Aschendorfer Moor - Papenburg-Untenende;;;Hermann Albers e.K.
+701;bus;Meppen - Geeste - Dalum - Wietmarschen - Nordhorn;;;Richters Reisen GmbH
+900;bus;Meppen - Rühle - Hesepe - Dalum - Geeste - Holthausen/Biene;;;Omnibusbetrieb Reinhard Bittner GmbH & Co. KG
+901;bus;Meppen - Holthausen - Hemsen;;;Elbert Reisen GmbH & Co. KG
+907;bus;Meppen - Lehrte - Bawinkel;;;Elbert Reisen GmbH & Co. KG
+928;bus;Hebelermeer, Schöninghsdorf - Twist;;;Wessels-Reisen
+932;bus;Kl. Berßen - Haselünne;;;Kalmer GmbH
+933;bus;Meppen - Haselünne;;;Kalmer GmbH
+934;bus;Haselünne - Lähden - Werlte;;;Kalmer GmbH
+935;bus;Haselünne - Herzlake - Wachtum;;;Kalmer GmbH
+936;bus;Haselünne - Herzlake - Dohren;;;Kalmer GmbH
+937;bus;Haselünne - Lage - Lotten;;;Kalmer GmbH
+939;bus;Haselünne - Bückelte - Lehrte;;;Kalmer GmbH
+941;bus;Herzlake - Westrum;;;Kalmer GmbH
+942;bus;Herzlake - Holte - Lähden;;;Kalmer GmbH
+945;bus;Löningen - Herzlake;;;Kalmer GmbH
+
+</pre>

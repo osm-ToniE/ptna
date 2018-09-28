@@ -1,0 +1,60 @@
+<pre>
+#
+# Formatierung:
+#
+# Überschriften beginnen mit '=', '==', '===', '====', ... am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an
+#
+# Einfacher Text beginnt mit '-' am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an, Zeilen hier werden im Wiki mit <br /> abgeschlossen (neue Zeile).
+# Einfacher Text darf nur direkt hinter einer Überschrift stehen.
+#
+# Links: [[...|...]] sind interne Verweise im Wiki
+#        [... ...] sind externe Verweise
+#
+# Kommentare beginnen mit '#' am Anfang einer Zeile. Kommentare mittendrin werden nicht erkannt.
+#
+# Format der Datei: UNIX (LF), UTF-8
+#
+#
+# Inhalt im CSV-Format
+#
+# ref;type;comment;from;to;operator
+#
+# - ref       == tag 'ref' von route oder route_master
+# - type      == inhalt des tags 'route' bzw. 'route_master'
+# - comment   == kann Kommentar enthalten wie; Ruftaxi, Bus, Expressbus, ...  wird nicht ausgewertet, lediglich ausgegeben
+# - from      == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - to        == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - operator  == wird bei mehreren Linie mit identischem ref und type Differenzierung herangezogen (Der Wert von 'operator' darf ';' enthalten)
+#
+
+
+= Überblick über die ÖPNV-Linien des Verkehrsregion-Nahverkehr Ems-Jade
+
+- Verweis auf die Datei mit den [[Ems-Jade/Transport/Analyse/DE-NI-VEJ-Linien|VEJ-Linien]] im Wiki.
+-
+- Verweis auf mehr [[Talk:Ems-Jade/Transport/Analyse|Informationen]] im Wiki.
+
+
+== Bus
+
+221;bus;Bockhorn - Grabstede - Jührdenerfeld;;;
+251;bus;Varel - Zetel - Wilhelmshaven;;;
+252;bus;Zetel - Grabstederfeld - Westerstede;;;
+253;bus;Varel - Dangast - und zurück;;;
+255;bus;Varel - Obenstrohe - Bredehorn;;;
+256;bus;Zetel - Büppel - Jaderberg;;;
+257;bus;Varel - Jaderberg;;;
+258;bus;Streek - Neuenwege - Büppel;;;
+259;bus;Varel/Langendamm - Dangast;;;
+260;bus;Blauhand - Zetelermarsch - Zetel;;;
+261;bus;Blauhand - Steinhausen - Bockhorn;;;
+261a;bus;Astederfeld - Zetel - Nbg - Bockhorn - Varel;;;
+262;bus;Neuenwege - Büppel - Varel;;;
+263;bus;Dangast - Borgstede - J'have - Varel;;;
+264;bus;Zetel - Bohlenbergerfeld - Friedeburg;;;
+265;bus;Varel - Zetel - Schortens - Jever;;;
+268;bus;Bockhorn - Grabstede - Bredehorn;;;
+273;bus;Varel - Varel, Dienstleistungszentrum;;;
+
+
+</pre>

@@ -1,0 +1,43 @@
+<pre>
+#
+# Formatierung:
+#
+# Überschriften beginnen mit '=', '==', '===', '====', ... am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an
+#
+# Einfacher Text beginnt mit '-' am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an, Zeilen hier werden im Wiki mit <br /> abgeschlossen (neue Zeile).
+# Einfacher Text darf nur direkt hinter einer Überschrift stehen.
+#
+# Links: [[...|...]] sind interne Verweise im Wiki
+#        [... ...] sind externe Verweise
+#
+# Kommentare beginnen mit '#' am Anfang einer Zeile. Kommentare mittendrin werden nicht erkannt.
+#
+# Format der Datei: UNIX (LF), UTF-8
+#
+#
+# Inhalt im CSV-Format
+#
+# ref;type;comment;from;to;operator
+#
+# - ref       == tag 'ref' von route oder route_master
+# - type      == inhalt des tags 'route' bzw. 'route_master'
+# - comment   == kann Kommentar enthalten wie; Ruftaxi, Bus, Expressbus, ...  wird nicht ausgewertet, lediglich ausgegeben
+# - from      == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - to        == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - operator  == wird bei mehreren Linie mit identischem ref und type Differenzierung herangezogen (Der Wert von 'operator' darf ';' enthalten)
+#
+
+
+= Überblick über die ÖPNV-Linien des Verkehrsgemeinschaft Cloppenburg
+
+- Verweis auf die Datei mit den [[Cloppenburg/Transport/Analyse/DE-NI-VGC-Linien|VGC-Linien]] im Wiki.
+-
+- Verweis auf mehr [[Talk:Cloppenburg/Transport/Analyse|Informationen]] im Wiki.
+
+# http://www.bus-vgc.de/inhalt/datei.php?id=MzM7LTsvdXNyL2xvY2FsL2h0dHBkL3ZodGRvY3Mvd2lsbWVyaW5nL3ZnYy9tZWRpZW4vZG9rdW1lbnRlL2xpbmllbm5ldHpwbGFuX2NscF8odmdjKV9hNC5wZGY%3D 
+
+
+== Bus
+
+
+</pre>

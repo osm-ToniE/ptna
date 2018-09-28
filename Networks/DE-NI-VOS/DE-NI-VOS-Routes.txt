@@ -1,0 +1,75 @@
+<pre>
+#
+# Formatierung:
+#
+# Überschriften beginnen mit '=', '==', '===', '====', ... am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an
+#
+# Einfacher Text beginnt mit '-' am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an, Zeilen hier werden im Wiki mit <br /> abgeschlossen (neue Zeile).
+# Einfacher Text darf nur direkt hinter einer Überschrift stehen.
+#
+# Links: [[...|...]] sind interne Verweise im Wiki
+#        [... ...] sind externe Verweise
+#
+# Kommentare beginnen mit '#' am Anfang einer Zeile. Kommentare mittendrin werden nicht erkannt.
+#
+# Format der Datei: UNIX (LF), UTF-8
+#
+#
+# Inhalt im CSV-Format
+#
+# ref;type;comment;from;to;operator
+#
+# - ref       == tag 'ref' von route oder route_master
+# - type      == inhalt des tags 'route' bzw. 'route_master'
+# - comment   == kann Kommentar enthalten wie; Ruftaxi, Bus, Expressbus, ...  wird nicht ausgewertet, lediglich ausgegeben
+# - from      == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - to        == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# - operator  == wird bei mehreren Linie mit identischem ref und type Differenzierung herangezogen (Der Wert von 'operator' darf ';' enthalten)
+#
+
+
+= Überblick über die ÖPNV-Linien des Verkehrsgemeinschaft Osnabrück
+
+- Verweis auf die Datei mit den [[Osnabrück/Transport/Analyse/DE-NI-VOS-Linien|VOS-Linien]] im Wiki.
+-
+- Verweis auf mehr [[Talk:Osnabrück/Transport/Analyse|Informationen]] im Wiki.
+
+=== Bus
+
+=== VOS Nord
+
+126;bus;Ibbenbüren - Bad Steinbeck - Recke - Schale;;;Gronemann
+127;bus;Schale - Hopsten - Jägerhof Wilhelmsschacht - Ibbenbüren;;;Gronemann
+192;bus;Ibbenbüren, Uffeln - Rheine;;Gronemann
+R27;bus;Hopsten - Dickenberg - Ibbenbüren;;;Gronemann
+610;bus;Fürstenau - Bramsche - Osnabrück;;;
+611;bus;Fürstenau - Schlichthorst - Merzen - Ueffeln - Neuenkirchen;;;
+612;bus;Fürstenau - Hollenstede - Settrup - Freren;;;
+613;bus;Achmer - Bramsche;;;
+620;bus;(Alfhausen) - Ueffeln - Hesepe - Bramsche;;;
+621;bus;Bersenbrück - Ankum - Voltlage - Recke;;;
+622;bus;Neuenkirchen - Vinte - Rothertshausen - Recke;;;
+624;bus;Hesepe - Sögeln - Bramsche;;;
+630;bus;Ankum - Nortrup - Quakenbrück;;;
+632;bus;BSB - Ankum - Fürstenau - Bippen - / Nortrup - Quakenbrück;;;
+640;bus;Fürstenau - Berge - Quakenbrück;;;
+641;bus;Fürstenau / Handrup - Grafeld - Schwagstorf / Bippen;;;
+642;bus;Berge - Menslage - Wohld - Hakenkamp / Quakenbrück;;;
+650;bus;Bersenbrück - Ankum - Fürstenau;;;
+651;bus;BSB - Ankum - Eggermühlen - Kettenkamp / Berge - Bippen;;;
+661;bus;Bürgerbus Badbergen 662 Quakenbrück - Talge - Bersenbrück;;;
+663;bus;Quakenbrück - Gehrde - Bersenbrück;;;
+671;bus;Ankum - BSB - Alfhausen - Rieste - Bramsche;;;
+672;bus;Ankum - BSB - Alfhausen - Thiene - Bramsche;;;
+673;bus;Bersenbrück - Wehbergen - Durchhorn - Ankum;;;
+674;bus;Ankum - Rüssel - Brickwedde - Holsten - Ankum;;;
+676;bus;Tütingen - Westerholte - Aslage - Sundern - Ankum;;;
+680;bus;Lappenstuhl - Malgarten - Gartenstadt - Bramsche;;;
+681;bus;Bramsche - Epe - Malgarten - (Hesepe, Purenkamp) - Bramsche;;;
+685;bus;Bramsche - Pente - Bramsche;;;
+686;bus;Lappenstuhl - Kalkriese - Engter - Bramsche;;;
+688;bus;Schleptrup - Evinghausen - Engter;;;
+690;bus;Kalkriese - (Lappenstuhl) - Engter - Schleptrup - Bramsche;;;
+
+
+</pre>
