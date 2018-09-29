@@ -21,8 +21,13 @@ use OSM::Data      qw( %META %NODES %WAYS %RELATIONS );
 use Data::Dumper;
 use Encode;
 
-my @supported_route_types   = ( 'train', 'subway', 'light_rail', 'tram', 'trolleybus', 'bus', 'coach', 'ferry', 'monorail', 'aerialway', 'funicular', 'share_taxi' );
-my @well_known_route_types  = ( 'bicycle', 'mtb', 'hiking', 'road' );
+my @supported_route_types                   = ( 'train', 'subway', 'light_rail', 'tram', 'trolleybus', 'bus', 'coach', 'ferry', 'monorail', 'aerialway', 'funicular', 'share_taxi' );
+my @well_known_other_route_types            = ( 'bicycle', 'mtb', 'hiking', 'road', 'foot', 'inline_skates', 'canoe', 'detour', 'fitness_trail', 'horse', 'motorboat', 'nordic_walking', 'pipeline', 'piste', 'power', 'running', 'ski', 'snowmobile', 'cycling' , 'historic', 'motorcycle', 'riding' );
+my @well_known_network_types                = ( 'international', 'national', 'regional', 'local', 'icn', 'ncn', 'rcn', 'lcn', 'iwn', 'nwn', 'rwn', 'lwn', 'road' );
+my @well_known_other_types                  = ( 'restriction', 'enforcement', 'destination_sign' );
+my %have_seen_well_known_other_route_types  = ();
+my %have_seen_well_known_network_types      = ();
+my %have_seen_well_known_other_types        = ();
 
 my $verbose                         = undef;
 my $debug                           = undef;
@@ -648,12 +653,39 @@ foreach $relation_id ( keys ( %RELATIONS ) ) {
             #
             # collect network relations (collection of public_transport relations), not of interest though for the moment and against the rule (relations are not categories)
             #
-            $suspicious_relations{$relation_id} = 1;
-            $number_of_suspicious_relations++;
+            my $well_known = undef;
+            if ( $RELATIONS{$relation_id}->{'tag'}->{'network'} ) {
+                my $network = $RELATIONS{$relation_id}->{'tag'}->{'network'};
+                foreach my $nt ( @well_known_network_types )
+                {
+                    if ( $network eq $nt ) {
+                        printf STDERR "%s Skipping well known network type: %s\n", get_time(), $network       if ( $debug );
+                        $have_seen_well_known_network_types{$network} = 1;
+                        $well_known = $network;
+                        last;
+                    }
+                }
+            }
+            if ( !defined($well_known) ) {
+                $suspicious_relations{$relation_id} = 1;
+                $number_of_suspicious_relations++;
+            }
         } else {
             #printf STDERR "%s Suspicious: unhandled type '%s' for relation id %s\n", get_time(), $type, $relation_id;
-            $suspicious_relations{$relation_id} = 1;
-            $number_of_suspicious_relations++;
+            my $well_known = undef;
+            foreach my $ot ( @well_known_other_types )
+            {
+                if ( $type eq $ot ) {
+                    printf STDERR "%s Skipping well known other type: %s\n", get_time(), $type       if ( $debug );
+                    $have_seen_well_known_other_types{$type} = 1;
+                    $well_known = $type;
+                    last;
+                }
+            }
+            if ( !defined($well_known) ) {
+                $suspicious_relations{$relation_id} = 1;
+                $number_of_suspicious_relations++;
+            }
         }
     } else {
         #printf STDERR "%s Suspicious: unset 'type' for relation id %s\n", get_time(), $relation_id;
@@ -1229,23 +1261,24 @@ sub match_route_type {
         foreach my $rt ( @supported_route_types )
         {
             if ( $route_type eq $rt ) {
-                printf STDERR "%s Keeping route_type: %s\n", get_time(), $route_type       if ( $debug );
+                printf STDERR "%s Keeping route type: %s\n", get_time(), $route_type       if ( $debug );
                 return 'keep';
             } elsif ( $route_type =~ m/$rt/ ) {
-                printf STDERR "%s Suspicious route_type: %s\n", get_time(), $route_type    if ( $debug );
+                printf STDERR "%s Suspicious route type: %s\n", get_time(), $route_type    if ( $debug );
                 return 'suspicious';
             }
         }
-        foreach my $rt ( @well_known_route_types )
+        foreach my $rt ( @well_known_other_route_types )
         {
             if ( $route_type eq $rt ) {
-                printf STDERR "%s Skipping well known route_type: %s\n", get_time(), $route_type       if ( $debug );
+                printf STDERR "%s Skipping well known other route type: %s\n", get_time(), $route_type       if ( $debug );
+                $have_seen_well_known_other_route_types{$route_type} = 1;
                 return 'well_known';
             }
         }
     }
 
-    printf STDERR "%s Finally other route_type: %s\n", get_time(), $route_type       if ( $debug );
+    printf STDERR "%s Finally other route type: %s\n", get_time(), $route_type       if ( $debug );
 
     return 'other';
 }
@@ -3748,6 +3781,9 @@ sub printHintSuspiciousRelations {
         #
         # HTML
         #
+        my $hswkort = scalar( keys ( %have_seen_well_known_other_route_types ) );
+        my $hswknt  = scalar( keys ( %have_seen_well_known_network_types ) );
+        my $hswkot  = scalar( keys ( %have_seen_well_known_other_types ) );
         push( @HTML_main, "Dieser Abschnitt enthält weitere Relationen aus dem Umfeld der Linien:\n" );
         push( @HTML_main, "<ul>\n" );
         push( @HTML_main, "    <li>evtl. falsche 'route' oder 'route_master' Werte?\n" );
@@ -3761,6 +3797,34 @@ sub printHintSuspiciousRelations {
         push( @HTML_main, "        </ul>\n" );
         push( @HTML_main, "    </li>\n" );
         push( @HTML_main, "</ul>\n" );
+        if ( $hswkort || $hswknt || $hswkot ) {
+            push( @HTML_main, "Die folgenden Werte bzw. Kombinationen wurden in den Inputdaten gefunden, werden hier aber nicht angezeigt. Sie gelten als \"wohl definierte\" Werte und nicht als Fehler.\n" );
+            push( @HTML_main, "<ul>\n" );
+            if ( $hswkort ) {
+                push( @HTML_main, "    <li>'type' = 'route_master' bzw. 'type' = 'route''\n" );
+                push( @HTML_main, "        <ul>\n" );
+                foreach my $rt (  sort ( keys %have_seen_well_known_other_route_types ) ) {
+                    push( @HTML_main, sprintf( "    <li>'route_master' = '%s' bzw. 'route' = '%s'</li>\n", $rt, $rt ) );
+                }
+                push( @HTML_main, "        </ul>\n" );
+                push( @HTML_main, "    </li>\n" );
+            }
+            if ( $hswknt ) {
+                push( @HTML_main, "    <li>'type' = 'network'\n" );
+                push( @HTML_main, "        <ul>\n" );
+                foreach my $nt (  sort ( keys %have_seen_well_known_network_types ) ) {
+                    push( @HTML_main, sprintf( "    <li>'network' = '%s'</li>\n", $nt ) );
+                }
+                push( @HTML_main, "        </ul>\n" );
+                push( @HTML_main, "    </li>\n" );
+            }
+            if ( $hswkot ) {
+                foreach my $ot ( sort ( keys %have_seen_well_known_other_types ) ) {
+                    push( @HTML_main, sprintf( "    <li>'type' = '%s'</li>\n", $ot ) );
+                }
+            }
+            push( @HTML_main, "</ul>\n" );
+        }
         push( @HTML_main, "\n" );
     }
 }
