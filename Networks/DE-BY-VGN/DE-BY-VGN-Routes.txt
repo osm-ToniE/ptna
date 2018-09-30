@@ -455,22 +455,23 @@ U3;subway;;;;
 529.2;bus;(Rufbus);;;
 529.3;bus;(Rufbus);;;
 529.4;bus;(Rufbus);;;
-530;bus;;;;
-531;bus;(Rufbus);;;
-532;bus;;;;
+530;bus;;;; (ab 11.09. ersatzlos gestrichen)
+531;bus;(Rufbus);;;(Fahrplanänderung da neuer Betreiber (Fa. Merz) ab 11.09.)
+532;bus;;;; (ab 11.09 ersatzlos gestrichen)
 534;bus;;;;
-535;bus;;;;
-536;bus;(Rufbus);;;
+535;bus;;;;(Fahrplanänderung da neuer Betreiber (Fa. Merz) ab 11.09.)
+536;bus;(Rufbus);;; (Fahrplanänderung da neuer Betreiber (Fa. Merz) ab 11.09.)
+537;bus;;;; (Neue Linie ab 11.09.2018)
 538;bus;;;;
 539;bus;;;;
-541;bus;;;;
-542;bus;;;;
-543;bus;;;;
+541;bus;;;;(Fahrplanänderung da neuer Betreiber (Fa. Merz) ab 11.09.)
+542;bus;;;;(Fahrplanänderung da neuer Betreiber (Fa. Merz) ab 11.09.)
+543;bus;;;;(Fahrplanänderung da neuer Betreiber (Fa. Merz) ab 11.09.)
 544;bus;;;;
 545;bus;;;;
-546;bus;(Rufbus);;;
-547;bus;;;;
-548;bus;;;;
+546;bus;(Rufbus);;;(Fahrplanänderung da neuer Betreiber (Fa. Merz) ab 11.09.)
+547;bus;;;;(Fahrplanänderung da neuer Betreiber (Fa. Merz) ab 11.09.)
+548;bus;;;;(Fahrplanänderung da neuer Betreiber (Fa. Merz) ab 11.09.)
 550;bus;;;;
 551;bus;;;;
 552;bus;;;;
