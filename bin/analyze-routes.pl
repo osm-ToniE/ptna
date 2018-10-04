@@ -1450,18 +1450,18 @@ sub analyze_route_master_environment {
                 push( @{$relation_ptr->{'__issues__'}}, "There is more than one Route-Master" );
             }
             if ( $number_of_my_routes > $number_of_routes ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf("Route-Masters have more Routes than actually exist (%d versus %d) in the given data set", $number_of_my_routes, $number_of_routes) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("Route-Masters have more Routes than actually match (%d versus %d) in the given data set", $number_of_my_routes, $number_of_routes) );
             } elsif ( $number_of_my_routes < $number_of_routes ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf("Route-Masters have less Routes than actually exist (%d versus %d) in the given data set", $number_of_my_routes, $number_of_routes) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("Route-Masters have less Routes than actually match (%d versus %d) in the given data set", $number_of_my_routes, $number_of_routes) );
             }
         } else {
             # how many routes are members of this route_master?
             $number_of_my_routes        = scalar( @{$relation_ptr->{'route_master_relation'}} );
         
             if ( $number_of_my_routes > $number_of_routes ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf("Route-Master has more Routes than actually exist (%d versus %d) in the given data set", $number_of_my_routes, $number_of_routes) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("Route-Master has more Routes than actually match (%d versus %d) in the given data set", $number_of_my_routes, $number_of_routes) );
             } elsif ( $number_of_my_routes < $number_of_routes ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf("Route-Master has less Routes than actually exist (%d versus %d) in the given data set", $number_of_my_routes, $number_of_routes) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("Route-Master has less Routes than actually match (%d versus %d) in the given data set", $number_of_my_routes, $number_of_routes) );
             }
         }
         
