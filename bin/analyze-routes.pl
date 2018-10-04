@@ -1481,13 +1481,25 @@ sub analyze_route_master_environment {
                             #
                             # 'ref' is the same, check for other problems
                             #
+                            if ( $relation_ptr->{'tag'}->{'route_master'} && $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'route'} ) {
+                                if ( $relation_ptr->{'tag'}->{'route_master'} eq $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'route'} ) {
+                                    ; # hmm should not happen here
+                                    printf STDERR "%s Route of Route-Master not found although 'ref' and 'route_master/route' are equal. Route-Master: %s, Route: %s, 'ref': %s, 'route': %s\n", get_time(), $relation_id, $member_ref->{'ref'}, $ref, $relation_ptr->{'tag'}->{'route_master'};
+                                } else {
+                                    # 'ref' tag is set and is same but 'route' is set and differs from 'route_master'
+                                    push( @{$relation_ptr->{'__issues__'}}, sprintf("Route has different 'route' = '%s' than Route-Master 'route_master' = '%s': %s", $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'route'}, $relation_ptr->{'tag'}->{'route_master'}, printRelationTemplate($member_ref->{'ref'}) ) );
+                                }
+                            } elsif ( $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'route'} ) {
+                                # 'ref' tag is set and is same but 'route' is strange
+                                push( @{$relation_ptr->{'__issues__'}}, sprintf("Route has 'route' = '%s' value which is considered as not relevant: %s", $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}, printRelationTemplate($member_ref->{'ref'}) ) );
+                            }
                             if ( $relation_ptr->{'tag'}->{'network'} && $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'} ) {
                                 if ( $relation_ptr->{'tag'}->{'network'} eq $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'} ) {
                                     ; # hmm should not happen here
                                     printf STDERR "%s Route of Route-Master not found although 'ref' and 'network' are equal. Route-Master: %s, Route: %s, 'ref': %s, 'network': %s\n", get_time(), $relation_id, $member_ref->{'ref'}, $ref, $relation_ptr->{'tag'}->{'network'};
                                 } else {
                                     # 'ref' tag is set and is same but 'network' is set and differs
-                                    push( @{$relation_ptr->{'__issues__'}}, sprintf("Route has different 'network' = '%s': %s", $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}, printRelationTemplate($member_ref->{'ref'}) ) );
+                                    push( @{$relation_ptr->{'__issues__'}}, sprintf("Route has different 'network' = '%s' than Route-Master 'network' = '%s': %s", $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}, $relation_ptr->{'tag'}->{'network'}, printRelationTemplate($member_ref->{'ref'}) ) );
                                 }
                             } elsif ( $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'} ) {
                                 # 'ref' tag is set and is same but 'network' is strange
