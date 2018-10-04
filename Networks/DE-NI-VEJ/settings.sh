@@ -7,7 +7,7 @@
 PREFIX="DE-NI-VEJ"
 
 OVERPASS_QUERY="http://overpass-api.de/api/interpreter?data=area[boundary=administrative][admin_level=6][name~'Wilhelmshaven|Emden|Landkreis Aurich|Landkreis Friesland|Landkreis Leer|Landkreis Wittmund'];(rel(area)[route~'(bus|tram|train|subway|light_rail|trolleybus|ferry|monorail|aerialway|share_taxi|funicular)'];rel(br);rel[type='route'](r);)->.routes;(.routes;<<;rel(r.routes);way(r.routes);node(r.routes););out;"
-NETWORK_LONG="Verkehrsregion-Nahverkehr Ems-Jade"
+NETWORK_LONG="Verkehrsverbund Ems-Jade"
 NETWORK_SHORT="VEJ"
 
 ANALYSIS_PAGE="Ems-Jade/Transportation/Analyse"
