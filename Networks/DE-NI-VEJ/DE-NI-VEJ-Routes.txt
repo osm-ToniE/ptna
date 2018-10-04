@@ -28,7 +28,7 @@
 #
 
 
-= Überblick über die ÖPNV-Linien des Verkehrsregion-Nahverkehr Ems-Jade
+= Überblick über die ÖPNV-Linien des Verkehrsverbund Ems-Jade
 
 - Verweis auf die Datei mit den [[Ems-Jade/Transport/Analyse/DE-NI-VEJ-Linien|VEJ-Linien]] im Wiki.
 -
