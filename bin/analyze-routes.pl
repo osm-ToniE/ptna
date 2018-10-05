@@ -21,7 +21,7 @@ use OSM::Data      qw( %META %NODES %WAYS %RELATIONS );
 use Data::Dumper;
 use Encode;
 
-my @supported_route_types                   = ( 'train', 'subway', 'light_rail', 'tram', 'trolleybus', 'bus', 'coach', 'ferry', 'monorail', 'aerialway', 'funicular', 'share_taxi' );
+my @supported_route_types                   = ( 'train', 'subway', 'light_rail', 'tram', 'trolleybus', 'bus', 'ferry', 'monorail', 'aerialway', 'funicular', 'share_taxi' );
 my @well_known_other_route_types            = ( 'bicycle', 'mtb', 'hiking', 'road', 'foot', 'inline_skates', 'canoe', 'detour', 'fitness_trail', 'horse', 'motorboat', 'nordic_walking', 'pipeline', 'piste', 'power', 'running', 'ski', 'snowmobile', 'cycling' , 'historic', 'motorcycle', 'riding' );
 my @well_known_network_types                = ( 'international', 'national', 'regional', 'local', 'icn', 'ncn', 'rcn', 'lcn', 'iwn', 'nwn', 'rwn', 'lwn', 'road' );
 my @well_known_other_types                  = ( 'restriction', 'enforcement', 'destination_sign' );
@@ -38,6 +38,7 @@ my $network_guid                    = undef;
 my $network_long_regex              = undef;
 my $network_short_regex             = undef;
 my $operator_regex                  = undef;
+my $allow_coach                     = undef;
 my $check_access                    = undef;
 my $check_bus_stop                  = undef;
 my $check_name                      = undef;
@@ -72,6 +73,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'man'                           =>  \$man_page,                     # --man                             manual pages
             'verbose'                       =>  \$verbose,                      # --verbose
             'debug'                         =>  \$debug,                        # --debug
+            'allow-coach'                   =>  \$allow_coach,                  # --allow-coach                     allow 'coach' als valid routetype
             'check-access'                  =>  \$check_access,                 # --check-access                    check for access restrictions on highways
             'check-bus-stop'                =>  \$check_bus_stop,               # --check-bus-stop                  check for strict highway=bus_stop on nodes only
             'check-motorway-link'           =>  \$check_motorway_link,          # --check-motorway-link             check for motorway_link followed/preceeded by motorway or trunk
@@ -122,6 +124,7 @@ if ( $verbose ) {
     printf STDERR "%20s--title='%s'\n",                    ' ', $page_title                    if ( $page_title                  );
     printf STDERR "%20s--network-guid='%s'\n",             ' ', $network_guid                  if ( $network_guid                );
     printf STDERR "%20s--wiki\n",                          ' '                                 if ( $print_wiki                  );
+    printf STDERR "%20s--allow-coach\n",                   ' '                                 if ( $allow_coach                 );
     printf STDERR "%20s--check-access\n",                  ' '                                 if ( $check_access                );
     printf STDERR "%20s--check-bus-stop\n",                ' '                                 if ( $check_bus_stop              );
     printf STDERR "%20s--check-motorway-link\n",           ' '                                 if ( $check_motorway_link         );
@@ -152,6 +155,10 @@ if ( $verbose ) {
     printf STDERR "%20s--separator='%s'\n",                ' ', $csv_separator                 if ( $csv_separator               );
     printf STDERR "%20s--routes-file='%s'\n",              ' ', decode('utf8', $routes_file )  if ( $routes_file                 );
     printf STDERR "%20s--osm-xml-file='%s'\n",             ' ', decode('utf8', $osm_xml_file ) if ( $osm_xml_file                );
+}
+
+if ( $allow_coach ) {
+    push( @supported_route_types, 'coach' );
 }
 
 if ( $multiple_ref_type_entries ne 'analyze' && $multiple_ref_type_entries ne 'allow' && $multiple_ref_type_entries ne 'ignore' ) {
@@ -2398,10 +2405,10 @@ sub analyze_ptv2_route_relation {
                                 $role_mismatch_found++;
                             }
                             if ( $check_stop_position ) {
-                                if ( $relation_ptr->{'tag'}->{'route'} eq 'bus'        ||
-                                     $relation_ptr->{'tag'}->{'route'} eq 'coach'      ||
-                                     $relation_ptr->{'tag'}->{'route'} eq 'tram'       ||
-                                     $relation_ptr->{'tag'}->{'route'} eq 'share_taxi'    ) {
+                                if (  $relation_ptr->{'tag'}->{'route'} eq 'bus'                     ||
+                                     ($relation_ptr->{'tag'}->{'route'} eq 'coach' && $allow_coach)  ||
+                                      $relation_ptr->{'tag'}->{'route'} eq 'tram'                    ||
+                                      $relation_ptr->{'tag'}->{'route'} eq 'share_taxi'                 ) {
                                     if ( $NODES{$node_ref->{'ref'}}->{'tag'}->{$relation_ptr->{'tag'}->{'route'}}          &&
                                          $NODES{$node_ref->{'ref'}}->{'tag'}->{$relation_ptr->{'tag'}->{'route'}} eq "yes"    ) {
                                         ; # fine
@@ -2442,10 +2449,10 @@ sub analyze_ptv2_route_relation {
                             # bus=yes, tram=yes or share_taxi=yes is not required on public_transport=platform
                             #
                             #if ( $check_platform ) {
-                            #    if ( $relation_ptr->{'tag'}->{'route'} eq 'bus'        ||
-                            #         $relation_ptr->{'tag'}->{'route'} eq 'coach'      ||
-                            #         $relation_ptr->{'tag'}->{'route'} eq 'tram'       ||
-                            #         $relation_ptr->{'tag'}->{'route'} eq 'share_taxi'    ) {
+                            #    if (  $relation_ptr->{'tag'}->{'route'} eq 'bus'                     ||
+                            #         ($relation_ptr->{'tag'}->{'route'} eq 'coach' && $allow_coach)  ||
+                            #          $relation_ptr->{'tag'}->{'route'} eq 'tram'                    ||
+                            #          $relation_ptr->{'tag'}->{'route'} eq 'share_taxi'                 ) {
                             #        if ( $NODES{$node_ref->{'ref'}}->{'tag'}->{$relation_ptr->{'tag'}->{'route'}}          &&
                             #             $NODES{$node_ref->{'ref'}}->{'tag'}->{$relation_ptr->{'tag'}->{'route'}} eq "yes"    ) {
                                         ; # fine
@@ -2673,10 +2680,10 @@ sub analyze_ptv2_route_relation {
                         # bus=yes, tram=yes or share_taxi=yes is not required on public_transport=platform
                         #
                         #if ( $check_platform ) {
-                        #    if ( $relation_ptr->{'tag'}->{'route'} eq 'bus'        ||
-                        #         $relation_ptr->{'tag'}->{'route'} eq 'coach'      ||
-                        #         $relation_ptr->{'tag'}->{'route'} eq 'tram'       ||
-                        #         $relation_ptr->{'tag'}->{'route'} eq 'share_taxi'    ) {
+                        #    if (  $relation_ptr->{'tag'}->{'route'} eq 'bus'                    ||
+                        #         ($relation_ptr->{'tag'}->{'route'} eq 'coach' && $allow_coach) ||
+                        #          $relation_ptr->{'tag'}->{'route'} eq 'tram'                   ||
+                        #          $relation_ptr->{'tag'}->{'route'} eq 'share_taxi'                ) {
                         #        if ( $WAYS{$highway_ref->{'ref'}}->{'tag'}->{$relation_ptr->{'tag'}->{'route'}}          &&
                         #             $WAYS{$highway_ref->{'ref'}}->{'tag'}->{$relation_ptr->{'tag'}->{'route'}} eq "yes"    ) {
                                     ; # fine
@@ -2737,10 +2744,10 @@ sub analyze_ptv2_route_relation {
                         # bus=yes, tram=yes or share_taxi=yes is not required on public_transport=platform
                         #
                         #if ( $check_platform ) {
-                        #    if ( $relation_ptr->{'tag'}->{'route'} eq 'bus'        ||
-                        #         $relation_ptr->{'tag'}->{'route'} eq 'coach'      ||
-                        #         $relation_ptr->{'tag'}->{'route'} eq 'tram'       ||
-                        #         $relation_ptr->{'tag'}->{'route'} eq 'share_taxi'    ) {
+                        #    if (  $relation_ptr->{'tag'}->{'route'} eq 'bus'                    ||
+                        #         ($relation_ptr->{'tag'}->{'route'} eq 'coach' && $allow_coach) ||
+                        #          $relation_ptr->{'tag'}->{'route'} eq 'tram'                   ||
+                        #          $relation_ptr->{'tag'}->{'route'} eq 'share_taxi'               ) {
                         #        if ( $RELATIONS{$rel_ref->{'ref'}}->{'tag'}->{$relation_ptr->{'tag'}->{'route'}}          &&
                         #             $RELATIONS{$rel_ref->{'ref'}}->{'tag'}->{$relation_ptr->{'tag'}->{'route'}} eq "yes"    ) {
                                     ; # fine
@@ -3403,7 +3410,11 @@ sub PTv2CompatibleNodePlatformTag {
     
     if ( $NODES{$node_id}->{'member_of_way'} ) {
         # this node is a member of a way,  yet don't know which type
-        if ( !defined($vehicle_type) || $vehicle_type eq 'bus' || $vehicle_type eq 'coach' || $vehicle_type eq 'share_taxi' || $vehicle_type eq 'trolleybus' ) {
+        if ( !defined($vehicle_type)                    || 
+              $vehicle_type eq 'bus'                    || 
+             ($vehicle_type eq 'coach' && $allow_coach) || 
+              $vehicle_type eq 'share_taxi'             || 
+              $vehicle_type eq 'trolleybus'                ) {
             if ( $NODES{$node_id}->{'tag'}->{'highway'} ) {
                 if ( $NODES{$node_id}->{'tag'}->{'highway'} eq 'bus_stop' || $NODES{$node_id}->{'tag'}->{'highway'} eq 'platform' ) {
                     foreach my $way_id ( keys (  %{$NODES{$node_id}->{'member_of_way'}} ) ) {
@@ -3419,7 +3430,11 @@ sub PTv2CompatibleNodePlatformTag {
         }
     } else {
         # this node is a solitary node
-        if ( !defined($vehicle_type) || $vehicle_type eq 'bus' || $vehicle_type eq 'coach' || $vehicle_type eq 'share_taxi' || $vehicle_type eq 'trolleybus' ) {
+        if ( !defined($vehicle_type)                    || 
+              $vehicle_type eq 'bus'                    || 
+             ($vehicle_type eq 'coach' && $allow_coach) || 
+              $vehicle_type eq 'share_taxi'             || 
+              $vehicle_type eq 'trolleybus'                ) {
             if ( $NODES{$node_id}->{'tag'} && $NODES{$node_id}->{'tag'}->{'highway'} ) {
                 if ( $NODES{$node_id}->{'tag'}->{'highway'} eq 'bus_stop' || $NODES{$node_id}->{'tag'}->{'highway'} eq 'platform' ) {
                     $ret_val = "'highway' = " . $NODES{$node_id}->{'tag'}->{'highway'} . "'";
@@ -3515,7 +3530,11 @@ sub noAccess {
     
     if ( $way_id && $WAYS{$way_id} && $vehicle_type ) {
         my $way_tag_ref = $WAYS{$way_id}->{'tag'};
-        if ( $vehicle_type eq 'bus' || $vehicle_type eq 'coach' || $vehicle_type eq 'share_taxi' || $vehicle_type eq 'trolleybus' ) {
+        if ( !defined($vehicle_type)                    || 
+              $vehicle_type eq 'bus'                    || 
+             ($vehicle_type eq 'coach' && $allow_coach) || 
+              $vehicle_type eq 'share_taxi'             || 
+              $vehicle_type eq 'trolleybus'                ) {
             if ( ($way_tag_ref->{'bus'} && ($way_tag_ref->{'bus'} eq 'yes' || $way_tag_ref->{'bus'} eq 'designated' || $way_tag_ref->{'bus'} eq 'official')) ||
                  ($way_tag_ref->{'psv'} && ($way_tag_ref->{'psv'} eq 'yes' || $way_tag_ref->{'psv'} eq 'designated' || $way_tag_ref->{'psv'} eq 'official'))    ) {
                 ; # fine
