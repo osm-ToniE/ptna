@@ -2301,7 +2301,14 @@ sub analyze_ptv2_route_relation {
         $return_code++;
     }
     if ( $relation_ptr->{'wrong_direction_oneways'} ) {
-        push( @{$relation_ptr->{'__issues__'}}, sprintf("PTv2 route: using oneway way(s) in wrong direction: %s", join(', ', map { printWayTemplate($_,'name;ref'); } sort(keys(%{$relation_ptr->{'wrong_direction_oneways'}})))) );
+        my @help_array     = sort(keys(%{$relation_ptr->{'wrong_direction_oneways'}}));
+        my $num_of_errors  = scalar(@help_array);
+        my $error_string   = "PTv2 route: using oneway way(s) in wrong direction";
+        if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+            push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s and %d more ...", $error_string, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+        } else {
+            push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $error_string, join(', ', map { printWayTemplate($_,'name;ref'); } @help_array )) );
+        }
         $return_code++;
     }
     if ( $check_motorway_link && $relation_ptr->{'expect_motorway_after'} ) {
