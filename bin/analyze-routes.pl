@@ -2007,7 +2007,7 @@ sub analyze_route_relation {
 
         if ( %restricted_access ) {
             foreach $access_restriction ( sort(keys(%restricted_access)) ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf("Route: restricted access (%s) to way(s) without 'bus'='yes', 'bus'='designated', 'psv'='yes' or ...: %s", $access_restriction, join(', ', map { printWayTemplate($_,'name;ref'); } sort(keys(%{$restricted_access{$access_restriction}})))) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("Route: restricted access (%s) to way(s) without 'psv'='yes', '%s'='yes', '%s'='designated', or ...: %s", $access_restriction, $relation_ptr->{'tag'}->{'route'}, $relation_ptr->{'tag'}->{'route'}, join(', ', map { printWayTemplate($_,'name;ref'); } sort(keys(%{$restricted_access{$access_restriction}})))) );
             }
         }
     }
@@ -3528,36 +3528,41 @@ sub noAccess {
     my $way_id          = shift;
     my $vehicle_type    = shift;        # optional !
     
-    if ( $way_id && $WAYS{$way_id} && $vehicle_type ) {
+    if ( $way_id && $WAYS{$way_id} && $WAYS{$way_id}->{'tag'} ) {
         my $way_tag_ref = $WAYS{$way_id}->{'tag'};
-        if ( !defined($vehicle_type)                    || 
-              $vehicle_type eq 'bus'                    || 
-             ($vehicle_type eq 'coach' && $allow_coach) || 
-              $vehicle_type eq 'share_taxi'             || 
-              $vehicle_type eq 'trolleybus'                ) {
-            if ( ($way_tag_ref->{'bus'} && ($way_tag_ref->{'bus'} eq 'yes' || $way_tag_ref->{'bus'} eq 'designated' || $way_tag_ref->{'bus'} eq 'official')) ||
-                 ($way_tag_ref->{'psv'} && ($way_tag_ref->{'psv'} eq 'yes' || $way_tag_ref->{'psv'} eq 'designated' || $way_tag_ref->{'psv'} eq 'official'))    ) {
-                ; # fine
-            } else {
-                foreach my $access_restriction ( 'no', 'private' ) {
-                    foreach my $access_type ( 'access', 'vehicle', 'motor_vehicle', 'motor_car' ) {
-                        if ( $way_tag_ref->{$access_type} && $way_tag_ref->{$access_type} eq $access_restriction ) {
-                            printf STDERR "noAccess() : no for %s for way %d (%s=%s)\n", $vehicle_type, $way_id, $access_type, $access_restriction       if ( $debug );
-                            return $access_type . '=' . $access_restriction;
-                        }
+
+        if ( $way_tag_ref->{'psv'} && ($way_tag_ref->{'psv'} eq 'yes' || $way_tag_ref->{'psv'} eq 'designated' || $way_tag_ref->{'psv'} eq 'official') ) {
+            #
+            # fine for all public service vehicles
+            #
+            printf STDERR "noAccess() : access for all psv for way %d\n", $way_id       if ( $debug );
+            return '';
+        } elsif ( $vehicle_type && $way_tag_ref->{$vehicle_type} && 
+                  ($way_tag_ref->{$vehicle_type} eq 'yes' || $way_tag_ref->{$vehicle_type} eq 'designated' || $way_tag_ref->{$vehicle_type} eq 'official') ) {
+            #
+            # fine for this specific type of vehicle (bus, train, subway, ...) == @supported_route_types
+            #
+            printf STDERR "noAccess() : access for %s for way %d\n", $vehicle_type, $way_id       if ( $debug );
+            return '';
+        } else {
+            foreach my $access_restriction ( 'no', 'private' ) {
+                foreach my $access_type ( 'access', 'vehicle', 'motor_vehicle', 'motor_car' ) {
+                    if ( $way_tag_ref->{$access_type} && $way_tag_ref->{$access_type} eq $access_restriction ) {
+                        printf STDERR "noAccess() : no access for way %d (%s=%s)\n", $way_id, $access_type, $access_restriction       if ( $debug );
+                        return $access_type . '=' . $access_restriction;
                     }
                 }
-                foreach my $highway_type ( 'pedestrian', 'footway', 'cycleway', 'path', 'construction' ) {
-                    if ( $way_tag_ref->{'highway'} && $way_tag_ref->{'highway'} eq $highway_type ) {
-                        if ( ($way_tag_ref->{'access'}          && $way_tag_ref->{'access'}         eq 'yes') ||
-                             ($way_tag_ref->{'vehicle'}         && $way_tag_ref->{'vehicle'}        eq 'yes') ||
-                             ($way_tag_ref->{'motor_vehicle'}   && $way_tag_ref->{'motor_vehicle'}  eq 'yes') ||
-                             ($way_tag_ref->{'motor_car'}       && $way_tag_ref->{'motor_car'}      eq 'yes')    ) {
-                            ; # fine
-                        } else {
-                            printf STDERR "noAccess() : no for %s for way %d (%s=%s)\n", $vehicle_type, $way_id, 'highway', $highway_type       if ( $debug );
-                            return 'highway=' . $highway_type;
-                        }
+            }
+            foreach my $highway_type ( 'pedestrian', 'footway', 'cycleway', 'path', 'construction' ) {
+                if ( $way_tag_ref->{'highway'} && $way_tag_ref->{'highway'} eq $highway_type ) {
+                    if ( ($way_tag_ref->{'access'}          && $way_tag_ref->{'access'}         eq 'yes') ||
+                         ($way_tag_ref->{'vehicle'}         && $way_tag_ref->{'vehicle'}        eq 'yes') ||
+                         ($way_tag_ref->{'motor_vehicle'}   && $way_tag_ref->{'motor_vehicle'}  eq 'yes') ||
+                         ($way_tag_ref->{'motor_car'}       && $way_tag_ref->{'motor_car'}      eq 'yes')    ) {
+                        ; # fine
+                    } else {
+                        printf STDERR "noAccess() : no access for way %d (%s=%s)\n", $way_id, 'highway', $highway_type       if ( $debug );
+                        return 'highway=' . $highway_type;
                     }
                 }
             }
