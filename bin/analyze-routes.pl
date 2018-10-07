@@ -2484,7 +2484,7 @@ sub analyze_ptv2_route_relation {
                     }
                 }
             } else {
-                $role_mismatch{"wrong 'role' = '".$node_ref->{'role'}."'"}->{$node_ref->{'ref'}} = 1;
+                $role_mismatch{"wrong 'role' = '".ctrl_escape($node_ref->{'role'})."'"}->{$node_ref->{'ref'}} = 1;
                 $role_mismatch_found++;
             }
         } else {
@@ -2703,7 +2703,7 @@ sub analyze_ptv2_route_relation {
                     }
                 }
             } else {
-                $role_mismatch{"wrong 'role' = '".$highway_ref->{'role'}."'"}->{$highway_ref->{'ref'}} = 1;
+                $role_mismatch{"wrong 'role' = '".ctrl_escape($highway_ref->{'role'})."'"}->{$highway_ref->{'ref'}} = 1;
                 $role_mismatch_found++;
             }
         } else {
@@ -2768,7 +2768,7 @@ sub analyze_ptv2_route_relation {
                     }
                 }
             } else {
-                $role_mismatch{"wrong 'role' = '".$rel_ref->{'role'}."'"}->{$rel_ref->{'ref'}} = 1;
+                $role_mismatch{"wrong 'role' = '".ctrl_escape($rel_ref->{'role'})."'"}->{$rel_ref->{'ref'}} = 1;
                 $role_mismatch_found++;
             }
         } else {
@@ -4571,6 +4571,20 @@ sub uri_escape {
         ; # todo
     }
     return $text;
+}
+
+
+#############################################################################################
+
+sub ctrl_escape {
+    my $text = shift;
+    if ( $text ) {
+        $text =~ s/\t/<tab>/g;
+        $text =~ s/\r/<cr>/g;
+        $text =~ s/\n/<lf>/g;
+        $text =~ s/ /<blank>/g;
+    }
+    return html_escape($text);
 }
 
 
