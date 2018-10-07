@@ -1998,7 +1998,7 @@ sub analyze_route_relation {
         my $access_restriction  = undef;
         my %restricted_access   = ();
         foreach my $route_highway ( @{$relation_ptr->{'route_highway'}} ) {
-            $access_restriction = noAccess( $route_highway->{'ref'}, $relation_ptr->{'tag'}->{'route'} );
+            $access_restriction = noAccess( $route_highway->{'ref'}, $relation_ptr->{'tag'}->{'route'}, $relation_ptr->{'tag'}->{'public_transport:version'}  );
             if ( $access_restriction ) {
                 $restricted_access{$access_restriction}->{$route_highway->{'ref'}} = 1;
                 $return_code++;
@@ -3527,6 +3527,7 @@ sub isNodeArrayClosedWay {
 sub noAccess {
     my $way_id          = shift;
     my $vehicle_type    = shift;        # optional !
+    my $ptv             = shift;        # optional !
     
     if ( $way_id && $WAYS{$way_id} && $WAYS{$way_id}->{'tag'} ) {
         my $way_tag_ref = $WAYS{$way_id}->{'tag'};
@@ -3543,6 +3544,25 @@ sub noAccess {
             # fine for this specific type of vehicle (bus, train, subway, ...) == @supported_route_types
             #
             printf STDERR "noAccess() : access for %s for way %d\n", $vehicle_type, $way_id       if ( $debug );
+            return '';
+        } elsif ( $vehicle_type && $vehicle_type eq 'ferry' && ($way_tag_ref->{'route'} eq 'ferry' || $way_tag_ref->{'route'} eq 'boat') ) {
+            #
+            # fine for ferries on ferry ways
+            #
+            printf STDERR "noAccess() : access for %s for way %d\n", $vehicle_type, $way_id       if ( $debug );
+            return '';
+        } elsif ( $vehicle_type             && ($vehicle_type             eq 'tram' || $vehicle_type             eq 'train' || $vehicle_type             eq 'light_rail' || $vehicle_type             eq 'subway')                                        &&
+                  $way_tag_ref->{'railway'} && ($way_tag_ref->{'railway'} eq 'tram' || $way_tag_ref->{'railway'} eq 'train' || $way_tag_ref->{'railway'} eq 'light_rail' || $way_tag_ref->{'railway'} eq 'subway' || $way_tag_ref->{'railway'} eq 'rail')    ) {
+            #
+            # fine for rail bounded vehivles rails
+            #
+            printf STDERR "noAccess() : access for %s for way %d railway=%s)\n", $vehicle_type, $way_id, $way_tag_ref->{'railway'}       if ( $debug );
+            return '';
+        } elsif ( (!defined($ptv) || $ptv ne '2') && $way_tag_ref->{'public_transport'} && $way_tag_ref->{'public_transport'} eq 'platform' ) {
+            #
+            # don't check for public_transport=platform (for PTv2 defined only) even if PTv2 is not defined or not '2'
+            #
+            printf STDERR "noAccess() : access for %s for way %d for non-PTv2 on Platforms\n", $vehicle_type, $way_id       if ( $debug );
             return '';
         } else {
             foreach my $access_restriction ( 'no', 'private' ) {
