@@ -3545,7 +3545,7 @@ sub noAccess {
             #
             printf STDERR "noAccess() : access for %s for way %d\n", $vehicle_type, $way_id       if ( $debug );
             return '';
-        } elsif ( $vehicle_type && $vehicle_type eq 'ferry' && ($way_tag_ref->{'route'} eq 'ferry' || $way_tag_ref->{'route'} eq 'boat') ) {
+        } elsif ( $vehicle_type && $vehicle_type eq 'ferry' && $way_tag_ref->{'route'} && ($way_tag_ref->{'route'} eq 'ferry' || $way_tag_ref->{'route'} eq 'boat') ) {
             #
             # fine for ferries on ferry ways
             #
