@@ -133,6 +133,7 @@ O7;bus;MVG-Museum-Shuttle;Giesing U S;MVG-Museum;SWM/MVG
 145;bus;;Ostbahnhof U S R;Fasangarten S;SWM/MVG
 147;bus;;Giesing U S;Kiefernstraße;SWM/MVG
 149;bus;;Ostbahnhof (Post) U S R;Zamilapark;SWM/MVG
+150;bus;;Bremer Straße;Arabellapark U;SWM/MVG
 151;bus;;Westfriedhof U;Parkstadt Solln;SWM/MVG
 153;bus;;HS München (Lothstraße);Am Harras;SWM/MVG
 154;bus;;Nordbad;Bruno-Walter-Ring;SWM/MVG
