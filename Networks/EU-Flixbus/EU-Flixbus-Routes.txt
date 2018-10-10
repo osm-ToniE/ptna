@@ -41,51 +41,52 @@
 
 == Zuglinien
 
-FLX 10;train;;;;
-FLX 20;train;;;;
+FLX 10;train;;Stuttgart;Berlin;FlixMobility GmbH
+FLX 20;train;;Hamburg;Köln;FlixMobility GmbH
+Nachtzug;train;;Hamburg;Lörrach;FlixMobility GmbH
 
 
 == 0xx-Linien
 
-001;bus;;;;
-002;bus;;;;
-005;bus;;;;
-006;bus;;;;
-007;bus;;;;
-008;bus;;;;
-009;bus;;;;
-011;bus;;;;
-012;bus;;;;
-013;bus;;;;
-015;bus;;;;
-016;bus;;;;
-017;bus;;;;
-020;bus;;;;
-021;bus;;;;
-022;bus;;;;
-023;bus;;;;
-024;bus;;;;
-025;bus;;;;
-026;bus;;;;
-027;bus;;;;
-028;bus;;;;
-029;bus;;;;
-030;bus;;;;
-031;bus;;;;
-032;bus;;;;
-035;bus;;;;
-036;bus;;;;
-037;bus;;;;
-038;bus;;;;
-039;bus;;;;
-040;bus;;;;
-041;bus;;;;
-042;bus;;;;
-044;bus;;;;
-045;bus;;;;
-047;bus;;;;
-049;bus;;;;
-050;bus;;;;
+001;bus;;Freiburg im Breisgau;München;FlixMobility GmbH
+002;bus;;Leipzig;Rostock;FlixMobility GmbH
+005;bus;;Hamburg;Hessisch Oldendorf;FlixMobility GmbH
+006;bus;;Zürich;Berlin;FlixMobility GmbH
+007;bus;;Zürich;Hamburg;FlixMobility GmbH
+008;bus;;Tübingen;Freiburg im Breisgau;FlixMobility GmbH
+009;bus;;Ludwigshafen;Berlin;FlixMobility GmbH
+011;bus;;Konstanz;Amsterdam;FlixMobility GmbH
+012;bus;;Dresden;Mannheim;FlixMobility GmbH
+013;bus;;Saarbrücken;Berlin;FlixMobility GmbH
+015;bus;;Freiburg im Breisgau;Berlin;FlixMobility GmbH
+016;bus;;Freiburg im Breisgau;Essen;FlixMobility GmbH
+017;bus;;Kornwestheim;Berlin;FlixMobility GmbH
+020;bus;;Dresden;Essen;FlixMobility GmbH
+021;bus;;Dresden;Karlsruhe;FlixMobility GmbH
+022;bus;;Lörrach;Oldenburg;FlixMobility GmbH
+023;bus;;Dresden;Düsseldorf;FlixMobility GmbH
+024;bus;;Zürich;Hamburg;FlixMobility GmbH
+025;bus;;Leipzig;Lubmin;FlixMobility GmbH
+026;bus;;Luxembourg;Berlin;FlixMobility GmbH
+027;bus;;Wilhelmshaven;München;FlixMobility GmbH
+028;bus;;Bochum;München;FlixMobility GmbH
+029;bus;;Hamburg;München;FlixMobility GmbH
+030;bus;;Neuss;Berlin;FlixMobility GmbH
+031;bus;;Münster;Berlin;FlixMobility GmbH
+032;bus;;Berlin;Malmö;FlixMobility GmbH
+035;bus;;Berlin;Duisburg;FlixMobility GmbH
+036;bus;;Wien;Saarbrücken;FlixMobility GmbH
+037;bus;;Duisburg;München;FlixMobility GmbH
+038;bus;;Bonn;Berlin;FlixMobility GmbH
+039;bus;;Berlin;Chemnitz;FlixMobility GmbH
+040;bus;;Neustift im Stubaital;München;FlixMobility GmbH
+041;bus;;Berlin;Passau;FlixMobility GmbH
+042;bus;;Reutlingen;Berlin;FlixMobility GmbH
+044;bus;;Oldenburg;Berlin;FlixMobility GmbH
+045;bus;;Kempten;Berlin;FlixMobility GmbH
+047;bus;;Berlin;Kühlungsborn;FlixMobility GmbH
+049;bus;;Lübeck;Leipzig;FlixMobility GmbH
+050;bus;;Kiel;Berlin;FlixMobility GmbH
 051;bus;;;;
 052;bus;;;;
 054;bus;;;;
@@ -434,7 +435,7 @@ FLX 20;train;;;;
 756;bus;;;;
 757;bus;;;;
 758;bus;;;;
-759;bus;;;;
+759;bus;;Lons-le-Saunier;Paris;FlixMobility GmbH
 760;bus;;;;
 761;bus;;;;
 762;bus;;;;
@@ -814,7 +815,7 @@ N729;bus;;;;
 N730;bus;;;;
 N740;bus;;;;
 N749;bus;;;;
-N759;bus;;;;
+N759;bus;;Tremblay-en-France;Strasbourg;FlixMobility GmbH
 N765;bus;;;;
 N769;bus;;;;
 N770;bus;;;;
