@@ -13,13 +13,13 @@ NETWORK_SHORT=""
 ANALYSIS_PAGE="Europa/Transportation/Analyse"
 WIKI_ROUTES_PAGE="Europa/Transportation/Analyse/Flixbuslinien"
 
-ANALYSIS_OPTIONS="--allow-coach --check-access --check-name --check-stop-position --check-sequence --check-version --check-osm-separator --check-motorway-link --max-error=10 --multiple-ref-type-entries=analyze --positive-notes --coloured-sketchline"
+ANALYSIS_OPTIONS="--allow-coach --check-access --check-name --check-stop-position --check-sequence --check-version --check-osm-separator --check-motorway-link --relaxed-begin-end-for=train --max-error=10 --multiple-ref-type-entries=analyze --positive-notes --coloured-sketchline"
 
 # --check-bus-stop 
 # --expect-network-long
 # --expect-network-short
 # --expect-network-short-for=
 # --expect-network-long-for=
-# --relaxed-begin-end-for=
+# 
 
 
