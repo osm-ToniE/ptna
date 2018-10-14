@@ -120,7 +120,7 @@ Nachtzug;train;;Hamburg;Lörrach;FlixMobility GmbH
 085;bus;;;;
 086;bus;;Salzburg;München;FlixMobility GmbH
 087;bus;via Kassel;Hamburg;München;FlixMobility GmbH
-090;bus;;;;
+090;bus;;Frankfurt;Paris;FlixMobility GmbH
 091;bus;;;;
 095;bus;;Meran;München;FlixMobility GmbH
 096;bus;;;;
@@ -137,7 +137,7 @@ Nachtzug;train;;Hamburg;Lörrach;FlixMobility GmbH
 108;bus;;;;
 109;bus;;;;
 110;bus;;Osnabrück;Firedrichshafen;FlixMobility GmbH
-113;bus;;;;
+113;bus;;Frankfurt;Saarbrücken;FlixMobility GmbH
 116;bus;;;;
 117;bus;;;;
 120;bus;;;;
@@ -541,6 +541,7 @@ Nachtzug;train;;Hamburg;Lörrach;FlixMobility GmbH
 946;bus;;;;
 948;bus;;;;
 950;bus;;;;
+954;bus;;Erlangen;Zagreb;FlixMobility GmbH
 956;bus;;;;
 958;bus;;;;
 961;bus;;;;
@@ -583,7 +584,7 @@ Nachtzug;train;;Hamburg;Lörrach;FlixMobility GmbH
 1925;bus;;;;
 1926;bus;;;;
 1927;bus;;;;
-1929;bus;;;;
+1929;bus;;Brüssel;Bukarest;FlixMobility GmbH
 1940;bus;;;;
 1941;bus;;;;
 1942;bus;;;;
@@ -668,7 +669,7 @@ N05;bus;;;;
 N06;bus;;;;
 N07;bus;;;;
 N11;bus;;;;
-N13;bus;;;;
+N13;bus;;Berlin;Saarbrücken;FlixMobility GmbH
 N14;bus;;;;
 N15;bus;;;;
 N17;bus;;;;
@@ -678,7 +679,7 @@ N24;bus;;;;
 N27;bus;;;;
 N30;bus;;;;
 N31;bus;;;;
-N36;bus;;;;
+N36;bus;;Antwerpen;Bratislava;FlixMobility GmbH
 N38;bus;;;;
 N40;bus;;Innsbruck;Berlin;FlixMobility GmbH
 N42;bus;;;;
@@ -722,7 +723,7 @@ N122;bus;;;;
 N131;bus;;;;
 N136;bus;;;;
 N150;bus;;;;
-N158;bus;;;;
+N158;bus;;Antwerpen;Berlin;FlixMobility GmbH
 N160;bus;;;;
 N168;bus;;;;
 N177;bus;;;;
@@ -730,14 +731,14 @@ N179;bus;;;;
 N184;bus;;;;
 
 N207;bus;;;;
-N236;bus;;;;
+N236;bus;;Paris;Wien;FlixMobility GmbH
 N260;bus;;;;
 N261;bus;;;;
 N277;bus;;;;
 
 N307;bus;;;;
 N367;bus;;;;
-N391;bus;;;;
+N391;bus;;Freiburg im Breisgau;Budapest Népliget;FlixMobility GmbH
 
 N401;bus;;;;
 N402;bus;;;;
@@ -837,7 +838,7 @@ N844;bus;fährt bis 04.11.2018;;;FlixMobility GmbH
 N890;bus;;;;
 N899;bus;;;;
 
-N900;bus;;;;
+N900;bus;;München;Zagreb;FlixMobility GmbH
 N903;bus;;;;
 N905;bus;;;;
 N906;bus;;;;
@@ -853,13 +854,13 @@ N920;bus;;;;
 N943;bus;;;;
 N948;bus;;;;
 N949;bus;;;;
-N950;bus;;;;
+N950;bus;;Karlsruhe;Osijek;FlixMobility GmbH
 N952;bus;;;;
 N953;bus;;;;
 N959;bus;;;;
 N960;bus;;;;
 N963;bus;;;;
-N971;bus;;;;
+N971;bus;;Dortmund;Sarajevo;FlixMobility GmbH
 N979;bus;;;;
 N980;bus;;;;
 N982;bus;;;;
