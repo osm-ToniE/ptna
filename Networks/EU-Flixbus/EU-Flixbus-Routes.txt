@@ -87,22 +87,22 @@ Nachtzug;train;;Hamburg;Lörrach;FlixMobility GmbH
 047;bus;;Berlin;Kühlungsborn;FlixMobility GmbH
 049;bus;;Lübeck;Leipzig;FlixMobility GmbH
 050;bus;;Kiel;Berlin;FlixMobility GmbH
-051;bus;;;;
-052;bus;;;;
-054;bus;;;;
-055;bus;;;;
+051;bus;;Düsseldorf;Berlin;FlixMobility GmbH
+052;bus;;Berlin;Gera;FlixMobility GmbH
+054;bus;;Berlin;Frankfurt am Main;FlixMobility GmbH
+055;bus;;Leipzig;Offenburg;FlixMobility GmbH
 056;bus;;Willingen (Upland);Amsterdam;FlixMobility GmbH
 057;bus;;Berlin;Paderborn;FlixMobility GmbH
-058;bus;;;;
-059;bus;;;;
-060;bus;;;;
-061;bus;;;;
-063;bus;;;;
+058;bus;;Berlin;Duisburg;FlixMobility GmbH
+059;bus;;Berlin;Paderborn;FlixMobility GmbH
+060;bus;;Berlin;Wien;FlixMobility GmbH
+061;bus;;Regensburg;Frankfurt am Main;FlixMobility GmbH
+063;bus;;München;Freiburg im Breisgau;FlixMobility GmbH
 064;bus;;Dresden;Aachen;FlixMobility GmbH
-065;bus;;;;
-066;bus;;;;
-067;bus;;;;
-068;bus;;;;
+065;bus;;Leipzig;Berlin;FlixMobility GmbH
+066;bus;;Hamburg;Prag;FlixMobility GmbH
+067;bus;;Dresden;Amsterdam;FlixMobility GmbH
+068;bus;;Frankfurt am Main;Prag;FlixMobility GmbH
 069;bus;;Amsterdam;Kassel;FlixMobility GmbH
 070;bus;;;;
 071;bus;;;;
@@ -169,7 +169,7 @@ Nachtzug;train;;Hamburg;Lörrach;FlixMobility GmbH
 161;bus;;;;
 162;bus;;;;
 163;bus;;;;
-164;bus;via Magdeburg,Bruanschweig,Celle;Berlin;Hamburg;
+164;bus;via Magdeburg,Braunschweig,Celle;Berlin;Hamburg;
 167;bus;;;;
 168;bus;;;;
 170;bus;;;;
@@ -181,7 +181,7 @@ Nachtzug;train;;Hamburg;Lörrach;FlixMobility GmbH
 180;bus;;;;
 184;bus;;;;
 186;bus;;;;
-189;bus;;;;
+189;bus;;Ulm;Berlin;FlixMobility GmbH
 191;bus;;;;
 198;bus;;;;
 
@@ -476,16 +476,16 @@ Nachtzug;train;;Hamburg;Lörrach;FlixMobility GmbH
 805;bus;;;;
 810;bus;;;;
 811;bus;;Almere;Brüssel;FlixMobility GmbH
-813;bus;;;;
+813;bus;;Brüssel;Delft;FlixMobility GmbH
 814;bus;;Amsterdam;London;FlixMobility GmbH
-815;bus;;;;
-817;bus;;;;
-818;bus;;Lille;Schiphol;FlixMobility GmbH
-819;bus;;;;
-820;bus;;;;
+815;bus;;Köln;London;FlixMobility GmbH
+817;bus;;Lille;Schiphol;FlixMobility GmbH
+818;bus;;Charleroi;Amsterdam;FlixMobility GmbH
+819;bus;;Brügge;Amsterdam;FlixMobility GmbH
+820;bus;;Köln;Paris;FlixMobility GmbH
 821;bus;;Groningen;Münster;FlixMobility GmbH
-822;bus;;Griningen;Brüssel;FlixMobility GmbH
-831;bus;;;;
+822;bus;;Groningen;Brüssel;FlixMobility GmbH
+831;bus;;Amsterdam;Luxembourg;FlixMobility GmbH
 833;bus;;;;
 850;bus;;;;
 851;bus;;;;
