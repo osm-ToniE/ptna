@@ -2318,7 +2318,7 @@ sub analyze_ptv2_route_relation {
         }
         $return_code++;
     }
-    if ( $check_motorway_link && $relation_ptr->{'expect_motorway_after'} ) {
+    if ( $relation_ptr->{'number_of_segments'} == 1 && $check_motorway_link && $relation_ptr->{'expect_motorway_after'} ) {
         push( @{$relation_ptr->{'__issues__'}}, sprintf("PTv2 route: using motorway_link way(s) without entering a motorway way: %s", join(', ', map { printWayTemplate($_,'name;ref'); } sort(keys(%{$relation_ptr->{'expect_motorway_after'}})))) );
         $return_code++;
     }
