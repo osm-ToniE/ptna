@@ -83,7 +83,7 @@ Nachtzug;train;;Hamburg;Lörrach;FlixMobility GmbH
 041;bus;;Berlin;Passau;FlixMobility GmbH
 042;bus;;Reutlingen;Berlin;FlixMobility GmbH
 044;bus;;Oldenburg;Berlin;FlixMobility GmbH
-045;bus;;Kempten;Berlin;FlixMobility GmbH
+045;bus;Ab 5.11.2018 nicht mehr buchbar, wird eingestellt.;Kempten;Berlin;FlixMobility GmbH
 047;bus;;Berlin;Kühlungsborn;FlixMobility GmbH
 049;bus;;Lübeck;Leipzig;FlixMobility GmbH
 050;bus;;Kiel;Berlin;FlixMobility GmbH
@@ -149,7 +149,7 @@ Nachtzug;train;;Hamburg;Lörrach;FlixMobility GmbH
 129;bus;;;;
 131;bus;;;;
 135;bus;;;;
-137;bus;;;;
+137;bus;Seit 25.04.2018 nicht mehr buchbar, wurde eingestellt.;;;
 138;bus;;;;
 141;bus;;;;
 142;bus;;;;
@@ -681,7 +681,7 @@ N30;bus;;;;
 N31;bus;;;;
 N36;bus;;Antwerpen;Bratislava;FlixMobility GmbH
 N38;bus;;;;
-N40;bus;;Innsbruck;Berlin;FlixMobility GmbH
+N40;bus;ab 05.11.2018 nicht mehr buchbar, wird eingestellt.;Innsbruck;Berlin;FlixMobility GmbH
 N42;bus;;;;
 N44;bus;via Groningen,Uplengen,Oldenburg,Bremen,Hamburg,Berlin (ZOB);Amsterdam;Berlin (Alexanderplatz);FlixMobility GmbH
 N50;bus;;;;
@@ -703,7 +703,7 @@ N81;bus;;Berlin;Brüssel;FlixMobility GmbH
 N83;bus;;;;
 N84;bus;;;;
 N86;bus;;;;
-N87;bus;;;;
+N87;bus;Seit 06.11.2017 nicht mehr buchbar, wurde eingestellt.;;;
 N90;bus;;;;
 N91;bus;;;;
 N93;bus;;;;
@@ -832,9 +832,9 @@ N814;bus;;;;
 N815;bus;;;;
 N818;bus;;;;
 N819;bus;;;;
-N831;bus;fährt bis 05.11.2018;;;FlixMobility GmbH
+N831;bus;;Amsterdam;Zürich;FlixMobility GmbH
 N836;bus;;;;
-N844;bus;fährt bis 04.11.2018;;;FlixMobility GmbH
+N844;bus;;Kopenhagen;Rotterdam;FlixMobility GmbH
 N890;bus;;;;
 N899;bus;;;;
 
