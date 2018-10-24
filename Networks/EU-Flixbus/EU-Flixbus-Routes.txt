@@ -289,9 +289,9 @@ Nachtzug;train;;Hamburg;Lörrach;FlixMobility GmbH
 441;bus;;;;
 442;bus;;;;
 443;bus;;;;
-450;bus;;;;
-451;bus;;;;
-452;bus;;;;
+450;bus;Seit 07.10.2018 nicht mehr buchbar, wurde eingestellt.;;;
+451;bus;Seit 07.10.2018 nicht mehr buchbar, wurde eingestellt.;;;
+452;bus;Seit 21.11.2017 nicht mehr buchbar, wurde eingestellt.;;;
 453;bus;;;;
 454;bus;;;;
 470;bus;;;;
@@ -700,7 +700,7 @@ N77;bus;;;;
 N79;bus;;;;
 N80;bus;;;;
 N81;bus;;Berlin;Brüssel;FlixMobility GmbH
-N83;bus;;;;
+N83;bus;;München;Prag;FlixMobility GmbH
 N84;bus;;;;
 N86;bus;;;;
 N87;bus;Seit 06.11.2017 nicht mehr buchbar, wurde eingestellt.;;;
@@ -718,7 +718,7 @@ N106;bus;;;;
 N109;bus;;;;
 N110;bus;;;;
 N116;bus;;;;
-N121;bus;;;;
+N121;bus;Ab 05.11.2018 nicht mehr buchbar, wird eingestellt.;;;
 N122;bus;;;;
 N131;bus;;;;
 N136;bus;;;;
