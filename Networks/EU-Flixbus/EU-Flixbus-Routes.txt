@@ -13,13 +13,6 @@
 # Kommentare beginnen mit '#' am Anfang einer Zeile. Kommentare mittendrin werden nicht erkannt.
 #
 # Format der Datei: UNIX (LF), UTF-8
-#pre>
-#
-# Formatierung:
-#
-# Überschriften beginnen mit '=', '==', '===', '====', ... am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an
-#
-# Einfacher Text beginnt mit '-' am Anfang einer Zeile, die Formatierung lehnt sich ans Wiki an, Zeilen hier werden im Wiki mit 
 #
 # Inhalt im CSV-Format
 #
