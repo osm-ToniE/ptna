@@ -30,8 +30,8 @@
 
 = Überblick Buslinien Landkreis Pfaffenhofen an der Ilm allgemein (KEIN Regionalnetzwerk für den Landkreis vorhanden)
 
-- Verweis auf die Datei mit den [[Pfaffenhofen an der Ilm/Transportation/Analyse/DE-BY-PAF-Linien|PAF Linien]] im Wiki.
-- Verweis auf mehr [[Talk:Pfaffenhofen an der Ilm/Transportation/Analyse|Informationen]] im Wiki.
+- Verweis auf die Datei mit den [[Pfaffenhofen_an_der_Ilm/Transportation/Analyse/DE-BY-PAF-Linien|PAF Linien]] im Wiki.
+- Verweis auf mehr [[Talk:Pfaffenhofen_an_der_Ilm/Transportation/Analyse|Informationen]] im Wiki.
 
 
 == Stadtbusse Pfaffenhofen (Betrieben durch die Stadtwerke Pfaffenhofen)
