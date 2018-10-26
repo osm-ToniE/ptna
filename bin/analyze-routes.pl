@@ -3647,15 +3647,15 @@ sub printInitialHeader {
         push( @HTML_start, "    <head>\n" );
         push( @HTML_start, sprintf( "        <title>%sPTNA - Public Transport Network Analysis</title>\n", ($title ? $title . ' - ' : '') ) );
         push( @HTML_start, "        <meta name=\"generator\" content=\"PTNA\">\n" );
-        push( @HTML_start, "        <meta charset=UTF-8\">\n" );
-        push( @HTML_start, "        <meta name=\"keywords\" content=\"OSM Public Transport PTv2\" />\n" );
-        push( @HTML_start, "        <meta name=\"description\" content=\"PTNA - Public Transport Network Analysis\" />\n" );
-        push( @HTML_start, "        <style type=\"text/css\">\n" );
+        push( @HTML_start, "        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />\n" );
+        push( @HTML_start, "        <meta name=\"keywords\" content=\"OSM Public Transport PTv2\">\n" );
+        push( @HTML_start, "        <meta name=\"description\" content=\"PTNA - Public Transport Network Analysis\">\n" );
+        push( @HTML_start, "        <style>\n" );
         push( @HTML_start, "              table { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; }\n" );
         push( @HTML_start, "              th    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }\n" );
         push( @HTML_start, "              td    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }\n" );
         push( @HTML_start, "              ol    { list-style: none; }\n" );
-        push( @HTML_start, "              img   { witdh: 20px }\n" );
+        push( @HTML_start, "              img   { width: 20px; }\n" );
         push( @HTML_start, "              .tableheaderrow   { background-color: LightSteelBlue;   }\n" );
         push( @HTML_start, "              .sketchline       { background-color: LightBlue;        }\n" );
         push( @HTML_start, "              .sketch           { text-align:left;  font-weight: 500; }\n" );
@@ -3669,10 +3669,9 @@ sub printInitialHeader {
         push( @HTML_start, "    <body>\n" );
         if ( $osm_base || $areas ) {
             printBigHeader( "Datum der Daten" );
-            push( @HTML_main, sprintf( "<p>OSM-Base Time : %s</p>\n", $osm_base ) )          if ( $osm_base );
-            push( @HTML_main, sprintf( "<p>Areas Time    : %s</p>\n", $areas ) )             if ( $areas    );
+            push( @HTML_main, sprintf( "<p>OSM-Base Time : %s<br>\n", $osm_base ) )       if ( $osm_base );
+            push( @HTML_main, sprintf( "Areas Time    : %s</p>\n", $areas ) )             if ( $areas    );
             push( @HTML_main, "\n" );
-            push( @HTML_main, "<br>\n" );
         }
         push( @HTML_main, "<p>Die Analyse läuft auf einem Raspberry Pi 2 Model B in der Regel nachts zwischen 01:00 und 04:00 Uhr lokaler Zeit München.\n" );
         push( @HTML_main, "Die Daten werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändert hat.\n" );
@@ -4152,7 +4151,6 @@ sub printTableHeader {
             # HTML
             #
             push( @HTML_main, sprintf( "%8s<table class=\"oepnvtable\">\n", ' ' ) );
-            push( @HTML_main, sprintf( "%12s<caption>oepnvtable</caption>\n", ' ' ) );
             push( @HTML_main, sprintf( "%12s<thead>\n", ' ' ) );
             push( @HTML_main, sprintf( "%16s<tr class=\"tableheaderrow\">", ' ' ) );
             if ( $no_of_columns == 0 ) {
@@ -4549,7 +4547,7 @@ sub printSketchLineTemplate {
         }
         $ref_escaped    =~ s/ /+/g;
         $network        =~ s/ /+/g;
-        $text           = sprintf( "<a href=\"https://overpass-api.de/api/sketch-line?ref=%s\&amp;network=%s\&amp;style=wuppertal%s%s\" title=\"Sketch-Line\"%s>%s%s%s</a>", $ref_escaped, uri_escape($network), $colour_string, $pt_string, $textdeco, $span_begin, $ref, $span_end ); # some manual expansion of the template
+        $text           = sprintf( "<a href=\"https://overpass-api.de/api/sketch-line?ref=%s\&amp;network=%s\&amp;style=wuppertal%s%s\" title=\"Sketch-Line\"%s>%s%s%s</a>", $ref_escaped, uri_escape($network), uri_escape($colour_string), $pt_string, $textdeco, $span_begin, $ref, $span_end ); # some manual expansion of the template
     }
     
     return $text;
@@ -4583,7 +4581,8 @@ sub html_escape {
 sub uri_escape {
     my $text = shift;
     if ( $text ) {
-        ; # todo
+        $text =~ s/ /%20/g;
+        $text =~ s/#/%23/g;
     }
     return $text;
 }
@@ -4622,6 +4621,9 @@ sub wiki2html {
             $text =~ s/\[[^ ]+ [^\]]+\]/$sub/;
         }
         while ( $text =~ m/'''(.?)'''/g ) {
+            $sub = sprintf( "<strong>%s</strong>", $1 );
+        }
+        while ( $text =~ m/''(.?)''/g ) {
             $sub = sprintf( "<em>%s</em>", $1 );
         }
     }
