@@ -3642,15 +3642,14 @@ sub printInitialHeader {
         #
         # HTML
         #
-        push( @HTML_start, "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01//EN\">\n" );
-        push( @HTML_start, "<html>\n" );
+        push( @HTML_start, "<!DOCTYPE html\n" );
+        push( @HTML_start, "<html lang=\"de\">\n" );
         push( @HTML_start, "    <head>\n" );
-        push( @HTML_start, sprintf( "        <title>%sOSM - Public Transport Analysis</title>\n", ($title ? $title . ' - ' : '') ) );
-        push( @HTML_start, "        <meta name=\"generator\" content=\"analyze-routes.pl\">\n" );
-        push( @HTML_start, "        <meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\" />\n" );
-        push( @HTML_start, "        <meta name=\"language\" content=\"de\" />\n" );
+        push( @HTML_start, sprintf( "        <title>%sPTNA - Public Transport Network Analysis</title>\n", ($title ? $title . ' - ' : '') ) );
+        push( @HTML_start, "        <meta name=\"generator\" content=\"PTNA\">\n" );
+        push( @HTML_start, "        <meta charset=UTF-8\">\n" );
         push( @HTML_start, "        <meta name=\"keywords\" content=\"OSM Public Transport PTv2\" />\n" );
-        push( @HTML_start, "        <meta name=\"description\" content=\"OSM - Public Transport Analysis\" />\n" );
+        push( @HTML_start, "        <meta name=\"description\" content=\"PTNA - Public Transport Network Analysis\" />\n" );
         push( @HTML_start, "        <style type=\"text/css\">\n" );
         push( @HTML_start, "              table { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; }\n" );
         push( @HTML_start, "              th    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }\n" );
@@ -3670,15 +3669,15 @@ sub printInitialHeader {
         push( @HTML_start, "    <body>\n" );
         if ( $osm_base || $areas ) {
             printBigHeader( "Datum der Daten" );
-            push( @HTML_main, sprintf( "OSM-Base Time : %s<br>\n", $osm_base ) )          if ( $osm_base );
-            push( @HTML_main, sprintf( "Areas Time    : %s<br>\n", $areas ) )             if ( $areas    );
+            push( @HTML_main, sprintf( "<p>OSM-Base Time : %s</p>\n", $osm_base ) )          if ( $osm_base );
+            push( @HTML_main, sprintf( "<p>Areas Time    : %s</p>\n", $areas ) )             if ( $areas    );
             push( @HTML_main, "\n" );
             push( @HTML_main, "<br>\n" );
         }
-        push( @HTML_main, "Die Analyse läuft auf einem Raspberry Pi 2 Model B in der Regel nachts zwischen 01:00 und 04:00 Uhr lokaler Zeit München.<br>\n" );
-        push( @HTML_main, "Die Daten werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändert hat.<br>\n" );
-        push( @HTML_main, "<br>\n" );
-        push( @HTML_main, "Eine Erläuterung der Fehlertexte ist auf der Seite von <a href='https://wiki.openstreetmap.org/wiki/User:ToniE/analyze-routes#Momentane_Pr.C3.BCfungen'>analyze-routes</a> zu finden.<br>\n" );
+        push( @HTML_main, "<p>Die Analyse läuft auf einem Raspberry Pi 2 Model B in der Regel nachts zwischen 01:00 und 04:00 Uhr lokaler Zeit München.\n" );
+        push( @HTML_main, "Die Daten werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändert hat.\n" );
+        push( @HTML_main, "</p>\n" );
+        push( @HTML_main, "<p>Eine Erläuterung der Fehlertexte ist auf der Seite von <a href='https://wiki.openstreetmap.org/wiki/User:ToniE/analyze-routes#Momentane_Pr.C3.BCfungen'>analyze-routes</a> zu finden.</p>\n" );
         push( @HTML_main, "\n" );
     }
 
@@ -3779,9 +3778,9 @@ sub printBigHeader {
 
 sub printHintUnselectedRelations {
     printText( "Dieser Abschnitt listet die Linien auf, die nicht eindeutig zugeordnet werden konnten." );
-    printText( "Die Liniennummern 'ref' sind in der CSV-Datei mehrfach angegeben worden.\n" );
-    printText( "Das bedeutet, dass die selbe Liniennummer im Verkehrsverbund mehrfach in verscheidenen Gemeinden/Städten vorhanden ist.\n" );
-    printText( "Um die Linien eindeutig zuordnen zu können sollte folgendes angegeben werden:\n" );
+    printText( "Die Liniennummern 'ref' sind in der CSV-Datei mehrfach angegeben worden." );
+    printText( "Das bedeutet, dass die selbe Liniennummer im Verkehrsverbund mehrfach in verscheidenen Gemeinden/Städten vorhanden ist." );
+    printText( "Um die Linien eindeutig zuordnen zu können sollte folgendes angegeben werden:" );
     if ( $print_wiki ) {
         #
         # WIKI code
@@ -3815,13 +3814,12 @@ sub printHintUnselectedRelations {
         push( @HTML_main, "        </ul>\n" );
         push( @HTML_main, "    </li>\n" );
         push( @HTML_main, "</ul>\n" );
-        push( @HTML_main, "Beispiele aus dem VMS für 'ref;type;Kommentar;Von;Nach;Betreiber':<br /><br />\n" );
-        push( @HTML_main, "&nbsp;&nbsp;&nbsp;&nbsp;1.) A;bus;'Hinweis: Bus A fährt in Annaberg-Buchholz';Barbara-Uthmann-Ring;Buchholz;RVE<br />\n" );
-        push( @HTML_main, "&nbsp;&nbsp;&nbsp;&nbsp;2.) A;bus;'Hinweis: Bus A fährt in Aue';Postplatz;Postplatz;RVE<br />\n" );
-        push( @HTML_main, "&nbsp;&nbsp;&nbsp;&nbsp;3.) A;bus;'Hinweis: Bus A fährt in Burgstädt';Sportzentrum;Heiersdorf;RBM<br /><br />\n" );
-        push( @HTML_main, "1.) und 2.) sind nur mit Hilfe von 'Von'/'from' und 'Nach'/'to' unterscheidbar, da 'Betreiber'/'operator' identisch (='RVE') sind.<br />\n" );
-        push( @HTML_main, "1.) und 3.) sowie 2.) und 3.) sind an Hand von 'Betreiber'/'operator' unterscheidbar, die diese unterschiedlich sind (='RVE' bzw. ='RBM').<br />\n" );
-        push( @HTML_main, "<br />\n" );
+        push( @HTML_main, "<p>Beispiele aus dem VMS für 'ref;type;Kommentar;Von;Nach;Betreiber':</p>\n" );
+        push( @HTML_main, "<p>&nbsp;&nbsp;&nbsp;&nbsp;1.) A;bus;'Hinweis: Bus A fährt in Annaberg-Buchholz';Barbara-Uthmann-Ring;Buchholz;RVE</p>\n" );
+        push( @HTML_main, "<p>&nbsp;&nbsp;&nbsp;&nbsp;2.) A;bus;'Hinweis: Bus A fährt in Aue';Postplatz;Postplatz;RVE</p>\n" );
+        push( @HTML_main, "<p>&nbsp;&nbsp;&nbsp;&nbsp;3.) A;bus;'Hinweis: Bus A fährt in Burgstädt';Sportzentrum;Heiersdorf;RBM<br /></p>\n" );
+        push( @HTML_main, "<p>1.) und 2.) sind nur mit Hilfe von 'Von'/'from' und 'Nach'/'to' unterscheidbar, da 'Betreiber'/'operator' identisch (='RVE') sind.</p>\n" );
+        push( @HTML_main, "<p>1.) und 3.) sowie 2.) und 3.) sind an Hand von 'Betreiber'/'operator' unterscheidbar, die diese unterschiedlich sind (='RVE' bzw. ='RBM').</p>\n" )
     }
 }
 
@@ -3847,7 +3845,7 @@ sub printHintSuspiciousRelations {
         my $hswkort = scalar( keys ( %have_seen_well_known_other_route_types ) );
         my $hswknt  = scalar( keys ( %have_seen_well_known_network_types ) );
         my $hswkot  = scalar( keys ( %have_seen_well_known_other_types ) );
-        push( @HTML_main, "Dieser Abschnitt enthält weitere Relationen aus dem Umfeld der Linien:\n" );
+        push( @HTML_main, "<p>Dieser Abschnitt enthält weitere Relationen aus dem Umfeld der Linien:</p>\n" );
         push( @HTML_main, "<ul>\n" );
         push( @HTML_main, "    <li>evtl. falsche 'route' oder 'route_master' Werte?\n" );
         push( @HTML_main, "        <ul>\n" );
@@ -3861,7 +3859,7 @@ sub printHintSuspiciousRelations {
         push( @HTML_main, "    </li>\n" );
         push( @HTML_main, "</ul>\n" );
         if ( $hswkort || $hswknt || $hswkot ) {
-            push( @HTML_main, "Die folgenden Werte bzw. Kombinationen wurden in den Inputdaten gefunden, werden hier aber nicht angezeigt. Sie gelten als \"wohl definierte\" Werte und nicht als Fehler.\n" );
+            push( @HTML_main, "<p>Die folgenden Werte bzw. Kombinationen wurden in den Inputdaten gefunden, werden hier aber nicht angezeigt. Sie gelten als \"wohl definierte\" Werte und nicht als Fehler.</p>\n" );
             push( @HTML_main, "<ul>\n" );
             if ( $hswkort ) {
                 push( @HTML_main, "    <li>'type' = 'route_master' bzw. 'type' = 'route''\n" );
@@ -3953,7 +3951,6 @@ sub printHintUsedNetworks {
     printHeader( "== Berücksichtigte 'network' Werte" );
     
     printText( "Dieser Abschnitt listet die 'network'-Werte auf, die berücksichtigt wurden, d.h. einen der oben genannten Werte enthält.\n" );
-    printText( "\n" );
 
     printTableHeader();
     foreach my $network ( sort( keys( %used_networks ) ) ) {
@@ -3983,9 +3980,7 @@ sub printHintUnusedNetworks {
     
     printHeader( "== Nicht berücksichtigte 'network' Werte" );
     
-    printText( "Dieser Abschnitt listet die 'network'-Werte auf, die nicht berücksichtigt wurden. " );
-    printText( "Darunter können auch Tippfehler in ansonsten zu berücksichtigenden Werten sein.\n" );
-    printText( "\n" );
+    printText( "Dieser Abschnitt listet die 'network'-Werte auf, die nicht berücksichtigt wurden. Darunter können auch Tippfehler in ansonsten zu berücksichtigenden Werten sein.\n" );
 
     printTableHeader();
     foreach my $network ( sort( keys( %unused_networks ) ) ) {
@@ -4093,11 +4088,10 @@ sub printText {
                 #
                 # HTML
                 #
-                push( @HTML_main, sprintf( "%s", wiki2html($text) ) );
+                push( @HTML_main, sprintf( "<p>%s</p>\n", wiki2html($text) ) );
             }
             #printf STDERR "%s %s\n", get_time(), $text    if ( $verbose );
         }
-        push( @HTML_main, "<br />\n" );
     }
 }
 
@@ -4157,7 +4151,8 @@ sub printTableHeader {
             #
             # HTML
             #
-            push( @HTML_main, sprintf( "%8s<table class=\"oepnvtable\" summary=\"oepnvtable\">\n", ' ' ) );
+            push( @HTML_main, sprintf( "%8s<table class=\"oepnvtable\">\n", ' ' ) );
+            push( @HTML_main, sprintf( "%12s<caption>oepnvtable</caption>\n", ' ' ) );
             push( @HTML_main, sprintf( "%12s<thead>\n", ' ' ) );
             push( @HTML_main, sprintf( "%16s<tr class=\"tableheaderrow\">", ' ' ) );
             if ( $no_of_columns == 0 ) {
