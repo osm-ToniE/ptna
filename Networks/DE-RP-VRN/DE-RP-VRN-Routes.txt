@@ -30,8 +30,8 @@
 
 = Überblick über die ÖPNV-Linien des Verkehrsverbundes Rhein-Neckar
 
-- Verweis auf die Datei mit den [[Verkehrsverbund Rhein-Neckar/Analyse/DE-RP-VRN-Linien|VRN-Linien]] im Wiki.
-- Verweis auf mehr [[Talk:Verkehrsverbund Rhein-Neckar/Analyse|Informationen]] im Wiki.
+- Verweis auf die Datei mit den [[Verkehrsverbund_Rhein-Neckar/Analyse/DE-RP-VRN-Linien|VRN-Linien]] im Wiki.
+- Verweis auf mehr [[Talk:Verkehrsverbund_Rhein-Neckar/Analyse|Informationen]] im Wiki.
 
 == Hinweis
 

@@ -30,8 +30,8 @@
 
 = Überblick über die ÖPNV-Linien des Verkehrsverbundes Mittelsachsen
 
-- Verweis auf die Datei mit den [[Saxony/Transportation/Verkehrsverbund Mittelsachsen/Analyse/DE-SN-VMS-Linien|VMS-Linien]] im Wiki.
-- Verweis auf mehr [[Talk:Saxony/Transportation/Verkehrsverbund Mittelsachsen/Analyse.|Informationen]] im Wiki.
+- Verweis auf die Datei mit den [[Saxony/Transportation/Verkehrsverbund_Mittelsachsen/Analyse/DE-SN-VMS-Linien|VMS-Linien]] im Wiki.
+- Verweis auf mehr [[Talk:Saxony/Transportation/Verkehrsverbund_Mittelsachsen/Analyse.|Informationen]] im Wiki.
 
 == Quelle
 -

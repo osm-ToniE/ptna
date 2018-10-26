@@ -30,9 +30,9 @@
 
 = Überblick Buslinien Regionalbus Augsburg (RBA) 
 
-- Verweis auf die Datei mit den [[Region Augsburg/Transportation/Analyse/DE-BY-RBA-Linien|RBA Linien]] im Wiki.
+- Verweis auf die Datei mit den [[Region_Augsburg/Transportation/Analyse/DE-BY-RBA-Linien|RBA Linien]] im Wiki.
 -
-- Verweis auf mehr [[Talk:Region Augsburg/Transportation/Analyse|Informationen]] im Wiki.
+- Verweis auf mehr [[Talk:Region_Augsburg/Transportation/Analyse|Informationen]] im Wiki.
 
 == Linien im Bereich Augsburg (Außerhalb AVV)
 

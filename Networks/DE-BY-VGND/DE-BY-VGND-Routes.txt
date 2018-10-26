@@ -30,8 +30,8 @@
 
 = Überblick Buslinien Verkehrsgmeinschaft Neuburg (VGND) allgemein 
 
-- Verweis auf die Datei mit den [[Neuburg an der Donau/Transportation/Analyse/DE-BY-VGND-Linien|VGND Linien]] im Wiki.
-- Verweis auf mehr [[Talk:Neuburg an der Donau/Transportation/Analyse|Informationen]] im Wiki.
+- Verweis auf die Datei mit den [[Neuburg_an_der_Donau/Transportation/Analyse/DE-BY-VGND-Linien|VGND Linien]] im Wiki.
+- Verweis auf mehr [[Talk:Neuburg_an_der_Donau/Transportation/Analyse|Informationen]] im Wiki.
 
 
 == Stadtbusse Neuburg (Betrieben durch die Stadtwerke Neuburg)
