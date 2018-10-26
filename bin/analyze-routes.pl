@@ -3759,14 +3759,19 @@ sub printHintUnselectedRelations {
     push( @HTML_main, "        </ul>\n" );
     push( @HTML_main, "    </li>\n" );
     push( @HTML_main, "</ul>\n" );
-    push( @HTML_main, "<p>Beispiele aus dem VMS für 'ref;type;Kommentar;Von;Nach;Betreiber':</p>\n" );
-    push( @HTML_main, "<ol>\n" );
-    push( @HTML_main, "    <li>A;bus;'Hinweis: Bus A fährt in Annaberg-Buchholz';Barbara-Uthmann-Ring;Buchholz;RVE</li>\n" );
-    push( @HTML_main, "    <li>A;bus;'Hinweis: Bus A fährt in Aue';Postplatz;Postplatz;RVE</li>\n" );
-    push( @HTML_main, "    <li>A;bus;'Hinweis: Bus A fährt in Burgstädt';Sportzentrum;Heiersdorf;RBM</li>\n" );
-    push( @HTML_main, "</ol>\n" );
+    push( @HTML_main, "<p>Beispiele aus dem VMS für einen Eintrag in der CSV-Datei der Form: 'ref;type;Kommentar;Von;Nach;Betreiber'</p>\n" );
+    push( @HTML_main, "<table>\n" );
+    push( @HTML_main, "    <thead class=\"tableheaderrow\">\n" );
+    push( @HTML_main, "    <tr><th>&nbsp;</th><th>ref</th><th>type</th><th>Kommentar</th><th>Von</th><th>Nach</th><th>Betreiber</th></tr>\n" );
+    push( @HTML_main, "    </thead>\n" );
+    push( @HTML_main, "    <tbody>\n" );
+    push( @HTML_main, "    <tr><td><strong>1.)</strong> </td><td>A</td><td>bus</td><td>Bus A fährt in Annaberg-Buchholz</td><td>Barbara-Uthmann-Ring</td><td>Buchholz</td><td>RVE</td></tr>\n" );
+    push( @HTML_main, "    <tr><td><strong>2.)</strong> </td><td>A</td><td>bus</td><td>Bus A fährt in Aue</td><td>Postplatz</td><td>Postplatz</td><td>RVE</td></tr>\n" );
+    push( @HTML_main, "    <tr><td><strong>3.)</strong> </td><td>A</td><td>bus</td><td>Bus A fährt in Burgstädt</td><td>Sportzentrum</td><td>Heiersdorf</td><td>RBM</td></tr>\n" );
+    push( @HTML_main, "    </body>\n" );
+    push( @HTML_main, "</table>\n" );
     push( @HTML_main, "<p>1.) und 2.) sind nur mit Hilfe von 'Von'/'from' und 'Nach'/'to' unterscheidbar, da 'Betreiber'/'operator' identisch (='RVE') sind.<br>\n" );
-    push( @HTML_main, "   1.) und 3.) sowie 2.) und 3.) sind an Hand von 'Betreiber'/'operator' unterscheidbar, die diese unterschiedlich sind (='RVE' bzw. ='RBM').</p>\n" );
+    push( @HTML_main, "   1.) und 3.) sowie 2.) und 3.) sind an Hand von 'Betreiber'/'operator' unterscheidbar, da diese unterschiedlich sind (='RVE' bzw. ='RBM').</p>\n" );
 
 }
 
@@ -4326,9 +4331,9 @@ sub wiki2html {
             $sub = sprintf( "<a href=\"https://wiki.openstreetmap.org/wiki/%s\">%s</a>", $1, $2 );
             $text =~ s/\[\[[^|]+\|[^\]]+\]\]/$sub/;
         }
-        # convert: [[https://example.com/index.html External Link]]
+        # convert: [https://example.com/index.html External Link]
         while ( $text =~ m/\[([^ ]+) ([^\]]+)\]/g ) {
-            $sub = sprintf( "<a href=\"https://wiki.openstreetmap.org/wiki/%s\">%s</a>", $1, $2 );
+            $sub = sprintf( "<a href=\"%s\">%s</a>", $1, $2 );
             $text =~ s/\[[^ ]+ [^\]]+\]/$sub/;
         }
         while ( $text =~ m/'''(.?)'''/g ) {
