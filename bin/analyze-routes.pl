@@ -3626,8 +3626,8 @@ sub printInitialHeader {
     push( @HTML_start, "              table { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; }\n" );
     push( @HTML_start, "              th    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }\n" );
     push( @HTML_start, "              td    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }\n" );
-    push( @HTML_start, "              ol    { list-style: none; }\n" );
     push( @HTML_start, "              img   { width: 20px; }\n" );
+    push( @HTML_start, "              #toc ol           { list-style: none; }\n" );
     push( @HTML_start, "              .tableheaderrow   { background-color: LightSteelBlue;   }\n" );
     push( @HTML_start, "              .sketchline       { background-color: LightBlue;        }\n" );
     push( @HTML_start, "              .sketch           { text-align:left;  font-weight: 500; }\n" );
@@ -3688,7 +3688,8 @@ sub printTableOfContents {
     my $header_number   = undef;
     my $header_text     = undef;
 
-    print "        <h1>Inhalts</h1>\n";
+    print "        <div id=\"toc\">\n";
+    print "        <h1>Inhalt</h1>\n";
     foreach $toc_line ( @html_header_anchors ) {
         if ( $toc_line =~ m/^L(\d+)\s+([0-9\.]+)\s+(.*)$/ ) {
             $anchor_level   = $1;
@@ -3717,6 +3718,7 @@ sub printTableOfContents {
         print "        </li>\n        </ol>\n";
         $last_level--;
     }
+    print "        </div> <!-- toc -->\n";
 }
 
 
@@ -3727,17 +3729,15 @@ sub printBigHeader {
     
     printHeader( '= ' . $title )  if ( $title );
     
-    $printText_buffer = '';
-
 }
 
 
 #############################################################################################
 
 sub printHintUnselectedRelations {
-    push( @HTML_main, "<p>Dieser Abschnitt listet die Linien auf, die nicht eindeutig zugeordnet werden konnten." );
-    push( @HTML_main, "Die Liniennummern 'ref' sind in der CSV-Datei mehrfach angegeben worden." );
-    push( @HTML_main, "Das bedeutet, dass die selbe Liniennummer im Verkehrsverbund mehrfach in verscheidenen Gemeinden/Städten vorhanden ist." );
+    push( @HTML_main, "<p>Dieser Abschnitt listet die Linien auf, die nicht eindeutig zugeordnet werden konnten. " );
+    push( @HTML_main, "Die Liniennummern 'ref' sind in der CSV-Datei mehrfach angegeben worden. " );
+    push( @HTML_main, "Das bedeutet, dass die selbe Liniennummer im Verkehrsverbund mehrfach in verscheidenen Gemeinden/Städten vorhanden ist. " );
     push( @HTML_main, "Um die Linien eindeutig zuordnen zu können sollte folgendes angegeben werden:</p>" );
     push( @HTML_main, "<ul>\n" );
     push( @HTML_main, "    <li>Relation:\n" );
@@ -3768,8 +3768,6 @@ sub printHintUnselectedRelations {
     push( @HTML_main, "<p>1.) und 2.) sind nur mit Hilfe von 'Von'/'from' und 'Nach'/'to' unterscheidbar, da 'Betreiber'/'operator' identisch (='RVE') sind.<br>\n" );
     push( @HTML_main, "   1.) und 3.) sowie 2.) und 3.) sind an Hand von 'Betreiber'/'operator' unterscheidbar, die diese unterschiedlich sind (='RVE' bzw. ='RBM').</p>\n" );
 
-    $printText_buffer = '';
-    
 }
 
 
@@ -3824,8 +3822,6 @@ sub printHintSuspiciousRelations {
     }
     push( @HTML_main, "\n" );
 
-    $printText_buffer = '';
-    
 }
 
 
@@ -3922,6 +3918,11 @@ sub printHintUnusedNetworks {
 sub printHeader {
     my $text = shift;
 
+    if ( $printText_buffer ) {
+        push( @HTML_main, $printText_buffer . "</p>\n" );
+        $printText_buffer = '';
+    }
+
     if ( $text ) {
         $text =~ s/^\s*//;
         $text =~ s/\s*=*\s*$//;
@@ -3987,7 +3988,7 @@ sub printText {
     if ( $text ) {
         $text =~ s/^\s*-\s*//;
         if ( $text ) {
-            $printText_buffer .= sprintf( "%s\n", wiki2html($text) );
+            $printText_buffer .= sprintf( "%s \n", wiki2html($text) );
         } else {
             push( @HTML_main, $printText_buffer . "</p>\n" );
             $printText_buffer = '';
