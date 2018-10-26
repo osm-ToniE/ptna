@@ -3602,10 +3602,11 @@ sub noAccess {
 my $no_of_columns               = 0;
 my @columns                     = ();
 my @table_columns               = ();
-my $max_templates               = 0;            # do not print more than xxx wiki-templates, set later on
-my $number_of_printed_templates = 0;
 my @html_header_anchors         = ();
 my @html_header_anchor_numbers  = (0,0,0,0,0,0,0);
+my $printText_buffer            = '';
+    
+
 
 sub printInitialHeader {
     my $title       = shift;
@@ -3615,70 +3616,48 @@ sub printInitialHeader {
     $no_of_columns               = 0;
     @columns                     = ();
     @table_columns               = ();
-    $max_templates               = 700;
-    $number_of_printed_templates = 0;
 
-    if ( $print_wiki ) {
-        #
-        # WIKI code
-        #
-        print  "{{TOC limit|3}}\n";
-        print  "\n";
-        if ( $osm_base || $areas ) {
-            printBigHeader( "Datum der Daten" );
-            printf "OSM-Base Time : %s<br>\n", $osm_base          if ( $osm_base );
-            printf "Areas Time    : %s<br>\n", $areas             if ( $areas    );
-            print  "<br>\n";
-        }
-        print  "Die Analyse läuft in der Regel abends zwischen 19:00 und 20:00 Uhr.<br>\n";
-        print  "<br>\n";
-        print  "Die Daten im Wiki werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändert hat.<br>\n";
-        print  "\n";
-        print  "Weitere Details sind auf der hier zugehörigen Diskussionsseite zu finden.<br>\n";
-        print  "\n";
-        print  "Eine Erläuterung der Fehlertexte ist auf der Seite von [[User:ToniE/analyze-routes#Momentane_Prüfungen|analyze-routes]] zu finden.<br>\n";
-        print  "\n";
-    } else {
-        #
-        # HTML
-        #
-        push( @HTML_start, "<!DOCTYPE html\n" );
-        push( @HTML_start, "<html lang=\"de\">\n" );
-        push( @HTML_start, "    <head>\n" );
-        push( @HTML_start, sprintf( "        <title>%sPTNA - Public Transport Network Analysis</title>\n", ($title ? $title . ' - ' : '') ) );
-        push( @HTML_start, "        <meta name=\"generator\" content=\"PTNA\">\n" );
-        push( @HTML_start, "        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />\n" );
-        push( @HTML_start, "        <meta name=\"keywords\" content=\"OSM Public Transport PTv2\">\n" );
-        push( @HTML_start, "        <meta name=\"description\" content=\"PTNA - Public Transport Network Analysis\">\n" );
-        push( @HTML_start, "        <style>\n" );
-        push( @HTML_start, "              table { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; }\n" );
-        push( @HTML_start, "              th    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }\n" );
-        push( @HTML_start, "              td    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }\n" );
-        push( @HTML_start, "              ol    { list-style: none; }\n" );
-        push( @HTML_start, "              img   { width: 20px; }\n" );
-        push( @HTML_start, "              .tableheaderrow   { background-color: LightSteelBlue;   }\n" );
-        push( @HTML_start, "              .sketchline       { background-color: LightBlue;        }\n" );
-        push( @HTML_start, "              .sketch           { text-align:left;  font-weight: 500; }\n" );
-        push( @HTML_start, "              .csvinfo          { text-align:right; font-size: 0.8em; }\n" );
-        push( @HTML_start, "              .ref              { white-space:nowrap; }\n" );
-        push( @HTML_start, "              .relation         { white-space:nowrap; }\n" );
-        push( @HTML_start, "              .PTv              { text-align:center; }\n" );
-        push( @HTML_start, "              .number           { text-align:right; }\n" );
-        push( @HTML_start, "        </style>\n" );
-        push( @HTML_start, "    </head>\n" );
-        push( @HTML_start, "    <body>\n" );
-        if ( $osm_base || $areas ) {
-            printBigHeader( "Datum der Daten" );
-            push( @HTML_main, sprintf( "<p>OSM-Base Time : %s<br>\n", $osm_base ) )       if ( $osm_base );
-            push( @HTML_main, sprintf( "Areas Time    : %s</p>\n", $areas ) )             if ( $areas    );
-            push( @HTML_main, "\n" );
-        }
-        push( @HTML_main, "<p>Die Analyse läuft auf einem Raspberry Pi 2 Model B in der Regel nachts zwischen 01:00 und 04:00 Uhr lokaler Zeit München.\n" );
-        push( @HTML_main, "Die Daten werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändert hat.\n" );
-        push( @HTML_main, "</p>\n" );
-        push( @HTML_main, "<p>Eine Erläuterung der Fehlertexte ist auf der Seite von <a href='https://wiki.openstreetmap.org/wiki/User:ToniE/analyze-routes#Momentane_Pr.C3.BCfungen'>analyze-routes</a> zu finden.</p>\n" );
+    push( @HTML_start, "<!DOCTYPE html>\n" );
+    push( @HTML_start, "<html lang=\"de\">\n" );
+    push( @HTML_start, "    <head>\n" );
+    push( @HTML_start, sprintf( "        <title>%sPTNA - Public Transport Network Analysis</title>\n", ($title ? html_escape($title) . ' - ' : '') ) );
+    push( @HTML_start, "        <meta name=\"generator\" content=\"PTNA\">\n" );
+    push( @HTML_start, "        <meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\" />\n" );
+    push( @HTML_start, "        <meta name=\"keywords\" content=\"OSM Public Transport PTv2\">\n" );
+    push( @HTML_start, "        <meta name=\"description\" content=\"PTNA - Public Transport Network Analysis\">\n" );
+    push( @HTML_start, "        <style>\n" );
+    push( @HTML_start, "              table { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; }\n" );
+    push( @HTML_start, "              th    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }\n" );
+    push( @HTML_start, "              td    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }\n" );
+    push( @HTML_start, "              ol    { list-style: none; }\n" );
+    push( @HTML_start, "              img   { width: 20px; }\n" );
+    push( @HTML_start, "              .tableheaderrow   { background-color: LightSteelBlue;   }\n" );
+    push( @HTML_start, "              .sketchline       { background-color: LightBlue;        }\n" );
+    push( @HTML_start, "              .sketch           { text-align:left;  font-weight: 500; }\n" );
+    push( @HTML_start, "              .csvinfo          { text-align:right; font-size: 0.8em; }\n" );
+    push( @HTML_start, "              .ref              { white-space:nowrap; }\n" );
+    push( @HTML_start, "              .relation         { white-space:nowrap; }\n" );
+    push( @HTML_start, "              .PTv              { text-align:center; }\n" );
+    push( @HTML_start, "              .number           { text-align:right; }\n" );
+    push( @HTML_start, "        </style>\n" );
+    push( @HTML_start, "    </head>\n" );
+    push( @HTML_start, "    <body>\n" );
+    if ( $osm_base || $areas ) {
+        printBigHeader( "Datum der Daten" );
+        push( @HTML_main, sprintf( "%8s<p>\n", ' ') );
+        push( @HTML_main, sprintf( "%12sOSM-Base Time : %s\n", ' ', $osm_base ) )       if ( $osm_base );
+        push( @HTML_main, sprintf( "%12s<br>\n",               ' ' ) )                  if ( $osm_base && $areas );
+        push( @HTML_main, sprintf( "%12sAreas Time    : %s\n", ' ', $areas ) )          if ( $areas    );
+        push( @HTML_main, sprintf( "%8s</p>\n", ' ') );
         push( @HTML_main, "\n" );
+    } else {
+        printBigHeader( "Hinweis" );
     }
+    push( @HTML_main, "<p>Die Analyse läuft auf einem Raspberry Pi 2 Model B in der Regel nachts zwischen 01:00 und 04:00 Uhr lokaler Zeit München.<br>\n" );
+    push( @HTML_main, "Die Daten werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändert hat.\n" );
+    push( @HTML_main, "</p>\n" );
+    push( @HTML_main, "<p>Eine Erläuterung der Fehlertexte ist auf der Seite von <a href='https://wiki.openstreetmap.org/wiki/User:ToniE/analyze-routes#Momentane_Pr.C3.BCfungen'>analyze-routes</a> zu finden.</p>\n" );
+    push( @HTML_main, "\n" );
 
 }
 
@@ -3687,28 +3666,17 @@ sub printInitialHeader {
 
 sub printFinalFooter {
 
-    if ( $print_wiki ) {
-        #
-        # WIKI code
-        #
-        print "<!-- end of file -->"
-    } else {
-        #
-        # HTML
-        #
-        push( @HTML_main, "    </body>\n" );
-        push( @HTML_main, "</html>\n" );
-        
-        foreach my $line ( @HTML_start ) {
-            print $line;
-        }
+    push( @HTML_main, "    </body>\n" );
+    push( @HTML_main, "</html>\n" );
+    
+    foreach my $line ( @HTML_start ) {
+        print $line;
+    }
 
-        printTableOfContents();
+    printTableOfContents();
 
-        foreach my $line ( @HTML_main ) {
-            print $line;
-        }
-        
+    foreach my $line ( @HTML_main ) {
+        print $line;
     }
 }
 
@@ -3717,49 +3685,40 @@ sub printFinalFooter {
 
 sub printTableOfContents {
     
-    if ( $print_wiki ) {
-        #
-        # WIKI code
-        #
-        ;
-    } else {
-        my $toc_line        = undef;
-        my $last_level      = 0;
-        my $anchor_level    = undef;
-        my $header_number   = undef;
-        my $header_text     = undef;
-        #
-        # HTML
-        #
-        print "        <h1>Inhaltsverzeichnis</h1>\n";
-        foreach $toc_line ( @html_header_anchors ) {
-            if ( $toc_line =~ m/^L(\d+)\s+([0-9\.]+)\s+(.*)$/ ) {
-                $anchor_level   = $1;
-                $header_number  = $2;
-                $header_text    = wiki2html($3);
-                if ( $anchor_level <= $last_level ) {
-                    print "        </li>\n";
-                }
-                if ( $anchor_level < $last_level ) {
-                    while ( $anchor_level < $last_level ) {
-                        print "        </ol>\n        </li>\n";
-                        $last_level--;
-                    }
-                } else {
-                    while ( $anchor_level > $last_level ) {
-                        print "        <ol>\n";
-                        $last_level++;
-                    }
-                }
-                printf "        <li>%s <a href=\"#A%s\">%s</a>\n", $header_number, $header_number, $header_text;
-            } else {
-                printf STDERR "%s Missmatch in TOC line '%s'\n", get_time(), $toc_line;
+    my $toc_line        = undef;
+    my $last_level      = 0;
+    my $anchor_level    = undef;
+    my $header_number   = undef;
+    my $header_text     = undef;
+
+    print "        <h1>Inhalts</h1>\n";
+    foreach $toc_line ( @html_header_anchors ) {
+        if ( $toc_line =~ m/^L(\d+)\s+([0-9\.]+)\s+(.*)$/ ) {
+            $anchor_level   = $1;
+            $header_number  = $2;
+            $header_text    = wiki2html($3);
+            if ( $anchor_level <= $last_level ) {
+                print "        </li>\n";
             }
+            if ( $anchor_level < $last_level ) {
+                while ( $anchor_level < $last_level ) {
+                    print "        </ol>\n        </li>\n";
+                    $last_level--;
+                }
+            } else {
+                while ( $anchor_level > $last_level ) {
+                    print "        <ol>\n";
+                    $last_level++;
+                }
+            }
+            printf "        <li>%s <a href=\"#A%s\">%s</a>\n", $header_number, $header_number, $header_text;
+        } else {
+            printf STDERR "%s Missmatch in TOC line '%s'\n", get_time(), $toc_line;
         }
-        while ( $last_level > 0) {
-            print "        </li>\n        </ol>\n";
-            $last_level--;
-        }
+    }
+    while ( $last_level > 0) {
+        print "        </li>\n        </ol>\n";
+        $last_level--;
     }
 }
 
@@ -3770,123 +3729,106 @@ sub printBigHeader {
     my $title    = shift;
     
     printHeader( '= ' . $title )  if ( $title );
+    
+    $printText_buffer = '';
+
 }
 
 
 #############################################################################################
 
 sub printHintUnselectedRelations {
-    printText( "Dieser Abschnitt listet die Linien auf, die nicht eindeutig zugeordnet werden konnten." );
-    printText( "Die Liniennummern 'ref' sind in der CSV-Datei mehrfach angegeben worden." );
-    printText( "Das bedeutet, dass die selbe Liniennummer im Verkehrsverbund mehrfach in verscheidenen Gemeinden/Städten vorhanden ist." );
-    printText( "Um die Linien eindeutig zuordnen zu können sollte folgendes angegeben werden:" );
-    if ( $print_wiki ) {
-        #
-        # WIKI code
-        #
-        print  "* 'operator', sowie 'from' und 'to' sollten bei der Relation getagged sein.\n";
-        print  "** Wenn der Wert von 'operator' zur Differenzierung eindeutig ist, so müssen 'from' und 'to' nicht angegeben werden.\n";
-        print  "* 'Betreiber', sowie 'Von' und 'Nach' sollten in der CSV-Datei mit den selben Werten wie bei der Relation angegeben werden.\n";
-        print  "** Siehe hierzu die Anleitung für solche Einträge am Anfang der CSV-Datei.\n";
-        print  "\n";
-    } else {
-        #
-        # HTML
-        #
-        push( @HTML_main, "<ul>\n" );
-        push( @HTML_main, "    <li>Relation:\n" );
-        push( @HTML_main, "        <ul>\n" );
-        push( @HTML_main, "            <li>'network', 'operator', sowie 'from' und 'to' sollten bei der Relation getagged sein.\n" );
-        push( @HTML_main, "                <ul>\n" );
-        push( @HTML_main, "                    <li>Wenn der Wert von 'operator' zur Differenzierung eindeutig ist, müssen 'from' und 'to' nicht angegeben werden.</li>\n" );
-        push( @HTML_main, "                </ul>\n" );
-        push( @HTML_main, "            </li>\n" );
-        push( @HTML_main, "        </ul>\n" );
-        push( @HTML_main, "    </li>\n" );
-        push( @HTML_main, "    <li>CSV-Datei:\n" );
-        push( @HTML_main, "        <ul>\n" );
-        push( @HTML_main, "            <li>'Betreiber', sowie 'Von' und 'Nach' sollten in der CSV-Datei mit den selben Werten wie bei der Relation angegeben werden.\n" );
-        push( @HTML_main, "                <ul>\n" );
-        push( @HTML_main, "                    <li>Siehe hierzu die Anleitung für solche Einträge am Anfang der CSV-Datei.</li>\n" );
-        push( @HTML_main, "                </ul>\n" );
-        push( @HTML_main, "            </li>\n" );
-        push( @HTML_main, "        </ul>\n" );
-        push( @HTML_main, "    </li>\n" );
-        push( @HTML_main, "</ul>\n" );
-        push( @HTML_main, "<p>Beispiele aus dem VMS für 'ref;type;Kommentar;Von;Nach;Betreiber':</p>\n" );
-        push( @HTML_main, "<p>&nbsp;&nbsp;&nbsp;&nbsp;1.) A;bus;'Hinweis: Bus A fährt in Annaberg-Buchholz';Barbara-Uthmann-Ring;Buchholz;RVE</p>\n" );
-        push( @HTML_main, "<p>&nbsp;&nbsp;&nbsp;&nbsp;2.) A;bus;'Hinweis: Bus A fährt in Aue';Postplatz;Postplatz;RVE</p>\n" );
-        push( @HTML_main, "<p>&nbsp;&nbsp;&nbsp;&nbsp;3.) A;bus;'Hinweis: Bus A fährt in Burgstädt';Sportzentrum;Heiersdorf;RBM<br /></p>\n" );
-        push( @HTML_main, "<p>1.) und 2.) sind nur mit Hilfe von 'Von'/'from' und 'Nach'/'to' unterscheidbar, da 'Betreiber'/'operator' identisch (='RVE') sind.</p>\n" );
-        push( @HTML_main, "<p>1.) und 3.) sowie 2.) und 3.) sind an Hand von 'Betreiber'/'operator' unterscheidbar, die diese unterschiedlich sind (='RVE' bzw. ='RBM').</p>\n" )
-    }
+    push( @HTML_main, "<p>Dieser Abschnitt listet die Linien auf, die nicht eindeutig zugeordnet werden konnten." );
+    push( @HTML_main, "Die Liniennummern 'ref' sind in der CSV-Datei mehrfach angegeben worden." );
+    push( @HTML_main, "Das bedeutet, dass die selbe Liniennummer im Verkehrsverbund mehrfach in verscheidenen Gemeinden/Städten vorhanden ist." );
+    push( @HTML_main, "Um die Linien eindeutig zuordnen zu können sollte folgendes angegeben werden:</p>" );
+    push( @HTML_main, "<ul>\n" );
+    push( @HTML_main, "    <li>Relation:\n" );
+    push( @HTML_main, "        <ul>\n" );
+    push( @HTML_main, "            <li>'network', 'operator', sowie 'from' und 'to' sollten bei der Relation getagged sein.\n" );
+    push( @HTML_main, "                <ul>\n" );
+    push( @HTML_main, "                    <li>Wenn der Wert von 'operator' zur Differenzierung eindeutig ist, müssen 'from' und 'to' nicht angegeben werden.</li>\n" );
+    push( @HTML_main, "                </ul>\n" );
+    push( @HTML_main, "            </li>\n" );
+    push( @HTML_main, "        </ul>\n" );
+    push( @HTML_main, "    </li>\n" );
+    push( @HTML_main, "    <li>CSV-Datei:\n" );
+    push( @HTML_main, "        <ul>\n" );
+    push( @HTML_main, "            <li>'Betreiber', sowie 'Von' und 'Nach' sollten in der CSV-Datei mit den selben Werten wie bei der Relation angegeben werden.\n" );
+    push( @HTML_main, "                <ul>\n" );
+    push( @HTML_main, "                    <li>Siehe hierzu die Anleitung für solche Einträge am Anfang der CSV-Datei.</li>\n" );
+    push( @HTML_main, "                </ul>\n" );
+    push( @HTML_main, "            </li>\n" );
+    push( @HTML_main, "        </ul>\n" );
+    push( @HTML_main, "    </li>\n" );
+    push( @HTML_main, "</ul>\n" );
+    push( @HTML_main, "<p>Beispiele aus dem VMS für 'ref;type;Kommentar;Von;Nach;Betreiber':</p>\n" );
+    push( @HTML_main, "<ol>\n" );
+    push( @HTML_main, "    <li>A;bus;'Hinweis: Bus A fährt in Annaberg-Buchholz';Barbara-Uthmann-Ring;Buchholz;RVE</li>\n" );
+    push( @HTML_main, "    <li>A;bus;'Hinweis: Bus A fährt in Aue';Postplatz;Postplatz;RVE</li>\n" );
+    push( @HTML_main, "    <li>A;bus;'Hinweis: Bus A fährt in Burgstädt';Sportzentrum;Heiersdorf;RBM</li>\n" );
+    push( @HTML_main, "</ol>\n" );
+    push( @HTML_main, "<p>1.) und 2.) sind nur mit Hilfe von 'Von'/'from' und 'Nach'/'to' unterscheidbar, da 'Betreiber'/'operator' identisch (='RVE') sind.<br>\n" );
+    push( @HTML_main, "   1.) und 3.) sowie 2.) und 3.) sind an Hand von 'Betreiber'/'operator' unterscheidbar, die diese unterschiedlich sind (='RVE' bzw. ='RBM').</p>\n" );
+
+    $printText_buffer = '';
+    
 }
 
 
 #############################################################################################
 
 sub printHintSuspiciousRelations {
-    if ( $print_wiki ) {
-        #
-        # WIKI code
-        #
-        print  "Dieser Abschnitt enthält weitere Relationen aus dem Umfeld der Linien:\n";
-        print  "* evtl. falsche 'route' oder 'route_master' Werte?\n";
-        print  "** z.B. 'route' = 'suspended_bus' statt 'route' = 'bus'\n";
-        print  "* aber auch 'type' = 'network', 'type' = 'set' oder 'route' = 'network', d.h. eine Sammlung aller zum 'network' gehörenden Route und Route-Master.\n";
-        print  "** solche '''Sammlungen sind Fehler''', da Relationen keinen Sammlungen darstellen sollen: [[DE:Relationen/Relationen_sind_keine_Kategorien|Relationen sind keine Kategorien]]\n";
-        print  "\n";
-    }
-    else {
-        #
-        # HTML
-        #
-        my $hswkort = scalar( keys ( %have_seen_well_known_other_route_types ) );
-        my $hswknt  = scalar( keys ( %have_seen_well_known_network_types ) );
-        my $hswkot  = scalar( keys ( %have_seen_well_known_other_types ) );
-        push( @HTML_main, "<p>Dieser Abschnitt enthält weitere Relationen aus dem Umfeld der Linien:</p>\n" );
+    my $hswkort = scalar( keys ( %have_seen_well_known_other_route_types ) );
+    my $hswknt  = scalar( keys ( %have_seen_well_known_network_types ) );
+    my $hswkot  = scalar( keys ( %have_seen_well_known_other_types ) );
+
+    push( @HTML_main, "<p>Dieser Abschnitt enthält weitere Relationen aus dem Umfeld der Linien:</p>\n" );
+    push( @HTML_main, "<ul>\n" );
+    push( @HTML_main, "    <li>evtl. falsche 'route' oder 'route_master' Werte?\n" );
+    push( @HTML_main, "        <ul>\n" );
+    push( @HTML_main, "            <li>z.B. 'route' = 'suspended_bus' statt 'route' = 'bus'</li>\n" );
+    push( @HTML_main, "        </ul>\n" );
+    push( @HTML_main, "    </li>\n" );
+    push( @HTML_main, "    <li>aber auch 'type' = 'network', 'type' = 'set' oder 'route' = 'network', d.h. eine Sammlung aller zum 'network' gehörenden Route und Route-Master.\n" );
+    push( @HTML_main, "        <ul>\n" );
+    push( @HTML_main, "            <li>solche <strong>Sammlungen sind streng genommen Fehler</strong>, da Relationen keinen Sammlungen darstellen sollen: <a href=\"https://wiki.openstreetmap.org/wiki/DE:Relationen/Relationen_sind_keine_Kategorien\">Relationen sind keine Kategorien</a></li>\n" );
+    push( @HTML_main, "        </ul>\n" );
+    push( @HTML_main, "    </li>\n" );
+    push( @HTML_main, "</ul>\n" );
+    if ( $hswkort || $hswknt || $hswkot ) {
+        push( @HTML_main, "<p>Die folgenden Werte bzw. Kombinationen wurden in den Inputdaten gefunden, werden hier aber nicht angezeigt.ßn" );
+        push( @HTML_main, "Sie gelten als \"wohl definierte\" Werte und nicht als Fehler.</p>\n" );
         push( @HTML_main, "<ul>\n" );
-        push( @HTML_main, "    <li>evtl. falsche 'route' oder 'route_master' Werte?\n" );
-        push( @HTML_main, "        <ul>\n" );
-        push( @HTML_main, "            <li>z.B. 'route' = 'suspended_bus' statt 'route' = 'bus'</li>\n" );
-        push( @HTML_main, "        </ul>\n" );
-        push( @HTML_main, "    </li>\n" );
-        push( @HTML_main, "    <li>aber auch 'type' = 'network', 'type' = 'set' oder 'route' = 'network', d.h. eine Sammlung aller zum 'network' gehörenden Route und Route-Master.\n" );
-        push( @HTML_main, "        <ul>\n" );
-        push( @HTML_main, "            <li>solche <em>Sammlungen sind streng genommen Fehler</em>, da Relationen keinen Sammlungen darstellen sollen: <a href=\"https://wiki.openstreetmap.org/wiki/DE:Relationen/Relationen_sind_keine_Kategorien\">Relationen sind keine Kategorien</a></li>\n" );
-        push( @HTML_main, "        </ul>\n" );
-        push( @HTML_main, "    </li>\n" );
-        push( @HTML_main, "</ul>\n" );
-        if ( $hswkort || $hswknt || $hswkot ) {
-            push( @HTML_main, "<p>Die folgenden Werte bzw. Kombinationen wurden in den Inputdaten gefunden, werden hier aber nicht angezeigt. Sie gelten als \"wohl definierte\" Werte und nicht als Fehler.</p>\n" );
-            push( @HTML_main, "<ul>\n" );
-            if ( $hswkort ) {
-                push( @HTML_main, "    <li>'type' = 'route_master' bzw. 'type' = 'route''\n" );
-                push( @HTML_main, "        <ul>\n" );
-                foreach my $rt (  sort ( keys %have_seen_well_known_other_route_types ) ) {
-                    push( @HTML_main, sprintf( "    <li>'route_master' = '%s' bzw. 'route' = '%s'</li>\n", $rt, $rt ) );
-                }
-                push( @HTML_main, "        </ul>\n" );
-                push( @HTML_main, "    </li>\n" );
+        if ( $hswkort ) {
+            push( @HTML_main, "    <li>'type' = 'route_master' bzw. 'type' = 'route''\n" );
+            push( @HTML_main, "        <ul>\n" );
+            foreach my $rt (  sort ( keys %have_seen_well_known_other_route_types ) ) {
+                push( @HTML_main, sprintf( "    <li>'route_master' = '%s' bzw. 'route' = '%s'</li>\n", $rt, $rt ) );
             }
-            if ( $hswknt ) {
-                push( @HTML_main, "    <li>'type' = 'network'\n" );
-                push( @HTML_main, "        <ul>\n" );
-                foreach my $nt (  sort ( keys %have_seen_well_known_network_types ) ) {
-                    push( @HTML_main, sprintf( "    <li>'network' = '%s'</li>\n", $nt ) );
-                }
-                push( @HTML_main, "        </ul>\n" );
-                push( @HTML_main, "    </li>\n" );
-            }
-            if ( $hswkot ) {
-                foreach my $ot ( sort ( keys %have_seen_well_known_other_types ) ) {
-                    push( @HTML_main, sprintf( "    <li>'type' = '%s'</li>\n", $ot ) );
-                }
-            }
-            push( @HTML_main, "</ul>\n" );
+            push( @HTML_main, "        </ul>\n" );
+            push( @HTML_main, "    </li>\n" );
         }
-        push( @HTML_main, "\n" );
+        if ( $hswknt ) {
+            push( @HTML_main, "    <li>'type' = 'network'\n" );
+            push( @HTML_main, "        <ul>\n" );
+            foreach my $nt (  sort ( keys %have_seen_well_known_network_types ) ) {
+                push( @HTML_main, sprintf( "    <li>'network' = '%s'</li>\n", $nt ) );
+            }
+            push( @HTML_main, "        </ul>\n" );
+            push( @HTML_main, "    </li>\n" );
+        }
+        if ( $hswkot ) {
+            foreach my $ot ( sort ( keys %have_seen_well_known_other_types ) ) {
+                push( @HTML_main, sprintf( "    <li>'type' = '%s'</li>\n", $ot ) );
+            }
+        }
+        push( @HTML_main, "</ul>\n" );
     }
+    push( @HTML_main, "\n" );
+
+    $printText_buffer = '';
+    
 }
 
 
@@ -3894,49 +3836,24 @@ sub printHintSuspiciousRelations {
 
 sub printHintNetworks {
 
-    printText( "Das 'network' Tag wird nach den folgenden Werten durchsucht:\n" );
+    push( @HTML_main, "<p>Das 'network' Tag wird nach den folgenden Werten durchsucht:</p>\n" );
 
-    if ( $print_wiki ) {
-        #
-        # WIKI code
-        #
-        if ( $network_long_regex || $network_short_regex ) {
-            if ( $network_long_regex ) {
-                foreach my $nw ( split( '\|', $network_long_regex ) ) {
-                    printf "* %s\n", html_escape($nw);
-                }
-            }
-            if ( $network_short_regex ) {
-                foreach my $nw ( split( '\|', $network_short_regex ) ) {
-                    printf "* %s\n", html_escape($nw);
-                }
-            }
-            if ( !$strict_network ) {
-                print "* 'network' ist nicht gesetzt\n";
+    if ( $network_long_regex || $network_short_regex ) {
+        push( @HTML_main, "<ul>\n" );
+        if ( $network_long_regex ) {
+            foreach my $nw ( split( '\|', $network_long_regex ) ) {
+                push( @HTML_main, sprintf( "    <li>%s</li>\n", html_escape($nw) ) );
             }
         }
-    }
-    else {
-        #
-        # HTML
-        #
-        if ( $network_long_regex || $network_short_regex ) {
-            push( @HTML_main, "<ul>\n" );
-            if ( $network_long_regex ) {
-                foreach my $nw ( split( '\|', $network_long_regex ) ) {
-                    push( @HTML_main, sprintf( "    <li>%s</li>\n", html_escape($nw) ) );
-                }
+        if ( $network_short_regex ) {
+            foreach my $nw ( split( '\|', $network_short_regex ) ) {
+                push( @HTML_main, sprintf( "    <li>%s</li>\n", html_escape($nw) ) );
             }
-            if ( $network_short_regex ) {
-                foreach my $nw ( split( '\|', $network_short_regex ) ) {
-                    push( @HTML_main, sprintf( "    <li>%s</li>\n", html_escape($nw) ) );
-                }
-            }
-            if ( !$strict_network ) {
-                push( @HTML_main, sprintf( "    <li>'network' ist nicht gesetzt</li>\n" ) );
-            }
-            push( @HTML_main, "</ul>\n" );
         }
+        if ( !$strict_network ) {
+            push( @HTML_main, sprintf( "    <li>'network' ist nicht gesetzt</li>\n" ) );
+        }
+        push( @HTML_main, "</ul>\n" );
     }
 }
     
@@ -3949,7 +3866,7 @@ sub printHintUsedNetworks {
     
     printHeader( "== Berücksichtigte 'network' Werte" );
     
-    printText( "Dieser Abschnitt listet die 'network'-Werte auf, die berücksichtigt wurden, d.h. einen der oben genannten Werte enthält.\n" );
+    push( @HTML_main, "<p>Dieser Abschnitt listet die 'network'-Werte auf, die berücksichtigt wurden, d.h. einen der oben genannten Werte enthält.</p>\n" );
 
     printTableHeader();
     foreach my $network ( sort( keys( %used_networks ) ) ) {
@@ -3979,7 +3896,8 @@ sub printHintUnusedNetworks {
     
     printHeader( "== Nicht berücksichtigte 'network' Werte" );
     
-    printText( "Dieser Abschnitt listet die 'network'-Werte auf, die nicht berücksichtigt wurden. Darunter können auch Tippfehler in ansonsten zu berücksichtigenden Werten sein.\n" );
+    push( @HTML_main, "<p>Dieser Abschnitt listet die 'network'-Werte auf, die nicht berücksichtigt wurden.\n" );
+    push( @HTML_main, "Darunter können auch Tippfehler in ansonsten zu berücksichtigenden Werten sein.</p>\n" );
 
     printTableHeader();
     foreach my $network ( sort( keys( %unused_networks ) ) ) {
@@ -4015,54 +3933,46 @@ sub printHeader {
         if ( $text ) {
             #printf STDERR "working on: %s\n", $text;
             if ( $text =~ m/^(=+)([^=].*)/ ) {
+                my $level_nr = 0;
+                my $header_numbers = '';
+
                 $level  =  $1;
                 $header =  $2;
                 $header =~ s/^\s*//;
-                if ( $print_wiki ) {
-                    #
-                    # WIKI code
-                    #
-                    printf "%s %s %s\n", $level, $header, $level;
-                } else {
-                    #
-                    # HTML
-                    #
-                    my $level_nr = 0;
-                    my $header_numbers = '';
-                    $level_nr++ while ( $level =~ m/=/g );
-                    $level_nr = 6   if ( $level_nr > 6 );
-                    if ( $level_nr == 1 ) {
-                        $header_numbers = ++$html_header_anchor_numbers[1];
-                        $html_header_anchor_numbers[2] = 0;
-                        $html_header_anchor_numbers[3] = 0;
-                        $html_header_anchor_numbers[4] = 0;
-                        $html_header_anchor_numbers[5] = 0;
-                        $html_header_anchor_numbers[6] = 0;
-                    } elsif ( $level_nr == 2 ) {
-                        $header_numbers = $html_header_anchor_numbers[1] . '.' . ++$html_header_anchor_numbers[2];
-                        $html_header_anchor_numbers[3] = 0;
-                        $html_header_anchor_numbers[4] = 0;
-                        $html_header_anchor_numbers[5] = 0;
-                        $html_header_anchor_numbers[6] = 0;
-                    } elsif ( $level_nr == 3 ) {
-                        $header_numbers = $html_header_anchor_numbers[1] . '.' . $html_header_anchor_numbers[2] . '.' . ++$html_header_anchor_numbers[3];
-                        $html_header_anchor_numbers[4] = 0;
-                        $html_header_anchor_numbers[5] = 0;
-                        $html_header_anchor_numbers[6] = 0;
-                    } elsif ( $level_nr == 4 ) {
-                        $header_numbers = $html_header_anchor_numbers[1] . '.' . $html_header_anchor_numbers[2] . '.' . $html_header_anchor_numbers[3] . '.' . ++$html_header_anchor_numbers[4];
-                        $html_header_anchor_numbers[5] = 0;
-                        $html_header_anchor_numbers[6] = 0;
-                    } elsif ( $level_nr == 4 ) {
-                        $header_numbers = $html_header_anchor_numbers[1] . '.' . $html_header_anchor_numbers[2] . '.' . $html_header_anchor_numbers[3] . '.' . $html_header_anchor_numbers[4] . '.' . ++$html_header_anchor_numbers[5];
-                        $html_header_anchor_numbers[6] = 0;
-                    } elsif ( $level_nr == 6 ) {
-                        $header_numbers = $html_header_anchor_numbers[1] . '.' . $html_header_anchor_numbers[2] . '.' . $html_header_anchor_numbers[3] . '.' . $html_header_anchor_numbers[4] . '.' . $html_header_anchor_numbers[5] . '.' . ++$html_header_anchor_numbers[6];
-                    }
-                    push( @html_header_anchors, sprintf( "L%d %s %s", $level_nr, $header_numbers, $header ) );
-                    push( @HTML_main,          "        <br /><hr />\n" )   if ( $level_nr == 1 );
-                    push( @HTML_main, sprintf( "        <h%d id=\"A%s\">%s %s</h%d>\n", $level_nr, $header_numbers, $header_numbers, wiki2html($header), $level_nr ) );
+                $level_nr++ while ( $level =~ m/=/g );
+                $level_nr = 6   if ( $level_nr > 6 );
+                if ( $level_nr == 1 ) {
+                    $header_numbers = ++$html_header_anchor_numbers[1];
+                    $html_header_anchor_numbers[2] = 0;
+                    $html_header_anchor_numbers[3] = 0;
+                    $html_header_anchor_numbers[4] = 0;
+                    $html_header_anchor_numbers[5] = 0;
+                    $html_header_anchor_numbers[6] = 0;
+                } elsif ( $level_nr == 2 ) {
+                    $header_numbers = $html_header_anchor_numbers[1] . '.' . ++$html_header_anchor_numbers[2];
+                    $html_header_anchor_numbers[3] = 0;
+                    $html_header_anchor_numbers[4] = 0;
+                    $html_header_anchor_numbers[5] = 0;
+                    $html_header_anchor_numbers[6] = 0;
+                } elsif ( $level_nr == 3 ) {
+                    $header_numbers = $html_header_anchor_numbers[1] . '.' . $html_header_anchor_numbers[2] . '.' . ++$html_header_anchor_numbers[3];
+                    $html_header_anchor_numbers[4] = 0;
+                    $html_header_anchor_numbers[5] = 0;
+                    $html_header_anchor_numbers[6] = 0;
+                } elsif ( $level_nr == 4 ) {
+                    $header_numbers = $html_header_anchor_numbers[1] . '.' . $html_header_anchor_numbers[2] . '.' . $html_header_anchor_numbers[3] . '.' . ++$html_header_anchor_numbers[4];
+                    $html_header_anchor_numbers[5] = 0;
+                    $html_header_anchor_numbers[6] = 0;
+                } elsif ( $level_nr == 4 ) {
+                    $header_numbers = $html_header_anchor_numbers[1] . '.' . $html_header_anchor_numbers[2] . '.' . $html_header_anchor_numbers[3] . '.' . $html_header_anchor_numbers[4] . '.' . ++$html_header_anchor_numbers[5];
+                    $html_header_anchor_numbers[6] = 0;
+                } elsif ( $level_nr == 6 ) {
+                    $header_numbers = $html_header_anchor_numbers[1] . '.' . $html_header_anchor_numbers[2] . '.' . $html_header_anchor_numbers[3] . '.' . $html_header_anchor_numbers[4] . '.' . $html_header_anchor_numbers[5] . '.' . ++$html_header_anchor_numbers[6];
                 }
+                push( @html_header_anchors, sprintf( "L%d %s %s", $level_nr, $header_numbers, $header ) );
+                push( @HTML_main,          "        <hr />\n" )   if ( $level_nr == 1 );
+                push( @HTML_main, sprintf( "        <h%d id=\"A%s\">%s %s</h%d>\n", $level_nr, $header_numbers, $header_numbers, wiki2html($header), $level_nr ) );
+
                 printf STDERR "%s %s %s %s\n", get_time(), $level, $header, $level    if ( $verbose );
             }
         }
@@ -4075,21 +3985,15 @@ sub printHeader {
 sub printText {
     my $text = shift;
 
+    $printText_buffer = '<p>'   unless ( $printText_buffer );
+
     if ( $text ) {
         $text =~ s/^\s*-\s*//;
         if ( $text ) {
-            if ( $print_wiki ) {
-                #
-                # WIKI code
-                #
-                printf "%s", $text;
-            } else {
-                #
-                # HTML
-                #
-                push( @HTML_main, sprintf( "<p>%s</p>\n", wiki2html($text) ) );
-            }
-            #printf STDERR "%s %s\n", get_time(), $text    if ( $verbose );
+            $printText_buffer .= sprintf( "%s\n", wiki2html($text) );
+        } else {
+            push( @HTML_main, $printText_buffer . "</p>\n" );
+            $printText_buffer = '';
         }
     }
 }
@@ -4098,16 +4002,7 @@ sub printText {
 #############################################################################################
 
 sub printFooter {
-
-    if ( $print_wiki ) {
-        #
-        # WIKI code
-        #
-    } else {
-        #
-        # HTML
-        #
-    }
+    ;
 }
 
 
@@ -4127,48 +4022,30 @@ sub printTableInitialization
 sub printTableHeader {
     my $element = undef;
 
+    if ( $printText_buffer ) {
+        push( @HTML_main, $printText_buffer . "</p>\n" );
+        $printText_buffer = '';
+    }
+
     if ( scalar(@table_columns) ) {
-        if ( $print_wiki ) {
-            #
-            # WIKI code
-            #
-            print  "{|class=\"wikitable unsortable\"\n";
-            print  "|-class=\"sorttop\"\n";
-            if ( $no_of_columns == 0 ) {
-                print  "!scope=\"col\" class=\"unsortable\"                 | Linienverlauf (name=)\n";
-                print  "!scope=\"col\" class=\"unsortable\"                 | Typ (type=)\n";
-                print  "!scope=\"col\" width=\"400\" class=\"unsortable\"   | Relation (id=)\n"; 
-                printf "!scope=\"col\" class=\"unsortable\"                 | PTv\n";
-                print  "!scope=\"col\" class=\"unsortable\"                 | Fehler\n";
-                print  "!scope=\"col\" class=\"unsortable\"                 | Anmerkungen\n";
-            } else {
-                foreach $element ( @table_columns ) {
-                    printf "!scope=\"col\" class=\"unsortable\"             | %s\n", $element;
-                }
-            }
+        push( @HTML_main, sprintf( "%8s<table class=\"oepnvtable\">\n", ' ' ) );
+        push( @HTML_main, sprintf( "%12s<thead>\n", ' ' ) );
+        push( @HTML_main, sprintf( "%16s<tr class=\"tableheaderrow\">", ' ' ) );
+        if ( $no_of_columns == 0 ) {
+            push( @HTML_main, "<th class=\"name\">Linienverlauf (name=)</th>" );
+            push( @HTML_main, "<th class=\"type\">Typ (type=)</th>" );
+            push( @HTML_main, "<th class=\"relation\">Relation (id=)</th>" ); 
+            push( @HTML_main, "<th class=\"PTv\">PTv</th>" );
+            push( @HTML_main, "<th class=\"issues\">Fehler</th>" );
+            push( @HTML_main, "<th class=\"notes\">Anmerkungen</th>" );
         } else {
-            #
-            # HTML
-            #
-            push( @HTML_main, sprintf( "%8s<table class=\"oepnvtable\">\n", ' ' ) );
-            push( @HTML_main, sprintf( "%12s<thead>\n", ' ' ) );
-            push( @HTML_main, sprintf( "%16s<tr class=\"tableheaderrow\">", ' ' ) );
-            if ( $no_of_columns == 0 ) {
-                push( @HTML_main, "<th class=\"name\">Linienverlauf (name=)</th>" );
-                push( @HTML_main, "<th class=\"type\">Typ (type=)</th>" );
-                push( @HTML_main, "<th class=\"relation\">Relation (id=)</th>" ); 
-                push( @HTML_main, "<th class=\"PTv\">PTv</th>" );
-                push( @HTML_main, "<th class=\"issues\">Fehler</th>" );
-                push( @HTML_main, "<th class=\"notes\">Anmerkungen</th>" );
-            } else {
-                foreach $element ( @columns ) {
-                    push( @HTML_main, sprintf( "<th class=\"%s\">%s</th>", $element, ($column_name{$element} ? $column_name{$element} : $element ) ) );
-                }
+            foreach $element ( @columns ) {
+                push( @HTML_main, sprintf( "<th class=\"%s\">%s</th>", $element, ($column_name{$element} ? $column_name{$element} : $element ) ) );
             }
-            push( @HTML_main, "</tr>\n" );
-            push( @HTML_main, sprintf( "%12s</thead>\n", ' ' ) );
-            push( @HTML_main, sprintf( "%12s<tbody>\n", ' ' ) );
         }
+        push( @HTML_main, "</tr>\n" );
+        push( @HTML_main, sprintf( "%12s</thead>\n", ' ' ) );
+        push( @HTML_main, sprintf( "%12s<tbody>\n", ' ' ) );
     }
 }
 
@@ -4201,18 +4078,7 @@ sub printTableSubHeader {
     $info =~ s/\"/_/g;
 
     if ( $no_of_columns > 1 && $ref && $ref_text ) {
-        if ( $print_wiki ) {
-            #
-            # WIKI code
-            #
-            print  "|- bgcolor=\"#dfdfdf\"\n";
-            printf "|| %s || colspan=\"%d\" align=\"right\"| %s\n", $ref_text, $no_of_columns-1, $csv_text;
-        } else {
-            #
-            # HTML
-            #
-            push( @HTML_main, sprintf( "%16s<tr data-info=\"%s\" data-ref=\"%s\" class=\"sketchline\"><td class=\"sketch\">%s</td><td class=\"csvinfo\" colspan=\"%d\">%s</td></tr>\n", ' ', $info, $ref, $ref_text, $no_of_columns-1, html_escape($csv_text) ) );
-        }
+        push( @HTML_main, sprintf( "%16s<tr data-info=\"%s\" data-ref=\"%s\" class=\"sketchline\"><td class=\"sketch\">%s</td><td class=\"csvinfo\" colspan=\"%d\">%s</td></tr>\n", ' ', $info, $ref, $ref_text, $no_of_columns-1, html_escape($csv_text) ) );
     }
 }
 
@@ -4222,58 +4088,33 @@ sub printTableSubHeader {
 sub printTableLine {
     my %hash    = ( @_ );
     my $val     = undef;
-    my $i = 0;
+    my $i       = 0;
+    my $ref     = $hash{'ref'} || '???';
+    my $info    = $hash{'relation'} ? $hash{'relation'} : ( $hash{'network'} ? $hash{'network'} : $ref);
 
-    if ( $print_wiki ) {
-        #
-        # WIKI code
-        #
-        print  "|-\n|";
-        for ( $i = 0; $i < $no_of_columns; $i++ ) {
-            $val =  $hash{$columns[$i]} || '';
+    $info =~ s/\"/_/g;
+    push( @HTML_main, sprintf( "%16s<tr data-info=\"%s\" data-ref=\"%s\" class=\"line\">", ' ', $info, $ref ) );
+    for ( $i = 0; $i < $no_of_columns; $i++ ) {
+        $val =  $hash{$columns[$i]} || '';
+        if ( $columns[$i] eq "relation" ) {
+            push( @HTML_main, sprintf( "<td class=\"relation\">%s</td>", printRelationTemplate($val) ) );
+        } elsif ( $columns[$i] eq "relations"  ){
+            my $and_more = '';
+            if ( $val =~ m/ and more .../ ) {
+                $and_more = ' and more ...';
+                $val =~ s/ and more ...//;
+            }
+            push( @HTML_main, sprintf( "<td class=\"relations\">%s%s</td>", join( ', ', map { printRelationTemplate($_,'ref'); } split( ',', $val ) ), $and_more ) );
+        } elsif ( $columns[$i] eq "issues"  ){
             $val =~ s/__separator__/<br>/g;
-            if ( $columns[$i] eq "relation" ) {
-                $val = printRelationTemplate( $val );
-            } elsif ( $columns[$i] eq "ref" ) {
-                $val =~ s/\s+/\&nbsp;/g;
-            } elsif ( $columns[$i] eq "PTv" ) {
-                $val = ' align="center" | ' . $val;
-            } elsif ( $columns[$i] eq "number" ) {
-                $val = ' align="right" | ' . $val;
-            }
-            printf " %s %s", $val, ( $i < $no_of_columns-1 ? '||' : "\n" );
+            push( @HTML_main, sprintf( "<td class=\"%s\">%s</td>", $columns[$i], $val ) );
+        } else {
+            $val = html_escape($val);
+            $val =~ s/__separator__/<br>/g;
+            push( @HTML_main, sprintf( "<td class=\"%s\">%s</td>", $columns[$i], $val ) );
         }
     }
-    else {
-        #
-        # HTML
-        #
-        my $ref  = $hash{'ref'} || '???';
-        my $info = $hash{'relation'} ? $hash{'relation'} : ( $hash{'network'} ? $hash{'network'} : $ref);
-        $info =~ s/\"/_/g;
-        push( @HTML_main, sprintf( "%16s<tr data-info=\"%s\" data-ref=\"%s\" class=\"line\">", ' ', $info, $ref ) );
-        for ( $i = 0; $i < $no_of_columns; $i++ ) {
-            $val =  $hash{$columns[$i]} || '';
-            if ( $columns[$i] eq "relation" ) {
-                push( @HTML_main, sprintf( "<td class=\"relation\">%s</td>", printRelationTemplate($val) ) );
-            } elsif ( $columns[$i] eq "relations"  ){
-                my $and_more = '';
-                if ( $val =~ m/ and more .../ ) {
-                    $and_more = ' and more ...';
-                    $val =~ s/ and more ...//;
-                }
-                push( @HTML_main, sprintf( "<td class=\"relations\">%s%s</td>", join( ', ', map { printRelationTemplate($_,'ref'); } split( ',', $val ) ), $and_more ) );
-            } elsif ( $columns[$i] eq "issues"  ){
-                $val =~ s/__separator__/<br>/g;
-                push( @HTML_main, sprintf( "<td class=\"%s\">%s</td>", $columns[$i], $val ) );
-            } else {
-                $val = html_escape($val);
-                $val =~ s/__separator__/<br>/g;
-                push( @HTML_main, sprintf( "<td class=\"%s\">%s</td>", $columns[$i], $val ) );
-            }
-        }
-        push( @HTML_main, "</tr>\n" );
-    }
+    push( @HTML_main, "</tr>\n" );
 }
 
 
@@ -4281,19 +4122,8 @@ sub printTableLine {
 
 sub printTableFooter {
 
-    if ( $print_wiki ) {
-        #
-        # WIKI code
-        #
-        print "|}\n\n";
-        printf STDERR "%s Templates printed: %d\n", get_time(), $number_of_printed_templates    if ( $verbose );
-    } else {
-        #
-        # HTML
-        #
-        push( @HTML_main, sprintf( "%12s</tbody>\n",  ' ' ) );
-        push( @HTML_main, sprintf( "%8s</table>\n\n", ' ' ) );
-    }
+    push( @HTML_main, sprintf( "%12s</tbody>\n",  ' ' ) );
+    push( @HTML_main, sprintf( "%8s</table>\n\n", ' ' ) );
 }
 
 
@@ -4304,58 +4134,26 @@ sub printRelationTemplate {
     my $tags = shift;
     
     if ( $val ) {
-        if ( $print_wiki ) {
-            #
-            # WIKI code
-            #
-            if ( $val > 0 ) {
-                if ( $number_of_printed_templates < $max_templates ) {
-                    $val = sprintf("{{Relation|%s}}", $val );
-                    $number_of_printed_templates++;
-                } else {
-                    # some manual expansion of the template
-                    
-                    my $image_url       = sprintf( "[[Image:Osm_element_relation.svg|20px]]" );
-                    my $relation_url    = sprintf( "[http://osm.org/relation/%s %s]", $val, $val );
-                    my $xml_url         = sprintf( "[http://api.osm.org/api/0.6/relation/%s XML]", $val );
-                    my $id_url          = sprintf( "[http://osm.org/edit?editor=id&relation=%s iD]", $val );
-                    my $josm_url        = sprintf( "[http://localhost:8111/import?url=https://api.openstreetmap.org/api/0.6/relation/%s/full JOSM]", $val );
-                    my $potlatch2_url   = sprintf( "[http://osm.org/edit?editor=potlatch2&zoom=11&amp;relation=%s Potlatch2]", $val );
-                    my $history_url     = sprintf( "[http://osm.virtuelle-loipe.de/history/?type=relation&ref=%s history]", $val );
-                    my $analyze_url     = sprintf( "[http://ra.osmsurround.org/analyze.jsp?relationId=%s analyze]", $val );
-                    my $manage_url      = sprintf( "[http://osmrm.openstreetmap.de/relation.jsp?id=%s manage]", $val );
-                    my $gpx_url         = sprintf( "[http://ra.osmsurround.org/exportRelation/gpx?relationId=%s gpx]", $val );
+        my $info_string = '';
+        if ( $tags ) {
+            foreach my $tag ( split( ';', $tags ) ) {
+                if ( $RELATIONS{$val} && $RELATIONS{$val}->{'tag'} && $RELATIONS{$val}->{'tag'}->{$tag} ) {
+                    $info_string .= sprintf( "'%s' ", $RELATIONS{$val}->{'tag'}->{$tag} );
+                    last;
+                }
+            }
+        }
         
-                    $val = sprintf( "%s %s <small>(%s, %s, %s, %s, %s, %s, %s, %s)</small>", $image_url, $relation_url, $xml_url, $id_url, $josm_url, $potlatch2_url, $history_url, $analyze_url, $manage_url, $gpx_url );    
-                }
-            } else {
-                $val = sprintf( "[[Image:Osm_element_relation.svg|20px]] %s", $val );
-            }
-        } else {
-            #
-            # HTML
-            #
-            my $info_string = '';
-            if ( $tags ) {
-                foreach my $tag ( split( ';', $tags ) ) {
-                    if ( $RELATIONS{$val} && $RELATIONS{$val}->{'tag'} && $RELATIONS{$val}->{'tag'}->{$tag} ) {
-                        $info_string .= sprintf( "'%s' ", $RELATIONS{$val}->{'tag'}->{$tag} );
-                        last;
-                    }
-                }
-            }
-            
-            my $image_url = "<img src=\"https://wiki.openstreetmap.org/w/images/d/d9/Mf_Relation.svg\" alt=\"Relation\" />";
+        my $image_url = "<img src=\"img/Relation.svg\" alt=\"Relation\" />";
 
-            if ( $val > 0 ) {
-                my $relation_url = sprintf( "<a href=\"https://osm.org/relation/%s\" title=\"Browse on map\">%s</a>", $val, $val );
-                my $id_url       = sprintf( "<a href=\"https://osm.org/edit?editor=id&amp;relation=%s\" title=\"Edit in iD\">iD</a>", $val );
-                my $josm_url     = sprintf( "<a href=\"https://localhost:8112/import?url=https://api.openstreetmap.org/api/0.6/relation/%s/full\" title=\"Edit in JOSM\">JOSM</a>", $val );
-    
-                $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $relation_url, $id_url, $josm_url );    
-            } else {
-                $val = sprintf( "%s %s%s", $image_url, $info_string, $val );
-            }
+        if ( $val > 0 ) {
+            my $relation_url = sprintf( "<a href=\"https://osm.org/relation/%s\" title=\"Browse on map\">%s</a>", $val, $val );
+            my $id_url       = sprintf( "<a href=\"https://osm.org/edit?editor=id&amp;relation=%s\" title=\"Edit in iD\">iD</a>", $val );
+            my $josm_url     = sprintf( "<a href=\"https://localhost:8112/import?url=https://api.openstreetmap.org/api/0.6/relation/%s/full\" title=\"Edit in JOSM\">JOSM</a>", $val );
+
+            $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $relation_url, $id_url, $josm_url );    
+        } else {
+            $val = sprintf( "%s %s%s", $image_url, $info_string, $val );
         }
     } else {
         $val = '';
@@ -4372,54 +4170,26 @@ sub printWayTemplate {
     my $tags = shift;
     
     if ( $val ) {
-        if ( $print_wiki ) {
-            #
-            # WIKI code
-            #
-            if ( $val > 0 ) {
-                if ( 0 ) { # $number_of_printed_templates < $max_templates ) {
-                    $val = sprintf("{{Way|%s}}", $val );
-                    $number_of_printed_templates++;
-                } else {
-                    # some manual expansion of the template
-                    
-                    my $image_url       = sprintf( "[[Image:Osm_element_way.svg|20px]]" );
-                    my $way_url         = sprintf( "[http://osm.org/way/%s %s]", $val, $val );
-                    my $xml_url         = sprintf( "[http://api.osm.org/api/0.6/way/%s XML]", $val );
-                    my $id_url          = sprintf( "[http://osm.org/edit?editor=id&way=%s iD]", $val );
-                    my $josm_url        = sprintf( "[http://localhost:8111/import?url=https://api.openstreetmap.org/api/0.6/way/%s/full JOSM]", $val );
-                    my $potlatch2_url   = sprintf( "[http://osm.org/edit?editor=potlatch2&zoom=11&amp;way=%s Potlatch2]", $val );
-        
-                    $val = sprintf( "%s %s <small>(%s, %s, %s, %s)</small>", $image_url, $way_url, $xml_url, $id_url, $josm_url, $potlatch2_url );    
+        my $info_string = '';
+        if ( $tags ) {
+            foreach my $tag ( split( ';', $tags ) ) {
+                if ( $WAYS{$val} && $WAYS{$val}->{'tag'} && $WAYS{$val}->{'tag'}->{$tag} ) {
+                    $info_string .= sprintf( "'%s' ", $WAYS{$val}->{'tag'}->{$tag} );
+                    last;
                 }
-            } else {
-                $val = sprintf( "[[Image:Osm_element_way.svg|20px]] %s", $val );
             }
+        }
+
+        my $image_url = "<img src=\"img/Way.svg\" alt=\"Way\" />";
+
+        if ( $val > 0 ) {
+            my $way_url   = sprintf( "<a href=\"https://osm.org/way/%s\" title=\"Browse on map\">%s</a>", $val, $val );
+            my $id_url    = sprintf( "<a href=\"https://osm.org/edit?editor=id&amp;way=%s\" title=\"Edit in iD\">iD</a>", $val );
+            my $josm_url  = sprintf( "<a href=\"https://localhost:8112/import?url=https://api.openstreetmap.org/api/0.6/way/%s/full\" title=\"Edit in JOSM\">JOSM</a>", $val );
+
+            $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $way_url, $id_url, $josm_url );    
         } else {
-            #
-            # HTML
-            #
-            my $info_string = '';
-            if ( $tags ) {
-                foreach my $tag ( split( ';', $tags ) ) {
-                    if ( $WAYS{$val} && $WAYS{$val}->{'tag'} && $WAYS{$val}->{'tag'}->{$tag} ) {
-                        $info_string .= sprintf( "'%s' ", $WAYS{$val}->{'tag'}->{$tag} );
-                        last;
-                    }
-                }
-            }
-
-            my $image_url = "<img src=\"https://wiki.openstreetmap.org/w/images/2/2a/Mf_way.svg\" alt=\"Way\" />";
-
-            if ( $val > 0 ) {
-                my $way_url   = sprintf( "<a href=\"https://osm.org/way/%s\" title=\"Browse on map\">%s</a>", $val, $val );
-                my $id_url    = sprintf( "<a href=\"https://osm.org/edit?editor=id&amp;way=%s\" title=\"Edit in iD\">iD</a>", $val );
-                my $josm_url  = sprintf( "<a href=\"https://localhost:8112/import?url=https://api.openstreetmap.org/api/0.6/way/%s/full\" title=\"Edit in JOSM\">JOSM</a>", $val );
-    
-                $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $way_url, $id_url, $josm_url );    
-            } else {
-                $val = sprintf( "%s %s%s", $image_url, $info_string, $val );
-            }
+            $val = sprintf( "%s %s%s", $image_url, $info_string, $val );
         }
     } else {
         $val = '';
@@ -4436,54 +4206,26 @@ sub printNodeTemplate {
     my $tags = shift;
     
     if ( $val ) {
-        if ( $print_wiki ) {
-            #
-            # WIKI code
-            #
-            if ( $val > 0 ) {
-                if ( 0 ) { # $number_of_printed_templates < $max_templates ) {
-                    $val = sprintf("{{Node|%s}}", $val );
-                    $number_of_printed_templates++;
-                } else {
-                    # some manual expansion of the template
-                    
-                    my $image_url       = sprintf( "[[Image:Osm_element_node.svg|20px]]" );
-                    my $node_url        = sprintf( "[http://osm.org/node/%s %s]", $val, $val );
-                    my $xml_url         = sprintf( "[http://api.osm.org/api/0.6/node/%s XML]", $val );
-                    my $id_url          = sprintf( "[http://osm.org/edit?editor=id&node=%s iD]", $val );
-                    my $josm_url        = sprintf( "[http://localhost:8111/import?url=https://api.openstreetmap.org/api/0.6/node/%s JOSM]", $val );
-                    my $potlatch2_url   = sprintf( "[http://osm.org/edit?editor=potlatch2&zoom=11&amp;node=%s Potlatch2]", $val );
-        
-                    $val = sprintf( "%s %s <small>(%s, %s, %s, %s)</small>", $image_url, $node_url, $xml_url, $id_url, $josm_url, $potlatch2_url );    
-                }
-            } else {
-                $val = sprintf( "[[Image:Osm_element_node.svg|20px]] %s", $val );
-            }
-        } else {
-            #
-            # HTML
-            #
-            my $info_string     = '';
-            if ( $tags ) {
-                foreach my $tag ( split( ';', $tags ) ) {
-                    if ( $NODES{$val} && $NODES{$val}->{'tag'} && $NODES{$val}->{'tag'}->{$tag} ) {
-                        $info_string = sprintf( "'%s' ", $NODES{$val}->{'tag'}->{$tag} );
-                        last;
-                    }
+        my $info_string     = '';
+        if ( $tags ) {
+            foreach my $tag ( split( ';', $tags ) ) {
+                if ( $NODES{$val} && $NODES{$val}->{'tag'} && $NODES{$val}->{'tag'}->{$tag} ) {
+                    $info_string = sprintf( "'%s' ", $NODES{$val}->{'tag'}->{$tag} );
+                    last;
                 }
             }
+        }
 
-            my $image_url = "<img src=\"https://wiki.openstreetmap.org/w/images/2/20/Mf_node.svg\" alt=\"Node\" />";
-            
-            if ( $val > 0 ) {
-                my $node_url = sprintf( "<a href=\"https://osm.org/node/%s\" title=\"Brose on map\">%s</a>", $val, $val );
-                my $id_url   = sprintf( "<a href=\"https://osm.org/edit?editor=id&amp;node=%s\" title=\"Edit in iD\">iD</a>", $val );
-                my $josm_url = sprintf( "<a href=\"https://localhost:8112/import?url=https://api.openstreetmap.org/api/0.6/node/%s\" title=\"Edit in JOSM\">JOSM</a>", $val );
-    
-                $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $node_url, $id_url, $josm_url );    
-            } else {
-                $val = sprintf( "%s %s%s", $image_url, $info_string, $val );
-            }
+        my $image_url = "<img src=\"img/Node.svg\" alt=\"Node\" />";
+        
+        if ( $val > 0 ) {
+            my $node_url = sprintf( "<a href=\"https://osm.org/node/%s\" title=\"Brose on map\">%s</a>", $val, $val );
+            my $id_url   = sprintf( "<a href=\"https://osm.org/edit?editor=id&amp;node=%s\" title=\"Edit in iD\">iD</a>", $val );
+            my $josm_url = sprintf( "<a href=\"https://localhost:8112/import?url=https://api.openstreetmap.org/api/0.6/node/%s\" title=\"Edit in JOSM\">JOSM</a>", $val );
+
+            $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $node_url, $id_url, $josm_url );    
+        } else {
+            $val = sprintf( "%s %s%s", $image_url, $info_string, $val );
         }
     } else {
         $val = '';
@@ -4505,50 +4247,21 @@ sub printSketchLineTemplate {
     my $colour_string = '';
     my $pt_string     = '';
     my $textdeco      = '';
+    my $span_begin    = '';
+    my $span_end      = '';
     my $bg_colour     = GetColourFromString( $colour );
     my $fg_colour     = GetForeGroundFromBackGround( $bg_colour );
     
-    if ( $print_wiki ) {
-        #
-        # WIKI code
-        #
-        if ( $number_of_printed_templates < $max_templates ) {
-            #printf STDERR "printSketchLineTemplate: ref=%s, network=%s, pt_type=%s, colour=%s\n", $ref, $network, $pt_type, $colour;
-            if ( $bg_colour && $fg_colour && $coloured_sketchline ) {
-                $colour_string = '|bg=' . $bg_colour . '|fg='. $fg_colour;
-                $pt_string     = '|r=1'                                 if ( $pt_type eq 'train' || $pt_type eq 'light_rail'     );
-                #printf STDERR "printSketchLineTemplate: ref=%s, network=%s, pt_string=%s, colour_string=%s\n", $ref, $network, $pt_string, $colour_string;
-            }
-            $text = sprintf( "'''{{Sketch Line|%s|%s|wuppertal%s%s}}'''", $ref, $network, $colour_string, $pt_string );
-            $number_of_printed_templates++;
-        } else {
-            #printf STDERR "printSketchLineTemplate: ref=%s, network=%s, pt_type=%s, colour=%s\n", $ref, $network, $pt_type, $colour;
-            if ( $bg_colour && $fg_colour && $coloured_sketchline ) {
-                $colour_string = '&bg=' . $bg_colour . '&fg='. $fg_colour;
-                $pt_string     = '&r=1'                                 if ( $pt_type eq 'train' || $pt_type eq 'light_rail'     );
-                #printf STDERR "printSketchLineTemplate: ref=%s, network=%s, pt_string=%s, colour_string=%s\n", $ref, $network, $pt_string, $colour_string;
-            }
-            $ref_escaped    =~ s/ /+/g;
-            $network        =~ s/ /+/g;
-            $text           = sprintf( "'''[https://overpass-api.de/api/sketch-line?ref=%s&network=%s&style=wuppertal%s%s %s]'''", $ref_escaped, $network, $colour_string, $pt_string, $ref ); # some manual expansion of the template
-        }
-    } else {
-        my $span_begin    = '';
-        my $span_end      = '';
-        #
-        # HTML
-        #
-        if ( $bg_colour && $fg_colour && $coloured_sketchline ) {
-            $colour_string = "\&amp;bg=" . $bg_colour . "\&amp;fg=". $fg_colour;
-            $pt_string     = "\&amp;r=1"                                        if ( $pt_type eq 'train' || $pt_type eq 'light_rail'     );
-            $textdeco      = ' style="text-decoration:none;"';
-            $span_begin    = sprintf( "<span style=\"color:%s;background-color:%s;\">&nbsp;", $fg_colour, $bg_colour );
-            $span_end      = "&nbsp;</span>";
-        }
-        $ref_escaped    =~ s/ /+/g;
-        $network        =~ s/ /+/g;
-        $text           = sprintf( "<a href=\"https://overpass-api.de/api/sketch-line?ref=%s\&amp;network=%s\&amp;style=wuppertal%s%s\" title=\"Sketch-Line\"%s>%s%s%s</a>", $ref_escaped, uri_escape($network), uri_escape($colour_string), $pt_string, $textdeco, $span_begin, $ref, $span_end ); # some manual expansion of the template
+    if ( $bg_colour && $fg_colour && $coloured_sketchline ) {
+        $colour_string = "\&amp;bg=" . $bg_colour . "\&amp;fg=". $fg_colour;
+        $pt_string     = "\&amp;r=1"                                        if ( $pt_type eq 'train' || $pt_type eq 'light_rail'     );
+        $textdeco      = ' style="text-decoration:none;"';
+        $span_begin    = sprintf( "<span style=\"color:%s;background-color:%s;\">&nbsp;", $fg_colour, $bg_colour );
+        $span_end      = "&nbsp;</span>";
     }
+    $ref_escaped    =~ s/ /+/g;
+    $network        =~ s/ /+/g;
+    $text           = sprintf( "<a href=\"https://overpass-api.de/api/sketch-line?ref=%s\&amp;network=%s\&amp;style=wuppertal%s%s\" title=\"Sketch-Line\"%s>%s%s%s</a>", $ref_escaped, uri_escape($network), uri_escape($colour_string), $pt_string, $textdeco, $span_begin, $ref, $span_end ); # some manual expansion of the template
     
     return $text;
 }
