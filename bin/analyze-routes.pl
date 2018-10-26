@@ -65,7 +65,6 @@ my $man_page                        = undef;
 my $positive_notes                  = undef;
 my $csv_separator                   = ';';
 my $coloured_sketchline             = undef;
-my $print_wiki                      = undef;
 my $page_title                      = undef;
 
 
@@ -106,7 +105,6 @@ GetOptions( 'help'                          =>  \$help,                         
             'strict-network'                =>  \$strict_network,               # --strict-network                  do not consider empty network tags
             'strict-operator'               =>  \$strict_operator,              # --strict-operator                 do not consider empty operator tags
             'title=s'                       =>  \$page_title,                   # --title=...                       Title for the HTML page
-            'wiki'                          =>  \$print_wiki,                   # --wiki                            prepare outut for WIKI instead of HTML
           );
 
 $page_title                 = decode('utf8', $page_title )                  if ( $page_title                );
@@ -123,7 +121,6 @@ if ( $verbose ) {
     printf STDERR "%s analyze-routes.pl -v\n", get_time();
     printf STDERR "%20s--title='%s'\n",                    ' ', $page_title                    if ( $page_title                  );
     printf STDERR "%20s--network-guid='%s'\n",             ' ', $network_guid                  if ( $network_guid                );
-    printf STDERR "%20s--wiki\n",                          ' '                                 if ( $print_wiki                  );
     printf STDERR "%20s--allow-coach\n",                   ' '                                 if ( $allow_coach                 );
     printf STDERR "%20s--check-access\n",                  ' '                                 if ( $check_access                );
     printf STDERR "%20s--check-bus-stop\n",                ' '                                 if ( $check_bus_stop              );
@@ -3595,7 +3592,7 @@ sub noAccess {
 
 #############################################################################################
 #
-# functions for printing wiki page code
+# functions for printing HTML code
 #
 #############################################################################################
 
