@@ -6,7 +6,6 @@
 
 if [ -z "$PTNA_TARGET_LOC"     -o \
      -z "$PTNA_RESULTS_LOC"    -o \
-     -z "$PTNA_WEB_HOST"       -o \
      -z "$PTNA_NETWORKS_LOC"   -o \
      -z "$PTNA_RESULTS_HTML"   -o \
      -z "$PTNA_WORK_LOC"            ]
@@ -14,7 +13,6 @@ then
     echo " ...unset global variable(s)"
     [ -z "$PTNA_TARGET_LOC"       ] && echo "Please specify: PTNA_TARGET_LOC as environment variable outside the tools"
     [ -z "$PTNA_RESULTS_LOC"      ] && echo "Please specify: PTNA_RESULTS_LOC as environment variable outside the tools"
-    [ -z "$PTNA_WEB_HOST"         ] && echo "Please specify: PTNA_WEB_HOST as environment variable outside the tools"
     [ -z "$PTNA_RESULTS_HTML"     ] && echo "Please specify: PTNA_RESULTS_HTML as environment variable outside the tools"
     [ -z "$PTNA_NETWORKS_LOC"     ] && echo "Please specify: PTNA_NETWORKS_LOC as environment variable outside the tools"
     [ -z "$PTNA_WORK_LOC"         ] && echo "Please specify: PTNA_WORK_LOC as environment variable outside the tools"

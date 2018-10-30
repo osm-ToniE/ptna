@@ -12,9 +12,9 @@ export PTNA_BIN="$HOME/ptna/bin"
 
 export PTNA_TARGET_LOC="/srv/www/htdocs"
 
-# this is the base URL to reach the web server
+# this is the location below $PTNA_TARGETLOC, where the results will bes stored (in sub directories)
 
-export PTNA_WEB_HOST="https://example.com"
+export $PTNA_RESULTS_LOC="results"
 
 # this is the location on the web server for the PTNA pages
 
