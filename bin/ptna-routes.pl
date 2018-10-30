@@ -3650,11 +3650,12 @@ sub printInitialHeader {
     } else {
         printBigHeader( "Hinweis" );
     }
-    push( @HTML_main, "<p>Die Analyse läuft auf einem Raspberry Pi 2 Model B in der Regel nachts zwischen 01:00 und 04:00 Uhr lokaler Zeit München.<br>\n" );
+    push( @HTML_main, "<p>\n" );
     push( @HTML_main, "Die Daten werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändert hat.\n" );
     push( @HTML_main, "</p>\n" );
-    push( @HTML_main, "<p>Eine Erläuterung der Fehlertexte ist auf der Seite von <a href='https://wiki.openstreetmap.org/wiki/User:ToniE/analyze-routes#Momentane_Pr.C3.BCfungen'>analyze-routes</a> zu finden.</p>\n" );
-    push( @HTML_main, "\n" );
+    push( @HTML_main, "<p>\n" );
+    push( @HTML_main, "Eine Erläuterung der Fehlertexte ist in der Dokumentaion unter <a href='/documentation.html#checks'>Prüfungen</a> zu finden.\n" );
+    push( @HTML_main, "</p>\n" );
 
 }
 
@@ -3735,10 +3736,12 @@ sub printBigHeader {
 #############################################################################################
 
 sub printHintUnselectedRelations {
-    push( @HTML_main, "<p>Dieser Abschnitt listet die Linien auf, die nicht eindeutig zugeordnet werden konnten. " );
+    push( @HTML_main, "<p>\n" );
+    push( @HTML_main, "Dieser Abschnitt listet die Linien auf, die nicht eindeutig zugeordnet werden konnten. " );
     push( @HTML_main, "Die Liniennummern 'ref' sind in der CSV-Datei mehrfach angegeben worden. " );
     push( @HTML_main, "Das bedeutet, dass die selbe Liniennummer im Verkehrsverbund mehrfach in verscheidenen Gemeinden/Städten vorhanden ist. " );
-    push( @HTML_main, "Um die Linien eindeutig zuordnen zu können sollte folgendes angegeben werden:</p>" );
+    push( @HTML_main, "Um die Linien eindeutig zuordnen zu können sollte folgendes angegeben werden:\n" );
+    push( @HTML_main, "</p>" );
     push( @HTML_main, "<ul>\n" );
     push( @HTML_main, "    <li>Relation:\n" );
     push( @HTML_main, "        <ul>\n" );
@@ -3759,7 +3762,9 @@ sub printHintUnselectedRelations {
     push( @HTML_main, "        </ul>\n" );
     push( @HTML_main, "    </li>\n" );
     push( @HTML_main, "</ul>\n" );
-    push( @HTML_main, "<p>Beispiele aus dem VMS für einen Eintrag in der CSV-Datei der Form: 'ref;type;Kommentar;Von;Nach;Betreiber'</p>\n" );
+    push( @HTML_main, "<p>\n" );
+    push( @HTML_main, "Beispiele aus dem VMS für einen Eintrag in der CSV-Datei der Form: 'ref;type;Kommentar;Von;Nach;Betreiber':\n" );
+    push( @HTML_main, "</p>\n" );
     push( @HTML_main, "<table>\n" );
     push( @HTML_main, "    <thead class=\"tableheaderrow\">\n" );
     push( @HTML_main, "        <tr><th>&nbsp;</th><th>ref</th><th>type</th><th>Kommentar</th><th>Von</th><th>Nach</th><th>Betreiber</th></tr>\n" );
@@ -3770,8 +3775,10 @@ sub printHintUnselectedRelations {
     push( @HTML_main, "        <tr><td><strong>3.)</strong> </td><td>A</td><td>bus</td><td>Bus A fährt in Burgstädt</td><td>Sportzentrum</td><td>Heiersdorf</td><td>RBM</td></tr>\n" );
     push( @HTML_main, "    </tbody>\n" );
     push( @HTML_main, "</table>\n" );
-    push( @HTML_main, "<p>1.) und 2.) sind nur mit Hilfe von 'Von'/'from' und 'Nach'/'to' unterscheidbar, da 'Betreiber'/'operator' identisch (='RVE') sind.<br>\n" );
-    push( @HTML_main, "   1.) und 3.) sowie 2.) und 3.) sind an Hand von 'Betreiber'/'operator' unterscheidbar, da diese unterschiedlich sind (='RVE' bzw. ='RBM').</p>\n" );
+    push( @HTML_main, "<p>\n" );
+    push( @HTML_main, "   1.) und 2.) sind nur mit Hilfe von 'Von'/'from' und 'Nach'/'to' unterscheidbar, da 'Betreiber'/'operator' identisch (='RVE') sind.<br>\n" );
+    push( @HTML_main, "   1.) und 3.) sowie 2.) und 3.) sind an Hand von 'Betreiber'/'operator' unterscheidbar, da diese unterschiedlich sind (='RVE' bzw. ='RBM').\n" );
+    push( @HTML_main, "</p>\n" );
 
 }
 
@@ -3783,7 +3790,9 @@ sub printHintSuspiciousRelations {
     my $hswknt  = scalar( keys ( %have_seen_well_known_network_types ) );
     my $hswkot  = scalar( keys ( %have_seen_well_known_other_types ) );
 
-    push( @HTML_main, "<p>Dieser Abschnitt enthält weitere Relationen aus dem Umfeld der Linien:</p>\n" );
+    push( @HTML_main, "<p>\n" );
+    push( @HTML_main, "Dieser Abschnitt enthält weitere Relationen aus dem Umfeld der Linien:\n" );
+    push( @HTML_main, "</p>\n" );
     push( @HTML_main, "<ul>\n" );
     push( @HTML_main, "    <li>evtl. falsche 'route' oder 'route_master' Werte?\n" );
     push( @HTML_main, "        <ul>\n" );
@@ -3797,8 +3806,10 @@ sub printHintSuspiciousRelations {
     push( @HTML_main, "    </li>\n" );
     push( @HTML_main, "</ul>\n" );
     if ( $hswkort || $hswknt || $hswkot ) {
-        push( @HTML_main, "<p>Die folgenden Werte bzw. Kombinationen wurden in den Inputdaten gefunden, werden hier aber nicht angezeigt.ßn" );
-        push( @HTML_main, "Sie gelten als \"wohl definierte\" Werte und nicht als Fehler.</p>\n" );
+        push( @HTML_main, "<p>\n" );
+        push( @HTML_main, "Die folgenden Werte bzw. Kombinationen wurden in den Inputdaten gefunden, werden hier aber nicht angezeigt.\n" );
+        push( @HTML_main, "Sie gelten als \"wohl definierte\" Werte und nicht als Fehler.\n" );
+        push( @HTML_main, "</p>\n" );
         push( @HTML_main, "<ul>\n" );
         if ( $hswkort ) {
             push( @HTML_main, "    <li>'type' = 'route_master' bzw. 'type' = 'route''\n" );
@@ -3834,7 +3845,9 @@ sub printHintSuspiciousRelations {
 
 sub printHintNetworks {
 
-    push( @HTML_main, "<p>Das 'network' Tag wird nach den folgenden Werten durchsucht:</p>\n" );
+    push( @HTML_main, "<p>\n" );
+    push( @HTML_main, "Das 'network' Tag wird nach den folgenden Werten durchsucht:\n" );
+    push( @HTML_main, "</p>\n" );
 
     if ( $network_long_regex || $network_short_regex ) {
         push( @HTML_main, "<ul>\n" );
@@ -3864,7 +3877,9 @@ sub printHintUsedNetworks {
     
     printHeader( "== Berücksichtigte 'network' Werte" );
     
-    push( @HTML_main, "<p>Dieser Abschnitt listet die 'network'-Werte auf, die berücksichtigt wurden, d.h. einen der oben genannten Werte enthält.</p>\n" );
+    push( @HTML_main, "<p>\n" );
+    push( @HTML_main, "Dieser Abschnitt listet die 'network'-Werte auf, die berücksichtigt wurden, d.h. einen der oben genannten Werte enthält.\n" );
+    push( @HTML_main, "</p>\n" );
 
     printTableHeader();
     foreach my $network ( sort( keys( %used_networks ) ) ) {
@@ -3894,8 +3909,10 @@ sub printHintUnusedNetworks {
     
     printHeader( "== Nicht berücksichtigte 'network' Werte" );
     
-    push( @HTML_main, "<p>Dieser Abschnitt listet die 'network'-Werte auf, die nicht berücksichtigt wurden.\n" );
-    push( @HTML_main, "Darunter können auch Tippfehler in ansonsten zu berücksichtigenden Werten sein.</p>\n" );
+    push( @HTML_main, "<p>\n" );
+    push( @HTML_main, "Dieser Abschnitt listet die 'network'-Werte auf, die nicht berücksichtigt wurden.\n" );
+    push( @HTML_main, "Darunter können auch Tippfehler in ansonsten zu berücksichtigenden Werten sein.\n" );
+    push( @HTML_main, "</p>\n" );
 
     printTableHeader();
     foreach my $network ( sort( keys( %unused_networks ) ) ) {
@@ -3924,7 +3941,7 @@ sub printHeader {
     my $text = shift;
 
     if ( $printText_buffer ) {
-        push( @HTML_main, $printText_buffer . "</p>\n" );
+        push( @HTML_main, $printText_buffer . "\n</p>\n" );
         $printText_buffer = '';
     }
 
@@ -3988,14 +4005,14 @@ sub printHeader {
 sub printText {
     my $text = shift;
 
-    $printText_buffer = '<p>'   unless ( $printText_buffer );
+    $printText_buffer = "<p>\n"   unless ( $printText_buffer );
 
     if ( $text ) {
         $text =~ s/^\s*-\s*//;
         if ( $text ) {
             $printText_buffer .= sprintf( "%s \n", wiki2html($text) );
         } else {
-            push( @HTML_main, $printText_buffer . "</p>\n" );
+            push( @HTML_main, $printText_buffer . "\n</p>\n" );
             $printText_buffer = '';
         }
     }
@@ -4026,7 +4043,7 @@ sub printTableHeader {
     my $element = undef;
 
     if ( $printText_buffer ) {
-        push( @HTML_main, $printText_buffer . "</p>\n" );
+        push( @HTML_main, $printText_buffer . "\n</p>\n" );
         $printText_buffer = '';
     }
 
@@ -4147,7 +4164,7 @@ sub printRelationTemplate {
             }
         }
         
-        my $image_url = "<img src=\"img/Relation.svg\" alt=\"Relation\" />";
+        my $image_url = "<img src=\"/img/Relation.svg\" alt=\"Relation\" />";
 
         if ( $val > 0 ) {
             my $relation_url = sprintf( "<a href=\"https://osm.org/relation/%s\" title=\"Browse on map\">%s</a>", $val, $val );
@@ -4183,7 +4200,7 @@ sub printWayTemplate {
             }
         }
 
-        my $image_url = "<img src=\"img/Way.svg\" alt=\"Way\" />";
+        my $image_url = "<img src=\"/img/Way.svg\" alt=\"Way\" />";
 
         if ( $val > 0 ) {
             my $way_url   = sprintf( "<a href=\"https://osm.org/way/%s\" title=\"Browse on map\">%s</a>", $val, $val );
@@ -4219,7 +4236,7 @@ sub printNodeTemplate {
             }
         }
 
-        my $image_url = "<img src=\"img/Node.svg\" alt=\"Node\" />";
+        my $image_url = "<img src=\"/img/Node.svg\" alt=\"Node\" />";
         
         if ( $val > 0 ) {
             my $node_url = sprintf( "<a href=\"https://osm.org/node/%s\" title=\"Brose on map\">%s</a>", $val, $val );
