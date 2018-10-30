@@ -241,7 +241,7 @@ fi
 
 if [ "$updateresult" = "true" ]
 then
-    echo $(date "+%Y-%m-%d %H:%M:%S")  "Updating '$WORK_LOC$HTML_FILE' to '$RESULTS_LOC'"
+    echo $(date "+%Y-%m-%d %H:%M:%S")  "Updating '$WORK_LOC/$HTML_FILE' to '$RESULTS_LOC'"
     
     if [ -f $WORK_LOC/$HTML_FILE ]
     then 
