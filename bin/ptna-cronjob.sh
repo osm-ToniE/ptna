@@ -14,7 +14,7 @@ export PTNA_TARGET_LOC="/srv/www/htdocs"
 
 # this is the location below $PTNA_TARGETLOC, where the results will bes stored (in sub directories)
 
-export $PTNA_RESULTS_LOC="results"
+export PTNA_RESULTS_LOC="results"
 
 # this is the location on the web server for the PTNA pages
 
