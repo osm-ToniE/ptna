@@ -2503,6 +2503,7 @@ sub analyze_ptv2_route_relation {
     $return_code += $role_mismatch_found;
 
     if ( $relation_ptr->{'number_of_segments'} == 1 ) {
+        printf STDERR "Checking whether first node is member of relation_route_stop_positions: Route-Name: %s\n", $relation_ptr->{'tag'}->{'name'}      if ( $debug );
         if ( isNodeInNodeArray($sorted_way_nodes[0],@relation_route_stop_positions) ) {
             #
             # fine, first node of ways is actually a stop position of this route
@@ -2522,6 +2523,7 @@ sub analyze_ptv2_route_relation {
                 }
             }
         } else {
+            printf STDERR "No! Checking whether we can be relaxed: Route-Name: %s\n", $relation_ptr->{'tag'}->{'name'}      if ( $debug );
             my $relaxed_for =  $relaxed_begin_end_for || '';
             $relaxed_for    =~ s/;/,/g;
             $relaxed_for    =  ',' . $relaxed_for . ',';
@@ -2581,6 +2583,7 @@ sub analyze_ptv2_route_relation {
                 $return_code++;
             }
         }
+        printf STDERR "Checking whether last node is member of relation_route_stop_positions: Route-Name: %s\n", $relation_ptr->{'tag'}->{'name'}      if ( $debug );
         if ( isNodeInNodeArray($sorted_way_nodes[$#sorted_way_nodes],@relation_route_stop_positions) ) {
             #
             # fine, last node of ways is actually a stop position of this route
@@ -2600,6 +2603,7 @@ sub analyze_ptv2_route_relation {
                 }
             }
         } else {
+            printf STDERR "No! Checking whether we can be relaxed: Route-Name: %s\n", $relation_ptr->{'tag'}->{'name'}      if ( $debug );
             my $relaxed_for =  $relaxed_begin_end_for || '';
             $relaxed_for    =~ s/;/,/g;
             $relaxed_for    =  ',' . $relaxed_for . ',';
@@ -2610,9 +2614,9 @@ sub analyze_ptv2_route_relation {
                 my $found_nodeid    = 0;
 
                 if ( $sorted_way_nodes[$#sorted_way_nodes] == ${$WAYS{$last_way_ID}->{'chain'}}[0] ) {
-                    @last_way_nodes  = @{$WAYS{$last_way_ID}->{'chain'}};
-                } else {
                     @last_way_nodes  = reverse @{$WAYS{$last_way_ID}->{'chain'}};
+                } else {
+                    @last_way_nodes  = @{$WAYS{$last_way_ID}->{'chain'}};
                 }
                 
                 foreach my $nodeid ( @last_way_nodes ) {

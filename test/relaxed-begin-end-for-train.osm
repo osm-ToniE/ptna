@@ -1,0 +1,268 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' upload='false' generator='JOSM'>
+  <bounds minlat='48.1834497' minlon='11.3741916' maxlat='48.1836321' maxlon='11.3744009' origin='CGImap 0.6.0 (3901 thorn-03.openstreetmap.org)' />
+  <bounds minlat='48.1834497' minlon='11.3741916' maxlat='48.1836321' maxlon='11.3744009' origin='OpenStreetMap server' />
+  <bounds minlat='48.183228' minlon='11.3739771' maxlat='48.1839111' maxlon='11.3746101' origin='CGImap 0.6.1 (2038 thorn-02.openstreetmap.org)' />
+  <bounds minlat='48.183228' minlon='11.3739771' maxlat='48.1839111' maxlon='11.3746101' origin='OpenStreetMap server' />
+  <node id='-39084' action='modify' lat='48.18362600514' lon='11.37436985052' />
+  <node id='-39086' action='modify' lat='48.18360086011' lon='11.37437003697'>
+    <tag k='name' v='A 2' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='railway' v='halt' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-39088' action='modify' lat='48.1835774194' lon='11.37437021078' />
+  <node id='-39090' action='modify' lat='48.1835582517' lon='11.37437035291' />
+  <node id='-39092' action='modify' lat='48.18353920776' lon='11.37437049412' />
+  <node id='-39094' action='modify' lat='48.18351805572' lon='11.37437065096' />
+  <node id='-39096' action='modify' lat='48.18350341666' lon='11.37437075951' />
+  <node id='-39098' action='modify' lat='48.1834835327' lon='11.37437090695' />
+  <node id='-39100' action='modify' lat='48.18346719742' lon='11.37437102808' />
+  <node id='-39102' action='modify' lat='48.18344205231' lon='11.37437121453' />
+  <node id='-39104' action='modify' lat='48.18340994983' lon='11.37437145257'>
+    <tag k='name' v='E 2' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='railway' v='halt' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-39106' action='modify' lat='48.18340295147' lon='11.37435634181'>
+    <tag k='name' v='E 2' />
+    <tag k='public_transport' v='platform' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-39108' action='modify' lat='48.18337754688' lon='11.37437169283' />
+  <node id='-39110' action='modify' lat='48.18339397038' lon='11.37437157105' />
+  <node id='-39112' action='modify' lat='48.18359345242' lon='11.37435469091'>
+    <tag k='name' v='A 2' />
+    <tag k='public_transport' v='platform' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-39114' action='modify' lat='48.18349172535' lon='11.37430697239' />
+  <node id='-39116' action='modify' lat='48.18347539071' lon='11.37430719804' />
+  <node id='-39118' action='modify' lat='48.18345024659' lon='11.37430754539' />
+  <node id='-39120' action='modify' lat='48.18341814537' lon='11.37430798884'>
+    <tag k='name' v='E 1' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='railway' v='halt' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-39122' action='modify' lat='48.18360239176' lon='11.37428758805'>
+    <tag k='name' v='A 1' />
+    <tag k='public_transport' v='platform' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-39124' action='modify' lat='48.18363419216' lon='11.37430500432' />
+  <node id='-39126' action='modify' lat='48.18360904812' lon='11.37430535166'>
+    <tag k='name' v='A 1' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='railway' v='halt' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-39128' action='modify' lat='48.18341113853' lon='11.37429205978'>
+    <tag k='name' v='E 1' />
+    <tag k='public_transport' v='platform' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-39130' action='modify' lat='48.1835664414' lon='11.37430594024' />
+  <node id='-39132' action='modify' lat='48.1835473982' lon='11.37430620331' />
+  <node id='-39134' action='modify' lat='48.183526247' lon='11.3743064955' />
+  <node id='-39136' action='modify' lat='48.18351160852' lon='11.37430669772' />
+  <node id='-39138' action='modify' lat='48.18361735709' lon='11.37430523688' />
+  <node id='-39140' action='modify' lat='48.18340369893' lon='11.37430818841' />
+  <node id='-39142' action='modify' lat='48.18338927526' lon='11.37430838766' />
+  <node id='-39144' action='modify' lat='48.18358246055' lon='11.37442140608'>
+    <tag k='name' v='A 3' />
+    <tag k='public_transport' v='platform' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-39146' action='modify' lat='48.18358986922' lon='11.37443634887'>
+    <tag k='name' v='A 3' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='railway' v='halt' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-39148' action='modify' lat='48.18339271187' lon='11.37442305698'>
+    <tag k='name' v='E 3' />
+    <tag k='public_transport' v='platform' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-39150' action='modify' lat='48.1833989664' lon='11.37443898604'>
+    <tag k='name' v='E 3' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='railway' v='halt' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-39152' action='modify' lat='48.18350706807' lon='11.3744374927' />
+  <node id='-39154' action='modify' lat='48.18349242959' lon='11.37443769492' />
+  <node id='-39156' action='modify' lat='48.18347254641' lon='11.37443796959' />
+  <node id='-39158' action='modify' lat='48.18345621177' lon='11.37443819524' />
+  <node id='-39160' action='modify' lat='48.18361501327' lon='11.37443600152' />
+  <node id='-39162' action='modify' lat='48.18359817819' lon='11.37443623408' />
+  <node id='-39164' action='modify' lat='48.18343106764' lon='11.37443854259' />
+  <node id='-39166' action='modify' lat='48.18354726248' lon='11.37443693745' />
+  <node id='-39168' action='modify' lat='48.18338451996' lon='11.37443918561' />
+  <node id='-39170' action='modify' lat='48.18337009628' lon='11.37443938486' />
+  <node id='-39172' action='modify' lat='48.18352821928' lon='11.37443720051' />
+  <way id='-39174' action='modify'>
+    <nd ref='-39094' />
+    <nd ref='-39096' />
+    <nd ref='-39098' />
+    <nd ref='-39100' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-39176' action='modify'>
+    <nd ref='-39100' />
+    <nd ref='-39102' />
+    <nd ref='-39104' />
+    <nd ref='-39110' />
+    <nd ref='-39108' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-39178' action='modify'>
+    <nd ref='-39084' />
+    <nd ref='-39086' />
+    <nd ref='-39088' />
+    <nd ref='-39090' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-39180' action='modify'>
+    <nd ref='-39090' />
+    <nd ref='-39092' />
+    <nd ref='-39094' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-39182' action='modify'>
+    <nd ref='-39130' />
+    <nd ref='-39132' />
+    <nd ref='-39134' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-39184' action='modify'>
+    <nd ref='-39134' />
+    <nd ref='-39136' />
+    <nd ref='-39114' />
+    <nd ref='-39116' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-39186' action='modify'>
+    <nd ref='-39124' />
+    <nd ref='-39138' />
+    <nd ref='-39126' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-39188' action='modify'>
+    <nd ref='-39116' />
+    <nd ref='-39118' />
+    <nd ref='-39120' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-39190' action='modify'>
+    <nd ref='-39126' />
+    <nd ref='-39130' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-39192' action='modify'>
+    <nd ref='-39120' />
+    <nd ref='-39140' />
+    <nd ref='-39142' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-39194' action='modify'>
+    <nd ref='-39152' />
+    <nd ref='-39154' />
+    <nd ref='-39156' />
+    <nd ref='-39158' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-39196' action='modify'>
+    <nd ref='-39160' />
+    <nd ref='-39162' />
+    <nd ref='-39146' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-39198' action='modify'>
+    <nd ref='-39158' />
+    <nd ref='-39164' />
+    <nd ref='-39150' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-39200' action='modify'>
+    <nd ref='-39146' />
+    <nd ref='-39166' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-39202' action='modify'>
+    <nd ref='-39150' />
+    <nd ref='-39168' />
+    <nd ref='-39170' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-39204' action='modify'>
+    <nd ref='-39166' />
+    <nd ref='-39172' />
+    <nd ref='-39152' />
+    <tag k='railway' v='rail' />
+  </way>
+  <relation id='-39206' action='modify'>
+    <member type='node' ref='-39126' role='stop' />
+    <member type='node' ref='-39122' role='platform' />
+    <member type='node' ref='-39120' role='stop' />
+    <member type='node' ref='-39128' role='platform' />
+    <member type='way' ref='-39186' role='' />
+    <member type='way' ref='-39190' role='' />
+    <member type='way' ref='-39182' role='' />
+    <member type='way' ref='-39184' role='' />
+    <member type='way' ref='-39188' role='' />
+    <member type='way' ref='-39192' role='' />
+    <tag k='comment' v='Error for both ends' />
+    <tag k='from' v='A 1' />
+    <tag k='name' v='Linie 1: A 1 =&gt; E 1' />
+    <tag k='network' v='Privat' />
+    <tag k='operator' v='Privat' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='1' />
+    <tag k='route' v='train' />
+    <tag k='to' v='E 1' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-39208' action='modify'>
+    <member type='node' ref='-39086' role='stop' />
+    <member type='node' ref='-39112' role='platform' />
+    <member type='node' ref='-39104' role='stop' />
+    <member type='node' ref='-39106' role='platform' />
+    <member type='way' ref='-39178' role='' />
+    <member type='way' ref='-39180' role='' />
+    <member type='way' ref='-39174' role='' />
+    <member type='way' ref='-39176' role='' />
+    <tag k='comment' v='No error if --relaxed-begin-end-for=train' />
+    <tag k='from' v='A 2' />
+    <tag k='name' v='Linie 2: A 2 =&gt; E 2' />
+    <tag k='network' v='Privat' />
+    <tag k='operator' v='Privat' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='2' />
+    <tag k='route' v='train' />
+    <tag k='to' v='E 2' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-39210' action='modify'>
+    <member type='node' ref='-39146' role='stop' />
+    <member type='node' ref='-39144' role='platform' />
+    <member type='node' ref='-39150' role='stop' />
+    <member type='node' ref='-39148' role='platform' />
+    <member type='way' ref='-39200' role='' />
+    <member type='way' ref='-39204' role='' />
+    <member type='way' ref='-39194' role='' />
+    <member type='way' ref='-39198' role='' />
+    <tag k='comment' v='No error at all' />
+    <tag k='from' v='A 3' />
+    <tag k='name' v='Linie 3: A 3 =&gt; E 3' />
+    <tag k='network' v='Privat' />
+    <tag k='operator' v='Privat' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='3' />
+    <tag k='route' v='train' />
+    <tag k='to' v='E 3' />
+    <tag k='type' v='route' />
+  </relation>
+</osm>
