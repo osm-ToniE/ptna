@@ -76,6 +76,10 @@ then
     
     LOGFILE=${PTNA_WORK_LOC}/ptna-all-networks.log
     
+    # o == do the overpasapi query and download the data (to work area)
+    # a == do the analysis (in work area)
+    # u == update the result from the work area to the location of the web service
+    
     ptna-all-networks.sh -oau > $LOGFILE 2>&1 < /dev/null
     
     emptyxml=$(find ${PTNA_WORK_LOC} -name '*.xml' -size 0 | wc -l)
@@ -88,6 +92,12 @@ then
         
         ptna-all-networks.sh -Oau >> $LOGFILE 2>&1 < /dev/null
     fi
+
+
+    # c == clean the work area
+    
+    ptna-all-networks.sh -c > $LOGFILE 2>&1 < /dev/null
+    
 else
     echo "directory $PTNA_WORK_LOC does not exist ... terminating"
     exit 2
