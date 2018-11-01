@@ -2532,6 +2532,7 @@ sub analyze_ptv2_route_relation {
                 my @first_way_nodes  = ();
                 my $found_it         = 0;
                 my $found_nodeid     = 0;
+                my $node_name       = '';
 
                 if ( $sorted_way_nodes[0] == ${$WAYS{$first_way_ID}->{'chain'}}[0] ) {
                     @first_way_nodes  = @{$WAYS{$first_way_ID}->{'chain'}};
@@ -2540,7 +2541,8 @@ sub analyze_ptv2_route_relation {
                 }
                 
                 foreach my $nodeid ( @first_way_nodes ) {
-                    printf STDERR "WAY{%s}->{'chain'}->%s\n", $first_way_ID, $nodeid   if ( $debug );
+                    if ( $debug ) { $node_name = ( $NODES{$nodeid} && $NODES{$nodeid}->{'tag'} && $NODES{$nodeid}->{'tag'}->{'name'}) ? $NODES{$nodeid}->{'tag'}->{'name'} : ''; }
+                    printf STDERR "WAY{%s}->{'chain'}->%s name='%s'\n", $first_way_ID, $nodeid, $node_name   if ( $debug );
                     if ( isNodeInNodeArray($nodeid,@relation_route_stop_positions) ) {
                         #
                         # fine, an inner node, or the last of the first way is a stop position of this route
@@ -2612,15 +2614,17 @@ sub analyze_ptv2_route_relation {
                 my @last_way_nodes  = ();
                 my $found_it        = 0;
                 my $found_nodeid    = 0;
+                my $node_name       = '';
 
                 if ( $sorted_way_nodes[$#sorted_way_nodes] == ${$WAYS{$last_way_ID}->{'chain'}}[0] ) {
-                    @last_way_nodes  = reverse @{$WAYS{$last_way_ID}->{'chain'}};
-                } else {
                     @last_way_nodes  = @{$WAYS{$last_way_ID}->{'chain'}};
+                } else {
+                    @last_way_nodes  = reverse @{$WAYS{$last_way_ID}->{'chain'}};
                 }
                 
                 foreach my $nodeid ( @last_way_nodes ) {
-                    printf STDERR "WAY{%s}->{'chain'}->%s\n", $last_way_ID, $nodeid   if ( $debug );
+                    if ( $debug ) { $node_name = ( $NODES{$nodeid} && $NODES{$nodeid}->{'tag'} && $NODES{$nodeid}->{'tag'}->{'name'}) ? $NODES{$nodeid}->{'tag'}->{'name'} : ''; }
+                    printf STDERR "WAY{%s}->{'chain'}->%s name='%s'\n", $last_way_ID, $nodeid, $node_name   if ( $debug );
                     if ( isNodeInNodeArray($nodeid,@relation_route_stop_positions) ) {
                         #
                         # fine, an inner node, or the first of the last way is a stop position of this route
@@ -2629,7 +2633,7 @@ sub analyze_ptv2_route_relation {
                         printf STDERR "WAY{%s}->{'chain'}->%s - %d\n", $last_way_ID, $nodeid, $found_it   if ( $debug );
                         if ( $nodeid == $relation_route_stop_positions[$#relation_route_stop_positions] ) {
                             #
-                            # fine the last node of the last way which is a stop position and is actually the first stop position
+                            # fine the last node of the last way which is a stop position and is actually the last stop position
                             #
                             $found_it++;
                             printf STDERR "WAY{%s}->{'chain'}->%s - %d\n", $last_way_ID, $nodeid, $found_it   if ( $debug );
@@ -2640,7 +2644,7 @@ sub analyze_ptv2_route_relation {
                 }
                 if ( $found_it == 1 ) {
                     printf STDERR "1: Number of ways: %s, found_nodeid = %s, first node of last way = %s\n", scalar(@relation_route_ways), $found_nodeid, $last_way_nodes[0]  if ( $debug );
-                    if ( scalar(@relation_route_ways) > 1 && $found_nodeid == $last_way_nodes[0] ) {
+                    if ( scalar(@relation_route_ways) > 1 && $found_nodeid == $last_way_nodes[$#last_way_nodes] ) {
                         push( @{$relation_ptr->{'__issues__'}}, sprintf("PTv2 route: there is no stop position of this route on the last way, except the first node == last node of previous way: %s", printWayTemplate($last_way_ID,'name;ref') ) );            
                         $return_code++;
                     } else {
@@ -2650,7 +2654,7 @@ sub analyze_ptv2_route_relation {
                 }
                 elsif ( $found_it == 2 ) {
                     printf STDERR "2: Number of ways: %s, found_nodeid = %s, first node of last way = %s\n", scalar(@relation_route_ways), $found_nodeid, $last_way_nodes[0]  if ( $debug );
-                    if ( scalar(@relation_route_ways) > 1 && $found_nodeid == $last_way_nodes[0] ) {
+                    if ( scalar(@relation_route_ways) > 1 && $found_nodeid == $last_way_nodes[$#last_way_nodes] ) {
                         push( @{$relation_ptr->{'__issues__'}}, sprintf("PTv2 route: there is no stop position of this route on the last way, except the first node == last node of previous way: %s", printWayTemplate($last_way_ID,'name;ref') ) );            
                         $return_code++;
                     }
