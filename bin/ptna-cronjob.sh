@@ -36,11 +36,8 @@ export PTNA_WORK_LOC="$HOME/tmp/ptna/work"
 
 
 
-# source $HOME/.bashrc
-
-[ -f $HOME/.bashrc ]      && source $HOME/.bashrc
-
 # source $HOME/.ptna-config to overwrite the settings above
+# and mybe to set some perl related variables (copied from .bashrc)
 
 [ -f $HOME/.ptna-config ] && source $HOME/.ptna-config
 
@@ -96,7 +93,7 @@ then
 
     # c == clean the work area
     
-    ptna-all-networks.sh -c > $LOGFILE 2>&1 < /dev/null
+    ptna-all-networks.sh -c >> $LOGFILE 2>&1 < /dev/null
     
 else
     echo "directory $PTNA_WORK_LOC does not exist ... terminating"
