@@ -261,16 +261,16 @@ my %colour_table            = ( 'black'         => '#000000',
                                 'teal'          => '#008080',
                                 'navy'          => '#000080',
                                 'purple'        => '#800080',
-                                'white'         => '#FFFFFF',
-                                'silver'        => '#C0C0C0',
-                                'red'           => '#FF0000',
-                                'yellow'        => '#FFFF00',
-                                'lime'          => '#00FF00',
-                                'aqua'          => '#00FFFF',
-                                'cyan'          => '#00FFFF',
-                                'blue'          => '#0000FF',
-                                'fuchsia'       => '#FF00FF',
-                                'magenta'       => '#FF00FF',
+                                'white'         => '#ffffff',
+                                'silver'        => '#c0c0c0',
+                                'red'           => '#ff0000',
+                                'yellow'        => '#ffff00',
+                                'lime'          => '#00ff00',
+                                'aqua'          => '#00ffff',
+                                'cyan'          => '#00ffff',
+                                'blue'          => '#0000ff',
+                                'fuchsia'       => '#ff00ff',
+                                'magenta'       => '#ff00ff',
                               );
 
 
@@ -4381,9 +4381,9 @@ sub GetColourFromString {
 
     if ( $string ) {
         if ( $string =~ m/^#[A-Fa-f0-9]{6}$/ ) {
-            $ret_value= uc($string);
+            $ret_value= lc($string);
         } elsif ( $string =~ m/^#([A-Fa-f0-9])([A-Fa-f0-9])([A-Fa-f0-9])$/ ) {
-            $ret_value= uc("#" . $1 . $1 . $2 . $2 . $3 . $3);
+            $ret_value= lc("#" . $1 . $1 . $2 . $2 . $3 . $3);
         } else {
             $ret_value = ( $colour_table{$string} ) ? $colour_table{$string} : undef;
         }
@@ -4404,10 +4404,10 @@ sub GetForeGroundFromBackGround {
         $bg_colour      =~ s/^#//;
         my$rgbval       = hex( $bg_colour );
         my $r           = $rgbval >> 16;
-        my $g           = ($rgbval & 0x00FF00) >> 8;
-        my $b           = $rgbval & 0xFF;
+        my $g           = ($rgbval & 0x00ff00) >> 8;
+        my $b           = $rgbval & 0xff;
         my $brightness  = $r * 0.299 + $g * 0.587 + $b * 0.114;
-        $ret_value      = ($brightness > 160) ? "#000" : "#fff";
+        $ret_value      = ($brightness > 160) ? "#000000" : "#ffffff";
     }
     return $ret_value;
 }
