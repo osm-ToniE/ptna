@@ -3659,10 +3659,10 @@ sub printInitialHeader {
         printBigHeader( "Hinweis" );
     }
     push( @HTML_main, "<p>\n" );
-    push( @HTML_main, "Die Daten werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändert hat.\n" );
+    push( @HTML_main, "    Die Daten werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändert hat.\n" );
     push( @HTML_main, "</p>\n" );
     push( @HTML_main, "<p>\n" );
-    push( @HTML_main, "Eine Erläuterung der Fehlertexte ist in der Dokumentaion unter <a href='/documentation.html#checks'>Prüfungen</a> zu finden.\n" );
+    push( @HTML_main, "    Eine Erläuterung der Fehlertexte ist in der Dokumentation unter <a href='/documentation.html#checks'>Prüfungen</a> zu finden.\n" );
     push( @HTML_main, "</p>\n" );
 
 }
