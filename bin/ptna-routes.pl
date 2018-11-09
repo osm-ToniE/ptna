@@ -527,24 +527,41 @@ foreach $relation_id ( keys ( %RELATIONS ) ) {
                         printf STDERR "%s Section mismatch 'status' = '%s'\n", get_time(), $status;
                     }
                 } else {
-                    $PT_relations_without_ref{$route_type}->{$relation_id} = $RELATIONS{$relation_id};
-                    $relation_ptr = $RELATIONS{$relation_id};
-                    $number_of_relations_without_ref++;
-
-                    # match_network() returns either "keep long" or "keep short" or "skip" (to do: or "suspicious")
-                    #
-                    my $status = match_network( $RELATIONS{$relation_id}->{'tag'}->{'network'} );
-                    if ( $status =~ m/keep/ ) {
-                        if ( $RELATIONS{$relation_id}->{'tag'}->{'network'} ) {
-                            $used_networks{$RELATIONS{$relation_id}->{'tag'}->{'network'}}->{$relation_id} = 1;
+                    $status = match_route_type( $route_type );
+                    printf STDERR "%-15s: ref=undef\ttype=%s\troute_type=%s\tRelation: %d\n", $status, $type, $route_type, $relation_id   if ( $debug );
+                    
+                    if ( $status eq 'keep' || $status eq 'suspicious' ) {
+                        # only supported route types or their typos must have 'ref' set
+                        
+                        $PT_relations_without_ref{$route_type}->{$relation_id} = $RELATIONS{$relation_id};
+                        $relation_ptr = $RELATIONS{$relation_id};
+                        $number_of_relations_without_ref++;
+    
+                        # match_network() returns either "keep long" or "keep short" or "skip"
+                        #
+                        my $status = match_network( $RELATIONS{$relation_id}->{'tag'}->{'network'} );
+                        if ( $status =~ m/keep/ ) {
+                            if ( $RELATIONS{$relation_id}->{'tag'}->{'network'} ) {
+                                $used_networks{$RELATIONS{$relation_id}->{'tag'}->{'network'}}->{$relation_id} = 1;
+                            } else {
+                                $used_networks{'__unset_network__'}->{$relation_id} = 1;
+                            }
                         } else {
-                            $used_networks{'__unset_network__'}->{$relation_id} = 1;
+                            if ( $RELATIONS{$relation_id}->{'tag'}->{'network'} ) {
+                                $unused_networks{$RELATIONS{$relation_id}->{'tag'}->{'network'}}->{$relation_id} = 1;
+                            } else {
+                                $unused_networks{'__unset_network__'}->{$relation_id} = 1;
+                            }
+                        }
+                        if ( $status eq 'suspicious' ) {
+                            $suspicious_relations{$relation_id} = 1;
+                            $number_of_suspicious_relations++;
                         }
                     } else {
-                        if ( $RELATIONS{$relation_id}->{'tag'}->{'network'} ) {
-                            $unused_networks{$RELATIONS{$relation_id}->{'tag'}->{'network'}}->{$relation_id} = 1;
-                        } else {
-                            $unused_networks{'__unset_network__'}->{$relation_id} = 1;
+                        if ( $status eq 'other' ) {
+                            # at least all others (except well_known) shall also be reported as 'suspicious'
+                            $suspicious_relations{$relation_id} = 1;
+                            $number_of_suspicious_relations++;
                         }
                     }
                 }
