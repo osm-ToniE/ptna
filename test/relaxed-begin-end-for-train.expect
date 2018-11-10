@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <title>PTNA - Public Transport Network Analysis</title>
+        <meta name="generator" content="PTNA">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="keywords" content="OSM Public Transport PTv2">
+        <meta name="description" content="PTNA - Public Transport Network Analysis">
+        <style>
+              table { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; }
+              th    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+              td    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+              img   { width: 20px; }
+              #toc ol           { list-style: none; }
+              .tableheaderrow   { background-color: LightSteelBlue;   }
+              .sketchline       { background-color: LightBlue;        }
+              .sketch           { text-align:left;  font-weight: 500; }
+              .csvinfo          { text-align:right; font-size: 0.8em; }
+              .ref              { white-space:nowrap; }
+              .relation         { white-space:nowrap; }
+              .PTv              { text-align:center; }
+              .number           { text-align:right; }
+        </style>
+    </head>
+    <body>
+        <div id="toc">
+        <h1>Inhalt</h1>
+        <ol>
+        <li>1 <a href="#A1">Hinweis</a>
+        </li>
+        <li>2 <a href="#A2">ÖPNV Linien</a>
+        <ol>
+        <li>2.1 <a href="#A2.1">Zug/S-Bahn</a>
+        </li>
+        </ol>
+        </li>
+        <li>3 <a href="#A3">Details zu 'network'-Werten</a>
+        <ol>
+        <li>3.1 <a href="#A3.1">Berücksichtigte 'network' Werte</a>
+        </li>
+        </ol>
+        </li>
+        </ol>
+        </div> <!-- toc -->
+        <hr />
+        <h1 id="A1">1 Hinweis</h1>
+<p>
+    Die Daten werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändert hat.
+</p>
+<p>
+    Eine Erläuterung der Fehlertexte ist in der Dokumentation unter <a href='/documentation.html#checks'>Prüfungen</a> zu finden.
+</p>
+        <hr />
+        <h1 id="A2">2 ÖPNV Linien</h1>
+        <h2 id="A2.1">2.1 Zug/S-Bahn</h2>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="ref">Linie (ref=)</th><th class="relation">Relation (id=)</th><th class="type">Typ (type=)</th><th class="route_type">Verkehrsmittel (route(_master)=)</th><th class="name">Name (name=)</th><th class="network">Netz (network=)</th><th class="operator">Betreiber (operator=)</th><th class="from">Von (from=)</th><th class="via">Über (via=)</th><th class="to">Nach (to=)</th><th class="PTv">PTv</th><th class="issues">Fehler</th><th class="notes">Anmerkungen</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="-39294" data-ref="1" class="line"><td class="ref">1</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39294</td><td class="type">route</td><td class="route_type">train</td><td class="name">Linie 1: A 1 =&gt; E 1</td><td class="network">Privat</td><td class="operator">Privat</td><td class="from">A 1</td><td class="via"></td><td class="to">E 1</td><td class="PTv">2</td><td class="issues">PTv2 route: there is no stop position of this route on the first way, except the last node == first node of next way: <img src="/img/Way.svg" alt="Way" /> 'L1-W1' -39258<br>PTv2 route: there is no stop position of this route on the last way, except the first node == last node of previous way: <img src="/img/Way.svg" alt="Way" /> 'L1-W6' -39264</td><td class="notes">&#039;comment&#039; = PTv2 route: there is no stop position of this route on the first way, except the last node == first node of next way: Way L1-W1 PTv2 route: there is no stop position of this route on the last way, except the first node == last node of previous way: Way L1-W6</td></tr>
+                <tr data-info="-39296" data-ref="2" class="line"><td class="ref">2</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39296</td><td class="type">route</td><td class="route_type">train</td><td class="name">Linie 2: A 2 =&gt; E 2</td><td class="network">Privat</td><td class="operator">Privat</td><td class="from">A 2</td><td class="via"></td><td class="to">E 2</td><td class="PTv">2</td><td class="issues"></td><td class="notes">&#039;comment&#039; = No error if --relaxed-begin-end-for=train</td></tr>
+                <tr data-info="-39298" data-ref="3" class="line"><td class="ref">3</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39298</td><td class="type">route</td><td class="route_type">train</td><td class="name">Linie 3: A 3 =&gt; E 3</td><td class="network">Privat</td><td class="operator">Privat</td><td class="from">A 3</td><td class="via"></td><td class="to">E 3</td><td class="PTv">2</td><td class="issues"></td><td class="notes">&#039;comment&#039; = No error at all</td></tr>
+                <tr data-info="-39300" data-ref="4" class="line"><td class="ref">4</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39300</td><td class="type">route</td><td class="route_type">train</td><td class="name">Linie 4: A 4 =&gt; E 4</td><td class="network">Privat</td><td class="operator">Privat</td><td class="from">A 4</td><td class="via"></td><td class="to">E 4</td><td class="PTv">2</td><td class="issues"></td><td class="notes">&#039;comment&#039; = No error at all</td></tr>
+                <tr data-info="-39302" data-ref="5" class="line"><td class="ref">5</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39302</td><td class="type">route</td><td class="route_type">train</td><td class="name">Linie 5: A 5 =&gt; E 5</td><td class="network">Privat</td><td class="operator">Privat</td><td class="from">A 5</td><td class="via"></td><td class="to">E 5</td><td class="PTv">2</td><td class="issues"></td><td class="notes">&#039;comment&#039; = No error at all</td></tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <h1 id="A3">3 Details zu 'network'-Werten</h1>
+        <h2 id="A3.1">3.1 Berücksichtigte 'network' Werte</h2>
+<p>
+Dieser Abschnitt listet die 'network'-Werte auf, die berücksichtigt wurden, d.h. einen der oben genannten Werte enthält.
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="network">Netz (network=)</th><th class="number">Anzahl</th><th class="relations">Relationen</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="Privat" data-ref="???" class="line"><td class="network">Privat</td><td class="number">5</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '1' -39294, <img src="/img/Relation.svg" alt="Relation" /> '2' -39296, <img src="/img/Relation.svg" alt="Relation" /> '3' -39298, <img src="/img/Relation.svg" alt="Relation" /> '4' -39300, <img src="/img/Relation.svg" alt="Relation" /> '5' -39302</td></tr>
+            </tbody>
+        </table>
+
+    </body>
+</html>
