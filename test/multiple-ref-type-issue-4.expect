@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <title>PTNA - Public Transport Network Analysis</title>
+        <meta name="generator" content="PTNA">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="keywords" content="OSM Public Transport PTv2">
+        <meta name="description" content="PTNA - Public Transport Network Analysis">
+        <style>
+              table { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; }
+              th    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+              td    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+              img   { width: 20px; }
+              #toc ol           { list-style: none; }
+              .tableheaderrow   { background-color: LightSteelBlue;   }
+              .sketchline       { background-color: LightBlue;        }
+              .sketch           { text-align:left;  font-weight: 500; }
+              .csvinfo          { text-align:right; font-size: 0.8em; }
+              .ref              { white-space:nowrap; }
+              .relation         { white-space:nowrap; }
+              .PTv              { text-align:center; }
+              .number           { text-align:right; }
+        </style>
+    </head>
+    <body>
+        <div id="toc">
+        <h1>Inhalt</h1>
+        <ol>
+        <li>1 <a href="#hints">Hinweis</a>
+        </li>
+        <li>2 <a href="#A2">Test file for issue #4 - multiple appearance of "ref;type" value for different lines in different areas</a>
+        <ol>
+        <li>2.1 <a href="#A2.1">Bus 'A' in Annaberg-Buchholz: Barbara-Uthmann-Ring => Buchholz, operated by Operator RVE</a>
+        </li>
+        <li>2.2 <a href="#A2.2">Bus 'A' in Aue: Postplatz => Postplatz, operated also by Operator RVE but different 'from' and 'to'</a>
+        </li>
+        <li>2.3 <a href="#A2.3">Bus 'A' in Burgstädt: Sportzentrum => Heiersdorf, operated by Operator RBM</a>
+        </li>
+        <li>2.4 <a href="#A2.4">Missing Bus 'A' in XYZ: Platz1 => Platz2, operated by Operator ABC</a>
+        </li>
+        </ol>
+        </li>
+        <li>3 <a href="#unassigned">Nicht eindeutig zugeordnete Linien</a>
+        </li>
+        <li>4 <a href="#networkdetails">Details zu 'network'-Werten</a>
+        <ol>
+        <li>4.1 <a href="#considerednetworks">Berücksichtigte 'network' Werte</a>
+        </li>
+        </ol>
+        </li>
+        </ol>
+        </div> <!-- toc -->
+        <hr />
+        <h1 id="hints">1 Hinweis</h1>
+<p>
+    Die Daten werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändert hat.
+</p>
+<p>
+    Eine Erläuterung der Fehlertexte ist in der Dokumentation unter <a href='/documentation.html#checks'>Prüfungen</a> zu finden.
+</p>
+        <hr />
+        <h1 id="A2">2 Test file for issue #4 - multiple appearance of "ref;type" value for different lines in different areas</h1>
+<p>
+We test with 4 expected bus routes, all having "A" as the 'ref' 
+
+</p>
+<p>
+Two of them have identical 'operator' but different 'from' and 'to' 
+
+</p>
+        <h2 id="A2.1">2.1 Bus 'A' in Annaberg-Buchholz: Barbara-Uthmann-Ring => Buchholz, operated by Operator RVE</h2>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Typ (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Fehler</th><th class="notes">Anmerkungen</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="Kommentar: Bus A fährt in Annaberg-Buchholz; Von: Barbara-Uthmann-Ring; Nach: Buchholz; Betreiber: RVE" data-ref="A" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=A&amp;network=VMS&amp;style=wuppertal" title="Sketch-Line">A</a></td><td class="csvinfo" colspan="5">Kommentar: Bus A f&auml;hrt in Annaberg-Buchholz; Von: Barbara-Uthmann-Ring; Nach: Buchholz; Betreiber: RVE</td></tr>
+                <tr data-info="-39174" data-ref="A" class="line"><td class="name">Bus A: Barbara-Uthmann-Ring &lt;=&gt; Buchholz</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39174</td><td class="PTv">2</td><td class="issues">There is more than one Route-Master</td><td class="notes"></td></tr>
+                <tr data-info="-39178" data-ref="A" class="line"><td class="name">Bus A: Postplatz &lt;=&gt; Postplatz</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39178</td><td class="PTv">2</td><td class="issues">There is more than one Route-Master</td><td class="notes"></td></tr>
+                <tr data-info="-39170" data-ref="A" class="line"><td class="name">Bus A: Barbara-Uthmann-Ring =&gt; Buchholz</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39170</td><td class="PTv">2</td><td class="issues">There is more than one Route-Master</td><td class="notes"></td></tr>
+                <tr data-info="-39172" data-ref="A" class="line"><td class="name">Bus A: Buchholz =&gt; Barbara-Uthmann-Ring</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39172</td><td class="PTv">2</td><td class="issues">There is more than one Route-Master</td><td class="notes"></td></tr>
+                <tr data-info="-39180" data-ref="A" class="line"><td class="name">Bus A: Postplatz =&gt; Postplatz</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39180</td><td class="PTv">2</td><td class="issues">There is more than one Route-Master</td><td class="notes"></td></tr>
+                <tr data-info="-39176" data-ref="A" class="line"><td class="name">Bus A: Postplatz =&gt; Postplatz</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39176</td><td class="PTv">2</td><td class="issues">There is more than one Route-Master</td><td class="notes"></td></tr>
+            </tbody>
+        </table>
+
+        <h2 id="A2.2">2.2 Bus 'A' in Aue: Postplatz => Postplatz, operated also by Operator RVE but different 'from' and 'to'</h2>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Typ (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Fehler</th><th class="notes">Anmerkungen</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="Kommentar: Bus A fährt in Aue; Von: Postplatz; Nach: Postplatz; Betreiber: RVE" data-ref="A" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=A&amp;network=VMS&amp;style=wuppertal" title="Sketch-Line">A</a></td><td class="csvinfo" colspan="5">Kommentar: Bus A f&auml;hrt in Aue; Von: Postplatz; Nach: Postplatz; Betreiber: RVE</td></tr>
+                <tr data-info="-39174" data-ref="A" class="line"><td class="name">Bus A: Barbara-Uthmann-Ring &lt;=&gt; Buchholz</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39174</td><td class="PTv">2</td><td class="issues">There is more than one Route-Master</td><td class="notes"></td></tr>
+                <tr data-info="-39178" data-ref="A" class="line"><td class="name">Bus A: Postplatz &lt;=&gt; Postplatz</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39178</td><td class="PTv">2</td><td class="issues">There is more than one Route-Master</td><td class="notes"></td></tr>
+                <tr data-info="-39170" data-ref="A" class="line"><td class="name">Bus A: Barbara-Uthmann-Ring =&gt; Buchholz</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39170</td><td class="PTv">2</td><td class="issues">There is more than one Route-Master</td><td class="notes"></td></tr>
+                <tr data-info="-39172" data-ref="A" class="line"><td class="name">Bus A: Buchholz =&gt; Barbara-Uthmann-Ring</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39172</td><td class="PTv">2</td><td class="issues">There is more than one Route-Master</td><td class="notes"></td></tr>
+                <tr data-info="-39180" data-ref="A" class="line"><td class="name">Bus A: Postplatz =&gt; Postplatz</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39180</td><td class="PTv">2</td><td class="issues">There is more than one Route-Master</td><td class="notes"></td></tr>
+                <tr data-info="-39176" data-ref="A" class="line"><td class="name">Bus A: Postplatz =&gt; Postplatz</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39176</td><td class="PTv">2</td><td class="issues">There is more than one Route-Master</td><td class="notes"></td></tr>
+            </tbody>
+        </table>
+
+        <h2 id="A2.3">2.3 Bus 'A' in Burgstädt: Sportzentrum => Heiersdorf, operated by Operator RBM</h2>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Typ (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Fehler</th><th class="notes">Anmerkungen</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="Kommentar: Bus A fährt in Burgstädt; Von: Sportzentrum; Nach: Heiersdorf; Betreiber: RBM" data-ref="A" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=A&amp;network=VMS&amp;style=wuppertal" title="Sketch-Line">A</a></td><td class="csvinfo" colspan="5">Kommentar: Bus A f&auml;hrt in Burgst&auml;dt; Von: Sportzentrum; Nach: Heiersdorf; Betreiber: RBM</td></tr>
+                <tr data-info="-39186" data-ref="A" class="line"><td class="name">Bus A: Sportzentrum &lt;=&gt; Heiersdorf</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39186</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+                <tr data-info="-39182" data-ref="A" class="line"><td class="name">Bus A: Sportzentrum =&gt; Heiersdorf</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39182</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+                <tr data-info="-39184" data-ref="A" class="line"><td class="name">Bus A: Heiersdorf =&gt; Sportzentrum</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39184</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+            </tbody>
+        </table>
+
+        <h2 id="A2.4">2.4 Missing Bus 'A' in XYZ: Platz1 => Platz2, operated by Operator ABC</h2>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Typ (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Fehler</th><th class="notes">Anmerkungen</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="Kommentar: Bus A fährt in XYZ; Von: Platz1; Nach: Platz2; Betreiber: ABC" data-ref="A" class="sketchline"><td class="sketch">A</td><td class="csvinfo" colspan="5">Kommentar: Bus A f&auml;hrt in XYZ; Von: Platz1; Nach: Platz2; Betreiber: ABC</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='A' and route='bus'</td><td class="notes"></td></tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <h1 id="unassigned">3 Nicht eindeutig zugeordnete Linien</h1>
+<p>
+Dieser Abschnitt listet die Linien auf, die nicht eindeutig zugeordnet werden konnten. Die Liniennummern 'ref' sind in der CSV-Datei mehrfach angegeben worden. Das bedeutet, dass die selbe Liniennummer im Verkehrsverbund mehrfach in verscheidenen Gemeinden/Städten vorhanden ist. Um die Linien eindeutig zuordnen zu können sollte folgendes angegeben werden:
+</p><ul>
+    <li>Relation:
+        <ul>
+            <li>'network', 'operator', sowie 'from' und 'to' sollten bei der Relation getagged sein.
+                <ul>
+                    <li>Wenn der Wert von 'operator' zur Differenzierung eindeutig ist, müssen 'from' und 'to' nicht angegeben werden.</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>CSV-Datei:
+        <ul>
+            <li>'Betreiber', sowie 'Von' und 'Nach' sollten in der CSV-Datei mit den selben Werten wie bei der Relation angegeben werden.
+                <ul>
+                    <li>Siehe hierzu die Anleitung für solche Einträge am Anfang der CSV-Datei.</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+<p>
+Beispiele aus dem VMS für einen Eintrag in der CSV-Datei der Form: 'ref;type;Kommentar;Von;Nach;Betreiber':
+</p>
+<table>
+    <thead class="tableheaderrow">
+        <tr><th>&nbsp;</th><th>ref</th><th>type</th><th>Kommentar</th><th>Von</th><th>Nach</th><th>Betreiber</th></tr>
+    </thead>
+    <tbody>
+        <tr><td><strong>1.)</strong> </td><td>A</td><td>bus</td><td>Bus A fährt in Annaberg-Buchholz</td><td>Barbara-Uthmann-Ring</td><td>Buchholz</td><td>RVE</td></tr>
+        <tr><td><strong>2.)</strong> </td><td>A</td><td>bus</td><td>Bus A fährt in Aue</td><td>Postplatz</td><td>Postplatz</td><td>RVE</td></tr>
+        <tr><td><strong>3.)</strong> </td><td>A</td><td>bus</td><td>Bus A fährt in Burgstädt</td><td>Sportzentrum</td><td>Heiersdorf</td><td>RBM</td></tr>
+    </tbody>
+</table>
+<p>
+   1.) und 2.) sind nur mit Hilfe von 'Von'/'from' und 'Nach'/'to' unterscheidbar, da 'Betreiber'/'operator' identisch (='RVE') sind.<br>
+   1.) und 3.) sowie 2.) und 3.) sind an Hand von 'Betreiber'/'operator' unterscheidbar, da diese unterschiedlich sind (='RVE' bzw. ='RBM').
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="ref">Linie (ref=)</th><th class="relation">Relation (id=)</th><th class="type">Typ (type=)</th><th class="route_type">Verkehrsmittel (route(_master)=)</th><th class="name">Name (name=)</th><th class="network">Netz (network=)</th><th class="operator">Betreiber (operator=)</th><th class="from">Von (from=)</th><th class="via">Über (via=)</th><th class="to">Nach (to=)</th><th class="PTv">PTv</th><th class="issues">Fehler</th><th class="notes">Anmerkungen</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="-39188" data-ref="A" class="line"><td class="ref">A</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39188</td><td class="type">route</td><td class="route_type">bus</td><td class="name">Bus A: Route-4-1 =&gt; Route-4-3</td><td class="network">VMS</td><td class="operator">KLM</td><td class="from">Route-4-1</td><td class="via"></td><td class="to">Route-4-3</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+                <tr data-info="-39190" data-ref="A" class="line"><td class="ref">A</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39190</td><td class="type">route</td><td class="route_type">bus</td><td class="name">Bus A: Route-4-3 =&gt; Route-4-1</td><td class="network">VMS</td><td class="operator">KLM</td><td class="from">Route-4-3</td><td class="via"></td><td class="to">Route-4-1</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+                <tr data-info="-39192" data-ref="A" class="line"><td class="ref">A</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39192</td><td class="type">route_master</td><td class="route_type">bus</td><td class="name">Bus A: Route-4-1 &lt;=&gt; Route-4-3</td><td class="network">VMS</td><td class="operator">KLM</td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <h1 id="networkdetails">4 Details zu 'network'-Werten</h1>
+        <h2 id="considerednetworks">4.1 Berücksichtigte 'network' Werte</h2>
+<p>
+Dieser Abschnitt listet die 'network'-Werte auf, die berücksichtigt wurden, d.h. einen der oben genannten Werte enthält.
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="network">Netz (network=)</th><th class="number">Anzahl</th><th class="relations">Relationen</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="VMS" data-ref="???" class="line"><td class="network">VMS</td><td class="number">12</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> 'A' -39170, <img src="/img/Relation.svg" alt="Relation" /> 'A' -39172, <img src="/img/Relation.svg" alt="Relation" /> 'A' -39174, <img src="/img/Relation.svg" alt="Relation" /> 'A' -39176, <img src="/img/Relation.svg" alt="Relation" /> 'A' -39178, <img src="/img/Relation.svg" alt="Relation" /> 'A' -39180, <img src="/img/Relation.svg" alt="Relation" /> 'A' -39182, <img src="/img/Relation.svg" alt="Relation" /> 'A' -39184, <img src="/img/Relation.svg" alt="Relation" /> 'A' -39186, <img src="/img/Relation.svg" alt="Relation" /> 'A' -39188 and more ...</td></tr>
+            </tbody>
+        </table>
+
+    </body>
+</html>

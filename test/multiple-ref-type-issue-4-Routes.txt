@@ -1,0 +1,50 @@
+<pre>
+#
+# Format:
+#
+# Headers start with '=', '==', '===', '====', ... at the beginning of a line, format is like in the OSM Wiki
+#
+# Simple text starts with '-' at the beginning of a line, format is like in the OSM Wiki, a single '-' will cause a new line (new paragraph).
+# Simple text starts may only be placed directly after a header line.
+#
+# Links: [[...|...]] are interne link like in the OSM Wiki
+#        [... ...] are external links
+#
+# Comments start with '#' at the beginning of a line. '#' inside text is not recognized as the start of a comment.
+#
+# Format of the file: UNIX (LF), UTF-8
+#
+#
+# Cotents in CSV-Format
+#
+# ref;type;comment;from;to;operator
+#
+# - ref       == tag 'ref' of route or route_master
+# - type      == contents of tags 'route' respectively 'route_master'
+# - comment   == can include comments like; Bus, Expressbus, ...  will not be analyze, but simply be printed out
+# - from      == if there is more than one entry with "ref;type" and "operator" is the same, then 'from' and 'to are also used to distinguish between same line number in different cities/villages
+# - to        == if there is more than one entry with "ref;type" and "operator" is the same, then 'from' and 'to are also used to distinguish between same line number in different cities/villages
+# - operator  == if there is more than one entry with "ref;type", then "operator" is used to distinguish between same line number in different cities/villages
+#
+
+
+= Test file for issue #4 - multiple appearance of "ref;type" value for different lines in different areas
+
+- We test with 4 expected bus routes, all having "A" as the 'ref'
+-
+- Two of them have identical 'operator' but different 'from' and 'to'
+
+== Bus 'A' in Annaberg-Buchholz: Barbara-Uthmann-Ring => Buchholz, operated by Operator RVE
+A;bus;Bus A fährt in Annaberg-Buchholz;Barbara-Uthmann-Ring;Buchholz;RVE
+
+== Bus 'A' in Aue: Postplatz => Postplatz, operated also by Operator RVE but different 'from' and 'to'
+A;bus;Bus A fährt in Aue;Postplatz;Postplatz;RVE
+
+== Bus 'A' in Burgstädt: Sportzentrum => Heiersdorf, operated by Operator RBM
+A;bus;Bus A fährt in Burgstädt;Sportzentrum;Heiersdorf;RBM
+
+== Missing Bus 'A' in XYZ: Platz1 => Platz2, operated by Operator ABC
+A;bus;Bus A fährt in XYZ;Platz1;Platz2;ABC
+
+
+</pre>

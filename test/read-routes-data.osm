@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' upload='false' generator='JOSM'>
+  <bounds minlat='48.069032' minlon='11.6330838' maxlat='48.0716416' maxlon='11.6389203' origin='CGImap 0.6.1 (13164 thorn-03.openstreetmap.org)' />
+  <bounds minlat='48.069032' minlon='11.6330838' maxlat='48.0716416' maxlon='11.6389203' origin='OpenStreetMap server' />
+  <relation id='-39096' action='modify'>
+    <tag k='from' v='from' />
+    <tag k='name' v='Bus 605: from =&gt; to' />
+    <tag k='network' v='network' />
+    <tag k='operator' v='operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='605' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='to' />
+    <tag k='type' v='route' />
+  </relation>
+</osm>
