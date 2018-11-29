@@ -11,6 +11,9 @@ BEGIN { my $PATH = $0; $PATH =~ s|bin/[^/]*$|modules|; unshift( @INC, $PATH ); }
 #
 ####################################################################################################################
 
+use POSIX;
+use Locale::gettext;
+
 use utf8;
 binmode STDOUT, ":utf8";
 binmode STDERR, ":utf8";
@@ -30,6 +33,7 @@ my %have_seen_well_known_other_route_types  = ();
 my %have_seen_well_known_network_types      = ();
 my %have_seen_well_known_other_types        = ();
 
+my $opt_language                    = undef;
 my $verbose                         = undef;
 my $debug                           = undef;
 my $osm_xml_file                    = undef;
@@ -71,6 +75,7 @@ my $page_title                      = undef;
 
 GetOptions( 'help'                          =>  \$help,                         # -h or --help                      help
             'man'                           =>  \$man_page,                     # --man                             manual pages
+            'language=s'                    =>  \$opt_language,                 # --language=de                     I18N
             'verbose'                       =>  \$verbose,                      # --verbose
             'debug'                         =>  \$debug,                        # --debug
             'allow-coach'                   =>  \$allow_coach,                  # --allow-coach                     allow 'coach' als valid routetype
@@ -120,6 +125,7 @@ $expect_network_short_for   = decode('utf8', $expect_network_short_for )    if (
 
 if ( $verbose ) {
     printf STDERR "%s analyze-routes.pl -v\n", get_time();
+    printf STDERR "%20s--language='%s'\n",                 ' ', $opt_language                  if ( $opt_language                );
     printf STDERR "%20s--title='%s'\n",                    ' ', $page_title                    if ( $page_title                  );
     printf STDERR "%20s--network-guid='%s'\n",             ' ', $network_guid                  if ( $network_guid                );
     printf STDERR "%20s--allow-coach\n",                   ' '                                 if ( $allow_coach                 );
@@ -154,6 +160,17 @@ if ( $verbose ) {
     printf STDERR "%20s--routes-file='%s'\n",              ' ', decode('utf8', $routes_file )  if ( $routes_file                 );
     printf STDERR "%20s--osm-xml-file='%s'\n",             ' ', decode('utf8', $osm_xml_file ) if ( $osm_xml_file                );
 }
+
+
+
+if ( $opt_language ) {
+    setlocale( LC_ALL, "" );
+    my $PATH = $0;
+    $PATH =~ s|bin/[^/]*$|locale|; 
+    bindtextdomain( 'ptna', $PATH );
+    textdomain( "ptna" );
+    $ENV{'LANG'} = $opt_language;
+}    
 
 if ( $allow_coach ) {
     push( @supported_route_types, 'coach' );
@@ -212,39 +229,39 @@ my $areas                           = '';
 my @HTML_start                      = ();
 my @HTML_main                       = ();
 
-my %column_name             = ( 'ref'           => 'Linie (ref=)',
-                                'relation'      => 'Relation (id=)',
-                                'relations'     => 'Relationen',                # comma separated list of relation-IDs
-                                'name'          => 'Name (name=)',
-                                'number'        => 'Anzahl',
-                                'network'       => 'Netz (network=)',
-                                'operator'      => 'Betreiber (operator=)',
-                                'from'          => 'Von (from=)',
-                                'via'           => 'Über (via=)',
-                                'to'            => 'Nach (to=)',
-                                'issues'        => 'Fehler',
-                                'notes'         => 'Anmerkungen',
-                                'type'          => 'Typ (type=)',
-                                'route_type'    => 'Verkehrsmittel (route(_master)=)',
-                                'PTv'           => '',
-                                'Comment'       => 'Kommentar',
-                                'From'          => 'Von',
-                                'To'            => 'Nach',
-                                'Operator'      => 'Betreiber',
+my %column_name             = ( 'ref'           => gettext('Line (ref=)'),
+                                'relation'      => gettext('Relation (id=)'),
+                                'relations'     => gettext('Relations'),                 # comma separated list of relation-IDs
+                                'name'          => gettext('Name (name=)'),
+                                'number'        => gettext('Number'),
+                                'network'       => gettext('Network (network=)'),
+                                'operator'      => gettext('Operator (operator=)'),
+                                'from'          => gettext('From (from=)'),
+                                'via'           => gettext('Via (via=)'),
+                                'to'            => gettext('To (to=)'),
+                                'issues'        => gettext('Errors'),
+                                'notes'         => gettext('Notes'),
+                                'type'          => gettext('Type (type=)'),
+                                'route_type'    => gettext('Vehicle (route(_master)=)'),
+                                'PTv'           => gettext('PTv'),
+                                'Comment'       => gettext('Comment'),
+                                'From'          => gettext('From'),
+                                'To'            => gettext('To'),
+                                'Operator'      => gettext('Operator'),
                               );
 
-my %transport_types         = ( 'bus'           => 'Bus',
-                                'coach'         => 'Fernbus',
-                                'share_taxi'    => '(Anruf-)Sammel-Taxi',
-                                'train'         => 'Zug/S-Bahn',
-                                'tram'          => 'Tram/Straßenbahn',
-                                'subway'        => 'U-Bahn',
-                                'light_rail'    => 'Light-Rail',
-                                'trolleybus'    => 'Trolley Bus',
-                                'ferry'         => 'Fähre',
-                                'monorail'      => 'Mono-Rail',
-                                'aerialway'     => 'Seilbahn',
-                                'funicular'     => 'Drahtseilbahn'
+my %transport_types         = ( 'bus'           => gettext('Bus'),
+                                'coach'         => gettext('Coach'),
+                                'share_taxi'    => gettext('Share-Taxi'),
+                                'train'         => gettext('Train/Suburban-Train'),
+                                'tram'          => gettext('Tram/Streetcar'),
+                                'subway'        => gettext('Subway/Underground'),
+                                'light_rail'    => gettext('Light-Rail'),
+                                'trolleybus'    => gettext('Trolley Bus'),
+                                'ferry'         => gettext('Ferry'),
+                                'monorail'      => gettext('Mono-Rail'),
+                                'aerialway'     => gettext('Aerialway'),
+                                'funicular'     => gettext('Funicular')
                               );
 
 my %colour_table            = ( 'black'         => '#000000',
@@ -3728,6 +3745,7 @@ sub printInitialHeader {
     push( @HTML_start, "<html lang=\"de\">\n" );
     push( @HTML_start, "    <head>\n" );
     push( @HTML_start, sprintf( "        <title>%sPTNA - Public Transport Network Analysis</title>\n", ($title ? html_escape($title) . ' - ' : '') ) );
+    push( @HTML_start, "        <meta charset=\"utf-8\" />\n" );
     push( @HTML_start, "        <meta name=\"generator\" content=\"PTNA\">\n" );
     push( @HTML_start, "        <meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\" />\n" );
     push( @HTML_start, "        <meta name=\"keywords\" content=\"OSM Public Transport PTv2\">\n" );
@@ -3746,6 +3764,7 @@ sub printInitialHeader {
     push( @HTML_start, "              .relation         { white-space:nowrap; }\n" );
     push( @HTML_start, "              .PTv              { text-align:center; }\n" );
     push( @HTML_start, "              .number           { text-align:right; }\n" );
+    push( @HTML_start, "              .attention        { background-color: yellow; font-weight: 500; font-size: 1.2em; }\n" );
     push( @HTML_start, "        </style>\n" );
     push( @HTML_start, "    </head>\n" );
     push( @HTML_start, "    <body>\n" );
@@ -4106,7 +4125,7 @@ sub printText {
     $printText_buffer = "<p>\n"   unless ( $printText_buffer );
 
     if ( $text ) {
-        $printText_buffer .= sprintf( "%s \n", wiki2html($text) );
+        $printText_buffer .= sprintf( "%s\n", wiki2html($text) );
     } else {
         push( @HTML_main, $printText_buffer . "\n</p>\n" );
         $printText_buffer = '';
@@ -4183,17 +4202,20 @@ sub printTableSubHeader {
         $ref_text = $ref;
     }
 
-    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'Comment'}  ? $column_name{'Comment'}  : 'Comment' ),  $hash{'Comment'}  )  if ( $hash{'Comment'}  );
-    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'From'}     ? $column_name{'From'}     : 'From' ),     $hash{'From'}     )  if ( $hash{'From'}     );
-    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'To'}       ? $column_name{'To'}       : 'To' ),       $hash{'To'}       )  if ( $hash{'To'}       );
-    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'Operator'} ? $column_name{'Operator'} : 'Operator' ), $hash{'Operator'} )  if ( $hash{'Operator'} );
+    if ( $hash{'Comment'}  ) {
+        $csv_text .= sprintf( "%s: %s; ", ( $column_name{'Comment'}  ? $column_name{'Comment'}  : 'Comment' ),  html_escape($hash{'Comment'})  );
+        $csv_text =~ s|!([^!]+)!|<span class=\"attention\">$1</span>|;
+    }
+    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'From'}     ? $column_name{'From'}     : 'From' ),     html_escape($hash{'From'})     )  if ( $hash{'From'}     );
+    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'To'}       ? $column_name{'To'}       : 'To' ),       html_escape($hash{'To'})       )  if ( $hash{'To'}       );
+    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'Operator'} ? $column_name{'Operator'} : 'Operator' ), html_escape($hash{'Operator'}) )  if ( $hash{'Operator'} );
     $csv_text =~ s/; $//;
     
     $info = $csv_text ? $csv_text : '???';
     $info =~ s/\"/_/g;
 
     if ( $no_of_columns > 1 && $ref && $ref_text ) {
-        push( @HTML_main, sprintf( "%16s<tr data-info=\"%s\" data-ref=\"%s\" class=\"sketchline\"><td class=\"sketch\">%s</td><td class=\"csvinfo\" colspan=\"%d\">%s</td></tr>\n", ' ', $info, $ref, $ref_text, $no_of_columns-1, html_escape($csv_text) ) );
+        push( @HTML_main, sprintf( "%16s<tr data-info=\"%s\" data-ref=\"%s\" class=\"sketchline\"><td class=\"sketch\">%s</td><td class=\"csvinfo\" colspan=\"%d\">%s</td></tr>\n", ' ', $info, $ref, $ref_text, $no_of_columns-1, $csv_text ) );
     }
 }
 
@@ -4448,11 +4470,17 @@ sub wiki2html {
             $sub = sprintf( "<a href=\"%s\">%s</a>", $1, $2 );
             $text =~ s/\[[^ ]+ [^\]]+\]/$sub/;
         }
-        while ( $text =~ m/'''(.?)'''/g ) {
-            $sub = sprintf( "<strong>%s</strong>", $1 );
+        while ( $text =~ m/'''''(.+?)'''''/g ) {
+            $sub = sprintf( "<strong><em>%s</em></strong>", $1 );
+            $text =~ s/'''''(.+?)'''''/$sub/;
         }
-        while ( $text =~ m/''(.?)''/g ) {
+        while ( $text =~ m/'''(.+?)'''/g ) {
+            $sub = sprintf( "<strong>%s</strong>", $1 );
+            $text =~ s/'''(.+?)'''/$sub/;
+        }
+        while ( $text =~ m/''(.+?)''/g ) {
             $sub = sprintf( "<em>%s</em>", $1 );
+            $text =~ s/''(.+?)''/$sub/;
         }
     }
     return $text;

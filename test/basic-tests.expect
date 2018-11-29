@@ -2,6 +2,7 @@
 <html lang="de">
     <head>
         <title>PTNA - Public Transport Network Analysis</title>
+        <meta charset="utf-8" />
         <meta name="generator" content="PTNA">
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <meta name="keywords" content="OSM Public Transport PTv2">
@@ -20,6 +21,7 @@
               .relation         { white-space:nowrap; }
               .PTv              { text-align:center; }
               .number           { text-align:right; }
+              .attention        { background-color: yellow; font-weight: 500; font-size: 1.2em; }
         </style>
     </head>
     <body>
@@ -55,7 +57,7 @@
         <h2 id="A2.1">2.1 Bus</h2>
         <table class="oepnvtable">
             <thead>
-                <tr class="tableheaderrow"><th class="ref">Linie (ref=)</th><th class="relation">Relation (id=)</th><th class="type">Typ (type=)</th><th class="route_type">Verkehrsmittel (route(_master)=)</th><th class="name">Name (name=)</th><th class="network">Netz (network=)</th><th class="operator">Betreiber (operator=)</th><th class="from">Von (from=)</th><th class="via">Über (via=)</th><th class="to">Nach (to=)</th><th class="PTv">PTv</th><th class="issues">Fehler</th><th class="notes">Anmerkungen</th></tr>
+                <tr class="tableheaderrow"><th class="ref">Line (ref=)</th><th class="relation">Relation (id=)</th><th class="type">Type (type=)</th><th class="route_type">Vehicle (route(_master)=)</th><th class="name">Name (name=)</th><th class="network">Network (network=)</th><th class="operator">Operator (operator=)</th><th class="from">From (from=)</th><th class="via">Via (via=)</th><th class="to">To (to=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
                 <tr data-info="-39139" data-ref="001" class="line"><td class="ref">001</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39139</td><td class="type">route_master</td><td class="route_type">bus</td><td class="name">Bus 001</td><td class="network">Test</td><td class="operator">Test</td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
@@ -72,7 +74,7 @@ Dieser Abschnitt listet die 'network'-Werte auf, die berücksichtigt wurden, d.h
 </p>
         <table class="oepnvtable">
             <thead>
-                <tr class="tableheaderrow"><th class="network">Netz (network=)</th><th class="number">Anzahl</th><th class="relations">Relationen</th></tr>
+                <tr class="tableheaderrow"><th class="network">Network (network=)</th><th class="number">Number</th><th class="relations">Relations</th></tr>
             </thead>
             <tbody>
                 <tr data-info="Test" data-ref="???" class="line"><td class="network">Test</td><td class="number">3</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '001' -39120, <img src="/img/Relation.svg" alt="Relation" /> '001' -39126, <img src="/img/Relation.svg" alt="Relation" /> '001' -39139</td></tr>

@@ -1,0 +1,165 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-11-29 22:02+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../bin/ptna-routes.pl:232
+msgid "Line (ref=)"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:233
+msgid "Relation (id=)"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:234
+msgid "Relations"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:235
+msgid "Name (name=)"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:236
+msgid "Number"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:237
+msgid "Network (network=)"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:238
+msgid "Operator (operator=)"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:239
+msgid "From (from=)"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:240
+msgid "Via (via=)"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:241
+msgid "To (to=)"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:242
+msgid "Errors"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:243
+msgid "Notes"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:244
+msgid "Type (type=)"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:245
+msgid "Vehicle (route(_master)=)"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:246
+msgid "PTv"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:247
+msgid "Comment"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:248
+msgid "From"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:249
+msgid "To"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:250
+msgid "Operator"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:253
+msgid "Bus"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:254
+msgid "Coach"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:255
+msgid "Share-Taxi"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:256
+msgid "Train/Suburban-Train"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:257
+msgid "Tram/Streetcar"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:258
+msgid "Subway/Underground"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:259
+msgid "Light-Rail"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:260
+msgid "Trolley Bus"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:261
+msgid "Ferry"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:262
+msgid "Mono-Rail"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:263
+msgid "Aerialway"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:264
+msgid "Funicular"
+msgstr ""
+
+#: ../modules/RoutesList.pm:97
+msgid "ERROR"
+msgstr ""
+
+#: ../modules/RoutesList.pm:98
+#, perl-format
+msgid ""
+"Simple text inside table not supported. Line %s of Routes-Data. Contents of "
+"line: '%s'"
+msgstr ""
+
+#: ../modules/RoutesList.pm:140
+#, perl-format
+msgid ""
+"Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line: "
+"'%s'"
+msgstr ""
+
+#: ../modules/RoutesList.pm:146
+#, perl-format
+msgid "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'"
+msgstr ""

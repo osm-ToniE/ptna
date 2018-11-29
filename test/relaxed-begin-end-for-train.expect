@@ -2,6 +2,7 @@
 <html lang="de">
     <head>
         <title>PTNA - Public Transport Network Analysis</title>
+        <meta charset="utf-8" />
         <meta name="generator" content="PTNA">
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <meta name="keywords" content="OSM Public Transport PTv2">
@@ -20,6 +21,7 @@
               .relation         { white-space:nowrap; }
               .PTv              { text-align:center; }
               .number           { text-align:right; }
+              .attention        { background-color: yellow; font-weight: 500; font-size: 1.2em; }
         </style>
     </head>
     <body>
@@ -30,7 +32,7 @@
         </li>
         <li>2 <a href="#otherslines">ÖPNV Linien</a>
         <ol>
-        <li>2.1 <a href="#A2.1">Zug/S-Bahn</a>
+        <li>2.1 <a href="#A2.1">Train/Suburban-Train</a>
         </li>
         </ol>
         </li>
@@ -52,10 +54,10 @@
 </p>
         <hr />
         <h1 id="otherslines">2 ÖPNV Linien</h1>
-        <h2 id="A2.1">2.1 Zug/S-Bahn</h2>
+        <h2 id="A2.1">2.1 Train/Suburban-Train</h2>
         <table class="oepnvtable">
             <thead>
-                <tr class="tableheaderrow"><th class="ref">Linie (ref=)</th><th class="relation">Relation (id=)</th><th class="type">Typ (type=)</th><th class="route_type">Verkehrsmittel (route(_master)=)</th><th class="name">Name (name=)</th><th class="network">Netz (network=)</th><th class="operator">Betreiber (operator=)</th><th class="from">Von (from=)</th><th class="via">Über (via=)</th><th class="to">Nach (to=)</th><th class="PTv">PTv</th><th class="issues">Fehler</th><th class="notes">Anmerkungen</th></tr>
+                <tr class="tableheaderrow"><th class="ref">Line (ref=)</th><th class="relation">Relation (id=)</th><th class="type">Type (type=)</th><th class="route_type">Vehicle (route(_master)=)</th><th class="name">Name (name=)</th><th class="network">Network (network=)</th><th class="operator">Operator (operator=)</th><th class="from">From (from=)</th><th class="via">Via (via=)</th><th class="to">To (to=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
                 <tr data-info="-39294" data-ref="1" class="line"><td class="ref">1</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39294</td><td class="type">route</td><td class="route_type">train</td><td class="name">Linie 1: A 1 =&gt; E 1</td><td class="network">Privat</td><td class="operator">Privat</td><td class="from">A 1</td><td class="via"></td><td class="to">E 1</td><td class="PTv">2</td><td class="issues">PTv2 route: there is no stop position of this route on the first way, except the last node == first node of next way: <img src="/img/Way.svg" alt="Way" /> 'L1-W1' -39258<br>PTv2 route: there is no stop position of this route on the last way, except the first node == last node of previous way: <img src="/img/Way.svg" alt="Way" /> 'L1-W6' -39264</td><td class="notes">&#039;comment&#039; = PTv2 route: there is no stop position of this route on the first way, except the last node == first node of next way: Way L1-W1 PTv2 route: there is no stop position of this route on the last way, except the first node == last node of previous way: Way L1-W6</td></tr>
@@ -74,7 +76,7 @@ Dieser Abschnitt listet die 'network'-Werte auf, die berücksichtigt wurden, d.h
 </p>
         <table class="oepnvtable">
             <thead>
-                <tr class="tableheaderrow"><th class="network">Netz (network=)</th><th class="number">Anzahl</th><th class="relations">Relationen</th></tr>
+                <tr class="tableheaderrow"><th class="network">Network (network=)</th><th class="number">Number</th><th class="relations">Relations</th></tr>
             </thead>
             <tbody>
                 <tr data-info="Privat" data-ref="???" class="line"><td class="network">Privat</td><td class="number">5</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '1' -39294, <img src="/img/Relation.svg" alt="Relation" /> '2' -39296, <img src="/img/Relation.svg" alt="Relation" /> '3' -39298, <img src="/img/Relation.svg" alt="Relation" /> '4' -39300, <img src="/img/Relation.svg" alt="Relation" /> '5' -39302</td></tr>

@@ -1,0 +1,178 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ptna 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-11-29 22:02+0100\n"
+"PO-Revision-Date: 2018-11-29 22:02+0100\n"
+"Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
+"Language-Team: osm-ToniE <osm-ToniE@web.de>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.9\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: bin\n"
+"X-Poedit-SearchPath-1: modules\n"
+
+#: bin/ptna-routes.pl:232
+msgid "Line (ref=)"
+msgstr "Linie (ref=)"
+
+#: bin/ptna-routes.pl:233
+msgid "Relation (id=)"
+msgstr "Relation (id=)"
+
+#: bin/ptna-routes.pl:234
+msgid "Relations"
+msgstr "Relationen"
+
+#: bin/ptna-routes.pl:235
+msgid "Name (name=)"
+msgstr "Name (name=)"
+
+#: bin/ptna-routes.pl:236
+msgid "Number"
+msgstr "Anzahl"
+
+#: bin/ptna-routes.pl:237
+msgid "Network (network=)"
+msgstr "Verkehrsverbund (network=)"
+
+#: bin/ptna-routes.pl:238
+msgid "Operator (operator=)"
+msgstr "Betreiber (operator=)"
+
+#: bin/ptna-routes.pl:239
+msgid "From (from=)"
+msgstr "Von (from=)"
+
+#: bin/ptna-routes.pl:240
+msgid "Via (via=)"
+msgstr "&Uuml;ber (via=)"
+
+#: bin/ptna-routes.pl:241
+msgid "To (to=)"
+msgstr "Nach (to=)"
+
+#: bin/ptna-routes.pl:242
+msgid "Errors"
+msgstr "Fehler"
+
+#: bin/ptna-routes.pl:243
+msgid "Notes"
+msgstr "Anmerkungen"
+
+#: bin/ptna-routes.pl:244
+msgid "Type (type=)"
+msgstr "Typ (type=)"
+
+#: bin/ptna-routes.pl:245
+msgid "Vehicle (route(_master)=)"
+msgstr "Fahrzeug (route(_master)=)"
+
+#: bin/ptna-routes.pl:246
+msgid "PTv"
+msgstr "PTv"
+
+#: bin/ptna-routes.pl:247
+msgid "Comment"
+msgstr "Kommentar"
+
+#: bin/ptna-routes.pl:248
+msgid "From"
+msgstr "Von"
+
+#: bin/ptna-routes.pl:249
+msgid "To"
+msgstr "Nach"
+
+#: bin/ptna-routes.pl:250
+msgid "Operator"
+msgstr "Betreiber"
+
+#: bin/ptna-routes.pl:253
+msgid "Bus"
+msgstr "Bus"
+
+#: bin/ptna-routes.pl:254
+msgid "Coach"
+msgstr "Fernbus"
+
+#: bin/ptna-routes.pl:255
+msgid "Share-Taxi"
+msgstr "(Anruf-)Sammel-Taxi"
+
+#: bin/ptna-routes.pl:256
+msgid "Train/Suburban-Train"
+msgstr "Zug/S-Bahn"
+
+#: bin/ptna-routes.pl:257
+msgid "Tram/Streetcar"
+msgstr "Tram/Stra&szlig;enbahn"
+
+#: bin/ptna-routes.pl:258
+msgid "Subway/Underground"
+msgstr "U-Bahn"
+
+#: bin/ptna-routes.pl:259
+msgid "Light-Rail"
+msgstr "Light-Rail"
+
+#: bin/ptna-routes.pl:260
+msgid "Trolley Bus"
+msgstr "Trolley Bus"
+
+#: bin/ptna-routes.pl:261
+msgid "Ferry"
+msgstr "F&äuml;hre"
+
+#: bin/ptna-routes.pl:262
+msgid "Mono-Rail"
+msgstr "Mono-Rail"
+
+#: bin/ptna-routes.pl:263
+msgid "Aerialway"
+msgstr "Seilbahn"
+
+#: bin/ptna-routes.pl:264
+msgid "Funicular"
+msgstr "Drahtseilbahn"
+
+#: modules/RoutesList.pm:97
+msgid "ERROR"
+msgstr "FEHLER"
+
+#: modules/RoutesList.pm:98
+#, perl-format
+msgid ""
+"Simple text inside table not supported. Line %s of Routes-Data. Contents of "
+"line: '%s'"
+msgstr ""
+"Einfacher Text innerhalb von Tabellen wird nicht unterst&uuml;tzt. Zeile %s "
+"der Routen-Daten. Inhalt der Zeile: '%s'"
+
+#: modules/RoutesList.pm:140
+#, perl-format
+msgid ""
+"Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line: "
+"'%s'"
+msgstr ""
+"Route-Typ wird nicht unterst&uuml;tzt: '%s'. Zeile %s der Routen-Daten. "
+"Inhalt der Zeile: '%s'"
+
+#: modules/RoutesList.pm:146
+#, perl-format
+msgid "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'"
+msgstr ""
+"Route-Typ ist nicht definiert. Zeile %s der Routen-Daten. Inhalt der Zeile: "
+"'%s'"
+
+#~ msgid "(Call-)Collect-Taxi"
+#~ msgstr "(Anruf-)Sammel-TAxi"

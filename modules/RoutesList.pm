@@ -2,6 +2,9 @@ package RoutesList;
 
 use strict;
 
+use POSIX;
+use Locale::gettext;
+
 use utf8;
 binmode STDOUT, ":utf8";
 binmode STDERR, ":utf8";
@@ -91,8 +94,8 @@ sub ReadRoutes {
                                 $hashref->{'text'}       =~ s/^\s*//;
                             } elsif ( $last_type ne 'none' ) {
                                 $hashref->{'type'}  = 'error';                                                                                  # this is an error
-                                $hashref->{'ref'}   = 'ERROR';                                                                                  # this is an error
-                                $hashref->{'error'} = sprintf( "Simple text inside table not supported. Line %s of Routes-Data. Contents of line: '%s'", $NR, $hashref->{'contents'} );    # this is an error
+                                $hashref->{'ref'}   = gettext('ERROR');                                                                                  # this is an error
+                                $hashref->{'error'} = sprintf( gettext("Simple text inside table not supported. Line %s of Routes-Data. Contents of line: '%s'"), $NR, $hashref->{'contents'} );    # this is an error
                             }
 
                         } else {
@@ -134,13 +137,13 @@ sub ReadRoutes {
                                         # this $ExpRouteType is not a valid one
                                         $hashref->{'type'}  = 'error';                                                                      # this is an error
                                         $hashref->{'ref'}   = $ExpRef;                                              # this is an error
-                                        $hashref->{'error'} = sprintf( "Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line: '%s'", $ExpRouteType, $NR, $hashref->{'contents'} );    # this is an error
+                                        $hashref->{'error'} = sprintf( gettext("Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line: '%s'"), $ExpRouteType, $NR, $hashref->{'contents'} );    # this is an error
                                     }
                                 } else {
                                     # if there is at least one separator, then $ExpRouteType as the second value must not be empty
                                     $hashref->{'type'}  = 'error';                                              # this is an error
                                     $hashref->{'ref'}   = $ExpRef;                                              # this is an error
-                                    $hashref->{'error'} = sprintf( "Route-Type is not set. Line %d of Routes-Data. Contents of line: '%s'", $NR, $hashref->{'contents'} );   # this is an error
+                                    $hashref->{'error'} = sprintf( gettext("Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'"), $NR, $hashref->{'contents'} );   # this is an error
                                 }
                             }
                         #} elsif ( m/(\S)/ ) {

@@ -45,6 +45,13 @@
 - simple text in a paragraph
 -
 - new paragraph
+-
+- simple text in '''''strong and em'''''er and '''''stronger and more em'''''
+-
+- simple text in '''strong'''er and '''stronger'''
+-
+- simple text in ''em'' and even more ''em''
+-
 
 
 010;train;ICE;Hamburg;Munich;Deutsche Bahn
@@ -71,6 +78,7 @@
 605;bus;comment;from;to;operator
 606;bus;;;;operator
 700;auto;invalid route-type;nowhere;nowhere;noone
+800;bus;!Neue Buslinie ab 09.12.2018!;nowhere;nowhere;noone
 
 
 </pre>
