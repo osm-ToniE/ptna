@@ -26,9 +26,9 @@
     </head>
     <body>
         <div id="toc">
-        <h1>Inhalt</h1>
+        <h1>Contents</h1>
         <ol>
-        <li>1 <a href="#hints">Hinweis</a>
+        <li>1 <a href="#hints">Hints</a>
         </li>
         <li>2 <a href="#A2">Test file for Read Routes Data</a>
         <ol>
@@ -54,21 +54,21 @@
         </li>
         </ol>
         </li>
-        <li>3 <a href="#networkdetails">Details zu 'network'-Werten</a>
+        <li>3 <a href="#networkdetails">Details for 'network'-Values</a>
         <ol>
-        <li>3.1 <a href="#considerednetworks">Berücksichtigte 'network' Werte</a>
+        <li>3.1 <a href="#considerednetworks">Considered 'network'-Values</a>
         </li>
         </ol>
         </li>
         </ol>
         </div> <!-- toc -->
         <hr />
-        <h1 id="hints">1 Hinweis</h1>
+        <h1 id="hints">1 Hints</h1>
 <p>
-    Die Daten werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändert hat.
+    The data will be updated when the result of the analysis has changed.
 </p>
 <p>
-    Eine Erläuterung der Fehlertexte ist in der Dokumentation unter <a href='/documentation.html#checks'>Prüfungen</a> zu finden.
+    An explanation of the error texts can be found in the documentation at <a href='/documentation.html#checks'>'Check'</a> zu finden.
 </p>
         <hr />
         <h1 id="A2">2 Test file for Read Routes Data</h1>
@@ -98,6 +98,10 @@ simple text in <strong>strong</strong>er and <strong>stronger</strong>
 simple text in <em>em</em> and even more <em>em</em>
 
 </p>
+<p>
+<span class="attention">Something very important</class>
+
+</p>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
@@ -106,33 +110,33 @@ simple text in <em>em</em> and even more <em>em</em>
                 <tr data-info="Comment: ICE; From: Hamburg; To: Munich; Operator: Deutsche Bahn" data-ref="010" class="sketchline"><td class="sketch">010</td><td class="csvinfo" colspan="5">Comment: ICE; From: Hamburg; To: Munich; Operator: Deutsche Bahn</td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='010' and route='train'</td><td class="notes"></td></tr>
                 <tr data-info="???" data-ref="100" class="sketchline"><td class="sketch">100</td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not set. Line 58 of Routes-Data. Contents of line: '100'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not set. Line 60 of Routes-Data. Contents of line: '100'</td><td class="notes"></td></tr>
                 <tr data-info="???" data-ref="200" class="sketchline"><td class="sketch">200</td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not set. Line 59 of Routes-Data. Contents of line: '200;'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not set. Line 61 of Routes-Data. Contents of line: '200;'</td><td class="notes"></td></tr>
                 <tr data-info="???" data-ref="201" class="sketchline"><td class="sketch">201</td><td class="csvinfo" colspan="5"></td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='201' and route='bus'</td><td class="notes"></td></tr>
                 <tr data-info="???" data-ref="ERROR" class="sketchline"><td class="sketch">ERROR</td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Simple text inside table not supported. Line 62 of Routes-Data. Contents of line: '- text inside table not supported'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Simple text inside table not supported. Line 64 of Routes-Data. Contents of line: '- text inside table not supported'</td><td class="notes"></td></tr>
                 <tr data-info="???" data-ref="300" class="sketchline"><td class="sketch">300</td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not set. Line 64 of Routes-Data. Contents of line: '300;;'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not set. Line 66 of Routes-Data. Contents of line: '300;;'</td><td class="notes"></td></tr>
                 <tr data-info="???" data-ref="301" class="sketchline"><td class="sketch">301</td><td class="csvinfo" colspan="5"></td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='301' and route='bus'</td><td class="notes"></td></tr>
                 <tr data-info="Comment: comment" data-ref="302" class="sketchline"><td class="sketch">302</td><td class="csvinfo" colspan="5">Comment: comment</td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='302' and route='bus'</td><td class="notes"></td></tr>
                 <tr data-info="???" data-ref="400" class="sketchline"><td class="sketch">400</td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not set. Line 67 of Routes-Data. Contents of line: '400;;;'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not set. Line 69 of Routes-Data. Contents of line: '400;;;'</td><td class="notes"></td></tr>
                 <tr data-info="Comment: comment" data-ref="401" class="sketchline"><td class="sketch">401</td><td class="csvinfo" colspan="5">Comment: comment</td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='401' and route='bus'</td><td class="notes"></td></tr>
                 <tr data-info="Comment: comment; From: from" data-ref="402" class="sketchline"><td class="sketch">402</td><td class="csvinfo" colspan="5">Comment: comment; From: from</td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='402' and route='bus'</td><td class="notes"></td></tr>
                 <tr data-info="???" data-ref="500" class="sketchline"><td class="sketch">500</td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not set. Line 70 of Routes-Data. Contents of line: '500;;;;'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not set. Line 72 of Routes-Data. Contents of line: '500;;;;'</td><td class="notes"></td></tr>
                 <tr data-info="Comment: comment; From: from" data-ref="501" class="sketchline"><td class="sketch">501</td><td class="csvinfo" colspan="5">Comment: comment; From: from</td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='501' and route='bus'</td><td class="notes"></td></tr>
                 <tr data-info="Comment: comment; From: from; To: to" data-ref="502" class="sketchline"><td class="sketch">502</td><td class="csvinfo" colspan="5">Comment: comment; From: from; To: to</td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='502' and route='bus'</td><td class="notes"></td></tr>
                 <tr data-info="???" data-ref="600" class="sketchline"><td class="sketch">600</td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not set. Line 73 of Routes-Data. Contents of line: '600;;;;;'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not set. Line 75 of Routes-Data. Contents of line: '600;;;;;'</td><td class="notes"></td></tr>
                 <tr data-info="???" data-ref="601" class="sketchline"><td class="sketch">601</td><td class="csvinfo" colspan="5"></td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='601' and route='bus'</td><td class="notes"></td></tr>
                 <tr data-info="Comment: comment" data-ref="602" class="sketchline"><td class="sketch">602</td><td class="csvinfo" colspan="5">Comment: comment</td></tr>
@@ -146,17 +150,17 @@ simple text in <em>em</em> and even more <em>em</em>
                 <tr data-info="Operator: operator" data-ref="606" class="sketchline"><td class="sketch">606</td><td class="csvinfo" colspan="5">Operator: operator</td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='606' and route='bus'</td><td class="notes"></td></tr>
                 <tr data-info="???" data-ref="700" class="sketchline"><td class="sketch">700</td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not supported: 'auto'. Line 80 of Routes-Data. Contents of line: '700;auto;invalid route-type;nowhere;nowhere;noone'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not supported: 'auto'. Line 82 of Routes-Data. Contents of line: '700;auto;invalid route-type;nowhere;nowhere;noone'</td><td class="notes"></td></tr>
                 <tr data-info="Comment: <span class=_attention_>Neue Buslinie ab 09.12.2018</span>; From: nowhere; To: nowhere; Operator: noone" data-ref="800" class="sketchline"><td class="sketch">800</td><td class="csvinfo" colspan="5">Comment: <span class="attention">Neue Buslinie ab 09.12.2018</span>; From: nowhere; To: nowhere; Operator: noone</td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='800' and route='bus'</td><td class="notes"></td></tr>
             </tbody>
         </table>
 
         <hr />
-        <h1 id="networkdetails">3 Details zu 'network'-Werten</h1>
-        <h2 id="considerednetworks">3.1 Berücksichtigte 'network' Werte</h2>
+        <h1 id="networkdetails">3 Details for 'network'-Values</h1>
+        <h2 id="considerednetworks">3.1 Considered 'network'-Values</h2>
 <p>
-Dieser Abschnitt listet die 'network'-Werte auf, die berücksichtigt wurden, d.h. einen der oben genannten Werte enthält.
+This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.
 </p>
         <table class="oepnvtable">
             <thead>

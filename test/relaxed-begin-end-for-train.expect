@@ -26,53 +26,53 @@
     </head>
     <body>
         <div id="toc">
-        <h1>Inhalt</h1>
+        <h1>Contents</h1>
         <ol>
-        <li>1 <a href="#hints">Hinweis</a>
+        <li>1 <a href="#hints">Hints</a>
         </li>
-        <li>2 <a href="#otherslines">ÖPNV Linien</a>
+        <li>2 <a href="#otherslines">Public Transport Lines</a>
         <ol>
         <li>2.1 <a href="#A2.1">Train/Suburban-Train</a>
         </li>
         </ol>
         </li>
-        <li>3 <a href="#networkdetails">Details zu 'network'-Werten</a>
+        <li>3 <a href="#networkdetails">Details for 'network'-Values</a>
         <ol>
-        <li>3.1 <a href="#considerednetworks">Berücksichtigte 'network' Werte</a>
+        <li>3.1 <a href="#considerednetworks">Considered 'network'-Values</a>
         </li>
         </ol>
         </li>
         </ol>
         </div> <!-- toc -->
         <hr />
-        <h1 id="hints">1 Hinweis</h1>
+        <h1 id="hints">1 Hints</h1>
 <p>
-    Die Daten werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändert hat.
+    The data will be updated when the result of the analysis has changed.
 </p>
 <p>
-    Eine Erläuterung der Fehlertexte ist in der Dokumentation unter <a href='/documentation.html#checks'>Prüfungen</a> zu finden.
+    An explanation of the error texts can be found in the documentation at <a href='/documentation.html#checks'>'Check'</a> zu finden.
 </p>
         <hr />
-        <h1 id="otherslines">2 ÖPNV Linien</h1>
+        <h1 id="otherslines">2 Public Transport Lines</h1>
         <h2 id="A2.1">2.1 Train/Suburban-Train</h2>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="ref">Line (ref=)</th><th class="relation">Relation (id=)</th><th class="type">Type (type=)</th><th class="route_type">Vehicle (route(_master)=)</th><th class="name">Name (name=)</th><th class="network">Network (network=)</th><th class="operator">Operator (operator=)</th><th class="from">From (from=)</th><th class="via">Via (via=)</th><th class="to">To (to=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
-                <tr data-info="-39294" data-ref="1" class="line"><td class="ref">1</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39294</td><td class="type">route</td><td class="route_type">train</td><td class="name">Linie 1: A 1 =&gt; E 1</td><td class="network">Privat</td><td class="operator">Privat</td><td class="from">A 1</td><td class="via"></td><td class="to">E 1</td><td class="PTv">2</td><td class="issues">PTv2 route: there is no stop position of this route on the first way, except the last node == first node of next way: <img src="/img/Way.svg" alt="Way" /> 'L1-W1' -39258<br>PTv2 route: there is no stop position of this route on the last way, except the first node == last node of previous way: <img src="/img/Way.svg" alt="Way" /> 'L1-W6' -39264</td><td class="notes">&#039;comment&#039; = PTv2 route: there is no stop position of this route on the first way, except the last node == first node of next way: Way L1-W1 PTv2 route: there is no stop position of this route on the last way, except the first node == last node of previous way: Way L1-W6</td></tr>
-                <tr data-info="-39296" data-ref="2" class="line"><td class="ref">2</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39296</td><td class="type">route</td><td class="route_type">train</td><td class="name">Linie 2: A 2 =&gt; E 2</td><td class="network">Privat</td><td class="operator">Privat</td><td class="from">A 2</td><td class="via"></td><td class="to">E 2</td><td class="PTv">2</td><td class="issues"></td><td class="notes">&#039;comment&#039; = No error if --relaxed-begin-end-for=train</td></tr>
-                <tr data-info="-39298" data-ref="3" class="line"><td class="ref">3</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39298</td><td class="type">route</td><td class="route_type">train</td><td class="name">Linie 3: A 3 =&gt; E 3</td><td class="network">Privat</td><td class="operator">Privat</td><td class="from">A 3</td><td class="via"></td><td class="to">E 3</td><td class="PTv">2</td><td class="issues"></td><td class="notes">&#039;comment&#039; = No error at all</td></tr>
-                <tr data-info="-39300" data-ref="4" class="line"><td class="ref">4</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39300</td><td class="type">route</td><td class="route_type">train</td><td class="name">Linie 4: A 4 =&gt; E 4</td><td class="network">Privat</td><td class="operator">Privat</td><td class="from">A 4</td><td class="via"></td><td class="to">E 4</td><td class="PTv">2</td><td class="issues"></td><td class="notes">&#039;comment&#039; = No error at all</td></tr>
-                <tr data-info="-39302" data-ref="5" class="line"><td class="ref">5</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39302</td><td class="type">route</td><td class="route_type">train</td><td class="name">Linie 5: A 5 =&gt; E 5</td><td class="network">Privat</td><td class="operator">Privat</td><td class="from">A 5</td><td class="via"></td><td class="to">E 5</td><td class="PTv">2</td><td class="issues"></td><td class="notes">&#039;comment&#039; = No error at all</td></tr>
+                <tr data-info="-39294" data-ref="1" class="line"><td class="ref">1</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39294</td><td class="type">route</td><td class="route_type">train</td><td class="name">Linie 1: A 1 =&gt; E 1</td><td class="network">Privat</td><td class="operator">Privat</td><td class="from">A 1</td><td class="via"></td><td class="to">E 1</td><td class="PTv">2</td><td class="issues">PTv2 route: there is no stop position of this route on the first way, except the last node == first node of next way: <img src="/img/Way.svg" alt="Way" /> 'L1-W1' -39258<br>PTv2 route: there is no stop position of this route on the last way, except the first node == last node of previous way: <img src="/img/Way.svg" alt="Way" /> 'L1-W6' -39264</td><td class="notes">&#039;comment&#039; = &#039;PTv2 route: there is no stop position of this route on the first way, except the last node == first node of next way: Way L1-W1 PTv2 route: there is no stop position of this route on the last way, except the first node == last node of previous way: Way L1-W6&#039;</td></tr>
+                <tr data-info="-39296" data-ref="2" class="line"><td class="ref">2</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39296</td><td class="type">route</td><td class="route_type">train</td><td class="name">Linie 2: A 2 =&gt; E 2</td><td class="network">Privat</td><td class="operator">Privat</td><td class="from">A 2</td><td class="via"></td><td class="to">E 2</td><td class="PTv">2</td><td class="issues"></td><td class="notes">&#039;comment&#039; = &#039;No error if --relaxed-begin-end-for=train&#039;</td></tr>
+                <tr data-info="-39298" data-ref="3" class="line"><td class="ref">3</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39298</td><td class="type">route</td><td class="route_type">train</td><td class="name">Linie 3: A 3 =&gt; E 3</td><td class="network">Privat</td><td class="operator">Privat</td><td class="from">A 3</td><td class="via"></td><td class="to">E 3</td><td class="PTv">2</td><td class="issues"></td><td class="notes">&#039;comment&#039; = &#039;No error at all&#039;</td></tr>
+                <tr data-info="-39300" data-ref="4" class="line"><td class="ref">4</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39300</td><td class="type">route</td><td class="route_type">train</td><td class="name">Linie 4: A 4 =&gt; E 4</td><td class="network">Privat</td><td class="operator">Privat</td><td class="from">A 4</td><td class="via"></td><td class="to">E 4</td><td class="PTv">2</td><td class="issues"></td><td class="notes">&#039;comment&#039; = &#039;No error at all&#039;</td></tr>
+                <tr data-info="-39302" data-ref="5" class="line"><td class="ref">5</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39302</td><td class="type">route</td><td class="route_type">train</td><td class="name">Linie 5: A 5 =&gt; E 5</td><td class="network">Privat</td><td class="operator">Privat</td><td class="from">A 5</td><td class="via"></td><td class="to">E 5</td><td class="PTv">2</td><td class="issues"></td><td class="notes">&#039;comment&#039; = &#039;No error at all&#039;</td></tr>
             </tbody>
         </table>
 
         <hr />
-        <h1 id="networkdetails">3 Details zu 'network'-Werten</h1>
-        <h2 id="considerednetworks">3.1 Berücksichtigte 'network' Werte</h2>
+        <h1 id="networkdetails">3 Details for 'network'-Values</h1>
+        <h2 id="considerednetworks">3.1 Considered 'network'-Values</h2>
 <p>
-Dieser Abschnitt listet die 'network'-Werte auf, die berücksichtigt wurden, d.h. einen der oben genannten Werte enthält.
+This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.
 </p>
         <table class="oepnvtable">
             <thead>

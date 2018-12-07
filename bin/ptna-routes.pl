@@ -12,12 +12,13 @@ BEGIN { my $PATH = $0; $PATH =~ s|bin/[^/]*$|modules|; unshift( @INC, $PATH ); }
 ####################################################################################################################
 
 use POSIX;
-use Locale::gettext;
 
 use utf8;
 binmode STDIN,  ":utf8";
 binmode STDOUT, ":utf8";
 binmode STDERR, ":utf8";
+
+use Locale::gettext;
 
 use Getopt::Long;
 use OSM::XML        qw( parse );
@@ -1097,7 +1098,7 @@ if ( scalar(@route_types) ) {
     
     printTableInitialization( 'relation', 'type', 'route_type', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'issues', 'notes' );
     
-    printHeader( gettext("Public Transport routes without 'ref'"), 1, 'withoutref' );
+    printHeader( gettext("Public Transport Lines without 'ref'"), 1, 'withoutref' );
     
     foreach $route_type ( @route_types ) {
         $help = sprintf( "%s", ($transport_types{$route_type} ? $transport_types{$route_type} : $route_type) );
@@ -1188,7 +1189,7 @@ printf STDERR "%s 'network' details\n", get_time()       if ( $verbose );
 
 printTableInitialization( 'network', 'number', 'relations' );
 
-printHeader( gettext("Details for 'network'-values"), 1, 'networkdetails' );
+printHeader( gettext("Details for 'network'-Values"), 1, 'networkdetails' );
 
 if ( $network_long_regex || $network_short_regex ) {
     printHintNetworks();
@@ -3999,7 +4000,7 @@ sub printHintUsedNetworks {
 
     my @relations_of_network = ();
     
-    printHeader( gettext("Considered 'network' Values"), 2, 'considerednetworks' );
+    printHeader( gettext("Considered 'network'-Values"), 2, 'considerednetworks' );
     
     push( @HTML_main, "<p>\n" );
     push( @HTML_main, gettext("This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.") );
@@ -4017,7 +4018,7 @@ sub printHintUsedNetworks {
         } else {
             printTableLine( 'network'           =>    $network,
                             'number'            =>    scalar @relations_of_network, 
-                            'relations'         =>    sprintf( "%s and more ...", join( ',', splice(@relations_of_network,0,10) ) )
+                            'relations'         =>    sprintf( gettext("%s and more ..."), join( ',', splice(@relations_of_network,0,10) ) )
                           );
         }
     }
@@ -4031,11 +4032,11 @@ sub printHintUnusedNetworks {
 
     my @relations_of_network = ();
     
-    printHeader( gettext("Not Considered 'network' Values"), 2, 'notconsiderednetworks' );
+    printHeader( gettext("Not Considered 'network'-Values"), 2, 'notconsiderednetworks' );
     
     push( @HTML_main, "<p>\n" );
-    push( @HTML_main, gettext("This section lists the 'network'-values which have not been consideref.") );
-    push( @HTML_main, gettext("They might include typos in values which otherwise should have benn considered.") );
+    push( @HTML_main, gettext("This section lists the 'network'-values which have not been considered.") );
+    push( @HTML_main, gettext("They might include typos in values which otherwise should have been considered.") );
     push( @HTML_main, "\n</p>\n" );
 
     printTableHeader();

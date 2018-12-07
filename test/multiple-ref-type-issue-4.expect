@@ -26,9 +26,9 @@
     </head>
     <body>
         <div id="toc">
-        <h1>Inhalt</h1>
+        <h1>Contents</h1>
         <ol>
-        <li>1 <a href="#hints">Hinweis</a>
+        <li>1 <a href="#hints">Hints</a>
         </li>
         <li>2 <a href="#A2">Test file for issue #4 - multiple appearance of "ref;type" value for different lines in different areas</a>
         <ol>
@@ -42,23 +42,23 @@
         </li>
         </ol>
         </li>
-        <li>3 <a href="#unassigned">Nicht eindeutig zugeordnete Linien</a>
+        <li>3 <a href="#unassigned">Not clearly assigned routes</a>
         </li>
-        <li>4 <a href="#networkdetails">Details zu 'network'-Werten</a>
+        <li>4 <a href="#networkdetails">Details for 'network'-Values</a>
         <ol>
-        <li>4.1 <a href="#considerednetworks">Berücksichtigte 'network' Werte</a>
+        <li>4.1 <a href="#considerednetworks">Considered 'network'-Values</a>
         </li>
         </ol>
         </li>
         </ol>
         </div> <!-- toc -->
         <hr />
-        <h1 id="hints">1 Hinweis</h1>
+        <h1 id="hints">1 Hints</h1>
 <p>
-    Die Daten werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändert hat.
+    The data will be updated when the result of the analysis has changed.
 </p>
 <p>
-    Eine Erläuterung der Fehlertexte ist in der Dokumentation unter <a href='/documentation.html#checks'>Prüfungen</a> zu finden.
+    An explanation of the error texts can be found in the documentation at <a href='/documentation.html#checks'>'Check'</a> zu finden.
 </p>
         <hr />
         <h1 id="A2">2 Test file for issue #4 - multiple appearance of "ref;type" value for different lines in different areas</h1>
@@ -121,7 +121,7 @@ Two of them have identical 'operator' but different 'from' and 'to'
         </table>
 
         <hr />
-        <h1 id="unassigned">3 Nicht eindeutig zugeordnete Linien</h1>
+        <h1 id="unassigned">3 Not clearly assigned routes</h1>
 <p>
 Dieser Abschnitt listet die Linien auf, die nicht eindeutig zugeordnet werden konnten. Die Liniennummern 'ref' sind in der CSV-Datei mehrfach angegeben worden. Das bedeutet, dass die selbe Liniennummer im Verkehrsverbund mehrfach in verscheidenen Gemeinden/Städten vorhanden ist. Um die Linien eindeutig zuordnen zu können sollte folgendes angegeben werden:
 </p><ul>
@@ -173,10 +173,10 @@ Beispiele aus dem VMS für einen Eintrag in der CSV-Datei der Form: 'ref;type;Ko
         </table>
 
         <hr />
-        <h1 id="networkdetails">4 Details zu 'network'-Werten</h1>
-        <h2 id="considerednetworks">4.1 Berücksichtigte 'network' Werte</h2>
+        <h1 id="networkdetails">4 Details for 'network'-Values</h1>
+        <h2 id="considerednetworks">4.1 Considered 'network'-Values</h2>
 <p>
-Dieser Abschnitt listet die 'network'-Werte auf, die berücksichtigt wurden, d.h. einen der oben genannten Werte enthält.
+This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.
 </p>
         <table class="oepnvtable">
             <thead>

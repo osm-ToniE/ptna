@@ -26,34 +26,34 @@
     </head>
     <body>
         <div id="toc">
-        <h1>Inhalt</h1>
+        <h1>Contents</h1>
         <ol>
-        <li>1 <a href="#hints">Hinweis</a>
+        <li>1 <a href="#hints">Hints</a>
         </li>
-        <li>2 <a href="#otherslines">ÖPNV Linien</a>
+        <li>2 <a href="#otherslines">Public Transport Lines</a>
         <ol>
         <li>2.1 <a href="#A2.1">Bus</a>
         </li>
         </ol>
         </li>
-        <li>3 <a href="#networkdetails">Details zu 'network'-Werten</a>
+        <li>3 <a href="#networkdetails">Details for 'network'-Values</a>
         <ol>
-        <li>3.1 <a href="#considerednetworks">Berücksichtigte 'network' Werte</a>
+        <li>3.1 <a href="#considerednetworks">Considered 'network'-Values</a>
         </li>
         </ol>
         </li>
         </ol>
         </div> <!-- toc -->
         <hr />
-        <h1 id="hints">1 Hinweis</h1>
+        <h1 id="hints">1 Hints</h1>
 <p>
-    Die Daten werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändert hat.
+    The data will be updated when the result of the analysis has changed.
 </p>
 <p>
-    Eine Erläuterung der Fehlertexte ist in der Dokumentation unter <a href='/documentation.html#checks'>Prüfungen</a> zu finden.
+    An explanation of the error texts can be found in the documentation at <a href='/documentation.html#checks'>'Check'</a> zu finden.
 </p>
         <hr />
-        <h1 id="otherslines">2 ÖPNV Linien</h1>
+        <h1 id="otherslines">2 Public Transport Lines</h1>
         <h2 id="A2.1">2.1 Bus</h2>
         <table class="oepnvtable">
             <thead>
@@ -61,16 +61,16 @@
             </thead>
             <tbody>
                 <tr data-info="-39493" data-ref="001" class="line"><td class="ref">001</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39493</td><td class="type">route_master</td><td class="route_type">bus</td><td class="name">Bus 001</td><td class="network">Test</td><td class="operator">Test</td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
-                <tr data-info="-39489" data-ref="001" class="line"><td class="ref">001</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39489</td><td class="type">route</td><td class="route_type">bus</td><td class="name">Bus 001: A-Village =&gt; B-Village =&gt; C-Village</td><td class="network">Test</td><td class="operator">Test</td><td class="from">A-Village</td><td class="via">B-Village</td><td class="to">C-Village</td><td class="PTv">2</td><td class="issues">PTv2 route: first way is a oneway road and ends in a 'stop_position' of this route and there is no exit. Is the route sorted in reverse order?<br>PTv2 route: has gap(s), consists of 2 segments<br>PTv2 route: using oneway way(s) in wrong direction: <img src="/img/Way.svg" alt="Way" /> 'W1' -39469</td><td class="notes">&#039;comment&#039; = PTv2 route: first way is a oneway road and ends in a &#039;stop_position&#039; of this route and there is no exit. Is the route sorted in reverse order? PTv2 route: has gap(s), consists of 2 segments PTv2 route: using oneway way(s) in wrong direction: Way W1</td></tr>
-                <tr data-info="-39491" data-ref="001" class="line"><td class="ref">001</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39491</td><td class="type">route</td><td class="route_type">bus</td><td class="name">Bus 001: C-Village =&gt; B-Village =&gt; A-Village</td><td class="network">Test</td><td class="operator">Test</td><td class="from">C-Village</td><td class="via">B-Village</td><td class="to">A-Village</td><td class="PTv">2</td><td class="issues">PTv2 route: first way is a oneway road and ends in a 'stop_position' of this route and there is no exit. Is the route sorted in reverse order?<br>PTv2 route: has gap(s), consists of 2 segments<br>PTv2 route: using oneway way(s) in wrong direction: <img src="/img/Way.svg" alt="Way" /> 'W12' -39471</td><td class="notes">&#039;comment&#039; = PTv2 route: first way is a oneway road and ends in a &#039;stop_position&#039; of this route and there is no exit. Is the route sorted in reverse order? PTv2 route: has gap(s), consists of 2 segments PTv2 route: using oneway way(s) in wrong direction: Way W12</td></tr>
+                <tr data-info="-39489" data-ref="001" class="line"><td class="ref">001</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39489</td><td class="type">route</td><td class="route_type">bus</td><td class="name">Bus 001: A-Village =&gt; B-Village =&gt; C-Village</td><td class="network">Test</td><td class="operator">Test</td><td class="from">A-Village</td><td class="via">B-Village</td><td class="to">C-Village</td><td class="PTv">2</td><td class="issues">PTv2 route: first way is a oneway road and ends in a 'stop_position' of this route and there is no exit. Is the route sorted in reverse order?<br>PTv2 route: has gap(s), consists of 2 segments<br>PTv2 route: using oneway way(s) in wrong direction: <img src="/img/Way.svg" alt="Way" /> 'W1' -39469</td><td class="notes">&#039;comment&#039; = &#039;PTv2 route: first way is a oneway road and ends in a &#039;stop_position&#039; of this route and there is no exit. Is the route sorted in reverse order? PTv2 route: has gap(s), consists of 2 segments PTv2 route: using oneway way(s) in wrong direction: Way W1&#039;</td></tr>
+                <tr data-info="-39491" data-ref="001" class="line"><td class="ref">001</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39491</td><td class="type">route</td><td class="route_type">bus</td><td class="name">Bus 001: C-Village =&gt; B-Village =&gt; A-Village</td><td class="network">Test</td><td class="operator">Test</td><td class="from">C-Village</td><td class="via">B-Village</td><td class="to">A-Village</td><td class="PTv">2</td><td class="issues">PTv2 route: first way is a oneway road and ends in a 'stop_position' of this route and there is no exit. Is the route sorted in reverse order?<br>PTv2 route: has gap(s), consists of 2 segments<br>PTv2 route: using oneway way(s) in wrong direction: <img src="/img/Way.svg" alt="Way" /> 'W12' -39471</td><td class="notes">&#039;comment&#039; = &#039;PTv2 route: first way is a oneway road and ends in a &#039;stop_position&#039; of this route and there is no exit. Is the route sorted in reverse order? PTv2 route: has gap(s), consists of 2 segments PTv2 route: using oneway way(s) in wrong direction: Way W12&#039;</td></tr>
             </tbody>
         </table>
 
         <hr />
-        <h1 id="networkdetails">3 Details zu 'network'-Werten</h1>
-        <h2 id="considerednetworks">3.1 Berücksichtigte 'network' Werte</h2>
+        <h1 id="networkdetails">3 Details for 'network'-Values</h1>
+        <h2 id="considerednetworks">3.1 Considered 'network'-Values</h2>
 <p>
-Dieser Abschnitt listet die 'network'-Werte auf, die berücksichtigt wurden, d.h. einen der oben genannten Werte enthält.
+This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.
 </p>
         <table class="oepnvtable">
             <thead>
