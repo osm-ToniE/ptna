@@ -171,7 +171,8 @@ if ( $opt_language ) {
     $PATH =~ s|bin/[^/]*$|locale|; 
     bindtextdomain( 'ptna', $PATH );
     textdomain( "ptna" );
-    $ENV{'LANG'} = $opt_language;
+    $ENV{'LANG'}     = $opt_language;
+    $ENV{'LANGUAGE'} = $opt_language;
 }    
 
 if ( $allow_coach ) {
