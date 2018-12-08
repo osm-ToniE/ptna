@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ptna 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-07 18:42+0100\n"
-"PO-Revision-Date: 2018-12-07 19:26+0100\n"
+"PO-Revision-Date: 2018-12-07 22:04+0100\n"
 "Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
 "Language-Team: osm-ToniE <osm-ToniE@web.de>\n"
 "Language: de\n"
@@ -253,7 +253,7 @@ msgstr "Route hat anderen 'ref' = '%s' Wert: %s"
 #: ../bin/ptna-routes.pl:1639
 #, perl-format
 msgid "Route exists but 'ref' tag is not set: %s"
-msgstr "Route existiert, das 'ref' Tag ist aber nicht gesetzt: %s"
+msgstr "Route existiert, 'ref' ist aber nicht gesetzt: %s"
 
 #: ../bin/ptna-routes.pl:1645
 #, perl-format
@@ -272,16 +272,17 @@ msgstr "Die Route ist direktes Element von mehr als einem Route-Master: %s"
 
 #: ../bin/ptna-routes.pl:1710
 msgid "Multiple Routes but no Route-Master"
-msgstr "Mehrere Routen aber keinen Route-Master"
+msgstr "Mehrere Routen aber kein Route-Master"
 
 #: ../bin/ptna-routes.pl:1712
 msgid "Multiple Routes but this Route is not a member of any Route-Master"
 msgstr ""
-"Mehrere Routen aber diese Route ist nicht Element irgendeines Route-Masters"
+"Mehrere Routen aber diese Route ist nicht Element eines existierenden Route-"
+"Masters"
 
 #: ../bin/ptna-routes.pl:1718
 msgid "This Route is not a member of any Route-Master"
-msgstr "Diese Route ist nicht Element irgendeines Route-Masters"
+msgstr "Diese Route ist nicht Element eines existierenden Route-Masters"
 
 #: ../bin/ptna-routes.pl:1733
 #, perl-format
@@ -414,15 +415,15 @@ msgid ""
 "Route: restricted access (%s) to way(s) without 'psv'='yes', '%s'='yes', "
 "'%s'='designated', or ...: %s"
 msgstr ""
-"Route: eingeschr&auml;nkte Befahrbarkeit (%s) auf Wegen ohne dass 'psv' = "
+"Route: eingeschr&auml;nkte Befahrbarkeit (%s) auf Weg(en) ohne dass 'psv' = "
 "'yes', '%s' = 'yes', '%s' = 'designated', oder ... angegeben ist: %s"
 
 #: ../bin/ptna-routes.pl:2147
 msgid ""
 "Route: 'highway' = 'bus_stop' is set on way(s). Allowed on nodes only!: "
 msgstr ""
-"Route: 'highway' = 'bus_stop' ist auf einem Way gesetzt. Dieses Tag ist nur "
-"auf Nodes erlaubt."
+"Route: 'highway' = 'bus_stop' ist auf einem 'way' gesetzt. Dieses Tag ist "
+"nur auf Nodes erlaubt."
 
 #: ../bin/ptna-routes.pl:2204
 #, perl-format
@@ -517,15 +518,16 @@ msgstr ""
 #: ../bin/ptna-routes.pl:2431
 msgid "PTv2 route: using oneway way(s) in wrong direction"
 msgstr ""
-"PTv2 Route: es werden Einbahnstra&szlig;en in der falschen Richtung benutzt"
+"PTv2 Route: es wird/werden Einbahnstra&szlig;(en) in der falschen Richtung "
+"benutzt"
 
 #: ../bin/ptna-routes.pl:2440
 #, perl-format
 msgid ""
 "PTv2 route: using motorway_link way(s) without entering a motorway way: %s"
 msgstr ""
-"PTv2 Route: es werden 'motorway_link' Stra&szlig;en benutzt vorher oder "
-"nachher eine 'motorway' Stra&szlig;e benutzt zu haben: %s"
+"PTv2 Route: es werden/werden 'motorway_link' Stra&szlig;(en) benutzt vorher "
+"oder nachher eine 'motorway' Stra&szlig;e benutzt zu haben: %s"
 
 #: ../bin/ptna-routes.pl:2494
 msgid "first node of oneway way has 'role' = 'stop_exit_only'"
@@ -667,8 +669,7 @@ msgstr "Inhalt"
 
 #: ../bin/ptna-routes.pl:3974
 msgid "The contents of the 'network' tag wil be searched for:"
-msgstr ""
-"Der Inhalt des 'network' Tags wird nach den folgenden Werten durchsucht:"
+msgstr "Der Inhalt von 'network' wird nach den folgenden Werten durchsucht:"
 
 #: ../bin/ptna-routes.pl:4003
 msgid "Considered 'network'-Values"

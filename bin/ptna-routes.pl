@@ -126,7 +126,7 @@ $expect_network_short_as    = decode('utf8', $expect_network_short_as )     if (
 $expect_network_short_for   = decode('utf8', $expect_network_short_for )    if ( $expect_network_short_for  );
 
 if ( $verbose ) {
-    printf STDERR "%s analyze-routes.pl -v\n", get_time();
+    printf STDERR "%s ptna-routes.pl -v\n", get_time();
     printf STDERR "%20s--language='%s'\n",                 ' ', $opt_language                  if ( $opt_language                );
     printf STDERR "%20s--title='%s'\n",                    ' ', $page_title                    if ( $page_title                  );
     printf STDERR "%20s--network-guid='%s'\n",             ' ', $network_guid                  if ( $network_guid                );

@@ -66,6 +66,8 @@ else
     exit 1
 fi
 
+TEXTDOMAINDIR=$PTNA_BIN/../locale LANGUAGE=de gettext -d ptna 'Notes'
+
 if [ -d "$PTNA_WORK_LOC" ]
 then
 
