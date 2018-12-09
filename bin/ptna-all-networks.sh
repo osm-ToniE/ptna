@@ -11,12 +11,12 @@ WD=$PWD
 
 for A in [A-Z]*
 do
-    echo
-    echo $(date "+%Y-%m-%d %H:%M:%S") "$A"
-    echo
-    
     if [ -d $A ]
     then
+        echo
+        echo $(date "+%Y-%m-%d %H:%M:%S") "$A"
+        echo
+    
         cd $A
     
         ptna-network.sh $*

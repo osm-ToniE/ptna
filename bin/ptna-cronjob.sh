@@ -42,10 +42,6 @@ export PTNA_WORK_LOC="$HOME/tmp/ptna/work"
 [ -f $HOME/.ptna-config ] && source $HOME/.ptna-config
 
 
-# we need standard language output of tools
-
-export LANG=C
-    
 ###################################################################################
 
 if [ -n "$PTNA_BIN" ]
@@ -59,7 +55,7 @@ if [ -n "$PTNA_WORK_LOC" ]
 then
     if [ ! -d "$PTNA_WORK_LOC" ]
     then
-        mkdir $PTNA_WORK_LOC
+        mkdir -p $PTNA_WORK_LOC
     fi
 else
     echo "directory for working location 'PTNA_WORK_LOC' is not specified ... terminating"

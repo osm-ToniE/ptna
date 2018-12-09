@@ -167,12 +167,12 @@ if ( $verbose ) {
 
 if ( $opt_language ) {
     setlocale( LC_ALL, "" );
+    $ENV{'LANG'}     = $opt_language;
+    $ENV{'LANGUAGE'} = $opt_language;
     my $PATH = $0;
     $PATH =~ s|bin/[^/]*$|locale|; 
     bindtextdomain( 'ptna', $PATH );
     textdomain( "ptna" );
-    $ENV{'LANG'}     = $opt_language;
-    $ENV{'LANGUAGE'} = $opt_language;
 }    
 
 if ( $allow_coach ) {
