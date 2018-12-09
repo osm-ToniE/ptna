@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ptna 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-09 18:50+0100\n"
-"PO-Revision-Date: 2018-12-09 19:18+0100\n"
+"PO-Revision-Date: 2018-12-09 19:27+0100\n"
 "Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
 "Language-Team: osm-ToniE <osm-ToniE@web.de>\n"
 "Language: de\n"
@@ -131,7 +131,7 @@ msgstr "Trolley Bus"
 
 #: bin/ptna-routes.pl:264
 msgid "Ferry"
-msgstr "F&äuml;hre"
+msgstr "F&auml;hre"
 
 #: bin/ptna-routes.pl:265
 msgid "Mono-Rail"
@@ -318,14 +318,14 @@ msgstr "'colour' der Route passt nicht zu 'colour' des %s Route-Masters: %s"
 #, perl-format
 msgid "'colour' of Route is set but 'colour' of %s Route-Master is not set: %s"
 msgstr ""
-"'colour' der Route ist gesetzt, aber 'colour' des %s Route-Masters ist nicht "
+"'colour' der Route ist gesetzt aber 'colour' des %s Route-Masters ist nicht "
 "gesetzt: %s"
 
 #: bin/ptna-routes.pl:1753
 #, perl-format
 msgid "'colour' of Route is not set but 'colour' of %s Route-Master is set: %s"
 msgstr ""
-"'colour' der Route ist nicht gesetzt, aber 'colour' des %s Route-Masters ist "
+"'colour' der Route ist nicht gesetzt aber 'colour' des %s Route-Masters ist "
 "gesetzt: %s"
 
 #: bin/ptna-routes.pl:1759
@@ -347,7 +347,7 @@ msgid ""
 "'network' = '%s' includes the separator value ';' (semi-colon) with "
 "sourrounding blank(s)"
 msgstr ""
-"'network' = '%s' enthält das Trennzeichen ';' (Semikolon) mit umgebendem "
+"'network' = '%s' enth&auml;lt das Trennzeichen ';' (Semikolon) mit umgebendem "
 "Leerzeichen"
 
 #: bin/ptna-routes.pl:1887
@@ -398,7 +398,7 @@ msgstr "'public_transport:version' ist nicht gesetzt"
 
 #: bin/ptna-routes.pl:2050
 msgid "Error in input data: insufficient data for ways"
-msgstr "Fehler in den Inputdaten: nicht gen&uuml;gend Daten für 'ways'"
+msgstr "Fehler in den Inputdaten: nicht gen&uuml;gend Daten f&uuml;r 'ways'"
 
 #: bin/ptna-routes.pl:2052 bin/ptna-routes.pl:2079 bin/ptna-routes.pl:2150
 #: bin/ptna-routes.pl:2434
@@ -464,11 +464,11 @@ msgstr "PTv2 Route: 'to' = '%s' ist nicht gesetzt"
 
 #: bin/ptna-routes.pl:2247
 msgid "PTv2 route: 'name' includes deprecated '<=>'"
-msgstr "PTv2 Route: 'name' enthält un&uuml;bliches '<=>'"
+msgstr "PTv2 Route: 'name' enth&auml;lt un&uuml;bliches '<=>'"
 
 #: bin/ptna-routes.pl:2252
 msgid "PTv2 route: 'name' includes deprecated '==>'"
-msgstr "PTv2 Route: 'name' enthält un&uuml;bliches '==>'"
+msgstr "PTv2 Route: 'name' enth&auml;lt un&uuml;bliches '==>'"
 
 #: bin/ptna-routes.pl:2274
 msgid ""
@@ -506,14 +506,14 @@ msgstr ""
 #: bin/ptna-routes.pl:2307
 msgid "PTv2 route: 'name' has more than one '=>' but 'via' is not set"
 msgstr ""
-"PTv2 Route: 'name' enthält mehr als ein '=>', aber 'via' ist nicht gesetzt"
+"PTv2 Route: 'name' enth&auml;lt mehr als ein '=>', aber 'via' ist nicht gesetzt"
 
 #: bin/ptna-routes.pl:2414
 msgid ""
 "PTv2 route: first way is a oneway road and ends in a 'stop_position' of this "
 "route and there is no exit. Is the route sorted in reverse order?"
 msgstr ""
-"PTv2 Route: der erste Weg ist eine Einbahnstraße und endet in einer "
+"PTv2 Route: der erste Weg ist eine Einbahnstra&szlig;e und endet in einer "
 "'stop_position' und es geht nicht mehr weiter. Sind die Wege der Route "
 "falsch herum sortiert?"
 
@@ -617,7 +617,7 @@ msgid ""
 "the last node == first node of next way: %s"
 msgstr ""
 "PTv2 Route: auf dem ersten Weg der Route gibt es keine Haltestelle "
-"'stop_position' außer dem letzten Punkt, der aber auch der erste Punkt des "
+"'stop_position' au&szlig;er dem letzten Punkt, der aber auch der erste Punkt des "
 "zweiten Weges ist: %s"
 
 #: bin/ptna-routes.pl:2691
@@ -660,7 +660,7 @@ msgid ""
 "the first node == last node of previous way: %s"
 msgstr ""
 "PTv2 Route: auf dem letzte Weg der Route gibt es keine Haltestelle "
-"'stop_position' außer dem ersten Punkt, der aber auch der letzte Punkt des "
+"'stop_position' au&szlig;er dem ersten Punkt, der aber auch der letzte Punkt des "
 "vorletzten Weges ist: %s"
 
 #: bin/ptna-routes.pl:2773
