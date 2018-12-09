@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-09 20:23+0100\n"
-"PO-Revision-Date: 2018-12-09 20:25+0100\n"
+"POT-Creation-Date: 2018-12-09 20:58+0100\n"
+"PO-Revision-Date: 2018-12-09 20:58+0100\n"
 "Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
 "Language-Team: osm-ToniE <osm-ToniE@web.de>\n"
 "Language: de\n"
@@ -287,45 +287,44 @@ msgstr "Diese Route ist nicht Element eines existierenden Route-Masters"
 #: bin/ptna-routes.pl:1734
 #, perl-format
 msgid ""
-"'route' = '%s' of Route does not fit to 'route_master' = '%s' of %s Route-"
+"'route' = '%s' of Route does not fit to 'route_master' = '%s' of Route-"
 "Master: %s"
 msgstr ""
-"'route' = '%s' der Route passt nicht zu 'route_master' = '%s' des %s Route-"
+"'route' = '%s' der Route passt nicht zu 'route_master' = '%s' des Route-"
 "Masters: %s"
 
 #: bin/ptna-routes.pl:1738
 #, perl-format
-msgid ""
-"'ref' = '%s' of Route does not fit to 'ref' = '%s' of %s Route-Master: %s"
+msgid "'ref' = '%s' of Route does not fit to 'ref' = '%s' of Route-Master: %s"
 msgstr ""
-"'ref' = '%s' der Route passt nicht zu 'ref' = '%s' des %s Route-Masters: %s"
+"'ref' = '%s' der Route passt nicht zu 'ref' = '%s' des Route-Masters: %s"
 
 #: bin/ptna-routes.pl:1742
 #, perl-format
 msgid ""
-"'network' = '%s' of Route does not fit to 'network' = '%s' of %s Route-"
-"Master: %s"
+"'network' = '%s' of Route does not fit to 'network' = '%s' of Route-Master: "
+"%s"
 msgstr ""
-"'network' = '%s' der Route passt nicht zu 'network' = '%s' des %s Route-"
+"'network' = '%s' der Route passt nicht zu 'network' = '%s' des Route-"
 "Masters: %s"
 
 #: bin/ptna-routes.pl:1747
 #, perl-format
-msgid "'colour' of Route does not fit to 'colour' of %s Route-Master: %s"
-msgstr "'colour' der Route passt nicht zu 'colour' des %s Route-Masters: %s"
+msgid "'colour' of Route does not fit to 'colour' of Route-Master: %s"
+msgstr "'colour' der Route passt nicht zu 'colour' des Route-Masters: %s"
 
 #: bin/ptna-routes.pl:1750
 #, perl-format
-msgid "'colour' of Route is set but 'colour' of %s Route-Master is not set: %s"
+msgid "'colour' of Route is set but 'colour' of Route-Master is not set: %s"
 msgstr ""
-"'colour' der Route ist gesetzt aber 'colour' des %s Route-Masters ist nicht "
+"'colour' der Route ist gesetzt aber 'colour' des Route-Masters ist nicht "
 "gesetzt: %s"
 
 #: bin/ptna-routes.pl:1753
 #, perl-format
-msgid "'colour' of Route is not set but 'colour' of %s Route-Master is set: %s"
+msgid "'colour' of Route is not set but 'colour' of Route-Master is set: %s"
 msgstr ""
-"'colour' der Route ist nicht gesetzt aber 'colour' des %s Route-Masters ist "
+"'colour' der Route ist nicht gesetzt aber 'colour' des Route-Masters ist "
 "gesetzt: %s"
 
 #: bin/ptna-routes.pl:1759
@@ -679,7 +678,7 @@ msgid ""
 "PTv2 route: first node of way is not the first stop position of this route: "
 "%s versus %s"
 msgstr ""
-"PTv2 Route: der erste Punkt des Fahrweges ist nicht die erste Haltestelle "
+"PTv2 Route: der erste Punkt des Fahrweges ist nicht die erste "
 "'stop_position' der Route: %s gegen&uuml;ber %s"
 
 #: bin/ptna-routes.pl:2699 bin/ptna-routes.pl:2709
@@ -688,9 +687,9 @@ msgid ""
 "PTv2 route: there is no stop position of this route on the first way, except "
 "the last node == first node of next way: %s"
 msgstr ""
-"PTv2 Route: auf dem ersten Weg der Route gibt es keine Haltestelle "
-"'stop_position' au&szlig;er dem letzten Punkt, der aber auch der erste Punkt "
-"des zweiten Weges ist: %s"
+"PTv2 Route: auf dem ersten Weg der Route gibt es keine 'stop_position' "
+"au&szlig;er dem letzten Punkt, der aber auch der erste Punkt des zweiten "
+"Weges ist: %s"
 
 #: bin/ptna-routes.pl:2702
 #, perl-format
@@ -698,23 +697,20 @@ msgid ""
 "PTv2 route: first stop position on first way is not the first stop position "
 "of this route: %s versus %s"
 msgstr ""
-"PTv2 Route: die erste Haltestelle auf dem ersten Weg ist nicht die erste "
-"Haltestelle 'stop_position' der Route: %s gegen&uuml;ber %s"
+"PTv2 Route: die erste 'stop_position' auf dem ersten Weg ist nicht die erste "
+"'stop_position' der Route: %s gegen&uuml;ber %s"
 
 #: bin/ptna-routes.pl:2713
 #, perl-format
 msgid ""
 "PTv2 route: there is no stop position of this route on the first way: %s"
 msgstr ""
-"PTv2 Route: es gibt keine Haltestelle 'stop_position' auf dem ersten Weg der "
-"Route: %s"
+"PTv2 Route: es gibt keine 'stop_position' auf dem ersten Weg der Route: %s"
 
 #: bin/ptna-routes.pl:2717
 #, perl-format
 msgid "PTv2 route: first node of way is not a stop position of this route: %s"
-msgstr ""
-"PTv2 Route: der erste Punkt des Weges ist keine Haltestelle 'stop_position': "
-"%s"
+msgstr "PTv2 Route: der erste Punkt des Weges ist keine 'stop_position': %s"
 
 #: bin/ptna-routes.pl:2736
 #, perl-format
@@ -722,7 +718,7 @@ msgid ""
 "PTv2 route: last node of way is not the last stop position of this route: %s "
 "versus %s"
 msgstr ""
-"PTv2 Route: der letzte Punkt des Fahrweges ist nicht die letzte Haltestelle "
+"PTv2 Route: der letzte Punkt des Fahrweges ist nicht die letzte "
 "'stop_position' der Route: %s gegen&uuml;ber %s"
 
 #: bin/ptna-routes.pl:2781 bin/ptna-routes.pl:2791
@@ -731,9 +727,9 @@ msgid ""
 "PTv2 route: there is no stop position of this route on the last way, except "
 "the first node == last node of previous way: %s"
 msgstr ""
-"PTv2 Route: auf dem letzte Weg der Route gibt es keine Haltestelle "
-"'stop_position' au&szlig;er dem ersten Punkt, der aber auch der letzte Punkt "
-"des vorletzten Weges ist: %s"
+"PTv2 Route: auf dem letzte Weg der Route gibt es keine 'stop_position' "
+"au&szlig;er dem ersten Punkt, der aber auch der letzte Punkt des vorletzten "
+"Weges ist: %s"
 
 #: bin/ptna-routes.pl:2784
 #, perl-format
@@ -741,22 +737,19 @@ msgid ""
 "PTv2 route: last stop position on last way is not the last stop position of "
 "this route: %s versus %s"
 msgstr ""
-"PTv2 Route: die letzte Haltestelle auf dem letzten Weg ist nicht die letzte "
-"Haltestelle 'stop_position' der Route: %s gegen&uuml;ber %s"
+"PTv2 Route: die letzte 'stop_position' auf dem letzten Weg ist nicht die "
+"letzte 'stop_position' der Route: %s gegen&uuml;ber %s"
 
 #: bin/ptna-routes.pl:2795
 #, perl-format
 msgid "PTv2 route: there is no stop position of this route on the last way: %s"
 msgstr ""
-"PTv2 Route: es gibt keine Haltestelle 'stop_position' auf dem letzten Weg "
-"der Route: %s"
+"PTv2 Route: es gibt keine 'stop_position' auf dem letzten Weg der Route: %s"
 
 #: bin/ptna-routes.pl:2799
 #, perl-format
 msgid "PTv2 route: last node of way is not a stop position of this route: %s"
-msgstr ""
-"PTv2 Route: der letzte Punkt des Weges ist keine Haltestelle "
-"'stop_position': %s"
+msgstr "PTv2 Route: der letzte Punkt des Weges ist keine 'stop_position': %s"
 
 #: bin/ptna-routes.pl:3792
 msgid "Date of Data"

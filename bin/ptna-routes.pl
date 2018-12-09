@@ -1731,26 +1731,26 @@ sub analyze_route_environment {
             #             'this' if this route is not a member of the current route_master (just coincidence, 'ref' and 'route_type' match)
             if ( $relation_ptr->{'tag'}->{'route'}   && $RELATIONS{$route_master_rel_id}->{'tag'}->{'route_master'} &&
                  $relation_ptr->{'tag'}->{'route'}   ne $RELATIONS{$route_master_rel_id}->{'tag'}->{'route_master'}     ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'route' = '%s' of Route does not fit to 'route_master' = '%s' of %s Route-Master: %s"), $relation_ptr->{'tag'}->{'route'}, $RELATIONS{$route_master_rel_id}->{'tag'}->{'route_master'}, $helpstring, printRelationTemplate($route_master_rel_id)) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'route' = '%s' of Route does not fit to 'route_master' = '%s' of Route-Master: %s"), $relation_ptr->{'tag'}->{'route'}, $RELATIONS{$route_master_rel_id}->{'tag'}->{'route_master'}, printRelationTemplate($route_master_rel_id)) );
             }
             if ( $relation_ptr->{'tag'}->{'ref'}     && $RELATIONS{$route_master_rel_id}->{'tag'}->{'ref'} &&
                  $relation_ptr->{'tag'}->{'ref'}     ne $RELATIONS{$route_master_rel_id}->{'tag'}->{'ref'}     ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'ref' = '%s' of Route does not fit to 'ref' = '%s' of %s Route-Master: %s"), $relation_ptr->{'tag'}->{'ref'}, $RELATIONS{$route_master_rel_id}->{'tag'}->{'ref'}, $helpstring, printRelationTemplate($route_master_rel_id)) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'ref' = '%s' of Route does not fit to 'ref' = '%s' of Route-Master: %s"), $relation_ptr->{'tag'}->{'ref'}, $RELATIONS{$route_master_rel_id}->{'tag'}->{'ref'}, printRelationTemplate($route_master_rel_id)) );
             }
             if ( $relation_ptr->{'tag'}->{'network'} && $RELATIONS{$route_master_rel_id}->{'tag'}->{'network'} &&
                  $relation_ptr->{'tag'}->{'network'} ne $RELATIONS{$route_master_rel_id}->{'tag'}->{'network'}     ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'network' = '%s' of Route does not fit to 'network' = '%s' of %s Route-Master: %s"), $relation_ptr->{'tag'}->{'network'}, $RELATIONS{$route_master_rel_id}->{'tag'}->{'network'}, $helpstring, printRelationTemplate($route_master_rel_id)) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'network' = '%s' of Route does not fit to 'network' = '%s' of Route-Master: %s"), $relation_ptr->{'tag'}->{'network'}, $RELATIONS{$route_master_rel_id}->{'tag'}->{'network'}, printRelationTemplate($route_master_rel_id)) );
             }
             if ( $relation_ptr->{'tag'}->{'colour'} ) {
                 if ( $RELATIONS{$route_master_rel_id}->{'tag'}->{'colour'} ) {
                     if ( uc($relation_ptr->{'tag'}->{'colour'}) ne uc($RELATIONS{$route_master_rel_id}->{'tag'}->{'colour'}) ) {
-                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'colour' of Route does not fit to 'colour' of %s Route-Master: %s"), $helpstring, printRelationTemplate($route_master_rel_id)) );
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'colour' of Route does not fit to 'colour' of Route-Master: %s"), printRelationTemplate($route_master_rel_id)) );
                     }
                 } else {
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'colour' of Route is set but 'colour' of %s Route-Master is not set: %s"), $helpstring, printRelationTemplate($route_master_rel_id)) );
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'colour' of Route is set but 'colour' of Route-Master is not set: %s"), printRelationTemplate($route_master_rel_id)) );
                 }
             } elsif ( $RELATIONS{$route_master_rel_id}->{'tag'}->{'colour'} ) {
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'colour' of Route is not set but 'colour' of %s Route-Master is set: %s"), $helpstring, printRelationTemplate($route_master_rel_id)) );
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'colour' of Route is not set but 'colour' of Route-Master is set: %s"), printRelationTemplate($route_master_rel_id)) );
             }
         }
 
