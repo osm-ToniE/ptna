@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ptna 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-09 20:58+0100\n"
-"PO-Revision-Date: 2018-12-09 20:58+0100\n"
+"PO-Revision-Date: 2018-12-09 21:08+0100\n"
 "Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
 "Language-Team: osm-ToniE <osm-ToniE@web.de>\n"
 "Language: de\n"
@@ -577,7 +577,7 @@ msgstr ""
 #: bin/ptna-routes.pl:2433
 msgid "PTv2 route: using oneway way(s) in wrong direction"
 msgstr ""
-"PTv2 Route: es wird/werden Einbahnstra&szlig;(en) in der falschen Richtung "
+"PTv2 Route: es wird/werden Einbahnstra&szlig;e(n) in der falschen Richtung "
 "benutzt"
 
 #: bin/ptna-routes.pl:2442
@@ -585,8 +585,8 @@ msgstr ""
 msgid ""
 "PTv2 route: using motorway_link way(s) without entering a motorway way: %s"
 msgstr ""
-"PTv2 Route: es werden/werden 'motorway_link' Stra&szlig;(en) benutzt vorher "
-"oder nachher eine 'motorway' Stra&szlig;e benutzt zu haben: %s"
+"PTv2 Route: es wird/werden 'motorway_link' Stra&szlig;e(n) benutzt ohne "
+"vorher oder nachher eine 'motorway' Stra&szlig;e benutzt zu haben: %s"
 
 #: bin/ptna-routes.pl:2496
 msgid "first node of oneway way has 'role' = 'stop_exit_only'"
