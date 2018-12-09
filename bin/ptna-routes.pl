@@ -1991,11 +1991,11 @@ sub analyze_route_master_relation {
     my $route_highway_index            = scalar( @{$relation_ptr->{'route_highway'}} );
     my $node_index                     = scalar( @{$relation_ptr->{'node'}} );
 
-    push( @{$relation_ptr->{'__issues__'}}, "Route-Master without Route(s)" )                                   unless ( $route_master_relation_index );
-    #push( @{$relation_ptr->{'__notes__'}},  "Route-Master with only 1 Route" )                                  if     ( $route_master_relation_index == 1 );
-    push( @{$relation_ptr->{'__issues__'}}, "Route-Master with Relation(s) unequal to 'route'" )                if     ( $route_master_relation_index != $relation_index );
-    push( @{$relation_ptr->{'__issues__'}}, "Route-Master with Way(s)" )                                        if     ( $way_index );
-    push( @{$relation_ptr->{'__issues__'}}, "Route-Master with Node(s)" )                                       if     ( $node_index );
+    push( @{$relation_ptr->{'__issues__'}}, gettext("Route-Master without Route(s)") )                                   unless ( $route_master_relation_index );
+    #push( @{$relation_ptr->{'__notes__'}},  gettext("Route-Master with only 1 Route") )                                  if     ( $route_master_relation_index == 1 );
+    push( @{$relation_ptr->{'__issues__'}}, gettext("Route-Master with Relation(s) unequal to 'route'") )                if     ( $route_master_relation_index != $relation_index );
+    push( @{$relation_ptr->{'__issues__'}}, gettext("Route-Master with Way(s)") )                                        if     ( $way_index );
+    push( @{$relation_ptr->{'__issues__'}}, gettext("Route-Master with Node(s)") )                                       if     ( $node_index );
     if ( $relation_ptr->{'tag'}->{'public_transport:version'} ) {
         if ( $relation_ptr->{'tag'}->{'public_transport:version'} !~ m/^2$/ ) {
             push( @{$relation_ptr->{'__issues__'}}, gettext("'public_transport:version' is not set to '2'") )        if ( $check_version ); 
@@ -2085,11 +2085,11 @@ sub analyze_route_relation {
         }
     }
     
-    push( @{$relation_ptr->{'__issues__'}}, "Route without Way(s)" )                    unless ( $route_highway_index );
-    push( @{$relation_ptr->{'__issues__'}}, "Route with only 1 Way" )                   if     ( $route_highway_index == 1 && $route_type ne 'ferry' && $route_type ne 'aerialway' );
-    push( @{$relation_ptr->{'__issues__'}}, "Route without Node(s)" )                   unless ( $node_index );
-    push( @{$relation_ptr->{'__issues__'}}, "Route with only 1 Node" )                  if     ( $node_index == 1 );
-    push( @{$relation_ptr->{'__issues__'}}, "Route with Relation(s)" )                  if     ( $route_relation_index );
+    push( @{$relation_ptr->{'__issues__'}}, gettext("Route without Way(s)") )                    unless ( $route_highway_index );
+    push( @{$relation_ptr->{'__issues__'}}, gettext("Route with only 1 Way") )                   if     ( $route_highway_index == 1 && $route_type ne 'ferry' && $route_type ne 'aerialway' );
+    push( @{$relation_ptr->{'__issues__'}}, gettext("Route without Node(s)") )                   unless ( $node_index );
+    push( @{$relation_ptr->{'__issues__'}}, gettext("Route with only 1 Node") )                  if     ( $node_index == 1 );
+    push( @{$relation_ptr->{'__issues__'}}, gettext("Route with Relation(s)") )                  if     ( $route_relation_index );
 
     if ( $relation_ptr->{'tag'}->{'public_transport:version'} ) {
         if ( $relation_ptr->{'tag'}->{'public_transport:version'} !~ m/^[12]$/ ) {
@@ -2170,6 +2170,7 @@ sub analyze_ptv2_route_relation {
     my @relation_route_stop_positions = ();
     my @sorted_way_nodes              = ();
     my @help_array                    = ();
+    my $help_string                   = '';
     my $num_of_errors                 = 0;
     my $access_restriction            = undef;
     
@@ -2532,28 +2533,33 @@ sub analyze_ptv2_route_relation {
                                          $NODES{$node_ref->{'ref'}}->{'tag'}->{$relation_ptr->{'tag'}->{'route'}} eq "yes"    ) {
                                         ; # fine
                                     } else {
-                                        $role_mismatch{sprintf(gettext("missing '%s' = 'yes' on 'public_transport' = 'stop_position'"),$relation_ptr->{'tag'}->{'route'})}->{$node_ref->{'ref'}} = 1;
+                                        $help_string = sprintf( gettext( "missing '%s' = 'yes' on 'public_transport' = 'stop_position'" ), $relation_ptr->{'tag'}->{'route'} );
+                                        $role_mismatch{$help_string}->{$node_ref->{'ref'}} = 1;
                                         $role_mismatch_found++;
                                     }
                                 }
                             }
                         }
                         elsif ( $NODES{$node_ref->{'ref'}}->{'tag'}->{'public_transport'} ) {
-                            $role_mismatch{"mismatch between 'role' = '".$node_ref->{'role'}."' and 'public_transport' = '".$NODES{$node_ref->{'ref'}}->{'tag'}->{'public_transport'}."'"}->{$node_ref->{'ref'}} = 1;
+                            $help_string = sprintf( gettext( "mismatch between 'role' = '%s' and 'public_transport' = '%s'" ), $node_ref->{'role'}, $NODES{$node_ref->{'ref'}}->{'tag'}->{'public_transport'} );
+                            $role_mismatch{$help_string}->{$node_ref->{'ref'}} = 1;
                             $role_mismatch_found++;
                         } elsif ( $ptv1_compatibility ne "no"  ) {
                             my $compatible_tag = PTv2CompatibleNodeStopTag( $node_ref->{'ref'}, $relation_ptr->{'tag'}->{'route'} );
                             if ( $compatible_tag ) {
                                 if ( $ptv1_compatibility eq "show" ) {
-                                    $role_mismatch{"'role' = '".$node_ref->{'role'}."' and ".$compatible_tag.": consider setting 'public_transport' = 'stop_position'"}->{$node_ref->{'ref'}} = 1;
+                                    $help_string = sprintf( gettext( "'role' = '%s' and %s: consider setting 'public_transport' = 'stop_position'" ), $node_ref->{'role'}, $compatible_tag ); 
+                                    $role_mismatch{$help_string}->{$node_ref->{'ref'}} = 1;
                                     $role_mismatch_found++;
                                 }
                             } else {
-                                $role_mismatch{"'role' = '".$node_ref->{'role'}."' but 'public_transport' is not set"}->{$node_ref->{'ref'}} = 1;
+                                $help_string = sprintf( gettext( "'role' = '%s' but 'public_transport' is not set" ), $node_ref->{'role'} );
+                                $role_mismatch{$help_string}->{$node_ref->{'ref'}} = 1;
                                 $role_mismatch_found++;
                             }
                         } else {
-                            $role_mismatch{"'role' = '".$node_ref->{'role'}."' but 'public_transport' is not set"}->{$node_ref->{'ref'}} = 1;
+                            $help_string = sprintf( gettext( "'role' = '%s' but 'public_transport' is not set" ), $node_ref->{'role'} );
+                            $role_mismatch{$help_string}->{$node_ref->{'ref'}} = 1;
                             $role_mismatch_found++;
                         }
                     } else {           # matches any platform of the three choices
@@ -2583,31 +2589,36 @@ sub analyze_ptv2_route_relation {
                             #    }
                             #}
                         } elsif ( $NODES{$node_ref->{'ref'}}->{'tag'}->{'public_transport'} ) {
-                            $role_mismatch{"mismatch between 'role' = '".$node_ref->{'role'}."' and 'public_transport' = '".$NODES{$node_ref->{'ref'}}->{'tag'}->{'public_transport'}."'"}->{$node_ref->{'ref'}} = 1;
+                            $help_string = sprintf( gettext( "mismatch between 'role' = '%s' and 'public_transport' = '%s'" ), $node_ref->{'role'}, $NODES{$node_ref->{'ref'}}->{'tag'}->{'public_transport'} );
+                            $role_mismatch{$help_string}->{$node_ref->{'ref'}} = 1;
                             $role_mismatch_found++;
                         } elsif ( $ptv1_compatibility ne "no"  ) {
                             my $compatible_tag = PTv2CompatibleNodePlatformTag( $node_ref->{'ref'}, $relation_ptr->{'tag'}->{'route'} );
                             if ( $compatible_tag ) {
                                 if ( $ptv1_compatibility eq "show" ) {
-                                    $role_mismatch{"'role' = '".$node_ref->{'role'}."' and ".$compatible_tag.": consider setting 'public_transport' = 'platform'"}->{$node_ref->{'ref'}} = 1;
+                                    $help_string = sprintf( gettext( "'role' = '%s' and %s: consider setting 'public_transport' = 'platform'" ), $node_ref->{'role'}, $compatible_tag );
+                                    $role_mismatch{$help_string}->{$node_ref->{'ref'}} = 1;
                                     $role_mismatch_found++;
                                 }
                             } else {
-                                $role_mismatch{"'role' = '".$node_ref->{'role'}."' but 'public_transport' is not set"}->{$node_ref->{'ref'}} = 1;
+                                $help_string = sprintf( gettext( "'role' = '%s' but 'public_transport' is not set" ), $node_ref->{'role'} );
+                                $role_mismatch{$help_string}->{$node_ref->{'ref'}} = 1;
                                 $role_mismatch_found++;
                             }
                         } else {
-                            $role_mismatch{"'role' = '".$node_ref->{'role'}."' but 'public_transport' is not set"}->{$node_ref->{'ref'}} = 1;
+                            $help_string = sprintf( gettext( "'role' = '%s' but 'public_transport' is not set" ), $node_ref->{'role'} );
+                            $role_mismatch{$help_string}->{$node_ref->{'ref'}} = 1;
                             $role_mismatch_found++;
                         }
                     }
                 }
             } else {
-                $role_mismatch{"wrong 'role' = '".ctrl_escape($node_ref->{'role'})."'"}->{$node_ref->{'ref'}} = 1;
+                $help_string = sprintf( gettext( "wrong 'role' = '%s'" ), ctrl_escape($node_ref->{'role'}) );
+                $role_mismatch{$help_string}->{$node_ref->{'ref'}} = 1;
                 $role_mismatch_found++;
             }
         } else {
-            $role_mismatch{"empty 'role'"}->{$node_ref->{'ref'}} = 1;
+            $role_mismatch{gettext( "empty 'role'")}->{$node_ref->{'ref'}} = 1;
             $role_mismatch_found++;
         }
     }
@@ -2822,15 +2833,18 @@ sub analyze_ptv2_route_relation {
                         #    }
                         #}
                     } elsif ( $WAYS{$highway_ref->{'ref'}}->{'tag'}->{'public_transport'} ) {
-                        $role_mismatch{"mismatch between 'role' = '".$highway_ref->{'role'}."' and 'public_transport' = '".$WAYS{$highway_ref->{'ref'}}->{'tag'}->{'public_transport'}."'"}->{$highway_ref->{'ref'}} = 1;
+                        $help_string = sprintf( gettext( "mismatch between 'role' = '%s' and 'public_transport' = '%s'" ), $highway_ref->{'role'}, $WAYS{$highway_ref->{'ref'}}->{'tag'}->{'public_transport'} );
+                        $role_mismatch{$help_string}->{$highway_ref->{'ref'}} = 1;
                         $role_mismatch_found++;
                     } else {
-                        $role_mismatch{"'role' = '".$highway_ref->{'role'}."' but 'public_transport' is not set"}->{$highway_ref->{'ref'}} = 1;
+                        $help_string = sprintf( gettext( "'role' = '%s' but 'public_transport' is not set" ), $highway_ref->{'role'} );
+                        $role_mismatch{$help_string}->{$highway_ref->{'ref'}} = 1;
                         $role_mismatch_found++;
                     }
                 }
             } else {
-                $role_mismatch{"wrong 'role' = '".ctrl_escape($highway_ref->{'role'})."'"}->{$highway_ref->{'ref'}} = 1;
+                $help_string = sprintf( gettext( "wrong 'role' = '%s'" ), ctrl_escape($highway_ref->{'role'}) );
+                $role_mismatch{$help_string}->{$highway_ref->{'ref'}} = 1;
                 $role_mismatch_found++;
             }
         } else {
@@ -2887,15 +2901,18 @@ sub analyze_ptv2_route_relation {
                         #}
                     } elsif ( $RELATIONS{$rel_ref->{'ref'}}                                &&
                             $RELATIONS{$rel_ref->{'ref'}}->{'tag'}->{'public_transport'}   ) {
-                        $role_mismatch{"mismatch between 'role' = '".$rel_ref->{'role'}."' and 'public_transport' = '".$RELATIONS{$rel_ref->{'ref'}}->{'tag'}->{'public_transport'}."'"}->{$rel_ref->{'ref'}} = 1;
+                        $help_string = sprintf( gettext( "mismatch between 'role' = '%s' and 'public_transport' = '%s'" ), $rel_ref->{'role'}, $RELATIONS{$rel_ref->{'ref'}}->{'tag'}->{'public_transport'} );
+                        $role_mismatch{$help_string}->{$rel_ref->{'ref'}} = 1;
                         $role_mismatch_found++;
                     } else {
-                        $role_mismatch{"'role' = '".$rel_ref->{'role'}."' but 'public_transport' is not set"}->{$rel_ref->{'ref'}} = 1;
+                        $help_string = sprintf( gettext( "'role' = '%s' but 'public_transport' is not set" ), $rel_ref->{'role'} );
+                        $role_mismatch{$help_string}->{$rel_ref->{'ref'}} = 1;
                         $role_mismatch_found++;
                     }
                 }
             } else {
-                $role_mismatch{"wrong 'role' = '".ctrl_escape($rel_ref->{'role'})."'"}->{$rel_ref->{'ref'}} = 1;
+                $help_string = sprintf( gettext( "wrong 'role' = '%s'" ), ctrl_escape($rel_ref->{'role'}) );
+                $role_mismatch{$help_string}->{$rel_ref->{'ref'}} = 1;
                 $role_mismatch_found++;
             }
         } else {
