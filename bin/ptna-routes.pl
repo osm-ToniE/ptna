@@ -1674,7 +1674,6 @@ sub analyze_route_environment {
     my $number_of_route_masters             = 0;
     my $number_of_routes                    = 0;
     my %direct_and_matching_route_masters   = ();
-    my $helpstring                          = '';
     
     if ( $env_ref && $ref && $type && $type eq 'route' && $route_type && $relation_id ) {
         
@@ -1726,9 +1725,6 @@ sub analyze_route_environment {
         #
 
         foreach my $route_master_rel_id ( sort( keys( %direct_and_matching_route_masters ) ) ) {
-            $helpstring = ( $RELATIONS{$relation_id}->{'member_of_route_master'}->{$route_master_rel_id} ) ? 'its' : 'this';
-            # helpstring: 'its'  if this route is a member of the current route_master
-            #             'this' if this route is not a member of the current route_master (just coincidence, 'ref' and 'route_type' match)
             if ( $relation_ptr->{'tag'}->{'route'}   && $RELATIONS{$route_master_rel_id}->{'tag'}->{'route_master'} &&
                  $relation_ptr->{'tag'}->{'route'}   ne $RELATIONS{$route_master_rel_id}->{'tag'}->{'route_master'}     ) {
                 push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'route' = '%s' of Route does not fit to 'route_master' = '%s' of Route-Master: %s"), $relation_ptr->{'tag'}->{'route'}, $RELATIONS{$route_master_rel_id}->{'tag'}->{'route_master'}, printRelationTemplate($route_master_rel_id)) );
@@ -1883,8 +1879,8 @@ sub analyze_relation {
             }
             
             if ( $check_osm_separator ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'network' = '%s' includes the separator value ';' (semi-colon) with sourrounding blank(s)"), $network) )                 if ( $count_error_semikolon_w_blank );
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'network' = '%s': ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank(s)"), $network) )  if ( $count_error_comma             );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'network' = '%s' includes the separator value ';' (semi-colon) with sourrounding blank"), $network) )                 if ( $count_error_semikolon_w_blank );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'network' = '%s': ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank"), $network) )  if ( $count_error_comma             );
             }
 
             if ( $expect_network_short  ) {
@@ -2125,8 +2121,11 @@ sub analyze_route_relation {
         }
 
         if ( %restricted_access ) {
+            my $helpstring = '';
             foreach $access_restriction ( sort(keys(%restricted_access)) ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: restricted access (%s) to way(s) without 'psv'='yes', '%s'='yes', '%s'='designated', or ...: %s"), $access_restriction, $relation_ptr->{'tag'}->{'route'}, $relation_ptr->{'tag'}->{'route'}, join(', ', map { printWayTemplate($_,'name;ref'); } sort(keys(%{$restricted_access{$access_restriction}})))) );
+                $helpstring = ngettext( "Route: restricted access (%s) to way without 'psv'='yes', '%s'='yes', '%s'='designated', or ...: %s",
+                                        "Route: restricted access (%s) to ways without 'psv'='yes', '%s'='yes', '%s'='designated', or ...: %s", scalar(keys(%{$restricted_access{$access_restriction}})) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf( $helpstring, $access_restriction, $relation_ptr->{'tag'}->{'route'}, $relation_ptr->{'tag'}->{'route'}, join(', ', map { printWayTemplate($_,'name;ref'); } sort(keys(%{$restricted_access{$access_restriction}})))) );
             }
         }
     }
@@ -2145,7 +2144,8 @@ sub analyze_route_relation {
         if ( %bus_stop_ways ) {
             my @help_array     = sort(keys(%bus_stop_ways));
             my $num_of_errors  = scalar(@help_array);
-            my $error_string   = gettext("Route: 'highway' = 'bus_stop' is set on way(s). Allowed on nodes only!: ");
+            my $error_string   = ngettext( "Route: 'highway' = 'bus_stop' is set on way. Allowed on nodes only!",
+                                           "Route: 'highway' = 'bus_stop' is set on ways. Allowed on nodes only!", $num_of_errors);
             if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
                 push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $error_string, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
             } else {
@@ -2416,7 +2416,8 @@ sub analyze_ptv2_route_relation {
         $return_code++
     }
     if ( $relation_ptr->{'number_of_segments'} > 1 ) {
-        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: has gap(s), consists of %d segments"), $relation_ptr->{'number_of_segments'}) );
+        my $error_string   = ngettext( "has a gap", "has gaps", $relation_ptr->{'number_of_segments'}-1 );
+        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: %s, consists of %d segments"), $error_string, $relation_ptr->{'number_of_segments'}) );
         $return_code += $relation_ptr->{'number_of_segments'} - 1;
     }
     if ( $relation_ptr->{'wrong_sequence'} ) {
@@ -2424,13 +2425,14 @@ sub analyze_ptv2_route_relation {
         $return_code++;
     }
     if ( $check_roundabouts  && $relation_ptr->{'number_of_roundabouts'} ) {
-        push( @{$relation_ptr->{'__notes__'}},  sprintf(gettext("PTv2 route: includes %d entire roundabout(s) but uses only segment(s)"), $relation_ptr->{'number_of_roundabouts'}) );
+        my $error_string   = ngettext( "entire roundabout but uses only segments", "entire roundabouts but uses only segments", $relation_ptr->{'number_of_roundabouts'} );
+        push( @{$relation_ptr->{'__notes__'}},  sprintf(gettext("PTv2 route: includes %d %s"), $relation_ptr->{'number_of_roundabouts'}, $error_string ) );
         $return_code++;
     }
     if ( $relation_ptr->{'wrong_direction_oneways'} ) {
         my @help_array     = sort(keys(%{$relation_ptr->{'wrong_direction_oneways'}}));
         my $num_of_errors  = scalar(@help_array);
-        my $error_string   = gettext("PTv2 route: using oneway way(s) in wrong direction");
+        my $error_string   = ngettext( "PTv2 route: using oneway way in wrong direction", "PTv2 route: using oneway ways in wrong direction", $num_of_errors );
         if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
             push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $error_string, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
         } else {
@@ -2439,7 +2441,8 @@ sub analyze_ptv2_route_relation {
         $return_code++;
     }
     if ( $relation_ptr->{'number_of_segments'} == 1 && $check_motorway_link && $relation_ptr->{'expect_motorway_after'} ) {
-        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: using motorway_link way(s) without entering a motorway way: %s"), join(', ', map { printWayTemplate($_,'name;ref'); } sort(keys(%{$relation_ptr->{'expect_motorway_after'}})))) );
+        my $helpstring = ngettext( "PTv2 route: using motorway_link way without entering a motorway way:", "PTv2 route: using motorway_link ways without entering a motorway way:", scalar(keys(%{$relation_ptr->{'expect_motorway_after'}})) );
+        push( @{$relation_ptr->{'__issues__'}}, sprintf("%s %s", $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } sort(keys(%{$relation_ptr->{'expect_motorway_after'}})))) );
         $return_code++;
     }
 
@@ -3934,25 +3937,26 @@ sub printHintSuspiciousRelations {
     my $hswkot  = scalar( keys ( %have_seen_well_known_other_types ) );
 
     push( @HTML_main, "<p>\n" );
-    push( @HTML_main, "Dieser Abschnitt enthält weitere Relationen aus dem Umfeld der Linien:\n" );
-    push( @HTML_main, "</p>\n" );
-    push( @HTML_main, "<ul>\n" );
-    push( @HTML_main, "    <li>evtl. falsche 'route' oder 'route_master' Werte?\n" );
-    push( @HTML_main, "        <ul>\n" );
-    push( @HTML_main, "            <li>z.B. 'route' = 'suspended_bus' statt 'route' = 'bus'</li>\n" );
-    push( @HTML_main, "        </ul>\n" );
-    push( @HTML_main, "    </li>\n" );
-    push( @HTML_main, "    <li>aber auch 'type' = 'network', 'type' = 'set' oder 'route' = 'network', d.h. eine Sammlung aller zum 'network' gehörenden Route und Route-Master.\n" );
-    push( @HTML_main, "        <ul>\n" );
-    push( @HTML_main, "            <li>solche <strong>Sammlungen sind streng genommen Fehler</strong>, da Relationen keinen Sammlungen darstellen sollen: <a href=\"https://wiki.openstreetmap.org/wiki/DE:Relationen/Relationen_sind_keine_Kategorien\">Relationen sind keine Kategorien</a></li>\n" );
-    push( @HTML_main, "        </ul>\n" );
+    push( @HTML_main, gettext("This section lists further relations of the environment of the routes:") );
+    push( @HTML_main, "\n</p>\n" );
+    push( @HTML_main, "<ul>\n    <li>" );
+    push( @HTML_main, gettext("potentially wrong 'route' or 'route_master' values?") );
+    push( @HTML_main, "\n        <ul>\n        <li>" );
+    push( @HTML_main, gettext("e.g. 'route' = 'suspended_bus' instead of 'route' = 'bus'") );
+    push( @HTML_main, "</li>\n        </ul>\n" );
+    push( @HTML_main, "    </li>\n    <li>" );
+    push( @HTML_main, gettext("but also 'type' = 'network', 'type' = 'set' or 'route' = 'network', i.e. a collection of all routes and route-masters belonging to the 'network'.") );
+    push( @HTML_main, "\n        <ul>\n            <li>" );
+    push( @HTML_main, gettext("such <strong>collections are strictly spoken errors</strong>, since relations shall not represent collections:") );
+    push( @HTML_main, gettext(" <a href=\"https://wiki.openstreetmap.org/wiki/Relations/Relations_are_not_Categories\">Relations/Relations are not Categories</a>") );
+    push( @HTML_main, "</li>\n        </ul>\n" );
     push( @HTML_main, "    </li>\n" );
     push( @HTML_main, "</ul>\n" );
     if ( $hswkort || $hswknt || $hswkot ) {
         push( @HTML_main, "<p>\n" );
-        push( @HTML_main, "Die folgenden Werte bzw. Kombinationen wurden in den Inputdaten gefunden, werden hier aber nicht angezeigt.\n" );
-        push( @HTML_main, "Sie gelten als \"wohl definierte\" Werte und nicht als Fehler.\n" );
-        push( @HTML_main, "</p>\n" );
+        push( @HTML_main, gettext("The following values and combinations have been found in the provided data but they will not be listed here. ") );
+        push( @HTML_main, gettext("They represent so called 'well defined' values and are not considered as errors.") );
+        push( @HTML_main, "\n</p>\n" );
         push( @HTML_main, "<ul>\n" );
         if ( $hswkort ) {
             push( @HTML_main, "    <li>'type' = 'route_master' bzw. 'type' = 'route''\n" );
@@ -3989,7 +3993,7 @@ sub printHintSuspiciousRelations {
 sub printHintNetworks {
 
     push( @HTML_main, "<p>\n" );
-    push( @HTML_main, gettext("The contents of the 'network' tag wil be searched for:") );
+    push( @HTML_main, gettext("The contents of the 'network' tag will be searched for:") );
     push( @HTML_main, "\n</p>\n" );
 
     if ( $network_long_regex || $network_short_regex ) {

@@ -4,181 +4,181 @@
   <bounds minlat='48.7201523' minlon='13.532238' maxlat='48.7204213' maxlon='13.5327423' origin='OpenStreetMap server' />
   <bounds minlat='48.7198471' minlon='13.531601' maxlat='48.7205991' maxlon='13.5331674' origin='CGImap 0.6.0 (30584 thorn-01.openstreetmap.org)' />
   <bounds minlat='48.7198471' minlon='13.531601' maxlat='48.7205991' maxlon='13.5331674' origin='OpenStreetMap server' />
-  <node id='-39413' action='modify' lat='48.72026558787' lon='13.53222459286'>
+  <node id='-39084' action='modify' lat='48.72026558787' lon='13.53222459286'>
     <tag k='bus' v='yes' />
     <tag k='name' v='C-Village' />
     <tag k='public_transport' v='stop_position' />
   </node>
-  <node id='-39415' action='modify' lat='48.72032286137' lon='13.53238745165' />
-  <node id='-39417' action='modify' lat='48.72045669886' lon='13.5325035426' />
-  <node id='-39419' action='modify' lat='48.72044785114' lon='13.53279053897' />
-  <node id='-39421' action='modify' lat='48.72031690478' lon='13.53290587395' />
-  <node id='-39423' action='modify' lat='48.72012756281' lon='13.53288441628' />
-  <node id='-39425' action='modify' lat='48.72006385881' lon='13.53242307633'>
+  <node id='-39086' action='modify' lat='48.72032286137' lon='13.53238745165' />
+  <node id='-39088' action='modify' lat='48.72045669886' lon='13.5325035426' />
+  <node id='-39090' action='modify' lat='48.72044785114' lon='13.53279053897' />
+  <node id='-39092' action='modify' lat='48.72031690478' lon='13.53290587395' />
+  <node id='-39094' action='modify' lat='48.72012756281' lon='13.53288441628' />
+  <node id='-39096' action='modify' lat='48.72006385881' lon='13.53242307633'>
     <tag k='bus' v='yes' />
     <tag k='name' v='B-Village' />
     <tag k='public_transport' v='stop_position' />
   </node>
-  <node id='-39427' action='modify' lat='48.72007093703' lon='13.53204756707' />
-  <node id='-39429' action='modify' lat='48.7199258332' lon='13.5320261094' />
-  <node id='-39431' action='modify' lat='48.71988513327' lon='13.53236406773' />
-  <node id='-39433' action='modify' lat='48.72002052017' lon='13.53242981297'>
+  <node id='-39098' action='modify' lat='48.72007093703' lon='13.53204756707' />
+  <node id='-39100' action='modify' lat='48.7199258332' lon='13.5320261094' />
+  <node id='-39102' action='modify' lat='48.71988513327' lon='13.53236406773' />
+  <node id='-39104' action='modify' lat='48.72002052017' lon='13.53242981297'>
     <tag k='bus' v='yes' />
     <tag k='name' v='B-Village' />
     <tag k='public_transport' v='platform' />
   </node>
-  <node id='-39435' action='modify' lat='48.71949689049' lon='13.53229333269' />
-  <node id='-39437' action='modify' lat='48.71915069928' lon='13.5322782686' />
-  <node id='-39439' action='modify' lat='48.71907947304' lon='13.53331769045'>
+  <node id='-39106' action='modify' lat='48.71949689049' lon='13.53229333269' />
+  <node id='-39108' action='modify' lat='48.71915069928' lon='13.5322782686' />
+  <node id='-39110' action='modify' lat='48.71907947304' lon='13.53331769045'>
     <tag k='bus' v='yes' />
     <tag k='name' v='A-Village' />
     <tag k='public_transport' v='stop_position' />
   </node>
-  <node id='-39441' action='modify' lat='48.71913413505' lon='13.53331517977'>
+  <node id='-39112' action='modify' lat='48.71913413505' lon='13.53331517977'>
     <tag k='name' v='A-Village' />
     <tag k='public_transport' v='platform' />
   </node>
-  <node id='-39443' action='modify' lat='48.72027284159' lon='13.53212419974'>
+  <node id='-39114' action='modify' lat='48.72027284159' lon='13.53212419974'>
     <tag k='bus' v='yes' />
     <tag k='name' v='C-Village' />
     <tag k='public_transport' v='platform' />
   </node>
-  <node id='-39445' action='modify' lat='48.72025634864' lon='13.53230839803'>
+  <node id='-39116' action='modify' lat='48.72025634864' lon='13.53230839803'>
     <tag k='bus' v='yes' />
     <tag k='name' v='C-Village' />
     <tag k='public_transport' v='platform' />
   </node>
-  <node id='-39447' action='modify' lat='48.72010975822' lon='13.53241259128'>
+  <node id='-39118' action='modify' lat='48.72010975822' lon='13.53241259128'>
     <tag k='bus' v='yes' />
     <tag k='name' v='B-Village' />
     <tag k='public_transport' v='platform' />
   </node>
-  <node id='-39449' action='modify' lat='48.71903143586' lon='13.53330639364'>
+  <node id='-39120' action='modify' lat='48.71903143586' lon='13.53330639364'>
     <tag k='name' v='A-Village' />
     <tag k='public_transport' v='platform' />
   </node>
-  <node id='-39451' action='modify' lat='48.72040293864' lon='13.53225567373' />
-  <node id='-39453' action='modify' lat='48.71902149812' lon='13.53280300089' />
-  <node id='-39455' action='modify' lat='48.71917554562' lon='13.53286827859' />
-  <node id='-39457' action='modify' lat='48.71999960807' lon='13.53199330759' />
-  <node id='-39459' action='modify' lat='48.71999463888' lon='13.53206862801' />
-  <node id='-39461' action='modify' lat='48.72022156451' lon='13.53295615367' />
-  <node id='-39463' action='modify' lat='48.72021659535' lon='13.5328481944' />
-  <way id='-39465' action='modify'>
-    <nd ref='-39417' />
-    <nd ref='-39419' />
-    <nd ref='-39421' />
+  <node id='-39122' action='modify' lat='48.72040293864' lon='13.53225567373' />
+  <node id='-39124' action='modify' lat='48.71902149812' lon='13.53280300089' />
+  <node id='-39126' action='modify' lat='48.71917554562' lon='13.53286827859' />
+  <node id='-39128' action='modify' lat='48.71999960807' lon='13.53199330759' />
+  <node id='-39130' action='modify' lat='48.71999463888' lon='13.53206862801' />
+  <node id='-39132' action='modify' lat='48.72022156451' lon='13.53295615367' />
+  <node id='-39134' action='modify' lat='48.72021659535' lon='13.5328481944' />
+  <way id='-39136' action='modify'>
+    <nd ref='-39088' />
+    <nd ref='-39090' />
+    <nd ref='-39092' />
     <tag k='highway' v='secondary' />
     <tag k='name' v='W3' />
     <tag k='ref' v='S 1' />
   </way>
-  <way id='-39467' action='modify'>
-    <nd ref='-39431' />
-    <nd ref='-39435' />
-    <nd ref='-39437' />
+  <way id='-39138' action='modify'>
+    <nd ref='-39102' />
+    <nd ref='-39106' />
+    <nd ref='-39108' />
     <tag k='highway' v='tertiary' />
     <tag k='name' v='W10' />
     <tag k='ref' v='T 1' />
   </way>
-  <way id='-39469' action='modify'>
-    <nd ref='-39417' />
-    <nd ref='-39451' />
-    <nd ref='-39413' />
+  <way id='-39140' action='modify'>
+    <nd ref='-39088' />
+    <nd ref='-39122' />
+    <nd ref='-39084' />
     <tag k='highway' v='service' />
     <tag k='name' v='W1' />
     <tag k='oneway' v='-1' />
   </way>
-  <way id='-39471' action='modify'>
-    <nd ref='-39439' />
-    <nd ref='-39453' />
-    <nd ref='-39437' />
+  <way id='-39142' action='modify'>
+    <nd ref='-39110' />
+    <nd ref='-39124' />
+    <nd ref='-39108' />
     <tag k='highway' v='service' />
     <tag k='name' v='W12' />
     <tag k='oneway' v='yes' />
   </way>
-  <way id='-39473' action='modify'>
-    <nd ref='-39413' />
-    <nd ref='-39415' />
-    <nd ref='-39417' />
+  <way id='-39144' action='modify'>
+    <nd ref='-39084' />
+    <nd ref='-39086' />
+    <nd ref='-39088' />
     <tag k='highway' v='service' />
     <tag k='name' v='W2' />
     <tag k='oneway' v='-1' />
   </way>
-  <way id='-39475' action='modify'>
-    <nd ref='-39437' />
-    <nd ref='-39455' />
-    <nd ref='-39439' />
+  <way id='-39146' action='modify'>
+    <nd ref='-39108' />
+    <nd ref='-39126' />
+    <nd ref='-39110' />
     <tag k='highway' v='service' />
     <tag k='name' v='W11' />
     <tag k='oneway' v='yes' />
   </way>
-  <way id='-39477' action='modify'>
-    <nd ref='-39427' />
-    <nd ref='-39457' />
-    <nd ref='-39429' />
+  <way id='-39148' action='modify'>
+    <nd ref='-39098' />
+    <nd ref='-39128' />
+    <nd ref='-39100' />
     <tag k='highway' v='secondary' />
     <tag k='name' v='W7' />
     <tag k='oneway' v='yes' />
     <tag k='ref' v='S 1' />
   </way>
-  <way id='-39479' action='modify'>
-    <nd ref='-39429' />
-    <nd ref='-39431' />
+  <way id='-39150' action='modify'>
+    <nd ref='-39100' />
+    <nd ref='-39102' />
     <tag k='highway' v='secondary' />
     <tag k='name' v='W9' />
     <tag k='ref' v='S 1' />
   </way>
-  <way id='-39481' action='modify'>
-    <nd ref='-39429' />
-    <nd ref='-39459' />
-    <nd ref='-39427' />
+  <way id='-39152' action='modify'>
+    <nd ref='-39100' />
+    <nd ref='-39130' />
+    <nd ref='-39098' />
     <tag k='highway' v='secondary' />
     <tag k='name' v='W8' />
     <tag k='oneway' v='yes' />
     <tag k='ref' v='S 1' />
   </way>
-  <way id='-39483' action='modify'>
-    <nd ref='-39421' />
-    <nd ref='-39461' />
-    <nd ref='-39423' />
+  <way id='-39154' action='modify'>
+    <nd ref='-39092' />
+    <nd ref='-39132' />
+    <nd ref='-39094' />
     <tag k='highway' v='secondary' />
     <tag k='name' v='W5' />
     <tag k='oneway' v='-1' />
     <tag k='ref' v='S 1' />
   </way>
-  <way id='-39485' action='modify'>
-    <nd ref='-39423' />
-    <nd ref='-39425' />
-    <nd ref='-39427' />
+  <way id='-39156' action='modify'>
+    <nd ref='-39094' />
+    <nd ref='-39096' />
+    <nd ref='-39098' />
     <tag k='highway' v='secondary' />
     <tag k='name' v='W6' />
     <tag k='ref' v='S 1' />
   </way>
-  <way id='-39487' action='modify'>
-    <nd ref='-39423' />
-    <nd ref='-39463' />
-    <nd ref='-39421' />
+  <way id='-39158' action='modify'>
+    <nd ref='-39094' />
+    <nd ref='-39134' />
+    <nd ref='-39092' />
     <tag k='highway' v='secondary' />
     <tag k='name' v='W4' />
     <tag k='oneway' v='-1' />
     <tag k='ref' v='S 1' />
   </way>
-  <relation id='-39489' action='modify'>
-    <member type='node' ref='-39439' role='stop_entry_only' />
-    <member type='node' ref='-39441' role='platform_entry_only' />
-    <member type='node' ref='-39425' role='stop' />
-    <member type='node' ref='-39433' role='platform' />
-    <member type='node' ref='-39413' role='stop_exit_only' />
-    <member type='node' ref='-39443' role='platform_exit_only' />
-    <member type='way' ref='-39475' role='' />
-    <member type='way' ref='-39467' role='' />
-    <member type='way' ref='-39479' role='' />
-    <member type='way' ref='-39481' role='' />
-    <member type='way' ref='-39485' role='' />
-    <member type='way' ref='-39483' role='' />
-    <member type='way' ref='-39465' role='' />
-    <member type='way' ref='-39469' role='' />
-    <tag k='comment' v='PTv2 route: first way is a oneway road and ends in a &apos;stop_position&apos; of this route and there is no exit. Is the route sorted in reverse order? PTv2 route: has gap(s), consists of 2 segments PTv2 route: using oneway way(s) in wrong direction: Way W1' />
+  <relation id='-39160' action='modify'>
+    <member type='node' ref='-39110' role='stop_entry_only' />
+    <member type='node' ref='-39112' role='platform_entry_only' />
+    <member type='node' ref='-39096' role='stop' />
+    <member type='node' ref='-39104' role='platform' />
+    <member type='node' ref='-39084' role='stop_exit_only' />
+    <member type='node' ref='-39114' role='platform_exit_only' />
+    <member type='way' ref='-39146' role='' />
+    <member type='way' ref='-39138' role='' />
+    <member type='way' ref='-39150' role='' />
+    <member type='way' ref='-39152' role='' />
+    <member type='way' ref='-39156' role='' />
+    <member type='way' ref='-39154' role='' />
+    <member type='way' ref='-39136' role='' />
+    <member type='way' ref='-39140' role='' />
+    <tag k='comment' v='PTv2 route: first way is a oneway road and ends in a &apos;stop_position&apos; of this route and there is no exit. Is the route sorted in reverse order? PTv2 route: has a gap, consists of 2 segments PTv2 route: using oneway way in wrong direction: Way W1' />
     <tag k='from' v='A-Village' />
     <tag k='name' v='Bus 001: A-Village =&gt; B-Village =&gt; C-Village' />
     <tag k='network' v='Test' />
@@ -190,22 +190,22 @@
     <tag k='type' v='route' />
     <tag k='via' v='B-Village' />
   </relation>
-  <relation id='-39491' action='modify'>
-    <member type='node' ref='-39413' role='stop_entry_only' />
-    <member type='node' ref='-39445' role='platform_entry_only' />
-    <member type='node' ref='-39425' role='stop' />
-    <member type='node' ref='-39447' role='platform' />
-    <member type='node' ref='-39439' role='stop_exit_only' />
-    <member type='node' ref='-39449' role='platform_exit_only' />
-    <member type='way' ref='-39473' role='' />
-    <member type='way' ref='-39465' role='' />
-    <member type='way' ref='-39487' role='' />
-    <member type='way' ref='-39485' role='' />
-    <member type='way' ref='-39477' role='' />
-    <member type='way' ref='-39479' role='' />
-    <member type='way' ref='-39467' role='' />
-    <member type='way' ref='-39471' role='' />
-    <tag k='comment' v='PTv2 route: first way is a oneway road and ends in a &apos;stop_position&apos; of this route and there is no exit. Is the route sorted in reverse order? PTv2 route: has gap(s), consists of 2 segments PTv2 route: using oneway way(s) in wrong direction: Way W12' />
+  <relation id='-39162' action='modify'>
+    <member type='node' ref='-39084' role='stop_entry_only' />
+    <member type='node' ref='-39116' role='platform_entry_only' />
+    <member type='node' ref='-39096' role='stop' />
+    <member type='node' ref='-39118' role='platform' />
+    <member type='node' ref='-39110' role='stop_exit_only' />
+    <member type='node' ref='-39120' role='platform_exit_only' />
+    <member type='way' ref='-39144' role='' />
+    <member type='way' ref='-39136' role='' />
+    <member type='way' ref='-39158' role='' />
+    <member type='way' ref='-39156' role='' />
+    <member type='way' ref='-39148' role='' />
+    <member type='way' ref='-39150' role='' />
+    <member type='way' ref='-39138' role='' />
+    <member type='way' ref='-39142' role='' />
+    <tag k='comment' v='PTv2 route: first way is a oneway road and ends in a &apos;stop_position&apos; of this route and there is no exit. Is the route sorted in reverse order? PTv2 route: has a gap, consists of 2 segments PTv2 route: using oneway way in wrong direction: Way W12' />
     <tag k='from' v='C-Village' />
     <tag k='name' v='Bus 001: C-Village =&gt; B-Village =&gt; A-Village' />
     <tag k='network' v='Test' />
@@ -217,9 +217,9 @@
     <tag k='type' v='route' />
     <tag k='via' v='B-Village' />
   </relation>
-  <relation id='-39493' action='modify'>
-    <member type='relation' ref='-39489' role='' />
-    <member type='relation' ref='-39491' role='' />
+  <relation id='-39164' action='modify'>
+    <member type='relation' ref='-39160' role='' />
+    <member type='relation' ref='-39162' role='' />
     <tag k='name' v='Bus 001' />
     <tag k='network' v='Test' />
     <tag k='operator' v='Test' />

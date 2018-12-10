@@ -16,7 +16,7 @@ compile:
 up update: $(LOCALIZABLE)
 	@echo Gathering translations...
 	@xgettext -L Perl \
-	    -kgettext \
+	    -kgettext -kngettext \
 	    --from-code utf-8 -o $(TEMPLATE) $(LOCALIZABLE)
 	@echo Merging...
 	@for i in $$(ls *.po); do \
