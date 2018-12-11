@@ -4057,8 +4057,8 @@ sub printHintUnusedNetworks {
     printHeader( gettext("Not Considered 'network'-Values"), 2, 'notconsiderednetworks' );
     
     push( @HTML_main, "<p>\n" );
-    push( @HTML_main, gettext("This section lists the 'network'-values which have not been considered.") );
-    push( @HTML_main, gettext("They might include typos in values which otherwise should have been considered.") );
+    push( @HTML_main, gettext("This section lists the 'network'-values which have not been considered. ") );
+    push( @HTML_main, gettext("They might include typos in values which otherwise should have been considered. ") );
     push( @HTML_main, "\n</p>\n" );
 
     printTableHeader();
