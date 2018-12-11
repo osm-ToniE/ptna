@@ -495,7 +495,7 @@ msgstr "PTv2 Route: 'to' = '%s' ist nicht Teil von 'name'"
 
 #: bin/ptna-routes.pl:2243
 msgid "PTv2 route: 'to' is not set"
-msgstr "PTv2 Route: 'to' = '%s' ist nicht gesetzt"
+msgstr "PTv2 Route: 'to' ist nicht gesetzt"
 
 #: bin/ptna-routes.pl:2248
 msgid "PTv2 route: 'name' includes deprecated '<=>'"
@@ -568,7 +568,7 @@ msgid ""
 "PTv2 route: incorrect order of 'stop_position', 'platform' and 'way' (stop/"
 "platform after way)"
 msgstr ""
-"PTv2 Route: falsche Reihenfolge von 'stop'position', 'platform' und 'way': "
+"PTv2 Route: falsche Reihenfolge von 'stop_position', 'platform' und 'way': "
 "'stop_position'/'platform' m&uuml;ssen vor allen 'way' kommen"
 
 #: bin/ptna-routes.pl:2428
