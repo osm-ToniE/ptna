@@ -713,7 +713,7 @@ msgstr "PTv2 Route: es gibt keine 'stop_position' auf dem ersten Weg der Route: 
 #: bin/ptna-routes.pl:2720
 #, perl-format
 msgid "PTv2 route: first node of way is not a stop position of this route: %s"
-msgstr "PTv2 Route: der erste Punkt des Weges ist keine 'stop_position': %s"
+msgstr "PTv2 Route: der erste Punkt des Weges ist keine 'stop_position' dieser Route: %s"
 
 #: bin/ptna-routes.pl:2739
 #, perl-format
@@ -750,7 +750,7 @@ msgstr "PTv2 Route: es gibt keine 'stop_position' auf dem letzten Weg der Route:
 #: bin/ptna-routes.pl:2802
 #, perl-format
 msgid "PTv2 route: last node of way is not a stop position of this route: %s"
-msgstr "PTv2 Route: der letzte Punkt des Weges ist keine 'stop_position': %s"
+msgstr "PTv2 Route: der letzte Punkt des Weges ist keine 'stop_position' dieser Route: %s"
 
 #: bin/ptna-routes.pl:3795
 msgid "Date of Data"
