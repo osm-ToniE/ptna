@@ -856,14 +856,14 @@ msgstr "Nicht ber&uuml;cksichtigte 'network'-Werte"
 msgid "This section lists the 'network'-values which have not been considered."
 msgstr ""
 "Dieser Abschnitt listet die 'network'-Werte auf, die nicht ber&uuml;cksichtigt "
-"wurden."
+"wurden. "
 
 #: bin/ptna-routes.pl:4061
 msgid ""
 "They might include typos in values which otherwise should have been considered."
 msgstr ""
 "Es liegen eventuell Tippfehler in Werten vor, die ansonsten zu ber&uuml;"
-"cksichtigen w&auml;ren."
+"cksichtigen w&auml;ren. "
 
 #: bin/ptna-routes.pl:4266
 msgid " and more ..."
