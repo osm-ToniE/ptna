@@ -769,7 +769,7 @@ msgstr ""
 #: bin/ptna-routes.pl:3809
 msgid ""
 "An explanation of the error texts can be found in the documentation at <a href='/"
-"documentation.html#checks'>'Check'</a> zu finden."
+"documentation.html#checks'>'Check'</a>."
 msgstr ""
 "Eine Erl&auml;uterung der Fehlertexte ist in der Dokumentation unter <a href='/"
 "documentation.html#checks'>Pr&uuml;fungen</a> zu finden."
