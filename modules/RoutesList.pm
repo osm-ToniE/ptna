@@ -95,7 +95,7 @@ sub ReadRoutes {
                             } elsif ( $last_type ne 'none' ) {
                                 $hashref->{'type'}  = 'error';                                                                                  # this is an error
                                 $hashref->{'ref'}   = gettext('ERROR');                                                                                  # this is an error
-                                $hashref->{'error'} = sprintf( gettext("Simple text inside table not supported. Line %s of Routes-Data. Contents of line: '%s'"), $NR, $hashref->{'contents'} );    # this is an error
+                                $hashref->{'error'} = sprintf( gettext("Simple text inside or directly after table is not supported. Line %s of Routes-Data. Contents of line: '%s'"), $NR, $hashref->{'contents'} );    # this is an error
                             }
 
                         } else {
