@@ -840,7 +840,7 @@ if ( $routes_file ) {
             printTableLine( 'issues' => $entryref->{'error'} );
         } elsif ( $entryref->{'type'} eq 'route' ) {
             
-            printf STDERR "    ref = %s, route = %s, comment = %s, from = %s, to = %s, operator = %s\n", $entryref->{'ref'}, $entryref->{'route'}, $entryref->{'comment'}, $entryref->{'from'}, $entryref->{'to'}, $entryref->{'operator'};
+            printf STDERR "    ref = %s, route = %s, comment = %s, from = %s, to = %s, operator = %s\n", $entryref->{'ref'}, $entryref->{'route'}, $entryref->{'comment'}, $entryref->{'from'}, $entryref->{'to'}, $entryref->{'operator'}  if ( $debug );
 
             if ( $table_headers_printed == 0 ) {
                 printTableHeader();
