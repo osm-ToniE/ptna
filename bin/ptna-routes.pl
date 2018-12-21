@@ -4287,7 +4287,7 @@ sub printTableLine {
 sub printTableFooter {
 
     push( @HTML_main, sprintf( "%12s</tbody>\n",  ' ' ) );
-    push( @HTML_main, sprintf( "%8s</table>\n\n", ' ' ) );
+    push( @HTML_main, sprintf( "%8s</table><br>\n\n", ' ' ) );
 }
 
 
