@@ -821,32 +821,26 @@ if ( $routes_file ) {
         #printf STDERR "Entry: type = %s\n", $entryref->{'type'};
         
         if ( $entryref->{'type'} eq 'header' ) {
-            #printf STDERR "    header = %s\n", $entryref->{'header'};
+            printf STDERR "    header = %s\n", $entryref->{'header'}  if ( $debug );
             printTableFooter()                                          if ( $table_headers_printed ); 
-            printHeader( $entryref->{'header'}, $entryref->{'level'} );
             $table_headers_printed = 0;
+            printHeader( $entryref->{'header'}, $entryref->{'level'} );
         } elsif ( $entryref->{'type'} eq 'text' ) {
-            #printf STDERR "    text = %s\n", $entryref->{'text'};
-            if ( $table_headers_printed ) {
-                printf STDERR "%s ignoring text inside table: %s\n", get_time(), $entry;
-            }
-            else {
-                printText( $entryref->{'text'} );
-            }
+            printf STDERR "    text = %s\n", $entryref->{'text'}  if ( $debug );
+            printTableFooter()                                          if ( $table_headers_printed ); 
+            $table_headers_printed = 0;
+            printText( $entryref->{'text'} );
         } elsif ( $entryref->{'type'} eq 'error' ) {
-            #printf STDERR "    error = %s\n", $entryref->{'error'};
-            if ( $table_headers_printed ) {
-                printTableSubHeader( 'ref' => $entryref->{'ref'} );
-                printTableLine( 'issues' => $entryref->{'error'} );
+            printf STDERR "    error = %s\n", $entryref->{'error'}  if ( $debug );
+            if ( $table_headers_printed == 0 ) {
+                printTableHeader();
+                $table_headers_printed++;
             }
-            else {
-                printText( '' );
-                printText( $entryref->{'error'} );
-                printText( '' );
-            }
+            printTableSubHeader( 'ref' => $entryref->{'ref'} );
+            printTableLine( 'issues' => $entryref->{'error'} );
         } elsif ( $entryref->{'type'} eq 'route' ) {
             
-            #printf STDERR "    ref = %s, route = %s, comment = %s, from = %s, to = %s, operator = %s\n", $entryref->{'ref'}, $entryref->{'route'}, $entryref->{'comment'}, $entryref->{'from'}, $entryref->{'to'}, $entryref->{'operator'};
+            printf STDERR "    ref = %s, route = %s, comment = %s, from = %s, to = %s, operator = %s\n", $entryref->{'ref'}, $entryref->{'route'}, $entryref->{'comment'}, $entryref->{'from'}, $entryref->{'to'}, $entryref->{'operator'};
 
             if ( $table_headers_printed == 0 ) {
                 printTableHeader();
@@ -4092,7 +4086,7 @@ sub printHeader {
     my $header_numbers = undef;
 
     if ( $printText_buffer ) {
-        push( @HTML_main, $printText_buffer . "\n</p>\n" );
+        push( @HTML_main, $printText_buffer . "&nbsp;\n</p>\n" );
         $printText_buffer = '';
     }
 
@@ -4153,7 +4147,7 @@ sub printText {
     if ( $text ) {
         $printText_buffer .= sprintf( "%s\n", wiki2html($text) );
     } else {
-        push( @HTML_main, $printText_buffer . "\n</p>\n" );
+        push( @HTML_main, $printText_buffer . "&nbsp;\n</p>\n" );
         $printText_buffer = '';
     }
 }
@@ -4287,7 +4281,7 @@ sub printTableLine {
 sub printTableFooter {
 
     push( @HTML_main, sprintf( "%12s</tbody>\n",  ' ' ) );
-    push( @HTML_main, sprintf( "%8s</table><br>\n\n", ' ' ) );
+    push( @HTML_main, sprintf( "%8s</table>\n\n", ' ' ) );
 }
 
 

@@ -88,16 +88,9 @@ sub ReadRoutes {
                             $hashref->{'level'}          =  6  if ( $hashref->{'level'} > 6 );
                             delete($hashref->{'level_string'});
                         } elsif ( m/^-(.*)/ ) {
-                            if ( $last_type eq 'header' || $last_type eq 'text' ) {
-                                $hashref->{'type'}       =  'text';       # store type
-                                $hashref->{'text'}       =  $1;
-                                $hashref->{'text'}       =~ s/^\s*//;
-                            } elsif ( $last_type ne 'none' ) {
-                                $hashref->{'type'}  = 'error';                                                                                  # this is an error
-                                $hashref->{'ref'}   = gettext('ERROR');                                                                                  # this is an error
-                                $hashref->{'error'} = sprintf( gettext("Simple text inside or directly after table is not supported. Line %s of Routes-Data. Contents of line: '%s'"), $NR, $hashref->{'contents'} );    # this is an error
-                            }
-
+                            $hashref->{'type'}       =  'text';       # store type
+                            $hashref->{'text'}       =  $1;
+                            $hashref->{'text'}       =~ s/^\s*//;
                         } else {
                             next;   # ignore 'comment' line
                         }

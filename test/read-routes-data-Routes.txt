@@ -61,12 +61,13 @@
 200;
 201;bus
 
-- text inside table not supported
+- text inside table is now supported
 
 300;;
 301;bus;
 302;bus;comment
 400;;;
+-
 401;bus;comment;
 402;bus;comment;from
 500;;;;
@@ -81,6 +82,8 @@
 606;bus;;;;operator
 700;auto;invalid route-type;nowhere;nowhere;noone
 800;bus;!Neue Buslinie ab 09.12.2018!;nowhere;nowhere;noone
+-
+
 
 
 </pre>
