@@ -80,27 +80,27 @@
         <h6 id="A2.1.1.1.1.2">2.1.1.1.1.2 Level 7 --> Level 6</h6>
 <p>
 simple text in a paragraph
-&nbsp;
+
 </p>
 <p>
 new paragraph
-&nbsp;
+
 </p>
 <p>
 simple text in <strong><em>strong and em</em></strong>er and <strong><em>stronger and more em</em></strong>
-&nbsp;
+
 </p>
 <p>
 simple text in <strong>strong</strong>er and <strong>stronger</strong>
-&nbsp;
+
 </p>
 <p>
 simple text in <em>em</em> and even more <em>em</em>
-&nbsp;
+
 </p>
 <p>
 <span class="attention">Something very important</class>
-&nbsp;
+
 </p>
         <table class="oepnvtable">
             <thead>
