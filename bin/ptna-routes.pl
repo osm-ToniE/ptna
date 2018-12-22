@@ -4086,7 +4086,11 @@ sub printHeader {
     my $header_numbers = undef;
 
     if ( $printText_buffer ) {
-        push( @HTML_main, $printText_buffer . "&nbsp;\n</p>\n" );
+        if ( $printText_buffer eq "<p>\n" ) {
+            push( @HTML_main, $printText_buffer . "&nbsp;\n</p>\n" );
+        } else {
+            push( @HTML_main, $printText_buffer . "\n</p>\n" );
+        }
         $printText_buffer = '';
     }
 
@@ -4147,7 +4151,11 @@ sub printText {
     if ( $text ) {
         $printText_buffer .= sprintf( "%s\n", wiki2html($text) );
     } else {
-        push( @HTML_main, $printText_buffer . "&nbsp;\n</p>\n" );
+        if ( $printText_buffer eq "<p>\n" ) {
+            push( @HTML_main, $printText_buffer . "&nbsp;\n</p>\n" );
+        } else {
+            push( @HTML_main, $printText_buffer . "\n</p>\n" );
+        }
         $printText_buffer = '';
     }
 }
@@ -4177,7 +4185,11 @@ sub printTableHeader {
     my $element = undef;
 
     if ( $printText_buffer ) {
-        push( @HTML_main, $printText_buffer . "\n</p>\n" );
+        if ( $printText_buffer eq "<p>\n" ) {
+            push( @HTML_main, $printText_buffer . "&nbsp;\n</p>\n" );
+        } else {
+            push( @HTML_main, $printText_buffer . "\n</p>\n" );
+        }
         $printText_buffer = '';
     }
 
