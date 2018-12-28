@@ -4504,7 +4504,7 @@ sub wiki2html {
             $text =~ s/\[[^ ]+ [^\]]+\]/$sub/;
         }
         while ( $text =~ m/!!!(.+?)!!!/g ) {
-            $sub = sprintf( "<span class=\"attention\">%s</class>", $1 );
+            $sub = sprintf( "<span class=\"attention\">%s</span>", $1 );
             $text =~ s/!!!(.+?)!!!/$sub/;
         }
         while ( $text =~ m/'''''(.+?)'''''/g ) {
