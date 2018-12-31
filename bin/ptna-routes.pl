@@ -1616,14 +1616,14 @@ sub analyze_route_master_environment {
                             if ( $relation_ptr->{'tag'}->{'network'} && $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'} ) {
                                 if ( $relation_ptr->{'tag'}->{'network'} eq $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'} ) {
                                     ; # hmm should not happen here
-                                    printf STDERR "%s Route of Route-Master not found although 'ref' and 'network' are equal. Route-Master: %s, Route: %s, 'ref': %s, 'network': %s\n", get_time(), $relation_id, $member_ref->{'ref'}, $ref, $relation_ptr->{'tag'}->{'network'};
+                                    printf STDERR "%s Route of Route-Master not found although 'ref' and 'network' are equal. Route-Master: %s, Route: %s, 'ref': %s, 'network': %s\n", get_time(), $relation_id, $member_ref->{'ref'}, $ref, html_escape($relation_ptr->{'tag'}->{'network'});
                                 } else {
                                     # 'ref' tag is set and is same but 'network' is set and differs
-                                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route has different 'network' = '%s' than Route-Master 'network' = '%s': %s"), $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}, $relation_ptr->{'tag'}->{'network'}, printRelationTemplate($member_ref->{'ref'}) ) );
+                                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route has different 'network' = '%s' than Route-Master 'network' = '%s': %s"), html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}), html_escape($relation_ptr->{'tag'}->{'network'}), printRelationTemplate($member_ref->{'ref'}) ) );
                                 }
                             } elsif ( $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'} ) {
                                 # 'ref' tag is set and is same but 'network' is strange
-                                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route has 'network' = '%s' value which is considered as not relevant: %s"), $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}, printRelationTemplate($member_ref->{'ref'}) ) );
+                                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route has 'network' = '%s' value which is considered as not relevant: %s"), html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}), printRelationTemplate($member_ref->{'ref'}) ) );
                             }
                         } else {
                             # 'ref' tag is set but differs
@@ -1729,7 +1729,7 @@ sub analyze_route_environment {
             }
             if ( $relation_ptr->{'tag'}->{'network'} && $RELATIONS{$route_master_rel_id}->{'tag'}->{'network'} &&
                  $relation_ptr->{'tag'}->{'network'} ne $RELATIONS{$route_master_rel_id}->{'tag'}->{'network'}     ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'network' = '%s' of Route does not fit to 'network' = '%s' of Route-Master: %s"), $relation_ptr->{'tag'}->{'network'}, $RELATIONS{$route_master_rel_id}->{'tag'}->{'network'}, printRelationTemplate($route_master_rel_id)) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'network' = '%s' of Route does not fit to 'network' = '%s' of Route-Master: %s"), html_escape($relation_ptr->{'tag'}->{'network'}), html_escape($RELATIONS{$route_master_rel_id}->{'tag'}->{'network'}), printRelationTemplate($route_master_rel_id)) );
             }
             if ( $relation_ptr->{'tag'}->{'colour'} ) {
                 if ( $RELATIONS{$route_master_rel_id}->{'tag'}->{'colour'} ) {
@@ -1801,9 +1801,9 @@ sub analyze_relation {
                         if ( $tag =~ m/^note$/i ){
                             $help =  $relation_ptr->{'tag'}->{$tag};
                             $help =~ s|^https{0,1}://wiki.openstreetmap.org\S+\s*[;,_+#\.\-]*\s*||;
-                            unshift( @{$relation_ptr->{$reporttype}}, sprintf("'%s' ~ '%s'", $tag, $help) )  if ( $help );
+                            unshift( @{$relation_ptr->{$reporttype}}, sprintf("'%s' ~ '%s'", $tag, html_escape($help)) )  if ( $help );
                         } else {
-                            unshift( @{$relation_ptr->{$reporttype}}, sprintf("'%s' = '%s'", $tag, $relation_ptr->{'tag'}->{$tag}) )
+                            unshift( @{$relation_ptr->{$reporttype}}, sprintf("'%s' = '%s'", $tag, html_escape($relation_ptr->{'tag'}->{$tag})) )
                         }
                     }
                 }
@@ -1831,9 +1831,9 @@ sub analyze_relation {
                         $match = $1;
                         if ( $positive_notes ) {
                             if ( $network eq $match ) {
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' = '%s'",$match) );
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' = '%s'",html_escape($match)) );
                             } else {
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' ~ '%s'",$match) );
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' ~ '%s'",html_escape($match)) );
                             }
                         }
                         if ( $network =~ m/;\s+$match/    ||
@@ -1854,9 +1854,9 @@ sub analyze_relation {
                         $match = $1;
                         if ( $positive_notes ) {
                             if ( $network eq $match ) {
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' = '%s'",$match) );
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' = '%s'",html_escape($match)) );
                             } else {
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' ~ '%s'",$match) );
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' ~ '%s'",html_escape($match)) );
                             }
                         }
                         if ( $network =~ m/;\s+$match/    ||
@@ -1873,8 +1873,8 @@ sub analyze_relation {
             }
             
             if ( $check_osm_separator ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'network' = '%s' includes the separator value ';' (semi-colon) with sourrounding blank"), $network) )                 if ( $count_error_semikolon_w_blank );
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'network' = '%s': ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank"), $network) )  if ( $count_error_comma             );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'network' = '%s' includes the separator value ';' (semi-colon) with sourrounding blank"), html_escape($network)) )                 if ( $count_error_semikolon_w_blank );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'network' = '%s': ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank"), html_escape($network)) )  if ( $count_error_comma             );
             }
 
             if ( $expect_network_short  ) {
@@ -1890,11 +1890,11 @@ sub analyze_relation {
                 
                 if ( $match_long ) {
                     if ( $match_long ne $expect_long_as ) {
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("'network' = '%s' should be short form"),$match_long) );
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("'network' = '%s' should be short form"),html_escape($match_long)) );
                     }
                 } elsif ( $match_short ) {
                     if ( $match_short eq $expect_long_for ) {
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("'network' = '%s' should be long form"),$match_short) );
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("'network' = '%s' should be long form"),html_escape($match_short)) );
                     }
                 }
             } elsif ( $expect_network_long  ) {
@@ -1910,11 +1910,11 @@ sub analyze_relation {
                 
                 if ( $match_short ) {
                     if ( $match_short ne $expect_short_as ) {
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("'network' = '%s' should be long form"),$match_short) );
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("'network' = '%s' should be long form"),html_escape($match_short)) );
                     }
                 } elsif ( $match_long ) {
                     if ( $match_long eq $expect_short_for ) {
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("'network' = '%s' should be short form"),$match_long) );
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("'network' = '%s' should be short form"),html_escape($match_long)) );
                     }
                 }
             }
@@ -1924,7 +1924,7 @@ sub analyze_relation {
 
         if ( $relation_ptr->{'tag'}->{'colour'} ) {
                 my $colour = GetColourFromString( $relation_ptr->{'tag'}->{'colour'} );
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'colour' has unknown value '%s'"),$relation_ptr->{'tag'}->{'colour'}) )        unless ( $colour );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'colour' has unknown value '%s'"),html_escape($relation_ptr->{'tag'}->{'colour'})) )        unless ( $colour );
         }
         
         if ( $positive_notes ) {
@@ -1990,7 +1990,7 @@ sub analyze_route_master_relation {
         if ( $relation_ptr->{'tag'}->{'public_transport:version'} !~ m/^2$/ ) {
             push( @{$relation_ptr->{'__issues__'}}, gettext("'public_transport:version' is not set to '2'") )        if ( $check_version ); 
         } else {
-            ; #push( @{$relation_ptr->{'__notes__'}}, sprintf("'public_transport:version' = %s",$relation_ptr->{'tag'}->{'public_transport:version'}) )    if ( $positive_notes );
+            ; #push( @{$relation_ptr->{'__notes__'}}, sprintf("'public_transport:version' = %s",html_escape($relation_ptr->{'tag'}->{'public_transport:version'})) )    if ( $positive_notes );
         }
     } else {
         push( @{$relation_ptr->{'__notes__'}}, gettext("'public_transport:version' is not set") )        if ( $check_version );
@@ -2085,7 +2085,7 @@ sub analyze_route_relation {
         if ( $relation_ptr->{'tag'}->{'public_transport:version'} !~ m/^[12]$/ ) {
             push( @{$relation_ptr->{'__issues__'}}, gettext("'public_transport:version' is neither '1' nor '2'") ); 
         } else {
-            #push( @{$relation_ptr->{'__notes__'}}, sprintf("'public_transport:version' = %s",$relation_ptr->{'tag'}->{'public_transport:version'}) )    if ( $positive_notes );
+            #push( @{$relation_ptr->{'__notes__'}}, sprintf("'public_transport:version' = %s",html_escape($relation_ptr->{'tag'}->{'public_transport:version'})) )    if ( $positive_notes );
             
             if ( $relation_ptr->{'tag'}->{'public_transport:version'} == 2 ) {
                 
@@ -2197,7 +2197,7 @@ sub analyze_ptv2_route_relation {
                             $number_of_ref_colon_tags++;
                             $ref_string = $1 . ' ' . $relation_ptr->{'tag'}->{$tag};
                             if ( index($name,$ref_string) == -1 ) {
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: '%s' is not part of 'name' (derived from '%s' = '%s')"),$ref_string,$tag,$relation_ptr->{'tag'}->{$tag}) );
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: '%s' is not part of 'name' (derived from '%s' = '%s')"),html_escape($ref_string),html_escape($tag),html_escape($relation_ptr->{'tag'}->{$tag})) );
                                 $preconditions_failed++;
                                 $return_code++;
                             }
@@ -2217,7 +2217,7 @@ sub analyze_ptv2_route_relation {
             }
             if ( $from ) {
                 if ( index($name,$from) == -1 ) {
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'from' = '%s' is not part of 'name'"), $from) );
+                    push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'from' = '%s' is not part of 'name'"), html_escape($from)) );
                     $preconditions_failed++;
                     $return_code++;
                 }
@@ -2228,7 +2228,7 @@ sub analyze_ptv2_route_relation {
             }
             if ( $to ) {
                 if ( index($name,$to) == -1 ) {
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'to' = '%s' is not part of 'name'"), $to) );
+                    push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'to' = '%s' is not part of 'name'"), html_escape($to)) );
                     $preconditions_failed++;
                     $return_code++;
                 }
@@ -2276,7 +2276,7 @@ sub analyze_ptv2_route_relation {
                         $preconditions_failed = 0;
                         foreach my $via_value ( @via_values ) {
                             if ( index($name,$via_value) == -1 ) {
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'via' is set: via-part = '%s' is not part of 'name' (separate multiple 'via' values by ';', without blanks)"),$via_value) );
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'via' is set: via-part = '%s' is not part of 'name' (separate multiple 'via' values by ';', without blanks)"),html_escape($via_value)) );
                                 $preconditions_failed++;
                                 $return_code++;
                             }
@@ -3673,14 +3673,14 @@ sub noAccess {
     if ( $way_id && $WAYS{$way_id} && $WAYS{$way_id}->{'tag'} ) {
         my $way_tag_ref = $WAYS{$way_id}->{'tag'};
 
-        if ( $way_tag_ref->{'psv'} && ($way_tag_ref->{'psv'} eq 'yes' || $way_tag_ref->{'psv'} eq 'designated' || $way_tag_ref->{'psv'} eq 'official') ) {
+        if ( $way_tag_ref->{'psv'} && ($way_tag_ref->{'psv'} eq 'yes' || $way_tag_ref->{'psv'} eq 'designated' || $way_tag_ref->{'psv'} eq 'permissive' || $way_tag_ref->{'psv'} eq 'official') ) {
             #
             # fine for all public service vehicles
             #
             printf STDERR "noAccess() : access for all psv for way %d\n", $way_id       if ( $debug );
             return '';
         } elsif ( $vehicle_type && $way_tag_ref->{$vehicle_type} && 
-                  ($way_tag_ref->{$vehicle_type} eq 'yes' || $way_tag_ref->{$vehicle_type} eq 'designated' || $way_tag_ref->{$vehicle_type} eq 'official') ) {
+                  ($way_tag_ref->{$vehicle_type} eq 'yes' || $way_tag_ref->{$vehicle_type} eq 'designated' || $way_tag_ref->{$vehicle_type} eq 'permissive' || $way_tag_ref->{$vehicle_type} eq 'official') ) {
             #
             # fine for this specific type of vehicle (bus, train, subway, ...) == @supported_route_types
             #
@@ -4276,6 +4276,9 @@ sub printTableLine {
             }
             push( @HTML_main, sprintf( "<td class=\"relations\">%s%s</td>", join( ', ', map { printRelationTemplate($_,'ref'); } split( ',', $val ) ), $and_more ) );
         } elsif ( $columns[$i] eq "issues"  ){
+            $val =~ s/__separator__/<br>/g;
+            push( @HTML_main, sprintf( "<td class=\"%s\">%s</td>", $columns[$i], $val ) );
+        } elsif ( $columns[$i] eq "notes"  ){
             $val =~ s/__separator__/<br>/g;
             push( @HTML_main, sprintf( "<td class=\"%s\">%s</td>", $columns[$i], $val ) );
         } else {
