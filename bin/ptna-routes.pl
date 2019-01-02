@@ -1383,7 +1383,8 @@ sub search_matching_relations {
                                                     } elsif ( $RelFrom =~ m/$ExpFrom/ ) {
                                                         $match = "$RelFrom =~ m/$ExpFrom/";
                                                     }
-                                                } elsif ( $RelTo ) {
+                                                }
+                                                if ( !defined($match) && $RelTo ) {
                                                     if ( $ExpFrom =~ m/$RelTo/ ) {
                                                         $match = "$ExpFrom =~ m/$RelTo/";
                                                     } elsif ( $RelTo =~ m/$ExpFrom/ ) {
@@ -1391,14 +1392,15 @@ sub search_matching_relations {
                                                     }
                                                 }
                                             }
-                                            if ( $ExpTo ) {
+                                            if ( !defined($match) && $ExpTo ) {
                                                 if ( $RelFrom ) {
                                                     if ( $ExpTo =~ m/$RelFrom/ ) {
                                                        $match = "$ExpTo =~ m/$RelFrom/";
                                                     } elsif ( $RelFrom =~ m/$ExpTo/ ) {
                                                        $match = "$RelFrom =~ m/$ExpTo/";
                                                     }
-                                                } elsif ( $RelTo ) {
+                                                }
+                                                if ( !defined($match) && $RelTo ) {
                                                     if ( $ExpTo =~ m/$RelTo/ ) {
                                                        $match = "$ExpTo =~ m/$RelTo/";
                                                     } elsif ( $RelTo =~ m/$ExpTo/ ) {
