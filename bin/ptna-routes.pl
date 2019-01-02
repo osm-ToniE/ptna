@@ -1594,7 +1594,7 @@ sub analyze_route_master_environment {
                 #
                 # relation_id points to a route which has different 'ref' or does not exist in data set
                 #
-                if ( $RELATIONS{$member_ref->{'ref'}} ) {
+                if ( $RELATIONS{$member_ref->{'ref'}} && $RELATIONS{$member_ref->{'ref'}}->{'tag'} ) {
                     #
                     # relation is included in XML input file but has no 'ref' or 'ref' is different from 'ref' or route_master
                     #
@@ -1633,7 +1633,7 @@ sub analyze_route_master_environment {
                         }
                     } else {
                         # 'ref' tag is not set
-                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route exists but 'ref' tag is not set: %s"), printRelationTemplate($member_ref->{'ref'}) ) );
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route exists in the given data set but 'ref' tag is not set: %s"), printRelationTemplate($member_ref->{'ref'}) ) );
                     }
                 } else {
                     #
