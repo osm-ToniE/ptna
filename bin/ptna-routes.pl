@@ -1928,20 +1928,20 @@ sub analyze_relation {
         }
         
         if ( $positive_notes ) {
-            foreach my $special ( 'network:', 'route:', 'ref:', 'ref_' ) {
+            foreach my $special ( 'network:', 'route:', 'ref:', 'ref_', 'operator' ) {
                 foreach my $tag ( sort(keys(%{$relation_ptr->{'tag'}})) ) {
                     if ( $tag =~ m/^$special/i ) {
                         if ( $relation_ptr->{'tag'}->{$tag} ) {
                             if ( $tag =~ m/^network:long$/i && $network_long_regex){
                                 if ( $relation_ptr->{'tag'}->{$tag} =~ m/^$network_long_regex$/ ) {
-                                    push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("'%s' is long form"), $tag) );
+                                    push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("'%s' is long form"), html_escape($tag)) );
                                 } elsif ( $relation_ptr->{'tag'}->{$tag} =~ m/$network_long_regex/ ) {
-                                    push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("'%s' matches long form"), $tag) );
+                                    push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("'%s' matches long form"), html_escape($tag)) );
                                 } else {
-                                    push( @{$relation_ptr->{'__notes__'}}, sprintf("'%s' = %s", $tag, $relation_ptr->{'tag'}->{$tag}) )
+                                    push( @{$relation_ptr->{'__notes__'}}, sprintf("'%s' = %s", html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag})) )
                                 }
                             } else {
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf("'%s' = %s", $tag, $relation_ptr->{'tag'}->{$tag}) )
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf("'%s' = %s", html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag})) )
                             }
                         }
                     }
