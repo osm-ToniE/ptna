@@ -1442,7 +1442,7 @@ sub search_matching_relations {
                                 }
                             }
                             else {
-                                printf STDERR "%s Skipping relation %s, 'ref' %s: Relation: 'operator' = '%s', CSV file: 'operator' = '%s'\n", get_time(), $rel_id, $ExpRef, $RelOperator, $ExpOperator         if ( $debug ); 
+                                printf STDERR "%s Skipping relation %s, 'ref' %s: Relation: 'operator' = '%s', CSV file: 'operator' = '%s'\n", get_time(), $rel_id, $ExpRef, $RelOperator, $ExpOperator         if ( $debug );
                                 next;
                             }
                         } 

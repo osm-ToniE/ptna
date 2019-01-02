@@ -52,6 +52,7 @@ sub ReadRoutes {
     my %supported_routes_types = ();
 
     my ($ExpRef,$ExpRouteType,$ExpComment,$ExpFrom,$ExpTo,$ExpOperator);
+    my @rest = ();
     
     if ( $ref_list_supported ) {
         map { $supported_routes_types{$_} = 1; } @{$ref_list_supported};
@@ -98,14 +99,21 @@ sub ReadRoutes {
                         $hashref->{'type'}       = 'route';          # store type
                          
                         #if ( m/$separator/ ) {
-                            ($ExpRef,$ExpRouteType,$ExpComment,$ExpFrom,$ExpTo,$ExpOperator) = split( $separator );
+                            ($ExpRef,$ExpRouteType,$ExpComment,$ExpFrom,$ExpTo,@rest) = split( $separator );
 
                             $hashref->{'ref'}            = $ExpRef       || '';              # 'ref'
                             $hashref->{'route'}          = $ExpRouteType || '';              # 'route/route_master'
                             $hashref->{'comment'}        = $ExpComment   || '';              # routes file comment
                             $hashref->{'from'}           = $ExpFrom      || '';              # 'from'
                             $hashref->{'to'}             = $ExpTo        || '';              # 'to'
-                            $hashref->{'operator'}       = $ExpOperator  || '';              # 'operator'
+                            if ( @rest ) {
+                                # 'operator' may include ';' (the separator)
+                                $ExpOperator           = join( ';', @rest );
+                                $hashref->{'operator'} = $ExpOperator;
+                            } else {
+                                $ExpOperator           = '';
+                                $hashref->{'operator'} = '';              # no 'operator'
+                            }
 
                             if ( $ExpRef ) {
                                 $seen_ref{$ExpRef} = 0  unless ( $seen_ref{$ExpRef} );
