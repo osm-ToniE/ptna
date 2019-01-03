@@ -204,6 +204,7 @@ my %platform_nodes          = ();       # all nodes of the XML file that are pla
 my %stop_nodes              = ();       # all nodes of the XML file that are stops (tag: public_transport=stop_position)
 my %used_networks           = ();       # 'network' values that did match
 my %unused_networks         = ();       # 'network' values that did not match
+my %unused_operators        = ();       # 'operator' values that did not match but 'network' values did match
 
 
 my $relation_ptr            = undef;    # a pointer in Perl to a relation structure
@@ -450,11 +451,24 @@ foreach $relation_id ( keys ( %RELATIONS ) ) {
                     if ( $status =~ m/keep/ ) { $status = match_network(  $RELATIONS{$relation_id}->{'tag'}->{'network'} ); }
                     
                     if ( $status =~ m/keep/ ) {
-                        if ( $RELATIONS{$relation_id}->{'tag'}->{'network'} ) {
-                            $used_networks{$RELATIONS{$relation_id}->{'tag'}->{'network'}}->{$relation_id} = 1;
-                        }
-                        else {
-                            $used_networks{'__unset_network__'}->{$relation_id} = 1;
+                        # match_operator() returns either "keep" or "skip"
+                        #
+                        $status = match_operator( $RELATIONS{$relation_id}->{'tag'}->{'operator'} );
+                                
+                        if ( $status =~ m/keep/ ) {
+                            if ( $RELATIONS{$relation_id}->{'tag'}->{'network'} ) {
+                                $used_networks{$RELATIONS{$relation_id}->{'tag'}->{'network'}}->{$relation_id} = 1;
+                            }
+                            else {
+                                $used_networks{'__unset_network__'}->{$relation_id} = 1;
+                            }
+                        } else {
+                            if ( $RELATIONS{$relation_id}->{'tag'}->{'operator'} ) {
+                                $unused_operators{$RELATIONS{$relation_id}->{'tag'}->{'operator'}}{$relation_id} = 1;
+                            }
+                            else {
+                                $unused_operators{'__unset_operator__'}->{$relation_id} = 1;
+                            }
                         }
                     } elsif ( $status ne 'well_known' ) {
                         if ( $RELATIONS{$relation_id}->{'tag'}->{'network'} ) {
@@ -465,11 +479,6 @@ foreach $relation_id ( keys ( %RELATIONS ) ) {
                         }
                     }
                     
-                    
-                    # match_operator() returns either "keep" or "skip"
-                    #
-                    if ( $status =~ m/keep/ ) { $status = match_operator( $RELATIONS{$relation_id}->{'tag'}->{'operator'} ); }
-                                
                     # match_ref_and_pt_type() returns "keep positive", "keep negative", "skip"
                     # "keep positive"   if $ref and $type match the %ref_type_of_interest (list of lines from CSV file)
                     # "keep negative"   if $ref and $type do not match
@@ -513,10 +522,24 @@ foreach $relation_id ( keys ( %RELATIONS ) ) {
                         #
                         my $status = match_network( $RELATIONS{$relation_id}->{'tag'}->{'network'} );
                         if ( $status =~ m/keep/ ) {
-                            if ( $RELATIONS{$relation_id}->{'tag'}->{'network'} ) {
-                                $used_networks{$RELATIONS{$relation_id}->{'tag'}->{'network'}}->{$relation_id} = 1;
+                            # match_operator() returns either "keep" or "skip"
+                            #
+                            $status = match_operator( $RELATIONS{$relation_id}->{'tag'}->{'operator'} );
+                                    
+                            if ( $status =~ m/keep/ ) {
+                                if ( $RELATIONS{$relation_id}->{'tag'}->{'network'} ) {
+                                    $used_networks{$RELATIONS{$relation_id}->{'tag'}->{'network'}}->{$relation_id} = 1;
+                                }
+                                else {
+                                    $used_networks{'__unset_network__'}->{$relation_id} = 1;
+                                }
                             } else {
-                                $used_networks{'__unset_network__'}->{$relation_id} = 1;
+                                if ( $RELATIONS{$relation_id}->{'tag'}->{'operator'} ) {
+                                    $unused_operators{$RELATIONS{$relation_id}->{'tag'}->{'operator'}}{$relation_id} = 1;
+                                }
+                                else {
+                                    $unused_operators{'__unset_operator__'}->{$relation_id} = 1;
+                                }
                             }
                         } else {
                             if ( $RELATIONS{$relation_id}->{'tag'}->{'network'} ) {
@@ -1181,8 +1204,6 @@ printf STDERR "%s Printed suspicious: %d\n", get_time(), $number_of_suspicious_r
 #############################################################################################
 
 printf STDERR "%s 'network' details\n", get_time()       if ( $verbose );
-
-printTableInitialization( 'network', 'number', 'relations' );
 
 printHeader( gettext("Details for 'network'-Values"), 1, 'networkdetails' );
 
@@ -1940,10 +1961,10 @@ sub analyze_relation {
                                 } elsif ( $relation_ptr->{'tag'}->{$tag} =~ m/$network_long_regex/ ) {
                                     push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("'%s' matches long form"), html_escape($tag)) );
                                 } else {
-                                    push( @{$relation_ptr->{'__notes__'}}, sprintf("'%s' = %s", html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag})) )
+                                    push( @{$relation_ptr->{'__notes__'}}, sprintf("'%s' = '%s'", html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag})) )
                                 }
                             } else {
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf("'%s' = %s", html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag})) )
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf("'%s' = '%s'", html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag})) )
                             }
                         }
                     }
@@ -1992,7 +2013,7 @@ sub analyze_route_master_relation {
         if ( $relation_ptr->{'tag'}->{'public_transport:version'} !~ m/^2$/ ) {
             push( @{$relation_ptr->{'__issues__'}}, gettext("'public_transport:version' is not set to '2'") )        if ( $check_version ); 
         } else {
-            ; #push( @{$relation_ptr->{'__notes__'}}, sprintf("'public_transport:version' = %s",html_escape($relation_ptr->{'tag'}->{'public_transport:version'})) )    if ( $positive_notes );
+            ; #push( @{$relation_ptr->{'__notes__'}}, sprintf("'public_transport:version' = '%s'",html_escape($relation_ptr->{'tag'}->{'public_transport:version'})) )    if ( $positive_notes );
         }
     } else {
         push( @{$relation_ptr->{'__notes__'}}, gettext("'public_transport:version' is not set") )        if ( $check_version );
@@ -2087,7 +2108,7 @@ sub analyze_route_relation {
         if ( $relation_ptr->{'tag'}->{'public_transport:version'} !~ m/^[12]$/ ) {
             push( @{$relation_ptr->{'__issues__'}}, gettext("'public_transport:version' is neither '1' nor '2'") ); 
         } else {
-            #push( @{$relation_ptr->{'__notes__'}}, sprintf("'public_transport:version' = %s",html_escape($relation_ptr->{'tag'}->{'public_transport:version'})) )    if ( $positive_notes );
+            #push( @{$relation_ptr->{'__notes__'}}, sprintf("'public_transport:version' = '%s'",html_escape($relation_ptr->{'tag'}->{'public_transport:version'})) )    if ( $positive_notes );
             
             if ( $relation_ptr->{'tag'}->{'public_transport:version'} == 2 ) {
                 
@@ -4009,6 +4030,23 @@ sub printHintNetworks {
         }
         push( @HTML_main, "</ul>\n" );
     }
+
+    if ( $operator_regex ) {
+        push( @HTML_main, "<p>\n" );
+        push( @HTML_main, gettext("The contents of the 'operator' tag will be searched for:") );
+        push( @HTML_main, "\n</p>\n" );
+
+        push( @HTML_main, "<ul>\n" );
+        if ( $operator_regex ) {
+            foreach my $nw ( split( '\|', $operator_regex ) ) {
+                push( @HTML_main, sprintf( "    <li>%s</li>\n", html_escape($nw) ) );
+            }
+        }
+        if ( !$strict_operator ) {
+            push( @HTML_main, sprintf( "    <li>%s</li>\n", gettext("'operator' is not set") ) );
+        }
+        push( @HTML_main, "</ul>\n" );
+    }
 }
     
 
@@ -4016,7 +4054,8 @@ sub printHintNetworks {
 
 sub printHintUsedNetworks {
 
-    my @relations_of_network = ();
+    my @relations_of_network  = ();
+    my @relations_of_operator = ();
     
     printHeader( gettext("Considered 'network'-Values"), 2, 'considerednetworks' );
     
@@ -4024,6 +4063,7 @@ sub printHintUsedNetworks {
     push( @HTML_main, gettext("This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.") );
     push( @HTML_main, "\n</p>\n" );
 
+    printTableInitialization( 'network', 'number', 'relations' );
     printTableHeader();
     foreach my $network ( sort( keys( %used_networks ) ) ) {
         @relations_of_network    = sort( keys( %{$used_networks{$network}} ) );
@@ -4041,6 +4081,33 @@ sub printHintUsedNetworks {
         }
     }
     printTableFooter(); 
+
+    if ( scalar keys (%unused_operators) ) {
+        push( @HTML_main, "<p>\n" );
+        push( @HTML_main, gettext("This section lists the 'operator'-values which have not been considered. ") );
+        push( @HTML_main, gettext("They might include typos in values which otherwise should have been considered. ") );
+        push( @HTML_main, "\n</p>\n" );
+    
+        printTableInitialization( 'operator', 'number', 'relations' );
+        printTableHeader();
+        foreach my $operator ( sort( keys( %unused_operators ) ) ) {
+            @relations_of_operator    = sort( keys( %{$unused_operators{$operator}} ) );
+            $operator = $operator eq '__unset_operator__' ? '' : $operator;
+            if ( scalar @relations_of_network <= 10 ) {
+                printTableLine( 'operator'          =>    $operator,
+                                'number'            =>    scalar @relations_of_operator, 
+                                'relations'         =>    join( ',', @relations_of_operator )
+                              );
+            } else {
+                printTableLine( 'operator'          =>    $operator,
+                                'number'            =>    scalar @relations_of_operator, 
+                                'relations'         =>    sprintf( gettext("%s and more ..."), join( ',', splice(@relations_of_operator,0,10) ) )
+                              );
+            }
+        }
+        printTableFooter();
+    }
+
 }
     
 
@@ -4057,6 +4124,7 @@ sub printHintUnusedNetworks {
     push( @HTML_main, gettext("They might include typos in values which otherwise should have been considered. ") );
     push( @HTML_main, "\n</p>\n" );
 
+    printTableInitialization( 'network', 'number', 'relations' );
     printTableHeader();
     foreach my $network ( sort( keys( %unused_networks ) ) ) {
         @relations_of_network    = sort( keys( %{$unused_networks{$network}} ) );
