@@ -610,10 +610,10 @@ msgid_plural ""
 "PTv2 route: using motorway_link ways without entering a motorway way:"
 msgstr[0] ""
 "PTv2 Route: es wird eine 'motorway_link' Stra&szlig;e benutzt ohne vorher "
-"oder nachher eine 'motorway' Stra&szlig;e benutzt zu haben: %s"
+"oder nachher eine 'motorway' Stra&szlig;e benutzt zu haben:"
 msgstr[1] ""
 "PTv2 Route: es werden 'motorway_link' Stra&szlig;en benutzt ohne vorher oder "
-"nachher eine 'motorway' Stra&szlig;e benutzt zu haben: %s"
+"nachher eine 'motorway' Stra&szlig;e benutzt zu haben:"
 
 #: bin/ptna-routes.pl:2516
 msgid "first node of oneway way has 'role' = 'stop_exit_only'"
