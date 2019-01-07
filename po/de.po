@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-03 13:49+0100\n"
-"PO-Revision-Date: 2019-01-03 13:49+0100\n"
+"POT-Creation-Date: 2019-01-07 20:35+0100\n"
+"PO-Revision-Date: 2019-01-07 20:36+0100\n"
 "Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
 "Language-Team: osm-ToniE <osm-ToniE@web.de>\n"
 "Language: de\n"
@@ -22,165 +22,165 @@ msgstr ""
 "X-Poedit-SearchPath-0: bin\n"
 "X-Poedit-SearchPath-1: modules\n"
 
-#: bin/ptna-routes.pl:236
+#: bin/ptna-routes.pl:243
 msgid "Line (ref=)"
 msgstr "Linie (ref=)"
 
-#: bin/ptna-routes.pl:237
+#: bin/ptna-routes.pl:244
 msgid "Relation (id=)"
 msgstr "Relation (id=)"
 
-#: bin/ptna-routes.pl:238
+#: bin/ptna-routes.pl:245
 msgid "Relations"
 msgstr "Relationen"
 
-#: bin/ptna-routes.pl:239
+#: bin/ptna-routes.pl:246
 msgid "Name (name=)"
 msgstr "Name (name=)"
 
-#: bin/ptna-routes.pl:240
+#: bin/ptna-routes.pl:247
 msgid "Number"
 msgstr "Anzahl"
 
-#: bin/ptna-routes.pl:241
+#: bin/ptna-routes.pl:248
 msgid "Network (network=)"
 msgstr "Verkehrsverbund (network=)"
 
-#: bin/ptna-routes.pl:242
+#: bin/ptna-routes.pl:249
 msgid "Operator (operator=)"
 msgstr "Betreiber (operator=)"
 
-#: bin/ptna-routes.pl:243
+#: bin/ptna-routes.pl:250
 msgid "From (from=)"
 msgstr "Von (from=)"
 
-#: bin/ptna-routes.pl:244
+#: bin/ptna-routes.pl:251
 msgid "Via (via=)"
 msgstr "&Uuml;ber (via=)"
 
-#: bin/ptna-routes.pl:245
+#: bin/ptna-routes.pl:252
 msgid "To (to=)"
 msgstr "Nach (to=)"
 
-#: bin/ptna-routes.pl:246
+#: bin/ptna-routes.pl:253
 msgid "Errors"
 msgstr "Fehler"
 
-#: bin/ptna-routes.pl:247
+#: bin/ptna-routes.pl:254
 msgid "Notes"
 msgstr "Anmerkungen"
 
-#: bin/ptna-routes.pl:248
+#: bin/ptna-routes.pl:255
 msgid "Type (type=)"
 msgstr "Typ (type=)"
 
-#: bin/ptna-routes.pl:249
+#: bin/ptna-routes.pl:256
 msgid "Vehicle (route(_master)=)"
 msgstr "Fahrzeug (route(_master)=)"
 
-#: bin/ptna-routes.pl:250
+#: bin/ptna-routes.pl:257
 msgid "PTv"
 msgstr "PTv"
 
-#: bin/ptna-routes.pl:251
+#: bin/ptna-routes.pl:258
 msgid "Comment"
 msgstr "Kommentar"
 
-#: bin/ptna-routes.pl:252
+#: bin/ptna-routes.pl:259
 msgid "From"
 msgstr "Von"
 
-#: bin/ptna-routes.pl:253
+#: bin/ptna-routes.pl:260
 msgid "To"
 msgstr "Nach"
 
-#: bin/ptna-routes.pl:254
+#: bin/ptna-routes.pl:261
 msgid "Operator"
 msgstr "Betreiber"
 
-#: bin/ptna-routes.pl:257
+#: bin/ptna-routes.pl:264
 msgid "Bus"
 msgstr "Bus"
 
-#: bin/ptna-routes.pl:258
+#: bin/ptna-routes.pl:265
 msgid "Coach"
 msgstr "Fernbus"
 
-#: bin/ptna-routes.pl:259
+#: bin/ptna-routes.pl:266
 msgid "Share-Taxi"
 msgstr "(Anruf-)Sammel-Taxi"
 
-#: bin/ptna-routes.pl:260
+#: bin/ptna-routes.pl:267
 msgid "Train/Suburban-Train"
 msgstr "Zug/S-Bahn"
 
-#: bin/ptna-routes.pl:261
+#: bin/ptna-routes.pl:268
 msgid "Tram/Streetcar"
 msgstr "Tram/Stra&szlig;enbahn"
 
-#: bin/ptna-routes.pl:262
+#: bin/ptna-routes.pl:269
 msgid "Subway/Underground"
 msgstr "U-Bahn"
 
-#: bin/ptna-routes.pl:263
+#: bin/ptna-routes.pl:270
 msgid "Light-Rail"
 msgstr "Light-Rail"
 
-#: bin/ptna-routes.pl:264
+#: bin/ptna-routes.pl:271
 msgid "Trolley Bus"
 msgstr "Trolley Bus"
 
-#: bin/ptna-routes.pl:265
+#: bin/ptna-routes.pl:272
 msgid "Ferry"
 msgstr "F&auml;hre"
 
-#: bin/ptna-routes.pl:266
+#: bin/ptna-routes.pl:273
 msgid "Mono-Rail"
 msgstr "Mono-Rail"
 
-#: bin/ptna-routes.pl:267
+#: bin/ptna-routes.pl:274
 msgid "Aerialway"
 msgstr "Seilbahn"
 
-#: bin/ptna-routes.pl:268
+#: bin/ptna-routes.pl:275
 msgid "Funicular"
 msgstr "Drahtseilbahn"
 
-#: bin/ptna-routes.pl:937 bin/ptna-routes.pl:948
+#: bin/ptna-routes.pl:944 bin/ptna-routes.pl:955
 #, perl-format
 msgid "Missing route for ref='%s' and route='%s'"
 msgstr "Fehlende Linie f&uuml;r 'ref' = '%s' und 'route' = '%s'"
 
-#: bin/ptna-routes.pl:995
+#: bin/ptna-routes.pl:1002
 msgid "Not clearly assigned routes"
 msgstr "Nicht eindeutig zugeordnete Linien"
 
-#: bin/ptna-routes.pl:1050
+#: bin/ptna-routes.pl:1057
 msgid "Other Public Transport Lines"
 msgstr "Andere &Ouml;PNV Linien"
 
-#: bin/ptna-routes.pl:1052
+#: bin/ptna-routes.pl:1059
 msgid "Public Transport Lines"
 msgstr "&Ouml;PNV Linien"
 
-#: bin/ptna-routes.pl:1119
+#: bin/ptna-routes.pl:1126
 msgid "Public Transport Lines without 'ref'"
 msgstr "&Ouml;PNV Linien ohne 'ref'-Wert"
 
-#: bin/ptna-routes.pl:1170
+#: bin/ptna-routes.pl:1177
 msgid "More Relations"
 msgstr "Weitere Relationen"
 
-#: bin/ptna-routes.pl:1208
+#: bin/ptna-routes.pl:1215
 msgid "Details for 'network'-Values"
 msgstr "Details zu 'network'-Werten"
 
-#: bin/ptna-routes.pl:1593 bin/ptna-routes.pl:1713
+#: bin/ptna-routes.pl:1600 bin/ptna-routes.pl:1720
 #, perl-format
 msgid "There is more than one Route-Master"
 msgstr "Es existiert mehr als ein Route-Master"
 
-#: bin/ptna-routes.pl:1596
+#: bin/ptna-routes.pl:1603
 #, perl-format
 msgid ""
 "Route-Masters have more Routes than actually match (%d versus %d) in the "
@@ -189,7 +189,7 @@ msgstr ""
 "Route-Master haben mehr Routen als im Datensatz tats&auml;chlich passend "
 "gefunden wurden (%d gegen&uuml;ber %d)"
 
-#: bin/ptna-routes.pl:1598
+#: bin/ptna-routes.pl:1605
 #, perl-format
 msgid ""
 "Route-Masters have less Routes than actually match (%d versus %d) in the "
@@ -198,7 +198,7 @@ msgstr ""
 "Route-Master haben weniger Routen als im Datensatz tats&auml;chlich passend "
 "gefunden wurden (%d gegen&uuml;ber %d)"
 
-#: bin/ptna-routes.pl:1605
+#: bin/ptna-routes.pl:1612
 #, perl-format
 msgid ""
 "Route-Master has more Routes than actually match (%d versus %d) in the given "
@@ -207,7 +207,7 @@ msgstr ""
 "Route-Master hat mehr Routen als im Datensatz tats&auml;chlich passend "
 "gefunden wurden (%d gegen&uuml;ber %d)"
 
-#: bin/ptna-routes.pl:1607
+#: bin/ptna-routes.pl:1614
 #, perl-format
 msgid ""
 "Route-Master has less Routes than actually match (%d versus %d) in the given "
@@ -216,7 +216,7 @@ msgstr ""
 "Route-Master hat weniger Routen als im Datensatz tats&auml;chlich passend "
 "gefunden wurden (%d gegen&uuml;ber %d)"
 
-#: bin/ptna-routes.pl:1633
+#: bin/ptna-routes.pl:1640
 #, perl-format
 msgid ""
 "Route has different 'route' = '%s' than Route-Master 'route_master' = '%s': "
@@ -225,13 +225,13 @@ msgstr ""
 "Route hat einen anderen 'route' = '%s' Wert als der Route-Master 'route' = "
 "'%s': %s"
 
-#: bin/ptna-routes.pl:1637
+#: bin/ptna-routes.pl:1644
 #, perl-format
 msgid "Route has 'route' = '%s' value which is considered as not relevant: %s"
 msgstr ""
 "Route hat einen 'route' = '%s' Wert, der als irrelevant betrachtet wird: %s"
 
-#: bin/ptna-routes.pl:1645
+#: bin/ptna-routes.pl:1652
 #, perl-format
 msgid ""
 "Route has different 'network' = '%s' than Route-Master 'network' = '%s': %s"
@@ -239,54 +239,54 @@ msgstr ""
 "Route hat einen anderen 'network' = '%s' Wert als der Route-Master 'network' "
 "= '%s': %s"
 
-#: bin/ptna-routes.pl:1649
+#: bin/ptna-routes.pl:1656
 #, perl-format
 msgid ""
 "Route has 'network' = '%s' value which is considered as not relevant: %s"
 msgstr ""
 "Route hat einen 'network' = '%s' Wert, der als irrelevant betrachtet wird: %s"
 
-#: bin/ptna-routes.pl:1653
+#: bin/ptna-routes.pl:1660
 #, perl-format
 msgid "Route has different 'ref' = '%s': %s"
 msgstr "Route hat anderen 'ref' = '%s' Wert: %s"
 
-#: bin/ptna-routes.pl:1657
+#: bin/ptna-routes.pl:1664
 #, perl-format
 msgid "Route exists in the given data set but 'ref' tag is not set: %s"
 msgstr ""
 "Route existiert im geladenen Datensatz, 'ref' ist aber nicht gesetzt: %s"
 
-#: bin/ptna-routes.pl:1663
+#: bin/ptna-routes.pl:1670
 #, perl-format
 msgid "Route does not exist in the given data set: %s"
 msgstr "Route wurde im geladenen Datensatz nicht gefunden: %s"
 
-#: bin/ptna-routes.pl:1670
+#: bin/ptna-routes.pl:1677
 #, perl-format
 msgid "Route is not member of Route-Master: %s"
 msgstr "Route ist nicht Element des Route-Masters: %s"
 
-#: bin/ptna-routes.pl:1723
+#: bin/ptna-routes.pl:1730
 #, perl-format
 msgid "This Route is direct member of more than one Route-Master: %s"
 msgstr "Die Route ist direktes Element von mehr als einem Route-Master: %s"
 
-#: bin/ptna-routes.pl:1727
+#: bin/ptna-routes.pl:1734
 msgid "Multiple Routes but no Route-Master"
 msgstr "Mehrere Routen aber kein Route-Master"
 
-#: bin/ptna-routes.pl:1729
+#: bin/ptna-routes.pl:1736
 msgid "Multiple Routes but this Route is not a member of any Route-Master"
 msgstr ""
 "Mehrere Routen aber diese Route ist nicht Element eines existierenden Route-"
 "Masters"
 
-#: bin/ptna-routes.pl:1735
+#: bin/ptna-routes.pl:1742
 msgid "This Route is not a member of any Route-Master"
 msgstr "Diese Route ist nicht Element eines existierenden Route-Masters"
 
-#: bin/ptna-routes.pl:1747
+#: bin/ptna-routes.pl:1754
 #, perl-format
 msgid ""
 "'route' = '%s' of Route does not fit to 'route_master' = '%s' of Route-"
@@ -295,13 +295,13 @@ msgstr ""
 "'route' = '%s' der Route passt nicht zu 'route_master' = '%s' des Route-"
 "Masters: %s"
 
-#: bin/ptna-routes.pl:1751
+#: bin/ptna-routes.pl:1758
 #, perl-format
 msgid "'ref' = '%s' of Route does not fit to 'ref' = '%s' of Route-Master: %s"
 msgstr ""
 "'ref' = '%s' der Route passt nicht zu 'ref' = '%s' des Route-Masters: %s"
 
-#: bin/ptna-routes.pl:1755
+#: bin/ptna-routes.pl:1762
 #, perl-format
 msgid ""
 "'network' = '%s' of Route does not fit to 'network' = '%s' of Route-Master: "
@@ -310,39 +310,39 @@ msgstr ""
 "'network' = '%s' der Route passt nicht zu 'network' = '%s' des Route-"
 "Masters: %s"
 
-#: bin/ptna-routes.pl:1760
+#: bin/ptna-routes.pl:1767
 #, perl-format
 msgid "'colour' of Route does not fit to 'colour' of Route-Master: %s"
 msgstr "'colour' der Route passt nicht zu 'colour' des Route-Masters: %s"
 
-#: bin/ptna-routes.pl:1763
+#: bin/ptna-routes.pl:1770
 #, perl-format
 msgid "'colour' of Route is set but 'colour' of Route-Master is not set: %s"
 msgstr ""
 "'colour' der Route ist gesetzt aber 'colour' des Route-Masters ist nicht "
 "gesetzt: %s"
 
-#: bin/ptna-routes.pl:1766
+#: bin/ptna-routes.pl:1773
 #, perl-format
 msgid "'colour' of Route is not set but 'colour' of Route-Master is set: %s"
 msgstr ""
 "'colour' der Route ist nicht gesetzt aber 'colour' des Route-Masters ist "
 "gesetzt: %s"
 
-#: bin/ptna-routes.pl:1772
+#: bin/ptna-routes.pl:1779
 msgid "Multiple Routes but 'public_transport:version' is not set to '2'"
 msgstr ""
 "Mehrere Routen aber 'public_transport:version' ist nicht auf '2' gesetzt"
 
-#: bin/ptna-routes.pl:1840
+#: bin/ptna-routes.pl:1847
 msgid "'ref' is not set"
 msgstr "'ref' ist nicht gesetzt"
 
-#: bin/ptna-routes.pl:1842
+#: bin/ptna-routes.pl:1849
 msgid "'name' is not set"
 msgstr "'name' ist nicht gesetzt"
 
-#: bin/ptna-routes.pl:1899
+#: bin/ptna-routes.pl:1906
 #, perl-format
 msgid ""
 "'network' = '%s' includes the separator value ';' (semi-colon) with "
@@ -351,7 +351,7 @@ msgstr ""
 "'network' = '%s' enth&auml;lt das Trennzeichen ';' (Semikolon) mit "
 "umgebendem Leerzeichen"
 
-#: bin/ptna-routes.pl:1900
+#: bin/ptna-routes.pl:1907
 #, perl-format
 msgid ""
 "'network' = '%s': ',' (comma) as separator value should be replaced by "
@@ -360,102 +360,102 @@ msgstr ""
 "'network' = '%s': ',' (Komma) als Trennzeichen sollte durch ';' (Semikolon, "
 "ohne Leerzeichen) ersetzt werden"
 
-#: bin/ptna-routes.pl:1916 bin/ptna-routes.pl:1940
+#: bin/ptna-routes.pl:1923 bin/ptna-routes.pl:1947
 #, perl-format
 msgid "'network' = '%s' should be short form"
 msgstr "'network' = '%s' sollte in Kurzform angegeben werden"
 
-#: bin/ptna-routes.pl:1920 bin/ptna-routes.pl:1936
+#: bin/ptna-routes.pl:1927 bin/ptna-routes.pl:1943
 #, perl-format
 msgid "'network' = '%s' should be long form"
 msgstr "'network' = '%s' sollte in Langform angegeben werden"
 
-#: bin/ptna-routes.pl:1945 bin/ptna-routes.pl:4029
+#: bin/ptna-routes.pl:1952 bin/ptna-routes.pl:4058
 msgid "'network' is not set"
 msgstr "'network' ist nicht gesetzt"
 
-#: bin/ptna-routes.pl:1950
+#: bin/ptna-routes.pl:1957
 #, perl-format
 msgid "'colour' has unknown value '%s'"
 msgstr "'colour' hat einen unbekannten Wert '%s'"
 
-#: bin/ptna-routes.pl:1960
+#: bin/ptna-routes.pl:1967
 #, perl-format
 msgid "'%s' is long form"
 msgstr "'%s' ist Langform"
 
-#: bin/ptna-routes.pl:1962
+#: bin/ptna-routes.pl:1969
 #, perl-format
 msgid "'%s' matches long form"
 msgstr "'%s' passt zur Langform"
 
-#: bin/ptna-routes.pl:2007
+#: bin/ptna-routes.pl:2014
 msgid "Route-Master without Route(s)"
 msgstr "Route-Master ohne Route(n)"
 
-#: bin/ptna-routes.pl:2009
+#: bin/ptna-routes.pl:2016
 msgid "Route-Master with Relation(s) unequal to 'route'"
 msgstr "Route-Master mit Relation(en) ungleich \"route\""
 
-#: bin/ptna-routes.pl:2010
+#: bin/ptna-routes.pl:2017
 msgid "Route-Master with Way(s)"
 msgstr "Route-Master mit Way(s)"
 
-#: bin/ptna-routes.pl:2011
+#: bin/ptna-routes.pl:2018
 msgid "Route-Master with Node(s)"
 msgstr "Route-Master mit Node(s)"
 
-#: bin/ptna-routes.pl:2014
+#: bin/ptna-routes.pl:2021
 msgid "'public_transport:version' is not set to '2'"
 msgstr "'public_transport:version' ist nicht '2'"
 
-#: bin/ptna-routes.pl:2019 bin/ptna-routes.pl:2123
+#: bin/ptna-routes.pl:2026 bin/ptna-routes.pl:2130
 msgid "'public_transport:version' is not set"
 msgstr "'public_transport:version' ist nicht gesetzt"
 
-#: bin/ptna-routes.pl:2063
+#: bin/ptna-routes.pl:2070
 msgid "Error in input data: insufficient data for ways"
 msgstr "Fehler in den Inputdaten: nicht gen&uuml;gend Daten f&uuml;r 'ways'"
 
-#: bin/ptna-routes.pl:2065 bin/ptna-routes.pl:2092 bin/ptna-routes.pl:2167
-#: bin/ptna-routes.pl:2454
+#: bin/ptna-routes.pl:2072 bin/ptna-routes.pl:2099 bin/ptna-routes.pl:2174
+#: bin/ptna-routes.pl:2483
 #, perl-format
 msgid "%s: %s and %d more ..."
 msgstr "%s: %s und %d mehr ..."
 
-#: bin/ptna-routes.pl:2090
+#: bin/ptna-routes.pl:2097
 msgid "Error in input data: insufficient data for nodes"
 msgstr "Fehler in den Inputdaten: nicht gen&uuml;gend Daten f&uuml;r 'nodes'"
 
-#: bin/ptna-routes.pl:2101
+#: bin/ptna-routes.pl:2108
 msgid "Route without Way(s)"
 msgstr "Route ohne Way(s)"
 
-#: bin/ptna-routes.pl:2102
+#: bin/ptna-routes.pl:2109
 msgid "Route with only 1 Way"
 msgstr "Route mit nur einem Way"
 
-#: bin/ptna-routes.pl:2103
+#: bin/ptna-routes.pl:2110
 msgid "Route without Node(s)"
 msgstr "Route ohne Node(s)"
 
-#: bin/ptna-routes.pl:2104
+#: bin/ptna-routes.pl:2111
 msgid "Route with only 1 Node"
 msgstr "Route mit nur einem Node"
 
-#: bin/ptna-routes.pl:2105
+#: bin/ptna-routes.pl:2112
 msgid "Route with Relation(s)"
 msgstr "Route mit Relation(en)"
 
-#: bin/ptna-routes.pl:2109
+#: bin/ptna-routes.pl:2116
 msgid "'public_transport:version' is neither '1' nor '2'"
 msgstr "'public_transport:version' ist weder '1' noch '2'"
 
-#: bin/ptna-routes.pl:2118
+#: bin/ptna-routes.pl:2125
 msgid "Skipping further analysis ..."
 msgstr "Weitere Analyse wird &uuml;bersprungen ..."
 
-#: bin/ptna-routes.pl:2143
+#: bin/ptna-routes.pl:2150
 #, perl-format
 msgid ""
 "Route: restricted access (%s) to way without 'psv'='yes', '%s'='yes', "
@@ -470,7 +470,7 @@ msgstr[1] ""
 "Route: eingeschr&auml;nkte Befahrbarkeit (%s) auf Wegen ohne dass 'psv' = "
 "'yes', '%s' = 'yes', '%s' = 'designated', oder ... angegeben ist: %s"
 
-#: bin/ptna-routes.pl:2164
+#: bin/ptna-routes.pl:2171
 msgid "Route: 'highway' = 'bus_stop' is set on way. Allowed on nodes only!"
 msgid_plural ""
 "Route: 'highway' = 'bus_stop' is set on ways. Allowed on nodes only!"
@@ -481,50 +481,71 @@ msgstr[1] ""
 "Route: 'highway' = 'bus_stop' ist auf mehreren 'way' gesetzt. Dieses Tag ist "
 "nur auf Nodes erlaubt."
 
-#: bin/ptna-routes.pl:2223
+#: bin/ptna-routes.pl:2230
 #, perl-format
 msgid "PTv2 route: '%s' is not part of 'name' (derived from '%s' = '%s')"
 msgstr ""
 "PTv2 Route: '%s' ist nicht Teil von 'name' (hergeleitet von '%s' = '%s')"
 
-#: bin/ptna-routes.pl:2230
+#: bin/ptna-routes.pl:2237
 msgid "PTv2 route: 'ref' is not part of 'name'"
 msgstr "PTv2 Route: 'ref' ist nicht Teil von 'name'"
 
-#: bin/ptna-routes.pl:2243
+#: bin/ptna-routes.pl:2251
 #, perl-format
 msgid "PTv2 route: 'from' = '%s' is not part of 'name'"
 msgstr "PTv2 Route: 'from' = '%s' ist nicht Teil von 'name'"
 
-#: bin/ptna-routes.pl:2248
+#: bin/ptna-routes.pl:2257
 msgid "PTv2 route: 'from' is not set"
 msgstr "PTv2 Route: 'from' ist nicht gesetzt"
 
-#: bin/ptna-routes.pl:2254
+#: bin/ptna-routes.pl:2264
 #, perl-format
 msgid "PTv2 route: 'to' = '%s' is not part of 'name'"
 msgstr "PTv2 Route: 'to' = '%s' ist nicht Teil von 'name'"
 
-#: bin/ptna-routes.pl:2260
+#: bin/ptna-routes.pl:2270
 msgid "PTv2 route: 'to' is not set"
 msgstr "PTv2 Route: 'to' ist nicht gesetzt"
 
-#: bin/ptna-routes.pl:2265
+#: bin/ptna-routes.pl:2275
 msgid "PTv2 route: 'name' includes deprecated '<=>'"
 msgstr "PTv2 Route: 'name' enth&auml;lt un&uuml;bliches '<=>'"
 
-#: bin/ptna-routes.pl:2270
+#: bin/ptna-routes.pl:2280
 msgid "PTv2 route: 'name' includes deprecated '==>'"
 msgstr "PTv2 Route: 'name' enth&auml;lt un&uuml;bliches '==>'"
 
-#: bin/ptna-routes.pl:2292
+#: bin/ptna-routes.pl:2300
+#, perl-format
+msgid "PTv2 route: from-part ('%s') of 'name' is not part of 'from' = '%s'"
+msgstr ""
+"PTv2 Route: Der 'Von' Anteil ('%s') von 'name' ist nicht Teil von 'from' = "
+"'%s'"
+
+#: bin/ptna-routes.pl:2304
+#, perl-format
+msgid "PTv2 route: to-part ('%s') of 'name' is not part of 'to' = '%s'"
+msgstr ""
+"PTv2 Route: Der 'Nach' Anteil ('%s') von 'name' ist nicht Teil von 'to' = "
+"'%s'"
+
+#: bin/ptna-routes.pl:2308
+msgid ""
+"PTv2 route: 'name' should be similar to the form '... ref ...: from => to'"
+msgstr ""
+"PTv2 Route: 'name' sollte ann&auml;hernd die Form '... ref ...: from => to' "
+"haben"
+
+#: bin/ptna-routes.pl:2320
 msgid ""
 "PTv2 route: 'name' should (at least) be of the form '... ref ...: from => to'"
 msgstr ""
 "PTv2 Route: 'name' sollte (mindest) von der Form '... ref ...: from => to' "
 "sein"
 
-#: bin/ptna-routes.pl:2302
+#: bin/ptna-routes.pl:2331
 #, perl-format
 msgid ""
 "PTv2 route: 'via' is set: via-part = '%s' is not part of 'name' (separate "
@@ -533,7 +554,7 @@ msgstr ""
 "PTv2 Route: 'via' ist gesetzt: via-Teil = '%s' ist nicht Teil von 'name' - "
 "trenne mehrere via-Teile mittels ';' (Semikolon, ohne Leerzeichen)"
 
-#: bin/ptna-routes.pl:2316
+#: bin/ptna-routes.pl:2345
 msgid ""
 "PTv2 route: 'via' is set: 'name' should be of the form '... ref ...: from => "
 "via => to'"
@@ -541,7 +562,7 @@ msgstr ""
 "PTv2 Route: 'via' ist gesetzt: 'name' sollte von der Form '... ref ...: from "
 "=> via => to' sein"
 
-#: bin/ptna-routes.pl:2318
+#: bin/ptna-routes.pl:2347
 msgid ""
 "PTv2 route: 'via' is set: 'name' should be of the form '... ref ...: from => "
 "via => ... => to' (separate multiple 'via' values by ';', without blanks)"
@@ -550,13 +571,13 @@ msgstr ""
 "=> via => to' sein - trenne mehrere via-Teile mittels ';' (Semikolon, ohne "
 "Leerzeichen)"
 
-#: bin/ptna-routes.pl:2325
+#: bin/ptna-routes.pl:2354
 msgid "PTv2 route: 'name' has more than one '=>' but 'via' is not set"
 msgstr ""
 "PTv2 Route: 'name' enth&auml;lt mehr als ein '=>', aber 'via' ist nicht "
 "gesetzt"
 
-#: bin/ptna-routes.pl:2432
+#: bin/ptna-routes.pl:2461
 msgid ""
 "PTv2 route: first way is a oneway road and ends in a 'stop_position' of this "
 "route and there is no exit. Is the route sorted in reverse order?"
@@ -565,18 +586,18 @@ msgstr ""
 "'stop_position' und es geht nicht mehr weiter. Sind die Wege der Route "
 "falsch herum sortiert?"
 
-#: bin/ptna-routes.pl:2436
+#: bin/ptna-routes.pl:2465
 msgid "has a gap"
 msgid_plural "has gaps"
 msgstr[0] "hat eine L&uuml;cke"
 msgstr[1] "hat L&uuml;cken"
 
-#: bin/ptna-routes.pl:2437
+#: bin/ptna-routes.pl:2466
 #, perl-format
 msgid "PTv2 route: %s, consists of %d segments"
 msgstr "PTv2 Route: %s, besteht aus %d Segmenten"
 
-#: bin/ptna-routes.pl:2441
+#: bin/ptna-routes.pl:2470
 #, perl-format
 msgid ""
 "PTv2 route: incorrect order of 'stop_position', 'platform' and 'way' (stop/"
@@ -585,18 +606,18 @@ msgstr ""
 "PTv2 Route: falsche Reihenfolge von 'stop_position', 'platform' und 'way': "
 "'stop_position'/'platform' m&uuml;ssen vor allen 'way' kommen"
 
-#: bin/ptna-routes.pl:2445
+#: bin/ptna-routes.pl:2474
 msgid "entire roundabout but uses only segments"
 msgid_plural "entire roundabouts but uses only segments"
 msgstr[0] "kompletten Kreisverkehr von dem aber nur Teile benutzt werden"
 msgstr[1] "komplette Kreisverkehre von denen aber nur Teile benutzt werden"
 
-#: bin/ptna-routes.pl:2446
+#: bin/ptna-routes.pl:2475
 #, perl-format
 msgid "PTv2 route: includes %d %s"
 msgstr "PTv2 Route: enth&auml;lt %d %s"
 
-#: bin/ptna-routes.pl:2452
+#: bin/ptna-routes.pl:2481
 msgid "PTv2 route: using oneway way in wrong direction"
 msgid_plural "PTv2 route: using oneway ways in wrong direction"
 msgstr[0] ""
@@ -604,7 +625,7 @@ msgstr[0] ""
 msgstr[1] ""
 "PTv2 Route: Einbahnstra&szlig;en werden in der falschen Richtung benutzt"
 
-#: bin/ptna-routes.pl:2461
+#: bin/ptna-routes.pl:2490
 msgid "PTv2 route: using motorway_link way without entering a motorway way:"
 msgid_plural ""
 "PTv2 route: using motorway_link ways without entering a motorway way:"
@@ -615,17 +636,17 @@ msgstr[1] ""
 "PTv2 Route: es werden 'motorway_link' Stra&szlig;en benutzt ohne vorher oder "
 "nachher eine 'motorway' Stra&szlig;e benutzt zu haben:"
 
-#: bin/ptna-routes.pl:2516
+#: bin/ptna-routes.pl:2545
 msgid "first node of oneway way has 'role' = 'stop_exit_only'"
 msgstr ""
 "Der erste Punkt einer Einbahnstra&szlig;e hat die 'role' = 'stop_exit_only'"
 
-#: bin/ptna-routes.pl:2520
+#: bin/ptna-routes.pl:2549
 msgid "last node of oneway way has 'role' = 'stop_entry_only'"
 msgstr ""
 "Der letzte Punkt einer Einbahstra&szlig;e hat die 'role' = 'stop_entry_only'"
 
-#: bin/ptna-routes.pl:2532
+#: bin/ptna-routes.pl:2561
 msgid ""
 "first node of way has 'role' = 'stop_exit_only'. Is the route sorted in "
 "reverse order?"
@@ -633,7 +654,7 @@ msgstr ""
 "Der erste Punkt des Fahrweges hat die 'role' = 'stop_exit_only'. Sind die "
 "Wege der Route falsch herum sortiert?"
 
-#: bin/ptna-routes.pl:2538
+#: bin/ptna-routes.pl:2567
 msgid ""
 "last node of way has 'role' = 'stop_entry_only'. Is the route sorted in "
 "reverse order?"
@@ -641,22 +662,22 @@ msgstr ""
 "Der letzte Punkt des Fahrweges hat die 'role' = 'stop_entry_only'. Sind die "
 "Wege der Route falsch herum sortiert?"
 
-#: bin/ptna-routes.pl:2544
+#: bin/ptna-routes.pl:2573
 msgid "'public_transport' = 'stop_position' is not part of way"
 msgstr "'public_transport' = 'stop_position' liegt nicht auf dem Fahrweg"
 
-#: bin/ptna-routes.pl:2556
+#: bin/ptna-routes.pl:2585
 #, perl-format
 msgid "missing '%s' = 'yes' on 'public_transport' = 'stop_position'"
 msgstr "Fehlende Angabe '%s' = 'yes' an 'public_transport' = 'stop_position'"
 
-#: bin/ptna-routes.pl:2564 bin/ptna-routes.pl:2612 bin/ptna-routes.pl:2856
-#: bin/ptna-routes.pl:2924
+#: bin/ptna-routes.pl:2593 bin/ptna-routes.pl:2641 bin/ptna-routes.pl:2885
+#: bin/ptna-routes.pl:2953
 #, perl-format
 msgid "mismatch between 'role' = '%s' and 'public_transport' = '%s'"
 msgstr "Konflikt zwischen 'role' = '%s' und 'public_transport' = '%s'"
 
-#: bin/ptna-routes.pl:2571
+#: bin/ptna-routes.pl:2600
 #, perl-format
 msgid ""
 "'role' = '%s' and %s: consider setting 'public_transport' = 'stop_position'"
@@ -664,42 +685,42 @@ msgstr ""
 "'role' = '%s' und %s: 'public_transport' = 'stop_position' sollte gesetzt "
 "werden"
 
-#: bin/ptna-routes.pl:2576 bin/ptna-routes.pl:2581 bin/ptna-routes.pl:2624
-#: bin/ptna-routes.pl:2629 bin/ptna-routes.pl:2860 bin/ptna-routes.pl:2928
+#: bin/ptna-routes.pl:2605 bin/ptna-routes.pl:2610 bin/ptna-routes.pl:2653
+#: bin/ptna-routes.pl:2658 bin/ptna-routes.pl:2889 bin/ptna-routes.pl:2957
 #, perl-format
 msgid "'role' = '%s' but 'public_transport' is not set"
 msgstr "'role' = '%s' aber 'public_transport' ist nicht gesetzt"
 
-#: bin/ptna-routes.pl:2588
+#: bin/ptna-routes.pl:2617
 msgid "'public_transport' = 'platform' is part of way"
 msgstr "'public_transport' = 'platform' liegt auf dem Fahrweg"
 
-#: bin/ptna-routes.pl:2619
+#: bin/ptna-routes.pl:2648
 #, perl-format
 msgid "'role' = '%s' and %s: consider setting 'public_transport' = 'platform'"
 msgstr ""
 "'role' = '%s' und %s: 'public_transport' = 'platform' sollte gesetzt werden"
 
-#: bin/ptna-routes.pl:2636 bin/ptna-routes.pl:2866 bin/ptna-routes.pl:2934
+#: bin/ptna-routes.pl:2665 bin/ptna-routes.pl:2895 bin/ptna-routes.pl:2963
 #, perl-format
 msgid "wrong 'role' = '%s'"
 msgstr "falsche 'role' = '%s'"
 
-#: bin/ptna-routes.pl:2641 bin/ptna-routes.pl:2872 bin/ptna-routes.pl:2939
+#: bin/ptna-routes.pl:2670 bin/ptna-routes.pl:2901 bin/ptna-routes.pl:2968
 msgid "empty 'role'"
 msgstr "Leere 'role'"
 
-#: bin/ptna-routes.pl:2650 bin/ptna-routes.pl:2882 bin/ptna-routes.pl:2948
+#: bin/ptna-routes.pl:2679 bin/ptna-routes.pl:2911 bin/ptna-routes.pl:2977
 #, perl-format
 msgid "PTv2 route: %s: %s and %d more ..."
 msgstr "PTv2 Route: %s: %s und %d mehr ..."
 
-#: bin/ptna-routes.pl:2652 bin/ptna-routes.pl:2885 bin/ptna-routes.pl:2950
+#: bin/ptna-routes.pl:2681 bin/ptna-routes.pl:2914 bin/ptna-routes.pl:2979
 #, perl-format
 msgid "PTv2 route: %s: %s"
 msgstr "PTv2 Route: %s: %s"
 
-#: bin/ptna-routes.pl:2674
+#: bin/ptna-routes.pl:2703
 #, perl-format
 msgid ""
 "PTv2 route: first node of way is not the first stop position of this route: "
@@ -708,7 +729,7 @@ msgstr ""
 "PTv2 Route: der erste Punkt des Fahrweges ist nicht die erste "
 "'stop_position' der Route: %s gegen&uuml;ber %s"
 
-#: bin/ptna-routes.pl:2719 bin/ptna-routes.pl:2729
+#: bin/ptna-routes.pl:2748 bin/ptna-routes.pl:2758
 #, perl-format
 msgid ""
 "PTv2 route: there is no stop position of this route on the first way, except "
@@ -718,7 +739,7 @@ msgstr ""
 "au&szlig;er dem letzten Punkt, der aber auch der erste Punkt des zweiten "
 "Weges ist: %s"
 
-#: bin/ptna-routes.pl:2722
+#: bin/ptna-routes.pl:2751
 #, perl-format
 msgid ""
 "PTv2 route: first stop position on first way is not the first stop position "
@@ -727,21 +748,21 @@ msgstr ""
 "PTv2 Route: die erste 'stop_position' auf dem ersten Weg ist nicht die erste "
 "'stop_position' der Route: %s gegen&uuml;ber %s"
 
-#: bin/ptna-routes.pl:2733
+#: bin/ptna-routes.pl:2762
 #, perl-format
 msgid ""
 "PTv2 route: there is no stop position of this route on the first way: %s"
 msgstr ""
 "PTv2 Route: es gibt keine 'stop_position' auf dem ersten Weg der Route: %s"
 
-#: bin/ptna-routes.pl:2737
+#: bin/ptna-routes.pl:2766
 #, perl-format
 msgid "PTv2 route: first node of way is not a stop position of this route: %s"
 msgstr ""
 "PTv2 Route: der erste Punkt des Weges ist keine 'stop_position' dieser "
 "Route: %s"
 
-#: bin/ptna-routes.pl:2756
+#: bin/ptna-routes.pl:2785
 #, perl-format
 msgid ""
 "PTv2 route: last node of way is not the last stop position of this route: %s "
@@ -750,7 +771,7 @@ msgstr ""
 "PTv2 Route: der letzte Punkt des Fahrweges ist nicht die letzte "
 "'stop_position' der Route: %s gegen&uuml;ber %s"
 
-#: bin/ptna-routes.pl:2801 bin/ptna-routes.pl:2811
+#: bin/ptna-routes.pl:2830 bin/ptna-routes.pl:2840
 #, perl-format
 msgid ""
 "PTv2 route: there is no stop position of this route on the last way, except "
@@ -760,7 +781,7 @@ msgstr ""
 "au&szlig;er dem ersten Punkt, der aber auch der letzte Punkt des vorletzten "
 "Weges ist: %s"
 
-#: bin/ptna-routes.pl:2804
+#: bin/ptna-routes.pl:2833
 #, perl-format
 msgid ""
 "PTv2 route: last stop position on last way is not the last stop position of "
@@ -769,34 +790,34 @@ msgstr ""
 "PTv2 Route: die letzte 'stop_position' auf dem letzten Weg ist nicht die "
 "letzte 'stop_position' der Route: %s gegen&uuml;ber %s"
 
-#: bin/ptna-routes.pl:2815
+#: bin/ptna-routes.pl:2844
 #, perl-format
 msgid "PTv2 route: there is no stop position of this route on the last way: %s"
 msgstr ""
 "PTv2 Route: es gibt keine 'stop_position' auf dem letzten Weg der Route: %s"
 
-#: bin/ptna-routes.pl:2819
+#: bin/ptna-routes.pl:2848
 #, perl-format
 msgid "PTv2 route: last node of way is not a stop position of this route: %s"
 msgstr ""
 "PTv2 Route: der letzte Punkt des Weges ist keine 'stop_position' dieser "
 "Route: %s"
 
-#: bin/ptna-routes.pl:3812
+#: bin/ptna-routes.pl:3841
 msgid "Date of Data"
 msgstr "Datum der Daten"
 
-#: bin/ptna-routes.pl:3820
+#: bin/ptna-routes.pl:3849
 msgid "Hints"
 msgstr "Hinweise"
 
-#: bin/ptna-routes.pl:3823
+#: bin/ptna-routes.pl:3852
 msgid "The data will be updated when the result of the analysis has changed."
 msgstr ""
 "Die Daten werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der "
 "Analyse ge&auml;ndert hat."
 
-#: bin/ptna-routes.pl:3826
+#: bin/ptna-routes.pl:3855
 msgid ""
 "An explanation of the error texts can be found in the documentation at <a "
 "href='/documentation.html#checks'>'Check'</a>."
@@ -804,24 +825,24 @@ msgstr ""
 "Eine Erl&auml;uterung der Fehlertexte ist in der Dokumentation unter <a "
 "href='/documentation.html#checks'>Pr&uuml;fungen</a> zu finden."
 
-#: bin/ptna-routes.pl:3864
+#: bin/ptna-routes.pl:3893
 msgid "Contents"
 msgstr "Inhalt"
 
-#: bin/ptna-routes.pl:3957
+#: bin/ptna-routes.pl:3986
 msgid "This section lists further relations of the environment of the routes:"
 msgstr ""
 "Dieser Abschnitt enth&auml;lt weitere Relationen aus dem Umfeld der Linien:"
 
-#: bin/ptna-routes.pl:3960
+#: bin/ptna-routes.pl:3989
 msgid "potentially wrong 'route' or 'route_master' values?"
 msgstr "evtl. falsche 'route' oder 'route_master' Werte?"
 
-#: bin/ptna-routes.pl:3962
+#: bin/ptna-routes.pl:3991
 msgid "e.g. 'route' = 'suspended_bus' instead of 'route' = 'bus'"
 msgstr "z.B. 'route' = 'suspended_bus' statt 'route' = 'bus'"
 
-#: bin/ptna-routes.pl:3965
+#: bin/ptna-routes.pl:3994
 msgid ""
 "but also 'type' = 'network', 'type' = 'set' or 'route' = 'network', i.e. a "
 "collection of all routes and route-masters belonging to the 'network'."
@@ -829,7 +850,7 @@ msgstr ""
 "aber auch 'type' = 'network', 'type' = 'set' oder 'route' = 'network', d.h. "
 "eine Sammlung aller zum 'network' geh&ouml;renden Route und Route-Master."
 
-#: bin/ptna-routes.pl:3967
+#: bin/ptna-routes.pl:3996
 msgid ""
 "such <strong>collections are strictly spoken errors</strong>, since "
 "relations shall not represent collections:"
@@ -837,7 +858,7 @@ msgstr ""
 "solche <strong>Sammlungen sind streng genommen Fehler</strong>, da "
 "Relationen keinen Sammlungen darstellen sollen:"
 
-#: bin/ptna-routes.pl:3968
+#: bin/ptna-routes.pl:3997
 msgid ""
 " <a href=\"https://wiki.openstreetmap.org/wiki/Relations/"
 "Relations_are_not_Categories\">Relations/Relations are not Categories</a>"
@@ -845,7 +866,7 @@ msgstr ""
 " <a href=\"https://wiki.openstreetmap.org/wiki/DE:Relationen/"
 "Relationen_sind_keine_Kategorien\">Relationen sind keine Kategorien</a>"
 
-#: bin/ptna-routes.pl:3974
+#: bin/ptna-routes.pl:4003
 msgid ""
 "The following values and combinations have been found in the provided data "
 "but they will not be listed here. "
@@ -853,29 +874,29 @@ msgstr ""
 "Die folgenden Werte bzw. Kombinationen wurden in den Inputdaten gefunden, "
 "werden hier aber nicht angezeigt. "
 
-#: bin/ptna-routes.pl:3975
+#: bin/ptna-routes.pl:4004
 msgid ""
 "They represent so called 'well defined' values and are not considered as "
 "errors."
 msgstr "Sie gelten als 'wohl definierte' Werte und nicht als Fehler."
 
-#: bin/ptna-routes.pl:4013
+#: bin/ptna-routes.pl:4042
 msgid "The contents of the 'network' tag will be searched for:"
 msgstr "Der Inhalt von 'network' wird nach den folgenden Werten durchsucht:"
 
-#: bin/ptna-routes.pl:4036
+#: bin/ptna-routes.pl:4065
 msgid "The contents of the 'operator' tag will be searched for:"
 msgstr "Der Inhalt von 'operator' wird nach den folgenden Werten durchsucht:"
 
-#: bin/ptna-routes.pl:4046
+#: bin/ptna-routes.pl:4075
 msgid "'operator' is not set"
 msgstr "'operator' ist nicht gesetzt"
 
-#: bin/ptna-routes.pl:4060
+#: bin/ptna-routes.pl:4089
 msgid "Considered 'network'-Values"
 msgstr "Ber&uuml;cksichtigte 'network'-Werte"
 
-#: bin/ptna-routes.pl:4063
+#: bin/ptna-routes.pl:4092
 msgid ""
 "This section lists the 'network'-values which have been considered; i.e. "
 "which match to one of the values above."
@@ -883,19 +904,19 @@ msgstr ""
 "Dieser Abschnitt listet die 'network'-Werte auf, die ber&uuml;cksichtigt "
 "wurden, d.h. die einen der oben aufgef&uuml;hrten Werte enthalten."
 
-#: bin/ptna-routes.pl:4079 bin/ptna-routes.pl:4104 bin/ptna-routes.pl:4140
+#: bin/ptna-routes.pl:4108 bin/ptna-routes.pl:4133 bin/ptna-routes.pl:4169
 #, perl-format
 msgid "%s and more ..."
 msgstr "%s und mehr ..."
 
-#: bin/ptna-routes.pl:4087
+#: bin/ptna-routes.pl:4116
 msgid ""
 "This section lists the 'operator'-values which have not been considered. "
 msgstr ""
 "Dieser Abschnitt listet die 'operator'-Werte auf, die nicht ber&uuml;"
 "cksichtigt wurden. "
 
-#: bin/ptna-routes.pl:4088 bin/ptna-routes.pl:4124
+#: bin/ptna-routes.pl:4117 bin/ptna-routes.pl:4153
 msgid ""
 "They might include typos in values which otherwise should have been "
 "considered. "
@@ -903,18 +924,18 @@ msgstr ""
 "Es liegen eventuell Tippfehler in Werten vor, die ansonsten zu ber&uuml;"
 "cksichtigen w&auml;ren. "
 
-#: bin/ptna-routes.pl:4120
+#: bin/ptna-routes.pl:4149
 msgid "Not Considered 'network'-Values"
 msgstr "Nicht ber&uuml;cksichtigte 'network'-Werte"
 
-#: bin/ptna-routes.pl:4123
+#: bin/ptna-routes.pl:4152
 msgid ""
 "This section lists the 'network'-values which have not been considered. "
 msgstr ""
 "Dieser Abschnitt listet die 'network'-Werte auf, die nicht ber&uuml;"
 "cksichtigt wurden. "
 
-#: bin/ptna-routes.pl:4342
+#: bin/ptna-routes.pl:4371
 msgid " and more ..."
 msgstr " und mehr ..."
 

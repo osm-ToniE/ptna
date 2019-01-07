@@ -49,6 +49,7 @@ my $allow_coach                     = undef;
 my $check_access                    = undef;
 my $check_bus_stop                  = undef;
 my $check_name                      = undef;
+my $check_name_relaxed              = undef;
 my $check_stop_position             = undef;
 my $check_osm_separator             = undef;
 my $check_platform                  = undef;
@@ -85,6 +86,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'check-bus-stop'                =>  \$check_bus_stop,               # --check-bus-stop                  check for strict highway=bus_stop on nodes only
             'check-motorway-link'           =>  \$check_motorway_link,          # --check-motorway-link             check for motorway_link followed/preceeded by motorway or trunk
             'check-name'                    =>  \$check_name,                   # --check-name                      check for strict name conventions (name='... ref: from => to'
+            'check-name-relaxed'            =>  \$check_name_relaxed,           # --check-name-relaxed              check for relaxed name conventions (name='... ref: from => to'
             'check-osm-separator'           =>  \$check_osm_separator,          # --check-osm-separator             check separator for '; ' (w/ blank) and ',' (comma instead of semi-colon)
             'check-platform'                =>  \$check_platform,               # --check-platform                  check for bus=yes, tram=yes, ... on platforms
             'check-roundabouts'             =>  \$check_roundabouts,            # --check-roundabouts               check for roundabouts being included completely
@@ -135,6 +137,7 @@ if ( $verbose ) {
     printf STDERR "%20s--check-bus-stop\n",                ' '                                 if ( $check_bus_stop              );
     printf STDERR "%20s--check-motorway-link\n",           ' '                                 if ( $check_motorway_link         );
     printf STDERR "%20s--check-name\n",                    ' '                                 if ( $check_name                  );
+    printf STDERR "%20s--check-name-relaxed\n",            ' '                                 if ( $check_name_relaxed          );
     printf STDERR "%20s--check-osm-separator\n",           ' '                                 if ( $check_osm_separator         );
     printf STDERR "%20s--check-platform\n",                ' '                                 if ( $check_platform              );
     printf STDERR "%20s--check-roundabouts\n",             ' '                                 if ( $check_roundabouts           );
@@ -174,6 +177,10 @@ if ( $opt_language ) {
     bindtextdomain( 'ptna', $PATH );
     textdomain( "ptna" );
 }    
+
+if ( $check_name_relaxed ) {
+    $check_name = 1;
+}
 
 if ( $allow_coach ) {
     push( @supported_route_types, 'coach' );
@@ -2239,10 +2246,12 @@ sub analyze_ptv2_route_relation {
                 $return_code++;
             }
             if ( $from ) {
-                if ( index($name,$from) == -1 ) {
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'from' = '%s' is not part of 'name'"), html_escape($from)) );
-                    $preconditions_failed++;
-                    $return_code++;
+                if ( !$check_name_relaxed ) {
+                    if ( index($name,$from) == -1 ) {
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'from' = '%s' is not part of 'name'"), html_escape($from)) );
+                        $preconditions_failed++;
+                        $return_code++;
+                    }
                 }
             } else {
                 push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'from' is not set") );
@@ -2250,13 +2259,14 @@ sub analyze_ptv2_route_relation {
                 $return_code++;
             }
             if ( $to ) {
-                if ( index($name,$to) == -1 ) {
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'to' = '%s' is not part of 'name'"), html_escape($to)) );
-                    $preconditions_failed++;
-                    $return_code++;
+                if ( !$check_name_relaxed ) {
+                    if ( index($name,$to) == -1 ) {
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'to' = '%s' is not part of 'name'"), html_escape($to)) );
+                        $preconditions_failed++;
+                        $return_code++;
+                    }
                 }
-            }
-            else {
+            } else {
                 push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'to' is not set") );
                 $preconditions_failed++;
                 $return_code++;
@@ -2281,16 +2291,35 @@ sub analyze_ptv2_route_relation {
                 my $num_of_arrows  = 0;
                 $num_of_arrows++    while ( $name =~ m/=>/g );
                 if ( $num_of_arrows < 2 ) {
-                    # well, 'name' should then include only 'from' and 'to' (no 'via')
-                    $expected_long  = ': ' . $from . ' => ' . $to;   # this is how it really should be: with blank around '=>'
-                    $expected_short = ': ' . $from .  '=>'  . $to;   # some people ommit the blank around the '=>', be relaxed with that
-                    $i_long        = index( $name, $expected_long  );
-                    $i_short       = index( $name, $expected_short );
-                    if ( ($i_long  == -1 || length($name) > $i_long  + length($expected_long))  &&
-                         ($i_short == -1 || length($name) > $i_short + length($expected_short))    ) {
-                        # no match or 'name' is longer than expected
-                        push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'name' should (at least) be of the form '... ref ...: from => to'") );
-                        $return_code++;
+                    if ( $check_name_relaxed ) {
+                        if ( $name =~ m/(.*):\s{0,1}(.*?)\s{0,1}=>\s{0,1}(.*)$/ ) {
+                            my $ref_in_name  = $1;
+                            my $from_in_name = $2;
+                            my $to_in_name   = $3;
+                            if ( index($from,$from_in_name) == -1 ) {
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: from-part ('%s') of 'name' is not part of 'from' = '%s'"), html_escape($from_in_name), html_escape($from)) );
+                                $return_code++;
+                            }
+                            if ( index($to,$to_in_name) == -1 ) {
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: to-part ('%s') of 'name' is not part of 'to' = '%s'"), html_escape($to_in_name), html_escape($to)) );
+                                $return_code++;
+                            }
+                        } else {
+                            push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'name' should be similar to the form '... ref ...: from => to'") );
+                            $return_code++;
+                        }
+                    } else {
+                        # well, 'name' should then include only 'from' and 'to' (no 'via')
+                        $expected_long  = ': ' . $from . ' => ' . $to;   # this is how it really should be: with blank around '=>'
+                        $expected_short = ': ' . $from .  '=>'  . $to;   # some people ommit the blank around the '=>', be relaxed with that
+                        $i_long        = index( $name, $expected_long  );
+                        $i_short       = index( $name, $expected_short );
+                        if ( ($i_long  == -1 || length($name) > $i_long  + length($expected_long))  &&
+                             ($i_short == -1 || length($name) > $i_short + length($expected_short))    ) {
+                            # no match or 'name' is longer than expected
+                            push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'name' should (at least) be of the form '... ref ...: from => to'") );
+                            $return_code++;
+                        }
                     }
                 } else {
                     # there is more than one '=>' in the 'name' value, so 'name' includes via stops
@@ -2324,7 +2353,7 @@ sub analyze_ptv2_route_relation {
                         # multiple '=>' in 'name' but 'via is not set
                         push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'name' has more than one '=>' but 'via' is not set") );
                         $return_code++;
-                     }
+                    }
                 }
             }
         }
