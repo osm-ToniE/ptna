@@ -39,7 +39,8 @@ my %seen_ref_type_operator_fromto   = ();
 sub ReadRoutes {
     my %hash                = @_;
     my $infile              = $hash{'file'};
-    my $separator           = $hash{'separator'} || ';';
+    my $csv_separator       = $hash{'csv-separator'} || ';';
+    my $ref_separator       = $hash{'ref-separator'} || '\|';
     my $analyze             = $hash{'analyze'}   || 'analyze';
     my $debug               = $hash{'debug'};
     my $verbose             = $hash{'verbose'};
@@ -98,8 +99,8 @@ sub ReadRoutes {
                     } else {
                         $hashref->{'type'}       = 'route';          # store type
                          
-                        #if ( m/$separator/ ) {
-                            ($ExpRef,$ExpRouteType,$ExpComment,$ExpFrom,$ExpTo,@rest) = split( $separator );
+                        #if ( m/$csv_separator/ ) {
+                            ($ExpRef,$ExpRouteType,$ExpComment,$ExpFrom,$ExpTo,@rest) = split( $csv_separator );
 
                             $hashref->{'ref'}            = $ExpRef       || '';              # 'ref'
                             $hashref->{'route'}          = $ExpRouteType || '';              # 'route/route_master'
@@ -116,35 +117,40 @@ sub ReadRoutes {
                             }
 
                             if ( $ExpRef ) {
-                                $seen_ref{$ExpRef} = 0  unless ( $seen_ref{$ExpRef} );
-                                $seen_ref{$ExpRef}++;
-                                #printf STDERR "seen_ref{%s} = %d\n", $ExpRef, $seen_ref{$ExpRef}      if ( $debug );
+                                my @ref_list = split( $ref_separator, $ExpRef );
+                                $hashref->{'ref-list'} = \@ref_list;
                                 
-                                if ( $ExpRouteType ) {
-                                    if ( $supported_routes_types{$ExpRouteType} ) {
-                                        $seen_ref_type{$ExpRef}->{$ExpRouteType} = 0    unless ( $seen_ref_type{$ExpRef}->{$ExpRouteType} );
-                                        $seen_ref_type{$ExpRef}->{$ExpRouteType}++;
-                                        #printf STDERR "seen_ref_type{%s}->{%s} = %d\n", $ExpRef, $ExpRouteType, $seen_ref_type{$ExpRef}->{$ExpRouteType}      if ( $debug );
-                                        
-                                        if ( $ExpOperator ) {
-                                            $seen_ref_type_operator{$ExpRef}->{$ExpRouteType}->{$ExpOperator} = 0   unless ( $seen_ref_type_operator{$ExpRef}->{$ExpRouteType}->{$ExpOperator} );
-                                            $seen_ref_type_operator{$ExpRef}->{$ExpRouteType}->{$ExpOperator}++;
-                                            #printf STDERR "seen_ref_type_operator{%s}->{%s}->{%s} = %d\n", $ExpRef, $ExpRouteType, $ExpOperator, $seen_ref_type_operator{$ExpRef}->{$ExpRouteType}->{$ExpOperator}      if ( $debug );
-                                        
-                                            $seen_ref_type_operator_fromto{$ExpRef}->{$ExpRouteType}->{$ExpOperator}->{$ExpFrom.';'.$ExpTo} = 0   unless ( $seen_ref_type_operator_fromto{$ExpRef}->{$ExpRouteType}->{$ExpOperator}->{$ExpFrom.';'.$ExpTo} );
-                                            $seen_ref_type_operator_fromto{$ExpRef}->{$ExpRouteType}->{$ExpOperator}->{$ExpFrom.';'.$ExpTo}++;
+                                foreach my $reflistentry ( @ref_list ) {
+                                    $seen_ref{$reflistentry} = 0  unless ( $seen_ref{$reflistentry} );
+                                    $seen_ref{$reflistentry}++;
+                                    #printf STDERR "seen_ref{%s} = %d\n", $reflistentry, $seen_ref{$reflistentry}      if ( $debug );
+                                    
+                                    if ( $ExpRouteType ) {
+                                        if ( $supported_routes_types{$ExpRouteType} ) {
+                                            $seen_ref_type{$reflistentry}->{$ExpRouteType} = 0    unless ( $seen_ref_type{$reflistentry}->{$ExpRouteType} );
+                                            $seen_ref_type{$reflistentry}->{$ExpRouteType}++;
+                                            #printf STDERR "seen_ref_type{%s}->{%s} = %d\n", $reflistentry, $ExpRouteType, $seen_ref_type{$reflistentry}->{$ExpRouteType}      if ( $debug );
+                                            
+                                            if ( $ExpOperator ) {
+                                                $seen_ref_type_operator{$reflistentry}->{$ExpRouteType}->{$ExpOperator} = 0   unless ( $seen_ref_type_operator{$reflistentry}->{$ExpRouteType}->{$ExpOperator} );
+                                                $seen_ref_type_operator{$reflistentry}->{$ExpRouteType}->{$ExpOperator}++;
+                                                #printf STDERR "seen_ref_type_operator{%s}->{%s}->{%s} = %d\n", $reflistentry, $ExpRouteType, $ExpOperator, $seen_ref_type_operator{$reflistentry}->{$ExpRouteType}->{$ExpOperator}      if ( $debug );
+                                            
+                                                $seen_ref_type_operator_fromto{$reflistentry}->{$ExpRouteType}->{$ExpOperator}->{$ExpFrom.';'.$ExpTo} = 0   unless ( $seen_ref_type_operator_fromto{$reflistentry}->{$ExpRouteType}->{$ExpOperator}->{$ExpFrom.';'.$ExpTo} );
+                                                $seen_ref_type_operator_fromto{$reflistentry}->{$ExpRouteType}->{$ExpOperator}->{$ExpFrom.';'.$ExpTo}++;
+                                            }
+                                        } else {
+                                            # this $ExpRouteType is not a valid one
+                                            $hashref->{'type'}  = 'error';                                              # this is an error
+                                            $hashref->{'ref'}   = $ExpRef;                                              # this is an error
+                                            $hashref->{'error'} = sprintf( gettext("Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line: '%s'"), $ExpRouteType, $NR, $hashref->{'contents'} );    # this is an error
                                         }
                                     } else {
-                                        # this $ExpRouteType is not a valid one
-                                        $hashref->{'type'}  = 'error';                                                                      # this is an error
+                                        # if there is at least one separator, then $ExpRouteType as the second value must not be empty
+                                        $hashref->{'type'}  = 'error';                                              # this is an error
                                         $hashref->{'ref'}   = $ExpRef;                                              # this is an error
-                                        $hashref->{'error'} = sprintf( gettext("Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line: '%s'"), $ExpRouteType, $NR, $hashref->{'contents'} );    # this is an error
+                                        $hashref->{'error'} = sprintf( gettext("Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'"), $NR, $hashref->{'contents'} );   # this is an error
                                     }
-                                } else {
-                                    # if there is at least one separator, then $ExpRouteType as the second value must not be empty
-                                    $hashref->{'type'}  = 'error';                                              # this is an error
-                                    $hashref->{'ref'}   = $ExpRef;                                              # this is an error
-                                    $hashref->{'error'} = sprintf( gettext("Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'"), $NR, $hashref->{'contents'} );   # this is an error
                                 }
                             }
                         #} elsif ( m/(\S)/ ) {

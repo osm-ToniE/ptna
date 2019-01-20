@@ -2,58 +2,58 @@
 <osm version='0.6' upload='false' generator='JOSM'>
   <bounds minlat='48.069032' minlon='11.6330838' maxlat='48.0716416' maxlon='11.6389203' origin='CGImap 0.6.1 (13164 thorn-03.openstreetmap.org)' />
   <bounds minlat='48.069032' minlon='11.6330838' maxlat='48.0716416' maxlon='11.6389203' origin='OpenStreetMap server' />
-  <node id='-104521' action='modify' lat='48.07094035355' lon='11.63437802378'>
+  <node id='-106423' action='modify' lat='48.07094035355' lon='11.63437802378'>
     <tag k='bus' v='yes' />
     <tag k='name' v='from' />
     <tag k='public_transport' v='stop_position' />
   </node>
-  <node id='-104524' action='modify' lat='48.07039765263' lon='11.63485322785' />
-  <node id='-104528' action='modify' lat='48.07013496023' lon='11.63575179555' />
-  <node id='-104530' action='modify' lat='48.07023599593' lon='11.63681020461' />
-  <node id='-104532' action='modify' lat='48.07058240252' lon='11.6375791712'>
+  <node id='-106425' action='modify' lat='48.07039765263' lon='11.63485322785' />
+  <node id='-106427' action='modify' lat='48.07013496023' lon='11.63575179555' />
+  <node id='-106429' action='modify' lat='48.07023599593' lon='11.63681020461' />
+  <node id='-106431' action='modify' lat='48.07058240252' lon='11.6375791712'>
     <tag k='bus' v='yes' />
     <tag k='name' v='to' />
     <tag k='public_transport' v='stop_position' />
   </node>
-  <node id='-104600' action='modify' lat='48.07088550637' lon='11.63425274271'>
+  <node id='-106433' action='modify' lat='48.07088550637' lon='11.63425274271'>
     <tag k='bus' v='yes' />
     <tag k='name' v='from' />
     <tag k='public_transport' v='platform' />
   </node>
-  <node id='-104635' action='modify' lat='48.07051312139' lon='11.6377433326'>
+  <node id='-106435' action='modify' lat='48.07051312139' lon='11.6377433326'>
     <tag k='bus' v='yes' />
     <tag k='name' v='to' />
     <tag k='public_transport' v='platform' />
   </node>
-  <way id='-104525' action='modify'>
-    <nd ref='-104521' />
-    <nd ref='-104524' />
+  <way id='-106436' action='modify'>
+    <nd ref='-106423' />
+    <nd ref='-106425' />
     <tag k='highway' v='unclassified' />
   </way>
-  <way id='-104660' action='modify'>
-    <nd ref='-104524' />
-    <nd ref='-104528' />
+  <way id='-106437' action='modify'>
+    <nd ref='-106425' />
+    <nd ref='-106427' />
     <tag k='highway' v='unclassified' />
   </way>
-  <way id='-104661' action='modify'>
-    <nd ref='-104528' />
-    <nd ref='-104530' />
+  <way id='-106438' action='modify'>
+    <nd ref='-106427' />
+    <nd ref='-106429' />
     <tag k='highway' v='unclassified' />
   </way>
-  <way id='-104662' action='modify'>
-    <nd ref='-104530' />
-    <nd ref='-104532' />
+  <way id='-106439' action='modify'>
+    <nd ref='-106429' />
+    <nd ref='-106431' />
     <tag k='highway' v='unclassified' />
   </way>
-  <relation id='-104500' action='modify'>
-    <member type='node' ref='-104521' role='stop' />
-    <member type='node' ref='-104600' role='platform' />
-    <member type='node' ref='-104532' role='stop' />
-    <member type='node' ref='-104635' role='platform' />
-    <member type='way' ref='-104525' role='' />
-    <member type='way' ref='-104660' role='' />
-    <member type='way' ref='-104661' role='' />
-    <member type='way' ref='-104662' role='' />
+  <relation id='-106440' action='modify'>
+    <member type='node' ref='-106423' role='stop' />
+    <member type='node' ref='-106433' role='platform' />
+    <member type='node' ref='-106431' role='stop' />
+    <member type='node' ref='-106435' role='platform' />
+    <member type='way' ref='-106436' role='' />
+    <member type='way' ref='-106437' role='' />
+    <member type='way' ref='-106438' role='' />
+    <member type='way' ref='-106439' role='' />
     <tag k='from' v='from' />
     <tag k='name' v='Bus 43: from =&gt; to' />
     <tag k='network' v='network' />
@@ -64,15 +64,15 @@
     <tag k='to' v='to' />
     <tag k='type' v='route' />
   </relation>
-  <relation id='-104504' action='modify'>
-    <member type='node' ref='-104521' role='stop' />
-    <member type='node' ref='-104600' role='platform' />
-    <member type='node' ref='-104532' role='stop' />
-    <member type='node' ref='-104635' role='platform' />
-    <member type='way' ref='-104525' role='' />
-    <member type='way' ref='-104660' role='' />
-    <member type='way' ref='-104661' role='' />
-    <member type='way' ref='-104662' role='' />
+  <relation id='-106441' action='modify'>
+    <member type='node' ref='-106423' role='stop' />
+    <member type='node' ref='-106433' role='platform' />
+    <member type='node' ref='-106431' role='stop' />
+    <member type='node' ref='-106435' role='platform' />
+    <member type='way' ref='-106436' role='' />
+    <member type='way' ref='-106437' role='' />
+    <member type='way' ref='-106438' role='' />
+    <member type='way' ref='-106439' role='' />
     <tag k='from' v='from' />
     <tag k='name' v='Bus E43: from =&gt; to' />
     <tag k='network' v='network' />
@@ -83,9 +83,9 @@
     <tag k='to' v='to' />
     <tag k='type' v='route' />
   </relation>
-  <relation id='-104508' action='modify'>
-    <member type='relation' ref='-104500' role='' />
-    <member type='relation' ref='-104504' role='' />
+  <relation id='-106442' action='modify'>
+    <member type='relation' ref='-106440' role='' />
+    <member type='relation' ref='-106441' role='' />
     <tag k='from' v='from' />
     <tag k='name' v='Bus 43' />
     <tag k='network' v='network' />
@@ -96,10 +96,10 @@
     <tag k='to' v='to' />
     <tag k='type' v='route_master' />
   </relation>
-  <relation id='-104510' action='modify'>
-    <member type='relation' ref='-104512' role='' />
-    <member type='relation' ref='-104514' role='' />
-    <member type='relation' ref='-104516' role='' />
+  <relation id='-106443' action='modify'>
+    <member type='relation' ref='-106444' role='' />
+    <member type='relation' ref='-106445' role='' />
+    <member type='relation' ref='-106446' role='' />
     <tag k='from' v='from' />
     <tag k='name' v='Bus 250' />
     <tag k='network' v='network' />
@@ -110,15 +110,15 @@
     <tag k='to' v='to' />
     <tag k='type' v='route_master' />
   </relation>
-  <relation id='-104512' action='modify'>
-    <member type='node' ref='-104521' role='stop' />
-    <member type='node' ref='-104600' role='platform' />
-    <member type='node' ref='-104532' role='stop' />
-    <member type='node' ref='-104635' role='platform' />
-    <member type='way' ref='-104525' role='' />
-    <member type='way' ref='-104660' role='' />
-    <member type='way' ref='-104661' role='' />
-    <member type='way' ref='-104662' role='' />
+  <relation id='-106444' action='modify'>
+    <member type='node' ref='-106423' role='stop' />
+    <member type='node' ref='-106433' role='platform' />
+    <member type='node' ref='-106431' role='stop' />
+    <member type='node' ref='-106435' role='platform' />
+    <member type='way' ref='-106436' role='' />
+    <member type='way' ref='-106437' role='' />
+    <member type='way' ref='-106438' role='' />
+    <member type='way' ref='-106439' role='' />
     <tag k='from' v='from' />
     <tag k='name' v='Bus 250: from =&gt; to' />
     <tag k='network' v='network' />
@@ -129,15 +129,15 @@
     <tag k='to' v='to' />
     <tag k='type' v='route' />
   </relation>
-  <relation id='-104514' action='modify'>
-    <member type='node' ref='-104521' role='stop' />
-    <member type='node' ref='-104600' role='platform' />
-    <member type='node' ref='-104532' role='stop' />
-    <member type='node' ref='-104635' role='platform' />
-    <member type='way' ref='-104525' role='' />
-    <member type='way' ref='-104660' role='' />
-    <member type='way' ref='-104661' role='' />
-    <member type='way' ref='-104662' role='' />
+  <relation id='-106445' action='modify'>
+    <member type='node' ref='-106423' role='stop' />
+    <member type='node' ref='-106433' role='platform' />
+    <member type='node' ref='-106431' role='stop' />
+    <member type='node' ref='-106435' role='platform' />
+    <member type='way' ref='-106436' role='' />
+    <member type='way' ref='-106437' role='' />
+    <member type='way' ref='-106438' role='' />
+    <member type='way' ref='-106439' role='' />
     <tag k='from' v='from' />
     <tag k='name' v='Bus 250a: from =&gt; to' />
     <tag k='network' v='network' />
@@ -148,21 +148,233 @@
     <tag k='to' v='to' />
     <tag k='type' v='route' />
   </relation>
-  <relation id='-104516' action='modify'>
-    <member type='node' ref='-104521' role='stop' />
-    <member type='node' ref='-104600' role='platform' />
-    <member type='node' ref='-104532' role='stop' />
-    <member type='node' ref='-104635' role='platform' />
-    <member type='way' ref='-104525' role='' />
-    <member type='way' ref='-104660' role='' />
-    <member type='way' ref='-104661' role='' />
-    <member type='way' ref='-104662' role='' />
+  <relation id='-106446' action='modify'>
+    <member type='node' ref='-106423' role='stop' />
+    <member type='node' ref='-106433' role='platform' />
+    <member type='node' ref='-106431' role='stop' />
+    <member type='node' ref='-106435' role='platform' />
+    <member type='way' ref='-106436' role='' />
+    <member type='way' ref='-106437' role='' />
+    <member type='way' ref='-106438' role='' />
+    <member type='way' ref='-106439' role='' />
     <tag k='from' v='from' />
     <tag k='name' v='Bus 250b: from =&gt; to' />
     <tag k='network' v='network' />
     <tag k='operator' v='operator' />
     <tag k='public_transport:version' v='2' />
     <tag k='ref' v='250b' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='to' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-106447' action='modify'>
+    <member type='node' ref='-106423' role='stop' />
+    <member type='node' ref='-106433' role='platform' />
+    <member type='node' ref='-106431' role='stop' />
+    <member type='node' ref='-106435' role='platform' />
+    <member type='way' ref='-106436' role='' />
+    <member type='way' ref='-106437' role='' />
+    <member type='way' ref='-106438' role='' />
+    <member type='way' ref='-106439' role='' />
+    <tag k='from' v='from' />
+    <tag k='name' v='Bus 53: from =&gt; to' />
+    <tag k='network' v='network' />
+    <tag k='operator' v='operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='53' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='to' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-106448' action='modify'>
+    <member type='node' ref='-106423' role='stop' />
+    <member type='node' ref='-106433' role='platform' />
+    <member type='node' ref='-106431' role='stop' />
+    <member type='node' ref='-106435' role='platform' />
+    <member type='way' ref='-106436' role='' />
+    <member type='way' ref='-106437' role='' />
+    <member type='way' ref='-106438' role='' />
+    <member type='way' ref='-106439' role='' />
+    <tag k='from' v='from' />
+    <tag k='name' v='Bus E53: from =&gt; to' />
+    <tag k='network' v='network' />
+    <tag k='operator' v='operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='E53' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='to' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-106449' action='modify'>
+    <member type='relation' ref='-106447' role='' />
+    <member type='relation' ref='-106448' role='' />
+    <tag k='from' v='from' />
+    <tag k='name' v='Bus 53' />
+    <tag k='network' v='network' />
+    <tag k='operator' v='operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='53' />
+    <tag k='route_master' v='bus' />
+    <tag k='to' v='to' />
+    <tag k='type' v='route_master' />
+  </relation>
+  <relation id='-106450' action='modify'>
+    <member type='node' ref='-106423' role='stop' />
+    <member type='node' ref='-106433' role='platform' />
+    <member type='node' ref='-106431' role='stop' />
+    <member type='node' ref='-106435' role='platform' />
+    <member type='way' ref='-106436' role='' />
+    <member type='way' ref='-106437' role='' />
+    <member type='way' ref='-106438' role='' />
+    <member type='way' ref='-106439' role='' />
+    <tag k='from' v='from' />
+    <tag k='name' v='Bus 255: from =&gt; to' />
+    <tag k='network' v='network' />
+    <tag k='operator' v='operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='255' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='to' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-106451' action='modify'>
+    <member type='node' ref='-106423' role='stop' />
+    <member type='node' ref='-106433' role='platform' />
+    <member type='node' ref='-106431' role='stop' />
+    <member type='node' ref='-106435' role='platform' />
+    <member type='way' ref='-106436' role='' />
+    <member type='way' ref='-106437' role='' />
+    <member type='way' ref='-106438' role='' />
+    <member type='way' ref='-106439' role='' />
+    <tag k='from' v='from' />
+    <tag k='name' v='Bus 255a: from =&gt; to' />
+    <tag k='network' v='network' />
+    <tag k='operator' v='operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='255a' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='to' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-106452' action='modify'>
+    <member type='node' ref='-106423' role='stop' />
+    <member type='node' ref='-106433' role='platform' />
+    <member type='node' ref='-106431' role='stop' />
+    <member type='node' ref='-106435' role='platform' />
+    <member type='way' ref='-106436' role='' />
+    <member type='way' ref='-106437' role='' />
+    <member type='way' ref='-106438' role='' />
+    <member type='way' ref='-106439' role='' />
+    <tag k='from' v='from' />
+    <tag k='name' v='Bus 255b: from =&gt; to' />
+    <tag k='network' v='network' />
+    <tag k='operator' v='operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='255b' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='to' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-106453' action='modify'>
+    <member type='relation' ref='-106450' role='' />
+    <member type='relation' ref='-106451' role='' />
+    <member type='relation' ref='-106460' role='' />
+    <tag k='from' v='from' />
+    <tag k='name' v='Bus 255' />
+    <tag k='network' v='network' />
+    <tag k='operator' v='operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='255' />
+    <tag k='route_master' v='bus' />
+    <tag k='to' v='to' />
+    <tag k='type' v='route_master' />
+  </relation>
+  <relation id='-106454' action='modify'>
+    <member type='node' ref='-106423' role='stop' />
+    <member type='node' ref='-106433' role='platform' />
+    <member type='node' ref='-106431' role='stop' />
+    <member type='node' ref='-106435' role='platform' />
+    <member type='way' ref='-106436' role='' />
+    <member type='way' ref='-106437' role='' />
+    <member type='way' ref='-106438' role='' />
+    <member type='way' ref='-106439' role='' />
+    <tag k='from' v='from' />
+    <tag k='name' v='Bus 260: from =&gt; to' />
+    <tag k='network' v='network' />
+    <tag k='operator' v='operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='260' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='to' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-106455' action='modify'>
+    <member type='node' ref='-106423' role='stop' />
+    <member type='node' ref='-106433' role='platform' />
+    <member type='node' ref='-106431' role='stop' />
+    <member type='node' ref='-106435' role='platform' />
+    <member type='way' ref='-106436' role='' />
+    <member type='way' ref='-106437' role='' />
+    <member type='way' ref='-106438' role='' />
+    <member type='way' ref='-106439' role='' />
+    <tag k='from' v='from' />
+    <tag k='name' v='Bus 260a: from =&gt; to' />
+    <tag k='network' v='network' />
+    <tag k='operator' v='operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='260a' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='to' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-106456' action='modify'>
+    <member type='node' ref='-106423' role='stop' />
+    <member type='node' ref='-106433' role='platform' />
+    <member type='node' ref='-106431' role='stop' />
+    <member type='node' ref='-106435' role='platform' />
+    <member type='way' ref='-106436' role='' />
+    <member type='way' ref='-106437' role='' />
+    <member type='way' ref='-106438' role='' />
+    <member type='way' ref='-106439' role='' />
+    <tag k='from' v='from' />
+    <tag k='name' v='Bus 260b: from =&gt; to' />
+    <tag k='network' v='network' />
+    <tag k='operator' v='operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='260b' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='to' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-106457' action='modify'>
+    <member type='relation' ref='-106454' role='' />
+    <member type='relation' ref='-106455' role='' />
+    <member type='relation' ref='-106456' role='' />
+    <tag k='from' v='from' />
+    <tag k='name' v='Bus 260' />
+    <tag k='network' v='network' />
+    <tag k='operator' v='operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='260' />
+    <tag k='route_master' v='bus' />
+    <tag k='to' v='to' />
+    <tag k='type' v='route_master' />
+  </relation>
+  <relation id='-106460' action='modify'>
+    <member type='node' ref='-106423' role='stop' />
+    <member type='node' ref='-106433' role='platform' />
+    <member type='node' ref='-106431' role='stop' />
+    <member type='node' ref='-106435' role='platform' />
+    <member type='way' ref='-106436' role='' />
+    <member type='way' ref='-106437' role='' />
+    <member type='way' ref='-106438' role='' />
+    <member type='way' ref='-106439' role='' />
+    <tag k='from' v='from' />
+    <tag k='name' v='Bus 255c: from =&gt; to' />
+    <tag k='network' v='network' />
+    <tag k='operator' v='operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='255c' />
     <tag k='route' v='bus' />
     <tag k='to' v='to' />
     <tag k='type' v='route' />
