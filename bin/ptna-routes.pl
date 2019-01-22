@@ -1658,55 +1658,72 @@ sub analyze_route_master_environment {
                 #
                 if ( $RELATIONS{$member_ref->{'ref'}} && $RELATIONS{$member_ref->{'ref'}}->{'tag'} ) {
                     #
-                    # relation is included in XML input file but has no 'ref' or 'ref' is invalid, not in the list of valid refs
+                    # relation is included in XML input file cehck for settings
                     #
-                    if ( $RELATIONS{$relation_id}->{'tag'}->{'ref'} ) {
-                        $masters_ref = $RELATIONS{$relation_id}->{'tag'}->{'ref'};
-                    }
-                    if ( $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'ref'} ) {
-                        foreach $members_ref ( @{$ref_list} ) {
-                            $allowed_refs{$members_ref} = 1;
-                        }
-                        $members_ref = $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'ref'};
-                        if ( $allowed_refs{$members_ref} ) {
-                            #
-                            # 'members_ref' is in the list, check for other problems
-                            #
+                    if ( $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'type'} ) {
+
+                        if ( $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'type'} eq 'route' ) {
+
                             if ( $relation_ptr->{'tag'}->{'route_master'} && $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'route'} ) {
+
                                 if ( $relation_ptr->{'tag'}->{'route_master'} eq $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'route'} ) {
-                                    ; # hmm should not happen here
-                                    printf STDERR "%s Route of Route-Master not found although 'ref' is valid and 'route_master/route' are equal. Route-Master: %s, Route: %s, 'ref': %s, 'route': %s\n", get_time(), $relation_id, $member_ref->{'ref'}, $members_ref, $relation_ptr->{'tag'}->{'route_master'};
+
+                                    if ( $RELATIONS{$relation_id}->{'tag'}->{'ref'} ) {
+                                        $masters_ref = $RELATIONS{$relation_id}->{'tag'}->{'ref'};
+                                    }
+                                    if ( $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'ref'} ) {
+                                        foreach $members_ref ( @{$ref_list} ) {
+                                            $allowed_refs{$members_ref} = 1;
+                                        }
+                                        $members_ref = $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'ref'};
+                                        if ( $allowed_refs{$members_ref} ) {
+                                            #
+                                            # 'members_ref' is in the list, check for other problems
+                                            #
+                                            if ( $relation_ptr->{'tag'}->{'network'} && $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'} ) {
+                                                if ( $relation_ptr->{'tag'}->{'network'} eq $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'} ) {
+                                                    ; # hmm should not happen here
+                                                    printf STDERR "%s Route of Route-Master not found although 'ref' is valid and 'network' are equal. Route-Master: %s, Route: %s, 'ref': %s, 'network': %s\n", get_time(), $relation_id, $member_ref->{'ref'}, $members_ref, html_escape($relation_ptr->{'tag'}->{'network'});
+                                                } else {
+                                                    # 'ref' tag is valid (in the list) but 'network' is set and differs
+                                                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route has different 'network' = '%s' than Route-Master 'network' = '%s': %s"), html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}), html_escape($relation_ptr->{'tag'}->{'network'}), printRelationTemplate($member_ref->{'ref'}) ) );
+                                                }
+                                            } elsif ( $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'} ) {
+                                                # 'ref' tag is valid (in the list) but 'network' is strange
+                                                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route has 'network' = '%s' value which is considered as not relevant: %s"), html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}), printRelationTemplate($member_ref->{'ref'}) ) );
+                                            }
+                                            if ( $members_ref ne $masters_ref ) {
+                                                # 'members_ref' is valid (in the list) but differs from 'ref' of route-master, so we have at least two refs in the list (a real list)
+                                                push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("Route has different 'ref' = '%s' than Route-Master 'ref' = '%s' - this should be avoided: %s"), $members_ref, $masters_ref, printRelationTemplate($member_ref->{'ref'}) ) );
+                                            }
+                                        } else {
+                                            # 'ref' tag is set but is not valid, not in list
+                                            push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route has not matching 'ref' = '%s': %s"), $members_ref, printRelationTemplate($member_ref->{'ref'}) ) );
+                                        }
+                                    } else {
+                                        # 'ref' tag is not set
+                                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route exists in the given data set but 'ref' tag is not set: %s"), printRelationTemplate($member_ref->{'ref'}) ) );
+                                    }
                                 } else {
                                     # 'ref' tag is valid (in the list) but 'route' is set and differs from 'route_master'
-                                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route has different 'route' = '%s' than Route-Master 'route_master' = '%s': %s"), $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'route'}, $relation_ptr->{'tag'}->{'route_master'}, printRelationTemplate($member_ref->{'ref'}) ) );
+                                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route has different 'route' = '%s' than Route-Master 'route_master' = '%s': %s"), html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'route'}), html_escape($relation_ptr->{'tag'}->{'route_master'}), printRelationTemplate($member_ref->{'ref'}) ) );
                                 }
-                            } elsif ( $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'route'} ) {
-                                # 'ref' tag is valid (in the list) but 'route' is strange
-                                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route has 'route' = '%s' value which is considered as not relevant: %s"), $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}, printRelationTemplate($member_ref->{'ref'}) ) );
-                            }
-                            if ( $relation_ptr->{'tag'}->{'network'} && $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'} ) {
-                                if ( $relation_ptr->{'tag'}->{'network'} eq $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'} ) {
-                                    ; # hmm should not happen here
-                                    printf STDERR "%s Route of Route-Master not found although 'ref' is valid and 'network' are equal. Route-Master: %s, Route: %s, 'ref': %s, 'network': %s\n", get_time(), $relation_id, $member_ref->{'ref'}, $members_ref, html_escape($relation_ptr->{'tag'}->{'network'});
+                            } else {
+                                if ( $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'route'} ) {
+                                    # 'route' is strange
+                                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route has 'route' = '%s' value which is considered as not relevant: %s"), html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'route'}), printRelationTemplate($member_ref->{'ref'}) ) );
                                 } else {
-                                    # 'ref' tag is valid (in the list) but 'network' is set and differs
-                                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route has different 'network' = '%s' than Route-Master 'network' = '%s': %s"), html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}), html_escape($relation_ptr->{'tag'}->{'network'}), printRelationTemplate($member_ref->{'ref'}) ) );
+                                    # 'route' is not set
+                                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: 'route' tag is not set: %s"), printRelationTemplate($member_ref->{'ref'}) ) );
                                 }
-                            } elsif ( $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'} ) {
-                                # 'ref' tag is valid (in the list) but 'network' is strange
-                                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route has 'network' = '%s' value which is considered as not relevant: %s"), html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}), printRelationTemplate($member_ref->{'ref'}) ) );
-                            }
-                            if ( $members_ref ne $masters_ref ) {
-                                # 'members_ref' is valid (in the list) but differs from 'ref' of route-master, so we have at least two refs in the list (a real list)
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("Route has different 'ref' = '%s' than Route-Master 'ref' = '%s' - this should be avoided: %s"), $members_ref, $masters_ref, printRelationTemplate($member_ref->{'ref'}) ) );
                             }
                         } else {
-                            # 'ref' tag is set but is not valid, not in list
-                            push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route has not matching 'ref' = '%s': %s"), $members_ref, printRelationTemplate($member_ref->{'ref'}) ) );
+                            # 'type' is strange
+                            push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: 'type' = '%s' is not 'route': %s"), html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'type'}), printRelationTemplate($member_ref->{'ref'}) ) );
                         }
                     } else {
-                        # 'ref' tag is not set
-                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route exists in the given data set but 'ref' tag is not set: %s"), printRelationTemplate($member_ref->{'ref'}) ) );
+                        # 'type' is not set
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: 'type' tag is not set: %s"), printRelationTemplate($member_ref->{'ref'}) ) );
                     }
                 } else {
                     #
@@ -1823,6 +1840,10 @@ sub analyze_route_environment {
                  $relation_ptr->{'tag'}->{'network'} ne $RELATIONS{$route_master_rel_id}->{'tag'}->{'network'}     ) {
                 push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'network' = '%s' of Route does not fit to 'network' = '%s' of Route-Master: %s"), html_escape($relation_ptr->{'tag'}->{'network'}), html_escape($RELATIONS{$route_master_rel_id}->{'tag'}->{'network'}), printRelationTemplate($route_master_rel_id)) );
             }
+#            if ( $relation_ptr->{'tag'}->{'operator'} && $RELATIONS{$route_master_rel_id}->{'tag'}->{'operator'} &&
+#                 $relation_ptr->{'tag'}->{'operator'} ne $RELATIONS{$route_master_rel_id}->{'tag'}->{'operator'}     ) {
+#                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'operator' = '%s' of Route does not fit to 'operator' = '%s' of Route-Master: %s"), html_escape($relation_ptr->{'tag'}->{'operator'}), html_escape($RELATIONS{$route_master_rel_id}->{'tag'}->{'operator'}), printRelationTemplate($route_master_rel_id)) );
+#            }
             if ( $relation_ptr->{'tag'}->{'colour'} ) {
                 if ( $RELATIONS{$route_master_rel_id}->{'tag'}->{'colour'} ) {
                     if ( uc($relation_ptr->{'tag'}->{'colour'}) ne uc($RELATIONS{$route_master_rel_id}->{'tag'}->{'colour'}) ) {
@@ -4067,10 +4088,10 @@ sub printHintSuspiciousRelations {
         push( @HTML_main, "\n</p>\n" );
         push( @HTML_main, "<ul>\n" );
         if ( $hswkort ) {
-            push( @HTML_main, "    <li>'type' = 'route_master' bzw. 'type' = 'route''\n" );
+            push( @HTML_main, "    <li>'type' = 'route_master', 'type' = 'route''\n" );
             push( @HTML_main, "        <ul>\n" );
             foreach my $rt (  sort ( keys %have_seen_well_known_other_route_types ) ) {
-                push( @HTML_main, sprintf( "    <li>'route_master' = '%s' bzw. 'route' = '%s'</li>\n", $rt, $rt ) );
+                push( @HTML_main, sprintf( "    <li>'route_master' = '%s', 'route' = '%s'</li>\n", $rt, $rt ) );
             }
             push( @HTML_main, "        </ul>\n" );
             push( @HTML_main, "    </li>\n" );
