@@ -32,17 +32,19 @@
         </li>
         <li>2 <a href="#A2">Test file for environment of Route-Master</a>
         </li>
-        <li>3 <a href="#withoutref">Public Transport Lines without 'ref'</a>
+        <li>3 <a href="#unassigned">Not clearly assigned routes</a>
+        </li>
+        <li>4 <a href="#withoutref">Public Transport Lines without 'ref'</a>
         <ol>
-        <li>3.1 <a href="#A3.1">Bus</a>
+        <li>4.1 <a href="#A4.1">Bus</a>
         </li>
         </ol>
         </li>
-        <li>4 <a href="#morerelations">More Relations</a>
+        <li>5 <a href="#morerelations">More Relations</a>
         </li>
-        <li>5 <a href="#networkdetails">Details for 'network'-Values</a>
+        <li>6 <a href="#networkdetails">Details for 'network'-Values</a>
         <ol>
-        <li>5.1 <a href="#considerednetworks">Considered 'network'-Values</a>
+        <li>6.1 <a href="#considerednetworks">Considered 'network'-Values</a>
         </li>
         </ol>
         </li>
@@ -64,29 +66,85 @@
             </thead>
             <tbody>
                 <tr data-info="???" data-ref="43 63" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=43&amp;network=network&amp;style=wuppertal" title="Sketch-Line">43</a> <a href="https://overpass-api.de/api/sketch-line?ref=63&amp;network=network&amp;style=wuppertal" title="Sketch-Line">63</a></td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="-106442" data-ref="43" class="line"><td class="name">Bus 43</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -106442</td><td class="PTv">2</td><td class="issues">Route-Master has more Routes than actually match (8 versus 3) in the given data set<br>Route: 'type' tag is not set: <img src="/img/Relation.svg" alt="Relation" /> -106485<br>Route: 'type' = 'multipolygon' is not 'route': <img src="/img/Relation.svg" alt="Relation" /> -106440<br>Route: 'route' tag is not set: <img src="/img/Relation.svg" alt="Relation" /> -106487<br>Route has different 'route' = 'road' than Route-Master 'route_master' = 'bus': <img src="/img/Relation.svg" alt="Relation" /> -106493<br>Route has not matching 'ref' = '53': <img src="/img/Relation.svg" alt="Relation" /> -106495</td><td class="notes"></td></tr>
-                <tr data-info="-106498" data-ref="43" class="line"><td class="name">Bus 43: from =&gt; to</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -106498</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'comment' = 'All is OK'</td></tr>
-                <tr data-info="-106491" data-ref="43" class="line"><td class="name">Bus 43: from =&gt; to</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -106491</td><td class="PTv">2</td><td class="issues">'network' = 'network2' of Route does not fit to 'network' = 'network' of Route-Master: <img src="/img/Relation.svg" alt="Relation" /> -106442</td><td class="notes">'comment' = '&#039;network&#039; is different'</td></tr>
-                <tr data-info="-106619" data-ref="63" class="line"><td class="name">Bus 63: from =&gt; to</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -106619</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'comment' = '&#039;ref&#039; is different but allowed'<br>Route has different 'ref' = '63' than Route-Master 'ref' = '43' - this should be avoided: <img src="/img/Relation.svg" alt="Relation" /> -106442</td></tr>
+                <tr data-info="-113804" data-ref="43" class="line"><td class="name">Bus 43</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113804</td><td class="PTv">2</td><td class="issues">Route-Master has more Routes than actually match (8 versus 3) in the given data set<br>Route: 'type' tag is not set: <img src="/img/Relation.svg" alt="Relation" /> -113805<br>Route: 'type' = 'multipolygon' is not 'route': <img src="/img/Relation.svg" alt="Relation" /> -113803<br>Route: 'route' tag is not set: <img src="/img/Relation.svg" alt="Relation" /> -113806<br>Route has different 'route' = 'road' than Route-Master 'route_master' = 'bus': <img src="/img/Relation.svg" alt="Relation" /> -113808<br>Route has not matching 'ref' = '53': <img src="/img/Relation.svg" alt="Relation" /> -113809</td><td class="notes"></td></tr>
+                <tr data-info="-113810" data-ref="43" class="line"><td class="name">Bus 43: from =&gt; to</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113810</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'comment' = 'All is OK'</td></tr>
+                <tr data-info="-113807" data-ref="43" class="line"><td class="name">Bus 43: from =&gt; to</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113807</td><td class="PTv">2</td><td class="issues">'network' = 'network2' of Route does not fit to 'network' = 'network' of Route-Master: <img src="/img/Relation.svg" alt="Relation" /> -113804</td><td class="notes">'comment' = '&#039;network&#039; is different'</td></tr>
+                <tr data-info="-113812" data-ref="63" class="line"><td class="name">Bus 63: from =&gt; to</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113812</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'comment' = '&#039;ref&#039; is different but allowed'<br>Route has different 'ref' = '63' than Route-Master 'ref' = '43' - this should be avoided: <img src="/img/Relation.svg" alt="Relation" /> -113804</td></tr>
                 <tr data-info="???" data-ref="53" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=53&amp;network=network&amp;style=wuppertal" title="Sketch-Line">53</a></td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="-106495" data-ref="53" class="line"><td class="name">Bus 53: from =&gt; to</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -106495</td><td class="PTv">2</td><td class="issues">Route-Master has not matching 'ref' = '43': <img src="/img/Relation.svg" alt="Relation" /> -106442</td><td class="notes">'comment' = '&#039;ref&#039; is different'</td></tr>
+                <tr data-info="-113809" data-ref="53" class="line"><td class="name">Bus 53: from =&gt; to</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113809</td><td class="PTv">2</td><td class="issues">Route-Master has not matching 'ref' = '43': <img src="/img/Relation.svg" alt="Relation" /> -113804</td><td class="notes">'comment' = '&#039;ref&#039; is different'</td></tr>
+                <tr data-info="Comment: A-Town; From: First Street; To: Second Street; Operator: Operator" data-ref="100" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=100&amp;network=network&amp;style=wuppertal" title="Sketch-Line">100</a></td><td class="csvinfo" colspan="5">Comment: A-Town; From: First Street; To: Second Street; Operator: Operator</td></tr>
+                <tr data-info="-113855" data-ref="100" class="line"><td class="name">Bus 100</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113855</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'Operator'</td></tr>
+                <tr data-info="-113886" data-ref="100" class="line"><td class="name">Bus 100: First Street =&gt; Second Street</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113886</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'Operator'</td></tr>
+                <tr data-info="Comment: B-Town; From: First Avenue; To: Second Avenue; Operator: Operator" data-ref="100" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=100&amp;network=network&amp;style=wuppertal" title="Sketch-Line">100</a></td><td class="csvinfo" colspan="5">Comment: B-Town; From: First Avenue; To: Second Avenue; Operator: Operator</td></tr>
+                <tr data-info="-113982" data-ref="100" class="line"><td class="name">Bus 100</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113982</td><td class="PTv">2</td><td class="issues">Route-Master has more Routes than actually match (2 versus 1) in the given data set<br>Route might be listed in a different section below the same 'ref' = '100' or in section 'Not clearly assigned routes' of this analysis: <img src="/img/Relation.svg" alt="Relation" /> -113978</td><td class="notes">'operator' = 'Operator'</td></tr>
+                <tr data-info="-113964" data-ref="100" class="line"><td class="name">Bus 100: First Avenue =&gt; Second Avenue</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113964</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'Operator'</td></tr>
             </tbody>
         </table>
 
         <hr />
-        <h1 id="withoutref">3 Public Transport Lines without 'ref'</h1>
-        <h2 id="A3.1">3.1 Bus</h2>
+        <h1 id="unassigned">3 Not clearly assigned routes</h1>
+<p>
+Dieser Abschnitt listet die Linien auf, die nicht eindeutig zugeordnet werden konnten. Die Liniennummern 'ref' sind in der CSV-Datei mehrfach angegeben worden. Das bedeutet, dass die selbe Liniennummer im Verkehrsverbund mehrfach in verscheidenen Gemeinden/Städten vorhanden ist. Um die Linien eindeutig zuordnen zu können sollte folgendes angegeben werden:
+</p><ul>
+    <li>Relation:
+        <ul>
+            <li>'network', 'operator', sowie 'from' und 'to' sollten bei der Relation getagged sein.
+                <ul>
+                    <li>Wenn der Wert von 'operator' zur Differenzierung eindeutig ist, müssen 'from' und 'to' nicht angegeben werden.</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>CSV-Datei:
+        <ul>
+            <li>'Betreiber', sowie 'Von' und 'Nach' sollten in der CSV-Datei mit den selben Werten wie bei der Relation angegeben werden.
+                <ul>
+                    <li>Siehe hierzu die Anleitung für solche Einträge am Anfang der CSV-Datei.</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+<p>
+Beispiele aus dem VMS für einen Eintrag in der CSV-Datei der Form: 'ref;type;Kommentar;Von;Nach;Betreiber':
+</p>
+<table>
+    <thead class="tableheaderrow">
+        <tr><th>&nbsp;</th><th>ref</th><th>type</th><th>Kommentar</th><th>Von</th><th>Nach</th><th>Betreiber</th></tr>
+    </thead>
+    <tbody>
+        <tr><td><strong>1.)</strong> </td><td>A</td><td>bus</td><td>Bus A fährt in Annaberg-Buchholz</td><td>Barbara-Uthmann-Ring</td><td>Buchholz</td><td>RVE</td></tr>
+        <tr><td><strong>2.)</strong> </td><td>A</td><td>bus</td><td>Bus A fährt in Aue</td><td>Postplatz</td><td>Postplatz</td><td>RVE</td></tr>
+        <tr><td><strong>3.)</strong> </td><td>A</td><td>bus</td><td>Bus A fährt in Burgstädt</td><td>Sportzentrum</td><td>Heiersdorf</td><td>RBM</td></tr>
+    </tbody>
+</table>
+<p>
+   1.) und 2.) sind nur mit Hilfe von 'Von'/'from' und 'Nach'/'to' unterscheidbar, da 'Betreiber'/'operator' identisch (='RVE') sind.<br>
+   1.) und 3.) sowie 2.) und 3.) sind an Hand von 'Betreiber'/'operator' unterscheidbar, da diese unterschiedlich sind (='RVE' bzw. ='RBM').
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="ref">Line (ref=)</th><th class="relation">Relation (id=)</th><th class="type">Type (type=)</th><th class="route_type">Vehicle (route(_master)=)</th><th class="name">Name (name=)</th><th class="network">Network (network=)</th><th class="operator">Operator (operator=)</th><th class="from">From (from=)</th><th class="via">Via (via=)</th><th class="to">To (to=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="-113978" data-ref="100" class="line"><td class="ref">100</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113978</td><td class="type">route</td><td class="route_type">bus</td><td class="name">Bus 100: Third Avenue =&gt; Fourth Avenue</td><td class="network">network</td><td class="operator">Operator</td><td class="from">Third Avenue</td><td class="via"></td><td class="to">Fourth Avenue</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'Operator'</td></tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <h1 id="withoutref">4 Public Transport Lines without 'ref'</h1>
+        <h2 id="A4.1">4.1 Bus</h2>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="relation">Relation (id=)</th><th class="type">Type (type=)</th><th class="route_type">Vehicle (route(_master)=)</th><th class="name">Name (name=)</th><th class="network">Network (network=)</th><th class="operator">Operator (operator=)</th><th class="from">From (from=)</th><th class="via">Via (via=)</th><th class="to">To (to=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
-                <tr data-info="-106511" data-ref="???" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -106511</td><td class="type">route</td><td class="route_type">bus</td><td class="name">Bus 43: from =&gt; to</td><td class="network">network</td><td class="operator"></td><td class="from">from</td><td class="via"></td><td class="to">to</td><td class="PTv">2</td><td class="issues">'ref' is not set</td><td class="notes">'comment' = '&#039;ref&#039; is not set'</td></tr>
+                <tr data-info="-113811" data-ref="???" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113811</td><td class="type">route</td><td class="route_type">bus</td><td class="name">Bus 43: from =&gt; to</td><td class="network">network</td><td class="operator"></td><td class="from">from</td><td class="via"></td><td class="to">to</td><td class="PTv">2</td><td class="issues">'ref' is not set</td><td class="notes">'comment' = '&#039;ref&#039; is not set'</td></tr>
             </tbody>
         </table>
 
         <hr />
-        <h1 id="morerelations">4 More Relations</h1>
+        <h1 id="morerelations">5 More Relations</h1>
 <p>
 This section lists further relations of the environment of the routes:
 </p>
@@ -106,9 +164,9 @@ This section lists further relations of the environment of the routes:
 The following values and combinations have been found in the provided data but they will not be listed here. They represent so called 'well defined' values and are not considered as errors.
 </p>
 <ul>
-    <li>'type' = 'route_master' bzw. 'type' = 'route''
+    <li>'type' = 'route_master', 'type' = 'route''
         <ul>
-    <li>'route_master' = 'road' bzw. 'route' = 'road'</li>
+    <li>'route_master' = 'road', 'route' = 'road'</li>
         </ul>
     </li>
 </ul>
@@ -118,15 +176,15 @@ The following values and combinations have been found in the provided data but t
                 <tr class="tableheaderrow"><th class="relation">Relation (id=)</th><th class="type">Type (type=)</th><th class="route_type">Vehicle (route(_master)=)</th><th class="ref">Line (ref=)</th><th class="name">Name (name=)</th><th class="network">Network (network=)</th><th class="operator">Operator (operator=)</th><th class="from">From (from=)</th><th class="via">Via (via=)</th><th class="to">To (to=)</th><th class="PTv">PTv</th><th class="public_transport">public_transport</th></tr>
             </thead>
             <tbody>
-                <tr data-info="-106440" data-ref="???" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -106440</td><td class="type">multipolygon</td><td class="route_type"></td><td class="ref"></td><td class="name">&#039;type&#039; is not &#039;route&#039; or &#039;route_master&#039;</td><td class="network"></td><td class="operator"></td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv"></td><td class="public_transport"></td></tr>
-                <tr data-info="-106485" data-ref="???" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -106485</td><td class="type"></td><td class="route_type"></td><td class="ref"></td><td class="name">&#039;type&#039; is not set</td><td class="network"></td><td class="operator"></td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv"></td><td class="public_transport"></td></tr>
-                <tr data-info="-106487" data-ref="???" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -106487</td><td class="type">route</td><td class="route_type"></td><td class="ref"></td><td class="name">&#039;route&#039; is not set</td><td class="network"></td><td class="operator"></td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv"></td><td class="public_transport"></td></tr>
+                <tr data-info="-113803" data-ref="???" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113803</td><td class="type">multipolygon</td><td class="route_type"></td><td class="ref"></td><td class="name">&#039;type&#039; is not &#039;route&#039; or &#039;route_master&#039;</td><td class="network"></td><td class="operator"></td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv"></td><td class="public_transport"></td></tr>
+                <tr data-info="-113805" data-ref="???" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113805</td><td class="type"></td><td class="route_type"></td><td class="ref"></td><td class="name">&#039;type&#039; is not set</td><td class="network"></td><td class="operator"></td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv"></td><td class="public_transport"></td></tr>
+                <tr data-info="-113806" data-ref="???" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113806</td><td class="type">route</td><td class="route_type"></td><td class="ref"></td><td class="name">&#039;route&#039; is not set</td><td class="network"></td><td class="operator"></td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv"></td><td class="public_transport"></td></tr>
             </tbody>
         </table>
 
         <hr />
-        <h1 id="networkdetails">5 Details for 'network'-Values</h1>
-        <h2 id="considerednetworks">5.1 Considered 'network'-Values</h2>
+        <h1 id="networkdetails">6 Details for 'network'-Values</h1>
+        <h2 id="considerednetworks">6.1 Considered 'network'-Values</h2>
 <p>
 This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.
 </p>
@@ -135,8 +193,8 @@ This section lists the 'network'-values which have been considered; i.e. which m
                 <tr class="tableheaderrow"><th class="network">Network (network=)</th><th class="number">Number</th><th class="relations">Relations</th></tr>
             </thead>
             <tbody>
-                <tr data-info="network" data-ref="???" class="line"><td class="network">network</td><td class="number">5</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '43' -106442, <img src="/img/Relation.svg" alt="Relation" /> '53' -106495, <img src="/img/Relation.svg" alt="Relation" /> '43' -106498, <img src="/img/Relation.svg" alt="Relation" /> -106511, <img src="/img/Relation.svg" alt="Relation" /> '63' -106619</td></tr>
-                <tr data-info="network2" data-ref="???" class="line"><td class="network">network2</td><td class="number">1</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '43' -106491</td></tr>
+                <tr data-info="network" data-ref="???" class="line"><td class="network">network</td><td class="number">10</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '43' -113804, <img src="/img/Relation.svg" alt="Relation" /> '53' -113809, <img src="/img/Relation.svg" alt="Relation" /> '43' -113810, <img src="/img/Relation.svg" alt="Relation" /> -113811, <img src="/img/Relation.svg" alt="Relation" /> '63' -113812, <img src="/img/Relation.svg" alt="Relation" /> '100' -113855, <img src="/img/Relation.svg" alt="Relation" /> '100' -113886, <img src="/img/Relation.svg" alt="Relation" /> '100' -113964, <img src="/img/Relation.svg" alt="Relation" /> '100' -113978, <img src="/img/Relation.svg" alt="Relation" /> '100' -113982</td></tr>
+                <tr data-info="network2" data-ref="???" class="line"><td class="network">network2</td><td class="number">1</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '43' -113807</td></tr>
             </tbody>
         </table>
 

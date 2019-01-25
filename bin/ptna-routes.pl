@@ -1682,8 +1682,20 @@ sub analyze_route_master_environment {
                                             #
                                             if ( $relation_ptr->{'tag'}->{'network'} && $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'} ) {
                                                 if ( $relation_ptr->{'tag'}->{'network'} eq $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'} ) {
-                                                    ; # hmm should not happen here
-                                                    printf STDERR "%s Route of Route-Master not found although 'ref' is valid and 'network' are equal. Route-Master: %s, Route: %s, 'ref': %s, 'network': %s\n", get_time(), $relation_id, $member_ref->{'ref'}, $members_ref, html_escape($relation_ptr->{'tag'}->{'network'});
+ #                                                    #printf STDERR "%s Route of Route-Master not found although 'ref' is valid and 'network' are equal. Route-Master: %s, Route: %s, 'ref': %s, 'network': %s\n", get_time(), $relation_id, $member_ref->{'ref'}, $members_ref, html_escape($relation_ptr->{'tag'}->{'network'});
+                                                    if ( $relation_ptr->{'tag'}->{'operator'} && $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'operator'} ) {
+                                                        if ( $relation_ptr->{'tag'}->{'operator'} eq $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'operator'} ) {
+                                                            #printf STDERR "%s Route of Route-Master not found although 'ref' is valid and 'operator' are equal. Route-Master: %s, Route: %s, 'ref': %s, 'operator': %s\n", get_time(), $relation_id, $member_ref->{'ref'}, $members_ref, html_escape($relation_ptr->{'tag'}->{'operator'});
+                                                            # 'ref' tag is valid (in the list) 'operator' is OK, any other reason
+                                                             push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route might be listed in a different section below the same 'ref' = '%s' or in section 'Not clearly assigned routes' of this analysis: %s"), $members_ref, printRelationTemplate($member_ref->{'ref'}) ) );
+                                                        } else {
+                                                            # 'ref' tag is valid (in the list) but 'operator' is set and differs
+                                                            push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route has different 'operator' = '%s' than Route-Master 'operator' = '%s': %s"), html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'operator'}), html_escape($relation_ptr->{'tag'}->{'operator'}), printRelationTemplate($member_ref->{'ref'}) ) );
+                                                        }
+                                                    } elsif ( $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'operator'} ) {
+                                                        # 'ref' tag is valid (in the list) but 'operator' is strange
+                                                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route has 'operator' = '%s' value which is considered as not relevant: %s"), html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'operator'}), printRelationTemplate($member_ref->{'ref'}) ) );
+                                                    }
                                                 } else {
                                                     # 'ref' tag is valid (in the list) but 'network' is set and differs
                                                     push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route has different 'network' = '%s' than Route-Master 'network' = '%s': %s"), html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}), html_escape($relation_ptr->{'tag'}->{'network'}), printRelationTemplate($member_ref->{'ref'}) ) );
@@ -1692,7 +1704,7 @@ sub analyze_route_master_environment {
                                                 # 'ref' tag is valid (in the list) but 'network' is strange
                                                 push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route has 'network' = '%s' value which is considered as not relevant: %s"), html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}), printRelationTemplate($member_ref->{'ref'}) ) );
                                             }
-                                            if ( $members_ref ne $masters_ref ) {
+                                           if ( $members_ref ne $masters_ref ) {
                                                 # 'members_ref' is valid (in the list) but differs from 'ref' of route-master, so we have at least two refs in the list (a real list)
                                                 push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("Route has different 'ref' = '%s' than Route-Master 'ref' = '%s' - this should be avoided: %s"), $members_ref, $masters_ref, printRelationTemplate($member_ref->{'ref'}) ) );
                                             }

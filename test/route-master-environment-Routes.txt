@@ -35,6 +35,8 @@
 
 53;bus;;;;
 
+100;bus;A-Town;First Street;Second Street;Operator
+100;bus;B-Town;First Avenue;Second Avenue;Operator
 
 
 </pre>
