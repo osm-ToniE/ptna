@@ -1687,7 +1687,7 @@ sub analyze_route_master_environment {
                                                         if ( $relation_ptr->{'tag'}->{'operator'} eq $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'operator'} ) {
                                                             #printf STDERR "%s Route of Route-Master not found although 'ref' is valid and 'operator' are equal. Route-Master: %s, Route: %s, 'ref': %s, 'operator': %s\n", get_time(), $relation_id, $member_ref->{'ref'}, $members_ref, html_escape($relation_ptr->{'tag'}->{'operator'});
                                                             # 'ref' tag is valid (in the list) 'operator' is OK, any other reason
-                                                             push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route might be listed in a different section below the same 'ref' = '%s' or in section 'Not clearly assigned routes' of this analysis: %s"), $members_ref, printRelationTemplate($member_ref->{'ref'}) ) );
+                                                             push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route might be listed with 'ref' = '%s' in a different section or in section 'Not clearly assigned routes' of this analysis: %s"), $members_ref, printRelationTemplate($member_ref->{'ref'}) ) );
                                                         } else {
                                                             # 'ref' tag is valid (in the list) but 'operator' is set and differs
                                                             push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route has different 'operator' = '%s' than Route-Master 'operator' = '%s': %s"), html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'operator'}), html_escape($relation_ptr->{'tag'}->{'operator'}), printRelationTemplate($member_ref->{'ref'}) ) );
@@ -1795,6 +1795,18 @@ sub analyze_route_environment {
         if ( $number_of_route_masters > 1 && $number_of_direct_route_masters < $number_of_route_masters ) {
             # number_of_direct_route_masters < y : because number_of_direct_route_masters == number_of_route_masters will be checked some lines below if number_of_direct_route_masters > 1
             push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext('There is more than one Route-Master')) );
+        }
+        if ( $number_of_direct_route_masters > $number_of_route_masters ) {
+            foreach my $direct_route_master_rel_id ( keys( %{$RELATIONS{$relation_id}->{'member_of_route_master'}}  ) ) {
+                if ( !defined($env_ref->{'route_master'}->{$route_type}->{$direct_route_master_rel_id}) ) {
+                    if ( $RELATIONS{$direct_route_master_rel_id} && $RELATIONS{$direct_route_master_rel_id}->{'tag'} && $RELATIONS{$direct_route_master_rel_id}->{'tag'}->{'ref'} ) {
+                        $masters_ref = $RELATIONS{$direct_route_master_rel_id}->{'tag'}->{'ref'};
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route-Master might be listed with 'ref' = '%s' in a different section or in section 'Not clearly assigned routes' of this analysis: %s"), $masters_ref, printRelationTemplate($direct_route_master_rel_id) ) );
+                    } else {
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route-Master might be listed with unknown 'ref' in section 'Public Transport Lines without 'ref'' of this analysis: %s"), $masters_ref, printRelationTemplate($direct_route_master_rel_id) ) );
+                    }
+                }
+            }
         }
         
         #
