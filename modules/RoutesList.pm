@@ -40,7 +40,7 @@ sub ReadRoutes {
     my %hash                = @_;
     my $infile              = $hash{'file'};
     my $csv_separator       = $hash{'csv-separator'} || ';';
-    my $ref_separator       = $hash{'ref-separator'} || '\|';
+    my $second_separator    = $hash{'second-separator'} || '\|';
     my $analyze             = $hash{'analyze'}   || 'analyze';
     my $debug               = $hash{'debug'};
     my $verbose             = $hash{'verbose'};
@@ -117,7 +117,7 @@ sub ReadRoutes {
                             }
 
                             if ( $ExpRef ) {
-                                my @ref_list = split( $ref_separator, $ExpRef );
+                                my @ref_list = split( $second_separator, $ExpRef );
                                 $hashref->{'ref-list'} = \@ref_list;
                                 
                                 foreach my $reflistentry ( @ref_list ) {
@@ -138,6 +138,14 @@ sub ReadRoutes {
                                             
                                                 $seen_ref_type_operator_fromto{$reflistentry}->{$ExpRouteType}->{$ExpOperator}->{$ExpFrom.';'.$ExpTo} = 0   unless ( $seen_ref_type_operator_fromto{$reflistentry}->{$ExpRouteType}->{$ExpOperator}->{$ExpFrom.';'.$ExpTo} );
                                                 $seen_ref_type_operator_fromto{$reflistentry}->{$ExpRouteType}->{$ExpOperator}->{$ExpFrom.';'.$ExpTo}++;
+                                            }
+                                            if ( $ExpFrom ) {
+                                                my @from_list = split( $second_separator, $ExpFrom );
+                                                $hashref->{'from-list'} = \@from_list;
+                                            }
+                                            if ( $ExpTo ) {
+                                                my @to_list = split( $second_separator, $ExpTo );
+                                                $hashref->{'to-list'} = \@to_list;
                                             }
                                         } else {
                                             # this $ExpRouteType is not a valid one

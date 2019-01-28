@@ -72,7 +72,7 @@ my $help                            = undef;
 my $man_page                        = undef;
 my $positive_notes                  = undef;
 my $csv_separator                   = ';';
-my $ref_separator                   = '|';                 # must be different from $csv_operator: used to separate several 'ref' values in CSV entry "43|E43;bus;;;;"
+my $second_separator                = '|';                 # must be different from $csv_operator: used to separate several 'ref' values in CSV entry "43|E43;bus;;;;"
 my $coloured_sketchline             = undef;
 my $page_title                      = undef;
 
@@ -113,7 +113,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'relaxed-begin-end-for:s'       =>  \$relaxed_begin_end_for,        # --relaxed-begin-end-for=...       for train/tram/light_rail: first/last stop position does not have to be on first/last node of way, but within first/last way
             'osm-xml-file=s'                =>  \$osm_xml_file,                 # --osm-xml-file=yyy                XML output of Overpass APU query
             'separator=s'                   =>  \$csv_separator,                # --separator=';'                   separator in the CSV file
-            'ref-separator=s'               =>  \$ref_separator,                # --ref-separator='|'               separator in the CSV file inside 'ref' values
+            'second-separator=s'            =>  \$second_separator,             # --second-separator='|'            separator in the CSV file inside 'ref' values
             'strict-network'                =>  \$strict_network,               # --strict-network                  do not consider empty network tags
             'strict-operator'               =>  \$strict_operator,              # --strict-operator                 do not consider empty operator tags
             'title=s'                       =>  \$page_title,                   # --title=...                       Title for the HTML page
@@ -164,7 +164,7 @@ if ( $verbose ) {
     printf STDERR "%20s--max-error='%s'\n",                ' ', $max_error                     if ( $max_error                   );
     printf STDERR "%20s--relaxed-begin-end-for='%s'\n",    ' ', $relaxed_begin_end_for         if ( $relaxed_begin_end_for       );
     printf STDERR "%20s--separator='%s'\n",                ' ', $csv_separator                 if ( $csv_separator               );
-    printf STDERR "%20s--ref-separator='%s'\n",            ' ', $ref_separator                 if ( $ref_separator               );
+    printf STDERR "%20s--second-separator='%s'\n",         ' ', $second_separator              if ( $second_separator               );
     printf STDERR "%20s--routes-file='%s'\n",              ' ', decode('utf8', $routes_file )  if ( $routes_file                 );
     printf STDERR "%20s--osm-xml-file='%s'\n",             ' ', decode('utf8', $osm_xml_file ) if ( $osm_xml_file                );
 }
@@ -193,20 +193,20 @@ if ( $csv_separator ) {
     $csv_separator = '\\' . $csv_separator;
 }
 
-if ( $ref_separator ) {
-    if ( length($ref_separator) > 1 ) {
-        printf STDERR "%s analyze-routes.pl: wrong value for option: '--ref-separator' = '%s' - setting it to '--ref-separator' = '|'\n", get_time(), $ref_separator;
-        $ref_separator = '|';
+if ( $second_separator ) {
+    if ( length($second_separator) > 1 ) {
+        printf STDERR "%s analyze-routes.pl: wrong value for option: '--second-separator' = '%s' - setting it to '--second-separator' = '|'\n", get_time(), $second_separator;
+        $second_separator = '|';
     }
-    if ( $ref_separator eq $csv_separator ) {
+    if ( $second_separator eq $csv_separator ) {
         if ( $csv_separator eq '|' ) {
-            $ref_separator = ';';
+            $second_separator = ';';
         } else {
-            $ref_separator = '|';
+            $second_separator = '|';
         }
-        printf STDERR "%s analyze-routes.pl: wrong value for option: '--ref-separator' = '%s' - setting it to '--ref-separator' = '%s'\n", get_time(), $csv_separator, $ref_separator;
+        printf STDERR "%s analyze-routes.pl: wrong value for option: '--second-separator' = '%s' - setting it to '--second-separator' = '%s'\n", get_time(), $csv_separator, $second_separator;
     }
-    $ref_separator = '\\' . $ref_separator;
+    $second_separator = '\\' . $second_separator;
 }
 
 if ( $allow_coach ) {
@@ -337,7 +337,7 @@ if ( $routes_file ) {
     my $ReadError = RoutesList::ReadRoutes( 'file'                   => $routes_file, 
                                             'analyze'                => $multiple_ref_type_entries, 
                                             'csv-separator'          => $csv_separator,
-                                            'ref-separator'          => $ref_separator,
+                                            'second-separator'       => $second_separator,
                                             'supported_route_types'  => \@supported_route_types,
                                             'verbose'                => $verbose, 
                                             'debug'                  => $debug
@@ -911,7 +911,9 @@ if ( $routes_file ) {
                                                                         'section'       =>  $section,
                                                                         'operator'      =>  $entryref->{'operator'},
                                                                         'from'          =>  $entryref->{'from'},
+                                                                        'from-list'     =>  $entryref->{'from-list'},
                                                                         'to'            =>  $entryref->{'to'},
+                                                                        'to-list'       =>  $entryref->{'to-list'},
                                                                       );
 
             $number_of_matching_entries = scalar @list_of_matching_relation_ids;
@@ -931,7 +933,9 @@ if ( $routes_file ) {
                                              'colour'        => $relation_ptr->{'tag'}->{'colour'},      # take 'colour' value from first relation, undef outside this for-loop
                                              'Comment'       => $entryref->{'comment'},
                                              'From'          => $entryref->{'from'},
+                                             'From-List'     => $entryref->{'from-list'},
                                              'To'            => $entryref->{'to'},
+                                             'To-List'       => $entryref->{'to-list'},
                                              'Operator'      => $entryref->{'operator'},
                                            );
                     }
@@ -967,7 +971,9 @@ if ( $routes_file ) {
                 printTableSubHeader( 'ref-list'      => $entryref->{'ref-list'},
                                      'Comment'       => $entryref->{'comment'},
                                      'From'          => $entryref->{'from'},
+                                     'From-List'     => $entryref->{'from-list'},
                                      'To'            => $entryref->{'to'},
+                                     'To-List'       => $entryref->{'to-list'},
                                      'Operator'      => $entryref->{'operator'},
                                    );
                 printTableLine( 'issues' => sprintf(gettext("Missing route for ref='%s' and route='%s'"), join(gettext("' or ref='"),@{$entryref->{'ref-list'}}), $entryref->{'route'} ) );
@@ -1364,7 +1370,9 @@ sub search_matching_relations {
     my $section                     = $hash{'section'}      || 'positive';
     my $ExpOperator                 = $hash{'operator'}     || '';
     my $ExpFrom                     = $hash{'from'}         || '';
+    my $ExpFromList                 = $hash{'from-list'};
     my $ExpTo                       = $hash{'to'}           || '';
+    my $ExpToList                   = $hash{'to-list'};
     my $RelOperator                 = undef;
     my $RelFrom                     = undef;
     my $RelTo                       = undef;
@@ -1381,11 +1389,23 @@ sub search_matching_relations {
     my $handle_multiple             = $multiple_ref_type_entries;
     
     my @ExpRefArray                 = ();
+    my @ExpFromArray                = ();
+    my @ExpToArray                  = ();
     
     if ( $ExpRefList ) {
         @ExpRefArray = @{$ExpRefList};
     } elsif ( $ExpRef ) {
         push( @ExpRefArray, $ExpRef );
+    }
+    if ( $ExpFromList ) {
+        @ExpFromArray = @{$ExpFromList};
+    } elsif ( $ExpFrom ) {
+        push( @ExpFromArray, $ExpFrom );
+    }
+    if ( $ExpToList ) {
+        @ExpToArray = @{$ExpToList};
+    } elsif ( $ExpRef ) {
+        push( @ExpToArray, $ExpTo );
     }
         
     if ( scalar @ExpRefArray && $ExpRouteType ) {
@@ -1428,40 +1448,54 @@ sub search_matching_relations {
                                             $RelFrom = $RELATIONS{$rel_id}->{'tag'}->{'from'} || '';
                                             $RelTo   = $RELATIONS{$rel_id}->{'tag'}->{'to'}   || '';
                                             
-                                            if ( ( $ExpFrom || $ExpTo ) &&
-                                                 ( $RelFrom || $RelTo )     ) {
+                                            if ( ( scalar @ExpFromArray || scalar @ExpToArray ) &&
+                                                 ( $RelFrom             || $RelTo )                ) {
                                                 # minimum one of each pair must be defined
     
                                                 $match = undef;
-                                                if ( $ExpFrom ) {
-                                                    if ( $RelFrom ) {
-                                                        if ( $ExpFrom =~ m/$RelFrom/ ) {
-                                                            $match = "$ExpFrom =~ m/$RelFrom/";
-                                                        } elsif ( $RelFrom =~ m/$ExpFrom/ ) {
-                                                            $match = "$RelFrom =~ m/$ExpFrom/";
+                                                foreach $ExpFrom ( @ExpFromArray ) {
+                                                    if ( $ExpFrom ) {
+                                                        if ( $RelFrom ) {
+                                                            if ( $ExpFrom =~ m/$RelFrom/ ) {
+                                                                $match = "$ExpFrom =~ m/$RelFrom/";
+                                                                last;
+                                                            } elsif ( $RelFrom =~ m/$ExpFrom/ ) {
+                                                                $match = "$RelFrom =~ m/$ExpFrom/";
+                                                                last;
+                                                            }
                                                         }
-                                                    }
-                                                    if ( !defined($match) && $RelTo ) {
-                                                        if ( $ExpFrom =~ m/$RelTo/ ) {
-                                                            $match = "$ExpFrom =~ m/$RelTo/";
-                                                        } elsif ( $RelTo =~ m/$ExpFrom/ ) {
-                                                            $match = "$RelTo =~ m/$ExpFrom/";
+                                                        if ( $RelTo ) {
+                                                            if ( $ExpFrom =~ m/$RelTo/ ) {
+                                                                $match = "$ExpFrom =~ m/$RelTo/";
+                                                                last;
+                                                            } elsif ( $RelTo =~ m/$ExpFrom/ ) {
+                                                                $match = "$RelTo =~ m/$ExpFrom/";
+                                                                last;
+                                                            }
                                                         }
                                                     }
                                                 }
-                                                if ( !defined($match) && $ExpTo ) {
-                                                    if ( $RelFrom ) {
-                                                        if ( $ExpTo =~ m/$RelFrom/ ) {
-                                                           $match = "$ExpTo =~ m/$RelFrom/";
-                                                        } elsif ( $RelFrom =~ m/$ExpTo/ ) {
-                                                           $match = "$RelFrom =~ m/$ExpTo/";
-                                                        }
-                                                    }
-                                                    if ( !defined($match) && $RelTo ) {
-                                                        if ( $ExpTo =~ m/$RelTo/ ) {
-                                                           $match = "$ExpTo =~ m/$RelTo/";
-                                                        } elsif ( $RelTo =~ m/$ExpTo/ ) {
-                                                           $match = "$RelTo =~ m/$ExpTo/";
+                                                if ( !defined($match) ) {
+                                                    foreach $ExpTo ( @ExpToArray ) {
+                                                        if ( $ExpTo ) {
+                                                            if ( $RelFrom ) {
+                                                                if ( $ExpTo =~ m/$RelFrom/ ) {
+                                                                   $match = "$ExpTo =~ m/$RelFrom/";
+                                                                   last;
+                                                                } elsif ( $RelFrom =~ m/$ExpTo/ ) {
+                                                                   $match = "$RelFrom =~ m/$ExpTo/";
+                                                                   last;
+                                                                }
+                                                            }
+                                                            if ( $RelTo ) {
+                                                                if ( $ExpTo =~ m/$RelTo/ ) {
+                                                                   $match = "$ExpTo =~ m/$RelTo/";
+                                                                   last;
+                                                                } elsif ( $RelTo =~ m/$ExpTo/ ) {
+                                                                   $match = "$RelTo =~ m/$ExpTo/";
+                                                                   last;
+                                                                }
+                                                            }
                                                         }
                                                     }
                                                 }
