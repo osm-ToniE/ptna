@@ -55,6 +55,7 @@ my $check_osm_separator             = undef;
 my $check_platform                  = undef;
 my $check_sequence                  = undef;
 my $check_roundabouts               = undef;
+my $check_route_ref                 = undef;
 my $check_motorway_link             = undef;
 my $check_version                   = undef;
 my $expect_network_long             = undef;
@@ -91,6 +92,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'check-osm-separator'           =>  \$check_osm_separator,          # --check-osm-separator             check separator for '; ' (w/ blank) and ',' (comma instead of semi-colon)
             'check-platform'                =>  \$check_platform,               # --check-platform                  check for bus=yes, tram=yes, ... on platforms
             'check-roundabouts'             =>  \$check_roundabouts,            # --check-roundabouts               check for roundabouts being included completely
+            'check-route-ref'               =>  \$check_route_ref,              # --check-route-ref                 check 'route_ref' tag on highway=bus_stop and public_transport=platform
             'check-sequence'                =>  \$check_sequence,               # --check-sequence                  check for correct sequence of stops, platforms and ways
             'check-stop-position'           =>  \$check_stop_position,          # --check-stop-position             check for bus=yes, tram=yes, ... on (stop_positions
             'check-version'                 =>  \$check_version,                # --check-version                   check for PTv2 on route_masters, ...
@@ -143,6 +145,7 @@ if ( $verbose ) {
     printf STDERR "%20s--check-osm-separator\n",           ' '                                 if ( $check_osm_separator         );
     printf STDERR "%20s--check-platform\n",                ' '                                 if ( $check_platform              );
     printf STDERR "%20s--check-roundabouts\n",             ' '                                 if ( $check_roundabouts           );
+    printf STDERR "%20s--check-route-ref\n",               ' '                                 if ( $check_route_ref             );
     printf STDERR "%20s--check-sequence\n",                ' '                                 if ( $check_sequence              );
     printf STDERR "%20s--check-stop-position\n",           ' '                                 if ( $check_stop_position         );
     printf STDERR "%20s--check-version\n",                 ' '                                 if ( $check_version               );
@@ -2319,6 +2322,116 @@ sub analyze_route_relation {
         }
     }
     
+    #
+    # check the 'route_ref' tag on all highway=bus_stop or all public_transport=platform members of this route
+    # to have 'ref' of this route included
+    #
+    if ( $check_route_ref && $ref ) {
+        my $object_ref              = undef;
+        my $platform_or_bus_stop    = undef;
+        my $temp_route_ref          = undef;
+        my $num_of_errors           = undef;
+        my %not_set_on              = ();
+        my %separator_with_blank_on = ();
+        my @help_array              = ();
+
+        foreach $member ( @{$relation_ptr->{'members'}} ) {
+            if ( $member->{'ref'} && $member->{'type'} ) {
+                if ( $member->{'type'} eq 'node' ) {
+                    $object_ref = $NODES{$member->{'ref'}};
+                } elsif ( $member->{'type'} eq 'way' ) {
+                    $object_ref = $WAYS{$member->{'ref'}};
+                } elsif ( $member->{'type'} eq 'relation' ) {
+                    $object_ref = $RELATIONS{$member->{'ref'}};
+                } else {
+                    $object_ref = undef;
+                }
+                if ( $object_ref && $object_ref->{'tag'} ) {
+                    if ( $object_ref->{'tag'}->{'public_transport'} && $object_ref->{'tag'}->{'public_transport'} eq 'platform' ) {
+                        $platform_or_bus_stop = "'public_transport' = 'platform'";
+                    } elsif ( $object_ref->{'tag'}->{'highway'} && $object_ref->{'tag'}->{'highway'} eq 'bus_stop') {
+                        $platform_or_bus_stop = "'highway' = 'bus_stop'";
+                    } else {
+                        $platform_or_bus_stop = undef;
+                    }
+                    if ( $platform_or_bus_stop ) {
+                        if ( $object_ref->{'tag'}->{'route_ref'} ) {
+                            $temp_route_ref = ';' . $object_ref->{'tag'}->{'route_ref'} . ';';
+                            $temp_route_ref =~ s/\s*;\s*/;/g;
+
+                            if ( $temp_route_ref =~ m/;$ref;/ ) {
+                                ; # fine
+                            } else {
+                                $not_set_on{$member->{'type'}}{gettext(sprintf("tag 'route_ref' is set on %s but does not include value of 'ref' = '%s' of this route",$platform_or_bus_stop,$ref))} = $member->{'ref'};
+                            }
+
+                            if ( $check_osm_separator ) {
+                                if ( $object_ref->{'tag'}->{'route_ref'} =~ m/\s+;/ ||
+                                     $object_ref->{'tag'}->{'route_ref'} =~ m/;\s+/    ) {
+                                    $separator_with_blank_on{$member->{'type'}}{gettext(sprintf("tag 'route_ref' is set on %s and includes separator ';' with sourrounding blank",$platform_or_bus_stop))} = $member->{'ref'};
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        foreach my $not_set ( sort( keys( %{$not_set_on{'node'}} ) ) ) {
+            @help_array     = sort( keys( %{$not_set_on{'node'}} ) );
+            $num_of_errors  = scalar( @help_array );
+            if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s and %d more ..."), $not_set, join(', ', map { printNodeTemplate($_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+            } else {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s"), $not_set, join(', ', map { printNodeTemplate($_,'name'); } @help_array )) );
+            }
+        }
+        foreach my $not_set ( sort( keys( %{$not_set_on{'way'}} ) ) ) {
+            @help_array     = sort( keys( %{$not_set_on{'way'}} ) );
+            $num_of_errors  = scalar( @help_array );
+            if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s and %d more ..."), $not_set, join(', ', map { printWayTemplate($_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+            } else {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s"), $not_set, join(', ', map { printWayTemplate($_,'name'); } @help_array )) );
+            }
+        }
+        foreach my $not_set ( sort( keys( %{$not_set_on{'relation'}} ) ) ) {
+            @help_array     = sort( keys( %{$not_set_on{'relation'}} ) );
+            $num_of_errors  = scalar( @help_array );
+            if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s and %d more ..."), $not_set, join(', ', map { printRelationTemplate($_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+            } else {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s"), $not_set, join(', ', map { printRelationTemplate($_,'name'); } @help_array )) );
+            }
+        }
+        foreach my $not_set ( sort( keys( %{$separator_with_blank_on{'node'}} ) ) ) {
+            @help_array     = sort( keys( %{$separator_with_blank_on{'node'}} ) );
+            $num_of_errors  = scalar( @help_array );
+            if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s and %d more ..."), $not_set, join(', ', map { printNodeTemplate($_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+            } else {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s"), $not_set, join(', ', map { printNodeTemplate($_,'name'); } @help_array )) );
+            }
+        }
+        foreach my $not_set ( sort( keys( %{$separator_with_blank_on{'way'}} ) ) ) {
+            @help_array     = sort( keys( %{$separator_with_blank_on{'way'}} ) );
+            $num_of_errors  = scalar( @help_array );
+            if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s and %d more ..."), $not_set, join(', ', map { printWayTemplate($_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+            } else {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s"), $not_set, join(', ', map { printWayTemplate($_,'name'); } @help_array )) );
+            }
+        }
+        foreach my $not_set ( sort( keys( %{$separator_with_blank_on{'relation'}} ) ) ) {
+            @help_array     = sort( keys( %{$separator_with_blank_on{'relation'}} ) );
+            $num_of_errors  = scalar( @help_array );
+            if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s and %d more ..."), $not_set, join(', ', map { printRelationTemplate($_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+            } else {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s"), $not_set, join(', ', map { printRelationTemplate($_,'name'); } @help_array )) );
+            }
+        }
+    }
+
     return $return_code;
 }
 
