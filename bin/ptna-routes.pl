@@ -2331,8 +2331,10 @@ sub analyze_route_relation {
         my $platform_or_bus_stop    = undef;
         my $temp_route_ref          = undef;
         my $num_of_errors           = undef;
+        my $hint                    = undef;
         my %not_set_on              = ();
         my %separator_with_blank_on = ();
+        my %comma_as_separator      = ();
         my @help_array              = ();
 
         foreach $member ( @{$relation_ptr->{'members'}} ) {
@@ -2351,6 +2353,8 @@ sub analyze_route_relation {
                         $platform_or_bus_stop = "'public_transport' = 'platform'";
                     } elsif ( $object_ref->{'tag'}->{'highway'} && $object_ref->{'tag'}->{'highway'} eq 'bus_stop') {
                         $platform_or_bus_stop = "'highway' = 'bus_stop'";
+                    } elsif ( $object_ref->{'tag'}->{'public_transport'} && $object_ref->{'tag'}->{'public_transport'} eq 'stop_position') {
+                        $platform_or_bus_stop = "'public_transport' = 'stop_position'";
                     } else {
                         $platform_or_bus_stop = undef;
                     }
@@ -2362,13 +2366,20 @@ sub analyze_route_relation {
                             if ( $temp_route_ref =~ m/;$ref;/ ) {
                                 ; # fine
                             } else {
-                                $not_set_on{$member->{'type'}}{sprintf(gettext("'route_ref' = '%s' does not include value of 'ref' = '%s' of this route"),html_escape($object_ref->{'tag'}->{'route_ref'}),html_escape($ref))} = $member->{'ref'};
+                                $hint = '';
+                                if ( $object_ref->{'tag'}->{'route_ref'} =~ m/,/ ) {
+                                    $hint = ' (' . gettext("separate multiple values by ';' (semi-colon) without blank") . ')';
+                                }
+                                $not_set_on{sprintf(gettext("'route_ref' = '%s' of stop does not include 'ref' = '%s' value of this route%s"),html_escape($object_ref->{'tag'}->{'route_ref'}),html_escape($ref),$hint)}->{$member->{'ref'}} = $member->{'type'};
                             }
 
                             if ( $check_osm_separator ) {
                                 if ( $object_ref->{'tag'}->{'route_ref'} =~ m/\s+;/ ||
                                      $object_ref->{'tag'}->{'route_ref'} =~ m/;\s+/    ) {
-                                    $separator_with_blank_on{$member->{'type'}}{sprintf(gettext("'route_ref' = '%s' includes separator ';' (semi-colon) with sourrounding blank"),html_escape($object_ref->{'tag'}->{'route_ref'}))} = $member->{'ref'};
+                                    $separator_with_blank_on{sprintf(gettext("'route_ref' = '%s' of stop includes the separator value ';' (semi-colon) with sourrounding blank"),html_escape($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
+                                }
+                                if ( $object_ref->{'tag'}->{'route_ref'} =~ m/,/ ) {
+                                    $comma_as_separator{sprintf(gettext("'route_ref' = '%s' of stop: ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank"),html_escape($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
                                 }
                             }
                         }
@@ -2376,58 +2387,31 @@ sub analyze_route_relation {
                 }
             }
         }
-        foreach my $not_set ( sort( keys( %{$not_set_on{'node'}} ) ) ) {
-            @help_array     = sort( keys( %{$not_set_on{'node'}} ) );
+        foreach my $message ( sort( keys( %not_set_on ) ) ) {
+            @help_array     = sort( keys( %{$not_set_on{$message}} ) );
             $num_of_errors  = scalar( @help_array );
             if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s and %d more ..."), $not_set, join(', ', map { printNodeTemplate($_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s and %d more ..."), $message, join(', ', map { printXxxTemplate($not_set_on{$message}->{$_},$_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
             } else {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s"), $not_set, join(', ', map { printNodeTemplate($_,'name'); } @help_array )) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s"), $message, join(', ', map { printXxxTemplate($not_set_on{$message}->{$_},$_,'name'); } @help_array )) );
             }
         }
-        foreach my $not_set ( sort( keys( %{$not_set_on{'way'}} ) ) ) {
-            @help_array     = sort( keys( %{$not_set_on{'way'}} ) );
+        foreach my $message ( sort( keys( %separator_with_blank_on ) ) ) {
+            @help_array     = sort( keys( %{$separator_with_blank_on{$message}} ) );
             $num_of_errors  = scalar( @help_array );
             if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s and %d more ..."), $not_set, join(', ', map { printWayTemplate($_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s and %d more ..."), $message, join(', ', map { printXxxTemplate($separator_with_blank_on{$message}->{$_},$_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
             } else {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s"), $not_set, join(', ', map { printWayTemplate($_,'name'); } @help_array )) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s"), $message, join(', ', map { printXxxTemplate($separator_with_blank_on{$message}->{$_},$_,'name'); } @help_array )) );
             }
         }
-        foreach my $not_set ( sort( keys( %{$not_set_on{'relation'}} ) ) ) {
-            @help_array     = sort( keys( %{$not_set_on{'relation'}} ) );
+        foreach my $message ( sort( keys( %comma_as_separator ) ) ) {
+            @help_array     = sort( keys( %{$comma_as_separator{$message}} ) );
             $num_of_errors  = scalar( @help_array );
             if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s and %d more ..."), $not_set, join(', ', map { printRelationTemplate($_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s and %d more ..."), $message, join(', ', map { printXxxTemplate($comma_as_separator{$message}->{$_},$_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
             } else {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s"), $not_set, join(', ', map { printRelationTemplate($_,'name'); } @help_array )) );
-            }
-        }
-        foreach my $not_set ( sort( keys( %{$separator_with_blank_on{'node'}} ) ) ) {
-            @help_array     = sort( keys( %{$separator_with_blank_on{'node'}} ) );
-            $num_of_errors  = scalar( @help_array );
-            if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s and %d more ..."), $not_set, join(', ', map { printNodeTemplate($_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
-            } else {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s"), $not_set, join(', ', map { printNodeTemplate($_,'name'); } @help_array )) );
-            }
-        }
-        foreach my $not_set ( sort( keys( %{$separator_with_blank_on{'way'}} ) ) ) {
-            @help_array     = sort( keys( %{$separator_with_blank_on{'way'}} ) );
-            $num_of_errors  = scalar( @help_array );
-            if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s and %d more ..."), $not_set, join(', ', map { printWayTemplate($_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
-            } else {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s"), $not_set, join(', ', map { printWayTemplate($_,'name'); } @help_array )) );
-            }
-        }
-        foreach my $not_set ( sort( keys( %{$separator_with_blank_on{'relation'}} ) ) ) {
-            @help_array     = sort( keys( %{$separator_with_blank_on{'relation'}} ) );
-            $num_of_errors  = scalar( @help_array );
-            if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s and %d more ..."), $not_set, join(', ', map { printRelationTemplate($_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
-            } else {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s"), $not_set, join(', ', map { printRelationTemplate($_,'name'); } @help_array )) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s"), $message, join(', ', map { printXxxTemplate($comma_as_separator{$message}->{$_},$_,'name'); } @help_array )) );
             }
         }
     }
@@ -2578,11 +2562,12 @@ sub analyze_ptv2_route_relation {
                 } else {
                     # there is more than one '=>' in the 'name' value, so 'name' includes via stops
                     if ( $via ) {
-                        my @via_values = split( ";", $via );
+                        my @via_values  = split( ";", $via );
+                        my $hint        = '(' . gettext("separate multiple values by ';' (semi-colon) without blank") . ')';
                         $preconditions_failed = 0;
                         foreach my $via_value ( @via_values ) {
                             if ( index($name,$via_value) == -1 ) {
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'via' is set: via-part = '%s' is not part of 'name' (separate multiple 'via' values by ';', without blanks)"),html_escape($via_value)) );
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'via' is set: via-part = '%s' is not part of 'name' %s"),html_escape($via_value),$hint) );
                                 $preconditions_failed++;
                                 $return_code++;
                             }
@@ -2598,7 +2583,7 @@ sub analyze_ptv2_route_relation {
                                 if ( $num_of_arrows == 2 ) {
                                     push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'via' is set: 'name' should be of the form '... ref ...: from => via => to'") );
                                 } else {
-                                    push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'via' is set: 'name' should be of the form '... ref ...: from => via => ... => to' (separate multiple 'via' values by ';', without blanks)") );
+                                    push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'via' is set: 'name' should be of the form '... ref ...: from => via => ... => to' %s"),$hint) );
                                 }
                                 $return_code++;
                             }
@@ -4661,6 +4646,30 @@ sub printTableFooter {
 
     push( @HTML_main, sprintf( "%12s</tbody>\n",  ' ' ) );
     push( @HTML_main, sprintf( "%8s</table>\n\n", ' ' ) );
+}
+
+
+#############################################################################################
+
+sub printXxxTemplate {
+    my $node_or_way_or_relation  = shift;
+    my $val                      = $_[0];
+
+    if ( $val ) {
+        if ( $node_or_way_or_relation ) {
+            if ( $node_or_way_or_relation eq 'node' ) {
+                $val = printNodeTemplate( @_ );
+            } elsif ( $node_or_way_or_relation eq 'way' ) {
+                $val = printWayTemplate( @_ );
+            } elsif ( $node_or_way_or_relation eq 'relation' ) {
+                $val = printRelationTemplate( @_ );
+            }
+        }
+    } else {
+        $val = '';
+    }
+
+    return $val;
 }
 
 
