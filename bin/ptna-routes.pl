@@ -2362,13 +2362,13 @@ sub analyze_route_relation {
                             if ( $temp_route_ref =~ m/;$ref;/ ) {
                                 ; # fine
                             } else {
-                                $not_set_on{$member->{'type'}}{gettext(sprintf("tag 'route_ref' is set on %s but does not include value of 'ref' = '%s' of this route",$platform_or_bus_stop,$ref))} = $member->{'ref'};
+                                $not_set_on{$member->{'type'}}{sprintf(gettext("tag 'route_ref' = '%s' is set on %s but does not include value of 'ref' = '%s' of this route"),html_escape($object_ref->{'tag'}->{'route_ref'}),$platform_or_bus_stop,html_escape($ref))} = $member->{'ref'};
                             }
 
                             if ( $check_osm_separator ) {
                                 if ( $object_ref->{'tag'}->{'route_ref'} =~ m/\s+;/ ||
                                      $object_ref->{'tag'}->{'route_ref'} =~ m/;\s+/    ) {
-                                    $separator_with_blank_on{$member->{'type'}}{gettext(sprintf("tag 'route_ref' is set on %s and includes separator ';' with sourrounding blank",$platform_or_bus_stop))} = $member->{'ref'};
+                                    $separator_with_blank_on{$member->{'type'}}{sprintf(gettext("'route_ref' = '%s' is set on %s and includes separator ';' (semi-colon) with sourrounding blank"),html_escape($object_ref->{'tag'}->{'route_ref'}),$platform_or_bus_stop)} = $member->{'ref'};
                                 }
                             }
                         }
