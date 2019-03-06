@@ -73,7 +73,8 @@ my $help                            = undef;
 my $man_page                        = undef;
 my $positive_notes                  = undef;
 my $csv_separator                   = ';';
-my $second_separator                = '|';                 # must be different from $csv_operator: used to separate several 'ref' values in CSV entry "43|E43;bus;;;;"
+my $or_separator                    = '|';                 # must be different from $csv_operator: used to separate several 'ref' values in CSV entry "43|E43;bus;;;;"
+my $ref_separator                   = '/';                 # must be different from $csv_operator: used to separate several 'ref' values in CSV entry "602/50;bus;;;;"
 my $coloured_sketchline             = undef;
 my $page_title                      = undef;
 
@@ -115,7 +116,8 @@ GetOptions( 'help'                          =>  \$help,                         
             'relaxed-begin-end-for:s'       =>  \$relaxed_begin_end_for,        # --relaxed-begin-end-for=...       for train/tram/light_rail: first/last stop position does not have to be on first/last node of way, but within first/last way
             'osm-xml-file=s'                =>  \$osm_xml_file,                 # --osm-xml-file=yyy                XML output of Overpass APU query
             'separator=s'                   =>  \$csv_separator,                # --separator=';'                   separator in the CSV file
-            'second-separator=s'            =>  \$second_separator,             # --second-separator='|'            separator in the CSV file inside 'ref' values
+            'or-separator=s'                =>  \$or_separator,                 # --or-separator='|'                separator in the CSV file inside 'ref' values to allow multiple values
+            'ref-separator=s'               =>  \$ref_separator,                # --ref-separator='/'               separator in the CSV file inside 'ref' values to show cooperations
             'strict-network'                =>  \$strict_network,               # --strict-network                  do not consider empty network tags
             'strict-operator'               =>  \$strict_operator,              # --strict-operator                 do not consider empty operator tags
             'title=s'                       =>  \$page_title,                   # --title=...                       Title for the HTML page
@@ -167,7 +169,8 @@ if ( $verbose ) {
     printf STDERR "%20s--max-error='%s'\n",                ' ', $max_error                     if ( $max_error                   );
     printf STDERR "%20s--relaxed-begin-end-for='%s'\n",    ' ', $relaxed_begin_end_for         if ( $relaxed_begin_end_for       );
     printf STDERR "%20s--separator='%s'\n",                ' ', $csv_separator                 if ( $csv_separator               );
-    printf STDERR "%20s--second-separator='%s'\n",         ' ', $second_separator              if ( $second_separator               );
+    printf STDERR "%20s--or-separator='%s'\n",             ' ', $or_separator                  if ( $or_separator                );
+    printf STDERR "%20s--ref-separator='%s'\n",            ' ', $ref_separator                 if ( $ref_separator               );
     printf STDERR "%20s--routes-file='%s'\n",              ' ', decode('utf8', $routes_file )  if ( $routes_file                 );
     printf STDERR "%20s--osm-xml-file='%s'\n",             ' ', decode('utf8', $osm_xml_file ) if ( $osm_xml_file                );
 }
@@ -196,20 +199,36 @@ if ( $csv_separator ) {
     $csv_separator = '\\' . $csv_separator;
 }
 
-if ( $second_separator ) {
-    if ( length($second_separator) > 1 ) {
-        printf STDERR "%s analyze-routes.pl: wrong value for option: '--second-separator' = '%s' - setting it to '--second-separator' = '|'\n", get_time(), $second_separator;
-        $second_separator = '|';
+if ( $or_separator ) {
+    if ( length($or_separator) > 1 ) {
+        printf STDERR "%s analyze-routes.pl: wrong value for option: '--or-separator' = '%s' - setting it to '--or-separator' = '|'\n", get_time(), $or_separator;
+        $or_separator = '|';
     }
-    if ( $second_separator eq $csv_separator ) {
+    if ( $or_separator eq $csv_separator ) {
         if ( $csv_separator eq '|' ) {
-            $second_separator = ';';
+            $or_separator = ';';
         } else {
-            $second_separator = '|';
+            $or_separator = '|';
         }
-        printf STDERR "%s analyze-routes.pl: wrong value for option: '--second-separator' = '%s' - setting it to '--second-separator' = '%s'\n", get_time(), $csv_separator, $second_separator;
+        printf STDERR "%s analyze-routes.pl: wrong value for option: '--or-separator' = '%s' - setting it to '--or-separator' = '%s'\n", get_time(), $csv_separator, $or_separator;
     }
-    $second_separator = '\\' . $second_separator;
+    $or_separator = '\\' . $or_separator;
+}
+
+if ( $ref_separator ) {
+    if ( length($ref_separator) > 1 ) {
+        printf STDERR "%s analyze-routes.pl: wrong value for option: '--ref-separator' = '%s' - setting it to '--ref-separator' = '/'\n", get_time(), $ref_separator;
+        $or_separator = '|';
+    }
+    if ( $ref_separator eq $csv_separator ) {
+        if ( $csv_separator eq '/' ) {
+            $ref_separator = ';';
+        } else {
+            $ref_separator = '/';
+        }
+        printf STDERR "%s analyze-routes.pl: wrong value for option: '--ref-separator' = '%s' - setting it to '--ref-separator' = '%s'\n", get_time(), $csv_separator, $ref_separator;
+    }
+    $ref_separator = '\\' . $ref_separator;
 }
 
 if ( $allow_coach ) {
@@ -340,7 +359,7 @@ if ( $routes_file ) {
     my $ReadError = RoutesList::ReadRoutes( 'file'                   => $routes_file, 
                                             'analyze'                => $multiple_ref_type_entries, 
                                             'csv-separator'          => $csv_separator,
-                                            'second-separator'       => $second_separator,
+                                            'or-separator'           => $or_separator,
                                             'supported_route_types'  => \@supported_route_types,
                                             'verbose'                => $verbose, 
                                             'debug'                  => $debug
@@ -901,7 +920,7 @@ if ( $routes_file ) {
             printTableLine( 'issues' => $entryref->{'error'} );
         } elsif ( $entryref->{'type'} eq 'route' ) {
             
-            printf STDERR "    ref = %s, ref-list = '%s', route = %s, comment = %s, from = %s, to = %s, operator = %s\n", $entryref->{'ref'}, join( ', ', @{$entryref->{'ref-list'}} ), $entryref->{'route'}, $entryref->{'comment'}, $entryref->{'from'}, $entryref->{'to'}, $entryref->{'operator'}  if ( $debug );
+            printf STDERR "    ref = %s, ref-or-list = '%s', ref-and-list = '%s', route = %s, comment = %s, from = %s, to = %s, operator = %s\n", $entryref->{'ref'}, join( ', ', @{$entryref->{'ref-or-list'}} ), join( ', ', @{$entryref->{'ref-and-list'}} ), $entryref->{'route'}, $entryref->{'comment'}, $entryref->{'from'}, $entryref->{'to'}, $entryref->{'operator'}  if ( $debug );
 
             if ( $table_headers_printed == 0 ) {
                 printTableHeader();
@@ -909,7 +928,8 @@ if ( $routes_file ) {
             }
             
             @list_of_matching_relation_ids = search_matching_relations( 'ref'           =>  $entryref->{'ref'},
-                                                                        'ref-list'      =>  $entryref->{'ref-list'},
+                                                                        'ref-or-list'   =>  $entryref->{'ref-or-list'},
+                                                                        'ref-and-list'  =>  $entryref->{'ref-and-list'},
                                                                         'route_type'    =>  $entryref->{'route'},
                                                                         'section'       =>  $section,
                                                                         'operator'      =>  $entryref->{'operator'},
@@ -930,7 +950,7 @@ if ( $routes_file ) {
                     printf STDERR "%s Found: Relation-ID %s, Type: %s, Ref: %s, RouteType: %s\n", get_time(), $relation_id, $RELATIONS{$relation_id}->{'tag'}->{'type'}, $RELATIONS{$relation_id}->{'tag'}->{'ref'}, $RELATIONS{$relation_id}->{'tag'}->{$RELATIONS{$relation_id}->{'tag'}->{'type'}}    if ( $debug );
 
                     if ( $i == 0 ) {
-                        printTableSubHeader( 'ref-list'      => $entryref->{'ref-list'},                 # is a pointer to an array: ('23') or also ('43', 'E43') for multiple 'ref' values
+                        printTableSubHeader( 'ref-or-list'   => $entryref->{'ref-or-list'},                 # is a pointer to an array: ('23') or also ('43', 'E43') for multiple 'ref' values
                                              'network'       => $relation_ptr->{'tag'}->{'network'},     # take 'network' value from first relation, undef outside this for-loop
                                              'pt_type'       => $entryref->{'route'},
                                              'colour'        => $relation_ptr->{'tag'}->{'colour'},      # take 'colour' value from first relation, undef outside this for-loop
@@ -946,7 +966,7 @@ if ( $routes_file ) {
                     @{$relation_ptr->{'__issues__'}} = ();  # just in case that this route has already been analyzed before (--multiple-ref-type-enries=allow)
                     @{$relation_ptr->{'__notes__'}}  = ();  # just in case that this route has already been analyzed before (--multiple-ref-type-enries=allow)
 
-                    $status = analyze_environment( \@list_of_matching_relation_ids, $entryref->{'ref-list'}, $relation_ptr->{'tag'}->{'type'}, $entryref->{'route'}, $relation_id );
+                    $status = analyze_environment( \@list_of_matching_relation_ids, $entryref->{'ref-or-list'}, $relation_ptr->{'tag'}->{'type'}, $entryref->{'route'}, $relation_id );
 
                     $status = analyze_relation( $relation_ptr, $relation_id );
                     
@@ -971,7 +991,7 @@ if ( $routes_file ) {
                 #
                 # we do not have a line which fits to the requested 'ref' and 'route_type' combination
                 #
-                printTableSubHeader( 'ref-list'      => $entryref->{'ref-list'},
+                printTableSubHeader( 'ref-or-list'   => $entryref->{'ref-or-list'},
                                      'Comment'       => $entryref->{'comment'},
                                      'From'          => $entryref->{'from'},
                                      'From-List'     => $entryref->{'from-list'},
@@ -979,7 +999,7 @@ if ( $routes_file ) {
                                      'To-List'       => $entryref->{'to-list'},
                                      'Operator'      => $entryref->{'operator'},
                                    );
-                printTableLine( 'issues' => sprintf(gettext("Missing route for ref='%s' and route='%s'"), join(gettext("' or ref='"),@{$entryref->{'ref-list'}}), $entryref->{'route'} ) );
+                printTableLine( 'issues' => sprintf(gettext("Missing route for ref='%s' and route='%s'"), join(gettext("' or ref='"),@{$entryref->{'ref-or-list'}}), $entryref->{'route'} ) );
             }
         } else {
             printf STDERR "%s Internal error: ref and route_type not set in CSV file. %d\n", get_time(), $entryref->{'NR'};
@@ -1368,7 +1388,8 @@ sub match_ref_and_pt_type {
 sub search_matching_relations {
     my %hash                        = ( @_ );
     my $ExpRef                      = $hash{'ref'};
-    my $ExpRefList                  = $hash{'ref-list'};
+    my $ExpRefOrList                = $hash{'ref-or-list'};
+    my $ExpRefAndList               = $hash{'ref-and-list'};    # currently no used
     my $ExpRouteType                = $hash{'route_type'};
     my $section                     = $hash{'section'}      || 'positive';
     my $ExpOperator                 = $hash{'operator'}     || '';
@@ -1391,14 +1412,15 @@ sub search_matching_relations {
     my $number_of_ref_type_operator = 1;
     my $handle_multiple             = $multiple_ref_type_entries;
     
-    my @ExpRefArray                 = ();
+    my @ExpRefOrArray               = ();
+    my @ExpRefAndArray              = ();    # currently no used
     my @ExpFromArray                = ();
     my @ExpToArray                  = ();
     
-    if ( $ExpRefList ) {
-        @ExpRefArray = @{$ExpRefList};
+    if ( $ExpRefOrList ) {
+        @ExpRefOrArray = @{$ExpRefOrList};
     } elsif ( $ExpRef ) {
-        push( @ExpRefArray, $ExpRef );
+        push( @ExpRefOrArray, $ExpRef );
     }
     if ( $ExpFromList ) {
         @ExpFromArray = @{$ExpFromList};
@@ -1411,9 +1433,9 @@ sub search_matching_relations {
         push( @ExpToArray, $ExpTo );
     }
         
-    if ( scalar @ExpRefArray && $ExpRouteType ) {
+    if ( scalar @ExpRefOrArray && $ExpRouteType ) {
 
-        foreach $ExpRef ( @ExpRefArray ) {
+        foreach $ExpRef ( @ExpRefOrArray ) {
             $number_of_ref_type             = RoutesList::RefTypeCount( $ExpRef, $ExpRouteType );
             $number_of_ref_type_operator    = RoutesList::RefTypeOperatorCount( $ExpRef, $ExpRouteType, $ExpOperator );
         
@@ -1562,7 +1584,7 @@ sub search_matching_relations {
 
 sub analyze_environment {
     my $matching_ref    = shift;
-    my $ref_list        = shift;
+    my $ref_or_list     = shift;
     my $type            = shift;
     my $route_type      = shift;
     my $relation_id     = shift;
@@ -1575,7 +1597,7 @@ sub analyze_environment {
     my $temproutetype   = undef;
     
     
-    if ( $matching_ref && $ref_list && $type && $route_type && $relation_id ) {
+    if ( $matching_ref && $ref_or_list && $type && $route_type && $relation_id ) {
         
         foreach my $relid ( @{$matching_ref} ) {
             $temptype       = $RELATIONS{$relid}->{'tag'}->{'type'};
@@ -1589,9 +1611,9 @@ sub analyze_environment {
         if ( $relation_ptr ) {
 
             if ( $type eq 'route_master' ) {
-                $return_code = analyze_route_master_environment( $env_ref, $ref_list, $type, $route_type, $relation_id );
+                $return_code = analyze_route_master_environment( $env_ref, $ref_or_list, $type, $route_type, $relation_id );
             } elsif ( $type eq 'route') {
-                $return_code = analyze_route_environment( $env_ref, $ref_list, $type, $route_type, $relation_id );
+                $return_code = analyze_route_environment( $env_ref, $ref_or_list, $type, $route_type, $relation_id );
             }
         }
     }
@@ -1604,7 +1626,7 @@ sub analyze_environment {
 
 sub analyze_route_master_environment {
     my $env_ref         = shift;
-    my $ref_list        = shift;
+    my $ref_or_list     = shift;
     my $type            = shift;
     my $route_type      = shift;
     my $relation_id     = shift;
@@ -1619,12 +1641,12 @@ sub analyze_route_master_environment {
     my $masters_ref             = undef;
     my $members_ref             = undef;
     
-    if ( $env_ref && $ref_list && $type && $type eq 'route_master' && $route_type && $relation_id ) {
+    if ( $env_ref && $ref_or_list && $type && $type eq 'route_master' && $route_type && $relation_id ) {
         
-        # do we have more than one route_master here for this "ref_list" and "route_type"?
+        # do we have more than one route_master here for this "ref_or_list" and "route_type"?
         $number_of_route_masters    = scalar( keys( %{$env_ref->{'route_master'}->{$route_type}} ) );
         
-        # how many routes do we have at all for this "ref_list" and "route_type"?
+        # how many routes do we have at all for this "ref_or_list" and "route_type"?
         $number_of_routes           = scalar( keys( %{$env_ref->{'route'}->{$route_type}} ) );
 
         # reference to this relation, the route_master under examination
@@ -1709,7 +1731,7 @@ sub analyze_route_master_environment {
                                         $masters_ref = $RELATIONS{$relation_id}->{'tag'}->{'ref'};
                                     }
                                     if ( $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'ref'} ) {
-                                        foreach $members_ref ( @{$ref_list} ) {
+                                        foreach $members_ref ( @{$ref_or_list} ) {
                                             $allowed_refs{$members_ref} = 1;
                                         }
                                         $members_ref = $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'ref'};
@@ -1798,7 +1820,7 @@ sub analyze_route_master_environment {
 
 sub analyze_route_environment {
     my $env_ref         = shift;
-    my $ref_list        = shift;
+    my $ref_or_list     = shift;
     my $type            = shift;
     my $route_type      = shift;
     my $relation_id     = shift;
@@ -1813,7 +1835,7 @@ sub analyze_route_environment {
     my $masters_ref                         = undef;
     my $routes_ref                          = undef;
     
-    if ( $env_ref && $ref_list && $type && $type eq 'route' && $route_type && $relation_id ) {
+    if ( $env_ref && $ref_or_list && $type && $type eq 'route' && $route_type && $relation_id ) {
         
         $relation_ptr = $env_ref->{'route'}->{$route_type}->{$relation_id};
         
@@ -1880,7 +1902,7 @@ sub analyze_route_environment {
                 push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("'route' = '%s' of Route does not fit to 'route_master' = '%s' of Route-Master: %s"), $relation_ptr->{'tag'}->{'route'}, $RELATIONS{$route_master_rel_id}->{'tag'}->{'route_master'}, printRelationTemplate($route_master_rel_id)) );
             }
             if ( $RELATIONS{$route_master_rel_id}->{'tag'}->{'ref'} ) {
-                foreach $masters_ref ( @{$ref_list} ) {
+                foreach $masters_ref ( @{$ref_or_list} ) {
                     $allowed_refs{$masters_ref} = 1;
                 }
                 $masters_ref = $RELATIONS{$route_master_rel_id}->{'tag'}->{'ref'};
@@ -2193,61 +2215,7 @@ sub analyze_route_relation {
     $relation_ptr->{'missing_way_data'}   = 0;
     $relation_ptr->{'missing_node_data'}  = 0;
 
-    #
-    # for all WAYS  check for completeness of data
-    #
-    if ( $xml_has_ways ) {
-        my %incomplete_data_for_ways   = ();
-        foreach my $highway_ref ( @{$relation_ptr->{'way'}} ) {
-            if ( $WAYS{$highway_ref->{'ref'}} ) {
-                # way exists in downloaded data
-                # check for more
-                $incomplete_data_for_ways{$highway_ref->{'ref'}} = 1    if ( !$WAYS{$highway_ref->{'ref'}}->{'tag'} );
-                $incomplete_data_for_ways{$highway_ref->{'ref'}} = 1    if ( !$WAYS{$highway_ref->{'ref'}}->{'chain'} || scalar @{$WAYS{$highway_ref->{'ref'}}->{'chain'}} == 0 );
-            } else {
-                $incomplete_data_for_ways{$highway_ref->{'ref'}} = 1;
-            }
-        }
-        if ( keys(%incomplete_data_for_ways) ) {
-            my @help_array     = sort(keys(%incomplete_data_for_ways));
-            my $num_of_errors  = scalar(@help_array);
-            my $error_string   = gettext("Error in input data: insufficient data for ways");
-            if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $error_string, join(', ', map { printWayTemplate($_); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
-            } else {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $error_string, join(', ', map { printWayTemplate($_); } @help_array )) );
-            }
-            $relation_ptr->{'missing_way_data'}   = 1;
-            printf STDERR "%s Error in input data: insufficient data for ways of route ref=%s\n", get_time(), ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref' );
-        }
-    }
-    #
-    # for all NODES  check for completeness of data
-    #
-    if ( $xml_has_nodes ) {
-        my %incomplete_data_for_nodes   = ();
-        foreach my $node_ref ( @{$relation_ptr->{'node'}} ) {
-            if ( $NODES{$node_ref->{'ref'}} ) {
-                # node exists in downloaded data
-                # check for more
-                # $incomplete_data_for_nodes{$node_ref->{'ref'}} = 1    if ( !$NODES{$node_ref->{'ref'}}->{'tag'} );
-            } else {
-                $incomplete_data_for_nodes{$node_ref->{'ref'}} = 1;
-            }
-        }
-        if ( keys(%incomplete_data_for_nodes) ) {
-            my @help_array     = sort(keys(%incomplete_data_for_nodes));
-            my $num_of_errors  = scalar(@help_array);
-            my $error_string   = gettext("Error in input data: insufficient data for nodes");
-            if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $error_string, join(', ', map { printWayTemplate($_); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
-            } else {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $error_string, join(', ', map { printWayTemplate($_); } @help_array )) );
-            }
-            $relation_ptr->{'missing_node_data'}   = 1;
-            printf STDERR "%s Error in input data: insufficient data for nodes of route ref=%s\n", get_time(), ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref' );
-        }
-    }
+    $return_code += CheckCompletenessOfData( $relation_ptr );
     
     push( @{$relation_ptr->{'__issues__'}}, gettext("Route without Way(s)") )                    unless ( $route_highway_index );
     push( @{$relation_ptr->{'__issues__'}}, gettext("Route with only 1 Way") )                   if     ( $route_highway_index == 1 && $route_type ne 'ferry' && $route_type ne 'aerialway' && $route_type ne 'funicular' );
@@ -2277,143 +2245,23 @@ sub analyze_route_relation {
     #
     # for WAYS used by vehicles     vehicles must have access permission
     #
-    if ( $check_access && $xml_has_ways ) {
-        my $access_restriction  = undef;
-        my %restricted_access   = ();
-        foreach my $route_highway ( @{$relation_ptr->{'route_highway'}} ) {
-            $access_restriction = noAccess( $route_highway->{'ref'}, $relation_ptr->{'tag'}->{'route'}, $relation_ptr->{'tag'}->{'public_transport:version'}  );
-            if ( $access_restriction ) {
-                $restricted_access{$access_restriction}->{$route_highway->{'ref'}} = 1;
-                $return_code++;
-            }
-        }
-
-        if ( %restricted_access ) {
-            my $helpstring = '';
-            foreach $access_restriction ( sort(keys(%restricted_access)) ) {
-                $helpstring = ngettext( "Route: restricted access (%s) to way without 'psv'='yes', '%s'='yes', '%s'='designated', or ...: %s",
-                                        "Route: restricted access (%s) to ways without 'psv'='yes', '%s'='yes', '%s'='designated', or ...: %s", scalar(keys(%{$restricted_access{$access_restriction}})) );
-                push( @{$relation_ptr->{'__issues__'}}, sprintf( $helpstring, $access_restriction, $relation_ptr->{'tag'}->{'route'}, $relation_ptr->{'tag'}->{'route'}, join(', ', map { printWayTemplate($_,'name;ref'); } sort(keys(%{$restricted_access{$access_restriction}})))) );
-            }
-        }
+    if ( $check_access ) {
+        $return_code += CheckAccessOnWays( $relation_ptr );
     }
 
     #
-    # all WAYS      must not have "highway" = "bus_stop" set - allowed only on nodes
+    # all WAYS          must not have "highway" = "bus_stop" set - allowed only on nodes
+    # all RELATIONS     must not have "highway" = "bus_stop" set - allowed only on nodes
     #
-    if ( $check_bus_stop && $xml_has_ways ) {
-        my %bus_stop_ways = ();
-        foreach my $highway_ref ( @{$relation_ptr->{'way'}} ) {
-            if ( $WAYS{$highway_ref->{'ref'}}->{'tag'}->{'highway'} && $WAYS{$highway_ref->{'ref'}}->{'tag'}->{'highway'} eq 'bus_stop' ) {
-                $bus_stop_ways{$highway_ref->{'ref'}} = 1;
-                $return_code++;
-            }
-        }
-        if ( %bus_stop_ways ) {
-            my @help_array     = sort(keys(%bus_stop_ways));
-            my $num_of_errors  = scalar(@help_array);
-            my $error_string   = ngettext( "Route: 'highway' = 'bus_stop' is set on way. Allowed on nodes only!",
-                                           "Route: 'highway' = 'bus_stop' is set on ways. Allowed on nodes only!", $num_of_errors);
-            if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $error_string, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
-            } else {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $error_string, join(', ', map { printWayTemplate($_,'name;ref'); } @help_array )) );
-            }
-        }
+    if ( $check_bus_stop ) {
+        $return_code += CheckBusStopOnWaysAndRelations( $relation_ptr );
     }
     
     #
-    # check the 'route_ref' tag on all highway=bus_stop or all public_transport=platform members of this route
-    # to have 'ref' of this route included
+    # check tag 'route_ref' on stops (highway_bus_stop and public_transport=platform (and also public_transport=stop_position)) 
     #
-    if ( $check_route_ref && $ref ) {
-        my $object_ref              = undef;
-        my $platform_or_bus_stop    = undef;
-        my $temp_route_ref          = undef;
-        my $num_of_errors           = undef;
-        my $hint                    = undef;
-        my %not_set_on              = ();
-        my %separator_with_blank_on = ();
-        my %comma_as_separator      = ();
-        my @help_array              = ();
-
-        foreach $member ( @{$relation_ptr->{'members'}} ) {
-            if ( $member->{'ref'} && $member->{'type'} ) {
-                if ( $member->{'type'} eq 'node' ) {
-                    $object_ref = $NODES{$member->{'ref'}};
-                } elsif ( $member->{'type'} eq 'way' ) {
-                    $object_ref = $WAYS{$member->{'ref'}};
-                } elsif ( $member->{'type'} eq 'relation' ) {
-                    $object_ref = $RELATIONS{$member->{'ref'}};
-                } else {
-                    $object_ref = undef;
-                }
-                if ( $object_ref && $object_ref->{'tag'} ) {
-                    if ( $object_ref->{'tag'}->{'public_transport'} && $object_ref->{'tag'}->{'public_transport'} eq 'platform' ) {
-                        $platform_or_bus_stop = "'public_transport' = 'platform'";
-                    } elsif ( $object_ref->{'tag'}->{'highway'} && $object_ref->{'tag'}->{'highway'} eq 'bus_stop') {
-                        $platform_or_bus_stop = "'highway' = 'bus_stop'";
-                    } elsif ( $object_ref->{'tag'}->{'public_transport'} && $object_ref->{'tag'}->{'public_transport'} eq 'stop_position') {
-                        $platform_or_bus_stop = "'public_transport' = 'stop_position'";
-                    } else {
-                        $platform_or_bus_stop = undef;
-                    }
-                    if ( $platform_or_bus_stop ) {
-                        if ( $object_ref->{'tag'}->{'route_ref'} ) {
-                            $temp_route_ref = ';' . $object_ref->{'tag'}->{'route_ref'} . ';';
-                            $temp_route_ref =~ s/\s*;\s*/;/g;
-
-                            if ( $temp_route_ref =~ m/;$ref;/ ) {
-                                ; # fine
-                            } else {
-                                $hint = '';
-                                if ( $object_ref->{'tag'}->{'route_ref'} =~ m/,/ ) {
-                                    $hint = ' (' . gettext("separate multiple values by ';' (semi-colon) without blank") . ')';
-                                }
-                                $not_set_on{sprintf(gettext("'route_ref' = '%s' of stop does not include 'ref' = '%s' value of this route%s"),html_escape($object_ref->{'tag'}->{'route_ref'}),html_escape($ref),$hint)}->{$member->{'ref'}} = $member->{'type'};
-                            }
-
-                            if ( $check_osm_separator ) {
-                                if ( $object_ref->{'tag'}->{'route_ref'} =~ m/\s+;/ ||
-                                     $object_ref->{'tag'}->{'route_ref'} =~ m/;\s+/    ) {
-                                    $separator_with_blank_on{sprintf(gettext("'route_ref' = '%s' of stop includes the separator value ';' (semi-colon) with sourrounding blank"),html_escape($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
-                                }
-                                if ( $object_ref->{'tag'}->{'route_ref'} =~ m/,/ ) {
-                                    $comma_as_separator{sprintf(gettext("'route_ref' = '%s' of stop: ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank"),html_escape($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        foreach my $message ( sort( keys( %not_set_on ) ) ) {
-            @help_array     = sort( keys( %{$not_set_on{$message}} ) );
-            $num_of_errors  = scalar( @help_array );
-            if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s and %d more ..."), $message, join(', ', map { printXxxTemplate($not_set_on{$message}->{$_},$_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
-            } else {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s"), $message, join(', ', map { printXxxTemplate($not_set_on{$message}->{$_},$_,'name'); } @help_array )) );
-            }
-        }
-        foreach my $message ( sort( keys( %separator_with_blank_on ) ) ) {
-            @help_array     = sort( keys( %{$separator_with_blank_on{$message}} ) );
-            $num_of_errors  = scalar( @help_array );
-            if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s and %d more ..."), $message, join(', ', map { printXxxTemplate($separator_with_blank_on{$message}->{$_},$_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
-            } else {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s"), $message, join(', ', map { printXxxTemplate($separator_with_blank_on{$message}->{$_},$_,'name'); } @help_array )) );
-            }
-        }
-        foreach my $message ( sort( keys( %comma_as_separator ) ) ) {
-            @help_array     = sort( keys( %{$comma_as_separator{$message}} ) );
-            $num_of_errors  = scalar( @help_array );
-            if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s and %d more ..."), $message, join(', ', map { printXxxTemplate($comma_as_separator{$message}->{$_},$_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
-            } else {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s"), $message, join(', ', map { printXxxTemplate($comma_as_separator{$message}->{$_},$_,'name'); } @help_array )) );
-            }
-        }
+    if ( $check_route_ref ) {
+        $return_code += CheckRouteRefOnStops( $relation_ptr );
     }
 
     return $return_code;
@@ -4027,6 +3875,261 @@ sub noAccess {
 
 #############################################################################################
 #
+# for WAYS used by vehicles     vehicles must have access permission
+#
+#############################################################################################
+
+sub CheckAccessOnWays {
+    my $relation_ptr = shift;
+    my $ret_val      = 0;
+
+    if ( $relation_ptr ) {
+        my $access_restriction  = undef;
+        my %restricted_access   = ();
+
+        foreach my $route_highway ( @{$relation_ptr->{'route_highway'}} ) {
+            $access_restriction = noAccess( $route_highway->{'ref'}, $relation_ptr->{'tag'}->{'route'}, $relation_ptr->{'tag'}->{'public_transport:version'}  );
+            if ( $access_restriction ) {
+                $restricted_access{$access_restriction}->{$route_highway->{'ref'}} = 1;
+                $ret_val++;
+            }
+        }
+        if ( %restricted_access ) {
+            my $helpstring = '';
+            foreach $access_restriction ( sort(keys(%restricted_access)) ) {
+                $helpstring = ngettext( "Route: restricted access (%s) to way without 'psv'='yes', '%s'='yes', '%s'='designated', or ...: %s",
+                                        "Route: restricted access (%s) to ways without 'psv'='yes', '%s'='yes', '%s'='designated', or ...: %s", scalar(keys(%{$restricted_access{$access_restriction}})) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf( $helpstring, $access_restriction, $relation_ptr->{'tag'}->{'route'}, $relation_ptr->{'tag'}->{'route'}, join(', ', map { printWayTemplate($_,'name;ref'); } sort(keys(%{$restricted_access{$access_restriction}})))) );
+            }
+        }
+    }
+}
+
+#############################################################################################
+#
+# all WAYS          must not have "highway" = "bus_stop" set - allowed only on nodes
+# all RELATIONS     must not have "highway" = "bus_stop" set - allowed only on nodes
+#
+#############################################################################################
+
+sub CheckBusStopOnWaysAndRelations {
+    my $relation_ptr = shift;
+    my $ret_val      = 0;
+    
+    if ( $relation_ptr ) {
+        my %bus_stop_ways = ();
+        
+        foreach my $highway_ref ( @{$relation_ptr->{'way'}} ) {
+            if ( $WAYS{$highway_ref->{'ref'}}->{'tag'}->{'highway'} && $WAYS{$highway_ref->{'ref'}}->{'tag'}->{'highway'} eq 'bus_stop' ) {
+                $bus_stop_ways{$highway_ref->{'ref'}} = 1;
+            }
+        }
+        if ( %bus_stop_ways ) {
+            my @help_array     = sort(keys(%bus_stop_ways));
+            my $num_of_errors  = scalar(@help_array);
+               $ret_val       += $num_of_errors;
+            my $error_string   = ngettext( "Route: 'highway' = 'bus_stop' is set on way. Allowed on nodes only!",
+                                           "Route: 'highway' = 'bus_stop' is set on ways. Allowed on nodes only!", $num_of_errors);
+            if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $error_string, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+            } else {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $error_string, join(', ', map { printWayTemplate($_,'name;ref'); } @help_array )) );
+            }
+        }
+    }
+    
+    return $ret_val;
+}
+
+
+#############################################################################################
+#
+# check the 'route_ref' tag on all highway=bus_stop or all public_transport=platform members of this route
+# to have 'ref' of this route included
+#
+#############################################################################################
+
+sub CheckRouteRefOnStops {
+    my $relation_ptr = shift;
+    my $ret_val      = 0;
+    
+    if ( $relation_ptr ) {
+        if ( $relation_ptr->{'tag'} && $relation_ptr->{'tag'}->{'ref'} ) {
+            my $ref                     = $relation_ptr->{'tag'}->{'ref'};
+            my $object_ref              = undef;
+            my $platform_or_bus_stop    = undef;
+            my $temp_route_ref          = undef;
+            my $num_of_errors           = undef;
+            my $hint                    = undef;
+            my %not_set_on              = ();
+            my %separator_with_blank_on = ();
+            my %comma_as_separator      = ();
+            my @help_array              = ();
+    
+            foreach $member ( @{$relation_ptr->{'members'}} ) {
+                if ( $member->{'ref'} && $member->{'type'} ) {
+                    if ( $member->{'type'} eq 'node' ) {
+                        $object_ref = $NODES{$member->{'ref'}};
+                    } elsif ( $member->{'type'} eq 'way' ) {
+                        $object_ref = $WAYS{$member->{'ref'}};
+                    } elsif ( $member->{'type'} eq 'relation' ) {
+                        $object_ref = $RELATIONS{$member->{'ref'}};
+                    } else {
+                        $object_ref = undef;
+                    }
+                    if ( $object_ref && $object_ref->{'tag'} ) {
+                        if ( $object_ref->{'tag'}->{'public_transport'} && $object_ref->{'tag'}->{'public_transport'} eq 'platform' ) {
+                            $platform_or_bus_stop = "'public_transport' = 'platform'";
+                        } elsif ( $object_ref->{'tag'}->{'highway'} && $object_ref->{'tag'}->{'highway'} eq 'bus_stop') {
+                            $platform_or_bus_stop = "'highway' = 'bus_stop'";
+                        } elsif ( $object_ref->{'tag'}->{'public_transport'} && $object_ref->{'tag'}->{'public_transport'} eq 'stop_position') {
+                            $platform_or_bus_stop = "'public_transport' = 'stop_position'";
+                        } else {
+                            $platform_or_bus_stop = undef;
+                        }
+                        if ( $platform_or_bus_stop ) {
+                            if ( $object_ref->{'tag'}->{'route_ref'} ) {
+                                $temp_route_ref = ';' . $object_ref->{'tag'}->{'route_ref'} . ';';
+                                $temp_route_ref =~ s/\s*;\s*/;/g;
+
+                                foreach my $sub_ref ( split( $ref_separator, $ref ) ) {
+                                    if ( $temp_route_ref =~ m/;$sub_ref;/ ) {
+                                        ; # fine
+                                    } else {
+                                        $hint = '';
+                                        if ( $object_ref->{'tag'}->{'route_ref'} =~ m/,/ ) {
+                                            $hint = ' (' . gettext("separate multiple values by ';' (semi-colon) without blank") . ')';
+                                        }
+                                        $not_set_on{sprintf(gettext("'route_ref' = '%s' of stop does not include 'ref' = '%s' value of this route%s"),html_escape($object_ref->{'tag'}->{'route_ref'}),html_escape($sub_ref),$hint)}->{$member->{'ref'}} = $member->{'type'};
+                                    }
+                                }
+    
+                                if ( $check_osm_separator ) {
+                                    if ( $object_ref->{'tag'}->{'route_ref'} =~ m/\s+;/ ||
+                                         $object_ref->{'tag'}->{'route_ref'} =~ m/;\s+/    ) {
+                                        $separator_with_blank_on{sprintf(gettext("'route_ref' = '%s' of stop includes the separator value ';' (semi-colon) with sourrounding blank"),html_escape($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
+                                    }
+                                    if ( $object_ref->{'tag'}->{'route_ref'} =~ m/,/ ) {
+                                        $comma_as_separator{sprintf(gettext("'route_ref' = '%s' of stop: ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank"),html_escape($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            foreach my $message ( sort( keys( %not_set_on ) ) ) {
+                @help_array     = sort( keys( %{$not_set_on{$message}} ) );
+                $num_of_errors  = scalar( @help_array );
+                $ret_val       += $num_of_errors;
+                if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s and %d more ..."), $message, join(', ', map { printXxxTemplate($not_set_on{$message}->{$_},$_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                } else {
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s"), $message, join(', ', map { printXxxTemplate($not_set_on{$message}->{$_},$_,'name'); } @help_array )) );
+                }
+            }
+            foreach my $message ( sort( keys( %separator_with_blank_on ) ) ) {
+                @help_array     = sort( keys( %{$separator_with_blank_on{$message}} ) );
+                $num_of_errors  = scalar( @help_array );
+                $ret_val       += $num_of_errors;
+                if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s and %d more ..."), $message, join(', ', map { printXxxTemplate($separator_with_blank_on{$message}->{$_},$_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                } else {
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s"), $message, join(', ', map { printXxxTemplate($separator_with_blank_on{$message}->{$_},$_,'name'); } @help_array )) );
+                }
+            }
+            foreach my $message ( sort( keys( %comma_as_separator ) ) ) {
+                @help_array     = sort( keys( %{$comma_as_separator{$message}} ) );
+                $num_of_errors  = scalar( @help_array );
+                $ret_val       += $num_of_errors;
+                if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s and %d more ..."), $message, join(', ', map { printXxxTemplate($comma_as_separator{$message}->{$_},$_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                } else {
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s"), $message, join(', ', map { printXxxTemplate($comma_as_separator{$message}->{$_},$_,'name'); } @help_array )) );
+                }
+            }
+        }
+    }
+    
+    return $ret_val;
+}
+
+
+#############################################################################################
+#
+# for all WAYS  check for completeness of data
+# for all NODES  check for completeness of data
+#
+#############################################################################################
+
+sub CheckCompletenessOfData {
+    my $relation_ptr = shift;
+    my $ret_val      = 0;
+    
+    #
+    # for all WAYS  check for completeness of data
+    #
+    if ( $xml_has_ways ) {
+        my %incomplete_data_for_ways   = ();
+        foreach my $highway_ref ( @{$relation_ptr->{'way'}} ) {
+            if ( $WAYS{$highway_ref->{'ref'}} ) {
+                # way exists in downloaded data
+                # check for more
+                $incomplete_data_for_ways{$highway_ref->{'ref'}} = 1    if ( !$WAYS{$highway_ref->{'ref'}}->{'tag'} );
+                $incomplete_data_for_ways{$highway_ref->{'ref'}} = 1    if ( !$WAYS{$highway_ref->{'ref'}}->{'chain'} || scalar @{$WAYS{$highway_ref->{'ref'}}->{'chain'}} == 0 );
+            } else {
+                $incomplete_data_for_ways{$highway_ref->{'ref'}} = 1;
+            }
+        }
+        if ( keys(%incomplete_data_for_ways) ) {
+            my @help_array     = sort(keys(%incomplete_data_for_ways));
+            my $num_of_errors  = scalar(@help_array);
+               $ret_val       += $num_of_errors;
+            my $error_string   = gettext("Error in input data: insufficient data for ways");
+            if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $error_string, join(', ', map { printWayTemplate($_); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+            } else {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $error_string, join(', ', map { printWayTemplate($_); } @help_array )) );
+            }
+            $relation_ptr->{'missing_way_data'}   = 1;
+            printf STDERR "%s Error in input data: insufficient data for ways of route ref=%s\n", get_time(), ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref' );
+        }
+    }
+    #
+    # for all NODES  check for completeness of data
+    #
+    if ( $xml_has_nodes ) {
+        my %incomplete_data_for_nodes   = ();
+        foreach my $node_ref ( @{$relation_ptr->{'node'}} ) {
+            if ( $NODES{$node_ref->{'ref'}} ) {
+                # node exists in downloaded data
+                # check for more
+                # $incomplete_data_for_nodes{$node_ref->{'ref'}} = 1    if ( !$NODES{$node_ref->{'ref'}}->{'tag'} );
+            } else {
+                $incomplete_data_for_nodes{$node_ref->{'ref'}} = 1;
+            }
+        }
+        if ( keys(%incomplete_data_for_nodes) ) {
+            my @help_array     = sort(keys(%incomplete_data_for_nodes));
+            my $num_of_errors  = scalar(@help_array);
+               $ret_val       += $num_of_errors;
+            my $error_string   = gettext("Error in input data: insufficient data for nodes");
+            if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $error_string, join(', ', map { printWayTemplate($_); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+            } else {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $error_string, join(', ', map { printWayTemplate($_); } @help_array )) );
+            }
+            $relation_ptr->{'missing_node_data'}   = 1;
+            printf STDERR "%s Error in input data: insufficient data for nodes of route ref=%s\n", get_time(), ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref' );
+        }
+    }
+    
+    return $ret_val;
+}
+
+
+#############################################################################################
+#
 # functions for printing HTML code
 #
 #############################################################################################
@@ -4559,28 +4662,28 @@ sub printTableHeader {
 sub printTableSubHeader {
     my %hash            = ( @_ );
     my $ref             = $hash{'ref'}           || '';
-    my $ref_list        = $hash{'ref-list'};
+    my $ref_or_list     = $hash{'ref-or-list'};
     my $network         = $hash{'network'}       || '';
     my $pt_type         = $hash{'pt_type'}       || '';
     my $colour          = $hash{'colour'}        || '';
     my $ref_text        = undef;
     my $csv_text        = '';       # some information comming from the CSV input file
     my $info            = '';
-    my @ref_array       = ();
-    my $ref_list_text   = '';
+    my @ref_or_array       = ();
+    my $ref_or_list_text   = '';
 
-    if ( $ref_list ) {
-        @ref_array = @{$ref_list};
-        $ref_list_text = join(' ', @ref_array );
+    if ( $ref_or_list ) {
+        @ref_or_array = @{$ref_or_list};
+        $ref_or_list_text = join(' ', @ref_or_array );
     } elsif ( $ref ) {
-        push( @ref_array, $ref );
-        $ref_list_text = $ref;
+        push( @ref_or_array, $ref );
+        $ref_or_list_text = $ref;
     }
 
-    if ( scalar @ref_array && $network ) {
-        $ref_text = join(' ', map { printSketchLineTemplate( $_, $network, $pt_type, $colour ) } @ref_array );
-    } elsif ( scalar @ref_array ) {
-        $ref_text = join(' ', @ref_array );
+    if ( scalar @ref_or_array && $network ) {
+        $ref_text = join(' ', map { printSketchLineTemplate( $_, $network, $pt_type, $colour ) } @ref_or_array );
+    } elsif ( scalar @ref_or_array ) {
+        $ref_text = join(' ', @ref_or_array );
     }
 
     if ( $hash{'Comment'}  ) {
@@ -4595,8 +4698,8 @@ sub printTableSubHeader {
     $info = $csv_text ? $csv_text : '???';
     $info =~ s/\"/_/g;
 
-    if ( $no_of_columns > 1 && $ref_list_text && $ref_text ) {
-        push( @HTML_main, sprintf( "%16s<tr data-info=\"%s\" data-ref=\"%s\" class=\"sketchline\"><td class=\"sketch\">%s</td><td class=\"csvinfo\" colspan=\"%d\">%s</td></tr>\n", ' ', $info, $ref_list_text, $ref_text, $no_of_columns-1, $csv_text ) );
+    if ( $no_of_columns > 1 && $ref_or_list_text && $ref_text ) {
+        push( @HTML_main, sprintf( "%16s<tr data-info=\"%s\" data-ref=\"%s\" class=\"sketchline\"><td class=\"sketch\">%s</td><td class=\"csvinfo\" colspan=\"%d\">%s</td></tr>\n", ' ', $info, $ref_or_list_text, $ref_text, $no_of_columns-1, $csv_text ) );
     }
 }
 
