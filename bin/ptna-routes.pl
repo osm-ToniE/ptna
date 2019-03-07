@@ -3944,8 +3944,8 @@ sub CheckBusStopOnWaysAndRelations {
 
 #############################################################################################
 #
-# check the 'route_ref' tag on all highway=bus_stop or all public_transport=platform members of this route
-# to have 'ref' of this route included
+# check the 'route_ref' tag on all highway=bus_stop or all public_transport=platform members of this route to have 'ref' of this route included
+# check for tags 'bus_lines', 'bus_routes, 'lines', 'line' and 'routes' on stops and propose converting them to 'route_ref'
 #
 #############################################################################################
 
@@ -3957,13 +3957,17 @@ sub CheckRouteRefOnStops {
         if ( $relation_ptr->{'tag'} && $relation_ptr->{'tag'}->{'ref'} ) {
             my $ref                     = $relation_ptr->{'tag'}->{'ref'};
             my $object_ref              = undef;
-            my $platform_or_bus_stop    = undef;
+            my $platform_or_stop        = undef;
             my $temp_route_ref          = undef;
             my $num_of_errors           = undef;
             my $hint                    = undef;
+            my $replace_by              = undef;
             my %not_set_on              = ();
             my %separator_with_blank_on = ();
             my %comma_as_separator      = ();
+            my %to_be_replaced          = ();
+            my %to_be_deleted           = ();
+            my %included_refs           = ();
             my @help_array              = ();
     
             foreach $member ( @{$relation_ptr->{'members'}} ) {
@@ -3979,17 +3983,17 @@ sub CheckRouteRefOnStops {
                     }
                     if ( $object_ref && $object_ref->{'tag'} ) {
                         if ( $object_ref->{'tag'}->{'public_transport'} && $object_ref->{'tag'}->{'public_transport'} eq 'platform' ) {
-                            $platform_or_bus_stop = "'public_transport' = 'platform'";
+                            $platform_or_stop = "'public_transport' = 'platform'";
                         } elsif ( $object_ref->{'tag'}->{'highway'} && $object_ref->{'tag'}->{'highway'} eq 'bus_stop') {
-                            $platform_or_bus_stop = "'highway' = 'bus_stop'";
+                            $platform_or_stop = "'highway' = 'bus_stop'";
                         } elsif ( $object_ref->{'tag'}->{'public_transport'} && $object_ref->{'tag'}->{'public_transport'} eq 'stop_position') {
-                            $platform_or_bus_stop = "'public_transport' = 'stop_position'";
+                            $platform_or_stop = "'public_transport' = 'stop_position'";
                         } else {
-                            $platform_or_bus_stop = undef;
+                            $platform_or_stop = undef;
                         }
-                        if ( $platform_or_bus_stop ) {
+                        if ( $platform_or_stop ) {
                             if ( $object_ref->{'tag'}->{'route_ref'} ) {
-                                $temp_route_ref = ';' . $object_ref->{'tag'}->{'route_ref'} . ';';
+                                $temp_route_ref =  ';' . $object_ref->{'tag'}->{'route_ref'} . ';';
                                 $temp_route_ref =~ s/\s*;\s*/;/g;
 
                                 foreach my $sub_ref ( split( $ref_separator, $ref ) ) {
@@ -4011,6 +4015,29 @@ sub CheckRouteRefOnStops {
                                     }
                                     if ( $object_ref->{'tag'}->{'route_ref'} =~ m/,/ ) {
                                         $comma_as_separator{sprintf(gettext("'route_ref' = '%s' of stop: ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank"),html_escape($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
+                                    }
+                                }
+
+                                foreach my $tag ( 'bus_lines', 'bus_routes', 'lines', 'routes', 'line' ) {
+                                    if ( $object_ref->{'tag'}->{$tag} ) {
+                                        $to_be_deleted{sprintf(gettext("'%s' = '%s' of stop should be deleted, 'route_ref' = '%s' exists"),$tag,html_escape($object_ref->{'tag'}->{$tag}),html_escape($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
+                                    }
+                                }
+                            } else {
+                                foreach my $tag ( 'bus_lines', 'bus_routes', 'lines', 'routes', 'line' ) {
+                                    if ( $object_ref->{'tag'}->{$tag} ) {
+                                        $replace_by     =  $object_ref->{'tag'}->{$tag};
+                                        $replace_by     =~ s/\s*[;,]\s*/;/g;
+                                        %included_refs  =  ();
+                                        foreach my $set_ref ( split( ';', $replace_by ) ) {
+                                            $included_refs{$set_ref} = 1;
+                                        }
+                                        foreach my $sub_ref ( split( $ref_separator, $ref ) ) {
+                                            $included_refs{$sub_ref} = 1;
+                                        }
+                                        delete( $included_refs{'yes'} );
+                                        $replace_by = join( ';', sort( { if ( $a =~ m/^[0-9]+$/ && $b =~ m/^[0-9]+$/ ) { $a <=> $b } else { $a cmp $b } } keys( %included_refs ) ) );
+                                        $to_be_replaced{sprintf(gettext("'%s' = '%s' of stop should be replaced by 'route_ref' = '%s'"),$tag,html_escape($object_ref->{'tag'}->{$tag}),html_escape($replace_by))}->{$member->{'ref'}} = $member->{'type'};
                                     }
                                 }
                             }
@@ -4046,6 +4073,26 @@ sub CheckRouteRefOnStops {
                     push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s and %d more ..."), $message, join(', ', map { printXxxTemplate($comma_as_separator{$message}->{$_},$_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
                 } else {
                     push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("Route: %s: %s"), $message, join(', ', map { printXxxTemplate($comma_as_separator{$message}->{$_},$_,'name'); } @help_array )) );
+                }
+            }
+            foreach my $message ( sort( keys( %to_be_replaced ) ) ) {
+                @help_array     = sort( keys( %{$to_be_replaced{$message}} ) );
+                $num_of_errors  = scalar( @help_array );
+                $ret_val       += $num_of_errors;
+                if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                    push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("Route: %s: %s and %d more ..."), $message, join(', ', map { printXxxTemplate($to_be_replaced{$message}->{$_},$_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                } else {
+                    push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("Route: %s: %s"), $message, join(', ', map { printXxxTemplate($to_be_replaced{$message}->{$_},$_,'name'); } @help_array )) );
+                }
+            }
+            foreach my $message ( sort( keys( %to_be_deleted ) ) ) {
+                @help_array     = sort( keys( %{$to_be_deleted{$message}} ) );
+                $num_of_errors  = scalar( @help_array );
+                $ret_val       += $num_of_errors;
+                if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                    push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("Route: %s: %s and %d more ..."), $message, join(', ', map { printXxxTemplate($to_be_deleted{$message}->{$_},$_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                } else {
+                    push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("Route: %s: %s"), $message, join(', ', map { printXxxTemplate($to_be_deleted{$message}->{$_},$_,'name'); } @help_array )) );
                 }
             }
         }
