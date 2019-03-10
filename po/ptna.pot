@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-06 21:45+0100\n"
+"POT-Creation-Date: 2019-03-10 19:38+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -394,7 +394,7 @@ msgstr ""
 msgid "'network' = '%s' should be long form"
 msgstr ""
 
-#: ../bin/ptna-routes.pl:2118 ../bin/ptna-routes.pl:4400
+#: ../bin/ptna-routes.pl:2118 ../bin/ptna-routes.pl:4470
 msgid "'network' is not set"
 msgstr ""
 
@@ -520,7 +520,7 @@ msgid ""
 "PTv2 route: 'name' should (at least) be of the form '... ref ...: from => to'"
 msgstr ""
 
-#: ../bin/ptna-routes.pl:2414 ../bin/ptna-routes.pl:4001
+#: ../bin/ptna-routes.pl:2414 ../bin/ptna-routes.pl:4006
 msgid "separate multiple values by ';' (semi-colon) without blank"
 msgstr ""
 
@@ -588,7 +588,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: ../bin/ptna-routes.pl:2570 ../bin/ptna-routes.pl:3934
-#: ../bin/ptna-routes.pl:4090 ../bin/ptna-routes.pl:4118
+#: ../bin/ptna-routes.pl:4160 ../bin/ptna-routes.pl:4188
 #, perl-format
 msgid "%s: %s and %d more ..."
 msgstr ""
@@ -761,160 +761,189 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../bin/ptna-routes.pl:4003
+#: ../bin/ptna-routes.pl:4008
 #, perl-format
 msgid ""
 "'route_ref' = '%s' of stop does not include 'ref' = '%s' value of this route"
 "%s"
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4010
+#: ../bin/ptna-routes.pl:4015
 #, perl-format
 msgid ""
 "'route_ref' = '%s' of stop includes the separator value ';' (semi-colon) "
 "with sourrounding blank"
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4013
+#: ../bin/ptna-routes.pl:4018
 #, perl-format
 msgid ""
 "'route_ref' = '%s' of stop: ',' (comma) as separator value should be "
 "replaced by ';' (semi-colon) without blank"
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4026 ../bin/ptna-routes.pl:4036
-#: ../bin/ptna-routes.pl:4046
+#: ../bin/ptna-routes.pl:4024
+#, perl-format
+msgid "'%s' = '%s' of stop should be deleted, 'route_ref' = '%s' exists"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:4033
+#, perl-format
+msgid "(consider adding '%s' to the 'route_ref' tag of the stop)"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:4034 ../bin/ptna-routes.pl:4062
+#, perl-format
+msgid ""
+"'ref' = '%s' of stop should represent the reference of the stop, but "
+"includes the 'ref' ='%s' of this route %s"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:4052
+#, perl-format
+msgid "'%s' = '%s' of stop should be replaced by 'route_ref' = '%s'"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:4061
+#, perl-format
+msgid "(consider creating a 'route_ref' = '%s' tag for the stop)"
+msgstr ""
+
+#: ../bin/ptna-routes.pl:4076 ../bin/ptna-routes.pl:4086
+#: ../bin/ptna-routes.pl:4096 ../bin/ptna-routes.pl:4106
+#: ../bin/ptna-routes.pl:4116
 #, perl-format
 msgid "Route: %s: %s and %d more ..."
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4028 ../bin/ptna-routes.pl:4038
-#: ../bin/ptna-routes.pl:4048
+#: ../bin/ptna-routes.pl:4078 ../bin/ptna-routes.pl:4088
+#: ../bin/ptna-routes.pl:4098 ../bin/ptna-routes.pl:4108
+#: ../bin/ptna-routes.pl:4118
 #, perl-format
 msgid "Route: %s: %s"
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4088
+#: ../bin/ptna-routes.pl:4158
 msgid "Error in input data: insufficient data for ways"
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4116
+#: ../bin/ptna-routes.pl:4186
 msgid "Error in input data: insufficient data for nodes"
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4183
+#: ../bin/ptna-routes.pl:4253
 msgid "Date of Data"
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4191
+#: ../bin/ptna-routes.pl:4261
 msgid "Hints"
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4194
+#: ../bin/ptna-routes.pl:4264
 msgid "The data will be updated when the result of the analysis has changed."
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4197
+#: ../bin/ptna-routes.pl:4267
 msgid ""
 "An explanation of the error texts can be found in the documentation at <a "
 "href='/documentation.html#checks'>'Check'</a>."
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4235
+#: ../bin/ptna-routes.pl:4305
 msgid "Contents"
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4328
+#: ../bin/ptna-routes.pl:4398
 msgid "This section lists further relations of the environment of the routes:"
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4331
+#: ../bin/ptna-routes.pl:4401
 msgid "potentially wrong 'route' or 'route_master' values?"
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4333
+#: ../bin/ptna-routes.pl:4403
 msgid "e.g. 'route' = 'suspended_bus' instead of 'route' = 'bus'"
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4336
+#: ../bin/ptna-routes.pl:4406
 msgid ""
 "but also 'type' = 'network', 'type' = 'set' or 'route' = 'network', i.e. a "
 "collection of all routes and route-masters belonging to the 'network'."
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4338
+#: ../bin/ptna-routes.pl:4408
 msgid ""
 "such <strong>collections are strictly spoken errors</strong>, since "
 "relations shall not represent collections:"
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4339
+#: ../bin/ptna-routes.pl:4409
 msgid ""
 " <a href=\"https://wiki.openstreetmap.org/wiki/Relations/"
 "Relations_are_not_Categories\">Relations/Relations are not Categories</a>"
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4345
+#: ../bin/ptna-routes.pl:4415
 msgid ""
 "The following values and combinations have been found in the provided data "
 "but they will not be listed here. "
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4346
+#: ../bin/ptna-routes.pl:4416
 msgid ""
 "They represent so called 'well defined' values and are not considered as "
 "errors."
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4384
+#: ../bin/ptna-routes.pl:4454
 msgid "The contents of the 'network' tag will be searched for:"
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4407
+#: ../bin/ptna-routes.pl:4477
 msgid "The contents of the 'operator' tag will be searched for:"
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4417
+#: ../bin/ptna-routes.pl:4487
 msgid "'operator' is not set"
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4431
+#: ../bin/ptna-routes.pl:4501
 msgid "Considered 'network'-Values"
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4434
+#: ../bin/ptna-routes.pl:4504
 msgid ""
 "This section lists the 'network'-values which have been considered; i.e. "
 "which match to one of the values above."
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4450 ../bin/ptna-routes.pl:4475
-#: ../bin/ptna-routes.pl:4511
+#: ../bin/ptna-routes.pl:4520 ../bin/ptna-routes.pl:4545
+#: ../bin/ptna-routes.pl:4581
 #, perl-format
 msgid "%s and more ..."
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4458
+#: ../bin/ptna-routes.pl:4528
 msgid ""
 "This section lists the 'operator'-values which have not been considered. "
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4459 ../bin/ptna-routes.pl:4495
+#: ../bin/ptna-routes.pl:4529 ../bin/ptna-routes.pl:4565
 msgid ""
 "They might include typos in values which otherwise should have been "
 "considered. "
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4491
+#: ../bin/ptna-routes.pl:4561
 msgid "Not Considered 'network'-Values"
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4494
+#: ../bin/ptna-routes.pl:4564
 msgid ""
 "This section lists the 'network'-values which have not been considered. "
 msgstr ""
 
-#: ../bin/ptna-routes.pl:4724
+#: ../bin/ptna-routes.pl:4794
 msgid " and more ..."
 msgstr ""
 

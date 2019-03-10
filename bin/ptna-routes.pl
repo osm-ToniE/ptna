@@ -3959,6 +3959,7 @@ sub CheckRouteRefOnStops {
             my $object_ref              = undef;
             my $platform_or_stop        = undef;
             my $temp_route_ref          = undef;
+            my $temp_stop_ref           = undef;
             my $num_of_errors           = undef;
             my $hint                    = undef;
             my $replace_by              = undef;
@@ -4023,6 +4024,17 @@ sub CheckRouteRefOnStops {
                                         $to_be_deleted{sprintf(gettext("'%s' = '%s' of stop should be deleted, 'route_ref' = '%s' exists"),$tag,html_escape($object_ref->{'tag'}->{$tag}),html_escape($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
                                     }
                                 }
+                                if ( $object_ref->{'tag'}->{'ref'} ) {
+                                    $temp_stop_ref =  ';' . $object_ref->{'tag'}->{'ref'} . ';';
+                                    $temp_stop_ref =~ s/\s*;\s*/;/g;
+    
+                                    foreach my $sub_ref ( split( $ref_separator, $ref ) ) {
+                                        if ( $temp_stop_ref =~ m/;$sub_ref;/ ) {
+                                            $hint = sprintf( gettext( "(consider adding '%s' to the 'route_ref' tag of the stop)" ), html_escape($sub_ref) );
+                                            $to_be_replaced{sprintf(gettext("'ref' = '%s' of stop should represent the reference of the stop, but includes the 'ref' ='%s' of this route %s"),html_escape($object_ref->{'tag'}->{'ref'}),html_escape($sub_ref),$hint)}->{$member->{'ref'}} = $member->{'type'};
+                                        }
+                                    }
+                                }
                             } else {
                                 foreach my $tag ( 'bus_lines', 'bus_routes', 'lines', 'routes', 'line' ) {
                                     if ( $object_ref->{'tag'}->{$tag} ) {
@@ -4038,6 +4050,17 @@ sub CheckRouteRefOnStops {
                                         delete( $included_refs{'yes'} );
                                         $replace_by = join( ';', sort( { if ( $a =~ m/^[0-9]+$/ && $b =~ m/^[0-9]+$/ ) { $a <=> $b } else { $a cmp $b } } keys( %included_refs ) ) );
                                         $to_be_replaced{sprintf(gettext("'%s' = '%s' of stop should be replaced by 'route_ref' = '%s'"),$tag,html_escape($object_ref->{'tag'}->{$tag}),html_escape($replace_by))}->{$member->{'ref'}} = $member->{'type'};
+                                    }
+                                }
+                                if ( $object_ref->{'tag'}->{'ref'} ) {
+                                    $temp_stop_ref =  ';' . $object_ref->{'tag'}->{'ref'} . ';';
+                                    $temp_stop_ref =~ s/\s*;\s*/;/g;
+    
+                                    foreach my $sub_ref ( split( $ref_separator, $ref ) ) {
+                                        if ( $temp_stop_ref =~ m/;$sub_ref;/ ) {
+                                            $hint = sprintf( gettext( "(consider creating a 'route_ref' = '%s' tag for the stop)" ), html_escape($sub_ref) );
+                                            $to_be_replaced{sprintf(gettext("'ref' = '%s' of stop should represent the reference of the stop, but includes the 'ref' ='%s' of this route %s"),html_escape($object_ref->{'tag'}->{'ref'}),html_escape($sub_ref),$hint)}->{$member->{'ref'}} = $member->{'type'};
+                                        }
                                     }
                                 }
                             }
