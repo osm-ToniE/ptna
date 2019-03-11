@@ -54,6 +54,15 @@
 -
 - !!!Something very important!!!
 -
+- External Link with alias: [https://ptna.openstreetmap.de PTNA]
+-
+- External Link without alias: [https://ptna.openstreetmap.de]
+-
+- OSM-Wiki Link with alias: [[M%C3%BCnchen|München]]
+-
+- OSM-Wiki Link without alias: [[München]]
+-
+
 
 
 010;train;ICE;Hamburg;Munich;Deutsche Bahn

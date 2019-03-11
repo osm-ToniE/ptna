@@ -5047,10 +5047,20 @@ sub wiki2html {
             $sub = sprintf( "<a href=\"https://wiki.openstreetmap.org/wiki/%s\">%s</a>", $1, $2 );
             $text =~ s/\[\[[^|]+\|[^\]]+\]\]/$sub/;
         }
+        # convert: [[Nürnberg/Transportation/Analyse/DE-BY-VGN-Linien]]
+        while ( $text =~ m/\[\[([^\]]+)\]\]/g ) {
+            $sub = sprintf( "<a href=\"https://wiki.openstreetmap.org/wiki/%s\">%s</a>", $1, $1 );
+            $text =~ s/\[\[[^\]]+\]\]/$sub/;
+        }
         # convert: [https://example.com/index.html External Link]
         while ( $text =~ m/\[([^ ]+) ([^\]]+)\]/g ) {
             $sub = sprintf( "<a href=\"%s\">%s</a>", $1, $2 );
             $text =~ s/\[[^ ]+ [^\]]+\]/$sub/;
+        }
+        # convert: [https://example.com/index.html]
+        while ( $text =~ m/\[([^\]]+)\]/g ) {
+            $sub = sprintf( "<a href=\"%s\">%s</a>", $1, $1 );
+            $text =~ s/\[[^\]]+\]/$sub/;
         }
         while ( $text =~ m/!!!(.+?)!!!/g ) {
             $sub = sprintf( "<span class=\"attention\">%s</span>", $1 );
