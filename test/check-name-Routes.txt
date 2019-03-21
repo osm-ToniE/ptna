@@ -1,0 +1,105 @@
+<pre>
+#
+# Format: format is like in the OSM Wiki
+#
+# Links: [[...|...]] are interne link like in the OSM Wiki
+#        [... ...] are external links
+#
+# Headers start with '=', '==', '===', '====', ... at the beginning of a line
+#
+# Simple text starts with '-' at the beginning of a line.
+#    Simple text starts may only be placed directly after a header line.
+#    A single '-' at the beginning of a line, followed by nothing:
+#    - if there was simple text before, it creates a line feed (i.e. encloses the text in a paragraph <p> ... </p>)
+#    - if there was no simple text before or a line feed, it creates an empty line (i.e. <p>&amp;nbsp;</p>)
+#
+# !!!Text yellow background!!! in simple text or headers
+# '''''Text mit bold and italics''''' in simple text or headers
+# '''Text with bold chars''' in simple text or headers
+# ''Text with italic chars'' in simple text or headers
+#
+# Comments start with '#' at the beginning of a line. '#' inside text is not recognized as the start of a comment, i.e.. '#' may occur inside of text.
+#
+# Format of the file: UTF-8
+#
+#
+# Cotents in CSV-Format
+#
+# ref;type;comment;from;to;operator
+#
+# - ref       == tag 'ref' of route or route_master
+#                250            defines that routes with 'ref'='250' are expected
+#                250|250a|250b  defines that routes with 'ref'='250' or 'ref'='250a' or 'ref'='250b' are expected - independent of whether this is allowed according to PTv1/PTv2
+# - type      == contents of tags 'route' respectively 'route_master'
+# - comment   == can include comments like; Bus, Expressbus, ...  will not be analyzed, but simply be printed out
+#                !Text with yellow background! in comment (surrounded by single !)
+# - from      == if there is more than one entry with "ref;type" and "operator" is the same, then 'from' and 'to are also used to distinguish between same line number in different cities/villages
+# - to        == if there is more than one entry with "ref;type" and "operator" is the same, then 'from' and 'to are also used to distinguish between same line number in different cities/villages
+# - operator  == if there is more than one entry with "ref;type", then "operator" is used to distinguish between same line number in different cities/villages
+#
+
+
+= Test file for check of name (not relaxed)
+
+== Positive, no errors
+
+=== Simple 'ref'
+
+1;bus;;;;
+2;bus;;;;
+3;bus;;;;
+4;bus;;;;
+5;bus;;;;
+6;bus;;;;
+7;bus;;;;
+8;bus;;;;
+9;bus;;;;
+10;bus;;;;
+
+=== Combined 'ref'
+
+-'''Notes''': 'ref:LAVV' = '21'; 'ref:RVO' = '11'
+11/21;bus;;;;
+12/22;bus;;;;
+13/23;bus;;;;
+14/24;bus;;;;
+15/25;bus;;;;
+16/26;bus;;;;
+17/27;bus;;;;
+18/28;bus;;;;
+19/29;bus;;;;
+
+
+== Negative, with errors
+
+- '''Errors:''' 'name' is not set; 'network' is not set; '''Notes:''' PTv2 route: 'from' is not set; PTv2 route: 'to' is not set
+101;bus;;;;
+
+- '''Notes:''' PTv2 route: 'from' is not set; PTv2 route: 'to' is not set
+102;bus;;;;
+
+-
+103;bus;;;;
+
+-
+104;bus;;;;
+
+-
+105;bus;;;;
+
+-
+106;bus;;;;
+
+-
+107;bus;;;;
+
+-
+108;bus;;;;
+
+-
+109;bus;;;;
+
+-
+110;bus;;;;
+
+</pre>

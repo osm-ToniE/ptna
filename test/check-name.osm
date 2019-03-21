@@ -1,0 +1,302 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' upload='false' generator='JOSM'>
+  <bounds minlat='48.069032' minlon='11.6330838' maxlat='48.0716416' maxlon='11.6389203' origin='CGImap 0.6.1 (13164 thorn-03.openstreetmap.org)' />
+  <bounds minlat='48.069032' minlon='11.6330838' maxlat='48.0716416' maxlon='11.6389203' origin='OpenStreetMap server' />
+  <node id='-102237' action='modify' lat='48.07137978608' lon='11.63363497778'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='Stop 1' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-102240' action='modify' lat='48.07085635898' lon='11.63450153657'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='Stop 2' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-102244' action='modify' lat='48.07129800095' lon='11.63567163573'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='Stop 3' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-102246' action='modify' lat='48.07031984068' lon='11.63565694829'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='Stop 4' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-102330' action='modify' lat='48.07128818672' lon='11.63347341597'>
+    <tag k='name' v='Stop 1' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-102336' action='modify' lat='48.07075494437' lon='11.63438893288'>
+    <tag k='name' v='Stop 2' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-102337' action='modify' lat='48.07119985862' lon='11.6355835111'>
+    <tag k='name' v='stop 3' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-102338' action='modify' lat='48.07029039744' lon='11.6355051781'>
+    <tag k='name' v='Stop 4' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-102399' action='modify' lat='48.07000577859' lon='11.63814891679'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='Stop 6' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-102404' action='modify' lat='48.06973751571' lon='11.63654309033'>
+    <tag k='name' v='Stop 5' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-102406' action='modify' lat='48.06989781931' lon='11.63819787491'>
+    <tag k='name' v='Stop 6' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-102409' action='modify' lat='48.06983566083' lon='11.63660673589'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='Stop 5' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-102487' action='modify' lat='48.07036564124' lon='11.63425674595' />
+  <way id='-102241' action='modify'>
+    <nd ref='-102237' />
+    <nd ref='-102240' />
+    <tag k='highway' v='residential' />
+    <tag k='name' v='Main Street' />
+  </way>
+  <way id='-102277' action='modify'>
+    <nd ref='-102240' />
+    <nd ref='-102244' />
+    <tag k='highway' v='residential' />
+    <tag k='name' v='Main Street' />
+  </way>
+  <way id='-102278' action='modify'>
+    <nd ref='-102244' />
+    <nd ref='-102246' />
+    <tag k='highway' v='residential' />
+    <tag k='name' v='Main Street' />
+  </way>
+  <way id='-102427' action='modify'>
+    <nd ref='-102246' />
+    <nd ref='-102409' />
+    <tag k='highway' v='residential' />
+    <tag k='name' v='Main Street' />
+  </way>
+  <way id='-102428' action='modify'>
+    <nd ref='-102409' />
+    <nd ref='-102399' />
+    <tag k='highway' v='residential' />
+    <tag k='name' v='Main Street' />
+  </way>
+  <way id='-102438' action='modify'>
+    <nd ref='-102240' />
+    <nd ref='-102246' />
+    <tag k='highway' v='residential' />
+    <tag k='name' v='2nd Street' />
+  </way>
+  <way id='-102488' action='modify'>
+    <nd ref='-102246' />
+    <nd ref='-102487' />
+    <tag k='highway' v='residential' />
+    <tag k='name' v='3rd Street' />
+  </way>
+  <way id='-102513' action='modify'>
+    <nd ref='-102487' />
+    <nd ref='-102237' />
+    <tag k='highway' v='residential' />
+    <tag k='name' v='3rd Street' />
+  </way>
+  <relation id='-102375' action='modify'>
+    <member type='node' ref='-102237' role='stop' />
+    <member type='node' ref='-102330' role='platform' />
+    <member type='node' ref='-102240' role='stop' />
+    <member type='node' ref='-102336' role='platform' />
+    <member type='node' ref='-102246' role='stop' />
+    <member type='node' ref='-102338' role='platform' />
+    <member type='way' ref='-102241' role='' />
+    <member type='way' ref='-102438' role='' />
+    <tag k='name' v='Bus 102' />
+    <tag k='network' v='Network' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='102' />
+    <tag k='route' v='bus' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-102384' action='modify'>
+    <member type='node' ref='-102237' role='stop' />
+    <member type='node' ref='-102330' role='platform' />
+    <member type='node' ref='-102240' role='stop' />
+    <member type='node' ref='-102336' role='platform' />
+    <member type='node' ref='-102244' role='stop' />
+    <member type='node' ref='-102337' role='platform' />
+    <member type='node' ref='-102246' role='stop' />
+    <member type='node' ref='-102338' role='platform' />
+    <member type='way' ref='-102241' role='' />
+    <member type='way' ref='-102277' role='' />
+    <member type='way' ref='-102278' role='' />
+    <tag k='name' v='Bus X: Stop 1 =&gt; Stop 4' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='route' v='bus' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-102422' action='modify'>
+    <member type='node' ref='-102237' role='stop' />
+    <member type='node' ref='-102330' role='platform' />
+    <member type='node' ref='-102240' role='stop' />
+    <member type='node' ref='-102336' role='platform' />
+    <member type='node' ref='-102244' role='stop' />
+    <member type='node' ref='-102337' role='platform' />
+    <member type='node' ref='-102246' role='stop' />
+    <member type='node' ref='-102338' role='platform' />
+    <member type='way' ref='-102241' role='' />
+    <member type='way' ref='-102277' role='' />
+    <member type='way' ref='-102278' role='' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='101' />
+    <tag k='route' v='bus' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-102425' action='modify'>
+    <member type='node' ref='-102237' role='stop' />
+    <member type='node' ref='-102330' role='platform' />
+    <member type='node' ref='-102240' role='stop' />
+    <member type='node' ref='-102336' role='platform' />
+    <member type='node' ref='-102244' role='stop' />
+    <member type='node' ref='-102337' role='platform' />
+    <member type='node' ref='-102246' role='stop' />
+    <member type='node' ref='-102338' role='platform' />
+    <member type='way' ref='-102241' role='' />
+    <member type='way' ref='-102277' role='' />
+    <member type='way' ref='-102278' role='' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='route' v='bus' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-102467' action='modify'>
+    <member type='node' ref='-102237' role='stop' />
+    <member type='node' ref='-102330' role='platform' />
+    <member type='node' ref='-102246' role='stop' />
+    <member type='node' ref='-102338' role='platform' />
+    <member type='way' ref='-102513' role='' />
+    <member type='way' ref='-102488' role='' />
+    <tag k='from' v='Stop 1' />
+    <tag k='name' v='Bus 1: Stop 1 =&gt; Stop 4' />
+    <tag k='network' v='Network' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='1' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='Stop 4' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-102524' action='modify'>
+    <member type='node' ref='-102237' role='stop' />
+    <member type='node' ref='-102330' role='platform' />
+    <member type='node' ref='-102240' role='stop' />
+    <member type='node' ref='-102336' role='platform' />
+    <member type='node' ref='-102246' role='stop' />
+    <member type='node' ref='-102338' role='platform' />
+    <member type='way' ref='-102241' role='' />
+    <member type='way' ref='-102438' role='' />
+    <tag k='from' v='Stop 1' />
+    <tag k='name' v='Bus 2: Stop 1 =&gt; Stop 2 =&gt; Stop 4' />
+    <tag k='network' v='Network' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='2' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='Stop 4' />
+    <tag k='type' v='route' />
+    <tag k='via' v='Stop 2' />
+  </relation>
+  <relation id='-102532' action='modify'>
+    <member type='node' ref='-102237' role='stop' />
+    <member type='node' ref='-102330' role='platform' />
+    <member type='node' ref='-102240' role='stop' />
+    <member type='node' ref='-102336' role='platform' />
+    <member type='node' ref='-102244' role='stop' />
+    <member type='node' ref='-102337' role='platform' />
+    <member type='node' ref='-102246' role='stop' />
+    <member type='node' ref='-102338' role='platform' />
+    <member type='way' ref='-102241' role='' />
+    <member type='way' ref='-102277' role='' />
+    <member type='way' ref='-102278' role='' />
+    <tag k='from' v='Stop 1' />
+    <tag k='name' v='Bus 3: Stop 1 =&gt; Stop 2 =&gt; Stop 3 =&gt; Stop 4' />
+    <tag k='network' v='Network' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='3' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='Stop 4' />
+    <tag k='type' v='route' />
+    <tag k='via' v='Stop 2;Stop 3' />
+  </relation>
+  <relation id='-102542' action='modify'>
+    <member type='node' ref='-102237' role='stop' />
+    <member type='node' ref='-102330' role='platform' />
+    <member type='node' ref='-102240' role='stop' />
+    <member type='node' ref='-102336' role='platform' />
+    <member type='node' ref='-102244' role='stop' />
+    <member type='node' ref='-102337' role='platform' />
+    <member type='node' ref='-102246' role='stop' />
+    <member type='node' ref='-102338' role='platform' />
+    <member type='node' ref='-102409' role='stop' />
+    <member type='node' ref='-102404' role='platform' />
+    <member type='way' ref='-102241' role='' />
+    <member type='way' ref='-102277' role='' />
+    <member type='way' ref='-102278' role='' />
+    <member type='way' ref='-102427' role='' />
+    <tag k='from' v='Stop 1' />
+    <tag k='name' v='Bus 4: Stop 1 =&gt; Stop 2 =&gt; Stop 3 =&gt; Stop 4 =&gt; Stop 5' />
+    <tag k='network' v='Network' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='4' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='Stop 5' />
+    <tag k='type' v='route' />
+    <tag k='via' v='Stop 2;Stop 3;Stop 4' />
+  </relation>
+  <relation id='-102544' action='modify'>
+    <member type='node' ref='-102237' role='stop' />
+    <member type='node' ref='-102330' role='platform' />
+    <member type='node' ref='-102240' role='stop' />
+    <member type='node' ref='-102336' role='platform' />
+    <member type='node' ref='-102244' role='stop' />
+    <member type='node' ref='-102337' role='platform' />
+    <member type='node' ref='-102246' role='stop' />
+    <member type='node' ref='-102338' role='platform' />
+    <member type='node' ref='-102409' role='stop' />
+    <member type='node' ref='-102404' role='platform' />
+    <member type='node' ref='-102399' role='stop' />
+    <member type='node' ref='-102406' role='platform' />
+    <member type='way' ref='-102241' role='' />
+    <member type='way' ref='-102277' role='' />
+    <member type='way' ref='-102278' role='' />
+    <member type='way' ref='-102427' role='' />
+    <member type='way' ref='-102428' role='' />
+    <tag k='from' v='Stop 1' />
+    <tag k='name' v='Bus 5: Stop 1 =&gt; Stop 2 =&gt; Stop 3 =&gt; Stop 4 =&gt; Stop 5 =&gt; Stop 6' />
+    <tag k='network' v='Network' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='5' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='Stop 6' />
+    <tag k='type' v='route' />
+    <tag k='via' v='Stop 2;Stop 3;Stop 4;Stop 5' />
+  </relation>
+  <relation id='-102551' action='modify'>
+    <member type='node' ref='-102237' role='stop' />
+    <member type='node' ref='-102330' role='platform' />
+    <member type='node' ref='-102246' role='stop' />
+    <member type='node' ref='-102338' role='platform' />
+    <member type='way' ref='-102513' role='' />
+    <member type='way' ref='-102488' role='' />
+    <tag k='from' v='Stop 1' />
+    <tag k='name' v='Bus RVO 11/LAVV 21: Stop 1 =&gt; Stop 4' />
+    <tag k='network' v='Network' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='11/21' />
+    <tag k='ref:LAVV' v='21' />
+    <tag k='ref:RVO' v='11' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='Stop 4' />
+    <tag k='type' v='route' />
+  </relation>
+</osm>
