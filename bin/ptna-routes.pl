@@ -204,14 +204,6 @@ if ( $or_separator ) {
         printf STDERR "%s analyze-routes.pl: wrong value for option: '--or-separator' = '%s' - setting it to '--or-separator' = '|'\n", get_time(), $or_separator;
         $or_separator = '|';
     }
-    if ( $or_separator eq $csv_separator ) {
-        if ( $csv_separator eq '|' ) {
-            $or_separator = ';';
-        } else {
-            $or_separator = '|';
-        }
-        printf STDERR "%s analyze-routes.pl: wrong value for option: '--or-separator' = '%s' - setting it to '--or-separator' = '%s'\n", get_time(), $csv_separator, $or_separator;
-    }
     $or_separator = '\\' . $or_separator;
 }
 
@@ -219,14 +211,6 @@ if ( $ref_separator ) {
     if ( length($ref_separator) > 1 ) {
         printf STDERR "%s analyze-routes.pl: wrong value for option: '--ref-separator' = '%s' - setting it to '--ref-separator' = '/'\n", get_time(), $ref_separator;
         $or_separator = '|';
-    }
-    if ( $ref_separator eq $csv_separator ) {
-        if ( $csv_separator eq '/' ) {
-            $ref_separator = ';';
-        } else {
-            $ref_separator = '/';
-        }
-        printf STDERR "%s analyze-routes.pl: wrong value for option: '--ref-separator' = '%s' - setting it to '--ref-separator' = '%s'\n", get_time(), $csv_separator, $ref_separator;
     }
     $ref_separator = '\\' . $ref_separator;
 }
@@ -999,7 +983,11 @@ if ( $routes_file ) {
                                      'To-List'       => $entryref->{'to-list'},
                                      'Operator'      => $entryref->{'operator'},
                                    );
-                printTableLine( 'issues' => sprintf(gettext("Missing route for ref='%s' and route='%s'"), join(gettext("' or ref='"),@{$entryref->{'ref-or-list'}}), $entryref->{'route'} ) );
+                if ( $entryref->{'ref-or-list'} ) {
+                    printTableLine( 'issues' => sprintf(gettext("Missing route for ref='%s' and route='%s'"), join(gettext("' or ref='"),@{$entryref->{'ref-or-list'}}), $entryref->{'route'} ) );
+                } else {
+                    printTableLine( 'issues' => sprintf(gettext("Missing route for ref='%s' and route='%s'"), '???', $entryref->{'route'} ) );
+                }
             }
         } else {
             printf STDERR "%s Internal error: ref and route_type not set in CSV file. %d\n", get_time(), $entryref->{'NR'};
@@ -2294,156 +2282,7 @@ sub analyze_ptv2_route_relation {
     $relation_ptr->{'sorted_in_reverse_order'} = '';
     
     if ( $check_name ) {
-        if ( $relation_ptr->{'tag'}->{'name'} ) {
-            my $preconditions_failed = 0;
-            my $name = $relation_ptr->{'tag'}->{'name'}; 
-            my $ref  = $relation_ptr->{'tag'}->{'ref'}; 
-            my $from = $relation_ptr->{'tag'}->{'from'}; 
-            my $to   = $relation_ptr->{'tag'}->{'to'}; 
-            my $via  = $relation_ptr->{'tag'}->{'via'};
-            #
-            # we do not use =~ m/.../ here because the strings may contain special regex characters such as ( ) [ ] and so on
-            #
-            if ( $ref ) {
-                if ( index($name,$ref) == -1 ) {
-                    my $number_of_ref_colon_tags = 0;
-                    my $ref_string               = '';
-                    foreach my $tag ( sort ( keys ( %{$relation_ptr->{'tag'}} ) ) ) {
-                        if ( $tag =~ m/^ref:(\S+)$/ ) {
-                            $number_of_ref_colon_tags++;
-                            $ref_string = $1 . ' ' . $relation_ptr->{'tag'}->{$tag};
-                            if ( index($name,$ref_string) == -1 ) {
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: '%s' is not part of 'name' (derived from '%s' = '%s')"),html_escape($ref_string),html_escape($tag),html_escape($relation_ptr->{'tag'}->{$tag})) );
-                                $preconditions_failed++;
-                                $return_code++;
-                            }
-                        }
-                    }
-                    if ( $number_of_ref_colon_tags == 0 ) {     # there are no 'ref:*' tags, so check 'ref' being present in 'name'
-                        push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'ref' is not part of 'name'") );
-                        $preconditions_failed++;
-                        $return_code++;
-                    }
-                }
-            } else {
-                # already checked, but must increase preconditions_failed here
-                #push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'ref' is not set") );
-                $preconditions_failed++;
-                $return_code++;
-            }
-            if ( $from ) {
-                if ( !$check_name_relaxed ) {
-                    if ( index($name,$from) == -1 ) {
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'from' = '%s' is not part of 'name'"), html_escape($from)) );
-                        $preconditions_failed++;
-                        $return_code++;
-                    }
-                }
-            } else {
-                push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'from' is not set") );
-                $preconditions_failed++;
-                $return_code++;
-            }
-            if ( $to ) {
-                if ( !$check_name_relaxed ) {
-                    if ( index($name,$to) == -1 ) {
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'to' = '%s' is not part of 'name'"), html_escape($to)) );
-                        $preconditions_failed++;
-                        $return_code++;
-                    }
-                }
-            } else {
-                push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'to' is not set") );
-                $preconditions_failed++;
-                $return_code++;
-            }
-            if ( $name =~ m/<=>/ ) {
-                push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'name' includes deprecated '<=>'") );
-                $preconditions_failed++;
-                $return_code++;
-            }
-            if ( $name =~ m/==>/ ) {
-                push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'name' includes deprecated '==>'") );
-                #$preconditions_failed++;
-                $return_code++;
-            }
-            
-            if ( $preconditions_failed == 0 ) {
-                # i.e. 'to' and 'from' and 'ref' are set, and of course 'name'
-                my $expected_long  = undef;
-                my $expected_short = undef;
-                my $i_long         = 0;
-                my $i_short        = 0;
-                my $num_of_arrows  = 0;
-                $num_of_arrows++    while ( $name =~ m/=>/g );
-                if ( $num_of_arrows < 2 ) {
-                    if ( $check_name_relaxed ) {
-                        if ( $name =~ m/(.*):\s{0,1}(.*?)\s{0,1}=>\s{0,1}(.*)$/ ) {
-                            my $ref_in_name  = $1;
-                            my $from_in_name = $2;
-                            my $to_in_name   = $3;
-                            if ( index($from,$from_in_name) == -1 ) {
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: from-part ('%s') of 'name' is not part of 'from' = '%s'"), html_escape($from_in_name), html_escape($from)) );
-                                $return_code++;
-                            }
-                            if ( index($to,$to_in_name) == -1 ) {
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: to-part ('%s') of 'name' is not part of 'to' = '%s'"), html_escape($to_in_name), html_escape($to)) );
-                                $return_code++;
-                            }
-                        } else {
-                            push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'name' should be similar to the form '... ref ...: from => to'") );
-                            $return_code++;
-                        }
-                    } else {
-                        # well, 'name' should then include only 'from' and 'to' (no 'via')
-                        $expected_long  = ': ' . $from . ' => ' . $to;   # this is how it really should be: with blank around '=>'
-                        $expected_short = ': ' . $from .  '=>'  . $to;   # some people ommit the blank around the '=>', be relaxed with that
-                        $i_long        = index( $name, $expected_long  );
-                        $i_short       = index( $name, $expected_short );
-                        if ( ($i_long  == -1 || length($name) > $i_long  + length($expected_long))  &&
-                             ($i_short == -1 || length($name) > $i_short + length($expected_short))    ) {
-                            # no match or 'name' is longer than expected
-                            push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'name' should (at least) be of the form '... ref ...: from => to'") );
-                            $return_code++;
-                        }
-                    }
-                } else {
-                    # there is more than one '=>' in the 'name' value, so 'name' includes via stops
-                    if ( $via ) {
-                        my @via_values  = split( ";", $via );
-                        my $hint        = '(' . gettext("separate multiple values by ';' (semi-colon) without blank") . ')';
-                        $preconditions_failed = 0;
-                        foreach my $via_value ( @via_values ) {
-                            if ( index($name,$via_value) == -1 ) {
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'via' is set: via-part = '%s' is not part of 'name' %s"),html_escape($via_value),$hint) );
-                                $preconditions_failed++;
-                                $return_code++;
-                            }
-                        }
-                        if ( $preconditions_failed == 0 ){
-                            $expected_long  = ': ' . $from . ' => ' . join(' => ',@via_values) .' => ' . $to;   # this is how it really should be: with blank around '=>'
-                            $expected_short = ': ' . $from .  '=>'  . join('=>'  ,@via_values) . '=>'  . $to;   # some people ommit the blank around the '=>', be relaxed with that
-                            $i_long         = index( $name, $expected_long );
-                            $i_short        = index( $name, $expected_short );
-                            if ( ($i_long  == -1 || length($name) > $i_long + length($expected_long)) && 
-                                 ($i_short == -1 || length($name) > $i_short + length($expected_short))    ) {
-                                # no match or 'name' is longer than expected
-                                if ( $num_of_arrows == 2 ) {
-                                    push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'via' is set: 'name' should be of the form '... ref ...: from => via => to'") );
-                                } else {
-                                    push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'via' is set: 'name' should be of the form '... ref ...: from => via => ... => to' %s"),$hint) );
-                                }
-                                $return_code++;
-                            }
-                        }
-                    } else {
-                        # multiple '=>' in 'name' but 'via is not set
-                        push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'name' has more than one '=>' but 'via' is not set") );
-                        $return_code++;
-                    }
-                }
-            }
-        }
+        $return_code += CheckNameRefFromViaToPTV2( $relation_ptr );
     }
 
     if ( $relation_route_ways[0] && $relation_route_ways[1] ) {
@@ -3870,6 +3709,192 @@ sub noAccess {
     }
     printf STDERR "noAccess() : access for all for way %d\n", $way_id       if ( $debug );
     return '';
+}
+
+
+#############################################################################################
+#
+# for syntx of 'name' with 'ref', 'from', 'to' and maybe 'via' included (also ref:*)
+#
+#############################################################################################
+
+sub CheckNameRefFromViaToPTV2 {
+    my $relation_ptr = shift;
+    my $return_code  = 0;
+    
+    if ( $relation_ptr && $relation_ptr->{'tag'} ) {
+        my $preconditions_failed = 0;
+        my $name = $relation_ptr->{'tag'}->{'name'}; 
+        my $ref  = $relation_ptr->{'tag'}->{'ref'}; 
+        my $from = $relation_ptr->{'tag'}->{'from'}; 
+        my $to   = $relation_ptr->{'tag'}->{'to'}; 
+        my $via  = $relation_ptr->{'tag'}->{'via'};
+
+        my $number_of_ref_colon_tags = 0;
+        my $ref_string               = '';
+
+        if ( $name ) {
+            #
+            # basic checks for 'name' w/o any other dependencies to 'ref', 'from', 'to' and 'via'
+            #
+            if ( $name =~ m/<=>/ ) {
+                push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'name' includes deprecated '<=>'") );
+                $preconditions_failed++;
+                $return_code++;
+            }
+            if ( $name =~ m/==>/ ) {
+                push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'name' includes deprecated '==>'") );
+                $preconditions_failed++;
+                $return_code++;
+            }
+        }
+
+        if ( $name && $ref && $preconditions_failed == 0) {
+#            if ( $from ) {
+#                if ( !$check_name_relaxed ) {
+#                    if ( index($name,$from) == -1 ) {
+#                        push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'from' = '%s' is not part of 'name'"), html_escape($from)) );
+#                        $preconditions_failed++;
+#                        $return_code++;
+#                    }
+#                }
+#            }
+#            if ( $to ) {
+#                if ( !$check_name_relaxed ) {
+#                    if ( index($name,$to) == -1 ) {
+#                        push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'to' = '%s' is not part of 'name'"), html_escape($to)) );
+#                        $preconditions_failed++;
+#                        $return_code++;
+#                    }
+#                }
+#            }
+            
+            if ( $name =~ m/^(.*):\s{0,1}(.*?)\s{0,1}=>\s{0,1}(.*)\s{0,1}=>\s{0,1}(.*)$/ ||
+                 $name =~ m/^(.*):\s{0,1}(.*?)\s{0,1}=>\s{0,1}(.*)$/                         ) {
+                
+                my $ref_in_name       = $1;
+                my $from_in_name      = $2;
+                my $vias_in_name      = $3;
+                my $to_in_name        = $4;
+                my @via_parts_in_name = ();
+                
+                if ( $to_in_name) {
+                    @via_parts_in_name = split( '=>', $vias_in_name );
+                    foreach ( @via_parts_in_name ) {
+                       s/^\s*//;
+                       s/\s*$//;
+                    }
+                } else {
+                    $to_in_name        = $vias_in_name;
+                    $vias_in_name      = undef;
+                    @via_parts_in_name = ();
+                }
+
+                if ( index($ref_in_name,$ref) == -1 ) {
+                    #
+                    # this will check only combinations of verious ref's: ref='025/9567/11'
+                    #                                                     name='Bus LAVV 025/RVO 9567/VLK 11 .....'
+                    #                                                     ref:LAV='025'
+                    #                                                     ref:RVO='9567'
+                    #                                                     ref:VLK='11'
+                    foreach my $tag ( sort ( keys ( %{$relation_ptr->{'tag'}} ) ) ) {
+                        if ( $tag =~ m/^ref:(\S+)$/ ) {
+                            $number_of_ref_colon_tags++;
+                            $ref_string = $1 . ' ' . $relation_ptr->{'tag'}->{$tag};
+                            if ( index($ref_in_name,$ref_string) == -1 ) {
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: '%s' is not part of 'name' (derived from '%s' = '%s')"),html_escape($ref_string),html_escape($tag),html_escape($relation_ptr->{'tag'}->{$tag})) );
+                                $return_code++;
+                            }
+                        }
+                    }
+                    if ( $number_of_ref_colon_tags == 0 ) {     # there are no 'ref:*' tags, so check 'ref' being present in 'name'
+                        push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'ref' is not part of 'name'") );
+                        $return_code++;
+                    }
+                }
+
+                if ( $from ) {
+                    if ( $from_in_name ne $from ) {
+                        if ( $check_name_relaxed ) {
+                            if ( index($from,$from_in_name) == -1 ) {
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: from-part ('%s') of 'name' is not part of 'from' = '%s'"), html_escape($from_in_name), html_escape($from)) );
+                                $return_code++;
+                            }
+                        } else {
+                            push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'from' = '%s' is not part of 'name'"), html_escape($from)) );
+                            $return_code++;
+                        }
+                    }
+                } else {
+                    push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'from' is not set") );
+                    $return_code++;
+                }
+
+                if ( $to ) {
+                    if ( $to_in_name ne $to ) {
+                        if ( $check_name_relaxed ) {
+                            if ( index($to,$to_in_name) == -1 ) {
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: to-part ('%s') of 'name' is not part of 'to' = '%s'"), html_escape($to_in_name), html_escape($to)) );
+                                $return_code++;
+                            }
+                        } else {
+                            push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'to' = '%s' is not part of 'name'"), html_escape($to)) );
+                            $return_code++;
+                        }
+                    }
+                } else {
+                    push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'to' is not set") );
+                    $return_code++;
+                }
+
+                if ( scalar(@via_parts_in_name) ) {
+                    if ( $via ) {
+                        my @via_values  = split( ";", $via );
+                        
+                        if ( !$check_name_relaxed ) {
+                            if ( scalar(@via_parts_in_name) == scalar(@via_values) ) {
+                                for ( my $index = 0; $index < scalar(@via_parts_in_name); $index++ ) {
+                                    if ( $via_parts_in_name[$index] ne $via_values[$index] ) {
+                                        push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'via' is set: %d. via-value = '%s' is not equal to %d. via-part = '%s' of 'name'"),$index+1,html_escape($via_values[$index]),$index+1,html_escape($via_parts_in_name[$index])) );
+                                        $return_code++;
+                                    }
+                                }
+                            } elsif ( scalar(@via_parts_in_name) > scalar(@via_values) ) {
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: there are more via-parts in 'name' (%d) than in 'via' (%d) "),scalar(@via_parts_in_name),scalar(@via_values)) );
+                                $return_code++;
+                            } else {
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: there are less via-parts in 'name' (%d) than in 'via' (%d) "),scalar(@via_parts_in_name),scalar(@via_values)) );
+                                $return_code++;
+                            }
+                        }
+                    } else {
+                        push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'name' has more than one '=>' but 'via' is not set") );
+                        $return_code++;
+                    }
+                }
+            } else {
+                if ( $check_name_relaxed ) {
+                    push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'name' should be similar to the form '... ref ...: from => to'") );
+                } else {
+                    push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'name' should (at least) be of the form '... ref ...: from => to'") );
+                }
+                $return_code++;
+            }
+        } else {
+            if ( !$name ) {
+                # already checked at a very early position, but must increase return_code here
+                #push( @{$relation_ptr->{'__issues__'}}, gettext("'name' is not set") );
+                $return_code++;
+            }
+            if ( !$ref ) {
+                # already checked at a very early position, but must increase return_code here
+                #push( @{$relation_ptr->{'__issues__'}}, gettext("'ref' is not set") );
+                $return_code++;
+            }
+        }
+    }
+    
+    return $return_code;
 }
 
 

@@ -4,6 +4,7 @@ use strict;
 
 use POSIX;
 use Locale::gettext;
+use Text::ParseWords;
 
 use utf8;
 binmode STDOUT, ":utf8";
@@ -101,7 +102,7 @@ sub ReadRoutes {
                         $hashref->{'type'}       = 'route';          # store type
                          
                         #if ( m/$csv_separator/ ) {
-                            ($ExpRef,$ExpRouteType,$ExpComment,$ExpFrom,$ExpTo,@rest) = split( $csv_separator );
+                            ($ExpRef,$ExpRouteType,$ExpComment,$ExpFrom,$ExpTo,@rest) = split( $csv_separator, $_ ); # parse_csv( $csv_separator, $_ ); # 
 
                             $hashref->{'ref'}            = $ExpRef       || '';              # 'ref'
                             $hashref->{'route'}          = $ExpRouteType || '';              # 'route/route_master'
@@ -231,6 +232,35 @@ sub ReadRoutes {
     
     return undef;
 }
+
+
+#############################################################################################
+# 
+# return a list (array) fileds of the CSV line
+
+# https://stackoverflow.com/questions/3065095/how-do-i-efficiently-parse-a-csv-file-in-perl
+#
+#############################################################################################
+
+sub parse_csv {
+    my $separator = shift;
+    my $text      = shift;
+    my $value     = undef;
+    my @cells     = ();
+    my $regex     = qr/(?:^|$separator)(?:"([^"]*)"|([^$separator]*))/;
+    
+    return () unless $text;
+
+    $text =~ s/\r?\n$//;
+
+    while( $text =~ /$regex/g ) {
+        $value = defined $1 ? $1 : $2;
+        push( @cells, (defined $value ? $value : '') );
+    }
+
+    return @cells;
+}
+
 
 #############################################################################################
 # 

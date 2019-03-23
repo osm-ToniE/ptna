@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <title>PTNA - Public Transport Network Analysis</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="PTNA">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="keywords" content="OSM Public Transport PTv2">
+        <meta name="description" content="PTNA - Public Transport Network Analysis">
+        <style>
+              table { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; }
+              th    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+              td    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+              img   { width: 20px; }
+              #toc ol           { list-style: none; }
+              .tableheaderrow   { background-color: LightSteelBlue;   }
+              .sketchline       { background-color: LightBlue;        }
+              .sketch           { text-align:left;  font-weight: 500; }
+              .csvinfo          { text-align:right; font-size: 0.8em; }
+              .ref              { white-space:nowrap; }
+              .relation         { white-space:nowrap; }
+              .PTv              { text-align:center; }
+              .number           { text-align:right; }
+              .attention        { background-color: yellow; font-weight: 500; font-size: 1.2em; }
+        </style>
+    </head>
+    <body>
+        <div id="toc">
+        <h1>Contents</h1>
+        <ol>
+        <li>1 <a href="#hints">Hints</a>
+        </li>
+        <li>2 <a href="#A2">Test file for --check-name (not relaxed)</a>
+        <ol>
+        <li>2.1 <a href="#A2.1">Positive, no errors</a>
+        <ol>
+        <li>2.1.1 <a href="#A2.1.1">Simple 'ref'</a>
+        </li>
+        <li>2.1.2 <a href="#A2.1.2">Combined 'ref'</a>
+        </li>
+        </ol>
+        </li>
+        <li>2.2 <a href="#A2.2">Negative, with errors</a>
+        <ol>
+        <li>2.2.1 <a href="#A2.2.1">Simple 'ref'</a>
+        </li>
+        <li>2.2.2 <a href="#A2.2.2">Combined 'ref'</a>
+        </li>
+        </ol>
+        </li>
+        </ol>
+        </li>
+        <li>3 <a href="#withoutref">Public Transport Lines without 'ref'</a>
+        <ol>
+        <li>3.1 <a href="#A3.1">Bus</a>
+        </li>
+        </ol>
+        </li>
+        <li>4 <a href="#networkdetails">Details for 'network'-Values</a>
+        <ol>
+        <li>4.1 <a href="#considerednetworks">Considered 'network'-Values</a>
+        </li>
+        </ol>
+        </li>
+        </ol>
+        </div> <!-- toc -->
+        <hr />
+        <h1 id="hints">1 Hints</h1>
+<p>
+    The data will be updated when the result of the analysis has changed.
+</p>
+<p>
+    An explanation of the error texts can be found in the documentation at <a href='/documentation.html#checks'>'Check'</a>.
+</p>
+        <hr />
+        <h1 id="A2">2 Test file for --check-name (not relaxed)</h1>
+        <h2 id="A2.1">2.1 Positive, no errors</h2>
+        <h3 id="A2.1.1">2.1.1 Simple 'ref'</h3>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="???" data-ref="1" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=1&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">1</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr data-info="-107236" data-ref="1" class="line"><td class="name">Bus 1: Stop 1 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107236</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="2" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=2&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">2</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr data-info="-107237" data-ref="2" class="line"><td class="name">Bus 2: Stop 1 =&gt; Stop 2 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107237</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="3" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=3&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">3</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr data-info="-107238" data-ref="3" class="line"><td class="name">Bus 3: Stop 1 =&gt; Stop 2 =&gt; Stop 3 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107238</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="4" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=4&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">4</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr data-info="-107239" data-ref="4" class="line"><td class="name">Bus 4: Stop 1 =&gt; Stop 2 =&gt; Stop 3 =&gt; Stop 4 =&gt; Stop 5</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107239</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="5" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=5&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">5</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr data-info="-107240" data-ref="5" class="line"><td class="name">Bus 5: Stop 1 =&gt; Stop 2 =&gt; Stop 3 =&gt; Stop 4 =&gt; Stop 5 =&gt; Stop 6</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107240</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+            </tbody>
+        </table>
+
+<p>
+&nbsp;
+</p>
+        <h3 id="A2.1.2">2.1.2 Combined 'ref'</h3>
+<p>
+<strong>Notes:</strong> 'ref:LAVV' = '21'; 'ref:RVO' = '11'
+
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="???" data-ref="11/21" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=11/21&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">11/21</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr data-info="-107244" data-ref="11/21" class="line"><td class="name">Bus RVO 11/LAVV 21: Stop 1 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107244</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'ref:LAVV' = '21'<br>'ref:RVO' = '11'</td></tr>
+            </tbody>
+        </table>
+
+<p>
+&nbsp;
+</p>
+<p>
+<strong>Notes:</strong> 'ref:LAVV' = '22'; 'ref:RVO' = '12'; 'ref_trips' = '012;015;0134'
+
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="???" data-ref="12/22" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=12/22&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">12/22</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr data-info="-107242" data-ref="12/22" class="line"><td class="name">Bus RVO 12/LAVV 22 (012,015,0134): Stop 1 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107242</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'ref:LAVV' = '22'<br>'ref:RVO' = '12'<br>'ref_trips' = '012;015;0134'</td></tr>
+            </tbody>
+        </table>
+
+<p>
+&nbsp;
+</p>
+        <h2 id="A2.2">2.2 Negative, with errors</h2>
+        <h3 id="A2.2.1">2.2.1 Simple 'ref'</h3>
+<p>
+<strong>Errors:</strong> 'name' is not set; 'network' is not set
+
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="???" data-ref="101" class="sketchline"><td class="sketch">101</td><td class="csvinfo" colspan="5"></td></tr>
+                <tr data-info="-107234" data-ref="101" class="line"><td class="name"></td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107234</td><td class="PTv">2</td><td class="issues">'name' is not set<br>'network' is not set</td><td class="notes"></td></tr>
+            </tbody>
+        </table>
+
+<p>
+&nbsp;
+</p>
+<p>
+<strong>Notes:</strong> PTv2 route: 'name' should (at least) be of the form '... ref ...: from => to'
+
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="???" data-ref="102" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=102&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">102</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr data-info="-107232" data-ref="102" class="line"><td class="name">Bus 102</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107232</td><td class="PTv">2</td><td class="issues"></td><td class="notes">PTv2 route: 'name' should (at least) be of the form '... ref ...: from => to'</td></tr>
+            </tbody>
+        </table>
+
+<p>
+&nbsp;
+</p>
+<p>
+<strong>Notes:</strong> PTv2 route: 'ref' is not part of 'name'
+
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="???" data-ref="103" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=103&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">103</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr data-info="-107246" data-ref="103" class="line"><td class="name">Bus 100+3: Stop 1 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107246</td><td class="PTv">2</td><td class="issues"></td><td class="notes">PTv2 route: 'ref' is not part of 'name'</td></tr>
+            </tbody>
+        </table>
+
+<p>
+&nbsp;
+</p>
+<p>
+<strong>Notes:</strong> PTv2 route: 'from' = 'Stop 1' is not part of 'name'; PTv2 route: 'to' = 'Stop 4' is not part of 'name'
+
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="???" data-ref="104" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=104&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">104</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr data-info="-107271" data-ref="104" class="line"><td class="name">Bus 104: Stop 2 =&gt; Stop 5</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107271</td><td class="PTv">2</td><td class="issues"></td><td class="notes">PTv2 route: 'from' = 'Stop 1' is not part of 'name'<br>PTv2 route: 'to' = 'Stop 4' is not part of 'name'</td></tr>
+            </tbody>
+        </table>
+
+<p>
+&nbsp;
+</p>
+        <h3 id="A2.2.2">2.2.2 Combined 'ref'</h3>
+<p>
+<strong>Notes:</strong> 'ref:RVO' = '111'
+
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="???" data-ref="111/121" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=111/121&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">111/121</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr data-info="-107243" data-ref="111/121" class="line"><td class="name">Bus RVO 111/LAVV 121: Stop 1 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107243</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'ref:RVO' = '111'</td></tr>
+            </tbody>
+        </table>
+
+<p>
+&nbsp;
+</p>
+<p>
+<strong>Notes:</strong> ref:LAVV' = '122'; 'ref:RVO' = '112'; PTv2 route: 'LAVV 122' is not part of 'name' (derived from 'ref:LAVV' = '122')
+
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="???" data-ref="112/122" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=112/122&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">112/122</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr data-info="-107241" data-ref="112/122" class="line"><td class="name">Bus RVO 112: Stop 1 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107241</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'ref:LAVV' = '122'<br>'ref:RVO' = '112'<br>PTv2 route: 'LAVV 122' is not part of 'name' (derived from 'ref:LAVV' = '122')</td></tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <h1 id="withoutref">3 Public Transport Lines without 'ref'</h1>
+        <h2 id="A3.1">3.1 Bus</h2>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="relation">Relation (id=)</th><th class="type">Type (type=)</th><th class="route_type">Vehicle (route(_master)=)</th><th class="name">Name (name=)</th><th class="network">Network (network=)</th><th class="operator">Operator (operator=)</th><th class="from">From (from=)</th><th class="via">Via (via=)</th><th class="to">To (to=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="-107233" data-ref="???" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107233</td><td class="type">route</td><td class="route_type">bus</td><td class="name">Bus X: Stop 1 =&gt; Stop 4</td><td class="network"></td><td class="operator"></td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv">2</td><td class="issues">'ref' is not set<br>'network' is not set</td><td class="notes"></td></tr>
+                <tr data-info="-107235" data-ref="???" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107235</td><td class="type">route</td><td class="route_type">bus</td><td class="name"></td><td class="network"></td><td class="operator"></td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv">2</td><td class="issues">'ref' is not set<br>'name' is not set<br>'network' is not set</td><td class="notes"></td></tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <h1 id="networkdetails">4 Details for 'network'-Values</h1>
+        <h2 id="considerednetworks">4.1 Considered 'network'-Values</h2>
+<p>
+This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="network">Network (network=)</th><th class="number">Number</th><th class="relations">Relations</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="Network" data-ref="???" class="line"><td class="network">Network</td><td class="number">12</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '102' -107232, <img src="/img/Relation.svg" alt="Relation" /> '1' -107236, <img src="/img/Relation.svg" alt="Relation" /> '2' -107237, <img src="/img/Relation.svg" alt="Relation" /> '3' -107238, <img src="/img/Relation.svg" alt="Relation" /> '4' -107239, <img src="/img/Relation.svg" alt="Relation" /> '5' -107240, <img src="/img/Relation.svg" alt="Relation" /> '112/122' -107241, <img src="/img/Relation.svg" alt="Relation" /> '12/22' -107242, <img src="/img/Relation.svg" alt="Relation" /> '111/121' -107243, <img src="/img/Relation.svg" alt="Relation" /> '11/21' -107244 and more ...</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="network"></td><td class="number">3</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> -107233, <img src="/img/Relation.svg" alt="Relation" /> '101' -107234, <img src="/img/Relation.svg" alt="Relation" /> -107235</td></tr>
+            </tbody>
+        </table>
+
+    </body>
+</html>

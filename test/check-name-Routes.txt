@@ -39,7 +39,7 @@
 #
 
 
-= Test file for check of name (not relaxed)
+= Test file for --check-name (not relaxed)
 
 == Positive, no errors
 
@@ -50,56 +50,83 @@
 3;bus;;;;
 4;bus;;;;
 5;bus;;;;
-6;bus;;;;
-7;bus;;;;
-8;bus;;;;
-9;bus;;;;
-10;bus;;;;
+#6;bus;;;;
+#7;bus;;;;
+#8;bus;;;;
+#9;bus;;;;
+#10;bus;;;;
+-
 
 === Combined 'ref'
 
--'''Notes''': 'ref:LAVV' = '21'; 'ref:RVO' = '11'
+-'''Notes:''' 'ref:LAVV' = '21'; 'ref:RVO' = '11'
 11/21;bus;;;;
-12/22;bus;;;;
-13/23;bus;;;;
-14/24;bus;;;;
-15/25;bus;;;;
-16/26;bus;;;;
-17/27;bus;;;;
-18/28;bus;;;;
-19/29;bus;;;;
 
+-
+- '''Notes:''' 'ref:LAVV' = '22'; 'ref:RVO' = '12'; 'ref_trips' = '012;015;0134'
+12/22;bus;;;;
+#13/23;bus;;;;
+#14/24;bus;;;;
+#15/25;bus;;;;
+#16/26;bus;;;;
+#17/27;bus;;;;
+#18/28;bus;;;;
+#19/29;bus;;;;
+-
 
 == Negative, with errors
 
-- '''Errors:''' 'name' is not set; 'network' is not set; '''Notes:''' PTv2 route: 'from' is not set; PTv2 route: 'to' is not set
+=== Simple 'ref'
+
+
+- '''Errors:''' 'name' is not set; 'network' is not set
 101;bus;;;;
 
-- '''Notes:''' PTv2 route: 'from' is not set; PTv2 route: 'to' is not set
+-
+- '''Notes:''' PTv2 route: 'name' should (at least) be of the form '... ref ...: from => to'
 102;bus;;;;
 
 -
+- '''Notes:''' PTv2 route: 'ref' is not part of 'name'
 103;bus;;;;
 
 -
+- '''Notes:''' PTv2 route: 'from' = 'Stop 1' is not part of 'name'; PTv2 route: 'to' = 'Stop 4' is not part of 'name'
 104;bus;;;;
 
+#-
+#-
+#105;bus;;;;
+
+#-
+#-
+#106;bus;;;;
+
+#-
+#-
+#107;bus;;;;
+
+#-
+#-
+#108;bus;;;;
+
+#-
+#-
+#109;bus;;;;
+
+#-
+#-
+#110;bus;;;;
 -
-105;bus;;;;
+
+=== Combined 'ref'
+
+-'''Notes:''' 'ref:RVO' = '111'
+111/121;bus;;;;
 
 -
-106;bus;;;;
+-'''Notes:''' ref:LAVV' = '122'; 'ref:RVO' = '112'; PTv2 route: 'LAVV 122' is not part of 'name' (derived from 'ref:LAVV' = '122')
+112/122;bus;;;;
 
--
-107;bus;;;;
-
--
-108;bus;;;;
-
--
-109;bus;;;;
-
--
-110;bus;;;;
 
 </pre>
