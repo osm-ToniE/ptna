@@ -1283,7 +1283,7 @@ sub match_route_type {
             if ( $route_type eq $rt ) {
                 printf STDERR "%s Keeping route type: %s\n", get_time(), $route_type       if ( $debug );
                 return 'keep';
-            } elsif ( $route_type =~ m/$rt/ ) {
+            } elsif ( $route_type =~ m/\Q$rt\E/ ) {
                 printf STDERR "%s Suspicious route type: %s\n", get_time(), $route_type    if ( $debug );
                 return 'suspicious';
             }
@@ -1469,19 +1469,19 @@ sub search_matching_relations {
                                                 foreach $ExpFrom ( @ExpFromArray ) {
                                                     if ( $ExpFrom ) {
                                                         if ( $RelFrom ) {
-                                                            if ( $ExpFrom =~ m/$RelFrom/ ) {
+                                                            if ( $ExpFrom =~ m/\Q$RelFrom\E/ ) {
                                                                 $match = "$ExpFrom =~ m/$RelFrom/";
                                                                 last;
-                                                            } elsif ( $RelFrom =~ m/$ExpFrom/ ) {
+                                                            } elsif ( $RelFrom =~ m/\Q$ExpFrom\E/ ) {
                                                                 $match = "$RelFrom =~ m/$ExpFrom/";
                                                                 last;
                                                             }
                                                         }
                                                         if ( $RelTo ) {
-                                                            if ( $ExpFrom =~ m/$RelTo/ ) {
+                                                            if ( $ExpFrom =~ m/\Q$RelTo\E/ ) {
                                                                 $match = "$ExpFrom =~ m/$RelTo/";
                                                                 last;
-                                                            } elsif ( $RelTo =~ m/$ExpFrom/ ) {
+                                                            } elsif ( $RelTo =~ m/\Q$ExpFrom\E/ ) {
                                                                 $match = "$RelTo =~ m/$ExpFrom/";
                                                                 last;
                                                             }
@@ -1492,19 +1492,19 @@ sub search_matching_relations {
                                                     foreach $ExpTo ( @ExpToArray ) {
                                                         if ( $ExpTo ) {
                                                             if ( $RelFrom ) {
-                                                                if ( $ExpTo =~ m/$RelFrom/ ) {
+                                                                if ( $ExpTo =~ m/\Q$RelFrom\E/ ) {
                                                                    $match = "$ExpTo =~ m/$RelFrom/";
                                                                    last;
-                                                                } elsif ( $RelFrom =~ m/$ExpTo/ ) {
+                                                                } elsif ( $RelFrom =~ m/\Q$ExpTo\E/ ) {
                                                                    $match = "$RelFrom =~ m/$ExpTo/";
                                                                    last;
                                                                 }
                                                             }
                                                             if ( $RelTo ) {
-                                                                if ( $ExpTo =~ m/$RelTo/ ) {
+                                                                if ( $ExpTo =~ m/\Q$RelTo\E/ ) {
                                                                    $match = "$ExpTo =~ m/$RelTo/";
                                                                    last;
-                                                                } elsif ( $RelTo =~ m/$ExpTo/ ) {
+                                                                } elsif ( $RelTo =~ m/\Q$ExpTo\E/ ) {
                                                                    $match = "$RelTo =~ m/$ExpTo/";
                                                                    last;
                                                                 }
@@ -1979,7 +1979,7 @@ sub analyze_relation {
         
         foreach $specialtag ( @specialtags ) {
             foreach my $tag ( sort(keys(%{$relation_ptr->{'tag'}})) ) {
-                if ( $tag =~ m/^$specialtag/i ) {
+                if ( $tag =~ m/^\Q$specialtag\E/i ) {
                     if ( $relation_ptr->{'tag'}->{$tag} ) {
                         $reporttype = ( $specialtag2reporttype{$specialtag} ) ? $specialtag2reporttype{$specialtag} : '__notes__';
                         if ( $tag =~ m/^note$/i ){
@@ -2011,7 +2011,7 @@ sub analyze_relation {
 
             if ( $network_short_regex ) {
                 foreach my $short_value ( split('\|',$network_short_regex) ) {
-                    if ( $network =~ m/($short_value)/ ) {
+                    if ( $network =~ m/(\Q$short_value\E)/ ) {
                         $match = $1;
                         if ( $positive_notes ) {
                             if ( $network eq $match ) {
@@ -2020,13 +2020,13 @@ sub analyze_relation {
                                 push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' ~ '%s'",html_escape($match)) );
                             }
                         }
-                        if ( $network =~ m/;\s+$match/    ||
-                             $network =~ m/$match\s+;/    ||
-                             $network =~ m/$match\s*;\s+/   ) {
+                        if ( $network =~ m/;\s+\Q$match\E/    ||
+                             $network =~ m/\Q$match\E\s+;/    ||
+                             $network =~ m/\Q$match\E\s*;\s+/   ) {
                             $count_error_semikolon_w_blank++;
                         }
-                        if ( $network =~ m/(,\s*)$match/    ||
-                             $network =~ m/$match(\s*,)/       ) {
+                        if ( $network =~ m/(,\s*)\Q$match\E/    ||
+                             $network =~ m/\Q$match\E(\s*,)/       ) {
                             $count_error_comma++;
                         }
                     }
@@ -2034,7 +2034,7 @@ sub analyze_relation {
             }
             if ( $network_long_regex ) {
                 foreach my $long_value ( split('\|',$network_long_regex) ) {
-                    if ( $network =~ m/($long_value)/ ) {
+                    if ( $network =~ m/(\Q$long_value\E)/ ) {
                         $match = $1;
                         if ( $positive_notes ) {
                             if ( $network eq $match ) {
@@ -2043,13 +2043,13 @@ sub analyze_relation {
                                 push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' ~ '%s'",html_escape($match)) );
                             }
                         }
-                        if ( $network =~ m/;\s+$match/    ||
-                             $network =~ m/$match\s+;/    ||
-                             $network =~ m/$match\s*;\s+/   ) {
+                        if ( $network =~ m/;\s+\Q$match\E/    ||
+                             $network =~ m/\Q$match\E\s+;/    ||
+                             $network =~ m/\Q$match\E\s*;\s+/   ) {
                             $count_error_semikolon_w_blank++;
                         }
-                        if ( $network =~ m/(,\s*)$match/    ||
-                             $network =~ m/$match(\s*,)/       ) {
+                        if ( $network =~ m/(,\s*)\Q$match\E/    ||
+                             $network =~ m/\Q$match\E(\s*,)/       ) {
                             $count_error_comma++;
                         }
                     }
@@ -2069,8 +2069,8 @@ sub analyze_relation {
                 
                 $match_short     = $1   if ( $network_short_regex     && $network =~ m/($network_short_regex)/     );
                 $match_long      = $1   if ( $network_long_regex      && $network =~ m/($network_long_regex)/      );
-                $expect_long_as  = $1   if ( $expect_network_long_as  && $network =~ m/($expect_network_long_as)/  );
-                $expect_long_for = $1   if ( $expect_network_long_for && $network =~ m/($expect_network_long_for)/ );
+                $expect_long_as  = $1   if ( $expect_network_long_as  && $network =~ m/(\Q$expect_network_long_as\E)/  );
+                $expect_long_for = $1   if ( $expect_network_long_for && $network =~ m/(\Q$expect_network_long_for\E)/ );
                 
                 if ( $match_long ) {
                     if ( $match_long ne $expect_long_as ) {
@@ -2089,8 +2089,8 @@ sub analyze_relation {
                 
                 $match_long       = $1   if ( $network_long_regex       && $network =~ m/($network_long_regex)/       );
                 $match_short      = $1   if ( $network_short_regex      && $network =~ m/($network_short_regex)/      );
-                $expect_short_as  = $1   if ( $expect_network_short_as  && $network =~ m/($expect_network_short_as)/  );
-                $expect_short_for = $1   if ( $expect_network_short_for && $network =~ m/($expect_network_short_for)/ );
+                $expect_short_as  = $1   if ( $expect_network_short_as  && $network =~ m/(\Q$expect_network_short_as\E)/  );
+                $expect_short_for = $1   if ( $expect_network_short_for && $network =~ m/(\Q$expect_network_short_for\E)/ );
                 
                 if ( $match_short ) {
                     if ( $match_short ne $expect_short_as ) {
@@ -2114,7 +2114,7 @@ sub analyze_relation {
         if ( $positive_notes ) {
             foreach my $special ( 'network:', 'route:', 'ref:', 'ref_', 'operator' ) {
                 foreach my $tag ( sort(keys(%{$relation_ptr->{'tag'}})) ) {
-                    if ( $tag =~ m/^$special/i ) {
+                    if ( $tag =~ m/^\Q$special\E/i ) {
                         if ( $relation_ptr->{'tag'}->{$tag} ) {
                             if ( $tag =~ m/^network:long$/i && $network_long_regex){
                                 if ( $relation_ptr->{'tag'}->{$tag} =~ m/^$network_long_regex$/ ) {
@@ -2635,7 +2635,7 @@ sub analyze_ptv2_route_relation {
             my $relaxed_for =  $relaxed_begin_end_for || '';
             $relaxed_for    =~ s/;/,/g;
             $relaxed_for    =  ',' . $relaxed_for . ',';
-            if ( $relaxed_for =~ m/,$relation_ptr->{'tag'}->{'route'},/ ) {
+            if ( $relaxed_for =~ m/,\Q$relation_ptr->{'tag'}->{'route'}\E,/ ) {
                 my $first_way_ID     = $relation_route_ways[0];
                 my @first_way_nodes  = ();
                 my $found_it         = 0;
@@ -2717,7 +2717,7 @@ sub analyze_ptv2_route_relation {
             my $relaxed_for =  $relaxed_begin_end_for || '';
             $relaxed_for    =~ s/;/,/g;
             $relaxed_for    =  ',' . $relaxed_for . ',';
-            if ( $relaxed_for =~ m/,$relation_ptr->{'tag'}->{'route'},/ ) {
+            if ( $relaxed_for =~ m/,\Q$relation_ptr->{'tag'}->{'route'}\E,/ ) {
                 my $last_way_ID     = $relation_route_ways[$#relation_route_ways];
                 my @last_way_nodes  = ();
                 my $found_it        = 0;
@@ -4023,7 +4023,7 @@ sub CheckRouteRefOnStops {
                                 $temp_route_ref =~ s/\s*;\s*/;/g;
 
                                 foreach my $sub_ref ( split( $ref_separator, $ref ) ) {
-                                    if ( $temp_route_ref =~ m/;$sub_ref;/ ) {
+                                    if ( $temp_route_ref =~ m/;\Q$sub_ref\E;/ ) {
                                         ; # fine
                                     } else {
                                         $hint = '';
@@ -4054,7 +4054,7 @@ sub CheckRouteRefOnStops {
                                     $temp_stop_ref =~ s/\s*;\s*/;/g;
     
                                     foreach my $sub_ref ( split( $ref_separator, $ref ) ) {
-                                        if ( $temp_stop_ref =~ m/;$sub_ref;/ ) {
+                                        if ( $temp_stop_ref =~ m/;\Q$sub_ref\E;/ ) {
                                             $hint = sprintf( gettext( "(consider adding '%s' to the 'route_ref' tag of the stop)" ), html_escape($sub_ref) );
                                             $to_be_replaced{sprintf(gettext("'ref' = '%s' of stop should represent the reference of the stop, but includes the 'ref' ='%s' of this route %s"),html_escape($object_ref->{'tag'}->{'ref'}),html_escape($sub_ref),$hint)}->{$member->{'ref'}} = $member->{'type'};
                                         }
@@ -4082,7 +4082,7 @@ sub CheckRouteRefOnStops {
                                     $temp_stop_ref =~ s/\s*;\s*/;/g;
     
                                     foreach my $sub_ref ( split( $ref_separator, $ref ) ) {
-                                        if ( $temp_stop_ref =~ m/;$sub_ref;/ ) {
+                                        if ( $temp_stop_ref =~ m/;\Q$sub_ref\E;/ ) {
                                             $hint = sprintf( gettext( "(consider creating a 'route_ref' = '%s' tag for the stop)" ), html_escape($sub_ref) );
                                             $to_be_replaced{sprintf(gettext("'ref' = '%s' of stop should represent the reference of the stop, but includes the 'ref' ='%s' of this route %s"),html_escape($object_ref->{'tag'}->{'ref'}),html_escape($sub_ref),$hint)}->{$member->{'ref'}} = $member->{'type'};
                                         }
@@ -4817,9 +4817,9 @@ sub printTableLine {
         } elsif ( $columns[$i] eq "relations"  ){
             my $and_more = '';
             my $searchfor = gettext(' and more ...');
-            if ( $val =~ m/$searchfor/ ) {
+            if ( $val =~ m/\Q$searchfor\E/ ) {
                 $and_more = $searchfor;
-                $val =~ s/$searchfor//;
+                $val =~ s/\Q$searchfor\E//;
             }
             push( @HTML_main, sprintf( "<td class=\"relations\">%s%s</td>", join( ', ', map { printRelationTemplate($_,'ref'); } split( ',', $val ) ), $and_more ) );
         } elsif ( $columns[$i] eq "issues"  ){
