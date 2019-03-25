@@ -3750,24 +3750,6 @@ sub CheckNameRefFromViaToPTV2 {
         }
 
         if ( $name && $ref && $preconditions_failed == 0) {
-#            if ( $from ) {
-#                if ( !$check_name_relaxed ) {
-#                    if ( index($name,$from) == -1 ) {
-#                        push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'from' = '%s' is not part of 'name'"), html_escape($from)) );
-#                        $preconditions_failed++;
-#                        $return_code++;
-#                    }
-#                }
-#            }
-#            if ( $to ) {
-#                if ( !$check_name_relaxed ) {
-#                    if ( index($name,$to) == -1 ) {
-#                        push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'to' = '%s' is not part of 'name'"), html_escape($to)) );
-#                        $preconditions_failed++;
-#                        $return_code++;
-#                    }
-#                }
-#            }
             
             if ( $name =~ m/^(.*):\s{0,1}(.*?)\s{0,1}=>\s{0,1}(.*)\s{0,1}=>\s{0,1}(.*)$/ ||
                  $name =~ m/^(.*):\s{0,1}(.*?)\s{0,1}=>\s{0,1}(.*)$/                         ) {
@@ -3855,7 +3837,7 @@ sub CheckNameRefFromViaToPTV2 {
                             if ( scalar(@via_parts_in_name) == scalar(@via_values) ) {
                                 for ( my $index = 0; $index < scalar(@via_parts_in_name); $index++ ) {
                                     if ( $via_parts_in_name[$index] ne $via_values[$index] ) {
-                                        push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'via' is set: %d. via-value = '%s' is not equal to %d. via-part = '%s' of 'name'"),$index+1,html_escape($via_values[$index]),$index+1,html_escape($via_parts_in_name[$index])) );
+                                        push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' is not equal to %d. via-value = '%s'"),$index+1,html_escape($via_values[$index]),$index+1,html_escape($via_parts_in_name[$index])) );
                                         $return_code++;
                                     }
                                 }
