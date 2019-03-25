@@ -210,7 +210,7 @@ if ( $or_separator ) {
 if ( $ref_separator ) {
     if ( length($ref_separator) > 1 ) {
         printf STDERR "%s analyze-routes.pl: wrong value for option: '--ref-separator' = '%s' - setting it to '--ref-separator' = '/'\n", get_time(), $ref_separator;
-        $or_separator = '|';
+        $ref_separator = '|';
     }
     $ref_separator = '\\' . $ref_separator;
 }
@@ -3837,7 +3837,7 @@ sub CheckNameRefFromViaToPTV2 {
                             if ( scalar(@via_parts_in_name) == scalar(@via_values) ) {
                                 for ( my $index = 0; $index < scalar(@via_parts_in_name); $index++ ) {
                                     if ( $via_parts_in_name[$index] ne $via_values[$index] ) {
-                                        push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' is not equal to %d. via-value = '%s'"),$index+1,html_escape($via_values[$index]),$index+1,html_escape($via_parts_in_name[$index])) );
+                                        push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' is not equal to %d. via-value = '%s'"),$index+1,html_escape($via_parts_in_name[$index]),$index+1,html_escape($via_values[$index])) );
                                         $return_code++;
                                     }
                                 }

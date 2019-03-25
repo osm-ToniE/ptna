@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-25 18:53+0100\n"
-"PO-Revision-Date: 2019-03-25 18:54+0100\n"
+"POT-Creation-Date: 2019-03-25 19:13+0100\n"
+"PO-Revision-Date: 2019-03-25 19:13+0100\n"
 "Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
 "Language-Team: osm-ToniE <osm-ToniE@web.de>\n"
 "Language: de\n"
@@ -1082,7 +1082,7 @@ msgstr ""
 msgid " and more ..."
 msgstr " und mehr ..."
 
-#: modules/RoutesList.pm:158
+#: modules/RoutesList.pm:161
 #, perl-format
 msgid ""
 "Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line: "
@@ -1091,7 +1091,7 @@ msgstr ""
 "Fahrzeugtyp wird nicht unterst&uuml;tzt: '%s'. Zeile %s der Routen-Daten. "
 "Inhalt der Zeile: '%s'"
 
-#: modules/RoutesList.pm:164
+#: modules/RoutesList.pm:167
 #, perl-format
 msgid "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'"
 msgstr ""

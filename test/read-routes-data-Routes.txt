@@ -101,12 +101,12 @@
 912;bus;comment;;to;operator1; operator2
 913;bus;comment;from;;operator1; operator2
 914;bus;;;;operator1; operator2
-#915;bus;;;;'Mein Bus' Gmbh
-#916;bus;;;;"'Mein Bus' Gmbh"
-#917;bus;;;;"\"Mein Bus\" Gmbh"
-#918;bus;;;;\"Mein Bus\" Gmbh
-#919;bus;;;;operator's son
-#"998;999";bus;;;;"operator1; operator2"
+915;bus;;;;'Mein Bus' Gmbh
+916;bus;;;;"'Mein Bus' Gmbh"
+917;bus;;;;"Mein Bus Gmbh"
+918;bus;;;;"Mein Bus" Gmbh
+919;bus;;;;operator's son
+"998;999";bus;;;;operator
 
 -
 

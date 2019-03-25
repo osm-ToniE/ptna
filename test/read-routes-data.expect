@@ -210,6 +210,18 @@ text inside table is now supported
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='913' and route='bus'</td><td class="notes"></td></tr>
                 <tr data-info="Operator: operator1; operator2" data-ref="914" class="sketchline"><td class="sketch">914</td><td class="csvinfo" colspan="5">Operator: operator1; operator2</td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='914' and route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Operator: &#039;Mein Bus&#039; Gmbh" data-ref="915" class="sketchline"><td class="sketch">915</td><td class="csvinfo" colspan="5">Operator: &#039;Mein Bus&#039; Gmbh</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='915' and route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Operator: &#039;Mein Bus&#039; Gmbh" data-ref="916" class="sketchline"><td class="sketch">916</td><td class="csvinfo" colspan="5">Operator: &#039;Mein Bus&#039; Gmbh</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='916' and route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Operator: Mein Bus Gmbh" data-ref="917" class="sketchline"><td class="sketch">917</td><td class="csvinfo" colspan="5">Operator: Mein Bus Gmbh</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='917' and route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Operator: &quot;Mein Bus&quot; Gmbh" data-ref="918" class="sketchline"><td class="sketch">918</td><td class="csvinfo" colspan="5">Operator: &quot;Mein Bus&quot; Gmbh</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='918' and route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Operator: operator&#039;s son" data-ref="919" class="sketchline"><td class="sketch">919</td><td class="csvinfo" colspan="5">Operator: operator&#039;s son</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='919' and route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Operator: operator" data-ref="998;999" class="sketchline"><td class="sketch">998;999</td><td class="csvinfo" colspan="5">Operator: operator</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='998;999' and route='bus'</td><td class="notes"></td></tr>
             </tbody>
         </table>
 
