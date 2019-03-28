@@ -466,7 +466,7 @@ msgstr "Route-Master ohne Route(n)"
 
 #: bin/ptna-routes.pl:2170
 msgid "Route-Master with Relation(s) unequal to 'route'"
-msgstr "Route-Master mit Relation(en) ungleich \"route\""
+msgstr "Route-Master mit Relation(en) ungleich 'route'"
 
 #: bin/ptna-routes.pl:2171
 msgid "Route-Master with Way(s)"
@@ -745,12 +745,12 @@ msgstr ""
 "Route: %s"
 
 #: bin/ptna-routes.pl:3741
-msgid "PTv2 route: 'name' includes deprecated '<=>'"
-msgstr "PTv2 Route: 'name' enth&auml;lt un&uuml;bliches '<=>'"
+msgid "PTv2 route: 'name' includes deprecated '&lt;=&gt;'"
+msgstr "PTv2 Route: 'name' enth&auml;lt un&uuml;bliches '&lt;=&gt;'"
 
 #: bin/ptna-routes.pl:3746
-msgid "PTv2 route: 'name' includes deprecated '==>'"
-msgstr "PTv2 Route: 'name' enth&auml;lt un&uuml;bliches '==>'"
+msgid "PTv2 route: 'name' includes deprecated '==&gt;'"
+msgstr "PTv2 Route: 'name' enth&auml;lt un&uuml;bliches '==&gt;'"
 
 #: bin/ptna-routes.pl:3787
 #, perl-format
