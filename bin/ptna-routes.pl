@@ -3738,12 +3738,12 @@ sub CheckNameRefFromViaToPTV2 {
             # basic checks for 'name' w/o any other dependencies to 'ref', 'from', 'to' and 'via'
             #
             if ( $name =~ m/<=>/ ) {
-                push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'name' includes deprecated '<=>'") );
+                push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'name' includes deprecated '&lt;=&gt;'") );
                 $preconditions_failed++;
                 $return_code++;
             }
             if ( $name =~ m/==>/ ) {
-                push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'name' includes deprecated '==>'") );
+                push( @{$relation_ptr->{'__notes__'}}, gettext("PTv2 route: 'name' includes deprecated '==&gt;'") );
                 $preconditions_failed++;
                 $return_code++;
             }
@@ -3774,7 +3774,7 @@ sub CheckNameRefFromViaToPTV2 {
 
                 if ( index($ref_in_name,$ref) == -1 ) {
                     #
-                    # this will check only combinations of verious ref's: ref='025/9567/11'
+                    # this will check only combinations of verious refs:  ref='025/9567/11'
                     #                                                     name='Bus LAVV 025/RVO 9567/VLK 11 .....'
                     #                                                     ref:LAV='025'
                     #                                                     ref:RVO='9567'
