@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-25 18:53+0100\n"
+"POT-Creation-Date: 2019-03-29 18:03+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -663,11 +663,11 @@ msgid "PTv2 route: last node of way is not a stop position of this route: %s"
 msgstr ""
 
 #: ../bin/ptna-routes.pl:3741
-msgid "PTv2 route: 'name' includes deprecated '<=>'"
+msgid "PTv2 route: 'name' includes deprecated '&lt;=&gt;'"
 msgstr ""
 
 #: ../bin/ptna-routes.pl:3746
-msgid "PTv2 route: 'name' includes deprecated '==>'"
+msgid "PTv2 route: 'name' includes deprecated '==&gt;'"
 msgstr ""
 
 #: ../bin/ptna-routes.pl:3787
@@ -845,7 +845,7 @@ msgstr ""
 #: ../bin/ptna-routes.pl:4274
 msgid ""
 "An explanation of the error texts can be found in the documentation at <a "
-"href='/documentation.html#checks'>'Check'</a>."
+"href='/doc/index.html#checks'>'Check'</a>."
 msgstr ""
 
 #: ../bin/ptna-routes.pl:4312
@@ -946,14 +946,14 @@ msgstr ""
 msgid " and more ..."
 msgstr ""
 
-#: ../modules/RoutesList.pm:158
+#: ../modules/RoutesList.pm:161
 #, perl-format
 msgid ""
 "Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line: "
 "'%s'"
 msgstr ""
 
-#: ../modules/RoutesList.pm:164
+#: ../modules/RoutesList.pm:167
 #, perl-format
 msgid "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'"
 msgstr ""
