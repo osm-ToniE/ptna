@@ -35,12 +35,15 @@ while true ; do
         -a|--analyze)                       analyze=true                ; shift ;;
         -c|--clean)                         clean=true                  ; shift ;;
         -g|--get-routes)                    getroutes=true              ; shift ;;
+        -P|--get-talk)                      gettalk=true                ; shift ;;
         -h|--help)                          help=true                   ; shift ;;
         -o|--overpass-query)                overpassquery=true  ; overpassqueryonzeroxml=false ; shift ;;
         -O|--overpass-query-on-zero-xml)    overpassqueryonzeroxml=true  ; overpassquery=false ; shift ;;
         -p|--push-routes)                   pushroutes=true             ; shift ;;
+        -P|--push-talk)                     pushtalk=true               ; shift ;;
         -u|--update-result)                 updateresult=true           ; shift ;;
         -w|--watch-routes)                  watchroutes=true            ; shift ;;
+        -W|--watch-talk)                    watchtalk=true              ; shift ;;
         -S|--settings_dir)                  shift; SETTINGS_DIR=$1      ; shift ;;
         --) shift ; break ;;
         *) echo "Internal error!" ; exit 3 ;;
@@ -61,17 +64,14 @@ else
 fi
 
 
-if [ -z "$PREFIX"              -o \
-     -z "$OVERPASS_QUERY"      -o \
-     -z "$WIKI_ROUTES_PAGE"    -o \
-     -z "$ANALYSIS_OPTIONS"    -o \
-     -z "$WIKI_ROUTES_PAGE"         ]
+if [ -z "$PREFIX"          -o \
+     -z "$OVERPASS_QUERY"  -o \
+     -z "$ANALYSIS_OPTIONS"     ]
 then
     echo "$SETTINGS_DIR/settings.sh file: unset variables(s)"
     [ -z "$PREFIX"           ] && echo "Please specify: PREFIX"
     [ -z "$OVERPASS_QUERY"   ] && echo "Please specify: OVERPASS_QUERY"
     [ -z "$ANALYSIS_OPTIONS" ] && echo "Please specify: ANALYSIS_OPTIONS"
-    [ -z "$WIKI_ROUTES_PAGE" ] && echo "Please specify: WIKI_ROUTES_PAGE"
     echo "... terminating"
     exit 5
 fi
@@ -91,6 +91,7 @@ RESULTS_LOC="$PTNA_TARGET_LOC/$PTNA_RESULTS_LOC/$SUB_DIR"
 
 ROUTES_FILE="$PREFIX-Routes.txt"
 SETTINGS_FILE="settings.sh"
+TALK_FILE="$PREFIX-Talk.wiki"
 
 OSM_XML_FILE="$PREFIX-Data.xml"
 HTML_FILE="$PREFIX-Analysis.html"
@@ -172,9 +173,29 @@ fi
 
 if [ "$getroutes" = "true" ]
 then
-    echo $(date "+%Y-%m-%d %H:%M:%S") "Reading Routes Wiki page '$WIKI_ROUTES_PAGE' to file '$SETTINGS_DIR/$ROUTES_FILE'"
-    ptna-wiki-page.pl --pull --page=$WIKI_ROUTES_PAGE --file=$SETTINGS_DIR/$ROUTES_FILE
-    echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $SETTINGS_DIR/$ROUTES_FILE)
+    if [ -n "$WIKI_ROUTES_PAGE" ]
+    then
+        echo $(date "+%Y-%m-%d %H:%M:%S") "Reading Routes Wiki page '$WIKI_ROUTES_PAGE' to file '$SETTINGS_DIR/$ROUTES_FILE'"
+        ptna-wiki-page.pl --pull --page=$WIKI_ROUTES_PAGE --file=$SETTINGS_DIR/$ROUTES_FILE
+        echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $SETTINGS_DIR/$ROUTES_FILE)
+    else
+        echo $(date "+%Y-%m-%d %H:%M:%S") "'$ROUTES_FILE' provided by GitHub only"
+        echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $SETTINGS_DIR/$ROUTES_FILE)
+    fi
+fi
+
+#
+# 
+#
+
+if [ "$gettalk" = "true" ]
+then
+    if [ -n "$ANALYSIS_TALK" ]
+    then
+        echo $(date "+%Y-%m-%d %H:%M:%S") "Reading Routes Wiki page '$ANALYSIS_TALK' to file '$SETTINGS_DIR/$TALK_FILE'"
+        ptna-wiki-page.pl --pull --page=$ANALYSIS_TALK --file=$SETTINGS_DIR/$TALK_FILE
+        echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $SETTINGS_DIR/$TALK_FILE)
+    fi
 fi
 
 #
@@ -356,17 +377,45 @@ fi
 
 if [ "$pushroutes" = "true" ]
 then
-    if [ -f $ROUTES_FILE ]
+    if [ -n "$WIKI_ROUTES_PAGE" ]
     then
-        if [ -s $ROUTES_FILE ]
+        if [ -f $ROUTES_FILE ]
         then
-            echo $(date "+%Y-%m-%d %H:%M:%S") "Writing Routes file '$ROUTES_FILE' to Wiki page '$WIKI_ROUTES_PAGE'"
-            ptna-wiki-page.pl --push --page=$WIKI_ROUTES_PAGE --file=$SETTINGS_DIR/$ROUTES_FILE --summary="update by PTNA"
+            if [ -s $ROUTES_FILE ]
+            then
+                echo $(date "+%Y-%m-%d %H:%M:%S") "Writing Routes file '$ROUTES_FILE' to Wiki page '$WIKI_ROUTES_PAGE'"
+                ptna-wiki-page.pl --push --page=$WIKI_ROUTES_PAGE --file=$SETTINGS_DIR/$ROUTES_FILE --summary="update by PTNA"
+            else
+                echo $(date "+%Y-%m-%d %H:%M:%S") $SETTINGS_DIR/$ROUTES_FILE is empty
+            fi
         else
-            echo $(date "+%Y-%m-%d %H:%M:%S") $SETTINGS_DIR/$ROUTES_FILE is empty
+            echo $(date "+%Y-%m-%d %H:%M:%S") $SETTINGS_DIR/$ROUTES_FILE does not exist
         fi
     else
-        echo $(date "+%Y-%m-%d %H:%M:%S") $SETTINGS_DIR/$ROUTES_FILE does not exist
+        echo $(date "+%Y-%m-%d %H:%M:%S") "'$ROUTES_FILE' stored in GitHub only"
+    fi
+fi
+
+#
+# 
+#
+
+if [ "$pushtalk" = "true" ]
+then
+    if [ -n "$ANALYSIS_TALK" ]
+    then
+        if [ -f $TALK_FILE ]
+        then
+            if [ -s $TALK_FILE ]
+            then
+                echo $(date "+%Y-%m-%d %H:%M:%S") "Writing Routes file '$TALK_FILE' to Wiki page '$ANALYSIS_TALK'"
+                ptna-wiki-page.pl --push --page=$ANALYSIS_TALK --file=$SETTINGS_DIR/$TALK_FILE --summary="update by PTNA"
+            else
+                echo $(date "+%Y-%m-%d %H:%M:%S") $SETTINGS_DIR/$TALK_FILE is empty
+            fi
+        else
+            echo $(date "+%Y-%m-%d %H:%M:%S") $SETTINGS_DIR/$TALK_FILE does not exist
+        fi
     fi
 fi
 
@@ -376,8 +425,26 @@ fi
 
 if [ "$watchroutes" = "true" ]
 then
-    echo $(date "+%Y-%m-%d %H:%M:%S") "Setting 'watch' on Wiki page '$WIKI_ROUTES_PAGE'"
-    ptna-wiki-page.pl --watch --page=$WIKI_ROUTES_PAGE
+    if [ -n "$WIKI_ROUTES_PAGE" ]
+    then
+        echo $(date "+%Y-%m-%d %H:%M:%S") "Setting 'watch' on Wiki page '$WIKI_ROUTES_PAGE'"
+        ptna-wiki-page.pl --watch --page=$WIKI_ROUTES_PAGE
+    else
+        echo $(date "+%Y-%m-%d %H:%M:%S") "'$ROUTES_FILE' provided by GitHub only"
+    fi
+fi
+
+#
+# 
+#
+
+if [ "$watchtalk" = "true" ]
+then
+    if [ -n "$ANALYSIS_TALK" ]
+    then
+        echo $(date "+%Y-%m-%d %H:%M:%S") "Setting 'watch' on Wiki page '$ANALYSIS_TALK'"
+        ptna-wiki-page.pl --watch --page=$ANALYSIS_TALK
+    fi
 fi
 
 
