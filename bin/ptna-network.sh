@@ -24,7 +24,7 @@ fi
 SETTINGS_DIR="."
 
 
-TEMP=$(getopt -o acghoOpuwS --long analyze,clean,get-routes,help,overpass-query,overpass-query-on-zero-xml,push-routes,update-result,watch-routes,settings-dir -n 'ptna-network.sh' -- "$@")
+TEMP=$(getopt -o acgGhoOpPuwWS --long analyze,clean,get-routes,help,overpass-query,overpass-query-on-zero-xml,push-routes,update-result,watch-routes,settings-dir -n 'ptna-network.sh' -- "$@")
 
 if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 2 ; fi
 
@@ -35,7 +35,7 @@ while true ; do
         -a|--analyze)                       analyze=true                ; shift ;;
         -c|--clean)                         clean=true                  ; shift ;;
         -g|--get-routes)                    getroutes=true              ; shift ;;
-        -P|--get-talk)                      gettalk=true                ; shift ;;
+        -G|--get-talk)                      gettalk=true                ; shift ;;
         -h|--help)                          help=true                   ; shift ;;
         -o|--overpass-query)                overpassquery=true  ; overpassqueryonzeroxml=false ; shift ;;
         -O|--overpass-query-on-zero-xml)    overpassqueryonzeroxml=true  ; overpassquery=false ; shift ;;

@@ -20,7 +20,7 @@ do
     
         cd $D
     
-        echo ptna-network.sh $*
+        ptna-network.sh $*
     
         cd $WD
     fi
