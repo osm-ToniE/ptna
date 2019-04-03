@@ -9,17 +9,18 @@ cd $PTNA_NETWORKS_LOC
 
 WD=$PWD
 
-for A in [A-Z]*
+for S in $(find . -name settings.sh)
 do
-    if [ -d $A ]
+    D=$(dirname $S)
+    if [ -d $D ]
     then
         echo
-        echo $(date "+%Y-%m-%d %H:%M:%S") "$A"
+        echo $(date "+%Y-%m-%d %H:%M:%S") "$D"
         echo
     
-        cd $A
+        cd $D
     
-        ptna-network.sh $*
+        echo ptna-network.sh $*
     
         cd $WD
     fi
