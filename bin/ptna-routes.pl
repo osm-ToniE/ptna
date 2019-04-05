@@ -19,6 +19,7 @@ binmode STDOUT, ":utf8";
 binmode STDERR, ":utf8";
 
 use Locale::gettext;
+use Locale::Util    qw( set_locale );
 
 use Getopt::Long;
 use OSM::XML        qw( parse );
@@ -176,11 +177,9 @@ if ( $verbose ) {
 }
 
 
-
 if ( $opt_language ) {
-    setlocale( LC_ALL, "" );
-    $ENV{'LANG'}     = $opt_language;
-    $ENV{'LANGUAGE'} = $opt_language;
+    $opt_language =~ s/_.*$//;
+    set_locale( LC_ALL, $opt_language );    # currently, we support only the main language like "de", "fr", ...
     my $PATH = $0;
     $PATH =~ s|bin/[^/]*$|locale|; 
     bindtextdomain( 'ptna', $PATH );
