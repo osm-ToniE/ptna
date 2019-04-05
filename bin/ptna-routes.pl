@@ -19,7 +19,6 @@ binmode STDOUT, ":utf8";
 binmode STDERR, ":utf8";
 
 use Locale::gettext;
-use Locale::Util    qw( set_locale );
 
 use Getopt::Long;
 use OSM::XML        qw( parse );
@@ -185,7 +184,7 @@ if ( $opt_language ) {
     $PATH =~ s|bin/[^/]*$|locale|; 
     bindtextdomain( 'ptna', $PATH );
     textdomain( "ptna" );
-}    
+}
 
 if ( $check_name_relaxed ) {
     $check_name = 1;
@@ -4271,7 +4270,7 @@ sub printInitialHeader {
     push( @HTML_main, gettext("The data will be updated when the result of the analysis has changed.") );
     push( @HTML_main, "\n</p>\n" );
     push( @HTML_main, "<p>\n    " );
-    push( @HTML_main, gettext("An explanation of the error texts can be found in the documentation at <a href='/doc/index.html#checks'>'Check'</a>.") );
+    push( @HTML_main, gettext("An explanation of the error texts can be found in the documentation at <a href='/en/index.html#checks'>'Check'</a>.") );
     push( @HTML_main, "\n</p>\n" );
 
 }
