@@ -9,7 +9,7 @@ cd $PTNA_NETWORKS_LOC
 
 WD=$PWD
 
-for S in $(find . -name settings.sh)
+for S in $(find . -name settings.sh | sort)
 do
     D=$(dirname $S)
     if [ -d $D ]
