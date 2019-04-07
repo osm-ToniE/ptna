@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-05 00:15+0200\n"
+"POT-Creation-Date: 2019-04-07 11:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: ../bin/ptna-routes.pl:176
+msgid "Language test"
+msgstr ""
 
 #: ../bin/ptna-routes.pl:276
 msgid "Line (ref=)"
@@ -845,7 +849,7 @@ msgstr ""
 #: ../bin/ptna-routes.pl:4274
 msgid ""
 "An explanation of the error texts can be found in the documentation at <a "
-"href='/doc/index.html#checks'>'Check'</a>."
+"href='/en/index.html#checks'>'Check'</a>."
 msgstr ""
 
 #: ../bin/ptna-routes.pl:4312

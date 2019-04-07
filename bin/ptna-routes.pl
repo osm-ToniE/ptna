@@ -19,6 +19,7 @@ binmode STDOUT, ":utf8";
 binmode STDERR, ":utf8";
 
 use Locale::gettext;
+use Locale::Util    qw ( set_locale );
 
 use Getopt::Long;
 use OSM::XML        qw( parse );
@@ -177,13 +178,106 @@ if ( $verbose ) {
 
 
 if ( $opt_language ) {
-    setlocale( LC_ALL, "" );
-    $ENV{'LANG'} = $opt_language;
-    $ENV{'LANGUAGE'} = $opt_language;
+    my %lang2default_country = ( 'de' => 'DE', 'fr' => 'FR' );
+
+    if ( $debug ) {
+        printf STDERR "%s\n", gettext("Language test");
+    }
+    if ( $lang2default_country{$opt_language} ) {
+        $ENV{'LANG'} = $opt_language . '_' . $lang2default_country{$opt_language};
+    } else {
+        $ENV{'LANG'} = $opt_language;
+    }
+    $ENV{'LANGUAGE'} = $ENV{'LANG'};
+    setlocale( LC_ALL, '' );
     my $PATH = $0;
-    $PATH =~ s|bin/[^/]*$|locale|; 
+    $PATH =~ s|bin/[^/]*$|locale|;
     bindtextdomain( 'ptna', $PATH );
     textdomain( "ptna" );
+    printf STDERR "%s -> %s + setlocale( LC_ALL, '' ): %s\n", $opt_language, $ENV{'LANG'}, gettext("Language test");
+
+    if ( $verbose ) {
+        $ENV{'LANG'} = $opt_language . '_' . $lang2default_country{$opt_language};
+        $ENV{'LANGUAGE'} = $ENV{'LANG'};
+        setlocale( LC_ALL, '' );
+        $PATH = $0;
+        $PATH =~ s|bin/[^/]*$|locale|;
+        bindtextdomain( 'ptna', $PATH );
+        textdomain( "ptna" );
+        printf STDERR "%s + setlocale( LC_ALL, '' ): %s\n", $ENV{'LANG'}, gettext("Language test");
+
+        $ENV{'LANG'} = $opt_language . '.UTF-8';
+        $ENV{'LANGUAGE'} = $ENV{'LANG'};
+        setlocale( LC_ALL, '' );
+        $PATH = $0;
+        $PATH =~ s|bin/[^/]*$|locale|;
+        bindtextdomain( 'ptna', $PATH );
+        textdomain( "ptna" );
+        printf STDERR "%s + setlocale( LC_ALL, '' ): %s\n", $ENV{'LANG'}, gettext("Language test");
+
+        $ENV{'LANG'} = $opt_language . '_' . $lang2default_country{$opt_language} . '.UTF-8';
+        $ENV{'LANGUAGE'} = $ENV{'LANG'};
+        setlocale( LC_ALL, '' );
+        $PATH = $0;
+        $PATH =~ s|bin/[^/]*$|locale|;
+        bindtextdomain( 'ptna', $PATH );
+        textdomain( "ptna" );
+        printf STDERR "%s + setlocale( LC_ALL, '' ): %s\n", $ENV{'LANG'}, gettext("Language test");
+
+        $ENV{'LANG'} = $opt_language . '.utf8';
+        $ENV{'LANGUAGE'} = $ENV{'LANG'};
+        setlocale( LC_ALL, '' );
+        $PATH = $0;
+        $PATH =~ s|bin/[^/]*$|locale|;
+        bindtextdomain( 'ptna', $PATH );
+        textdomain( "ptna" );
+        printf STDERR "%s + setlocale( LC_ALL, '' ): %s\n", $ENV{'LANG'}, gettext("Language test");
+
+        $ENV{'LANG'} = $opt_language . '_' . $lang2default_country{$opt_language} . '.utf8';
+        $ENV{'LANGUAGE'} = $ENV{'LANG'};
+        setlocale( LC_ALL, '' );
+        $PATH = $0;
+        $PATH =~ s|bin/[^/]*$|locale|;
+        bindtextdomain( 'ptna', $PATH );
+        textdomain( "ptna" );
+        printf STDERR "%s + setlocale( LC_ALL, '' ): %s\n", $ENV{'LANG'}, gettext("Language test");
+
+        $ENV{'LANG'} = $opt_language;
+        $ENV{'LANGUAGE'} = $ENV{'LANG'};
+        set_locale( LC_ALL, $opt_language );
+        $PATH = $0;
+        $PATH =~ s|bin/[^/]*$|locale|;
+        bindtextdomain( 'ptna', $PATH );
+        textdomain( "ptna" );
+        printf STDERR "%s + set_locale( LC_ALL, %s ): %s\n", $ENV{'LANG'}, $opt_language, gettext("Language test");
+
+        $ENV{'LANG'} = $opt_language;
+        $ENV{'LANGUAGE'} = $ENV{'LANG'};
+        set_locale( LC_ALL, $opt_language, $lang2default_country{$opt_language} );
+        $PATH = $0;
+        $PATH =~ s|bin/[^/]*$|locale|;
+        bindtextdomain( 'ptna', $PATH );
+        textdomain( "ptna" );
+        printf STDERR "%s + set_locale( LC_ALL, %s, %s ): %s\n", $ENV{'LANG'}, $opt_language, $lang2default_country{$opt_language}, gettext("Language test");
+
+        $ENV{'LANG'} = $opt_language;
+        $ENV{'LANGUAGE'} = $ENV{'LANG'};
+        set_locale( LC_ALL, $opt_language, $lang2default_country{$opt_language}, 'UTF-8' );
+        $PATH = $0;
+        $PATH =~ s|bin/[^/]*$|locale|;
+        bindtextdomain( 'ptna', $PATH );
+        textdomain( "ptna" );
+        printf STDERR "%s + set_locale( LC_ALL, %s, %s, 'UTF-8' ): %s\n", $ENV{'LANG'}, $opt_language, $lang2default_country{$opt_language}, gettext("Language test");
+
+        $ENV{'LANG'} = $opt_language;
+        $ENV{'LANGUAGE'} = $ENV{'LANG'};
+        set_locale( LC_ALL, $opt_language, $lang2default_country{$opt_language}, 'utf8' );
+        $PATH = $0;
+        $PATH =~ s|bin/[^/]*$|locale|;
+        bindtextdomain( 'ptna', $PATH );
+        textdomain( "ptna" );
+        printf STDERR "%s + set_locale( LC_ALL, %s, %s, 'utf8' ): %s\n", $ENV{'LANG'}, $opt_language, $lang2default_country{$opt_language}, gettext("Language test");
+    }
 }
 
 if ( $check_name_relaxed ) {
