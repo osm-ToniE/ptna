@@ -1,0 +1,115 @@
+<pre>
+#
+# Format:
+#
+# Headers start with '=', '==', '===', '====', ... at the beginning of a line, format is like in the OSM Wiki
+#
+# Simple text starts with '-' at the beginning of a line, format is like in the OSM Wiki, a single '-' will cause a new line (new paragraph).
+# Simple text starts may only be placed directly after a header line.
+#
+# Links: [[...|...]] are interne link like in the OSM Wiki
+#        [... ...] are external links
+#
+# Comments start with '#' at the beginning of a line. '#' inside text is not recognized as the start of a comment.
+#
+# Format of the file: UNIX (LF), UTF-8
+#
+#
+# Cotents in CSV-Format
+#
+# ref;type;comment;from;to;operator
+#
+# - ref       == tag 'ref' of route or route_master
+# - type      == contents of tags 'route' respectively 'route_master'
+# - comment   == can include comments like; Bus, Expressbus, ...  will not be analyze, but simply be printed out
+# - from      == if there is more than one entry with "ref;type" and "operator" is the same, then 'from' and 'to are also used to distinguish between same line number in different cities/villages
+# - to        == if there is more than one entry with "ref;type" and "operator" is the same, then 'from' and 'to are also used to distinguish between same line number in different cities/villages
+# - operator  == if there is more than one entry with "ref;type", then "operator" is used to distinguish between same line number in different cities/villages
+#
+
+
+= Test file for Read Routes Data
+
+== Level 2
+
+=== Level 3
+
+==== Level 4
+
+===== Level 5
+
+====== Level 6
+
+======= Level 7 --> Level 6
+
+- simple text in a paragraph
+-
+- new paragraph
+-
+- simple text in '''''strong and em'''''er and '''''stronger and more em'''''
+-
+- simple text in '''strong'''er and '''stronger'''
+-
+- simple text in ''em'' and even more ''em''
+-
+- !!!Something very important!!!
+-
+- External Link with alias: [https://ptna.openstreetmap.de PTNA]
+-
+- External Link without alias: [https://ptna.openstreetmap.de]
+-
+- OSM-Wiki Link with alias: [[M%C3%BCnchen|München]]
+-
+- OSM-Wiki Link without alias: [[München]]
+-
+
+
+
+010;train;ICE;Hamburg;Munich;Deutsche Bahn
+100
+200;
+201;bus
+
+- text inside table is now supported
+
+300;;
+301;bus;
+302;bus;comment
+400;;;
+-
+401;bus;comment;
+402;bus;comment;from
+500;;;;
+501;bus;comment;from;
+502;bus;comment;from;to
+600;;;;;
+601;bus;;;;
+602;bus;comment;;;
+603;bus;comment;from;;
+604;bus;comment;from;to;
+605;bus;comment;from;to;operator
+606;bus;;;;operator
+700;auto;invalid route-type;nowhere;nowhere;noone
+800;bus;!Neue Buslinie ab 09.12.2018!;nowhere;nowhere;noone
+900;bus;comment;from;to;operator1;operator2
+901;bus;;from;to;operator1;operator2
+902;bus;comment;;to;operator1;operator2
+903;bus;comment;from;;operator1;operator2
+904;bus;;;;operator1;operator2
+910;bus;comment;from;to;operator1; operator2
+911;bus;;from;to;operator1; operator2
+912;bus;comment;;to;operator1; operator2
+913;bus;comment;from;;operator1; operator2
+914;bus;;;;operator1; operator2
+915;bus;;;;'Mein Bus' Gmbh
+916;bus;;;;"'Mein Bus' Gmbh"
+917;bus;;;;"Mein Bus Gmbh"
+918;bus;;;;"Mein Bus" Gmbh
+919;bus;;;;operator's son
+"998;999";bus;;;;operator
+
+-
+
+
+
+</pre>

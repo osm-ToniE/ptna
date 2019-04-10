@@ -58,7 +58,7 @@
     The data will be updated when the result of the analysis has changed.
 </p>
 <p>
-    An explanation of the error texts can be found in the documentation at <a href='/en/index.html#checks'>'Check'</a>.
+    An explanation of the error texts can be found in the documentation at <a href='/en/doc_toc.html#checks'>'Check'</a>.
 </p>
         <hr />
         <h1 id="A2">2 Test file for issue #4 - multiple appearance of "ref;type" value for different lines in different areas</h1>
@@ -76,7 +76,7 @@ Two of them have identical 'operator' but different 'from' and 'to'
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
-                <tr data-info="Comment: Bus A f&auml;hrt in Annaberg-Buchholz; From: Barbara-Uthmann-Ring; To: Buchholz; Operator: RVE" data-ref="A" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=A&amp;network=VMS&amp;style=wuppertal" title="Sketch-Line">A</a></td><td class="csvinfo" colspan="5">Comment: Bus A f&auml;hrt in Annaberg-Buchholz; From: Barbara-Uthmann-Ring; To: Buchholz; Operator: RVE</td></tr>
+                <tr data-info="Comment: Bus A fährt in Annaberg-Buchholz; From: Barbara-Uthmann-Ring; To: Buchholz; Operator: RVE" data-ref="A" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=A&amp;network=VMS&amp;style=wuppertal" title="Sketch-Line">A</a></td><td class="csvinfo" colspan="5">Comment: Bus A fährt in Annaberg-Buchholz; From: Barbara-Uthmann-Ring; To: Buchholz; Operator: RVE</td></tr>
                 <tr data-info="-39174" data-ref="A" class="line"><td class="name">Bus A: Barbara-Uthmann-Ring &lt;=&gt; Buchholz</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39174</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'RVE'</td></tr>
                 <tr data-info="-39170" data-ref="A" class="line"><td class="name">Bus A: Barbara-Uthmann-Ring =&gt; Buchholz</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39170</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'RVE'</td></tr>
                 <tr data-info="-39172" data-ref="A" class="line"><td class="name">Bus A: Buchholz =&gt; Barbara-Uthmann-Ring</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39172</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'RVE'</td></tr>
@@ -89,7 +89,7 @@ Two of them have identical 'operator' but different 'from' and 'to'
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
-                <tr data-info="Comment: Bus A f&auml;hrt in Aue; From: Postplatz; To: Postplatz; Operator: RVE" data-ref="A" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=A&amp;network=VMS&amp;style=wuppertal" title="Sketch-Line">A</a></td><td class="csvinfo" colspan="5">Comment: Bus A f&auml;hrt in Aue; From: Postplatz; To: Postplatz; Operator: RVE</td></tr>
+                <tr data-info="Comment: Bus A fährt in Aue; From: Postplatz; To: Postplatz; Operator: RVE" data-ref="A" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=A&amp;network=VMS&amp;style=wuppertal" title="Sketch-Line">A</a></td><td class="csvinfo" colspan="5">Comment: Bus A fährt in Aue; From: Postplatz; To: Postplatz; Operator: RVE</td></tr>
                 <tr data-info="-39178" data-ref="A" class="line"><td class="name">Bus A: Postplatz &lt;=&gt; Postplatz</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39178</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'RVE'</td></tr>
                 <tr data-info="-39180" data-ref="A" class="line"><td class="name">Bus A: Postplatz =&gt; Postplatz</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39180</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'RVE'</td></tr>
                 <tr data-info="-39176" data-ref="A" class="line"><td class="name">Bus A: Postplatz =&gt; Postplatz</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39176</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'RVE'</td></tr>
@@ -102,7 +102,7 @@ Two of them have identical 'operator' but different 'from' and 'to'
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
-                <tr data-info="Comment: Bus A f&auml;hrt in Burgst&auml;dt; From: Sportzentrum; To: Heiersdorf; Operator: RBM" data-ref="A" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=A&amp;network=VMS&amp;style=wuppertal" title="Sketch-Line">A</a></td><td class="csvinfo" colspan="5">Comment: Bus A f&auml;hrt in Burgst&auml;dt; From: Sportzentrum; To: Heiersdorf; Operator: RBM</td></tr>
+                <tr data-info="Comment: Bus A fährt in Burgstädt; From: Sportzentrum; To: Heiersdorf; Operator: RBM" data-ref="A" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=A&amp;network=VMS&amp;style=wuppertal" title="Sketch-Line">A</a></td><td class="csvinfo" colspan="5">Comment: Bus A fährt in Burgstädt; From: Sportzentrum; To: Heiersdorf; Operator: RBM</td></tr>
                 <tr data-info="-39186" data-ref="A" class="line"><td class="name">Bus A: Sportzentrum &lt;=&gt; Heiersdorf</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39186</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'RBM'</td></tr>
                 <tr data-info="-39182" data-ref="A" class="line"><td class="name">Bus A: Sportzentrum =&gt; Heiersdorf</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39182</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'RBM'</td></tr>
                 <tr data-info="-39184" data-ref="A" class="line"><td class="name">Bus A: Heiersdorf =&gt; Sportzentrum</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39184</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'RBM'</td></tr>
@@ -115,7 +115,7 @@ Two of them have identical 'operator' but different 'from' and 'to'
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
-                <tr data-info="Comment: Bus A f&auml;hrt in XYZ; From: Platz1; To: Platz2; Operator: ABC" data-ref="A" class="sketchline"><td class="sketch">A</td><td class="csvinfo" colspan="5">Comment: Bus A f&auml;hrt in XYZ; From: Platz1; To: Platz2; Operator: ABC</td></tr>
+                <tr data-info="Comment: Bus A fährt in XYZ; From: Platz1; To: Platz2; Operator: ABC" data-ref="A" class="sketchline"><td class="sketch">A</td><td class="csvinfo" colspan="5">Comment: Bus A fährt in XYZ; From: Platz1; To: Platz2; Operator: ABC</td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='A' and route='bus'</td><td class="notes"></td></tr>
             </tbody>
         </table>

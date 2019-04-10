@@ -158,13 +158,13 @@ sub ReadRoutes {
                                         # this $ExpRouteType is not a valid one
                                         $hashref->{'type'}  = 'error';                                              # this is an error
                                         $hashref->{'ref'}   = $ExpRef;                                              # this is an error
-                                        $hashref->{'error'} = sprintf( gettext("Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line: '%s'"), $ExpRouteType, $NR, $hashref->{'contents'} );    # this is an error
+                                        $hashref->{'error'} = sprintf( decode('utf8',gettext("Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line: '%s'")), $ExpRouteType, $NR, $hashref->{'contents'} );    # this is an error
                                     }
                                 } else {
                                     # if there is at least one separator, then $ExpRouteType as the second value must not be empty
                                     $hashref->{'type'}  = 'error';                                              # this is an error
                                     $hashref->{'ref'}   = $ExpRef;                                              # this is an error
-                                    $hashref->{'error'} = sprintf( gettext("Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'"), $NR, $hashref->{'contents'} );   # this is an error
+                                    $hashref->{'error'} = sprintf( decode('utf8',gettext("Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'")), $NR, $hashref->{'contents'} );   # this is an error
                                 }
                             }
                         } 

@@ -120,7 +120,7 @@ OSM-Wiki Link without alias: <a href="https://wiki.openstreetmap.org/wiki/Münch
 </p>
         <table class="oepnvtable">
             <thead>
-                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+                <tr class="tableheaderrow"><th class="name">Nom (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
                 <tr data-info="Comment: ICE; From: Hamburg; To: Munich; Operator: Deutsche Bahn" data-ref="010" class="sketchline"><td class="sketch">010</td><td class="csvinfo" colspan="5">Comment: ICE; From: Hamburg; To: Munich; Operator: Deutsche Bahn</td></tr>
@@ -140,7 +140,7 @@ text inside table is now supported
 </p>
         <table class="oepnvtable">
             <thead>
-                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+                <tr class="tableheaderrow"><th class="name">Nom (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
                 <tr data-info="???" data-ref="300" class="sketchline"><td class="sketch">300</td><td class="csvinfo" colspan="5"></td></tr>
@@ -159,7 +159,7 @@ text inside table is now supported
 </p>
         <table class="oepnvtable">
             <thead>
-                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+                <tr class="tableheaderrow"><th class="name">Nom (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
                 <tr data-info="Comment: comment" data-ref="401" class="sketchline"><td class="sketch">401</td><td class="csvinfo" colspan="5">Comment: comment</td></tr>

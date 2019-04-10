@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <title>PTNA - Public Transport Network Analysis</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="PTNA">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="keywords" content="OSM Public Transport PTv2">
+        <meta name="description" content="PTNA - Public Transport Network Analysis">
+        <style>
+              table { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; }
+              th    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+              td    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+              img   { width: 20px; }
+              #toc ol           { list-style: none; }
+              .tableheaderrow   { background-color: LightSteelBlue;   }
+              .sketchline       { background-color: LightBlue;        }
+              .sketch           { text-align:left;  font-weight: 500; }
+              .csvinfo          { text-align:right; font-size: 0.8em; }
+              .ref              { white-space:nowrap; }
+              .relation         { white-space:nowrap; }
+              .PTv              { text-align:center; }
+              .number           { text-align:right; }
+              .attention        { background-color: yellow; font-weight: 500; font-size: 1.2em; }
+        </style>
+    </head>
+    <body>
+        <div id="toc">
+        <h1>Inhalt</h1>
+        <ol>
+        <li>1 <a href="#hints">Hinweise</a>
+        </li>
+        <li>2 <a href="#A2">Test file for Read Routes Data</a>
+        <ol>
+        <li>2.1 <a href="#A2.1">Level 2</a>
+        <ol>
+        <li>2.1.1 <a href="#A2.1.1">Level 3</a>
+        <ol>
+        <li>2.1.1.1 <a href="#A2.1.1.1">Level 4</a>
+        <ol>
+        <li>2.1.1.1.1 <a href="#A2.1.1.1.1">Level 5</a>
+        <ol>
+        <li>2.1.1.1.1.1 <a href="#A2.1.1.1.1.1">Level 6</a>
+        </li>
+        <li>2.1.1.1.1.2 <a href="#A2.1.1.1.1.2">Level 7 --> Level 6</a>
+        </li>
+        </ol>
+        </li>
+        </ol>
+        </li>
+        </ol>
+        </li>
+        </ol>
+        </li>
+        </ol>
+        </li>
+        <li>3 <a href="#networkdetails">Details zu 'network'-Werten</a>
+        <ol>
+        <li>3.1 <a href="#considerednetworks">Berücksichtigte 'network'-Werte</a>
+        </li>
+        </ol>
+        </li>
+        </ol>
+        </div> <!-- toc -->
+        <hr />
+        <h1 id="hints">1 Hinweise</h1>
+<p>
+    Die Daten werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändert hat.
+</p>
+<p>
+    Eine Erläuterung der Fehlertexte ist in der Dokumentation unter <a href='/de/doc_toc.html#checks'>Prüfungen</a> zu finden.
+</p>
+        <hr />
+        <h1 id="A2">2 Test file for Read Routes Data</h1>
+        <h2 id="A2.1">2.1 Level 2</h2>
+        <h3 id="A2.1.1">2.1.1 Level 3</h3>
+        <h4 id="A2.1.1.1">2.1.1.1 Level 4</h4>
+        <h5 id="A2.1.1.1.1">2.1.1.1.1 Level 5</h5>
+        <h6 id="A2.1.1.1.1.1">2.1.1.1.1.1 Level 6</h6>
+        <h6 id="A2.1.1.1.1.2">2.1.1.1.1.2 Level 7 --> Level 6</h6>
+<p>
+simple text in a paragraph
+
+</p>
+<p>
+new paragraph
+
+</p>
+<p>
+simple text in <strong><em>strong and em</em></strong>er and <strong><em>stronger and more em</em></strong>
+
+</p>
+<p>
+simple text in <strong>strong</strong>er and <strong>stronger</strong>
+
+</p>
+<p>
+simple text in <em>em</em> and even more <em>em</em>
+
+</p>
+<p>
+<span class="attention">Something very important</span>
+
+</p>
+<p>
+External Link with alias: <a href="https://ptna.openstreetmap.de">PTNA</a>
+
+</p>
+<p>
+External Link without alias: <a href="https://ptna.openstreetmap.de">https://ptna.openstreetmap.de</a>
+
+</p>
+<p>
+OSM-Wiki Link with alias: <a href="https://wiki.openstreetmap.org/wiki/M%C3%BCnchen">München</a>
+
+</p>
+<p>
+OSM-Wiki Link without alias: <a href="https://wiki.openstreetmap.org/wiki/München">München</a>
+
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Typ (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Fehler</th><th class="notes">Anmerkungen</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="Kommentar: ICE; Von: Hamburg; Nach: Munich; Betreiber: Deutsche Bahn" data-ref="010" class="sketchline"><td class="sketch">010</td><td class="csvinfo" colspan="5">Kommentar: ICE; Von: Hamburg; Nach: Munich; Betreiber: Deutsche Bahn</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '010' und 'route' = 'train'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="100" class="sketchline"><td class="sketch">100</td><td class="csvinfo" colspan="5"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fahrzeugtyp ist nicht definiert. Zeile 69 der Routen-Daten. Inhalt der Zeile: '100'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="200" class="sketchline"><td class="sketch">200</td><td class="csvinfo" colspan="5"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fahrzeugtyp ist nicht definiert. Zeile 70 der Routen-Daten. Inhalt der Zeile: '200;'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="201" class="sketchline"><td class="sketch">201</td><td class="csvinfo" colspan="5"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '201' und 'route' = 'bus'</td><td class="notes"></td></tr>
+            </tbody>
+        </table>
+
+<p>
+text inside table is now supported
+
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Typ (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Fehler</th><th class="notes">Anmerkungen</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="???" data-ref="300" class="sketchline"><td class="sketch">300</td><td class="csvinfo" colspan="5"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fahrzeugtyp ist nicht definiert. Zeile 75 der Routen-Daten. Inhalt der Zeile: '300;;'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="301" class="sketchline"><td class="sketch">301</td><td class="csvinfo" colspan="5"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '301' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="Kommentar: comment" data-ref="302" class="sketchline"><td class="sketch">302</td><td class="csvinfo" colspan="5">Kommentar: comment</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '302' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="400" class="sketchline"><td class="sketch">400</td><td class="csvinfo" colspan="5"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fahrzeugtyp ist nicht definiert. Zeile 78 der Routen-Daten. Inhalt der Zeile: '400;;;'</td><td class="notes"></td></tr>
+            </tbody>
+        </table>
+
+<p>
+&nbsp;
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Typ (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Fehler</th><th class="notes">Anmerkungen</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="Kommentar: comment" data-ref="401" class="sketchline"><td class="sketch">401</td><td class="csvinfo" colspan="5">Kommentar: comment</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '401' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="Kommentar: comment; Von: from" data-ref="402" class="sketchline"><td class="sketch">402</td><td class="csvinfo" colspan="5">Kommentar: comment; Von: from</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '402' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="500" class="sketchline"><td class="sketch">500</td><td class="csvinfo" colspan="5"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fahrzeugtyp ist nicht definiert. Zeile 82 der Routen-Daten. Inhalt der Zeile: '500;;;;'</td><td class="notes"></td></tr>
+                <tr data-info="Kommentar: comment; Von: from" data-ref="501" class="sketchline"><td class="sketch">501</td><td class="csvinfo" colspan="5">Kommentar: comment; Von: from</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '501' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="Kommentar: comment; Von: from; Nach: to" data-ref="502" class="sketchline"><td class="sketch">502</td><td class="csvinfo" colspan="5">Kommentar: comment; Von: from; Nach: to</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '502' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="600" class="sketchline"><td class="sketch">600</td><td class="csvinfo" colspan="5"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fahrzeugtyp ist nicht definiert. Zeile 85 der Routen-Daten. Inhalt der Zeile: '600;;;;;'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="601" class="sketchline"><td class="sketch">601</td><td class="csvinfo" colspan="5"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '601' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="Kommentar: comment" data-ref="602" class="sketchline"><td class="sketch">602</td><td class="csvinfo" colspan="5">Kommentar: comment</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '602' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="Kommentar: comment; Von: from" data-ref="603" class="sketchline"><td class="sketch">603</td><td class="csvinfo" colspan="5">Kommentar: comment; Von: from</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '603' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="Kommentar: comment; Von: from; Nach: to" data-ref="604" class="sketchline"><td class="sketch">604</td><td class="csvinfo" colspan="5">Kommentar: comment; Von: from; Nach: to</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '604' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="Kommentar: comment; Von: from; Nach: to; Betreiber: operator" data-ref="605" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=605&amp;network=network&amp;style=wuppertal" title="Sketch-Line">605</a></td><td class="csvinfo" colspan="5">Kommentar: comment; Von: from; Nach: to; Betreiber: operator</td></tr>
+                <tr data-info="-39096" data-ref="605" class="line"><td class="name">Bus 605: from =&gt; to</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39096</td><td class="PTv">2</td><td class="issues">Route ohne Way(s)<br>Route ohne Node(s)</td><td class="notes">'operator' = 'operator'</td></tr>
+                <tr data-info="Betreiber: operator" data-ref="606" class="sketchline"><td class="sketch">606</td><td class="csvinfo" colspan="5">Betreiber: operator</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '606' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="700" class="sketchline"><td class="sketch">700</td><td class="csvinfo" colspan="5"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fahrzeugtyp wird nicht unterstützt: 'auto'. Zeile 92 der Routen-Daten. Inhalt der Zeile: '700;auto;invalid route-type;nowhere;nowhere;noone'</td><td class="notes"></td></tr>
+                <tr data-info="Kommentar: <span class=_attention_>Neue Buslinie ab 09.12.2018</span>; Von: nowhere; Nach: nowhere; Betreiber: noone" data-ref="800" class="sketchline"><td class="sketch">800</td><td class="csvinfo" colspan="5">Kommentar: <span class="attention">Neue Buslinie ab 09.12.2018</span>; Von: nowhere; Nach: nowhere; Betreiber: noone</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '800' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="Kommentar: comment; Von: from; Nach: to; Betreiber: operator1;operator2" data-ref="900" class="sketchline"><td class="sketch">900</td><td class="csvinfo" colspan="5">Kommentar: comment; Von: from; Nach: to; Betreiber: operator1;operator2</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '900' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="Von: from; Nach: to; Betreiber: operator1;operator2" data-ref="901" class="sketchline"><td class="sketch">901</td><td class="csvinfo" colspan="5">Von: from; Nach: to; Betreiber: operator1;operator2</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '901' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="Kommentar: comment; Nach: to; Betreiber: operator1;operator2" data-ref="902" class="sketchline"><td class="sketch">902</td><td class="csvinfo" colspan="5">Kommentar: comment; Nach: to; Betreiber: operator1;operator2</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '902' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="Kommentar: comment; Von: from; Betreiber: operator1;operator2" data-ref="903" class="sketchline"><td class="sketch">903</td><td class="csvinfo" colspan="5">Kommentar: comment; Von: from; Betreiber: operator1;operator2</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '903' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="Betreiber: operator1;operator2" data-ref="904" class="sketchline"><td class="sketch">904</td><td class="csvinfo" colspan="5">Betreiber: operator1;operator2</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '904' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="Kommentar: comment; Von: from; Nach: to; Betreiber: operator1; operator2" data-ref="910" class="sketchline"><td class="sketch">910</td><td class="csvinfo" colspan="5">Kommentar: comment; Von: from; Nach: to; Betreiber: operator1; operator2</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '910' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="Von: from; Nach: to; Betreiber: operator1; operator2" data-ref="911" class="sketchline"><td class="sketch">911</td><td class="csvinfo" colspan="5">Von: from; Nach: to; Betreiber: operator1; operator2</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '911' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="Kommentar: comment; Nach: to; Betreiber: operator1; operator2" data-ref="912" class="sketchline"><td class="sketch">912</td><td class="csvinfo" colspan="5">Kommentar: comment; Nach: to; Betreiber: operator1; operator2</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '912' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="Kommentar: comment; Von: from; Betreiber: operator1; operator2" data-ref="913" class="sketchline"><td class="sketch">913</td><td class="csvinfo" colspan="5">Kommentar: comment; Von: from; Betreiber: operator1; operator2</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '913' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="Betreiber: operator1; operator2" data-ref="914" class="sketchline"><td class="sketch">914</td><td class="csvinfo" colspan="5">Betreiber: operator1; operator2</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '914' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="Betreiber: &#039;Mein Bus&#039; Gmbh" data-ref="915" class="sketchline"><td class="sketch">915</td><td class="csvinfo" colspan="5">Betreiber: &#039;Mein Bus&#039; Gmbh</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '915' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="Betreiber: &#039;Mein Bus&#039; Gmbh" data-ref="916" class="sketchline"><td class="sketch">916</td><td class="csvinfo" colspan="5">Betreiber: &#039;Mein Bus&#039; Gmbh</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '916' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="Betreiber: Mein Bus Gmbh" data-ref="917" class="sketchline"><td class="sketch">917</td><td class="csvinfo" colspan="5">Betreiber: Mein Bus Gmbh</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '917' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="Betreiber: &quot;Mein Bus&quot; Gmbh" data-ref="918" class="sketchline"><td class="sketch">918</td><td class="csvinfo" colspan="5">Betreiber: &quot;Mein Bus&quot; Gmbh</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '918' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="Betreiber: operator&#039;s son" data-ref="919" class="sketchline"><td class="sketch">919</td><td class="csvinfo" colspan="5">Betreiber: operator&#039;s son</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '919' und 'route' = 'bus'</td><td class="notes"></td></tr>
+                <tr data-info="Betreiber: operator" data-ref="998;999" class="sketchline"><td class="sketch">998;999</td><td class="csvinfo" colspan="5">Betreiber: operator</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Fehlende Linie für 'ref' = '998;999' und 'route' = 'bus'</td><td class="notes"></td></tr>
+            </tbody>
+        </table>
+
+<p>
+&nbsp;
+</p>
+        <hr />
+        <h1 id="networkdetails">3 Details zu 'network'-Werten</h1>
+        <h2 id="considerednetworks">3.1 Berücksichtigte 'network'-Werte</h2>
+<p>
+Dieser Abschnitt listet die 'network'-Werte auf, die berücksichtigt wurden, d.h. die einen der oben aufgeführten Werte enthalten.
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="network">Verkehrsverbund (network=)</th><th class="number">Anzahl</th><th class="relations">Relationen</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="network" data-ref="???" class="line"><td class="network">network</td><td class="number">1</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '605' -39096</td></tr>
+            </tbody>
+        </table>
+
+    </body>
+</html>

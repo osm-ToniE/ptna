@@ -18,8 +18,7 @@ binmode STDIN,  ":utf8";
 binmode STDOUT, ":utf8";
 binmode STDERR, ":utf8";
 
-use Locale::gettext;
-use Locale::Util    qw ( set_locale );
+use Locale::gettext qw();       # 'gettext()' will be overwritten in this file (at the end), so don't import from module into our name space
 
 use Getopt::Long;
 use OSM::XML        qw( parse );
@@ -178,106 +177,14 @@ if ( $verbose ) {
 
 
 if ( $opt_language ) {
-    my %lang2default_country = ( 'de' => 'DE', 'fr' => 'FR' );
-
-    if ( $debug ) {
-        printf STDERR "%s\n", gettext("Language test");
-    }
-    if ( $lang2default_country{$opt_language} ) {
-        $ENV{'LANG'} = $opt_language . '_' . $lang2default_country{$opt_language};
-    } else {
-        $ENV{'LANG'} = $opt_language;
-    }
-    $ENV{'LANGUAGE'} = $ENV{'LANG'};
-    setlocale( LC_ALL, '' );
     my $PATH = $0;
     $PATH =~ s|bin/[^/]*$|locale|;
-    bindtextdomain( 'ptna', $PATH );
-    textdomain( "ptna" );
-    printf STDERR "%s -> %s + setlocale( LC_ALL, '' ): %s\n", $opt_language, $ENV{'LANG'}, gettext("Language test");
-
-    if ( $verbose ) {
-        $ENV{'LANG'} = $opt_language . '_' . $lang2default_country{$opt_language};
-        $ENV{'LANGUAGE'} = $ENV{'LANG'};
-        setlocale( LC_ALL, '' );
-        $PATH = $0;
-        $PATH =~ s|bin/[^/]*$|locale|;
-        bindtextdomain( 'ptna', $PATH );
-        textdomain( "ptna" );
-        printf STDERR "%s + setlocale( LC_ALL, '' ): %s\n", $ENV{'LANG'}, gettext("Language test");
-
-        $ENV{'LANG'} = $opt_language . '.UTF-8';
-        $ENV{'LANGUAGE'} = $ENV{'LANG'};
-        setlocale( LC_ALL, '' );
-        $PATH = $0;
-        $PATH =~ s|bin/[^/]*$|locale|;
-        bindtextdomain( 'ptna', $PATH );
-        textdomain( "ptna" );
-        printf STDERR "%s + setlocale( LC_ALL, '' ): %s\n", $ENV{'LANG'}, gettext("Language test");
-
-        $ENV{'LANG'} = $opt_language . '_' . $lang2default_country{$opt_language} . '.UTF-8';
-        $ENV{'LANGUAGE'} = $ENV{'LANG'};
-        setlocale( LC_ALL, '' );
-        $PATH = $0;
-        $PATH =~ s|bin/[^/]*$|locale|;
-        bindtextdomain( 'ptna', $PATH );
-        textdomain( "ptna" );
-        printf STDERR "%s + setlocale( LC_ALL, '' ): %s\n", $ENV{'LANG'}, gettext("Language test");
-
-        $ENV{'LANG'} = $opt_language . '.utf8';
-        $ENV{'LANGUAGE'} = $ENV{'LANG'};
-        setlocale( LC_ALL, '' );
-        $PATH = $0;
-        $PATH =~ s|bin/[^/]*$|locale|;
-        bindtextdomain( 'ptna', $PATH );
-        textdomain( "ptna" );
-        printf STDERR "%s + setlocale( LC_ALL, '' ): %s\n", $ENV{'LANG'}, gettext("Language test");
-
-        $ENV{'LANG'} = $opt_language . '_' . $lang2default_country{$opt_language} . '.utf8';
-        $ENV{'LANGUAGE'} = $ENV{'LANG'};
-        setlocale( LC_ALL, '' );
-        $PATH = $0;
-        $PATH =~ s|bin/[^/]*$|locale|;
-        bindtextdomain( 'ptna', $PATH );
-        textdomain( "ptna" );
-        printf STDERR "%s + setlocale( LC_ALL, '' ): %s\n", $ENV{'LANG'}, gettext("Language test");
-
-        $ENV{'LANG'} = $opt_language;
-        $ENV{'LANGUAGE'} = $ENV{'LANG'};
-        set_locale( LC_ALL, $opt_language );
-        $PATH = $0;
-        $PATH =~ s|bin/[^/]*$|locale|;
-        bindtextdomain( 'ptna', $PATH );
-        textdomain( "ptna" );
-        printf STDERR "%s + set_locale( LC_ALL, %s ): %s\n", $ENV{'LANG'}, $opt_language, gettext("Language test");
-
-        $ENV{'LANG'} = $opt_language;
-        $ENV{'LANGUAGE'} = $ENV{'LANG'};
-        set_locale( LC_ALL, $opt_language, $lang2default_country{$opt_language} );
-        $PATH = $0;
-        $PATH =~ s|bin/[^/]*$|locale|;
-        bindtextdomain( 'ptna', $PATH );
-        textdomain( "ptna" );
-        printf STDERR "%s + set_locale( LC_ALL, %s, %s ): %s\n", $ENV{'LANG'}, $opt_language, $lang2default_country{$opt_language}, gettext("Language test");
-
-        $ENV{'LANG'} = $opt_language;
-        $ENV{'LANGUAGE'} = $ENV{'LANG'};
-        set_locale( LC_ALL, $opt_language, $lang2default_country{$opt_language}, 'UTF-8' );
-        $PATH = $0;
-        $PATH =~ s|bin/[^/]*$|locale|;
-        bindtextdomain( 'ptna', $PATH );
-        textdomain( "ptna" );
-        printf STDERR "%s + set_locale( LC_ALL, %s, %s, 'UTF-8' ): %s\n", $ENV{'LANG'}, $opt_language, $lang2default_country{$opt_language}, gettext("Language test");
-
-        $ENV{'LANG'} = $opt_language;
-        $ENV{'LANGUAGE'} = $ENV{'LANG'};
-        set_locale( LC_ALL, $opt_language, $lang2default_country{$opt_language}, 'utf8' );
-        $PATH = $0;
-        $PATH =~ s|bin/[^/]*$|locale|;
-        bindtextdomain( 'ptna', $PATH );
-        textdomain( "ptna" );
-        printf STDERR "%s + set_locale( LC_ALL, %s, %s, 'utf8' ): %s\n", $ENV{'LANG'}, $opt_language, $lang2default_country{$opt_language}, gettext("Language test");
-    }
+    printf STDERR "%s\n", gettext("Language test");
+    $ENV{'LANGUAGE'} = $opt_language;
+    Locale::gettext::setlocale( LC_MESSAGES, '' );
+    Locale::gettext::bindtextdomain( 'ptna', $PATH );
+    Locale::gettext::textdomain( "ptna" );
+    printf STDERR "%s -> %s + setlocale( LC_MESSAGES, '' ): %s\n", $opt_language, $ENV{'LANGUAGE'}, gettext("Language test");
 }
 
 if ( $check_name_relaxed ) {
@@ -4318,12 +4225,14 @@ sub printInitialHeader {
     my $osm_base    = shift;
     my $areas       = shift;
     
+    my $html_lang   = $opt_language || 'en';
+    
     $no_of_columns               = 0;
     @columns                     = ();
     @table_columns               = ();
 
     push( @HTML_start, "<!DOCTYPE html>\n" );
-    push( @HTML_start, "<html lang=\"de\">\n" );
+    push( @HTML_start, sprintf( "<html lang=\"%s\">\n", $html_lang ) );
     push( @HTML_start, "    <head>\n" );
     push( @HTML_start, sprintf( "        <title>%sPTNA - Public Transport Network Analysis</title>\n", ($title ? html_escape($title) . ' - ' : '') ) );
     push( @HTML_start, "        <meta charset=\"utf-8\" />\n" );
@@ -4364,7 +4273,7 @@ sub printInitialHeader {
     push( @HTML_main, gettext("The data will be updated when the result of the analysis has changed.") );
     push( @HTML_main, "\n</p>\n" );
     push( @HTML_main, "<p>\n    " );
-    push( @HTML_main, gettext("An explanation of the error texts can be found in the documentation at <a href='/en/index.html#checks'>'Check'</a>.") );
+    push( @HTML_main, gettext("An explanation of the error texts can be found in the documentation at <a href='/en/doc_toc.html#checks'>'Check'</a>.") );
     push( @HTML_main, "\n</p>\n" );
 
 }
@@ -5096,13 +5005,13 @@ sub html_escape {
         $text =~ s/>/&gt;/g;
         $text =~ s/"/&quot;/g;
         $text =~ s/'/&#039;/g;
-        $text =~ s/Ä/&Auml;/g;
-        $text =~ s/ä/&auml;/g;
-        $text =~ s/Ö/&Ouml;/g;
-        $text =~ s/ö/&ouml;/g;
-        $text =~ s/Ü/&Uuml;/g;
-        $text =~ s/ü/&uuml;/g;
-        $text =~ s/ß/&szlig;/g;
+        #$text =~ s/Ä/&Auml;/g;
+        #$text =~ s/ä/&auml;/g;
+        #$text =~ s/Ö/&Ouml;/g;
+        #$text =~ s/ö/&ouml;/g;
+        #$text =~ s/Ü/&Uuml;/g;
+        #$text =~ s/ü/&uuml;/g;
+        #$text =~ s/ß/&szlig;/g;
     }
     return $text;
 }
@@ -5233,4 +5142,27 @@ sub get_time {
     return sprintf( "%04d-%02d-%02d %02d:%02d:%02d", $year+1900, $month+1, $day, $hour, $min, $sec ); 
 }
     
+
+#############################################################################################
+#
+# overwrite Locale::gettext::gettext() by our own function which simply decodes the getrieved data
+#
+#############################################################################################
+
+sub gettext {
+    return decode( 'utf8', Locale::gettext::gettext( @_ ) );
+}
+
+
+#############################################################################################
+#
+# overwrite Locale::gettext::ngettext() by our own function which simply decodes the getrieved data
+#
+#############################################################################################
+
+sub ngettext {
+    return decode( 'utf8', Locale::gettext::ngettext( @_ ) );
+}
+
+
 

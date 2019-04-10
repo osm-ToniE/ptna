@@ -82,12 +82,14 @@ fi
 SUB_DIR="${PREFIX%-*}"
 SUB_DIR="${SUB_DIR//-//}"
 
-WEB_LOC="$PTNA_SUB_DIR"
-[ -n "$PTNA_WEB_BASE_LOC" ] && WEB_LOC="$PTNA_WEB_BASE_LOC/$WEB_LOC"
+# on the web, the overview results HTML file might be
+# $PTNA_TARGET_LOC/$PTNA_RESULTS_LOC/$COUNTRY_DIR/$PTNA_RESULTS_HTML or
+# $PTNA_TARGET_LOC/$PTNA_RESULTS_LOC/PTNA_RESULTS_HTML
+# check in this order, which one exists
+
+COUNTRY_DIR=SUB_DIR="${PREFIX%%-*}"
 
 WORK_LOC="$PTNA_WORK_LOC/$SUB_DIR"
-
-RESULTS_LOC="$PTNA_TARGET_LOC/$PTNA_RESULTS_LOC/$SUB_DIR"
 
 ROUTES_FILE="$PREFIX-Routes.txt"
 SETTINGS_FILE="settings.sh"
@@ -262,6 +264,18 @@ fi
 
 if [ "$updateresult" = "true" ]
 then
+    RESULTS_LOC="$PTNA_TARGET_LOC/$PTNA_RESULTS_LOC/$SUB_DIR"
+    
+    if [ -f "$PTNA_TARGET_LOC/$PTNA_RESULTS_LOC/$COUNTRY_DIR/$PTNA_RESULTS_HTML" ]
+    then
+        RESULTS_HTML="$PTNA_TARGET_LOC/$PTNA_RESULTS_LOC/$COUNTRY_DIR/$PTNA_RESULTS_HTML"
+    elif [ -f $PTNA_TARGET_LOC/$PTNA_RESULTS_LOC/$PTNA_RESULTS_HTML ]
+    then
+        RESULTS_HTML="$PTNA_TARGET_LOC/$PTNA_RESULTS_LOC/$PTNA_RESULTS_HTML"
+    else
+        RESULTS_HTML=""
+    fi
+
     echo $(date "+%Y-%m-%d %H:%M:%S")  "Updating '$WORK_LOC/$HTML_FILE' to '$RESULTS_LOC'"
     
     if [ -f $WORK_LOC/$HTML_FILE ]
@@ -317,46 +331,48 @@ then
     
                         echo $(date "+%Y-%m-%d %H:%M:%S") "Copying '$WORK_LOC/$DIFF_HTML_FILE' to '$RESULTS_LOC'"
                         cp $WORK_LOC/$DIFF_HTML_FILE $RESULTS_LOC
-    
-                        if [ -n "$PTNA_RESULTS_HTML" -a -f "$PTNA_TARGET_LOC/$PTNA_RESULTS_HTML" ]
+
+                        if [ -n "$RESULTS_HTML" ]
                         then
-                            echo $(date "+%Y-%m-%d %H:%M:%S") "Updating results HTML file '$PTNA_TARGET_LOC/$PTNA_RESULTS_HTML'"
-                            
+                            echo $(date "+%Y-%m-%d %H:%M:%S") "Updating results HTML file '$RESULTS_HTML'"
+
                             NEW_OSM_Base_Time="$(awk '/OSM-Base Time : .* UTC/ { print $4 "T" $5 "Z"; }' $WORK_LOC/$HTML_FILE)"
                             NEW_Local_OSM_Base_Time="$(date --date="$NEW_OSM_Base_Time" '+%d.%m.%Y %H:%M:%S')"
     
                             sed -i -e "s/^\(.*$PREFIX-datadate.*\)<time .*\(<.time>.*\)$/\1<time datetime='$NEW_OSM_Base_Time'>$NEW_Local_OSM_Base_Time\2/" \
                                    -e "s/^\(.*$PREFIX-analyzed.*\)<time .*\(<.time>.*\)$/\1<time datetime='$NEW_OSM_Base_Time'>$NEW_Local_OSM_Base_Time\2/" \
                                    -e "s/^\(.*$PREFIX-analyzed.*class=.\)results-analyzed-...\(\".*\)$/\1results-analyzed-new\2/" \
-                                   $PTNA_TARGET_LOC/$PTNA_RESULTS_HTML
+                                   $RESULTS_HTML
                         fi
                     else
                         echo $(date "+%Y-%m-%d %H:%M:%S") "no htmldiff.pl tool: no HTML-Diff Analysis page '$HTMLDIFF_FILE'"
-                        echo $(date "+%Y-%m-%d %H:%M:%S") "Updating results HTML file '$PTNA_TARGET_LOC/$PTNA_RESULTS_HTML'"
 
-                        if [ -n "$PTNA_RESULTS_HTML" -a -f "$PTNA_TARGET_LOC/$PTNA_RESULTS_HTML" ]
+                        if [ -n "$RESULTS_HTML" ]
                         then
+                            echo $(date "+%Y-%m-%d %H:%M:%S") "Updating results HTML file '$RESULTS_HTML'"
+
                             NEW_OSM_Base_Time="$(awk '/OSM-Base Time : / { print $4 "T" $5 "Z"; }' $WORK_LOC/$HTML_FILE)"
                             NEW_Local_OSM_Base_Time="$(date --date="$NEW_OSM_Base_Time" '+%d.%m.%Y %H:%M:%S')"
     
                             sed -i -e "s/^\(.*$PREFIX-datadate.*\)<time .*\(<.time>.*\)$/\1<time datetime='$NEW_OSM_Base_Time'>$NEW_Local_OSM_Base_Time\2/" \
                                    -e "s/^\(.*$PREFIX-analyzed.*\)<a .*<.a>\(.*\)$/\1\&nbsp;\2/" \
                                    -e "s/^\(.*$PREFIX-analyzed.*class=.\)results-analyzed-...\(\".*\)$/\1results-analyzed-old\2/" \
-                                   $PTNA_TARGET_LOC/$PTNA_RESULTS_HTML
+                                   $RESULTS_HTML
                         fi
                     fi
                 else
                     echo $(date "+%Y-%m-%d %H:%M:%S") "No relevant changes on '$HTML_FILE'"
-                    echo $(date "+%Y-%m-%d %H:%M:%S") "Updating results HTML file '$PTNA_TARGET_LOC/$PTNA_RESULTS_HTML'"
 
-                    if [ -n "$PTNA_RESULTS_HTML" -a -f "$PTNA_TARGET_LOC/$PTNA_RESULTS_HTML" ]
+                    if [ -n "$RESULTS_HTML" ]
                     then
+                        echo $(date "+%Y-%m-%d %H:%M:%S") "Updating results HTML file '$RESULTS_HTML'"
+
                         NEW_OSM_Base_Time="$(awk '/OSM-Base Time : / { print $4 "T" $5 "Z"; }' $WORK_LOC/$HTML_FILE)"
                         NEW_Local_OSM_Base_Time="$(date --date="$NEW_OSM_Base_Time" '+%d.%m.%Y %H:%M:%S')"
     
                         sed -i -e "s/^\(.*$PREFIX-datadate.*\)<time .*\(<.time>.*\)$/\1<time datetime='$NEW_OSM_Base_Time'>$NEW_Local_OSM_Base_Time\2/" \
                                -e "s/^\(.*$PREFIX-analyzed.*class=.\)results-analyzed-...\(\".*\)$/\1results-analyzed-old\2/" \
-                               $PTNA_TARGET_LOC/$PTNA_RESULTS_HTML
+                               $RESULTS_HTML
                     fi
                 fi
             else
