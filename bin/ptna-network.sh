@@ -87,7 +87,7 @@ SUB_DIR="${SUB_DIR//-//}"
 # $PTNA_TARGET_LOC/$PTNA_RESULTS_LOC/PTNA_RESULTS_HTML
 # check in this order, which one exists
 
-COUNTRY_DIR=SUB_DIR="${PREFIX%%-*}"
+COUNTRY_DIR="${PREFIX%%-*}"
 
 WORK_LOC="$PTNA_WORK_LOC/$SUB_DIR"
 
