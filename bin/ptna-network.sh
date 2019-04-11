@@ -77,10 +77,17 @@ then
 fi
 
 # on the web and in the work directory, the data will be stored in sub-directories
-# PREFIX=DE-BY-MVV --> stored in DE/BY/
+# PREFIX=DE-BY-MVV --> stored in SUB_DIR=DE/BY
+# PREFIX=DE-BW-DING-SWU --> stored in SUB_DIR=DE/BW
+# PREFIX=FR-IDF-entre-seine-et-foret --> stored in SUB_DIR=FR/IDF
+# PREFIX=EU-Flixbus --> stored in SUB_DIR=EU
 
-SUB_DIR="${PREFIX%-*}"
-SUB_DIR="${SUB_DIR//-//}"
+# PREFIX=FR-IDF-entre-seine-et-foret --> changed into in SUB_DIR=FR/IDF-entre-seine-et-foret
+SUB_DIR=${PREFIX/-//}
+# SUB_DIR=FR/IDF-entre-seine-et-foret --> changed into in SUB_DIR=FR/IDF/entre-seine-et-foret
+SUB_DIR=${PREFIX/-//}
+# SUB_DIR=FR/IDF/entre-seine-et-foret --> changed into in SUB_DIR=FR/IDF
+SUB_DIR="${PREFIX%/*}"
 
 # on the web, the overview results HTML file might be
 # $PTNA_TARGET_LOC/$PTNA_RESULTS_LOC/$COUNTRY_DIR/$PTNA_RESULTS_HTML or
