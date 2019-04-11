@@ -69,12 +69,16 @@ then
     
     LOGFILE=${PTNA_WORK_LOC}/ptna-all-networks.log
     
-    # g == get the OSM-Wiki data for the routes
+    # c == clean the work area
+    
+    ptna-all-networks.sh -c > $LOGFILE 2>&1 < /dev/null
+    
     # o == do the overpasapi query and download the data (to work area)
+    # g == get the OSM-Wiki data for the routes
     # a == do the analysis (in work area)
     # u == update the result from the work area to the location of the web service
     
-    ptna-all-networks.sh -ogau > $LOGFILE 2>&1 < /dev/null
+    ptna-all-networks.sh -ogau >> $LOGFILE 2>&1 < /dev/null
     
     emptyxml=$(find ${PTNA_WORK_LOC} -name '*.xml' -size 0 | wc -l)
     
