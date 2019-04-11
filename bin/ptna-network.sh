@@ -85,9 +85,9 @@ fi
 # PREFIX=FR-IDF-entre-seine-et-foret --> changed into in SUB_DIR=FR/IDF-entre-seine-et-foret
 SUB_DIR=${PREFIX/-//}
 # SUB_DIR=FR/IDF-entre-seine-et-foret --> changed into in SUB_DIR=FR/IDF/entre-seine-et-foret
-SUB_DIR=${PREFIX/-//}
+SUB_DIR=${SUB_DIR/-//}
 # SUB_DIR=FR/IDF/entre-seine-et-foret --> changed into in SUB_DIR=FR/IDF
-SUB_DIR="${PREFIX%/*}"
+SUB_DIR="${SUB_DIR%/*}"
 
 # on the web, the overview results HTML file might be
 # $PTNA_TARGET_LOC/$PTNA_RESULTS_LOC/$COUNTRY_DIR/$PTNA_RESULTS_HTML or
