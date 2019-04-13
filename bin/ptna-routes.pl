@@ -184,7 +184,7 @@ if ( $opt_language ) {
     Locale::gettext::setlocale( LC_MESSAGES, '' );
     Locale::gettext::bindtextdomain( 'ptna', $PATH );
     Locale::gettext::textdomain( "ptna" );
-    printf STDERR "%s -> %s + setlocale( LC_MESSAGES, '' ): %s\n", $opt_language, $ENV{'LANGUAGE'}, gettext("Language test");
+    printf STDERR "%s\n", gettext("Language test");
 }
 
 if ( $check_name_relaxed ) {
@@ -2008,10 +2008,12 @@ sub analyze_relation {
             my $count_error_semikolon_w_blank = 0;
             my $count_error_comma             = 0;
             my $match                         = '';
+            
+            my $network_with = ';' . $network . ';';        # we match only with sourrounding ';', i.e. 'DB InterCity' does not match network='DB InterCityExpress'
 
             if ( $network_short_regex ) {
                 foreach my $short_value ( split('\|',$network_short_regex) ) {
-                    if ( $network =~ m/(\Q$short_value\E)/ ) {
+                    if ( $network_with =~ m/;(\Q$short_value\E);/ ) {
                         $match = $1;
                         if ( $positive_notes ) {
                             if ( $network eq $match ) {
@@ -2034,7 +2036,7 @@ sub analyze_relation {
             }
             if ( $network_long_regex ) {
                 foreach my $long_value ( split('\|',$network_long_regex) ) {
-                    if ( $network =~ m/(\Q$long_value\E)/ ) {
+                    if ( $network_with =~ m/;(\Q$long_value\E);/ ) {
                         $match = $1;
                         if ( $positive_notes ) {
                             if ( $network eq $match ) {
