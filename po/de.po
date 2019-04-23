@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-23 21:35+0200\n"
+"POT-Creation-Date: 2019-04-23 21:49+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2019\n"
 "Language-Team: German (https://www.transifex.com/jungle-bus/teams/97874/de/)\n"
@@ -1061,20 +1061,19 @@ msgstr ""
 "Dieser Abschnitt listet die 'network'-Werte auf, die berücksichtigt wurden, "
 "d.h. die einen der oben aufgeführten Werte enthalten."
 
-#: ../bin/ptna-routes.pl:4537 ../bin/ptna-routes.pl:4562
-#: ../bin/ptna-routes.pl:4598
-#, perl-format
-msgid "%s and more ..."
-msgstr "%s und mehr ..."
+#: ../bin/ptna-routes.pl:4538 ../bin/ptna-routes.pl:4564
+#: ../bin/ptna-routes.pl:4601
+msgid "and more ..."
+msgstr "und mehr ..."
 
-#: ../bin/ptna-routes.pl:4545
+#: ../bin/ptna-routes.pl:4546
 msgid ""
 "This section lists the 'operator'-values which have not been considered. "
 msgstr ""
 "Dieser Abschnitt listet die 'operator'-Werte auf, die nicht berücksichtigt "
 "wurden. "
 
-#: ../bin/ptna-routes.pl:4546 ../bin/ptna-routes.pl:4582
+#: ../bin/ptna-routes.pl:4547 ../bin/ptna-routes.pl:4584
 msgid ""
 "They might include typos in values which otherwise should have been "
 "considered. "
@@ -1082,20 +1081,16 @@ msgstr ""
 "Es liegen eventuell Tippfehler in Werten vor, die ansonsten zu "
 "berücksichtigen wären. "
 
-#: ../bin/ptna-routes.pl:4578
+#: ../bin/ptna-routes.pl:4580
 msgid "Not Considered 'network'-Values"
 msgstr "Nicht berücksichtigte 'network'-Werte"
 
-#: ../bin/ptna-routes.pl:4581
+#: ../bin/ptna-routes.pl:4583
 msgid ""
 "This section lists the 'network'-values which have not been considered. "
 msgstr ""
 "Dieser Abschnitt listet die 'network'-Werte auf, die nicht berücksichtigt "
 "wurden. "
-
-#: ../bin/ptna-routes.pl:4811
-msgid " and more ..."
-msgstr " und mehr ..."
 
 #: ../modules/RoutesList.pm:161
 #, perl-format

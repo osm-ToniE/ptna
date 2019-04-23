@@ -4534,7 +4534,8 @@ sub printHintUsedNetworks {
         } else {
             printTableLine( 'network'           =>    $network,
                             'number'            =>    scalar @relations_of_network, 
-                            'relations'         =>    sprintf( gettext("%s and more ..."), join( ',', splice(@relations_of_network,0,10) ) )
+                            'relations'         =>    join( ',', splice(@relations_of_network,0,10) ),
+                            'and more'          =>    gettext( "and more ..." ) 
                           );
         }
     }
@@ -4559,7 +4560,8 @@ sub printHintUsedNetworks {
             } else {
                 printTableLine( 'operator'          =>    $operator,
                                 'number'            =>    scalar @relations_of_operator, 
-                                'relations'         =>    sprintf( gettext("%s and more ..."), join( ',', splice(@relations_of_operator,0,10) ) )
+                                'relations'         =>    join( ',', splice(@relations_of_operator,0,10) ),
+                                'and more'          =>    gettext( "and more ..." )
                               );
             }
         }
@@ -4595,7 +4597,8 @@ sub printHintUnusedNetworks {
         } else {
             printTableLine( 'network'           =>    $network,
                             'number'            =>    scalar @relations_of_network, 
-                            'relations'         =>    sprintf( gettext("%s and more ..."), join( ',', splice(@relations_of_network,0,10) ) )
+                            'relations'         =>    join( ',', splice(@relations_of_network,0,10) ),
+                            'and more'          =>    gettext( "and more ..." )
                           );
         }
     }
@@ -4798,7 +4801,8 @@ sub printTableLine {
     my $val     = undef;
     my $i       = 0;
     my $ref     = $hash{'ref'} || '???';
-    my $info    = $hash{'relation'} ? $hash{'relation'} : ( $hash{'network'} ? $hash{'network'} : $ref);
+    my $info    = $hash{'relation'} ? $hash{'relation'}       : ( $hash{'network'} ? $hash{'network'} : $ref);
+    my $andmore = $hash{'and more'} ? ' ' . $hash{'and more'} : '';
 
     $info =~ s/\"/_/g;
     push( @HTML_main, sprintf( "%16s<tr data-info=\"%s\" data-ref=\"%s\" class=\"line\">", ' ', $info, $ref ) );
@@ -4807,13 +4811,7 @@ sub printTableLine {
         if ( $columns[$i] eq "relation" ) {
             push( @HTML_main, sprintf( "<td class=\"relation\">%s</td>", printRelationTemplate($val) ) );
         } elsif ( $columns[$i] eq "relations"  ){
-            my $and_more = '';
-            my $searchfor = gettext(' and more ...');
-            if ( $val =~ m/\Q$searchfor\E/ ) {
-                $and_more = $searchfor;
-                $val =~ s/\Q$searchfor\E//;
-            }
-            push( @HTML_main, sprintf( "<td class=\"relations\">%s%s</td>", join( ', ', map { printRelationTemplate($_,'ref'); } split( ',', $val ) ), $and_more ) );
+            push( @HTML_main, sprintf( "<td class=\"relations\">%s%s</td>", join( ', ', map { printRelationTemplate($_,'ref'); } split( ',', $val ) ), $andmore ) );
         } elsif ( $columns[$i] eq "issues"  ){
             $val =~ s/__separator__/<br>/g;
             push( @HTML_main, sprintf( "<td class=\"%s\">%s</td>", $columns[$i], $val ) );
