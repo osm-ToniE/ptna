@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-23 21:29+0200\n"
+"POT-Creation-Date: 2019-04-23 21:35+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2019\n"
 "Language-Team: French (https://www.transifex.com/jungle-bus/teams/97874/fr/)\n"
@@ -1010,8 +1010,8 @@ msgstr ""
 " compte"
 
 #: ../bin/ptna-routes.pl:4811
-msgid "and more ..."
-msgstr "et plus ..."
+msgid " and more ..."
+msgstr " et plus ..."
 
 #: ../modules/RoutesList.pm:161
 #, perl-format

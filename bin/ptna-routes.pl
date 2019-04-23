@@ -4808,7 +4808,7 @@ sub printTableLine {
             push( @HTML_main, sprintf( "<td class=\"relation\">%s</td>", printRelationTemplate($val) ) );
         } elsif ( $columns[$i] eq "relations"  ){
             my $and_more = '';
-            my $searchfor = gettext('and more ...');
+            my $searchfor = gettext(' and more ...');
             if ( $val =~ m/\Q$searchfor\E/ ) {
                 $and_more = $searchfor;
                 $val =~ s/\Q$searchfor\E//;
