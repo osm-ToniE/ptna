@@ -26,7 +26,7 @@
     </head>
     <body>
         <div id="toc">
-        <h1>Contents</h1>
+        <h1>Résultats</h1>
         <ol>
         <li>1 <a href="#hints">Hints</a>
         </li>
@@ -54,9 +54,9 @@
         </li>
         </ol>
         </li>
-        <li>3 <a href="#networkdetails">Details for 'network'-Values</a>
+        <li>3 <a href="#networkdetails">Détails des valeurs pour le tag 'network'</a>
         <ol>
-        <li>3.1 <a href="#considerednetworks">Considered 'network'-Values</a>
+        <li>3.1 <a href="#considerednetworks">Valeurs du tag 'network' prises en compte</a>
         </li>
         </ol>
         </li>
@@ -65,7 +65,7 @@
         <hr />
         <h1 id="hints">1 Hints</h1>
 <p>
-    The data will be updated when the result of the analysis has changed.
+    Le tableau sera mis à jour quand les résultats de l'analyse auront changé.
 </p>
 <p>
     An explanation of the error texts can be found in the documentation at <a href='/en/doc_toc.html#checks'>'Check'</a>.
@@ -120,17 +120,17 @@ OSM-Wiki Link without alias: <a href="https://wiki.openstreetmap.org/wiki/Münch
 </p>
         <table class="oepnvtable">
             <thead>
-                <tr class="tableheaderrow"><th class="name">Nom (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+                <tr class="tableheaderrow"><th class="name">Nom (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Erreurs</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
-                <tr data-info="Comment: ICE; From: Hamburg; To: Munich; Operator: Deutsche Bahn" data-ref="010" class="sketchline"><td class="sketch">010</td><td class="csvinfo" colspan="5">Comment: ICE; From: Hamburg; To: Munich; Operator: Deutsche Bahn</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='010' and route='train'</td><td class="notes"></td></tr>
+                <tr data-info="Commentaire: ICE; Depuis: Hamburg; Vers: Munich; Transporteur: Deutsche Bahn" data-ref="010" class="sketchline"><td class="sketch">010</td><td class="csvinfo" colspan="5">Commentaire: ICE; Depuis: Hamburg; Vers: Munich; Transporteur: Deutsche Bahn</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='010' et route='train'</td><td class="notes"></td></tr>
                 <tr data-info="???" data-ref="100" class="sketchline"><td class="sketch">100</td><td class="csvinfo" colspan="5"></td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not set. Line 69 of Routes-Data. Contents of line: '100'</td><td class="notes"></td></tr>
                 <tr data-info="???" data-ref="200" class="sketchline"><td class="sketch">200</td><td class="csvinfo" colspan="5"></td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not set. Line 70 of Routes-Data. Contents of line: '200;'</td><td class="notes"></td></tr>
                 <tr data-info="???" data-ref="201" class="sketchline"><td class="sketch">201</td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='201' and route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='201' et route='bus'</td><td class="notes"></td></tr>
             </tbody>
         </table>
 
@@ -140,15 +140,15 @@ text inside table is now supported
 </p>
         <table class="oepnvtable">
             <thead>
-                <tr class="tableheaderrow"><th class="name">Nom (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+                <tr class="tableheaderrow"><th class="name">Nom (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Erreurs</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
                 <tr data-info="???" data-ref="300" class="sketchline"><td class="sketch">300</td><td class="csvinfo" colspan="5"></td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not set. Line 75 of Routes-Data. Contents of line: '300;;'</td><td class="notes"></td></tr>
                 <tr data-info="???" data-ref="301" class="sketchline"><td class="sketch">301</td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='301' and route='bus'</td><td class="notes"></td></tr>
-                <tr data-info="Comment: comment" data-ref="302" class="sketchline"><td class="sketch">302</td><td class="csvinfo" colspan="5">Comment: comment</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='302' and route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='301' et route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Commentaire: comment" data-ref="302" class="sketchline"><td class="sketch">302</td><td class="csvinfo" colspan="5">Commentaire: comment</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='302' et route='bus'</td><td class="notes"></td></tr>
                 <tr data-info="???" data-ref="400" class="sketchline"><td class="sketch">400</td><td class="csvinfo" colspan="5"></td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not set. Line 78 of Routes-Data. Contents of line: '400;;;'</td><td class="notes"></td></tr>
             </tbody>
@@ -159,69 +159,69 @@ text inside table is now supported
 </p>
         <table class="oepnvtable">
             <thead>
-                <tr class="tableheaderrow"><th class="name">Nom (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+                <tr class="tableheaderrow"><th class="name">Nom (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Erreurs</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
-                <tr data-info="Comment: comment" data-ref="401" class="sketchline"><td class="sketch">401</td><td class="csvinfo" colspan="5">Comment: comment</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='401' and route='bus'</td><td class="notes"></td></tr>
-                <tr data-info="Comment: comment; From: from" data-ref="402" class="sketchline"><td class="sketch">402</td><td class="csvinfo" colspan="5">Comment: comment; From: from</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='402' and route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Commentaire: comment" data-ref="401" class="sketchline"><td class="sketch">401</td><td class="csvinfo" colspan="5">Commentaire: comment</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='401' et route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Commentaire: comment; Depuis: from" data-ref="402" class="sketchline"><td class="sketch">402</td><td class="csvinfo" colspan="5">Commentaire: comment; Depuis: from</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='402' et route='bus'</td><td class="notes"></td></tr>
                 <tr data-info="???" data-ref="500" class="sketchline"><td class="sketch">500</td><td class="csvinfo" colspan="5"></td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not set. Line 82 of Routes-Data. Contents of line: '500;;;;'</td><td class="notes"></td></tr>
-                <tr data-info="Comment: comment; From: from" data-ref="501" class="sketchline"><td class="sketch">501</td><td class="csvinfo" colspan="5">Comment: comment; From: from</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='501' and route='bus'</td><td class="notes"></td></tr>
-                <tr data-info="Comment: comment; From: from; To: to" data-ref="502" class="sketchline"><td class="sketch">502</td><td class="csvinfo" colspan="5">Comment: comment; From: from; To: to</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='502' and route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Commentaire: comment; Depuis: from" data-ref="501" class="sketchline"><td class="sketch">501</td><td class="csvinfo" colspan="5">Commentaire: comment; Depuis: from</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='501' et route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Commentaire: comment; Depuis: from; Vers: to" data-ref="502" class="sketchline"><td class="sketch">502</td><td class="csvinfo" colspan="5">Commentaire: comment; Depuis: from; Vers: to</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='502' et route='bus'</td><td class="notes"></td></tr>
                 <tr data-info="???" data-ref="600" class="sketchline"><td class="sketch">600</td><td class="csvinfo" colspan="5"></td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not set. Line 85 of Routes-Data. Contents of line: '600;;;;;'</td><td class="notes"></td></tr>
                 <tr data-info="???" data-ref="601" class="sketchline"><td class="sketch">601</td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='601' and route='bus'</td><td class="notes"></td></tr>
-                <tr data-info="Comment: comment" data-ref="602" class="sketchline"><td class="sketch">602</td><td class="csvinfo" colspan="5">Comment: comment</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='602' and route='bus'</td><td class="notes"></td></tr>
-                <tr data-info="Comment: comment; From: from" data-ref="603" class="sketchline"><td class="sketch">603</td><td class="csvinfo" colspan="5">Comment: comment; From: from</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='603' and route='bus'</td><td class="notes"></td></tr>
-                <tr data-info="Comment: comment; From: from; To: to" data-ref="604" class="sketchline"><td class="sketch">604</td><td class="csvinfo" colspan="5">Comment: comment; From: from; To: to</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='604' and route='bus'</td><td class="notes"></td></tr>
-                <tr data-info="Comment: comment; From: from; To: to; Operator: operator" data-ref="605" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=605&amp;network=network&amp;style=wuppertal" title="Sketch-Line">605</a></td><td class="csvinfo" colspan="5">Comment: comment; From: from; To: to; Operator: operator</td></tr>
-                <tr data-info="-39096" data-ref="605" class="line"><td class="name">Bus 605: from =&gt; to</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39096</td><td class="PTv">2</td><td class="issues">Route without Way(s)<br>Route without Node(s)</td><td class="notes">'operator' = 'operator'</td></tr>
-                <tr data-info="Operator: operator" data-ref="606" class="sketchline"><td class="sketch">606</td><td class="csvinfo" colspan="5">Operator: operator</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='606' and route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='601' et route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Commentaire: comment" data-ref="602" class="sketchline"><td class="sketch">602</td><td class="csvinfo" colspan="5">Commentaire: comment</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='602' et route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Commentaire: comment; Depuis: from" data-ref="603" class="sketchline"><td class="sketch">603</td><td class="csvinfo" colspan="5">Commentaire: comment; Depuis: from</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='603' et route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Commentaire: comment; Depuis: from; Vers: to" data-ref="604" class="sketchline"><td class="sketch">604</td><td class="csvinfo" colspan="5">Commentaire: comment; Depuis: from; Vers: to</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='604' et route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Commentaire: comment; Depuis: from; Vers: to; Transporteur: operator" data-ref="605" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=605&amp;network=network&amp;style=wuppertal" title="Sketch-Line">605</a></td><td class="csvinfo" colspan="5">Commentaire: comment; Depuis: from; Vers: to; Transporteur: operator</td></tr>
+                <tr data-info="-39096" data-ref="605" class="line"><td class="name">Bus 605: from =&gt; to</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39096</td><td class="PTv">2</td><td class="issues">Parcours sans tracé(s)<br>Route without Node(s)</td><td class="notes">'operator' = 'operator'</td></tr>
+                <tr data-info="Transporteur: operator" data-ref="606" class="sketchline"><td class="sketch">606</td><td class="csvinfo" colspan="5">Transporteur: operator</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='606' et route='bus'</td><td class="notes"></td></tr>
                 <tr data-info="???" data-ref="700" class="sketchline"><td class="sketch">700</td><td class="csvinfo" colspan="5"></td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not supported: 'auto'. Line 92 of Routes-Data. Contents of line: '700;auto;invalid route-type;nowhere;nowhere;noone'</td><td class="notes"></td></tr>
-                <tr data-info="Comment: <span class=_attention_>Neue Buslinie ab 09.12.2018</span>; From: nowhere; To: nowhere; Operator: noone" data-ref="800" class="sketchline"><td class="sketch">800</td><td class="csvinfo" colspan="5">Comment: <span class="attention">Neue Buslinie ab 09.12.2018</span>; From: nowhere; To: nowhere; Operator: noone</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='800' and route='bus'</td><td class="notes"></td></tr>
-                <tr data-info="Comment: comment; From: from; To: to; Operator: operator1;operator2" data-ref="900" class="sketchline"><td class="sketch">900</td><td class="csvinfo" colspan="5">Comment: comment; From: from; To: to; Operator: operator1;operator2</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='900' and route='bus'</td><td class="notes"></td></tr>
-                <tr data-info="From: from; To: to; Operator: operator1;operator2" data-ref="901" class="sketchline"><td class="sketch">901</td><td class="csvinfo" colspan="5">From: from; To: to; Operator: operator1;operator2</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='901' and route='bus'</td><td class="notes"></td></tr>
-                <tr data-info="Comment: comment; To: to; Operator: operator1;operator2" data-ref="902" class="sketchline"><td class="sketch">902</td><td class="csvinfo" colspan="5">Comment: comment; To: to; Operator: operator1;operator2</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='902' and route='bus'</td><td class="notes"></td></tr>
-                <tr data-info="Comment: comment; From: from; Operator: operator1;operator2" data-ref="903" class="sketchline"><td class="sketch">903</td><td class="csvinfo" colspan="5">Comment: comment; From: from; Operator: operator1;operator2</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='903' and route='bus'</td><td class="notes"></td></tr>
-                <tr data-info="Operator: operator1;operator2" data-ref="904" class="sketchline"><td class="sketch">904</td><td class="csvinfo" colspan="5">Operator: operator1;operator2</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='904' and route='bus'</td><td class="notes"></td></tr>
-                <tr data-info="Comment: comment; From: from; To: to; Operator: operator1; operator2" data-ref="910" class="sketchline"><td class="sketch">910</td><td class="csvinfo" colspan="5">Comment: comment; From: from; To: to; Operator: operator1; operator2</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='910' and route='bus'</td><td class="notes"></td></tr>
-                <tr data-info="From: from; To: to; Operator: operator1; operator2" data-ref="911" class="sketchline"><td class="sketch">911</td><td class="csvinfo" colspan="5">From: from; To: to; Operator: operator1; operator2</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='911' and route='bus'</td><td class="notes"></td></tr>
-                <tr data-info="Comment: comment; To: to; Operator: operator1; operator2" data-ref="912" class="sketchline"><td class="sketch">912</td><td class="csvinfo" colspan="5">Comment: comment; To: to; Operator: operator1; operator2</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='912' and route='bus'</td><td class="notes"></td></tr>
-                <tr data-info="Comment: comment; From: from; Operator: operator1; operator2" data-ref="913" class="sketchline"><td class="sketch">913</td><td class="csvinfo" colspan="5">Comment: comment; From: from; Operator: operator1; operator2</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='913' and route='bus'</td><td class="notes"></td></tr>
-                <tr data-info="Operator: operator1; operator2" data-ref="914" class="sketchline"><td class="sketch">914</td><td class="csvinfo" colspan="5">Operator: operator1; operator2</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='914' and route='bus'</td><td class="notes"></td></tr>
-                <tr data-info="Operator: &#039;Mein Bus&#039; Gmbh" data-ref="915" class="sketchline"><td class="sketch">915</td><td class="csvinfo" colspan="5">Operator: &#039;Mein Bus&#039; Gmbh</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='915' and route='bus'</td><td class="notes"></td></tr>
-                <tr data-info="Operator: &#039;Mein Bus&#039; Gmbh" data-ref="916" class="sketchline"><td class="sketch">916</td><td class="csvinfo" colspan="5">Operator: &#039;Mein Bus&#039; Gmbh</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='916' and route='bus'</td><td class="notes"></td></tr>
-                <tr data-info="Operator: Mein Bus Gmbh" data-ref="917" class="sketchline"><td class="sketch">917</td><td class="csvinfo" colspan="5">Operator: Mein Bus Gmbh</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='917' and route='bus'</td><td class="notes"></td></tr>
-                <tr data-info="Operator: &quot;Mein Bus&quot; Gmbh" data-ref="918" class="sketchline"><td class="sketch">918</td><td class="csvinfo" colspan="5">Operator: &quot;Mein Bus&quot; Gmbh</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='918' and route='bus'</td><td class="notes"></td></tr>
-                <tr data-info="Operator: operator&#039;s son" data-ref="919" class="sketchline"><td class="sketch">919</td><td class="csvinfo" colspan="5">Operator: operator&#039;s son</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='919' and route='bus'</td><td class="notes"></td></tr>
-                <tr data-info="Operator: operator" data-ref="998;999" class="sketchline"><td class="sketch">998;999</td><td class="csvinfo" colspan="5">Operator: operator</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='998;999' and route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Commentaire: <span class=_attention_>Neue Buslinie ab 09.12.2018</span>; Depuis: nowhere; Vers: nowhere; Transporteur: noone" data-ref="800" class="sketchline"><td class="sketch">800</td><td class="csvinfo" colspan="5">Commentaire: <span class="attention">Neue Buslinie ab 09.12.2018</span>; Depuis: nowhere; Vers: nowhere; Transporteur: noone</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='800' et route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Commentaire: comment; Depuis: from; Vers: to; Transporteur: operator1;operator2" data-ref="900" class="sketchline"><td class="sketch">900</td><td class="csvinfo" colspan="5">Commentaire: comment; Depuis: from; Vers: to; Transporteur: operator1;operator2</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='900' et route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Depuis: from; Vers: to; Transporteur: operator1;operator2" data-ref="901" class="sketchline"><td class="sketch">901</td><td class="csvinfo" colspan="5">Depuis: from; Vers: to; Transporteur: operator1;operator2</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='901' et route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Commentaire: comment; Vers: to; Transporteur: operator1;operator2" data-ref="902" class="sketchline"><td class="sketch">902</td><td class="csvinfo" colspan="5">Commentaire: comment; Vers: to; Transporteur: operator1;operator2</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='902' et route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Commentaire: comment; Depuis: from; Transporteur: operator1;operator2" data-ref="903" class="sketchline"><td class="sketch">903</td><td class="csvinfo" colspan="5">Commentaire: comment; Depuis: from; Transporteur: operator1;operator2</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='903' et route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Transporteur: operator1;operator2" data-ref="904" class="sketchline"><td class="sketch">904</td><td class="csvinfo" colspan="5">Transporteur: operator1;operator2</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='904' et route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Commentaire: comment; Depuis: from; Vers: to; Transporteur: operator1; operator2" data-ref="910" class="sketchline"><td class="sketch">910</td><td class="csvinfo" colspan="5">Commentaire: comment; Depuis: from; Vers: to; Transporteur: operator1; operator2</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='910' et route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Depuis: from; Vers: to; Transporteur: operator1; operator2" data-ref="911" class="sketchline"><td class="sketch">911</td><td class="csvinfo" colspan="5">Depuis: from; Vers: to; Transporteur: operator1; operator2</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='911' et route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Commentaire: comment; Vers: to; Transporteur: operator1; operator2" data-ref="912" class="sketchline"><td class="sketch">912</td><td class="csvinfo" colspan="5">Commentaire: comment; Vers: to; Transporteur: operator1; operator2</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='912' et route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Commentaire: comment; Depuis: from; Transporteur: operator1; operator2" data-ref="913" class="sketchline"><td class="sketch">913</td><td class="csvinfo" colspan="5">Commentaire: comment; Depuis: from; Transporteur: operator1; operator2</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='913' et route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Transporteur: operator1; operator2" data-ref="914" class="sketchline"><td class="sketch">914</td><td class="csvinfo" colspan="5">Transporteur: operator1; operator2</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='914' et route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Transporteur: &#039;Mein Bus&#039; Gmbh" data-ref="915" class="sketchline"><td class="sketch">915</td><td class="csvinfo" colspan="5">Transporteur: &#039;Mein Bus&#039; Gmbh</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='915' et route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Transporteur: &#039;Mein Bus&#039; Gmbh" data-ref="916" class="sketchline"><td class="sketch">916</td><td class="csvinfo" colspan="5">Transporteur: &#039;Mein Bus&#039; Gmbh</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='916' et route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Transporteur: Mein Bus Gmbh" data-ref="917" class="sketchline"><td class="sketch">917</td><td class="csvinfo" colspan="5">Transporteur: Mein Bus Gmbh</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='917' et route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Transporteur: &quot;Mein Bus&quot; Gmbh" data-ref="918" class="sketchline"><td class="sketch">918</td><td class="csvinfo" colspan="5">Transporteur: &quot;Mein Bus&quot; Gmbh</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='918' et route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Transporteur: operator&#039;s son" data-ref="919" class="sketchline"><td class="sketch">919</td><td class="csvinfo" colspan="5">Transporteur: operator&#039;s son</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='919' et route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="Transporteur: operator" data-ref="998;999" class="sketchline"><td class="sketch">998;999</td><td class="csvinfo" colspan="5">Transporteur: operator</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec ref='998;999' et route='bus'</td><td class="notes"></td></tr>
             </tbody>
         </table>
 
@@ -229,14 +229,14 @@ text inside table is now supported
 &nbsp;
 </p>
         <hr />
-        <h1 id="networkdetails">3 Details for 'network'-Values</h1>
-        <h2 id="considerednetworks">3.1 Considered 'network'-Values</h2>
+        <h1 id="networkdetails">3 Détails des valeurs pour le tag 'network'</h1>
+        <h2 id="considerednetworks">3.1 Valeurs du tag 'network' prises en compte</h2>
 <p>
-This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.
+Cette section liste les valeurs du tag 'network' qui ont été prises en compte car elles sont identiques aux valeurs ci-dessus.
 </p>
         <table class="oepnvtable">
             <thead>
-                <tr class="tableheaderrow"><th class="network">Network (network=)</th><th class="number">Number</th><th class="relations">Relations</th></tr>
+                <tr class="tableheaderrow"><th class="network">Réseau (network=)</th><th class="number">Nombre</th><th class="relations">Relations</th></tr>
             </thead>
             <tbody>
                 <tr data-info="network" data-ref="???" class="line"><td class="network">network</td><td class="number">1</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '605' -39096</td></tr>
