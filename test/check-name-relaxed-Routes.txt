@@ -39,7 +39,7 @@
 #
 
 
-= Test file for --check-name (not relaxed)
+= Test file for --check-name-relaxed
 
 == Positive, no errors
 
@@ -77,6 +77,8 @@
 === Normal
 
 X1;bus;;;;
+X2;bus;;;;
+X3;bus;;;;
 -
 
 == Negative, with errors
@@ -133,11 +135,6 @@ X1;bus;;;;
 -'''Notes:''' ref:LAVV' = '122'; 'ref:RVO' = '112'; PTv2 route: 'LAVV 122' is not part of 'name' (derived from 'ref:LAVV' = '122')
 112/122;bus;;;;
 
-=== Negative, with special characters
-
-X2;bus;;;;
-X3;bus;;;;
--
 
 
 </pre>
