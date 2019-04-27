@@ -2419,7 +2419,20 @@ sub analyze_ptv2_route_relation {
         push( @{$relation_ptr->{'__issues__'}}, sprintf("%s %s", $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } sort(keys(%{$relation_ptr->{'expect_motorway_after'}})))) );
         $return_code++;
     }
-
+    if ( $relation_ptr->{'roundabout_follows_itself'} ) {
+        my @help_array        = sort(keys(%{$relation_ptr->{'roundabout_follows_itself'}}));
+        my $num_of_errors     = scalar(@help_array);
+        my $error_2422_string      = ngettext( "PTv2 route: roundabout appears twice, following itself", "PTv2 route: roundabouts appear twice, following themselves", $num_of_errors );
+        my $error_2422_option      = '';
+        my $error_2422_description = '';
+        my $error_2422_howtofix    = '';
+        if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+            push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $error_2422_string, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+        } else {
+            push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $error_2422_string, join(', ', map { printWayTemplate($_,'name;ref'); } @help_array )) );
+        }
+        $return_code++;
+    }
     #
     # NODES     are either Stop-Positions or Platforms, so they must have a 'role'
     #
@@ -2988,6 +3001,11 @@ sub SortRouteWayNodes {
             push( @control_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
     
             if ( $next_way_id ) {
+
+                if ( $current_way_id == $next_way_id && isClosedWay($current_way_id) ) {
+                    $relation_ptr->{'roundabout_follows_itself'}->{$current_way_id} = 1;
+                }
+
                 if ( $connecting_node_id ) {
                     #
                     printf STDERR "SortRouteWayNodes() : Connecting Node %d\n",$connecting_node_id       if ( $debug );
