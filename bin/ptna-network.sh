@@ -24,7 +24,7 @@ fi
 SETTINGS_DIR="."
 
 
-TEMP=$(getopt -o acgGhoOpPuwWS --long analyze,clean,get-routes,help,overpass-query,overpass-query-on-zero-xml,push-routes,update-result,watch-routes,settings-dir -n 'ptna-network.sh' -- "$@")
+TEMP=$(getopt -o acfgGhoOpPuwWS --long analyze,clean,get-routes,get-talk,force-download,help,overpass-query,overpass-query-on-zero-xml,push-routes,push-talk,update-result,watch-routes,watch-talk,settings-dir -n 'ptna-network.sh' -- "$@")
 
 if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 2 ; fi
 
@@ -34,6 +34,7 @@ while true ; do
     case "$1" in
         -a|--analyze)                       analyze=true                ; shift ;;
         -c|--clean)                         clean=true                  ; shift ;;
+        -f|--force-download)                forcedownload=true          ; shift ;;
         -g|--get-routes)                    getroutes=true              ; shift ;;
         -G|--get-talk)                      gettalk=true                ; shift ;;
         -h|--help)                          help=true                   ; shift ;;
@@ -102,12 +103,43 @@ ROUTES_FILE="$PREFIX-Routes.txt"
 SETTINGS_FILE="settings.sh"
 TALK_FILE="$PREFIX-Talk.wiki"
 
-OSM_XML_FILE="$PREFIX-Data.xml"
 HTML_FILE="$PREFIX-Analysis.html"
 DIFF_FILE="$PREFIX-Analysis.html.diff"
 DIFF_HTML_FILE="$PREFIX-Analysis.diff.html"
 SAVE_FILE="$PREFIX-Analysis.html.save"
 
+if [ "$OVERPASS_REUSE_ID" ]
+then
+    OSM_XML_FILE_ABSOLUTE="$PTNA_WORK_LOC/$OVERPASS_REUSE_ID-Data.xml"
+else
+    OSM_XML_FILE_ABSOLUTE="$WORK_LOC/$PREFIX-Data.xml"
+fi
+
+#
+#
+#
+
+if [ "$forcedownload" = "true" ]
+then
+    overpassquery="true"
+
+elif [ "$overpassquery" = "true" ]
+then
+    if [ -f $OSM_XML_FILE_ABSOLUTE -a -s $OSM_XML_FILE_ABSOLUTE ]
+    then
+        last_mod=$(stat -c '%Y' $OSM_XML_FILE_ABSOLUTE)
+        now=$(date '+%s')
+        age=$(( $now - $last_mod ))
+
+        if [ "$age" -lt 3600 ]
+        then
+            echo $(date "+%Y-%m-%d %H:%M:%S") "Skipping download via Overpass Query API to $OSM_XML_FILE_ABSOLUTE"
+            echo $(date "+%Y-%m-%d %H:%M:%S") "Age of file: $age seconds is less than 3600 seconds = 1 hour"
+            echo $(date "+%Y-%m-%d %H:%M:%S") "Use option -f if you want to force the download"
+            overpassquery="false"
+        fi
+    fi
+fi
 
 #
 # 
@@ -116,7 +148,7 @@ SAVE_FILE="$PREFIX-Analysis.html.save"
 if [ "$clean" = "true" ]
 then
     echo $(date "+%Y-%m-%d %H:%M:%S") "Removing temporary files"
-    rm -f $WORK_LOC/$OSM_XML_FILE $WORK_LOC/$HTML_FILE $WORK_LOC/$DIFF_FILE $WORK_LOC/$DIFF_HTML_FILE $WORK_LOC/$SAVE_FILE
+    rm -f $OSM_XML_FILE_ABSOLUTE $WORK_LOC/$HTML_FILE $WORK_LOC/$DIFF_FILE $WORK_LOC/$DIFF_HTML_FILE $WORK_LOC/$SAVE_FILE
 fi
 
 #
@@ -125,12 +157,12 @@ fi
 
 if [ "$overpassqueryonzeroxml" = "true" ]
 then
-    if [ -f $WORK_LOC/$OSM_XML_FILE -a -s $WORK_LOC/$OSM_XML_FILE ]
+    if [ -f $OSM_XML_FILE_ABSOLUTE -a -s $OSM_XML_FILE_ABSOLUTE ]
     then
-        echo $(date "+%Y-%m-%d %H:%M:%S") "File '$WORK_LOC/$OSM_XML_FILE' exists, no further analysis required, terminating"
+        echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' exists, no further analysis required, terminating"
         exit 0
     else
-        echo $(date "+%Y-%m-%d %H:%M:%S") "File '$WORK_LOC/$OSM_XML_FILE' does not exist or is empty, starting download"
+        echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' does not exist or is empty, starting download"
         overpassquery="true"
     fi
 fi
@@ -143,28 +175,30 @@ if [ "$overpassquery" = "true" ]
 then
     echo $(date "+%Y-%m-%d %H:%M:%S") "Calling wget for '$PREFIX'"
     
-    if [ ! -d "$WORK_LOC" ] 
+    OSM_XML_LOC=$(dirname $OSM_XML_FILE_ABSOLUTE)
+
+    if [ ! -d "$OSM_XML_LOC" ]
     then
-        echo $(date "+%Y-%m-%d %H:%M:%S") "Creating directory $WORK_LOC"
-        mkdir -p $WORK_LOC
+        echo $(date "+%Y-%m-%d %H:%M:%S") "Creating directory $OSM_XML_LOC"
+        mkdir -p $OSM_XML_LOC
     fi
        
-    if [ -d "$WORK_LOC" ]
+    if [ -d "$OSM_XML_LOC" ]
     then
-        wget "$OVERPASS_QUERY" -O $WORK_LOC/$OSM_XML_FILE
+        wget "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE
         echo $(date "+%Y-%m-%d %H:%M:%S") "wget returns $?"
         
-        if [ -s $WORK_LOC/$OSM_XML_FILE ]
+        if [ -s $OSM_XML_FILE_ABSOLUTE ]
         then
             echo $(date "+%Y-%m-%d %H:%M:%S") "Success for wget for '$PREFIX'"
         else
             echo $(date "+%Y-%m-%d %H:%M:%S") "Calling wget for '$PREFIX' a second time"
             # try a second, but only a second time
             sleep 60    
-            wget "$OVERPASS_QUERY" -O $WORK_LOC/$OSM_XML_FILE
+            wget "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE
             echo $(date "+%Y-%m-%d %H:%M:%S") "wget returns $?"
             
-            if [ -s $WORK_LOC/$OSM_XML_FILE ]
+            if [ -s $OSM_XML_FILE_ABSOLUTE ]
             then
                 echo $(date "+%Y-%m-%d %H:%M:%S") "Success for wget for '$PREFIX'"
             else
@@ -172,7 +206,7 @@ then
             fi
         fi
     else
-        echo $(date "+%Y-%m-%d %H:%M:%S") "Work dir $WORK_LOC does not exist/could not be created"
+        echo $(date "+%Y-%m-%d %H:%M:%S") "Work dir $OSM_XML_LOC does not exist/could not be created"
     fi    
 fi
 
@@ -215,9 +249,9 @@ if [ "$analyze" = "true" ]
 then
     echo $(date "+%Y-%m-%d %H:%M:%S")  "Analyze $PREFIX"
     
-    if [ -f $SETTINGS_DIR/$ROUTES_FILE -a -f $WORK_LOC/$OSM_XML_FILE ]
+    if [ -f $SETTINGS_DIR/$ROUTES_FILE -a -f $OSM_XML_FILE_ABSOLUTE ]
     then
-        if [ -s $SETTINGS_DIR/$ROUTES_FILE -a -s $WORK_LOC/$OSM_XML_FILE ]
+        if [ -s $SETTINGS_DIR/$ROUTES_FILE -a -s $OSM_XML_FILE_ABSOLUTE ]
         then
             rm -f $WORK_LOC/$DIFF_FILE.diff
 
@@ -237,7 +271,7 @@ then
                            --network-short-regex="$NETWORK_SHORT" \
                            --operator-regex="$OPERATOR_REGEX" \
                            --routes-file=$SETTINGS_DIR/$ROUTES_FILE \
-                           --osm-xml-file=$WORK_LOC/$OSM_XML_FILE \
+                           --osm-xml-file=$OSM_XML_FILE_ABSOLUTE \
                            > $WORK_LOC/$HTML_FILE
     
             if [ -s "$WORK_LOC/$HTML_FILE" ]
@@ -257,11 +291,11 @@ then
                 echo $(date "+%Y-%m-%d %H:%M:%S") "'$WORK_LOC/$HTML_FILE' is empty"
             fi
         else
-            echo $(date "+%Y-%m-%d %H:%M:%S") "'$SETTINGS_DIR/$ROUTES_FILE' or '$WORK_LOC/$OSM_XML_FILE' is empty"
+            echo $(date "+%Y-%m-%d %H:%M:%S") "'$SETTINGS_DIR/$ROUTES_FILE' or '$OSM_XML_FILE_ABSOLUTE' is empty"
             echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WORK_LOC/$HTML_FILE)
        fi
     else
-        echo $(date "+%Y-%m-%d %H:%M:%S") "'$SETTINGS_DIR/$ROUTES_FILE' or '$WORK_LOC/$OSM_XML_FILE' does not exist"
+        echo $(date "+%Y-%m-%d %H:%M:%S") "'$SETTINGS_DIR/$ROUTES_FILE' or '$OSM_XML_FILE_ABSOLUTE' does not exist"
     fi
 fi
 
