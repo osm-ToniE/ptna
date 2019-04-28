@@ -56,14 +56,14 @@
     <tag k='public_transport' v='platform' />
   </node>
   <node id='-102446' action='modify' lat='48.7201435238' lon='13.53175905007' />
-  <way id='-102420' action='modify'>
+  <way id='-102447' action='modify'>
     <nd ref='-102446' />
     <nd ref='-102399' />
     <tag k='highway' v='secondary' />
     <tag k='name' v='Way 3' />
     <tag k='ref' v='W 3' />
   </way>
-  <way id='-102421' action='modify'>
+  <way id='-102448' action='modify'>
     <nd ref='-102401' />
     <nd ref='-102409' />
     <tag k='highway' v='tertiary' />
@@ -135,15 +135,15 @@
     <tag k='oneway' v='yes' />
     <tag k='ref' v='1-5' />
   </way>
-  <relation id='-102422' action='modify'>
+  <relation id='-102594' action='modify'>
     <member type='node' ref='-102409' role='stop_entry_only' />
     <member type='node' ref='-102411' role='platform_entry_only' />
     <member type='node' ref='-102395' role='stop' />
     <member type='node' ref='-102403' role='platform' />
     <member type='node' ref='-102383' role='stop_exit_only' />
     <member type='node' ref='-102413' role='platform_exit_only' />
-    <member type='way' ref='-102421' role='' />
-    <member type='way' ref='-102420' role='' />
+    <member type='way' ref='-102448' role='' />
+    <member type='way' ref='-102447' role='' />
     <member type='way' ref='-102519' role='' />
     <member type='way' ref='-102499' role='' />
     <member type='way' ref='-102508' role='' />
@@ -151,7 +151,7 @@
     <member type='way' ref='-102488' role='' />
     <member type='way' ref='-102494' role='' />
     <member type='way' ref='-102457' role='' />
-    <tag k='comment' v='Gaps at Way 1, Way 10, Way 9 and Way 6' />
+    <tag k='comment' v='Gaps at Way 1, Way 6, Way 9 and Way 10' />
     <tag k='from' v='A-Village' />
     <tag k='name' v='Bus 001: A-Village =&gt; B-Village =&gt; C-Village' />
     <tag k='network' v='Test' />
@@ -162,7 +162,7 @@
     <tag k='type' v='route' />
     <tag k='via' v='B-Village' />
   </relation>
-  <relation id='-102423' action='modify'>
+  <relation id='-102595' action='modify'>
     <member type='node' ref='-102383' role='stop_entry_only' />
     <member type='node' ref='-102415' role='platform_entry_only' />
     <member type='node' ref='-102395' role='stop' />
@@ -176,7 +176,7 @@
     <member type='way' ref='-102499' role='' />
     <member type='way' ref='-102508' role='' />
     <member type='way' ref='-102593' role='' />
-    <member type='way' ref='-102421' role='' />
+    <member type='way' ref='-102448' role='' />
     <tag k='comment' v='PTv2 route: using oneway way in wrong direction: Way &apos;Way 1-5&apos;' />
     <tag k='from' v='C-Village' />
     <tag k='name' v='Bus 001: C-Village =&gt; B-Village =&gt; A-Village' />
@@ -188,9 +188,9 @@
     <tag k='type' v='route' />
     <tag k='via' v='B-Village' />
   </relation>
-  <relation id='-102424' action='modify'>
-    <member type='relation' ref='-102422' role='' />
-    <member type='relation' ref='-102423' role='' />
+  <relation id='-102596' action='modify'>
+    <member type='relation' ref='-102594' role='' />
+    <member type='relation' ref='-102595' role='' />
     <tag k='name' v='Bus 001' />
     <tag k='network' v='Test' />
     <tag k='public_transport:version' v='2' />

@@ -2280,6 +2280,7 @@ sub analyze_ptv2_route_relation {
     
     $relation_ptr->{'non_platform_ways'}       = \@relation_route_ways;
     $relation_ptr->{'number_of_segments'}      = 0;
+    $relation_ptr->{'gap_at_way'}              = ();
     $relation_ptr->{'number_of_roundabouts'}   = 0;
     $relation_ptr->{'sorted_in_reverse_order'} = '';
     
@@ -2390,7 +2391,7 @@ sub analyze_ptv2_route_relation {
         $return_code++
     }
     if ( $relation_ptr->{'number_of_segments'} > 1 ) {
-        my @help_array     = sort(keys(%{$relation_ptr->{'gap_at_way'}}));
+        my @help_array     = @{$relation_ptr->{'gap_at_way'}};
         my $num_of_errors  = scalar(@help_array);
         my $error_string = sprintf( ngettext( "PTv2 route: has a gap, consists of %d segments. Gap appears at way", "PTv2 route: has gaps, consists of %d segments. Gaps appear at ways", $relation_ptr->{'number_of_segments'}-1 ), $relation_ptr->{'number_of_segments'});
         if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
@@ -3077,7 +3078,7 @@ sub SortRouteWayNodes {
                                     printf STDERR "SortRouteWayNodes() : no match between this closed Way %s and the next Way %s\n", $current_way_id, $next_way_id      if ( $debug );
                                     push( @sorted_nodes, 0 );      # mark a gap in the sorted nodes
                                     $relation_ptr->{'number_of_segments'}++;
-                                    $relation_ptr->{'gap_at_way'}->{$current_way_id} = 1;
+                                    push( @{$relation_ptr->{'gap_at_way'}}, $current_way_id );
                                     printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d at Way %s and the next Way %s\n", $relation_ptr->{'number_of_segments'}, $current_way_id, $next_way_id      if ( $debug );
                                 }
                             }
@@ -3086,7 +3087,7 @@ sub SortRouteWayNodes {
                             push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                             push( @sorted_nodes, 0 );      # mark a gap in the sorted nodes
                             $relation_ptr->{'number_of_segments'}++;
-                            $relation_ptr->{'gap_at_way'}->{$current_way_id} = 1;
+                            push( @{$relation_ptr->{'gap_at_way'}}, $current_way_id );
                             printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d at first, closed, single Way %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                         }
                     } elsif ( 0 != ($entry_node_id=isOneway($current_way_id,undef)) ) {
@@ -3140,7 +3141,7 @@ sub SortRouteWayNodes {
                                 }
                                 printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ at gap between this (current) way and the way before\n"     if ( $debug );
                                 $relation_ptr->{'number_of_segments'}++;
-                                $relation_ptr->{'gap_at_way'}->{$current_way_id} = 1;
+                                push( @{$relation_ptr->{'gap_at_way'}}, $current_way_id );
                                 $connecting_node_id = 0;
                             }
                         }
@@ -3166,7 +3167,7 @@ sub SortRouteWayNodes {
                         push( @sorted_nodes, 0 );      # mark a gap in the sorted nodes
                         push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                         $relation_ptr->{'number_of_segments'}++;
-                        $relation_ptr->{'gap_at_way'}->{$current_way_id} = 1;
+                        push( @{$relation_ptr->{'gap_at_way'}}, $current_way_id );
                         printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d before Way %s:\nNodes: %s, G, %s\n", $relation_ptr->{'number_of_segments'}, $current_way_id, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
                         $connecting_node_id = 0;
                     }
@@ -3197,7 +3198,7 @@ sub SortRouteWayNodes {
                             push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                             push( @sorted_nodes, 0 );                   # mark a gap in the sorted nodes
                             $relation_ptr->{'number_of_segments'}++;
-                            $relation_ptr->{'gap_at_way'}->{$current_way_id} = 1;
+                            push( @{$relation_ptr->{'gap_at_way'}}, $current_way_id );
                             printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d at Nodes of first, closed, single Way %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
     
                         }
@@ -3242,7 +3243,7 @@ sub SortRouteWayNodes {
                             push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                             push( @sorted_nodes, 0 );                   # mark a gap in the sorted nodes
                             $relation_ptr->{'number_of_segments'}++;
-                            $relation_ptr->{'gap_at_way'}->{$current_way_id} = 1;
+                            push( @{$relation_ptr->{'gap_at_way'}}, $current_way_id );
                             printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d at Nodes of single Way %s before a closed Way %s:\nNodes: %s, G\n", $relation_ptr->{'number_of_segments'}, $current_way_id, $next_way_id, oin( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
                         }
                     } elsif ( $WAYS{$current_way_id}->{'last_node'} == $WAYS{$next_way_id}->{'first_node'}   ||
@@ -3267,7 +3268,7 @@ sub SortRouteWayNodes {
                         push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                         push( @sorted_nodes, 0 );                   # mark a gap in the sorted nodes
                         $relation_ptr->{'number_of_segments'}++;
-                        $relation_ptr->{'gap_at_way'}->{$current_way_id} = 1;
+                        push( @{$relation_ptr->{'gap_at_way'}}, $current_way_id );
                         printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d at Nodes of single Way %s:\nNodes: %s, G\n", $relation_ptr->{'number_of_segments'}, $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                     }
                 }
@@ -3300,7 +3301,7 @@ sub SortRouteWayNodes {
                             printf STDERR "SortRouteWayNodes() : handle Nodes of last, closed, isolated Way %s:\nNodes: %s\n", $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                             push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                             $relation_ptr->{'number_of_segments'}++;
-                            $relation_ptr->{'gap_at_way'}->{$current_way_id} = 1;
+                            push( @{$relation_ptr->{'gap_at_way'}}, $current_way_id );
                             printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d at Nodes of last, closed, isolated Way %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                         }
                     } elsif ( 0 != ($entry_node_id=isOneway($current_way_id,undef)) ) {
@@ -3352,7 +3353,7 @@ sub SortRouteWayNodes {
                                     push( @sorted_nodes, reverse(@{$WAYS{$current_way_id}->{'chain'}}) );
                                 }
                                 $relation_ptr->{'number_of_segments'}++;
-                                $relation_ptr->{'gap_at_way'}->{$current_way_id} = 1;
+                                push( @{$relation_ptr->{'gap_at_way'}}, $current_way_id );
                                 printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d at gap between this (current) way and the way before, we will follow the oneway in the intended direction\n", $relation_ptr->{'number_of_segments'}, $current_way_id, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
                                 $connecting_node_id = 0;
                             }
@@ -3370,7 +3371,7 @@ sub SortRouteWayNodes {
                         push( @sorted_nodes, 0 );      # mark a gap in the sorted nodes
                         push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                         $relation_ptr->{'number_of_segments'}++;
-                        $relation_ptr->{'gap_at_way'}->{$current_way_id} = 1;
+                        push( @{$relation_ptr->{'gap_at_way'}}, $current_way_id );
                         printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d last, isolated Way %s and Node %s\n", $relation_ptr->{'number_of_segments'}, $current_way_id, $connecting_node_id     if ( $debug );
                     }
                 } else {
