@@ -2426,7 +2426,7 @@ sub analyze_ptv2_route_relation {
         push( @{$relation_ptr->{'__issues__'}}, sprintf("%s %s", $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } sort(keys(%{$relation_ptr->{'expect_motorway_after'}})))) );
         $return_code++;
     }
-    if ( $relation_ptr->{'roundabout_follows_itself'} ) {
+    if ( $relation_ptr->{'number_of_segments'} == 1 && $relation_ptr->{'roundabout_follows_itself'} ) {
         my @help_array        = sort(keys(%{$relation_ptr->{'roundabout_follows_itself'}}));
         my $num_of_errors     = scalar(@help_array);
         my $error_2422_string      = ngettext( "PTv2 route: roundabout appears twice, following itself", "PTv2 route: roundabouts appear twice, following themselves", $num_of_errors );

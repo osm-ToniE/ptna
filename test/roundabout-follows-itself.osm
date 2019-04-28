@@ -72,11 +72,6 @@
     <nd ref='-102238' />
     <nd ref='-102240' />
     <nd ref='-102242' />
-    <nd ref='-102244' />
-    <nd ref='-102246' />
-    <nd ref='-102248' />
-    <nd ref='-102250' />
-    <nd ref='-102333' />
     <tag k='highway' v='secondary' />
     <tag k='name' v='Mainstreet' />
     <tag k='ref' v='M 1' />
@@ -116,6 +111,29 @@
     <tag k='name' v='2nd Street' />
     <tag k='ref' v='S 2' />
   </way>
+  <way id='-102425' action='modify'>
+    <nd ref='-102248' />
+    <nd ref='-102250' />
+    <nd ref='-102333' />
+    <tag k='highway' v='secondary' />
+    <tag k='name' v='Mainstreet' />
+    <tag k='ref' v='M 1' />
+  </way>
+  <way id='-102434' action='modify'>
+    <nd ref='-102244' />
+    <nd ref='-102246' />
+    <nd ref='-102248' />
+    <tag k='highway' v='secondary' />
+    <tag k='name' v='Mainstreet' />
+    <tag k='ref' v='M 1' />
+  </way>
+  <way id='-102443' action='modify'>
+    <nd ref='-102242' />
+    <nd ref='-102244' />
+    <tag k='highway' v='secondary' />
+    <tag k='name' v='Mainstreet' />
+    <tag k='ref' v='M 1' />
+  </way>
   <relation id='-102363' action='modify'>
     <member type='node' ref='-102262' role='stop_entry_only' />
     <member type='node' ref='-102264' role='platform_entry_only' />
@@ -127,11 +145,13 @@
     <member type='way' ref='-102360' role='' />
     <member type='way' ref='-102362' role='' />
     <member type='way' ref='-102360' role='' />
+    <member type='way' ref='-102425' role='' />
+    <member type='way' ref='-102434' role='' />
+    <member type='way' ref='-102443' role='' />
     <member type='way' ref='-102359' role='' />
     <tag k='from' v='A-Village' />
     <tag k='name' v='Bus 001: A-Village =&gt; B-Village =&gt; C-Village' />
     <tag k='network' v='Test' />
-    <tag k='operator' v='Test' />
     <tag k='public_transport:version' v='2' />
     <tag k='ref' v='001' />
     <tag k='route' v='bus' />
@@ -147,6 +167,9 @@
     <member type='node' ref='-102262' role='stop_exit_only' />
     <member type='node' ref='-102272' role='platform_exit_only' />
     <member type='way' ref='-102359' role='' />
+    <member type='way' ref='-102443' role='' />
+    <member type='way' ref='-102434' role='' />
+    <member type='way' ref='-102425' role='' />
     <member type='way' ref='-102360' role='' />
     <member type='way' ref='-102360' role='' />
     <member type='way' ref='-102361' role='' />
@@ -154,7 +177,6 @@
     <tag k='from' v='C-Village' />
     <tag k='name' v='Bus 001: C-Village =&gt; B-Village =&gt; A-Village' />
     <tag k='network' v='Test' />
-    <tag k='operator' v='Test' />
     <tag k='public_transport:version' v='2' />
     <tag k='ref' v='001' />
     <tag k='route' v='bus' />
@@ -172,5 +194,29 @@
     <tag k='ref' v='001' />
     <tag k='route_master' v='bus' />
     <tag k='type' v='route_master' />
+  </relation>
+  <relation id='-102449' action='modify'>
+    <member type='node' ref='-102262' role='stop_entry_only' />
+    <member type='node' ref='-102264' role='platform_entry_only' />
+    <member type='node' ref='-102248' role='stop' />
+    <member type='node' ref='-102256' role='platform' />
+    <member type='node' ref='-102236' role='stop_exit_only' />
+    <member type='node' ref='-102266' role='platform_exit_only' />
+    <member type='way' ref='-102361' role='' />
+    <member type='way' ref='-102360' role='' />
+    <member type='way' ref='-102360' role='' />
+    <member type='way' ref='-102425' role='' />
+    <member type='way' ref='-102443' role='' />
+    <member type='way' ref='-102359' role='' />
+    <tag k='comment' v='PTv2 route: has a gap, consists of 2 segments. Gap appears at way: Way &apos;Mainstreet&apos;' />
+    <tag k='from' v='A-Village' />
+    <tag k='name' v='Bus 001: A-Village =&gt; B-Village =&gt; C-Village' />
+    <tag k='network' v='Test' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='001' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='C-Village' />
+    <tag k='type' v='route' />
+    <tag k='via' v='B-Village' />
   </relation>
 </osm>
