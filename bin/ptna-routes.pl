@@ -2266,7 +2266,7 @@ sub analyze_ptv2_route_relation {
     
     my $role_mismatch_found           = 0;
     my %role_mismatch                 = ();
-    my @relation_route_ways           = ();
+    my @relation_route_highways       = ();
     my @relation_route_stop_positions = ();
     my @sorted_way_nodes              = ();
     my @help_array                    = ();
@@ -2274,11 +2274,11 @@ sub analyze_ptv2_route_relation {
     my $num_of_errors                 = 0;
     my $access_restriction            = undef;
     
-    @relation_route_ways            = FindRouteWays( $relation_ptr );
+    @relation_route_highways        = FindRouteHighWays( $relation_ptr );
     
     @relation_route_stop_positions  = FindRouteStopPositions( $relation_ptr );
     
-    $relation_ptr->{'non_platform_ways'}       = \@relation_route_ways;
+    $relation_ptr->{'non_platform_ways'}       = \@relation_route_highways;
     $relation_ptr->{'number_of_segments'}      = 0;
     $relation_ptr->{'gap_at_way'}              = ();
     $relation_ptr->{'number_of_roundabouts'}   = 0;
@@ -2288,13 +2288,13 @@ sub analyze_ptv2_route_relation {
         $return_code += CheckNameRefFromViaToPTV2( $relation_ptr );
     }
 
-    if ( $relation_route_ways[0] && $relation_route_ways[1] ) {
+    if ( $relation_route_highways[0] && $relation_route_highways[1] ) {
         #
         # special check for route being sorted in reverse order and starting with a oneway (except closed way)
         # another check for first way being a oneway way being used in wrong direction
         #
-        my $first_way_id    = $relation_route_ways[0];
-        my $second_way_id   = $relation_route_ways[1];
+        my $first_way_id    = $relation_route_highways[0];
+        my $second_way_id   = $relation_route_highways[1];
         my $entry_node_id   = undef;
         my $node_id         = undef;
         printf STDERR "analyze_ptv2_route_relation() : at least two ways exist: 1st = %d, 2nd = %s\n", $first_way_id, $second_way_id     if ( $debug );
@@ -2485,8 +2485,8 @@ sub analyze_ptv2_route_relation {
                                     #    }
                                     #}
                                 }
-                                if ( scalar(@relation_route_ways) == 1 ) {
-                                    my $entry_node_id = isOneway( $relation_route_ways[0], undef );
+                                if ( scalar(@relation_route_highways) == 1 ) {
+                                    my $entry_node_id = isOneway( $relation_route_highways[0], undef );
                                     if ( $entry_node_id != 0 ) {
                                         # it is a oneway
                                         if ( $node_ref->{'role'} eq 'stop_exit_only' && isFirstNodeInNodeArray($node_ref->{'ref'},@sorted_way_nodes) ) {
@@ -2498,7 +2498,7 @@ sub analyze_ptv2_route_relation {
                                             $role_mismatch_found++;
                                         }
                                     }
-                                } elsif ( scalar(@relation_route_ways) > 1 ) {
+                                } elsif ( scalar(@relation_route_highways) > 1 ) {
                                     #
                                     # for routes with more than 1 way
                                     #
@@ -2624,9 +2624,9 @@ sub analyze_ptv2_route_relation {
             @help_array     = sort(keys(%{$role_mismatch{$role}}));
             $num_of_errors  = scalar(@help_array);
             if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: %s: %s and %d more ..."), $role, join(', ', map { printNodeTemplate($_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: %s: %s and %d more ..."), $role, join(', ', map { printNodeTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
             } else {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: %s: %s"), $role, join(', ', map { printNodeTemplate($_,'name'); } @help_array )) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: %s: %s"), $role, join(', ', map { printNodeTemplate($_,'name;ref'); } @help_array )) );
             }
         }
     }
@@ -2644,11 +2644,11 @@ sub analyze_ptv2_route_relation {
                 #
                 ;
             } else {
-                if ( scalar(@relation_route_ways) > 1 || isOneway($relation_route_ways[0],undef) ) {
+                if ( scalar(@relation_route_highways) > 1 || isOneway($relation_route_highways[0],undef) ) {
                     #
                     # if we have more than one way or the single way is a oneway, and because we know: the ways are sorted and w/o gaps
                     #
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: first node of way is not the first stop position of this route: %s versus %s"), printNodeTemplate($sorted_way_nodes[0],'name'), printNodeTemplate($relation_route_stop_positions[0],'name') ) );            
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: first node of way is not the first stop position of this route: %s versus %s"), printNodeTemplate($sorted_way_nodes[0],'name;ref'), printNodeTemplate($relation_route_stop_positions[0],'name;ref') ) );            
                     $return_code++;
                 }
             }
@@ -2658,7 +2658,7 @@ sub analyze_ptv2_route_relation {
             $relaxed_for    =~ s/;/,/g;
             $relaxed_for    =  ',' . $relaxed_for . ',';
             if ( $relaxed_for =~ m/,\Q$relation_ptr->{'tag'}->{'route'}\E,/ ) {
-                my $first_way_ID     = $relation_route_ways[0];
+                my $first_way_ID     = $relation_route_highways[0];
                 my @first_way_nodes  = ();
                 my $found_it         = 0;
                 my $found_nodeid     = 0;
@@ -2691,18 +2691,18 @@ sub analyze_ptv2_route_relation {
                     }
                 }
                 if ( $found_it == 1 ) {
-                    printf STDERR "1: Number of ways: %s, found_nodeid = %s, last node of first way = %s\n", scalar(@relation_route_ways), $found_nodeid, $first_way_nodes[$#first_way_nodes]  if ( $debug );
-                    if ( scalar(@relation_route_ways) > 1 && $found_nodeid == $first_way_nodes[$#first_way_nodes] ) {
+                    printf STDERR "1: Number of ways: %s, found_nodeid = %s, last node of first way = %s\n", scalar(@relation_route_highways), $found_nodeid, $first_way_nodes[$#first_way_nodes]  if ( $debug );
+                    if ( scalar(@relation_route_highways) > 1 && $found_nodeid == $first_way_nodes[$#first_way_nodes] ) {
                         push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the first way, except the last node == first node of next way: %s"), printWayTemplate($first_way_ID,'name;ref') ) );            
                         $return_code++;
                     } else {
-                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: first stop position on first way is not the first stop position of this route: %s versus %s"), printNodeTemplate($found_nodeid,'name'), printNodeTemplate($relation_route_stop_positions[0],'name') ) );            
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: first stop position on first way is not the first stop position of this route: %s versus %s"), printNodeTemplate($found_nodeid,'name;ref'), printNodeTemplate($relation_route_stop_positions[0],'name;ref') ) );            
                         $return_code++;
                     }
                 }
                 elsif ( $found_it == 2 ) {
-                    printf STDERR "2: Number of ways: %s, found_nodeid = %s, last node of first way = %s\n", scalar(@relation_route_ways), $found_nodeid, $first_way_nodes[$#first_way_nodes]  if ( $debug );
-                    if ( scalar(@relation_route_ways) > 1 && $found_nodeid == $first_way_nodes[$#first_way_nodes] ) {
+                    printf STDERR "2: Number of ways: %s, found_nodeid = %s, last node of first way = %s\n", scalar(@relation_route_highways), $found_nodeid, $first_way_nodes[$#first_way_nodes]  if ( $debug );
+                    if ( scalar(@relation_route_highways) > 1 && $found_nodeid == $first_way_nodes[$#first_way_nodes] ) {
                         push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the first way, except the last node == first node of next way: %s"), printWayTemplate($first_way_ID,'name;ref') ) );            
                         $return_code++;
                     }
@@ -2711,7 +2711,7 @@ sub analyze_ptv2_route_relation {
                     $return_code++;
                 }
             } else {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: first node of way is not a stop position of this route: %s"), printNodeTemplate($sorted_way_nodes[0],'name') ) );            
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: first node of way is not a stop position of this route: %s"), printNodeTemplate($sorted_way_nodes[0],'name;ref') ) );            
                 $return_code++;
             }
         }
@@ -2726,11 +2726,11 @@ sub analyze_ptv2_route_relation {
                 #
                 ;
             } else {
-                if ( scalar(@relation_route_ways) > 1 || isOneway($relation_route_ways[0],undef) ) {
+                if ( scalar(@relation_route_highways) > 1 || isOneway($relation_route_highways[0],undef) ) {
                     #
                     # if we have more than one way or the single way is a oneway, and because we know: the ways are sorted and w/o gaps
                     #
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: last node of way is not the last stop position of this route: %s versus %s"), printNodeTemplate($sorted_way_nodes[$#sorted_way_nodes],'name'), printNodeTemplate($relation_route_stop_positions[$#relation_route_stop_positions],'name') ) );            
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: last node of way is not the last stop position of this route: %s versus %s"), printNodeTemplate($sorted_way_nodes[$#sorted_way_nodes],'name;ref'), printNodeTemplate($relation_route_stop_positions[$#relation_route_stop_positions],'name;ref') ) );            
                     $return_code++;
                 }
             }
@@ -2740,7 +2740,7 @@ sub analyze_ptv2_route_relation {
             $relaxed_for    =~ s/;/,/g;
             $relaxed_for    =  ',' . $relaxed_for . ',';
             if ( $relaxed_for =~ m/,\Q$relation_ptr->{'tag'}->{'route'}\E,/ ) {
-                my $last_way_ID     = $relation_route_ways[$#relation_route_ways];
+                my $last_way_ID     = $relation_route_highways[$#relation_route_highways];
                 my @last_way_nodes  = ();
                 my $found_it        = 0;
                 my $found_nodeid    = 0;
@@ -2773,18 +2773,18 @@ sub analyze_ptv2_route_relation {
                     }
                 }
                 if ( $found_it == 1 ) {
-                    printf STDERR "1: Number of ways: %s, found_nodeid = %s, first node of last way = %s\n", scalar(@relation_route_ways), $found_nodeid, $last_way_nodes[0]  if ( $debug );
-                    if ( scalar(@relation_route_ways) > 1 && $found_nodeid == $last_way_nodes[$#last_way_nodes] ) {
+                    printf STDERR "1: Number of ways: %s, found_nodeid = %s, first node of last way = %s\n", scalar(@relation_route_highways), $found_nodeid, $last_way_nodes[0]  if ( $debug );
+                    if ( scalar(@relation_route_highways) > 1 && $found_nodeid == $last_way_nodes[$#last_way_nodes] ) {
                         push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the last way, except the first node == last node of previous way: %s"), printWayTemplate($last_way_ID,'name;ref') ) );            
                         $return_code++;
                     } else {
-                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: last stop position on last way is not the last stop position of this route: %s versus %s"), printNodeTemplate($found_nodeid,'name'), printNodeTemplate($relation_route_stop_positions[$#relation_route_stop_positions],'name') ) );            
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: last stop position on last way is not the last stop position of this route: %s versus %s"), printNodeTemplate($found_nodeid,'name;ref'), printNodeTemplate($relation_route_stop_positions[$#relation_route_stop_positions],'name;ref') ) );            
                         $return_code++;
                     }
                 }
                 elsif ( $found_it == 2 ) {
-                    printf STDERR "2: Number of ways: %s, found_nodeid = %s, first node of last way = %s\n", scalar(@relation_route_ways), $found_nodeid, $last_way_nodes[0]  if ( $debug );
-                    if ( scalar(@relation_route_ways) > 1 && $found_nodeid == $last_way_nodes[$#last_way_nodes] ) {
+                    printf STDERR "2: Number of ways: %s, found_nodeid = %s, first node of last way = %s\n", scalar(@relation_route_highways), $found_nodeid, $last_way_nodes[0]  if ( $debug );
+                    if ( scalar(@relation_route_highways) > 1 && $found_nodeid == $last_way_nodes[$#last_way_nodes] ) {
                         push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the last way, except the first node == last node of previous way: %s"), printWayTemplate($last_way_ID,'name;ref') ) );            
                         $return_code++;
                     }
@@ -2793,7 +2793,7 @@ sub analyze_ptv2_route_relation {
                     $return_code++;
                 }
             } else {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: last node of way is not a stop position of this route: %s"), printNodeTemplate($sorted_way_nodes[$#sorted_way_nodes],'name') ) );            
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: last node of way is not a stop position of this route: %s"), printNodeTemplate($sorted_way_nodes[$#sorted_way_nodes],'name;ref') ) );            
                 $return_code++;
             }
         }
@@ -2922,9 +2922,9 @@ sub analyze_ptv2_route_relation {
             @help_array     = sort(keys(%{$role_mismatch{$role}}));
             $num_of_errors  = scalar(@help_array);
             if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: %s: %s and %d more ..."), $role, join(', ', map { printRelationTemplate($_,'ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: %s: %s and %d more ..."), $role, join(', ', map { printRelationTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
             } else {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: %s: %s"), $role, join(', ', map { printRelationTemplate($_,'ref'); } @help_array )) );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: %s: %s"), $role, join(', ', map { printRelationTemplate($_,'name;ref'); } @help_array )) );
             }
         }
     }
@@ -2948,6 +2948,23 @@ sub FindRouteWays {
     }
     
     return @relations_route_ways;
+}
+
+
+#############################################################################################
+
+sub FindRouteHighWays {
+    my $relation_ptr                = shift;
+    my $highway_ref                 = undef;
+    my @relations_route_highways    = ();
+
+    foreach $highway_ref ( @{$relation_ptr->{'route_highway'}} ) {
+        push( @relations_route_highways, $highway_ref->{'ref'} )    unless ( $platform_ways{$highway_ref->{'ref'}} );
+        #printf STDERR "FindRouteHighWays(): not pushed() %s\n", $highway_ref->{'ref'}   if ( $platform_ways{$highway_ref->{'ref'}} );
+        #printf STDERR "FindRouteHighWays(): pushed() %s\n", $highway_ref->{'ref'}       unless ( $platform_ways{$highway_ref->{'ref'}} );
+    }
+    
+    return @relations_route_highways;
 }
 
 
