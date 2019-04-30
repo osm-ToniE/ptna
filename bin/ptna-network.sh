@@ -125,7 +125,7 @@ then
 
 elif [ "$overpassquery" = "true" ]
 then
-    if [ -f $OSM_XML_FILE_ABSOLUTE -a -s $OSM_XML_FILE_ABSOLUTE ]
+    if [ "$OVERPASS_REUSE_ID" -a -f $OSM_XML_FILE_ABSOLUTE -a -s $OSM_XML_FILE_ABSOLUTE ]
     then
         last_mod=$(stat -c '%Y' $OSM_XML_FILE_ABSOLUTE)
         now=$(date '+%s')
