@@ -2,27 +2,27 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 # Translators:
 # Philippe Verdy, 2019
 # Noémie <nlehuby@zaclys.net>, 2019
+# Julien Lepiller <transifex@lepiller.eu>, 2019
 # ToniE <osm-ToniE@web.de>, 2019
-#
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-03 20:34+0200\n"
-"PO-Revision-Date: 2019-05-03 20:34+0200\n"
-"Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
-"Language-Team: French (https://www.transifex.com/jungle-bus/teams/97874/"
-"fr/)\n"
-"Language: fr\n"
+"PO-Revision-Date: 2019-04-05 14:25+0000\n"
+"Last-Translator: ToniE <osm-ToniE@web.de>, 2019\n"
+"Language-Team: French (https://www.transifex.com/jungle-bus/teams/97874/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.8.9\n"
 
 #: ../bin/ptna-routes.pl:182 ../bin/ptna-routes.pl:187
 msgid "Language test"
@@ -188,29 +188,29 @@ msgstr "Détails des valeurs pour le tag 'network'"
 #: ../bin/ptna-routes.pl:1654
 #, perl-format
 msgid ""
-"Route-Master has more Routes than actually match (%d versus %d) in the given "
-"data set"
+"Route-Master has more Routes than actually match (%d versus %d) in the given"
+" data set"
 msgid_plural ""
 "Route-Masters have more Routes than actually match (%d versus %d) in the "
 "given data set"
 msgstr[0] ""
-"La ligne a plus de parcours ( %d au lieu de %d) que dans les données sources"
+"La ligne a plus de parcours (%dau lieu de %d) que dans les données sources"
 msgstr[1] ""
-"Les lignes ont plus de parcours ( %d au lieu de %d) que dans les données "
+"Les lignes ont plus de parcours (%d au lieu de %d) que dans les données "
 "sources"
 
 #: ../bin/ptna-routes.pl:1659
 #, perl-format
 msgid ""
-"Route-Master has less Routes than actually match (%d versus %d) in the given "
-"data set"
+"Route-Master has less Routes than actually match (%d versus %d) in the given"
+" data set"
 msgid_plural ""
 "Route-Masters have less Routes than actually match (%d versus %d) in the "
 "given data set"
 msgstr[0] ""
-"La ligne a moins de parcours ( %d au lieu de %d) que dans les données sources"
+"La ligne a moins de parcours (%d au lieu de %d) que dans les données sources"
 msgstr[1] ""
-"Les lignes ont moins de parcours ( %d au lieu de %d) que dans les données "
+"Les lignes ont moins de parcours (%d au lieu de %d) que dans les données "
 "sources"
 
 #: ../bin/ptna-routes.pl:1700 ../bin/ptna-routes.pl:1944
@@ -220,14 +220,18 @@ msgstr "Il y a plus d'une route_master"
 #: ../bin/ptna-routes.pl:1762
 #, perl-format
 msgid ""
-"Route might be listed with 'ref' = '%s' in a different section or in section "
-"'Not clearly assigned routes' of this analysis: %s"
+"Route might be listed with 'ref' = '%s' in a different section or in section"
+" 'Not clearly assigned routes' of this analysis: %s"
 msgstr ""
+"La ligne est peut-être renseignée avec 'ref' = '%s' dans une autre section "
+"ou dans une section qui n'a 'Pas de parcours clairement assigné' de cette "
+"analyse : %s"
 
 #: ../bin/ptna-routes.pl:1770
 #, perl-format
 msgid ""
-"Route has different 'operator' = '%s' than Route-Master 'operator' = '%s': %s"
+"Route has different 'operator' = '%s' than Route-Master 'operator' = '%s': "
+"%s"
 msgstr ""
 "Le parcours a l'opérateur '%s' alors que la ligne a l'opérateur '%s' : %s"
 
@@ -236,6 +240,8 @@ msgstr ""
 msgid ""
 "Route has 'operator' = '%s' value which is considered as not relevant: %s"
 msgstr ""
+"La ligne a la valeur 'operator' = '%s' qui n'est pas considérée comme "
+"pertinente : %s"
 
 #: ../bin/ptna-routes.pl:1788
 #, perl-format
@@ -248,6 +254,8 @@ msgstr "Le parcours a le réseau '%s' alors que la ligne a le réseau '%s' : %s"
 msgid ""
 "Route has 'network' = '%s' value which is considered as not relevant: %s"
 msgstr ""
+"La ligne a la valeur 'network' = '%s' qui n'est pas considérée comme "
+"pertinente : %s"
 
 #: ../bin/ptna-routes.pl:1806 ../bin/ptna-routes.pl:2044
 #, perl-format
@@ -261,7 +269,7 @@ msgstr ""
 #: ../bin/ptna-routes.pl:1815
 #, perl-format
 msgid "Route has not matching 'ref' = '%s': %s"
-msgstr ""
+msgstr "La ligne n'a pas de 'ref' = '%s' correspondant : %s"
 
 #: ../bin/ptna-routes.pl:1824
 #, perl-format
@@ -283,6 +291,8 @@ msgstr ""
 #, perl-format
 msgid "Route has 'route' = '%s' value which is considered as not relevant: %s"
 msgstr ""
+"La ligne a la valeur 'route' = '%s' qui n'est pas considérée comme "
+"pertinente : %s"
 
 #: ../bin/ptna-routes.pl:1851
 #, perl-format
@@ -292,7 +302,7 @@ msgstr "Parcours: le mode 'route' n'est pas défini : %s"
 #: ../bin/ptna-routes.pl:1861
 #, perl-format
 msgid "Route: 'type' = '%s' is not 'route': %s"
-msgstr ""
+msgstr "Parcours : l'attribut 'type' = '%s' n'est par 'route' : %s"
 
 #: ../bin/ptna-routes.pl:1870
 #, perl-format
@@ -315,13 +325,18 @@ msgid ""
 "Route-Master might be listed with 'ref' = '%s' in a different section or in "
 "section 'Not clearly assigned routes' of this analysis: %s"
 msgstr ""
+"La ligne route_master est peut-être renseignée avec 'ref' = '%s' dans une "
+"autre section ou dans une section qui n'a 'Pas de parcours clairement "
+"assigné' de cette analyse : %s"
 
 #: ../bin/ptna-routes.pl:1957
 #, perl-format
 msgid ""
-"Route-Master might be listed with unknown 'ref' in section 'Public Transport "
-"Lines without 'ref'' of this analysis: %s"
+"Route-Master might be listed with unknown 'ref' in section 'Public Transport"
+" Lines without 'ref'' of this analysis: %s"
 msgstr ""
+"La ligne route_master est peut-être renseignée avec un 'ref' inconnu dans la"
+" section 'Lignes de transport en commun sans 'ref'' de cette analyse : %s"
 
 #: ../bin/ptna-routes.pl:1981
 #, perl-format
@@ -330,15 +345,15 @@ msgstr "Le parcours fait partie de plusieurs lignes : %s"
 
 #: ../bin/ptna-routes.pl:1990
 msgid "Multiple Routes but no Route-Master"
-msgstr ""
+msgstr "Plusieurs parcours mais pas de route_master"
 
 #: ../bin/ptna-routes.pl:1997
 msgid "Multiple Routes but this Route is not a member of any Route-Master"
-msgstr ""
+msgstr "Plusieurs parcours mais ce parcours n'est membre d'aucun route_master"
 
 #: ../bin/ptna-routes.pl:2008
 msgid "This Route is not a member of any Route-Master"
-msgstr ""
+msgstr "Ce parcours n'est membre d'aucun route_master"
 
 #: ../bin/ptna-routes.pl:2025
 #, perl-format
@@ -352,7 +367,7 @@ msgstr ""
 #: ../bin/ptna-routes.pl:2052
 #, perl-format
 msgid "Route-Master has not matching 'ref' = '%s': %s"
-msgstr ""
+msgstr "La ligne n'a pas d'attribut 'ref' = '%s' correspondant : %s"
 
 #: ../bin/ptna-routes.pl:2062
 #, perl-format
@@ -360,15 +375,15 @@ msgid ""
 "'network' = '%s' of Route does not fit to 'network' = '%s' of Route-Master: "
 "%s"
 msgstr ""
-"Le réseau 'network'=%s du parcours ne correspond pas au réseau 'network'= %s "
-"de la ligne :  %s"
+"Le réseau 'network'=%s du parcours ne correspond pas au réseau 'network'= %s"
+" de la ligne :  %s"
 
 #: ../bin/ptna-routes.pl:2081
 #, perl-format
 msgid "'colour' of Route does not fit to 'colour' of Route-Master: %s"
 msgstr ""
-"La couleur 'colour' du parcours ne correspond pas à la couleur de la ligne : "
-"%s"
+"La couleur 'colour' du parcours ne correspond pas à la couleur de la ligne :"
+" %s"
 
 #: ../bin/ptna-routes.pl:2089
 #, perl-format
@@ -402,23 +417,27 @@ msgid ""
 "'network' = '%s' includes the separator value ';' (semi-colon) with "
 "sourrounding blank"
 msgstr ""
+"L'attribut 'network' = '%s' de cet arrêt comprend des espaces en trop autour"
+" du séparateur  ';' (point-virgule) "
 
 #: ../bin/ptna-routes.pl:2262
 #, perl-format
 msgid ""
-"'network' = '%s': ',' (comma) as separator value should be replaced by "
-"';' (semi-colon) without blank"
+"'network' = '%s': ',' (comma) as separator value should be replaced by ';' "
+"(semi-colon) without blank"
 msgstr ""
+"L'attribut 'network' = '%s' : la ',' (virgule) comme valeur de séparateur "
+"devrait être remplacée par un ';' (point-virgule) sans espace"
 
 #: ../bin/ptna-routes.pl:2271
 #, perl-format
 msgid "'network' = '%s' should be short form"
-msgstr ""
+msgstr "'network' = '%s' devrait être la forme courte"
 
 #: ../bin/ptna-routes.pl:2276
 #, perl-format
 msgid "'network' = '%s' should be long form"
-msgstr ""
+msgstr "'network' = '%s' devrait être la forme longue"
 
 #: ../bin/ptna-routes.pl:2323 ../bin/ptna-routes.pl:4779
 msgid "'network' is not set"
@@ -432,20 +451,20 @@ msgstr "La couleur 'colour' a une valeur inconnue : %s"
 #: ../bin/ptna-routes.pl:2342
 #, perl-format
 msgid "'%s' is long form"
-msgstr ""
+msgstr "'%s' est en forme longue"
 
 #: ../bin/ptna-routes.pl:2347
 #, perl-format
 msgid "'%s' matches long form"
-msgstr ""
+msgstr "'%s' correspond à la forme longue"
 
 #: ../bin/ptna-routes.pl:2405
 msgid "Route-Master without Route(s)"
-msgstr ""
+msgstr "Ligne sans parcours"
 
 #: ../bin/ptna-routes.pl:2407
 msgid "Route-Master with Relation(s) unequal to 'route'"
-msgstr ""
+msgstr "Ligne avec des relations qui ne sont pas de type 'route'"
 
 #: ../bin/ptna-routes.pl:2408
 msgid "Route-Master with Way(s)"
@@ -453,7 +472,7 @@ msgstr "La route_master ne devrait pas contenir de chemin(s)"
 
 #: ../bin/ptna-routes.pl:2409
 msgid "Route-Master with Node(s)"
-msgstr ""
+msgstr "Ligne route_master avec des points"
 
 #: ../bin/ptna-routes.pl:2412
 msgid "'public_transport:version' is not set to '2'"
@@ -469,19 +488,19 @@ msgstr "Parcours sans tracé(s)"
 
 #: ../bin/ptna-routes.pl:2446
 msgid "Route with only 1 Way"
-msgstr ""
+msgstr "Ligne avec seulement un chemin"
 
 #: ../bin/ptna-routes.pl:2447
 msgid "Route without Node(s)"
-msgstr ""
+msgstr "Ligne sans point"
 
 #: ../bin/ptna-routes.pl:2448
 msgid "Route with only 1 Node"
-msgstr ""
+msgstr "Ligne avec seulement un point"
 
 #: ../bin/ptna-routes.pl:2449
 msgid "Route with Relation(s)"
-msgstr ""
+msgstr "Ligne sans relation"
 
 #: ../bin/ptna-routes.pl:2453
 msgid "'public_transport:version' is neither '1' nor '2'"
@@ -489,13 +508,16 @@ msgstr "'public_transport:version' n'est ni '1' ni '2'"
 
 #: ../bin/ptna-routes.pl:2462
 msgid "Skipping further analysis ..."
-msgstr ""
+msgstr "Omission des analyses suivantes…"
 
 #: ../bin/ptna-routes.pl:2625
 msgid ""
-"PTv2 route: first way is a oneway road and ends in a 'stop_position' of this "
-"route and there is no exit. Is the route sorted in reverse order?"
+"PTv2 route: first way is a oneway road and ends in a 'stop_position' of this"
+" route and there is no exit. Is the route sorted in reverse order?"
 msgstr ""
+"Ligne PTv2 : le premier chemin est une route en sens unique et s'arrête avec"
+" un 'stop_position' de cette ligne et n'a pas de sortie. La ligne serait-"
+"elle triée en sens inverse ?"
 
 #: ../bin/ptna-routes.pl:2631
 #, perl-format
@@ -503,38 +525,44 @@ msgid "PTv2 route: has a gap, consists of %d segments. Gap appears at way"
 msgid_plural ""
 "PTv2 route: has gaps, consists of %d segments. Gaps appear at ways"
 msgstr[0] ""
+"Ligne PTv2 : a un trou, consistent en %d segments. Le trou apparaît sur le "
+"chemin"
 msgstr[1] ""
+"Ligne PTv2 : a des trous, consistant en %d segments. Les trous apparaissent "
+"sur les chemins"
 
 #: ../bin/ptna-routes.pl:2633 ../bin/ptna-routes.pl:2653
 #: ../bin/ptna-routes.pl:2673 ../bin/ptna-routes.pl:4241
 #: ../bin/ptna-routes.pl:4467 ../bin/ptna-routes.pl:4495
 #, perl-format
 msgid "%s: %s and %d more ..."
-msgstr ""
+msgstr "%s : %s et %d en plus…"
 
 #: ../bin/ptna-routes.pl:2640
 #, perl-format
 msgid ""
-"PTv2 route: incorrect order of 'stop_position', 'platform' and 'way' (stop/"
-"platform after way)"
+"PTv2 route: incorrect order of 'stop_position', 'platform' and 'way' "
+"(stop/platform after way)"
 msgstr ""
+"Ligne PTv2 : ordre incorrect de 'stop_position', 'platform' et 'way' (arrêt "
+"après le chemin)"
 
 #: ../bin/ptna-routes.pl:2644
 msgid "entire roundabout but uses only segments"
 msgid_plural "entire roundabouts but uses only segments"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "rond-point complet mais n'utilise que des segments"
+msgstr[1] "rond-point complets mais n'utilise que des segments"
 
 #: ../bin/ptna-routes.pl:2645
 #, perl-format
 msgid "PTv2 route: includes %d %s"
-msgstr ""
+msgstr "Ligne PTv2 : contient %d %s"
 
 #: ../bin/ptna-routes.pl:2651
 msgid "PTv2 route: using oneway way in wrong direction"
 msgid_plural "PTv2 route: using oneway ways in wrong direction"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ligne PTv2 : utilise un sens-unique dans le mauvais sens"
+msgstr[1] "Ligne PTv2 : utilise des sens-uniques dans le mauvais sens"
 
 #: ../bin/ptna-routes.pl:2660
 msgid "PTv2 route: using motorway_link way without entering a motorway way:"
@@ -610,7 +638,7 @@ msgstr ""
 #: ../bin/ptna-routes.pl:3147
 #, perl-format
 msgid "wrong 'role' = '%s'"
-msgstr ""
+msgstr "mauvais role : '%s' "
 
 #: ../bin/ptna-routes.pl:2854 ../bin/ptna-routes.pl:3085
 #: ../bin/ptna-routes.pl:3152
@@ -639,8 +667,8 @@ msgstr ""
 #: ../bin/ptna-routes.pl:2932 ../bin/ptna-routes.pl:2942
 #, perl-format
 msgid ""
-"PTv2 route: there is no stop position of this route on the first way, except "
-"the last node == first node of next way: %s"
+"PTv2 route: there is no stop position of this route on the first way, except"
+" the last node == first node of next way: %s"
 msgstr ""
 
 #: ../bin/ptna-routes.pl:2935
@@ -664,8 +692,8 @@ msgstr ""
 #: ../bin/ptna-routes.pl:2969
 #, perl-format
 msgid ""
-"PTv2 route: last node of way is not the last stop position of this route: %s "
-"versus %s"
+"PTv2 route: last node of way is not the last stop position of this route: %s"
+" versus %s"
 msgstr ""
 
 #: ../bin/ptna-routes.pl:3014 ../bin/ptna-routes.pl:3024
@@ -684,7 +712,8 @@ msgstr ""
 
 #: ../bin/ptna-routes.pl:3028
 #, perl-format
-msgid "PTv2 route: there is no stop position of this route on the last way: %s"
+msgid ""
+"PTv2 route: there is no stop position of this route on the last way: %s"
 msgstr ""
 
 #: ../bin/ptna-routes.pl:3032
@@ -713,8 +742,8 @@ msgstr "Parcours PTv2 : le nom 'name' devrait contenir le code de ligne 'ref'"
 #, perl-format
 msgid "PTv2 route: from-part ('%s') of 'name' is not part of 'from' = '%s'"
 msgstr ""
-"Parcours PTv2 : l'origine de ligne précisée dans le nom ('%s') ne correspond "
-"pas à l'origine dans le tag 'from'='%s'"
+"Parcours PTv2 : l'origine de ligne précisée dans le nom ('%s') ne correspond"
+" pas à l'origine dans le tag 'from'='%s'"
 
 #: ../bin/ptna-routes.pl:4106
 #, perl-format
@@ -754,12 +783,14 @@ msgstr ""
 
 #: ../bin/ptna-routes.pl:4145
 #, perl-format
-msgid "PTv2 route: there are more via-parts in 'name' (%d) than in 'via' (%d) "
+msgid ""
+"PTv2 route: there are more via-parts in 'name' (%d) than in 'via' (%d) "
 msgstr ""
 
 #: ../bin/ptna-routes.pl:4148
 #, perl-format
-msgid "PTv2 route: there are less via-parts in 'name' (%d) than in 'via' (%d) "
+msgid ""
+"PTv2 route: there are less via-parts in 'name' (%d) than in 'via' (%d) "
 msgstr ""
 
 #: ../bin/ptna-routes.pl:4153
@@ -776,10 +807,11 @@ msgstr ""
 
 #: ../bin/ptna-routes.pl:4161
 msgid ""
-"PTv2 route: 'name' should (at least) be of the form '... ref ...: from => to'"
+"PTv2 route: 'name' should (at least) be of the form '... ref ...: from => "
+"to'"
 msgstr ""
-"Parcours PTv2 : le nom devrait être sous la forme (ou ressembler à) '... "
-"ref ...: from => to'"
+"Parcours PTv2 : le nom devrait être sous la forme (ou ressembler à) '... ref"
+" ...: from => to'"
 
 #: ../bin/ptna-routes.pl:4207
 #, perl-format
@@ -797,18 +829,25 @@ msgid "Route: 'highway' = 'bus_stop' is set on way. Allowed on nodes only!"
 msgid_plural ""
 "Route: 'highway' = 'bus_stop' is set on ways. Allowed on nodes only!"
 msgstr[0] ""
+"Parcours : le tag 'highway'='bus_stop' est placé sur un chemin. Seul un "
+"noeud peut être un arrêt de bus !"
 msgstr[1] ""
+"Parcours : le tag 'highway'='bus_stop' est placé sur des chemins. Seuls les "
+"noeuds peuvent être des arrêts de bus !"
 
 #: ../bin/ptna-routes.pl:4313
 msgid "separate multiple values by ';' (semi-colon) without blank"
 msgstr ""
+"Séparer les différentes valeurs par des ';' (point-virgule) sans espaces"
 
 #: ../bin/ptna-routes.pl:4315
 #, perl-format
 msgid ""
-"'route_ref' = '%s' of stop does not include 'ref' = '%s' value of this route"
-"%s"
+"'route_ref' = '%s' of stop does not include 'ref' = '%s' value of this "
+"route%s"
 msgstr ""
+"Le tag 'route_ref'='%s' de cet arrêt ne comprend pas le tag 'ref'='%s' de ce"
+" parcours %s"
 
 #: ../bin/ptna-routes.pl:4322
 #, perl-format
@@ -816,6 +855,8 @@ msgid ""
 "'route_ref' = '%s' of stop includes the separator value ';' (semi-colon) "
 "with sourrounding blank"
 msgstr ""
+"Le tag 'route_ref' = '%s' de cet arrêt comprend des espaces en trop autour "
+"du séparateur  ';' (point-virgule) "
 
 #: ../bin/ptna-routes.pl:4325
 #, perl-format
@@ -823,16 +864,21 @@ msgid ""
 "'route_ref' = '%s' of stop: ',' (comma) as separator value should be "
 "replaced by ';' (semi-colon) without blank"
 msgstr ""
+"Remplacer les ',' (virgule) par des ';' (point-virgule) comme séparateur "
+"dans le tag 'route_ref'='%s' de cet arrêt, sans espaces."
 
 #: ../bin/ptna-routes.pl:4331
 #, perl-format
 msgid "'%s' = '%s' of stop should be deleted, 'route_ref' = '%s' exists"
 msgstr ""
+"'%s'='%s' doit être supprimé sur cet arrêt car 'route_ref' = '%s' est déjà "
+"présent"
 
 #: ../bin/ptna-routes.pl:4340
 #, perl-format
 msgid "(consider adding '%s' to the 'route_ref' tag of the stop)"
 msgstr ""
+"(ajouter '%s' au tag 'route_ref' de cet arrêt serait peut-être plus adapté)"
 
 #: ../bin/ptna-routes.pl:4341 ../bin/ptna-routes.pl:4369
 #, perl-format
@@ -840,30 +886,33 @@ msgid ""
 "'ref' = '%s' of stop should represent the reference of the stop, but "
 "includes the 'ref' ='%s' of this route %s"
 msgstr ""
+"Le tag 'ref'='%s' sur un arrêt doit correspondre au numéro de l'arrêt, mais "
+"semble être le numéro de la ligne, 'ref'='%s' du parcours %s"
 
 #: ../bin/ptna-routes.pl:4359
 #, perl-format
 msgid "'%s' = '%s' of stop should be replaced by 'route_ref' = '%s'"
-msgstr ""
+msgstr "'%s'='%s' de cet arrêt devrait être remplacé par 'route_ref' = '%s'"
 
 #: ../bin/ptna-routes.pl:4368
 #, perl-format
 msgid "(consider creating a 'route_ref' = '%s' tag for the stop)"
 msgstr ""
+"(le tag 'route_ref' = '%s' serait peut-être plus adapté pour cet arrêt)"
 
 #: ../bin/ptna-routes.pl:4383 ../bin/ptna-routes.pl:4393
 #: ../bin/ptna-routes.pl:4403 ../bin/ptna-routes.pl:4413
 #: ../bin/ptna-routes.pl:4423
 #, perl-format
 msgid "Route: %s: %s and %d more ..."
-msgstr ""
+msgstr "Parcours : %s : %s et %d en plus ..."
 
 #: ../bin/ptna-routes.pl:4385 ../bin/ptna-routes.pl:4395
 #: ../bin/ptna-routes.pl:4405 ../bin/ptna-routes.pl:4415
 #: ../bin/ptna-routes.pl:4425
 #, perl-format
 msgid "Route: %s: %s"
-msgstr ""
+msgstr "Parcours : %s:%s"
 
 #: ../bin/ptna-routes.pl:4465
 msgid "Error in input data: insufficient data for ways"
@@ -891,6 +940,8 @@ msgid ""
 "An explanation of the error texts can be found in the documentation at <a "
 "href='/en/doc_toc.html#checks'>'Check'</a>."
 msgstr ""
+"Une explication sur chaque erreur peut être trouvée dans la <a "
+"href='/en/doc_toc.html#checks'>documentation</a>."
 
 #: ../bin/ptna-routes.pl:4614
 msgid "Contents"
@@ -927,12 +978,13 @@ msgstr ""
 
 #: ../bin/ptna-routes.pl:4718
 msgid ""
-" <a href=\"https://wiki.openstreetmap.org/wiki/Relations/"
-"Relations_are_not_Categories\">Relations/Relations are not Categories</a>"
+" <a "
+"href=\"https://wiki.openstreetmap.org/wiki/Relations/Relations_are_not_Categories\">Relations/Relations"
+" are not Categories</a>"
 msgstr ""
-"<a href=\"https\\://wiki.openstreetmap.org/wiki/FR:Relations/"
-"Les_relations_ne_sont_pas_des_cat%C3%A9gories\">https://wiki.openstreetmap."
-"org/wiki/FR:Relations/Les_relations_ne_sont_pas_des_cat%C3%A9gories</a> "
+"<a "
+"href=\"https\\://wiki.openstreetmap.org/wiki/FR:Relations/Les_relations_ne_sont_pas_des_cat%C3%A9gories\">https://wiki.openstreetmap.org/wiki/FR:Relations/Les_relations_ne_sont_pas_des_cat%C3%A9gories</a>"
+" "
 
 #: ../bin/ptna-routes.pl:4724
 msgid ""
@@ -999,36 +1051,17 @@ msgstr "Valeurs du tag 'network' non prises en compte"
 msgid ""
 "This section lists the 'network'-values which have not been considered. "
 msgstr ""
-"Cette section liste les valeurs du tag 'network' qui n'ont pas été prises en "
-"compte"
+"Cette section liste les valeurs du tag 'network' qui n'ont pas été prises en"
+" compte"
 
 #: ../modules/RoutesList.pm:161
 #, perl-format
 msgid ""
-"Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line: "
-"'%s'"
+"Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line:"
+" '%s'"
 msgstr ""
 
 #: ../modules/RoutesList.pm:167
 #, perl-format
 msgid "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'"
 msgstr ""
-
-#~ msgid ""
-#~ "Route-Masters have more Routes than actually match (%d versus %d) in the "
-#~ "given data set"
-#~ msgstr ""
-#~ "La ligne a plus de parcours (%d au lieu de %d) que dans les données "
-#~ "sources"
-
-#~ msgid ""
-#~ "Route-Masters have less Routes than actually match (%d versus %d) in the "
-#~ "given data set"
-#~ msgstr ""
-#~ "La ligne a moins de parcours (%d au lieu de %d) que dans les données "
-#~ "sources"
-
-#~ msgid "has a gap"
-#~ msgid_plural "has gaps"
-#~ msgstr[0] "a un trou"
-#~ msgstr[1] "a des trous"
