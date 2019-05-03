@@ -453,7 +453,7 @@ my $number_of_unused_networks           = 0;
 
 printf STDERR "%s Converting relations\n", get_time()       if ( $verbose );
 
-foreach $relation_id ( keys ( %RELATIONS ) ) {
+foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
     
     $number_of_relations++;
     
