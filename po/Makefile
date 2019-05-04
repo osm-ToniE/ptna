@@ -15,9 +15,14 @@ compile:
 
 up update: $(LOCALIZABLE)
 	@echo Gathering translations...
-	@xgettext -L Perl \
-	    -kgettext -kngettext \
-	    --from-code utf-8 -o $(TEMPLATE) $(LOCALIZABLE)
+	@xgettext --language Perl \
+	    --keyword=gettext --keyword=ngettext \
+	    --from-code utf-8 \
+	    --add-comments=xgettext \
+	    --package-name=ptna \
+	    --package-version=1.0.0 \
+	    --msgid-bugs-address='osm-ToniE@web.de' \
+	    --output $(TEMPLATE) $(LOCALIZABLE)
 	@echo Merging...
 	@for i in $$(ls *.po); do \
 	    cp $$i $$i.save; \

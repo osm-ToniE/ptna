@@ -1040,7 +1040,8 @@ if ( $routes_file ) {
     if ( scalar(@relation_ids) ) {
     
         printTableInitialization( 'ref', 'relation', 'type', 'route_type', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'issues', 'notes' );
-    
+
+        # xgettext: This section will list all routes which could not be clearly assigned because the combination of "ref;type" appears more than once and information like 'operator', 'from' and 'to' is missing
         printHeader( gettext('Not clearly assigned routes'), 1, 'unassigned' );
         printHintUnassignedRelations();
         printTableHeader();
