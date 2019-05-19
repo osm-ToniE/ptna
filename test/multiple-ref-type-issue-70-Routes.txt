@@ -1,0 +1,66 @@
+<pre>
+#
+# Format:
+#
+# Headers start with '=', '==', '===', '====', ... at the beginning of a line, format is like in the OSM Wiki
+#
+# Simple text starts with '-' at the beginning of a line, format is like in the OSM Wiki, a single '-' will cause a new line (new paragraph).
+# Simple text starts may only be placed directly after a header line.
+#
+# Links: [[...|...]] are interne link like in the OSM Wiki
+#        [... ...] are external links
+#
+# Comments start with '#' at the beginning of a line. '#' inside text is not recognized as the start of a comment.
+#
+# Format of the file: UNIX (LF), UTF-8
+#
+#
+# Cotents in CSV-Format
+#
+# ref;type;comment;from;to;operator
+#
+# - ref       == tag 'ref' of route or route_master
+# - type      == contents of tags 'route' respectively 'route_master'
+# - comment   == can include comments like; Bus, Expressbus, ...  will not be analyze, but simply be printed out
+# - from      == if there is more than one entry with "ref;type" and "operator" is the same, then 'from' and 'to are also used to distinguish between same line number in different cities/villages
+# - to        == if there is more than one entry with "ref;type" and "operator" is the same, then 'from' and 'to are also used to distinguish between same line number in different cities/villages
+# - operator  == if there is more than one entry with "ref;type", then "operator" is used to distinguish between same line number in different cities/villages
+#
+
+
+= Test for issue #??
+
+== multiple appearances of "ref;type" and also "from" or/and "to" appear multiple times, "operator" is identical
+
+RB;train;;Wertheim;Lauda;"DB RegioNetz Verkehrs GmbH;Westfrankenbahn"
+RB;train;;Bad Mergentheim;Würzburg;"DB RegioNetz Verkehrs GmbH;Westfrankenbahn"
+RB;train;;Seckach;Miltenberg;"DB RegioNetz Verkehrs GmbH;Westfrankenbahn"
+RB;train;;Aschaffenburg;Miltenberg;"DB RegioNetz Verkehrs GmbH;Westfrankenbahn"
+RB;train;;Miltenberg;Wertheim;"DB RegioNetz Verkehrs GmbH;Westfrankenbahn"
+
+
+== multiple appearances of "ref;type" and "operator" is not set, but "from" and "to" are set
+
+R1;train;;Augsburg;München;
+R1;train;;Augsburg;Radersdorf;
+
+R6;train;;Augusburg;Dinkelscherben;
+R6;train;;Nürnberg;Treuchtlingen;
+
+R11;train;;Augsburg;Schmiechen;
+R11;train;Rangaubahn;Fürth;Cadolzburg;DB Regio Mittelfranken
+
+
+== multiple appearances with 'or' values and "operator" is not set in both CSV data and in Relations
+
+4;light_rail;;Käfertal|Wallstadt;Oggersheim|Bad Dürkheim;
+4;light_rail;;Lohmannshof;Rathaus;
+
+
+== multiple appearances with 'or' values and "operator" is not set in Relations
+
+4;light_rail;;Käfertal|Wallstadt;Oggersheim|Bad Dürkheim;Rhein-Neckar-Verkehr GmbH
+4;light_rail;;Lohmannshof;Rathaus;moBiel GmbH
+
+
+</pre>

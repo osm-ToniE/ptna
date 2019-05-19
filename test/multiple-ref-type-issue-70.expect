@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>PTNA - Public Transport Network Analysis</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="PTNA">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="keywords" content="OSM Public Transport PTv2">
+        <meta name="description" content="PTNA - Public Transport Network Analysis">
+        <style>
+              table { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; }
+              th    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+              td    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+              img   { width: 20px; }
+              #toc ol           { list-style: none; }
+              .tableheaderrow   { background-color: LightSteelBlue;   }
+              .sketchline       { background-color: LightBlue;        }
+              .sketch           { text-align:left;  font-weight: 500; }
+              .csvinfo          { text-align:right; font-size: 0.8em; }
+              .ref              { white-space:nowrap; }
+              .relation         { white-space:nowrap; }
+              .PTv              { text-align:center; }
+              .number           { text-align:right; }
+              .attention        { background-color: yellow; font-weight: 500; font-size: 1.2em; }
+        </style>
+    </head>
+    <body>
+        <div id="toc">
+        <h1>Contents</h1>
+        <ol>
+        <li>1 <a href="#hints">Hints</a>
+        </li>
+        <li>2 <a href="#A2">Test for issue #??</a>
+        <ol>
+        <li>2.1 <a href="#A2.1">multiple appearances of "ref;type" and also "from" or/and "to" appear multiple times, "operator" is identical</a>
+        </li>
+        <li>2.2 <a href="#A2.2">multiple appearances of "ref;type" and "operator" is not set, but "from" and "to" are set</a>
+        </li>
+        <li>2.3 <a href="#A2.3">multiple appearances with 'or' values and "operator" is not set in both CSV data and in Relations</a>
+        </li>
+        <li>2.4 <a href="#A2.4">multiple appearances with 'or' values and "operator" is not set in Relations</a>
+        </li>
+        </ol>
+        </li>
+        <li>3 <a href="#networkdetails">Details for 'network'-Values</a>
+        <ol>
+        <li>3.1 <a href="#considerednetworks">Considered 'network'-Values</a>
+        </li>
+        </ol>
+        </li>
+        </ol>
+        </div> <!-- toc -->
+        <hr />
+        <h1 id="hints">1 Hints</h1>
+<p>
+    The data will be updated when the result of the analysis has changed.
+</p>
+<p>
+    An explanation of the error texts can be found in the documentation at <a href='/en/doc_toc.html#checks'>'Check'</a>.
+</p>
+        <hr />
+        <h1 id="A2">2 Test for issue #??</h1>
+        <h2 id="A2.1">2.1 multiple appearances of "ref;type" and also "from" or/and "to" appear multiple times, "operator" is identical</h2>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="From: Wertheim; To: Lauda; Operator: DB RegioNetz Verkehrs GmbH;Westfrankenbahn" data-ref="RB" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=RB&amp;network=any&amp;style=wuppertal" title="Sketch-Line">RB</a></td><td class="csvinfo" colspan="5">From: Wertheim; To: Lauda; Operator: DB RegioNetz Verkehrs GmbH;Westfrankenbahn</td></tr>
+                <tr data-info="-102808" data-ref="RB" class="line"><td class="name">RB Wertheim &lt;=&gt; Lauda</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -102808</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'DB RegioNetz Verkehrs GmbH;Westfrankenbahn'</td></tr>
+                <tr data-info="-102806" data-ref="RB" class="line"><td class="name">RB: Lauda =&gt; Wertheim</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -102806</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'DB RegioNetz Verkehrs GmbH;Westfrankenbahn'</td></tr>
+                <tr data-info="-102807" data-ref="RB" class="line"><td class="name">RB: Wertheim =&gt; Lauda</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -102807</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'DB RegioNetz Verkehrs GmbH;Westfrankenbahn'</td></tr>
+                <tr data-info="From: Bad Mergentheim; To: Würzburg; Operator: DB RegioNetz Verkehrs GmbH;Westfrankenbahn" data-ref="RB" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=RB&amp;network=any&amp;style=wuppertal" title="Sketch-Line">RB</a></td><td class="csvinfo" colspan="5">From: Bad Mergentheim; To: Würzburg; Operator: DB RegioNetz Verkehrs GmbH;Westfrankenbahn</td></tr>
+                <tr data-info="-102814" data-ref="RB" class="line"><td class="name">RB Bad Mergentheim &lt;=&gt; Würzburg</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -102814</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'DB RegioNetz Verkehrs GmbH;Westfrankenbahn'</td></tr>
+                <tr data-info="-102812" data-ref="RB" class="line"><td class="name">RB: Bad Mergentheim =&gt; Würzburg</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -102812</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'DB RegioNetz Verkehrs GmbH;Westfrankenbahn'</td></tr>
+                <tr data-info="-102813" data-ref="RB" class="line"><td class="name">RB: Würzburg =&gt; Bad Mergentheim</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -102813</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'DB RegioNetz Verkehrs GmbH;Westfrankenbahn'</td></tr>
+                <tr data-info="From: Seckach; To: Miltenberg; Operator: DB RegioNetz Verkehrs GmbH;Westfrankenbahn" data-ref="RB" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=RB&amp;network=any&amp;style=wuppertal" title="Sketch-Line">RB</a></td><td class="csvinfo" colspan="5">From: Seckach; To: Miltenberg; Operator: DB RegioNetz Verkehrs GmbH;Westfrankenbahn</td></tr>
+                <tr data-info="-102908" data-ref="RB" class="line"><td class="name">RB Seckach &lt;=&gt; Miltenberg</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -102908</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'DB RegioNetz Verkehrs GmbH;Westfrankenbahn'</td></tr>
+                <tr data-info="-102904" data-ref="RB" class="line"><td class="name">RB: Seckach =&gt; Miltenberg</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -102904</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'DB RegioNetz Verkehrs GmbH;Westfrankenbahn'</td></tr>
+                <tr data-info="-102878" data-ref="RB" class="line"><td class="name">RB: Miltenberg =&gt; Seckach</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -102878</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'DB RegioNetz Verkehrs GmbH;Westfrankenbahn'</td></tr>
+                <tr data-info="From: Aschaffenburg; To: Miltenberg; Operator: DB RegioNetz Verkehrs GmbH;Westfrankenbahn" data-ref="RB" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=RB&amp;network=any&amp;style=wuppertal" title="Sketch-Line">RB</a></td><td class="csvinfo" colspan="5">From: Aschaffenburg; To: Miltenberg; Operator: DB RegioNetz Verkehrs GmbH;Westfrankenbahn</td></tr>
+                <tr data-info="-102950" data-ref="RB" class="line"><td class="name">RB Aschaffenburg &lt;=&gt; Miltenberg</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -102950</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'DB RegioNetz Verkehrs GmbH;Westfrankenbahn'</td></tr>
+                <tr data-info="-102928" data-ref="RB" class="line"><td class="name">RB: Aschaffenburg =&gt; Miltenberg</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -102928</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'DB RegioNetz Verkehrs GmbH;Westfrankenbahn'</td></tr>
+                <tr data-info="-102946" data-ref="RB" class="line"><td class="name">RB: Miltenberg =&gt; Aschaffenburg</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -102946</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'DB RegioNetz Verkehrs GmbH;Westfrankenbahn'</td></tr>
+                <tr data-info="From: Miltenberg; To: Wertheim; Operator: DB RegioNetz Verkehrs GmbH;Westfrankenbahn" data-ref="RB" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=RB&amp;network=any&amp;style=wuppertal" title="Sketch-Line">RB</a></td><td class="csvinfo" colspan="5">From: Miltenberg; To: Wertheim; Operator: DB RegioNetz Verkehrs GmbH;Westfrankenbahn</td></tr>
+                <tr data-info="-102811" data-ref="RB" class="line"><td class="name">RB Miltenberg &lt;=&gt; Wertheim</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -102811</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'DB RegioNetz Verkehrs GmbH;Westfrankenbahn'</td></tr>
+                <tr data-info="-102809" data-ref="RB" class="line"><td class="name">RB: Miltenberg =&gt; Wertheim</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -102809</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'DB RegioNetz Verkehrs GmbH;Westfrankenbahn'</td></tr>
+                <tr data-info="-102810" data-ref="RB" class="line"><td class="name">RB: Wertheim =&gt; Miltenberg</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -102810</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'operator' = 'DB RegioNetz Verkehrs GmbH;Westfrankenbahn'</td></tr>
+            </tbody>
+        </table>
+
+        <h2 id="A2.2">2.2 multiple appearances of "ref;type" and "operator" is not set, but "from" and "to" are set</h2>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="From: Augsburg; To: München" data-ref="R1" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=R1&amp;network=any&amp;style=wuppertal" title="Sketch-Line">R1</a></td><td class="csvinfo" colspan="5">From: Augsburg; To: München</td></tr>
+                <tr data-info="-103249" data-ref="R1" class="line"><td class="name">R1 Augsburg &lt;=&gt; München</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -103249</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+                <tr data-info="-103166" data-ref="R1" class="line"><td class="name">R1: Augsburg =&gt; München</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -103166</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+                <tr data-info="-103245" data-ref="R1" class="line"><td class="name">R1: München =&gt; Augsburg</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -103245</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+                <tr data-info="From: Augsburg; To: Radersdorf" data-ref="R1" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=R1&amp;network=any&amp;style=wuppertal" title="Sketch-Line">R1</a></td><td class="csvinfo" colspan="5">From: Augsburg; To: Radersdorf</td></tr>
+                <tr data-info="-103351" data-ref="R1" class="line"><td class="name">R1 Augsburg &lt;=&gt; Radersdorf</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -103351</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+                <tr data-info="-103299" data-ref="R1" class="line"><td class="name">R1: Augsburg =&gt; Radersdorf</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -103299</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+                <tr data-info="-103520" data-ref="R1" class="line"><td class="name">R1: Radersdorf =&gt; Augsburg</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -103520</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+                <tr data-info="From: Augusburg; To: Dinkelscherben" data-ref="R6" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=R6&amp;network=any&amp;style=wuppertal" title="Sketch-Line">R6</a></td><td class="csvinfo" colspan="5">From: Augusburg; To: Dinkelscherben</td></tr>
+                <tr data-info="-103517" data-ref="R6" class="line"><td class="name">R6 Augsburg &lt;=&gt; Dinkelscherben</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -103517</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+                <tr data-info="-103513" data-ref="R6" class="line"><td class="name">R6: Augsburg =&gt; Dinkelscherben</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -103513</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+                <tr data-info="-103347" data-ref="R6" class="line"><td class="name">R6: Dinkelscherben =&gt; Augsburg</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -103347</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+                <tr data-info="From: Nürnberg; To: Treuchtlingen" data-ref="R6" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=R6&amp;network=any&amp;style=wuppertal" title="Sketch-Line">R6</a></td><td class="csvinfo" colspan="5">From: Nürnberg; To: Treuchtlingen</td></tr>
+                <tr data-info="-103658" data-ref="R6" class="line"><td class="name">R6 Nürnberg &lt;=&gt; Treuchtlingen</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -103658</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+                <tr data-info="-103639" data-ref="R6" class="line"><td class="name">R6: Nürnberg =&gt; Treuchtlingen</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -103639</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+                <tr data-info="-103616" data-ref="R6" class="line"><td class="name">R6: Treuchtlingen =&gt; Nürnberg</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -103616</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+                <tr data-info="From: Augsburg; To: Schmiechen" data-ref="R11" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=R11&amp;network=any&amp;style=wuppertal" title="Sketch-Line">R11</a></td><td class="csvinfo" colspan="5">From: Augsburg; To: Schmiechen</td></tr>
+                <tr data-info="-103726" data-ref="R11" class="line"><td class="name">R11 Augsburg &lt;=&gt; Schmiechen</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -103726</td><td class="PTv">2</td><td class="issues">There is more than one Route-Master</td><td class="notes"></td></tr>
+                <tr data-info="-103820" data-ref="R11" class="line"><td class="name">R11 Fürth &lt;=&gt; Cadolzburg</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -103820</td><td class="PTv">2</td><td class="issues">'note' = '&#039;operator&#039; not set be intention'<br>There is more than one Route-Master</td><td class="notes"></td></tr>
+                <tr data-info="-103715" data-ref="R11" class="line"><td class="name">R11: Augsburg =&gt; Schmiechen</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -103715</td><td class="PTv">2</td><td class="issues">There is more than one Route-Master</td><td class="notes"></td></tr>
+                <tr data-info="-103720" data-ref="R11" class="line"><td class="name">R11: Schmiechen =&gt; Augsburg</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -103720</td><td class="PTv">2</td><td class="issues">There is more than one Route-Master</td><td class="notes"></td></tr>
+                <tr data-info="-103782" data-ref="R11" class="line"><td class="name">R11: Fürth =&gt; Cadolzburg</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -103782</td><td class="PTv">2</td><td class="issues">'note' = '&#039;operator&#039; not set be intention'<br>There is more than one Route-Master</td><td class="notes"></td></tr>
+                <tr data-info="-103818" data-ref="R11" class="line"><td class="name">R11: Cadolzburg =&gt; Fürth</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -103818</td><td class="PTv">2</td><td class="issues">'note' = '&#039;operator&#039; not set be intention'<br>There is more than one Route-Master</td><td class="notes"></td></tr>
+                <tr data-info="Comment: Rangaubahn; From: Fürth; To: Cadolzburg; Operator: DB Regio Mittelfranken" data-ref="R11" class="sketchline"><td class="sketch">R11</td><td class="csvinfo" colspan="5">Comment: Rangaubahn; From: Fürth; To: Cadolzburg; Operator: DB Regio Mittelfranken</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='R11' and route='train'</td><td class="notes"></td></tr>
+            </tbody>
+        </table>
+
+        <h2 id="A2.3">2.3 multiple appearances with 'or' values and "operator" is not set in both CSV data and in Relations</h2>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="From: Käfertal|Wallstadt; To: Oggersheim|Bad Dürkheim" data-ref="4" class="sketchline"><td class="sketch">4</td><td class="csvinfo" colspan="5">From: Käfertal|Wallstadt; To: Oggersheim|Bad Dürkheim</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='4' and route='light_rail'</td><td class="notes"></td></tr>
+                <tr data-info="From: Lohmannshof; To: Rathaus" data-ref="4" class="sketchline"><td class="sketch">4</td><td class="csvinfo" colspan="5">From: Lohmannshof; To: Rathaus</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='4' and route='light_rail'</td><td class="notes"></td></tr>
+            </tbody>
+        </table>
+
+        <h2 id="A2.4">2.4 multiple appearances with 'or' values and "operator" is not set in Relations</h2>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="From: Käfertal|Wallstadt; To: Oggersheim|Bad Dürkheim; Operator: Rhein-Neckar-Verkehr GmbH" data-ref="4" class="sketchline"><td class="sketch">4</td><td class="csvinfo" colspan="5">From: Käfertal|Wallstadt; To: Oggersheim|Bad Dürkheim; Operator: Rhein-Neckar-Verkehr GmbH</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='4' and route='light_rail'</td><td class="notes"></td></tr>
+                <tr data-info="From: Lohmannshof; To: Rathaus; Operator: moBiel GmbH" data-ref="4" class="sketchline"><td class="sketch">4</td><td class="csvinfo" colspan="5">From: Lohmannshof; To: Rathaus; Operator: moBiel GmbH</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='4' and route='light_rail'</td><td class="notes"></td></tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <h1 id="networkdetails">3 Details for 'network'-Values</h1>
+        <h2 id="considerednetworks">3.1 Considered 'network'-Values</h2>
+<p>
+This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="network">Network (network=)</th><th class="number">Number</th><th class="relations">Relations</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="any" data-ref="???" class="line"><td class="network">any</td><td class="number">33</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> 'RB' -102806, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102807, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102808, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102809, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102810, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102811, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102812, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102813, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102814, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102878 and more ...</td></tr>
+            </tbody>
+        </table>
+
+    </body>
+</html>

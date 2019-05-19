@@ -1,0 +1,868 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' upload='false' generator='JOSM'>
+  <bounds minlat='48.069032' minlon='11.6330838' maxlat='48.0716416' maxlon='11.6389203' origin='CGImap 0.6.1 (13164 thorn-03.openstreetmap.org)' />
+  <bounds minlat='48.069032' minlon='11.6330838' maxlat='48.0716416' maxlon='11.6389203' origin='OpenStreetMap server' />
+  <node id='-102340' action='modify' lat='48.07098899277' lon='11.63345383801'>
+    <tag k='name' v='Lauda' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-102343' action='modify' lat='48.07098615196' lon='11.63397577306'>
+    <tag k='name' v='B' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-102347' action='modify' lat='48.07098354304' lon='11.63457802895'>
+    <tag k='name' v='Wertheim' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-102402' action='modify' lat='48.07108381644' lon='11.63345114624'>
+    <tag k='name' v='Lauda' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-102415' action='modify' lat='48.07108098168' lon='11.63397328237'>
+    <tag k='name' v='B' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-102417' action='modify' lat='48.07107825567' lon='11.63457875593'>
+    <tag k='name' v='Wertheim' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-102538' action='modify' lat='48.07106940388' lon='11.63616191409'>
+    <tag k='name' v='Miltenberg' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-102540' action='modify' lat='48.0709746453' lon='11.63616191772'>
+    <tag k='name' v='Miltenberg' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-102542' action='modify' lat='48.07097901485' lon='11.63536320224'>
+    <tag k='name' v='C' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-102545' action='modify' lat='48.07107380353' lon='11.63536114323'>
+    <tag k='name' v='C' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-102681' action='modify' lat='48.07159594132' lon='11.63395975689'>
+    <tag k='name' v='A' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-102683' action='modify' lat='48.07159016198' lon='11.63458268518'>
+    <tag k='name' v='Bad Mergentheim' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-102685' action='modify' lat='48.07150596465' lon='11.63343916259'>
+    <tag k='name' v='Würzburg' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-102687' action='modify' lat='48.07149537748' lon='11.63458195764'>
+    <tag k='name' v='Bad Mergentheim' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-102689' action='modify' lat='48.07150106195' lon='11.63396224892'>
+    <tag k='name' v='A' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-102691' action='modify' lat='48.07160079622' lon='11.63343647056'>
+    <tag k='name' v='Würzburg' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-102759' action='modify' lat='48.07130585558' lon='11.63535610256'>
+    <tag k='name' v='D' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-102761' action='modify' lat='48.07121460672' lon='11.63457980252'>
+    <tag k='name' v='Seckach' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-102763' action='modify' lat='48.07121060455' lon='11.63535817162'>
+    <tag k='name' v='D' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-102765' action='modify' lat='48.07130939199' lon='11.63458053007'>
+    <tag k='name' v='Seckach' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-102789' action='modify' lat='48.07083817675' lon='11.63536626153'>
+    <tag k='name' v='E' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-102791' action='modify' lat='48.07074669754' lon='11.63457621101'>
+    <tag k='name' v='Aschaffenburg' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-102793' action='modify' lat='48.07074292486' lon='11.63536833059'>
+    <tag k='name' v='E' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-102795' action='modify' lat='48.07084148368' lon='11.63457693855'>
+    <tag k='name' v='Aschaffenburg' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-102963' action='modify' lat='48.07045670744' lon='11.63537454777'>
+    <tag k='name' v='Mering' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-102965' action='modify' lat='48.07055335898' lon='11.63457471569'>
+    <tag k='name' v='Augsburg' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-102966' action='modify' lat='48.07055150766' lon='11.63537248854'>
+    <tag k='name' v='Mering' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-102967' action='modify' lat='48.0707840805' lon='11.63616192502'>
+    <tag k='name' v='München' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-102968' action='modify' lat='48.07045855557' lon='11.63457398799'>
+    <tag k='name' v='Augsburg' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-102970' action='modify' lat='48.07068929493' lon='11.63616192865'>
+    <tag k='name' v='München' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-103000' action='modify' lat='48.07055592786' lon='11.63346613143'>
+    <tag k='name' v='Radersdorf' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103001' action='modify' lat='48.07046110322' lon='11.63346882321'>
+    <tag k='name' v='Radersdorf' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-103002' action='modify' lat='48.07045990255' lon='11.633989669'>
+    <tag k='name' v='Aichach' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-103004' action='modify' lat='48.07055472046' lon='11.63398717843'>
+    <tag k='name' v='Aichach' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103365' action='modify' lat='48.07016297227' lon='11.63347728618'>
+    <tag k='name' v='Dinkelscherben' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103366' action='modify' lat='48.07006346516' lon='11.63399995021'>
+    <tag k='name' v='Diedorf' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-103367' action='modify' lat='48.0700681469' lon='11.63347997796'>
+    <tag k='name' v='Dinkelscherben' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-103368' action='modify' lat='48.07015828716' lon='11.63399745952'>
+    <tag k='name' v='Diedorf' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103536' action='modify' lat='48.07005101087' lon='11.63538317216'>
+    <tag k='name' v='Roth' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-103537' action='modify' lat='48.07014582484' lon='11.63538111331'>
+    <tag k='name' v='Roth' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103538' action='modify' lat='48.07015311577' lon='11.63457162304'>
+    <tag k='name' v='Treuchtlingen' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103539' action='modify' lat='48.07005832447' lon='11.63457089521'>
+    <tag k='name' v='Treuchtlingen' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-103540' action='modify' lat='48.0701387921' lon='11.63616194973'>
+    <tag k='name' v='Nürnberg' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103541' action='modify' lat='48.07004399886' lon='11.63616195336'>
+    <tag k='name' v='Nürnberg' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-103665' action='modify' lat='48.07054968081' lon='11.636161934'>
+    <tag k='name' v='Schmiechen' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103666' action='modify' lat='48.0704548948' lon='11.63616193763'>
+    <tag k='name' v='Schmiechen' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-103737' action='modify' lat='48.07013376735' lon='11.6367198196'>
+    <tag k='name' v='Fürth' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103738' action='modify' lat='48.07012647642' lon='11.63752930987'>
+    <tag k='name' v='Zirndorf' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103739' action='modify' lat='48.07011944367' lon='11.63831013449'>
+    <tag k='name' v='Cadolzburg' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103740' action='modify' lat='48.07003898248' lon='11.63671909186'>
+    <tag k='name' v='Fürth' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-103742' action='modify' lat='48.07002465687' lon='11.63831015001'>
+    <tag k='name' v='Cadolzburg' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='train' v='yes' />
+  </node>
+  <node id='-103743' action='modify' lat='48.07003166888' lon='11.63753136881'>
+    <tag k='name' v='Zirndorf' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='train' v='yes' />
+  </node>
+  <way id='-102796' action='modify'>
+    <nd ref='-102340' />
+    <nd ref='-102343' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-102797' action='modify'>
+    <nd ref='-102343' />
+    <nd ref='-102347' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-102798' action='modify'>
+    <nd ref='-102540' />
+    <nd ref='-102542' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-102799' action='modify'>
+    <nd ref='-102542' />
+    <nd ref='-102347' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-102800' action='modify'>
+    <nd ref='-102687' />
+    <nd ref='-102689' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-102801' action='modify'>
+    <nd ref='-102689' />
+    <nd ref='-102685' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-102802' action='modify'>
+    <nd ref='-102540' />
+    <nd ref='-102763' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-102803' action='modify'>
+    <nd ref='-102763' />
+    <nd ref='-102761' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-102804' action='modify'>
+    <nd ref='-102540' />
+    <nd ref='-102793' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-102805' action='modify'>
+    <nd ref='-102793' />
+    <nd ref='-102791' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-102964' action='modify'>
+    <nd ref='-103666' />
+    <nd ref='-102963' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-102969' action='modify'>
+    <nd ref='-102970' />
+    <nd ref='-102963' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-103003' action='modify'>
+    <nd ref='-103001' />
+    <nd ref='-103002' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-103044' action='modify'>
+    <nd ref='-103002' />
+    <nd ref='-102968' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-103362' action='modify'>
+    <nd ref='-103366' />
+    <nd ref='-102968' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-103369' action='modify'>
+    <nd ref='-103367' />
+    <nd ref='-103366' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-103535' action='modify'>
+    <nd ref='-103536' />
+    <nd ref='-103539' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-103542' action='modify'>
+    <nd ref='-103541' />
+    <nd ref='-103536' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-103703' action='modify'>
+    <nd ref='-102963' />
+    <nd ref='-102968' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-103741' action='modify'>
+    <nd ref='-103742' />
+    <nd ref='-103743' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-103744' action='modify'>
+    <nd ref='-103743' />
+    <nd ref='-103740' />
+    <tag k='railway' v='rail' />
+  </way>
+  <relation id='-102806' action='modify'>
+    <member type='node' ref='-102340' role='stop' />
+    <member type='node' ref='-102402' role='platform' />
+    <member type='node' ref='-102343' role='stop' />
+    <member type='node' ref='-102415' role='platform' />
+    <member type='node' ref='-102347' role='stop' />
+    <member type='node' ref='-102417' role='platform' />
+    <member type='way' ref='-102796' role='' />
+    <member type='way' ref='-102797' role='' />
+    <tag k='from' v='Lauda' />
+    <tag k='name' v='RB: Lauda =&gt; Wertheim' />
+    <tag k='network' v='any' />
+    <tag k='operator' v='DB RegioNetz Verkehrs GmbH;Westfrankenbahn' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='RB' />
+    <tag k='route' v='train' />
+    <tag k='to' v='Wertheim' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-102807' action='modify'>
+    <member type='node' ref='-102347' role='stop' />
+    <member type='node' ref='-102417' role='platform' />
+    <member type='node' ref='-102343' role='stop' />
+    <member type='node' ref='-102415' role='platform' />
+    <member type='node' ref='-102340' role='stop' />
+    <member type='node' ref='-102402' role='platform' />
+    <member type='way' ref='-102797' role='' />
+    <member type='way' ref='-102796' role='' />
+    <tag k='from' v='Wertheim' />
+    <tag k='name' v='RB: Wertheim =&gt; Lauda' />
+    <tag k='network' v='any' />
+    <tag k='operator' v='DB RegioNetz Verkehrs GmbH;Westfrankenbahn' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='RB' />
+    <tag k='route' v='train' />
+    <tag k='to' v='Lauda' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-102808' action='modify'>
+    <member type='relation' ref='-102806' role='' />
+    <member type='relation' ref='-102807' role='' />
+    <tag k='name' v='RB Wertheim &lt;=&gt; Lauda' />
+    <tag k='network' v='any' />
+    <tag k='operator' v='DB RegioNetz Verkehrs GmbH;Westfrankenbahn' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='RB' />
+    <tag k='route_master' v='train' />
+    <tag k='type' v='route_master' />
+  </relation>
+  <relation id='-102809' action='modify'>
+    <member type='node' ref='-102540' role='stop' />
+    <member type='node' ref='-102538' role='platform' />
+    <member type='node' ref='-102542' role='stop' />
+    <member type='node' ref='-102545' role='platform' />
+    <member type='node' ref='-102347' role='stop' />
+    <member type='node' ref='-102417' role='platform' />
+    <member type='way' ref='-102798' role='' />
+    <member type='way' ref='-102799' role='' />
+    <tag k='from' v='Miltenberg' />
+    <tag k='name' v='RB: Miltenberg =&gt; Wertheim' />
+    <tag k='network' v='any' />
+    <tag k='operator' v='DB RegioNetz Verkehrs GmbH;Westfrankenbahn' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='RB' />
+    <tag k='route' v='train' />
+    <tag k='to' v='Wertheim' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-102810' action='modify'>
+    <member type='node' ref='-102347' role='stop' />
+    <member type='node' ref='-102417' role='platform' />
+    <member type='node' ref='-102542' role='stop' />
+    <member type='node' ref='-102545' role='platform' />
+    <member type='node' ref='-102540' role='stop' />
+    <member type='node' ref='-102538' role='platform' />
+    <member type='way' ref='-102799' role='' />
+    <member type='way' ref='-102798' role='' />
+    <tag k='from' v='Wertheim' />
+    <tag k='name' v='RB: Wertheim =&gt; Miltenberg' />
+    <tag k='network' v='any' />
+    <tag k='operator' v='DB RegioNetz Verkehrs GmbH;Westfrankenbahn' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='RB' />
+    <tag k='route' v='train' />
+    <tag k='to' v='Miltenberg' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-102811' action='modify'>
+    <member type='relation' ref='-102809' role='' />
+    <member type='relation' ref='-102810' role='' />
+    <tag k='name' v='RB Miltenberg &lt;=&gt; Wertheim' />
+    <tag k='network' v='any' />
+    <tag k='operator' v='DB RegioNetz Verkehrs GmbH;Westfrankenbahn' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='RB' />
+    <tag k='route_master' v='train' />
+    <tag k='type' v='route_master' />
+  </relation>
+  <relation id='-102812' action='modify'>
+    <member type='node' ref='-102687' role='stop' />
+    <member type='node' ref='-102683' role='platform' />
+    <member type='node' ref='-102689' role='stop' />
+    <member type='node' ref='-102681' role='platform' />
+    <member type='node' ref='-102685' role='stop' />
+    <member type='node' ref='-102691' role='platform' />
+    <member type='way' ref='-102800' role='' />
+    <member type='way' ref='-102801' role='' />
+    <tag k='from' v='Bad Mergentheim' />
+    <tag k='name' v='RB: Bad Mergentheim =&gt; Würzburg' />
+    <tag k='network' v='any' />
+    <tag k='operator' v='DB RegioNetz Verkehrs GmbH;Westfrankenbahn' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='RB' />
+    <tag k='route' v='train' />
+    <tag k='to' v='Würzburg' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-102813' action='modify'>
+    <member type='node' ref='-102685' role='stop' />
+    <member type='node' ref='-102691' role='platform' />
+    <member type='node' ref='-102689' role='stop' />
+    <member type='node' ref='-102681' role='platform' />
+    <member type='node' ref='-102687' role='stop' />
+    <member type='node' ref='-102683' role='platform' />
+    <member type='way' ref='-102801' role='' />
+    <member type='way' ref='-102800' role='' />
+    <tag k='from' v='Würzburg' />
+    <tag k='name' v='RB: Würzburg =&gt; Bad Mergentheim' />
+    <tag k='network' v='any' />
+    <tag k='operator' v='DB RegioNetz Verkehrs GmbH;Westfrankenbahn' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='RB' />
+    <tag k='route' v='train' />
+    <tag k='to' v='Bad Mergentheim' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-102814' action='modify'>
+    <member type='relation' ref='-102812' role='' />
+    <member type='relation' ref='-102813' role='' />
+    <tag k='name' v='RB Bad Mergentheim &lt;=&gt; Würzburg' />
+    <tag k='network' v='any' />
+    <tag k='operator' v='DB RegioNetz Verkehrs GmbH;Westfrankenbahn' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='RB' />
+    <tag k='route_master' v='train' />
+    <tag k='type' v='route_master' />
+  </relation>
+  <relation id='-102878' action='modify'>
+    <member type='node' ref='-102540' role='stop' />
+    <member type='node' ref='-102538' role='platform' />
+    <member type='node' ref='-102763' role='stop' />
+    <member type='node' ref='-102759' role='platform' />
+    <member type='node' ref='-102761' role='stop' />
+    <member type='node' ref='-102765' role='platform' />
+    <member type='way' ref='-102802' role='' />
+    <member type='way' ref='-102803' role='' />
+    <tag k='from' v='Miltenberg' />
+    <tag k='name' v='RB: Miltenberg =&gt; Seckach' />
+    <tag k='network' v='any' />
+    <tag k='operator' v='DB RegioNetz Verkehrs GmbH;Westfrankenbahn' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='RB' />
+    <tag k='route' v='train' />
+    <tag k='to' v='Seckach' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-102904' action='modify'>
+    <member type='node' ref='-102761' role='stop' />
+    <member type='node' ref='-102765' role='platform' />
+    <member type='node' ref='-102763' role='stop' />
+    <member type='node' ref='-102759' role='platform' />
+    <member type='node' ref='-102540' role='stop' />
+    <member type='node' ref='-102538' role='platform' />
+    <member type='way' ref='-102803' role='' />
+    <member type='way' ref='-102802' role='' />
+    <tag k='from' v='Seckach' />
+    <tag k='name' v='RB: Seckach =&gt; Miltenberg' />
+    <tag k='network' v='any' />
+    <tag k='operator' v='DB RegioNetz Verkehrs GmbH;Westfrankenbahn' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='RB' />
+    <tag k='route' v='train' />
+    <tag k='to' v='Miltenberg' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-102908' action='modify'>
+    <member type='relation' ref='-102904' role='' />
+    <member type='relation' ref='-102878' role='' />
+    <tag k='name' v='RB Seckach &lt;=&gt; Miltenberg' />
+    <tag k='network' v='any' />
+    <tag k='operator' v='DB RegioNetz Verkehrs GmbH;Westfrankenbahn' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='RB' />
+    <tag k='route_master' v='train' />
+    <tag k='type' v='route_master' />
+  </relation>
+  <relation id='-102928' action='modify'>
+    <member type='node' ref='-102791' role='stop' />
+    <member type='node' ref='-102795' role='platform' />
+    <member type='node' ref='-102793' role='stop' />
+    <member type='node' ref='-102789' role='platform' />
+    <member type='node' ref='-102540' role='stop' />
+    <member type='node' ref='-102538' role='platform' />
+    <member type='way' ref='-102805' role='' />
+    <member type='way' ref='-102804' role='' />
+    <tag k='from' v='Aschaffenburg' />
+    <tag k='name' v='RB: Aschaffenburg =&gt; Miltenberg' />
+    <tag k='network' v='any' />
+    <tag k='operator' v='DB RegioNetz Verkehrs GmbH;Westfrankenbahn' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='RB' />
+    <tag k='route' v='train' />
+    <tag k='to' v='Miltenberg' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-102946' action='modify'>
+    <member type='node' ref='-102540' role='stop' />
+    <member type='node' ref='-102538' role='platform' />
+    <member type='node' ref='-102793' role='stop' />
+    <member type='node' ref='-102789' role='platform' />
+    <member type='node' ref='-102791' role='stop' />
+    <member type='node' ref='-102795' role='platform' />
+    <member type='way' ref='-102804' role='' />
+    <member type='way' ref='-102805' role='' />
+    <tag k='from' v='Miltenberg' />
+    <tag k='name' v='RB: Miltenberg =&gt; Aschaffenburg' />
+    <tag k='network' v='any' />
+    <tag k='operator' v='DB RegioNetz Verkehrs GmbH;Westfrankenbahn' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='RB' />
+    <tag k='route' v='train' />
+    <tag k='to' v='Aschaffenburg' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-102950' action='modify'>
+    <member type='relation' ref='-102928' role='' />
+    <member type='relation' ref='-102946' role='' />
+    <tag k='name' v='RB Aschaffenburg &lt;=&gt; Miltenberg' />
+    <tag k='network' v='any' />
+    <tag k='operator' v='DB RegioNetz Verkehrs GmbH;Westfrankenbahn' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='RB' />
+    <tag k='route_master' v='train' />
+    <tag k='type' v='route_master' />
+  </relation>
+  <relation id='-103166' action='modify'>
+    <member type='node' ref='-102968' role='stop' />
+    <member type='node' ref='-102965' role='platform' />
+    <member type='node' ref='-102963' role='stop' />
+    <member type='node' ref='-102966' role='platform' />
+    <member type='node' ref='-102970' role='stop' />
+    <member type='node' ref='-102967' role='platform' />
+    <member type='way' ref='-103703' role='' />
+    <member type='way' ref='-102969' role='' />
+    <tag k='from' v='Augsburg' />
+    <tag k='name' v='R1: Augsburg =&gt; München' />
+    <tag k='network' v='any' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='R1' />
+    <tag k='route' v='train' />
+    <tag k='to' v='München' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-103245' action='modify'>
+    <member type='node' ref='-102970' role='stop' />
+    <member type='node' ref='-102967' role='platform' />
+    <member type='node' ref='-102963' role='stop' />
+    <member type='node' ref='-102966' role='platform' />
+    <member type='node' ref='-102968' role='stop' />
+    <member type='node' ref='-102965' role='platform' />
+    <member type='way' ref='-102969' role='' />
+    <member type='way' ref='-103703' role='' />
+    <tag k='from' v='München' />
+    <tag k='name' v='R1: München =&gt; Augsburg' />
+    <tag k='network' v='any' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='R1' />
+    <tag k='route' v='train' />
+    <tag k='to' v='Augsburg' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-103249' action='modify'>
+    <member type='relation' ref='-103166' role='' />
+    <member type='relation' ref='-103245' role='' />
+    <tag k='name' v='R1 Augsburg &lt;=&gt; München' />
+    <tag k='network' v='any' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='R1' />
+    <tag k='route_master' v='train' />
+    <tag k='type' v='route_master' />
+  </relation>
+  <relation id='-103299' action='modify'>
+    <member type='node' ref='-102968' role='stop' />
+    <member type='node' ref='-102965' role='platform' />
+    <member type='node' ref='-103002' role='stop' />
+    <member type='node' ref='-103004' role='platform' />
+    <member type='node' ref='-103001' role='stop' />
+    <member type='node' ref='-103000' role='platform' />
+    <member type='way' ref='-103044' role='' />
+    <member type='way' ref='-103003' role='' />
+    <tag k='from' v='Augsburg' />
+    <tag k='name' v='R1: Augsburg =&gt; Radersdorf' />
+    <tag k='network' v='any' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='R1' />
+    <tag k='route' v='train' />
+    <tag k='to' v='Radersdorf' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-103347' action='modify'>
+    <member type='node' ref='-103367' role='stop' />
+    <member type='node' ref='-103365' role='platform' />
+    <member type='node' ref='-103366' role='stop' />
+    <member type='node' ref='-103368' role='platform' />
+    <member type='node' ref='-102968' role='stop' />
+    <member type='node' ref='-102965' role='platform' />
+    <member type='way' ref='-103369' role='' />
+    <member type='way' ref='-103362' role='' />
+    <tag k='from' v='Dinkelscherben' />
+    <tag k='name' v='R6: Dinkelscherben =&gt; Augsburg' />
+    <tag k='network' v='any' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='R6' />
+    <tag k='route' v='train' />
+    <tag k='to' v='Augsburg' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-103351' action='modify'>
+    <member type='relation' ref='-103299' role='' />
+    <member type='relation' ref='-103520' role='' />
+    <tag k='name' v='R1 Augsburg &lt;=&gt; Radersdorf' />
+    <tag k='network' v='any' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='R1' />
+    <tag k='route_master' v='train' />
+    <tag k='type' v='route_master' />
+  </relation>
+  <relation id='-103513' action='modify'>
+    <member type='node' ref='-102968' role='stop' />
+    <member type='node' ref='-102965' role='platform' />
+    <member type='node' ref='-103366' role='stop' />
+    <member type='node' ref='-103368' role='platform' />
+    <member type='node' ref='-103367' role='stop' />
+    <member type='node' ref='-103365' role='platform' />
+    <member type='way' ref='-103362' role='' />
+    <member type='way' ref='-103369' role='' />
+    <tag k='from' v='Augsburg' />
+    <tag k='name' v='R6: Augsburg =&gt; Dinkelscherben' />
+    <tag k='network' v='any' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='R6' />
+    <tag k='route' v='train' />
+    <tag k='to' v='Dinkelscherben' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-103517' action='modify'>
+    <member type='relation' ref='-103513' role='' />
+    <member type='relation' ref='-103347' role='' />
+    <tag k='name' v='R6 Augsburg &lt;=&gt; Dinkelscherben' />
+    <tag k='network' v='any' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='R6' />
+    <tag k='route_master' v='train' />
+    <tag k='type' v='route_master' />
+  </relation>
+  <relation id='-103520' action='modify'>
+    <member type='node' ref='-103001' role='stop' />
+    <member type='node' ref='-103000' role='platform' />
+    <member type='node' ref='-103002' role='stop' />
+    <member type='node' ref='-103004' role='platform' />
+    <member type='node' ref='-102968' role='stop' />
+    <member type='node' ref='-102965' role='platform' />
+    <member type='way' ref='-103003' role='' />
+    <member type='way' ref='-103044' role='' />
+    <tag k='from' v='Radersdorf' />
+    <tag k='name' v='R1: Radersdorf =&gt; Augsburg' />
+    <tag k='network' v='any' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='R1' />
+    <tag k='route' v='train' />
+    <tag k='to' v='Augsburg' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-103616' action='modify'>
+    <member type='node' ref='-103539' role='stop' />
+    <member type='node' ref='-103538' role='platform' />
+    <member type='node' ref='-103536' role='stop' />
+    <member type='node' ref='-103537' role='platform' />
+    <member type='node' ref='-103541' role='stop' />
+    <member type='node' ref='-103540' role='platform' />
+    <member type='way' ref='-103535' role='' />
+    <member type='way' ref='-103542' role='' />
+    <tag k='from' v='Treuchtlingen' />
+    <tag k='name' v='R6: Treuchtlingen =&gt; Nürnberg' />
+    <tag k='network' v='any' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='R6' />
+    <tag k='route' v='train' />
+    <tag k='to' v='Nürnberg' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-103639' action='modify'>
+    <member type='node' ref='-103541' role='stop' />
+    <member type='node' ref='-103540' role='platform' />
+    <member type='node' ref='-103536' role='stop' />
+    <member type='node' ref='-103537' role='platform' />
+    <member type='node' ref='-103539' role='stop' />
+    <member type='node' ref='-103538' role='platform' />
+    <member type='way' ref='-103542' role='' />
+    <member type='way' ref='-103535' role='' />
+    <tag k='from' v='Nürnberg' />
+    <tag k='name' v='R6: Nürnberg =&gt; Treuchtlingen' />
+    <tag k='network' v='any' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='R6' />
+    <tag k='route' v='train' />
+    <tag k='to' v='Treuchtlingen' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-103658' action='modify'>
+    <member type='relation' ref='-103639' role='' />
+    <member type='relation' ref='-103616' role='' />
+    <tag k='name' v='R6 Nürnberg &lt;=&gt; Treuchtlingen' />
+    <tag k='network' v='any' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='R6' />
+    <tag k='route_master' v='train' />
+    <tag k='type' v='route_master' />
+  </relation>
+  <relation id='-103715' action='modify'>
+    <member type='node' ref='-102968' role='stop' />
+    <member type='node' ref='-102965' role='platform' />
+    <member type='node' ref='-102963' role='stop' />
+    <member type='node' ref='-102966' role='platform' />
+    <member type='node' ref='-103666' role='stop' />
+    <member type='node' ref='-103665' role='platform' />
+    <member type='way' ref='-103703' role='' />
+    <member type='way' ref='-102964' role='' />
+    <tag k='from' v='Augsburg' />
+    <tag k='name' v='R11: Augsburg =&gt; Schmiechen' />
+    <tag k='network' v='any' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='R11' />
+    <tag k='route' v='train' />
+    <tag k='to' v='Schmiechen' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-103720' action='modify'>
+    <member type='node' ref='-103666' role='stop' />
+    <member type='node' ref='-103665' role='platform' />
+    <member type='node' ref='-102963' role='stop' />
+    <member type='node' ref='-102966' role='platform' />
+    <member type='node' ref='-102968' role='stop' />
+    <member type='node' ref='-102965' role='platform' />
+    <member type='way' ref='-102964' role='' />
+    <member type='way' ref='-103703' role='' />
+    <tag k='from' v='Schmiechen' />
+    <tag k='name' v='R11: Schmiechen =&gt; Augsburg' />
+    <tag k='network' v='any' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='R11' />
+    <tag k='route' v='train' />
+    <tag k='to' v='Augsburg' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-103726' action='modify'>
+    <member type='relation' ref='-103715' role='' />
+    <member type='relation' ref='-103720' role='' />
+    <tag k='name' v='R11 Augsburg &lt;=&gt; Schmiechen' />
+    <tag k='network' v='any' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='R11' />
+    <tag k='route_master' v='train' />
+    <tag k='type' v='route_master' />
+  </relation>
+  <relation id='-103782' action='modify'>
+    <member type='node' ref='-103740' role='stop' />
+    <member type='node' ref='-103737' role='platform' />
+    <member type='node' ref='-103743' role='stop' />
+    <member type='node' ref='-103738' role='platform' />
+    <member type='node' ref='-103742' role='stop' />
+    <member type='node' ref='-103739' role='platform' />
+    <member type='way' ref='-103744' role='' />
+    <member type='way' ref='-103741' role='' />
+    <tag k='from' v='Fürth' />
+    <tag k='name' v='R11: Fürth =&gt; Cadolzburg' />
+    <tag k='network' v='any' />
+    <tag k='note' v='&apos;operator&apos; not set be intention' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='R11' />
+    <tag k='route' v='train' />
+    <tag k='to' v='Cadolzburg' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-103818' action='modify'>
+    <member type='node' ref='-103742' role='stop' />
+    <member type='node' ref='-103739' role='platform' />
+    <member type='node' ref='-103743' role='stop' />
+    <member type='node' ref='-103738' role='platform' />
+    <member type='node' ref='-103740' role='stop' />
+    <member type='node' ref='-103737' role='platform' />
+    <member type='way' ref='-103741' role='' />
+    <member type='way' ref='-103744' role='' />
+    <tag k='from' v='Cadolzburg' />
+    <tag k='name' v='R11: Cadolzburg =&gt; Fürth' />
+    <tag k='network' v='any' />
+    <tag k='note' v='&apos;operator&apos; not set be intention' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='R11' />
+    <tag k='route' v='train' />
+    <tag k='to' v='Fürth' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-103820' action='modify'>
+    <member type='relation' ref='-103782' role='' />
+    <member type='relation' ref='-103818' role='' />
+    <tag k='name' v='R11 Fürth &lt;=&gt; Cadolzburg' />
+    <tag k='network' v='any' />
+    <tag k='note' v='&apos;operator&apos; not set be intention' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='R11' />
+    <tag k='route_master' v='train' />
+    <tag k='type' v='route_master' />
+  </relation>
+</osm>
