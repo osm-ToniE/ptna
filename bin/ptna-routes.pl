@@ -2371,7 +2371,7 @@ sub analyze_route_relation {
     $return_code += CheckCompletenessOfData( $relation_ptr );
     
     push( @{$relation_ptr->{'__issues__'}}, gettext("Route without Way(s)") )                    unless ( $route_highway_index );
-    push( @{$relation_ptr->{'__issues__'}}, gettext("Route with only 1 Way") )                   if     ( $route_highway_index == 1 && $route_type ne 'ferry' && $route_type ne 'aerialway' && $route_type ne 'funicular' );
+    push( @{$relation_ptr->{'__issues__'}}, gettext("Route with only 1 Way") )                   if     ( $route_highway_index == 1 && $route_type ne 'monorail' && $route_type ne 'ferry' && $route_type ne 'aerialway' && $route_type ne 'funicular' );
     push( @{$relation_ptr->{'__issues__'}}, gettext("Route without Node(s)") )                   unless ( $node_index );
     push( @{$relation_ptr->{'__issues__'}}, gettext("Route with only 1 Node") )                  if     ( $node_index == 1 );
     push( @{$relation_ptr->{'__issues__'}}, gettext("Route with Relation(s)") )                  if     ( $route_relation_index );
