@@ -3932,6 +3932,45 @@ sub noAccessOnWay {
 
 
 #############################################################################################
+
+sub noAccessOnNode {
+    my $node_id         = shift;
+    my $vehicle_type    = shift;        # optional !
+    
+    my @list_of_access_levels = ( 'psv', 'motorcar', 'motor_vehicle', 'vehicle', 'access' );
+    
+    if ( $node_id && $NODES{$node_id} && $NODES{$node_id}->{'tag'}&& $NODES{$node_id}->{'tag'}->{'barrier'} ) {
+
+        my $node_tag_ref = $NODES{$node_id}->{'tag'};
+
+        if ( $node_tag_ref->{'barrier'} eq 'entrance' ) {
+            printf STDERR "noAccessOnNode() : access for node %d (barrier=%s, implied access=yes)\n", $node_id, $node_tag_ref->{'barrier'}       if ( $debug );
+            return '';
+        } else {
+            if ( $vehicle_type ) {
+                unshift( @list_of_access_levels, $vehicle_type );
+            } 
+            
+            foreach my $positive_access ( 'yes', 'designated', 'permissive', 'official' ) {
+                foreach my $access_type ( @list_of_access_levels ) {
+                    if ( $node_tag_ref->{$access_type} && $node_tag_ref->{$access_type} eq $positive_access ) {
+                        printf STDERR "noAccessOnNode() : access for node %d (barrier=%s, %s=%s)\n", $node_id, $node_tag_ref->{'barrier'}, $access_type, $positive_access       if ( $debug );
+                        return '';
+                    }
+                }
+            }
+            
+            printf STDERR "noAccessOnNode() : no access for node %d (barrier=%s, implied access=no)\n", $node_id, $node_tag_ref->{'barrier'}       if ( $debug );
+            return sprintf( gettext("'barrier'='%s' with implied 'access'='no'"), $node_tag_ref->{'barrier'} );
+            
+        }
+    }
+    printf STDERR "noAccessOnNode() : access for all for node %d\n", $node_id       if ( $debug );
+    return '';
+}
+
+
+#############################################################################################
 #
 # for syntax of 'name' with 'ref', 'from', 'to' and maybe 'via' included (also ref:*)
 #
@@ -4131,7 +4170,14 @@ sub CheckAccessOnWaysAndNodes {
                 $restricted_access_on_ways{$access_restriction}->{$route_highway->{'ref'}} = 1;
                 $ret_val++;
             }
-            # to-do: $access_restriction = noAccessOnNode( $route_highway->{'ref'}->{'nodes'}[$i}], $relation_ptr->{'tag'}->{'route'}, $relation_ptr->{'tag'}->{'public_transport:version'} );
+            
+            foreach my $highway_node_ID ( @{$WAYS{$route_highway->{'ref'}}->{'chain'}} ) {
+                $access_restriction = noAccessOnNode( $highway_node_ID, $relation_ptr->{'tag'}->{'route'} );
+                if ( $access_restriction ) {
+                    $restricted_access_on_nodes{$access_restriction}->{$highway_node_ID} = 1;
+                    $ret_val++;
+                }
+            }
         }
         if ( scalar(keys(%restricted_access_on_ways)) ) {
             my $helpstring = '';
@@ -4144,8 +4190,8 @@ sub CheckAccessOnWaysAndNodes {
         if ( scalar(keys(%restricted_access_on_nodes)) ) {
             my $helpstring = '';
             foreach $access_restriction ( sort(keys(%restricted_access_on_nodes)) ) {
-                $helpstring = ngettext( "Route: restricted access at barrier (%s) on node without 'psv'='yes', '%s'='yes', '%s'='designated', or ...: %s",
-                                        "Route: restricted access at barriers (%s) on nodes without 'psv'='yes', '%s'='yes', '%s'='designated', or ...: %s", scalar(keys(%{$restricted_access_on_nodes{$access_restriction}})) );
+                $helpstring = ngettext( "Route: restricted access at barrier (%s) without 'psv'='yes', '%s'='yes', '%s'='designated', or ...: %s",
+                                        "Route: restricted access at barriers (%s) without 'psv'='yes', '%s'='yes', '%s'='designated', or ...: %s", scalar(keys(%{$restricted_access_on_nodes{$access_restriction}})) );
                 push( @{$relation_ptr->{'__issues__'}}, sprintf( $helpstring, $access_restriction, $relation_ptr->{'tag'}->{'route'}, $relation_ptr->{'tag'}->{'route'}, join(', ', map { printNodeTemplate($_,'name;ref'); } sort(keys(%{$restricted_access_on_nodes{$access_restriction}})))) );
             }
         }

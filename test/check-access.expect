@@ -34,9 +34,9 @@
         <ol>
         <li>2.1 <a href="#A2.1">Positive, normal situation</a>
         </li>
-        <li>2.2 <a href="#A2.2">Positive, no errors on ways, access explicitely allowed: access=yes, psv=yes, bus=yes , ...</a>
+        <li>2.2 <a href="#A2.2">Positive, no errors on ways and nodes, access explicitely allowed: access=yes, psv=yes, bus=yes , ...</a>
         </li>
-        <li>2.3 <a href="#A2.3">Negative, with errors on ways</a>
+        <li>2.3 <a href="#A2.3">Negative, with errors on ways and nodes</a>
         </li>
         </ol>
         </li>
@@ -65,16 +65,16 @@
             </thead>
             <tbody>
                 <tr data-info="From: A-Village; To: C-Village; Operator: Test" data-ref="001" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=001&amp;network=Test&amp;style=wuppertal" title="Sketch-Line">001</a></td><td class="csvinfo" colspan="5">From: A-Village; To: C-Village; Operator: Test</td></tr>
-                <tr data-info="-102596" data-ref="001" class="line"><td class="name">Bus 001</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -102596</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
-                <tr data-info="-102594" data-ref="001" class="line"><td class="name">Bus 001: A-Village =&gt; B-Village =&gt; C-Village</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -102594</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
-                <tr data-info="-102595" data-ref="001" class="line"><td class="name">Bus 001: C-Village =&gt; B-Village =&gt; A-Village</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -102595</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+                <tr data-info="-103141" data-ref="001" class="line"><td class="name">Bus 001</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -103141</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+                <tr data-info="-103139" data-ref="001" class="line"><td class="name">Bus 001: A-Village =&gt; B-Village =&gt; C-Village</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -103139</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+                <tr data-info="-103140" data-ref="001" class="line"><td class="name">Bus 001: C-Village =&gt; B-Village =&gt; A-Village</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -103140</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
             </tbody>
         </table>
 
 <p>
 &nbsp;
 </p>
-        <h2 id="A2.2">2.2 Positive, no errors on ways, access explicitely allowed: access=yes, psv=yes, bus=yes , ...</h2>
+        <h2 id="A2.2">2.2 Positive, no errors on ways and nodes, access explicitely allowed: access=yes, psv=yes, bus=yes , ...</h2>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
@@ -90,7 +90,7 @@
 <p>
 &nbsp;
 </p>
-        <h2 id="A2.3">2.3 Negative, with errors on ways</h2>
+        <h2 id="A2.3">2.3 Negative, with errors on ways and nodes</h2>
 <p>
 Route: restricted access ('access'='private') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Way 'Way 15' -102699
 
@@ -124,6 +124,10 @@ Route: restricted access ('vehicle'='private') to way without 'psv'='yes', 'bus'
 
 </p>
 <p>
+Route: restricted access at barrier ('barrier'='bollard' with implied 'access'='no') without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Node -103450
+
+</p>
+<p>
 &nbsp;
 </p>
 <p>
@@ -150,15 +154,19 @@ Route: restricted access ('motorcar'='no') to way without 'psv'='yes', 'bus'='ye
 Route: restricted access ('vehicle'='private') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Way 'Way 16' -102698
 
 </p>
+<p>
+Route: restricted access at barrier ('barrier'='bollard' with implied 'access'='no') without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Node -103450
+
+</p>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
                 <tr data-info="From: A-Town; To: C-Town; Operator: Test" data-ref="011" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=011&amp;network=Test&amp;style=wuppertal" title="Sketch-Line">011</a></td><td class="csvinfo" colspan="5">From: A-Town; To: C-Town; Operator: Test</td></tr>
-                <tr data-info="-102915" data-ref="011" class="line"><td class="name">Bus 011</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -102915</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
-                <tr data-info="-102853" data-ref="011" class="line"><td class="name">Bus 011: A-Town =&gt; B-Town =&gt; C-Town</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -102853</td><td class="PTv">2</td><td class="issues">Route: restricted access ('access'='private') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 15' -102699<br>Route: restricted access ('highway'='construction') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 11' -102701<br>Route: restricted access ('highway'='cycleway') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 12' -102713<br>Route: restricted access ('highway'='footway') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 4' -102708<br>Route: restricted access ('highway'='pedestrian') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 13' -102703<br>Route: restricted access ('motor_vehicle'='no') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 17' -102697<br>Route: restricted access ('motorcar'='no') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 18' -102696<br>Route: restricted access ('vehicle'='private') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 16' -102698</td><td class="notes"></td></tr>
-                <tr data-info="-102906" data-ref="011" class="line"><td class="name">Bus 011: C-Town =&gt; B-Town =&gt; A-Town</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -102906</td><td class="PTv">2</td><td class="issues">Route: restricted access ('access'='private') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 15' -102699<br>Route: restricted access ('highway'='construction') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 11' -102701<br>Route: restricted access ('highway'='path') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 11-15' -102687<br>Route: restricted access ('motor_vehicle'='no') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 17' -102697<br>Route: restricted access ('motorcar'='no') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 18' -102696<br>Route: restricted access ('vehicle'='private') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 16' -102698</td><td class="notes"></td></tr>
+                <tr data-info="-103144" data-ref="011" class="line"><td class="name">Bus 011</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -103144</td><td class="PTv">2</td><td class="issues"></td><td class="notes"></td></tr>
+                <tr data-info="-103142" data-ref="011" class="line"><td class="name">Bus 011: A-Town =&gt; B-Town =&gt; C-Town</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -103142</td><td class="PTv">2</td><td class="issues">Route: restricted access ('access'='private') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 15' -103122<br>Route: restricted access ('highway'='construction') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 11' -103123<br>Route: restricted access ('highway'='cycleway') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 12' -103127<br>Route: restricted access ('highway'='footway') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 4' -103125<br>Route: restricted access ('highway'='pedestrian') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 13' -103124<br>Route: restricted access ('motor_vehicle'='no') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 17' -103120<br>Route: restricted access ('motorcar'='no') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 18' -103119<br>Route: restricted access ('vehicle'='private') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 16' -103121<br>Route: restricted access at barrier ('barrier'='bollard' with implied 'access'='no') without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Node.svg" alt="Node" /> -103450</td><td class="notes"></td></tr>
+                <tr data-info="-103143" data-ref="011" class="line"><td class="name">Bus 011: C-Town =&gt; B-Town =&gt; A-Town</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -103143</td><td class="PTv">2</td><td class="issues">Route: restricted access ('access'='private') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 15' -103122<br>Route: restricted access ('highway'='construction') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 11' -103123<br>Route: restricted access ('highway'='path') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 11-15' -103117<br>Route: restricted access ('motor_vehicle'='no') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 17' -103120<br>Route: restricted access ('motorcar'='no') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 18' -103119<br>Route: restricted access ('vehicle'='private') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Way.svg" alt="Way" /> 'Way 16' -103121<br>Route: restricted access at barrier ('barrier'='bollard' with implied 'access'='no') without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: <img src="/img/Node.svg" alt="Node" /> -103450</td><td class="notes"></td></tr>
             </tbody>
         </table>
 
@@ -176,7 +184,7 @@ This section lists the 'network'-values which have been considered; i.e. which m
                 <tr class="tableheaderrow"><th class="network">Network (network=)</th><th class="number">Number</th><th class="relations">Relations</th></tr>
             </thead>
             <tbody>
-                <tr data-info="Test" data-ref="???" class="line"><td class="network">Test</td><td class="number">9</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '001' -102594, <img src="/img/Relation.svg" alt="Relation" /> '001' -102595, <img src="/img/Relation.svg" alt="Relation" /> '001' -102596, <img src="/img/Relation.svg" alt="Relation" /> '011' -102853, <img src="/img/Relation.svg" alt="Relation" /> '011' -102906, <img src="/img/Relation.svg" alt="Relation" /> '011' -102915, <img src="/img/Relation.svg" alt="Relation" /> '021' -103338, <img src="/img/Relation.svg" alt="Relation" /> '021' -103439, <img src="/img/Relation.svg" alt="Relation" /> '021' -103445</td></tr>
+                <tr data-info="Test" data-ref="???" class="line"><td class="network">Test</td><td class="number">9</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '001' -103139, <img src="/img/Relation.svg" alt="Relation" /> '001' -103140, <img src="/img/Relation.svg" alt="Relation" /> '001' -103141, <img src="/img/Relation.svg" alt="Relation" /> '011' -103142, <img src="/img/Relation.svg" alt="Relation" /> '011' -103143, <img src="/img/Relation.svg" alt="Relation" /> '011' -103144, <img src="/img/Relation.svg" alt="Relation" /> '021' -103338, <img src="/img/Relation.svg" alt="Relation" /> '021' -103439, <img src="/img/Relation.svg" alt="Relation" /> '021' -103445</td></tr>
             </tbody>
         </table>
 

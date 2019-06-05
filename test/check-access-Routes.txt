@@ -46,13 +46,13 @@
 001;bus;;A-Village;C-Village;Test
 -
 
-== Positive, no errors on ways, access explicitely allowed: access=yes, psv=yes, bus=yes , ...
+== Positive, no errors on ways and nodes, access explicitely allowed: access=yes, psv=yes, bus=yes , ...
 
 021;bus;;A-City;C-City;Test
 -
 
 
-== Negative, with errors on ways
+== Negative, with errors on ways and nodes
 
 - Route: restricted access ('access'='private') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Way 'Way 15' -102699
 -
@@ -70,6 +70,8 @@
 -
 - Route: restricted access ('vehicle'='private') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Way 'Way 16' -102698
 -
+- Route: restricted access at barrier ('barrier'='bollard' with implied 'access'='no') without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Node -103450
+-
 -
 - Route: restricted access ('access'='private') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Way 'Way 15' -102699
 -
@@ -82,6 +84,8 @@
 - Route: restricted access ('motorcar'='no') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Way 'Way 18' -102696
 -
 - Route: restricted access ('vehicle'='private') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Way 'Way 16' -102698
+-
+- Route: restricted access at barrier ('barrier'='bollard' with implied 'access'='no') without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Node -103450
 -
 
 011;bus;;A-Town;C-Town;Test
