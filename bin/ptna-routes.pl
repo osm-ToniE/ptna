@@ -3943,26 +3943,32 @@ sub noAccessOnNode {
 
         my $node_tag_ref = $NODES{$node_id}->{'tag'};
 
-        if ( $node_tag_ref->{'barrier'} eq 'entrance' ) {
-            printf STDERR "noAccessOnNode() : access for node %d (barrier=%s, implied access=yes)\n", $node_id, $node_tag_ref->{'barrier'}       if ( $debug );
-            return '';
-        } else {
-            if ( $vehicle_type ) {
-                unshift( @list_of_access_levels, $vehicle_type );
-            } 
-            
-            foreach my $positive_access ( 'yes', 'designated', 'permissive', 'official' ) {
-                foreach my $access_type ( @list_of_access_levels ) {
-                    if ( $node_tag_ref->{$access_type} && $node_tag_ref->{$access_type} eq $positive_access ) {
-                        printf STDERR "noAccessOnNode() : access for node %d (barrier=%s, %s=%s)\n", $node_id, $node_tag_ref->{'barrier'}, $access_type, $positive_access       if ( $debug );
-                        return '';
-                    }
+        if ( $vehicle_type ) {
+            unshift( @list_of_access_levels, $vehicle_type );
+        } 
+
+        foreach my $access_type ( @list_of_access_levels ) {
+            if ( $node_tag_ref->{$access_type} ) {
+                if ( $node_tag_ref->{$access_type} eq 'yes' ||
+                     $node_tag_ref->{$access_type} eq 'designated' ||
+                     $node_tag_ref->{$access_type} eq 'permissive' ||
+                     $node_tag_ref->{$access_type} eq 'official'      ) {
+                    printf STDERR "noAccessOnNode() : access for node %d (barrier=%s, %s=%s)\n", $node_id, $node_tag_ref->{'barrier'}, $access_type, $node_tag_ref->{$access_type}       if ( $debug );
+                    return '';
+                } elsif ( $node_tag_ref->{$access_type} eq 'no'      || 
+                          $node_tag_ref->{$access_type} eq 'private'    ) {
+                    printf STDERR "noAccessOnNode() : no access for node %d (barrier=%s, %s=%s)\n", $node_id, $node_tag_ref->{'barrier'}, $access_type, $node_tag_ref->{$access_type}       if ( $debug );
+                    return sprintf( "'barrier'='%s', '%s'='%s'", $node_tag_ref->{'barrier'}, $access_type, $node_tag_ref->{$access_type} );
                 }
             }
-            
+        }
+
+        if ( $node_tag_ref->{'barrier'} eq 'entrance' ) {
+            printf STDERR "noAccessOnNode() : access for node %d (barrier=%s with implied access=yes)\n", $node_id, $node_tag_ref->{'barrier'}       if ( $debug );
+            return '';
+        } else {
             printf STDERR "noAccessOnNode() : no access for node %d (barrier=%s, implied access=no)\n", $node_id, $node_tag_ref->{'barrier'}       if ( $debug );
             return sprintf( gettext("'barrier'='%s' with implied 'access'='no'"), $node_tag_ref->{'barrier'} );
-            
         }
     }
     printf STDERR "noAccessOnNode() : access for all for node %d\n", $node_id       if ( $debug );
