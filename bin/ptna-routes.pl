@@ -2858,7 +2858,8 @@ sub analyze_ptv2_route_relation {
                 if ( $found_it == 1 ) {
                     printf STDERR "1: Number of ways: %s, found_nodeid = %s, last node of first way = %s\n", scalar(@relation_route_highways), $found_nodeid, $first_way_nodes[$#first_way_nodes]  if ( $debug );
                     if ( scalar(@relation_route_highways) > 1 && $found_nodeid == $first_way_nodes[$#first_way_nodes] ) {
-                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the first way, except the last node == first node of next way: %s"), printWayTemplate($first_way_ID,'name;ref') ) );            
+                        #push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the first way, except the last node == first node of next way: %s"), printWayTemplate($first_way_ID,'name;ref') ) );            
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: consider removing the first way of the route from the relation, it is a way before the first stop position: %s"), printWayTemplate($first_way_ID,'name;ref') ) );            
                         $return_code++;
                     } else {
                         push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: first stop position on first way is not the first stop position of this route: %s versus %s"), printNodeTemplate($found_nodeid,'name;ref'), printNodeTemplate($relation_route_stop_positions[0],'name;ref') ) );            
@@ -2868,7 +2869,8 @@ sub analyze_ptv2_route_relation {
                 elsif ( $found_it == 2 ) {
                     printf STDERR "2: Number of ways: %s, found_nodeid = %s, last node of first way = %s\n", scalar(@relation_route_highways), $found_nodeid, $first_way_nodes[$#first_way_nodes]  if ( $debug );
                     if ( scalar(@relation_route_highways) > 1 && $found_nodeid == $first_way_nodes[$#first_way_nodes] ) {
-                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the first way, except the last node == first node of next way: %s"), printWayTemplate($first_way_ID,'name;ref') ) );            
+                        #push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the first way, except the last node == first node of next way: %s"), printWayTemplate($first_way_ID,'name;ref') ) );            
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: consider removing the first way of the route from the relation, it is a way before the first stop position: %s"), printWayTemplate($first_way_ID,'name;ref') ) );            
                         $return_code++;
                     }
                 } else {
@@ -2940,7 +2942,8 @@ sub analyze_ptv2_route_relation {
                 if ( $found_it == 1 ) {
                     printf STDERR "1: Number of ways: %s, found_nodeid = %s, first node of last way = %s\n", scalar(@relation_route_highways), $found_nodeid, $last_way_nodes[0]  if ( $debug );
                     if ( scalar(@relation_route_highways) > 1 && $found_nodeid == $last_way_nodes[$#last_way_nodes] ) {
-                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the last way, except the first node == last node of previous way: %s"), printWayTemplate($last_way_ID,'name;ref') ) );            
+                        #push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the last way, except the first node == last node of previous way: %s"), printWayTemplate($last_way_ID,'name;ref') ) );            
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: consider removing the last way of the route from the relation, it is a way after the last stop position: %s"), printWayTemplate($last_way_ID,'name;ref') ) );            
                         $return_code++;
                     } else {
                         push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: last stop position on last way is not the last stop position of this route: %s versus %s"), printNodeTemplate($found_nodeid,'name;ref'), printNodeTemplate($relation_route_stop_positions[$#relation_route_stop_positions],'name;ref') ) );            
@@ -2950,7 +2953,8 @@ sub analyze_ptv2_route_relation {
                 elsif ( $found_it == 2 ) {
                     printf STDERR "2: Number of ways: %s, found_nodeid = %s, first node of last way = %s\n", scalar(@relation_route_highways), $found_nodeid, $last_way_nodes[0]  if ( $debug );
                     if ( scalar(@relation_route_highways) > 1 && $found_nodeid == $last_way_nodes[$#last_way_nodes] ) {
-                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the last way, except the first node == last node of previous way: %s"), printWayTemplate($last_way_ID,'name;ref') ) );            
+                        #push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the last way, except the first node == last node of previous way: %s"), printWayTemplate($last_way_ID,'name;ref') ) );            
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: consider removing the last way of the route from the relation, it is a way after the last stop position: %s"), printWayTemplate($last_way_ID,'name;ref') ) );            
                         $return_code++;
                     }
                 } else {
