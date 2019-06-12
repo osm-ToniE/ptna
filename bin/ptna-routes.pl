@@ -2358,10 +2358,10 @@ sub analyze_route_relation {
     my $ref                            = $relation_ptr->{'tag'}->{'ref'};
     my $type                           = $relation_ptr->{'tag'}->{'type'};
     my $route_type                     = $relation_ptr->{'tag'}->{$type};
-    my $member_index                   = scalar( @{$relation_ptr->{'members'}} );
-    my $relation_index                 = scalar( @{$relation_ptr->{'relation'}} );
+#    my $member_index                   = scalar( @{$relation_ptr->{'members'}} );
+#    my $relation_index                 = scalar( @{$relation_ptr->{'relation'}} );
     my $route_relation_index           = scalar( @{$relation_ptr->{'route_relation'}} );
-    my $way_index                      = scalar( @{$relation_ptr->{'way'}} );
+#    my $way_index                      = scalar( @{$relation_ptr->{'way'}} );
     my $route_highway_index            = scalar( @{$relation_ptr->{'route_highway'}} );
     my $node_index                     = scalar( @{$relation_ptr->{'node'}} );
 
@@ -2370,29 +2370,29 @@ sub analyze_route_relation {
 
     $return_code += CheckCompletenessOfData( $relation_ptr );
     
-    push( @{$relation_ptr->{'__issues__'}}, gettext("Route without Way(s)") )                    unless ( $route_highway_index );
-    push( @{$relation_ptr->{'__issues__'}}, gettext("Route with only 1 Way") )                   if     ( $route_highway_index == 1 && $route_type ne 'monorail' && $route_type ne 'ferry' && $route_type ne 'aerialway' && $route_type ne 'funicular' );
-    push( @{$relation_ptr->{'__issues__'}}, gettext("Route without Node(s)") )                   unless ( $node_index );
-    push( @{$relation_ptr->{'__issues__'}}, gettext("Route with only 1 Node") )                  if     ( $node_index == 1 );
-    push( @{$relation_ptr->{'__issues__'}}, gettext("Route with Relation(s)") )                  if     ( $route_relation_index );
 
-    if ( $relation_ptr->{'tag'}->{'public_transport:version'} ) {
-        if ( $relation_ptr->{'tag'}->{'public_transport:version'} !~ m/^[12]$/ ) {
-            push( @{$relation_ptr->{'__issues__'}}, gettext("'public_transport:version' is neither '1' nor '2'") ); 
+    if ( $relation_ptr->{'tag'}->{'public_transport:version'} && $relation_ptr->{'tag'}->{'public_transport:version'} == 2 ) {
+        if ( $relation_ptr->{'missing_way_data'} == 0 && $relation_ptr->{'missing_node_data'} == 0 ) {
+            $return_code = analyze_ptv2_route_relation( $relation_ptr );
         } else {
-            #push( @{$relation_ptr->{'__notes__'}}, sprintf("'public_transport:version' = '%s'",html_escape($relation_ptr->{'tag'}->{'public_transport:version'})) )    if ( $positive_notes );
-            
-            if ( $relation_ptr->{'tag'}->{'public_transport:version'} == 2 ) {
-                
-                if ( $relation_ptr->{'missing_way_data'} == 0 && $relation_ptr->{'missing_node_data'} == 0 ) {
-                    $return_code = analyze_ptv2_route_relation( $relation_ptr );
-                } else {
-                    push( @{$relation_ptr->{'__issues__'}}, gettext("Skipping further analysis ...") );
-                }
-            }
+            push( @{$relation_ptr->{'__issues__'}}, gettext("Skipping further analysis ...") );
         }
     } else {
-        push( @{$relation_ptr->{'__notes__'}}, gettext("'public_transport:version' is not set") )        if ( $check_version );
+        push( @{$relation_ptr->{'__issues__'}}, gettext("Route without Way(s)") )                    unless ( $route_highway_index );
+        push( @{$relation_ptr->{'__issues__'}}, gettext("Route with only 1 Way") )                   if     ( $route_highway_index == 1 && $route_type ne 'monorail' && $route_type ne 'ferry' && $route_type ne 'aerialway' && $route_type ne 'funicular' );
+        push( @{$relation_ptr->{'__issues__'}}, gettext("Route without Node(s)") )                   unless ( $node_index );
+        push( @{$relation_ptr->{'__issues__'}}, gettext("Route with only 1 Node") )                  if     ( $node_index == 1 );
+        push( @{$relation_ptr->{'__issues__'}}, gettext("Route with Relation(s)") )                  if     ( $route_relation_index );
+
+        if ( $relation_ptr->{'tag'}->{'public_transport:version'} ) {
+            if ( $relation_ptr->{'tag'}->{'public_transport:version'} ne '1' ) {
+                push( @{$relation_ptr->{'__issues__'}}, gettext("'public_transport:version' is neither '1' nor '2'") ); 
+            } else {
+                #push( @{$relation_ptr->{'__notes__'}}, sprintf("'public_transport:version' = '%s'",html_escape($relation_ptr->{'tag'}->{'public_transport:version'})) )    if ( $positive_notes );
+            }
+        } else {
+            push( @{$relation_ptr->{'__notes__'}}, gettext("'public_transport:version' is not set") )        if ( $check_version );
+        }
     }
     
     #
@@ -2428,20 +2428,44 @@ sub analyze_ptv2_route_relation {
     my $relation_ptr        = shift;
     my $return_code         = 0;
     
-    my $role_mismatch_found           = 0;
-    my %role_mismatch                 = ();
-    my @relation_route_highways       = ();
-    my @relation_route_stop_positions = ();
-    my @sorted_way_nodes              = ();
-    my @help_array                    = ();
-    my $help_string                   = '';
-    my $num_of_errors                 = 0;
-    my $access_restriction            = undef;
+    my $type                                = $relation_ptr->{'tag'}->{'type'};
+    my $route_type                          = $relation_ptr->{'tag'}->{$type};
+    my $role_mismatch_found                 = 0;
+    my %role_mismatch                       = ();
+    my @sorted_way_nodes                    = ();
+    my @help_array                          = ();
+    my $help_string                         = '';
+    my $num_of_errors                       = 0;
+    my $access_restriction                  = undef;
+
+    my $number_of_route_relation            = scalar( @{$relation_ptr->{'route_relation'}} );
+
+    my @relation_route_highways             = FindRouteHighWays( $relation_ptr );
+    my $number_of_route_highways            = scalar( @relation_route_highways );
     
-    @relation_route_highways        = FindRouteHighWays( $relation_ptr );
+    my @relation_route_stop_positions       = FindRouteStopPositions( $relation_ptr );  # stop positions are nodes only
+    my $number_of_route_stop_positions      = scalar( @relation_route_stop_positions );
+
+    my @relation_route_platform_nodes       = FindRoutePlatformNodes( $relation_ptr );
+    my @relation_route_platform_ways        = FindRoutePlatformWays( $relation_ptr );
+    my @relation_route_platform_relations   = FindRoutePlatformRelations( $relation_ptr );
+    my $number_of_route_platform_nodes      = scalar( @relation_route_platform_nodes );
+    my $number_of_route_platform_ways       = scalar( @relation_route_platform_ways );
+    my $number_of_route_platform_relations  = scalar( @relation_route_platform_relations );
+    my $number_of_route_platforms           = $number_of_route_platform_nodes + $number_of_route_platform_ways + $number_of_route_platform_relations;
     
-    @relation_route_stop_positions  = FindRouteStopPositions( $relation_ptr );
-    
+    push( @{$relation_ptr->{'__issues__'}}, gettext("Route without Way(s)") )                                               unless ( $number_of_route_highways );
+    push( @{$relation_ptr->{'__issues__'}}, gettext("Route with only 1 Way") )                                              if     ( $number_of_route_highways == 1 && $route_type ne 'monorail' && $route_type ne 'ferry' && $route_type ne 'aerialway' && $route_type ne 'funicular' );
+    if ( $number_of_route_stop_positions == 0 && $number_of_route_platforms == 0 ) {
+        push( @{$relation_ptr->{'__issues__'}}, gettext("PTv2 Route: there are no 'public_transport' = 'stop_position' and no 'public_transport' = 'platform'") );
+    } else {
+        push( @{$relation_ptr->{'__notes__'}},  gettext("PTv2 Route: there is no 'public_transport' = 'stop_position'") )       unless ( $number_of_route_stop_positions );
+        push( @{$relation_ptr->{'__issues__'}}, gettext("PTv2 Route: there is only one 'public_transport' = 'stop_position'") ) if     ( $number_of_route_stop_positions == 1 );
+        push( @{$relation_ptr->{'__notes__'}},  gettext("PTv2 Route: there is no 'public_transport' = 'platform'") )            unless ( $number_of_route_platforms );
+        push( @{$relation_ptr->{'__issues__'}}, gettext("PTv2 Route: there is only one 'public_transport' = 'platform'") )      if     ( $number_of_route_platforms == 1 );
+    }
+    push( @{$relation_ptr->{'__issues__'}}, gettext("Route with Relation(s)") )                                             if     ( $number_of_route_relation );
+
     $relation_ptr->{'non_platform_ways'}       = \@relation_route_highways;
     $relation_ptr->{'number_of_segments'}      = 0;
     $relation_ptr->{'gap_at_way'}              = ();
@@ -2874,12 +2898,16 @@ sub analyze_ptv2_route_relation {
                         $return_code++;
                     }
                 } else {
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the first way: %s"), printWayTemplate($first_way_ID,'name;ref') ) );            
-                    $return_code++;
+                    if ( $number_of_route_stop_positions > 0 ) {
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the first way: %s"), printWayTemplate($first_way_ID,'name;ref') ) );            
+                        $return_code++;
+                    }
                 }
             } else {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: first node of way is not a stop position of this route: %s"), printNodeTemplate($sorted_way_nodes[0],'name;ref') ) );            
-                $return_code++;
+                if ( $number_of_route_stop_positions > 0 ) {
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: first node of way is not a stop position of this route: %s"), printNodeTemplate($sorted_way_nodes[0],'name;ref') ) );            
+                    $return_code++;
+                }
             }
         }
         printf STDERR "Checking whether last node is member of relation_route_stop_positions: Route-Name: %s\n", $relation_ptr->{'tag'}->{'name'}      if ( $debug );
@@ -2958,12 +2986,16 @@ sub analyze_ptv2_route_relation {
                         $return_code++;
                     }
                 } else {
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the last way: %s"), printWayTemplate($last_way_ID,'name;ref') ) );            
-                    $return_code++;
+                    if ( $number_of_route_stop_positions > 0 ) {
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the last way: %s"), printWayTemplate($last_way_ID,'name;ref') ) );            
+                        $return_code++;
+                    }
                 }
             } else {
-                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: last node of way is not a stop position of this route: %s"), printNodeTemplate($sorted_way_nodes[$#sorted_way_nodes],'name;ref') ) );            
-                $return_code++;
+                if ( $number_of_route_stop_positions > 0 ) {
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: last node of way is not a stop position of this route: %s"), printNodeTemplate($sorted_way_nodes[$#sorted_way_nodes],'name;ref') ) );            
+                    $return_code++;
+                }
             }
         }
     }                                
@@ -3145,10 +3177,69 @@ sub FindRouteStopPositions {
     my @relations_route_stop_positions  = ();
 
     foreach $node_ref ( @{$relation_ptr->{'node'}} ) {
-        push( @relations_route_stop_positions, $node_ref->{'ref'} )    if ( $stop_nodes{$node_ref->{'ref'}} );
+        if ( $stop_nodes{$node_ref->{'ref'}} ) {
+            push( @relations_route_stop_positions, $node_ref->{'ref'} );
+        } elsif ( $ptv1_compatibility ne "no"  ) {
+            my $compatible_tag = PTv2CompatibleNodeStopTag( $node_ref->{'ref'}, $relation_ptr->{'tag'}->{'route'} );
+            if ( $compatible_tag ) {
+                push( @relations_route_stop_positions, $node_ref->{'ref'} );
+            }
+        }
     }
     
     return @relations_route_stop_positions;
+}
+
+
+#############################################################################################
+
+sub FindRoutePlatformNodes {
+    my $relation_ptr                    = shift;
+    my $node_ref                        = undef;
+    my @relations_route_platform_nodes  = ();
+
+    foreach $node_ref ( @{$relation_ptr->{'node'}} ) {
+        if ( $platform_nodes{$node_ref->{'ref'}} ) {
+            push( @relations_route_platform_nodes, $node_ref->{'ref'} );
+        } elsif ( $ptv1_compatibility ne "no"  ) {
+            my $compatible_tag = PTv2CompatibleNodePlatformTag( $node_ref->{'ref'}, $relation_ptr->{'tag'}->{'route'} );
+            if ( $compatible_tag ) {
+                push( @relations_route_platform_nodes, $node_ref->{'ref'} );
+            }
+        }
+    }
+    
+    return @relations_route_platform_nodes;
+}
+
+
+#############################################################################################
+
+sub FindRoutePlatformWays {
+    my $relation_ptr                    = shift;
+    my $way_ref                         = undef;
+    my @relations_route_platform_ways   = ();
+
+    foreach $way_ref ( @{$relation_ptr->{'way'}} ) {
+        push( @relations_route_platform_ways, $way_ref->{'ref'} )    if ( $platform_ways{$way_ref->{'ref'}} );
+    }
+    
+    return @relations_route_platform_ways;
+}
+
+
+#############################################################################################
+
+sub FindRoutePlatformRelations {
+    my $relation_ptr                        = shift;
+    my $rel_ref                             = undef;
+    my @relations_route_platform_relations  = ();
+
+    foreach $rel_ref ( @{$relation_ptr->{'relation'}} ) {
+        push( @relations_route_platform_relations, $rel_ref->{'ref'} )    if ( $platform_multipolygon_relations{$rel_ref->{'ref'}} );
+    }
+    
+    return @relations_route_platform_relations;
 }
 
 
@@ -3738,8 +3829,26 @@ sub isLastNodeInNodeArray {
 sub PTv2CompatibleNodeStopTag {
     my $node_id         = shift;
     my $vehicle_type    = shift;
+    my $ret_val         = '';
     
-    return '';
+    if ( $NODES{$node_id}->{'member_of_way'} ) {
+        # this node is a member of a way,  don't care at the moment which type
+        if ( !defined($vehicle_type)                    || 
+              $vehicle_type eq 'bus'                    || 
+             ($vehicle_type eq 'coach' && $allow_coach) || 
+              $vehicle_type eq 'share_taxi'             || 
+              $vehicle_type eq 'trolleybus'                ) {
+            if ( $NODES{$node_id}->{'tag'}->{'highway'} ) {
+                if ( $NODES{$node_id}->{'tag'}->{'highway'} eq 'bus_stop' ) {
+                     $ret_val = "'highway' = " . $NODES{$node_id}->{'tag'}->{'highway'} . "'";
+                }
+            }
+        }
+    }else {
+        ; # PTv2 compatible stop_position must be member of a way, higway=bus_stop can be placed next to a way though
+    }
+    
+    return $ret_val;
 }
 
 
