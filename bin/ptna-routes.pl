@@ -2259,7 +2259,6 @@ sub analyze_relation {
         }
         
         if ( $positive_notes ) {
-            my @specials = ( 'network:', 'route:', 'ref:', 'ref_', 'operator' );
             my $note_nlilf_1s_string             = gettext( "'%s' is long form" );
             my $note_nlilf_1s_option             = '--positive-notes';
             my $note_nlilf_1s_description        = '';
@@ -2273,14 +2272,16 @@ sub analyze_relation {
             
             if ( !$network_long_regex && !$network_short_regex ) {
                 # we do not filter for any 'network' values, so let's print also the value of 'network'
-                unshift( @specials, 'network' );
+                if ( $relation_ptr->{'tag'}->{'network'} ) {
+                    push( @{$relation_ptr->{'__notes__'}}, sprintf("'%s' = '%s'", 'network', html_escape($relation_ptr->{'tag'}->{'network'})) )
+                }
             }
             
-            foreach my $special ( @specials ) {
+            foreach my $special ( 'network:', 'route:', 'ref:', 'ref_', 'operator' ) {
                 foreach my $tag ( sort(keys(%{$relation_ptr->{'tag'}})) ) {
                     if ( $tag =~ m/^\Q$special\E/i ) {
                         if ( $relation_ptr->{'tag'}->{$tag} ) {
-                            if ( $tag =~ m/^network:long$/i && $network_long_regex){
+                            if ( $tag =~ m/^network:long$/i && $network_long_regex ){
                                 if ( $relation_ptr->{'tag'}->{$tag} =~ m/^$network_long_regex$/ ) {
                                     push( @{$relation_ptr->{'__notes__'}}, sprintf( $note_nlilf_1s_string, html_escape($tag) ) );
                                 } elsif ( $relation_ptr->{'tag'}->{$tag} =~ m/$network_long_regex/ ) {
