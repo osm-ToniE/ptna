@@ -236,7 +236,7 @@ my $xml_has_nodes           = 0;        # does the XML file include any nodes, t
 
 my %PT_relations_with_ref   = ();       # includes "positive" (the ones we are looking for) as well as "negative" (the other ones) route/route_master relations and "skip"ed relations (where 'network' or 'operator' does not fit)
 my %PT_relations_without_ref= ();       # includes any route/route_master relations without 'ref' tag
-my %PL_MP_relations         = ();       # includes type=multipolygon, public_transport=platform  multipolygone relations
+my %platform_multipolygon_relations         = ();       # includes type=multipolygon, public_transport=platform  multipolygone relations
 my %suspicious_relations    = ();       # strange relations with suspicious tags, a simple list of Relation-IDs, more details can befound with $RELATIONS{rel-id}
 my %route_ways              = ();       # all ways  of the XML file that build the route : equals to %WAYS - %platform_ways
 my %platform_ways           = ();       # all ways  of the XML file that are platforms (tag: public_transport=platform)
@@ -432,7 +432,7 @@ my $status                              = undef;        # can be: 'keep', 'skip'
 my $section                             = undef;        # can be: 'positive', 'negative', 'skip', 'suspicious' or something else
 my $number_of_relations                 = 0;
 my $number_of_route_relations           = 0;
-my $number_of_pl_mp_relations           = 0;
+my $number_of_platform_multipolygon_relations           = 0;
 my $number_of_positive_relations        = 0;
 my $number_of_unassigned_relations      = 0;
 my $number_of_negative_relations        = 0;
@@ -539,11 +539,8 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
                             my $ue_ref = $ref;
                             $PT_relations_with_ref{$section}->{$ue_ref}->{$type}->{$route_type}->{$relation_id} = $RELATIONS{$relation_id};
                             $relation_ptr = $RELATIONS{$relation_id};
-                            $number_of_positive_relations++     if ( $section eq "positive"     );
-                            $number_of_negative_relations++     if ( $section eq "negative"     );
                         } elsif ( $section eq 'other' || $section eq 'suspicious' ) {
                             $suspicious_relations{$relation_id} = 1;
-                            $number_of_suspicious_relations++;
                         }
                     } elsif ( $verbose ) {
                         printf STDERR "%s Section mismatch 'status' = '%s'\n", get_time(), $status;
@@ -557,7 +554,6 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
                         
                         $PT_relations_without_ref{$route_type}->{$relation_id} = $RELATIONS{$relation_id};
                         $relation_ptr = $RELATIONS{$relation_id};
-                        $number_of_relations_without_ref++;
     
                         # match_network() returns either "keep long" or "keep short" or "skip"
                         #
@@ -591,13 +587,11 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
                         }
                         if ( $status eq 'suspicious' ) {
                             $suspicious_relations{$relation_id} = 1;
-                            $number_of_suspicious_relations++;
                         }
                     } else {
                         if ( $status eq 'other' ) {
                             # at least all others (except well_known) shall also be reported as 'suspicious'
                             $suspicious_relations{$relation_id} = 1;
-                            $number_of_suspicious_relations++;
                         }
                     }
                 }
@@ -681,7 +675,6 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
             } else {
                 #printf STDERR "%s Suspicious: unset '%s' for relation id %s\n", get_time(), $type, $relation_id;
                 $suspicious_relations{$relation_id} = 1;
-                $number_of_suspicious_relations++;
             }
         } elsif ( $type eq 'multipolygon' ){
             #
@@ -689,12 +682,10 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
             #
             if ( $RELATIONS{$relation_id}->{'tag'}->{'public_transport'}               &&
                  $RELATIONS{$relation_id}->{'tag'}->{'public_transport'} eq 'platform'    ) {
-                $PL_MP_relations{$relation_id} = $RELATIONS{$relation_id};
-                $number_of_pl_mp_relations++;
+                $platform_multipolygon_relations{$relation_id} = $RELATIONS{$relation_id};
             } else {
                 #printf STDERR "%s Suspicious: wrong type=multipolygon (not public_transport=platform) for relation id %s\n", get_time(), $relation_id;
                 $suspicious_relations{$relation_id} = 1;
-                $number_of_suspicious_relations++;
             }
         } elsif ($type eq 'public_transport' ) {
             #
@@ -706,7 +697,6 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
             } else {
                 #printf STDERR "%s Suspicious: wrong type=public_transport (not public_transport=stop_area) for relation id %s\n", get_time(), $relation_id;
                 $suspicious_relations{$relation_id} = 1;
-                $number_of_suspicious_relations++;
             }
         } elsif ($type eq 'network' ) {
             #
@@ -727,7 +717,6 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
             }
             if ( !defined($well_known) ) {
                 $suspicious_relations{$relation_id} = 1;
-                $number_of_suspicious_relations++;
             }
         } else {
             #printf STDERR "%s Suspicious: unhandled type '%s' for relation id %s\n", get_time(), $type, $relation_id;
@@ -743,24 +732,27 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
             }
             if ( !defined($well_known) ) {
                 $suspicious_relations{$relation_id} = 1;
-                $number_of_suspicious_relations++;
             }
         }
     } else {
         #printf STDERR "%s Suspicious: unset 'type' for relation id %s\n", get_time(), $relation_id;
         $suspicious_relations{$relation_id} = 1;
-        $number_of_suspicious_relations++;
     }
 }   
 
+$number_of_positive_relations               = scalar( keys ( %{$PT_relations_with_ref{'positive'}} ) );
+$number_of_negative_relations               = scalar( keys ( %{$PT_relations_with_ref{'negative'}} ) );
+$number_of_suspicious_relations             = scalar( keys ( %suspicious_relations ) );
+$number_of_platform_multipolygon_relations  = scalar( keys ( %platform_multipolygon_relations ) );
+$number_of_relations_without_ref            = scalar( keys ( %PT_relations_without_ref ) );
+
 if ( $verbose ) {
-    printf STDERR "%s Relations converted: %d, route_relations: %d, platform_mp_relations: %d, positive: %d, unassigned: %d, negative: %d, w/o ref: %d, suspicious: %d\n", 
+    printf STDERR "%s Relations converted: %d, route_relations: %d, platform_mp_relations: %d, positive: %d, negative: %d, w/o ref: %d, suspicious: %d\n", 
                    get_time(),             
                    $number_of_relations, 
                    $number_of_route_relations,
-                   $number_of_pl_mp_relations,
+                   $number_of_platform_multipolygon_relations,
                    $number_of_positive_relations,
-                   $number_of_unassigned_relations,
                    $number_of_negative_relations,
                    $number_of_relations_without_ref,
                    $number_of_suspicious_relations;
@@ -2267,6 +2259,7 @@ sub analyze_relation {
         }
         
         if ( $positive_notes ) {
+            my @specials = ( 'network:', 'route:', 'ref:', 'ref_', 'operator' );
             my $note_nlilf_1s_string             = gettext( "'%s' is long form" );
             my $note_nlilf_1s_option             = '--positive-notes';
             my $note_nlilf_1s_description        = '';
@@ -2277,7 +2270,13 @@ sub analyze_relation {
             my $note_nlmlf_1s_description        = '';
             my $note_nlmlf_1s_howtofix           = '';
             my $note_nlmlf_1s_image              = '';
-             foreach my $special ( 'network:', 'route:', 'ref:', 'ref_', 'operator' ) {
+            
+            if ( !$network_long_regex && !$network_short_regex ) {
+                # we do not filter for any 'network' values, so let's print also the value of 'network'
+                unshift( @specials, 'network' );
+            }
+            
+            foreach my $special ( @specials ) {
                 foreach my $tag ( sort(keys(%{$relation_ptr->{'tag'}})) ) {
                     if ( $tag =~ m/^\Q$special\E/i ) {
                         if ( $relation_ptr->{'tag'}->{$tag} ) {
@@ -2537,7 +2536,7 @@ sub analyze_ptv2_route_relation {
                     }
                 }
             } elsif ( $item->{'type'} eq 'relation' ) {
-                if ( $PL_MP_relations{$item->{'ref'}} ) {
+                if ( $platform_multipolygon_relations{$item->{'ref'}} ) {
                     $have_seen_platform++;
                     $relation_ptr->{'wrong_sequence'}++     if ( $have_seen_highway_railway );
                     #printf STDERR "platform relation after way for %s\n", $item->{'ref'};
@@ -3045,8 +3044,8 @@ sub analyze_ptv2_route_relation {
                  $rel_ref->{'role'} =~ m/^platform_entry_only$/    ||
                  $rel_ref->{'role'} =~ m/^platform_exit_only$/        ) {
                 
-                if ( $number_of_pl_mp_relations ) {
-                    if ( $PL_MP_relations{$rel_ref->{'ref'}} ) {
+                if ( $number_of_platform_multipolygon_relations ) {
+                    if ( $platform_multipolygon_relations{$rel_ref->{'ref'}} ) {
                         #
                         # bus=yes, tram=yes or share_taxi=yes is not required on public_transport=platform
                         #
