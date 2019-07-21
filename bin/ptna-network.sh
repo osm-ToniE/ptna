@@ -323,7 +323,7 @@ then
     then 
         if [ -s $WORK_LOC/$HTML_FILE ]
         then
-            if [ $(echo $OVERPASS_QUERY | egrep -c '(data=area)|(data=\[timeout:\d+\];area)') = 1 ]
+            if [ $(echo $OVERPASS_QUERY | egrep -c '(data=area)|(data=\[timeout:[0-9]+\];area)') = 1 ]
             then
                 DIFF_LINES_BASE=8
             else
