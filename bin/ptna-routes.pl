@@ -4190,7 +4190,7 @@ sub CheckNameRefFromViaToPTV2 {
                                 $return_code++;
                             }
                         } else {
-                            push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'from' = '%s' is not part of 'name'"), html_escape($from)) );
+                            push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: from-part ('%s') of 'name' is not equal to 'from' = '%s'"), html_escape($from_in_name), html_escape($from)) );
                             $return_code++;
                         }
                     }
@@ -4207,7 +4207,7 @@ sub CheckNameRefFromViaToPTV2 {
                                 $return_code++;
                             }
                         } else {
-                            push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'to' = '%s' is not part of 'name'"), html_escape($to)) );
+                            push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: to-part ('%s') of 'name' is not equal to 'to' = '%s'"), html_escape($to_in_name), html_escape($to)) );
                             $return_code++;
                         }
                     }

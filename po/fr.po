@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 1.0.0\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2019-06-12 17:50+0200\n"
-"PO-Revision-Date: 2019-06-12 17:52+0200\n"
+"POT-Creation-Date: 2019-08-03 19:23+0200\n"
+"PO-Revision-Date: 2019-08-03 19:33+0200\n"
 "Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
 "Language-Team: French (https://www.transifex.com/jungle-bus/teams/97874/"
 "fr/)\n"
@@ -774,10 +774,10 @@ msgstr ""
 
 #: ../bin/ptna-routes.pl:4193
 #, perl-format
-msgid "PTv2 route: 'from' = '%s' is not part of 'name'"
+msgid "PTv2 route: from-part ('%s') of 'name' is not equal to 'from' = '%s'"
 msgstr ""
-"Parcours PTv2 : le nom 'name' devrait contenir l'origine de la ligne 'from' "
-"= '%s'"
+"Parcours PTv2 : l'origine de ligne précisée dans le nom ('%s') n'est pas "
+"mème que dans le tag 'from'='%s'"
 
 #: ../bin/ptna-routes.pl:4198
 msgid "PTv2 route: 'from' is not set"
@@ -792,10 +792,10 @@ msgstr ""
 
 #: ../bin/ptna-routes.pl:4210
 #, perl-format
-msgid "PTv2 route: 'to' = '%s' is not part of 'name'"
+msgid "PTv2 route: to-part ('%s') of 'name' is not equal to 'to' = '%s'"
 msgstr ""
-"Parcours PTv2 : le nom 'name' devrait contenir la destination de la ligne "
-"'to' = '%s'"
+"Parcours PTv2 : la destination de ligne précisée dans le nom ('%s') n'est "
+"pas mème que dans le tag 'to'='%s'"
 
 #: ../bin/ptna-routes.pl:4215
 msgid "PTv2 route: 'to' is not set"
@@ -1099,3 +1099,13 @@ msgstr ""
 #, perl-format
 msgid "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'"
 msgstr ""
+
+#~ msgid "PTv2 route: 'from' = '%s' is not part of 'name'"
+#~ msgstr ""
+#~ "Parcours PTv2 : le nom 'name' devrait contenir l'origine de la ligne "
+#~ "'from' = '%s'"
+
+#~ msgid "PTv2 route: 'to' = '%s' is not part of 'name'"
+#~ msgstr ""
+#~ "Parcours PTv2 : le nom 'name' devrait contenir la destination de la ligne "
+#~ "'to' = '%s'"

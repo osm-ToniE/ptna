@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 1.0.0\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2019-06-12 17:50+0200\n"
+"POT-Creation-Date: 2019-08-03 19:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -715,7 +715,7 @@ msgstr ""
 
 #: ../bin/ptna-routes.pl:4193
 #, perl-format
-msgid "PTv2 route: 'from' = '%s' is not part of 'name'"
+msgid "PTv2 route: from-part ('%s') of 'name' is not equal to 'from' = '%s'"
 msgstr ""
 
 #: ../bin/ptna-routes.pl:4198
@@ -729,7 +729,7 @@ msgstr ""
 
 #: ../bin/ptna-routes.pl:4210
 #, perl-format
-msgid "PTv2 route: 'to' = '%s' is not part of 'name'"
+msgid "PTv2 route: to-part ('%s') of 'name' is not equal to 'to' = '%s'"
 msgstr ""
 
 #: ../bin/ptna-routes.pl:4215

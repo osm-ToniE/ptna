@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 1.0.0\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2019-06-12 17:50+0200\n"
-"PO-Revision-Date: 2019-06-12 17:48+0200\n"
+"POT-Creation-Date: 2019-08-03 19:23+0200\n"
+"PO-Revision-Date: 2019-08-03 19:24+0200\n"
 "Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
 "Language-Team: German (https://www.transifex.com/jungle-bus/teams/97874/"
 "de/)\n"
@@ -809,8 +809,10 @@ msgstr ""
 
 #: ../bin/ptna-routes.pl:4193
 #, perl-format
-msgid "PTv2 route: 'from' = '%s' is not part of 'name'"
-msgstr "PTv2 Route: 'from' = '%s' ist nicht Teil von 'name'"
+msgid "PTv2 route: from-part ('%s') of 'name' is not equal to 'from' = '%s'"
+msgstr ""
+"PTv2 Route: Der 'Von'-Anteil ('%s') von 'name' ist nicht identisch zu 'from' "
+"= '%s'"
 
 #: ../bin/ptna-routes.pl:4198
 msgid "PTv2 route: 'from' is not set"
@@ -825,8 +827,10 @@ msgstr ""
 
 #: ../bin/ptna-routes.pl:4210
 #, perl-format
-msgid "PTv2 route: 'to' = '%s' is not part of 'name'"
-msgstr "PTv2 Route: 'to' = '%s' ist nicht Teil von 'name'"
+msgid "PTv2 route: to-part ('%s') of 'name' is not equal to 'to' = '%s'"
+msgstr ""
+"PTv2 Route: Der 'Nach'-Anteil ('%s') von 'name' ist nicht identisch zu 'to' "
+"= '%s'"
 
 #: ../bin/ptna-routes.pl:4215
 msgid "PTv2 route: 'to' is not set"
@@ -1144,6 +1148,12 @@ msgid "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'"
 msgstr ""
 "Fahrzeugtyp ist nicht definiert. Zeile %s der Routen-Daten. Inhalt der "
 "Zeile: '%s'"
+
+#~ msgid "PTv2 route: 'from' = '%s' is not part of 'name'"
+#~ msgstr "PTv2 Route: 'from' = '%s' ist nicht Teil von 'name'"
+
+#~ msgid "PTv2 route: 'to' = '%s' is not part of 'name'"
+#~ msgstr "PTv2 Route: 'to' = '%s' ist nicht Teil von 'name'"
 
 #~ msgid ""
 #~ "PTv2 route: there is no stop position of this route on the first way, "
