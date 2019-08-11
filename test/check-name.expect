@@ -213,7 +213,7 @@
             </thead>
             <tbody>
                 <tr data-info="???" data-ref="104" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=104&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">104</a></td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="-107271" data-ref="104" class="line"><td class="name">Bus 104: Stop 2 =&gt; Stop 5</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107271</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'<br>PTv2 route: 'from' = 'Stop 1' is not part of 'name'<br>PTv2 route: 'to' = 'Stop 4' is not part of 'name'</td></tr>
+                <tr data-info="-107271" data-ref="104" class="line"><td class="name">Bus 104: Stop 2 =&gt; Stop 5</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107271</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'<br>PTv2 route: from-part ('Stop 2') of 'name' is not equal to 'from' = 'Stop 1'<br>PTv2 route: to-part ('Stop 5') of 'name' is not equal to 'to' = 'Stop 4'</td></tr>
             </tbody>
         </table>
 

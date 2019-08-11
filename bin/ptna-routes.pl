@@ -4076,7 +4076,7 @@ sub noAccessOnNode {
             }
         }
 
-        if ( $node_tag_ref->{'barrier'} eq 'entrance' ) {
+        if ( $node_tag_ref->{'barrier'} eq 'entrance' || $node_tag_ref->{'barrier'} eq 'kerb' ) {
             printf STDERR "noAccessOnNode() : access for node %d (barrier=%s with implied access=yes)\n", $node_id, $node_tag_ref->{'barrier'}       if ( $debug );
             return '';
         } else {
