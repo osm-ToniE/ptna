@@ -83,16 +83,16 @@
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
-                <tr data-info="???" data-ref="1" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=1&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">1</a></td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="-107236" data-ref="1" class="line"><td class="name">Bus 1: Stop 1 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107236</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'</td></tr>
-                <tr data-info="???" data-ref="2" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=2&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">2</a></td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="-107237" data-ref="2" class="line"><td class="name">Bus 2: Stop 1 =&gt; Stop 2 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107237</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'</td></tr>
-                <tr data-info="???" data-ref="3" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=3&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">3</a></td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="-107238" data-ref="3" class="line"><td class="name">Bus 3: Stop 1 =&gt; Stop 2 =&gt; Stop 3 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107238</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'</td></tr>
-                <tr data-info="???" data-ref="4" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=4&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">4</a></td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="-107239" data-ref="4" class="line"><td class="name">Bus 4: Stop 1 =&gt; Stop 2 =&gt; Stop 3 =&gt; Stop 4 =&gt; Stop 5</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107239</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'</td></tr>
-                <tr data-info="???" data-ref="5" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=5&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">5</a></td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="-107240" data-ref="5" class="line"><td class="name">Bus 5: Stop 1 =&gt; Stop 2 =&gt; Stop 3 =&gt; Stop 4 =&gt; Stop 5 =&gt; Stop 6</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107240</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'</td></tr>
+                <tr id="bus_1" data-info="???" data-ref="1" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=1&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">1</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr id="-107236" data-info="-107236" data-ref="1" class="line"><td class="name">Bus 1: Stop 1 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107236</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'</td></tr>
+                <tr id="bus_2" data-info="???" data-ref="2" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=2&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">2</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr id="-107237" data-info="-107237" data-ref="2" class="line"><td class="name">Bus 2: Stop 1 =&gt; Stop 2 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107237</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'</td></tr>
+                <tr id="bus_3" data-info="???" data-ref="3" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=3&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">3</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr id="-107238" data-info="-107238" data-ref="3" class="line"><td class="name">Bus 3: Stop 1 =&gt; Stop 2 =&gt; Stop 3 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107238</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'</td></tr>
+                <tr id="bus_4" data-info="???" data-ref="4" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=4&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">4</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr id="-107239" data-info="-107239" data-ref="4" class="line"><td class="name">Bus 4: Stop 1 =&gt; Stop 2 =&gt; Stop 3 =&gt; Stop 4 =&gt; Stop 5</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107239</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'</td></tr>
+                <tr id="bus_5" data-info="???" data-ref="5" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=5&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">5</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr id="-107240" data-info="-107240" data-ref="5" class="line"><td class="name">Bus 5: Stop 1 =&gt; Stop 2 =&gt; Stop 3 =&gt; Stop 4 =&gt; Stop 5 =&gt; Stop 6</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107240</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'</td></tr>
             </tbody>
         </table>
 
@@ -109,8 +109,8 @@
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
-                <tr data-info="???" data-ref="11/21" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=11/21&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">11/21</a></td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="-107244" data-ref="11/21" class="line"><td class="name">Bus RVO 11/LAVV 21: Stop 1 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107244</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'<br>'ref:LAVV' = '21'<br>'ref:RVO' = '11'</td></tr>
+                <tr id="bus_11_21" data-info="???" data-ref="11/21" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=11/21&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">11/21</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr id="-107244" data-info="-107244" data-ref="11/21" class="line"><td class="name">Bus RVO 11/LAVV 21: Stop 1 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107244</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'<br>'ref:LAVV' = '21'<br>'ref:RVO' = '11'</td></tr>
             </tbody>
         </table>
 
@@ -126,8 +126,8 @@
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
-                <tr data-info="???" data-ref="12/22" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=12/22&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">12/22</a></td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="-107242" data-ref="12/22" class="line"><td class="name">Bus RVO 12/LAVV 22 (012,015,0134): Stop 1 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107242</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'<br>'ref:LAVV' = '22'<br>'ref:RVO' = '12'<br>'ref_trips' = '012;015;0134'</td></tr>
+                <tr id="bus_12_22" data-info="???" data-ref="12/22" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=12/22&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">12/22</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr id="-107242" data-info="-107242" data-ref="12/22" class="line"><td class="name">Bus RVO 12/LAVV 22 (012,015,0134): Stop 1 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107242</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'<br>'ref:LAVV' = '22'<br>'ref:RVO' = '12'<br>'ref_trips' = '012;015;0134'</td></tr>
             </tbody>
         </table>
 
@@ -140,12 +140,12 @@
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
-                <tr data-info="???" data-ref="X1" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=X1&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">X1</a></td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="-107233" data-ref="X1" class="line"><td class="name">Bus X1: Stop 1 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107233</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'</td></tr>
-                <tr data-info="???" data-ref="X2" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=X2&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">X2</a></td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="-107279" data-ref="X2" class="line"><td class="name">Bus X2: Stop 1 → Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107279</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'</td></tr>
-                <tr data-info="???" data-ref="X3" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=X3&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">X3</a></td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="-107281" data-ref="X3" class="line"><td class="name">Bus X3: Stop 1 ⇒ Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107281</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'</td></tr>
+                <tr id="bus_X1" data-info="???" data-ref="X1" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=X1&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">X1</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr id="-107233" data-info="-107233" data-ref="X1" class="line"><td class="name">Bus X1: Stop 1 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107233</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'</td></tr>
+                <tr id="bus_X2" data-info="???" data-ref="X2" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=X2&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">X2</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr id="-107279" data-info="-107279" data-ref="X2" class="line"><td class="name">Bus X2: Stop 1 → Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107279</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'</td></tr>
+                <tr id="bus_X3" data-info="???" data-ref="X3" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=X3&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">X3</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr id="-107281" data-info="-107281" data-ref="X3" class="line"><td class="name">Bus X3: Stop 1 ⇒ Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107281</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'</td></tr>
             </tbody>
         </table>
 
@@ -163,8 +163,8 @@
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
-                <tr data-info="???" data-ref="101" class="sketchline"><td class="sketch">101</td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="-107234" data-ref="101" class="line"><td class="name"></td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107234</td><td class="PTv">2</td><td class="issues">'name' is not set<br>'network' is not set</td><td class="notes"></td></tr>
+                <tr id="bus_101" data-info="???" data-ref="101" class="sketchline"><td class="sketch">101</td><td class="csvinfo" colspan="5"></td></tr>
+                <tr id="-107234" data-info="-107234" data-ref="101" class="line"><td class="name"></td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107234</td><td class="PTv">2</td><td class="issues">'name' is not set<br>'network' is not set</td><td class="notes"></td></tr>
             </tbody>
         </table>
 
@@ -180,8 +180,8 @@
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
-                <tr data-info="???" data-ref="102" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=102&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">102</a></td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="-107232" data-ref="102" class="line"><td class="name">Bus 102</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107232</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'<br>PTv2 route: 'name' should be similar to the form '... ref ...: from => to'</td></tr>
+                <tr id="bus_102" data-info="???" data-ref="102" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=102&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">102</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr id="-107232" data-info="-107232" data-ref="102" class="line"><td class="name">Bus 102</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107232</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'<br>PTv2 route: 'name' should be similar to the form '... ref ...: from => to'</td></tr>
             </tbody>
         </table>
 
@@ -197,8 +197,8 @@
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
-                <tr data-info="???" data-ref="103" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=103&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">103</a></td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="-107246" data-ref="103" class="line"><td class="name">Bus 100+3: Stop 1 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107246</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'<br>PTv2 route: 'ref' is not part of 'name'</td></tr>
+                <tr id="bus_103" data-info="???" data-ref="103" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=103&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">103</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr id="-107246" data-info="-107246" data-ref="103" class="line"><td class="name">Bus 100+3: Stop 1 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107246</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'<br>PTv2 route: 'ref' is not part of 'name'</td></tr>
             </tbody>
         </table>
 
@@ -214,8 +214,8 @@
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
-                <tr data-info="???" data-ref="104" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=104&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">104</a></td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="-107271" data-ref="104" class="line"><td class="name">Bus 104: Stop 2 =&gt; Stop 5</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107271</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'<br>PTv2 route: from-part ('Stop 2') of 'name' is not part of 'from' = 'Stop 1'<br>PTv2 route: to-part ('Stop 5') of 'name' is not part of 'to' = 'Stop 4'</td></tr>
+                <tr id="bus_104" data-info="???" data-ref="104" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=104&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">104</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr id="-107271" data-info="-107271" data-ref="104" class="line"><td class="name">Bus 104: Stop 2 =&gt; Stop 5</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107271</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'<br>PTv2 route: from-part ('Stop 2') of 'name' is not part of 'from' = 'Stop 1'<br>PTv2 route: to-part ('Stop 5') of 'name' is not part of 'to' = 'Stop 4'</td></tr>
             </tbody>
         </table>
 
@@ -232,8 +232,8 @@
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
-                <tr data-info="???" data-ref="111/121" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=111/121&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">111/121</a></td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="-107243" data-ref="111/121" class="line"><td class="name">Bus RVO 111/LAVV 121: Stop 1 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107243</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'<br>'ref:RVO' = '111'</td></tr>
+                <tr id="bus_111_121" data-info="???" data-ref="111/121" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=111/121&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">111/121</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr id="-107243" data-info="-107243" data-ref="111/121" class="line"><td class="name">Bus RVO 111/LAVV 121: Stop 1 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107243</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'<br>'ref:RVO' = '111'</td></tr>
             </tbody>
         </table>
 
@@ -249,8 +249,8 @@
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
-                <tr data-info="???" data-ref="112/122" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=112/122&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">112/122</a></td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="-107241" data-ref="112/122" class="line"><td class="name">Bus RVO 112: Stop 1 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107241</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'<br>'ref:LAVV' = '122'<br>'ref:RVO' = '112'<br>PTv2 route: 'LAVV 122' is not part of 'name' (derived from 'ref:LAVV' = '122')</td></tr>
+                <tr id="bus_112_122" data-info="???" data-ref="112/122" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=112/122&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">112/122</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr id="-107241" data-info="-107241" data-ref="112/122" class="line"><td class="name">Bus RVO 112: Stop 1 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107241</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'<br>'ref:LAVV' = '122'<br>'ref:RVO' = '112'<br>PTv2 route: 'LAVV 122' is not part of 'name' (derived from 'ref:LAVV' = '122')</td></tr>
             </tbody>
         </table>
 
@@ -262,8 +262,8 @@
                 <tr class="tableheaderrow"><th class="relation">Relation (id=)</th><th class="type">Type (type=)</th><th class="route_type">Vehicle (route(_master)=)</th><th class="name">Name (name=)</th><th class="network">Network (network=)</th><th class="operator">Operator (operator=)</th><th class="from">From (from=)</th><th class="via">Via (via=)</th><th class="to">To (to=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
-                <tr data-info="-107235" data-ref="???" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107235</td><td class="type">route</td><td class="route_type">bus</td><td class="name"></td><td class="network"></td><td class="operator"></td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv">2</td><td class="issues">'ref' is not set<br>'name' is not set<br>'network' is not set</td><td class="notes"></td></tr>
-                <tr data-info="-107286" data-ref="???" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107286</td><td class="type">route</td><td class="route_type">bus</td><td class="name">Bus X: Stop 1 =&gt; Stop 4</td><td class="network"></td><td class="operator"></td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv">2</td><td class="issues">'ref' is not set<br>'network' is not set</td><td class="notes"></td></tr>
+                <tr id="-107235" data-info="-107235" data-ref="???" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107235</td><td class="type">route</td><td class="route_type">bus</td><td class="name"></td><td class="network"></td><td class="operator"></td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv">2</td><td class="issues">'ref' is not set<br>'name' is not set<br>'network' is not set</td><td class="notes"></td></tr>
+                <tr id="-107286" data-info="-107286" data-ref="???" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107286</td><td class="type">route</td><td class="route_type">bus</td><td class="name">Bus X: Stop 1 =&gt; Stop 4</td><td class="network"></td><td class="operator"></td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv">2</td><td class="issues">'ref' is not set<br>'network' is not set</td><td class="notes"></td></tr>
             </tbody>
         </table>
 

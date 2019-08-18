@@ -960,6 +960,7 @@ if ( $routes_file ) {
                 # we do not have a line which fits to the requested 'ref' and 'route_type' combination
                 #
                 printTableSubHeader( 'ref-or-list'   => $entryref->{'ref-or-list'},
+                                     'pt_type'       => $entryref->{'route'},
                                      'Comment'       => $entryref->{'comment'},
                                      'From'          => $entryref->{'from'},
                                      'From-List'     => $entryref->{'from-list'},
@@ -4625,6 +4626,7 @@ my @table_columns               = ();
 my @html_header_anchors         = ();
 my @html_header_anchor_numbers  = (0,0,0,0,0,0,0);
 my $printText_buffer            = '';
+my %id_markers                  = ();                   # printTableSubHeader() auto-generates id='' strings based on 'route_type' and 'ref'; they may appear multiple times
     
 
 
@@ -5150,17 +5152,18 @@ sub printTableHeader {
 #############################################################################################
 
 sub printTableSubHeader {
-    my %hash            = ( @_ );
-    my $ref             = $hash{'ref'}           || '';
-    my $ref_or_list     = $hash{'ref-or-list'};
-    my $network         = $hash{'network'}       || '';
-    my $pt_type         = $hash{'pt_type'}       || '';
-    my $colour          = $hash{'colour'}        || '';
-    my $ref_text        = undef;
-    my $csv_text        = '';       # some information comming from the CSV input file
-    my $info            = '';
-    my @ref_or_array       = ();
-    my $ref_or_list_text   = '';
+    my %hash                = ( @_ );
+    my $ref                 = $hash{'ref'}           || '';
+    my $ref_or_list         = $hash{'ref-or-list'};
+    my $network             = $hash{'network'}       || '';
+    my $pt_type             = $hash{'pt_type'}       || '';
+    my $colour              = $hash{'colour'}        || '';
+    my $ref_text            = undef;
+    my $csv_text            = '';       # some information comming from the CSV input file
+    my $info                = '';
+    my @ref_or_array        = ();
+    my $ref_or_list_text    = '';
+    my $id_string           = '';
 
     if ( $ref_or_list ) {
         @ref_or_array = @{$ref_or_list};
@@ -5176,6 +5179,18 @@ sub printTableSubHeader {
         $ref_text = join(' ', @ref_or_array );
     }
 
+    if ( scalar @ref_or_array && $pt_type ) {
+        $id_string = sprintf( "%s_%s", $pt_type, join('_', @ref_or_array ) );
+        $id_string =~ s/[^0-9A-Za-z_.-]/_/g;                                    # other characters are not allowed in 'id'
+        if ( $id_markers{$id_string} ) {                                        # if the same combination appears more than one, add a number as suffix (e.g. "Bus A" of VMS in Saxony, Germany
+            $id_markers{$id_string}++;
+            $id_string = sprintf( "id=\"%s-%d\" ", $id_string, $id_markers{$id_string} );
+        } else {
+            $id_markers{$id_string} = 1;
+            $id_string = sprintf( "id=\"%s\" ", $id_string );
+        }
+    }
+    
     if ( $hash{'Comment'}  ) {
         $csv_text .= sprintf( "%s: %s; ", ( $column_name{'Comment'}  ? $column_name{'Comment'}  : 'Comment' ),  html_escape($hash{'Comment'})  );
         $csv_text =~ s|!([^!]+)!|<span class=\"attention\">$1</span>|;
@@ -5189,7 +5204,7 @@ sub printTableSubHeader {
     $info =~ s/\"/_/g;
 
     if ( $no_of_columns > 1 && $ref_or_list_text && $ref_text ) {
-        push( @HTML_main, sprintf( "%16s<tr data-info=\"%s\" data-ref=\"%s\" class=\"sketchline\"><td class=\"sketch\">%s</td><td class=\"csvinfo\" colspan=\"%d\">%s</td></tr>\n", ' ', $info, $ref_or_list_text, $ref_text, $no_of_columns-1, $csv_text ) );
+        push( @HTML_main, sprintf( "%16s<tr %sdata-info=\"%s\" data-ref=\"%s\" class=\"sketchline\"><td class=\"sketch\">%s</td><td class=\"csvinfo\" colspan=\"%d\">%s</td></tr>\n", ' ', $id_string, $info, $ref_or_list_text, $ref_text, $no_of_columns-1, $csv_text ) );
     }
 }
 
@@ -5197,15 +5212,27 @@ sub printTableSubHeader {
 #############################################################################################
 
 sub printTableLine {
-    my %hash    = ( @_ );
-    my $val     = undef;
-    my $i       = 0;
-    my $ref     = $hash{'ref'} || '???';
-    my $info    = $hash{'relation'} ? $hash{'relation'}       : ( $hash{'network'} ? $hash{'network'} : $ref);
-    my $andmore = $hash{'and more'} ? ' ' . $hash{'and more'} : '';
+    my %hash        = ( @_ );
+    my $val         = undef;
+    my $i           = 0;
+    my $ref         = $hash{'ref'} || '???';
+    my $info        = $hash{'relation'} ? $hash{'relation'}       : ( $hash{'network'} ? $hash{'network'} : $ref);
+    my $andmore     = $hash{'and more'} ? ' ' . $hash{'and more'} : '';
+    my $id_string   = '';
+
+    if ( $hash{'relation'} ) {
+        $id_string = $hash{'relation'};
+        $id_string =~ s/[^0-9A-Za-z_.-]/_/g;                                    # other characters are not allowed in 'id'
+        if ( $id_markers{$id_string} ) {                                        # don't print id="<relation-id>" a second time, once is enough
+            $id_string = '';
+        } else {
+            $id_markers{$id_string} = 1;
+            $id_string = sprintf( "id=\"%s\" ", $id_string );
+        }
+    }
 
     $info =~ s/\"/_/g;
-    push( @HTML_main, sprintf( "%16s<tr data-info=\"%s\" data-ref=\"%s\" class=\"line\">", ' ', $info, $ref ) );
+    push( @HTML_main, sprintf( "%16s<tr %sdata-info=\"%s\" data-ref=\"%s\" class=\"line\">", ' ', $id_string, $info, $ref ) );
     for ( $i = 0; $i < $no_of_columns; $i++ ) {
         $val =  $hash{$columns[$i]} || '';
         if ( $columns[$i] eq "relation" ) {
