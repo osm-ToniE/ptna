@@ -452,4 +452,55 @@
     <tag k='route' v='bus' />
     <tag k='type' v='route' />
   </relation>
+  <relation id='-107297' action='modify'>
+    <member type='node' ref='-107199' role='stop' />
+    <member type='node' ref='-107207' role='platform' />
+    <member type='node' ref='-107201' role='stop' />
+    <member type='node' ref='-107209' role='platform' />
+    <member type='node' ref='-107205' role='stop' />
+    <member type='node' ref='-107213' role='platform' />
+    <member type='way' ref='-107224' role='' />
+    <member type='way' ref='-107229' role='' />
+    <tag k='from' v='Stop 1' />
+    <tag k='name' v='Bus Y: Stop 1 =&gt; Stop 4' />
+    <tag k='network' v='Network' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='Y' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='Stop 4' />
+    <tag k='type' v='route' />
+    <tag k='via' v='Stop 2' />
+  </relation>
+  <relation id='-107300' action='modify'>
+    <member type='node' ref='-107199' role='stop' />
+    <member type='node' ref='-107207' role='platform' />
+    <member type='node' ref='-107201' role='stop' />
+    <member type='node' ref='-107209' role='platform' />
+    <member type='node' ref='-107203' role='stop' />
+    <member type='node' ref='-107211' role='platform' />
+    <member type='node' ref='-107205' role='stop' />
+    <member type='node' ref='-107213' role='platform' />
+    <member type='way' ref='-107224' role='' />
+    <member type='way' ref='-107225' role='' />
+    <member type='way' ref='-107226' role='' />
+    <tag k='from' v='Stop 1' />
+    <tag k='name' v='Bus Y: Stop 1 =&gt; Stop 4' />
+    <tag k='network' v='Network' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='Y' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='Stop 4' />
+    <tag k='type' v='route' />
+    <tag k='via' v='Stop 2;Stop 3' />
+  </relation>
+  <relation id='-107403' action='modify'>
+    <member type='relation' ref='-107297' role='' />
+    <member type='relation' ref='-107300' role='' />
+    <tag k='name' v='Bus Y' />
+    <tag k='network' v='Network' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='Y' />
+    <tag k='route_master' v='bus' />
+    <tag k='type' v='route_master' />
+  </relation>
 </osm>

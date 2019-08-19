@@ -337,18 +337,18 @@ my %colour_table            = ( 'black'         => '#000000',
 #############################################################################################
 
 if ( $routes_file ) {
-    
+
     printf STDERR "%s Reading %s\n", get_time(), decode('utf8', $routes_file )                  if ( $verbose );
-    
-    my $ReadError = RoutesList::ReadRoutes( 'file'                   => $routes_file, 
-                                            'analyze'                => $multiple_ref_type_entries, 
+
+    my $ReadError = RoutesList::ReadRoutes( 'file'                   => $routes_file,
+                                            'analyze'                => $multiple_ref_type_entries,
                                             'csv-separator'          => $csv_separator,
                                             'or-separator'           => $or_separator,
                                             'supported_route_types'  => \@supported_route_types,
-                                            'verbose'                => $verbose, 
+                                            'verbose'                => $verbose,
                                             'debug'                  => $debug
                                           );
-    
+
     if ( $ReadError ) {
         printf STDERR "%s %s\n", get_time(), $ReadError;
     } else {
@@ -358,7 +358,7 @@ if ( $routes_file ) {
 
 
 #############################################################################################
-# 
+#
 # secondly read the XML file with the OSM information (might take a while)
 #
 #############################################################################################
@@ -368,7 +368,7 @@ if ( $osm_xml_file ) {
     printf STDERR "%s Reading %s\n", get_time(), decode('utf8', $osm_xml_file )                                         if ( $verbose );
 
     my $ret = parse( 'data' => $osm_xml_file, 'debug' => $debug, 'verbose' => $verbose );
-    
+
     if ( $ret ) {
         printf STDERR "%s %s read\n", get_time(), decode('utf8', $osm_xml_file )                                        if ( $verbose );
         $xml_has_meta       = 1  if ( scalar(keys(%META)) );
@@ -382,7 +382,7 @@ if ( $osm_xml_file ) {
 
 if ( $xml_has_relations == 0 ) {
     printf STDERR "No relations found in XML file %s - exiting\n", decode('utf8', $osm_xml_file );
-    
+
     exit 1;
 }
 
@@ -454,9 +454,9 @@ my $number_of_unused_networks           = 0;
 printf STDERR "%s Converting relations\n", get_time()       if ( $verbose );
 
 foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
-    
+
     $number_of_relations++;
-    
+
     $ref        = $RELATIONS{$relation_id}->{'tag'}->{'ref'};
     $type       = $RELATIONS{$relation_id}->{'tag'}->{'type'};
 
@@ -465,18 +465,18 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
         # first analyze route_master and route relations
         #
         if ( $type eq 'route_master' || $type eq 'route' ) {
-    
+
             $route_type = $RELATIONS{$relation_id}->{'tag'}->{$RELATIONS{$relation_id}->{'tag'}->{'type'}};
-    
-            if ( $route_type ) {    
-            
+
+            if ( $route_type ) {
+
                 $number_of_route_relations++;
-        
+
                 $relation_ptr = undef;
-                
+
                 if ( $ref ) {
                     $status = 'keep';
-            
+
                     # match_route_type() returns either "keep" or "suspicious" or "skip"
                     # is this route_type of general interest? 'hiking', 'bicycle', ... routes are not of interest here
                     # "keep"        route_type matches exactly the supported route types            m/^'type'$/
@@ -486,16 +486,16 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
                     #
                     if ( $status =~ m/keep/ ) { $status = match_route_type( $route_type ); }
                     printf STDERR "%-15s: ref=%s\ttype=%s\troute_type=%s\tRelation: %d\n", $status, $ref, $type, $route_type, $relation_id   if ( $debug );
-                    
+
                     # match_network() returns either "keep long" or "keep short" or "skip"
                     #
                     if ( $status =~ m/keep/ ) { $status = match_network(  $RELATIONS{$relation_id}->{'tag'}->{'network'} ); }
-                    
+
                     if ( $status =~ m/keep/ ) {
                         # match_operator() returns either "keep" or "skip"
                         #
                         $status = match_operator( $RELATIONS{$relation_id}->{'tag'}->{'operator'} );
-                                
+
                         if ( $status =~ m/keep/ ) {
                             if ( $RELATIONS{$relation_id}->{'tag'}->{'network'} ) {
                                 $used_networks{$RELATIONS{$relation_id}->{'tag'}->{'network'}}->{$relation_id} = 1;
@@ -519,21 +519,21 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
                             $unused_networks{'__unset_network__'}->{$relation_id} = 1;
                         }
                     }
-                    
+
                     # match_ref_and_pt_type() returns "keep positive", "keep negative", "skip"
                     # "keep positive"   if $ref and $type match the %ref_type_of_interest (list of lines from CSV file)
                     # "keep negative"   if $ref and $type do not match
                     # "skip"            if $ref and $type are not set
                     #
                     if ( $status =~ m/keep/ ) { $status = match_ref_and_pt_type( $ref, $route_type ); }
-                                
+
                     printf STDERR "%-15s: ref=%s\ttype=%s\troute_type=%s\tnetwork=%s\toperator=%s\tRelation: %d\n", $status, $ref, $type, $route_type, $RELATIONS{$relation_id}->{'tag'}->{'network'}, $RELATIONS{$relation_id}->{'tag'}->{'operator'}, $relation_id   if ( $debug );
-                    
+
                     $section = undef;
                     if ( $status =~ m/(positive|negative|skip|other|suspicious|well_known)/ ) {
                         $section= $1;
                     }
-                    
+
                     if ( $section ) {
                         if ( $section eq 'positive' || $section eq 'negative' ) {
                             my $ue_ref = $ref;
@@ -548,13 +548,13 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
                 } else {
                     $status = match_route_type( $route_type );
                     printf STDERR "%-15s: ref=undef\ttype=%s\troute_type=%s\tRelation: %d\n", $status, $type, $route_type, $relation_id   if ( $debug );
-                    
+
                     if ( $status eq 'keep' || $status eq 'suspicious' ) {
                         # only supported route types or their typos must have 'ref' set
-                        
+
                         $PT_relations_without_ref{$route_type}->{$relation_id} = $RELATIONS{$relation_id};
                         $relation_ptr = $RELATIONS{$relation_id};
-    
+
                         # match_network() returns either "keep long" or "keep short" or "skip"
                         #
                         my $status = match_network( $RELATIONS{$relation_id}->{'tag'}->{'network'} );
@@ -562,7 +562,7 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
                             # match_operator() returns either "keep" or "skip"
                             #
                             $status = match_operator( $RELATIONS{$relation_id}->{'tag'}->{'operator'} );
-                                    
+
                             if ( $status =~ m/keep/ ) {
                                 if ( $RELATIONS{$relation_id}->{'tag'}->{'network'} ) {
                                     $used_networks{$RELATIONS{$relation_id}->{'tag'}->{'network'}}->{$relation_id} = 1;
@@ -595,9 +595,9 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
                         }
                     }
                 }
-                
+
                 if ( $relation_ptr ) {
-        
+
                     @{$relation_ptr->{'relation'}}              = ();
                     @{$relation_ptr->{'route_master_relation'}} = ();
                     @{$relation_ptr->{'route_relation'}}        = ();
@@ -653,7 +653,7 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
                                 ${$relation_ptr->{'node'}}[$node_index]->{'role'} = $member->{'role'};
                                 $node_index++;
                             }
-                            
+
                             if ( $member->{'role'} ) {
                                 if ( $member->{'role'} =~ m/^platform/ ) {
                                     ${$relation_ptr->{'role_platform'}}[$role_platform_index]->{'type'} = $member->{'type'};
@@ -738,7 +738,7 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
         #printf STDERR "%s Suspicious: unset 'type' for relation id %s\n", get_time(), $relation_id;
         $suspicious_relations{$relation_id} = 1;
     }
-}   
+}
 
 $number_of_positive_relations               = scalar( keys ( %{$PT_relations_with_ref{'positive'}} ) );
 $number_of_negative_relations               = scalar( keys ( %{$PT_relations_with_ref{'negative'}} ) );
@@ -747,9 +747,9 @@ $number_of_platform_multipolygon_relations  = scalar( keys ( %platform_multipoly
 $number_of_relations_without_ref            = scalar( keys ( %PT_relations_without_ref ) );
 
 if ( $verbose ) {
-    printf STDERR "%s Relations converted: %d, route_relations: %d, platform_mp_relations: %d, positive: %d, negative: %d, w/o ref: %d, suspicious: %d\n", 
-                   get_time(),             
-                   $number_of_relations, 
+    printf STDERR "%s Relations converted: %d, route_relations: %d, platform_mp_relations: %d, positive: %d, negative: %d, w/o ref: %d, suspicious: %d\n",
+                   get_time(),
+                   $number_of_relations,
                    $number_of_route_relations,
                    $number_of_platform_multipolygon_relations,
                    $number_of_positive_relations,
@@ -767,28 +767,28 @@ if ( $verbose ) {
 
 if ( $xml_has_ways ) {
     printf STDERR "%s Converting ways\n", get_time()       if ( $verbose );
-    
+
     foreach $way_id ( keys ( %WAYS ) ) {
-        
+
         $number_of_ways++;
-        
+
         $WAYS{$way_id}->{'first_node'} = ${$WAYS{$way_id}->{'chain'}}[0];
         $WAYS{$way_id}->{'last_node'}  = ${$WAYS{$way_id}->{'chain'}}[$#{$WAYS{$way_id}->{'chain'}}];
-        
+
         #
         # lets categorize the way as member or route or platform or ...
         #
-        if ( $WAYS{$way_id}->{'tag'}->{'public_transport'}               && 
+        if ( $WAYS{$way_id}->{'tag'}->{'public_transport'}               &&
              $WAYS{$way_id}->{'tag'}->{'public_transport'} eq 'platform'    ) {
             $platform_ways{$way_id} = $WAYS{$way_id};
             $number_of_platformways++;
             $platform_ways{$way_id}->{'is_area'}   = 1 if ( $platform_ways{$way_id}->{'tag'}->{'area'} && $platform_ways{$way_id}->{'tag'}->{'area'} eq 'yes' );
             #printf STDERR "WAYS{%s} is a platform\n", $way_id;
-        } else { #if ( ($WAYS{$way_id}->{'tag'}->{'highway'}                && 
+        } else { #if ( ($WAYS{$way_id}->{'tag'}->{'highway'}                &&
                #  $WAYS{$way_id}->{'tag'}->{'highway'} ne 'platform')                               ||
-               # ($WAYS{$way_id}->{'tag'}->{'railway'}                && 
+               # ($WAYS{$way_id}->{'tag'}->{'railway'}                &&
                #  $WAYS{$way_id}->{'tag'}->{'railway'} =~ m/^rail|tram|subway|construction|razed$/) ||
-               # ($WAYS{$way_id}->{'tag'}->{'route'}                  && 
+               # ($WAYS{$way_id}->{'tag'}->{'route'}                  &&
                #  $WAYS{$way_id}->{'tag'}->{'route'} =~ m/^ferry$/)                                     ) {
             $route_ways{$way_id} = $WAYS{$way_id};
             $number_of_routeways++;
@@ -797,12 +797,12 @@ if ( $xml_has_ways ) {
         } #else {
         #    printf STDERR "Unmatched way type for way: %s\n", $way_id;
         #}
-        
+
         map { $NODES{$_}->{'member_of_way'}->{$way_id} = 1; } @{$WAYS{$way_id}->{'chain'}};
     }
-    
+
     if ( $verbose ) {
-        printf STDERR "%s Ways converted: %d, route_ways: %d, platform_ways: %d\n", 
+        printf STDERR "%s Ways converted: %d, route_ways: %d, platform_ways: %d\n",
                        get_time(), $number_of_ways, $number_of_routeways, $number_of_platformways;
     }
 }
@@ -816,19 +816,19 @@ if ( $xml_has_ways ) {
 
 if ( $xml_has_nodes ) {
     printf STDERR "%s Converting nodes\n", get_time()       if ( $verbose );
-    
+
     foreach $node_id ( keys ( %NODES ) ) {
-        
+
         $number_of_nodes++;
-        
+
         #
         # lets categorize the node as stop_position or platform or ...
         #
-        if ( $NODES{$node_id}->{'tag'}->{'public_transport'}                    && 
+        if ( $NODES{$node_id}->{'tag'}->{'public_transport'}                    &&
              $NODES{$node_id}->{'tag'}->{'public_transport'} eq 'platform'    ) {
             $platform_nodes{$node_id} = $NODES{$node_id};
             $number_of_platformnodes++;
-        } elsif ( $NODES{$node_id}->{'tag'}->{'public_transport'}                    && 
+        } elsif ( $NODES{$node_id}->{'tag'}->{'public_transport'}                    &&
                 $NODES{$node_id}->{'tag'}->{'public_transport'} eq 'stop_position'    ) {
             $stop_nodes{$node_id} = $NODES{$node_id};
             $number_of_stop_positions++;
@@ -838,19 +838,19 @@ if ( $xml_has_nodes ) {
     }
 
     if ( $verbose ) {
-        printf STDERR "%s Nodes converted: %d, platform_nodes: %d, stop_positions: %d\n", 
+        printf STDERR "%s Nodes converted: %d, platform_nodes: %d, stop_positions: %d\n",
                        get_time(), $number_of_nodes, $number_of_platformnodes, $number_of_stop_positions;
     }
 }
 
 
 #############################################################################################
-# 
+#
 # output section begins here
 #
 #############################################################################################
 
-printInitialHeader( $page_title, $osm_base, $areas  ); 
+printInitialHeader( $page_title, $osm_base, $areas  );
 
 
 #############################################################################################
@@ -863,27 +863,27 @@ printf STDERR "%s Printing positives\n", get_time()       if ( $verbose );
 $number_of_positive_relations= 0;
 
 if ( $routes_file ) {
-    
+
     $section = 'positive';
-    
+
     my $table_headers_printed           = 0;
     my @list_of_matching_relation_ids   = ();
     my $number_of_matching_entries      = 0;
 
     printTableInitialization( 'name', 'type', 'relation', 'PTv', 'issues', 'notes' );
-    
+
     foreach my $entryref ( RoutesList::GetRoutesList() ) {
 
         #printf STDERR "Entry: type = %s\n", $entryref->{'type'};
-        
+
         if ( $entryref->{'type'} eq 'header' ) {
             printf STDERR "    header = %s\n", $entryref->{'header'}  if ( $debug );
-            printTableFooter()                                          if ( $table_headers_printed ); 
+            printTableFooter()                                          if ( $table_headers_printed );
             $table_headers_printed = 0;
             printHeader( $entryref->{'header'}, $entryref->{'level'} );
         } elsif ( $entryref->{'type'} eq 'text' ) {
             printf STDERR "    text = %s\n", $entryref->{'text'}  if ( $debug );
-            printTableFooter()                                          if ( $table_headers_printed ); 
+            printTableFooter()                                          if ( $table_headers_printed );
             $table_headers_printed = 0;
             printText( $entryref->{'text'} );
         } elsif ( $entryref->{'type'} eq 'error' ) {
@@ -895,14 +895,14 @@ if ( $routes_file ) {
             printTableSubHeader( 'ref' => $entryref->{'ref'} );
             printTableLine( 'issues' => $entryref->{'error'} );
         } elsif ( $entryref->{'type'} eq 'route' ) {
-            
+
             printf STDERR "    ref = %s, ref-or-list = '%s', ref-and-list = '%s', route = %s, comment = %s, from = %s, to = %s, operator = %s\n", $entryref->{'ref'}, join( ', ', @{$entryref->{'ref-or-list'}} ), join( ', ', @{$entryref->{'ref-and-list'}} ), $entryref->{'route'}, $entryref->{'comment'}, $entryref->{'from'}, $entryref->{'to'}, $entryref->{'operator'}  if ( $debug );
 
             if ( $table_headers_printed == 0 ) {
                 printTableHeader();
                 $table_headers_printed++;
             }
-            
+
             @list_of_matching_relation_ids = SearchMatchingRelations(   'SearchListRef'             =>  $PT_relations_with_ref{$section},
                                                                         'EntryRef'                  =>  $entryref,
                                                                      );
@@ -930,14 +930,14 @@ if ( $routes_file ) {
                                              'Operator'      => $entryref->{'operator'},
                                            );
                     }
-                    
+
                     @{$relation_ptr->{'__issues__'}} = ();  # just in case that this route has already been analyzed before (--multiple-ref-type-enries=allow)
                     @{$relation_ptr->{'__notes__'}}  = ();  # just in case that this route has already been analyzed before (--multiple-ref-type-enries=allow)
 
                     $status = analyze_environment( \@list_of_matching_relation_ids, $entryref->{'ref-or-list'}, $relation_ptr->{'tag'}->{'type'}, $entryref->{'route'}, $relation_id );
 
                     $status = analyze_relation( $relation_ptr, $relation_id );
-                    
+
                     printTableLine( 'ref'           =>    $relation_ptr->{'tag'}->{'ref'},
                                     'relation'      =>    $relation_id,
                                     'type'          =>    $relation_ptr->{'tag'}->{'type'},
@@ -985,9 +985,9 @@ if ( $routes_file ) {
             printf STDERR "%s Internal error: ref and route_type not set in CSV file. %d\n", get_time(), $entryref->{'NR'};
         }
     }
-    
-    printTableFooter()  if ( $table_headers_printed ); 
-    
+
+    printTableFooter()  if ( $table_headers_printed );
+
     printFooter();
 
 }
@@ -1005,9 +1005,9 @@ printf STDERR "%s Printing unassigned\n", get_time()       if ( $verbose );
 $number_of_unassigned_relations = 0;
 
 if ( $routes_file ) {
-    
+
     $section = 'positive';
-    
+
     my @relation_ids = ();
 
     foreach $ref ( sort( keys( %{$PT_relations_with_ref{$section}} ) ) ) {
@@ -1021,24 +1021,24 @@ if ( $routes_file ) {
             }
         }
     }
-        
+
     if ( scalar(@relation_ids) ) {
-    
+
         printTableInitialization( 'ref', 'relation', 'type', 'route_type', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'issues', 'notes' );
 
         # xgettext: This section will list all routes which could not be clearly assigned because the combination of "ref;type" appears more than once and information like 'operator', 'from' and 'to' is missing
         printHeader( gettext('Not clearly assigned routes'), 1, 'unassigned' );
         printHintUnassignedRelations();
         printTableHeader();
-    
+
         foreach $relation_id ( @relation_ids ) {
             $relation_ptr = $RELATIONS{$relation_id};
-    
+
             @{$relation_ptr->{'__issues__'}} = ();  # just in case that this route has already been analyzed before (--multiple-ref-type-enries=allow)
             @{$relation_ptr->{'__notes__'}}  = ();  # just in case that this route has already been analyzed before (--multiple-ref-type-enries=allow)
 
             $status = analyze_relation( $relation_ptr, $relation_id );
-                        
+
             printTableLine( 'ref'           =>    $relation_ptr->{'tag'}->{'ref'},
                             'relation'      =>    $relation_id,
                             'type'          =>    $relation_ptr->{'tag'}->{'type'},
@@ -1055,15 +1055,15 @@ if ( $routes_file ) {
                           );
             $number_of_unassigned_relations++;
         }
-    
-        printTableFooter(); 
-    
+
+        printTableFooter();
+
     }
 }
 
 printf STDERR "%s Printed unassigned: %d\n", get_time(), $number_of_unassigned_relations       if ( $verbose );
 
-        
+
 #############################################################################################
 #
 # now we print the list of all remainig relations/lines that could not be associated or when there was no csv file
@@ -1081,7 +1081,7 @@ $section = 'negative';
 if ( scalar(@line_refs) ) {
     my $help;
     my $route_type_lines = 0;
-    
+
     printTableInitialization( 'ref', 'relation', 'type', 'route_type', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'issues', 'notes' );
 
     if ( $routes_file ) {
@@ -1092,7 +1092,7 @@ if ( scalar(@line_refs) ) {
 
 
     foreach $route_type ( @supported_route_types ) {
-        
+
         $route_type_lines = 0;
         foreach $ref ( @line_refs ) {
             foreach $type ( 'route_master', 'route' ) {
@@ -1105,16 +1105,16 @@ if ( scalar(@line_refs) ) {
             printTableHeader();
             foreach $ref ( @line_refs ) {
                 foreach $type ( 'route_master', 'route' ) {
-                    foreach $relation_id ( sort( { $PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}->{$a}->{'__sort_name__'} cmp 
-                                                   $PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}->{$b}->{'__sort_name__'}     } 
+                    foreach $relation_id ( sort( { $PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}->{$a}->{'__sort_name__'} cmp
+                                                   $PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}->{$b}->{'__sort_name__'}     }
                                                  keys(%{$PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}})) ) {
                         $relation_ptr = $PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}->{$relation_id};
-    
+
                         @{$relation_ptr->{'__issues__'}} = ();  # just in case that this route has already been analyzed before (--multiple-ref-type-enries=allow)
                         @{$relation_ptr->{'__notes__'}}  = ();  # just in case that this route has already been analyzed before (--multiple-ref-type-enries=allow)
 
                         $status = analyze_relation( $relation_ptr, $relation_id );
-                                    
+
                         printTableLine( 'ref'           =>    $relation_ptr->{'tag'}->{'ref'},
                                         'relation'      =>    $relation_id,
                                         'type'          =>    $type,
@@ -1133,7 +1133,7 @@ if ( scalar(@line_refs) ) {
                     }
                 }
             }
-            printTableFooter(); 
+            printTableFooter();
         }
     }
 }
@@ -1154,22 +1154,22 @@ my @route_types = sort( keys( %PT_relations_without_ref ) );
 
 if ( scalar(@route_types) ) {
     my $help;
-    
+
     printTableInitialization( 'relation', 'type', 'route_type', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'issues', 'notes' );
-    
+
     printHeader( gettext("Public Transport Lines without 'ref'"), 1, 'withoutref' );
-    
+
     foreach $route_type ( @route_types ) {
         $help = sprintf( "%s", ($transport_types{$route_type} ? $transport_types{$route_type} : $route_type) );
         printHeader( $help, 2 );
         printTableHeader();
-        foreach $relation_id ( sort( { $PT_relations_without_ref{$route_type}->{$a}->{'__sort_name__'} cmp 
-                                       $PT_relations_without_ref{$route_type}->{$b}->{'__sort_name__'}     } 
+        foreach $relation_id ( sort( { $PT_relations_without_ref{$route_type}->{$a}->{'__sort_name__'} cmp
+                                       $PT_relations_without_ref{$route_type}->{$b}->{'__sort_name__'}     }
                                      keys(%{$PT_relations_without_ref{$route_type}})) ) {
             $relation_ptr = $PT_relations_without_ref{$route_type}->{$relation_id};
 
             $status = analyze_relation( $relation_ptr, $relation_id );
-                                
+
             printTableLine( 'relation'      =>    $relation_id,
                             'type'          =>    $relation_ptr->{'tag'}->{'type'},
                             'route_type'    =>    $route_type,
@@ -1185,7 +1185,7 @@ if ( scalar(@route_types) ) {
                           );
             $number_of_relations_without_ref++;
         }
-        printTableFooter(); 
+        printTableFooter();
     }
 }
 
@@ -1205,13 +1205,13 @@ printTableInitialization( 'relation', 'type', 'route_type', 'ref', 'name', 'netw
 my @suspicious_relations = sort( keys( %suspicious_relations ) );
 
 if ( scalar(@suspicious_relations) ) {
-    
+
     $number_of_suspicious_relations = 0;
 
     printHeader( gettext('More Relations'), 1, 'morerelations' );
 
     printHintSuspiciousRelations();
-        
+
     printTableHeader();
 
     foreach $relation_id ( @suspicious_relations ) {
@@ -1232,7 +1232,7 @@ if ( scalar(@suspicious_relations) ) {
                       );
         $number_of_suspicious_relations++;
     }
-    printTableFooter(); 
+    printTableFooter();
 }
 
 printf STDERR "%s Printed suspicious: %d\n", get_time(), $number_of_suspicious_relations       if ( $verbose );
@@ -1265,7 +1265,7 @@ printf STDERR "%s Printed network details\n", get_time()       if ( $verbose );
 
 #############################################################################################
 
-printFinalFooter(); 
+printFinalFooter();
 
 printf STDERR "%s Done ...\n", get_time()       if ( $verbose );
 
@@ -1371,7 +1371,7 @@ sub match_ref_and_pt_type {
 
 
 #############################################################################################
-# 
+#
 # return a list of matching route and route-master relations
 #
 #############################################################################################
@@ -1379,10 +1379,10 @@ sub match_ref_and_pt_type {
 
 sub SearchMatchingRelations {
     my %hash                        = ( @_ );
-    
+
     my $SearchListRef               = $hash{'SearchListRef'};
     my $EntryRef                    = $hash{'EntryRef'};
-   
+
     my $ExpRef                      = $EntryRef->{'ref'}                              || '';
     my $ExpRefOrList                = $EntryRef->{'ref-or-list'};
     my $ExpRouteType                = $EntryRef->{'route'}                            || '';
@@ -1395,12 +1395,12 @@ sub SearchMatchingRelations {
 
     my @route_master_list           = ();
     my @route_list                  = ();
-    
+
     my %selected_route_masters      = ();
     my %selected_routes             = ();
 
     my @ExpRefOrArray               = ();
-    
+
     if ( $ExpRefOrList ) {
         @ExpRefOrArray = @{$ExpRefOrList};
     } elsif ( $ExpRef ) {
@@ -1410,22 +1410,22 @@ sub SearchMatchingRelations {
     if ( $SearchListRef ) {
 
         if ( scalar @ExpRefOrArray && $ExpRouteType ) {
-    
+
             foreach my $ExpRefPart ( @ExpRefOrArray ) {
-            
-                my $relations_for_this_route_type = scalar(keys(%{$SearchListRef->{$ExpRefPart}->{'route_master'}->{$ExpRouteType}})) + 
+
+                my $relations_for_this_route_type = scalar(keys(%{$SearchListRef->{$ExpRefPart}->{'route_master'}->{$ExpRouteType}})) +
                                                     scalar(keys(%{$SearchListRef->{$ExpRefPart}->{'route'}->{$ExpRouteType}}));
                 if ( $relations_for_this_route_type ) {
 
                     foreach my $type ( 'route', 'route_master' ) {
                         #
-                        # check 'route' first 
+                        # check 'route' first
                         # so that in case of a need to check 'from' and 'to', 'route_master' can rely on 'route' information.
                         # i.e. if 'route' is selected, then it's 'route_master' also?
                         #
                         if ( $SearchListRef->{$ExpRefPart}->{$type} && $SearchListRef->{$ExpRefPart}->{$type}->{$ExpRouteType} ) {
-                            foreach my $rel_id ( sort( { $SearchListRef->{$ExpRefPart}->{$type}->{$ExpRouteType}->{$a}->{'__sort_name__'} cmp 
-                                                         $SearchListRef->{$ExpRefPart}->{$type}->{$ExpRouteType}->{$b}->{'__sort_name__'}     } 
+                            foreach my $rel_id ( sort( { $SearchListRef->{$ExpRefPart}->{$type}->{$ExpRouteType}->{$a}->{'__sort_name__'} cmp
+                                                         $SearchListRef->{$ExpRefPart}->{$type}->{$ExpRouteType}->{$b}->{'__sort_name__'}     }
                                                          keys(%{$SearchListRef->{$ExpRefPart}->{$type}->{$ExpRouteType}})) ) {
                                 printf STDERR "Relation %s, __sort_name__ = %s\n", $rel_id, $RELATIONS{$rel_id}->{'__sort_name__'} if ( $debug );
 
@@ -1434,8 +1434,8 @@ sub SearchMatchingRelations {
                                 $RelOperator    = $RELATIONS{$rel_id}->{'tag'}->{'operator'} || '';
                                 $RelFrom        = $RELATIONS{$rel_id}->{'tag'}->{'from'}     || '';
                                 $RelTo          = $RELATIONS{$rel_id}->{'tag'}->{'to'}       || '';
-        
-                                printf STDERR "%s Checking %s relation %s, 'ref' %s and  'operator' %s \n", get_time(), $type, $rel_id, $ExpRefPart, $RelOperator    if ( $debug ); 
+
+                                printf STDERR "%s Checking %s relation %s, 'ref' %s and  'operator' %s \n", get_time(), $type, $rel_id, $ExpRefPart, $RelOperator    if ( $debug );
 
                                 $match  = RoutesList::RelationMatchesExpected(  'rel-id'                      => $rel_id,
                                                                                 'rel-ref'                     => $RelRef,
@@ -1446,17 +1446,17 @@ sub SearchMatchingRelations {
                                                                                 'EntryRef'                    => $EntryRef,
                                                                                 'multiple_ref_type_entries'   => $multiple_ref_type_entries,
                                                                              );
-                                printf STDERR "%s Checking == %s\n", get_time(), $match     if ( $debug ); 
+                                printf STDERR "%s Checking == %s\n", get_time(), $match     if ( $debug );
 
                                 if ( !$match ) {
                                     if ( $type eq 'route_master' ) {
 
                                         # route_masters usually don't have 'from' or 'to' set: let's try something different in case we don't have a direct match
 
-                                        printf STDERR "%s Route-Master w/o values: %s\n", get_time(), $rel_id   if ( $debug ); 
+                                        printf STDERR "%s Route-Master w/o values: %s\n", get_time(), $rel_id   if ( $debug );
 
                                         foreach my $member_rel_ref ( @{$RELATIONS{$rel_id}->{'route_master_relation'}} ) {
-                                            printf STDERR "%s Route-Master w/o values: %s - check Member %s\n", get_time(), $rel_id, $member_rel_ref->{'ref'}   if ( $debug ); 
+                                            printf STDERR "%s Route-Master w/o values: %s - check Member %s\n", get_time(), $rel_id, $member_rel_ref->{'ref'}   if ( $debug );
                                             if ( $selected_routes{$member_rel_ref->{'ref'}} ) {
                                                 # member route has been selected, from and/or to match, so let's assume, the route_master matches as well
                                                 $match = $member_rel_ref->{'ref'};
@@ -1473,7 +1473,7 @@ sub SearchMatchingRelations {
 #                                        # members of selected route_masters also match
 #
 #                                        foreach my $member_rel_ref ( @{$RELATIONS{$rel_id}->{'route_master_relation'}} ) {
-#                                            printf STDERR "%s Relations of seletced Route-Master also match: %s - Member %s\n", get_time(), $rel_id, $member_rel_ref->{'ref'}   if ( $debug ); 
+#                                            printf STDERR "%s Relations of seletced Route-Master also match: %s - Member %s\n", get_time(), $rel_id, $member_rel_ref->{'ref'}   if ( $debug );
 #                                            push( @route_list, $member_rel_ref->{'ref'} )    unless ( $selected_routes{$member_rel_ref->{'ref'}} );
 #                                            $selected_routes{$member_rel_ref->{'ref'}} = 1;
 #                                        }
@@ -1491,7 +1491,7 @@ sub SearchMatchingRelations {
     } else {
         printf STDERR "%s SearchMatchingRelations(): no Search List specified\n", get_time();
     }
-    
+
     return ( @route_master_list, @route_list );
 }
 
@@ -1505,25 +1505,25 @@ sub analyze_environment {
     my $route_type      = shift;
     my $relation_id     = shift;
     my $return_code     = 0;
-    
+
     my $relation_ptr    = undef;
     my $env_ref         = undef;
     my %environment     = ();
     my $temptype        = undef;
     my $temproutetype   = undef;
-    
-    
+
+
     if ( $matching_ref && $ref_or_list && $type && $route_type && $relation_id ) {
-        
+
         foreach my $relid ( @{$matching_ref} ) {
             $temptype       = $RELATIONS{$relid}->{'tag'}->{'type'};
             $temproutetype  = $RELATIONS{$relid}->{'tag'}->{$temptype};
             $environment{'dummy'}->{$temptype}->{$temproutetype}->{$relid} = $RELATIONS{$relid};
         }
         $env_ref = $environment{'dummy'};
-        
+
         $relation_ptr = $env_ref->{$type}->{$route_type}->{$relation_id};
-        
+
         if ( $relation_ptr ) {
 
             if ( $type eq 'route_master' ) {
@@ -1547,7 +1547,7 @@ sub analyze_route_master_environment {
     my $route_type      = shift;
     my $relation_id     = shift;
     my $return_code     = 0;
-    
+
     my $relation_ptr            = undef;
     my $number_of_route_masters = 0;
     my $number_of_routes        = 0;
@@ -1556,19 +1556,19 @@ sub analyze_route_master_environment {
     my %allowed_refs            = ();
     my $masters_ref             = undef;
     my $members_ref             = undef;
-    
+
     if ( $env_ref && $ref_or_list && $type && $type eq 'route_master' && $route_type && $relation_id ) {
-        
+
         # do we have more than one route_master here for this "ref_or_list" and "route_type"?
         $number_of_route_masters    = scalar( keys( %{$env_ref->{'route_master'}->{$route_type}} ) );
-        
+
         # how many routes do we have at all for this "ref_or_list" and "route_type"?
         $number_of_routes           = scalar( keys( %{$env_ref->{'route'}->{$route_type}} ) );
 
         # reference to this relation, the route_master under examination
         $relation_ptr               = $env_ref->{'route_master'}->{$route_type}->{$relation_id};
-        
-        # if this is a route_master and PTv2 is set, then 
+
+        # if this is a route_master and PTv2 is set, then
         # 1. check route_master_relation number against number of 'route' relations below this ref_ref with same route_type (same number?)
         # 2. check 'route' relations and their 'relation_id' against the member list (do all 'route' members actually exist?)
 
@@ -1595,19 +1595,19 @@ sub analyze_route_master_environment {
             my $temp_relation_ptr   = undef;
             foreach my $rel_id ( keys( %{$env_ref->{'route_master'}->{$route_type}} ) ) {
                 $temp_relation_ptr = $env_ref->{'route_master'}->{$route_type}->{$rel_id};
-                
+
                 # how many routes are members of this route_master?
                 $number_of_my_routes        += scalar( @{$temp_relation_ptr->{'route_master_relation'}} );
-                
+
                 foreach my $member_ref ( @{$temp_relation_ptr->{'route_master_relation'}} ) {
                     $my_routes{$member_ref->{'ref'}} = 1;
                 }
-                
+
                 if ( $temp_relation_ptr->{'tag'}->{'network'} ) {
                     $networks{$temp_relation_ptr->{'tag'}->{'network'}} = 1;
                     #printf STDERR "analyze_route_master_environment(): network = %s\n", $temp_relation_ptr->{'tag'}->{'network'};
                 }
-                
+
                 if ( $temp_relation_ptr->{'tag'}->{'operator'} ) {
                     $operators{$temp_relation_ptr->{'tag'}->{'operator'}} = 1;
                     #printf STDERR "analyze_route_master_environment(): operator = %s\n", $temp_relation_ptr->{'tag'}->{'operator'};
@@ -1634,14 +1634,14 @@ sub analyze_route_master_environment {
         } else {
             # how many routes are members of this route_master?
             $number_of_my_routes        = scalar( @{$relation_ptr->{'route_master_relation'}} );
-        
+
             if ( $number_of_my_routes > $number_of_routes ) {
                 push( @{$relation_ptr->{'__issues__'}}, sprintf($error_RMhmR_2d_string, $number_of_my_routes, $number_of_routes) );
             } elsif ( $number_of_my_routes < $number_of_routes ) {
                 push( @{$relation_ptr->{'__issues__'}}, sprintf($error_RMhlR_2d_string, $number_of_my_routes, $number_of_routes) );
             }
         }
-        
+
         # check whether all my member routes actually exist, tell us which one does not
         foreach my $member_ref ( @{$relation_ptr->{'route_master_relation'}} ) {
             $my_routes{$member_ref->{'ref'}} = 1;
@@ -1834,7 +1834,7 @@ sub analyze_route_environment {
     my $route_type      = shift;
     my $relation_id     = shift;
     my $return_code     = 0;
-    
+
     my $relation_ptr                        = undef;
     my $number_of_direct_route_masters      = 0;
     my $number_of_route_masters             = 0;
@@ -1843,11 +1843,11 @@ sub analyze_route_environment {
     my %allowed_refs                        = ();
     my $masters_ref                         = undef;
     my $routes_ref                          = undef;
-    
+
     if ( $env_ref && $ref_or_list && $type && $type eq 'route' && $route_type && $relation_id ) {
-        
+
         $relation_ptr = $env_ref->{'route'}->{$route_type}->{$relation_id};
-        
+
         #
         # 1. find all direct and matching route_masters here (also those where only 'ref' and 'route_type' match)
         #
@@ -1891,7 +1891,7 @@ sub analyze_route_environment {
                 }
             }
         }
-        
+
         #
         # 2. check direct environment of this route: route_master(s) where this route is member of (independent of PTv2 or not)
         #
@@ -1935,7 +1935,7 @@ sub analyze_route_environment {
                 }
             }
         }
-        
+
         #
         # 3. check major tags of this route and the route_masters: they should match
         #
@@ -2025,7 +2025,48 @@ sub analyze_route_environment {
         }
 
         if ( $number_of_routes > 1 ) {
-            if ( !$relation_ptr->{'tag'}->{'public_transport:version'} || $relation_ptr->{'tag'}->{'public_transport:version'} !~ m/^2$/ ) {
+
+            # 4. check 'name' tag of this route against the 'name' tag of the other routes, there should be no match, 'name' should be unique
+
+            if ( $check_name                                                &&
+                 $relation_ptr->{'tag'}->{'name'}                           &&
+                 $relation_ptr->{'tag'}->{'public_transport:version'}       &&
+                 $relation_ptr->{'tag'}->{'public_transport:version'} eq '2'   ) {
+
+                my %name_matches = ();
+
+                foreach my $peer_route_relation_id ( keys ( %{$env_ref->{'route'}->{$route_type}} ) ) {
+
+                    next    if ( $relation_id eq $peer_route_relation_id );
+
+                    if ( $RELATIONS{$peer_route_relation_id}->{'tag'}->{'name'}                             &&
+                         $RELATIONS{$peer_route_relation_id}->{'tag'}->{'public_transport:version'}         &&
+                         $RELATIONS{$peer_route_relation_id}->{'tag'}->{'public_transport:version'} eq '2'  &&
+                         $relation_ptr->{'tag'}->{'name'} eq $RELATIONS{$peer_route_relation_id}->{'tag'}->{'name'}     ) {
+                        $name_matches{$peer_route_relation_id} = 1;
+                    }
+                }
+
+                if ( scalar( keys ( %name_matches ) ) ) {
+                    my @help_array                        = sort( keys ( %name_matches ) );
+                    my $num_of_errors                     = scalar(@help_array);
+                    my $error_PRnoRiitnoor_0s_string      = gettext( "PTv2 Route: 'name' of Route is identical to 'name' of other Route(s), consider setting an appropriate 'via' value and include that into 'name'" );
+                    my $error_PRnoRiitnoor_0s_option      = "--check-name\n--check-name-relaxed";
+                    my $error_PRnoRiitnoor_0s_description = "If two routes take different ways between 'A' and 'E', the difference should be stated in different 'name' and 'via' values like:\n1.) 'name' = 'Bus A: A => B => E' and 'via' = 'B'\n2.)  'name' = 'Bus A: A => C => E' and 'via' = 'C'" ;
+                    my $error_PRnoRiitnoor_0s_howtofix    = "Set appropriate 'via' values and include that into 'name' to distinguish between different route variants.";
+                    my $error_PRnoRiitnoor_0s_image       = '';
+                    if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("%s: %s and %d more ..."), $error_PRnoRiitnoor_0s_string, join(', ', map { printRelationTemplate($_); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                    } else {
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf("%s: %s", $error_PRnoRiitnoor_0s_string, join(', ', map { printRelationTemplate($_); } @help_array )) );
+                    }
+                }
+            }
+
+
+            # 5. check for 'public_transport:version' being set to '2' if there is more than one route
+
+            if ( !$relation_ptr->{'tag'}->{'public_transport:version'} || $relation_ptr->{'tag'}->{'public_transport:version'} ne '2' ) {
                 my $error_MRbptvinst2_string      = gettext( "Multiple Routes but 'public_transport:version' is not set to '2'" );
                 my $error_MRbptvinst2_option      = '';
                 my $error_MRbptvinst2_description = '';
@@ -2046,7 +2087,7 @@ sub analyze_relation {
     my $relation_ptr    = shift;
     my $relation_id     = shift;
     my $return_code     = 0;
-    
+
     my $ref                             = '';
     my $type                            = '';
     my $route_type                      = '';
@@ -2067,9 +2108,9 @@ sub analyze_relation {
                                             'check_date'    => '__notes__'
                                           );
     my $reporttype                      = undef;
-    
+
     if ( $relation_ptr ) {
-        
+
         $ref                            = $relation_ptr->{'tag'}->{'ref'};
         $type                           = $relation_ptr->{'tag'}->{'type'};
         $route_type                     = $relation_ptr->{'tag'}->{$type};
@@ -2077,7 +2118,7 @@ sub analyze_relation {
         #
         # now, check existing and defined tags and report them to front of list (ISSUES, NOTES)
         #
-        
+
         foreach $specialtag ( @specialtags ) {
             foreach my $tag ( sort(keys(%{$relation_ptr->{'tag'}})) ) {
                 if ( $tag =~ m/^\Q$specialtag\E/i ) {
@@ -2096,14 +2137,14 @@ sub analyze_relation {
         #
         # now check existance of required/optional tags
         #
-        
+
         unless ( $ref ) {
             my $error_refins_string      = gettext( "'ref' is not set" );
             my $error_refins_option      = '';
             my $error_refins_description = '';
             my $error_refins_howtofix    = '';
             my $error_refins_image       = '';
-            push( @{$relation_ptr->{'__issues__'}}, $error_refins_string ); 
+            push( @{$relation_ptr->{'__issues__'}}, $error_refins_string );
         }
         unless ( $relation_ptr->{'tag'}->{'name'} ) {
             my $error_nameins_string      = gettext( "'name' is not set" );
@@ -2120,7 +2161,7 @@ sub analyze_relation {
             my $count_error_semikolon_w_blank = 0;
             my $count_error_comma             = 0;
             my $match                         = '';
-            
+
             my $network_with = ';' . $network . ';';        # we match only with sourrounding ';', i.e. 'DB InterCity' does not match network='DB InterCityExpress'
 
             if ( $network_short_regex ) {
@@ -2169,7 +2210,7 @@ sub analyze_relation {
                     }
                 }
             }
-            
+
             if ( $check_osm_separator ) {
                 if ( $count_error_semikolon_w_blank ) {
                     my $error_nitsvscwsb_1s_string      = gettext( "'network' = '%s' includes the separator value ';' (semi-colon) with sourrounding blank" );
@@ -2204,12 +2245,12 @@ sub analyze_relation {
                 my $match_long      = '';
                 my $expect_long_as  = '';
                 my $expect_long_for = '';
-                
+
                 $match_short     = $1   if ( $network_short_regex     && $network =~ m/($network_short_regex)/     );
                 $match_long      = $1   if ( $network_long_regex      && $network =~ m/($network_long_regex)/      );
                 $expect_long_as  = $1   if ( $expect_network_long_as  && $network =~ m/(\Q$expect_network_long_as\E)/  );
                 $expect_long_for = $1   if ( $expect_network_long_for && $network =~ m/(\Q$expect_network_long_for\E)/ );
-                
+
                 if ( $match_long ) {
                     if ( $match_long ne $expect_long_as ) {
                         push( @{$relation_ptr->{'__notes__'}}, sprintf( $note_networksbsf_1s_string, html_escape($match_long) ) );
@@ -2224,12 +2265,12 @@ sub analyze_relation {
                 my $match_short      = '';
                 my $expect_short_as  = '';
                 my $expect_short_for = '';
-                
+
                 $match_long       = $1   if ( $network_long_regex       && $network =~ m/($network_long_regex)/       );
                 $match_short      = $1   if ( $network_short_regex      && $network =~ m/($network_short_regex)/      );
                 $expect_short_as  = $1   if ( $expect_network_short_as  && $network =~ m/(\Q$expect_network_short_as\E)/  );
                 $expect_short_for = $1   if ( $expect_network_short_for && $network =~ m/(\Q$expect_network_short_for\E)/ );
-                
+
                 if ( $match_short ) {
                     if ( $match_short ne $expect_short_as ) {
                         push( @{$relation_ptr->{'__notes__'}}, sprintf( $note_networksblf_1s_string, html_escape($match_short) ) );
@@ -2258,7 +2299,7 @@ sub analyze_relation {
                 my $colour = GetColourFromString( $relation_ptr->{'tag'}->{'colour'} );
                 push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_chuv_1s_string, html_escape($relation_ptr->{'tag'}->{'colour'}) ) )        unless ( $colour );
         }
-        
+
         if ( $positive_notes ) {
             my $note_nlilf_1s_string             = gettext( "'%s' is long form" );
             my $note_nlilf_1s_option             = '--positive-notes';
@@ -2270,14 +2311,14 @@ sub analyze_relation {
             my $note_nlmlf_1s_description        = '';
             my $note_nlmlf_1s_howtofix           = '';
             my $note_nlmlf_1s_image              = '';
-            
+
             if ( !$network_long_regex && !$network_short_regex ) {
                 # we do not filter for any 'network' values, so let's print also the value of 'network'
                 if ( $relation_ptr->{'tag'}->{'network'} ) {
                     push( @{$relation_ptr->{'__notes__'}}, sprintf("'%s' = '%s'", 'network', html_escape($relation_ptr->{'tag'}->{'network'})) )
                 }
             }
-            
+
             foreach my $special ( 'network:', 'route:', 'ref:', 'ref_', 'operator' ) {
                 foreach my $tag ( sort(keys(%{$relation_ptr->{'tag'}})) ) {
                     if ( $tag =~ m/^\Q$special\E/i ) {
@@ -2298,11 +2339,11 @@ sub analyze_relation {
                 }
             }
         }
-        
+
         #
         # check route_master/route specific things
         #
-        
+
         if ( $type eq 'route_master' ) {
             $return_code = analyze_route_master_relation( $relation_ptr );
         } elsif ( $type eq 'route') {
@@ -2319,7 +2360,7 @@ sub analyze_relation {
 sub analyze_route_master_relation {
     my $relation_ptr    = shift;
     my $return_code     = 0;
-    
+
     my $ref                            = $relation_ptr->{'tag'}->{'ref'};
     my $type                           = $relation_ptr->{'tag'}->{'type'};
     my $route_type                     = $relation_ptr->{'tag'}->{$type};
@@ -2338,7 +2379,7 @@ sub analyze_route_master_relation {
     push( @{$relation_ptr->{'__issues__'}}, gettext("Route-Master with Node(s)") )                                       if     ( $node_index );
     if ( $relation_ptr->{'tag'}->{'public_transport:version'} ) {
         if ( $relation_ptr->{'tag'}->{'public_transport:version'} !~ m/^2$/ ) {
-            push( @{$relation_ptr->{'__issues__'}}, gettext("'public_transport:version' is not set to '2'") )        if ( $check_version ); 
+            push( @{$relation_ptr->{'__issues__'}}, gettext("'public_transport:version' is not set to '2'") )        if ( $check_version );
         } else {
             ; #push( @{$relation_ptr->{'__notes__'}}, sprintf("'public_transport:version' = '%s'",html_escape($relation_ptr->{'tag'}->{'public_transport:version'})) )    if ( $positive_notes );
         }
@@ -2355,7 +2396,7 @@ sub analyze_route_master_relation {
 sub analyze_route_relation {
     my $relation_ptr    = shift;
     my $return_code     = 0;
-    
+
     my $ref                            = $relation_ptr->{'tag'}->{'ref'};
     my $type                           = $relation_ptr->{'tag'}->{'type'};
     my $route_type                     = $relation_ptr->{'tag'}->{$type};
@@ -2370,7 +2411,7 @@ sub analyze_route_relation {
     $relation_ptr->{'missing_node_data'}  = 0;
 
     $return_code += CheckCompletenessOfData( $relation_ptr );
-    
+
 
     if ( $relation_ptr->{'tag'}->{'public_transport:version'} && $relation_ptr->{'tag'}->{'public_transport:version'} eq '2' ) {
         if ( $relation_ptr->{'missing_way_data'} == 0 && $relation_ptr->{'missing_node_data'} == 0 ) {
@@ -2387,7 +2428,7 @@ sub analyze_route_relation {
 
         if ( $relation_ptr->{'tag'}->{'public_transport:version'} ) {
             if ( $relation_ptr->{'tag'}->{'public_transport:version'} ne '1' ) {
-                push( @{$relation_ptr->{'__issues__'}}, gettext("'public_transport:version' is neither '1' nor '2'") ); 
+                push( @{$relation_ptr->{'__issues__'}}, gettext("'public_transport:version' is neither '1' nor '2'") );
             } else {
                 #push( @{$relation_ptr->{'__notes__'}}, sprintf("'public_transport:version' = '%s'",html_escape($relation_ptr->{'tag'}->{'public_transport:version'})) )    if ( $positive_notes );
             }
@@ -2395,7 +2436,7 @@ sub analyze_route_relation {
             push( @{$relation_ptr->{'__notes__'}}, gettext("'public_transport:version' is not set") )        if ( $check_version );
         }
     }
-    
+
     #
     # for WAYS used by vehicles             vehicles must have access permission
     # for NODES of WAYS used by vehicles    vehicles must have access permission on barrier NODES
@@ -2411,9 +2452,9 @@ sub analyze_route_relation {
     if ( $check_bus_stop ) {
         $return_code += CheckBusStopOnWaysAndRelations( $relation_ptr );
     }
-    
+
     #
-    # check tag 'route_ref' on stops (highway_bus_stop and public_transport=platform (and also public_transport=stop_position)) 
+    # check tag 'route_ref' on stops (highway_bus_stop and public_transport=platform (and also public_transport=stop_position))
     #
     if ( $check_route_ref ) {
         $return_code += CheckRouteRefOnStops( $relation_ptr );
@@ -2428,7 +2469,7 @@ sub analyze_route_relation {
 sub analyze_ptv2_route_relation {
     my $relation_ptr        = shift;
     my $return_code         = 0;
-    
+
     my $type                                = $relation_ptr->{'tag'}->{'type'};
     my $route_type                          = $relation_ptr->{'tag'}->{$type};
     my $role_mismatch_found                 = 0;
@@ -2443,7 +2484,7 @@ sub analyze_ptv2_route_relation {
 
     my @relation_route_highways             = FindRouteHighWays( $relation_ptr );
     my $number_of_route_highways            = scalar( @relation_route_highways );
-    
+
     my @relation_route_stop_positions       = FindRouteStopPositions( $relation_ptr );  # stop positions are nodes only
     my $number_of_route_stop_positions      = scalar( @relation_route_stop_positions );
 
@@ -2454,7 +2495,7 @@ sub analyze_ptv2_route_relation {
     my $number_of_route_platform_ways       = scalar( @relation_route_platform_ways );
     my $number_of_route_platform_relations  = scalar( @relation_route_platform_relations );
     my $number_of_route_platforms           = $number_of_route_platform_nodes + $number_of_route_platform_ways + $number_of_route_platform_relations;
-    
+
     push( @{$relation_ptr->{'__issues__'}}, gettext("Route without Way(s)") )                                               unless ( $number_of_route_highways );
     push( @{$relation_ptr->{'__issues__'}}, gettext("Route with only 1 Way") )                                              if     ( $number_of_route_highways == 1 && $route_type ne 'monorail' && $route_type ne 'ferry' && $route_type ne 'aerialway' && $route_type ne 'funicular' );
     if ( $number_of_route_stop_positions == 0 && $number_of_route_platforms == 0 ) {
@@ -2472,7 +2513,7 @@ sub analyze_ptv2_route_relation {
     $relation_ptr->{'gap_at_way'}              = ();
     $relation_ptr->{'number_of_roundabouts'}   = 0;
     $relation_ptr->{'sorted_in_reverse_order'} = '';
-    
+
     if ( $check_name ) {
         $return_code += CheckNameRefFromViaToPTV2( $relation_ptr );
     }
@@ -2524,7 +2565,7 @@ sub analyze_ptv2_route_relation {
             }
         }
     }
-    
+
     if ( $check_sequence ) {
         #
         # check for correct sequence of members: stop1, platform1, stop2, platform2, ... way1, way2, ...
@@ -2570,11 +2611,11 @@ sub analyze_ptv2_route_relation {
             }
         }
     }
-        
+
     printf STDERR "analyze_ptv2_route_relation() : SortRouteWayNodes() for relation ref=%s, name=%s\n", $relation_ptr->{'tag'}->{'ref'}, $relation_ptr->{'tag'}->{'name'}   if ( $debug );
-    
+
     @sorted_way_nodes    = SortRouteWayNodes( $relation_ptr, $relation_ptr->{'non_platform_ways'} );
-    
+
     if ( $relation_ptr->{'sorted_in_reverse_order'} ) {
         push( @{$relation_ptr->{'__issues__'}}, gettext("PTv2 route: first way is a oneway road and ends in a 'stop_position' of this route and there is no exit. Is the route sorted in reverse order?") );
         $return_code++
@@ -2641,21 +2682,21 @@ sub analyze_ptv2_route_relation {
                  $node_ref->{'role'} =~ m/^platform$/               ||
                  $node_ref->{'role'} =~ m/^platform_entry_only$/    ||
                  $node_ref->{'role'} =~ m/^platform_exit_only$/        ) {
-                
+
                 if ( $xml_has_nodes ) {
                     if ( $node_ref->{'role'} =~ m/^stop/ ) {
                         if ( $stop_nodes{$node_ref->{'ref'}} ) {
                             if ( isNodeInNodeArray($node_ref->{'ref'},@sorted_way_nodes) ) {
-                                
+
                                 # checking roles stop_entry_only and stop_exit_only makes only sense if there are no gaps, i.e. the ways are sorted
                                 # checking stop_exit_only and stop_entry_only is not performed
                                 # MVV Bus 213 (Munich) has stops at Karl-Preis-Platz which are neither first nor last nodes.
-                                
+
                                 if ( $relation_ptr->{'number_of_segments'} == 1 ) {
                                       #
                                     ; # fine, what can we check here now?
                                       #
-                                    
+
                                     #if ( $node_ref->{'role'} eq 'stop_entry_only' ) {
                                     #    if ( isFirstNodeInNodeArray($node_ref->{'ref'},@sorted_way_nodes) ) {
                                     #        ; # fine, what else can we check here?
@@ -2735,7 +2776,7 @@ sub analyze_ptv2_route_relation {
                             my $compatible_tag = PTv2CompatibleNodeStopTag( $node_ref->{'ref'}, $relation_ptr->{'tag'}->{'route'} );
                             if ( $compatible_tag ) {
                                 if ( $ptv1_compatibility eq "show" ) {
-                                    $help_string = sprintf( gettext( "'role' = '%s' and %s: consider setting 'public_transport' = 'stop_position'" ), $node_ref->{'role'}, $compatible_tag ); 
+                                    $help_string = sprintf( gettext( "'role' = '%s' and %s: consider setting 'public_transport' = 'stop_position'" ), $node_ref->{'role'}, $compatible_tag );
                                     $role_mismatch{$help_string}->{$node_ref->{'ref'}} = 1;
                                     $role_mismatch_found++;
                                 }
@@ -2838,7 +2879,7 @@ sub analyze_ptv2_route_relation {
                     #
                     # if we have more than one way or the single way is a oneway, and because we know: the ways are sorted and w/o gaps
                     #
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: first node of way is not the first stop position of this route: %s versus %s"), printNodeTemplate($sorted_way_nodes[0],'name;ref'), printNodeTemplate($relation_route_stop_positions[0],'name;ref') ) );            
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: first node of way is not the first stop position of this route: %s versus %s"), printNodeTemplate($sorted_way_nodes[0],'name;ref'), printNodeTemplate($relation_route_stop_positions[0],'name;ref') ) );
                     $return_code++;
                 }
             }
@@ -2859,7 +2900,7 @@ sub analyze_ptv2_route_relation {
                 } else {
                     @first_way_nodes  = reverse @{$WAYS{$first_way_ID}->{'chain'}};
                 }
-                
+
                 foreach my $nodeid ( @first_way_nodes ) {
                     if ( $debug ) { $node_name = ( $NODES{$nodeid} && $NODES{$nodeid}->{'tag'} && $NODES{$nodeid}->{'tag'}->{'name'}) ? $NODES{$nodeid}->{'tag'}->{'name'} : ''; }
                     printf STDERR "WAY{%s}->{'chain'}->%s name='%s'\n", $first_way_ID, $nodeid, $node_name   if ( $debug );
@@ -2883,30 +2924,30 @@ sub analyze_ptv2_route_relation {
                 if ( $found_it == 1 ) {
                     printf STDERR "1: Number of ways: %s, found_nodeid = %s, last node of first way = %s\n", scalar(@relation_route_highways), $found_nodeid, $first_way_nodes[$#first_way_nodes]  if ( $debug );
                     if ( scalar(@relation_route_highways) > 1 && $found_nodeid == $first_way_nodes[$#first_way_nodes] ) {
-                        #push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the first way, except the last node == first node of next way: %s"), printWayTemplate($first_way_ID,'name;ref') ) );            
-                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: consider removing the first way of the route from the relation, it is a way before the first stop position: %s"), printWayTemplate($first_way_ID,'name;ref') ) );            
+                        #push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the first way, except the last node == first node of next way: %s"), printWayTemplate($first_way_ID,'name;ref') ) );
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: consider removing the first way of the route from the relation, it is a way before the first stop position: %s"), printWayTemplate($first_way_ID,'name;ref') ) );
                         $return_code++;
                     } else {
-                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: first stop position on first way is not the first stop position of this route: %s versus %s"), printNodeTemplate($found_nodeid,'name;ref'), printNodeTemplate($relation_route_stop_positions[0],'name;ref') ) );            
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: first stop position on first way is not the first stop position of this route: %s versus %s"), printNodeTemplate($found_nodeid,'name;ref'), printNodeTemplate($relation_route_stop_positions[0],'name;ref') ) );
                         $return_code++;
                     }
                 }
                 elsif ( $found_it == 2 ) {
                     printf STDERR "2: Number of ways: %s, found_nodeid = %s, last node of first way = %s\n", scalar(@relation_route_highways), $found_nodeid, $first_way_nodes[$#first_way_nodes]  if ( $debug );
                     if ( scalar(@relation_route_highways) > 1 && $found_nodeid == $first_way_nodes[$#first_way_nodes] ) {
-                        #push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the first way, except the last node == first node of next way: %s"), printWayTemplate($first_way_ID,'name;ref') ) );            
-                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: consider removing the first way of the route from the relation, it is a way before the first stop position: %s"), printWayTemplate($first_way_ID,'name;ref') ) );            
+                        #push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the first way, except the last node == first node of next way: %s"), printWayTemplate($first_way_ID,'name;ref') ) );
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: consider removing the first way of the route from the relation, it is a way before the first stop position: %s"), printWayTemplate($first_way_ID,'name;ref') ) );
                         $return_code++;
                     }
                 } else {
                     if ( $number_of_route_stop_positions > 0 ) {
-                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the first way: %s"), printWayTemplate($first_way_ID,'name;ref') ) );            
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the first way: %s"), printWayTemplate($first_way_ID,'name;ref') ) );
                         $return_code++;
                     }
                 }
             } else {
                 if ( $number_of_route_stop_positions > 0 ) {
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: first node of way is not a stop position of this route: %s"), printNodeTemplate($sorted_way_nodes[0],'name;ref') ) );            
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: first node of way is not a stop position of this route: %s"), printNodeTemplate($sorted_way_nodes[0],'name;ref') ) );
                     $return_code++;
                 }
             }
@@ -2926,7 +2967,7 @@ sub analyze_ptv2_route_relation {
                     #
                     # if we have more than one way or the single way is a oneway, and because we know: the ways are sorted and w/o gaps
                     #
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: last node of way is not the last stop position of this route: %s versus %s"), printNodeTemplate($sorted_way_nodes[$#sorted_way_nodes],'name;ref'), printNodeTemplate($relation_route_stop_positions[$#relation_route_stop_positions],'name;ref') ) );            
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: last node of way is not the last stop position of this route: %s versus %s"), printNodeTemplate($sorted_way_nodes[$#sorted_way_nodes],'name;ref'), printNodeTemplate($relation_route_stop_positions[$#relation_route_stop_positions],'name;ref') ) );
                     $return_code++;
                 }
             }
@@ -2947,7 +2988,7 @@ sub analyze_ptv2_route_relation {
                 } else {
                     @last_way_nodes  = reverse @{$WAYS{$last_way_ID}->{'chain'}};
                 }
-                
+
                 foreach my $nodeid ( @last_way_nodes ) {
                     if ( $debug ) { $node_name = ( $NODES{$nodeid} && $NODES{$nodeid}->{'tag'} && $NODES{$nodeid}->{'tag'}->{'name'}) ? $NODES{$nodeid}->{'tag'}->{'name'} : ''; }
                     printf STDERR "WAY{%s}->{'chain'}->%s name='%s'\n", $last_way_ID, $nodeid, $node_name   if ( $debug );
@@ -2971,35 +3012,35 @@ sub analyze_ptv2_route_relation {
                 if ( $found_it == 1 ) {
                     printf STDERR "1: Number of ways: %s, found_nodeid = %s, first node of last way = %s\n", scalar(@relation_route_highways), $found_nodeid, $last_way_nodes[0]  if ( $debug );
                     if ( scalar(@relation_route_highways) > 1 && $found_nodeid == $last_way_nodes[$#last_way_nodes] ) {
-                        #push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the last way, except the first node == last node of previous way: %s"), printWayTemplate($last_way_ID,'name;ref') ) );            
-                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: consider removing the last way of the route from the relation, it is a way after the last stop position: %s"), printWayTemplate($last_way_ID,'name;ref') ) );            
+                        #push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the last way, except the first node == last node of previous way: %s"), printWayTemplate($last_way_ID,'name;ref') ) );
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: consider removing the last way of the route from the relation, it is a way after the last stop position: %s"), printWayTemplate($last_way_ID,'name;ref') ) );
                         $return_code++;
                     } else {
-                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: last stop position on last way is not the last stop position of this route: %s versus %s"), printNodeTemplate($found_nodeid,'name;ref'), printNodeTemplate($relation_route_stop_positions[$#relation_route_stop_positions],'name;ref') ) );            
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: last stop position on last way is not the last stop position of this route: %s versus %s"), printNodeTemplate($found_nodeid,'name;ref'), printNodeTemplate($relation_route_stop_positions[$#relation_route_stop_positions],'name;ref') ) );
                         $return_code++;
                     }
                 }
                 elsif ( $found_it == 2 ) {
                     printf STDERR "2: Number of ways: %s, found_nodeid = %s, first node of last way = %s\n", scalar(@relation_route_highways), $found_nodeid, $last_way_nodes[0]  if ( $debug );
                     if ( scalar(@relation_route_highways) > 1 && $found_nodeid == $last_way_nodes[$#last_way_nodes] ) {
-                        #push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the last way, except the first node == last node of previous way: %s"), printWayTemplate($last_way_ID,'name;ref') ) );            
-                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: consider removing the last way of the route from the relation, it is a way after the last stop position: %s"), printWayTemplate($last_way_ID,'name;ref') ) );            
+                        #push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the last way, except the first node == last node of previous way: %s"), printWayTemplate($last_way_ID,'name;ref') ) );
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: consider removing the last way of the route from the relation, it is a way after the last stop position: %s"), printWayTemplate($last_way_ID,'name;ref') ) );
                         $return_code++;
                     }
                 } else {
                     if ( $number_of_route_stop_positions > 0 ) {
-                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the last way: %s"), printWayTemplate($last_way_ID,'name;ref') ) );            
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: there is no stop position of this route on the last way: %s"), printWayTemplate($last_way_ID,'name;ref') ) );
                         $return_code++;
                     }
                 }
             } else {
                 if ( $number_of_route_stop_positions > 0 ) {
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: last node of way is not a stop position of this route: %s"), printNodeTemplate($sorted_way_nodes[$#sorted_way_nodes],'name;ref') ) );            
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("PTv2 route: last node of way is not a stop position of this route: %s"), printNodeTemplate($sorted_way_nodes[$#sorted_way_nodes],'name;ref') ) );
                     $return_code++;
                 }
             }
         }
-    }                                
+    }
     #
     # WAYS      are either Platforms (which must have a 'role') or Ways (which must not have a 'role')
     #
@@ -3010,7 +3051,7 @@ sub analyze_ptv2_route_relation {
             if ( $highway_ref->{'role'} =~ m/^platform$/               ||
                  $highway_ref->{'role'} =~ m/^platform_entry_only$/    ||
                  $highway_ref->{'role'} =~ m/^platform_exit_only$/        ) {
-                
+
                 if ( $xml_has_ways ) {
                     if ( $platform_ways{$highway_ref->{'ref'}} ) {
                         #
@@ -3077,7 +3118,7 @@ sub analyze_ptv2_route_relation {
             if ( $rel_ref->{'role'} =~ m/^platform$/               ||
                  $rel_ref->{'role'} =~ m/^platform_entry_only$/    ||
                  $rel_ref->{'role'} =~ m/^platform_exit_only$/        ) {
-                
+
                 if ( $number_of_platform_multipolygon_relations ) {
                     if ( $platform_multipolygon_relations{$rel_ref->{'ref'}} ) {
                         #
@@ -3131,7 +3172,7 @@ sub analyze_ptv2_route_relation {
         }
     }
     $return_code += $role_mismatch_found;
-    
+
     return $return_code;
 }
 
@@ -3148,7 +3189,7 @@ sub FindRouteWays {
         #printf STDERR "FindRouteWays(): not pushed() %s\n", $highway_ref->{'ref'}   if ( $platform_ways{$highway_ref->{'ref'}} );
         #printf STDERR "FindRouteWays(): pushed() %s\n", $highway_ref->{'ref'}       unless ( $platform_ways{$highway_ref->{'ref'}} );
     }
-    
+
     return @relations_route_ways;
 }
 
@@ -3165,7 +3206,7 @@ sub FindRouteHighWays {
         #printf STDERR "FindRouteHighWays(): not pushed() %s\n", $highway_ref->{'ref'}   if ( $platform_ways{$highway_ref->{'ref'}} );
         #printf STDERR "FindRouteHighWays(): pushed() %s\n", $highway_ref->{'ref'}       unless ( $platform_ways{$highway_ref->{'ref'}} );
     }
-    
+
     return @relations_route_highways;
 }
 
@@ -3187,7 +3228,7 @@ sub FindRouteStopPositions {
             }
         }
     }
-    
+
     return @relations_route_stop_positions;
 }
 
@@ -3209,7 +3250,7 @@ sub FindRoutePlatformNodes {
             }
         }
     }
-    
+
     return @relations_route_platform_nodes;
 }
 
@@ -3224,7 +3265,7 @@ sub FindRoutePlatformWays {
     foreach $way_ref ( @{$relation_ptr->{'way'}} ) {
         push( @relations_route_platform_ways, $way_ref->{'ref'} )    if ( $platform_ways{$way_ref->{'ref'}} );
     }
-    
+
     return @relations_route_platform_ways;
 }
 
@@ -3239,7 +3280,7 @@ sub FindRoutePlatformRelations {
     foreach $rel_ref ( @{$relation_ptr->{'relation'}} ) {
         push( @relations_route_platform_relations, $rel_ref->{'ref'} )    if ( $platform_multipolygon_relations{$rel_ref->{'ref'}} );
     }
-    
+
     return @relations_route_platform_relations;
 }
 
@@ -3263,11 +3304,11 @@ sub SortRouteWayNodes {
     my $access_restriction          = undef;
     my $number_of_ways              = 0;
     my %expect_motorway_or_motorway_link_after = ();
-    
+
     printf STDERR "SortRouteWayNodes() : processing Ways:\nWays: %s\n", join( ', ', @{$relations_route_ways_ref} )     if ( $debug );
-    
+
     if ( $relation_ptr && $relations_route_ways_ref ) {
-        
+
         $number_of_ways = scalar @{$relations_route_ways_ref} ;
         if ( $number_of_ways ) {
             # we have at least one way, so we start with one segment
@@ -3276,15 +3317,15 @@ sub SortRouteWayNodes {
             # no ways, no segments
             $relation_ptr->{'number_of_segments'} = 0;
         }
-        
+
         while ( ${$relations_route_ways_ref}[$way_index] ) {
-            
+
             $current_way_id  = ${$relations_route_ways_ref}[$way_index];
             $next_way_id     = ${$relations_route_ways_ref}[$way_index+1];
             $way_index++;
-            
+
             push( @control_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
-    
+
             if ( $next_way_id ) {
 
                 if ( $current_way_id == $next_way_id && isClosedWay($current_way_id) ) {
@@ -3311,7 +3352,7 @@ sub SortRouteWayNodes {
                             for ( $i = 1; $i <= $index; $i++ ) {
                                 push( @sorted_nodes, ${$WAYS{$current_way_id}->{'chain'}}[$i] );
                             }
-                            
+
                             #
                             # now that we entered the closed way, how and where (!) do we get out of it
                             # - if this current way is a turning circle, where the 'bus' turns and comes back, then entering_node is leaving_node and we're fine and next While-loop will find that out
@@ -3323,22 +3364,22 @@ sub SortRouteWayNodes {
                                 # perfect: this is a turnig roundabout where the 'bus' leaves where it entered the closed way, no reason to complain
                                 #
                                 printf STDERR "SortRouteWayNodes() : handle turning roundabout %s at node %s for %s:\nNodes here : %s\nNodes there: %s\n",
-                                                                    $current_way_id, 
-                                                                    $sorted_nodes[$#sorted_nodes], 
-                                                                    $next_way_id, 
-                                                                    join( ', ', @{$WAYS{$current_way_id}->{'chain'}} ), 
+                                                                    $current_way_id,
+                                                                    $sorted_nodes[$#sorted_nodes],
+                                                                    $next_way_id,
+                                                                    join( ', ', @{$WAYS{$current_way_id}->{'chain'}} ),
                                                                     join( ', ', @{$WAYS{$next_way_id}->{'chain'}} )     if ( $debug );
                             } else {
                                 printf STDERR "SortRouteWayNodes() : handle partially used roundabout %s at node %s for %s:\nNodes here : %s\nNodes there: %s\n",
-                                                                    $current_way_id, 
-                                                                    $sorted_nodes[$#sorted_nodes], 
-                                                                    $next_way_id, 
-                                                                    join( ', ', @{$WAYS{$current_way_id}->{'chain'}} ), 
+                                                                    $current_way_id,
+                                                                    $sorted_nodes[$#sorted_nodes],
+                                                                    $next_way_id,
+                                                                    join( ', ', @{$WAYS{$current_way_id}->{'chain'}} ),
                                                                     join( ', ', @{$WAYS{$next_way_id}->{'chain'}} )     if ( $debug );
-                                
+
                                 $relation_ptr->{'number_of_roundabouts'}++;
-                                
-                                if ( isNodeInNodeArray($WAYS{$next_way_id}->{'first_node'},@{$WAYS{$current_way_id}->{'chain'}}) || 
+
+                                if ( isNodeInNodeArray($WAYS{$next_way_id}->{'first_node'},@{$WAYS{$current_way_id}->{'chain'}}) ||
                                      isNodeInNodeArray($WAYS{$next_way_id}->{'last_node'}, @{$WAYS{$current_way_id}->{'chain'}})     ){
                                     #
                                     # there is a match with first or last node of next way and some node of this roundabout
@@ -3478,7 +3519,7 @@ sub SortRouteWayNodes {
                             $relation_ptr->{'number_of_segments'}++;
                             push( @{$relation_ptr->{'gap_at_way'}}, $current_way_id );
                             printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d at Nodes of first, closed, single Way %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
-    
+
                         }
                     } elsif ( 0 != ($entry_node_id=isOneway($current_way_id,undef)) ) {
                         if ( $entry_node_id == $WAYS{$current_way_id}->{'first_node'} ) {
@@ -3682,19 +3723,19 @@ sub SortRouteWayNodes {
                     printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'} = %d at handle Nodes of last, isolated Way\n", $relation_ptr->{'number_of_segments'}    if ( $debug );
                 }
             }
-            
+
             $connecting_node_id = $sorted_nodes[$#sorted_nodes];
-            
+
             #
             # check whether we entered a motorway_link and did not enter motorway before entering another type of way
             #
-            if ( $current_way_id && $WAYS{$current_way_id} && $WAYS{$current_way_id}->{'tag'} && $WAYS{$current_way_id}->{'tag'}->{'highway'} && 
+            if ( $current_way_id && $WAYS{$current_way_id} && $WAYS{$current_way_id}->{'tag'} && $WAYS{$current_way_id}->{'tag'}->{'highway'} &&
                  $next_way_id    && $WAYS{$next_way_id}    && $WAYS{$next_way_id}->{'tag'}    && $WAYS{$next_way_id}->{'tag'}->{'highway'}        ) {
                 if ( $WAYS{$next_way_id}->{'tag'}->{'highway'} eq 'motorway_link' ) {
                     #
                     # next way is a motorway_link - be carefull
                     #
-                    if ( $WAYS{$current_way_id}->{'tag'}->{'highway'} eq 'motorway' || 
+                    if ( $WAYS{$current_way_id}->{'tag'}->{'highway'} eq 'motorway' ||
                          $WAYS{$current_way_id}->{'tag'}->{'highway'} eq 'trunk'       ) {
                         #
                         # current way is motorway or trunk and next way is motorway_link - everthings is fine, no problem
@@ -3727,23 +3768,23 @@ sub SortRouteWayNodes {
                 }
             }
         }
-    
+
         foreach my $k ( keys ( %expect_motorway_or_motorway_link_after ) ) {
             $relation_ptr->{'expect_motorway_after'}->{$k} = 1;
         }
-        
+
         if ( $debug ) {
             foreach $node_id ( @control_nodes ) {
                 $counter = isNodeInNodeArray( $node_id, @sorted_nodes );
                 printf STDERR "SortRouteWayNodes() : Node %s has been considered %d times\n", $node_id, $counter   if ( $counter != 1 );
             }
-        
+
             printf STDERR "SortRouteWayNodes() : returning Nodes:\nNodes: %s\n", join( ', ', @sorted_nodes );
             printf STDERR "%s\n", join( '', map { $_ ? '_' : 'G' } @sorted_nodes );
-        
+
         }
     }
-    
+
     return @sorted_nodes;
 }
 
@@ -3753,10 +3794,10 @@ sub SortRouteWayNodes {
 sub isNodeInNodeArray {
     my $node_id         = shift;
     my @node_array      = @_;
-    
+
     my $node_of_way     = undef;
     my $return_code     = 0;
-    
+
     if ( $node_id && @node_array ) {
         foreach $node_of_way ( @node_array ) {
             if ( $node_of_way eq $node_id ) {
@@ -3775,9 +3816,9 @@ sub isNodeInNodeArray {
 sub IndexOfNodeInNodeArray {
     my $node_id         = shift;
     my @node_array      = @_;
-    
+
     my $index           = undef;
-   
+
     if ( $node_id && @node_array ) {
         for ( $index = 0; $index <= $#node_array; $index++ ) {
             if ( $node_array[$index] == $node_id ) {
@@ -3796,7 +3837,7 @@ sub IndexOfNodeInNodeArray {
 sub isFirstNodeInNodeArray {
     my $node_id         = shift;
     my @node_array      = @_;
-    
+
     if ( $node_id && @node_array ) {
         if ( $node_array[0] == $node_id    ) {
             printf STDERR "... match found for Node-ID %d, $node_id\n"       if ( $debug );
@@ -3813,7 +3854,7 @@ sub isFirstNodeInNodeArray {
 sub isLastNodeInNodeArray {
     my $node_id         = shift;
     my @node_array      = @_;
-    
+
     if ( $node_id && @node_array ) {
         if ( $node_array[$#node_array] == $node_id    ) {
             printf STDERR "... match found for Node-ID %d, $node_id\n"       if ( $debug );
@@ -3831,13 +3872,13 @@ sub PTv2CompatibleNodeStopTag {
     my $node_id         = shift;
     my $vehicle_type    = shift;
     my $ret_val         = '';
-    
+
     if ( $NODES{$node_id}->{'member_of_way'} ) {
         # this node is a member of a way,  don't care at the moment which type
-        if ( !defined($vehicle_type)                    || 
-              $vehicle_type eq 'bus'                    || 
-             ($vehicle_type eq 'coach' && $allow_coach) || 
-              $vehicle_type eq 'share_taxi'             || 
+        if ( !defined($vehicle_type)                    ||
+              $vehicle_type eq 'bus'                    ||
+             ($vehicle_type eq 'coach' && $allow_coach) ||
+              $vehicle_type eq 'share_taxi'             ||
               $vehicle_type eq 'trolleybus'                ) {
             if ( $NODES{$node_id}->{'tag'}->{'highway'} ) {
                 if ( $NODES{$node_id}->{'tag'}->{'highway'} eq 'bus_stop' ) {
@@ -3848,7 +3889,7 @@ sub PTv2CompatibleNodeStopTag {
     }else {
         ; # PTv2 compatible stop_position must be member of a way, higway=bus_stop can be placed next to a way though
     }
-    
+
     return $ret_val;
 }
 
@@ -3859,13 +3900,13 @@ sub PTv2CompatibleNodePlatformTag {
     my $node_id         = shift;
     my $vehicle_type    = shift;
     my $ret_val         = '';
-    
+
     if ( $NODES{$node_id}->{'member_of_way'} ) {
         # this node is a member of a way,  yet don't know which type
-        if ( !defined($vehicle_type)                    || 
-              $vehicle_type eq 'bus'                    || 
-             ($vehicle_type eq 'coach' && $allow_coach) || 
-              $vehicle_type eq 'share_taxi'             || 
+        if ( !defined($vehicle_type)                    ||
+              $vehicle_type eq 'bus'                    ||
+             ($vehicle_type eq 'coach' && $allow_coach) ||
+              $vehicle_type eq 'share_taxi'             ||
               $vehicle_type eq 'trolleybus'                ) {
             if ( $NODES{$node_id}->{'tag'}->{'highway'} ) {
                 if ( $NODES{$node_id}->{'tag'}->{'highway'} eq 'bus_stop' || $NODES{$node_id}->{'tag'}->{'highway'} eq 'platform' ) {
@@ -3882,10 +3923,10 @@ sub PTv2CompatibleNodePlatformTag {
         }
     } else {
         # this node is a solitary node
-        if ( !defined($vehicle_type)                    || 
-              $vehicle_type eq 'bus'                    || 
-             ($vehicle_type eq 'coach' && $allow_coach) || 
-              $vehicle_type eq 'share_taxi'             || 
+        if ( !defined($vehicle_type)                    ||
+              $vehicle_type eq 'bus'                    ||
+             ($vehicle_type eq 'coach' && $allow_coach) ||
+              $vehicle_type eq 'share_taxi'             ||
               $vehicle_type eq 'trolleybus'                ) {
             if ( $NODES{$node_id}->{'tag'} && $NODES{$node_id}->{'tag'}->{'highway'} ) {
                 if ( $NODES{$node_id}->{'tag'}->{'highway'} eq 'bus_stop' || $NODES{$node_id}->{'tag'}->{'highway'} eq 'platform' ) {
@@ -3894,7 +3935,7 @@ sub PTv2CompatibleNodePlatformTag {
             }
         }
     }
-    
+
     return $ret_val;
 }
 
@@ -3904,15 +3945,15 @@ sub PTv2CompatibleNodePlatformTag {
 sub isOneway {
     my $way_id          = shift;
     my $vehicle_type    = shift;        # optional !
-    
+
     my $entry_node_id   = 0;
-    
+
     if ( $way_id && $WAYS{$way_id} ) {
         if ( $vehicle_type ) {
             ; # todo
         } else {
             if ( ($WAYS{$way_id}->{'tag'}->{'oneway:bus'} && $WAYS{$way_id}->{'tag'}->{'oneway:bus'} eq 'no')            ||
-                 ($WAYS{$way_id}->{'tag'}->{'oneway:psv'} && $WAYS{$way_id}->{'tag'}->{'oneway:psv'} eq 'no')            || 
+                 ($WAYS{$way_id}->{'tag'}->{'oneway:psv'} && $WAYS{$way_id}->{'tag'}->{'oneway:psv'} eq 'no')            ||
                  ($WAYS{$way_id}->{'tag'}->{'busway'}     && $WAYS{$way_id}->{'tag'}->{'busway'}     eq 'opposite_lane')    ) {
                 # bus may enter the road in either direction, return 0: don't care about entry point
                 printf STDERR "isOneway() : no for bus/psv for Way %d\n", $way_id       if ( $debug );
@@ -3941,7 +3982,7 @@ sub isOneway {
 
 sub isClosedWay {
     my $way_id  = shift;
-    
+
     if ( $way_id && $WAYS{$way_id} ) {
         if ( $WAYS{$way_id}->{'first_node'} && $WAYS{$way_id}->{'last_node'} ) {
             if ( $WAYS{$way_id}->{'first_node'} == $WAYS{$way_id}->{'last_node'} ) {
@@ -3962,7 +4003,7 @@ sub isClosedWay {
 
 sub isNodeArrayClosedWay {
     my @node_array = @_;
-    
+
     if ( @node_array ) {
         if ( $node_array[0] == $node_array[$#node_array] ) {
             printf STDERR "isNodeArrayClosedWay() : yes\n"       if ( $debug );
@@ -3980,7 +4021,7 @@ sub noAccessOnWay {
     my $way_id          = shift;
     my $vehicle_type    = shift;        # optional !
     my $ptv             = shift;        # optional !
-    
+
     if ( $way_id && $WAYS{$way_id} && $WAYS{$way_id}->{'tag'} ) {
         my $way_tag_ref = $WAYS{$way_id}->{'tag'};
 
@@ -3990,7 +4031,7 @@ sub noAccessOnWay {
             #
             printf STDERR "noAccessOnWay() : access for all psv for way %d\n", $way_id       if ( $debug );
             return '';
-        } elsif ( $vehicle_type && $way_tag_ref->{$vehicle_type} && 
+        } elsif ( $vehicle_type && $way_tag_ref->{$vehicle_type} &&
                   ($way_tag_ref->{$vehicle_type} eq 'yes' || $way_tag_ref->{$vehicle_type} eq 'designated' || $way_tag_ref->{$vehicle_type} eq 'permissive' || $way_tag_ref->{$vehicle_type} eq 'official') ) {
             #
             # fine for this specific type of vehicle (bus, train, subway, ...) == @supported_route_types
@@ -4050,16 +4091,16 @@ sub noAccessOnWay {
 sub noAccessOnNode {
     my $node_id         = shift;
     my $vehicle_type    = shift;        # optional !
-    
+
     my @list_of_access_levels = ( 'psv', 'motorcar', 'motor_vehicle', 'vehicle', 'access' );
-    
+
     if ( $node_id && $NODES{$node_id} && $NODES{$node_id}->{'tag'}&& $NODES{$node_id}->{'tag'}->{'barrier'} ) {
 
         my $node_tag_ref = $NODES{$node_id}->{'tag'};
 
         if ( $vehicle_type ) {
             unshift( @list_of_access_levels, $vehicle_type );
-        } 
+        }
 
         foreach my $access_type ( @list_of_access_levels ) {
             if ( $node_tag_ref->{$access_type} ) {
@@ -4069,7 +4110,7 @@ sub noAccessOnNode {
                      $node_tag_ref->{$access_type} eq 'official'      ) {
                     printf STDERR "noAccessOnNode() : access for node %d (barrier=%s, %s=%s)\n", $node_id, $node_tag_ref->{'barrier'}, $access_type, $node_tag_ref->{$access_type}       if ( $debug );
                     return '';
-                } elsif ( $node_tag_ref->{$access_type} eq 'no'      || 
+                } elsif ( $node_tag_ref->{$access_type} eq 'no'      ||
                           $node_tag_ref->{$access_type} eq 'private'    ) {
                     printf STDERR "noAccessOnNode() : no access for node %d (barrier=%s, %s=%s)\n", $node_id, $node_tag_ref->{'barrier'}, $access_type, $node_tag_ref->{$access_type}       if ( $debug );
                     return sprintf( "'barrier'='%s', '%s'='%s'", $node_tag_ref->{'barrier'}, $access_type, $node_tag_ref->{$access_type} );
@@ -4102,13 +4143,13 @@ sub noAccessOnNode {
 sub CheckNameRefFromViaToPTV2 {
     my $relation_ptr = shift;
     my $return_code  = 0;
-    
+
     if ( $relation_ptr && $relation_ptr->{'tag'} ) {
         my $preconditions_failed = 0;
-        my $name = $relation_ptr->{'tag'}->{'name'}; 
-        my $ref  = $relation_ptr->{'tag'}->{'ref'}; 
-        my $from = $relation_ptr->{'tag'}->{'from'}; 
-        my $to   = $relation_ptr->{'tag'}->{'to'}; 
+        my $name = $relation_ptr->{'tag'}->{'name'};
+        my $ref  = $relation_ptr->{'tag'}->{'ref'};
+        my $from = $relation_ptr->{'tag'}->{'from'};
+        my $to   = $relation_ptr->{'tag'}->{'to'};
         my $via  = $relation_ptr->{'tag'}->{'via'};
 
         my $number_of_ref_colon_tags = 0;
@@ -4131,22 +4172,22 @@ sub CheckNameRefFromViaToPTV2 {
         }
 
         if ( $name && $ref && $preconditions_failed == 0) {
-            
+
             if ( $name =~ m/^(.*):\s{0,1}(.*?)\s{0,1}=>\s{0,1}(.*)\s{0,1}=>\s{0,1}(.*)$/ ||
                  $name =~ m/^(.*):\s{0,1}(.*?)\s{0,1}=>\s{0,1}(.*)$/                     ||
-                 ( $check_name_relaxed && 
+                 ( $check_name_relaxed &&
                     ( $name =~ m/^(.*):\s*(.*?)\s*(?:=>|→|⇒)\s*(.*)\s*(?:=>|→|⇒)\s*(.*)$/ ||
                       $name =~ m/^(.*):\s*(.*?)\s*(?:=>|→|⇒)\s*(.*)$/
                     )
                  )
                ){
-                
+
                 my $ref_in_name       = $1;
                 my $from_in_name      = $2;
                 my $vias_in_name      = $3;
                 my $to_in_name        = $4;
                 my @via_parts_in_name = ();
-                
+
                 if ( $to_in_name) {
                     if ( $check_name_relaxed ) {
                         @via_parts_in_name = split( '(?:=>|→|⇒)', $vias_in_name );
@@ -4223,7 +4264,7 @@ sub CheckNameRefFromViaToPTV2 {
                 if ( scalar(@via_parts_in_name) ) {
                     if ( $via ) {
                         my @via_values  = split( ";", $via );
-                        
+
                         if ( !$check_name_relaxed ) {
                             if ( scalar(@via_parts_in_name) == scalar(@via_values) ) {
                                 for ( my $index = 0; $index < scalar(@via_parts_in_name); $index++ ) {
@@ -4266,7 +4307,7 @@ sub CheckNameRefFromViaToPTV2 {
             }
         }
     }
-    
+
     return $return_code;
 }
 
@@ -4293,7 +4334,7 @@ sub CheckAccessOnWaysAndNodes {
                 $restricted_access_on_ways{$access_restriction}->{$route_highway->{'ref'}} = 1;
                 $ret_val++;
             }
-            
+
             foreach my $highway_node_ID ( @{$WAYS{$route_highway->{'ref'}}->{'chain'}} ) {
                 $access_restriction = noAccessOnNode( $highway_node_ID, $relation_ptr->{'tag'}->{'route'} );
                 if ( $access_restriction ) {
@@ -4331,10 +4372,10 @@ sub CheckAccessOnWaysAndNodes {
 sub CheckBusStopOnWaysAndRelations {
     my $relation_ptr = shift;
     my $ret_val      = 0;
-    
+
     if ( $relation_ptr ) {
         my %bus_stop_ways = ();
-        
+
         foreach my $highway_ref ( @{$relation_ptr->{'way'}} ) {
             if ( $WAYS{$highway_ref->{'ref'}}->{'tag'}->{'highway'} && $WAYS{$highway_ref->{'ref'}}->{'tag'}->{'highway'} eq 'bus_stop' ) {
                 $bus_stop_ways{$highway_ref->{'ref'}} = 1;
@@ -4353,7 +4394,7 @@ sub CheckBusStopOnWaysAndRelations {
             }
         }
     }
-    
+
     return $ret_val;
 }
 
@@ -4368,7 +4409,7 @@ sub CheckBusStopOnWaysAndRelations {
 sub CheckRouteRefOnStops {
     my $relation_ptr = shift;
     my $ret_val      = 0;
-    
+
     if ( $relation_ptr ) {
         if ( $relation_ptr->{'tag'} && $relation_ptr->{'tag'}->{'ref'} ) {
             my $ref                     = $relation_ptr->{'tag'}->{'ref'};
@@ -4386,7 +4427,7 @@ sub CheckRouteRefOnStops {
             my %to_be_deleted           = ();
             my %included_refs           = ();
             my @help_array              = ();
-    
+
             foreach $member ( @{$relation_ptr->{'members'}} ) {
                 if ( $member->{'ref'} && $member->{'type'} ) {
                     if ( $member->{'type'} eq 'node' ) {
@@ -4424,7 +4465,7 @@ sub CheckRouteRefOnStops {
                                         $not_set_on{sprintf(gettext("'route_ref' = '%s' of stop does not include 'ref' = '%s' value of this route%s"),html_escape($object_ref->{'tag'}->{'route_ref'}),html_escape($sub_ref),$hint)}->{$member->{'ref'}} = $member->{'type'};
                                     }
                                 }
-    
+
                                 if ( $check_osm_separator ) {
                                     if ( $object_ref->{'tag'}->{'route_ref'} =~ m/\s+;/ ||
                                          $object_ref->{'tag'}->{'route_ref'} =~ m/;\s+/    ) {
@@ -4443,7 +4484,7 @@ sub CheckRouteRefOnStops {
                                 if ( $object_ref->{'tag'}->{'ref'} ) {
                                     $temp_stop_ref =  ';' . $object_ref->{'tag'}->{'ref'} . ';';
                                     $temp_stop_ref =~ s/\s*;\s*/;/g;
-    
+
                                     foreach my $sub_ref ( split( $ref_separator, $ref ) ) {
                                         if ( $temp_stop_ref =~ m/;\Q$sub_ref\E;/ ) {
                                             $hint = sprintf( gettext( "(consider adding '%s' to the 'route_ref' tag of the stop)" ), html_escape($sub_ref) );
@@ -4471,7 +4512,7 @@ sub CheckRouteRefOnStops {
                                 if ( $object_ref->{'tag'}->{'ref'} ) {
                                     $temp_stop_ref =  ';' . $object_ref->{'tag'}->{'ref'} . ';';
                                     $temp_stop_ref =~ s/\s*;\s*/;/g;
-    
+
                                     foreach my $sub_ref ( split( $ref_separator, $ref ) ) {
                                         if ( $temp_stop_ref =~ m/;\Q$sub_ref\E;/ ) {
                                             $hint = sprintf( gettext( "(consider creating a 'route_ref' = '%s' tag for the stop)" ), html_escape($sub_ref) );
@@ -4536,7 +4577,7 @@ sub CheckRouteRefOnStops {
             }
         }
     }
-    
+
     return $ret_val;
 }
 
@@ -4551,7 +4592,7 @@ sub CheckRouteRefOnStops {
 sub CheckCompletenessOfData {
     my $relation_ptr = shift;
     my $ret_val      = 0;
-    
+
     #
     # for all WAYS  check for completeness of data
     #
@@ -4609,7 +4650,7 @@ sub CheckCompletenessOfData {
             printf STDERR "%s Error in input data: insufficient data for nodes of route ref=%s\n", get_time(), ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref' );
         }
     }
-    
+
     return $ret_val;
 }
 
@@ -4627,16 +4668,16 @@ my @html_header_anchors         = ();
 my @html_header_anchor_numbers  = (0,0,0,0,0,0,0);
 my $printText_buffer            = '';
 my %id_markers                  = ();                   # printTableSubHeader() auto-generates id='' strings based on 'route_type' and 'ref'; they may appear multiple times
-    
+
 
 
 sub printInitialHeader {
     my $title       = shift;
     my $osm_base    = shift;
     my $areas       = shift;
-    
+
     my $html_lang   = $opt_language || 'en';
-    
+
     $no_of_columns               = 0;
     @columns                     = ();
     @table_columns               = ();
@@ -4695,7 +4736,7 @@ sub printFinalFooter {
 
     push( @HTML_main, "    </body>\n" );
     push( @HTML_main, "</html>\n" );
-    
+
     foreach my $line ( @HTML_start ) {
         print $line;
     }
@@ -4711,7 +4752,7 @@ sub printFinalFooter {
 #############################################################################################
 
 sub printTableOfContents {
-    
+
     my $toc_line        = undef;
     my $last_level      = 0;
     my $anchor_level    = undef;
@@ -4908,7 +4949,7 @@ sub printHintNetworks {
         push( @HTML_main, "</ul>\n" );
     }
 }
-    
+
 
 #############################################################################################
 
@@ -4916,9 +4957,9 @@ sub printHintUsedNetworks {
 
     my @relations_of_network  = ();
     my @relations_of_operator = ();
-    
+
     printHeader( gettext("Considered 'network'-Values"), 2, 'considerednetworks' );
-    
+
     push( @HTML_main, "<p>\n" );
     push( @HTML_main, gettext("This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.") );
     push( @HTML_main, "\n</p>\n" );
@@ -4930,25 +4971,25 @@ sub printHintUsedNetworks {
         $network = $network eq '__unset_network__' ? '' : $network;
         if ( scalar @relations_of_network <= 10 ) {
             printTableLine( 'network'           =>    $network,
-                            'number'            =>    scalar @relations_of_network, 
+                            'number'            =>    scalar @relations_of_network,
                             'relations'         =>    join( ',', @relations_of_network )
                           );
         } else {
             printTableLine( 'network'           =>    $network,
-                            'number'            =>    scalar @relations_of_network, 
+                            'number'            =>    scalar @relations_of_network,
                             'relations'         =>    join( ',', splice(@relations_of_network,0,10) ),
-                            'and more'          =>    gettext( "and more ..." ) 
+                            'and more'          =>    gettext( "and more ..." )
                           );
         }
     }
-    printTableFooter(); 
+    printTableFooter();
 
     if ( scalar keys (%unused_operators) ) {
         push( @HTML_main, "<p>\n" );
         push( @HTML_main, gettext("This section lists the 'operator'-values which have not been considered. ") );
         push( @HTML_main, gettext("They might include typos in values which otherwise should have been considered. ") );
         push( @HTML_main, "\n</p>\n" );
-    
+
         printTableInitialization( 'operator', 'number', 'relations' );
         printTableHeader();
         foreach my $operator ( sort( keys( %unused_operators ) ) ) {
@@ -4956,12 +4997,12 @@ sub printHintUsedNetworks {
             $operator = $operator eq '__unset_operator__' ? '' : $operator;
             if ( scalar @relations_of_network <= 10 ) {
                 printTableLine( 'operator'          =>    $operator,
-                                'number'            =>    scalar @relations_of_operator, 
+                                'number'            =>    scalar @relations_of_operator,
                                 'relations'         =>    join( ',', @relations_of_operator )
                               );
             } else {
                 printTableLine( 'operator'          =>    $operator,
-                                'number'            =>    scalar @relations_of_operator, 
+                                'number'            =>    scalar @relations_of_operator,
                                 'relations'         =>    join( ',', splice(@relations_of_operator,0,10) ),
                                 'and more'          =>    gettext( "and more ..." )
                               );
@@ -4971,16 +5012,16 @@ sub printHintUsedNetworks {
     }
 
 }
-    
+
 
 #############################################################################################
 
 sub printHintUnusedNetworks {
 
     my @relations_of_network = ();
-    
+
     printHeader( gettext("Not Considered 'network'-Values"), 2, 'notconsiderednetworks' );
-    
+
     push( @HTML_main, "<p>\n" );
     push( @HTML_main, gettext("This section lists the 'network'-values which have not been considered. ") );
     push( @HTML_main, gettext("They might include typos in values which otherwise should have been considered. ") );
@@ -4993,21 +5034,21 @@ sub printHintUnusedNetworks {
         $network = $network eq '__unset_network__' ? '' : $network;
         if ( scalar @relations_of_network <= 10 ) {
             printTableLine( 'network'           =>    $network,
-                            'number'            =>    scalar @relations_of_network, 
+                            'number'            =>    scalar @relations_of_network,
                             'relations'         =>    join( ',', @relations_of_network )
                           );
         } else {
             printTableLine( 'network'           =>    $network,
-                            'number'            =>    scalar @relations_of_network, 
+                            'number'            =>    scalar @relations_of_network,
                             'relations'         =>    join( ',', splice(@relations_of_network,0,10) ),
                             'and more'          =>    gettext( "and more ..." )
                           );
         }
     }
-    printTableFooter(); 
+    printTableFooter();
 
 }
-    
+
 
 #############################################################################################
 
@@ -5015,7 +5056,7 @@ sub printHeader {
     my $text  = shift;
     my $level = shift || 1;
     my $label = shift;
-    
+
     my $header_numbers = undef;
 
     if ( $printText_buffer ) {
@@ -5058,7 +5099,7 @@ sub printHeader {
         } elsif ( $level == 6 ) {
             $header_numbers = $html_header_anchor_numbers[1] . '.' . $html_header_anchor_numbers[2] . '.' . $html_header_anchor_numbers[3] . '.' . $html_header_anchor_numbers[4] . '.' . $html_header_anchor_numbers[5] . '.' . ++$html_header_anchor_numbers[6];
         }
-        
+
         if ( $label ) {
             push( @html_header_anchors, sprintf( "A%d N%s L%s T%s", $level, $header_numbers, $label, $text ) );
             push( @HTML_main,          "        <hr />\n" )   if ( $level == 1 );
@@ -5133,7 +5174,7 @@ sub printTableHeader {
         if ( $no_of_columns == 0 ) {
             push( @HTML_main, "<th class=\"name\">Linienverlauf (name=)</th>" );
             push( @HTML_main, "<th class=\"type\">Typ (type=)</th>" );
-            push( @HTML_main, "<th class=\"relation\">Relation (id=)</th>" ); 
+            push( @HTML_main, "<th class=\"relation\">Relation (id=)</th>" );
             push( @HTML_main, "<th class=\"PTv\">PTv</th>" );
             push( @HTML_main, "<th class=\"issues\">Fehler</th>" );
             push( @HTML_main, "<th class=\"notes\">Anmerkungen</th>" );
@@ -5190,7 +5231,7 @@ sub printTableSubHeader {
             $id_string = sprintf( "id=\"%s\" ", $id_string );
         }
     }
-    
+
     if ( $hash{'Comment'}  ) {
         $csv_text .= sprintf( "%s: %s; ", ( $column_name{'Comment'}  ? $column_name{'Comment'}  : 'Comment' ),  html_escape($hash{'Comment'})  );
         $csv_text =~ s|!([^!]+)!|<span class=\"attention\">$1</span>|;
@@ -5199,7 +5240,7 @@ sub printTableSubHeader {
     $csv_text .= sprintf( "%s: %s; ", ( $column_name{'To'}       ? $column_name{'To'}       : 'To' ),       html_escape($hash{'To'})       )  if ( $hash{'To'}       );
     $csv_text .= sprintf( "%s: %s; ", ( $column_name{'Operator'} ? $column_name{'Operator'} : 'Operator' ), html_escape($hash{'Operator'}) )  if ( $hash{'Operator'} );
     $csv_text =~ s/; $//;
-    
+
     $info = $csv_text ? $csv_text : '???';
     $info =~ s/\"/_/g;
 
@@ -5293,7 +5334,7 @@ sub printXxxTemplate {
 sub printRelationTemplate {
     my $val  = shift;
     my $tags = shift;
-    
+
     if ( $val ) {
         my $info_string = '';
         if ( $tags ) {
@@ -5304,7 +5345,7 @@ sub printRelationTemplate {
                 }
             }
         }
-        
+
         my $image_url = "<img src=\"/img/Relation.svg\" alt=\"Relation\" />";
 
         if ( $val > 0 ) {
@@ -5312,14 +5353,14 @@ sub printRelationTemplate {
             my $id_url       = sprintf( "<a href=\"https://osm.org/edit?editor=id&amp;relation=%s\" title=\"Edit in iD\">iD</a>", $val );
             my $josm_url     = sprintf( "<a href=\"http://127.0.0.1:8111/import?url=https://api.openstreetmap.org/api/0.6/relation/%s/full\" title=\"Edit in JOSM\">JOSM</a>", $val );
 
-            $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $relation_url, $id_url, $josm_url );    
+            $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $relation_url, $id_url, $josm_url );
         } else {
             $val = sprintf( "%s %s%s", $image_url, $info_string, $val );
         }
     } else {
         $val = '';
     }
-    
+
     return $val;
 }
 
@@ -5329,7 +5370,7 @@ sub printRelationTemplate {
 sub printWayTemplate {
     my $val  = shift;
     my $tags = shift;
-    
+
     if ( $val ) {
         my $info_string = '';
         if ( $tags ) {
@@ -5348,14 +5389,14 @@ sub printWayTemplate {
             my $id_url    = sprintf( "<a href=\"https://osm.org/edit?editor=id&amp;way=%s\" title=\"Edit in iD\">iD</a>", $val );
             my $josm_url  = sprintf( "<a href=\"http://127.0.0.1:8111/import?url=https://api.openstreetmap.org/api/0.6/way/%s/full\" title=\"Edit in JOSM\">JOSM</a>", $val );
 
-            $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $way_url, $id_url, $josm_url );    
+            $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $way_url, $id_url, $josm_url );
         } else {
             $val = sprintf( "%s %s%s", $image_url, $info_string, $val );
         }
     } else {
         $val = '';
     }
-    
+
     return $val;
 }
 
@@ -5365,7 +5406,7 @@ sub printWayTemplate {
 sub printNodeTemplate {
     my $val  = shift;
     my $tags = shift;
-    
+
     if ( $val ) {
         my $info_string     = '';
         if ( $tags ) {
@@ -5378,20 +5419,20 @@ sub printNodeTemplate {
         }
 
         my $image_url = "<img src=\"/img/Node.svg\" alt=\"Node\" />";
-        
+
         if ( $val > 0 ) {
             my $node_url = sprintf( "<a href=\"https://osm.org/node/%s\" title=\"Brose on map\">%s</a>", $val, $val );
             my $id_url   = sprintf( "<a href=\"https://osm.org/edit?editor=id&amp;node=%s\" title=\"Edit in iD\">iD</a>", $val );
             my $josm_url = sprintf( "<a href=\"http://127.0.0.1:8111/import?url=https://api.openstreetmap.org/api/0.6/node/%s\" title=\"Edit in JOSM\">JOSM</a>", $val );
 
-            $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $node_url, $id_url, $josm_url );    
+            $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $node_url, $id_url, $josm_url );
         } else {
             $val = sprintf( "%s %s%s", $image_url, $info_string, $val );
         }
     } else {
         $val = '';
     }
-    
+
     return $val;
 }
 
@@ -5412,7 +5453,7 @@ sub printSketchLineTemplate {
     my $span_end      = '';
     my $bg_colour     = GetColourFromString( $colour );
     my $fg_colour     = GetForeGroundFromBackGround( $bg_colour );
-    
+
     if ( $bg_colour && $fg_colour && $coloured_sketchline ) {
         $colour_string = "\&amp;bg=" . $bg_colour . "\&amp;fg=". $fg_colour;
         $pt_string     = "\&amp;r=1"                                        if ( $pt_type eq 'train' || $pt_type eq 'light_rail'     );
@@ -5423,7 +5464,7 @@ sub printSketchLineTemplate {
     $ref_escaped    =~ s/ /+/g;
     $network        =~ s/ /+/g;
     $text           = sprintf( "<a href=\"https://overpass-api.de/api/sketch-line?ref=%s\&amp;network=%s\&amp;style=wuppertal%s%s\" title=\"Sketch-Line\"%s>%s%s%s</a>", $ref_escaped, uri_escape($network), uri_escape($colour_string), $pt_string, $textdeco, $span_begin, $ref, $span_end ); # some manual expansion of the template
-    
+
     return $text;
 }
 
@@ -5549,10 +5590,10 @@ sub GetColourFromString {
 #############################################################################################
 
 sub GetForeGroundFromBackGround {
-    
+
     my $bg_colour = shift;
     my $ret_value = undef;
-    
+
     if ( $bg_colour ) {
         $bg_colour      =~ s/^#//;
         my$rgbval       = hex( $bg_colour );
@@ -5564,17 +5605,17 @@ sub GetForeGroundFromBackGround {
     }
     return $ret_value;
 }
-    
+
 
 #############################################################################################
 
 sub get_time {
-    
+
     my ($sec,$min,$hour,$day,$month,$year) = localtime();
-    
-    return sprintf( "%04d-%02d-%02d %02d:%02d:%02d", $year+1900, $month+1, $day, $hour, $min, $sec ); 
+
+    return sprintf( "%04d-%02d-%02d %02d:%02d:%02d", $year+1900, $month+1, $day, $hour, $min, $sec );
 }
-    
+
 
 #############################################################################################
 #

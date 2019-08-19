@@ -139,5 +139,10 @@ X2;bus;;;;
 X3;bus;;;;
 -
 
+=== Negative, identical 'name'
+
+Y;bus;;;;
+-
+
 
 </pre>

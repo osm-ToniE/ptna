@@ -50,6 +50,8 @@
         </li>
         <li>2.2.3 <a href="#A2.2.3">Negative, with special characters</a>
         </li>
+        <li>2.2.4 <a href="#A2.2.4">Negative, identical 'name'</a>
+        </li>
         </ol>
         </li>
         </ol>
@@ -268,6 +270,22 @@
 <p>
 &nbsp;
 </p>
+        <h3 id="A2.2.4">2.2.4 Negative, identical 'name'</h3>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr id="bus_Y" data-info="???" data-ref="Y" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=Y&amp;network=Network&amp;style=wuppertal" title="Sketch-Line">Y</a></td><td class="csvinfo" colspan="5"></td></tr>
+                <tr id="-107403" data-info="-107403" data-ref="Y" class="line"><td class="name">Bus Y</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107403</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'</td></tr>
+                <tr id="-107297" data-info="-107297" data-ref="Y" class="line"><td class="name">Bus Y: Stop 1 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107297</td><td class="PTv">2</td><td class="issues"></td><td class="notes">PTv2 Route: 'name' of Route is identical to 'name' of other Route(s), consider setting an appropriate 'via' value and include that into 'name': <img src="/img/Relation.svg" alt="Relation" /> -107300<br>'network' = 'Network'</td></tr>
+                <tr id="-107300" data-info="-107300" data-ref="Y" class="line"><td class="name">Bus Y: Stop 1 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -107300</td><td class="PTv">2</td><td class="issues"></td><td class="notes">PTv2 Route: 'name' of Route is identical to 'name' of other Route(s), consider setting an appropriate 'via' value and include that into 'name': <img src="/img/Relation.svg" alt="Relation" /> -107297<br>'network' = 'Network'</td></tr>
+            </tbody>
+        </table>
+
+<p>
+&nbsp;
+</p>
         <hr />
         <h1 id="withoutref">3 Public Transport Lines without 'ref'</h1>
         <h2 id="A3.1">3.1 Bus</h2>
@@ -292,7 +310,7 @@ This section lists the 'network'-values which have been considered; i.e. which m
                 <tr class="tableheaderrow"><th class="network">Network (network=)</th><th class="number">Number</th><th class="relations">Relations</th></tr>
             </thead>
             <tbody>
-                <tr data-info="Network" data-ref="???" class="line"><td class="network">Network</td><td class="number">15</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '102' -107232, <img src="/img/Relation.svg" alt="Relation" /> 'X1' -107233, <img src="/img/Relation.svg" alt="Relation" /> '1' -107236, <img src="/img/Relation.svg" alt="Relation" /> '2' -107237, <img src="/img/Relation.svg" alt="Relation" /> '3' -107238, <img src="/img/Relation.svg" alt="Relation" /> '4' -107239, <img src="/img/Relation.svg" alt="Relation" /> '5' -107240, <img src="/img/Relation.svg" alt="Relation" /> '112/122' -107241, <img src="/img/Relation.svg" alt="Relation" /> '12/22' -107242, <img src="/img/Relation.svg" alt="Relation" /> '111/121' -107243 and more ...</td></tr>
+                <tr data-info="Network" data-ref="???" class="line"><td class="network">Network</td><td class="number">18</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '102' -107232, <img src="/img/Relation.svg" alt="Relation" /> 'X1' -107233, <img src="/img/Relation.svg" alt="Relation" /> '1' -107236, <img src="/img/Relation.svg" alt="Relation" /> '2' -107237, <img src="/img/Relation.svg" alt="Relation" /> '3' -107238, <img src="/img/Relation.svg" alt="Relation" /> '4' -107239, <img src="/img/Relation.svg" alt="Relation" /> '5' -107240, <img src="/img/Relation.svg" alt="Relation" /> '112/122' -107241, <img src="/img/Relation.svg" alt="Relation" /> '12/22' -107242, <img src="/img/Relation.svg" alt="Relation" /> '111/121' -107243 and more ...</td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="network"></td><td class="number">3</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '101' -107234, <img src="/img/Relation.svg" alt="Relation" /> -107235, <img src="/img/Relation.svg" alt="Relation" /> -107286</td></tr>
             </tbody>
         </table>
