@@ -183,56 +183,56 @@
     <tag k='motor_vehicle' v='no' />
     <tag k='psv' v='yes' />
   </node>
-  <way id='-152154' action='modify'>
+  <way id='-152334' action='modify'>
     <nd ref='-152077' />
     <nd ref='-152059' />
     <tag k='highway' v='secondary' />
     <tag k='name' v='Way 3' />
     <tag k='ref' v='W 3' />
   </way>
-  <way id='-152155' action='modify'>
+  <way id='-152335' action='modify'>
     <nd ref='-152061' />
     <nd ref='-152065' />
     <tag k='highway' v='tertiary' />
     <tag k='name' v='Way 1' />
     <tag k='ref' v='W 1' />
   </way>
-  <way id='-152156' action='modify'>
+  <way id='-152336' action='modify'>
     <nd ref='-152043' />
     <nd ref='-152045' />
     <tag k='highway' v='secondary' />
     <tag k='name' v='Way 10' />
     <tag k='ref' v='W 10' />
   </way>
-  <way id='-152157' action='modify'>
+  <way id='-152337' action='modify'>
     <nd ref='-152045' />
     <nd ref='-152047' />
     <tag k='highway' v='secondary' />
     <tag k='name' v='Way 9' />
     <tag k='ref' v='W 9' />
   </way>
-  <way id='-152158' action='modify'>
+  <way id='-152338' action='modify'>
     <nd ref='-152047' />
     <nd ref='-152049' />
     <tag k='highway' v='secondary' />
     <tag k='name' v='Way 8' />
     <tag k='ref' v='W 8' />
   </way>
-  <way id='-152159' action='modify'>
+  <way id='-152339' action='modify'>
     <nd ref='-152049' />
     <nd ref='-152051' />
     <tag k='highway' v='secondary' />
     <tag k='name' v='Way 7' />
     <tag k='ref' v='W 7' />
   </way>
-  <way id='-152160' action='modify'>
+  <way id='-152340' action='modify'>
     <nd ref='-152051' />
     <nd ref='-152053' />
     <tag k='highway' v='secondary' />
     <tag k='name' v='Way 6' />
     <tag k='ref' v='W 6' />
   </way>
-  <way id='-152161' action='modify'>
+  <way id='-152341' action='modify'>
     <nd ref='-152053' />
     <nd ref='-152055' />
     <nd ref='-152057' />
@@ -240,28 +240,28 @@
     <tag k='name' v='Way 5' />
     <tag k='ref' v='W 5' />
   </way>
-  <way id='-152162' action='modify'>
+  <way id='-152342' action='modify'>
     <nd ref='-152057' />
     <nd ref='-152077' />
     <tag k='highway' v='secondary' />
     <tag k='name' v='Way 4' />
     <tag k='ref' v='W 4' />
   </way>
-  <way id='-152163' action='modify'>
+  <way id='-152343' action='modify'>
     <nd ref='-152059' />
     <nd ref='-152061' />
     <tag k='highway' v='secondary' />
     <tag k='name' v='Way 2' />
     <tag k='ref' v='W 2' />
   </way>
-  <way id='-152164' action='modify'>
+  <way id='-152344' action='modify'>
     <nd ref='-152061' />
     <nd ref='-152057' />
     <tag k='highway' v='secondary' />
     <tag k='name' v='Way 1-5' />
     <tag k='ref' v='1-5' />
   </way>
-  <way id='-152165' action='modify'>
+  <way id='-152345' action='modify'>
     <nd ref='-152079' />
     <nd ref='-152329' />
     <nd ref='-152111' />
@@ -269,22 +269,23 @@
     <tag k='name' v='Way 11-15' />
     <tag k='ref' v='11-15' />
   </way>
-  <way id='-152166' action='modify'>
+  <way id='-152346' action='modify'>
     <nd ref='-152099' />
     <nd ref='-152101' />
     <tag k='highway' v='secondary' />
     <tag k='name' v='Way 19' />
     <tag k='ref' v='W 19' />
   </way>
-  <way id='-152167' action='modify'>
+  <way id='-152347' action='modify'>
     <nd ref='-152101' />
     <nd ref='-152103' />
+    <tag k='bus:conditional' v='yes @ operator' />
     <tag k='highway' v='secondary' />
     <tag k='motorcar' v='no' />
     <tag k='name' v='Way 18' />
     <tag k='ref' v='W 18' />
   </way>
-  <way id='-152168' action='modify'>
+  <way id='-152348' action='modify'>
     <nd ref='-152103' />
     <nd ref='-152105' />
     <tag k='highway' v='secondary' />
@@ -292,7 +293,7 @@
     <tag k='name' v='Way 17' />
     <tag k='ref' v='W 17' />
   </way>
-  <way id='-152169' action='modify'>
+  <way id='-152349' action='modify'>
     <nd ref='-152105' />
     <nd ref='-152107' />
     <tag k='highway' v='secondary' />
@@ -300,7 +301,7 @@
     <tag k='ref' v='W 16' />
     <tag k='vehicle' v='private' />
   </way>
-  <way id='-152170' action='modify'>
+  <way id='-152350' action='modify'>
     <nd ref='-152107' />
     <nd ref='-152109' />
     <nd ref='-152111' />
@@ -309,7 +310,7 @@
     <tag k='name' v='Way 15' />
     <tag k='ref' v='W 15' />
   </way>
-  <way id='-152171' action='modify'>
+  <way id='-152351' action='modify'>
     <nd ref='-152079' />
     <nd ref='-152151' />
     <nd ref='-152083' />
@@ -318,7 +319,7 @@
     <tag k='name' v='Way 11' />
     <tag k='ref' v='W 11' />
   </way>
-  <way id='-152172' action='modify'>
+  <way id='-152352' action='modify'>
     <nd ref='-152095' />
     <nd ref='-152303' />
     <nd ref='-152113' />
@@ -326,28 +327,28 @@
     <tag k='name' v='Way 13' />
     <tag k='ref' v='W 13' />
   </way>
-  <way id='-152173' action='modify'>
+  <way id='-152353' action='modify'>
     <nd ref='-152111' />
     <nd ref='-152095' />
     <tag k='highway' v='footway' />
     <tag k='name' v='Way 4' />
     <tag k='ref' v='W 4' />
   </way>
-  <way id='-152174' action='modify'>
+  <way id='-152354' action='modify'>
     <nd ref='-152097' />
     <nd ref='-152099' />
     <tag k='highway' v='secondary' />
     <tag k='name' v='Way 20' />
     <tag k='ref' v='W 20' />
   </way>
-  <way id='-152175' action='modify'>
+  <way id='-152355' action='modify'>
     <nd ref='-152113' />
     <nd ref='-152079' />
     <tag k='highway' v='cycleway' />
     <tag k='name' v='Way 12' />
     <tag k='ref' v='W 12' />
   </way>
-  <way id='-152176' action='modify'>
+  <way id='-152356' action='modify'>
     <nd ref='-152115' />
     <nd ref='-152333' />
     <nd ref='-152145' />
@@ -356,14 +357,14 @@
     <tag k='psv' v='yes' />
     <tag k='ref' v='11-15' />
   </way>
-  <way id='-152177' action='modify'>
+  <way id='-152357' action='modify'>
     <nd ref='-152135' />
     <nd ref='-152139' />
     <tag k='highway' v='secondary' />
     <tag k='name' v='Way 19' />
     <tag k='ref' v='W 19' />
   </way>
-  <way id='-152178' action='modify'>
+  <way id='-152358' action='modify'>
     <nd ref='-152139' />
     <nd ref='-152137' />
     <tag k='bus' v='designated' />
@@ -372,7 +373,7 @@
     <tag k='name' v='Way 18' />
     <tag k='ref' v='W 18' />
   </way>
-  <way id='-152179' action='modify'>
+  <way id='-152359' action='modify'>
     <nd ref='-152141' />
     <nd ref='-152143' />
     <tag k='bus' v='yes' />
@@ -381,7 +382,7 @@
     <tag k='ref' v='W 16' />
     <tag k='vehicle' v='private' />
   </way>
-  <way id='-152180' action='modify'>
+  <way id='-152360' action='modify'>
     <nd ref='-152137' />
     <nd ref='-152141' />
     <tag k='highway' v='secondary' />
@@ -390,7 +391,7 @@
     <tag k='psv' v='designated' />
     <tag k='ref' v='W 17' />
   </way>
-  <way id='-152181' action='modify'>
+  <way id='-152361' action='modify'>
     <nd ref='-152143' />
     <nd ref='-152147' />
     <nd ref='-152145' />
@@ -400,7 +401,7 @@
     <tag k='psv' v='yes' />
     <tag k='ref' v='W 15' />
   </way>
-  <way id='-152182' action='modify'>
+  <way id='-152362' action='modify'>
     <nd ref='-152115' />
     <nd ref='-152153' />
     <nd ref='-152121' />
@@ -410,7 +411,7 @@
     <tag k='name' v='Way 11' />
     <tag k='ref' v='W 11' />
   </way>
-  <way id='-152183' action='modify'>
+  <way id='-152363' action='modify'>
     <nd ref='-152131' />
     <nd ref='-152315' />
     <nd ref='-152149' />
@@ -419,7 +420,7 @@
     <tag k='name' v='Way 13' />
     <tag k='ref' v='W 13' />
   </way>
-  <way id='-152184' action='modify'>
+  <way id='-152364' action='modify'>
     <nd ref='-152145' />
     <nd ref='-152131' />
     <tag k='highway' v='footway' />
@@ -427,14 +428,14 @@
     <tag k='ref' v='W 4' />
     <tag k='vehicle' v='yes' />
   </way>
-  <way id='-152185' action='modify'>
+  <way id='-152365' action='modify'>
     <nd ref='-152133' />
     <nd ref='-152135' />
     <tag k='highway' v='secondary' />
     <tag k='name' v='Way 20' />
     <tag k='ref' v='W 20' />
   </way>
-  <way id='-152186' action='modify'>
+  <way id='-152366' action='modify'>
     <nd ref='-152149' />
     <nd ref='-152115' />
     <tag k='highway' v='cycleway' />
@@ -442,23 +443,23 @@
     <tag k='name' v='Way 12' />
     <tag k='ref' v='W 12' />
   </way>
-  <relation id='-152187' action='modify'>
+  <relation id='-152367' action='modify'>
     <member type='node' ref='-152065' role='stop_entry_only' />
     <member type='node' ref='-152067' role='platform_entry_only' />
     <member type='node' ref='-152055' role='stop' />
     <member type='node' ref='-152063' role='platform' />
     <member type='node' ref='-152043' role='stop_exit_only' />
     <member type='node' ref='-152069' role='platform_exit_only' />
-    <member type='way' ref='-152155' role='' />
-    <member type='way' ref='-152163' role='' />
-    <member type='way' ref='-152154' role='' />
-    <member type='way' ref='-152162' role='' />
-    <member type='way' ref='-152161' role='' />
-    <member type='way' ref='-152160' role='' />
-    <member type='way' ref='-152159' role='' />
-    <member type='way' ref='-152158' role='' />
-    <member type='way' ref='-152157' role='' />
-    <member type='way' ref='-152156' role='' />
+    <member type='way' ref='-152335' role='' />
+    <member type='way' ref='-152343' role='' />
+    <member type='way' ref='-152334' role='' />
+    <member type='way' ref='-152342' role='' />
+    <member type='way' ref='-152341' role='' />
+    <member type='way' ref='-152340' role='' />
+    <member type='way' ref='-152339' role='' />
+    <member type='way' ref='-152338' role='' />
+    <member type='way' ref='-152337' role='' />
+    <member type='way' ref='-152336' role='' />
     <tag k='from' v='A-Village' />
     <tag k='name' v='Bus 001: A-Village =&gt; B-Village =&gt; C-Village' />
     <tag k='network' v='Test' />
@@ -469,21 +470,21 @@
     <tag k='type' v='route' />
     <tag k='via' v='B-Village' />
   </relation>
-  <relation id='-152188' action='modify'>
+  <relation id='-152368' action='modify'>
     <member type='node' ref='-152043' role='stop_entry_only' />
     <member type='node' ref='-152071' role='platform_entry_only' />
     <member type='node' ref='-152055' role='stop' />
     <member type='node' ref='-152073' role='platform' />
     <member type='node' ref='-152065' role='stop_exit_only' />
     <member type='node' ref='-152075' role='platform_exit_only' />
-    <member type='way' ref='-152156' role='' />
-    <member type='way' ref='-152157' role='' />
-    <member type='way' ref='-152158' role='' />
-    <member type='way' ref='-152159' role='' />
-    <member type='way' ref='-152160' role='' />
-    <member type='way' ref='-152161' role='' />
-    <member type='way' ref='-152164' role='' />
-    <member type='way' ref='-152155' role='' />
+    <member type='way' ref='-152336' role='' />
+    <member type='way' ref='-152337' role='' />
+    <member type='way' ref='-152338' role='' />
+    <member type='way' ref='-152339' role='' />
+    <member type='way' ref='-152340' role='' />
+    <member type='way' ref='-152341' role='' />
+    <member type='way' ref='-152344' role='' />
+    <member type='way' ref='-152335' role='' />
     <tag k='from' v='C-Village' />
     <tag k='name' v='Bus 001: C-Village =&gt; B-Village =&gt; A-Village' />
     <tag k='network' v='Test' />
@@ -494,9 +495,9 @@
     <tag k='type' v='route' />
     <tag k='via' v='B-Village' />
   </relation>
-  <relation id='-152189' action='modify'>
-    <member type='relation' ref='-152187' role='' />
-    <member type='relation' ref='-152188' role='' />
+  <relation id='-152369' action='modify'>
+    <member type='relation' ref='-152367' role='' />
+    <member type='relation' ref='-152368' role='' />
     <tag k='name' v='Bus 001' />
     <tag k='network' v='Test' />
     <tag k='public_transport:version' v='2' />
@@ -504,23 +505,23 @@
     <tag k='route_master' v='bus' />
     <tag k='type' v='route_master' />
   </relation>
-  <relation id='-152190' action='modify'>
+  <relation id='-152370' action='modify'>
     <member type='node' ref='-152083' role='stop' />
     <member type='node' ref='-152093' role='platform' />
     <member type='node' ref='-152109' role='stop' />
     <member type='node' ref='-152081' role='platform' />
     <member type='node' ref='-152097' role='stop' />
     <member type='node' ref='-152089' role='platform' />
-    <member type='way' ref='-152171' role='' />
-    <member type='way' ref='-152175' role='' />
-    <member type='way' ref='-152172' role='' />
-    <member type='way' ref='-152173' role='' />
-    <member type='way' ref='-152170' role='' />
-    <member type='way' ref='-152169' role='' />
-    <member type='way' ref='-152168' role='' />
-    <member type='way' ref='-152167' role='' />
-    <member type='way' ref='-152166' role='' />
-    <member type='way' ref='-152174' role='' />
+    <member type='way' ref='-152351' role='' />
+    <member type='way' ref='-152355' role='' />
+    <member type='way' ref='-152352' role='' />
+    <member type='way' ref='-152353' role='' />
+    <member type='way' ref='-152350' role='' />
+    <member type='way' ref='-152349' role='' />
+    <member type='way' ref='-152348' role='' />
+    <member type='way' ref='-152347' role='' />
+    <member type='way' ref='-152346' role='' />
+    <member type='way' ref='-152354' role='' />
     <tag k='from' v='A-Town' />
     <tag k='name' v='Bus 011: A-Town =&gt; B-Town =&gt; C-Town' />
     <tag k='network' v='Test' />
@@ -531,21 +532,21 @@
     <tag k='type' v='route' />
     <tag k='via' v='B-Town' />
   </relation>
-  <relation id='-152191' action='modify'>
+  <relation id='-152371' action='modify'>
     <member type='node' ref='-152087' role='platform' />
     <member type='node' ref='-152097' role='stop' />
     <member type='node' ref='-152091' role='platform' />
     <member type='node' ref='-152109' role='stop' />
     <member type='node' ref='-152085' role='platform' />
     <member type='node' ref='-152083' role='stop' />
-    <member type='way' ref='-152174' role='' />
-    <member type='way' ref='-152166' role='' />
-    <member type='way' ref='-152167' role='' />
-    <member type='way' ref='-152168' role='' />
-    <member type='way' ref='-152169' role='' />
-    <member type='way' ref='-152170' role='' />
-    <member type='way' ref='-152165' role='' />
-    <member type='way' ref='-152171' role='' />
+    <member type='way' ref='-152354' role='' />
+    <member type='way' ref='-152346' role='' />
+    <member type='way' ref='-152347' role='' />
+    <member type='way' ref='-152348' role='' />
+    <member type='way' ref='-152349' role='' />
+    <member type='way' ref='-152350' role='' />
+    <member type='way' ref='-152345' role='' />
+    <member type='way' ref='-152351' role='' />
     <tag k='from' v='C-Town' />
     <tag k='name' v='Bus 011: C-Town =&gt; B-Town =&gt; A-Town' />
     <tag k='network' v='Test' />
@@ -556,9 +557,9 @@
     <tag k='type' v='route' />
     <tag k='via' v='B-Town' />
   </relation>
-  <relation id='-152192' action='modify'>
-    <member type='relation' ref='-152190' role='' />
-    <member type='relation' ref='-152191' role='' />
+  <relation id='-152372' action='modify'>
+    <member type='relation' ref='-152370' role='' />
+    <member type='relation' ref='-152371' role='' />
     <tag k='name' v='Bus 011' />
     <tag k='network' v='Test' />
     <tag k='public_transport:version' v='2' />
@@ -566,23 +567,23 @@
     <tag k='route_master' v='bus' />
     <tag k='type' v='route_master' />
   </relation>
-  <relation id='-152193' action='modify'>
+  <relation id='-152373' action='modify'>
     <member type='node' ref='-152129' role='platform' />
     <member type='node' ref='-152121' role='stop' />
     <member type='node' ref='-152117' role='platform' />
     <member type='node' ref='-152147' role='stop' />
     <member type='node' ref='-152127' role='platform' />
     <member type='node' ref='-152133' role='stop' />
-    <member type='way' ref='-152182' role='' />
-    <member type='way' ref='-152186' role='' />
-    <member type='way' ref='-152183' role='' />
-    <member type='way' ref='-152184' role='' />
-    <member type='way' ref='-152181' role='' />
-    <member type='way' ref='-152179' role='' />
-    <member type='way' ref='-152180' role='' />
-    <member type='way' ref='-152178' role='' />
-    <member type='way' ref='-152177' role='' />
-    <member type='way' ref='-152185' role='' />
+    <member type='way' ref='-152362' role='' />
+    <member type='way' ref='-152366' role='' />
+    <member type='way' ref='-152363' role='' />
+    <member type='way' ref='-152364' role='' />
+    <member type='way' ref='-152361' role='' />
+    <member type='way' ref='-152359' role='' />
+    <member type='way' ref='-152360' role='' />
+    <member type='way' ref='-152358' role='' />
+    <member type='way' ref='-152357' role='' />
+    <member type='way' ref='-152365' role='' />
     <tag k='from' v='A-City' />
     <tag k='name' v='Bus 021: A-City =&gt; B-City =&gt; C-City' />
     <tag k='network' v='Test' />
@@ -593,21 +594,21 @@
     <tag k='type' v='route' />
     <tag k='via' v='B-City' />
   </relation>
-  <relation id='-152194' action='modify'>
+  <relation id='-152374' action='modify'>
     <member type='node' ref='-152123' role='platform' />
     <member type='node' ref='-152133' role='stop' />
     <member type='node' ref='-152125' role='platform' />
     <member type='node' ref='-152147' role='stop' />
     <member type='node' ref='-152119' role='platform' />
     <member type='node' ref='-152121' role='stop' />
-    <member type='way' ref='-152185' role='' />
-    <member type='way' ref='-152177' role='' />
-    <member type='way' ref='-152178' role='' />
-    <member type='way' ref='-152180' role='' />
-    <member type='way' ref='-152179' role='' />
-    <member type='way' ref='-152181' role='' />
-    <member type='way' ref='-152176' role='' />
-    <member type='way' ref='-152182' role='' />
+    <member type='way' ref='-152365' role='' />
+    <member type='way' ref='-152357' role='' />
+    <member type='way' ref='-152358' role='' />
+    <member type='way' ref='-152360' role='' />
+    <member type='way' ref='-152359' role='' />
+    <member type='way' ref='-152361' role='' />
+    <member type='way' ref='-152356' role='' />
+    <member type='way' ref='-152362' role='' />
     <tag k='from' v='C-City' />
     <tag k='name' v='Bus 021: C-City =&gt; B-City =&gt; A-City' />
     <tag k='network' v='Test' />
@@ -618,9 +619,9 @@
     <tag k='type' v='route' />
     <tag k='via' v='B-City' />
   </relation>
-  <relation id='-152195' action='modify'>
-    <member type='relation' ref='-152193' role='' />
-    <member type='relation' ref='-152194' role='' />
+  <relation id='-152375' action='modify'>
+    <member type='relation' ref='-152373' role='' />
+    <member type='relation' ref='-152374' role='' />
     <tag k='name' v='Bus 021' />
     <tag k='network' v='Test' />
     <tag k='public_transport:version' v='2' />

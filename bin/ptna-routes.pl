@@ -4031,6 +4031,12 @@ sub noAccessOnWay {
             #
             printf STDERR "noAccessOnWay() : access for all psv for way %d\n", $way_id       if ( $debug );
             return '';
+        } elsif ( $way_tag_ref->{'psv:conditional'} && $way_tag_ref->{'psv:conditional'} =~ m/^yes\s*@/ ) {
+            #
+            # to be checked for conditional access for public service vehicles
+            #
+            printf STDERR "noAccessOnWay() : unclear access for all psv for way %d\n", $way_id       if ( $debug );
+            return sprintf( "'psv:conditional'='%s'", $way_tag_ref->{'psv:conditional'} );
         } elsif ( $vehicle_type && $way_tag_ref->{$vehicle_type} &&
                   ($way_tag_ref->{$vehicle_type} eq 'yes' || $way_tag_ref->{$vehicle_type} eq 'designated' || $way_tag_ref->{$vehicle_type} eq 'permissive' || $way_tag_ref->{$vehicle_type} eq 'official') ) {
             #
@@ -4038,6 +4044,12 @@ sub noAccessOnWay {
             #
             printf STDERR "noAccessOnWay() : access for %s for way %d\n", $vehicle_type, $way_id       if ( $debug );
             return '';
+        } elsif ( $vehicle_type && $way_tag_ref->{$vehicle_type.':conditional'} && $way_tag_ref->{$vehicle_type.':conditional'} =~ m/^yes\s*@/ ) {
+            #
+            # to be checked for conditional access for this specific type of vehicle (bus, train, subway, ...) == @supported_route_types
+            #
+            printf STDERR "noAccessOnWay() : unclear access for %s for way %d\n", $vehicle_type, $way_id       if ( $debug );
+            return sprintf( "'%s:conditional'='%s'", $vehicle_type, $way_tag_ref->{$vehicle_type.':conditional'} );
         } elsif ( $vehicle_type && $vehicle_type eq 'ferry' && $way_tag_ref->{'route'} && ($way_tag_ref->{'route'} eq 'ferry' || $way_tag_ref->{'route'} eq 'boat') ) {
             #
             # fine for ferries on ferry ways
@@ -4352,9 +4364,14 @@ sub CheckAccessOnWaysAndNodes {
         if ( scalar(keys(%restricted_access_on_ways)) ) {
             my $helpstring = '';
             foreach $access_restriction ( sort(keys(%restricted_access_on_ways)) ) {
-                $helpstring = ngettext( "Route: restricted access (%s) to way without 'psv'='yes', '%s'='yes', '%s'='designated', or ...: %s",
-                                        "Route: restricted access (%s) to ways without 'psv'='yes', '%s'='yes', '%s'='designated', or ...: %s", scalar(keys(%{$restricted_access_on_ways{$access_restriction}})) );
-                push( @{$relation_ptr->{'__issues__'}}, sprintf( $helpstring, $access_restriction, $relation_ptr->{'tag'}->{'route'}, $relation_ptr->{'tag'}->{'route'}, join(', ', map { printWayTemplate($_,'name;ref'); } sort(keys(%{$restricted_access_on_ways{$access_restriction}})))) );
+                if ( $access_restriction =~ m/conditional/ ) {
+                    $helpstring = ngettext( "Route: unclear access (%s) to way: %s", "Route: unclear access (%s) to ways: %s", scalar(keys(%{$restricted_access_on_ways{$access_restriction}})) );
+                    push( @{$relation_ptr->{'__notes__'}}, sprintf( $helpstring, $access_restriction, join(', ', map { printWayTemplate($_,'name;ref'); } sort(keys(%{$restricted_access_on_ways{$access_restriction}})))) );
+                } else {
+                    $helpstring = ngettext( "Route: restricted access (%s) to way without 'psv'='yes', '%s'='yes', '%s'='designated', or ...: %s",
+                                            "Route: restricted access (%s) to ways without 'psv'='yes', '%s'='yes', '%s'='designated', or ...: %s", scalar(keys(%{$restricted_access_on_ways{$access_restriction}})) );
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $helpstring, $access_restriction, $relation_ptr->{'tag'}->{'route'}, $relation_ptr->{'tag'}->{'route'}, join(', ', map { printWayTemplate($_,'name;ref'); } sort(keys(%{$restricted_access_on_ways{$access_restriction}})))) );
+                }
             }
         }
         if ( scalar(keys(%restricted_access_on_nodes)) ) {
