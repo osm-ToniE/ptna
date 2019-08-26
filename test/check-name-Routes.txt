@@ -96,12 +96,12 @@ X1;bus;;;;
 103;bus;;;;
 
 -
-- '''Notes:''' PTv2 route: 'from' = 'Stop 1' is not part of 'name'; PTv2 route: 'to' = 'Stop 4' is not part of 'name'
+- '''Notes:''' PTv2 route: from-part ('%s') of 'name' is not equal to 'from' = '%s'; PTv2 route: to-part ('%s') of 'name' is not equal to 'to' = '%s'
 104;bus;;;;
 
-#-
-#-
-#105;bus;;;;
+-
+-'''Notes:''' PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' is not equal to %d. via-value = '%s'
+105;bus;;;;
 
 #-
 #-

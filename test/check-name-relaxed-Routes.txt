@@ -90,7 +90,7 @@ X3;bus;;;;
 101;bus;;;;
 
 -
-- '''Notes:''' PTv2 route: 'name' should (at least) be of the form '... ref ...: from => to'
+- '''Notes:''' PTv2 route: 'name' should be similar to the form '... ref ...: from => to'
 102;bus;;;;
 
 -
@@ -101,9 +101,9 @@ X3;bus;;;;
 - '''Notes:''' PTv2 route: 'from' = 'Stop 1' is not part of 'name'; PTv2 route: 'to' = 'Stop 4' is not part of 'name'
 104;bus;;;;
 
-#-
-#-
-#105;bus;;;;
+-
+-'''Notes:''' PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' is not equal to %d. via-value = '%s'
+105;bus;;;;
 
 #-
 #-
