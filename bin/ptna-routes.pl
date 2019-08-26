@@ -4281,7 +4281,7 @@ sub CheckNameRefFromViaToPTV2 {
                             for ( my $index = 0; $index < scalar(@via_parts_in_name); $index++ ) {
                                 if ( $via_parts_in_name[$index] ne $via_values[$index] ) {
                                     if ( $check_name_relaxed ) {
-                                        printf STDERR "check %d via = %s against %s\n", $index, $via_values[$index], $via_parts_in_name[$index];
+                                        #printf STDERR "check %d via = %s against %s\n", $index, $via_values[$index], $via_parts_in_name[$index];
                                         if ( index($via_values[$index],$via_parts_in_name[$index]) == -1 ) {
                                             push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' is not part of %d. via-value = '%s'"),$index+1,html_escape($via_parts_in_name[$index]),$index+1,html_escape($via_values[$index])) );
                                             $return_code++;
