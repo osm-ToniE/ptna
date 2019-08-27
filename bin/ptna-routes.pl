@@ -2652,22 +2652,28 @@ sub analyze_ptv2_route_relation {
         $return_code++;
     }
     if ( $relation_ptr->{'number_of_segments'} == 1 && $check_motorway_link && $relation_ptr->{'expect_motorway_after'} ) {
-        my $helpstring = ngettext( "PTv2 route: using motorway_link way without entering a motorway way:", "PTv2 route: using motorway_link ways without entering a motorway way:", scalar(keys(%{$relation_ptr->{'expect_motorway_after'}})) );
-        push( @{$relation_ptr->{'__issues__'}}, sprintf("%s %s", $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } sort(keys(%{$relation_ptr->{'expect_motorway_after'}})))) );
+        my @help_array        = sort(keys(%{$relation_ptr->{'expect_motorway_after'}}));
+        my $num_of_errors     = scalar(@help_array);
+        my $helpstring = ngettext( "PTv2 route: using motorway_link way without entering a motorway way", "PTv2 route: using motorway_link ways without entering a motorway way", $num_of_errors );
+        if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+            push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+        } else {
+            push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } @help_array )) );
+        }
         $return_code++;
     }
     if ( $relation_ptr->{'number_of_segments'} == 1 && $relation_ptr->{'roundabout_follows_itself'} ) {
-        my @help_array        = sort(keys(%{$relation_ptr->{'roundabout_follows_itself'}}));
-        my $num_of_errors     = scalar(@help_array);
-        my $error_2422_string      = ngettext( "PTv2 route: roundabout appears twice, following itself", "PTv2 route: roundabouts appear twice, following themselves", $num_of_errors );
-        my $error_2422_option      = '';
-        my $error_2422_description = '';
-        my $error_2422_howtofix    = '';
-        my $error_2422_image       = '';
+        my @help_array                = sort(keys(%{$relation_ptr->{'roundabout_follows_itself'}}));
+        my $num_of_errors             = scalar(@help_array);
+        my $error_prratfi_string      = ngettext( "PTv2 route: roundabout appears twice, following itself", "PTv2 route: roundabouts appear twice, following themselves", $num_of_errors );
+        my $error_prratfi_option      = '';
+        my $error_prratfi_description = '';
+        my $error_prratfi_howtofix    = '';
+        my $error_prratfi_image       = '';
         if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-            push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $error_2422_string, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+            push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $error_prratfi_string, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
         } else {
-            push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $error_2422_string, join(', ', map { printWayTemplate($_,'name;ref'); } @help_array )) );
+            push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $error_prratfi_string, join(', ', map { printWayTemplate($_,'name;ref'); } @help_array )) );
         }
         $return_code++;
     }
@@ -4362,24 +4368,51 @@ sub CheckAccessOnWaysAndNodes {
             }
         }
         if ( scalar(keys(%restricted_access_on_ways)) ) {
-            my $helpstring = '';
+            my $helpstring     = '';
+            my @help_array     = ();
+            my $num_of_errors  = 0;
             foreach $access_restriction ( sort(keys(%restricted_access_on_ways)) ) {
+                @help_array     = sort(keys(%{$restricted_access_on_ways{$access_restriction}}));
+                $num_of_errors  = scalar(@help_array);
                 if ( $access_restriction =~ m/conditional/ ) {
-                    $helpstring = ngettext( "Route: unclear access (%s) to way: %s", "Route: unclear access (%s) to ways: %s", scalar(keys(%{$restricted_access_on_ways{$access_restriction}})) );
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf( $helpstring, $access_restriction, join(', ', map { printWayTemplate($_,'name;ref'); } sort(keys(%{$restricted_access_on_ways{$access_restriction}})))) );
+                    $helpstring = sprintf( ngettext( "Route: unclear access (%s) to way",
+                                                     "Route: unclear access (%s) to ways",
+                                                     $num_of_errors
+                                                   ), $access_restriction );
+                    if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                    } else {
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf("%s: %s", $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } @help_array )) );
+                    }
                 } else {
-                    $helpstring = ngettext( "Route: restricted access (%s) to way without 'psv'='yes', '%s'='yes', '%s'='designated', or ...: %s",
-                                            "Route: restricted access (%s) to ways without 'psv'='yes', '%s'='yes', '%s'='designated', or ...: %s", scalar(keys(%{$restricted_access_on_ways{$access_restriction}})) );
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $helpstring, $access_restriction, $relation_ptr->{'tag'}->{'route'}, $relation_ptr->{'tag'}->{'route'}, join(', ', map { printWayTemplate($_,'name;ref'); } sort(keys(%{$restricted_access_on_ways{$access_restriction}})))) );
+                    $helpstring = sprintf( ngettext( "Route: restricted access (%s) to way without 'psv'='yes', '%s'='yes', '%s'='designated', or ...",
+                                                     "Route: restricted access (%s) to ways without 'psv'='yes', '%s'='yes', '%s'='designated', or ...",
+                                                     $num_of_errors
+                                                   ), $access_restriction, $relation_ptr->{'tag'}->{'route'}, $relation_ptr->{'tag'}->{'route'} );
+                    if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                    } else {
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } @help_array )) );
+                    }
                 }
             }
         }
         if ( scalar(keys(%restricted_access_on_nodes)) ) {
-            my $helpstring = '';
+            my $helpstring     = '';
+            my @help_array     = ();
+            my $num_of_errors  = 0;
             foreach $access_restriction ( sort(keys(%restricted_access_on_nodes)) ) {
-                $helpstring = ngettext( "Route: restricted access at barrier (%s) without 'psv'='yes', '%s'='yes', '%s'='designated', or ...: %s",
-                                        "Route: restricted access at barriers (%s) without 'psv'='yes', '%s'='yes', '%s'='designated', or ...: %s", scalar(keys(%{$restricted_access_on_nodes{$access_restriction}})) );
-                push( @{$relation_ptr->{'__issues__'}}, sprintf( $helpstring, $access_restriction, $relation_ptr->{'tag'}->{'route'}, $relation_ptr->{'tag'}->{'route'}, join(', ', map { printNodeTemplate($_,'name;ref'); } sort(keys(%{$restricted_access_on_nodes{$access_restriction}})))) );
+                @help_array     = sort(keys(%{$restricted_access_on_nodes{$access_restriction}}));
+                $num_of_errors  = scalar(@help_array);
+                $helpstring = sprintf( ngettext( "Route: restricted access at barrier (%s) without 'psv'='yes', '%s'='yes', '%s'='designated', or ...",
+                                                 "Route: restricted access at barriers (%s) without 'psv'='yes', '%s'='yes', '%s'='designated', or ...",
+                                                 $num_of_errors
+                                               ), $access_restriction, $relation_ptr->{'tag'}->{'route'}, $relation_ptr->{'tag'}->{'route'} );
+                if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printNodeTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                } else {
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $helpstring, join(', ', map { printNodeTemplate($_,'name;ref'); } @help_array )) );
+                }
             }
         }
     }
