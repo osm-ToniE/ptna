@@ -82,5 +82,6 @@ This section lists the 'network'-values which have been considered; i.e. which m
             </tbody>
         </table>
 
+        <iframe style="display:none" id="hiddenIframe" name="hiddenIframe"></iframe>
     </body>
 </html>

@@ -21,7 +21,7 @@ up update: $(LOCALIZABLE)
 	    --no-location \
 	    --add-comments=xgettext \
 	    --package-name=ptna \
-	    --package-version=2.0.0 \
+	    --package-version=2.0.1 \
 	    --msgid-bugs-address='osm-ToniE@web.de' \
 	    --output $(TEMPLATE) $(LOCALIZABLE)
 	@echo Merging...

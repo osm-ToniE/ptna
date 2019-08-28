@@ -4790,6 +4790,7 @@ sub printInitialHeader {
 
 sub printFinalFooter {
 
+    push( @HTML_main, "        <iframe style=\"display:none\" id=\"hiddenIframe\" name=\"hiddenIframe\"></iframe>\n" );
     push( @HTML_main, "    </body>\n" );
     push( @HTML_main, "</html>\n" );
 
@@ -5407,7 +5408,7 @@ sub printRelationTemplate {
         if ( $val > 0 ) {
             my $relation_url = sprintf( "<a href=\"https://osm.org/relation/%s\" title=\"Browse on map\">%s</a>", $val, $val );
             my $id_url       = sprintf( "<a href=\"https://osm.org/edit?editor=id&amp;relation=%s\" title=\"Edit in iD\">iD</a>", $val );
-            my $josm_url     = sprintf( "<a href=\"http://127.0.0.1:8111/import?url=https://api.openstreetmap.org/api/0.6/relation/%s/full\" title=\"Edit in JOSM\">JOSM</a>", $val );
+            my $josm_url     = sprintf( "<a href=\"http://127.0.0.1:8111/load_object?new_layer=false&amp;relation_members=true&amp;objects=r%s\" target=\"hiddenIframe\" title=\"Edit in JOSM\">JOSM</a>", $val );
 
             $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $relation_url, $id_url, $josm_url );
         } else {
@@ -5443,7 +5444,7 @@ sub printWayTemplate {
         if ( $val > 0 ) {
             my $way_url   = sprintf( "<a href=\"https://osm.org/way/%s\" title=\"Browse on map\">%s</a>", $val, $val );
             my $id_url    = sprintf( "<a href=\"https://osm.org/edit?editor=id&amp;way=%s\" title=\"Edit in iD\">iD</a>", $val );
-            my $josm_url  = sprintf( "<a href=\"http://127.0.0.1:8111/import?url=https://api.openstreetmap.org/api/0.6/way/%s/full\" title=\"Edit in JOSM\">JOSM</a>", $val );
+            my $josm_url  = sprintf( "<a href=\"http://127.0.0.1:8111/load_object?new_layer=false&amp;objects=w%s\" target=\"hiddenIframe\" title=\"Edit in JOSM\">JOSM</a>", $val );
 
             $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $way_url, $id_url, $josm_url );
         } else {
@@ -5479,7 +5480,7 @@ sub printNodeTemplate {
         if ( $val > 0 ) {
             my $node_url = sprintf( "<a href=\"https://osm.org/node/%s\" title=\"Brose on map\">%s</a>", $val, $val );
             my $id_url   = sprintf( "<a href=\"https://osm.org/edit?editor=id&amp;node=%s\" title=\"Edit in iD\">iD</a>", $val );
-            my $josm_url = sprintf( "<a href=\"http://127.0.0.1:8111/import?url=https://api.openstreetmap.org/api/0.6/node/%s\" title=\"Edit in JOSM\">JOSM</a>", $val );
+            my $josm_url = sprintf( "<a href=\"http://127.0.0.1:8111/load_object?new_layer=false&amp;objects=n%s\" target=\"hiddenIframe\" title=\"Edit in JOSM\">JOSM</a>", $val );
 
             $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $node_url, $id_url, $josm_url );
         } else {

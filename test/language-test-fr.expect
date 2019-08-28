@@ -243,5 +243,6 @@ Cette section liste les valeurs du tag 'network' qui ont été prises en compte 
             </tbody>
         </table>
 
+        <iframe style="display:none" id="hiddenIframe" name="hiddenIframe"></iframe>
     </body>
 </html>

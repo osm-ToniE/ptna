@@ -243,5 +243,6 @@ Dieser Abschnitt listet die 'network'-Werte auf, die berücksichtigt wurden, d.h
             </tbody>
         </table>
 
+        <iframe style="display:none" id="hiddenIframe" name="hiddenIframe"></iframe>
     </body>
 </html>
