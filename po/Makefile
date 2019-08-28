@@ -18,9 +18,10 @@ up update: $(LOCALIZABLE)
 	@xgettext --language Perl \
 	    --keyword=gettext --keyword=ngettext \
 	    --from-code utf-8 \
+	    --no-location \
 	    --add-comments=xgettext \
 	    --package-name=ptna \
-	    --package-version=1.0.0 \
+	    --package-version=2.0.0 \
 	    --msgid-bugs-address='osm-ToniE@web.de' \
 	    --output $(TEMPLATE) $(LOCALIZABLE)
 	@echo Merging...
