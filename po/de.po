@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 1.0.0\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2019-08-31 18:39+0200\n"
-"PO-Revision-Date: 2019-08-31 18:40+0200\n"
+"POT-Creation-Date: 2019-08-31 21:03+0200\n"
+"PO-Revision-Date: 2019-08-31 21:05+0200\n"
 "Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
 "Language-Team: German (https://www.transifex.com/jungle-bus/teams/97874/"
 "de/)\n"
@@ -244,16 +244,16 @@ msgstr ""
 "Route hat einen 'route' = '%s' Wert, der als irrelevant betrachtet wird: %s"
 
 #, perl-format
-msgid "Route: 'route' tag is not set: %s"
-msgstr "Route: 'route' ist nicht gesetzt: %s"
+msgid "'route' tag is not set: %s"
+msgstr "'route' ist nicht gesetzt: %s"
 
 #, perl-format
-msgid "Route: 'type' = '%s' is not 'route': %s"
-msgstr "Route: 'type' = '%s' ist nicht 'route': %s"
+msgid "'type' = '%s' is not 'route': %s"
+msgstr "'type' = '%s' ist nicht 'route': %s"
 
 #, perl-format
-msgid "Route: 'type' tag is not set: %s"
-msgstr "Route: 'type' ist nicht gesetzt: %s"
+msgid "'type' tag is not set: %s"
+msgstr "'type' ist nicht gesetzt: %s"
 
 #, perl-format
 msgid "Route does not exist in the given data set: %s"
@@ -332,7 +332,7 @@ msgstr ""
 "gesetzt: %s"
 
 msgid ""
-"PTv2 Route: 'name' of Route is identical to 'name' of other Route(s), "
+"PTv2 route: 'name' of Route is identical to 'name' of other Route(s), "
 "consider setting an appropriate 'via' value and include that into 'name'"
 msgstr ""
 "PTv2 Route: 'name' der Route ist identisch zu 'name' anderer Route(n). Setze "
@@ -383,13 +383,11 @@ msgstr "'network' ist nicht gesetzt"
 msgid "'colour' has unknown value '%s'"
 msgstr "'colour' hat einen unbekannten Wert '%s'"
 
-#, perl-format
-msgid "'%s' is long form"
-msgstr "'%s' ist Langform"
+msgid "'network:long' is long form"
+msgstr "'network:long' ist Langform"
 
-#, perl-format
-msgid "'%s' matches long form"
-msgstr "'%s' passt zur Langform"
+msgid "'network:long' matches long form"
+msgstr "'network:long' passt zur Langform"
 
 msgid "Route-Master without Route(s)"
 msgstr "Route-Master ohne Route(n)"
@@ -431,22 +429,22 @@ msgid "'public_transport:version' is neither '1' nor '2'"
 msgstr "'public_transport:version' ist weder '1' noch '2'"
 
 msgid ""
-"PTv2 Route: there are no 'public_transport' = 'stop_position' and no "
+"PTv2 route: there are no 'public_transport' = 'stop_position' and no "
 "'public_transport' = 'platform'"
 msgstr ""
 "PTv2 Route: es gibt keine 'public_transport' = 'stop_position' und keine "
 "'public_transport' = 'platform'"
 
-msgid "PTv2 Route: there is no 'public_transport' = 'stop_position'"
+msgid "PTv2 route: there is no 'public_transport' = 'stop_position'"
 msgstr "PTv2 Route: es gibt keine 'public_transport' = 'stop_position'"
 
-msgid "PTv2 Route: there is only one 'public_transport' = 'stop_position'"
+msgid "PTv2 route: there is only one 'public_transport' = 'stop_position'"
 msgstr "PTv2 Route: es gibt nur eine 'public_transport' = 'stop_position'"
 
-msgid "PTv2 Route: there is no 'public_transport' = 'platform'"
+msgid "PTv2 route: there is no 'public_transport' = 'platform'"
 msgstr "PTv2 Route: es gibt keine 'public_transport' = 'platform'"
 
-msgid "PTv2 Route: there is only one 'public_transport' = 'platform'"
+msgid "PTv2 route: there is only one 'public_transport' = 'platform'"
 msgstr "PTv2 Route: es gibt nur eine 'public_transport' = 'platform'"
 
 msgid ""
@@ -838,14 +836,6 @@ msgstr ""
 msgid "(consider creating a 'route_ref' = '%s' tag for the stop)"
 msgstr "(erzeuge gegebenenfalls 'route_ref' = '%s' für die Haltestelle)"
 
-#, perl-format
-msgid ""
-"Route: 'ref' = '%s' of stop should represent the reference of the stop, but "
-"includes the 'ref' ='%s' of this route %s"
-msgstr ""
-"Route: 'ref' = '%s' der Haltestelle sollte die Referenz der Haltestelle "
-"sein, enthält aber die 'ref' = '%s' dieser Route %s"
-
 msgid "Error in input data: insufficient data for ways"
 msgstr "Fehler in den Inputdaten: nicht genügend Daten für 'ways'"
 
@@ -972,6 +962,13 @@ msgid "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'"
 msgstr ""
 "Fahrzeugtyp ist nicht definiert. Zeile %s der Routen-Daten. Inhalt der "
 "Zeile: '%s'"
+
+#~ msgid ""
+#~ "Route: 'ref' = '%s' of stop should represent the reference of the stop, "
+#~ "but includes the 'ref' ='%s' of this route %s"
+#~ msgstr ""
+#~ "Route: 'ref' = '%s' der Haltestelle sollte die Referenz der Haltestelle "
+#~ "sein, enthält aber die 'ref' = '%s' dieser Route %s"
 
 #~ msgid "mismatch between 'role' = '%s' and 'public_transport' = '%s'"
 #~ msgstr ""

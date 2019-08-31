@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2019-08-31 18:39+0200\n"
+"POT-Creation-Date: 2019-08-31 21:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -214,15 +214,15 @@ msgid "Route has 'route' = '%s' value which is considered as not relevant: %s"
 msgstr ""
 
 #, perl-format
-msgid "Route: 'route' tag is not set: %s"
+msgid "'route' tag is not set: %s"
 msgstr ""
 
 #, perl-format
-msgid "Route: 'type' = '%s' is not 'route': %s"
+msgid "'type' = '%s' is not 'route': %s"
 msgstr ""
 
 #, perl-format
-msgid "Route: 'type' tag is not set: %s"
+msgid "'type' tag is not set: %s"
 msgstr ""
 
 #, perl-format
@@ -287,7 +287,7 @@ msgid "'colour' of Route is not set but 'colour' of Route-Master is set: %s"
 msgstr ""
 
 msgid ""
-"PTv2 Route: 'name' of Route is identical to 'name' of other Route(s), "
+"PTv2 route: 'name' of Route is identical to 'name' of other Route(s), "
 "consider setting an appropriate 'via' value and include that into 'name'"
 msgstr ""
 
@@ -331,12 +331,10 @@ msgstr ""
 msgid "'colour' has unknown value '%s'"
 msgstr ""
 
-#, perl-format
-msgid "'%s' is long form"
+msgid "'network:long' is long form"
 msgstr ""
 
-#, perl-format
-msgid "'%s' matches long form"
+msgid "'network:long' matches long form"
 msgstr ""
 
 msgid "Route-Master without Route(s)"
@@ -379,20 +377,20 @@ msgid "'public_transport:version' is neither '1' nor '2'"
 msgstr ""
 
 msgid ""
-"PTv2 Route: there are no 'public_transport' = 'stop_position' and no "
+"PTv2 route: there are no 'public_transport' = 'stop_position' and no "
 "'public_transport' = 'platform'"
 msgstr ""
 
-msgid "PTv2 Route: there is no 'public_transport' = 'stop_position'"
+msgid "PTv2 route: there is no 'public_transport' = 'stop_position'"
 msgstr ""
 
-msgid "PTv2 Route: there is only one 'public_transport' = 'stop_position'"
+msgid "PTv2 route: there is only one 'public_transport' = 'stop_position'"
 msgstr ""
 
-msgid "PTv2 Route: there is no 'public_transport' = 'platform'"
+msgid "PTv2 route: there is no 'public_transport' = 'platform'"
 msgstr ""
 
-msgid "PTv2 Route: there is only one 'public_transport' = 'platform'"
+msgid "PTv2 route: there is only one 'public_transport' = 'platform'"
 msgstr ""
 
 msgid ""
@@ -686,12 +684,6 @@ msgstr ""
 
 #, perl-format
 msgid "(consider creating a 'route_ref' = '%s' tag for the stop)"
-msgstr ""
-
-#, perl-format
-msgid ""
-"Route: 'ref' = '%s' of stop should represent the reference of the stop, but "
-"includes the 'ref' ='%s' of this route %s"
 msgstr ""
 
 msgid "Error in input data: insufficient data for ways"

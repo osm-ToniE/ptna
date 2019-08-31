@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 1.0.0\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2019-08-31 18:39+0200\n"
-"PO-Revision-Date: 2019-08-31 18:41+0200\n"
+"POT-Creation-Date: 2019-08-31 21:03+0200\n"
+"PO-Revision-Date: 2019-08-31 21:06+0200\n"
 "Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
 "Language-Team: French (https://www.transifex.com/jungle-bus/teams/97874/"
 "fr/)\n"
@@ -243,16 +243,16 @@ msgstr ""
 "pertinente : %s"
 
 #, perl-format
-msgid "Route: 'route' tag is not set: %s"
-msgstr "Parcours: le mode 'route' n'est pas défini : %s"
+msgid "'route' tag is not set: %s"
+msgstr "le tag 'route' n'est pas défini : %s"
 
 #, perl-format
-msgid "Route: 'type' = '%s' is not 'route': %s"
-msgstr "Parcours : l'attribut 'type' = '%s' n'est par 'route' : %s"
+msgid "'type' = '%s' is not 'route': %s"
+msgstr "l'attribut 'type' = '%s' n'est par 'route' : %s"
 
 #, perl-format
-msgid "Route: 'type' tag is not set: %s"
-msgstr "Parcours: le tag 'type' n'est pas défini : %s"
+msgid "'type' tag is not set: %s"
+msgstr "le tag 'type' n'est pas défini : %s"
 
 #, perl-format
 msgid "Route does not exist in the given data set: %s"
@@ -329,7 +329,7 @@ msgstr ""
 "La couleur 'colour' de la ligne est définie mais pas celle du parcours : %s"
 
 msgid ""
-"PTv2 Route: 'name' of Route is identical to 'name' of other Route(s), "
+"PTv2 route: 'name' of Route is identical to 'name' of other Route(s), "
 "consider setting an appropriate 'via' value and include that into 'name'"
 msgstr ""
 
@@ -379,13 +379,11 @@ msgstr "Le tag 'network' n'est pas défini"
 msgid "'colour' has unknown value '%s'"
 msgstr "La couleur 'colour' a une valeur inconnue : '%s'"
 
-#, perl-format
-msgid "'%s' is long form"
-msgstr "'%s' est en forme longue"
+msgid "'network:long' is long form"
+msgstr "'network:long' est en forme longue"
 
-#, perl-format
-msgid "'%s' matches long form"
-msgstr "'%s' correspond à la forme longue"
+msgid "'network:long' matches long form"
+msgstr "'network:long' correspond à la forme longue"
 
 msgid "Route-Master without Route(s)"
 msgstr "Ligne sans parcours"
@@ -427,21 +425,29 @@ msgid "'public_transport:version' is neither '1' nor '2'"
 msgstr "'public_transport:version' n'est ni '1' ni '2'"
 
 msgid ""
-"PTv2 Route: there are no 'public_transport' = 'stop_position' and no "
+"PTv2 route: there are no 'public_transport' = 'stop_position' and no "
 "'public_transport' = 'platform'"
 msgstr ""
 
-msgid "PTv2 Route: there is no 'public_transport' = 'stop_position'"
+msgid "PTv2 route: there is no 'public_transport' = 'stop_position'"
 msgstr ""
+"Parcours PTv2 : Le role vaut %s mais le tag 'public_transport' n'est pas "
+"défini"
 
-msgid "PTv2 Route: there is only one 'public_transport' = 'stop_position'"
+msgid "PTv2 route: there is only one 'public_transport' = 'stop_position'"
 msgstr ""
+"Parcours PTv2 : Le role vaut %s mais le tag 'public_transport' n'est pas "
+"défini"
 
-msgid "PTv2 Route: there is no 'public_transport' = 'platform'"
+msgid "PTv2 route: there is no 'public_transport' = 'platform'"
 msgstr ""
+"Parcours PTv2 : Le role vaut %s mais le tag 'public_transport' n'est pas "
+"défini"
 
-msgid "PTv2 Route: there is only one 'public_transport' = 'platform'"
+msgid "PTv2 route: there is only one 'public_transport' = 'platform'"
 msgstr ""
+"Parcours PTv2 : Le role vaut %s mais le tag 'public_transport' n'est pas "
+"défini"
 
 msgid ""
 "PTv2 route: first way is a oneway road and ends in a 'stop_position' of this "
@@ -782,14 +788,6 @@ msgid "(consider creating a 'route_ref' = '%s' tag for the stop)"
 msgstr ""
 "(le tag 'route_ref' = '%s' serait peut-être plus adapté pour cet arrêt)"
 
-#, perl-format
-msgid ""
-"Route: 'ref' = '%s' of stop should represent the reference of the stop, but "
-"includes the 'ref' ='%s' of this route %s"
-msgstr ""
-"Parcours : Le tag 'ref' = '%s' sur un arrêt doit correspondre au numéro de "
-"l'arrêt, mais semble être le numéro de la ligne, 'ref' = '%s' du parcours %s"
-
 msgid "Error in input data: insufficient data for ways"
 msgstr "Erreur dans les données d'entrée : pas assez de chemins (ways)"
 
@@ -912,6 +910,14 @@ msgstr ""
 #, perl-format
 msgid "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'"
 msgstr ""
+
+#~ msgid ""
+#~ "Route: 'ref' = '%s' of stop should represent the reference of the stop, "
+#~ "but includes the 'ref' ='%s' of this route %s"
+#~ msgstr ""
+#~ "Parcours : Le tag 'ref' = '%s' sur un arrêt doit correspondre au numéro "
+#~ "de l'arrêt, mais semble être le numéro de la ligne, 'ref' = '%s' du "
+#~ "parcours %s"
 
 #~ msgid "PTv2 route: includes %d %s"
 #~ msgstr "Ligne PTv2 : contient %d %s"

@@ -164,17 +164,17 @@ sub ReadRoutes {
                                         }
                                     } else {
                                         # this $ExpRouteType is not a valid one
-                                        $issues_string      = decode( 'utf8', gettext( "Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line: '%s'" ) );
+                                        $issues_string      = gettext( "Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line: '%s'" );
                                         $hashref->{'type'}  = 'error';                                              # this is an error
                                         $hashref->{'ref'}   = $ExpRef;                                              # this is an error
-                                        $hashref->{'error'} = sprintf( $issues_string, $ExpRouteType, $NR, $hashref->{'contents'} );    # this is an error
+                                        $hashref->{'error'} = sprintf( decode( 'utf8', $issues_string ), $ExpRouteType, $NR, $hashref->{'contents'} );    # this is an error
                                     }
                                 } else {
                                     # if there is at least one separator, then $ExpRouteType as the second value must not be empty
-                                    $issues_string      = decode( 'utf8', gettext( "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'" ) );
+                                    $issues_string      = gettext( "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'" );
                                     $hashref->{'type'}  = 'error';                                              # this is an error
                                     $hashref->{'ref'}   = $ExpRef;                                              # this is an error
-                                    $hashref->{'error'} = sprintf( $issues_string, $NR, $hashref->{'contents'} );   # this is an error
+                                    $hashref->{'error'} = sprintf( decode( 'utf8', $issues_string ), $NR, $hashref->{'contents'} );   # this is an error
                                 }
                             }
                         }
