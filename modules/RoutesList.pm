@@ -31,8 +31,11 @@ my $REF_separator                   = '\/';
 my $Debug                           = undef;
 my $Verbose                         = undef;
 
+my $issues_string                   = '';   # to be used with ALL 'issues' and gettext/ngettext - a separate tool parses this code, extracts those statements and creates a list of all issues
+
+
 #############################################################################################
-# 
+#
 # read the CSV Routes file information about 'ref', 'type', ...
 #
 #############################################################################################
@@ -47,16 +50,16 @@ sub ReadRoutes {
     my $debug               = $hash{'debug'};
     my $verbose             = $hash{'verbose'};
     my $ref_list_supported  = $hash{'supported_route_types'};
-    
+
     my $NR                  = undef;
     my $hashref             = undef;
     my $last_type           = 'none';
-    
+
     my %supported_routes_types = ();
 
     my ($ExpRef,$ExpRouteType,$ExpComment,$ExpFrom,$ExpTo,$ExpOperator);
     my @rest = ();
-    
+
     $CSV_separator  = $csv_separator;
     $OR_separator   = $or_separator;
     $REF_separator  = $ref_separator;
@@ -66,13 +69,13 @@ sub ReadRoutes {
     if ( $ref_list_supported ) {
         map { $supported_routes_types{$_} = 1; } @{$ref_list_supported};
     }
-    
+
     if ( $infile ) {
         if ( -e $infile && -f $infile && -r $infile ) {
-            
+
             if ( open(CSV,"< $infile") ) {
                 binmode CSV, ":utf8";
-                
+
                 while ( <CSV> ) {
                     chomp();                                        # remove NewLine
                     s/\r$//;                                        # remoce 'CR'
@@ -81,7 +84,7 @@ sub ReadRoutes {
                     s/<pre>//;                                      # remove HTML tag if this is a copy from the Wiki-Page
                     s|</pre>||;                                     # remove HTML tag if this is a copy from the Wiki-Page
                     next    if ( !$_ );                             # ignore if line is empty
-                    
+
                     $NR                         = $.;
                     $routes_hash{$NR}->{'NR'}   = $NR;                 # store line number
                     $hashref                    = $routes_hash{$NR};
@@ -106,7 +109,7 @@ sub ReadRoutes {
                         }
                     } else {
                         $hashref->{'type'}       = 'route';          # store type
-                        
+
                         if ( m/^"/ || m/"$csv_separator/ || m/"$/ ) {
                             ($ExpRef,$ExpRouteType,$ExpComment,$ExpFrom,$ExpTo,@rest) = parse_csv( $csv_separator, $_ );
                         } else {
@@ -132,22 +135,22 @@ sub ReadRoutes {
                             my @ref_and_list = split( $ref_separator, $ExpRef );
                             $hashref->{'ref-or-list'}  = \@ref_or_list;
                             $hashref->{'ref-and-list'} = \@ref_and_list;
-                            
+
                             foreach my $reflistentry ( @ref_or_list ) {
                                 $seen_ref{$reflistentry} = 0  unless ( $seen_ref{$reflistentry} );
                                 $seen_ref{$reflistentry}++;
                                 #printf STDERR "seen_ref{%s} = %d\n", $reflistentry, $seen_ref{$reflistentry}      if ( $debug );
-                                
+
                                 if ( $ExpRouteType ) {
                                     if ( $supported_routes_types{$ExpRouteType} ) {
                                         $seen_ref_type{$reflistentry}->{$ExpRouteType} = 0    unless ( $seen_ref_type{$reflistentry}->{$ExpRouteType} );
                                         $seen_ref_type{$reflistentry}->{$ExpRouteType}++;
                                         #printf STDERR "seen_ref_type{%s}->{%s} = %d\n", $reflistentry, $ExpRouteType, $seen_ref_type{$reflistentry}->{$ExpRouteType}      if ( $debug );
-                                        
+
                                         $seen_ref_type_operator{$reflistentry}->{$ExpRouteType}->{'ExpOperator='.$ExpOperator} = 0   unless ( $seen_ref_type_operator{$reflistentry}->{$ExpRouteType}->{'ExpOperator='.$ExpOperator} );
                                         $seen_ref_type_operator{$reflistentry}->{$ExpRouteType}->{'ExpOperator='.$ExpOperator}++;
                                         #printf STDERR "seen_ref_type_operator{%s}->{%s}->{%s} = %d\n", $reflistentry, $ExpRouteType, $ExpOperator, $seen_ref_type_operator{$reflistentry}->{$ExpRouteType}->{'ExpOperator='.$ExpOperator}      if ( $debug );
-                                    
+
                                         $seen_ref_type_operator_fromto{$reflistentry}->{$ExpRouteType}->{'ExpOperator='.$ExpOperator}->{'['.$ExpFrom.'];['.$ExpTo.']'} = 1;
 
                                         if ( $ExpFrom ) {
@@ -161,18 +164,20 @@ sub ReadRoutes {
                                         }
                                     } else {
                                         # this $ExpRouteType is not a valid one
+                                        $issues_string      = decode( 'utf8', gettext( "Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line: '%s'" ) );
                                         $hashref->{'type'}  = 'error';                                              # this is an error
                                         $hashref->{'ref'}   = $ExpRef;                                              # this is an error
-                                        $hashref->{'error'} = sprintf( decode('utf8',gettext("Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line: '%s'")), $ExpRouteType, $NR, $hashref->{'contents'} );    # this is an error
+                                        $hashref->{'error'} = sprintf( $issues_string, $ExpRouteType, $NR, $hashref->{'contents'} );    # this is an error
                                     }
                                 } else {
                                     # if there is at least one separator, then $ExpRouteType as the second value must not be empty
+                                    $issues_string      = decode( 'utf8', gettext( "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'" ) );
                                     $hashref->{'type'}  = 'error';                                              # this is an error
                                     $hashref->{'ref'}   = $ExpRef;                                              # this is an error
-                                    $hashref->{'error'} = sprintf( decode('utf8',gettext("Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'")), $NR, $hashref->{'contents'} );   # this is an error
+                                    $hashref->{'error'} = sprintf( $issues_string, $NR, $hashref->{'contents'} );   # this is an error
                                 }
                             }
-                        } 
+                        }
                     }
                     #if ( $debug ) {
                     #    printf STDERR "NR = %d, type = %s, contents = '%s'\n", $routes_hash{$NR}->{'NR'}, $routes_hash{$NR}->{'type'}, $routes_hash{$NR}->{'contents'};
@@ -206,20 +211,20 @@ sub ReadRoutes {
                         if ( $seen_ref_type_operator{$ExpRef}                  &&
                              $seen_ref_type_operator{$ExpRef}->{$ExpRouteType}    ) {
                             printf STDERR "CSV-File %s: entry: ref=%s and type=%s has %d different operator values\n", $infile, $ExpRef, $ExpRouteType, scalar(keys(%{$seen_ref_type_operator{$ExpRef}->{$ExpRouteType}}))        if ( $debug );
-                        
+
                             if ( scalar(keys(%{$seen_ref_type_operator{$ExpRef}->{$ExpRouteType}})) < $seen_ref_type{$ExpRef}->{$ExpRouteType} ) {
                                 printf STDERR "CSV-File %s: potential problem with entry: ref=%s and type=%s\n", $infile, $ExpRef, $ExpRouteType          if ( $debug );
-                                
+
                                 foreach $ExpOperator ( sort ( keys %{$seen_ref_type_operator{$ExpRef}->{$ExpRouteType}} ) ) {
                                     if ( $seen_ref_type_operator{$ExpRef}->{$ExpRouteType}->{$ExpOperator} > 1 ) {
                                         printf STDERR "CSV-File %s: problem with entry: ref=%s, type=%s and operator=%s ==> %d\n", $infile, $ExpRef, $ExpRouteType, $ExpOperator, $seen_ref_type_operator{$ExpRef}->{$ExpRouteType}->{$ExpOperator}           if ( $debug );
-                                    
+
                                         foreach my $fromto ( sort ( keys %{$seen_ref_type_operator_fromto{$ExpRef}->{$ExpRouteType}->{$ExpOperator}} ) ) {
                                             if ( $seen_ref_type_operator_fromto{$ExpRef}->{$ExpRouteType}->{$ExpOperator}->{$fromto} > 1 ) {
                                                 printf STDERR "CSV-File %s: big trouble with entry: ref=%s, type=%s, operator=%s, fromto=%s ==> %d\n", $infile, $ExpRef, $ExpRouteType, $ExpOperator, $fromto, $seen_ref_type_operator_fromto{$ExpRef}->{$ExpRouteType}->{$ExpOperator}->{$fromto}           if ( $debug );
                                             }
                                         }
-                                        
+
                                     }
                                 }
                             }
@@ -229,13 +234,13 @@ sub ReadRoutes {
             }
         }
     }
-    
+
     return undef;
 }
 
 
 #############################################################################################
-# 
+#
 # return a list (array) fields of the CSV line
 #
 # https://stackoverflow.com/questions/3065095/how-do-i-efficiently-parse-a-csv-file-in-perl
@@ -248,7 +253,7 @@ sub parse_csv {
     my $value     = undef;
     my @cells     = ();
     my $regex     = qr/(?:^|$separator)(?:"([^"]*)"|([^$separator]*))/;
-    
+
     return () unless $text;
 
     $text =~ s/\r?\n$//;
@@ -263,35 +268,35 @@ sub parse_csv {
 
 
 #############################################################################################
-# 
+#
 # return the list (array) of references to list
 #
 #############################################################################################
 
 sub GetRoutesList {
-    
+
     return @routes_list;
-    
+
 }
 
 
 #############################################################################################
-# 
+#
 # return whether the combination of 'ref' is in the list
 #
 #############################################################################################
 
 sub RefCount {
     my $ref         = shift;
-    
+
     return $seen_ref{$ref}        if ( $ref && $seen_ref{$ref} );
-    
+
     return 0;
 }
 
 
 #############################################################################################
-# 
+#
 # return whether the combination of 'ref' and 'type' is in the list
 #
 #############################################################################################
@@ -299,15 +304,15 @@ sub RefCount {
 sub RefTypeCount {
     my $ref         = shift;
     my $route_type  = shift;
-    
+
     return $seen_ref_type{$ref}->{$route_type}        if ( $ref && $route_type && $seen_ref{$ref} && $seen_ref_type{$ref} && $seen_ref_type{$ref}->{$route_type} );
-    
+
     return 0;
 }
 
 
 #############################################################################################
-# 
+#
 # return how many combinations with identical 'ref' and 'type' and 'operator' are in the list
 #
 #############################################################################################
@@ -316,9 +321,9 @@ sub RefTypeOperatorCount {
     my $ref         = shift;
     my $route_type  = shift;
     my $operator    = shift;
-    
-    if ( $ref && $route_type                                                           && 
-         $seen_ref{$ref}                                                               && 
+
+    if ( $ref && $route_type                                                           &&
+         $seen_ref{$ref}                                                               &&
          $seen_ref_type{$ref} && $seen_ref_type{$ref}->{$route_type}                   &&
          $seen_ref_type_operator{$ref} && $seen_ref_type_operator{$ref}->{$route_type} &&
          $seen_ref_type_operator{$ref}->{$route_type}->{'ExpOperator='.$operator}         ) {
@@ -326,13 +331,13 @@ sub RefTypeOperatorCount {
             return $seen_ref_type_operator{$ref}->{$route_type}->{'ExpOperator='.$operator};
 
     }
-    
+
     return 0;
 }
 
 
 #############################################################################################
-# 
+#
 # return combinations with identical 'ref' and 'type' and 'operator' from the list
 #
 #############################################################################################
@@ -343,24 +348,24 @@ sub GetRefTypeOperatorFromAndTo {
     my $RelOperator         = shift;
     my $RelFrom             = shift;
     my $RelTo               = shift;
-    
+
     my @ret_list            = ();
-    
+
     my $CombFrom            = undef;
     my $CombTo              = undef;
     my @CombFromArray       = ();
     my @CombToArray         = ();
-    
+
     my $match               = undef;
-    
+
     printf STDERR "%s GetRefTypeOperatorFromAndTo( %s, %s, %s, %s, %s );\n", get_time(), $RelRef, $RelRouteType, $RelOperator, $RelFrom, $RelTo  if ( $Debug );
 
     if ( $RelRef                                                                                 &&
-         $RelRouteType                                                                           && 
+         $RelRouteType                                                                           &&
          $seen_ref_type_operator_fromto{$RelRef}                                                 &&
          $seen_ref_type_operator_fromto{$RelRef}->{$RelRouteType}                                &&
          $seen_ref_type_operator_fromto{$RelRef}->{$RelRouteType}->{'ExpOperator='.$RelOperator}       ) {
-    
+
         foreach my $combination ( sort ( keys ( %{$seen_ref_type_operator_fromto{$RelRef}->{$RelRouteType}->{'ExpOperator='.$RelOperator}} ) ) ) {
 
             printf STDERR "%s GetRefTypeOperatorFromAndTo(): checking combination '%s' with OR\n", get_time(), $combination  if ( $Debug );
@@ -369,14 +374,14 @@ sub GetRefTypeOperatorFromAndTo {
 
                 $CombFrom = $1;
                 $CombTo   = $2;
-                
+
                 @CombFromArray  = split( $OR_separator, $CombFrom );
                 @CombToArray    = split( $OR_separator, $CombTo );
 
                 if ( ( scalar @CombFromArray || scalar @CombToArray ) &&
                      ( $RelFrom              || $RelTo )                 ) {
                     # minimum one of each pair must be defined
-    
+
                     $match = undef;
                     foreach $CombFrom ( @CombFromArray ) {
                         if ( $CombFrom ) {
@@ -425,48 +430,48 @@ sub GetRefTypeOperatorFromAndTo {
                         }
                     }
                     if ( $match ) {
-                        printf STDERR "%s GetRefTypeOperatorFromAndTo(): selecting combination 'ref' = '%s' and  'operator' = '%s': match = '%s'\n", get_time(), $RelRef, $RelOperator, $match     if ( $Debug ); 
+                        printf STDERR "%s GetRefTypeOperatorFromAndTo(): selecting combination 'ref' = '%s' and  'operator' = '%s': match = '%s'\n", get_time(), $RelRef, $RelOperator, $match     if ( $Debug );
                         push( @ret_list, $combination );
                     } else {
-                        printf STDERR "%s GetRefTypeOperatorFromAndTo(): skipping combination 'ref' = '%s' and  'operator' = '%s': NO match\n", get_time(), $RelRef, $RelOperator     if ( $Debug ); 
+                        printf STDERR "%s GetRefTypeOperatorFromAndTo(): skipping combination 'ref' = '%s' and  'operator' = '%s': NO match\n", get_time(), $RelRef, $RelOperator     if ( $Debug );
                     }
                 }
             }
         }
 
         # check whether we had a single match using 'from' OR 'to'
-        
+
         if ( scalar(@ret_list) > 1 ) {
             #
             # no, there is more than one match, let's try 'from' AND 'to'
-            
+
             my $from_match  = '';
             my $to_match    = '';
             my @second_list = @ret_list;
             @ret_list       = ();
-            
+
             foreach my $combination ( @second_list ) {
 
                 printf STDERR "%s GetRefTypeOperatorFromAndTo(): checking combination '%s' with AND\n", get_time(), $combination  if ( $Debug );
-    
+
                 if ( $combination =~ m/^\[.*$RelFrom.*\];\[.*$RelTo.*\]$/ ||
                      $combination =~ m/^\[.*$RelTo.*\];\[.*$RelFrom.*\]$/    ) {
-                    printf STDERR "%s GetRefTypeOperatorFromAndTo(): selecting combination 'ref' = '%s' and  'operator' = '%s': from-match = '%s', to-match = '%s' with combination = '%s'\n", get_time(), $RelRef, $RelOperator, $from_match, $to_match, $combination     if ( $Debug ); 
+                    printf STDERR "%s GetRefTypeOperatorFromAndTo(): selecting combination 'ref' = '%s' and  'operator' = '%s': from-match = '%s', to-match = '%s' with combination = '%s'\n", get_time(), $RelRef, $RelOperator, $from_match, $to_match, $combination     if ( $Debug );
                     push( @ret_list, $combination );
                 } else {
-                    printf STDERR "%s GetRefTypeOperatorFromAndTo(): skipping combination 'ref' = '%s' and  'operator' = '%s': NO match for 'from' = '%s' AND 'to' = '%s' with combination = '%s'\n", get_time(), $RelRef, $RelOperator, $from_match, $to_match, $combination     if ( $Debug ); 
+                    printf STDERR "%s GetRefTypeOperatorFromAndTo(): skipping combination 'ref' = '%s' and  'operator' = '%s': NO match for 'from' = '%s' AND 'to' = '%s' with combination = '%s'\n", get_time(), $RelRef, $RelOperator, $from_match, $to_match, $combination     if ( $Debug );
                 }
             }
         }
 
     }
-    
+
     return @ret_list;
 }
 
 
 #############################################################################################
-# 
+#
 # return whether the combination of 'ref' and 'type' is in the list
 #
 #############################################################################################
@@ -482,9 +487,9 @@ sub RelationMatchesExpected {
     my $RelID                       = $hash{'rel-id'}                           || '';
     my $EntryRef                    = $hash{'EntryRef'};
     my $handle_multiple             = $hash{'multiple_ref_type_entries'}        || 'analyze';
-   
+
     return 0    unless ( $EntryRef );
-    
+
     my $ExpOperator                 = $EntryRef->{'operator'}                   || '';
     my $ExpFrom                     = $EntryRef->{'from'}                       || '';
     my $ExpTo                       = $EntryRef->{'to'}                         || '';
@@ -494,7 +499,7 @@ sub RelationMatchesExpected {
 
     my $match                       = undef;
 
-    printf STDERR "%s Checking %s relation %s, 'ref' %s and  'operator' %s, ref-type-count %d\n", get_time(), $RelRouteType, $RelID, $RelRef, $RelOperator, $number_of_ref_type     if ( $Debug ); 
+    printf STDERR "%s Checking %s relation %s, 'ref' %s and  'operator' %s, ref-type-count %d\n", get_time(), $RelRouteType, $RelID, $RelRef, $RelOperator, $number_of_ref_type     if ( $Debug );
 
     if ( $number_of_ref_type > 1 && $handle_multiple eq 'analyze' ) {
 
@@ -506,17 +511,17 @@ sub RelationMatchesExpected {
         #
 
         if ( $ExpOperator eq $RelOperator ) {
-            
+
             $number_of_ref_type_operator = RefTypeOperatorCount( $RelRef, $RelRouteType, $RelOperator );
 
             if ( $number_of_ref_type_operator > 1 ) {
 
                 my $ExpectedCombination              = '['.$ExpFrom.'];['.$ExpTo.']';
 
-                printf STDERR "%s Checking %s relation %s, 'ref'= '%s' and  'operator'= '%s', ref-type-operator-count = '%d': expected combination: = '%s'\n", get_time(), $RelRouteType, $RelID, $RelRef, $RelOperator, $number_of_ref_type_operator, $ExpectedCombination     if ( $Debug ); 
+                printf STDERR "%s Checking %s relation %s, 'ref'= '%s' and  'operator'= '%s', ref-type-operator-count = '%d': expected combination: = '%s'\n", get_time(), $RelRouteType, $RelID, $RelRef, $RelOperator, $number_of_ref_type_operator, $ExpectedCombination     if ( $Debug );
 
                 my @CombinationsWithMatchingFromAndTo = GetRefTypeOperatorFromAndTo( $RelRef, $RelRouteType, $RelOperator, $RelFrom, $RelTo, $ExpectedCombination );
-                
+
                 if ( scalar(@CombinationsWithMatchingFromAndTo) == 0 ) {
 
                     printf STDERR "%s Skipping relation %s, 'ref' = '%s' and  'operator' = '%s': NO match for from = '%s' and/or 'to' = '%s'\n", get_time(), $RelID, $RelRef, $RelOperator, $RelFrom, $RelTo     if ( $Debug );
@@ -525,10 +530,10 @@ sub RelationMatchesExpected {
                 } elsif ( scalar(@CombinationsWithMatchingFromAndTo) == 1 ) {
 
                     if ( $CombinationsWithMatchingFromAndTo[0] eq $ExpectedCombination ) {
-                        printf STDERR "%s Selecting relation %s, 'ref' = '%s' and  'operator' = '%s': EXACT match for from = '%s' and/or 'to' = '%s'\n", get_time(), $RelID, $RelRef, $RelOperator, $RelFrom, $RelTo     if ( $Debug ); 
+                        printf STDERR "%s Selecting relation %s, 'ref' = '%s' and  'operator' = '%s': EXACT match for from = '%s' and/or 'to' = '%s'\n", get_time(), $RelID, $RelRef, $RelOperator, $RelFrom, $RelTo     if ( $Debug );
                         return 1;
                     } else {
-                        printf STDERR "%s skipping relation %s, 'ref' = '%s' and  'operator' = '%s': match = '%s', not the expected one = '%s'\n", get_time(), $RelID, $RelRef, $RelOperator, $match, $ExpectedCombination     if ( $Debug ); 
+                        printf STDERR "%s skipping relation %s, 'ref' = '%s' and  'operator' = '%s': match = '%s', not the expected one = '%s'\n", get_time(), $RelID, $RelRef, $RelOperator, $match, $ExpectedCombination     if ( $Debug );
                         return 0;
                     }
 
@@ -538,32 +543,32 @@ sub RelationMatchesExpected {
 
                 }
             } else {
-                printf STDERR "%s Selecting relation %s, 'ref' %s 'operator' matches single expected operator (%s vs %s)\n", get_time(), $RelID, $RelRef, $RelOperator, $RelOperator     if ( $Debug ); 
+                printf STDERR "%s Selecting relation %s, 'ref' %s 'operator' matches single expected operator (%s vs %s)\n", get_time(), $RelID, $RelRef, $RelOperator, $RelOperator     if ( $Debug );
                 return 1;
             }
         } else {
-            printf STDERR "%s Skipping relation %s, 'ref' %s: 'operator' does not match expected operator (%s vs %s)\n", get_time(), $RelID, $RelRef, $RelOperator, $RelOperator       if ( $Debug ); 
+            printf STDERR "%s Skipping relation %s, 'ref' %s: 'operator' does not match expected operator (%s vs %s)\n", get_time(), $RelID, $RelRef, $RelOperator, $RelOperator       if ( $Debug );
             return 0;
         }
     } else {
         # we do not have multiple entries or we are not interested to distinguish between them
-        printf STDERR "%s Selecting relation %s, 'ref' %s and  'operator' %s: no multiple entries\n", get_time(), $RelID, $RelRef, $RelOperator     if ( $Debug ); 
+        printf STDERR "%s Selecting relation %s, 'ref' %s and  'operator' %s: no multiple entries\n", get_time(), $RelID, $RelRef, $RelOperator     if ( $Debug );
         return 1;
     }
-    
+
     return 0;
 }
-    
-    
+
+
 #############################################################################################
 
 sub get_time {
-    
+
     my ($sec,$min,$hour,$day,$month,$year) = localtime();
-    
-    return sprintf( "%04d-%02d-%02d %02d:%02d:%02d", $year+1900, $month+1, $day, $hour, $min, $sec ); 
+
+    return sprintf( "%04d-%02d-%02d %02d:%02d:%02d", $year+1900, $month+1, $day, $hour, $min, $sec );
 }
-    
+
 
 
 

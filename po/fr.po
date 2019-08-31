@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 1.0.0\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2019-08-30 22:52+0200\n"
-"PO-Revision-Date: 2019-08-27 19:40+0200\n"
+"POT-Creation-Date: 2019-08-31 18:39+0200\n"
+"PO-Revision-Date: 2019-08-31 18:41+0200\n"
 "Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
 "Language-Team: French (https://www.transifex.com/jungle-bus/teams/97874/"
 "fr/)\n"
@@ -123,10 +123,10 @@ msgstr "Funiculaire"
 
 #, perl-format
 msgid "Missing route for ref='%s' and route='%s'"
-msgstr "Parcours manquant avec ref='%s' et route='%s'"
+msgstr "Parcours manquant avec 'ref' = '%s' et 'route' = '%s'"
 
 msgid "' or ref='"
-msgstr "' ou ref='"
+msgstr "' ou 'ref ' = '"
 
 #. xgettext: This section will list all routes which could not be clearly assigned because the combination of "ref;type" appears more than once and information like 'operator', 'from' and 'to' is missing
 msgid "Not clearly assigned routes"
@@ -147,6 +147,9 @@ msgstr "Autres relations"
 msgid "Details for 'network'-Values"
 msgstr "Détails des valeurs pour le tag 'network'"
 
+msgid "There is more than one Route-Master"
+msgstr "Il y a plus d'une route_master"
+
 #, perl-format
 msgid ""
 "Route-Master has more Routes than actually match (%d versus %d) in the given "
@@ -155,7 +158,7 @@ msgid_plural ""
 "Route-Masters have more Routes than actually match (%d versus %d) in the "
 "given data set"
 msgstr[0] ""
-"La ligne a plus de parcours (%dau lieu de %d) que dans les données sources"
+"La ligne a plus de parcours (%d au lieu de %d) que dans les données sources"
 msgstr[1] ""
 "Les lignes ont plus de parcours (%d au lieu de %d) que dans les données "
 "sources"
@@ -172,9 +175,6 @@ msgstr[0] ""
 msgstr[1] ""
 "Les lignes ont moins de parcours (%d au lieu de %d) que dans les données "
 "sources"
-
-msgid "There is more than one Route-Master"
-msgstr "Il y a plus d'une route_master"
 
 #, perl-format
 msgid ""
@@ -297,8 +297,8 @@ msgid ""
 "'route' = '%s' of Route does not fit to 'route_master' = '%s' of Route-"
 "Master: %s"
 msgstr ""
-"Le mode 'route'=%s du parcours ne correspond pas au mode 'route_master'=%s "
-"de la ligne : %s"
+"Le mode 'route' = '%s' du parcours ne correspond pas au mode 'route_master' "
+"= '%s' de la ligne : %s"
 
 #, perl-format
 msgid "Route-Master has not matching 'ref' = '%s': %s"
@@ -335,7 +335,7 @@ msgstr ""
 
 #, perl-format
 msgid "%s: %s and %d more ..."
-msgstr "%s : %s et %d en plus…"
+msgstr "%s : %s et %d en plus …"
 
 msgid "Multiple Routes but 'public_transport:version' is not set to '2'"
 msgstr ""
@@ -377,7 +377,7 @@ msgstr "Le tag 'network' n'est pas défini"
 
 #, perl-format
 msgid "'colour' has unknown value '%s'"
-msgstr "La couleur 'colour' a une valeur inconnue : %s"
+msgstr "La couleur 'colour' a une valeur inconnue : '%s'"
 
 #, perl-format
 msgid "'%s' is long form"
@@ -447,111 +447,110 @@ msgid ""
 "PTv2 route: first way is a oneway road and ends in a 'stop_position' of this "
 "route and there is no exit. Is the route sorted in reverse order?"
 msgstr ""
-"Ligne PTv2 : le premier chemin est une route en sens unique et s'arrête avec "
-"un 'stop_position' de cette ligne et n'a pas de sortie. La ligne serait-elle "
-"triée en sens inverse ?"
+"Parcours PTv2 : le premier chemin est une route en sens unique et s'arrête "
+"avec un 'stop_position' de cette ligne et n'a pas de sortie. La ligne serait-"
+"elle triée en sens inverse ?"
 
 #, perl-format
 msgid "PTv2 route: has a gap, consists of %d segments. Gap appears at way"
 msgid_plural ""
 "PTv2 route: has gaps, consists of %d segments. Gaps appear at ways"
 msgstr[0] ""
-"Ligne PTv2 : a un trou, consistent en %d segments. Le trou apparaît sur le "
-"chemin"
+"Parcours PTv2 : a un trou, consistent en %d segments. Le trou apparaît sur "
+"le chemin"
 msgstr[1] ""
-"Ligne PTv2 : a des trous, consistant en %d segments. Les trous apparaissent "
-"sur les chemins"
+"Parcours PTv2 : a des trous, consistant en %d segments. Les trous "
+"apparaissent sur les chemins"
 
-#, perl-format
 msgid ""
 "PTv2 route: incorrect order of 'stop_position', 'platform' and 'way' (stop/"
 "platform after way)"
 msgstr ""
-"Ligne PTv2 : ordre incorrect de 'stop_position', 'platform' et 'way' (arrêt "
-"après le chemin)"
-
-msgid "entire roundabout but uses only segments"
-msgid_plural "entire roundabouts but uses only segments"
-msgstr[0] "rond-point complet mais n'utilise que des segments"
-msgstr[1] "rond-point complets mais n'utilise que des segments"
+"Parcours PTv2 : ordre incorrect de 'stop_position', 'platform' et "
+"'way' (arrêt après le chemin)"
 
 #, perl-format
-msgid "PTv2 route: includes %d %s"
-msgstr "Ligne PTv2 : contient %d %s"
+msgid "PTv2 route: includes %d entire roundabout but uses only segments"
+msgid_plural ""
+"PTv2 route: includes %d entire roundabouts but uses only segments"
+msgstr[0] ""
+"Parcours PTv2 : utilise %d rond-point complet mais n'utilise que des segments"
+msgstr[1] ""
+"Parcours PTv2 : utilise %d rond-point complets mais n'utilise que des "
+"segments"
 
 msgid "PTv2 route: using oneway way in wrong direction"
 msgid_plural "PTv2 route: using oneway ways in wrong direction"
-msgstr[0] "Ligne PTv2 : utilise un sens-unique dans le mauvais sens"
-msgstr[1] "Ligne PTv2 : utilise des sens-uniques dans le mauvais sens"
+msgstr[0] "Parcours PTv2 : utilise un sens-unique dans le mauvais sens"
+msgstr[1] "Parcours PTv2 : utilise des sens-uniques dans le mauvais sens"
 
 msgid "PTv2 route: using motorway_link way without entering a motorway way"
 msgid_plural ""
 "PTv2 route: using motorway_link ways without entering a motorway way"
-msgstr[0] "Ligne PTv2 : utilise un sens-unique dans le mauvais sens"
-msgstr[1] "Ligne PTv2 : utilise des sens-uniques dans le mauvais sens"
+msgstr[0] "Parcours PTv2 : utilise un sens-unique dans le mauvais sens"
+msgstr[1] "Parcours PTv2 : utilise des sens-uniques dans le mauvais sens"
 
 msgid "PTv2 route: roundabout appears twice, following itself"
 msgid_plural "PTv2 route: roundabouts appear twice, following themselves"
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "first node of oneway way has 'role' = 'stop_exit_only'"
+msgid "PTv2 route: first node of oneway way has 'role' = 'stop_exit_only'"
 msgstr ""
 
-msgid "last node of oneway way has 'role' = 'stop_entry_only'"
-msgstr ""
-
-msgid ""
-"first node of way has 'role' = 'stop_exit_only'. Is the route sorted in "
-"reverse order?"
+msgid "PTv2 route: last node of oneway way has 'role' = 'stop_entry_only'"
 msgstr ""
 
 msgid ""
-"last node of way has 'role' = 'stop_entry_only'. Is the route sorted in "
-"reverse order?"
+"PTv2 route: first node of way has 'role' = 'stop_exit_only'. Is the route "
+"sorted in reverse order?"
 msgstr ""
 
-msgid "'public_transport' = 'stop_position' is not part of way"
+msgid ""
+"PTv2 route: last node of way has 'role' = 'stop_entry_only'. Is the route "
+"sorted in reverse order?"
 msgstr ""
 
-#, perl-format
-msgid "missing '%s' = 'yes' on 'public_transport' = 'stop_position'"
-msgstr ""
-
-#, perl-format
-msgid "mismatch between 'role' = '%s' and 'public_transport' = '%s'"
+msgid "PTv2 route: 'public_transport' = 'stop_position' is not part of way"
 msgstr ""
 
 #, perl-format
 msgid ""
-"'role' = '%s' and %s: consider setting 'public_transport' = 'stop_position'"
+"PTv2 route: missing '%s' = 'yes' on 'public_transport' = 'stop_position'"
 msgstr ""
 
 #, perl-format
-msgid "'role' = '%s' but 'public_transport' is not set"
-msgstr "Le role vaut %s mais le tag 'public_transport' n'est pas défini"
-
-msgid "'public_transport' = 'platform' is part of way"
+msgid ""
+"PTv2 route: mismatch between 'role' = '%s' and 'public_transport' = '%s'"
 msgstr ""
 
 #, perl-format
-msgid "'role' = '%s' and %s: consider setting 'public_transport' = 'platform'"
+msgid ""
+"PTv2 route: 'role' = '%s' and %s: consider setting 'public_transport' = "
+"'stop_position'"
 msgstr ""
 
 #, perl-format
-msgid "wrong 'role' = '%s'"
-msgstr "mauvais role : '%s' "
+msgid "PTv2 route: 'role' = '%s' but 'public_transport' is not set"
+msgstr ""
+"Parcours PTv2 : Le role vaut %s mais le tag 'public_transport' n'est pas "
+"défini"
 
-msgid "empty 'role'"
-msgstr "'role' vide"
-
-#, perl-format
-msgid "PTv2 route: %s: %s and %d more ..."
-msgstr "Parcours PTv2 : %s : %s et %d autres ..."
+msgid "PTv2 route: 'public_transport' = 'platform' is part of way"
+msgstr ""
 
 #, perl-format
-msgid "PTv2 route: %s: %s"
-msgstr "Parcours PTv2 : %s : %s"
+msgid ""
+"PTv2 route: 'role' = '%s' and %s: consider setting 'public_transport' = "
+"'platform'"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: wrong 'role' = '%s'"
+msgstr "Parcours PTv2 : mauvais role : '%s' "
+
+msgid "PTv2 route: empty 'role'"
+msgstr "Parcours PTv2 : 'role' vide"
 
 #, perl-format
 msgid ""
@@ -666,11 +665,11 @@ msgid ""
 msgstr ""
 
 #, perl-format
-msgid "PTv2 route: there are more via-parts in 'name' (%d) than in 'via' (%d) "
+msgid "PTv2 route: there are more via-parts in 'name' (%d) than in 'via' (%d)"
 msgstr ""
 
 #, perl-format
-msgid "PTv2 route: there are less via-parts in 'name' (%d) than in 'via' (%d) "
+msgid "PTv2 route: there are less via-parts in 'name' (%d) than in 'via' (%d)"
 msgstr ""
 
 msgid "PTv2 route: 'name' has more than one '=>' but 'via' is not set"
@@ -731,33 +730,33 @@ msgstr ""
 
 #, perl-format
 msgid ""
-"'route_ref' = '%s' of stop does not include 'ref' = '%s' value of this route"
-"%s"
+"Route: 'route_ref' = '%s' of stop does not include 'ref' = '%s' value of "
+"this route%s"
 msgstr ""
-"Le tag 'route_ref'='%s' de cet arrêt ne comprend pas le tag 'ref'='%s' de ce "
-"parcours %s"
+"Parcours : Le tag 'route_ref' =' %s' de cet arrêt ne comprend pas le tag "
+"'ref' = '%s' de ce parcours %s"
 
 #, perl-format
 msgid ""
-"'route_ref' = '%s' of stop includes the separator value ';' (semi-colon) "
-"with sourrounding blank"
+"Route: 'route_ref' = '%s' of stop includes the separator value ';' (semi-"
+"colon) with sourrounding blank"
 msgstr ""
-"Le tag 'route_ref' = '%s' de cet arrêt comprend des espaces en trop autour "
-"du séparateur  ';' (point-virgule) "
+"Parcours : Le tag 'route_ref' = '%s' de cet arrêt comprend des espaces en "
+"trop autour du séparateur  ';' (point-virgule) "
 
 #, perl-format
 msgid ""
-"'route_ref' = '%s' of stop: ',' (comma) as separator value should be "
+"Route: 'route_ref' = '%s' of stop: ',' (comma) as separator value should be "
 "replaced by ';' (semi-colon) without blank"
 msgstr ""
-"Remplacer les ',' (virgule) par des ';' (point-virgule) comme séparateur "
-"dans le tag 'route_ref'='%s' de cet arrêt, sans espaces."
+"Parcours : Remplacer les ',' (virgule) par des ';' (point-virgule) comme "
+"séparateur dans le tag 'route_ref' = '%s' de cet arrêt, sans espaces."
 
 #, perl-format
-msgid "'%s' = '%s' of stop should be deleted, 'route_ref' = '%s' exists"
+msgid "Route: '%s' = '%s' of stop should be deleted, 'route_ref' = '%s' exists"
 msgstr ""
-"'%s'='%s' doit être supprimé sur cet arrêt car 'route_ref' = '%s' est déjà "
-"présent"
+"Parcours : '%s' = '%s' doit être supprimé sur cet arrêt car 'route_ref' = "
+"'%s' est déjà présent"
 
 #, perl-format
 msgid "(consider adding '%s' to the 'route_ref' tag of the stop)"
@@ -766,15 +765,17 @@ msgstr ""
 
 #, perl-format
 msgid ""
-"'ref' = '%s' of stop should represent the reference of the stop, but "
-"includes the 'ref' ='%s' of this route %s"
+"Route: 'ref' = '%s' of stop should represent the reference of the stop, but "
+"includes the 'ref' = '%s' of this route %s"
 msgstr ""
-"Le tag 'ref'='%s' sur un arrêt doit correspondre au numéro de l'arrêt, mais "
-"semble être le numéro de la ligne, 'ref'='%s' du parcours %s"
+"Parcours : Le tag 'ref' = '%s' sur un arrêt doit correspondre au numéro de "
+"l'arrêt, mais semble être le numéro de la ligne, 'ref' = '%s' du parcours %s"
 
 #, perl-format
-msgid "'%s' = '%s' of stop should be replaced by 'route_ref' = '%s'"
-msgstr "'%s'='%s' de cet arrêt devrait être remplacé par 'route_ref' = '%s'"
+msgid "Route: '%s' = '%s' of stop should be replaced by 'route_ref' = '%s'"
+msgstr ""
+"Parcours : '%s' = '%s' de cet arrêt devrait être remplacé par 'route_ref' = "
+"'%s'"
 
 #, perl-format
 msgid "(consider creating a 'route_ref' = '%s' tag for the stop)"
@@ -782,12 +783,12 @@ msgstr ""
 "(le tag 'route_ref' = '%s' serait peut-être plus adapté pour cet arrêt)"
 
 #, perl-format
-msgid "Route: %s: %s and %d more ..."
-msgstr "Parcours : %s : %s et %d en plus ..."
-
-#, perl-format
-msgid "Route: %s: %s"
-msgstr "Parcours : %s:%s"
+msgid ""
+"Route: 'ref' = '%s' of stop should represent the reference of the stop, but "
+"includes the 'ref' ='%s' of this route %s"
+msgstr ""
+"Parcours : Le tag 'ref' = '%s' sur un arrêt doit correspondre au numéro de "
+"l'arrêt, mais semble être le numéro de la ligne, 'ref' = '%s' du parcours %s"
 
 msgid "Error in input data: insufficient data for ways"
 msgstr "Erreur dans les données d'entrée : pas assez de chemins (ways)"
@@ -911,3 +912,18 @@ msgstr ""
 #, perl-format
 msgid "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'"
 msgstr ""
+
+#~ msgid "PTv2 route: includes %d %s"
+#~ msgstr "Ligne PTv2 : contient %d %s"
+
+#~ msgid "PTv2 route: %s: %s and %d more ..."
+#~ msgstr "Parcours PTv2 : %s : %s et %d autres ..."
+
+#~ msgid "PTv2 route: %s: %s"
+#~ msgstr "Parcours PTv2 : %s : %s"
+
+#~ msgid "Route: %s: %s and %d more ..."
+#~ msgstr "Parcours : %s : %s et %d en plus ..."
+
+#~ msgid "Route: %s: %s"
+#~ msgstr "Parcours : %s:%s"
