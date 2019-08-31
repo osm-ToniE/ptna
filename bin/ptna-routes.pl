@@ -229,6 +229,7 @@ if ( $ptv1_compatibility ne 'no' && $ptv1_compatibility ne 'allow' && $ptv1_comp
     $ptv1_compatibility = 'no';
 }
 
+
 my $xml_has_meta            = 0;        # does the XML file include META information?
 my $xml_has_relations       = 0;        # does the XML file include any relations? If not, we will exit
 my $xml_has_ways            = 0;        # does the XML file include any ways, then we can make a big analysis
@@ -970,10 +971,6 @@ if ( $routes_file ) {
                                    );
 
                 my $error_Mrfrar_2s_string      = gettext( "Missing route for ref='%s' and route='%s'" );
-                my $error_Mrfrar_2s_option      = '';
-                my $error_Mrfrar_2s_description = '';
-                my $error_Mrfrar_2s_howtofix    = '';
-                my $error_Mrfrar_2s_image       = '';
 
                 if ( $entryref->{'ref-or-list'} ) {
                     printTableLine( 'issues' => sprintf($error_Mrfrar_2s_string, join(gettext("' or ref='"),@{$entryref->{'ref-or-list'}}), $entryref->{'route'} ) );
@@ -1573,15 +1570,7 @@ sub analyze_route_master_environment {
         # 2. check 'route' relations and their 'relation_id' against the member list (do all 'route' members actually exist?)
 
         my $error_RMhmR_2d_string      = ngettext( "Route-Master has more Routes than actually match (%d versus %d) in the given data set", "Route-Masters have more Routes than actually match (%d versus %d) in the given data set", $number_of_route_masters );
-        my $error_RMhmR_2d_option      = '';
-        my $error_RMhmR_2d_description = '';
-        my $error_RMhmR_2d_howtofix    = '';
-        my $error_RMhmR_2d_image       = '';
         my $error_RMhlR_2d_string      = ngettext( "Route-Master has less Routes than actually match (%d versus %d) in the given data set", "Route-Masters have less Routes than actually match (%d versus %d) in the given data set", $number_of_route_masters );
-        my $error_RMhlR_2d_option      = '';
-        my $error_RMhlR_2d_description = '';
-        my $error_RMhlR_2d_howtofix    = '';
-        my $error_RMhlR_2d_image       = '';
 
         if ( $number_of_route_masters > 1 ) {
             #
@@ -1618,12 +1607,8 @@ sub analyze_route_master_environment {
             $num_of_operators = scalar( keys ( %operators ) );
             #printf STDERR "analyze_route_master_environment(): num_of_networks = %s, num_of_operators = %s\n", $num_of_networks, $num_of_operators;
             if ( $num_of_networks < 2 && $num_of_operators < 2 ) {
-                my $error_TimtoRM_string      = gettext( "There is more than one Route-Master" );
-                my $error_TimtoRM_option      = '';
-                my $error_TimtoRM_description = '';
-                my $error_TimtoRM_howtofix    = '';
-                my $error_TimtoRM_image       = '';
-                push( @{$relation_ptr->{'__issues__'}}, $error_TimtoRM_string );
+                my $error_string = gettext( "There is more than one Route-Master" );
+                push( @{$relation_ptr->{'__issues__'}}, $error_string );
             }
 
             if ( $number_of_my_routes > $number_of_routes ) {
@@ -1681,118 +1666,66 @@ sub analyze_route_master_environment {
                                                             #printf STDERR "%s Route of Route-Master not found although 'ref' is valid and 'operator' are equal. Route-Master: %s, Route: %s, 'ref': %s, 'operator': %s\n", get_time(), $relation_id, $member_ref->{'ref'}, $members_ref, html_escape($relation_ptr->{'tag'}->{'operator'});
                                                             # 'ref' tag is valid (in the list) 'operator' is OK, any other reason
                                                             my $error_Rmblwr_2s_string      = gettext( "Route might be listed with 'ref' = '%s' in a different section or in section 'Not clearly assigned routes' of this analysis: %s" );
-                                                            my $error_Rmblwr_2s_option      = '';
-                                                            my $error_Rmblwr_2s_description = '';
-                                                            my $error_Rmblwr_2s_howtofix    = '';
-                                                            my $error_Rmblwr_2s_image       = '';
                                                             push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_Rmblwr_2s_string, $members_ref, printRelationTemplate($member_ref->{'ref'}) ) );
                                                         } else {
                                                             # 'ref' tag is valid (in the list) but 'operator' is set and differs
                                                             my $error_RhdotRM_3s_string      = gettext( "Route has different 'operator' = '%s' than Route-Master 'operator' = '%s': %s" );
-                                                            my $error_RhdotRM_3s_option      = '';
-                                                            my $error_RhdotRM_3s_description = '';
-                                                            my $error_RhdotRM_3s_howtofix    = '';
-                                                            my $error_RhdotRM_3s_image       = '';
                                                             push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_RhdotRM_3s_string, html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'operator'}), html_escape($relation_ptr->{'tag'}->{'operator'}), printRelationTemplate($member_ref->{'ref'}) ) );
                                                         }
                                                     } elsif ( $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'operator'} ) {
                                                         # 'ref' tag is valid (in the list) but 'operator' is strange
                                                         my $error_Rhovwicanr_2s_string      = gettext( "Route has 'operator' = '%s' value which is considered as not relevant: %s" );
-                                                        my $error_Rhovwicanr_2s_option      = '';
-                                                        my $error_Rhovwicanr_2s_description = '';
-                                                        my $error_Rhovwicanr_2s_howtofix    = '';
-                                                        my $error_Rhovwicanr_2s_image       = '';
                                                         push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_Rhovwicanr_2s_string, html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'operator'}), printRelationTemplate($member_ref->{'ref'}) ) );
                                                     }
                                                 } else {
                                                     # 'ref' tag is valid (in the list) but 'network' is set and differs
                                                     my $error_RhdntRM_3s_string      = gettext( "Route has different 'network' = '%s' than Route-Master 'network' = '%s': %s" );
-                                                    my $error_RhdntRM_3s_option      = '';
-                                                    my $error_RhdntRM_3s_description = '';
-                                                    my $error_RhdntRM_3s_howtofix    = '';
-                                                    my $error_RhdntRM_3s_image       = '';
                                                     push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_RhdntRM_3s_string, html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}), html_escape($relation_ptr->{'tag'}->{'network'}), printRelationTemplate($member_ref->{'ref'}) ) );
                                                 }
                                             } elsif ( $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'} ) {
                                                 # 'ref' tag is valid (in the list) but 'network' is strange
                                                 my $error_Rhnvwicanr_2s_string      = gettext( "Route has 'network' = '%s' value which is considered as not relevant: %s" );
-                                                my $error_Rhnvwicanr_2s_option      = '';
-                                                my $error_Rhnvwicanr_2s_description = '';
-                                                my $error_Rhnvwicanr_2s_howtofix    = '';
-                                                my $error_Rhnvwicanr_2s_image       = '';
                                                 push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_Rhnvwicanr_2s_string, html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}), printRelationTemplate($member_ref->{'ref'}) ) );
                                             }
                                             if ( $members_ref ne $masters_ref ) {
                                                 # 'members_ref' is valid (in the list) but differs from 'ref' of route-master, so we have at least two refs in the list (a real list)
                                                 my $note_RhdrtRMrtsba_3s_string      = gettext( "Route has different 'ref' = '%s' than Route-Master 'ref' = '%s' - this should be avoided: %s" );
-                                                my $note_RhdrtRMrtsba_3s_option      = '';
-                                                my $note_RhdrtRMrtsba_3s_description = '';
-                                                my $note_RhdrtRMrtsba_3s_howtofix    = '';
-                                                my $note_RhdrtRMrtsba_3s_image       = '';
                                                 push( @{$relation_ptr->{'__notes__'}}, sprintf( $note_RhdrtRMrtsba_3s_string, $members_ref, $masters_ref, printRelationTemplate($member_ref->{'ref'}) ) );
                                             }
                                         } else {
                                             # 'ref' tag is set but is not valid, not in list
                                             my $error_Rhnmr_2s_string      = gettext( "Route has not matching 'ref' = '%s': %s" );
-                                            my $error_Rhnmr_2s_option      = '';
-                                            my $error_Rhnmr_2s_description = '';
-                                            my $error_Rhnmr_2s_howtofix    = '';
-                                            my $error_Rhnmr_2s_image       = '';
                                             push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_Rhnmr_2s_string, $members_ref, printRelationTemplate($member_ref->{'ref'}) ) );
                                         }
                                     } else {
                                         # 'ref' tag is not set
                                         my $error_Reitgdsbrtins_1s_string      = gettext( "Route exists in the given data set but 'ref' tag is not set: %s" );
-                                        my $error_Reitgdsbrtins_1s_option      = '';
-                                        my $error_Reitgdsbrtins_1s_description = '';
-                                        my $error_Reitgdsbrtins_1s_howtofix    = '';
-                                        my $error_Reitgdsbrtins_1s_image       = '';
                                         push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_Reitgdsbrtins_1s_string, printRelationTemplate($member_ref->{'ref'}) ) );
                                     }
                                 } else {
                                     # 'ref' tag is valid (in the list) but 'route' is set and differs from 'route_master'
                                     my $error_RhdrtRrm_3s_string      = gettext( "Route has different 'route' = '%s' than Route-Master 'route_master' = '%s': %s" );
-                                    my $error_RhdrtRrm_3s_option      = '';
-                                    my $error_RhdrtRrm_3s_description = '';
-                                    my $error_RhdrtRrm_3s_howtofix    = '';
-                                    my $error_RhdrtRrm_3s_image       = '';
                                     push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_RhdrtRrm_3s_string, html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'route'}), html_escape($relation_ptr->{'tag'}->{'route_master'}), printRelationTemplate($member_ref->{'ref'}) ) );
                                 }
                             } else {
                                 if ( $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'route'} ) {
                                     # 'route' is strange
                                     my $error_Rhrvwicanr_2s_string      = gettext( "Route has 'route' = '%s' value which is considered as not relevant: %s" );
-                                    my $error_Rhrvwicanr_2s_option      = '';
-                                    my $error_Rhrvwicanr_2s_description = '';
-                                    my $error_Rhrvwicanr_2s_howtofix    = '';
-                                    my $error_Rhrvwicanr_2s_image       = '';
                                     push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_Rhrvwicanr_2s_string, html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'route'}), printRelationTemplate($member_ref->{'ref'}) ) );
                                 } else {
                                     # 'route' is not set
                                     my $error_Rrtins_1s_string      = gettext( "Route: 'route' tag is not set: %s" );
-                                    my $error_Rrtins_1s_option      = '';
-                                    my $error_Rrtins_1s_description = '';
-                                    my $error_Rrtins_1s_howtofix    = '';
-                                    my $error_Rrtins_1s_image       = '';
                                     push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_Rrtins_1s_string, printRelationTemplate($member_ref->{'ref'}) ) );
                                 }
                             }
                         } else {
                             # 'type' is strange
                             my $error_Rtinr_2s_string      = gettext( "Route: 'type' = '%s' is not 'route': %s" );
-                            my $error_Rtinr_2s_option      = '';
-                            my $error_Rtinr_2s_description = '';
-                            my $error_Rtinr_2s_howtofix    = '';
-                            my $error_Rtinr_2s_image       = '';
                             push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_Rtinr_2s_string, html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'type'}), printRelationTemplate($member_ref->{'ref'}) ) );
                         }
                     } else {
                         # 'type' is not set
                         my $error_Rttins_1s_string      = gettext( "Route: 'type' tag is not set: %s" );
-                        my $error_Rttins_1s_option      = '';
-                        my $error_Rttins_1s_description = '';
-                        my $error_Rttins_1s_howtofix    = '';
-                        my $error_Rttins_1s_image       = '';
                         push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_Rttins_1s_string, printRelationTemplate($member_ref->{'ref'}) ) );
                     }
                 } else {
@@ -1800,10 +1733,6 @@ sub analyze_route_master_environment {
                     # relation is not included in XML input file
                     #
                     my $error_Rdneitgds_1s_string      = gettext( "Route does not exist in the given data set: %s" );
-                    my $error_Rdneitgds_1s_option      = '';
-                    my $error_Rdneitgds_1s_description = '';
-                    my $error_Rdneitgds_1s_howtofix    = '';
-                    my $error_Rdneitgds_1s_image       = '';
                     push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_Rdneitgds_1s_string, printRelationTemplate($member_ref->{'ref'}) ) );
                 }
             }
@@ -1812,10 +1741,6 @@ sub analyze_route_master_environment {
         foreach my $rel_id ( sort( keys( %{$env_ref->{'route'}->{$route_type}} ) ) ) {
             if ( !defined($my_routes{$rel_id}) ) {
                 my $error_RinamoRM_1s_string      = gettext( "Route is not member of Route-Master: %s" );
-                my $error_RinamoRM_1s_option      = '';
-                my $error_RinamoRM_1s_description = '';
-                my $error_RinamoRM_1s_howtofix    = '';
-                my $error_RinamoRM_1s_image       = '';
                 push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_RinamoRM_1s_string, printRelationTemplate($rel_id) ) );
             }
         }
@@ -1863,23 +1788,11 @@ sub analyze_route_environment {
         if ( $number_of_route_masters > 1 && $number_of_direct_route_masters < $number_of_route_masters ) {
             # number_of_direct_route_masters < y : because number_of_direct_route_masters == number_of_route_masters will be checked some lines below if number_of_direct_route_masters > 1
             my $error_TimtoRM_string      = gettext( "There is more than one Route-Master" );
-            my $error_TimtoRM_option      = '';
-            my $error_TimtoRM_description = '';
-            my $error_TimtoRM_howtofix    = '';
-            my $error_TimtoRM_image       = '';
             push( @{$relation_ptr->{'__issues__'}}, $error_TimtoRM_string );
         }
         if ( $number_of_direct_route_masters > $number_of_route_masters ) {
             my $error_RMmblwrindsoisNcarota_2s_string       = gettext( "Route-Master might be listed with 'ref' = '%s' in a different section or in section 'Not clearly assigned routes' of this analysis: %s" );
-            my $error_RMmblwrindsoisNcarota_2s_option       = '';
-            my $error_RMmblwrindsoisNcarota_2s_description  = '';
-            my $error_RMmblwrindsoisNcarota_2s_howtofix     = '';
-            my $error_RMmblwrindsoisNcarota_2s_image        = '';
             my $error_RMmblwurisRPLwrota_1s_string          = gettext( "Route-Master might be listed with unknown 'ref' in section 'Public Transport Lines without 'ref'' of this analysis: %s" );
-            my $error_RMmblwurisRPLwrota_1s_option          = '';
-            my $error_RMmblwurisRPLwrota_1s_description     = '';
-            my $error_RMmblwurisRPLwrota_1s_howtofix        = '';
-            my $error_RMmblwurisRPLwrota_1s_image           = '';
             foreach my $direct_route_master_rel_id ( keys( %{$RELATIONS{$relation_id}->{'member_of_route_master'}}  ) ) {
                 if ( !defined($env_ref->{'route_master'}->{$route_type}->{$direct_route_master_rel_id}) ) {
                     if ( $RELATIONS{$direct_route_master_rel_id} && $RELATIONS{$direct_route_master_rel_id}->{'tag'} && $RELATIONS{$direct_route_master_rel_id}->{'tag'}->{'ref'} ) {
@@ -1900,26 +1813,14 @@ sub analyze_route_environment {
 
         if ( $number_of_direct_route_masters > 1 ) {
             my $error_TRidmomtoRM_1s_string      = gettext( "This Route is direct member of more than one Route-Master: %s" );
-            my $error_TRidmomtoRM_1s_option      = '';
-            my $error_TRidmomtoRM_1s_description = '';
-            my $error_TRidmomtoRM_1s_howtofix    = '';
-            my $error_TRidmomtoRM_1s_image       = '';
             push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_TRidmomtoRM_1s_string, join(', ', map { printRelationTemplate($_); } sort( keys( %{$RELATIONS{$relation_id}->{'member_of_route_master'}} ) ) ) ) );
         } else {
             if ( $number_of_routes > 1 ) {
                 if ( $number_of_route_masters == 0 ) {
                     my $error_MRbnRM_string      = gettext( "Multiple Routes but no Route-Master" );
-                    my $error_MRbnRM_option      = '';
-                    my $error_MRbnRM_description = '';
-                    my $error_MRbnRM_howtofix    = '';
-                    my $error_MRbnRM_image       = '';
                     push( @{$relation_ptr->{'__issues__'}}, $error_MRbnRM_string );
                 } elsif ( $number_of_direct_route_masters == 0 ) {
                     my $error_MRbtRinamoaRM_string      = gettext( "Multiple Routes but this Route is not a member of any Route-Master" );
-                    my $error_MRbtRinamoaRM_option      = '';
-                    my $error_MRbtRinamoaRM_description = '';
-                    my $error_MRbtRinamoaRM_howtofix    = '';
-                    my $error_MRbtRinamoaRM_image       = '';
                     push( @{$relation_ptr->{'__issues__'}}, $error_MRbtRinamoaRM_string );
                 }
             } else {
@@ -1927,10 +1828,6 @@ sub analyze_route_environment {
                 if ( $number_of_route_masters > 0 && $number_of_direct_route_masters == 0 ) {
                     # there is at least one route_master, but this route is not a member of any
                     my $error_TRinamoaRM_string      = gettext( "This Route is not a member of any Route-Master" );
-                    my $error_TRinamoaRM_option      = '';
-                    my $error_TRinamoaRM_description = '';
-                    my $error_TRinamoaRM_howtofix    = '';
-                    my $error_TRinamoaRM_image       = '';
                     push( @{$relation_ptr->{'__issues__'}}, $error_TRinamoaRM_string );
                 }
             }
@@ -1944,10 +1841,6 @@ sub analyze_route_environment {
             if ( $relation_ptr->{'tag'}->{'route'}   && $RELATIONS{$route_master_rel_id}->{'tag'}->{'route_master'} &&
                  $relation_ptr->{'tag'}->{'route'}   ne $RELATIONS{$route_master_rel_id}->{'tag'}->{'route_master'}     ) {
                 my $error_roRdnftrmoRM_3s_string      = gettext( "'route' = '%s' of Route does not fit to 'route_master' = '%s' of Route-Master: %s" );
-                my $error_roRdnftrmoRM_3s_option      = '';
-                my $error_roRdnftrmoRM_3s_description = '';
-                my $error_roRdnftrmoRM_3s_howtofix    = '';
-                my $error_roRdnftrmoRM_3s_image       = '';
                 push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_roRdnftrmoRM_3s_string, $relation_ptr->{'tag'}->{'route'}, $RELATIONS{$route_master_rel_id}->{'tag'}->{'route_master'}, printRelationTemplate($route_master_rel_id)) );
             }
             if ( $RELATIONS{$route_master_rel_id}->{'tag'}->{'ref'} ) {
@@ -1963,63 +1856,35 @@ sub analyze_route_environment {
                     if ( $routes_ref && $routes_ref ne $masters_ref ) {
                         # 'masters_ref' is valid (in the list) but differs from 'ref' of route, so we have at least two refs in the list (a real list)
                         my $error_RhdrtRMrtsba_3s_string      = gettext( "Route has different 'ref' = '%s' than Route-Master 'ref' = '%s' - this should be avoided: %s" );
-                        my $error_RhdrtRMrtsba_3s_option      = '';
-                        my $error_RhdrtRMrtsba_3s_description = '';
-                        my $error_RhdrtRMrtsba_3s_howtofix    = '';
-                        my $error_RhdrtRMrtsba_3s_image       = '';
                         push( @{$relation_ptr->{'__notes__'}}, sprintf( $error_RhdrtRMrtsba_3s_string, $routes_ref, $masters_ref, printRelationTemplate($route_master_rel_id) ) );
                     }
                 } else {
                     my $error_RMhnmr_2s_string      = gettext("Route-Master has not matching 'ref' = '%s': %s");
-                    my $error_RMhnmr_2s_option      = '';
-                    my $error_RMhnmr_2s_description = '';
-                    my $error_RMhnmr_2s_howtofix    = '';
-                    my $error_RMhnmr_2s_image       = '';
                     push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_RMhnmr_2s_string, $masters_ref, printRelationTemplate($route_master_rel_id)) );
                 }
             }
             if ( $relation_ptr->{'tag'}->{'network'} && $RELATIONS{$route_master_rel_id}->{'tag'}->{'network'} &&
                  $relation_ptr->{'tag'}->{'network'} ne $RELATIONS{$route_master_rel_id}->{'tag'}->{'network'}     ) {
                 my $error_noRdnftnoRM_3s_string      = gettext( "'network' = '%s' of Route does not fit to 'network' = '%s' of Route-Master: %s" );
-                my $error_noRdnftnoRM_3s_option      = '';
-                my $error_noRdnftnoRM_3s_description = '';
-                my $error_noRdnftnoRM_3s_howtofix    = '';
-                my $error_noRdnftnoRM_3s_image       = '';
                 push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_noRdnftnoRM_3s_string, html_escape($relation_ptr->{'tag'}->{'network'}), html_escape($RELATIONS{$route_master_rel_id}->{'tag'}->{'network'}), printRelationTemplate($route_master_rel_id)) );
             }
 #            if ( $relation_ptr->{'tag'}->{'operator'} && $RELATIONS{$route_master_rel_id}->{'tag'}->{'operator'} &&
 #                 $relation_ptr->{'tag'}->{'operator'} ne $RELATIONS{$route_master_rel_id}->{'tag'}->{'operator'}     ) {
 #                my $error_ooRdnftooRM_3s_string      = gettext( "'operator' = '%s' of Route does not fit to 'operator' = '%s' of Route-Master: %s" );
-#                my $error_ooRdnftooRM_3s_option      = '';
-#                my $error_ooRdnftooRM_3s_description = '';
-#                my $error_ooRdnftooRM_3s_howtofix    = '';
-#                my $error_ooRdnftooRM_3s_image       = '';
 #                push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_ooRdnftooRM_3s_string, html_escape($relation_ptr->{'tag'}->{'operator'}), html_escape($RELATIONS{$route_master_rel_id}->{'tag'}->{'operator'}), printRelationTemplate($route_master_rel_id)) );
 #            }
             if ( $relation_ptr->{'tag'}->{'colour'} ) {
                 if ( $RELATIONS{$route_master_rel_id}->{'tag'}->{'colour'} ) {
                     if ( uc($relation_ptr->{'tag'}->{'colour'}) ne uc($RELATIONS{$route_master_rel_id}->{'tag'}->{'colour'}) ) {
                         my $error_coRdnftcoRM_1s_string      = gettext( "'colour' of Route does not fit to 'colour' of Route-Master: %s" );
-                        my $error_coRdnftcoRM_1s_option      = '';
-                        my $error_coRdnftcoRM_1s_description = '';
-                        my $error_coRdnftcoRM_1s_howtofix    = '';
-                        my $error_coRdnftcoRM_1s_image       = '';
                         push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_coRdnftcoRM_1s_string, printRelationTemplate($route_master_rel_id)) );
                     }
                 } else {
                     my $error_coRisbcoRMins_1s_string      = gettext( "'colour' of Route is set but 'colour' of Route-Master is not set: %s" );
-                    my $error_coRisbcoRMins_1s_option      = '';
-                    my $error_coRisbcoRMins_1s_description = '';
-                    my $error_coRisbcoRMins_1s_howtofix    = '';
-                    my $error_coRisbcoRMins_1s_image       = '';
                     push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_coRisbcoRMins_1s_string, printRelationTemplate($route_master_rel_id)) );
                 }
             } elsif ( $RELATIONS{$route_master_rel_id}->{'tag'}->{'colour'} ) {
                 my $error_coRinsbcoRMis_1s_string      = gettext( "'colour' of Route is not set but 'colour' of Route-Master is set: %s" );
-                my $error_coRinsbcoRMis_1s_option      = '';
-                my $error_coRinsbcoRMis_1s_description = '';
-                my $error_coRinsbcoRMis_1s_howtofix    = '';
-                my $error_coRinsbcoRMis_1s_image       = '';
                 push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_coRinsbcoRMis_1s_string, printRelationTemplate($route_master_rel_id)) );
             }
         }
@@ -2051,10 +1916,6 @@ sub analyze_route_environment {
                     my @help_array                        = sort( keys ( %name_matches ) );
                     my $num_of_errors                     = scalar(@help_array);
                     my $error_PRnoRiitnoor_0s_string      = gettext( "PTv2 Route: 'name' of Route is identical to 'name' of other Route(s), consider setting an appropriate 'via' value and include that into 'name'" );
-                    my $error_PRnoRiitnoor_0s_option      = "--check-name\n--check-name-relaxed";
-                    my $error_PRnoRiitnoor_0s_description = "If two routes take different ways between 'A' and 'E', the difference should be stated in different 'name' and 'via' values like:\n1.) 'name' = 'Bus A: A => B => E' and 'via' = 'B'\n2.)  'name' = 'Bus A: A => C => E' and 'via' = 'C'" ;
-                    my $error_PRnoRiitnoor_0s_howtofix    = "Set appropriate 'via' values and include that into 'name' to distinguish between different route variants.";
-                    my $error_PRnoRiitnoor_0s_image       = '';
                     if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
                         push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("%s: %s and %d more ..."), $error_PRnoRiitnoor_0s_string, join(', ', map { printRelationTemplate($_); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
                     } else {
@@ -2068,10 +1929,6 @@ sub analyze_route_environment {
 
             if ( !$relation_ptr->{'tag'}->{'public_transport:version'} || $relation_ptr->{'tag'}->{'public_transport:version'} ne '2' ) {
                 my $error_MRbptvinst2_string      = gettext( "Multiple Routes but 'public_transport:version' is not set to '2'" );
-                my $error_MRbptvinst2_option      = '';
-                my $error_MRbptvinst2_description = '';
-                my $error_MRbptvinst2_howtofix    = '';
-                my $error_MRbptvinst2_image       = '';
                 push( @{$relation_ptr->{'__issues__'}}, $error_MRbptvinst2_string );
             }
         }
@@ -2140,18 +1997,10 @@ sub analyze_relation {
 
         unless ( $ref ) {
             my $error_refins_string      = gettext( "'ref' is not set" );
-            my $error_refins_option      = '';
-            my $error_refins_description = '';
-            my $error_refins_howtofix    = '';
-            my $error_refins_image       = '';
             push( @{$relation_ptr->{'__issues__'}}, $error_refins_string );
         }
         unless ( $relation_ptr->{'tag'}->{'name'} ) {
             my $error_nameins_string      = gettext( "'name' is not set" );
-            my $error_nameins_option      = '';
-            my $error_nameins_description = '';
-            my $error_nameins_howtofix    = '';
-            my $error_nameins_image       = '';
             push( @{$relation_ptr->{'__issues__'}}, $error_nameins_string );
         }
 
@@ -2214,32 +2063,16 @@ sub analyze_relation {
             if ( $check_osm_separator ) {
                 if ( $count_error_semikolon_w_blank ) {
                     my $error_nitsvscwsb_1s_string      = gettext( "'network' = '%s' includes the separator value ';' (semi-colon) with sourrounding blank" );
-                    my $error_nitsvscwsb_1s_option      = '--check-osm-separator';
-                    my $error_nitsvscwsb_1s_description = '';
-                    my $error_nitsvscwsb_1s_howtofix    = '';
-                    my $error_nitsvscwsb_1s_image       = '';
                     push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_nitsvscwsb_1s_string, html_escape($network)) );
                 }
                 if ( $count_error_comma) {
                     my $error_ncasvsbrbscwb_1s_string      = gettext( "'network' = '%s': ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank" );
-                    my $error_ncasvsbrbscwb_1s_option      = '--check-osm-separator';
-                    my $error_ncasvsbrbscwb_1s_description = '';
-                    my $error_ncasvsbrbscwb_1s_howtofix    = '';
-                    my $error_ncasvsbrbscwb_1s_image       = '';
                     push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_ncasvsbrbscwb_1s_string, html_escape($network)) );
                 }
             }
 
             my $note_networksbsf_1s_string             = gettext( "'network' = '%s' should be short form" );
-            my $note_networksbsf_1s_option             = '--expect-network-short';
-            my $note_networksbsf_1s_description        = '';
-            my $note_networksbsf_1s_howtofix           = '';
-            my $note_networksbsf_1s_image              = '';
             my $note_networksblf_1s_string             = gettext( "'network' = '%s' should be long form" );
-            my $note_networksblf_1s_option             = '--expect-network-long';
-            my $note_networksblf_1s_description        = '';
-            my $note_networksblf_1s_howtofix           = '';
-            my $note_networksblf_1s_image              = '';
             if ( $expect_network_short  ) {
                 my $match_short     = '';
                 my $match_long      = '';
@@ -2283,34 +2116,18 @@ sub analyze_relation {
             }
         } else {
             my $error_networkisn_string      = gettext( "'network' is not set" );
-            my $error_networkisn_option      = '';
-            my $error_networkisn_description = '';
-            my $error_networkisn_howtofix    = '';
-            my $error_networkisn_image       = '';
             push( @{$relation_ptr->{'__issues__'}}, $error_networkisn_string );
         }
 
         if ( $relation_ptr->{'tag'}->{'colour'} ) {
-                my $error_chuv_1s_string      = gettext( "'colour' has unknown value '%s'" );
-                my $error_chuv_1s_option      = '';
-                my $error_chuv_1s_description = '';
-                my $error_chuv_1s_howtofix    = '';
-                my $error_chuv_1s_image       = '';
-                my $colour = GetColourFromString( $relation_ptr->{'tag'}->{'colour'} );
-                push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_chuv_1s_string, html_escape($relation_ptr->{'tag'}->{'colour'}) ) )        unless ( $colour );
+            my $error_chuv_1s_string      = gettext( "'colour' has unknown value '%s'" );
+            my $colour = GetColourFromString( $relation_ptr->{'tag'}->{'colour'} );
+            push( @{$relation_ptr->{'__issues__'}}, sprintf( $error_chuv_1s_string, html_escape($relation_ptr->{'tag'}->{'colour'}) ) )        unless ( $colour );
         }
 
         if ( $positive_notes ) {
             my $note_nlilf_1s_string             = gettext( "'%s' is long form" );
-            my $note_nlilf_1s_option             = '--positive-notes';
-            my $note_nlilf_1s_description        = '';
-            my $note_nlilf_1s_howtofix           = '';
-            my $note_nlilf_1s_image              = '';
             my $note_nlmlf_1s_string             = gettext( "'%s' matches long form" );
-            my $note_nlmlf_1s_option             = '--positive-notes';
-            my $note_nlmlf_1s_description        = '';
-            my $note_nlmlf_1s_howtofix           = '';
-            my $note_nlmlf_1s_image              = '';
 
             if ( !$network_long_regex && !$network_short_regex ) {
                 # we do not filter for any 'network' values, so let's print also the value of 'network'
@@ -2666,10 +2483,6 @@ sub analyze_ptv2_route_relation {
         my @help_array                = sort(keys(%{$relation_ptr->{'roundabout_follows_itself'}}));
         my $num_of_errors             = scalar(@help_array);
         my $error_prratfi_string      = ngettext( "PTv2 route: roundabout appears twice, following itself", "PTv2 route: roundabouts appear twice, following themselves", $num_of_errors );
-        my $error_prratfi_option      = '';
-        my $error_prratfi_description = '';
-        my $error_prratfi_howtofix    = '';
-        my $error_prratfi_image       = '';
         if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
             push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $error_prratfi_string, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
         } else {
