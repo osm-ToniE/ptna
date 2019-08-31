@@ -54,6 +54,7 @@ sub ReadRoutes {
     my $NR                  = undef;
     my $hashref             = undef;
     my $last_type           = 'none';
+    my $have_seen_pre       = 0;
 
     my %supported_routes_types = ();
 
@@ -78,11 +79,10 @@ sub ReadRoutes {
 
                 while ( <CSV> ) {
                     chomp();                                        # remove NewLine
-                    s/\r$//;                                        # remoce 'CR'
+                    s/\r$//;                                        # remove 'CR'
                     s/^\s*//;                                       # remove space at the beginning
                     s/\s*$//;                                       # remove space at the end
-                    s/<pre>//;                                      # remove HTML tag if this is a copy from the Wiki-Page
-                    s|</pre>||;                                     # remove HTML tag if this is a copy from the Wiki-Page
+                    
                     next    if ( !$_ );                             # ignore if line is empty
 
                     $NR                         = $.;
@@ -90,6 +90,7 @@ sub ReadRoutes {
                     $hashref                    = $routes_hash{$NR};
                     $hashref->{'contents'}      = $_;                  # store original contents
 
+                        next    if ( !$_ );                             # ignore if line is empty
                     if ( m/^[=#-]/ ) {                              # headers, text and comment lines
                         if ( m/^(=+)([^=].*)/ ) {
                             $hashref->{'type'}           =  'header';     # store type
@@ -107,6 +108,12 @@ sub ReadRoutes {
                         } else {
                             next;   # ignore 'comment' line
                         }
+                    } elsif ( m/<pre>/ ) {                          # ignore lines with HTML <pre>
+                        $have_seen_pre = 1;
+                        next;
+                    } elsif ( m|</pre>| ) {                         # ignore lines with HTML </pre>
+                        last    if ( $have_seen_pre );              # terminate when this is aclosing </pre>
+                        next;
                     } else {
                         $hashref->{'type'}       = 'route';          # store type
 
