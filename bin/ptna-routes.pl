@@ -2163,6 +2163,11 @@ sub analyze_relation {
             }
         }
 
+        if ( $relation_ptr->{'tag'}->{'line'} ) {
+            $notes_string = gettext( "The tag 'line' (='%s') is reserved for 'power' = 'line' related tagging. For public transport 'route_master' and 'route' are used." );
+            push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, $relation_ptr->{'tag'}->{'line'} ) );
+        }
+        
         #
         # check route_master/route specific things
         #

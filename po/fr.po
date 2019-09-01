@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 1.0.0\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2019-08-31 21:03+0200\n"
-"PO-Revision-Date: 2019-08-31 21:54+0200\n"
+"POT-Creation-Date: 2019-09-01 16:30+0200\n"
+"PO-Revision-Date: 2019-09-01 16:24+0200\n"
 "Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
 "Language-Team: French (https://www.transifex.com/jungle-bus/teams/97874/"
 "fr/)\n"
@@ -384,6 +384,12 @@ msgstr "'network:long' est en forme longue"
 
 msgid "'network:long' matches long form"
 msgstr "'network:long' correspond à la forme longue"
+
+#, perl-format
+msgid ""
+"The tag 'line' (='%s') is reserved for 'power' = 'line' related tagging. For "
+"public transport 'route_master' and 'route' are used."
+msgstr ""
 
 msgid "Route-Master without Route(s)"
 msgstr "Ligne sans parcours"
