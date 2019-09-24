@@ -20,8 +20,10 @@ binmode STDERR, ":utf8";
 
 use Locale::gettext qw();
 
+use Encode;                                                
+
 use Getopt::Long;
-use PtnaStrings     qw( InitMessageStrings InitOptionStrings GetMessageKeys GetMessageValue GetOptionKeys GetOptionValue %MessageHash @MessageList %OptionHash @OptionList );
+use PtnaStrings     qw( InitMessageStrings InitOptionStrings GetMessageKeys GetMessageValue GetOptionKeys GetOptionValue );
 
 
 my $opt_language                    = undef;
@@ -39,7 +41,7 @@ GetOptions( 'language=s'                    =>  \$opt_language,                 
           );
 
 if ( $verbose ) {
-    printf STDERR "ptna-list-strings.pl -v", get_time();
+    printf STDERR "ptna-list-strings.pl -v";
     printf STDERR " --language='%s'", $opt_language  if ( $opt_language );
     printf STDERR " --what=%s",       $opt_what      if ( $opt_what     );
     printf STDERR " --type=%s",       $opt_type      if ( $opt_type     );
@@ -72,7 +74,7 @@ if ( $opt_what eq 'messages' ) {
 
     if ( $opt_type eq 'html' ) {
         ListOptionStringsDetailsHtml();
-    } elsif ( $opt_what eq 'wiki' ) {
+    } elsif ( $opt_type eq 'wiki' ) {
         ListOptionStringsDetailsWiki();
     } else {
         ListOptionStrings();
@@ -88,7 +90,7 @@ if ( $opt_what eq 'messages' ) {
 
 sub ListMessageStrings {
 
-    foreach my $key ( GetMessageKeys() ) {
+    foreach my $key ( sort ( GetMessageKeys() ) ) {
         printf STDOUT "%s\n", GetMessageValue( $key, 'message' );
     }
     return;
@@ -104,27 +106,25 @@ sub ListMessageStrings {
 sub ListMessageStringsDetailsHtml {
 
     my $key = undef;
-    my $i   = undef;
 
     printf STDOUT "    <table id=\"message-table\">\n";
     printf STDOUT "        <thead>\n";
     printf STDOUT "            <tr class=\"message-tableheaderrow\">\n";
-    #printf STDOUT "                <th class=\"message-text\">%s</th>\n",        gettext( "Message" );
-    #printf STDOUT "                <th class=\"message-option\">%s</th>\n",      gettext( "Option" );
-    #printf STDOUT "                <th class=\"message-description\">%s</th>\n", gettext( "Description" );
-    #printf STDOUT "                <th class=\"message-fix\">%s</th>\n",         gettext( "How to fix" );
-    #printf STDOUT "                <th class=\"message-image\">%s</th>\n",       gettext( "Image" );
+    printf STDOUT "                <th class=\"message-text\">%s</th>\n",        gettext( "Message" );
+    printf STDOUT "                <th class=\"message-option\">%s</th>\n",      gettext( "Option" );
+    printf STDOUT "                <th class=\"message-description\">%s</th>\n", gettext( "Description" );
+    printf STDOUT "                <th class=\"message-fix\">%s</th>\n",         gettext( "How to fix" );
+    printf STDOUT "                <th class=\"message-image\">%s</th>\n",       gettext( "Image" );
     printf STDOUT "            </tr>\n";
     printf STDOUT "        </thead>\n";
     printf STDOUT "        <tbody>\n";
-    foreach $key ( sort ( keys ( %MessageHash ) ) ) {
-        $i = $MessageHash{$key};
-        printf STDOUT "            <tr>\n";
-        printf STDOUT "                <td class=\"message-text\">%s</td>\n",          $MessageList[$i]->{'message'};
-        printf STDOUT "                <td class=\"message-option\">%s</td>\n",      ( $MessageList[$i]->{'option'}      ) ? $MessageList[$MessageHash{$key}]->{'option'}      : '&nbsp;';
-        printf STDOUT "                <td class=\"message-description\">%s</td>\n", ( $MessageList[$i]->{'description'} ) ? $MessageList[$MessageHash{$key}]->{'description'} : '&nbsp;';
-        #printf STDOUT "                <td class=\"message-fix\">%s</td>\n",         ( $MessageList[$i]->{'fix'}         ) ? $MessageList[$MessageHash{$key}]->{'fix'}         : '&nbsp;';
-        #printf STDOUT "                <td class=\"message-image\">%s</td>\n",       ( $MessageList[$i]->{'image'}       ) ? $MessageList[$MessageHash{$key}]->{'image'}       : '&nbsp;';
+    foreach $key ( sort ( GetMessageKeys() ) ) {
+        printf STDOUT "            <tr class=\"message-tablerow\">\n";
+        printf STDOUT "                <td class=\"message-text\">%s</td>\n",        GetMessageValue( $key, 'message' );
+        printf STDOUT "                <td class=\"message-option\">%s</td>\n",      GetMessageValue( $key, 'option' );
+        printf STDOUT "                <td class=\"message-description\">%s</td>\n", GetMessageValue( $key, 'description' );
+        printf STDOUT "                <td class=\"message-fix\">%s</td>\n",         GetMessageValue( $key, 'fix' );
+        printf STDOUT "                <td class=\"message-image\">%s</td>\n",       GetMessageValue( $key, 'image' );
         printf STDOUT "            </tr>\n";
 
     }
@@ -142,7 +142,7 @@ sub ListMessageStringsDetailsHtml {
 
 sub ListOptionStrings {
 
-    foreach my $key ( GetOptionKeys() ) {
+    foreach my $key ( sort ( GetOptionKeys() ) ) {
         printf STDOUT "%s\n", GetOptionValue( $key, 'option' );
     }
     return;
@@ -158,7 +158,6 @@ sub ListOptionStrings {
 sub ListOptionStringsDetailsHtml {
 
     my $key = undef;
-    my $i   = undef;
 
     printf STDOUT "    <table id=\"message-table\">\n";
     printf STDOUT "        <thead>\n";
@@ -169,12 +168,11 @@ sub ListOptionStringsDetailsHtml {
     printf STDOUT "            </tr>\n";
     printf STDOUT "        </thead>\n";
     printf STDOUT "        <tbody>\n";
-    foreach $key ( sort ( keys ( %OptionHash ) ) ) {
-        $i = $OptionHash{$key};
-        printf STDOUT "            <tr>\n";
-        printf STDOUT "                <td class=\"message-option\">%s</td>\n",      ( $OptionList[$i]->{'option'}      ) ? $OptionList[$OptionHash{$key}]->{'option'}      : '&nbsp;';
-        printf STDOUT "                <td class=\"message-default\">%s</td>\n",     ( $OptionList[$i]->{'default'}     ) ? $OptionList[$OptionHash{$key}]->{'default'}     : '&nbsp;';
-        printf STDOUT "                <td class=\"message-description\">%s</td>\n", ( $OptionList[$i]->{'description'} ) ? $OptionList[$OptionHash{$key}]->{'description'} : '&nbsp;';
+    foreach $key ( sort ( GetOptionKeys() ) ) {
+        printf STDOUT "            <tr class=\"message-tablerow\">\n";
+        printf STDOUT "                <td class=\"message-option\">%s</td>\n",      GetOptionValue( $key, 'option' );
+        printf STDOUT "                <td class=\"message-default\">%s</td>\n",     GetOptionValue( $key, 'default' );
+        printf STDOUT "                <td class=\"message-description\">%s</td>\n", GetOptionValue( $key, 'description' );
         printf STDOUT "            </tr>\n";
 
     }
@@ -193,14 +191,12 @@ sub ListOptionStringsDetailsHtml {
 sub ListOptionStringsDetailsWiki {
 
     my $key = undef;
-    my $i   = undef;
 
-    foreach $key ( sort ( keys ( %OptionHash ) ) ) {
-        $i = $OptionHash{$key};
+    foreach $key ( sort ( GetOptionKeys() ) ) {
         printf STDOUT "|-\n";
-        printf STDOUT "|- | %s ||", ( $OptionList[$i]->{'option'}      ) ? $OptionList[$OptionHash{$key}]->{'option'}      : '&nbsp;';
-        printf STDOUT " | %s ||",   ( $OptionList[$i]->{'default'}     ) ? $OptionList[$OptionHash{$key}]->{'default'}     : '&nbsp;';
-        printf STDOUT " | %s ||\n", ( $OptionList[$i]->{'description'} ) ? $OptionList[$OptionHash{$key}]->{'description'} : '&nbsp;';
+        printf STDOUT "|- | %s ||", GetOptionValue( $key, 'option' );
+        printf STDOUT " | %s ||",   GetOptionValue( $key, 'default' );
+        printf STDOUT " | %s ||\n", GetOptionValue( $key, 'description' );
 
     }
     return;
@@ -208,12 +204,26 @@ sub ListOptionStringsDetailsWiki {
 
 
 #############################################################################################
+#
+# overwrite Locale::gettext::gettext() by our own function which simply decodes the getrieved data
+#
+#############################################################################################
 
-sub get_time {
-
-    my ($sec,$min,$hour,$day,$month,$year) = localtime();
-
-    return sprintf( "%04d-%02d-%02d %02d:%02d:%02d", $year+1900, $month+1, $day, $hour, $min, $sec );
+sub gettext {
+    return decode( 'utf8', Locale::gettext::gettext( @_ ) );
 }
+
+
+#############################################################################################
+#
+# overwrite Locale::gettext::ngettext() by our own function which simply decodes the getrieved data
+#
+#############################################################################################
+
+sub ngettext {
+    return decode( 'utf8', Locale::gettext::ngettext( @_ ) );
+}
+
+
 
 
