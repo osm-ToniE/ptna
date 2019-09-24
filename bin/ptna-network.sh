@@ -393,7 +393,7 @@ then
                             echo $(date "+%Y-%m-%d %H:%M:%S") "Updating results HTML file '$RESULTS_HTML'"
 
                             NEW_OSM_Base_Time="$(awk '/OSM-Base Time : / { print $4 "T" $5 "Z"; }' $WORK_LOC/$HTML_FILE)"
-                            NEW_Local_OSM_Base_Time="$(date --date="$NEW_OSM_Base_Time" '+%d.%m.%Y %H:%M:%S')"
+                            NEW_Local_OSM_Base_Time="$(date --date="$NEW_OSM_Base_Time" '+%d.%m.%Y %H:%M:%S %Z')"
     
                             sed -i -e "s/^\(.*$PREFIX-datadate.*\)<time .*\(<.time>.*\)$/\1<time datetime='$NEW_OSM_Base_Time'>$NEW_Local_OSM_Base_Time\2/" \
                                    -e "s/^\(.*$PREFIX-analyzed.*\)<a .*<.a>\(.*\)$/\1\&nbsp;\2/" \
@@ -409,7 +409,7 @@ then
                         echo $(date "+%Y-%m-%d %H:%M:%S") "Updating results HTML file '$RESULTS_HTML'"
 
                         NEW_OSM_Base_Time="$(awk '/OSM-Base Time : / { print $4 "T" $5 "Z"; }' $WORK_LOC/$HTML_FILE)"
-                        NEW_Local_OSM_Base_Time="$(date --date="$NEW_OSM_Base_Time" '+%d.%m.%Y %H:%M:%S')"
+                        NEW_Local_OSM_Base_Time="$(date --date="$NEW_OSM_Base_Time" '+%d.%m.%Y %H:%M:%S %Z')"
     
                         sed -i -e "s/^\(.*$PREFIX-datadate.*\)<time .*\(<.time>.*\)$/\1<time datetime='$NEW_OSM_Base_Time'>$NEW_Local_OSM_Base_Time\2/" \
                                -e "s/^\(.*$PREFIX-analyzed.*class=.\)results-analyzed-...\(\".*\)$/\1results-analyzed-old\2/" \
