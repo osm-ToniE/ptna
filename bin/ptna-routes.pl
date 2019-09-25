@@ -833,7 +833,7 @@ if ( $xml_has_nodes ) {
             $platform_nodes{$node_id} = $NODES{$node_id};
             $number_of_platformnodes++;
         } elsif ( $NODES{$node_id}->{'tag'}->{'public_transport'}                    &&
-                $NODES{$node_id}->{'tag'}->{'public_transport'} eq 'stop_position'    ) {
+                  $NODES{$node_id}->{'tag'}->{'public_transport'} eq 'stop_position'    ) {
             $stop_nodes{$node_id} = $NODES{$node_id};
             $number_of_stop_positions++;
         } else {
@@ -973,12 +973,12 @@ if ( $routes_file ) {
                                      'Operator'      => $entryref->{'operator'},
                                    );
 
-                my $error_Mrfrar_2s_string      = gettext( "Missing route for ref='%s' and route='%s'" );
+                $issues_string = gettext( "Missing route for ref='%s' and route='%s'" );
 
                 if ( $entryref->{'ref-or-list'} ) {
-                    printTableLine( 'issues' => sprintf($error_Mrfrar_2s_string, join(gettext("' or ref='"),@{$entryref->{'ref-or-list'}}), $entryref->{'route'} ) );
+                    printTableLine( 'issues' => sprintf($issues_string, join(gettext("' or ref='"),@{$entryref->{'ref-or-list'}}), $entryref->{'route'} ) );
                 } else {
-                    printTableLine( 'issues' => sprintf($error_Mrfrar_2s_string, '???', $entryref->{'route'} ) );
+                    printTableLine( 'issues' => sprintf($issues_string, '???', $entryref->{'route'} ) );
                 }
             }
         } else {
@@ -1919,7 +1919,7 @@ sub analyze_route_environment {
                 if ( scalar( keys ( %name_matches ) ) ) {
                     my @help_array    = sort( keys ( %name_matches ) );
                     my $num_of_errors = scalar(@help_array);
-                    $notes_string  = gettext( "PTv2 route: 'name' of Route is identical to 'name' of other Route(s), consider setting an appropriate 'via' value and include that into 'name'" );
+                    $notes_string = gettext( "PTv2 route: 'name' of Route is identical to 'name' of other Route(s), consider setting an appropriate 'via' value and include that into 'name'" );
                     if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
                         push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("%s: %s and %d more ..."), $notes_string, join(', ', map { printRelationTemplate($_); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
                     } else {
@@ -1932,7 +1932,7 @@ sub analyze_route_environment {
             # 5. check for 'public_transport:version' being set to '2' if there is more than one route
 
             if ( !$relation_ptr->{'tag'}->{'public_transport:version'} || $relation_ptr->{'tag'}->{'public_transport:version'} ne '2' ) {
-                $issues_string      = gettext( "Multiple Routes but 'public_transport:version' is not set to '2'" );
+                $issues_string = gettext( "Multiple Routes but 'public_transport:version' is not set to '2'" );
                 push( @{$relation_ptr->{'__issues__'}}, $issues_string );
             }
         }
