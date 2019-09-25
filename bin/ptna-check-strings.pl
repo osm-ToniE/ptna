@@ -66,10 +66,14 @@ sub ReadStringsFromFile {
     if ( open(F,"< $filename") ) {
         
         while ( <F> ) {
-            if ( m/\s*\$issues_string\s*=\s*(gettext\(\s*\")(.*)(\"\s*\)\s*;)/ ) {
+            s/^\s+//;
+            s/\s+$//;
+            if ( m/^\$issues_string\s*=\s*(gettext\(\s*\")(.*)(\"\s*\)\s*;)/  ||
+                 m/^\$notes_string\s*=\s*(gettext\(\s*\")(.*)(\"\s*\)\s*;)/      ) {
                 $strings_to_statement{$2} = $1 . $2 . $3;
                 printf STDERR "--> \$strings_to_statement{%s} = %s\n", $2, $strings_to_statement{$2}    if ( $debug );
-            } elsif ( m/\s*\$issues_string\s*=\s*(ngettext\(\s*\")(.*?)(\",\s*\".*\",\s*)(.*)(\s*\)\s*;)/ ) {
+            } elsif ( m/^\$issues_string\s*=\s*(ngettext\(\s*\")(.*?)(\",\s*\".*\",\s*)(.*)(\s*\)\s*;)/  ||
+                      m/^\$notes_string\s*=\s*(ngettext\(\s*\")(.*?)(\",\s*\".*\",\s*)(.*)(\s*\)\s*;)/      ) {
                 $strings_to_statement{$2} = $1 . $2 . $3 . '1 ' . $5;
                 printf STDERR "--> \$strings_to_statement{%s} = %s\n", $2, $strings_to_statement{$2}    if ( $debug );
             }
