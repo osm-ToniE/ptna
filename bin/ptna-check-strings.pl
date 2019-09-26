@@ -68,14 +68,12 @@ sub ReadStringsFromFile {
         while ( <F> ) {
             s/^\s+//;
             s/\s+$//;
-            if ( m/^\$issues_string\s*=\s*(gettext\(\s*\")(.*)(\"\s*\)\s*;)/  ||
-                 m/^\$notes_string\s*=\s*(gettext\(\s*\")(.*)(\"\s*\)\s*;)/      ) {
-                $strings_to_statement{$2} = $1 . $2 . $3;
-                printf STDERR "--> \$strings_to_statement{%s} = %s\n", $2, $strings_to_statement{$2}    if ( $debug );
-            } elsif ( m/^\$issues_string\s*=\s*(ngettext\(\s*\")(.*?)(\",\s*\".*\",\s*)(.*)(\s*\)\s*;)/  ||
-                      m/^\$notes_string\s*=\s*(ngettext\(\s*\")(.*?)(\",\s*\".*\",\s*)(.*)(\s*\)\s*;)/      ) {
-                $strings_to_statement{$2} = $1 . $2 . $3 . '1 ' . $5;
-                printf STDERR "--> \$strings_to_statement{%s} = %s\n", $2, $strings_to_statement{$2}    if ( $debug );
+            if ( m/^\$(issues|notes)_string\s*=\s*(gettext\(\s*\")(.*)(\"\s*\)\s*;)/ ) {
+                $strings_to_statement{$3}->{$1} = $2 . $3 . $4;
+                printf STDERR "--> \$strings_to_statement{%s}->{%s} = %s\n", $2, $1, $strings_to_statement{$3}->{$1}    if ( $debug );
+            } elsif ( m/^\$(issues|notes)_string\s*=\s*(ngettext\(\s*\")(.*?)(\",\s*\".*\",\s*)(.*)(\s*\)\s*;)/ ) {
+                $strings_to_statement{$3}->{$1} = $2 . $3 . $4 . '1 ' . $6;
+                printf STDERR "--> \$strings_to_statement{%s}->{%s} = %s\n", $3, $1, $strings_to_statement{$3}->{$1}    if ( $debug );
             }
         }
         close( F );
@@ -126,10 +124,23 @@ sub FindNewMessageStrings {
 sub ListNewMessageStringsStatements {
 
     my $new_strings_ref = shift;
+    my $message_type    = undef;
+    my $message_string  = undef;
     
     foreach my $key ( sort ( keys (%{$new_strings_ref}) ) ) {
+        $message_type = join( '', sort( keys( %{${$new_strings_ref}{$key}} ) ) );
+        if ( $message_type eq 'issues' ) {
+            $message_string = 'Errors';
+        } elsif ( $message_type eq 'notes' ) {
+            $message_string = 'Notes';
+        } elsif ( $message_type eq 'issuesnotes' ) {
+            printf STDERR "    \$MessageList[\$i]->{'message'}                = %s\n", ${$new_strings_ref}{$key}->{'issues'};
+            printf STDERR "    \$MessageList[\$i]->{'message'}                = %s\n", ${$new_strings_ref}{$key}->{'notes'};
+        }
+        
         printf "    \$i++;\n";
-        printf "    \$MessageList[\$i]->{'message'}                = %s\n", ${$new_strings_ref}{$key};
+        printf "    \$MessageList[\$i]->{'message'}                = %s\n", ${$new_strings_ref}{$key}->{$message_type};
+        printf "    \$MessageList[\$i]->{'type'}                   = gettext( \"%s\" );\n", $message_string;
         printf "    \$MessageList[\$i]->{'option'}                 = \"\";\n";
         printf "    \$MessageList[\$i]->{'description'}            = \"\";\n";
         printf "    \$MessageList[\$i]->{'fix'}                    = \"\";\n";

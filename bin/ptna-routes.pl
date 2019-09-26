@@ -1859,7 +1859,7 @@ sub analyze_route_environment {
                     #
                     if ( $routes_ref && $routes_ref ne $masters_ref ) {
                         # 'masters_ref' is valid (in the list) but differs from 'ref' of route, so we have at least two refs in the list (a real list)
-                        $issues_string = gettext( "Route has different 'ref' = '%s' than Route-Master 'ref' = '%s' - this should be avoided: %s" );
+                        $notes_string = gettext( "Route has different 'ref' = '%s' than Route-Master 'ref' = '%s' - this should be avoided: %s" );
                         push( @{$relation_ptr->{'__notes__'}}, sprintf( $issues_string, $routes_ref, $masters_ref, printRelationTemplate($route_master_rel_id) ) );
                     }
                 } else {

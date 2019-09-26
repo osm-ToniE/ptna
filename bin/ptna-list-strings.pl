@@ -111,6 +111,7 @@ sub ListMessageStringsDetailsHtml {
     printf STDOUT "        <thead>\n";
     printf STDOUT "            <tr class=\"message-tableheaderrow\">\n";
     printf STDOUT "                <th class=\"message-text\">%s</th>\n",        gettext( "Message" );
+    printf STDOUT "                <th class=\"message-type\">%s</th>\n",        gettext( "Type" );
     printf STDOUT "                <th class=\"message-option\">%s</th>\n",      gettext( "Option" );
     printf STDOUT "                <th class=\"message-description\">%s</th>\n", gettext( "Description" );
     printf STDOUT "                <th class=\"message-fix\">%s</th>\n",         gettext( "How to fix" );
@@ -121,6 +122,7 @@ sub ListMessageStringsDetailsHtml {
     foreach $key ( sort ( GetMessageKeys() ) ) {
         printf STDOUT "            <tr class=\"message-tablerow\">\n";
         printf STDOUT "                <td class=\"message-text\">%s</td>\n",        GetMessageValue( $key, 'message' );
+        printf STDOUT "                <td class=\"message-type\">%s</td>\n",        GetMessageValue( $key, 'type' );
         printf STDOUT "                <td class=\"message-option\">%s</td>\n",      GetMessageValue( $key, 'option' );
         printf STDOUT "                <td class=\"message-description\">%s</td>\n", GetMessageValue( $key, 'description' );
         printf STDOUT "                <td class=\"message-fix\">%s</td>\n",         GetMessageValue( $key, 'fix' );
