@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2019-09-01 16:30+0200\n"
+"POT-Creation-Date: 2019-09-26 19:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,27 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+msgid "Message"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Option"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "How to fix"
+msgstr ""
+
+msgid "Image"
+msgstr ""
+
+msgid "Default Value"
+msgstr ""
 
 msgid "Language test"
 msgstr ""
@@ -786,11 +807,11 @@ msgid ""
 msgstr ""
 
 #, perl-format
-msgid ""
-"Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line: "
-"'%s'"
+msgid "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'"
 msgstr ""
 
 #, perl-format
-msgid "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'"
+msgid ""
+"Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line: "
+"'%s'"
 msgstr ""
