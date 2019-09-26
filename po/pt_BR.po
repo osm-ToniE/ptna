@@ -1,0 +1,822 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# Alexandre Oliveira <rockytvbr@gmail.com>, 2019
+# ToniE <osm-ToniE@web.de>, 2019
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ptna 2.0.2\n"
+"Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
+"POT-Creation-Date: 2019-09-26 23:59+0200\n"
+"PO-Revision-Date: 2019-04-05 14:25+0000\n"
+"Last-Translator: ToniE <osm-ToniE@web.de>, 2019\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/jungle-bus/"
+"teams/97874/pt_BR/)\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Message"
+msgstr "Mensagem"
+
+msgid "Type"
+msgstr "Tipo"
+
+msgid "Option"
+msgstr ""
+
+msgid "Description"
+msgstr "Descrição"
+
+msgid "How to fix"
+msgstr "Como corrigir"
+
+msgid "Image"
+msgstr "Imagem"
+
+msgid "Default Value"
+msgstr "Padrão"
+
+msgid "Language test"
+msgstr "Teste de idioma"
+
+msgid "Line (ref=)"
+msgstr "Linha (ref=)"
+
+msgid "Relation (id=)"
+msgstr "Relação (id=)"
+
+msgid "Relations"
+msgstr "Relações"
+
+msgid "Name (name=)"
+msgstr "Nome (name=)"
+
+msgid "Number"
+msgstr "Número"
+
+msgid "Network (network=)"
+msgstr ""
+
+msgid "Operator (operator=)"
+msgstr "Operador(a) (operator=)"
+
+msgid "From (from=)"
+msgstr "De (from=)"
+
+msgid "Via (via=)"
+msgstr "Via (via=)"
+
+msgid "To (to=)"
+msgstr "Para (to=)"
+
+msgid "Errors"
+msgstr "Erros"
+
+msgid "Notes"
+msgstr "Observações"
+
+msgid "Type (type=)"
+msgstr "Tipo (type=)"
+
+msgid "Vehicle (route(_master)=)"
+msgstr "Veículo (route(_master)=)"
+
+msgid "PTv"
+msgstr "PTv"
+
+msgid "Comment"
+msgstr "Comentário"
+
+msgid "From"
+msgstr "De"
+
+msgid "To"
+msgstr "Para"
+
+msgid "Operator"
+msgstr "Operador(a)"
+
+msgid "Bus"
+msgstr "Ônibus"
+
+msgid "Coach"
+msgstr ""
+
+msgid "Share-Taxi"
+msgstr ""
+
+msgid "Train/Suburban-Train"
+msgstr ""
+
+msgid "Tram/Streetcar"
+msgstr ""
+
+msgid "Subway/Underground"
+msgstr "Metrô (subterrâneo)"
+
+msgid "Light-Rail"
+msgstr ""
+
+msgid "Trolley Bus"
+msgstr ""
+
+msgid "Ferry"
+msgstr ""
+
+msgid "Mono-Rail"
+msgstr ""
+
+msgid "Aerialway"
+msgstr ""
+
+msgid "Funicular"
+msgstr ""
+
+#, perl-format
+msgid "Missing route for ref='%s' and route='%s'"
+msgstr "Não há rota para ref=\"%s\" e route=\"%s\""
+
+msgid "' or ref='"
+msgstr "' ou ref='"
+
+#. xgettext: This section will list all routes which could not be clearly assigned because the combination of "ref;type" appears more than once and information like 'operator', 'from' and 'to' is missing
+msgid "Not clearly assigned routes"
+msgstr ""
+
+msgid "Other Public Transport Lines"
+msgstr "Outras linhas de transporte público"
+
+msgid "Public Transport Lines"
+msgstr "Linhas de transporte público"
+
+msgid "Public Transport Lines without 'ref'"
+msgstr "Linhas de transporte público sem a etiqueta \"ref\""
+
+msgid "More Relations"
+msgstr "Mais relações"
+
+msgid "Details for 'network'-Values"
+msgstr ""
+
+msgid "There is more than one Route-Master"
+msgstr ""
+
+#, perl-format
+msgid ""
+"Route-Master has more Routes than actually match (%d versus %d) in the given "
+"data set"
+msgid_plural ""
+"Route-Masters have more Routes than actually match (%d versus %d) in the "
+"given data set"
+msgstr[0] ""
+msgstr[1] ""
+
+#, perl-format
+msgid ""
+"Route-Master has less Routes than actually match (%d versus %d) in the given "
+"data set"
+msgid_plural ""
+"Route-Masters have less Routes than actually match (%d versus %d) in the "
+"given data set"
+msgstr[0] ""
+msgstr[1] ""
+
+#, perl-format
+msgid ""
+"Route might be listed with 'ref' = '%s' in a different section or in section "
+"'Not clearly assigned routes' of this analysis: %s"
+msgstr ""
+
+#, perl-format
+msgid ""
+"Route has different 'operator' = '%s' than Route-Master 'operator' = '%s': %s"
+msgstr ""
+
+#, perl-format
+msgid ""
+"Route has 'operator' = '%s' value which is considered as not relevant: %s"
+msgstr ""
+
+#, perl-format
+msgid ""
+"Route has different 'network' = '%s' than Route-Master 'network' = '%s': %s"
+msgstr ""
+
+#, perl-format
+msgid ""
+"Route has 'network' = '%s' value which is considered as not relevant: %s"
+msgstr ""
+
+#, perl-format
+msgid ""
+"Route has different 'ref' = '%s' than Route-Master 'ref' = '%s' - this "
+"should be avoided: %s"
+msgstr ""
+
+#, perl-format
+msgid "Route has not matching 'ref' = '%s': %s"
+msgstr ""
+
+#, perl-format
+msgid "Route exists in the given data set but 'ref' tag is not set: %s"
+msgstr ""
+
+#, perl-format
+msgid ""
+"Route has different 'route' = '%s' than Route-Master 'route_master' = '%s': "
+"%s"
+msgstr ""
+
+#, perl-format
+msgid "Route has 'route' = '%s' value which is considered as not relevant: %s"
+msgstr ""
+
+#, perl-format
+msgid "'route' tag is not set: %s"
+msgstr ""
+
+#, perl-format
+msgid "'type' = '%s' is not 'route': %s"
+msgstr ""
+
+#, perl-format
+msgid "'type' tag is not set: %s"
+msgstr "A etiqueta \"type\" não está definida: %s"
+
+#, perl-format
+msgid "Route does not exist in the given data set: %s"
+msgstr ""
+
+#, perl-format
+msgid "Route is not member of Route-Master: %s"
+msgstr ""
+
+#, perl-format
+msgid ""
+"Route-Master might be listed with 'ref' = '%s' in a different section or in "
+"section 'Not clearly assigned routes' of this analysis: %s"
+msgstr ""
+
+#, perl-format
+msgid ""
+"Route-Master might be listed with unknown 'ref' in section 'Public Transport "
+"Lines without 'ref'' of this analysis: %s"
+msgstr ""
+
+#, perl-format
+msgid "This Route is direct member of more than one Route-Master: %s"
+msgstr ""
+
+msgid "Multiple Routes but no Route-Master"
+msgstr "Há várias rotas mas nenhuma rota mestra"
+
+msgid "Multiple Routes but this Route is not a member of any Route-Master"
+msgstr ""
+
+msgid "This Route is not a member of any Route-Master"
+msgstr ""
+
+#, perl-format
+msgid ""
+"'route' = '%s' of Route does not fit to 'route_master' = '%s' of Route-"
+"Master: %s"
+msgstr ""
+
+#, perl-format
+msgid "Route-Master has not matching 'ref' = '%s': %s"
+msgstr ""
+
+#, perl-format
+msgid ""
+"'network' = '%s' of Route does not fit to 'network' = '%s' of Route-Master: "
+"%s"
+msgstr ""
+
+#, perl-format
+msgid "'colour' of Route does not fit to 'colour' of Route-Master: %s"
+msgstr ""
+
+#, perl-format
+msgid "'colour' of Route is set but 'colour' of Route-Master is not set: %s"
+msgstr ""
+
+#, perl-format
+msgid "'colour' of Route is not set but 'colour' of Route-Master is set: %s"
+msgstr ""
+
+msgid ""
+"PTv2 route: 'name' of Route is identical to 'name' of other Route(s), "
+"consider setting an appropriate 'via' value and include that into 'name'"
+msgstr ""
+
+#, perl-format
+msgid "%s: %s and %d more ..."
+msgstr ""
+
+msgid "Multiple Routes but 'public_transport:version' is not set to '2'"
+msgstr ""
+
+msgid "'ref' is not set"
+msgstr "Etiqueta \"ref\" não definida"
+
+msgid "'name' is not set"
+msgstr "Etiqueta \"name\" não definida"
+
+#, perl-format
+msgid ""
+"'network' = '%s' includes the separator value ';' (semi-colon) with "
+"sourrounding blank"
+msgstr ""
+
+#, perl-format
+msgid ""
+"'network' = '%s': ',' (comma) as separator value should be replaced by "
+"';' (semi-colon) without blank"
+msgstr ""
+
+#, perl-format
+msgid "'network' = '%s' should be short form"
+msgstr ""
+
+#, perl-format
+msgid "'network' = '%s' should be long form"
+msgstr ""
+
+msgid "'network' is not set"
+msgstr "Etiqueta \"network\" não definida"
+
+#, perl-format
+msgid "'colour' has unknown value '%s'"
+msgstr ""
+
+msgid "'network:long' is long form"
+msgstr ""
+
+msgid "'network:long' matches long form"
+msgstr ""
+
+#, perl-format
+msgid ""
+"The tag 'line' (='%s') is reserved for 'power' = 'line' related tagging. For "
+"public transport 'route_master' and 'route' are used."
+msgstr ""
+
+msgid "Route-Master without Route(s)"
+msgstr ""
+
+msgid "Route-Master with Relation(s) unequal to 'route'"
+msgstr ""
+
+msgid "Route-Master with Way(s)"
+msgstr ""
+
+msgid "Route-Master with Node(s)"
+msgstr ""
+
+msgid "'public_transport:version' is not set to '2'"
+msgstr ""
+
+msgid "'public_transport:version' is not set"
+msgstr ""
+
+msgid "Skipping further analysis ..."
+msgstr ""
+
+msgid "Route without Way(s)"
+msgstr ""
+
+msgid "Route with only 1 Way"
+msgstr ""
+
+msgid "Route without Node(s)"
+msgstr "A rota não possui nó(s)"
+
+msgid "Route with only 1 Node"
+msgstr "Rota com apenas um nó"
+
+msgid "Route with Relation(s)"
+msgstr ""
+
+msgid "'public_transport:version' is neither '1' nor '2'"
+msgstr ""
+
+msgid ""
+"PTv2 route: there are no 'public_transport' = 'stop_position' and no "
+"'public_transport' = 'platform'"
+msgstr ""
+
+msgid "PTv2 route: there is no 'public_transport' = 'stop_position'"
+msgstr ""
+
+msgid "PTv2 route: there is only one 'public_transport' = 'stop_position'"
+msgstr ""
+
+msgid "PTv2 route: there is no 'public_transport' = 'platform'"
+msgstr ""
+
+msgid "PTv2 route: there is only one 'public_transport' = 'platform'"
+msgstr ""
+
+msgid ""
+"PTv2 route: first way is a oneway road and ends in a 'stop_position' of this "
+"route and there is no exit. Is the route sorted in reverse order?"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: has a gap, consists of %d segments. Gap appears at way"
+msgid_plural ""
+"PTv2 route: has gaps, consists of %d segments. Gaps appear at ways"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid ""
+"PTv2 route: incorrect order of 'stop_position', 'platform' and 'way' (stop/"
+"platform after way)"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: includes %d entire roundabout but uses only segments"
+msgid_plural ""
+"PTv2 route: includes %d entire roundabouts but uses only segments"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "PTv2 route: using oneway way in wrong direction"
+msgid_plural "PTv2 route: using oneway ways in wrong direction"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "PTv2 route: using motorway_link way without entering a motorway way"
+msgid_plural ""
+"PTv2 route: using motorway_link ways without entering a motorway way"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "PTv2 route: roundabout appears twice, following itself"
+msgid_plural "PTv2 route: roundabouts appear twice, following themselves"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "PTv2 route: first node of oneway way has 'role' = 'stop_exit_only'"
+msgstr ""
+
+msgid "PTv2 route: last node of oneway way has 'role' = 'stop_entry_only'"
+msgstr ""
+
+msgid ""
+"PTv2 route: first node of way has 'role' = 'stop_exit_only'. Is the route "
+"sorted in reverse order?"
+msgstr ""
+
+msgid ""
+"PTv2 route: last node of way has 'role' = 'stop_entry_only'. Is the route "
+"sorted in reverse order?"
+msgstr ""
+
+msgid "PTv2 route: 'public_transport' = 'stop_position' is not part of way"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: missing '%s' = 'yes' on 'public_transport' = 'stop_position'"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: mismatch between 'role' = '%s' and 'public_transport' = '%s'"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'role' = '%s' and %s: consider setting 'public_transport' = "
+"'stop_position'"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: 'role' = '%s' but 'public_transport' is not set"
+msgstr ""
+
+msgid "PTv2 route: 'public_transport' = 'platform' is part of way"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'role' = '%s' and %s: consider setting 'public_transport' = "
+"'platform'"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: wrong 'role' = '%s'"
+msgstr ""
+
+msgid "PTv2 route: empty 'role'"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: first node of way is not the first stop position of this route: "
+"%s versus %s"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: consider removing the first way of the route from the relation, "
+"it is a way before the first stop position: %s"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: first stop position on first way is not the first stop position "
+"of this route: %s versus %s"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: there is no stop position of this route on the first way: %s"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: first node of way is not a stop position of this route: %s"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: last node of way is not the last stop position of this route: %s "
+"versus %s"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: consider removing the last way of the route from the relation, "
+"it is a way after the last stop position: %s"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: last stop position on last way is not the last stop position of "
+"this route: %s versus %s"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: there is no stop position of this route on the last way: %s"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: last node of way is not a stop position of this route: %s"
+msgstr ""
+
+#, perl-format
+msgid "'barrier'='%s' with implied 'access'='no'"
+msgstr ""
+
+msgid "PTv2 route: 'name' includes deprecated '&lt;=&gt;'"
+msgstr ""
+
+msgid "PTv2 route: 'name' includes deprecated '==&gt;'"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: '%s' is not part of 'name' (derived from '%s' = '%s')"
+msgstr ""
+
+msgid "PTv2 route: 'ref' is not part of 'name'"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: from-part ('%s') of 'name' is not part of 'from' = '%s'"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: from-part ('%s') of 'name' is not equal to 'from' = '%s'"
+msgstr ""
+
+msgid "PTv2 route: 'from' is not set"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: to-part ('%s') of 'name' is not part of 'to' = '%s'"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: to-part ('%s') of 'name' is not equal to 'to' = '%s'"
+msgstr ""
+
+msgid "PTv2 route: 'to' is not set"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' is not part of %d. "
+"via-value = '%s'"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' is not equal to %d. "
+"via-value = '%s'"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: there are more via-parts in 'name' (%d) than in 'via' (%d)"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: there are less via-parts in 'name' (%d) than in 'via' (%d)"
+msgstr ""
+
+msgid "PTv2 route: 'name' has more than one '=>' but 'via' is not set"
+msgstr ""
+
+msgid ""
+"PTv2 route: 'name' should be similar to the form '... ref ...: from => to'"
+msgstr ""
+
+msgid ""
+"PTv2 route: 'name' should (at least) be of the form '... ref ...: from => to'"
+msgstr ""
+
+#, perl-format
+msgid "Route: unclear access (%s) to way"
+msgid_plural "Route: unclear access (%s) to ways"
+msgstr[0] ""
+msgstr[1] ""
+
+#, perl-format
+msgid ""
+"Route: restricted access (%s) to way without 'psv'='yes', '%s'='yes', "
+"'%s'='designated', or ..."
+msgid_plural ""
+"Route: restricted access (%s) to ways without 'psv'='yes', '%s'='yes', "
+"'%s'='designated', or ..."
+msgstr[0] ""
+msgstr[1] ""
+
+#, perl-format
+msgid ""
+"Route: restricted access at barrier (%s) without 'psv'='yes', '%s'='yes', "
+"'%s'='designated', or ..."
+msgid_plural ""
+"Route: restricted access at barriers (%s) without 'psv'='yes', '%s'='yes', "
+"'%s'='designated', or ..."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Route: 'highway' = 'bus_stop' is set on way. Allowed on nodes only!"
+msgid_plural ""
+"Route: 'highway' = 'bus_stop' is set on ways. Allowed on nodes only!"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "separate multiple values by ';' (semi-colon) without blank"
+msgstr ""
+
+#, perl-format
+msgid ""
+"Route: 'route_ref' = '%s' of stop does not include 'ref' = '%s' value of "
+"this route%s"
+msgstr ""
+
+#, perl-format
+msgid ""
+"Route: 'route_ref' = '%s' of stop includes the separator value ';' (semi-"
+"colon) with sourrounding blank"
+msgstr ""
+
+#, perl-format
+msgid ""
+"Route: 'route_ref' = '%s' of stop: ',' (comma) as separator value should be "
+"replaced by ';' (semi-colon) without blank"
+msgstr ""
+
+#, perl-format
+msgid "Route: '%s' = '%s' of stop should be deleted, 'route_ref' = '%s' exists"
+msgstr ""
+
+#, perl-format
+msgid "(consider adding '%s' to the 'route_ref' tag of the stop)"
+msgstr ""
+
+#, perl-format
+msgid ""
+"Route: 'ref' = '%s' of stop should represent the reference of the stop, but "
+"includes the 'ref' = '%s' of this route %s"
+msgstr ""
+
+#, perl-format
+msgid "Route: '%s' = '%s' of stop should be replaced by 'route_ref' = '%s'"
+msgstr ""
+
+#, perl-format
+msgid "(consider creating a 'route_ref' = '%s' tag for the stop)"
+msgstr ""
+
+msgid "Error in input data: insufficient data for ways"
+msgstr ""
+
+msgid "Error in input data: insufficient data for nodes"
+msgstr ""
+
+msgid "Date of Data"
+msgstr "Data dos dados"
+
+msgid "Hints"
+msgstr "Dicas"
+
+msgid "The data will be updated when the result of the analysis has changed."
+msgstr "Os dados serão atualizados quando o resultado da análise for alterado."
+
+msgid ""
+"An explanation of the error texts can be found in the documentation at <a "
+"href='/en/doc_toc.html#checks'>'Check'</a>."
+msgstr ""
+
+msgid "Contents"
+msgstr "Conteúdo"
+
+msgid "This section lists further relations of the environment of the routes:"
+msgstr ""
+
+msgid "potentially wrong 'route' or 'route_master' values?"
+msgstr ""
+
+msgid "e.g. 'route' = 'suspended_bus' instead of 'route' = 'bus'"
+msgstr "e.g. \"route\" = \"suspended_bus\" em vez de \"route\" = \"bus\""
+
+msgid ""
+"but also 'type' = 'network', 'type' = 'set' or 'route' = 'network', i.e. a "
+"collection of all routes and route-masters belonging to the 'network'."
+msgstr ""
+
+msgid ""
+"such <strong>collections are strictly spoken errors</strong>, since "
+"relations shall not represent collections:"
+msgstr ""
+
+msgid ""
+" <a href=\"https://wiki.openstreetmap.org/wiki/Relations/"
+"Relations_are_not_Categories\">Relations/Relations are not Categories</a>"
+msgstr ""
+
+msgid ""
+"The following values and combinations have been found in the provided data "
+"but they will not be listed here. "
+msgstr ""
+
+msgid ""
+"They represent so called 'well defined' values and are not considered as "
+"errors."
+msgstr ""
+
+msgid "The contents of the 'network' tag will be searched for:"
+msgstr ""
+
+msgid "The contents of the 'operator' tag will be searched for:"
+msgstr ""
+
+msgid "'operator' is not set"
+msgstr "Etiqueta \"operator\" não definida"
+
+msgid "Considered 'network'-Values"
+msgstr ""
+
+msgid ""
+"This section lists the 'network'-values which have been considered; i.e. "
+"which match to one of the values above."
+msgstr ""
+
+msgid "and more ..."
+msgstr ""
+
+msgid ""
+"This section lists the 'operator'-values which have not been considered. "
+msgstr ""
+
+msgid ""
+"They might include typos in values which otherwise should have been "
+"considered. "
+msgstr ""
+
+msgid "Not Considered 'network'-Values"
+msgstr ""
+
+msgid ""
+"This section lists the 'network'-values which have not been considered. "
+msgstr ""
+
+#, perl-format
+msgid "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'"
+msgstr ""
+
+#, perl-format
+msgid ""
+"Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line: "
+"'%s'"
+msgstr ""
