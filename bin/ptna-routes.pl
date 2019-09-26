@@ -1860,7 +1860,7 @@ sub analyze_route_environment {
                     if ( $routes_ref && $routes_ref ne $masters_ref ) {
                         # 'masters_ref' is valid (in the list) but differs from 'ref' of route, so we have at least two refs in the list (a real list)
                         $notes_string = gettext( "Route has different 'ref' = '%s' than Route-Master 'ref' = '%s' - this should be avoided: %s" );
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf( $issues_string, $routes_ref, $masters_ref, printRelationTemplate($route_master_rel_id) ) );
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, $routes_ref, $masters_ref, printRelationTemplate($route_master_rel_id) ) );
                     }
                 } else {
                     $issues_string = gettext( "Route-Master has not matching 'ref' = '%s': %s" );
@@ -2520,8 +2520,8 @@ sub analyze_ptv2_route_relation {
         $return_code++;
     }
     if ( $check_roundabouts  && $relation_ptr->{'number_of_roundabouts'} ) {
-        $issues_string = ngettext( "PTv2 route: includes %d entire roundabout but uses only segments", "PTv2 route: includes %d entire roundabouts but uses only segments", $relation_ptr->{'number_of_roundabouts'} );
-        push( @{$relation_ptr->{'__notes__'}},  sprintf( $issues_string, $relation_ptr->{'number_of_roundabouts'} ) );
+        $notes_string = ngettext( "PTv2 route: includes %d entire roundabout but uses only segments", "PTv2 route: includes %d entire roundabouts but uses only segments", $relation_ptr->{'number_of_roundabouts'} );
+        push( @{$relation_ptr->{'__notes__'}},  sprintf( $notes_string, $relation_ptr->{'number_of_roundabouts'} ) );
         $return_code++;
     }
     if ( $relation_ptr->{'wrong_direction_oneways'} ) {
@@ -4307,8 +4307,8 @@ sub CheckAccessOnWaysAndNodes {
                 @help_array     = sort(keys(%{$restricted_access_on_ways{$access_restriction}}));
                 $num_of_errors  = scalar(@help_array);
                 if ( $access_restriction =~ m/conditional/ ) {
-                    $issues_string = ngettext( "Route: unclear access (%s) to way", "Route: unclear access (%s) to ways", $num_of_errors );
-                    $helpstring    = sprintf( $issues_string, $access_restriction );
+                    $notes_string = ngettext( "Route: unclear access (%s) to way", "Route: unclear access (%s) to ways", $num_of_errors );
+                    $helpstring    = sprintf( $notes_string, $access_restriction );
                     if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
                         push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
                     } else {

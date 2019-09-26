@@ -539,7 +539,7 @@ sub InitMessageStrings {
 
     $i++;
     $MessageList[$i]->{'message'}                = ngettext( "PTv2 route: includes %d entire roundabout but uses only segments", "PTv2 route: includes %d entire roundabouts but uses only segments", 1 );
-    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'type'}                   = gettext( "Notes" );
     $MessageList[$i]->{'option'}                 = "";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
@@ -1070,7 +1070,7 @@ sub InitMessageStrings {
 
     $i++;
     $MessageList[$i]->{'message'}                = ngettext( "Route: unclear access (%s) to way", "Route: unclear access (%s) to ways", 1 );
-    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'type'}                   = gettext( "Notes" );
     $MessageList[$i]->{'option'}                 = "";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
