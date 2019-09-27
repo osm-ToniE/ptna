@@ -56,7 +56,7 @@
     The data will be updated when the result of the analysis has changed.
 </p>
 <p>
-    An explanation of the error texts can be found in the documentation at <a href='/en/doc_toc.html#checks'>'Check'</a>.
+    An explanation of the error texts can be found in the documentation at <a href='/en/index.php#messages'>'Messages'</a>.
 </p>
         <hr />
         <h1 id="A2">2 Test file for environment of Route-Master</h1>

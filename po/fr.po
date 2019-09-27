@@ -2,27 +2,28 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Philippe Verdy, 2019
 # Noémie <nlehuby@zaclys.net>, 2019
 # Julien Lepiller <transifex@lepiller.eu>, 2019
 # ToniE <osm-ToniE@web.de>, 2019
-# 
-#, fuzzy
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2019-09-26 20:11+0200\n"
-"PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: ToniE <osm-ToniE@web.de>, 2019\n"
-"Language-Team: French (https://www.transifex.com/jungle-bus/teams/97874/fr/)\n"
+"POT-Creation-Date: 2019-09-27 19:59+0200\n"
+"PO-Revision-Date: 2019-09-27 20:03+0200\n"
+"Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
+"Language-Team: French (https://www.transifex.com/jungle-bus/teams/97874/"
+"fr/)\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.8.9\n"
 
 msgid "Message"
 msgstr ""
@@ -148,9 +149,7 @@ msgstr "Parcours manquant avec 'ref' = '%s' et 'route' = '%s'"
 msgid "' or ref='"
 msgstr "' ou 'ref ' = '"
 
-#. xgettext: This section will list all routes which could not be clearly
-#. assigned because the combination of "ref;type" appears more than once and
-#. information like 'operator', 'from' and 'to' is missing
+#. xgettext: This section will list all routes which could not be clearly assigned because the combination of "ref;type" appears more than once and information like 'operator', 'from' and 'to' is missing
 msgid "Not clearly assigned routes"
 msgstr "Des parcours qu'on ne peut pas clairement assigner"
 
@@ -174,8 +173,8 @@ msgstr "Il y a plus d'une route_master"
 
 #, perl-format
 msgid ""
-"Route-Master has more Routes than actually match (%d versus %d) in the given"
-" data set"
+"Route-Master has more Routes than actually match (%d versus %d) in the given "
+"data set"
 msgid_plural ""
 "Route-Masters have more Routes than actually match (%d versus %d) in the "
 "given data set"
@@ -187,8 +186,8 @@ msgstr[1] ""
 
 #, perl-format
 msgid ""
-"Route-Master has less Routes than actually match (%d versus %d) in the given"
-" data set"
+"Route-Master has less Routes than actually match (%d versus %d) in the given "
+"data set"
 msgid_plural ""
 "Route-Masters have less Routes than actually match (%d versus %d) in the "
 "given data set"
@@ -200,8 +199,8 @@ msgstr[1] ""
 
 #, perl-format
 msgid ""
-"Route might be listed with 'ref' = '%s' in a different section or in section"
-" 'Not clearly assigned routes' of this analysis: %s"
+"Route might be listed with 'ref' = '%s' in a different section or in section "
+"'Not clearly assigned routes' of this analysis: %s"
 msgstr ""
 "La ligne est peut-être renseignée avec 'ref' = '%s' dans une autre section "
 "ou dans une section qui n'a 'Pas de parcours clairement assigné' de cette "
@@ -209,8 +208,7 @@ msgstr ""
 
 #, perl-format
 msgid ""
-"Route has different 'operator' = '%s' than Route-Master 'operator' = '%s': "
-"%s"
+"Route has different 'operator' = '%s' than Route-Master 'operator' = '%s': %s"
 msgstr ""
 "Le parcours a l'opérateur '%s' alors que la ligne a l'opérateur '%s' : %s"
 
@@ -296,11 +294,11 @@ msgstr ""
 
 #, perl-format
 msgid ""
-"Route-Master might be listed with unknown 'ref' in section 'Public Transport"
-" Lines without 'ref'' of this analysis: %s"
+"Route-Master might be listed with unknown 'ref' in section 'Public Transport "
+"Lines without 'ref'' of this analysis: %s"
 msgstr ""
-"La ligne route_master est peut-être renseignée avec un 'ref' inconnu dans la"
-" section 'Lignes de transport en commun sans 'ref'' de cette analyse : %s"
+"La ligne route_master est peut-être renseignée avec un 'ref' inconnu dans la "
+"section 'Lignes de transport en commun sans 'ref'' de cette analyse : %s"
 
 #, perl-format
 msgid "This Route is direct member of more than one Route-Master: %s"
@@ -332,14 +330,14 @@ msgid ""
 "'network' = '%s' of Route does not fit to 'network' = '%s' of Route-Master: "
 "%s"
 msgstr ""
-"Le réseau 'network'=%s du parcours ne correspond pas au réseau 'network'= %s"
-" de la ligne :  %s"
+"Le réseau 'network'=%s du parcours ne correspond pas au réseau 'network'= %s "
+"de la ligne :  %s"
 
 #, perl-format
 msgid "'colour' of Route does not fit to 'colour' of Route-Master: %s"
 msgstr ""
-"La couleur 'colour' du parcours ne correspond pas à la couleur de la ligne :"
-" %s"
+"La couleur 'colour' du parcours ne correspond pas à la couleur de la ligne : "
+"%s"
 
 #, perl-format
 msgid "'colour' of Route is set but 'colour' of Route-Master is not set: %s"
@@ -376,13 +374,13 @@ msgid ""
 "'network' = '%s' includes the separator value ';' (semi-colon) with "
 "sourrounding blank"
 msgstr ""
-"L'attribut 'network' = '%s' de cet arrêt comprend des espaces en trop autour"
-" du séparateur  ';' (point-virgule) "
+"L'attribut 'network' = '%s' de cet arrêt comprend des espaces en trop autour "
+"du séparateur  ';' (point-virgule) "
 
 #, perl-format
 msgid ""
-"'network' = '%s': ',' (comma) as separator value should be replaced by ';' "
-"(semi-colon) without blank"
+"'network' = '%s': ',' (comma) as separator value should be replaced by "
+"';' (semi-colon) without blank"
 msgstr ""
 "L'attribut 'network' = '%s' : la ',' (virgule) comme valeur de séparateur "
 "devrait être remplacée par un ';' (point-virgule) sans espace"
@@ -410,8 +408,8 @@ msgstr "'network:long' correspond à la forme longue"
 
 #, perl-format
 msgid ""
-"The tag 'line' (='%s') is reserved for 'power' = 'line' related tagging. For"
-" public transport 'route_master' and 'route' are used."
+"The tag 'line' (='%s') is reserved for 'power' = 'line' related tagging. For "
+"public transport 'route_master' and 'route' are used."
 msgstr ""
 
 msgid "Route-Master without Route(s)"
@@ -471,12 +469,12 @@ msgid "PTv2 route: there is only one 'public_transport' = 'platform'"
 msgstr ""
 
 msgid ""
-"PTv2 route: first way is a oneway road and ends in a 'stop_position' of this"
-" route and there is no exit. Is the route sorted in reverse order?"
+"PTv2 route: first way is a oneway road and ends in a 'stop_position' of this "
+"route and there is no exit. Is the route sorted in reverse order?"
 msgstr ""
 "Parcours PTv2 : le premier chemin est une route en sens unique et s'arrête "
-"avec un 'stop_position' de cette ligne et n'a pas de sortie. La ligne "
-"serait-elle triée en sens inverse ?"
+"avec un 'stop_position' de cette ligne et n'a pas de sortie. La ligne serait-"
+"elle triée en sens inverse ?"
 
 #, perl-format
 msgid "PTv2 route: has a gap, consists of %d segments. Gap appears at way"
@@ -490,19 +488,18 @@ msgstr[1] ""
 "apparaissent sur les chemins"
 
 msgid ""
-"PTv2 route: incorrect order of 'stop_position', 'platform' and 'way' "
-"(stop/platform after way)"
+"PTv2 route: incorrect order of 'stop_position', 'platform' and 'way' (stop/"
+"platform after way)"
 msgstr ""
-"Parcours PTv2 : ordre incorrect de 'stop_position', 'platform' et 'way' "
-"(arrêt après le chemin)"
+"Parcours PTv2 : ordre incorrect de 'stop_position', 'platform' et "
+"'way' (arrêt après le chemin)"
 
 #, perl-format
 msgid "PTv2 route: includes %d entire roundabout but uses only segments"
 msgid_plural ""
 "PTv2 route: includes %d entire roundabouts but uses only segments"
 msgstr[0] ""
-"Parcours PTv2 : utilise %d rond-point complet mais n'utilise que des "
-"segments"
+"Parcours PTv2 : utilise %d rond-point complet mais n'utilise que des segments"
 msgstr[1] ""
 "Parcours PTv2 : utilise %d rond-point complets mais n'utilise que des "
 "segments"
@@ -609,8 +606,8 @@ msgstr ""
 
 #, perl-format
 msgid ""
-"PTv2 route: last node of way is not the last stop position of this route: %s"
-" versus %s"
+"PTv2 route: last node of way is not the last stop position of this route: %s "
+"versus %s"
 msgstr ""
 
 #, perl-format
@@ -626,8 +623,7 @@ msgid ""
 msgstr ""
 
 #, perl-format
-msgid ""
-"PTv2 route: there is no stop position of this route on the last way: %s"
+msgid "PTv2 route: there is no stop position of this route on the last way: %s"
 msgstr ""
 
 #, perl-format
@@ -654,8 +650,8 @@ msgstr "Parcours PTv2 : le nom 'name' devrait contenir le code de ligne 'ref'"
 #, perl-format
 msgid "PTv2 route: from-part ('%s') of 'name' is not part of 'from' = '%s'"
 msgstr ""
-"Parcours PTv2 : l'origine de ligne précisée dans le nom ('%s') ne correspond"
-" pas à l'origine dans le tag 'from'='%s'"
+"Parcours PTv2 : l'origine de ligne précisée dans le nom ('%s') ne correspond "
+"pas à l'origine dans le tag 'from'='%s'"
 
 #, perl-format
 msgid "PTv2 route: from-part ('%s') of 'name' is not equal to 'from' = '%s'"
@@ -712,11 +708,10 @@ msgstr ""
 "Parcours PTv2 : le nom devrait être sous la forme '... ref ...: from => to'"
 
 msgid ""
-"PTv2 route: 'name' should (at least) be of the form '... ref ...: from => "
-"to'"
+"PTv2 route: 'name' should (at least) be of the form '... ref ...: from => to'"
 msgstr ""
-"Parcours PTv2 : le nom devrait être sous la forme (ou ressembler à) '... ref"
-" ...: from => to'"
+"Parcours PTv2 : le nom devrait être sous la forme (ou ressembler à) '... "
+"ref ...: from => to'"
 
 #, perl-format
 msgid "Route: unclear access (%s) to way"
@@ -783,8 +778,7 @@ msgstr ""
 "séparateur dans le tag 'route_ref' = '%s' de cet arrêt, sans espaces."
 
 #, perl-format
-msgid ""
-"Route: '%s' = '%s' of stop should be deleted, 'route_ref' = '%s' exists"
+msgid "Route: '%s' = '%s' of stop should be deleted, 'route_ref' = '%s' exists"
 msgstr ""
 "Parcours : '%s' = '%s' doit être supprimé sur cet arrêt car 'route_ref' = "
 "'%s' est déjà présent"
@@ -831,10 +825,10 @@ msgstr ""
 
 msgid ""
 "An explanation of the error texts can be found in the documentation at <a "
-"href='/en/doc_toc.html#checks'>'Check'</a>."
+"href='/en/index.php#messages'>'Messages'</a>."
 msgstr ""
-"Une explication sur chaque erreur peut être trouvée dans la <a "
-"href='/en/doc_toc.html#checks'>documentation</a>."
+"Une explication sur chaque erreur peut être trouvée dans la <a href='/en/"
+"index.php#messages'>documentation</a>."
 
 msgid "Contents"
 msgstr "Résultats"
@@ -864,13 +858,12 @@ msgstr ""
 "représenter des catégories:"
 
 msgid ""
-" <a "
-"href=\"https://wiki.openstreetmap.org/wiki/Relations/Relations_are_not_Categories\">Relations/Relations"
-" are not Categories</a>"
+" <a href=\"https://wiki.openstreetmap.org/wiki/Relations/"
+"Relations_are_not_Categories\">Relations/Relations are not Categories</a>"
 msgstr ""
-"<a "
-"href=\"https\\://wiki.openstreetmap.org/wiki/FR:Relations/Les_relations_ne_sont_pas_des_cat%C3%A9gories\">https://wiki.openstreetmap.org/wiki/FR:Relations/Les_relations_ne_sont_pas_des_cat%C3%A9gories</a>"
-" "
+"<a href=\"https\\://wiki.openstreetmap.org/wiki/FR:Relations/"
+"Les_relations_ne_sont_pas_des_cat%C3%A9gories\">https://wiki.openstreetmap."
+"org/wiki/FR:Relations/Les_relations_ne_sont_pas_des_cat%C3%A9gories</a> "
 
 msgid ""
 "The following values and combinations have been found in the provided data "
@@ -924,8 +917,8 @@ msgstr "Valeurs du tag 'network' non prises en compte"
 msgid ""
 "This section lists the 'network'-values which have not been considered. "
 msgstr ""
-"Cette section liste les valeurs du tag 'network' qui n'ont pas été prises en"
-" compte"
+"Cette section liste les valeurs du tag 'network' qui n'ont pas été prises en "
+"compte"
 
 #, perl-format
 msgid "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'"
@@ -933,6 +926,6 @@ msgstr ""
 
 #, perl-format
 msgid ""
-"Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line:"
-" '%s'"
+"Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line: "
+"'%s'"
 msgstr ""
