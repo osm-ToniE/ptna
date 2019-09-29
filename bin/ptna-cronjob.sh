@@ -62,42 +62,57 @@ else
     exit 1
 fi
 
-if [ -d "$PTNA_WORK_LOC" ]
+if [ -d "$PTNA_NETWORKS_LOC" ]
 then
-
-    cd $PTNA_WORK_LOC
-    
-    LOGFILE=${PTNA_WORK_LOC}/ptna-all-networks.log
-    
-    # c == clean the work area
-    
-    ptna-all-networks.sh -c > $LOGFILE 2>&1 < /dev/null
-    
-    # o == do the overpasapi query and download the data (to work area)
-    # g == get the OSM-Wiki data for the routes
-    # a == do the analysis (in work area)
-    # u == update the result from the work area to the location of the web service
-    
-    ptna-all-networks.sh -ogau >> $LOGFILE 2>&1 < /dev/null
-    
-    emptyxml=$(find ${PTNA_WORK_LOC} -name '*.xml' -size 0 | wc -l)
-    
-    if [ "$emptyxml" -gt 0 -a "$emptyxml" -lt 10 ]
+    if [ -n "$1" ]
     then
-        # most of the analysis succeeded, let's try a second time for the others
-        
-        sleep 300
-        
-        ptna-all-networks.sh -Oau >> $LOGFILE 2>&1 < /dev/null
+        PTNA_NETWORKS_LOC="$PTNA_NETWORKS_LOC/$1"
+        LOGFILE_SUFFIX="-$1"
     fi
-
-
-    # c == clean the work area
-    
-    ptna-all-networks.sh -c >> $LOGFILE 2>&1 < /dev/null
-    
-else
-    echo "directory $PTNA_WORK_LOC does not exist ... terminating"
-    exit 2
 fi
 
+
+if [ -d "$PTNA_NETWORKS_LOC" ]
+then
+    if [ -d "$PTNA_WORK_LOC" ]
+    then
+    
+        cd $PTNA_WORK_LOC
+        
+        LOGFILE=${PTNA_WORK_LOC}/ptna-all-networks$LOGFILE_SUFFIX.log
+        
+        # c == clean the work area
+        
+        ptna-all-networks.sh -c > $LOGFILE 2>&1 < /dev/null
+        
+        # o == do the overpassapi query and download the data (to work area)
+        # g == get the OSM-Wiki data for the routes
+        # a == do the analysis (in work area)
+        # u == update the result from the work area to the location of the web service
+        
+        ptna-all-networks.sh -ogau >> $LOGFILE 2>&1 < /dev/null
+        
+        emptyxml=$(find ${PTNA_WORK_LOC} -name '*.xml' -size 0 | wc -l)
+        
+        if [ "$emptyxml" -gt 0 -a "$emptyxml" -lt 10 ]
+        then
+            # most of the analysis succeeded, let's try a second time for the others
+            
+            sleep 300
+            
+            ptna-all-networks.sh -Oau >> $LOGFILE 2>&1 < /dev/null
+        fi
+    
+    
+        # c == clean the work area
+        
+        ptna-all-networks.sh -c >> $LOGFILE 2>&1 < /dev/null
+        
+    else
+        echo "directory $PTNA_WORK_LOC does not exist ... terminating"
+        exit 2
+    fi
+else
+    echo "directory $PTNA_NETWORKS_LOC does not exist ... terminating"
+    exit 3
+fi
