@@ -68,7 +68,7 @@
     Die Daten werden gegebenenfalls nur aktualisiert, wenn sich das Ergebnis der Analyse geändert hat.
 </p>
 <p>
-    An explanation of the error texts can be found in the documentation at <a href='/en/index.php#messages'>'Messages'</a>.
+    Eine Erläuterung der Fehlertexte ist in der Dokumentation unter <a href='/de/index.php#messages'>Meldungen</a> zu finden.
 </p>
         <hr />
         <h1 id="A2">2 Test file for Read Routes Data</h1>

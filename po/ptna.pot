@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2019-09-27 19:59+0200\n"
+"POT-Creation-Date: 2019-09-30 20:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -734,6 +734,96 @@ msgid ""
 msgstr ""
 
 msgid "Contents"
+msgstr ""
+
+msgid "This section lists the lines that could not be clearly assigned."
+msgstr ""
+
+msgid ""
+"The line numbers 'ref' have been specified several times in the CSV file."
+msgstr ""
+
+msgid ""
+"This means that the same line number exists in the transport network several "
+"times in different municipalities / cities."
+msgstr ""
+
+msgid ""
+"In order to be able to clearly assign the lines, the following should be "
+"indicated:"
+msgstr ""
+
+msgid "Relation"
+msgstr ""
+
+msgid ""
+"'network', 'operator', as well as 'from' and 'to' should be tagged with the "
+"relation."
+msgstr ""
+
+msgid ""
+"If the value of 'operator' is sufficient for differentiation, 'from' and "
+"'to' need not be specified."
+msgstr ""
+
+msgid "CSV file"
+msgstr ""
+
+msgid ""
+"'Operator', as well as 'From' and 'To' should be specified in the CSV file "
+"with the same values as with the relation."
+msgstr ""
+
+msgid "See the instructions for such entries at the beginning of the CSV file."
+msgstr ""
+
+msgid ""
+"Examples for an entry in the CSV file of the form: 'ref;type;Comment;From;To;"
+"Operator':"
+msgstr ""
+
+msgid "provides services in City-A"
+msgstr ""
+
+msgid "First Avenue"
+msgstr ""
+
+msgid "Sixth Avenue"
+msgstr ""
+
+msgid "Operator-X"
+msgstr ""
+
+msgid "provides services in Village-B"
+msgstr ""
+
+msgid "Main Street"
+msgstr ""
+
+msgid "Second Street"
+msgstr ""
+
+msgid "provides services in Town-C"
+msgstr ""
+
+msgid "Sunset Boulevard"
+msgstr ""
+
+msgid "Rainbow Boulevard"
+msgstr ""
+
+msgid "Operator-Z"
+msgstr ""
+
+msgid ""
+"1.) and 2.) are only distinguishable by means of 'From'/'from' and "
+"'To'/'to', since 'Operator'/'operator' are identical (='Operator-X')."
+msgstr ""
+
+msgid ""
+"1.) and 3.) as well as 2.) and 3.) can be distinguished by "
+"'Operator'/'operator', as these are different (='Operator-X' or ='Operator-"
+"Z')."
 msgstr ""
 
 msgid "This section lists further relations of the environment of the routes:"
