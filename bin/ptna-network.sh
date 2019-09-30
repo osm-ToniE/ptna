@@ -338,11 +338,14 @@ then
                
             if [ -d "$RESULTS_LOC" ]
             then
-            
+
                 echo $(date "+%Y-%m-%d %H:%M:%S")  "Copying '$RESULTS_LOC/$HTML_FILE' to '$WORK_LOC/$SAVE_FILE'"
                 if [ -f $RESULTS_LOC/$HTML_FILE ]
                 then
                     cp $RESULTS_LOC/$HTML_FILE $WORK_LOC/$SAVE_FILE
+                else
+                    # if there is no *.html file on the Web server side, the we delete also the local *.save file, so that a copy will take place
+                    rm -f $WORK_LOC/$SAVE_FILE
                 fi
     
                 if [ -f "$WORK_LOC/$SAVE_FILE" ]
