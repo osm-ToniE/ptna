@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2019-09-30 20:55+0200\n"
+"POT-Creation-Date: 2019-10-01 19:47+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: Alexandre Oliveira <rockytvbr@gmail.com>, 2019\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/jungle-bus/teams/97874/pt_BR/)\n"
@@ -21,6 +21,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Example"
+msgstr ""
 
 msgid "Message"
 msgstr "Mensagem"
@@ -919,6 +922,14 @@ msgstr ""
 
 msgid ""
 "This section lists the 'network'-values which have not been considered. "
+msgstr ""
+
+msgid ""
+"A conditional access is mapped to a way. PTNA will not analyze the value of "
+"the tag."
+msgstr ""
+
+msgid "Please evaluate the value manually."
 msgstr ""
 
 #, perl-format

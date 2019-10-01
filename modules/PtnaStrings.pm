@@ -1072,7 +1072,8 @@ sub InitMessageStrings {
     $MessageList[$i]->{'message'}                = ngettext( "Route: unclear access (%s) to way", "Route: unclear access (%s) to ways", 1 );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
     $MessageList[$i]->{'option'}                 = "--check-access";
-    $MessageList[$i]->{'description'}            = gettext( "A conditional access is mapped to a way. PTNA will noch analyze the value of the tag." );
+    $MessageList[$i]->{'description'}            = gettext( "A conditional access is mapped to a way. PTNA will not analyze the value of the tag." ) . " " .
+                                                   gettext( "Example" ) . ": 'psv:conditional=yes @ (Mo-Fr 05:00-22:00)'.";
     $MessageList[$i]->{'fix'}                    = gettext( "Please evaluate the value manually." );
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
