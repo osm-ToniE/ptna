@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>PTNA - Public Transport Network Analysis</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="PTNA">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="keywords" content="OSM Public Transport PTv2">
+        <meta name="description" content="PTNA - Public Transport Network Analysis">
+        <style>
+              table { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; }
+              th    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+              td    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+              img   { width: 20px; }
+              #toc ol           { list-style: none; }
+              .tableheaderrow   { background-color: LightSteelBlue;   }
+              .sketchline       { background-color: LightBlue;        }
+              .sketch           { text-align:left;  font-weight: 500; }
+              .csvinfo          { text-align:right; font-size: 0.8em; }
+              .ref              { white-space:nowrap; }
+              .relation         { white-space:nowrap; }
+              .PTv              { text-align:center; }
+              .number           { text-align:right; }
+              .attention        { background-color: yellow; font-weight: 500; font-size: 1.2em; }
+        </style>
+    </head>
+    <body>
+        <div id="toc">
+        <h1>Contents</h1>
+        <ol>
+        <li>1 <a href="#hints">Hints</a>
+        </li>
+        <li>2 <a href="#A2">Test for Route-Master without 'ref'</a>
+        </li>
+        <li>3 <a href="#A3">Test for Route without 'ref'</a>
+        </li>
+        <li>4 <a href="#withoutref">Public Transport Lines without 'ref'</a>
+        <ol>
+        <li>4.1 <a href="#A4.1">Bus</a>
+        </li>
+        </ol>
+        </li>
+        <li>5 <a href="#networkdetails">Details for 'network'-Values</a>
+        <ol>
+        <li>5.1 <a href="#considerednetworks">Considered 'network'-Values</a>
+        </li>
+        </ol>
+        </li>
+        </ol>
+        </div> <!-- toc -->
+        <hr />
+        <h1 id="hints">1 Hints</h1>
+<p>
+    The data will be updated when the result of the analysis has changed.
+</p>
+<p>
+    An explanation of the error texts can be found in the documentation at <a href='/en/index.php#messages'>'Messages'</a>.
+</p>
+        <hr />
+        <h1 id="A2">2 Test for Route-Master without 'ref'</h1>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr id="bus_100" data-info="Comment: B-Town; From: First Avenue; To: Second Avenue; Operator: Operator" data-ref="100" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=100&amp;network=network&amp;style=wuppertal" title="Sketch-Line">100</a></td><td class="csvinfo" colspan="5">Comment: B-Town; From: First Avenue; To: Second Avenue; Operator: Operator</td></tr>
+                <tr id="-130951" data-info="-130951" data-ref="100" class="line"><td class="name">Bus 100: First Avenue =&gt; Second Avenue</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -130951</td><td class="PTv">2</td><td class="issues">Route-Master exists in the given data set but 'ref' tag is not set: <img src="/img/Relation.svg" alt="Relation" /> -130953</td><td class="notes">'network' = 'network'<br>'operator' = 'Operator'</td></tr>
+                <tr id="-130952" data-info="-130952" data-ref="100" class="line"><td class="name">Bus 100: Third Avenue =&gt; Fourth Avenue</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -130952</td><td class="PTv">2</td><td class="issues">Route-Master exists in the given data set but 'ref' tag is not set: <img src="/img/Relation.svg" alt="Relation" /> -130953</td><td class="notes">'network' = 'network'<br>'operator' = 'Operator'</td></tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <h1 id="A3">3 Test for Route without 'ref'</h1>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr id="bus_101" data-info="Comment: B-Town; From: First Avenue; To: Second Avenue; Operator: Operator" data-ref="101" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=101&amp;network=network&amp;style=wuppertal" title="Sketch-Line">101</a></td><td class="csvinfo" colspan="5">Comment: B-Town; From: First Avenue; To: Second Avenue; Operator: Operator</td></tr>
+                <tr id="-131173" data-info="-131173" data-ref="101" class="line"><td class="name">Bus 101</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -131173</td><td class="PTv">2</td><td class="issues">Route-Master has more Routes than actually match (2 versus 1) in the given data set<br>Route exists in the given data set but 'ref' tag is not set: <img src="/img/Relation.svg" alt="Relation" /> -131169</td><td class="notes">'network' = 'network'<br>'operator' = 'Operator'</td></tr>
+                <tr id="-131167" data-info="-131167" data-ref="101" class="line"><td class="name">Bus 101: First Avenue =&gt; Second Avenue</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -131167</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'network'<br>'operator' = 'Operator'</td></tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <h1 id="withoutref">4 Public Transport Lines without 'ref'</h1>
+        <h2 id="A4.1">4.1 Bus</h2>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="relation">Relation (id=)</th><th class="type">Type (type=)</th><th class="route_type">Vehicle (route(_master)=)</th><th class="name">Name (name=)</th><th class="network">Network (network=)</th><th class="operator">Operator (operator=)</th><th class="from">From (from=)</th><th class="via">Via (via=)</th><th class="to">To (to=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr id="-130953" data-info="-130953" data-ref="???" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -130953</td><td class="type">route_master</td><td class="route_type">bus</td><td class="name">Bus 100</td><td class="network">network</td><td class="operator">Operator</td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv">2</td><td class="issues">'ref' is not set</td><td class="notes">'network' = 'network'<br>'operator' = 'Operator'</td></tr>
+                <tr id="-131169" data-info="-131169" data-ref="???" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -131169</td><td class="type">route</td><td class="route_type">bus</td><td class="name">Bus 101: Third Avenue =&gt; Fourth Avenue</td><td class="network">network</td><td class="operator">Operator</td><td class="from">Third Avenue</td><td class="via"></td><td class="to">Fourth Avenue</td><td class="PTv">2</td><td class="issues">'ref' is not set</td><td class="notes">'network' = 'network'<br>'operator' = 'Operator'</td></tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <h1 id="networkdetails">5 Details for 'network'-Values</h1>
+        <h2 id="considerednetworks">5.1 Considered 'network'-Values</h2>
+<p>
+This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="network">Network (network=)</th><th class="number">Number</th><th class="relations">Relations</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="network" data-ref="???" class="line"><td class="network">network</td><td class="number">6</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '100' -130951, <img src="/img/Relation.svg" alt="Relation" /> '100' -130952, <img src="/img/Relation.svg" alt="Relation" /> -130953, <img src="/img/Relation.svg" alt="Relation" /> '101' -131167, <img src="/img/Relation.svg" alt="Relation" /> -131169, <img src="/img/Relation.svg" alt="Relation" /> '101' -131173</td></tr>
+            </tbody>
+        </table>
+
+        <iframe style="display:none" id="hiddenIframe" name="hiddenIframe"></iframe>
+    </body>
+</html>

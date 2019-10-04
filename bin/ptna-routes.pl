@@ -1764,14 +1764,14 @@ sub analyze_route_environment {
     my $relation_id     = shift;
     my $return_code     = 0;
 
-    my $relation_ptr                        = undef;
-    my $number_of_direct_route_masters      = 0;
-    my $number_of_route_masters             = 0;
-    my $number_of_routes                    = 0;
-    my %direct_and_matching_route_masters   = ();
-    my %allowed_refs                        = ();
-    my $masters_ref                         = undef;
-    my $routes_ref                          = undef;
+    my $relation_ptr                            = undef;
+    my $number_of_direct_route_masters          = 0;
+    my $number_of_route_masters                 = 0;
+    my $number_of_routes                        = 0;
+    my %direct_and_matching_route_masters       = ();
+    my %allowed_refs                            = ();
+    my $masters_ref                             = undef;
+    my $routes_ref                              = undef;
 
     if ( $env_ref && $ref_or_list && $type && $type eq 'route' && $route_type && $relation_id ) {
 
@@ -1866,7 +1866,10 @@ sub analyze_route_environment {
                     $issues_string = gettext( "Route-Master has not matching 'ref' = '%s': %s" );
                     push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, $masters_ref, printRelationTemplate($route_master_rel_id)) );
                 }
-            }
+            } else {
+                $issues_string = gettext( "Route-Master exists in the given data set but 'ref' tag is not set: %s" );
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, printRelationTemplate($route_master_rel_id)) );
+           }
             if ( $relation_ptr->{'tag'}->{'network'} && $RELATIONS{$route_master_rel_id}->{'tag'}->{'network'} &&
                  $relation_ptr->{'tag'}->{'network'} ne $RELATIONS{$route_master_rel_id}->{'tag'}->{'network'}     ) {
                 $issues_string = gettext( "'network' = '%s' of Route does not fit to 'network' = '%s' of Route-Master: %s" );

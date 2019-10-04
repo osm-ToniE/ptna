@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' upload='false' generator='JOSM'>
+  <bounds minlat='48.069032' minlon='11.6330838' maxlat='48.0716416' maxlon='11.6389203' origin='CGImap 0.6.1 (13164 thorn-03.openstreetmap.org)' />
+  <bounds minlat='48.069032' minlon='11.6330838' maxlat='48.0716416' maxlon='11.6389203' origin='OpenStreetMap server' />
+  <node id='-130904' action='modify' lat='48.06989999582' lon='11.63729048998'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='Second Avenue' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-130906' action='modify' lat='48.07020310369' lon='11.63396406149'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='First Avenue' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-130908' action='modify' lat='48.06983071377' lon='11.63745465138'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='Second Avenue' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-130910' action='modify' lat='48.0702579516' lon='11.63408934256'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='First Avenue' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-130912' action='modify' lat='48.0694525476' lon='11.63546311433' />
+  <node id='-130914' action='modify' lat='48.06955358464' lon='11.63652152339' />
+  <node id='-130916' action='modify' lat='48.06970136922' lon='11.6338531964'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='Third Avenue' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-130918' action='modify' lat='48.06975621766' lon='11.63397847747'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='Third Avenue' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-130920' action='modify' lat='48.06955075509' lon='11.63733907612'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='Fourth Avenue' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-130922' action='modify' lat='48.06948147257' lon='11.63750323752'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='Fourth Avenue' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-130924' action='modify' lat='48.06971035379' lon='11.63456633555' />
+  <way id='-130933' action='modify'>
+    <nd ref='-130924' />
+    <nd ref='-130912' />
+    <tag k='highway' v='unclassified' />
+  </way>
+  <way id='-130934' action='modify'>
+    <nd ref='-130910' />
+    <nd ref='-130924' />
+    <tag k='highway' v='unclassified' />
+  </way>
+  <way id='-130935' action='modify'>
+    <nd ref='-130914' />
+    <nd ref='-130904' />
+    <tag k='highway' v='unclassified' />
+  </way>
+  <way id='-130936' action='modify'>
+    <nd ref='-130912' />
+    <nd ref='-130914' />
+    <tag k='highway' v='unclassified' />
+  </way>
+  <way id='-130937' action='modify'>
+    <nd ref='-130918' />
+    <nd ref='-130924' />
+    <tag k='highway' v='unclassified' />
+  </way>
+  <way id='-130938' action='modify'>
+    <nd ref='-130914' />
+    <nd ref='-130920' />
+    <tag k='highway' v='unclassified' />
+  </way>
+  <relation id='-130951' action='modify'>
+    <member type='node' ref='-130910' role='stop' />
+    <member type='node' ref='-130906' role='platform' />
+    <member type='node' ref='-130904' role='stop' />
+    <member type='node' ref='-130908' role='platform' />
+    <member type='way' ref='-130934' role='' />
+    <member type='way' ref='-130933' role='' />
+    <member type='way' ref='-130936' role='' />
+    <member type='way' ref='-130935' role='' />
+    <tag k='from' v='First Avenue' />
+    <tag k='name' v='Bus 100: First Avenue =&gt; Second Avenue' />
+    <tag k='network' v='network' />
+    <tag k='operator' v='Operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='100' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='Second Avenue' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-130952' action='modify'>
+    <member type='node' ref='-130918' role='stop' />
+    <member type='node' ref='-130916' role='platform' />
+    <member type='node' ref='-130920' role='stop' />
+    <member type='node' ref='-130922' role='platform' />
+    <member type='way' ref='-130937' role='' />
+    <member type='way' ref='-130933' role='' />
+    <member type='way' ref='-130936' role='' />
+    <member type='way' ref='-130938' role='' />
+    <tag k='from' v='Third Avenue' />
+    <tag k='name' v='Bus 100: Third Avenue =&gt; Fourth Avenue' />
+    <tag k='network' v='network' />
+    <tag k='operator' v='Operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='100' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='Fourth Avenue' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-130953' action='modify'>
+    <member type='relation' ref='-130951' role='' />
+    <member type='relation' ref='-130952' role='' />
+    <tag k='name' v='Bus 100' />
+    <tag k='network' v='network' />
+    <tag k='operator' v='Operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='route_master' v='bus' />
+    <tag k='type' v='route_master' />
+  </relation>
+  <relation id='-131167' action='modify'>
+    <member type='node' ref='-130910' role='stop' />
+    <member type='node' ref='-130906' role='platform' />
+    <member type='node' ref='-130904' role='stop' />
+    <member type='node' ref='-130908' role='platform' />
+    <member type='way' ref='-130934' role='' />
+    <member type='way' ref='-130933' role='' />
+    <member type='way' ref='-130936' role='' />
+    <member type='way' ref='-130935' role='' />
+    <tag k='from' v='First Avenue' />
+    <tag k='name' v='Bus 101: First Avenue =&gt; Second Avenue' />
+    <tag k='network' v='network' />
+    <tag k='operator' v='Operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='101' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='Second Avenue' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-131169' action='modify'>
+    <member type='node' ref='-130918' role='stop' />
+    <member type='node' ref='-130916' role='platform' />
+    <member type='node' ref='-130920' role='stop' />
+    <member type='node' ref='-130922' role='platform' />
+    <member type='way' ref='-130937' role='' />
+    <member type='way' ref='-130933' role='' />
+    <member type='way' ref='-130936' role='' />
+    <member type='way' ref='-130938' role='' />
+    <tag k='from' v='Third Avenue' />
+    <tag k='name' v='Bus 101: Third Avenue =&gt; Fourth Avenue' />
+    <tag k='network' v='network' />
+    <tag k='operator' v='Operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='Fourth Avenue' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-131173' action='modify'>
+    <member type='relation' ref='-131167' role='' />
+    <member type='relation' ref='-131169' role='' />
+    <tag k='name' v='Bus 101' />
+    <tag k='network' v='network' />
+    <tag k='operator' v='Operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='101' />
+    <tag k='route_master' v='bus' />
+    <tag k='type' v='route_master' />
+  </relation>
+</osm>
