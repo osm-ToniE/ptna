@@ -76,6 +76,8 @@
 -
 - Route: unclear access ('bus:conditional'='yes @ operator') to way: Way 'Way 18' -152347
 -
+- Route: suspicious 'construction'='secondary' along with 'highway' unequal to 'construction' on way: Way 'Way 19' -152346
+-
 -
 - Route: restricted access ('access'='private') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Way 'Way 15' -102699
 -
@@ -94,6 +96,8 @@
 - Route: restricted access at barrier ('barrier'='entrance', 'motor_vehicle'='no') without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Node -152329
 -
 - Route: unclear access ('bus:conditional'='yes @ operator') to way: Way 'Way 18' -152347
+-
+- Route: suspicious 'construction'='secondary' along with 'highway' unequal to 'construction' on way: Way 'Way 19' -152346
 -
 
 011;bus;;A-Town;C-Town;Test

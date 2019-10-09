@@ -4013,6 +4013,10 @@ sub noAccessOnWay {
                     }
                 }
             }
+            if ( $way_tag_ref->{'highway'} && $way_tag_ref->{'highway'} ne 'construction' && $way_tag_ref->{'construction'} && $way_tag_ref->{'construction'} ne 'no' ) {
+                printf STDERR "noAccessOnWay() : suspicious 'construction' = '%s' on 'highway' = '%s'\n", $way_id, $way_tag_ref->{'construction'}, $way_tag_ref->{'highway'}      if ( $debug );
+                return sprintf( "'construction'='%s'", $way_tag_ref->{'construction'} );
+            }
         }
     }
     printf STDERR "noAccessOnWay() : access for all for way %d\n", $way_id       if ( $debug );
@@ -4311,7 +4315,15 @@ sub CheckAccessOnWaysAndNodes {
                 $num_of_errors  = scalar(@help_array);
                 if ( $access_restriction =~ m/conditional/ ) {
                     $notes_string = ngettext( "Route: unclear access (%s) to way", "Route: unclear access (%s) to ways", $num_of_errors );
-                    $helpstring    = sprintf( $notes_string, $access_restriction );
+                    $helpstring   = sprintf( $notes_string, $access_restriction );
+                    if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                    } else {
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf("%s: %s", $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } @help_array )) );
+                    }
+                } elsif ( $access_restriction =~ m/^\'construction\'=\'/ ) {
+                    $notes_string = ngettext( "Route: suspicious %s along with 'highway' unequal to 'construction' on way", "Route: suspicious %s along with 'highway' unequal to 'construction' on ways", $num_of_errors );
+                    $helpstring   = sprintf( $notes_string, $access_restriction );
                     if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
                         push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
                     } else {
