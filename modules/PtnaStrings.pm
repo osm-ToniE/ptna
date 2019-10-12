@@ -226,7 +226,7 @@ sub InitMessageStrings {
     $MessageList[$i]->{'message'}                = gettext( "Error in input data: insufficient data for nodes" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
-    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'description'}            = gettext( "This Route relation has been included into the input data as a side-effect, the member ways and member nodes of this Route have not been included." );
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
@@ -235,7 +235,7 @@ sub InitMessageStrings {
     $MessageList[$i]->{'message'}                = gettext( "Error in input data: insufficient data for ways" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
-    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'description'}            = gettext( "This Route relation has been included into the input data as a side-effect, the member ways and member nodes of this Route have not been included." );
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
@@ -1081,8 +1081,16 @@ sub InitMessageStrings {
     $MessageList[$i]->{'message'}                = ngettext( "Route: suspicious %s along with 'highway' unequal to 'construction' on way", "Route: suspicious %s along with 'highway' unequal to 'construction' on ways", 1 );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
     $MessageList[$i]->{'option'}                 = "--check-access";
-    $MessageList[$i]->{'description'}            = "";
-    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'description'}            = gettext( "The key 'construction' is set and the key 'highway' is not set to 'construction'." ) . " " .
+                                                   gettext( "Construction works on ways are usually mapped as the combination of 'higway'='construction' and 'construction'='xxx', where 'xxx' is the former value of the 'highway' key." ) . " " .
+                                                   gettext( "When the construction works are finished, the key 'highway' is set to its former or a different value while the key 'construction' gets delete." ) . " " .
+                                                   gettext( "Sometimes, deleting the key 'construction' is not carried out, which leaves an artifact and can be seen as an error." ) . " " .
+                                                   gettext( "Example" ) . ": 'construction'='primary' " . 
+                                                   gettext( "and" ) . " 'highway'='primary' " . 
+                                                   gettext( "instead of" ) . " 'highway'='construction'.";
+    $MessageList[$i]->{'fix'}                    = gettext( "Check whether the construction works are finished or not." ) . " " .
+                                                   gettext( "If yes, delete the key 'construction'." ) . " " .
+                                                   gettext( "If no, check for an appropriate value of the key 'highway'." );
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
@@ -1092,7 +1100,7 @@ sub InitMessageStrings {
     $MessageList[$i]->{'option'}                 = "--check-access";
     $MessageList[$i]->{'description'}            = gettext( "A conditional access is mapped to a way. PTNA will not analyze the value of the tag." ) . " " .
                                                    gettext( "Example" ) . ": 'psv:conditional=yes @ (Mo-Fr 05:00-22:00)'.";
-    $MessageList[$i]->{'fix'}                    = gettext( "Please evaluate the value manually." );
+    $MessageList[$i]->{'fix'}                    = gettext( "Please evaluate the value manually and decide whether a fix is needed or not." );
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
@@ -1100,7 +1108,11 @@ sub InitMessageStrings {
     $MessageList[$i]->{'message'}                = gettext( "Skipping further analysis ..." );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
-    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'description'}            = gettext( "This error is related to:" ) . " \"" . 
+                                                   gettext( "Error in input data: insufficient data for nodes" ) . "\" " . 
+                                                   gettext( "and" ) . " \"" . 
+                                                   gettext( "Error in input data: insufficient data for ways" ) . "\". " .
+                                                   gettext( "Further analysis of this Route relation does not make sense without the data for ways and nodes." );
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;

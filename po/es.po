@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2019-10-11 18:24+0200\n"
+"POT-Creation-Date: 2019-10-12 17:05+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Language-Team: Spanish (https://www.transifex.com/jungle-bus/teams/97874/"
 "es/)\n"
@@ -912,11 +912,61 @@ msgid ""
 msgstr ""
 
 msgid ""
+"This Route relation has been included into the input data as a side-effect, "
+"the member ways and member nodes of this Route have not been included."
+msgstr ""
+
+msgid ""
+"The key 'construction' is set and the key 'highway' is not set to "
+"'construction'."
+msgstr ""
+
+msgid ""
+"Construction works on ways are usually mapped as the combination of "
+"'higway'='construction' and 'construction'='xxx', where 'xxx' is the former "
+"value of the 'highway' key."
+msgstr ""
+
+msgid ""
+"When the construction works are finished, the key 'highway' is set to its "
+"former or a different value while the key 'construction' gets delete."
+msgstr ""
+
+msgid ""
+"Sometimes, deleting the key 'construction' is not carried out, which leaves "
+"an artifact and can be seen as an error."
+msgstr ""
+
+msgid "and"
+msgstr ""
+
+msgid "instead of"
+msgstr ""
+
+msgid "Check whether the construction works are finished or not."
+msgstr ""
+
+msgid "If yes, delete the key 'construction'."
+msgstr ""
+
+msgid "If no, check for an appropriate value of the key 'highway'."
+msgstr ""
+
+msgid ""
 "A conditional access is mapped to a way. PTNA will not analyze the value of "
 "the tag."
 msgstr ""
 
-msgid "Please evaluate the value manually."
+msgid ""
+"Please evaluate the value manually and decide whether a fix is needed or not."
+msgstr ""
+
+msgid "This error is related to:"
+msgstr ""
+
+msgid ""
+"Further analysis of this Route relation does not make sense without the data "
+"for ways and nodes."
 msgstr ""
 
 #, perl-format
