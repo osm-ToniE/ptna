@@ -1393,19 +1393,21 @@ sub SearchMatchingRelations {
     my $RelTo                       = undef;
     my $match                       = undef;
 
-    my @route_master_list           = ();
-    my @route_list                  = ();
+    my @return_list                 = ();
 
     my %selected_route_masters      = ();
     my %selected_routes             = ();
 
     my @ExpRefOrArray               = ();
+    my %ExpRefHash                  = ();
 
     if ( $ExpRefOrList ) {
         @ExpRefOrArray = @{$ExpRefOrList};
     } elsif ( $ExpRef ) {
         push( @ExpRefOrArray, $ExpRef );
     }
+
+    map { $ExpRefHash{$_} = 1; } @ExpRefOrArray;
 
     if ( $SearchListRef ) {
 
@@ -1424,10 +1426,8 @@ sub SearchMatchingRelations {
                         # i.e. if 'route' is selected, then it's 'route_master' also?
                         #
                         if ( $SearchListRef->{$ExpRefPart}->{$type} && $SearchListRef->{$ExpRefPart}->{$type}->{$ExpRouteType} ) {
-                            foreach my $rel_id ( sort( { $SearchListRef->{$ExpRefPart}->{$type}->{$ExpRouteType}->{$a}->{'__sort_name__'} cmp
-                                                         $SearchListRef->{$ExpRefPart}->{$type}->{$ExpRouteType}->{$b}->{'__sort_name__'}     }
-                                                         keys(%{$SearchListRef->{$ExpRefPart}->{$type}->{$ExpRouteType}})) ) {
-                                printf STDERR "Relation %s, __sort_name__ = %s\n", $rel_id, $RELATIONS{$rel_id}->{'__sort_name__'} if ( $debug );
+
+                            foreach my $rel_id ( keys( %{$SearchListRef->{$ExpRefPart}->{$type}->{$ExpRouteType}} ) ) {
 
                                 $RelRef         = $RELATIONS{$rel_id}->{'tag'}->{'ref'}      || '';
                                 $RelRouteType   = $RELATIONS{$rel_id}->{'tag'}->{$type}      || '';
@@ -1467,18 +1467,8 @@ sub SearchMatchingRelations {
                                 }
                                 if ( $match ) {
                                     if ( $type eq 'route_master' ) {
-                                        push( @route_master_list, $rel_id )    unless ( $selected_route_masters{$rel_id} );
                                         $selected_route_masters{$rel_id} = 1;
-#
-#                                        # members of selected route_masters also match
-#
-#                                        foreach my $member_rel_ref ( @{$RELATIONS{$rel_id}->{'route_master_relation'}} ) {
-#                                            printf STDERR "%s Relations of seletced Route-Master also match: %s - Member %s\n", get_time(), $rel_id, $member_rel_ref->{'ref'}   if ( $debug );
-#                                            push( @route_list, $member_rel_ref->{'ref'} )    unless ( $selected_routes{$member_rel_ref->{'ref'}} );
-#                                            $selected_routes{$member_rel_ref->{'ref'}} = 1;
-#                                        }
                                     } else {
-                                        push( @route_list, $rel_id )    unless ( $selected_routes{$rel_id} );
                                         $selected_routes{$rel_id} = 1;
                                     }
                                 }
@@ -1492,7 +1482,31 @@ sub SearchMatchingRelations {
         printf STDERR "%s SearchMatchingRelations(): no Search List specified\n", get_time();
     }
 
-    return ( @route_master_list, @route_list );
+    foreach my $rel_id ( keys( %selected_route_masters ) ) {
+
+        # members of selected route_masters also match, but check some basic settings first
+
+        foreach my $member_rel_ref ( @{$RELATIONS{$rel_id}->{'route_master_relation'}} ) {
+            printf STDERR "%s Relations of selected Route-Master also match: %s - Member %s\n", get_time(), $rel_id, $member_rel_ref->{'ref'}   if ( $debug );
+            if ( !exists($selected_routes{$member_rel_ref->{'ref'}})                       &&
+                 $RELATIONS{$member_rel_ref->{'ref'}}                                      &&
+                 $RELATIONS{$member_rel_ref->{'ref'}}->{'tag'}                             &&
+                 $RELATIONS{$member_rel_ref->{'ref'}}->{'tag'}->{'type'}                   &&
+                 $RELATIONS{$member_rel_ref->{'ref'}}->{'tag'}->{'type'}  eq 'route'       &&
+                 $RELATIONS{$member_rel_ref->{'ref'}}->{'tag'}->{'route'}                  &&
+                 $RELATIONS{$member_rel_ref->{'ref'}}->{'tag'}->{'route'} eq $ExpRouteType &&
+                 $RELATIONS{$member_rel_ref->{'ref'}}->{'tag'}->{'ref'}                    &&
+                 $ExpRefHash{$RELATIONS{$member_rel_ref->{'ref'}}->{'tag'}->{'ref'}}          ) {
+                printf STDERR "Add member route %s of route_master %s\n", $member_rel_ref->{'ref'}, $rel_id   if ( $debug );
+                $selected_routes{$member_rel_ref->{'ref'}} = 1;
+            }
+        }
+    }
+
+    map { push( @return_list, $_ ); } sort( { $RELATIONS{$a}->{'__sort_name__'} cmp $RELATIONS{$b}->{'__sort_name__'} } keys( %selected_route_masters ) );
+    map { push( @return_list, $_ ); } sort( { $RELATIONS{$a}->{'__sort_name__'} cmp $RELATIONS{$b}->{'__sort_name__'} } keys( %selected_routes        ) );
+
+    return ( @return_list );
 }
 
 
@@ -1640,7 +1654,7 @@ sub analyze_route_master_environment {
                 #
                 if ( $RELATIONS{$member_ref->{'ref'}} && $RELATIONS{$member_ref->{'ref'}}->{'tag'} ) {
                     #
-                    # relation is included in XML input file cehck for settings
+                    # relation is included in XML input file check for settings
                     #
                     if ( $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'type'} ) {
 
@@ -2017,6 +2031,7 @@ sub analyze_relation {
             my $count_error_semikolon_w_blank = 0;
             my $count_error_comma             = 0;
             my $match                         = '';
+            my $we_have_a_match               = 0;
 
             my $network_with = ';' . $network . ';';        # we match only with sourrounding ';', i.e. 'DB InterCity' does not match network='DB InterCityExpress'
 
@@ -2040,6 +2055,7 @@ sub analyze_relation {
                              $network =~ m/\Q$match\E(\s*,)/       ) {
                             $count_error_comma++;
                         }
+                        $we_have_a_match++;
                     }
                 }
             }
@@ -2063,7 +2079,15 @@ sub analyze_relation {
                              $network =~ m/\Q$match\E(\s*,)/       ) {
                             $count_error_comma++;
                         }
+                        $we_have_a_match++;
                     }
+                }
+            }
+            if ( $we_have_a_match == 0 && $network_long_regex && $network_short_regex ) {
+                $issues_string = gettext( "Route has 'network' = '%s' value which is considered as not relevant: %s" );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($network), printRelationTemplate($relation_id) ) );
+                if ( $positive_notes ) {
+                    push( @{$relation_ptr->{'__notes__'}}, sprintf( "'network' = '%s'", html_escape($network)) );
                 }
             }
 
@@ -2170,7 +2194,7 @@ sub analyze_relation {
             $notes_string = gettext( "The tag 'line' (='%s') is reserved for 'power' = 'line' related tagging. For public transport 'route_master' and 'route' are used." );
             push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, $relation_ptr->{'tag'}->{'line'} ) );
         }
-        
+
         #
         # check route_master/route specific things
         #
@@ -2248,9 +2272,9 @@ sub analyze_route_relation {
     my $ref                            = $relation_ptr->{'tag'}->{'ref'};
     my $type                           = $relation_ptr->{'tag'}->{'type'};
     my $route_type                     = $relation_ptr->{'tag'}->{$type};
-    my $route_relation_index           = scalar( @{$relation_ptr->{'route_relation'}} );
-    my $route_highway_index            = scalar( @{$relation_ptr->{'route_highway'}} );
-    my $node_index                     = scalar( @{$relation_ptr->{'node'}} );
+    my $route_relation_index           = $relation_ptr->{'route_relation'} ? scalar( @{$relation_ptr->{'route_relation'}} ) : 0;
+    my $route_highway_index            = $relation_ptr->{'route_highway'}  ? scalar( @{$relation_ptr->{'route_highway'}} )  : 0;
+    my $node_index                     = $relation_ptr->{'node'}           ? scalar( @{$relation_ptr->{'node'}} )           : 0;
 
     $relation_ptr->{'missing_way_data'}   = 0;
     $relation_ptr->{'missing_node_data'}  = 0;
@@ -2342,7 +2366,7 @@ sub analyze_ptv2_route_relation {
     my $num_of_errors                       = 0;
     my $access_restriction                  = undef;
 
-    my $number_of_route_relation            = scalar( @{$relation_ptr->{'route_relation'}} );
+    my $number_of_route_relation            = $relation_ptr->{'route_relation'} ? scalar( @{$relation_ptr->{'route_relation'}} ) : 0;
 
     my @relation_route_highways             = FindRouteHighWays( $relation_ptr );
     my $number_of_route_highways            = scalar( @relation_route_highways );
@@ -4804,7 +4828,7 @@ sub printTableOfContents {
 #############################################################################################
 
 sub printHintUnassignedRelations {
-    
+
     push( @HTML_main, "<p>\n" );
     push( @HTML_main, gettext( "This section lists the lines that could not be clearly assigned." ) );
     push( @HTML_main, " " );

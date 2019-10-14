@@ -32,19 +32,17 @@
         </li>
         <li>2 <a href="#A2">Test file for environment of Route-Master</a>
         </li>
-        <li>3 <a href="#unassigned">Not clearly assigned routes</a>
-        </li>
-        <li>4 <a href="#withoutref">Public Transport Lines without 'ref'</a>
+        <li>3 <a href="#withoutref">Public Transport Lines without 'ref'</a>
         <ol>
-        <li>4.1 <a href="#A4.1">Bus</a>
+        <li>3.1 <a href="#A3.1">Bus</a>
         </li>
         </ol>
         </li>
-        <li>5 <a href="#morerelations">More Relations</a>
+        <li>4 <a href="#morerelations">More Relations</a>
         </li>
-        <li>6 <a href="#networkdetails">Details for 'network'-Values</a>
+        <li>5 <a href="#networkdetails">Details for 'network'-Values</a>
         <ol>
-        <li>6.1 <a href="#considerednetworks">Considered 'network'-Values</a>
+        <li>5.1 <a href="#considerednetworks">Considered 'network'-Values</a>
         </li>
         </ol>
         </li>
@@ -76,64 +74,15 @@
                 <tr id="-113855" data-info="-113855" data-ref="100" class="line"><td class="name">Bus 100</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113855</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'network'<br>'operator' = 'Operator'</td></tr>
                 <tr id="-113886" data-info="-113886" data-ref="100" class="line"><td class="name">Bus 100: First Street =&gt; Second Street</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113886</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'network'<br>'operator' = 'Operator'</td></tr>
                 <tr id="bus_100-2" data-info="Comment: B-Town; From: First Avenue; To: Second Avenue; Operator: Operator" data-ref="100" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=100&amp;network=network&amp;style=wuppertal" title="Sketch-Line">100</a></td><td class="csvinfo" colspan="5">Comment: B-Town; From: First Avenue; To: Second Avenue; Operator: Operator</td></tr>
-                <tr id="-113982" data-info="-113982" data-ref="100" class="line"><td class="name">Bus 100</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113982</td><td class="PTv">2</td><td class="issues">Route-Master has more Routes than actually match (2 versus 1) in the given data set<br>Route might be listed with 'ref' = '100' in a different section or in section 'Not clearly assigned routes' of this analysis: <img src="/img/Relation.svg" alt="Relation" /> -113978</td><td class="notes">'network' = 'network'<br>'operator' = 'Operator'</td></tr>
+                <tr id="-113982" data-info="-113982" data-ref="100" class="line"><td class="name">Bus 100</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113982</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'network'<br>'operator' = 'Operator'</td></tr>
                 <tr id="-113964" data-info="-113964" data-ref="100" class="line"><td class="name">Bus 100: First Avenue =&gt; Second Avenue</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113964</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'network'<br>'operator' = 'Operator'</td></tr>
+                <tr id="-113978" data-info="-113978" data-ref="100" class="line"><td class="name">Bus 100: Third Avenue =&gt; Fourth Avenue</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113978</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'network'<br>'operator' = 'Operator'</td></tr>
             </tbody>
         </table>
 
         <hr />
-        <h1 id="unassigned">3 Not clearly assigned routes</h1>
-<p>
-This section lists the lines that could not be clearly assigned. The line numbers 'ref' have been specified several times in the CSV file. This means that the same line number exists in the transport network several times in different municipalities / cities. In order to be able to clearly assign the lines, the following should be indicated:
-</p><ul>
-    <li>Relation:
-        <ul>
-            <li>'network', 'operator', as well as 'from' and 'to' should be tagged with the relation.
-                <ul>
-                    <li>If the value of 'operator' is sufficient for differentiation, 'from' and 'to' need not be specified.</li>
-                </ul>
-            </li>
-        </ul>
-    </li>
-    <li>CSV file:
-        <ul>
-            <li>'Operator', as well as 'From' and 'To' should be specified in the CSV file with the same values as with the relation.
-                <ul>
-                    <li>See the instructions for such entries at the beginning of the CSV file.</li>
-                </ul>
-            </li>
-        </ul>
-    </li>
-</ul>
-<p>
-Examples for an entry in the CSV file of the form: 'ref;type;Comment;From;To;Operator':
-</p>
-<table>
-    <thead class="tableheaderrow">
-        <tr><th>&nbsp;</th><th>ref</th><th>type</th><th>Comment</th><th>From</th><th>To</th><th>Operator</th></tr>
-    </thead>
-    <tbody>
-        <tr><td><strong>1.)</strong> </td><td>9</td><td>bus</td><td>Bus 9 provides services in City-A</td><td>First Avenue</td><td>Sixth Avenue</td><td>Operator-X</td></tr>
-        <tr><td><strong>2.)</strong> </td><td>9</td><td>bus</td><td>Bus 9 provides services in Village-B</td><td>Main Street</td><td>Second Street</td><td>Operator-X</td></tr>
-        <tr><td><strong>3.)</strong> </td><td>9</td><td>bus</td><td>Bus 9 provides services in Town-C</td><td>Sunset Boulevard</td><td>Rainbow Boulevard</td><td>Operator-Z</td></tr>
-    </tbody>
-</table>
-<p>
-   1.) and 2.) are only distinguishable by means of 'From'/'from' and 'To'/'to', since 'Operator'/'operator' are identical (='Operator-X').<br>
-   1.) and 3.) as well as 2.) and 3.) can be distinguished by 'Operator'/'operator', as these are different (='Operator-X' or ='Operator-Z').
-</p>
-        <table class="oepnvtable">
-            <thead>
-                <tr class="tableheaderrow"><th class="ref">Line (ref=)</th><th class="relation">Relation (id=)</th><th class="type">Type (type=)</th><th class="route_type">Vehicle (route(_master)=)</th><th class="name">Name (name=)</th><th class="network">Network (network=)</th><th class="operator">Operator (operator=)</th><th class="from">From (from=)</th><th class="via">Via (via=)</th><th class="to">To (to=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
-            </thead>
-            <tbody>
-                <tr id="-113978" data-info="-113978" data-ref="100" class="line"><td class="ref">100</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113978</td><td class="type">route</td><td class="route_type">bus</td><td class="name">Bus 100: Third Avenue =&gt; Fourth Avenue</td><td class="network">network</td><td class="operator">Operator</td><td class="from">Third Avenue</td><td class="via"></td><td class="to">Fourth Avenue</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'network'<br>'operator' = 'Operator'</td></tr>
-            </tbody>
-        </table>
-
-        <hr />
-        <h1 id="withoutref">4 Public Transport Lines without 'ref'</h1>
-        <h2 id="A4.1">4.1 Bus</h2>
+        <h1 id="withoutref">3 Public Transport Lines without 'ref'</h1>
+        <h2 id="A3.1">3.1 Bus</h2>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="relation">Relation (id=)</th><th class="type">Type (type=)</th><th class="route_type">Vehicle (route(_master)=)</th><th class="name">Name (name=)</th><th class="network">Network (network=)</th><th class="operator">Operator (operator=)</th><th class="from">From (from=)</th><th class="via">Via (via=)</th><th class="to">To (to=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
@@ -144,7 +93,7 @@ Examples for an entry in the CSV file of the form: 'ref;type;Comment;From;To;Ope
         </table>
 
         <hr />
-        <h1 id="morerelations">5 More Relations</h1>
+        <h1 id="morerelations">4 More Relations</h1>
 <p>
 This section lists further relations of the environment of the routes:
 </p>
@@ -183,8 +132,8 @@ The following values and combinations have been found in the provided data but t
         </table>
 
         <hr />
-        <h1 id="networkdetails">6 Details for 'network'-Values</h1>
-        <h2 id="considerednetworks">6.1 Considered 'network'-Values</h2>
+        <h1 id="networkdetails">5 Details for 'network'-Values</h1>
+        <h2 id="considerednetworks">5.1 Considered 'network'-Values</h2>
 <p>
 This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.
 </p>
