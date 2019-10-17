@@ -149,7 +149,7 @@ msgid "Missing route for ref='%s' and route='%s'"
 msgstr "Parcours manquant avec 'ref' = '%s' et 'route' = '%s'"
 
 msgid "' or ref='"
-msgstr "' ou 'ref ' = '"
+msgstr "' ou 'ref' = '"
 
 #. xgettext: This section will list all routes which could not be clearly
 #. assigned because the combination of "ref;type" appears more than once and
@@ -242,8 +242,8 @@ msgid ""
 "Route has different 'ref' = '%s' than Route-Master 'ref' = '%s' - this "
 "should be avoided: %s"
 msgstr ""
-"Le parcours a le code de ligne ref= '%s' alors que la ligne a le code de "
-"ligne ref= '%s', cela devrait être évité : %s"
+"Le parcours a le code de ligne 'ref' = '%s' alors que la ligne a le code de "
+"ligne 'ref' = '%s', cela devrait être évité : %s"
 
 #, perl-format
 msgid "Route has not matching 'ref' = '%s': %s"
@@ -343,8 +343,8 @@ msgid ""
 "'network' = '%s' of Route does not fit to 'network' = '%s' of Route-Master: "
 "%s"
 msgstr ""
-"Le réseau 'network'='%s' du parcours ne correspond pas au réseau "
-"'network'='%s' de la ligne :  %s"
+"Le réseau 'network' = '%s' du parcours ne correspond pas au réseau 'network'"
+" = '%s' de la ligne :  %s"
 
 #, perl-format
 msgid "'colour' of Route does not fit to 'colour' of Route-Master: %s"
@@ -586,7 +586,7 @@ msgstr ""
 
 #, perl-format
 msgid "PTv2 route: wrong 'role' = '%s'"
-msgstr "Parcours PTv2 : mauvais role : '%s' "
+msgstr "Parcours PTv2 : mauvais 'role' = '%s' "
 
 msgid "PTv2 route: empty 'role'"
 msgstr "Parcours PTv2 : 'role' vide"
@@ -666,13 +666,13 @@ msgstr "Parcours PTv2 : le nom 'name' devrait contenir le code de ligne 'ref'"
 msgid "PTv2 route: from-part ('%s') of 'name' is not part of 'from' = '%s'"
 msgstr ""
 "Parcours PTv2 : l'origine de ligne précisée dans le nom ('%s') ne correspond"
-" pas à l'origine dans le tag 'from'='%s'"
+" pas à l'origine dans le tag 'from' = '%s'"
 
 #, perl-format
 msgid "PTv2 route: from-part ('%s') of 'name' is not equal to 'from' = '%s'"
 msgstr ""
 "Parcours PTv2 : l'origine de ligne précisée dans le nom ('%s') n'est pas "
-"mème que dans le tag 'from'='%s'"
+"mème que dans le tag 'from' = '%s'"
 
 msgid "PTv2 route: 'from' is not set"
 msgstr "Parcours PTv2 : Le tag 'from' n'est pas défini"
@@ -681,13 +681,13 @@ msgstr "Parcours PTv2 : Le tag 'from' n'est pas défini"
 msgid "PTv2 route: to-part ('%s') of 'name' is not part of 'to' = '%s'"
 msgstr ""
 "Parcours PTv2 : la destination de ligne précisée dans le nom ('%s') ne "
-"correspond pas à la destination dans le tag 'to'='%s'"
+"correspond pas à la destination dans le tag 'to' = '%s'"
 
 #, perl-format
 msgid "PTv2 route: to-part ('%s') of 'name' is not equal to 'to' = '%s'"
 msgstr ""
 "Parcours PTv2 : la destination de ligne précisée dans le nom ('%s') n'est "
-"pas mème que dans le tag 'to'='%s'"
+"pas mème que dans le tag 'to' = '%s'"
 
 msgid "PTv2 route: 'to' is not set"
 msgstr "Parcours PTv2 : Le tag 'to' n'est pas défini"
@@ -782,7 +782,7 @@ msgid ""
 "Route: 'route_ref' = '%s' of stop does not include 'ref' = '%s' value of "
 "this route%s"
 msgstr ""
-"Parcours : Le tag 'route_ref' =' %s' de cet arrêt ne comprend pas le tag "
+"Parcours : Le tag 'route_ref' = '%s' de cet arrêt ne comprend pas le tag "
 "'ref' = '%s' de ce parcours %s"
 
 #, perl-format
@@ -957,14 +957,14 @@ msgstr ""
 "des modes de transports erronés dans les tags 'route' et 'route_master' ?"
 
 msgid "e.g. 'route' = 'suspended_bus' instead of 'route' = 'bus'"
-msgstr "par exemple 'route'='suspended_bus' au lieu de 'route'='bus'"
+msgstr "par exemple 'route'='suspended_bus' au lieu de 'route' = 'bus'"
 
 msgid ""
 "but also 'type' = 'network', 'type' = 'set' or 'route' = 'network', i.e. a "
 "collection of all routes and route-masters belonging to the 'network'."
 msgstr ""
-"ou des relations utilisées comme des collections d'objets : "
-"'type'='network', 'type'='set' ou encore 'route'='network'"
+"ou des relations utilisées comme des collections d'objets : 'type' = "
+"'network', 'type' = 'set' ou encore 'route' = 'network'"
 
 msgid ""
 "such <strong>collections are strictly spoken errors</strong>, since "

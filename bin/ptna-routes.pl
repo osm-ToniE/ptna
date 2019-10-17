@@ -2037,7 +2037,7 @@ sub analyze_relation {
 
             if ( $network_short_regex ) {
                 foreach my $short_value ( split('\|',$network_short_regex) ) {
-                    if ( $network_with =~ m/;(\Q$short_value\E);/ ) {
+                    if ( $network_with =~ m/[;,]\s*(\Q$short_value\E)\s*[;,]\s*/ ) {
                         $match = $1;
                         if ( $positive_notes ) {
                             if ( $network eq $match ) {
@@ -2061,7 +2061,7 @@ sub analyze_relation {
             }
             if ( $network_long_regex ) {
                 foreach my $long_value ( split('\|',$network_long_regex) ) {
-                    if ( $network_with =~ m/;(\Q$long_value\E);/ ) {
+                    if ( $network_with =~ m/[;,]\s*(\Q$long_value\E)\s*[;,]\s*/ ) {
                         $match = $1;
                         if ( $positive_notes ) {
                             if ( $network eq $match ) {
