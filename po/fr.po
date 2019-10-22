@@ -438,7 +438,7 @@ msgid "Route-Master with Node(s)"
 msgstr "Ligne route_master avec des points"
 
 msgid "'public_transport:version' is not set to '2'"
-msgstr "Le tag 'public_transport:version' ne vaut pas 2"
+msgstr "Le tag 'public_transport:version' ne vaut pas '2'"
 
 msgid "'public_transport:version' is not set"
 msgstr "Le tag 'public_transport:version' n'est pas défini"
@@ -572,8 +572,8 @@ msgstr ""
 #, perl-format
 msgid "PTv2 route: 'role' = '%s' but 'public_transport' is not set"
 msgstr ""
-"Parcours PTv2 : Le role vaut %s mais le tag 'public_transport' n'est pas "
-"défini"
+"Parcours PTv2 : Le 'role' vaut '%s' mais le tag 'public_transport' n'est pas"
+" défini"
 
 msgid "PTv2 route: 'public_transport' = 'platform' is part of way"
 msgstr ""
@@ -783,7 +783,7 @@ msgid ""
 "this route%s"
 msgstr ""
 "Parcours : Le tag 'route_ref' = '%s' de cet arrêt ne comprend pas le tag "
-"'ref' = '%s' de ce parcours %s"
+"'ref' = '%s' de ce parcours%s"
 
 #, perl-format
 msgid ""
