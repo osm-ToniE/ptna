@@ -323,10 +323,18 @@ then
     then 
         if [ -s $WORK_LOC/$HTML_FILE ]
         then
+            # DIFF_LINES_BASE defines how many diff lines we have to tollerate in order to skip the
+            # different time strings of the analysis
+            # only diffs in the analysis result count
+            
             if [ $(echo $OVERPASS_QUERY | egrep -c '(data=area)|(data=\[timeout:[0-9]+\];area)') = 1 ]
             then
+                # Overpass-API query includes an area(...), so AREA Time is included in HTML
+                # this is the case for most 'network' analyzes
                 DIFF_LINES_BASE=8
             else
+                # Overpass-API query includes definition of a poly('...'), so no AREA Time is included in HTML
+                # this is the case for EU-Flixbus and one or two others
                 DIFF_LINES_BASE=4
             fi
             
@@ -350,6 +358,15 @@ then
     
                 if [ -f "$WORK_LOC/$SAVE_FILE" ]
                 then
+                    OLD_OSM_Base_Time="$(awk '/OSM-Base Time : .* UTC/ { print $4 "T" $5 "Z"; }' $WORK_LOC/$SAVE_FILE)"
+                    NEW_OSM_Base_Time="$(awk '/OSM-Base Time : .* UTC/ { print $4 "T" $5 "Z"; }' $WORK_LOC/$HTML_FILE)"
+                    
+                    if [ "$NEW_OSM_Base_Time" = "$OLD_OSM_Base_Time" ]
+                    then
+                        # we analyzed the same XML data again, so every diff line counts
+                        DIFF_LINES_BASE=0
+                    fi
+                    
                     diff $WORK_LOC/$SAVE_FILE $WORK_LOC/$HTML_FILE > $WORK_LOC/$DIFF_FILE
                     DIFF_LINES=$(cat $WORK_LOC/$DIFF_FILE | wc -l)
                     echo $(date "+%Y-%m-%d %H:%M:%S") "Diff size:  " $(ls -l $WORK_LOC/$DIFF_FILE | awk '{print $5 " " $9}')
