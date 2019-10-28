@@ -4751,7 +4751,7 @@ sub printInitialHeader {
     push( @HTML_main, gettext("The data will be updated when the result of the analysis has changed.") );
     push( @HTML_main, "\n</p>\n" );
     push( @HTML_main, "<p>\n    " );
-    push( @HTML_main, gettext("An explanation of the error texts can be found in the documentation at <a href='/en/index.php#messages'>'Messages'</a>.") );
+    push( @HTML_main, gettext("An explanation of the error texts can be found in the documentation at '<a href='/en/index.php#messages'>Messages</a>'.") );
     push( @HTML_main, "\n</p>\n" );
 
 }
