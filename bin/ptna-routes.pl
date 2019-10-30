@@ -4037,7 +4037,12 @@ sub noAccessOnWay {
                     }
                 }
             }
-            if ( $way_tag_ref->{'highway'} && $way_tag_ref->{'highway'} ne 'construction' && $way_tag_ref->{'construction'} && $way_tag_ref->{'construction'} ne 'no' ) {
+            if ( $way_tag_ref->{'construction'}               && 
+                 $way_tag_ref->{'highway'}                    && 
+                 $way_tag_ref->{'highway'} ne 'construction'  &&
+                 $way_tag_ref->{'construction'} ne 'no'       && 
+                 $way_tag_ref->{'construction'} ne 'minor'    && 
+                 $way_tag_ref->{'construction'} ne 'widening'    ) {
                 printf STDERR "noAccessOnWay() : suspicious 'construction' = '%s' on 'highway' = '%s'\n", $way_id, $way_tag_ref->{'construction'}, $way_tag_ref->{'highway'}      if ( $debug );
                 return sprintf( "'construction'='%s'", $way_tag_ref->{'construction'} );
             }

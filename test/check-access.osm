@@ -289,6 +289,7 @@
   <way id='-152348' action='modify'>
     <nd ref='-152103' />
     <nd ref='-152105' />
+    <tag k='construction' v='minor' />
     <tag k='highway' v='secondary' />
     <tag k='motor_vehicle' v='no' />
     <tag k='name' v='Way 17' />
@@ -297,6 +298,7 @@
   <way id='-152349' action='modify'>
     <nd ref='-152105' />
     <nd ref='-152107' />
+    <tag k='construction' v='widening' />
     <tag k='highway' v='secondary' />
     <tag k='name' v='Way 16' />
     <tag k='ref' v='W 16' />
