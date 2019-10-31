@@ -8,24 +8,24 @@
         <meta name="keywords" content="OSM Public Transport PTv2">
         <meta name="description" content="PTNA - Public Transport Network Analysis">
         <style>
-              table { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; }
-              th    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
-              td    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
-              img   { width: 20px; }
-              #toc ol           { list-style: none; }
-              .tableheaderrow   { background-color: LightSteelBlue;   }
-              .sketchline       { background-color: LightBlue;        }
-              .sketch           { text-align:left;  font-weight: 500; }
-              .csvinfo          { text-align:right; font-size: 0.8em; }
-              .ref              { white-space:nowrap; }
-              .relation         { white-space:nowrap; }
-              .PTv              { text-align:center; }
-              .number           { text-align:right; }
-              .attention        { background-color: yellow; font-weight: 500; font-size: 1.2em; }
+            #analysis table           { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; }
+            #analysis th              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+            #analysis td              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+            #analysis ol              { list-style: none; }
+            #analysis img             { width: 20px; vertical-align: top; }
+            #analysis .tableheaderrow { background-color: LightSteelBlue;   }
+            #analysis .sketchline     { background-color: LightBlue;        }
+            #analysis .sketch         { text-align:left;  font-weight: 500; }
+            #analysis .csvinfo        { text-align:right; font-size: 0.8em; }
+            #analysis .ref            { white-space:nowrap; }
+            #analysis .relation       { white-space:nowrap; }
+            #analysis .PTv            { text-align:center; }
+            #analysis .number         { text-align:right; }
+            #analysis .attention      { background-color: yellow; font-weight: 500; font-size: 1.2em; }
         </style>
     </head>
     <body>
-        <div id="toc">
+        <div id="analysis">
         <h1>Contents</h1>
         <ol>
         <li>1 <a href="#hints">Hints</a>
@@ -47,7 +47,6 @@
         </ol>
         </li>
         </ol>
-        </div> <!-- toc -->
         <hr />
         <h1 id="hints">1 Hints</h1>
 <p>
@@ -110,6 +109,7 @@ This section lists the 'network'-values which have been considered; i.e. which m
             </tbody>
         </table>
 
+        </div> <!-- analysis -->
         <iframe style="display:none" id="hiddenIframe" name="hiddenIframe"></iframe>
     </body>
 </html>

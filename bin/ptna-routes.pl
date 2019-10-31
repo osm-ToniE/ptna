@@ -36,6 +36,7 @@ my %have_seen_well_known_network_types      = ();
 my %have_seen_well_known_other_types        = ();
 
 my $opt_language                    = undef;
+my $opt_test                        = undef;
 my $verbose                         = undef;
 my $debug                           = undef;
 my $osm_xml_file                    = undef;
@@ -120,6 +121,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'ref-separator=s'               =>  \$ref_separator,                # --ref-separator='/'               separator in the CSV file inside 'ref' values to show cooperations
             'strict-network'                =>  \$strict_network,               # --strict-network                  do not consider empty network tags
             'strict-operator'               =>  \$strict_operator,              # --strict-operator                 do not consider empty operator tags
+            'test'                          =>  \$opt_test,                     # --test                            to test the SW
             'title=s'                       =>  \$page_title,                   # --title=...                       Title for the HTML page
           );
 
@@ -4037,11 +4039,11 @@ sub noAccessOnWay {
                     }
                 }
             }
-            if ( $way_tag_ref->{'construction'}               && 
-                 $way_tag_ref->{'highway'}                    && 
+            if ( $way_tag_ref->{'construction'}               &&
+                 $way_tag_ref->{'highway'}                    &&
                  $way_tag_ref->{'highway'} ne 'construction'  &&
-                 $way_tag_ref->{'construction'} ne 'no'       && 
-                 $way_tag_ref->{'construction'} ne 'minor'    && 
+                 $way_tag_ref->{'construction'} ne 'no'       &&
+                 $way_tag_ref->{'construction'} ne 'minor'    &&
                  $way_tag_ref->{'construction'} ne 'widening'    ) {
                 printf STDERR "noAccessOnWay() : suspicious 'construction' = '%s' on 'highway' = '%s'\n", $way_id, $way_tag_ref->{'construction'}, $way_tag_ref->{'highway'}      if ( $debug );
                 return sprintf( "'construction'='%s'", $way_tag_ref->{'construction'} );
@@ -4723,24 +4725,38 @@ sub printInitialHeader {
     push( @HTML_start, "        <meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\" />\n" );
     push( @HTML_start, "        <meta name=\"keywords\" content=\"OSM Public Transport PTv2\">\n" );
     push( @HTML_start, "        <meta name=\"description\" content=\"PTNA - Public Transport Network Analysis\">\n" );
-    push( @HTML_start, "        <style>\n" );
-    push( @HTML_start, "              table { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; }\n" );
-    push( @HTML_start, "              th    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }\n" );
-    push( @HTML_start, "              td    { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }\n" );
-    push( @HTML_start, "              img   { width: 20px; }\n" );
-    push( @HTML_start, "              #toc ol           { list-style: none; }\n" );
-    push( @HTML_start, "              .tableheaderrow   { background-color: LightSteelBlue;   }\n" );
-    push( @HTML_start, "              .sketchline       { background-color: LightBlue;        }\n" );
-    push( @HTML_start, "              .sketch           { text-align:left;  font-weight: 500; }\n" );
-    push( @HTML_start, "              .csvinfo          { text-align:right; font-size: 0.8em; }\n" );
-    push( @HTML_start, "              .ref              { white-space:nowrap; }\n" );
-    push( @HTML_start, "              .relation         { white-space:nowrap; }\n" );
-    push( @HTML_start, "              .PTv              { text-align:center; }\n" );
-    push( @HTML_start, "              .number           { text-align:right; }\n" );
-    push( @HTML_start, "              .attention        { background-color: yellow; font-weight: 500; font-size: 1.2em; }\n" );
-    push( @HTML_start, "        </style>\n" );
+    if ( $opt_test ) {
+        push( @HTML_start, "        <style>\n" );
+        push( @HTML_start, "            #analysis table           { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; }\n" );
+        push( @HTML_start, "            #analysis th              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }\n" );
+        push( @HTML_start, "            #analysis td              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }\n" );
+        push( @HTML_start, "            #analysis ol              { list-style: none; }\n" );
+        push( @HTML_start, "            #analysis img             { width: 20px; vertical-align: top; }\n" );
+        push( @HTML_start, "            #analysis .tableheaderrow { background-color: LightSteelBlue;   }\n" );
+        push( @HTML_start, "            #analysis .sketchline     { background-color: LightBlue;        }\n" );
+        push( @HTML_start, "            #analysis .sketch         { text-align:left;  font-weight: 500; }\n" );
+        push( @HTML_start, "            #analysis .csvinfo        { text-align:right; font-size: 0.8em; }\n" );
+        push( @HTML_start, "            #analysis .ref            { white-space:nowrap; }\n" );
+        push( @HTML_start, "            #analysis .relation       { white-space:nowrap; }\n" );
+        push( @HTML_start, "            #analysis .PTv            { text-align:center; }\n" );
+        push( @HTML_start, "            #analysis .number         { text-align:right; }\n" );
+        push( @HTML_start, "            #analysis .attention      { background-color: yellow; font-weight: 500; font-size: 1.2em; }\n" );
+        push( @HTML_start, "        </style>\n" );
+    } else {
+        push( @HTML_start, "        <link rel=\"stylesheet\" href=\"/css/main.css\" />\n" );
+        push( @HTML_start, "        <link rel=\"shortcut icon\" href=\"/favicon.ico\" />\n" );
+        push( @HTML_start, "        <link rel=\"icon\" type=\"image/png\" href=\"/favicon.png\" sizes=\"32x32\" />\n" );
+        push( @HTML_start, "        <link rel=\"icon\" type=\"image/png\" href=\"/favicon.png\" sizes=\"96x96\" />\n" );
+        push( @HTML_start, "        <link rel=\"icon\" type=\"image/svg+xml\" href=\"/favicon.svg\" sizes=\"any\" />\n" );
+    }
     push( @HTML_start, "    </head>\n" );
     push( @HTML_start, "    <body>\n" );
+    if ( !$opt_test ) {
+        printPtnaHeader( 'language'       => $opt_language,
+                         'diff_file_name' => $title . '-Analysis.diff.html'
+                       );
+    }
+    push( @HTML_start, "        <div id=\"analysis\">\n" );
     if ( $osm_base || $areas ) {
         printHeader( gettext("Date of Data"), 1, 'dates' );
         push( @HTML_main, sprintf( "%8s<p>\n", ' ') );
@@ -4764,8 +4780,44 @@ sub printInitialHeader {
 
 #############################################################################################
 
+sub printPtnaHeader {
+    my %hash        = @_;
+    my $language    = $hash{'language'};
+    my $diff_file   = $hash{'diff_file_name'};
+
+    push( @HTML_start, "        <header id=\"headerblock\">\n" );
+    push( @HTML_start, "            <div id=\"headerimg\" class=\"logo\">\n" );
+    push( @HTML_start, "                <a href=\"/\"><img src=\"/img/logo.png\" alt=\"logo\" /></a>\n" );
+    push( @HTML_start, "            </div>\n" );
+    push( @HTML_start, "            <div id=\"headertext\">\n" );
+    push( @HTML_start, "                <h1><a href=\"/\">PTNA - Public Transport Network Analysis</a></h1>\n" );
+    push( @HTML_start, sprintf( "                <h2>%s</h2>\n", gettext("Static Analysis for OpenStreetMap") ) );
+    push( @HTML_start, "            </div>\n" );
+    push( @HTML_start, "            <div id=\"headernav\">\n" );
+    push( @HTML_start, "                <a href=\"/\">Home</a> | \n" );
+    if ( $diff_file ) {
+        push( @HTML_start, sprintf( "                <a href=\"%s\" title=\"switch view\">%s</a> |\n", $diff_file, gettext("Switch View") ) );
+    }
+    push( @HTML_start, "                <a href=\"/contact.html\">Contact</a> | \n" );
+    push( @HTML_start, "                <a target=\"_blank\" href=\"https://www.openstreetmap.de/impressum.html\">Impressum</a> | \n" );
+    push( @HTML_start, "                <a target=\"_blank\" href=\"https://www.fossgis.de/datenschutzerklaerung\">Datenschutzerklärung</a> | \n" );
+    push( @HTML_start, "                <a href=\"/en/index.html\" title=\"english\"><img src=\"/img/GreatBritain16.png\" alt=\"Union Jack\" /></a>\n" );
+    push( @HTML_start, "                <a href=\"/de/index.html\" title=\"deutsch\"><img src=\"/img/Germany16.png\" alt=\"deutsche Flagge\" /></a>\n" );
+    push( @HTML_start, "                <!-- <a href=\"/fr/index.html\" title=\"français\"><img src=\"/img/France16.png\" alt=\"Tricolore Française\" /></a> -->\n" );
+    push( @HTML_start, "            </div>\n" );
+    push( @HTML_start, "        </header>\n" );
+
+}
+
+
+#############################################################################################
+
 sub printFinalFooter {
 
+    push( @HTML_main, "        </div> <!-- analysis -->\n" );
+    if ( !$opt_test ) {
+        printPtnaFooter( 'language' => $opt_language );
+    }
     push( @HTML_main, "        <iframe style=\"display:none\" id=\"hiddenIframe\" name=\"hiddenIframe\"></iframe>\n" );
     push( @HTML_main, "    </body>\n" );
     push( @HTML_main, "</html>\n" );
@@ -4784,6 +4836,14 @@ sub printFinalFooter {
 
 #############################################################################################
 
+sub printPtnaFooter {
+    my %hash        = @_;
+    my $language    = $hash{'language'};
+}
+
+
+#############################################################################################
+
 sub printTableOfContents {
 
     my $toc_line        = undef;
@@ -4793,7 +4853,6 @@ sub printTableOfContents {
     my $label           = undef;
     my $header_text     = undef;
 
-    print "        <div id=\"toc\">\n";
     print "        <h1>";
     print gettext("Contents");
     printf "</h1>\n";
@@ -4826,7 +4885,6 @@ sub printTableOfContents {
         print "        </li>\n        </ol>\n";
         $last_level--;
     }
-    print "        </div> <!-- toc -->\n";
 }
 
 

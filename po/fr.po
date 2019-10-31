@@ -7,15 +7,15 @@
 # Philippe Verdy, 2019
 # Noémie <nlehuby@zaclys.net>, 2019
 # Julien Lepiller <transifex@lepiller.eu>, 2019
-# ToniE <osm-ToniE@web.de>, 2019
 # Adrien Pavie <panieravide@riseup.net>, 2019
+# ToniE <osm-ToniE@web.de>, 2019
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2019-10-28 22:58+0100\n"
-"PO-Revision-Date: 2019-10-28 23:01+0100\n"
+"POT-Creation-Date: 2019-10-31 20:34+0100\n"
+"PO-Revision-Date: 2019-10-31 20:37+0100\n"
 "Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
 "Language-Team: French (https://www.transifex.com/jungle-bus/teams/97874/"
 "fr/)\n"
@@ -850,6 +850,12 @@ msgstr ""
 "Une explication sur chaque erreur peut être trouvée dans la <a href='/en/"
 "index.php#messages'>documentation</a>."
 
+msgid "Static Analysis for OpenStreetMap"
+msgstr "Analyse statique pour OpenStreetMap"
+
+msgid "Switch View"
+msgstr "Changer de vue"
+
 msgid "Contents"
 msgstr "Résultats"
 
@@ -1097,3 +1103,9 @@ msgid ""
 "Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line: "
 "'%s'"
 msgstr ""
+
+#~ msgid "Analysis"
+#~ msgstr "Analyse"
+
+#~ msgid "Difference"
+#~ msgstr "Difference"
