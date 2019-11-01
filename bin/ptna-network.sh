@@ -391,7 +391,7 @@ then
                         fi
     
                         echo $(date "+%Y-%m-%d %H:%M:%S") "Copying '$WORK_LOC/$DIFF_HTML_FILE' to '$RESULTS_LOC'"
-                        sed -e 's/diff.html" title="switch view"/html" title="switch view"/' $WORK_LOC/$DIFF_HTML_FILE > $RESULTS_LOC/$DIFF_HTML_FILE
+                        cp $WORK_LOC/$DIFF_HTML_FILE $RESULTS_LOC
 
                         if [ -n "$RESULTS_HTML" ]
                         then
