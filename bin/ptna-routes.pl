@@ -4748,13 +4748,24 @@ sub printInitialHeader {
         push( @HTML_start, "        <link rel=\"icon\" type=\"image/png\" href=\"/favicon.png\" sizes=\"32x32\" />\n" );
         push( @HTML_start, "        <link rel=\"icon\" type=\"image/png\" href=\"/favicon.png\" sizes=\"96x96\" />\n" );
         push( @HTML_start, "        <link rel=\"icon\" type=\"image/svg+xml\" href=\"/favicon.svg\" sizes=\"any\" />\n" );
+        push( @HTML_start, "        <script>\n" );
+        push( @HTML_start, "            function ToggleView() {\n" );
+        push( @HTML_start, "                var filename = location.pathname.substring(location.pathname.lastIndexOf(\"/\") + 1);\n" );
+        push( @HTML_start, "                var prefix   = filename.substring(0,filename.lastIndexOf(\"-Analysis.\"));\n" );
+        push( @HTML_start, "                var suffix   = filename.substring(filename.lastIndexOf(\"-Analysis.\"));\n" );
+        push( @HTML_start, "                if ( suffix == '-Analysis.html' ) {\n" );
+        push( @HTML_start, "                    filename = prefix + '-Analysis.diff.html';\n" );
+        push( @HTML_start, "                } else if ( suffix == '-Analysis.diff.html' ) {\n" );
+        push( @HTML_start, "                    filename = prefix + '-Analysis.html';\n" );
+        push( @HTML_start, "                }\n" );
+        push( @HTML_start, "                window.open( filename, '_self' );\n" );
+        push( @HTML_start, "            }\n" );
+        push( @HTML_start, "        </script>\n" );
     }
     push( @HTML_start, "    </head>\n" );
     push( @HTML_start, "    <body>\n" );
     if ( !$opt_test ) {
-        printPtnaHeader( 'language'       => $opt_language,
-                         'diff_file_name' => $title . '-Analysis.diff.html'
-                       );
+        printPtnaHeader( 'language'       => $opt_language );
     }
     push( @HTML_start, "        <div id=\"analysis\">\n" );
     if ( $osm_base || $areas ) {
@@ -4783,7 +4794,6 @@ sub printInitialHeader {
 sub printPtnaHeader {
     my %hash        = @_;
     my $language    = $hash{'language'};
-    my $diff_file   = $hash{'diff_file_name'};
 
     push( @HTML_start, "        <header id=\"headerblock\">\n" );
     push( @HTML_start, "            <div id=\"headerimg\" class=\"logo\">\n" );
@@ -4795,9 +4805,7 @@ sub printPtnaHeader {
     push( @HTML_start, "            </div>\n" );
     push( @HTML_start, "            <div id=\"headernav\">\n" );
     push( @HTML_start, "                <a href=\"/\">Home</a> | \n" );
-    if ( $diff_file ) {
-        push( @HTML_start, sprintf( "                <a href=\"%s\" title=\"switch view\">%s</a> |\n", $diff_file, gettext("Switch View") ) );
-    }
+    push( @HTML_start, sprintf( "                <a href=\"\" onclick=\"ToggleView(); return false;\" title=\"%s\">%s</a> |\n", gettext("Click here to toggle between 'analysis' page and 'differences' page"), gettext("Toggle View") ) );
     push( @HTML_start, "                <a href=\"/contact.html\">Contact</a> | \n" );
     push( @HTML_start, "                <a target=\"_blank\" href=\"https://www.openstreetmap.de/impressum.html\">Impressum</a> | \n" );
     push( @HTML_start, "                <a target=\"_blank\" href=\"https://www.fossgis.de/datenschutzerklaerung\">Datenschutzerklärung</a> | \n" );

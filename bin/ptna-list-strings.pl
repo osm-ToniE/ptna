@@ -117,7 +117,7 @@ sub ListMessageStringsDetailsHtml {
     printf STDOUT "                <th class=\"message-type\">%s</th>\n",        gettext( "Type" );
     printf STDOUT "                <th class=\"message-option\">%s</th>\n",      gettext( "Option" );
     printf STDOUT "                <th class=\"message-description\">%s</th>\n", gettext( "Description" );
-    printf STDOUT "                <th class=\"message-fix\">%s</th>\n",         gettext( "How to fix" );
+    printf STDOUT "                <th class=\"message-fix\">%s</th>\n",         gettext( "How to fix it" );
     printf STDOUT "                <th class=\"message-image\">%s</th>\n",       gettext( "Image" );
     printf STDOUT "            </tr>\n";
     printf STDOUT "        </thead>\n";
