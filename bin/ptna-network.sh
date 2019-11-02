@@ -272,7 +272,7 @@ then
                            --operator-regex="$OPERATOR_REGEX" \
                            --routes-file=$SETTINGS_DIR/$ROUTES_FILE \
                            --osm-xml-file=$OSM_XML_FILE_ABSOLUTE \
-                           > $WORK_LOC/$HTML_FILE
+                           2>&1 > $WORK_LOC/$HTML_FILE | tee $WORK_LOC/$HTML_FILE.log
     
             if [ -s "$WORK_LOC/$HTML_FILE" ]
             then

@@ -135,48 +135,6 @@ $expect_network_long_for    = decode('utf8', $expect_network_long_for )     if (
 $expect_network_short_as    = decode('utf8', $expect_network_short_as )     if ( $expect_network_short_as   );
 $expect_network_short_for   = decode('utf8', $expect_network_short_for )    if ( $expect_network_short_for  );
 
-if ( $verbose ) {
-    printf STDERR "%s ptna-routes.pl -v\n", get_time();
-    printf STDERR "%20s--language='%s'\n",                 ' ', $opt_language                  if ( $opt_language                );
-    printf STDERR "%20s--title='%s'\n",                    ' ', $page_title                    if ( $page_title                  );
-    printf STDERR "%20s--network-guid='%s'\n",             ' ', $network_guid                  if ( $network_guid                );
-    printf STDERR "%20s--allow-coach\n",                   ' '                                 if ( $allow_coach                 );
-    printf STDERR "%20s--check-access\n",                  ' '                                 if ( $check_access                );
-    printf STDERR "%20s--check-bus-stop\n",                ' '                                 if ( $check_bus_stop              );
-    printf STDERR "%20s--check-motorway-link\n",           ' '                                 if ( $check_motorway_link         );
-    printf STDERR "%20s--check-name\n",                    ' '                                 if ( $check_name                  );
-    printf STDERR "%20s--check-name-relaxed\n",            ' '                                 if ( $check_name_relaxed          );
-    printf STDERR "%20s--check-osm-separator\n",           ' '                                 if ( $check_osm_separator         );
-    printf STDERR "%20s--check-platform\n",                ' '                                 if ( $check_platform              );
-    printf STDERR "%20s--check-roundabouts\n",             ' '                                 if ( $check_roundabouts           );
-    printf STDERR "%20s--check-route-ref\n",               ' '                                 if ( $check_route_ref             );
-    printf STDERR "%20s--check-sequence\n",                ' '                                 if ( $check_sequence              );
-    printf STDERR "%20s--check-stop-position\n",           ' '                                 if ( $check_stop_position         );
-    printf STDERR "%20s--check-version\n",                 ' '                                 if ( $check_version               );
-    printf STDERR "%20s--coloured-sketchline\n",           ' '                                 if ( $coloured_sketchline         );
-    printf STDERR "%20s--expect-network-long\n",           ' '                                 if ( $expect_network_long         );
-    printf STDERR "%20s--expect-network-short\n",          ' '                                 if ( $expect_network_short        );
-    printf STDERR "%20s--positive-notes\n",                ' '                                 if ( $positive_notes              );
-    printf STDERR "%20s--strict-network\n",                ' '                                 if ( $strict_network              );
-    printf STDERR "%20s--strict-operator\n",               ' '                                 if ( $strict_operator             );
-    printf STDERR "%20s--network-long-regex='%s'\n",       ' ', $network_long_regex            if ( $network_long_regex          );
-    printf STDERR "%20s--network-short-regex='%s'\n",      ' ', $network_short_regex           if ( $network_short_regex         );
-    printf STDERR "%20s--operator-regex='%s'\n",           ' ', $operator_regex                if ( $operator_regex              );
-    printf STDERR "%20s--expect-network-long-as='%s'\n",   ' ', $expect_network_long_as        if ( $expect_network_long_as      );
-    printf STDERR "%20s--expect-network-long-for='%s'\n",  ' ', $expect_network_long_for       if ( $expect_network_long_for     );
-    printf STDERR "%20s--expect-network-short-as='%s'\n",  ' ', $expect_network_short_as       if ( $expect_network_short_as     );
-    printf STDERR "%20s--expect-network-short-for='%s'\n", ' ', $expect_network_short_for      if ( $expect_network_short_for    );
-    printf STDERR "%20s--multiple-ref-type-entries='%s'\n",' ', $multiple_ref_type_entries     if ( $multiple_ref_type_entries   );
-    printf STDERR "%20s--ptv1-compatibility='%s'\n",       ' ', $ptv1_compatibility            if ( $ptv1_compatibility          );
-    printf STDERR "%20s--max-error='%s'\n",                ' ', $max_error                     if ( $max_error                   );
-    printf STDERR "%20s--relaxed-begin-end-for='%s'\n",    ' ', $relaxed_begin_end_for         if ( $relaxed_begin_end_for       );
-    printf STDERR "%20s--separator='%s'\n",                ' ', $csv_separator                 if ( $csv_separator               );
-    printf STDERR "%20s--or-separator='%s'\n",             ' ', $or_separator                  if ( $or_separator                );
-    printf STDERR "%20s--ref-separator='%s'\n",            ' ', $ref_separator                 if ( $ref_separator               );
-    printf STDERR "%20s--routes-file='%s'\n",              ' ', decode('utf8', $routes_file )  if ( $routes_file                 );
-    printf STDERR "%20s--osm-xml-file='%s'\n",             ' ', decode('utf8', $osm_xml_file ) if ( $osm_xml_file                );
-}
-
 
 if ( $opt_language ) {
     my $PATH = $0;
@@ -229,6 +187,49 @@ if ( $multiple_ref_type_entries ne 'analyze' && $multiple_ref_type_entries ne 'a
 if ( $ptv1_compatibility ne 'no' && $ptv1_compatibility ne 'allow' && $ptv1_compatibility ne 'show' ) {
     printf STDERR "%s analyze-routes.pl: wrong value for option: '--ptv1_compatibility' = '%s' - setting it to '--ptv1_compatibility' = 'no'\n", get_time(), $ptv1_compatibility;
     $ptv1_compatibility = 'no';
+}
+
+
+if ( $verbose ) {
+    printf STDERR "%s ptna-routes.pl -v\n", get_time();
+    printf STDERR "%20s--title='%s'\n",                    ' ', $page_title                 ? $page_title   : '';
+    printf STDERR "%20s--network-guid='%s'\n",             ' ', $network_guid               ? $network_guid : '';
+    printf STDERR "%20s--language='%s'\n",                 ' ', $opt_language               ? $opt_language : 'en';
+    printf STDERR "%20s--allow-coach=%s\n",                ' ', $allow_coach                ? 'ON'          :'OFF';
+    printf STDERR "%20s--check-access=%s\n",               ' ', $check_access               ? 'ON'          :'OFF';
+    printf STDERR "%20s--check-bus-stop=%s\n",             ' ', $check_bus_stop             ? 'ON'          :'OFF';
+    printf STDERR "%20s--check-motorway-link=%s\n",        ' ', $check_motorway_link        ? 'ON'          :'OFF';
+    printf STDERR "%20s--check-name=%s\n",                 ' ', $check_name                 ? 'ON'          :'OFF';
+    printf STDERR "%20s--check-name-relaxed=%s\n",         ' ', $check_name_relaxed         ? 'ON'          :'OFF';
+    printf STDERR "%20s--check-osm-separator=%s\n",        ' ', $check_osm_separator        ? 'ON'          :'OFF';
+    printf STDERR "%20s--check-platform=%s\n",             ' ', $check_platform             ? 'ON'          :'OFF';
+    printf STDERR "%20s--check-roundabouts=%s\n",          ' ', $check_roundabouts          ? 'ON'          :'OFF';
+    printf STDERR "%20s--check-route-ref=%s\n",            ' ', $check_route_ref            ? 'ON'          :'OFF';
+    printf STDERR "%20s--check-sequence=%s\n",             ' ', $check_sequence             ? 'ON'          :'OFF';
+    printf STDERR "%20s--check-stop-position=%s\n",        ' ', $check_stop_position        ? 'ON'          :'OFF';
+    printf STDERR "%20s--check-version=%s\n",              ' ', $check_version              ? 'ON'          :'OFF';
+    printf STDERR "%20s--coloured-sketchline=%s\n",        ' ', $coloured_sketchline        ? 'ON'          :'OFF';
+    printf STDERR "%20s--expect-network-long=%s\n",        ' ', $expect_network_long        ? 'ON'          :'OFF';
+    printf STDERR "%20s--expect-network-long-as='%s'\n",   ' ', $expect_network_long_as     ? $expect_network_long_as      : '';
+    printf STDERR "%20s--expect-network-long-for='%s'\n",  ' ', $expect_network_long_for    ? $expect_network_long_for     : '';
+    printf STDERR "%20s--expect-network-short=%s\n",       ' ', $expect_network_short       ? 'ON'          :'OFF';
+    printf STDERR "%20s--expect-network-short-as='%s'\n",  ' ', $expect_network_short_as    ? $expect_network_short_as     : '';
+    printf STDERR "%20s--expect-network-short-for='%s'\n", ' ', $expect_network_short_for   ? $expect_network_short_for    : '';
+    printf STDERR "%20s--max-error='%s'\n",                ' ', $max_error                  ? $max_error                   : '';
+    printf STDERR "%20s--multiple-ref-type-entries='%s'\n",' ', $multiple_ref_type_entries  ? $multiple_ref_type_entries   : '';
+    printf STDERR "%20s--network-long-regex='%s'\n",       ' ', $network_long_regex         ? $network_long_regex          : '';
+    printf STDERR "%20s--network-short-regex='%s'\n",      ' ', $network_short_regex        ? $network_short_regex         : '';
+    printf STDERR "%20s--operator-regex='%s'\n",           ' ', $operator_regex             ? $operator_regex              : '';
+    printf STDERR "%20s--positive-notes=%s\n",             ' ', $positive_notes             ? 'ON'          :'OFF';
+    printf STDERR "%20s--ptv1-compatibility='%s'\n",       ' ', $ptv1_compatibility         ? $ptv1_compatibility          : '';
+    printf STDERR "%20s--relaxed-begin-end-for='%s'\n",    ' ', $relaxed_begin_end_for      ? $relaxed_begin_end_for       : '';
+    printf STDERR "%20s--strict-network=%s\n",             ' ', $strict_network             ? 'ON'          :'OFF';
+    printf STDERR "%20s--strict-operator=%s\n",            ' ', $strict_operator            ? 'ON'          :'OFF';
+    printf STDERR "%20s--separator='%s'\n",                ' ', $csv_separator              ? $csv_separator               : '';
+    printf STDERR "%20s--or-separator='%s'\n",             ' ', $or_separator               ? $or_separator                : '';
+    printf STDERR "%20s--ref-separator='%s'\n",            ' ', $ref_separator              ? $ref_separator               : '';
+    printf STDERR "%20s--routes-file='%s'\n",              ' ', decode('utf8', $routes_file )  if ( $routes_file                 );
+    printf STDERR "%20s--osm-xml-file='%s'\n",             ' ', decode('utf8', $osm_xml_file ) if ( $osm_xml_file                );
 }
 
 
