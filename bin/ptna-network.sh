@@ -107,6 +107,7 @@ HTML_FILE="$PREFIX-Analysis.html"
 DIFF_FILE="$PREFIX-Analysis.html.diff"
 DIFF_HTML_FILE="$PREFIX-Analysis.diff.html"
 SAVE_FILE="$PREFIX-Analysis.html.save"
+DETAILS_FILE="$PREFIX-Analysis-details.txt"
 
 if [ "$OVERPASS_REUSE_ID" ]
 then
@@ -317,6 +318,8 @@ then
         RESULTS_HTML=""
     fi
 
+    rm -f $WORK_LOC/$DETAILS_FILE
+    
     echo $(date "+%Y-%m-%d %H:%M:%S")  "Updating '$WORK_LOC/$HTML_FILE' to '$RESULTS_LOC'"
     
     if [ -f $WORK_LOC/$HTML_FILE ]
@@ -327,6 +330,12 @@ then
             # different time strings of the analysis
             # only diffs in the analysis result count
             
+            NEW_OSM_Base_Time="$(awk '/OSM-Base Time : .* UTC/ { print $4 "T" $5 "Z"; }' $WORK_LOC/$HTML_FILE)"
+            NEW_Local_OSM_Base_Time="$(TZ=${PTNA_TIMEZONE:-Europe/Berlin} date --date "$NEW_OSM_Base_Time" '+%Y-%m-%d %H:%M:%S %Z' | sed -e 's/ \([+-][0-9]*\)$/ UTC\1/')"
+            
+            echo "NEW_DATE_UTC=$NEW_OSM_Base_Time"       >> $WORK_LOC/$DETAILS_FILE
+            echo "NEW_DATE_LOC=$NEW_Local_OSM_Base_Time" >> $WORK_LOC/$DETAILS_FILE
+
             if [ $(echo $OVERPASS_QUERY | egrep -c '(data=area)|(data=\[timeout:[0-9]+\];area)') = 1 ]
             then
                 # Overpass-API query includes an area(...), so AREA Time is included in HTML
@@ -359,8 +368,11 @@ then
                 if [ -f "$WORK_LOC/$SAVE_FILE" ]
                 then
                     OLD_OSM_Base_Time="$(awk '/OSM-Base Time : .* UTC/ { print $4 "T" $5 "Z"; }' $WORK_LOC/$SAVE_FILE)"
-                    NEW_OSM_Base_Time="$(awk '/OSM-Base Time : .* UTC/ { print $4 "T" $5 "Z"; }' $WORK_LOC/$HTML_FILE)"
+                    OLD_Local_OSM_Base_Time="$(TZ=${PTNA_TIMEZONE:-Europe/Berlin} date --date "$OLD_OSM_Base_Time" '+%Y-%m-%d %H:%M:%S %Z' | sed -e 's/ \([+-][0-9]*\)$/ UTC\1/')"
                     
+                    echo "OLD_DATE_UTC=$OLD_OSM_Base_Time"       >> $WORK_LOC/$DETAILS_FILE
+                    echo "OLD_DATE_LOC=$OLD_Local_OSM_Base_Time" >> $WORK_LOC/$DETAILS_FILE
+
                     if [ "$NEW_OSM_Base_Time" = "$OLD_OSM_Base_Time" ]
                     then
                         # we analyzed the same XML data again, so every diff line counts
@@ -383,7 +395,7 @@ then
                     
                     if [ -n "$(which htmldiff.pl)" ]
                     then
-                        if [ -f "$WORK_LOC/$DIFF_FILE" ]
+                        if [ -f "$WORK_LOC/$SAVE_FILE" ]
                         then
                             htmldiff.pl -c $WORK_LOC/$SAVE_FILE $WORK_LOC/$HTML_FILE > $WORK_LOC/$DIFF_HTML_FILE 
                         else
@@ -397,14 +409,12 @@ then
                         then
                             echo $(date "+%Y-%m-%d %H:%M:%S") "Updating results HTML file '$RESULTS_HTML'"
 
-                            NEW_OSM_Base_Time="$(awk '/OSM-Base Time : .* UTC/ { print $4 "T" $5 "Z"; }' $WORK_LOC/$HTML_FILE)"
-                            NEW_Local_OSM_Base_Time="$(TZ=${PTNA_TIMEZONE:-Europe/Berlin} date --date "$NEW_OSM_Base_Time" '+%Y-%m-%d %H:%M:%S %Z' | sed -e 's/ \([+-][0-9]*\)$/ UTC\1/')"
-    
                             sed -i -e "s/^\(.*$PREFIX-datadate.*\)<time .*\(<.time>.*\)$/\1<time datetime='$NEW_OSM_Base_Time'>$NEW_Local_OSM_Base_Time\2/" \
                                    -e "s/^\(.*$PREFIX-analyzed.*\)<time .*\(<.time>.*\)$/\1<time datetime='$NEW_OSM_Base_Time'>$NEW_Local_OSM_Base_Time\2/" \
                                    -e "s/^\(.*$PREFIX-analyzed.*class=.\)results-analyzed-...\(\".*\)$/\1results-analyzed-new\2/" \
                                    $RESULTS_HTML
                         fi
+                        echo "OLD_OR_NEW=new" >> $WORK_LOC/$DETAILS_FILE
                     else
                         echo $(date "+%Y-%m-%d %H:%M:%S") "no htmldiff.pl tool: no HTML-Diff Analysis page '$HTMLDIFF_FILE'"
 
@@ -412,14 +422,12 @@ then
                         then
                             echo $(date "+%Y-%m-%d %H:%M:%S") "Updating results HTML file '$RESULTS_HTML'"
 
-                            NEW_OSM_Base_Time="$(awk '/OSM-Base Time : / { print $4 "T" $5 "Z"; }' $WORK_LOC/$HTML_FILE)"
-                            NEW_Local_OSM_Base_Time="$(TZ=${PTNA_TIMEZONE:-Europe/Berlin} date --date "$NEW_OSM_Base_Time" '+%Y-%m-%d %H:%M:%S %Z' | sed -e 's/ \([+-][0-9]*\)$/ UTC\1/')"
-    
                             sed -i -e "s/^\(.*$PREFIX-datadate.*\)<time .*\(<.time>.*\)$/\1<time datetime='$NEW_OSM_Base_Time'>$NEW_Local_OSM_Base_Time\2/" \
                                    -e "s/^\(.*$PREFIX-analyzed.*\)<a .*<.a>\(.*\)$/\1\&nbsp;\2/" \
                                    -e "s/^\(.*$PREFIX-analyzed.*class=.\)results-analyzed-...\(\".*\)$/\1results-analyzed-old\2/" \
                                    $RESULTS_HTML
                         fi
+                        echo "OLD_OR_NEW=old" >> $WORK_LOC/$DETAILS_FILE
                     fi
                 else
                     echo $(date "+%Y-%m-%d %H:%M:%S") "No relevant changes on '$HTML_FILE'"
@@ -428,13 +436,11 @@ then
                     then
                         echo $(date "+%Y-%m-%d %H:%M:%S") "Updating results HTML file '$RESULTS_HTML'"
 
-                        NEW_OSM_Base_Time="$(awk '/OSM-Base Time : / { print $4 "T" $5 "Z"; }' $WORK_LOC/$HTML_FILE)"
-                        NEW_Local_OSM_Base_Time="$(TZ=${PTNA_TIMEZONE:-Europe/Berlin} date --date "$NEW_OSM_Base_Time" '+%Y-%m-%d %H:%M:%S %Z' | sed -e 's/ \([+-][0-9]*\)$/ UTC\1/')"
-    
                         sed -i -e "s/^\(.*$PREFIX-datadate.*\)<time .*\(<.time>.*\)$/\1<time datetime='$NEW_OSM_Base_Time'>$NEW_Local_OSM_Base_Time\2/" \
                                -e "s/^\(.*$PREFIX-analyzed.*class=.\)results-analyzed-...\(\".*\)$/\1results-analyzed-old\2/" \
                                $RESULTS_HTML
                     fi
+                    echo "OLD_OR_NEW=old" >> $WORK_LOC/$DETAILS_FILE
                 fi
             else
                 echo $(date "+%Y-%m-%d %H:%M:%S") "Target location $RESULTS_LOC does not exist/could not be created"
