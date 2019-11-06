@@ -370,9 +370,6 @@ then
                     OLD_OSM_Base_Time="$(awk '/OSM-Base Time : .* UTC/ { print $4 "T" $5 "Z"; }' $WORK_LOC/$SAVE_FILE)"
                     OLD_Local_OSM_Base_Time="$(TZ=${PTNA_TIMEZONE:-Europe/Berlin} date --date "$OLD_OSM_Base_Time" '+%Y-%m-%d %H:%M:%S %Z' | sed -e 's/ \([+-][0-9]*\)$/ UTC\1/')"
                     
-                    echo "OLD_DATE_UTC=$OLD_OSM_Base_Time"       >> $WORK_LOC/$DETAILS_FILE
-                    echo "OLD_DATE_LOC=$OLD_Local_OSM_Base_Time" >> $WORK_LOC/$DETAILS_FILE
-
                     if [ "$NEW_OSM_Base_Time" = "$OLD_OSM_Base_Time" ]
                     then
                         # we analyzed the same XML data again, so every diff line counts
@@ -414,7 +411,9 @@ then
                                    -e "s/^\(.*$PREFIX-analyzed.*class=.\)results-analyzed-...\(\".*\)$/\1results-analyzed-new\2/" \
                                    $RESULTS_HTML
                         fi
-                        echo "OLD_OR_NEW=new" >> $WORK_LOC/$DETAILS_FILE
+                        echo "OLD_DATE_UTC=$NEW_OSM_Base_Time"       >> $WORK_LOC/$DETAILS_FILE
+                        echo "OLD_DATE_LOC=$NEW_Local_OSM_Base_Time" >> $WORK_LOC/$DETAILS_FILE
+                        echo "OLD_OR_NEW=new"                        >> $WORK_LOC/$DETAILS_FILE
                     else
                         echo $(date "+%Y-%m-%d %H:%M:%S") "no htmldiff.pl tool: no HTML-Diff Analysis page '$HTMLDIFF_FILE'"
 
@@ -427,6 +426,8 @@ then
                                    -e "s/^\(.*$PREFIX-analyzed.*class=.\)results-analyzed-...\(\".*\)$/\1results-analyzed-old\2/" \
                                    $RESULTS_HTML
                         fi
+                        echo "OLD_DATE_UTC="  >> $WORK_LOC/$DETAILS_FILE
+                        echo "OLD_DATE_LOC="  >> $WORK_LOC/$DETAILS_FILE
                         echo "OLD_OR_NEW=old" >> $WORK_LOC/$DETAILS_FILE
                     fi
                 else
@@ -440,7 +441,9 @@ then
                                -e "s/^\(.*$PREFIX-analyzed.*class=.\)results-analyzed-...\(\".*\)$/\1results-analyzed-old\2/" \
                                $RESULTS_HTML
                     fi
-                    echo "OLD_OR_NEW=old" >> $WORK_LOC/$DETAILS_FILE
+                    echo "OLD_DATE_UTC=$OLD_OSM_Base_Time"       >> $WORK_LOC/$DETAILS_FILE
+                    echo "OLD_DATE_LOC=$OLD_Local_OSM_Base_Time" >> $WORK_LOC/$DETAILS_FILE
+                    echo "OLD_OR_NEW=old"                        >> $WORK_LOC/$DETAILS_FILE
                 fi
             else
                 echo $(date "+%Y-%m-%d %H:%M:%S") "Target location $RESULTS_LOC does not exist/could not be created"
