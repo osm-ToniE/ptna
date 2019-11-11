@@ -7,13 +7,11 @@
 if [ -z "$PTNA_TARGET_LOC"     -o \
      -z "$PTNA_RESULTS_LOC"    -o \
      -z "$PTNA_NETWORKS_LOC"   -o \
-     -z "$PTNA_RESULTS_HTML"   -o \
      -z "$PTNA_WORK_LOC"            ]
 then
     echo " ...unset global variable(s)"
     [ -z "$PTNA_TARGET_LOC"       ] && echo "Please specify: PTNA_TARGET_LOC as environment variable outside the tools"
     [ -z "$PTNA_RESULTS_LOC"      ] && echo "Please specify: PTNA_RESULTS_LOC as environment variable outside the tools"
-    [ -z "$PTNA_RESULTS_HTML"     ] && echo "Please specify: PTNA_RESULTS_HTML as environment variable outside the tools"
     [ -z "$PTNA_NETWORKS_LOC"     ] && echo "Please specify: PTNA_NETWORKS_LOC as environment variable outside the tools"
     [ -z "$PTNA_WORK_LOC"         ] && echo "Please specify: PTNA_WORK_LOC as environment variable outside the tools"
     echo "... terminating"
@@ -89,11 +87,6 @@ SUB_DIR=${PREFIX/-//}
 SUB_DIR=${SUB_DIR/-//}
 # SUB_DIR=FR/IDF/entre-seine-et-foret --> changed into in SUB_DIR=FR/IDF
 SUB_DIR="${SUB_DIR%/*}"
-
-# on the web, the overview results HTML file might be
-# $PTNA_TARGET_LOC/$PTNA_RESULTS_LOC/$COUNTRY_DIR/$PTNA_RESULTS_HTML or
-# $PTNA_TARGET_LOC/$PTNA_RESULTS_LOC/PTNA_RESULTS_HTML
-# check in this order, which one exists
 
 COUNTRY_DIR="${PREFIX%%-*}"
 
@@ -308,16 +301,6 @@ if [ "$updateresult" = "true" ]
 then
     RESULTS_LOC="$PTNA_TARGET_LOC/$PTNA_RESULTS_LOC/$SUB_DIR"
     
-    if [ -f "$PTNA_TARGET_LOC/$PTNA_RESULTS_LOC/$COUNTRY_DIR/$PTNA_RESULTS_HTML" ]
-    then
-        RESULTS_HTML="$PTNA_TARGET_LOC/$PTNA_RESULTS_LOC/$COUNTRY_DIR/$PTNA_RESULTS_HTML"
-    elif [ -f $PTNA_TARGET_LOC/$PTNA_RESULTS_LOC/$PTNA_RESULTS_HTML ]
-    then
-        RESULTS_HTML="$PTNA_TARGET_LOC/$PTNA_RESULTS_LOC/$PTNA_RESULTS_HTML"
-    else
-        RESULTS_HTML=""
-    fi
-
     echo "REGION_NAME=$PTNA_WWW_REGION_NAME"         >  $WORK_LOC/$DETAILS_FILE
     echo "REGION_LINK=$PTNA_WWW_REGION_LINK"         >> $WORK_LOC/$DETAILS_FILE
     echo "NETWORK_NAME=$PTNA_WWW_NETWORK_NAME"       >> $WORK_LOC/$DETAILS_FILE
@@ -409,30 +392,14 @@ then
                         echo $(date "+%Y-%m-%d %H:%M:%S") "Copying '$WORK_LOC/$DIFF_HTML_FILE' to '$RESULTS_LOC'"
                         cp $WORK_LOC/$DIFF_HTML_FILE $RESULTS_LOC
 
-                        if [ -n "$RESULTS_HTML" ]
-                        then
-                            echo $(date "+%Y-%m-%d %H:%M:%S") "Updating results HTML file '$RESULTS_HTML'"
-
-                            sed -i -e "s/^\(.*$PREFIX-datadate.*\)<time .*\(<.time>.*\)$/\1<time datetime='$NEW_OSM_Base_Time'>$NEW_Local_OSM_Base_Time\2/" \
-                                   -e "s/^\(.*$PREFIX-analyzed.*\)<time .*\(<.time>.*\)$/\1<time datetime='$NEW_OSM_Base_Time'>$NEW_Local_OSM_Base_Time\2/" \
-                                   -e "s/^\(.*$PREFIX-analyzed.*class=.\)results-analyzed-...\(\".*\)$/\1results-analyzed-new\2/" \
-                                   $RESULTS_HTML
-                        fi
+                        echo $(date "+%Y-%m-%d %H:%M:%S") "Updating analysis details file '$WORK_LOC/$DETAILS_FILE' old date = new"
                         echo "OLD_DATE_UTC=$NEW_OSM_Base_Time"       >> $WORK_LOC/$DETAILS_FILE
                         echo "OLD_DATE_LOC=$NEW_Local_OSM_Base_Time" >> $WORK_LOC/$DETAILS_FILE
                         echo "OLD_OR_NEW=new"                        >> $WORK_LOC/$DETAILS_FILE
                     else
                         echo $(date "+%Y-%m-%d %H:%M:%S") "no htmldiff.pl tool: no HTML-Diff Analysis page '$HTMLDIFF_FILE'"
 
-                        if [ -n "$RESULTS_HTML" ]
-                        then
-                            echo $(date "+%Y-%m-%d %H:%M:%S") "Updating results HTML file '$RESULTS_HTML'"
-
-                            sed -i -e "s/^\(.*$PREFIX-datadate.*\)<time .*\(<.time>.*\)$/\1<time datetime='$NEW_OSM_Base_Time'>$NEW_Local_OSM_Base_Time\2/" \
-                                   -e "s/^\(.*$PREFIX-analyzed.*\)<a .*<.a>\(.*\)$/\1\&nbsp;\2/" \
-                                   -e "s/^\(.*$PREFIX-analyzed.*class=.\)results-analyzed-...\(\".*\)$/\1results-analyzed-old\2/" \
-                                   $RESULTS_HTML
-                        fi
+                        echo $(date "+%Y-%m-%d %H:%M:%S") "Updating analysis details file '$WORK_LOC/$DETAILS_FILE' old date = empty"
                         echo "OLD_DATE_UTC="  >> $WORK_LOC/$DETAILS_FILE
                         echo "OLD_DATE_LOC="  >> $WORK_LOC/$DETAILS_FILE
                         echo "OLD_OR_NEW=old" >> $WORK_LOC/$DETAILS_FILE
@@ -440,14 +407,7 @@ then
                 else
                     echo $(date "+%Y-%m-%d %H:%M:%S") "No relevant changes on '$HTML_FILE'"
 
-                    if [ -n "$RESULTS_HTML" ]
-                    then
-                        echo $(date "+%Y-%m-%d %H:%M:%S") "Updating results HTML file '$RESULTS_HTML'"
-
-                        sed -i -e "s/^\(.*$PREFIX-datadate.*\)<time .*\(<.time>.*\)$/\1<time datetime='$NEW_OSM_Base_Time'>$NEW_Local_OSM_Base_Time\2/" \
-                               -e "s/^\(.*$PREFIX-analyzed.*class=.\)results-analyzed-...\(\".*\)$/\1results-analyzed-old\2/" \
-                               $RESULTS_HTML
-                    fi
+                    echo $(date "+%Y-%m-%d %H:%M:%S") "Updating analysis details file '$WORK_LOC/$DETAILS_FILE' old date = old"
                     echo "OLD_DATE_UTC=$OLD_OSM_Base_Time"       >> $WORK_LOC/$DETAILS_FILE
                     echo "OLD_DATE_LOC=$OLD_Local_OSM_Base_Time" >> $WORK_LOC/$DETAILS_FILE
                     echo "OLD_OR_NEW=old"                        >> $WORK_LOC/$DETAILS_FILE
