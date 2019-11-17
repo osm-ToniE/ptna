@@ -534,7 +534,7 @@ sub InitMessageStrings {
     $MessageList[$i]->{'option'}                 = "--check-sequence";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
-    $MessageList[$i]->{'image'}                  = "";
+    $MessageList[$i]->{'image'}                  = "message-has_gaps.png";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
@@ -552,7 +552,7 @@ sub InitMessageStrings {
     $MessageList[$i]->{'option'}                 = "";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
-    $MessageList[$i]->{'image'}                  = "";
+    $MessageList[$i]->{'image'}                  = "message-incorrect_order_of_stop_platform_and_way.png";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
@@ -624,7 +624,7 @@ sub InitMessageStrings {
     $MessageList[$i]->{'option'}                 = "--check-sequence";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
-    $MessageList[$i]->{'image'}                  = "";
+    $MessageList[$i]->{'image'}                  = "message-roundabout_appears_twice.png";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
@@ -741,7 +741,7 @@ sub InitMessageStrings {
     $MessageList[$i]->{'option'}                 = "--check-sequence";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
-    $MessageList[$i]->{'image'}                  = "";
+    $MessageList[$i]->{'image'}                  = "message-using_oneway_way_in_wrong_direction.png";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;

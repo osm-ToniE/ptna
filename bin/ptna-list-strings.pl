@@ -109,6 +109,8 @@ sub ListMessageStringsDetailsHtml {
     my $descr   = undef;
     my $replace = gettext( "Example" );
     my $opt     = undef;
+    my $img     = undef;
+    my $alt     = undef;
 
     printf STDOUT "    <table id=\"message-table\">\n";
     printf STDOUT "        <thead>\n";
@@ -123,17 +125,29 @@ sub ListMessageStringsDetailsHtml {
     printf STDOUT "        </thead>\n";
     printf STDOUT "        <tbody>\n";
     foreach $key ( sort ( GetMessageKeys() ) ) {
-        $opt   = GetMessageValue( $key, 'option' );
+        $opt   =  GetMessageValue( $key, 'option' );
         $opt   =~ s| --|<br />--|g;
-        $descr = GetMessageValue( $key, 'description' );
+        $descr =  GetMessageValue( $key, 'description' );
         $descr =~ s| \Q$replace\E|<br />\Q$replace\E|g;
+        $img   =  GetMessageValue( $key, 'image' );
+        if ( $img ) {
+            $alt =  $img;
+            $alt =~ s|^message-||;
+            $alt =~ s|\.png$||;
+            $alt =~ s|_| |g;
+            $img = '/img/' . $img;
+        }
         printf STDOUT "            <tr class=\"message-tablerow\">\n";
         printf STDOUT "                <td class=\"message-text\">%s</td>\n",        GetMessageValue( $key, 'message' );
         printf STDOUT "                <td class=\"message-type\">%s</td>\n",        GetMessageValue( $key, 'type' );
         printf STDOUT "                <td class=\"message-option\">%s</td>\n",      $opt;
         printf STDOUT "                <td class=\"message-description\">%s</td>\n", $descr;
         printf STDOUT "                <td class=\"message-fix\">%s</td>\n",         GetMessageValue( $key, 'fix' );
-        printf STDOUT "                <td class=\"message-image\">%s</td>\n",       GetMessageValue( $key, 'image' );
+        if ( $img ) {
+            printf STDOUT "                <td class=\"message-image\"><img src=\"%s\" alt=\"%s\" /></td>\n", $img, $alt;
+        } else {
+            printf STDOUT "                <td class=\"message-image\">&nbsp;</td>\n";
+        }
         printf STDOUT "            </tr>\n";
 
     }
