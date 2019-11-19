@@ -110,7 +110,6 @@ sub ListMessageStringsDetailsHtml {
     my $replace = gettext( "Example" );
     my $opt     = undef;
     my $img     = undef;
-    my $alt     = undef;
 
     printf STDOUT "    <table id=\"message-table\">\n";
     printf STDOUT "        <thead>\n";
@@ -130,13 +129,6 @@ sub ListMessageStringsDetailsHtml {
         $descr =  GetMessageValue( $key, 'description' );
         $descr =~ s| \Q$replace\E|<br />\Q$replace\E|g;
         $img   =  GetMessageValue( $key, 'image' );
-        if ( $img ) {
-            $alt =  $img;
-            $alt =~ s|^message-||;
-            $alt =~ s|\.png$||;
-            $alt =~ s|_| |g;
-            $img = '/img/' . $img;
-        }
         printf STDOUT "            <tr class=\"message-tablerow\">\n";
         printf STDOUT "                <td class=\"message-text\">%s</td>\n",        GetMessageValue( $key, 'message' );
         printf STDOUT "                <td class=\"message-type\">%s</td>\n",        GetMessageValue( $key, 'type' );
@@ -144,7 +136,7 @@ sub ListMessageStringsDetailsHtml {
         printf STDOUT "                <td class=\"message-description\">%s</td>\n", $descr;
         printf STDOUT "                <td class=\"message-fix\">%s</td>\n",         GetMessageValue( $key, 'fix' );
         if ( $img ) {
-            printf STDOUT "                <td class=\"message-image\"><img src=\"%s\" alt=\"%s\" /></td>\n", $img, $alt;
+            printf STDOUT "                <td class=\"message-image\"><img src=\"/img/%s\" alt=\"%s\" title=\"%s\" /></td>\n", $img, GetMessageValue($key,'message'), GetMessageValue($key,'message');
         } else {
             printf STDOUT "                <td class=\"message-image\">&nbsp;</td>\n";
         }
