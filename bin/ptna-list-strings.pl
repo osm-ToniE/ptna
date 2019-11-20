@@ -107,7 +107,8 @@ sub ListMessageStringsDetailsHtml {
 
     my $key     = undef;
     my $descr   = undef;
-    my $replace = gettext( "Example" );
+    my $replace = html_escape(gettext( "Example" ));
+    my $msg     = undef;
     my $opt     = undef;
     my $img     = undef;
 
@@ -124,19 +125,21 @@ sub ListMessageStringsDetailsHtml {
     printf STDOUT "        </thead>\n";
     printf STDOUT "        <tbody>\n";
     foreach $key ( sort ( GetMessageKeys() ) ) {
-        $opt   =  GetMessageValue( $key, 'option' );
-        $opt   =~ s| --|<br />--|g;
-        $descr =  GetMessageValue( $key, 'description' );
+        $msg   =  html_escape( GetMessageValue( $key, 'message'     ) );
+        $opt   =  html_escape( GetMessageValue( $key, 'option'      ) );
+        $opt   =~ s| &#045;&#045;|<br />&#045;&#045;|g;
+        $descr =  html_escape( GetMessageValue( $key, 'description' ) );
         $descr =~ s| \Q$replace\E|<br />\Q$replace\E|g;
         $img   =  GetMessageValue( $key, 'image' );
         printf STDOUT "            <tr class=\"message-tablerow\">\n";
-        printf STDOUT "                <td class=\"message-text\">%s</td>\n",        GetMessageValue( $key, 'message' );
-        printf STDOUT "                <td class=\"message-type\">%s</td>\n",        GetMessageValue( $key, 'type' );
+        printf STDOUT "                <td class=\"message-text\">%s</td>\n",        $msg;
+        printf STDOUT "                <td class=\"message-type\">%s</td>\n",        html_escape( GetMessageValue( $key, 'type' ) );
         printf STDOUT "                <td class=\"message-option\">%s</td>\n",      $opt;
         printf STDOUT "                <td class=\"message-description\">%s</td>\n", $descr;
-        printf STDOUT "                <td class=\"message-fix\">%s</td>\n",         GetMessageValue( $key, 'fix' );
+        printf STDOUT "                <td class=\"message-fix\">%s</td>\n",         html_escape( GetMessageValue( $key, 'fix' ) );
         if ( $img ) {
-            printf STDOUT "                <td class=\"message-image\"><img src=\"/img/%s\" alt=\"%s\" title=\"%s\" /></td>\n", $img, GetMessageValue($key,'message'), GetMessageValue($key,'message');
+            printf STDOUT "                <td class=\"message-image\">";
+            printf STDOUT                      "<div class=\"message-tooltip\"><img src=\"/img/%s\" alt=\"%s\" /><span class=\"message-tooltiptext\">%s</span></div></td>\n", $img, $msg, $msg;
         } else {
             printf STDOUT "                <td class=\"message-image\">&nbsp;</td>\n";
         }
@@ -238,6 +241,30 @@ sub gettext {
 sub ngettext {
     return decode( 'utf8', Locale::gettext::ngettext( @_ ) );
 }
+
+
+#############################################################################################
+
+sub html_escape {
+    my $text = shift;
+    if ( $text ) {
+        $text =~ s/&/&amp;/g;
+        $text =~ s/</&lt;/g;
+        $text =~ s/>/&gt;/g;
+        $text =~ s/"/&quot;/g;
+        $text =~ s/'/&#039;/g;
+        $text =~ s/--/&#045;&#045;/g;
+        #$text =~ s/Ä/&Auml;/g;
+        #$text =~ s/ä/&auml;/g;
+        #$text =~ s/Ö/&Ouml;/g;
+        #$text =~ s/ö/&ouml;/g;
+        #$text =~ s/Ü/&Uuml;/g;
+        #$text =~ s/ü/&uuml;/g;
+        #$text =~ s/ß/&szlig;/g;
+    }
+    return $text;
+}
+
 
 
 
