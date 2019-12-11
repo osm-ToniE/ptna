@@ -183,6 +183,9 @@
     <tag k='motor_vehicle' v='no' />
     <tag k='psv' v='yes' />
   </node>
+  <node id='-152376' action='modify' lat='48.72039305377' lon='13.53183767612'>
+    <tag k='barrier' v='sally_port' />
+  </node>
   <way id='-152334' action='modify'>
     <nd ref='-152077' />
     <nd ref='-152059' />
@@ -192,6 +195,7 @@
   </way>
   <way id='-152335' action='modify'>
     <nd ref='-152061' />
+    <nd ref='-152376' />
     <nd ref='-152065' />
     <tag k='highway' v='tertiary' />
     <tag k='name' v='Way 1' />
