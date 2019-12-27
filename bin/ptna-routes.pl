@@ -2005,7 +2005,9 @@ sub analyze_relation {
                 if ( $tag =~ m/^\Q$specialtag\E/i ) {
                     if ( $relation_ptr->{'tag'}->{$tag} ) {
                         $reporttype = ( $specialtag2reporttype{$specialtag} ) ? $specialtag2reporttype{$specialtag} : '__notes__';
-                        if ( $tag =~ m/^note$/i && $relation_ptr->{'tag'}->{$tag} =~ m|^https{0,1}://wiki.openstreetmap.org\S+\s*[;,_+#\.\-]*\s*(.*)| ){
+                        if ( $tag =~ m/^note$/i && $relation_ptr->{'tag'}->{$tag} =~ m|^https{0,1}://wiki.openstreetmap.org\S+\s*[;,_+#\.\-]*\s*(.*)| ) {
+                            unshift( @{$relation_ptr->{$reporttype}}, sprintf("'%s' ~ '%s'", $tag, html_escape($1)) )  if ( $1 );
+                        } elsif ( $tag =~ m/^note$/i && $relation_ptr->{'tag'}->{$tag} =~ m|^https{0,1}://ptna.openstreetmap.de\S+\s*[;,_+#\.\-]*\s*(.*)| ) {
                             unshift( @{$relation_ptr->{$reporttype}}, sprintf("'%s' ~ '%s'", $tag, html_escape($1)) )  if ( $1 );
                         } else {
                             unshift( @{$relation_ptr->{$reporttype}}, sprintf("'%s' = '%s'", $tag, html_escape($relation_ptr->{'tag'}->{$tag})) )
