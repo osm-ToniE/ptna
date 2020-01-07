@@ -5373,7 +5373,7 @@ sub printTableSubHeader {
     }
 
     if ( $hash{'Comment'}  ) {
-        $csv_text .= sprintf( "%s: %s; ", ( $column_name{'Comment'}  ? $column_name{'Comment'}  : 'Comment' ),  html_escape($hash{'Comment'})  );
+        $csv_text .= sprintf( "%s: %s; ", ( $column_name{'Comment'}  ? $column_name{'Comment'}  : 'Comment' ),  wiki2html( html_escape( $hash{'Comment'} ) )  );
         $csv_text =~ s|!([^!]+)!|<span class=\"attention\">$1</span>|;
     }
     $csv_text .= sprintf( "%s: %s; ", ( $column_name{'From'}     ? $column_name{'From'}     : 'From' ),     html_escape($hash{'From'})     )  if ( $hash{'From'}     );
