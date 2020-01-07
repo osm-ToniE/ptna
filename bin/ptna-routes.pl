@@ -955,7 +955,7 @@ if ( $routes_file ) {
                                     'from'          =>    $relation_ptr->{'tag'}->{'from'},
                                     'via'           =>    $relation_ptr->{'tag'}->{'via'},
                                     'to'            =>    $relation_ptr->{'tag'}->{'to'},
-                                    'PTv'           =>    ($relation_ptr->{'tag'}->{'public_transport:version'} ? $relation_ptr->{'tag'}->{'public_transport:version'} : '?'),
+                                    'PTv'           =>    $relation_ptr->{'tag'}->{'public_transport:version'},
                                     'issues'        =>    join( '__separator__', @{$relation_ptr->{'__issues__'}} ),
                                     'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}}  )
                                   );
@@ -1052,7 +1052,7 @@ if ( $routes_file ) {
                             'from'          =>    $relation_ptr->{'tag'}->{'from'},
                             'via'           =>    $relation_ptr->{'tag'}->{'via'},
                             'to'            =>    $relation_ptr->{'tag'}->{'to'},
-                            'PTv'           =>    ($relation_ptr->{'tag'}->{'public_transport:version'} ? $relation_ptr->{'tag'}->{'public_transport:version'} : '?'),
+                            'PTv'           =>    $relation_ptr->{'tag'}->{'public_transport:version'},
                             'issues'        =>    join( '__separator__', @{$relation_ptr->{'__issues__'}} ),
                             'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}} )
                           );
@@ -1128,7 +1128,7 @@ if ( scalar(@line_refs) ) {
                                         'from'          =>    $relation_ptr->{'tag'}->{'from'},
                                         'via'           =>    $relation_ptr->{'tag'}->{'via'},
                                         'to'            =>    $relation_ptr->{'tag'}->{'to'},
-                                        'PTv'           =>    ($relation_ptr->{'tag'}->{'public_transport:version'} ? $relation_ptr->{'tag'}->{'public_transport:version'} : '?'),
+                                        'PTv'           =>    $relation_ptr->{'tag'}->{'public_transport:version'},
                                         'issues'        =>    join( '__separator__', @{$relation_ptr->{'__issues__'}} ),
                                         'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}} )
                                       );
@@ -1182,7 +1182,7 @@ if ( scalar(@route_types) ) {
                             'from'          =>    $relation_ptr->{'tag'}->{'from'},
                             'via'           =>    $relation_ptr->{'tag'}->{'via'},
                             'to'            =>    $relation_ptr->{'tag'}->{'to'},
-                            'PTv'           =>    ($relation_ptr->{'tag'}->{'public_transport:version'} ? $relation_ptr->{'tag'}->{'public_transport:version'} : '?'),
+                            'PTv'           =>    $relation_ptr->{'tag'}->{'public_transport:version'},
                             'issues'        =>    join( '__separator__', @{$relation_ptr->{'__issues__'}} ),
                             'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}} )
                           );
