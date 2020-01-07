@@ -2259,10 +2259,10 @@ sub analyze_route_master_relation {
         } else {
             ; #push( @{$relation_ptr->{'__notes__'}}, sprintf("'public_transport:version' = '%s'",html_escape($relation_ptr->{'tag'}->{'public_transport:version'})) )    if ( $positive_notes );
         }
-    } else {
-        $notes_string = gettext( "'public_transport:version' is not set" );
-        push( @{$relation_ptr->{'__notes__'}}, $notes_string )        if ( $check_version );
-    }
+    } # else {
+    #    $notes_string = gettext( "'public_transport:version' is not set" );
+    #    push( @{$relation_ptr->{'__notes__'}}, $notes_string )        if ( $check_version );
+    #}
 
     return $return_code;
 }
@@ -2322,10 +2322,10 @@ sub analyze_route_relation {
             } else {
                 #push( @{$relation_ptr->{'__notes__'}}, sprintf("'public_transport:version' = '%s'",html_escape($relation_ptr->{'tag'}->{'public_transport:version'})) )    if ( $positive_notes );
             }
-        } else {
-            $notes_string = gettext( "'public_transport:version' is not set" );
-            push( @{$relation_ptr->{'__notes__'}}, $notes_string )        if ( $check_version );
-        }
+        } #else {
+        #    $notes_string = gettext( "'public_transport:version' is not set" );
+        #    push( @{$relation_ptr->{'__notes__'}}, $notes_string )        if ( $check_version );
+        #}
     }
 
     #
