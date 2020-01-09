@@ -1,0 +1,50 @@
+#!/bin/bash
+
+ERRORS=0
+
+#######################################################################
+# 
+# script to test PTv1 compatibility
+
+if [ -n "$1" ]
+then
+    TESTFILE=$1
+    TEST=$(basename $TESTFILE .osm)   # strip '.osm' from end of file name (if exists)
+    TEST=$(basename $TEST     .xml)   # strip '.xml' from end of file name (if exists)
+    
+    ROUTES_OPTION=""
+    if [ -f "$TEST-Routes.txt" ]
+    then
+        ROUTES_OPTION="--routes-file=$TEST-Routes.txt"
+    fi
+
+    ptna-routes.pl --ptv1-compatibility=allow --max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-version --check-motorway-link \
+                   --multiple-ref-type-entries=analyze --positive-notes --coloured-sketchline --verbose --debug --relaxed-begin-end-for=train --network-long-regex='network'\
+                   --test --osm-xml-file=$TESTFILE $ROUTES_OPTION > $TEST.html 2> $TEST.log
+
+    if [ -e $TEST.expect -a -s $TEST.html ]
+    then
+        diff $TEST.expect $TEST.html > $TEST.diff
+    
+        if [ -s $TEST.diff ]
+        then
+            echo -e "failed with diff\t$TEST"
+            ERRORS=$(( $ERRORS + 1 ))
+        else
+            echo -e "passed\t\t\t$TEST"
+        fi
+    else
+        echo -e "failed\t\t\t$TEST"
+        ERRORS=$(( $ERRORS + 1 ))
+    fi
+
+else
+
+    echo -e "failed\t\t\tParameter: 'test file' not sprcified"
+    ERRORS=$(( $ERRORS + 1 ))
+    
+fi
+
+#######################################################################
+
+exit $ERRORS

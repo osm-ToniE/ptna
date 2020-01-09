@@ -473,13 +473,15 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
         #
         if ( $type eq 'route_master' || $type eq 'route' ) {
 
-            $route_type = $RELATIONS{$relation_id}->{'tag'}->{$RELATIONS{$relation_id}->{'tag'}->{'type'}};
+            $route_type   = $RELATIONS{$relation_id}->{'tag'}->{$RELATIONS{$relation_id}->{'tag'}->{'type'}};
+
+            $relation_ptr = undef;
 
             if ( $route_type ) {
 
                 $number_of_route_relations++;
 
-                $relation_ptr = undef;
+                $relation_ptr = $RELATIONS{$relation_id};
 
                 if ( $ref ) {
                     $status = 'keep';
@@ -496,23 +498,23 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
 
                     # match_network() returns either "keep long" or "keep short" or "skip"
                     #
-                    if ( $status =~ m/keep/ ) { $status = match_network(  $RELATIONS{$relation_id}->{'tag'}->{'network'} ); }
+                    if ( $status =~ m/keep/ ) { $status = match_network(  $relation_ptr->{'tag'}->{'network'} ); }
 
                     if ( $status =~ m/keep/ ) {
                         # match_operator() returns either "keep" or "skip"
                         #
-                        $status = match_operator( $RELATIONS{$relation_id}->{'tag'}->{'operator'} );
+                        $status = match_operator( $relation_ptr->{'tag'}->{'operator'} );
 
                         if ( $status =~ m/keep/ ) {
                             if ( $RELATIONS{$relation_id}->{'tag'}->{'network'} ) {
-                                $used_networks{$RELATIONS{$relation_id}->{'tag'}->{'network'}}->{$relation_id} = 1;
+                                $used_networks{$relation_ptr->{'tag'}->{'network'}}->{$relation_id} = 1;
                             }
                             else {
                                 $used_networks{'__unset_network__'}->{$relation_id} = 1;
                             }
                         } else {
                             if ( $RELATIONS{$relation_id}->{'tag'}->{'operator'} ) {
-                                $unused_operators{$RELATIONS{$relation_id}->{'tag'}->{'operator'}}{$relation_id} = 1;
+                                $unused_operators{$relation_ptr->{'tag'}->{'operator'}}{$relation_id} = 1;
                             }
                             else {
                                 $unused_operators{'__unset_operator__'}->{$relation_id} = 1;
@@ -520,7 +522,7 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
                         }
                     } elsif ( $status ne 'well_known' ) {
                         if ( $RELATIONS{$relation_id}->{'tag'}->{'network'} ) {
-                            $unused_networks{$RELATIONS{$relation_id}->{'tag'}->{'network'}}{$relation_id} = 1;
+                            $unused_networks{$relation_ptr->{'tag'}->{'network'}}{$relation_id} = 1;
                         }
                         else {
                             $unused_networks{'__unset_network__'}->{$relation_id} = 1;
@@ -534,7 +536,14 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
                     #
                     if ( $status =~ m/keep/ ) { $status = match_ref_and_pt_type( $ref, $route_type ); }
 
-                    printf STDERR "%-15s: ref=%s\ttype=%s\troute_type=%s\tnetwork=%s\toperator=%s\tRelation: %d\n", $status, $ref, $type, $route_type, $RELATIONS{$relation_id}->{'tag'}->{'network'}, $RELATIONS{$relation_id}->{'tag'}->{'operator'}, $relation_id   if ( $debug );
+                    if ( $debug ) {
+                        printf STDERR "%-15s: ref=%s", $status, $ref;
+                        printf STDERR "\ttype=%s", $type;
+                        printf STDERR "\troute_type=%s", $route_type;
+                        printf STDERR "\tnetwork=%s", $relation_ptr->{'tag'}->{'network'};
+                        printf STDERR "\toperator=%s", ($relation_ptr->{'tag'}->{'operator'} || '');
+                        printf STDERR "\tRelation: %d\n", $relation_id;
+                    }
 
                     $section = undef;
                     if ( $status =~ m/(positive|negative|skip|other|suspicious|well_known)/ ) {
@@ -544,8 +553,7 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
                     if ( $section ) {
                         if ( $section eq 'positive' || $section eq 'negative' ) {
                             my $ue_ref = $ref;
-                            $PT_relations_with_ref{$section}->{$ue_ref}->{$type}->{$route_type}->{$relation_id} = $RELATIONS{$relation_id};
-                            $relation_ptr = $RELATIONS{$relation_id};
+                            $PT_relations_with_ref{$section}->{$ue_ref}->{$type}->{$route_type}->{$relation_id} = $relation_ptr;
                         } elsif ( $section eq 'other' || $section eq 'suspicious' ) {
                             $suspicious_relations{$relation_id} = 1;
                         }
@@ -559,35 +567,34 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
                     if ( $status eq 'keep' || $status eq 'suspicious' ) {
                         # only supported route types or their typos must have 'ref' set
 
-                        $PT_relations_without_ref{$route_type}->{$relation_id} = $RELATIONS{$relation_id};
-                        $relation_ptr = $RELATIONS{$relation_id};
+                        $PT_relations_without_ref{$route_type}->{$relation_id} = $relation_ptr;
 
                         # match_network() returns either "keep long" or "keep short" or "skip"
                         #
-                        my $status = match_network( $RELATIONS{$relation_id}->{'tag'}->{'network'} );
+                        my $status = match_network( $relation_ptr->{'tag'}->{'network'} );
                         if ( $status =~ m/keep/ ) {
                             # match_operator() returns either "keep" or "skip"
                             #
-                            $status = match_operator( $RELATIONS{$relation_id}->{'tag'}->{'operator'} );
+                            $status = match_operator( $relation_ptr->{'tag'}->{'operator'} );
 
                             if ( $status =~ m/keep/ ) {
-                                if ( $RELATIONS{$relation_id}->{'tag'}->{'network'} ) {
-                                    $used_networks{$RELATIONS{$relation_id}->{'tag'}->{'network'}}->{$relation_id} = 1;
+                                if ( $relation_ptr->{'tag'}->{'network'} ) {
+                                    $used_networks{$relation_ptr->{'tag'}->{'network'}}->{$relation_id} = 1;
                                 }
                                 else {
                                     $used_networks{'__unset_network__'}->{$relation_id} = 1;
                                 }
                             } else {
-                                if ( $RELATIONS{$relation_id}->{'tag'}->{'operator'} ) {
-                                    $unused_operators{$RELATIONS{$relation_id}->{'tag'}->{'operator'}}{$relation_id} = 1;
+                                if ( $relation_ptr->{'tag'}->{'operator'} ) {
+                                    $unused_operators{$relation_ptr->{'tag'}->{'operator'}}{$relation_id} = 1;
                                 }
                                 else {
                                     $unused_operators{'__unset_operator__'}->{$relation_id} = 1;
                                 }
                             }
                         } else {
-                            if ( $RELATIONS{$relation_id}->{'tag'}->{'network'} ) {
-                                $unused_networks{$RELATIONS{$relation_id}->{'tag'}->{'network'}}->{$relation_id} = 1;
+                            if ( $relation_ptr->{'tag'}->{'network'} ) {
+                                $unused_networks{$relation_ptr->{'tag'}->{'network'}}->{$relation_id} = 1;
                             } else {
                                 $unused_networks{'__unset_network__'}->{$relation_id} = 1;
                             }
@@ -1485,6 +1492,26 @@ sub SearchMatchingRelations {
         printf STDERR "%s SearchMatchingRelations(): no Search List specified\n", get_time();
     }
 
+    foreach my $rel_id ( keys( %selected_routes ) ) {
+
+        # route_masters of selected routes also match, but check some basic settings first
+
+        foreach my $route_master_rel_id ( keys ( %{$RELATIONS{$rel_id}->{'member_of_route_master'}} ) ) {
+            printf STDERR "%s Route-Master Relations of selected Routes also match: %s - Master %s\n", get_time(), $rel_id, $route_master_rel_id   if ( $debug );
+            if ( !exists($selected_route_masters{$route_master_rel_id})                         &&
+                 $RELATIONS{$route_master_rel_id}                                               &&
+                 $RELATIONS{$route_master_rel_id}->{'tag'}                                      &&
+                 $RELATIONS{$route_master_rel_id}->{'tag'}->{'type'}                            &&
+                 $RELATIONS{$route_master_rel_id}->{'tag'}->{'type'}  eq 'route_master'         &&
+                 $RELATIONS{$route_master_rel_id}->{'tag'}->{'route_master'}                    &&
+                 $RELATIONS{$route_master_rel_id}->{'tag'}->{'route_master'} eq $ExpRouteType   &&
+                 $RELATIONS{$route_master_rel_id}->{'tag'}->{'ref'}                             &&
+                 $ExpRefHash{$RELATIONS{$route_master_rel_id}->{'tag'}->{'ref'}}                    ) {
+                printf STDERR "Add route_master %s of route %s\n", $route_master_rel_id, $rel_id   if ( $debug );
+                $selected_route_masters{$route_master_rel_id} = 1;
+            }
+        }
+    }
     foreach my $rel_id ( keys( %selected_route_masters ) ) {
 
         # members of selected route_masters also match, but check some basic settings first
@@ -1508,6 +1535,21 @@ sub SearchMatchingRelations {
 
     map { push( @return_list, $_ ); } sort( { $RELATIONS{$a}->{'__sort_name__'} cmp $RELATIONS{$b}->{'__sort_name__'} } keys( %selected_route_masters ) );
     map { push( @return_list, $_ ); } sort( { $RELATIONS{$a}->{'__sort_name__'} cmp $RELATIONS{$b}->{'__sort_name__'} } keys( %selected_routes        ) );
+
+    if ( $debug ) {
+        map { printf STDERR "SearchMatchingRelations: Rel-ID = %s, type = %s, ref = %s, name = %s\n",
+                                                               $_,
+                                                                          $RELATIONS{$_}->{'tag'}->{'type'},
+                                                                                    $RELATIONS{$_}->{'tag'}->{'ref'},
+                                                                                                $RELATIONS{$_}->{'tag'}->{'name'};
+            } sort( { $RELATIONS{$a}->{'__sort_name__'} cmp $RELATIONS{$b}->{'__sort_name__'} } keys( %selected_route_masters ) );
+        map { printf STDERR "SearchMatchingRelations: Rel-ID = %s, type = %s, ref = %s, name = %s\n",
+                                                               $_,
+                                                                          $RELATIONS{$_}->{'tag'}->{'type'},
+                                                                                    $RELATIONS{$_}->{'tag'}->{'ref'},
+                                                                                                $RELATIONS{$_}->{'tag'}->{'name'};
+            } sort( { $RELATIONS{$a}->{'__sort_name__'} cmp $RELATIONS{$b}->{'__sort_name__'} } keys( %selected_routes ) );
+    }
 
     return ( @return_list );
 }
@@ -2088,7 +2130,7 @@ sub analyze_relation {
                     }
                 }
             }
-            if ( $we_have_a_match == 0 && $network_long_regex && $network_short_regex ) {
+            if ( $we_have_a_match == 0 && ($network_long_regex || $network_short_regex) ) {
                 $issues_string = gettext( "Route has 'network' = '%s' value which is considered as not relevant: %s" );
                 push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($network), printRelationTemplate($relation_id) ) );
                 if ( $positive_notes ) {
@@ -2205,9 +2247,9 @@ sub analyze_relation {
         #
 
         if ( $type eq 'route_master' ) {
-            $return_code = analyze_route_master_relation( $relation_ptr );
+            $return_code = analyze_route_master_relation( $relation_ptr, $relation_id );
         } elsif ( $type eq 'route') {
-            $return_code = analyze_route_relation( $relation_ptr );
+            $return_code = analyze_route_relation( $relation_ptr, $relation_id );
         }
     }
 
@@ -2219,6 +2261,7 @@ sub analyze_relation {
 
 sub analyze_route_master_relation {
     my $relation_ptr    = shift;
+    my $relation_id     = shift;
     my $return_code     = 0;
 
     my $ref                            = $relation_ptr->{'tag'}->{'ref'};
@@ -2272,6 +2315,7 @@ sub analyze_route_master_relation {
 
 sub analyze_route_relation {
     my $relation_ptr    = shift;
+    my $relation_id     = shift;
     my $return_code     = 0;
 
     my $ref                            = $relation_ptr->{'tag'}->{'ref'};
@@ -2358,8 +2402,9 @@ sub analyze_route_relation {
 #############################################################################################
 
 sub analyze_ptv2_route_relation {
-    my $relation_ptr        = shift;
-    my $return_code         = 0;
+    my $relation_ptr    = shift;
+    my $relation_id     = shift;
+    my $return_code     = 0;
 
     my $type                                = $relation_ptr->{'tag'}->{'type'};
     my $route_type                          = $relation_ptr->{'tag'}->{$type};
