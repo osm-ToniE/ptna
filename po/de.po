@@ -1065,7 +1065,7 @@ msgid ""
 "relations shall not represent collections:"
 msgstr ""
 "solche <strong>Sammlungen sind streng genommen Fehler</strong>, da "
-"Relationen keinen Sammlungen darstellen sollen:"
+"Relationen keine Sammlungen darstellen sollen:"
 
 msgid ""
 " <a href=\"https://wiki.openstreetmap.org/wiki/Relations/"
