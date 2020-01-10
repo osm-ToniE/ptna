@@ -246,8 +246,8 @@ msgid ""
 "Route has different 'ref' = '%s' than Route-Master 'ref' = '%s' - this "
 "should be avoided: %s"
 msgstr ""
-"Route hat einen anderen 'ref' = '%s' Wert als der Route-Master 'ref' = '%s "
-"- das sollte vermieden werden': %s"
+"Route hat einen anderen 'ref' = '%s' Wert als der Route-Master 'ref' = '%s' "
+"- das sollte vermieden werden: %s"
 
 #, perl-format
 msgid "Route has not matching 'ref' = '%s': %s"
@@ -1156,7 +1156,7 @@ msgstr ""
 
 msgid ""
 "When the construction works are finished, the key 'highway' is set to its "
-"former or a different value while the key 'construction' gets delete."
+"former or a different value while the key 'construction' gets delet
 msgstr ""
 "Sind die Bauarbeiten beendet, erhält der Schlüssel 'highway' seinen "
 "ursprünglichen Wert zurück oder einen anderen Wert, dabei wird dann der "
