@@ -82,8 +82,9 @@ then
         LOGFILE=${PTNA_WORK_LOC}/ptna-all-networks$LOGFILE_SUFFIX.log
         
         # c == clean the work area
+        # C == clean the XML file
         
-        ptna-all-networks.sh -c > $LOGFILE 2>&1 < /dev/null
+        ptna-all-networks.sh -cC > $LOGFILE 2>&1 < /dev/null
         
         # o == do the overpassapi query and download the data (to work area)
         # g == get the OSM-Wiki data for the routes
@@ -100,13 +101,25 @@ then
             
             sleep 300
             
+            # O == do the overpassapi query only if the downloaded XML data is empty, otherwiese skip the rest
+            #      a == do the analysis (in work area)
+            #      u == update the result from the work area to the location of the web service
+
             ptna-all-networks.sh -Oau >> $LOGFILE 2>&1 < /dev/null
         fi
     
     
         # c == clean the work area
-        
-        ptna-all-networks.sh -c >> $LOGFILE 2>&1 < /dev/null
+        # C == clean the XML file
+
+        if [ "$(date "+%u")" eq 7 ]    # = Sunday
+        then
+            # on Sundays, do not delete the downloaded XML data
+            
+            ptna-all-networks.sh -c >> $LOGFILE 2>&1 < /dev/null
+        else
+            ptna-all-networks.sh -cC >> $LOGFILE 2>&1 < /dev/null
+        fi
         
     else
         echo "directory $PTNA_WORK_LOC does not exist ... terminating"

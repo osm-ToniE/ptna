@@ -32,6 +32,7 @@ while true ; do
     case "$1" in
         -a|--analyze)                       analyze=true                ; shift ;;
         -c|--clean)                         clean=true                  ; shift ;;
+        -C|--clean-xml)                     cleanxml=true               ; shift ;;
         -f|--force-download)                forcedownload=true          ; shift ;;
         -g|--get-routes)                    getroutes=true              ; shift ;;
         -G|--get-talk)                      gettalk=true                ; shift ;;
@@ -142,7 +143,17 @@ fi
 if [ "$clean" = "true" ]
 then
     echo $(date "+%Y-%m-%d %H:%M:%S") "Removing temporary files"
-    rm -f $OSM_XML_FILE_ABSOLUTE $WORK_LOC/$HTML_FILE $WORK_LOC/$DIFF_FILE $WORK_LOC/$DIFF_HTML_FILE $WORK_LOC/$SAVE_FILE
+    rm -f $WORK_LOC/$HTML_FILE $WORK_LOC/$DIFF_FILE $WORK_LOC/$DIFF_HTML_FILE $WORK_LOC/$SAVE_FILE
+fi
+
+#
+# 
+#
+
+if [ "$cleanxml" = "true" ]
+then
+    echo $(date "+%Y-%m-%d %H:%M:%S") "Removing XML file"
+    rm -f $OSM_XML_FILE_ABSOLUTE
 fi
 
 #
