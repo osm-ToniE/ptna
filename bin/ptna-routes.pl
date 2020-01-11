@@ -1320,14 +1320,24 @@ sub match_network {
 
     if ( $network ) {
         if ( $network_long_regex || $network_short_regex ) {
-            if ( $network_long_regex  && $network =~ m/$network_long_regex/ ) {
-                return 'keep long';
-            } elsif ( $network_short_regex && $network =~ m/$network_short_regex/ ) {
-                return 'keep short';
-            } else {
-                printf STDERR "%s Skipping network: %s\n", get_time(), $network        if ( $debug );
-                return 'skip';
+            my $network_with = ';' . $network . ';';        # we match only with sourrounding ';', i.e. 'DB InterCity' does not match network='DB InterCityExpress'
+                                                            # i.e. "Sénar Bus" does not match "Seine Sénar Bus"
+            if ( $network_short_regex ) {
+                foreach my $short_value ( split('\|',$network_short_regex) ) {
+                    if ( $network_with =~ m/[;,]\s*(\Q$short_value\E)\s*[;,]\s*/ ) {
+                        return 'keep short';
+                    }
+                }
             }
+            if ( $network_long_regex ) {
+                foreach my $long_value ( split('\|',$network_long_regex) ) {
+                    if ( $network_with =~ m/[;,]\s*(\Q$long_value\E)\s*[;,]\s*/ ) {
+                        return 'keep long';
+                    }
+                }
+            }
+            printf STDERR "%s Skipping network: %s\n", get_time(), $network        if ( $debug );
+            return 'skip';
         }
     } else {
         if ( $strict_network ) {

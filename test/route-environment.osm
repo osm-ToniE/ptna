@@ -165,7 +165,7 @@
     <member type='relation' ref='-113933' role='' />
     <member type='relation' ref='-113931' role='' />
     <tag k='name' v='Bus 633' />
-    <tag k='network' v='other' />
+    <tag k='network' v='network2' />
     <tag k='public_transport:version' v='2' />
     <tag k='ref' v='633' />
     <tag k='route_master' v='bus' />
