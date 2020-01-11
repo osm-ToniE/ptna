@@ -22,7 +22,7 @@ fi
 SETTINGS_DIR="."
 
 
-TEMP=$(getopt -o acfgGhoOpPuwWS --long analyze,clean,get-routes,get-talk,force-download,help,overpass-query,overpass-query-on-zero-xml,push-routes,push-talk,update-result,watch-routes,watch-talk,settings-dir -n 'ptna-network.sh' -- "$@")
+TEMP=$(getopt -o acCfgGhoOpPuwWS --long analyze,clean,get-routes,get-talk,force-download,help,overpass-query,overpass-query-on-zero-xml,push-routes,push-talk,update-result,watch-routes,watch-talk,settings-dir -n 'ptna-network.sh' -- "$@")
 
 if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 2 ; fi
 
