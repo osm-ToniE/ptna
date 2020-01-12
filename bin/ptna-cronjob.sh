@@ -112,9 +112,9 @@ then
         # c == clean the work area
         # C == clean the XML file
 
-        if [ "$(date "+%u")" eq 7 ]    # = Sunday
+        if [ "$(date '+%u')" = "1" ]    # = Monday
         then
-            # on Sundays, do not delete the downloaded XML data
+            # on Mondays, do not delete the downloaded XML data
             
             ptna-all-networks.sh -c >> $LOGFILE 2>&1 < /dev/null
         else
