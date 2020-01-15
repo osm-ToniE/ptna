@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the ptna package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 # Translators:
@@ -10,9 +10,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ptna 3.0.1\n"
+"Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-01-11 12:38+0100\n"
+"POT-Creation-Date: 2020-01-15 22:13+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2020\n"
 "Language-Team: German (https://www.transifex.com/jungle-bus/teams/97874/"
@@ -686,7 +686,7 @@ msgstr ""
 
 #, perl-format
 msgid "'barrier'='%s' with implied 'access'='no'"
-msgstr "'barrier'='%s' mit implizietem 'access'='no'"
+msgstr "'barrier'='%s' mit implizitem 'access'='no'"
 
 msgid "PTv2 route: 'name' includes deprecated '&lt;=&gt;'"
 msgstr "PTv2 Route: 'name' enthält unübliches '&lt;=&gt;'"
