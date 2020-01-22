@@ -4206,8 +4206,8 @@ sub CheckNameRefFromViaToPTV2 {
             if ( $name =~ m/^(.*):\s{0,1}(.*?)\s{0,1}=>\s{0,1}(.*)\s{0,1}=>\s{0,1}(.*)$/ ||
                  $name =~ m/^(.*):\s{0,1}(.*?)\s{0,1}=>\s{0,1}(.*)$/                     ||
                  ( $check_name_relaxed &&
-                    ( $name =~ m/^(.*):\s*(.*?)\s*(?:=>|→|⇒)\s*(.*)\s*(?:=>|→|⇒)\s*(.*)$/ ||
-                      $name =~ m/^(.*):\s*(.*?)\s*(?:=>|→|⇒)\s*(.*)$/
+                    ( $name =~ m/^(.*):\s*(.*?)\s*(?:=>|->|→|⇒)\s*(.*)\s*(?:=>|->|→|⇒)\s*(.*)$/ ||
+                      $name =~ m/^(.*):\s*(.*?)\s*(?:=>|->|→|⇒)\s*(.*)$/
                     )
                  )
                ){
@@ -4220,7 +4220,7 @@ sub CheckNameRefFromViaToPTV2 {
 
                 if ( $to_in_name) {
                     if ( $check_name_relaxed ) {
-                        @via_parts_in_name = split( '(?:=>|→|⇒)', $vias_in_name );
+                        @via_parts_in_name = split( '(?:=>|->|→|⇒)', $vias_in_name );
                     } else {
                         @via_parts_in_name = split( '=>', $vias_in_name );
                    }
