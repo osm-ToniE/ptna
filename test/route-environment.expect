@@ -96,7 +96,8 @@ This section lists the 'network'-values which have been considered; i.e. which m
 
         <h2 id="notconsiderednetworks">3.2 Not Considered 'network'-Values</h2>
 <p>
-This section lists the 'network'-values which have not been considered. They might include typos in values which otherwise should have been considered. 
+This section lists the 'network'-values which have not been considered.
+They might include typos in values which otherwise should have been considered.
 </p>
         <table class="oepnvtable">
             <thead>

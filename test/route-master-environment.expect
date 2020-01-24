@@ -109,7 +109,8 @@ This section lists further relations of the environment of the routes:
     </li>
 </ul>
 <p>
-The following values and combinations have been found in the provided data but they will not be listed here. They represent so called 'well defined' values and are not considered as errors.
+The following values and combinations have been found in the provided data but they will not be listed here.
+They represent so called 'well defined' values and are not considered as errors.
 </p>
 <ul>
     <li>'type' = 'route_master', 'type' = 'route''
