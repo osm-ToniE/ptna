@@ -10,14 +10,13 @@
 # Adrien Pavie <panieravide@riseup.net>, 2019
 # ToniE <osm-ToniE@web.de>, 2019
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 3.0.1\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-01-20 23:11+0100\n"
-"PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: ToniE <osm-ToniE@web.de>, 2019\n"
+"POT-Creation-Date: 2020-01-24 22:30+0100\n"
+"PO-Revision-Date: 2020-01-24 22:33+0100\n"
+"Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
 "Language-Team: French (https://www.transifex.com/jungle-bus/teams/97874/"
 "fr/)\n"
 "Language: fr\n"
@@ -25,6 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.2.1\n"
 
 msgid "Example"
 msgstr "Exemple"
@@ -984,7 +984,7 @@ msgstr ""
 
 msgid ""
 "The following values and combinations have been found in the provided data "
-"but they will not be listed here. "
+"but they will not be listed here."
 msgstr ""
 "Les valeurs suivantes ont été trouvées dans les données mais ne sont pas "
 "listées ici."
@@ -1018,21 +1018,21 @@ msgid "and more ..."
 msgstr "et d'autres ..."
 
 msgid ""
-"This section lists the 'operator'-values which have not been considered. "
+"This section lists the 'operator'-values which have not been considered."
 msgstr ""
 "Cette section liste les valeurs du tag 'operator' qui n'ont pas été prises "
 "en compte."
 
 msgid ""
 "They might include typos in values which otherwise should have been "
-"considered. "
+"considered."
 msgstr "Cela correspond par exemples à des fautes d'orthographe ou des typos."
 
 msgid "Not Considered 'network'-Values"
 msgstr "Valeurs du tag 'network' non prises en compte"
 
-msgid ""
-"This section lists the 'network'-values which have not been considered. "
+#, fuzzy
+msgid "This section lists the 'network'-values which have not been considered."
 msgstr ""
 "Cette section liste les valeurs du tag 'network' qui n'ont pas été prises en "
 "compte"

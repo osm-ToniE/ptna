@@ -5074,7 +5074,8 @@ sub printHintSuspiciousRelations {
     push( @HTML_main, "</ul>\n" );
     if ( $hswkort || $hswknt || $hswkot ) {
         push( @HTML_main, "<p>\n" );
-        push( @HTML_main, gettext("The following values and combinations have been found in the provided data but they will not be listed here. ") );
+        push( @HTML_main, gettext("The following values and combinations have been found in the provided data but they will not be listed here.") );
+        push( @HTML_main, "\n" );
         push( @HTML_main, gettext("They represent so called 'well defined' values and are not considered as errors.") );
         push( @HTML_main, "\n</p>\n" );
         push( @HTML_main, "<ul>\n" );
@@ -5188,8 +5189,9 @@ sub printHintUsedNetworks {
 
     if ( scalar keys (%unused_operators) ) {
         push( @HTML_main, "<p>\n" );
-        push( @HTML_main, gettext("This section lists the 'operator'-values which have not been considered. ") );
-        push( @HTML_main, gettext("They might include typos in values which otherwise should have been considered. ") );
+        push( @HTML_main, gettext("This section lists the 'operator'-values which have not been considered.") );
+        push( @HTML_main, "\n" );
+        push( @HTML_main, gettext("They might include typos in values which otherwise should have been considered.") );
         push( @HTML_main, "\n</p>\n" );
 
         printTableInitialization( 'operator', 'number', 'relations' );
@@ -5225,8 +5227,9 @@ sub printHintUnusedNetworks {
     printHeader( gettext("Not Considered 'network'-Values"), 2, 'notconsiderednetworks' );
 
     push( @HTML_main, "<p>\n" );
-    push( @HTML_main, gettext("This section lists the 'network'-values which have not been considered. ") );
-    push( @HTML_main, gettext("They might include typos in values which otherwise should have been considered. ") );
+    push( @HTML_main, gettext("This section lists the 'network'-values which have not been considered.") );
+    push( @HTML_main, "\n" );
+    push( @HTML_main, gettext("They might include typos in values which otherwise should have been considered.") );
     push( @HTML_main, "\n</p>\n" );
 
     printTableInitialization( 'network', 'number', 'relations' );

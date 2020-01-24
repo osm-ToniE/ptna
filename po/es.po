@@ -6,14 +6,13 @@
 # Translators:
 # ToniE <osm-ToniE@web.de>, 2019
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 3.0.1\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-01-20 23:11+0100\n"
-"PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: ToniE <osm-ToniE@web.de>, 2019\n"
+"POT-Creation-Date: 2020-01-24 22:30+0100\n"
+"PO-Revision-Date: 2020-01-24 22:31+0100\n"
+"Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
 "Language-Team: Spanish (https://www.transifex.com/jungle-bus/teams/97874/"
 "es/)\n"
 "Language: es\n"
@@ -21,6 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.2.1\n"
 
 msgid "Example"
 msgstr ""
@@ -879,7 +879,7 @@ msgstr ""
 
 msgid ""
 "The following values and combinations have been found in the provided data "
-"but they will not be listed here. "
+"but they will not be listed here."
 msgstr ""
 
 msgid ""
@@ -908,19 +908,18 @@ msgid "and more ..."
 msgstr ""
 
 msgid ""
-"This section lists the 'operator'-values which have not been considered. "
+"This section lists the 'operator'-values which have not been considered."
 msgstr ""
 
 msgid ""
 "They might include typos in values which otherwise should have been "
-"considered. "
+"considered."
 msgstr ""
 
 msgid "Not Considered 'network'-Values"
 msgstr ""
 
-msgid ""
-"This section lists the 'network'-values which have not been considered. "
+msgid "This section lists the 'network'-values which have not been considered."
 msgstr ""
 
 msgid "'public_transport:version' is not set"
