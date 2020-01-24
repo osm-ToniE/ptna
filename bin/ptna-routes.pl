@@ -27,6 +27,7 @@ use RoutesList;
 use Data::Dumper;
 use Encode;
 
+my @RouteList                               = ();
 my @supported_route_types                   = ( 'train', 'subway', 'light_rail', 'tram', 'trolleybus', 'bus', 'ferry', 'monorail', 'aerialway', 'funicular', 'share_taxi' );
 my @well_known_other_route_types            = ( 'bicycle', 'mtb', 'hiking', 'road', 'foot', 'inline_skates', 'canoe', 'detour', 'fitness_trail', 'horse', 'motorboat', 'nordic_walking', 'pipeline', 'piste', 'power', 'running', 'ski', 'snowmobile', 'cycling' , 'historic', 'motorcycle', 'riding' );
 my @well_known_network_types                = ( 'international', 'national', 'regional', 'local', 'icn', 'ncn', 'rcn', 'lcn', 'iwn', 'nwn', 'rwn', 'lwn', 'road' );
@@ -357,10 +358,16 @@ if ( $routes_file ) {
                                           );
 
     if ( $ReadError ) {
+
         printf STDERR "%s %s\n", get_time(), $ReadError;
+    
     } else {
+    
+        @RouteList = RoutesList::GetRoutesList();
+        
         printf STDERR "%s %s read\n", get_time(), decode('utf8', $routes_file )                 if ( $verbose );
     }
+
 }
 
 
@@ -876,8 +883,6 @@ printInitialHeader( $page_title, $osm_base, $areas  );
 printf STDERR "%s Printing positives\n", get_time()       if ( $verbose );
 $number_of_positive_relations= 0;
 
-my @RouteList = RoutesList::GetRoutesList();
-
 if ( scalar( @RouteList ) ) {
 
     $section = 'positive';
@@ -1016,7 +1021,7 @@ printf STDERR "%s Printed positives: %d\n", get_time(), $number_of_positive_rela
 printf STDERR "%s Printing unassigned\n", get_time()       if ( $verbose );
 $number_of_unassigned_relations = 0;
 
-if ( $routes_file ) {
+if ( scalar( @RouteList ) ) {
 
     $section = 'positive';
 
@@ -1096,7 +1101,7 @@ if ( scalar(@line_refs) ) {
 
     printTableInitialization( 'ref', 'relation', 'type', 'route_type', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'issues', 'notes' );
 
-    if ( $routes_file ) {
+    if ( scalar( @RouteList ) ) {
         printHeader( gettext('Other Public Transport Lines'), 1, 'otherlines' );
     } else {
         printHeader( gettext('Public Transport Lines'), 1, 'otherslines' );
