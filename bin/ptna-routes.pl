@@ -347,6 +347,8 @@ if ( $routes_file ) {
 
     printf STDERR "%s Reading %s\n", get_time(), decode('utf8', $routes_file )                  if ( $verbose );
 
+    @supported_route_types = ();
+
     my $ReadError = RoutesList::ReadRoutes( 'file'                   => $routes_file,
                                             'analyze'                => $multiple_ref_type_entries,
                                             'csv-separator'          => $csv_separator,
@@ -378,7 +380,7 @@ if ( $osm_xml_file ) {
 
     if ( $ret ) {
         printf STDERR "%s %s read\n", get_time(), decode('utf8', $osm_xml_file )                                        if ( $verbose );
-        $xml_has_meta       = 1  if ( scalar(keys(%META)) );
+        $xml_has_meta       = 1  if ( scalar(keys(%META))      );
         $xml_has_relations  = 1  if ( scalar(keys(%RELATIONS)) );
         $xml_has_ways       = 1  if ( scalar(keys(%WAYS))      );
         $xml_has_nodes      = 1  if ( scalar(keys(%NODES))     );
@@ -398,7 +400,7 @@ if ( $xml_has_relations == 0 ) {
 #
 # now analyze the XML data
 #
-# 1. the meta informatio of the data: when has this been extracted from the DB
+# 1. the meta information of the data: when has this been extracted from the DB
 #
 #############################################################################################
 
