@@ -347,8 +347,6 @@ if ( $routes_file ) {
 
     printf STDERR "%s Reading %s\n", get_time(), decode('utf8', $routes_file )                  if ( $verbose );
 
-    @supported_route_types = ();
-
     my $ReadError = RoutesList::ReadRoutes( 'file'                   => $routes_file,
                                             'analyze'                => $multiple_ref_type_entries,
                                             'csv-separator'          => $csv_separator,
@@ -878,7 +876,9 @@ printInitialHeader( $page_title, $osm_base, $areas  );
 printf STDERR "%s Printing positives\n", get_time()       if ( $verbose );
 $number_of_positive_relations= 0;
 
-if ( $routes_file ) {
+my @RouteList = RoutesList::GetRoutesList();
+
+if ( scalar( @RouteList ) ) {
 
     $section = 'positive';
 
@@ -888,7 +888,7 @@ if ( $routes_file ) {
 
     printTableInitialization( 'name', 'type', 'relation', 'PTv', 'issues', 'notes' );
 
-    foreach my $entryref ( RoutesList::GetRoutesList() ) {
+    foreach my $entryref ( @RouteList ) {
 
         #printf STDERR "Entry: type = %s\n", $entryref->{'type'};
 
