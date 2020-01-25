@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-01-25 11:40+0100\n"
+"POT-Creation-Date: 2020-01-25 12:14+0100\n"
 "PO-Revision-Date: 2020-01-25 11:43+0100\n"
 "Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/jungle-bus/"
@@ -950,10 +950,6 @@ msgstr "Valores de 'network' não considerados"
 msgid "This section lists the 'network'-values which have not been considered."
 msgstr "Esta seção lista os valores de 'network' que não foram considerados."
 
-#, perl-format
-msgid "'colour' has unknown value '%s'"
-msgstr "Valor inválido para etiqueta \"colour\": \"%s\""
-
 msgid "'public_transport:version' is not set"
 msgstr ""
 
@@ -1028,3 +1024,6 @@ msgid ""
 msgstr ""
 "Tipo de rota inválido: \"%s\". Linha %s dos dados de rotas. Conteúdo da "
 "linha: \"%s\""
+
+#~ msgid "'colour' has unknown value '%s'"
+#~ msgstr "Valor inválido para etiqueta \"colour\": \"%s\""

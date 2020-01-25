@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-01-25 11:40+0100\n"
+"POT-Creation-Date: 2020-01-25 12:14+0100\n"
 "PO-Revision-Date: 2020-01-25 11:34+0100\n"
 "Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
 "Language-Team: Spanish (https://www.transifex.com/jungle-bus/teams/97874/"
@@ -926,10 +926,6 @@ msgid "Not Considered 'network'-Values"
 msgstr ""
 
 msgid "This section lists the 'network'-values which have not been considered."
-msgstr ""
-
-#, perl-format
-msgid "'colour' has unknown value '%s'"
 msgstr ""
 
 msgid "'public_transport:version' is not set"
