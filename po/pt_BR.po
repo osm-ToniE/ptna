@@ -1,18 +1,18 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the ptna package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 # Translators:
 # Alexandre Oliveira <rockytvbr@gmail.com>, 2019
-# ToniE <osm-ToniE@web.de>, 2019
+# ToniE <osm-ToniE@web.de>, 2020
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: ptna 3.0.1\n"
+"Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-01-24 22:30+0100\n"
-"PO-Revision-Date: 2020-01-24 22:33+0100\n"
+"POT-Creation-Date: 2020-01-25 10:09+0100\n"
+"PO-Revision-Date: 2020-01-25 10:14+0100\n"
 "Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/jungle-bus/"
 "teams/97874/pt_BR/)\n"
@@ -924,22 +924,20 @@ msgstr "e mais..."
 
 msgid ""
 "This section lists the 'operator'-values which have not been considered."
-msgstr ""
-"Esta seção lista quais os valores para a etiqueta \"network\" foram "
-"considerados; por exemplo, quais valores correspondem aos valores acima."
+msgstr "Esta seção lista os valores de 'operator' que não foram considerados."
 
 msgid ""
 "They might include typos in values which otherwise should have been "
 "considered."
 msgstr ""
+"Eles podem incluir erros de digitação em valores que, de outra forma, "
+"deveriam ter sido considerados."
 
 msgid "Not Considered 'network'-Values"
-msgstr ""
+msgstr "Valores de 'network' não considerados"
 
 msgid "This section lists the 'network'-values which have not been considered."
-msgstr ""
-"Esta seção lista quais os valores para a etiqueta \"network\" foram "
-"considerados; por exemplo, quais valores correspondem aos valores acima."
+msgstr "Esta seção lista os valores de 'network' que não foram considerados."
 
 msgid "'public_transport:version' is not set"
 msgstr ""
@@ -948,6 +946,8 @@ msgid ""
 "This Route relation has been included into the input data as a side-effect, "
 "the member ways and member nodes of this Route have not been included."
 msgstr ""
+"Esta relação de rota foi incluída nos dados de entrada como um efeito "
+"colateral, as formas e os nós dos membros desta rota não foram incluídos."
 
 msgid ""
 "The key 'construction' is set and the key 'highway' is not set to "
