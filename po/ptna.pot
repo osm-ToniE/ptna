@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-01-25 10:09+0100\n"
+"POT-Creation-Date: 2020-01-25 11:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -356,7 +356,13 @@ msgid "'network' is not set"
 msgstr ""
 
 #, perl-format
-msgid "'colour' has unknown value '%s'"
+msgid "'colour' has unknown value '%s'. Add '#' as first character."
+msgstr ""
+
+#, perl-format
+msgid ""
+"'colour' has unknown value '%s'. PTNA supports the 16 well defined HTML "
+"colours (VGA Color Palettes) and the HTML Hex color code '#......'."
 msgstr ""
 
 msgid "'network:long' is long form"
@@ -914,6 +920,10 @@ msgid "Not Considered 'network'-Values"
 msgstr ""
 
 msgid "This section lists the 'network'-values which have not been considered."
+msgstr ""
+
+#, perl-format
+msgid "'colour' has unknown value '%s'"
 msgstr ""
 
 msgid "'public_transport:version' is not set"

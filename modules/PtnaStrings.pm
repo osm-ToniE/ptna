@@ -34,7 +34,16 @@ sub InitMessageStrings {
     my $i = 0;
 
     $i++;
-    $MessageList[$i]->{'message'}                = gettext( "'colour' has unknown value '%s'" );
+    $MessageList[$i]->{'message'}                = gettext( "'colour' has unknown value '%s'. Add '#' as first character." );
+    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
+    $MessageList[$i]->{'message'}                = gettext( "'colour' has unknown value '%s'. PTNA supports the 16 well defined HTML colours (VGA Color Palettes) and the HTML Hex color code '#......'." );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
     $MessageList[$i]->{'description'}            = "";

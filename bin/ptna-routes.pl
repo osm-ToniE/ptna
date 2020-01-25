@@ -2217,9 +2217,16 @@ sub analyze_relation {
         }
 
         if ( $relation_ptr->{'tag'}->{'colour'} ) {
-            my $colour     = GetColourFromString( $relation_ptr->{'tag'}->{'colour'} );
-            $issues_string = gettext( "'colour' has unknown value '%s'" );
-            push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($relation_ptr->{'tag'}->{'colour'}) ) )        unless ( $colour );
+            my $colour = GetColourFromString( $relation_ptr->{'tag'}->{'colour'} );
+            unless ( $colour ) {
+                if ( $relation_ptr->{'tag'}->{'colour'} =~ m/^[0-9A-Fa-f]{3,6}$/ ) {
+                    $issues_string = gettext( "'colour' has unknown value '%s'. Add '#' as first character." );
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($relation_ptr->{'tag'}->{'colour'}) ) );
+                } else {
+                    $issues_string = gettext( "'colour' has unknown value '%s'. PTNA supports the 16 well defined HTML colours (VGA Color Palettes) and the HTML Hex color code '#......'." );
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($relation_ptr->{'tag'}->{'colour'}) ) );
+                }
+            }
         }
 
         if ( $positive_notes ) {
