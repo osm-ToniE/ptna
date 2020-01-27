@@ -4,6 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 # Translators:
+# Marco <marcxosm@gmail.com>, 2019
 # ToniE <osm-ToniE@web.de>, 2019
 #
 msgid ""
@@ -11,11 +12,11 @@ msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
 "POT-Creation-Date: 2020-01-27 22:10+0100\n"
-"PO-Revision-Date: 2020-01-25 11:34+0100\n"
+"PO-Revision-Date: 2020-01-27 22:11+0100\n"
 "Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
-"Language-Team: Spanish (https://www.transifex.com/jungle-bus/teams/97874/"
-"es/)\n"
-"Language: es\n"
+"Language-Team: Italian (https://www.transifex.com/jungle-bus/teams/97874/"
+"it/)\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -38,7 +39,7 @@ msgid "Description"
 msgstr ""
 
 msgid "How to fix it"
-msgstr "Como arreglarlo"
+msgstr ""
 
 msgid "Image"
 msgstr ""
@@ -50,126 +51,126 @@ msgid "Language test"
 msgstr ""
 
 msgid "Line (ref=)"
-msgstr ""
+msgstr "Linea (ref=)"
 
 msgid "Relation (id=)"
-msgstr ""
+msgstr "Relazione (id=)"
 
 msgid "Relations"
-msgstr ""
+msgstr "Relazioni"
 
 msgid "Name (name=)"
-msgstr ""
+msgstr "Nome (name=)"
 
 msgid "Number"
-msgstr ""
+msgstr "Numero"
 
 msgid "Network (network=)"
-msgstr ""
+msgstr "Rete (network=)"
 
 msgid "Operator (operator=)"
-msgstr ""
+msgstr "Operatore (operator=)"
 
 msgid "From (from=)"
-msgstr ""
+msgstr "Partenza (from=)"
 
 msgid "Via (via=)"
-msgstr ""
+msgstr "Passa da (via=)"
 
 msgid "To (to=)"
-msgstr ""
+msgstr "Destinazione (to=)"
 
 msgid "Errors"
-msgstr ""
+msgstr "Errori"
 
 msgid "Notes"
-msgstr ""
+msgstr "Note"
 
 msgid "Type (type=)"
-msgstr ""
+msgstr "Tipo (type=)"
 
 msgid "Vehicle (route(_master)=)"
-msgstr ""
+msgstr "Veicolo (route(_master)=)"
 
 msgid "PTv"
-msgstr ""
+msgstr "PTv"
 
 msgid "Comment"
-msgstr ""
+msgstr "Commento"
 
 msgid "From"
-msgstr ""
+msgstr "Partenza"
 
 msgid "To"
-msgstr ""
+msgstr "Destinazione"
 
 msgid "Operator"
-msgstr ""
+msgstr "Operatore"
 
 msgid "Bus"
-msgstr ""
+msgstr "Bus"
 
 msgid "Coach"
-msgstr ""
+msgstr "Pullman"
 
 msgid "Share-Taxi"
-msgstr ""
+msgstr "Taxi condiviso"
 
 msgid "Train/Suburban-Train"
 msgstr ""
 
 msgid "Tram/Streetcar"
-msgstr ""
+msgstr "Tram"
 
 msgid "Subway/Underground"
-msgstr ""
+msgstr "Metro"
 
 msgid "Light-Rail"
-msgstr ""
+msgstr "Metrotranvia"
 
 msgid "Trolley Bus"
-msgstr ""
+msgstr "Filobus"
 
 msgid "Ferry"
-msgstr ""
+msgstr "Traghetto"
 
 msgid "Mono-Rail"
-msgstr ""
+msgstr "Monorotaia"
 
 msgid "Aerialway"
-msgstr ""
+msgstr "Trasporto a fune"
 
 msgid "Funicular"
-msgstr ""
+msgstr "Funiculare"
 
 #, perl-format
 msgid "Missing route for ref='%s' and route='%s'"
-msgstr ""
+msgstr "Itinerario mancante per ref='%s' e route='%s'"
 
 msgid "' or ref='"
-msgstr ""
+msgstr "' oppure ref='"
 
 #. xgettext: This section will list all routes which could not be clearly assigned because the combination of "ref;type" appears more than once and information like 'operator', 'from' and 'to' is missing
 msgid "Not clearly assigned routes"
-msgstr ""
+msgstr "Itinerari non assegnati in maniera chiara"
 
 msgid "Other Public Transport Lines"
-msgstr ""
+msgstr "Altre linee di trasporto pubblico"
 
 msgid "Public Transport Lines"
-msgstr ""
+msgstr "Linee di trasporto pubblico"
 
 msgid "Public Transport Lines without 'ref'"
-msgstr ""
+msgstr "Linee di trasporto pubblico senza ‘ref’"
 
 msgid "More Relations"
-msgstr ""
+msgstr "Altre relazioni"
 
 msgid "Details for 'network'-Values"
-msgstr ""
+msgstr "Dettagli per valori di ‘network’"
 
 msgid "There is more than one Route-Master"
-msgstr ""
+msgstr "C’è più di un route-master"
 
 #, perl-format
 msgid ""
@@ -179,7 +180,11 @@ msgid_plural ""
 "Route-Masters have more Routes than actually match (%d versus %d) in the "
 "given data set"
 msgstr[0] ""
+"L’itinerario ‘master’ ha più itinerari di quelli corrispondenti (%d contro "
+"%d) nell’insieme dei dati"
 msgstr[1] ""
+"Gli itinerari ‘master’ hanno più itinerari di quelli corrispondenti "
+"(%dcontro %d) nell’insieme dei dati"
 
 #, perl-format
 msgid ""
@@ -189,57 +194,78 @@ msgid_plural ""
 "Route-Masters have less Routes than actually match (%d versus %d) in the "
 "given data set"
 msgstr[0] ""
+"L’itinerario ‘master’ ha meno itinerari di quelli corrispondenti (%d contro "
+"%d) nell’insieme dei dati"
 msgstr[1] ""
+"Gli itinerari ‘master’ hanno meno itinerari di quelli corrispondenti (%d "
+"contro %d) nell’insieme dei dati"
 
 #, perl-format
 msgid ""
 "Route might be listed with 'ref' = '%s' in a different section or in section "
 "'Not clearly assigned routes' of this analysis: %s"
 msgstr ""
+"L’itinerario potrebbe comparire con ‘ref’ = %s in una parte diversa o nella "
+"sezione ‘Itinerari non assegnati in maniera chiara’ di questa analisi: %s"
 
 #, perl-format
 msgid ""
 "Route has different 'operator' = '%s' than Route-Master 'operator' = '%s': %s"
 msgstr ""
+"L’itinerario ha un ‘operator’ = ‘%s’ differente rispetto all’itinerario "
+"‘master‘ che ha ‘operator’ = ‘%s’: %s"
 
 #, perl-format
 msgid ""
 "Route has 'operator' = '%s' value which is considered as not relevant: %s"
 msgstr ""
+"L’itinerario ha un valore ‘operator’ =‘%s’  che è considerato non rilevante: "
+"%s"
 
 #, perl-format
 msgid ""
 "Route has different 'network' = '%s' than Route-Master 'network' = '%s': %s"
 msgstr ""
+"L’itinerario ha un ‘network’ = %s differente rispetto all’itinerario "
+"‘master’ che ha ‘network’=‘%s’: %s"
 
 #, perl-format
 msgid ""
 "Route has 'network' = '%s' value which is considered as not relevant: %s"
 msgstr ""
+"L’itinerario ha un valore ’network’=‘%s’ che è considerato non rilevante: %s"
 
 #, perl-format
 msgid ""
 "Route has different 'ref' = '%s' than Route-Master 'ref' = '%s' - this "
 "should be avoided: %s"
 msgstr ""
+"L’itinerario ha ‘ref’=‘%s’ differente rispetto all’itinerario ’master’ che "
+"ha ‘ref’=‘%s’ (ciò andrebbe evitato): %s"
 
 #, perl-format
 msgid "Route has not matching 'ref' = '%s': %s"
-msgstr ""
+msgstr "L’itinerario non ha un ‘ref’=‘%s’ corrispondente: %s"
 
 #, perl-format
 msgid "Route exists in the given data set but 'ref' tag is not set: %s"
 msgstr ""
+"L’itinerario esiste nell’insieme dei dati ma l’etichetta ‘ref’ non è "
+"impostata: %s"
 
 #, perl-format
 msgid ""
 "Route has different 'route' = '%s' than Route-Master 'route_master' = '%s': "
 "%s"
 msgstr ""
+"L’itinerario ha un valore ‘route’=‘%s’ differente dall’itinerario ‘master’ "
+"che ha ‘route_master’=‘%s’: %s"
 
 #, perl-format
 msgid "Route has 'route' = '%s' value which is considered as not relevant: %s"
 msgstr ""
+"L’itinerario ha un valore ‘route’=‘%s’ che è non considerato non rilevante: "
+"%s"
 
 #, perl-format
 msgid "'route' tag is not set: %s"
@@ -255,46 +281,55 @@ msgstr ""
 
 #, perl-format
 msgid "Route does not exist in the given data set: %s"
-msgstr ""
+msgstr "L’itinerario non esiste nell’insieme dei dati: %s"
 
 #, perl-format
 msgid "Route is not member of Route-Master: %s"
-msgstr ""
+msgstr "L’itinerario non è un membro di quello ‘master’: %s"
 
 #, perl-format
 msgid ""
 "Route-Master might be listed with 'ref' = '%s' in a different section or in "
 "section 'Not clearly assigned routes' of this analysis: %s"
 msgstr ""
+"L’itinerario ‘master’ potrebbe comparire con ‘ref’=‘%s’ in una parte diversa "
+"o nella sezione ‘Itinerari non assegnati in maniera chiara’ di questa "
+"analisi: %s"
 
 #, perl-format
 msgid ""
 "Route-Master might be listed with unknown 'ref' in section 'Public Transport "
 "Lines without 'ref'' of this analysis: %s"
 msgstr ""
+"L’itinerario ‘master’ potrebbe comparire con ‘ref’ sconosciuto nella sezione "
+"‘Linee di trasporto pubblico senza ‘ref’’ di questa analisi: %s"
 
 #, perl-format
 msgid "This Route is direct member of more than one Route-Master: %s"
 msgstr ""
+"Questo itinerario è un membro diretto di uno o più itinerari ‘master’: %s"
 
 msgid "Multiple Routes but no Route-Master"
-msgstr ""
+msgstr "Molteplici Itinerari senza alcun itinerario ‘master’"
 
 msgid "Multiple Routes but this Route is not a member of any Route-Master"
 msgstr ""
+"Molteplici itinerari ma questo non è membro di alcun itinerario ‘master’"
 
 msgid "This Route is not a member of any Route-Master"
-msgstr ""
+msgstr "Questo itinerario non è membro di alcun itinerario ‘master’"
 
 #, perl-format
 msgid ""
 "'route' = '%s' of Route does not fit to 'route_master' = '%s' of Route-"
 "Master: %s"
 msgstr ""
+"‘route’=‘%s’ dell’itinerario non corrisponde a ‘route_master’=‘%s’ "
+"dell’itinerario ‘master’: %s"
 
 #, perl-format
 msgid "Route-Master has not matching 'ref' = '%s': %s"
-msgstr ""
+msgstr "L’itinerario ‘master’ non ha ‘ref’=‘%s’ corrispondente: %s"
 
 #, perl-format
 msgid "Route-Master exists in the given data set but 'ref' tag is not set: %s"
@@ -305,14 +340,20 @@ msgid ""
 "'network' = '%s' of Route does not fit to 'network' = '%s' of Route-Master: "
 "%s"
 msgstr ""
+"‘network’=‘%s’ dell’itinerario non corrisponde a ‘network’=‘%s’ "
+"dell’itinerario ‘master’: %s"
 
 #, perl-format
 msgid "'colour' of Route does not fit to 'colour' of Route-Master: %s"
 msgstr ""
+"‘colour’ dell’itinerario non corrisponde a ‘colour’ dell’itinerario "
+"‘master’: %s"
 
 #, perl-format
 msgid "'colour' of Route is set but 'colour' of Route-Master is not set: %s"
 msgstr ""
+"‘colour’ dell’itinerario è impostato ma ’colour’ dell’itinerario ‘master’ "
+"non lo è: %s"
 
 #, perl-format
 msgid "'colour' of Route is not set but 'colour' of Route-Master is set: %s"
@@ -325,16 +366,16 @@ msgstr ""
 
 #, perl-format
 msgid "%s: %s and %d more ..."
-msgstr ""
+msgstr "%s:%s e altri%d..."
 
 msgid "Multiple Routes but 'public_transport:version' is not set to '2'"
 msgstr ""
 
 msgid "'ref' is not set"
-msgstr ""
+msgstr "‘ref’ non è impostata"
 
 msgid "'name' is not set"
-msgstr ""
+msgstr "‘name’ non è impostata"
 
 #, perl-format
 msgid ""
@@ -357,7 +398,7 @@ msgid "'network' = '%s' should be long form"
 msgstr ""
 
 msgid "'network' is not set"
-msgstr ""
+msgstr "‘network‘ non è impostata"
 
 #, perl-format
 msgid "'colour' has unknown value '%s'. Add '#' as first character."
@@ -382,7 +423,7 @@ msgid ""
 msgstr ""
 
 msgid "Route-Master without Route(s)"
-msgstr ""
+msgstr "Itinerario ‘master’ senza itinerari"
 
 msgid "Route-Master with Relation(s) unequal to 'route'"
 msgstr ""
@@ -400,22 +441,22 @@ msgid "Skipping further analysis ..."
 msgstr ""
 
 msgid "Route without Way(s)"
-msgstr ""
+msgstr "Itinerario senza percorsi"
 
 msgid "Route with only 1 Way"
-msgstr ""
+msgstr "Itinerario con un solo percorso"
 
 msgid "Route without Node(s)"
-msgstr ""
+msgstr "Itinerario senza nodi"
 
 msgid "Route with only 1 Node"
-msgstr ""
+msgstr "Itinerario con un solo nodo"
 
 msgid "Route with Relation(s)"
-msgstr ""
+msgstr "Itinerario con almeno una relazione"
 
 msgid "'public_transport:version' is neither '1' nor '2'"
-msgstr ""
+msgstr "‘public_transport:version’ non è né ‘1’ né ‘2’"
 
 msgid ""
 "PTv2 route: there are no 'public_transport' = 'stop_position' and no "
@@ -608,7 +649,7 @@ msgid "PTv2 route: from-part ('%s') of 'name' is not equal to 'from' = '%s'"
 msgstr ""
 
 msgid "PTv2 route: 'from' is not set"
-msgstr ""
+msgstr "Itinerario PTv2: ‘from’ non è impostata"
 
 #, perl-format
 msgid "PTv2 route: to-part ('%s') of 'name' is not part of 'to' = '%s'"
@@ -619,7 +660,7 @@ msgid "PTv2 route: to-part ('%s') of 'name' is not equal to 'to' = '%s'"
 msgstr ""
 
 msgid "PTv2 route: 'to' is not set"
-msgstr ""
+msgstr "Itinerario PTv2: ‘to’ non è impostata"
 
 #, perl-format
 msgid ""
@@ -756,15 +797,13 @@ msgid ""
 msgstr ""
 
 msgid "Static Analysis for OpenStreetMap"
-msgstr "Análisis estático para OpenStreetMap"
+msgstr ""
 
 msgid "Click here to toggle between 'analysis' page and 'differences' page"
 msgstr ""
-"Haga clic aquí para alternar entre la página de 'análisis' y la página de "
-"'diferencias'"
 
 msgid "Toggle View"
-msgstr "Cambiar vista"
+msgstr ""
 
 msgid "Contents"
 msgstr ""
