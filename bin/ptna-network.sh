@@ -190,7 +190,9 @@ then
 
     if [ -d "$OSM_XML_LOC" ]
     then
+        START_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
         wget "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE
+        END_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
         echo $(date "+%Y-%m-%d %H:%M:%S") "wget returns $?"
 
         if [ -s $OSM_XML_FILE_ABSOLUTE ]
@@ -200,7 +202,9 @@ then
             echo $(date "+%Y-%m-%d %H:%M:%S") "Calling wget for '$PREFIX' a second time"
             # try a second, but only a second time
             sleep 60
+            START_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
             wget "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE
+            END_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
             echo $(date "+%Y-%m-%d %H:%M:%S") "wget returns $?"
 
             if [ -s $OSM_XML_FILE_ABSOLUTE ]
@@ -300,6 +304,7 @@ then
                     then
                         mv $WORK_LOC/$HTML_FILE $WORK_LOC/$SAVE_FILE
                     fi
+                    START_ANALYSIS=$(date "+%Y-%m-%d %H:%M:%S %Z")
                     ptna-routes.pl --v\
                                    --title="$PREFIX" \
                                    --network-guid=$PREFIX \
@@ -314,6 +319,7 @@ then
                                    --routes-file=$WORK_LOC/$ROUTES_FILE \
                                    --osm-xml-file=$OSM_XML_FILE_ABSOLUTE \
                                    2>&1 > $WORK_LOC/$HTML_FILE | tee $WORK_LOC/$HTML_FILE.log
+                    END_ANALYSIS=$(date "+%Y-%m-%d %H:%M:%S %Z")
         
                     if [ -s "$WORK_LOC/$HTML_FILE" ]
                     then
@@ -359,6 +365,7 @@ then
     then
         RESULTS_LOC="$PTNA_TARGET_LOC/$PTNA_RESULTS_LOC/$SUB_DIR"
     
+        echo $(date "+%Y-%m-%d %H:%M:%S") "Creating analysis details file '$WORK_LOC/$DETAILS_FILE'"
         echo "REGION_NAME=$PTNA_WWW_REGION_NAME"         >  $WORK_LOC/$DETAILS_FILE
         echo "REGION_LINK=$PTNA_WWW_REGION_LINK"         >> $WORK_LOC/$DETAILS_FILE
         echo "NETWORK_NAME=$PTNA_WWW_NETWORK_NAME"       >> $WORK_LOC/$DETAILS_FILE
@@ -368,6 +375,16 @@ then
         echo "ROUTES_NAME=$PTNA_WWW_ROUTES_NAME"         >> $WORK_LOC/$DETAILS_FILE
         echo "ROUTES_LINK=$PTNA_WWW_ROUTES_LINK"         >> $WORK_LOC/$DETAILS_FILE
         echo "OVERPASS_QUERY=$OVERPASS_QUERY"            >> $WORK_LOC/$DETAILS_FILE
+        echo "START_DOWNLOAD=$START_DOWNLOAD"            >> $WORK_LOC/$DETAILS_FILE
+        echo "END_DOWNLOAD=$END_DOWNLOAD"                >> $WORK_LOC/$DETAILS_FILE
+        if [ -f $OSM_XML_FILE_ABSOLUTE ]
+        then
+            echo "OSM_XML_FILE=$OSM_XML_FILE_ABSOLUTE"                                                                                      >> $WORK_LOC/$DETAILS_FILE
+            echo "OSM_XML_FILE_SIZE=$(ls -s --format=single-column $OSM_XML_FILE_ABSOLUTE | awk '{print $1}')"                              >> $WORK_LOC/$DETAILS_FILE
+            echo "OSM_XML_FILE_DATE=$(ls -l --time-style='+%Y-%m-%d %H:%M:%S %Z' $OSM_XML_FILE_ABSOLUTE | awk '{print $6 ' ' $7 ' ' $8}')"  >> $WORK_LOC/$DETAILS_FILE
+        fi
+        echo "START_ANALYSIS=$START_ANALYSIS"            >> $WORK_LOC/$DETAILS_FILE
+        echo "END_ANALYSIS=$END_ANALYSIS"                >> $WORK_LOC/$DETAILS_FILE
         echo "analysis-option=$ANALYSIS_OPTION"          >> $WORK_LOC/$DETAILS_FILE
         echo "expect-network-short-as=$EXPECT_NETWORK_SHORT_AS"    >> $WORK_LOC/$DETAILS_FILE
         echo "expect-network-short-for=$EXPECT_NETWORK_SHORT_FOR"  >> $WORK_LOC/$DETAILS_FILE
@@ -376,12 +393,6 @@ then
         echo "network-long-regex=$NETWORK_LONG"          >> $WORK_LOC/$DETAILS_FILE
         echo "network-short-regex=$NETWORK_SHORT"        >> $WORK_LOC/$DETAILS_FILE
         echo "operator-regex=$OPERATOR_REGEX"            >> $WORK_LOC/$DETAILS_FILE
-        if [ -f $OSM_XML_FILE_ABSOLUTE ]
-        then
-            echo "OSM-XML-FILE=$OSM_XML_FILE_ABSOLUTE"                                                                                      >> $WORK_LOC/$DETAILS_FILE
-            echo "OSM-XML-FILE-SIZE=$(ls -s --format=single-column $OSM_XML_FILE_ABSOLUTE | awk '{print $1}')"                              >> $WORK_LOC/$DETAILS_FILE
-            echo "OSM-XML-FILE-DATE=$(ls -l --time-style='+%Y-%m-%d %H:%M:%S %Z' $OSM_XML_FILE_ABSOLUTE | awk '{print $6 ' ' $7 ' ' $8}')"  >> $WORK_LOC/$DETAILS_FILE
-        fi
 
         echo $(date "+%Y-%m-%d %H:%M:%S")  "Updating '$WORK_LOC/$HTML_FILE' to '$RESULTS_LOC'"
     
