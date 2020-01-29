@@ -381,11 +381,11 @@ then
         then
             echo "OSM_XML_FILE=$OSM_XML_FILE_ABSOLUTE"                                                                                      >> $WORK_LOC/$DETAILS_FILE
             echo "OSM_XML_FILE_SIZE=$(ls -s --format=single-column $OSM_XML_FILE_ABSOLUTE | awk '{print $1}')"                              >> $WORK_LOC/$DETAILS_FILE
-            echo "OSM_XML_FILE_DATE=$(ls -l --time-style='+%Y-%m-%d %H:%M:%S %Z' $OSM_XML_FILE_ABSOLUTE | awk '{print $6 ' ' $7 ' ' $8}')"  >> $WORK_LOC/$DETAILS_FILE
+            echo "OSM_XML_FILE_DATE=$(ls -l --time-style='+%Y-%m-%d %H:%M:%S %Z' $OSM_XML_FILE_ABSOLUTE | awk '{print $6 " " $7 " " $8}')"  >> $WORK_LOC/$DETAILS_FILE
         fi
         echo "START_ANALYSIS=$START_ANALYSIS"            >> $WORK_LOC/$DETAILS_FILE
         echo "END_ANALYSIS=$END_ANALYSIS"                >> $WORK_LOC/$DETAILS_FILE
-        echo "analysis-option=$ANALYSIS_OPTION"          >> $WORK_LOC/$DETAILS_FILE
+        echo "analysis-options=$ANALYSIS_OPTIONS"        >> $WORK_LOC/$DETAILS_FILE
         echo "expect-network-short-as=$EXPECT_NETWORK_SHORT_AS"    >> $WORK_LOC/$DETAILS_FILE
         echo "expect-network-short-for=$EXPECT_NETWORK_SHORT_FOR"  >> $WORK_LOC/$DETAILS_FILE
         echo "expect-network-long-as=$EXPECT_NETWORK_LONG_AS"      >> $WORK_LOC/$DETAILS_FILE
