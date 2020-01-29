@@ -367,7 +367,22 @@ then
         echo "DISCUSSION_LINK=$PTNA_WWW_DISCUSSION_LINK" >> $WORK_LOC/$DETAILS_FILE
         echo "ROUTES_NAME=$PTNA_WWW_ROUTES_NAME"         >> $WORK_LOC/$DETAILS_FILE
         echo "ROUTES_LINK=$PTNA_WWW_ROUTES_LINK"         >> $WORK_LOC/$DETAILS_FILE
-    
+        echo "OVERPASS_QUERY=$OVERPASS_QUERY"            >> $WORK_LOC/$DETAILS_FILE
+        echo "analysis-option=$ANALYSIS_OPTION"          >> $WORK_LOC/$DETAILS_FILE
+        echo "expect-network-short-as=$EXPECT_NETWORK_SHORT_AS"    >> $WORK_LOC/$DETAILS_FILE
+        echo "expect-network-short-for=$EXPECT_NETWORK_SHORT_FOR"  >> $WORK_LOC/$DETAILS_FILE
+        echo "expect-network-long-as=$EXPECT_NETWORK_LONG_AS"      >> $WORK_LOC/$DETAILS_FILE
+        echo "expect-network-long-for=$EXPECT_NETWORK_LONG_FOR"    >> $WORK_LOC/$DETAILS_FILE
+        echo "network-long-regex=$NETWORK_LONG"          >> $WORK_LOC/$DETAILS_FILE
+        echo "network-short-regex=$NETWORK_SHORT"        >> $WORK_LOC/$DETAILS_FILE
+        echo "operator-regex=$OPERATOR_REGEX"            >> $WORK_LOC/$DETAILS_FILE
+        if [ -f $OSM_XML_FILE_ABSOLUTE ]
+        then
+            echo "OSM-XML-FILE=$OSM_XML_FILE_ABSOLUTE"                                                                                      >> $WORK_LOC/$DETAILS_FILE
+            echo "OSM-XML-FILE-SIZE=$(ls -s --format=single-column $OSM_XML_FILE_ABSOLUTE | awk '{print $1}')"                              >> $WORK_LOC/$DETAILS_FILE
+            echo "OSM-XML-FILE-DATE=$(ls -l --time-style='+%Y-%m-%d %H:%M:%S %Z' $OSM_XML_FILE_ABSOLUTE | awk '{print $6 ' ' $7 ' ' $8}')"  >> $WORK_LOC/$DETAILS_FILE
+        fi
+
         echo $(date "+%Y-%m-%d %H:%M:%S")  "Updating '$WORK_LOC/$HTML_FILE' to '$RESULTS_LOC'"
     
         if [ -f $WORK_LOC/$HTML_FILE ]
