@@ -288,7 +288,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: '%s' is not part of 'name' (derived from '%s' = '%s')" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "--check-name";
+    $MessageList[$i]->{'option'}                 = "check-name";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -297,7 +297,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: 'from' is not set" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "--check-name";
+    $MessageList[$i]->{'option'}                 = "check-name";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -306,7 +306,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: 'name' has more than one '=>' but 'via' is not set" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "--check-name";
+    $MessageList[$i]->{'option'}                 = "check-name";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -315,7 +315,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: 'name' includes deprecated '&lt;=&gt;'" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "--check-name";
+    $MessageList[$i]->{'option'}                 = "check-name";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -324,7 +324,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: 'name' includes deprecated '==&gt;'" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "--check-name";
+    $MessageList[$i]->{'option'}                 = "check-name";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -333,7 +333,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: 'name' of Route is identical to 'name' of other Route(s), consider setting an appropriate 'via' value and include that into 'name'" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "--check-name";
+    $MessageList[$i]->{'option'}                 = "check-name";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -342,7 +342,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: 'name' should (at least) be of the form '... ref ...: from => to'" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "--check-name";
+    $MessageList[$i]->{'option'}                 = "check-name";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -351,7 +351,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: 'name' should be similar to the form '... ref ...: from => to'" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "--check-name-relaxed";
+    $MessageList[$i]->{'option'}                 = "check-name-relaxed";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -378,7 +378,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: 'ref' is not part of 'name'" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "--check-name";
+    $MessageList[$i]->{'option'}                 = "check-name";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -387,7 +387,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: 'role' = '%s' and %s: consider setting 'public_transport' = 'platform'" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--ptv1-compatibility=show";
+    $MessageList[$i]->{'option'}                 = "ptv1-compatibility=show";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -396,7 +396,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: 'role' = '%s' and %s: consider setting 'public_transport' = 'stop_position'" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--ptv1-compatibility=show";
+    $MessageList[$i]->{'option'}                 = "ptv1-compatibility=show";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -414,7 +414,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: 'to' is not set" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "--check-name";
+    $MessageList[$i]->{'option'}                 = "check-name";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -423,7 +423,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' is not equal to %d. via-value = '%s'" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "--check-name";
+    $MessageList[$i]->{'option'}                 = "check-name";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -432,7 +432,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' is not part of %d. via-value = '%s'" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "--check-name-relaxed";
+    $MessageList[$i]->{'option'}                 = "check-name-relaxed";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -441,7 +441,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: consider removing the first way of the route from the relation, it is a way before the first stop position: %s" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--check-sequence";
+    $MessageList[$i]->{'option'}                 = "check-sequence";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -450,7 +450,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: consider removing the last way of the route from the relation, it is a way after the last stop position: %s" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--check-sequence";
+    $MessageList[$i]->{'option'}                 = "check-sequence";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -468,7 +468,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: first node of oneway way has 'role' = 'stop_exit_only'" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--check-sequence";
+    $MessageList[$i]->{'option'}                 = "check-sequence";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -477,7 +477,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: first node of way has 'role' = 'stop_exit_only'. Is the route sorted in reverse order?" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--check-sequence";
+    $MessageList[$i]->{'option'}                 = "check-sequence";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -486,7 +486,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: first node of way is not a stop position of this route: %s" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--check-sequence";
+    $MessageList[$i]->{'option'}                 = "check-sequence";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -495,7 +495,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: first node of way is not the first stop position of this route: %s versus %s" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--check-sequence";
+    $MessageList[$i]->{'option'}                 = "check-sequence";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -504,7 +504,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: first stop position on first way is not the first stop position of this route: %s versus %s" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--check-sequence";
+    $MessageList[$i]->{'option'}                 = "check-sequence";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -513,7 +513,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: first way is a oneway road and ends in a 'stop_position' of this route and there is no exit. Is the route sorted in reverse order?" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--check-sequence";
+    $MessageList[$i]->{'option'}                 = "check-sequence";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -522,7 +522,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: from-part ('%s') of 'name' is not equal to 'from' = '%s'" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "--check-name";
+    $MessageList[$i]->{'option'}                 = "check-name";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -531,7 +531,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: from-part ('%s') of 'name' is not part of 'from' = '%s'" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "--check-name-relaxed";
+    $MessageList[$i]->{'option'}                 = "check-name-relaxed";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -540,7 +540,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = ngettext( "PTv2 route: has a gap, consists of %d segments. Gap appears at way", "PTv2 route: has gaps, consists of %d segments. Gaps appear at ways", 1 );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--check-sequence";
+    $MessageList[$i]->{'option'}                 = "check-sequence";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "message-has_gaps.png";
@@ -549,7 +549,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = ngettext( "PTv2 route: includes %d entire roundabout but uses only segments", "PTv2 route: includes %d entire roundabouts but uses only segments", 1 );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "--check-sequence --check-roundabout";
+    $MessageList[$i]->{'option'}                 = "check-sequence --check-roundabout";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -567,7 +567,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: last node of oneway way has 'role' = 'stop_entry_only'" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--check-sequence";
+    $MessageList[$i]->{'option'}                 = "check-sequence";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -576,7 +576,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: last node of way has 'role' = 'stop_entry_only'. Is the route sorted in reverse order?" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--check-sequence";
+    $MessageList[$i]->{'option'}                 = "check-sequence";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -585,7 +585,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: last node of way is not a stop position of this route: %s" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--check-sequence";
+    $MessageList[$i]->{'option'}                 = "check-sequence";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -594,7 +594,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: last node of way is not the last stop position of this route: %s versus %s" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--check-sequence";
+    $MessageList[$i]->{'option'}                 = "check-sequence";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -603,7 +603,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: last stop position on last way is not the last stop position of this route: %s versus %s" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--check-sequence";
+    $MessageList[$i]->{'option'}                 = "check-sequence";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -630,7 +630,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = ngettext( "PTv2 route: roundabout appears twice, following itself", "PTv2 route: roundabouts appear twice, following themselves", 1 );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--check-sequence";
+    $MessageList[$i]->{'option'}                 = "check-sequence";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "message-roundabout_appears_twice.png";
@@ -639,7 +639,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: there are less via-parts in 'name' (%d) than in 'via' (%d)" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "--check-name";
+    $MessageList[$i]->{'option'}                 = "check-name";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -684,7 +684,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: there is no stop position of this route on the first way: %s" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--check-sequence";
+    $MessageList[$i]->{'option'}                 = "check-sequence";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -693,7 +693,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: there is no stop position of this route on the last way: %s" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--check-sequence";
+    $MessageList[$i]->{'option'}                 = "check-sequence";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -720,7 +720,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: to-part ('%s') of 'name' is not equal to 'to' = '%s'" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "--check-name";
+    $MessageList[$i]->{'option'}                 = "check-name";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -729,7 +729,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: to-part ('%s') of 'name' is not part of 'to' = '%s'" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "--check-name-relaxed";
+    $MessageList[$i]->{'option'}                 = "check-name-relaxed";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -738,7 +738,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = ngettext( "PTv2 route: using motorway_link way without entering a motorway way", "PTv2 route: using motorway_link ways without entering a motorway way", 1 );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--check-motorway-link";
+    $MessageList[$i]->{'option'}                 = "check-motorway-link";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -747,7 +747,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = ngettext( "PTv2 route: using oneway way in wrong direction", "PTv2 route: using oneway ways in wrong direction", 1 );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--check-sequence";
+    $MessageList[$i]->{'option'}                 = "check-sequence";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "message-using_oneway_way_in_wrong_direction.png";
@@ -1017,7 +1017,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "Route: '%s' = '%s' of stop should be replaced by 'route_ref' = '%s'" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "--check-route-ref";
+    $MessageList[$i]->{'option'}                 = "check-route-ref";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -1026,7 +1026,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = ngettext( "Route: 'highway' = 'bus_stop' is set on way. Allowed on nodes only!", "Route: 'highway' = 'bus_stop' is set on ways. Allowed on nodes only!", 1 );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--check-bus-stop";
+    $MessageList[$i]->{'option'}                 = "check-bus-stop";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -1035,7 +1035,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "Route: 'ref' = '%s' of stop should represent the reference of the stop, but includes the 'ref' = '%s' of this route %s" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "--check-route-ref";
+    $MessageList[$i]->{'option'}                 = "check-route-ref";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -1044,7 +1044,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "Route: 'route_ref' = '%s' of stop does not include 'ref' = '%s' value of this route%s" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--check-route-ref";
+    $MessageList[$i]->{'option'}                 = "check-route-ref";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -1053,7 +1053,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "Route: 'route_ref' = '%s' of stop includes the separator value ';' (semi-colon) with sourrounding blank" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--check-route-ref";
+    $MessageList[$i]->{'option'}                 = "check-route-ref";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -1062,7 +1062,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "Route: 'route_ref' = '%s' of stop: ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--check-route-ref";
+    $MessageList[$i]->{'option'}                 = "check-route-ref";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -1071,7 +1071,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = ngettext( "Route: restricted access (%s) to way without 'psv'='yes', '%s'='yes', '%s'='designated', or ...", "Route: restricted access (%s) to ways without 'psv'='yes', '%s'='yes', '%s'='designated', or ...", 1 );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--check-access";
+    $MessageList[$i]->{'option'}                 = "check-access";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -1080,7 +1080,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = ngettext( "Route: restricted access at barrier (%s) without 'psv'='yes', '%s'='yes', '%s'='designated', or ...", "Route: restricted access at barriers (%s) without 'psv'='yes', '%s'='yes', '%s'='designated', or ...", 1 );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "--check-access";
+    $MessageList[$i]->{'option'}                 = "check-access";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -1089,7 +1089,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = ngettext( "Route: suspicious %s along with 'highway' unequal to 'construction' on way", "Route: suspicious %s along with 'highway' unequal to 'construction' on ways", 1 );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "--check-access";
+    $MessageList[$i]->{'option'}                 = "check-access";
     $MessageList[$i]->{'description'}            = gettext( "The key 'construction' is set and the key 'highway' is not set to 'construction'." ) . " " .
                                                    gettext( "Construction works on ways are usually mapped as the combination of 'higway'='construction' and 'construction'='xxx', where 'xxx' is the former value of the 'highway' key." ) . " " .
                                                    gettext( "When the construction works are finished, the key 'highway' is set to its former or a different value while the key 'construction' gets delete." ) . " " .
@@ -1106,7 +1106,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = ngettext( "Route: unclear access (%s) to way", "Route: unclear access (%s) to ways", 1 );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "--check-access";
+    $MessageList[$i]->{'option'}                 = "check-access";
     $MessageList[$i]->{'description'}            = gettext( "A conditional access is mapped to a way. PTNA will not analyze the value of the tag." ) . " " .
                                                    gettext( "Example" ) . ": 'psv:conditional=yes @ (Mo-Fr 05:00-22:00)'.";
     $MessageList[$i]->{'fix'}                    = gettext( "Please evaluate the value manually and decide whether a fix is needed or not." );
@@ -1203,17 +1203,208 @@ sub InitOptionStrings {
     my $i = 0;
 
     $i++;
-    $OptionList[$i]->{'option'}                 = "--check-name";
+    $OptionList[$i]->{'option'}                 = "language";
+    $OptionList[$i]->{'default'}                = "en";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+
+    $i++;
+    $OptionList[$i]->{'option'}                 = "allow-coach";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
-    $OptionList[$i]->{'option'}                 = "--check-name-relaxed";
+    $OptionList[$i]->{'option'}                 = "check-access";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
+    $i++;
+    $OptionList[$i]->{'option'}                 = "check-bus-stop";
+    $OptionList[$i]->{'default'}                = "OFF";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+    
+    $i++;
+    $OptionList[$i]->{'option'}                 = "check-motorway-link";
+    $OptionList[$i]->{'default'}                = "OFF";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+    
+    $i++;
+    $OptionList[$i]->{'option'}                 = "check-name";
+    $OptionList[$i]->{'default'}                = "OFF";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+    
+    $i++;
+    $OptionList[$i]->{'option'}                 = "check-name-relaxed";
+    $OptionList[$i]->{'default'}                = "OFF";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+    
+    $i++;
+    $OptionList[$i]->{'option'}                 = "check-osm-separator";
+    $OptionList[$i]->{'default'}                = "OFF";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+    
+    $i++;
+    $OptionList[$i]->{'option'}                 = "check-platform";
+    $OptionList[$i]->{'default'}                = "OFF";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+    
+    $i++;
+    $OptionList[$i]->{'option'}                 = "check-soundabouts";
+    $OptionList[$i]->{'default'}                = "OFF";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+    
+    $i++;
+    $OptionList[$i]->{'option'}                 = "check-route-ref";
+    $OptionList[$i]->{'default'}                = "OFF";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+    
+    $i++;
+    $OptionList[$i]->{'option'}                 = "check-sequence";
+    $OptionList[$i]->{'default'}                = "OFF";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+    
+    $i++;
+    $OptionList[$i]->{'option'}                 = "check-stop-position";
+    $OptionList[$i]->{'default'}                = "OFF";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+    
+    $i++;
+    $OptionList[$i]->{'option'}                 = "check-version";
+    $OptionList[$i]->{'default'}                = "OFF";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+    
+    $i++;
+    $OptionList[$i]->{'option'}                 = "coloured-sketchline";
+    $OptionList[$i]->{'default'}                = "OFF";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+    
+    $i++;
+    $OptionList[$i]->{'option'}                 = "expect-network-long";
+    $OptionList[$i]->{'default'}                = "OFF";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+    
+    $i++;
+    $OptionList[$i]->{'option'}                 = "expect-network-long-as";
+    $OptionList[$i]->{'default'}                = "";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+    
+    $i++;
+    $OptionList[$i]->{'option'}                 = "expect-network-long-for";
+    $OptionList[$i]->{'default'}                = "";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+    
+    $i++;
+    $OptionList[$i]->{'option'}                 = "expect-network-short";
+    $OptionList[$i]->{'default'}                = "OFF";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+    
+    $i++;
+    $OptionList[$i]->{'option'}                 = "expect-network-short-as";
+    $OptionList[$i]->{'default'}                = "";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+    
+    $i++;
+    $OptionList[$i]->{'option'}                 = "expect-network-short-for";
+    $OptionList[$i]->{'default'}                = "";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+    
+    $i++;
+    $OptionList[$i]->{'option'}                 = "max-error";
+    $OptionList[$i]->{'default'}                = "";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+
+    $i++;
+    $OptionList[$i]->{'option'}                 = "multiperef-type-entries";
+    $OptionList[$i]->{'default'}                = "analyze";
+    $OptionList[$i]->{'description'}            = "allow|analyze|no";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+
+    $i++;
+    $OptionList[$i]->{'option'}                 = "network-long-regex";
+    $OptionList[$i]->{'default'}                = "";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+
+    $i++;
+    $OptionList[$i]->{'option'}                 = "network-short-regex";
+    $OptionList[$i]->{'default'}                = "";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+
+    $i++;
+    $OptionList[$i]->{'option'}                 = "operator-regex";
+    $OptionList[$i]->{'default'}                = "";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+
+    $i++;
+    $OptionList[$i]->{'option'}                 = "positive-notes";
+    $OptionList[$i]->{'default'}                = "OFF";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+
+    $i++;
+    $OptionList[$i]->{'option'}                 = "ptv1-compatibility";
+    $OptionList[$i]->{'default'}                = "allow|no|show";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+
+    $i++;
+    $OptionList[$i]->{'option'}                 = "relaxed-begin-end-for";
+    $OptionList[$i]->{'default'}                = "";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+
+    $i++;
+    $OptionList[$i]->{'option'}                 = "strict-network";
+    $OptionList[$i]->{'default'}                = "OFF";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+
+    $i++;
+    $OptionList[$i]->{'option'}                 = "strict-operator";
+    $OptionList[$i]->{'default'}                = "en";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+
+    $i++;
+    $OptionList[$i]->{'option'}                 = "separator";
+    $OptionList[$i]->{'default'}                = ";";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+
+    $i++;
+    $OptionList[$i]->{'option'}                 = "or-separator";
+    $OptionList[$i]->{'default'}                = "|";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+
+    $i++;
+    $OptionList[$i]->{'option'}                 = "ref-separator";
+    $OptionList[$i]->{'default'}                = "/";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     return 0;
 }
