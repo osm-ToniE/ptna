@@ -1335,7 +1335,7 @@ sub InitOptionStrings {
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
-    $OptionList[$i]->{'option'}                 = "multiperef-type-entries";
+    $OptionList[$i]->{'option'}                 = "multipe-ref-type-entries";
     $OptionList[$i]->{'default'}                = "analyze";
     $OptionList[$i]->{'description'}            = "allow|analyze|no";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
