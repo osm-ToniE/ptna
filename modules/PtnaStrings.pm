@@ -1257,7 +1257,7 @@ sub InitOptionStrings {
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
-    $OptionList[$i]->{'option'}                 = "check-soundabouts";
+    $OptionList[$i]->{'option'}                 = "check-roundabouts";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
