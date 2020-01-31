@@ -186,7 +186,11 @@ sub ListOptionStrings {
 
 sub ListOptionStringsDetailsHtml {
 
-    my $key = undef;
+    my $key     = undef;
+    my $opt     = undef;
+    my $descr   = undef;
+    my $replace = html_escape(gettext( "Example" ));
+    my $img     = undef;
 
     printf STDOUT "\n";
     printf STDOUT "<!--\n";
@@ -205,14 +209,25 @@ sub ListOptionStringsDetailsHtml {
     printf STDOUT "                <th class=\"message-option\">%s</th>\n",         gettext( "Option"        );
     printf STDOUT "                <th class=\"message-default\">%s</th>\n",        gettext( "Default Value" );
     printf STDOUT "                <th class=\"message-description\">%s</th>\n",    gettext( "Description"   );
+    printf STDOUT "                <th class=\"message-image\">%s</th>\n",          gettext( "Image" );
     printf STDOUT "            </tr>\n";
     printf STDOUT "        </thead>\n";
     printf STDOUT "        <tbody>\n";
     foreach $key ( sort ( GetOptionKeys() ) ) {
-        printf STDOUT "            <tr class=\"message-tablerow\">\n";
-        printf STDOUT "                <td class=\"message-option\">%s</td>\n",      GetOptionValue( $key, 'option' );
-        printf STDOUT "                <td class=\"message-default\">%s</td>\n",     GetOptionValue( $key, 'default' );
-        printf STDOUT "                <td class=\"message-description\">%s</td>\n", GetOptionValue( $key, 'description' );
+        $opt   =  html_escape( GetOptionValue( $key, 'option'      ) );
+        $descr =  html_escape( GetOptionValue( $key, 'description' ) );
+        $descr =~ s| \Q$replace\E|<br />\Q$replace\E|g;
+        $img   =  GetOptionValue( $key, 'image' );
+        printf STDOUT "            <tr class=\"message-tablerow\" id=\"option-%s\">\n", $opt;
+        printf STDOUT "                <td class=\"message-option\">%s</td>\n",       $opt;
+        printf STDOUT "                <td class=\"message-default\">%s</td>\n",      html_escape( GetOptionValue( $key, 'default' ) );
+        printf STDOUT "                <td class=\"message-description\">%s</td>\n",  $descr;
+        if ( $img ) {
+            printf STDOUT "                <td class=\"message-image\">";
+            printf STDOUT                      "<div class=\"message-tooltip\"><img src=\"/img/%s\" alt=\"%s\" /><span class=\"message-tooltiptext\">%s</span></div></td>\n", $img, $opt, $opt;
+        } else {
+            printf STDOUT "                <td class=\"message-image\">&nbsp;</td>\n";
+        }
         printf STDOUT "            </tr>\n";
 
     }
