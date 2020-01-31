@@ -152,7 +152,7 @@ sub ListMessageStringsDetailsHtml {
             printf STDOUT "                <td class=\"message-image\">";
             printf STDOUT                      "<div class=\"message-tooltip\"><img src=\"/img/%s\" alt=\"%s\" /><span class=\"message-tooltiptext\">%s</span></div></td>\n", $img, $msg, $msg;
         } else {
-            printf STDOUT "                <td class=\"message-image\">&nbsp;</td>\n";
+            printf STDOUT "                <td class=\"message-image\"></td>\n";
         }
         printf STDOUT "            </tr>\n";
 
@@ -226,7 +226,7 @@ sub ListOptionStringsDetailsHtml {
             printf STDOUT "                <td class=\"message-image\">";
             printf STDOUT                      "<div class=\"message-tooltip\"><img src=\"/img/%s\" alt=\"%s\" /><span class=\"message-tooltiptext\">%s</span></div></td>\n", $img, $opt, $opt;
         } else {
-            printf STDOUT "                <td class=\"message-image\">&nbsp;</td>\n";
+            printf STDOUT "                <td class=\"message-image\"></td>\n";
         }
         printf STDOUT "            </tr>\n";
 

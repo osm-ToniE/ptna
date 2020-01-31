@@ -1366,8 +1366,8 @@ sub InitOptionStrings {
 
     $i++;
     $OptionList[$i]->{'option'}                 = "ptv1-compatibility";
-    $OptionList[$i]->{'default'}                = "allow|no|show";
-    $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'default'}                = "no";
+    $OptionList[$i]->{'description'}            = "allow|no|show";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
@@ -1384,7 +1384,7 @@ sub InitOptionStrings {
 
     $i++;
     $OptionList[$i]->{'option'}                 = "strict-operator";
-    $OptionList[$i]->{'default'}                = "en";
+    $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
