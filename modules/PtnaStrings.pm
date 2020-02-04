@@ -549,7 +549,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = ngettext( "PTv2 route: includes %d entire roundabout but uses only segments", "PTv2 route: includes %d entire roundabouts but uses only segments", 1 );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "check-sequence --check-roundabout";
+    $MessageList[$i]->{'option'}                 = "check-sequence check-roundabout";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -648,7 +648,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: there are more via-parts in 'name' (%d) than in 'via' (%d)" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "--check-name";
+    $MessageList[$i]->{'option'}                 = "check-name";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -1008,7 +1008,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "Route: '%s' = '%s' of stop should be deleted, 'route_ref' = '%s' exists" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "--check-route-ref";
+    $MessageList[$i]->{'option'}                 = "check-route-ref";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
