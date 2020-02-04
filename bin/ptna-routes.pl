@@ -75,8 +75,8 @@ my $help                            = undef;
 my $man_page                        = undef;
 my $positive_notes                  = undef;
 my $csv_separator                   = ';';
-my $or_separator                    = '|';                 # must be different from $csv_operator: used to separate several 'ref' values in CSV entry "43|E43;bus;;;;"
-my $ref_separator                   = '/';                 # must be different from $csv_operator: used to separate several 'ref' values in CSV entry "602/50;bus;;;;"
+my $or_separator                    = '|';                 # used to separate several 'ref' values in CSV entry "43|E43;bus;;;;"
+my $ref_separator                   = '/';                 # used to separate several 'ref' values in CSV entry "602/50;bus;;;;"
 my $coloured_sketchline             = undef;
 my $page_title                      = undef;
 
@@ -171,7 +171,7 @@ if ( $or_separator ) {
 if ( $ref_separator ) {
     if ( length($ref_separator) > 1 ) {
         printf STDERR "%s analyze-routes.pl: wrong value for option: '--ref-separator' = '%s' - setting it to '--ref-separator' = '/'\n", get_time(), $ref_separator;
-        $ref_separator = '|';
+        $ref_separator = '/';
     }
     $ref_separator = '\\' . $ref_separator;
 }
