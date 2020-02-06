@@ -4939,7 +4939,7 @@ sub printInitialHeader {
     push( @HTML_start, "<!DOCTYPE html>\n" );
     push( @HTML_start, sprintf( "<html lang=\"%s\">\n", $html_lang ) );
     push( @HTML_start, "    <head>\n" );
-    push( @HTML_start, sprintf( "        <title>%sPTNA - Public Transport Network Analysis</title>\n", ($title ? html_escape($title) . ' - ' : '') ) );
+    push( @HTML_start, sprintf( "        <title>PTNA - %s</title>\n", ($title ? html_escape($title) : 'Results') ) );
     push( @HTML_start, "        <meta charset=\"utf-8\" />\n" );
     push( @HTML_start, "        <meta name=\"generator\" content=\"PTNA\">\n" );
     push( @HTML_start, "        <meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\" />\n" );
