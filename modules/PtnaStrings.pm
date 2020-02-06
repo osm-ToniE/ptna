@@ -1206,204 +1206,238 @@ sub InitOptionStrings {
     $OptionList[$i]->{'option'}                 = "language";
     $OptionList[$i]->{'default'}                = "en";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
     $OptionList[$i]->{'option'}                 = "allow-coach";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "check-access";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "check-bus-stop";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "check-motorway-link";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "check-name";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "check-name-relaxed";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "check-osm-separator";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "check-platform";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "check-roundabouts";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "check-route-ref";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "check-sequence";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "check-stop-position";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "check-version";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "coloured-sketchline";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "expect-network-long";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "expect-network-long-as";
     $OptionList[$i]->{'default'}                = "";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "expect-network-long-for";
     $OptionList[$i]->{'default'}                = "";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "expect-network-short";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "expect-network-short-as";
     $OptionList[$i]->{'default'}                = "";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "expect-network-short-for";
     $OptionList[$i]->{'default'}                = "";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "max-error";
     $OptionList[$i]->{'default'}                = "";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
     $OptionList[$i]->{'option'}                 = "multiple-ref-type-entries";
     $OptionList[$i]->{'default'}                = "analyze";
     $OptionList[$i]->{'description'}            = "allow|analyze|no";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
     $OptionList[$i]->{'option'}                 = "network-long-regex";
     $OptionList[$i]->{'default'}                = "";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
     $OptionList[$i]->{'option'}                 = "network-short-regex";
     $OptionList[$i]->{'default'}                = "";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
     $OptionList[$i]->{'option'}                 = "operator-regex";
     $OptionList[$i]->{'default'}                = "";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
     $OptionList[$i]->{'option'}                 = "positive-notes";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
     $OptionList[$i]->{'option'}                 = "ptv1-compatibility";
     $OptionList[$i]->{'default'}                = "no";
     $OptionList[$i]->{'description'}            = "allow|no|show";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
     $OptionList[$i]->{'option'}                 = "relaxed-begin-end-for";
     $OptionList[$i]->{'default'}                = "";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
     $OptionList[$i]->{'option'}                 = "strict-network";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
     $OptionList[$i]->{'option'}                 = "strict-operator";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
     $OptionList[$i]->{'option'}                 = "separator";
     $OptionList[$i]->{'default'}                = ";";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
     $OptionList[$i]->{'option'}                 = "or-separator";
     $OptionList[$i]->{'default'}                = "|";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
     $OptionList[$i]->{'option'}                 = "ref-separator";
     $OptionList[$i]->{'default'}                = "/";
     $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     return 0;
