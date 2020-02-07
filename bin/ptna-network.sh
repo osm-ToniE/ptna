@@ -379,9 +379,9 @@ then
         echo "END_DOWNLOAD=$END_DOWNLOAD"                >> $WORK_LOC/$DETAILS_FILE
         if [ -f $OSM_XML_FILE_ABSOLUTE ]
         then
-            echo "OSM_XML_FILE=$OSM_XML_FILE_ABSOLUTE"                                                                                      >> $WORK_LOC/$DETAILS_FILE
-            echo "OSM_XML_FILE_SIZE=$(ls -s --format=single-column $OSM_XML_FILE_ABSOLUTE | awk '{print $1}')"                              >> $WORK_LOC/$DETAILS_FILE
-            echo "OSM_XML_FILE_DATE=$(ls -l --time-style='+%Y-%m-%d %H:%M:%S %Z' $OSM_XML_FILE_ABSOLUTE | awk '{print $6 " " $7 " " $8}')"  >> $WORK_LOC/$DETAILS_FILE
+            echo "OSM_XML_FILE=$OSM_XML_FILE_ABSOLUTE"                                                         >> $WORK_LOC/$DETAILS_FILE
+            echo "OSM_XML_FILE_SIZE=$(ls -s --format=single-column $OSM_XML_FILE_ABSOLUTE | awk '{print $1}')" >> $WORK_LOC/$DETAILS_FILE
+            echo "OSM_XML_FILE_SIZE_BYTE=$(stat -c '%s' $OSM_XML_FILE_ABSOLUTE)"                               >> $WORK_LOC/$DETAILS_FILE
         fi
         echo "START_ANALYSIS=$START_ANALYSIS"            >> $WORK_LOC/$DETAILS_FILE
         echo "END_ANALYSIS=$END_ANALYSIS"                >> $WORK_LOC/$DETAILS_FILE
