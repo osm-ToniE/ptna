@@ -107,7 +107,6 @@ sub ListMessageStringsDetailsHtml {
 
     my $key     = undef;
     my $descr   = undef;
-    my $replace = html_escape(gettext( "Example" ));
     my $msg     = undef;
     my $opt     = undef;
     my $img     = undef;
@@ -138,9 +137,9 @@ sub ListMessageStringsDetailsHtml {
     foreach $key ( sort ( GetMessageKeys() ) ) {
         $msg   =  html_escape( GetMessageValue( $key, 'message'     ) );
         $opt   =  html_escape( GetMessageValue( $key, 'option'      ) );
-        $opt   =~ s| &#045;&#045;|<br />&#045;&#045;|g;
+        $opt   =~ s|\n|<br />|g;
         $descr =  html_escape( GetMessageValue( $key, 'description' ) );
-        $descr =~ s| \Q$replace\E|<br />\Q$replace\E|g;
+        $descr =~ s|\n|<br />|g;
         $img   =  GetMessageValue( $key, 'image' );
         printf STDOUT "            <tr class=\"message-tablerow\">\n";
         printf STDOUT "                <td class=\"message-text\">%s</td>\n",        $msg;
@@ -189,7 +188,6 @@ sub ListOptionStringsDetailsHtml {
     my $key     = undef;
     my $opt     = undef;
     my $descr   = undef;
-    my $replace = html_escape(gettext( "Example" ));
     my $img     = undef;
 
     printf STDOUT "\n";
@@ -216,7 +214,7 @@ sub ListOptionStringsDetailsHtml {
     foreach $key ( sort ( GetOptionKeys() ) ) {
         $opt   =  html_escape( GetOptionValue( $key, 'option'      ) );
         $descr =  html_escape( GetOptionValue( $key, 'description' ) );
-        $descr =~ s| \Q$replace\E|<br />\Q$replace\E|g;
+        $descr =~ s|\n|<br />|g;
         $img   =  GetOptionValue( $key, 'image' );
         printf STDOUT "            <tr class=\"message-tablerow\" id=\"option-%s\">\n", $opt;
         printf STDOUT "                <td class=\"message-option\">%s</td>\n",       $opt;
