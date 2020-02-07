@@ -126,10 +126,10 @@ then
         now=$(date '+%s')
         age=$(( $now - $last_mod ))
 
-        if [ "$age" -lt 3600 ]
+        if [ "$age" -lt 5400 ]
         then
             echo $(date "+%Y-%m-%d %H:%M:%S") "Skipping download via Overpass Query API to $OSM_XML_FILE_ABSOLUTE"
-            echo $(date "+%Y-%m-%d %H:%M:%S") "Age of file: $age seconds is less than 3600 seconds = 1 hour"
+            echo $(date "+%Y-%m-%d %H:%M:%S") "Age of file: $age seconds is less than 5400 seconds = 1.5 hours"
             echo $(date "+%Y-%m-%d %H:%M:%S") "Use option -f if you want to force the download"
             overpassquery="false"
         fi
