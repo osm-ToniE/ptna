@@ -739,7 +739,12 @@ sub InitMessageStrings {
     $MessageList[$i]->{'message'}                = ngettext( "PTv2 route: using motorway_link way without entering a motorway way", "PTv2 route: using motorway_link ways without entering a motorway way", 1 );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "check-motorway-link";
-    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'description'}            = gettext( "The vehicle uses a motorway entrance or exit without using a motorway/trunk road immediately after or before it." ) . ' ' .
+                                                   gettext( "This may indicate incorrect tagging of the highway=motorway_link." ) . ' ' .
+                                                   gettext( "But it can also point to a wrong route, e.g. if it was created automatically by a routing SW." ) . ' ' .
+                                                   gettext( "There still seems to be Routing-SW that prefers to use a short stretch of highway enrance to turn around after 20 m and route back to the previous route instead of taking the direct route (because a traffic light influences the result?)." ) . ' ' .
+                                                   "\n" .
+                                                   gettext( "Precondition: the route is without gap(s)." );
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
@@ -1094,6 +1099,7 @@ sub InitMessageStrings {
                                                    gettext( "Construction works on ways are usually mapped as the combination of 'higway'='construction' and 'construction'='xxx', where 'xxx' is the former value of the 'highway' key." ) . " " .
                                                    gettext( "When the construction works are finished, the key 'highway' is set to its former or a different value while the key 'construction' gets delete." ) . " " .
                                                    gettext( "Sometimes, deleting the key 'construction' is not carried out, which leaves an artifact and can be seen as an error." ) . " " .
+                                                   "\n" . 
                                                    gettext( "Example" ) . ": 'construction'='primary' " . 
                                                    gettext( "and" ) . " 'highway'='primary' " . 
                                                    gettext( "instead of" ) . " 'highway'='construction'.";
@@ -1108,6 +1114,7 @@ sub InitMessageStrings {
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
     $MessageList[$i]->{'option'}                 = "check-access";
     $MessageList[$i]->{'description'}            = gettext( "A conditional access is mapped to a way. PTNA will not analyze the value of the tag." ) . " " .
+                                                   "\n" . 
                                                    gettext( "Example" ) . ": 'psv:conditional=yes @ (Mo-Fr 05:00-22:00)'.";
     $MessageList[$i]->{'fix'}                    = gettext( "Please evaluate the value manually and decide whether a fix is needed or not." );
     $MessageList[$i]->{'image'}                  = "";
