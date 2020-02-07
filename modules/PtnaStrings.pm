@@ -253,7 +253,7 @@ sub InitMessageStrings {
     $MessageList[$i]->{'message'}                = gettext( "Missing route for ref='%s' and route='%s'" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
-    $MessageList[$i]->{'description'}            = getext( "This route is expected as '%s' (bus, tram, ...) according to CSV data, but does not exist in the given data set (see also: Overpass API Query)." );
+    $MessageList[$i]->{'description'}            = gettext( "This route is expected as '%s' ('bus', 'tram', ...) according to CSV data, but does not exist in the given data set (see also section: \"Overpass API Query\")." );
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
@@ -549,7 +549,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = ngettext( "PTv2 route: includes %d entire roundabout but uses only segments", "PTv2 route: includes %d entire roundabouts but uses only segments", 1 );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "check-sequence check-roundabout";
+    $MessageList[$i]->{'option'}                 = "check-sequence\ncheck-roundabout";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -740,7 +740,7 @@ sub InitMessageStrings {
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "check-motorway-link";
     $MessageList[$i]->{'description'}            = gettext( "The vehicle uses a motorway entrance or exit without using a motorway/trunk road immediately after or before it." ) . ' ' .
-                                                   gettext( "This may indicate incorrect tagging of the highway=motorway_link." ) . ' ' .
+                                                   gettext( "This may indicate incorrect tagging of the 'highway' = 'motorway_link'." ) . ' ' .
                                                    gettext( "But it can also point to a wrong route, e.g. if it was created automatically by a routing SW." ) . ' ' .
                                                    gettext( "There still seems to be Routing-SW that prefers to use a short stretch of highway enrance to turn around after 20 m and route back to the previous route instead of taking the direct route (because a traffic light influences the result?)." ) . ' ' .
                                                    "\n" .
@@ -781,7 +781,7 @@ sub InitMessageStrings {
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
     $MessageList[$i]->{'description'}            = gettext( "The Route is member of this Route-Master, but has no 'ref' tag (%s = ID of the route)." );
-    $MessageList[$i]->{'fix'}                    = gettext( "See section: \"Public Transport Lines without 'ref'\"." );
+    $MessageList[$i]->{'fix'}                    = gettext( "See section: \"Public Transport Lines without 'ref'\" of the analysis." );
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
@@ -987,7 +987,7 @@ sub InitMessageStrings {
     $MessageList[$i]->{'message'}                = gettext( "Route-Master with Relation(s) unequal to 'route'" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
-    $MessageList[$i]->{'description'}            = gettext( "The Route-Master relation contains relation(s) that are not of type "route"." );
+    $MessageList[$i]->{'description'}            = gettext( "The Route-Master relation contains relation(s) that are not of type 'route'." );
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
@@ -1005,7 +1005,7 @@ sub InitMessageStrings {
     $MessageList[$i]->{'message'}                = gettext( "Route-Master without Route(s)" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
-    $MessageList[$i]->{'description'}            = gettext ("The Route-Master relation does not contain a Route relation (should not happen with the used overpass API query, see: "The overpass API query does not return")." );
+    $MessageList[$i]->{'description'}            = gettext ("The Route-Master relation does not contain a Route relation (should not happen with the used Overpass API query, see: 'The overpass API query does not return')." );
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
@@ -1096,13 +1096,13 @@ sub InitMessageStrings {
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
     $MessageList[$i]->{'option'}                 = "check-access";
     $MessageList[$i]->{'description'}            = gettext( "The key 'construction' is set and the key 'highway' is not set to 'construction'." ) . " " .
-                                                   gettext( "Construction works on ways are usually mapped as the combination of 'higway'='construction' and 'construction'='xxx', where 'xxx' is the former value of the 'highway' key." ) . " " .
+                                                   gettext( "Construction works on ways are usually mapped as the combination of 'higway' = 'construction' and 'construction' = 'xxx', where 'xxx' is the former value of the 'highway' key." ) . " " .
                                                    gettext( "When the construction works are finished, the key 'highway' is set to its former or a different value while the key 'construction' gets delete." ) . " " .
                                                    gettext( "Sometimes, deleting the key 'construction' is not carried out, which leaves an artifact and can be seen as an error." ) . " " .
                                                    "\n" . 
-                                                   gettext( "Example" ) . ": 'construction'='primary' " . 
-                                                   gettext( "and" ) . " 'highway'='primary' " . 
-                                                   gettext( "instead of" ) . " 'highway'='construction'.";
+                                                   gettext( "Example" ) . ": 'construction' = 'primary' " . 
+                                                   gettext( "and" ) . " 'highway' = 'primary' " . 
+                                                   gettext( "instead of" ) . " 'highway' = 'construction'.";
     $MessageList[$i]->{'fix'}                    = gettext( "Check whether the construction works are finished or not." ) . " " .
                                                    gettext( "If yes, delete the key 'construction'." ) . " " .
                                                    gettext( "If no, check for an appropriate value of the key 'highway'." );
@@ -1113,9 +1113,8 @@ sub InitMessageStrings {
     $MessageList[$i]->{'message'}                = ngettext( "Route: unclear access (%s) to way", "Route: unclear access (%s) to ways", 1 );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
     $MessageList[$i]->{'option'}                 = "check-access";
-    $MessageList[$i]->{'description'}            = gettext( "A conditional access is mapped to a way. PTNA will not analyze the value of the tag." ) . " " .
-                                                   "\n" . 
-                                                   gettext( "Example" ) . ": 'psv:conditional=yes @ (Mo-Fr 05:00-22:00)'.";
+    $MessageList[$i]->{'description'}            = gettext( "A conditional access is mapped to a way. PTNA will not analyze the value of the tag." ) . "\n" . 
+                                                   gettext( "Example" ) . ": 'psv:conditional' = 'yes @ (Mo-Fr 05:00-22:00)'.";
     $MessageList[$i]->{'fix'}                    = gettext( "Please evaluate the value manually and decide whether a fix is needed or not." );
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
@@ -1124,10 +1123,10 @@ sub InitMessageStrings {
     $MessageList[$i]->{'message'}                = gettext( "Skipping further analysis ..." );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
-    $MessageList[$i]->{'description'}            = gettext( "This error is related to:" ) . " \"" . 
-                                                   gettext( "Error in input data: insufficient data for nodes" ) . "\" " . 
-                                                   gettext( "and" ) . " \"" . 
-                                                   gettext( "Error in input data: insufficient data for ways" ) . "\". " .
+    $MessageList[$i]->{'description'}            = gettext( "This error is related to:" ) . " '" . 
+                                                   gettext( "Error in input data: insufficient data for nodes" ) . "' " . 
+                                                   gettext( "and" ) . " '" . 
+                                                   gettext( "Error in input data: insufficient data for ways" ) . "'. " .
                                                    gettext( "Further analysis of this Route relation does not make sense without the data for ways and nodes." );
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -1220,22 +1219,22 @@ sub InitOptionStrings {
     $i++;
     $OptionList[$i]->{'option'}                 = "allow-coach";
     $OptionList[$i]->{'default'}                = "OFF";
-    $OptionList[$i]->{'description'}            = gettext( "route_master=\"coach\" und route=\"coach\" are allowed (although they are inofficial)." );
+    $OptionList[$i]->{'description'}            = gettext( "Allow 'route_master' = 'coach' und 'route' = 'coach' (although they are inofficial)." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "check-access";
     $OptionList[$i]->{'default'}                = "OFF";
-    $OptionList[$i]->{'description'}            = gettext( "Ways are used which cannot be used explicitly or implicitly (construction, access, ...) and where bus=\"yes\", bus=\"designated\", bus=\"official\", psv="yes", ... is not set." ) . ' ' .
-                                                  gettext( "This applies to barrier=\"...\" as well." );
+    $OptionList[$i]->{'description'}            = gettext( "Ways are used which cannot be used explicitly or implicitly ('construction', 'access', ...) and where 'bus' = 'yes', 'bus' = 'designated', 'bus' = 'official', 'psv' =' yes', ... is not set." ) . ' ' .
+                                                  gettext( "This applies to 'barrier' = '...' as well." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "check-bus-stop";
     $OptionList[$i]->{'default'}                = "OFF";
-    $OptionList[$i]->{'description'}            = getext( "highway=\"bus_stop\" can be set on nodes only, not on ways or areas." );
+    $OptionList[$i]->{'description'}            = gettext( "'highway' = 'bus_stop' can be set on nodes only, not on ways or areas." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
@@ -1249,14 +1248,14 @@ sub InitOptionStrings {
     $i++;
     $OptionList[$i]->{'option'}                 = "check-name";
     $OptionList[$i]->{'default'}                = "OFF";
-    $OptionList[$i]->{'description'}            = gettext( "Check of name=\"...ref: from => to\" respectively name=\"...ref: from => via => ... => to\"." );
+    $OptionList[$i]->{'description'}            = gettext( "Check of 'name' = '...ref: from => to' respectively 'name' ='...ref: from => via => ... => to'." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "check-name-relaxed";
     $OptionList[$i]->{'default'}                = "OFF";
-    $OptionList[$i]->{'description'}            = gettext( "More relaxed check of name=\"...: A => B\", where \"A\" must be part of 'from' and \"B\" must be part of 'to'." );
+    $OptionList[$i]->{'description'}            = gettext( "More relaxed check of 'name' ='...: A => B', where 'A' must be part of 'from' and 'B' must be part of 'to'." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
@@ -1270,14 +1269,14 @@ sub InitOptionStrings {
     $i++;
     $OptionList[$i]->{'option'}                 = "check-platform";
     $OptionList[$i]->{'default'}                = "OFF";
-    $OptionList[$i]->{'description'}            = gettext( "Missing bus=\"yes\", tram=\"yes\" or share_taxi=\"yes\" on public_transport=\"platform\"." );
+    $OptionList[$i]->{'description'}            = gettext( "Missing 'bus' = 'yes', 'tram' = 'yes' or 'share_taxi' = 'yes' on 'public_transport' = 'platform'." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "check-roundabouts";
     $OptionList[$i]->{'default'}                = "OFF";
-    $OptionList[$i]->{'description'}            = gettext( "Check whether roundabouts are used partially (segments only) or completely (JOSM does not check that)." );
+    $OptionList[$i]->{'description'}            = gettext( "Check whether roundabouts are used partially (segments only) or completely (while not being segmented)." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
@@ -1300,63 +1299,63 @@ sub InitOptionStrings {
     $i++;
     $OptionList[$i]->{'option'}                 = "check-stop-position";
     $OptionList[$i]->{'default'}                = "OFF";
-    $OptionList[$i]->{'description'}            = gettext( "Missing bus=\"yes\", tram=\"yes\" or share_taxi=\"yes\" on public_transport=\"stop_position\"." );
+    $OptionList[$i]->{'description'}            = gettext( "Missing 'bus' = 'yes', 'tram' = 'yes' or 'share_taxi' = 'yes' on 'public_transport' = 'stop_position'." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "check-version";
     $OptionList[$i]->{'default'}                = "OFF";
-    $OptionList[$i]->{'description'}            = gettext( "Check of public_transport:version=\"...\" on Route-Master and Route.";
+    $OptionList[$i]->{'description'}            = gettext( "Check of 'public_transport:version' = '...' on Route-Master and Route." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "coloured-sketchline";
     $OptionList[$i]->{'default'}                = "OFF";
-    $OptionList[$i]->{'description'}            = gettext( "SketchLine considers the value of colour=\"...\" of Route-Master or Route." );
+    $OptionList[$i]->{'description'}            = gettext( "SketchLine considers the value of 'colour'= '...' of Route-Master or Route." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "expect-network-long";
     $OptionList[$i]->{'default'}                = "OFF";
-    $OptionList[$i]->{'description'}            = gettext( "The value of network=\"...\" is expected in long form (see: network-long-regex)." );
+    $OptionList[$i]->{'description'}            = gettext( "The value of 'network' = '...' is expected in long form (see: network-long-regex)." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "expect-network-long-as";
     $OptionList[$i]->{'default'}                = "";
-    $OptionList[$i]->{'description'}            = gettext( "The value of network=\"...\" is expected in long form, as shown here." );
+    $OptionList[$i]->{'description'}            = gettext( "The value of 'network' = '...' is expected in long form, as shown here." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "expect-network-long-for";
     $OptionList[$i]->{'default'}                = "";
-    $OptionList[$i]->{'description'}            = gettext( "The value of network=\"...\" is expected in long form, instead of the short form shown here." );
+    $OptionList[$i]->{'description'}            = gettext( "The value of 'network' = '...' is expected in long form, instead of the short form shown here." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "expect-network-short";
     $OptionList[$i]->{'default'}                = "OFF";
-    $OptionList[$i]->{'description'}            = gettext( "The value of network=\"...\" is expected in short form (see: network-short-regex)." );
+    $OptionList[$i]->{'description'}            = gettext( "The value of 'network' = '...' is expected in short form (see: network-short-regex)." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "expect-network-short-as";
     $OptionList[$i]->{'default'}                = "";
-    $OptionList[$i]->{'description'}            = gettext( "The value of network=\"...\" is expected in short form, as shown here." );
+    $OptionList[$i]->{'description'}            = gettext( "The value of 'network' = '...' is expected in short form, as shown here." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
     $i++;
     $OptionList[$i]->{'option'}                 = "expect-network-short-for";
     $OptionList[$i]->{'default'}                = "";
-    $OptionList[$i]->{'description'}            = gettext( "The value of network=\"...\" is expected in short form, instead of the long form shown here." );
+    $OptionList[$i]->{'description'}            = gettext( "The value of 'network' = '...' is expected in short form, instead of the long form shown here." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     
@@ -1371,35 +1370,35 @@ sub InitOptionStrings {
     $OptionList[$i]->{'option'}                 = "multiple-ref-type-entries";
     $OptionList[$i]->{'default'}                = "analyze";
     $OptionList[$i]->{'description'}            = "allow|analyze|no" . "\n" .
-                                                  gettext( "If the combination of "ref;type" (e.g. "N8;bus") appears more than once in the route data, the tool expects that there are separate routes with identical "ref" and "type" in different cities/villages and that those can be distinguished by also checking "operator", "to" and "from"." );
+                                                  gettext( "If the combination of \"ref;type\" (e.g. \"N8;bus\") appears more than once in the route data, the tool expects that there are separate routes with identical 'ref' and 'type' in different cities/villages and that those can be distinguished by also checking 'operator', 'to' and 'from'." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
     $OptionList[$i]->{'option'}                 = "network-long-regex";
     $OptionList[$i]->{'default'}                = "";
-    $OptionList[$i]->{'description'}            = gettext( "The value of network=\"...\" of the Route-Master and Route relations must match this regular expression as 'long' form or can be empty (unset)." );
+    $OptionList[$i]->{'description'}            = gettext( "The value of 'network' = '...' of the Route-Master and Route relations must match this regular expression as 'long' form or can be empty (unset)." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
     $OptionList[$i]->{'option'}                 = "network-short-regex";
     $OptionList[$i]->{'default'}                = "";
-    $OptionList[$i]->{'description'}            = gettext( "The value of network=\"...\" of the Route-Master and Route relations must match this regular expression as 'short' form or can be empty (unset)." );
+    $OptionList[$i]->{'description'}            = gettext( "The value of 'network' = '...' of the Route-Master and Route relations must match this regular expression as 'short' form or can be empty (unset)." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
     $OptionList[$i]->{'option'}                 = "operator-regex";
     $OptionList[$i]->{'default'}                = "";
-    $OptionList[$i]->{'description'}            = gettext( "The value of operator=\"...\" of the Route-Master and Route relations must match this regular expression of can be emoty (unset)." );
+    $OptionList[$i]->{'description'}            = gettext( "The value of 'operator' = '...' of the Route-Master and Route relations must match this regular expression or can be empty (unset)." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
     $OptionList[$i]->{'option'}                 = "positive-notes";
     $OptionList[$i]->{'default'}                = "OFF";
-    $OptionList[$i]->{'description'}            = gettext( "Also show network:short=\"...\", network:guid=\"...\" and other tags and values." );
+    $OptionList[$i]->{'description'}            = gettext( "Also show 'network:short' = '...', 'network:guid' = '...' and other tags and values." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
@@ -1407,28 +1406,31 @@ sub InitOptionStrings {
     $OptionList[$i]->{'option'}                 = "ptv1-compatibility";
     $OptionList[$i]->{'default'}                = "no";
     $OptionList[$i]->{'description'}            = "allow|no|show" . "\n" .
-                                                  gettext( "highway=\"bus_stop\" on a point beside the road is treated as public_transport=\"platform\" if 'role'='platform." );
+                                                  gettext( "'highway' = 'bus_stop' on a point beside the road is treated as 'public_transport' = 'platform' if 'role' = 'platform'." ) . "\n" .
+                                                  "allow: " . gettext( "silently assume compatibility with legacy bus-stops (aka: PTv1)" ) . "\n" .
+                                                  "no: "    . gettext( "no compatibility with legacy bus-stops (aka: PTv1)" ) . "\n" .
+                                                  "show: "  . gettext( "assume and show compatibility with legacy bus-stops (aka: PTv1)" );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
     $OptionList[$i]->{'option'}                 = "relaxed-begin-end-for";
     $OptionList[$i]->{'default'}                = "";
-    $OptionList[$i]->{'description'}            = gettext( "Relaxed check of begin and end of routes regarding stop positions (i.e. for train, tram, light_rail)." );
+    $OptionList[$i]->{'description'}            = gettext( "Relaxed check of begin and end of routes regarding stop positions (i.e. for 'train', 'tram', 'light_rail')." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
     $OptionList[$i]->{'option'}                 = "strict-network";
     $OptionList[$i]->{'default'}                = "OFF";
-    $OptionList[$i]->{'description'}            = gettext( "Do not consider Route-Master and Route relations with empty network=\"\"." );
+    $OptionList[$i]->{'description'}            = gettext( "Do not consider Route-Master and Route relations with empty 'network'." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
     $OptionList[$i]->{'option'}                 = "strict-operator";
     $OptionList[$i]->{'default'}                = "OFF";
-    $OptionList[$i]->{'description'}            = gettext( "Do not consider Route-Master and Route relations with empty operator=\"\"." );
+    $OptionList[$i]->{'description'}            = gettext( "Do not consider Route-Master and Route relations with empty 'operator'." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 

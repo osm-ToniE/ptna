@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-01-27 22:10+0100\n"
-"PO-Revision-Date: 2020-01-25 14:24+0100\n"
+"POT-Creation-Date: 2020-02-07 22:03+0100\n"
+"PO-Revision-Date: 2020-02-07 22:14+0100\n"
 "Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
 "Language-Team: French (https://www.transifex.com/jungle-bus/teams/97874/"
 "fr/)\n"
@@ -1063,15 +1063,81 @@ msgid ""
 "the member ways and member nodes of this Route have not been included."
 msgstr ""
 
+#, perl-format
+msgid ""
+"This route is expected as '%s' ('bus', 'tram', ...) according to CSV data, "
+"but does not exist in the given data set (see also section: \"Overpass API "
+"Query\")."
+msgstr ""
+
+msgid ""
+"The vehicle uses a motorway entrance or exit without using a motorway/trunk "
+"road immediately after or before it."
+msgstr ""
+
+msgid "This may indicate incorrect tagging of the 'highway' = 'motorway_link'."
+msgstr ""
+
+msgid ""
+"But it can also point to a wrong route, e.g. if it was created automatically "
+"by a routing SW."
+msgstr ""
+
+msgid ""
+"There still seems to be Routing-SW that prefers to use a short stretch of "
+"highway enrance to turn around after 20 m and route back to the previous "
+"route instead of taking the direct route (because a traffic light influences "
+"the result?)."
+msgstr ""
+
+msgid "Precondition: the route is without gap(s)."
+msgstr ""
+
+#, perl-format
+msgid ""
+"The Route is member of this Route-Master, but has no 'ref' tag (%s = ID of "
+"the route)."
+msgstr ""
+
+msgid "See section: \"Public Transport Lines without 'ref'\" of the analysis."
+msgstr ""
+
+msgid ""
+"This Route-Master has less route relations than listed here (Route(s) not "
+"listed in the Route-Master?)."
+msgstr ""
+
+msgid ""
+"This route master has more route relations than listed here (route without "
+"or with other 'ref'/'route'/'network' tag?)."
+msgstr ""
+
+msgid "The Route-Master relation contains stops or train/bus stops."
+msgstr ""
+
+msgid ""
+"The Route-Master relation contains relation(s) that are not of type 'route'."
+msgstr ""
+
+msgid ""
+"The Route-Master relation contains streets/railways/trains/bus stops/..."
+msgstr ""
+
+msgid ""
+"The Route-Master relation does not contain a Route relation (should not "
+"happen with the used Overpass API query, see: 'The overpass API query does "
+"not return')."
+msgstr ""
+
 msgid ""
 "The key 'construction' is set and the key 'highway' is not set to "
 "'construction'."
 msgstr ""
 
 msgid ""
-"Construction works on ways are usually mapped as the combination of "
-"'higway'='construction' and 'construction'='xxx', where 'xxx' is the former "
-"value of the 'highway' key."
+"Construction works on ways are usually mapped as the combination of 'higway' "
+"= 'construction' and 'construction' = 'xxx', where 'xxx' is the former value "
+"of the 'highway' key."
 msgstr ""
 
 msgid ""
@@ -1116,6 +1182,22 @@ msgid ""
 "for ways and nodes."
 msgstr ""
 
+msgid ""
+"Route-Master: There is more than one Route-Master for this line = "
+"'ref' (different 'network'-tags?)."
+msgstr ""
+
+msgid ""
+"Route: There is more than one Route Master for this line = 'ref' plus the "
+"parent Route Master of this route."
+msgstr ""
+
+#, perl-format
+msgid ""
+"This Route has more than one parent Route-Master (%s = list of Route-"
+"Masters)."
+msgstr ""
+
 #, perl-format
 msgid "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'"
 msgstr ""
@@ -1124,6 +1206,165 @@ msgstr ""
 msgid ""
 "Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line: "
 "'%s'"
+msgstr ""
+
+msgid ""
+"Allow 'route_master' = 'coach' und 'route' = 'coach' (although they are "
+"inofficial)."
+msgstr ""
+
+msgid ""
+"Ways are used which cannot be used explicitly or implicitly ('construction', "
+"'access', ...) and where 'bus' = 'yes', 'bus' = 'designated', 'bus' = "
+"'official', 'psv' =' yes', ... is not set."
+msgstr ""
+
+msgid "This applies to 'barrier' = '...' as well."
+msgstr ""
+
+msgid "'highway' = 'bus_stop' can be set on nodes only, not on ways or areas."
+msgstr ""
+
+msgid ""
+"Check whether motorway links are used without actually using a motorway/"
+"trunk road."
+msgstr ""
+
+msgid ""
+"Check of 'name' = '...ref: from => to' respectively 'name' ='...ref: from => "
+"via => ... => to'."
+msgstr ""
+
+msgid ""
+"More relaxed check of 'name' ='...: A => B', where 'A' must be part of "
+"'from' and 'B' must be part of 'to'."
+msgstr ""
+
+msgid ""
+"Check the value of 'network', ... whether the separator is actually the "
+"semicolon ';' (w/o Blanks)."
+msgstr ""
+
+msgid ""
+"Missing 'bus' = 'yes', 'tram' = 'yes' or 'share_taxi' = 'yes' on "
+"'public_transport' = 'platform'."
+msgstr ""
+
+msgid ""
+"Check whether roundabouts are used partially (segments only) or completely "
+"(while not being segmented)."
+msgstr ""
+
+msgid ""
+"Check whether the tag 'route_ref' on the stops of a route includes the value "
+"of 'ref' of the route (provided 'route_ref' exists)."
+msgstr ""
+
+msgid ""
+"Check also whether the tag 'ref' on the stops of a route accidentially "
+"includes the value of 'ref' of the route."
+msgstr ""
+
+msgid ""
+"Check also for tags 'bus_lines', 'bus_routes', 'lines', 'routes' on the "
+"stops of a route. Those should be replaced by the tag 'route_ref'."
+msgstr ""
+
+msgid "Check sequence of ways, are there any gaps?"
+msgstr ""
+
+msgid ""
+"Missing 'bus' = 'yes', 'tram' = 'yes' or 'share_taxi' = 'yes' on "
+"'public_transport' = 'stop_position'."
+msgstr ""
+
+msgid "Check of 'public_transport:version' = '...' on Route-Master and Route."
+msgstr ""
+
+msgid ""
+"SketchLine considers the value of 'colour'= '...' of Route-Master or Route."
+msgstr ""
+
+msgid ""
+"The value of 'network' = '...' is expected in long form (see: network-long-"
+"regex)."
+msgstr ""
+
+msgid "The value of 'network' = '...' is expected in long form, as shown here."
+msgstr ""
+
+msgid ""
+"The value of 'network' = '...' is expected in long form, instead of the "
+"short form shown here."
+msgstr ""
+
+msgid ""
+"The value of 'network' = '...' is expected in short form (see: network-short-"
+"regex)."
+msgstr ""
+
+msgid ""
+"The value of 'network' = '...' is expected in short form, as shown here."
+msgstr ""
+
+msgid ""
+"The value of 'network' = '...' is expected in short form, instead of the "
+"long form shown here."
+msgstr ""
+
+msgid "Limits the number of identical error and note messages for a relation."
+msgstr ""
+
+msgid ""
+"If the combination of \"ref;type\" (e.g. \"N8;bus\") appears more than once "
+"in the route data, the tool expects that there are separate routes with "
+"identical 'ref' and 'type' in different cities/villages and that those can "
+"be distinguished by also checking 'operator', 'to' and 'from'."
+msgstr ""
+
+msgid ""
+"The value of 'network' = '...' of the Route-Master and Route relations must "
+"match this regular expression as 'long' form or can be empty (unset)."
+msgstr ""
+
+msgid ""
+"The value of 'network' = '...' of the Route-Master and Route relations must "
+"match this regular expression as 'short' form or can be empty (unset)."
+msgstr ""
+
+msgid ""
+"The value of 'operator' = '...' of the Route-Master and Route relations must "
+"match this regular expression or can be empty (unset)."
+msgstr ""
+
+msgid ""
+"Also show 'network:short' = '...', 'network:guid' = '...' and other tags and "
+"values."
+msgstr ""
+
+msgid ""
+"'highway' = 'bus_stop' on a point beside the road is treated as "
+"'public_transport' = 'platform' if 'role' = 'platform'."
+msgstr ""
+
+msgid "silently assume compatibility with legacy bus-stops (aka: PTv1)"
+msgstr ""
+
+msgid "no compatibility with legacy bus-stops (aka: PTv1)"
+msgstr ""
+
+msgid "assume and show compatibility with legacy bus-stops (aka: PTv1)"
+msgstr ""
+
+msgid ""
+"Relaxed check of begin and end of routes regarding stop positions (i.e. for "
+"'train', 'tram', 'light_rail')."
+msgstr ""
+
+msgid "Do not consider Route-Master and Route relations with empty 'network'."
+msgstr ""
+
+msgid "Do not consider Route-Master and Route relations with empty 'operator'."
 msgstr ""
 
 #~ msgid ""
