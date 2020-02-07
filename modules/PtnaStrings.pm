@@ -253,7 +253,7 @@ sub InitMessageStrings {
     $MessageList[$i]->{'message'}                = gettext( "Missing route for ref='%s' and route='%s'" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
-    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'description'}            = getext( "This route is expected as '%s' (bus, tram, ...) according to CSV data, but does not exist in the given data set (see also: Overpass API Query)." );
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
@@ -780,8 +780,8 @@ sub InitMessageStrings {
     $MessageList[$i]->{'message'}                = gettext( "Route exists in the given data set but 'ref' tag is not set: %s" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
-    $MessageList[$i]->{'description'}            = "";
-    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'description'}            = gettext( "The Route is member of this Route-Master, but has no 'ref' tag (%s = ID of the route)." );
+    $MessageList[$i]->{'fix'}                    = gettext( "See section: \"Public Transport Lines without 'ref'\"." );
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
@@ -933,7 +933,7 @@ sub InitMessageStrings {
     $MessageList[$i]->{'message'}                = ngettext( "Route-Master has less Routes than actually match (%d versus %d) in the given data set", "Route-Masters have less Routes than actually match (%d versus %d) in the given data set", 1 );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
-    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'description'}            = gettext( "This Route-Master has less route relations than listed here (Route(s) not listed in the Route-Master?)." );
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
@@ -942,7 +942,7 @@ sub InitMessageStrings {
     $MessageList[$i]->{'message'}                = ngettext( "Route-Master has more Routes than actually match (%d versus %d) in the given data set", "Route-Masters have more Routes than actually match (%d versus %d) in the given data set", 1 );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
-    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'description'}            = gettext( "This route master has more route relations than listed here (route without or with other 'ref'/'route'/'network' tag?)." );
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
@@ -978,7 +978,7 @@ sub InitMessageStrings {
     $MessageList[$i]->{'message'}                = gettext( "Route-Master with Node(s)" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
-    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'description'}            = gettext( "The Route-Master relation contains stops or train/bus stops." );
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
@@ -987,7 +987,7 @@ sub InitMessageStrings {
     $MessageList[$i]->{'message'}                = gettext( "Route-Master with Relation(s) unequal to 'route'" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
-    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'description'}            = gettext( "The Route-Master relation contains relation(s) that are not of type "route"." );
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
@@ -996,7 +996,7 @@ sub InitMessageStrings {
     $MessageList[$i]->{'message'}                = gettext( "Route-Master with Way(s)" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
-    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'description'}            = gettext( "The Route-Master relation contains streets/railways/trains/bus stops/..." );
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
@@ -1005,7 +1005,7 @@ sub InitMessageStrings {
     $MessageList[$i]->{'message'}                = gettext( "Route-Master without Route(s)" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
-    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'description'}            = gettext ("The Route-Master relation does not contain a Route relation (should not happen with the used overpass API query, see: "The overpass API query does not return")." );
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
@@ -1146,7 +1146,8 @@ sub InitMessageStrings {
     $MessageList[$i]->{'message'}                = gettext( "There is more than one Route-Master" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
-    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'description'}            = gettext( "Route-Master: There is more than one Route-Master for this line = 'ref' (different 'network'-tags?)." ) . "\n" .
+                                                   gettext( "Route: There is more than one Route Master for this line = 'ref' plus the parent Route Master of this route." );
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
@@ -1155,7 +1156,7 @@ sub InitMessageStrings {
     $MessageList[$i]->{'message'}                = gettext( "This Route is direct member of more than one Route-Master: %s" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
-    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'description'}            = gettext( "This Route has more than one parent Route-Master (%s = list of Route-Masters)." );
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
