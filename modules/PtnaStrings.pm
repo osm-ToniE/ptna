@@ -1212,7 +1212,7 @@ sub InitOptionStrings {
     $i++;
     $OptionList[$i]->{'option'}                 = "language";
     $OptionList[$i]->{'default'}                = "en";
-    $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'description'}            = gettext( "Defines the language for the output." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
@@ -1313,7 +1313,7 @@ sub InitOptionStrings {
     $i++;
     $OptionList[$i]->{'option'}                 = "coloured-sketchline";
     $OptionList[$i]->{'default'}                = "OFF";
-    $OptionList[$i]->{'description'}            = gettext( "SketchLine considers the value of 'colour'= '...' of Route-Master or Route." );
+    $OptionList[$i]->{'description'}            = gettext( "SketchLine considers the value of 'colour' = '...' of Route-Master or Route." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
     

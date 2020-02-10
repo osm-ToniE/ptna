@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-02-07 22:03+0100\n"
+"POT-Creation-Date: 2020-02-10 18:55+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,9 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-
-msgid "Example"
-msgstr ""
 
 msgid "Message"
 msgstr ""
@@ -1017,6 +1014,9 @@ msgid ""
 "an artifact and can be seen as an error."
 msgstr ""
 
+msgid "Example"
+msgstr ""
+
 msgid "and"
 msgstr ""
 
@@ -1073,6 +1073,9 @@ msgstr ""
 msgid ""
 "Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line: "
 "'%s'"
+msgstr ""
+
+msgid "Defines the language for the output."
 msgstr ""
 
 msgid ""
@@ -1149,7 +1152,7 @@ msgid "Check of 'public_transport:version' = '...' on Route-Master and Route."
 msgstr ""
 
 msgid ""
-"SketchLine considers the value of 'colour'= '...' of Route-Master or Route."
+"SketchLine considers the value of 'colour' = '...' of Route-Master or Route."
 msgstr ""
 
 msgid ""
