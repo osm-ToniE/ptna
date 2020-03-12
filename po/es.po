@@ -5,15 +5,16 @@
 #
 # Translators:
 # ToniE <osm-ToniE@web.de>, 2019
+# Jorge Sanz <sanchi2@gmail.com>, 2020
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-02-10 18:55+0100\n"
+"POT-Creation-Date: 2020-03-12 19:07+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: ToniE <osm-ToniE@web.de>, 2019\n"
+"Last-Translator: Jorge Sanz <sanchi2@gmail.com>, 2020\n"
 "Language-Team: Spanish (https://www.transifex.com/jungle-bus/teams/97874/"
 "es/)\n"
 "Language: es\n"
@@ -23,88 +24,88 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Message"
-msgstr ""
+msgstr "Mensaje"
 
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 msgid "Option"
-msgstr ""
+msgstr "Opción"
 
 msgid "Description"
-msgstr ""
+msgstr "Descripción"
 
 msgid "How to fix it"
 msgstr "Como arreglarlo"
 
 msgid "Image"
-msgstr ""
+msgstr "Imagen"
 
 msgid "Default Value"
-msgstr ""
+msgstr "Valor por defecto"
 
 msgid "Language test"
-msgstr ""
+msgstr "Prueba de idioma"
 
 msgid "Line (ref=)"
-msgstr ""
+msgstr "Línea (ref=)"
 
 msgid "Relation (id=)"
-msgstr ""
+msgstr "Relación (id=)"
 
 msgid "Relations"
-msgstr ""
+msgstr "Relaciones"
 
 msgid "Name (name=)"
-msgstr ""
+msgstr "Nombre (name=)"
 
 msgid "Number"
-msgstr ""
+msgstr "Número"
 
 msgid "Network (network=)"
-msgstr ""
+msgstr "Red (network=)"
 
 msgid "Operator (operator=)"
-msgstr ""
+msgstr "Operador (operator=)"
 
 msgid "From (from=)"
-msgstr ""
+msgstr "Desde (from=)"
 
 msgid "Via (via=)"
-msgstr ""
+msgstr "Vía (via=)"
 
 msgid "To (to=)"
-msgstr ""
+msgstr "A (to=)"
 
 msgid "Errors"
-msgstr ""
+msgstr "Errores"
 
 msgid "Notes"
-msgstr ""
+msgstr "Notas"
 
 msgid "Type (type=)"
-msgstr ""
+msgstr "Tipo (type=)"
 
 msgid "Vehicle (route(_master)=)"
 msgstr ""
 
 msgid "PTv"
-msgstr ""
+msgstr "PTv"
 
 msgid "Comment"
-msgstr ""
+msgstr "Comentario"
 
 msgid "From"
-msgstr ""
+msgstr "Desde"
 
 msgid "To"
-msgstr ""
+msgstr "A"
 
 msgid "Operator"
-msgstr ""
+msgstr "Operador"
 
 msgid "Bus"
-msgstr ""
+msgstr "Bus"
 
 msgid "Coach"
 msgstr ""
@@ -113,31 +114,31 @@ msgid "Share-Taxi"
 msgstr ""
 
 msgid "Train/Suburban-Train"
-msgstr ""
+msgstr "Tren/Tren-suburbano"
 
 msgid "Tram/Streetcar"
-msgstr ""
+msgstr "Tranvía"
 
 msgid "Subway/Underground"
-msgstr ""
+msgstr "Metro"
 
 msgid "Light-Rail"
-msgstr ""
+msgstr "Tren Ligero"
 
 msgid "Trolley Bus"
-msgstr ""
+msgstr "Trolebús"
 
 msgid "Ferry"
-msgstr ""
+msgstr "Ferry"
 
 msgid "Mono-Rail"
-msgstr ""
+msgstr "Monorail"
 
 msgid "Aerialway"
 msgstr ""
 
 msgid "Funicular"
-msgstr ""
+msgstr "Funicular"
 
 #, perl-format
 msgid "Missing route for ref='%s' and route='%s'"
@@ -148,25 +149,25 @@ msgstr ""
 
 #. xgettext: This section will list all routes which could not be clearly assigned because the combination of "ref;type" appears more than once and information like 'operator', 'from' and 'to' is missing
 msgid "Not clearly assigned routes"
-msgstr ""
+msgstr "Rutas no asignadas claramente"
 
 msgid "Other Public Transport Lines"
-msgstr ""
+msgstr "Otras Líneas de Transporte Público"
 
 msgid "Public Transport Lines"
-msgstr ""
+msgstr "Líneas de Transporte Público"
 
 msgid "Public Transport Lines without 'ref'"
-msgstr ""
+msgstr "Líneas de Transporte Público sin 'ref'"
 
 msgid "More Relations"
-msgstr ""
+msgstr "Más Relaciones"
 
 msgid "Details for 'network'-Values"
-msgstr ""
+msgstr "Detalles para 'network'-Valores"
 
 msgid "There is more than one Route-Master"
-msgstr ""
+msgstr "Hay más de una Route-Master"
 
 #, perl-format
 msgid ""
@@ -394,25 +395,25 @@ msgid "'public_transport:version' is not set to '2'"
 msgstr ""
 
 msgid "Skipping further analysis ..."
-msgstr ""
+msgstr "Omitiendo análisis adicionales ..."
 
 msgid "Route without Way(s)"
-msgstr ""
+msgstr "Ruta sin Vía(s)"
 
 msgid "Route with only 1 Way"
-msgstr ""
+msgstr "Ruta con 1 sola vía"
 
 msgid "Route without Node(s)"
-msgstr ""
+msgstr "Ruta sin Nodo(s)"
 
 msgid "Route with only 1 Node"
-msgstr ""
+msgstr "Ruta con solo 1 Nodo"
 
 msgid "Route with Relation(s)"
-msgstr ""
+msgstr "Ruta con Relación(s)"
 
 msgid "'public_transport:version' is neither '1' nor '2'"
-msgstr ""
+msgstr "'public_transport:version' no es ni '1' ni '2'"
 
 msgid ""
 "PTv2 route: there are no 'public_transport' = 'stop_position' and no "
@@ -784,7 +785,7 @@ msgid ""
 msgstr ""
 
 msgid "Relation"
-msgstr ""
+msgstr "Relación"
 
 msgid ""
 "'network', 'operator', as well as 'from' and 'to' should be tagged with the "
@@ -797,7 +798,7 @@ msgid ""
 msgstr ""
 
 msgid "CSV file"
-msgstr ""
+msgstr "Archivo CSV"
 
 msgid ""
 "'Operator', as well as 'From' and 'To' should be specified in the CSV file "
@@ -816,10 +817,10 @@ msgid "provides services in City-A"
 msgstr ""
 
 msgid "First Avenue"
-msgstr ""
+msgstr "Primera Avenida"
 
 msgid "Sixth Avenue"
-msgstr ""
+msgstr "Sexta Avenida"
 
 msgid "Operator-X"
 msgstr ""

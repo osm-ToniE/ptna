@@ -9,15 +9,16 @@
 # Julien Lepiller <transifex@lepiller.eu>, 2019
 # Adrien Pavie <panieravide@riseup.net>, 2019
 # ToniE <osm-ToniE@web.de>, 2020
+# Rainer Elbing <r.elbing@gmx.de>, 2020
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-02-10 18:55+0100\n"
+"POT-Creation-Date: 2020-03-12 19:07+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: ToniE <osm-ToniE@web.de>, 2020\n"
+"Last-Translator: Rainer Elbing <r.elbing@gmx.de>, 2020\n"
 "Language-Team: French (https://www.transifex.com/jungle-bus/teams/97874/"
 "fr/)\n"
 "Language: fr\n"
@@ -913,7 +914,7 @@ msgid ""
 msgstr ""
 
 msgid "CSV file"
-msgstr ""
+msgstr "fichier csv"
 
 msgid ""
 "'Operator', as well as 'From' and 'To' should be specified in the CSV file "
