@@ -2098,11 +2098,11 @@ sub analyze_route_environment {
                 $issues_string = gettext( "'network' = '%s' of Route does not fit to 'network' = '%s' of Route-Master: %s" );
                 push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($relation_ptr->{'tag'}->{'network'}), html_escape($RELATIONS{$route_master_rel_id}->{'tag'}->{'network'}), printRelationTemplate($route_master_rel_id)) );
             }
-#            if ( $relation_ptr->{'tag'}->{'operator'} && $RELATIONS{$route_master_rel_id}->{'tag'}->{'operator'} &&
-#                 $relation_ptr->{'tag'}->{'operator'} ne $RELATIONS{$route_master_rel_id}->{'tag'}->{'operator'}     ) {
-#                $issues_string = gettext( "'operator' = '%s' of Route does not fit to 'operator' = '%s' of Route-Master: %s" );
-#                push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($relation_ptr->{'tag'}->{'operator'}), html_escape($RELATIONS{$route_master_rel_id}->{'tag'}->{'operator'}), printRelationTemplate($route_master_rel_id)) );
-#            }
+            if ( $relation_ptr->{'tag'}->{'operator'} && $RELATIONS{$route_master_rel_id}->{'tag'}->{'operator'} &&
+                 $relation_ptr->{'tag'}->{'operator'} ne $RELATIONS{$route_master_rel_id}->{'tag'}->{'operator'}     ) {
+                $issues_string = gettext( "'operator' = '%s' of Route does not fit to 'operator' = '%s' of Route-Master: %s" );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($relation_ptr->{'tag'}->{'operator'}), html_escape($RELATIONS{$route_master_rel_id}->{'tag'}->{'operator'}), printRelationTemplate($route_master_rel_id)) );
+            }
             if ( $relation_ptr->{'tag'}->{'colour'} ) {
                 if ( $RELATIONS{$route_master_rel_id}->{'tag'}->{'colour'} ) {
                     if ( uc($relation_ptr->{'tag'}->{'colour'}) ne uc($RELATIONS{$route_master_rel_id}->{'tag'}->{'colour'}) ) {
