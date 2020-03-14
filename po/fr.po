@@ -11,14 +11,13 @@
 # ToniE <osm-ToniE@web.de>, 2020
 # Rainer Elbing <r.elbing@gmx.de>, 2020
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-03-12 19:07+0100\n"
-"PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: Rainer Elbing <r.elbing@gmx.de>, 2020\n"
+"POT-Creation-Date: 2020-03-14 14:21+0100\n"
+"PO-Revision-Date: 2020-03-14 14:24+0100\n"
+"Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
 "Language-Team: French (https://www.transifex.com/jungle-bus/teams/97874/"
 "fr/)\n"
 "Language: fr\n"
@@ -26,6 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.2.1\n"
 
 msgid "Message"
 msgstr "Message"
@@ -342,6 +342,14 @@ msgid ""
 msgstr ""
 "Le réseau 'network' = '%s' du parcours ne correspond pas au réseau 'network' "
 "= '%s' de la ligne :  %s"
+
+#, perl-format
+msgid ""
+"'operator' = '%s' of Route does not fit to 'operator' = '%s' of Route-"
+"Master: %s"
+msgstr ""
+"Le réseau 'operator' = '%s' du parcours ne correspond pas au réseau "
+"'operator' = '%s' de la ligne :  %s"
 
 #, perl-format
 msgid "'colour' of Route does not fit to 'colour' of Route-Master: %s"
@@ -914,7 +922,7 @@ msgid ""
 msgstr ""
 
 msgid "CSV file"
-msgstr "fichier csv"
+msgstr "Fichier csv"
 
 msgid ""
 "'Operator', as well as 'From' and 'To' should be specified in the CSV file "
