@@ -4371,7 +4371,7 @@ sub CheckNameRefFromViaToPTV2 {
                       $name =~ m/^(.*):\s*(.*?)\s*(?:=>|->|→|⇒)\s*(.*)$/
                     )
                  )
-               ){
+               ) {
 
                 my $ref_in_name       = $1;
                 my $from_in_name      = $2;
@@ -4423,7 +4423,11 @@ sub CheckNameRefFromViaToPTV2 {
                 if ( $from ) {
                     if ( $from_in_name ne $from ) {
                         if ( $check_name_relaxed ) {
-                            if ( index($from,$from_in_name) == -1 ) {
+                            my $temp_from         = $from;
+                            my $temp_from_in_name = $from_in_name;
+                            $temp_from            =~ s/,//g;
+                            $temp_from_in_name    =~ s/,//g;
+                            if ( index($temp_from,$temp_from_in_name) == -1 ) {
                                 $notes_string = gettext( "PTv2 route: from-part ('%s') of 'name' is not part of 'from' = '%s'" );
                                 push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, html_escape($from_in_name), html_escape($from)) );
                                 $return_code++;
@@ -4443,7 +4447,11 @@ sub CheckNameRefFromViaToPTV2 {
                 if ( $to ) {
                     if ( $to_in_name ne $to ) {
                         if ( $check_name_relaxed ) {
-                            if ( index($to,$to_in_name) == -1 ) {
+                            my $temp_to         = $to;
+                            my $temp_to_in_name = $to_in_name;
+                            $temp_to            =~ s/,//g;
+                            $temp_to_in_name    =~ s/,//g;
+                            if ( index($temp_to,$temp_to_in_name) == -1 ) {
                                 $notes_string = gettext( "PTv2 route: to-part ('%s') of 'name' is not part of 'to' = '%s'" );
                                 push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, html_escape($to_in_name), html_escape($to)) );
                                 $return_code++;
