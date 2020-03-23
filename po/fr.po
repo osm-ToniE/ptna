@@ -9,15 +9,15 @@
 # Julien Lepiller <transifex@lepiller.eu>, 2019
 # Adrien Pavie <panieravide@riseup.net>, 2019
 # ToniE <osm-ToniE@web.de>, 2020
-# Rainer Elbing <r.elbing@gmx.de>, 2020
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-03-14 16:00+0100\n"
-"PO-Revision-Date: 2020-03-14 14:24+0100\n"
-"Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
+"POT-Creation-Date: 2020-03-23 11:33+0100\n"
+"PO-Revision-Date: 2019-04-05 14:25+0000\n"
+"Last-Translator: ToniE <osm-ToniE@web.de>, 2020\n"
 "Language-Team: French (https://www.transifex.com/jungle-bus/teams/97874/"
 "fr/)\n"
 "Language: fr\n"
@@ -25,7 +25,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.2.1\n"
 
 msgid "Message"
 msgstr "Message"
@@ -233,14 +232,6 @@ msgid ""
 msgstr ""
 "La ligne a la valeur 'network' = '%s' qui n'est pas considérée comme "
 "pertinente : %s"
-
-#, perl-format
-msgid ""
-"Route has different 'ref' = '%s' than Route-Master 'ref' = '%s' - this "
-"should be avoided: %s"
-msgstr ""
-"Le parcours a le code de ligne 'ref' = '%s' alors que la ligne a le code de "
-"ligne 'ref' = '%s', cela devrait être évité : %s"
 
 #, perl-format
 msgid "Route has not matching 'ref' = '%s': %s"
@@ -1115,6 +1106,17 @@ msgid ""
 msgstr ""
 
 msgid "See section: \"Public Transport Lines without 'ref'\" of the analysis."
+msgstr ""
+
+#, perl-format
+msgid ""
+"Route has different 'ref' = '%s' than Route-Master 'ref' = '%s' - this "
+"should be avoided: %s"
+msgstr ""
+"Le parcours a le code de ligne 'ref' = '%s' alors que la ligne a le code de "
+"ligne 'ref' = '%s', cela devrait être évité : %s"
+
+msgid "This is currently deactivated."
 msgstr ""
 
 msgid ""

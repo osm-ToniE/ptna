@@ -1916,8 +1916,9 @@ sub analyze_route_master_environment {
                                             }
                                             if ( $members_ref ne $masters_ref ) {
                                                 # 'members_ref' is valid (in the list) but differs from 'ref' of route-master, so we have at least two refs in the list (a real list)
-                                                $notes_string = gettext( "Route has different 'ref' = '%s' than Route-Master 'ref' = '%s' - this should be avoided: %s" );
-                                                push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, $members_ref, $masters_ref, printRelationTemplate($member_ref->{'ref'}) ) );
+                                                #$notes_string = gettext( "Route has different 'ref' = '%s' than Route-Master 'ref' = '%s' - this should be avoided: %s" );
+                                                #push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, $members_ref, $masters_ref, printRelationTemplate($member_ref->{'ref'}) ) );
+                                                ;
                                             }
                                         } else {
                                             # 'ref' tag is set but is not valid, not in list
@@ -2082,8 +2083,9 @@ sub analyze_route_environment {
                     #
                     if ( $routes_ref && $routes_ref ne $masters_ref ) {
                         # 'masters_ref' is valid (in the list) but differs from 'ref' of route, so we have at least two refs in the list (a real list)
-                        $notes_string = gettext( "Route has different 'ref' = '%s' than Route-Master 'ref' = '%s' - this should be avoided: %s" );
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, $routes_ref, $masters_ref, printRelationTemplate($route_master_rel_id) ) );
+                        #$notes_string = gettext( "Route has different 'ref' = '%s' than Route-Master 'ref' = '%s' - this should be avoided: %s" );
+                        #push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, $routes_ref, $masters_ref, printRelationTemplate($route_master_rel_id) ) );
+                        ;
                     }
                 } else {
                     $issues_string = gettext( "Route-Master has not matching 'ref' = '%s': %s" );

@@ -4,17 +4,17 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 # Translators:
-# Alexandre Oliveira <rockytvbr@gmail.com>, 2019
 # ToniE <osm-ToniE@web.de>, 2020
+# Alexandre Oliveira <rockytvbr@gmail.com>, 2020
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-03-14 16:00+0100\n"
+"POT-Creation-Date: 2020-03-23 11:33+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: ToniE <osm-ToniE@web.de>, 2020\n"
+"Last-Translator: Alexandre Oliveira <rockytvbr@gmail.com>, 2020\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/jungle-bus/"
 "teams/97874/pt_BR/)\n"
 "Language: pt_BR\n"
@@ -63,7 +63,7 @@ msgid "Number"
 msgstr "Número"
 
 msgid "Network (network=)"
-msgstr ""
+msgstr "Rede de transporte (network=)"
 
 msgid "Operator (operator=)"
 msgstr "Operador(a) (operator=)"
@@ -111,7 +111,7 @@ msgid "Coach"
 msgstr ""
 
 msgid "Share-Taxi"
-msgstr ""
+msgstr "Táxi compartilhado"
 
 msgid "Train/Suburban-Train"
 msgstr ""
@@ -129,7 +129,7 @@ msgid "Trolley Bus"
 msgstr ""
 
 msgid "Ferry"
-msgstr ""
+msgstr "Balsa"
 
 msgid "Mono-Rail"
 msgstr ""
@@ -167,7 +167,7 @@ msgid "Details for 'network'-Values"
 msgstr ""
 
 msgid "There is more than one Route-Master"
-msgstr ""
+msgstr "Há mais de uma relação-mestra (route_master)"
 
 #, perl-format
 msgid ""
@@ -216,18 +216,14 @@ msgid ""
 msgstr ""
 
 #, perl-format
-msgid ""
-"Route has different 'ref' = '%s' than Route-Master 'ref' = '%s' - this "
-"should be avoided: %s"
-msgstr ""
-
-#, perl-format
 msgid "Route has not matching 'ref' = '%s': %s"
-msgstr ""
+msgstr "A rota não possui uma etiqueta \"ref\" correspondente a \"%s\": %s"
 
 #, perl-format
 msgid "Route exists in the given data set but 'ref' tag is not set: %s"
 msgstr ""
+"A rota existe no conjunto de dados mas a etiqueta \"ref\" não está definida: "
+"%s"
 
 #, perl-format
 msgid ""
@@ -241,7 +237,7 @@ msgstr ""
 
 #, perl-format
 msgid "'route' tag is not set: %s"
-msgstr ""
+msgstr "A etiqueta \"route\" não está definida: %s"
 
 #, perl-format
 msgid "'type' = '%s' is not 'route': %s"
@@ -253,11 +249,11 @@ msgstr "A etiqueta \"type\" não está definida: %s"
 
 #, perl-format
 msgid "Route does not exist in the given data set: %s"
-msgstr ""
+msgstr "A rota não existe no conjunto de dados: %s"
 
 #, perl-format
 msgid "Route is not member of Route-Master: %s"
-msgstr ""
+msgstr "A rota não é membro da rota mestra: %s"
 
 #, perl-format
 msgid ""
@@ -329,7 +325,7 @@ msgstr ""
 
 #, perl-format
 msgid "%s: %s and %d more ..."
-msgstr ""
+msgstr "%s: %s, %d e mais..."
 
 msgid "Multiple Routes but 'public_transport:version' is not set to '2'"
 msgstr ""
@@ -415,7 +411,7 @@ msgid "Route with only 1 Way"
 msgstr "A rota possui apenas um caminho"
 
 msgid "Route without Node(s)"
-msgstr "A rota não possui nó(s)"
+msgstr "A rota não possui nós"
 
 msgid "Route with only 1 Node"
 msgstr "Rota com apenas um nó"
@@ -1000,6 +996,15 @@ msgid ""
 msgstr ""
 
 msgid "See section: \"Public Transport Lines without 'ref'\" of the analysis."
+msgstr ""
+
+#, perl-format
+msgid ""
+"Route has different 'ref' = '%s' than Route-Master 'ref' = '%s' - this "
+"should be avoided: %s"
+msgstr ""
+
+msgid "This is currently deactivated."
 msgstr ""
 
 msgid ""

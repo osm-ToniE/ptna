@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-03-14 16:00+0100\n"
+"POT-Creation-Date: 2020-03-23 11:33+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -208,12 +208,6 @@ msgstr ""
 #, perl-format
 msgid ""
 "Route has 'network' = '%s' value which is considered as not relevant: %s"
-msgstr ""
-
-#, perl-format
-msgid ""
-"Route has different 'ref' = '%s' than Route-Master 'ref' = '%s' - this "
-"should be avoided: %s"
 msgstr ""
 
 #, perl-format
@@ -970,6 +964,15 @@ msgid ""
 msgstr ""
 
 msgid "See section: \"Public Transport Lines without 'ref'\" of the analysis."
+msgstr ""
+
+#, perl-format
+msgid ""
+"Route has different 'ref' = '%s' than Route-Master 'ref' = '%s' - this "
+"should be avoided: %s"
+msgstr ""
+
+msgid "This is currently deactivated."
 msgstr ""
 
 msgid ""

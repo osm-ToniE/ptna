@@ -834,7 +834,7 @@ sub InitMessageStrings {
     $MessageList[$i]->{'message'}                = gettext( "Route has different 'ref' = '%s' than Route-Master 'ref' = '%s' - this should be avoided: %s" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
     $MessageList[$i]->{'option'}                 = "";
-    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'description'}            = gettext( "This is currently deactivated." );
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
