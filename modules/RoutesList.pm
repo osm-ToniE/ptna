@@ -123,6 +123,26 @@ sub ReadRoutes {
                             ($ExpRef,$ExpRouteType,$ExpComment,$ExpFrom,$ExpTo,@rest) = split( $csv_separator, $_ );
                         }
 
+                        if ( $ExpRef ) {
+                            $ExpRef =~ s/^\s*//;
+                            $ExpRef =~ s/\s*$//;
+                        }
+                        if ( $ExpRouteType ) {
+                            $ExpRouteType =~ s/^\s*//;
+                            $ExpRouteType =~ s/\s*$//;
+                        }
+                        if ( $ExpComment ) {
+                            $ExpComment =~ s/^\s*//;
+                            $ExpComment =~ s/\s*$//;
+                        }
+                        if ( $ExpFrom ) {
+                            $ExpFrom =~ s/^\s*//;
+                            $ExpFrom =~ s/\s*$//;
+                        }
+                        if ( $ExpTo ) {
+                            $ExpTo =~ s/^\s*//;
+                            $ExpTo =~ s/\s*$//;
+                        }
                         $hashref->{'ref'}            = $ExpRef       || '';              # 'ref'=
                         $hashref->{'route'}          = $ExpRouteType || '';              # 'route/route_master'=
                         $hashref->{'comment'}        = $ExpComment   || '';              # routes file comment
