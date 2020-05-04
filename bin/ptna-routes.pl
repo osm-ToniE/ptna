@@ -507,11 +507,11 @@ if ( $routes_file ) {
     if ( $ReadError ) {
 
         printf STDERR "%s %s\n", get_time(), $ReadError;
-    
+
     } else {
-    
+
         @RouteList = RoutesList::GetRoutesList();
-        
+
         printf STDERR "%s %s read\n", get_time(), decode('utf8', $routes_file )                 if ( $verbose );
     }
 
@@ -2893,9 +2893,11 @@ sub analyze_ptv2_route_relation {
                                     }
                                 }
                             } else {
-                                $issues_string = gettext( "PTv2 route: 'public_transport' = 'stop_position' is not part of way" );
-                                $role_mismatch{$issues_string}->{$node_ref->{'ref'}} = 1;
-                                $role_mismatch_found++;
+                                if ( $number_of_route_highways ) {
+                                    $issues_string = gettext( "PTv2 route: 'public_transport' = 'stop_position' is not part of way" );
+                                    $role_mismatch{$issues_string}->{$node_ref->{'ref'}} = 1;
+                                    $role_mismatch_found++;
+                                }
                             }
                             if ( $check_stop_position ) {
                                 if (  $relation_ptr->{'tag'}->{'route'} eq 'bus'                     ||
@@ -6011,6 +6013,3 @@ sub gettext {
 sub ngettext {
     return decode( 'utf8', Locale::gettext::ngettext( @_ ) );
 }
-
-
-
