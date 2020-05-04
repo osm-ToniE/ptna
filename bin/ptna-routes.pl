@@ -4511,6 +4511,10 @@ sub CheckNameRefFromViaToPTV2 {
                         push( @{$relation_ptr->{'__notes__'}}, $notes_string );
                         $return_code++;
                     }
+                } elsif ( $via ) {
+                    $notes_string = gettext( "PTv2 route: 'name' has no via-parts but 'via' is set" );
+                    push( @{$relation_ptr->{'__notes__'}}, $notes_string );
+                    $return_code++;
                 }
             } else {
                 if ( $check_name_relaxed ) {
