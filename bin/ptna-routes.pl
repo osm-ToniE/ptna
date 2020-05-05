@@ -27,14 +27,43 @@ use RoutesList;
 use Data::Dumper;
 use Encode;
 
-my @RouteList                               = ();
+
+####################################################################################################################
+#
+# Some OSM specific stuff, settings
+#
+####################################################################################################################
+
 my @supported_route_types                   = ( 'train', 'subway', 'light_rail', 'tram', 'trolleybus', 'bus', 'ferry', 'monorail', 'aerialway', 'funicular', 'share_taxi' );
 my @well_known_other_route_types            = ( 'bicycle', 'mtb', 'hiking', 'road', 'foot', 'inline_skates', 'canoe', 'detour', 'fitness_trail', 'horse', 'motorboat', 'nordic_walking', 'pipeline', 'piste', 'power', 'running', 'ski', 'snowmobile', 'cycling' , 'historic', 'motorcycle', 'riding' );
 my @well_known_network_types                = ( 'international', 'national', 'regional', 'local', 'icn', 'ncn', 'rcn', 'lcn', 'iwn', 'nwn', 'rwn', 'lwn', 'road' );
 my @well_known_other_types                  = ( 'restriction', 'enforcement', 'destination_sign' );
-my %have_seen_well_known_other_route_types  = ();
-my %have_seen_well_known_network_types      = ();
-my %have_seen_well_known_other_types        = ();
+
+my %transport_type_uses_way_type = ( 'train'     => { 'railway'   => [ 'rail',   'light_rail', 'narrow_gauge', 'preserved', 'construction' ] },
+                                     'subway'    => { 'railway'   => [ 'subway', 'light_rail', 'tram' ] },
+                                     'tram'      => { 'railway'   => [ 'tram',   'rail',       'light_rail', 'narrow_gauge' ] },
+                                     'monorail'  => { 'railway'   => [ 'monorail'  ] },
+                                     'funicular' => { 'railway'   => [ 'funicular' ] },
+                                     'ferry'     => { 'route'     => [ 'ferry'     ] },
+                                     'aerialway' => { 'aerialway' => [ 'cable_car',     'gondola',        'mixed_lift',  'chair_lift' ] },
+                                     'bus'       => { 'highway'   => [ 'motorway',      'motorway_link',  'trunk',       'trunk_link',    'primary',      'primary_link',
+                                                                       'secondary',     'secondary_link', 'tertiary',    'tertiary_link', 'unclassified', 'residential',
+                                                                       'service',       'track',          'footway',     'cycleway',      'path',         'pedestrian',
+                                                                       'living_street', 'road',           'construction'
+                                                                     ]
+                                                    },
+                                   );
+   $transport_type_uses_way_type{'coach'}       = $transport_type_uses_way_type{'bus'};
+   $transport_type_uses_way_type{'share_taxi'}  = $transport_type_uses_way_type{'bus'};
+   $transport_type_uses_way_type{'trolleybus'}  = $transport_type_uses_way_type{'bus'};
+   $transport_type_uses_way_type{'light_rail'}  = $transport_type_uses_way_type{'train'};
+
+
+####################################################################################################################
+#
+# Handling options from command line
+#
+####################################################################################################################
 
 my $opt_language                    = undef;
 my $opt_test                        = undef;
@@ -237,10 +266,21 @@ if ( $verbose ) {
 }
 
 
+####################################################################################################################
+#
+# Some PTNA internal stuff
+#
+####################################################################################################################
+
 my $xml_has_meta            = 0;        # does the XML file include META information?
 my $xml_has_relations       = 0;        # does the XML file include any relations? If not, we will exit
 my $xml_has_ways            = 0;        # does the XML file include any ways, then we can make a big analysis
 my $xml_has_nodes           = 0;        # does the XML file include any nodes, then we can make a big analysis
+
+my @RouteList                               = ();
+my %have_seen_well_known_other_route_types  = ();
+my %have_seen_well_known_network_types      = ();
+my %have_seen_well_known_other_types        = ();
 
 my %PT_relations_with_ref   = ();       # includes "positive" (the ones we are looking for) as well as "negative" (the other ones) route/route_master relations and "skip"ed relations (where 'network' or 'operator' does not fit)
 my %PT_relations_without_ref= ();       # includes any route/route_master relations without 'ref' tag
@@ -253,7 +293,6 @@ my %stop_nodes              = ();       # all nodes of the XML file that are sto
 my %used_networks           = ();       # 'network' values that did match
 my %unused_networks         = ();       # 'network' values that did not match
 my %unused_operators        = ();       # 'operator' values that did not match but 'network' values did match
-
 
 my $relation_ptr            = undef;    # a pointer in Perl to a relation structure
 my $relation_id             = undef;    # the OSM ID of a relation
@@ -2553,13 +2592,6 @@ sub analyze_route_relation {
     }
 
     #
-    # for WAYS used by vehicles             vehicles must use the right type of way
-    #
-    if ( $check_way_type ) {
-        $return_code += CheckWayType( $relation_ptr );
-    }
-
-    #
     # for WAYS used by vehicles             vehicles must have access permission
     # for NODES of WAYS used by vehicles    vehicles must have access permission on barrier NODES
     #
@@ -3357,6 +3389,13 @@ sub analyze_ptv2_route_relation {
         }
     }
     $return_code += $role_mismatch_found;
+
+    #
+    # for WAYS used by vehicles             vehicles must use the right type of way
+    #
+    if ( $check_way_type ) {
+        $return_code += CheckWayType( $relation_ptr );
+    }
 
     return $return_code;
 }
@@ -4207,11 +4246,28 @@ sub CheckThisWayTypeForThisVehicle {
     my $vehicle_type    = shift;
 
     if ( $way_id && $WAYS{$way_id} && $WAYS{$way_id}->{'tag'} && $vehicle_type ) {
-        my $way_tag_ref = $WAYS{$way_id}->{'tag'};
+
+        if ( $transport_type_uses_way_type{$vehicle_type} ) {
+            foreach my $waykey ( keys( %{$transport_type_uses_way_type{$vehicle_type}} ) ) {
+                if ( $WAYS{$way_id}->{'tag'}->{$waykey} ) {
+                    foreach my $wayvalue ( @{${$transport_type_uses_way_type{$vehicle_type}}{$waykey}}) {
+                        if ( $wayvalue eq $WAYS{$way_id}->{'tag'}->{$waykey} ) {
+                            printf STDERR "CheckThisWayTypeForThisVehicle() : way %d has appropriate '%s' = '%s' for vehicle '%s'\n", $way_id, $waykey, $wayvalue, $vehicle_type       if ( $debug );
+                            return '';
+                        }
+                    }
+                    printf STDERR "CheckThisWayTypeForThisVehicle() : way %d has wrong '%s' = '%s' for vehicle '%s'\n", $way_id, $waykey, $WAYS{$way_id}->{'tag'}->{$waykey}, $vehicle_type       if ( $debug );
+                    return sprintf( "%s: '%s' = '%s'", gettext("wrong value"), $waykey, $WAYS{$way_id}->{'tag'}->{$waykey} );
+                } else {
+                    printf STDERR "CheckThisWayTypeForThisVehicle() : way %d has missing key '%s' for vehicle '%s'\n", $way_id, $waykey, $vehicle_type       if ( $debug );
+                    return sprintf( "%s: '%s'", gettext("missing key"), $waykey );
+                }
+            }
+        }
 
     }
 
-    printf STDERR "CheckThisWayTypeForThisVehicle() : way %d is appropriate for %s\n", $way_id, $vehicle_type       if ( $debug );
+    printf STDERR "CheckThisWayTypeForThisVehicle() : way %d is globally appropriate for vehicle '%s'\n", $way_id, $vehicle_type       if ( $debug );
     return '';
 }
 
@@ -4600,7 +4656,7 @@ sub CheckWayType {
             foreach $this_is_wrong ( sort(keys(%using_wrong_way_type)) ) {
                 @help_array     = sort(keys(%{$using_wrong_way_type{$this_is_wrong}}));
                 $num_of_errors  = scalar(@help_array);
-                $issues_string  = gettext( "Route: using wrong way type (%s)" );
+                $issues_string  = gettext( "PTv2 route: using wrong way type (%s)" );
                 $helpstring     = sprintf( $issues_string, $this_is_wrong );
                 if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
                     push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
