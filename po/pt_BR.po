@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-05-05 15:44+0200\n"
+"POT-Creation-Date: 2020-05-05 20:04+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: Alexandre Oliveira <rockytvbr@gmail.com>, 2020\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/jungle-bus/"
@@ -587,6 +587,12 @@ msgstr ""
 msgid "PTv2 route: last node of way is not a stop position of this route: %s"
 msgstr ""
 
+msgid "wrong value"
+msgstr ""
+
+msgid "missing key"
+msgstr ""
+
 #, perl-format
 msgid "'barrier'='%s' with implied 'access'='no'"
 msgstr ""
@@ -661,7 +667,7 @@ msgid ""
 msgstr ""
 
 #, perl-format
-msgid "Route: using wrong way type (%s)"
+msgid "PTv2 route: using wrong way type (%s)"
 msgstr ""
 
 #, perl-format
@@ -1087,6 +1093,10 @@ msgstr ""
 
 msgid ""
 "Please evaluate the value manually and decide whether a fix is needed or not."
+msgstr ""
+
+#, perl-format
+msgid "Route: using wrong way type (%s)"
 msgstr ""
 
 msgid "This error is related to:"

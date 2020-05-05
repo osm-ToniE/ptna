@@ -777,6 +777,15 @@ sub InitMessageStrings {
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
+    $MessageList[$i]->{'message'}                = gettext( "PTv2 route: using wrong way type (%s)" );
+    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: wrong 'role' = '%s'" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
@@ -1134,15 +1143,6 @@ sub InitMessageStrings {
     $MessageList[$i]->{'description'}            = gettext( "A conditional access is mapped to a way. PTNA will not analyze the value of the tag." ) . "\n" .
                                                    gettext( "Example" ) . ": 'psv:conditional' = 'yes @ (Mo-Fr 05:00-22:00)'.";
     $MessageList[$i]->{'fix'}                    = gettext( "Please evaluate the value manually and decide whether a fix is needed or not." );
-    $MessageList[$i]->{'image'}                  = "";
-    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
-
-    $i++;
-    $MessageList[$i]->{'message'}                = gettext( "Route: using wrong way type (%s)" );
-    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "";
-    $MessageList[$i]->{'description'}            = "";
-    $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
