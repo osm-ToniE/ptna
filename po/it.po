@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-05-04 17:45+0200\n"
+"POT-Creation-Date: 2020-05-05 15:44+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2020\n"
 "Language-Team: Italian (https://www.transifex.com/jungle-bus/teams/97874/"
@@ -682,9 +682,8 @@ msgstr ""
 msgid "PTv2 route: 'name' has more than one '=>' but 'via' is not set"
 msgstr ""
 
-#, fuzzy
 msgid "PTv2 route: 'name' has no via-parts but 'via' is set"
-msgstr "Itinerario PTv2: ‘from’ non è impostata"
+msgstr ""
 
 msgid ""
 "PTv2 route: 'name' should be similar to the form '... ref ...: from => to'"
@@ -692,6 +691,10 @@ msgstr ""
 
 msgid ""
 "PTv2 route: 'name' should (at least) be of the form '... ref ...: from => to'"
+msgstr ""
+
+#, perl-format
+msgid "Route: using wrong way type (%s)"
 msgstr ""
 
 #, perl-format
@@ -1209,6 +1212,12 @@ msgid ""
 msgstr ""
 
 msgid "Check of 'public_transport:version' = '...' on Route-Master and Route."
+msgstr ""
+
+msgid ""
+"Check whether the used way types are appropriate for the vehicle type "
+"('train' using 'railway' = 'rail', 'tram' using 'railway' = 'tram', 'bus' "
+"using 'highway' = '...', ...)."
 msgstr ""
 
 msgid ""

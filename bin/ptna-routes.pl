@@ -60,6 +60,7 @@ my $check_roundabouts               = undef;
 my $check_route_ref                 = undef;
 my $check_motorway_link             = undef;
 my $check_version                   = undef;
+my $check_way_type                  = undef;
 my $expect_network_long             = undef;
 my $expect_network_long_as          = undef;
 my $expect_network_long_for         = undef;
@@ -99,6 +100,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'check-sequence'                =>  \$check_sequence,               # --check-sequence                  check for correct sequence of stops, platforms and ways
             'check-stop-position'           =>  \$check_stop_position,          # --check-stop-position             check for bus=yes, tram=yes, ... on (stop_positions
             'check-version'                 =>  \$check_version,                # --check-version                   check for PTv2 on route_masters, ...
+            'check-way-type'                =>  \$check_way_type,               # --check-way-type                  check for routes: do vehicles use the right way type
             'coloured-sketchline'           =>  \$coloured_sketchline,          # --coloured-sketchline             force SketchLine to print coloured icons
             'expect-network-long'           =>  \$expect_network_long,          # --expect-network-long             note if 'network' is not long form in general
             'expect-network-long-as:s'      =>  \$expect_network_long_as,       # --expect-network-long-as="Münchner Verkehrs- und Tarifverbund|Biberger Bürgerbus"
@@ -209,6 +211,7 @@ if ( $verbose ) {
     printf STDERR "%20s--check-sequence='%s'\n",           ' ', $check_sequence             ? 'ON'          :'OFF';
     printf STDERR "%20s--check-stop-position='%s'\n",      ' ', $check_stop_position        ? 'ON'          :'OFF';
     printf STDERR "%20s--check-version='%s'\n",            ' ', $check_version              ? 'ON'          :'OFF';
+    printf STDERR "%20s--check-way-type='%s'\n",           ' ', $check_way_type             ? 'ON'          :'OFF';
     printf STDERR "%20s--coloured-sketchline='%s'\n",      ' ', $coloured_sketchline        ? 'ON'          :'OFF';
     printf STDERR "%20s--expect-network-long='%s'\n",      ' ', $expect_network_long        ? 'ON'          :'OFF';
     printf STDERR "%20s--expect-network-long-as='%s'\n",   ' ', $expect_network_long_as     ? $expect_network_long_as      : '';
@@ -2550,6 +2553,13 @@ sub analyze_route_relation {
     }
 
     #
+    # for WAYS used by vehicles             vehicles must use the right type of way
+    #
+    if ( $check_way_type ) {
+        $return_code += CheckWayType( $relation_ptr );
+    }
+
+    #
     # for WAYS used by vehicles             vehicles must have access permission
     # for NODES of WAYS used by vehicles    vehicles must have access permission on barrier NODES
     #
@@ -4192,6 +4202,22 @@ sub isNodeArrayClosedWay {
 
 #############################################################################################
 
+sub CheckThisWayTypeForThisVehicle {
+    my $way_id          = shift;
+    my $vehicle_type    = shift;
+
+    if ( $way_id && $WAYS{$way_id} && $WAYS{$way_id}->{'tag'} && $vehicle_type ) {
+        my $way_tag_ref = $WAYS{$way_id}->{'tag'};
+
+    }
+
+    printf STDERR "CheckThisWayTypeForThisVehicle() : way %d is appropriate for %s\n", $way_id, $vehicle_type       if ( $debug );
+    return '';
+}
+
+
+#############################################################################################
+
 sub noAccessOnWay {
     my $way_id          = shift;
     my $vehicle_type    = shift;        # optional !
@@ -4548,6 +4574,47 @@ sub CheckNameRefFromViaToPTV2 {
 
 #############################################################################################
 #
+# for WAYS used by vehicles             vehicles must use the right way type
+#
+#############################################################################################
+
+sub CheckWayType {
+    my $relation_ptr = shift;
+    my $ret_val      = 0;
+
+    if ( $relation_ptr ) {
+        my $this_is_wrong        = '';
+        my %using_wrong_way_type = ();
+
+        foreach my $route_highway ( @{$relation_ptr->{'route_highway'}} ) {
+            $this_is_wrong = CheckThisWayTypeForThisVehicle( $route_highway->{'ref'}, $relation_ptr->{'tag'}->{'route'} );
+            if ( $this_is_wrong ) {
+                $using_wrong_way_type{$this_is_wrong}->{$route_highway->{'ref'}} = 1;
+                $ret_val++;
+            }
+        }
+        if ( scalar(keys(%using_wrong_way_type)) ) {
+            my $helpstring     = '';
+            my @help_array     = ();
+            my $num_of_errors  = 0;
+            foreach $this_is_wrong ( sort(keys(%using_wrong_way_type)) ) {
+                @help_array     = sort(keys(%{$using_wrong_way_type{$this_is_wrong}}));
+                $num_of_errors  = scalar(@help_array);
+                $issues_string  = gettext( "Route: using wrong way type (%s)" );
+                $helpstring     = sprintf( $issues_string, $this_is_wrong );
+                if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                } else {
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } @help_array )) );
+                }
+            }
+        }
+    }
+}
+
+
+#############################################################################################
+#
 # for WAYS used by vehicles             vehicles must have access permission
 # for NODES of WAYS used by vehicles    vehicles must have access permission on barrier NODES
 #
@@ -4629,6 +4696,7 @@ sub CheckAccessOnWaysAndNodes {
         }
     }
 }
+
 
 #############################################################################################
 #

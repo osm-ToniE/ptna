@@ -1138,6 +1138,15 @@ sub InitMessageStrings {
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
+    $MessageList[$i]->{'message'}                = gettext( "Route: using wrong way type (%s)" );
+    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
     $MessageList[$i]->{'message'}                = gettext( "Skipping further analysis ..." );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
@@ -1325,6 +1334,13 @@ sub InitOptionStrings {
     $OptionList[$i]->{'option'}                 = "check-version";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = gettext( "Check of 'public_transport:version' = '...' on Route-Master and Route." );
+    $OptionList[$i]->{'image'}                  = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+
+    $i++;
+    $OptionList[$i]->{'option'}                 = "check-way-type";
+    $OptionList[$i]->{'default'}                = "OFF";
+    $OptionList[$i]->{'description'}            = gettext( "Check whether the used way types are appropriate for the vehicle type ('train' using 'railway' = 'rail', 'tram' using 'railway' = 'tram', 'bus' using 'highway' = '...', ...)." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
