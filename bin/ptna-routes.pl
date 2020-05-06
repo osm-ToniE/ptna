@@ -39,17 +39,17 @@ my @well_known_other_route_types            = ( 'bicycle', 'mtb', 'hiking', 'roa
 my @well_known_network_types                = ( 'international', 'national', 'regional', 'local', 'icn', 'ncn', 'rcn', 'lcn', 'iwn', 'nwn', 'rwn', 'lwn', 'road' );
 my @well_known_other_types                  = ( 'restriction', 'enforcement', 'destination_sign' );
 
-my %transport_type_uses_way_type = ( 'train'     => { 'railway'   => [ 'rail',   'light_rail', 'narrow_gauge', 'preserved', 'construction' ] },
+my %transport_type_uses_way_type = ( 'train'     => { 'railway'   => [ 'rail',   'light_rail', 'tram', 'narrow_gauge', 'preserved',  'construction' ] },
                                      'subway'    => { 'railway'   => [ 'subway', 'light_rail', 'tram' ] },
-                                     'tram'      => { 'railway'   => [ 'tram',   'rail',       'light_rail', 'narrow_gauge' ] },
+                                     'tram'      => { 'railway'   => [ 'tram',   'rail',       'light_rail', 'narrow_gauge', 'subway' ] },
                                      'monorail'  => { 'railway'   => [ 'monorail'  ] },
                                      'funicular' => { 'railway'   => [ 'funicular' ] },
                                      'ferry'     => { 'route'     => [ 'ferry'     ] },
-                                     'aerialway' => { 'aerialway' => [ 'cable_car',     'gondola',        'mixed_lift',  'chair_lift' ] },
-                                     'bus'       => { 'highway'   => [ 'motorway',      'motorway_link',  'trunk',       'trunk_link',    'primary',      'primary_link',
-                                                                       'secondary',     'secondary_link', 'tertiary',    'tertiary_link', 'unclassified', 'residential',
-                                                                       'service',       'track',          'footway',     'cycleway',      'path',         'pedestrian',
-                                                                       'living_street', 'road',           'construction'
+                                     'aerialway' => { 'aerialway' => [ 'cable_car',     'gondola',        'mixed_lift',   'chair_lift' ] },
+                                     'bus'       => { 'highway'   => [ 'motorway',      'motorway_link',  'trunk',        'trunk_link',    'primary',      'primary_link',
+                                                                       'secondary',     'secondary_link', 'tertiary',     'tertiary_link', 'unclassified', 'residential',
+                                                                       'service',       'track',          'footway',      'cycleway',      'path',         'pedestrian',
+                                                                       'living_street', 'road',           'bus_guideway', 'construction'
                                                                      ]
                                                     },
                                    );
@@ -4244,27 +4244,46 @@ sub isNodeArrayClosedWay {
 sub CheckThisWayTypeForThisVehicle {
     my $way_id          = shift;
     my $vehicle_type    = shift;
+    my $help_string     = '';
+    my $waykey_list     = '';
 
     if ( $way_id && $WAYS{$way_id} && $WAYS{$way_id}->{'tag'} && $vehicle_type ) {
-
-        if ( $transport_type_uses_way_type{$vehicle_type} ) {
-            foreach my $waykey ( keys( %{$transport_type_uses_way_type{$vehicle_type}} ) ) {
-                if ( $WAYS{$way_id}->{'tag'}->{$waykey} ) {
-                    foreach my $wayvalue ( @{${$transport_type_uses_way_type{$vehicle_type}}{$waykey}}) {
-                        if ( $wayvalue eq $WAYS{$way_id}->{'tag'}->{$waykey} ) {
-                            printf STDERR "CheckThisWayTypeForThisVehicle() : way %d has appropriate '%s' = '%s' for vehicle '%s'\n", $way_id, $waykey, $wayvalue, $vehicle_type       if ( $debug );
-                            return '';
+        if ( !$WAYS{$way_id}->{'tag'}->{'public_transport'} ||
+             ($WAYS{$way_id}->{'tag'}->{'public_transport'} ne 'stop_position' &&
+              $WAYS{$way_id}->{'tag'}->{'public_transport'} ne 'platform'        )  ) {
+            if ( $transport_type_uses_way_type{$vehicle_type} ) {
+                foreach my $waykey ( keys( %{$transport_type_uses_way_type{$vehicle_type}} ) ) {
+                    if ( $WAYS{$way_id}->{'tag'}->{$waykey} ) {
+                        foreach my $wayvalue ( @{${$transport_type_uses_way_type{$vehicle_type}}{$waykey}}) {
+                            if ( $wayvalue eq $WAYS{$way_id}->{'tag'}->{$waykey} ) {
+                                printf STDERR "CheckThisWayTypeForThisVehicle() : way %d has appropriate '%s' = '%s' for vehicle '%s'\n", $way_id, $waykey, $wayvalue, $vehicle_type       if ( $debug );
+                                return '';
+                            }
+                        }
+                        printf STDERR "CheckThisWayTypeForThisVehicle() : way %d has wrong '%s' = '%s' for vehicle '%s'\n", $way_id, $waykey, $WAYS{$way_id}->{'tag'}->{$waykey}, $vehicle_type       if ( $debug );
+                        return sprintf( "%s: '%s' = '%s'", gettext("wrong value"), $waykey, $WAYS{$way_id}->{'tag'}->{$waykey} );
+                    }
+                }
+                if ( $WAYS{$way_id}->{'tag'}->{'route'} && $WAYS{$way_id}->{'tag'}->{'route'} eq 'ferry' ) {
+                    if ( $vehicle_type eq 'bus' || $vehicle_type eq 'trolleybus' || $vehicle_type eq 'share_taxi' || $vehicle_type eq 'coach' ) {
+                        foreach my $v ( $vehicle_type, 'psv', 'motor_vehicle', 'vehicle', 'taxi', 'motor_car' ) {
+                            if ( $WAYS{$way_id}->{'tag'}->{$v} &&
+                                ($WAYS{$way_id}->{'tag'}->{$v} eq 'yes'        ||
+                                 $WAYS{$way_id}->{'tag'}->{$v} eq 'permissive' ||
+                                 $WAYS{$way_id}->{'tag'}->{$v} eq 'designated' ||
+                                 $WAYS{$way_id}->{'tag'}->{$v} eq 'official'      ) ) {
+                                printf STDERR "CheckThisWayTypeForThisVehicle() : way %d has appropriate 'route' = 'ferry' for vehicle '%s': '%s' = '%s'\n", $way_id, $vehicle_type, $v, $WAYS{$way_id}->{'tag'}->{$v}       if ( $debug );
+                                return '';
+                            }
                         }
                     }
-                    printf STDERR "CheckThisWayTypeForThisVehicle() : way %d has wrong '%s' = '%s' for vehicle '%s'\n", $way_id, $waykey, $WAYS{$way_id}->{'tag'}->{$waykey}, $vehicle_type       if ( $debug );
-                    return sprintf( "%s: '%s' = '%s'", gettext("wrong value"), $waykey, $WAYS{$way_id}->{'tag'}->{$waykey} );
-                } else {
-                    printf STDERR "CheckThisWayTypeForThisVehicle() : way %d has missing key '%s' for vehicle '%s'\n", $way_id, $waykey, $vehicle_type       if ( $debug );
-                    return sprintf( "%s: '%s'", gettext("missing key"), $waykey );
                 }
+                $help_string = ' ' . gettext( 'or' ) . ' ';
+                $waykey_list = join( $help_string, sort ( keys( %{$transport_type_uses_way_type{$vehicle_type}} ) ) );
+                printf STDERR "CheckThisWayTypeForThisVehicle() : way %d has missing key(s) '%s' for vehicle '%s'\n", $way_id, $waykey_list, $vehicle_type       if ( $debug );
+                return sprintf( "%s: '%s'", gettext("missing key"), $waykey_list );
             }
         }
-
     }
 
     printf STDERR "CheckThisWayTypeForThisVehicle() : way %d is globally appropriate for vehicle '%s'\n", $way_id, $vehicle_type       if ( $debug );

@@ -7,14 +7,13 @@
 # ToniE <osm-ToniE@web.de>, 2020
 # Alexandre Oliveira <rockytvbr@gmail.com>, 2020
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-05-05 20:04+0200\n"
-"PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: Alexandre Oliveira <rockytvbr@gmail.com>, 2020\n"
+"POT-Creation-Date: 2020-05-06 09:36+0200\n"
+"PO-Revision-Date: 2020-05-06 09:38+0200\n"
+"Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/jungle-bus/"
 "teams/97874/pt_BR/)\n"
 "Language: pt_BR\n"
@@ -22,6 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.2.1\n"
 
 msgid "Message"
 msgstr "Mensagem"
@@ -590,6 +590,9 @@ msgstr ""
 msgid "wrong value"
 msgstr ""
 
+msgid "or"
+msgstr "ou"
+
 msgid "missing key"
 msgstr ""
 
@@ -1093,10 +1096,6 @@ msgstr ""
 
 msgid ""
 "Please evaluate the value manually and decide whether a fix is needed or not."
-msgstr ""
-
-#, perl-format
-msgid "Route: using wrong way type (%s)"
 msgstr ""
 
 msgid "This error is related to:"
