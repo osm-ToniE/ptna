@@ -893,33 +893,6 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
             if ( $RELATIONS{$relation_id}->{'tag'}->{'public_transport'}               &&
                  $RELATIONS{$relation_id}->{'tag'}->{'public_transport'} eq 'platform'    ) {
                 $platform_multipolygon_relations{$relation_id} = $RELATIONS{$relation_id};
-
-                #
-                # lets assign lat/lon of first node or the lat/lon of the first node of the first way as representative position of the relation
-                #
-                my $way_id  = 0;
-                my $node_id = 0;
-                foreach $member ( @{$RELATIONS{$relation_id}->{'members'}} ) {
-                    if ( $member->{'type'} ) {
-                        if ( $member->{'type'} eq 'way' ) {
-                            $way_id  = $member->{'ref'};
-                            $node_id = $WAYS{$way_id}->{'chain'}[0];
-                            if ( $node_id ) {
-                                $RELATIONS{$relation_id}->{'lat'} = $NODES{$node_id}->{'lat'};
-                                $RELATIONS{$relation_id}->{'lon'} = $NODES{$node_id}->{'lon'};
-                                last;
-                            }
-                        } elsif ( $member->{'type'} eq 'node' ) {
-                            $node_id = $member->{'ref'};
-                            $RELATIONS{$relation_id}->{'lat'} = $NODES{$node_id}->{'lat'};
-                            $RELATIONS{$relation_id}->{'lon'} = $NODES{$node_id}->{'lon'};
-                            last;
-                        }
-                    }
-                }
-                if ( !$node_id ) {
-                    printf STDERR "Could not find a node for MP relation %s\n", $relation_id;
-                }
             } else {
                 #printf STDERR "%s Suspicious: wrong type=multipolygon (not public_transport=platform) for relation id %s\n", get_time(), $relation_id;
                 $suspicious_relations{$relation_id} = 1;
@@ -1011,14 +984,6 @@ if ( $xml_has_ways ) {
 
         $WAYS{$way_id}->{'first_node'} = ${$WAYS{$way_id}->{'chain'}}[0];
         $WAYS{$way_id}->{'last_node'}  = ${$WAYS{$way_id}->{'chain'}}[$#{$WAYS{$way_id}->{'chain'}}];
-
-        #
-        # lets assign lat/lon of first node as representative position of the way
-        #
-        if ( $WAYS{$way_id}->{'first_node'} ) {
-            $WAYS{$way_id}->{'lat'} = $NODES{$WAYS{$way_id}->{'first_node'}}->{'lat'};
-            $WAYS{$way_id}->{'lon'} = $NODES{$WAYS{$way_id}->{'first_node'}}->{'lon'};
-        }
 
         #
         # lets categorize the way as member or route or platform or ...
@@ -3435,12 +3400,9 @@ sub analyze_ptv2_route_relation {
     }
 
     #
-    # store a list of lat/lon of the platforms in the relation
+    # relation shall be shown on PTNA's special map
     #
-    if (  $relation_ptr->{'tag'}->{'route'} =~ m/bus/ || $relation_ptr->{'tag'}->{'route'} eq 'share_taxi' || $relation_ptr->{'tag'}->{'route'} eq 'coach' ) {
-
-        SetPt2PlatformLonLats( $relation_ptr );
-    }
+    $relation_ptr->{'show_relation'} = 1;
 
     return $return_code;
 }
@@ -3551,57 +3513,6 @@ sub FindRoutePlatformRelations {
     }
 
     return @relations_route_platform_relations;
-}
-
-
-#############################################################################################
-
-sub SetPt2PlatformLonLats {
-    my $relation_ptr = shift;
-
-    my $lonlat_list   = '';
-    my $center_latlon = '';
-
-return;
-
-
-    foreach my $item ( @{$relation_ptr->{'members'}} ) {
-        if ( $item->{'role'} =~ m/^platform/ ) {
-            if ( $item->{'type'} eq 'node' ) {
-                my $node_id = $item->{'ref'};
-                if ( $NODES{$node_id}->{'lat'} && $NODES{$node_id}->{'lon'} ) {
-                    $lonlat_list .= $NODES{$node_id}->{'lon'} . ',' . $NODES{$node_id}->{'lat'} . ';';
-                    unless ( $center_latlon ) {
-                        $center_latlon = $NODES{$node_id}->{'lat'} . '/' . $NODES{$node_id}->{'lon'};
-                    }
-                }
-            } elsif ( $item->{'type'} eq 'way' ) {
-                my $way_id = $item->{'ref'};
-                if ( $WAYS{$way_id}->{'lat'} && $WAYS{$way_id}->{'lon'} ) {
-                    $lonlat_list .= $WAYS{$way_id}->{'lon'} . ',' . $WAYS{$way_id}->{'lat'} . ';';
-                    unless ($center_latlon ) {
-                        $center_latlon = $WAYS{$way_id}->{'lat'} . '/' . $WAYS{$way_id}->{'lon'};
-                    }
-                }
-            } elsif ( $item->{'type'} eq 'relation' ) {
-                my $relation_id = $item->{'ref'};
-                if ( $RELATIONS{$relation_id}->{'lat'} && $RELATIONS{$relation_id}->{'lon'} ) {
-                    $lonlat_list .= $RELATIONS{$relation_id}->{'lon'} . ',' . $RELATIONS{$relation_id}->{'lat'} . ';';
-                    unless ($center_latlon ) {
-                        $center_latlon = $RELATIONS{$relation_id}->{'lat'} . '/' . $RELATIONS{$relation_id}->{'lon'};
-                    }
-                }
-            }
-        }
-    }
-
-    $lonlat_list =~ s/;$//;
-
-    $relation_ptr->{'platform_lonlats'} = $lonlat_list;
-
-    $relation_ptr->{'center_latlon'}    = $center_latlon;
-
-    return;
 }
 
 
@@ -5978,19 +5889,14 @@ sub printRelationTemplate {
             my $id_url       = sprintf( "<a href=\"https://osm.org/edit?editor=id&amp;relation=%s\" title=\"Edit in iD\">iD</a>", $val );
             my $josm_url     = sprintf( "<a href=\"http://127.0.0.1:8111/load_object?new_layer=false&amp;relation_members=true&amp;objects=r%s\" target=\"hiddenIframe\" title=\"Edit in JOSM\">JOSM</a>", $val );
 
-            if ( $RELATIONS{$val} && $RELATIONS{$val}->{'platform_lonlats'} && $RELATIONS{$val}->{'center_latlon'} ) {
-                my $brouter_url = sprintf( "<a href=\"http://brouter.de/brouter-web/#map=12/%s/standard&profile=car-eco&lonlats=%s\" title=\"Route platforms on brouter\">Brouter</a>", $RELATIONS{$val}->{'center_latlon'}, $RELATIONS{$val}->{'platform_lonlats'} );
-                $val = sprintf( "%s %s%s <small>(%s, %s, %s)</small>", $image_url, $info_string, $relation_url, $id_url, $josm_url, $brouter_url );
+            if ( $RELATIONS{$val} && $RELATIONS{$val}->{'show_relation'} ) {
+                my $show_url = sprintf( "<a href=\"/relation.php?id=%d\" title=\"Show relation on special map\">PTNA</a>", $val );
+                $val = sprintf( "%s %s%s <small>(%s, %s, %s)</small>", $image_url, $info_string, $relation_url, $id_url, $josm_url, $show_url );
             } else {
                 $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $relation_url, $id_url, $josm_url );
             }
         } else {
-            if ( $RELATIONS{$val} && $RELATIONS{$val}->{'platform_lonlats'} && $RELATIONS{$val}->{'center_latlon'} ) {
-                my $brouter_url = sprintf( "<a href=\"http://brouter.de/brouter-web/#map=12/%s/standard&profile=car-eco&lonlats=%s\" title=\"Route between platforms on brouter\">Brouter</a>", $RELATIONS{$val}->{'center_latlon'}, $RELATIONS{$val}->{'platform_lonlats'} );
-                $val = sprintf( "%s %s%s <small>(%s)</small>", $image_url, $info_string, $val, $brouter_url );
-            } else {
-                $val = sprintf( "%s %s%s", $image_url, $info_string, $val );
-            }
+            $val = sprintf( "%s %s%s", $image_url, $info_string, $val );
         }
     } else {
         $val = '';
