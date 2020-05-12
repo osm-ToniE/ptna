@@ -3402,7 +3402,7 @@ sub analyze_ptv2_route_relation {
     #
     # relation shall be shown on PTNA's special map
     #
-    $relation_ptr->{'show_relation'} = 1;
+    # $relation_ptr->{'show_relation'} = 1;
 
     return $return_code;
 }
