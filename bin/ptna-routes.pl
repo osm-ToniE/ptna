@@ -4410,7 +4410,7 @@ sub noAccessOnWay {
             printf STDERR "noAccessOnWay() : unclear access for all psv for way %d\n", $way_id       if ( $debug );
             return sprintf( "'psv:conditional'='%s'", $way_tag_ref->{'psv:conditional'} );
         } elsif ( $vehicle_type && $way_tag_ref->{$vehicle_type} &&
-                  ($way_tag_ref->{$vehicle_type} eq 'yes' || $way_tag_ref->{$vehicle_type} eq 'designated' || $way_tag_ref->{$vehicle_type} eq 'permissive' || $way_tag_ref->{$vehicle_type} eq 'official') ) {
+                  ($way_tag_ref->{$vehicle_type} eq 'yes' || $way_tag_ref->{$vehicle_type} eq 'destination' || $way_tag_ref->{$vehicle_type} eq 'designated' || $way_tag_ref->{$vehicle_type} eq 'permissive' || $way_tag_ref->{$vehicle_type} eq 'official') ) {
             #
             # fine for this specific type of vehicle (bus, train, subway, ...) == @supported_route_types
             #
@@ -4442,11 +4442,17 @@ sub noAccessOnWay {
             printf STDERR "noAccessOnWay() : access for %s for way %d for non-PTv2 on Platforms\n", $vehicle_type, $way_id       if ( $debug );
             return '';
         } else {
-            foreach my $access_restriction ( 'no', 'private' ) {
-                foreach my $access_type ( 'access', 'vehicle', 'motor_vehicle', 'motorcar' ) {
-                    if ( $way_tag_ref->{$access_type} && $way_tag_ref->{$access_type} eq $access_restriction ) {
-                        printf STDERR "noAccessOnWay() : no access for way %d (%s=%s)\n", $way_id, $access_type, $access_restriction       if ( $debug );
-                        return sprintf( "'%s'='%s'", $access_type, $access_restriction );
+            foreach my $access_type ( 'vehicle', 'motor_vehicle', 'motorcar', 'access' ) {
+                if ( $way_tag_ref->{$access_type} ) {
+                    if ( $way_tag_ref->{$access_type} eq 'yes'         ||
+                         $way_tag_ref->{$access_type} eq 'permissive'  ||
+                         $way_tag_ref->{$access_type} eq 'official'    ||
+                         $way_tag_ref->{$access_type} eq 'destination' ||
+                         $way_tag_ref->{$access_type} eq 'designated'     ) {
+                        last;
+                    } else {
+                        printf STDERR "noAccessOnWay() : no access for way %d (%s=%s)\n", $way_id, $access_type, $way_tag_ref->{$access_type}       if ( $debug );
+                        return sprintf( "'%s'='%s'", $access_type, $way_tag_ref->{$access_type} );
                     }
                 }
             }
@@ -4497,10 +4503,11 @@ sub noAccessOnNode {
 
         foreach my $access_type ( @list_of_access_levels ) {
             if ( $node_tag_ref->{$access_type} ) {
-                if ( $node_tag_ref->{$access_type} eq 'yes' ||
-                     $node_tag_ref->{$access_type} eq 'designated' ||
-                     $node_tag_ref->{$access_type} eq 'permissive' ||
-                     $node_tag_ref->{$access_type} eq 'official'      ) {
+                if ( $node_tag_ref->{$access_type} eq 'yes'         ||
+                     $node_tag_ref->{$access_type} eq 'destination' ||
+                     $node_tag_ref->{$access_type} eq 'designated'  ||
+                     $node_tag_ref->{$access_type} eq 'permissive'  ||
+                     $node_tag_ref->{$access_type} eq 'official'       ) {
                     printf STDERR "noAccessOnNode() : access for node %d (barrier=%s, %s=%s)\n", $node_id, $node_tag_ref->{'barrier'}, $access_type, $node_tag_ref->{$access_type}       if ( $debug );
                     return '';
                 } elsif ( $node_tag_ref->{$access_type} eq 'no'      ||
