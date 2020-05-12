@@ -63,12 +63,12 @@
         </ol>
         <hr />
         <h1 id="hints">1 Hints</h1>
-<p>
-    Le tableau sera mis à jour quand les résultats de l'analyse auront changé.
-</p>
-<p>
-    Une explication sur chaque erreur peut être trouvée dans la <a href='/en/index.php#messages'>documentation</a>.
-</p>
+        <p>
+            Le tableau sera mis à jour quand les résultats de l'analyse auront changé.
+        </p>
+        <p>
+            Une explication sur chaque erreur peut être trouvée dans la <a href='/en/index.php#messages'>documentation</a>.
+        </p>
         <hr />
         <h1 id="A2">2 Test file for Read Routes Data</h1>
         <h2 id="A2.1">2.1 Level 2</h2>
