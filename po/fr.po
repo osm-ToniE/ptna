@@ -10,13 +10,14 @@
 # Adrien Pavie <panieravide@riseup.net>, 2019
 # ToniE <osm-ToniE@web.de>, 2020
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-05-06 09:36+0200\n"
-"PO-Revision-Date: 2020-05-06 09:38+0200\n"
-"Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
+"POT-Creation-Date: 2020-05-13 23:19+0200\n"
+"PO-Revision-Date: 2019-04-05 14:25+0000\n"
+"Last-Translator: ToniE <osm-ToniE@web.de>, 2020\n"
 "Language-Team: French (https://www.transifex.com/jungle-bus/teams/97874/"
 "fr/)\n"
 "Language: fr\n"
@@ -24,7 +25,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.2.1\n"
 
 msgid "Message"
 msgstr "Message"
@@ -748,9 +748,19 @@ msgstr ""
 "Parcours PTv2 : le nom devrait être sous la forme (ou ressembler à) '... "
 "ref ...: from => to'"
 
-#, fuzzy, perl-format
+#, perl-format
 msgid "PTv2 route: using wrong way type (%s)"
-msgstr "Parcours PTv2 : mauvais 'role' = '%s'"
+msgstr ""
+
+#, perl-format
+msgid ""
+"Route: incorrect access restriction (%s) to way. Consider tagging as "
+"'%s'='no' and '%s'='yes'"
+msgid_plural ""
+"Route: incorrect access restriction (%s) to ways. Consider tagging as "
+"'%s'='no' and '%s'='yes'"
+msgstr[0] ""
+msgstr[1] ""
 
 #, perl-format
 msgid "Route: unclear access (%s) to way"
@@ -1220,6 +1230,14 @@ msgid ""
 msgstr ""
 "Veuillez évaluer la valeur manuellement et décider si un correctif est "
 "nécessaire ou non."
+
+msgid "The access restriction does not comply with the map features."
+msgstr ""
+
+msgid ""
+"Please consult the OSM Wiki: https://wiki.openstreetmap.org/wiki/"
+"Map_Features#Restrictions"
+msgstr ""
 
 msgid "This error is related to:"
 msgstr "Cette erreur est liée à:"

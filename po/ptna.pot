@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-05-06 09:36+0200\n"
+"POT-Creation-Date: 2020-05-13 23:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -662,6 +662,16 @@ msgid "PTv2 route: using wrong way type (%s)"
 msgstr ""
 
 #, perl-format
+msgid ""
+"Route: incorrect access restriction (%s) to way. Consider tagging as "
+"'%s'='no' and '%s'='yes'"
+msgid_plural ""
+"Route: incorrect access restriction (%s) to ways. Consider tagging as "
+"'%s'='no' and '%s'='yes'"
+msgstr[0] ""
+msgstr[1] ""
+
+#, perl-format
 msgid "Route: unclear access (%s) to way"
 msgid_plural "Route: unclear access (%s) to ways"
 msgstr[0] ""
@@ -1064,6 +1074,14 @@ msgstr ""
 
 msgid ""
 "Please evaluate the value manually and decide whether a fix is needed or not."
+msgstr ""
+
+msgid "The access restriction does not comply with the map features."
+msgstr ""
+
+msgid ""
+"Please consult the OSM Wiki: https://wiki.openstreetmap.org/wiki/"
+"Map_Features#Restrictions"
 msgstr ""
 
 msgid "This error is related to:"
