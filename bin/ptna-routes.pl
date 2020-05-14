@@ -2551,7 +2551,6 @@ sub analyze_route_relation {
 
     $return_code += CheckCompletenessOfData( $relation_ptr );
 
-
     if ( $relation_ptr->{'tag'}->{'public_transport:version'} && $relation_ptr->{'tag'}->{'public_transport:version'} eq '2' ) {
         if ( $relation_ptr->{'missing_way_data'} == 0 && $relation_ptr->{'missing_node_data'} == 0 ) {
             $return_code = analyze_ptv2_route_relation( $relation_ptr );
@@ -2615,6 +2614,11 @@ sub analyze_route_relation {
     if ( $check_route_ref ) {
         $return_code += CheckRouteRefOnStops( $relation_ptr );
     }
+
+    #
+    # relation shall be shown on PTNA's special map
+    #
+    $relation_ptr->{'show_relation'} = 1;
 
     return $return_code;
 }
@@ -3398,11 +3402,6 @@ sub analyze_ptv2_route_relation {
     if ( $check_way_type ) {
         $return_code += CheckWayType( $relation_ptr );
     }
-
-    #
-    # relation shall be shown on PTNA's special map
-    #
-    # $relation_ptr->{'show_relation'} = 1;
 
     return $return_code;
 }
