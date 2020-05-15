@@ -5897,7 +5897,8 @@ sub printRelationTemplate {
             my $josm_url     = sprintf( "<a href=\"http://127.0.0.1:8111/load_object?new_layer=false&amp;relation_members=true&amp;objects=r%s\" target=\"hiddenIframe\" title=\"Edit in JOSM\">JOSM</a>", $val );
 
             if ( $RELATIONS{$val} && $RELATIONS{$val}->{'show_relation'} ) {
-                my $show_url = sprintf( "<a href=\"/relation.php?id=%d\" title=\"Show relation on special map\">PTNA</a>", $val );
+                my $langparam   = $opt_language? '&lang=' . uri_escape($opt_language) : '';
+                my $show_url    = sprintf( "<a href=\"/relation.php?id=%d%s%s%s\" title=\"Show relation on special map\">PTNA</a>", $val, $langparam );
                 $val = sprintf( "%s %s%s <small>(%s, %s, %s)</small>", $image_url, $info_string, $relation_url, $id_url, $josm_url, $show_url );
             } else {
                 $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $relation_url, $id_url, $josm_url );
@@ -6044,8 +6045,7 @@ sub html_escape {
 sub uri_escape {
     my $text = shift;
     if ( $text ) {
-        $text =~ s/ /%20/g;
-        $text =~ s/#/%23/g;
+        $text =~ s/([^^A-Za-z0-9\-_.!~*()])/ sprintf "%%%02x", ord $1 /eg;
     }
     return $text;
 }
