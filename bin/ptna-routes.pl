@@ -6071,6 +6071,10 @@ sub wiki2html {
     my $text = shift;
     my $sub  = undef;
     if ( $text ) {
+        $text =~ s/&/&amp;/g;
+        $text =~ s/</&lt;/g;
+        $text =~ s/>/&gt;/g;
+        $text =~ s/"/&quot;/g;
         # ignore: [[Category:Nürnberg]]
         $text =~ s/\[\[Category:[^\]]+\]\]//g;
         # convert: [[Nürnberg/Transportation/Analyse/DE-BY-VGN-Linien|VGN Linien]]
@@ -6109,6 +6113,7 @@ sub wiki2html {
             $sub = sprintf( "<em>%s</em>", $1 );
             $text =~ s/''(.+?)''/$sub/;
         }
+        $text =~ s/'/&#039;/g;
     }
     return $text;
 }
