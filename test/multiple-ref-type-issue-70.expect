@@ -32,19 +32,19 @@
         </li>
         <li>2 <a href="#A2">Test for issue #??</a>
         <ol>
-        <li>2.1 <a href="#A2.1">multiple appearances of "ref;type" and also "from" or/and "to" appear multiple times, "operator" is identical</a>
+        <li>2.1 <a href="#A2.1">multiple appearances of &quot;ref;type&quot; and also &quot;from&quot; or/and &quot;to&quot; appear multiple times, &quot;operator&quot; is identical</a>
         </li>
-        <li>2.2 <a href="#A2.2">multiple appearances of "ref;type" and "operator" is not set, but "from" and "to" are set</a>
+        <li>2.2 <a href="#A2.2">multiple appearances of &quot;ref;type&quot; and &quot;operator&quot; is not set, but &quot;from&quot; and &quot;to&quot; are set</a>
         </li>
-        <li>2.3 <a href="#A2.3">multiple appearances with 'or' values and "operator" is not set in both CSV data and in Relations</a>
+        <li>2.3 <a href="#A2.3">multiple appearances with &#039;or&#039; values and &quot;operator&quot; is not set in both CSV data and in Relations</a>
         </li>
-        <li>2.4 <a href="#A2.4">multiple appearances with 'or' values and "operator" is not set in Relations</a>
+        <li>2.4 <a href="#A2.4">multiple appearances with &#039;or&#039; values and &quot;operator&quot; is not set in Relations</a>
         </li>
         </ol>
         </li>
-        <li>3 <a href="#networkdetails">Details for 'network'-Values</a>
+        <li>3 <a href="#networkdetails">Details for &#039;network&#039;-Values</a>
         <ol>
-        <li>3.1 <a href="#considerednetworks">Considered 'network'-Values</a>
+        <li>3.1 <a href="#considerednetworks">Considered &#039;network&#039;-Values</a>
         </li>
         </ol>
         </li>
@@ -59,7 +59,7 @@
         </p>
         <hr />
         <h1 id="A2">2 Test for issue #??</h1>
-        <h2 id="A2.1">2.1 multiple appearances of "ref;type" and also "from" or/and "to" appear multiple times, "operator" is identical</h2>
+        <h2 id="A2.1">2.1 multiple appearances of &quot;ref;type&quot; and also &quot;from&quot; or/and &quot;to&quot; appear multiple times, &quot;operator&quot; is identical</h2>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
@@ -88,7 +88,7 @@
             </tbody>
         </table>
 
-        <h2 id="A2.2">2.2 multiple appearances of "ref;type" and "operator" is not set, but "from" and "to" are set</h2>
+        <h2 id="A2.2">2.2 multiple appearances of &quot;ref;type&quot; and &quot;operator&quot; is not set, but &quot;from&quot; and &quot;to&quot; are set</h2>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
@@ -122,7 +122,7 @@
             </tbody>
         </table>
 
-        <h2 id="A2.3">2.3 multiple appearances with 'or' values and "operator" is not set in both CSV data and in Relations</h2>
+        <h2 id="A2.3">2.3 multiple appearances with &#039;or&#039; values and &quot;operator&quot; is not set in both CSV data and in Relations</h2>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
@@ -135,7 +135,7 @@
             </tbody>
         </table>
 
-        <h2 id="A2.4">2.4 multiple appearances with 'or' values and "operator" is not set in Relations</h2>
+        <h2 id="A2.4">2.4 multiple appearances with &#039;or&#039; values and &quot;operator&quot; is not set in Relations</h2>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
@@ -149,8 +149,8 @@
         </table>
 
         <hr />
-        <h1 id="networkdetails">3 Details for 'network'-Values</h1>
-        <h2 id="considerednetworks">3.1 Considered 'network'-Values</h2>
+        <h1 id="networkdetails">3 Details for &#039;network&#039;-Values</h1>
+        <h2 id="considerednetworks">3.1 Considered &#039;network&#039;-Values</h2>
 <p>
 This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.
 </p>

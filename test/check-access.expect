@@ -40,9 +40,9 @@
         </li>
         </ol>
         </li>
-        <li>3 <a href="#networkdetails">Details for 'network'-Values</a>
+        <li>3 <a href="#networkdetails">Details for &#039;network&#039;-Values</a>
         <ol>
-        <li>3.1 <a href="#considerednetworks">Considered 'network'-Values</a>
+        <li>3.1 <a href="#considerednetworks">Considered &#039;network&#039;-Values</a>
         </li>
         </ol>
         </li>
@@ -91,94 +91,94 @@
 </p>
         <h2 id="A2.3">2.3 Negative, with errors on ways and nodes</h2>
 <p>
-Route: restricted access ('access'='private') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Way 'Way 15' -102699
+Route: restricted access (&#039;access&#039;=&#039;private&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 15&#039; -102699
 
 </p>
 <p>
-Route: restricted access ('highway'='construction') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Way 'Way 11' -102701
+Route: restricted access (&#039;highway&#039;=&#039;construction&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 11&#039; -102701
 
 </p>
 <p>
-Route: restricted access ('highway'='cycleway') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Way 'Way 12' -102713
+Route: restricted access (&#039;highway&#039;=&#039;cycleway&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 12&#039; -102713
 
 </p>
 <p>
-Route: restricted access ('highway'='footway') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Way 'Way 4' -102708
+Route: restricted access (&#039;highway&#039;=&#039;footway&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 4&#039; -102708
 
 </p>
 <p>
-Route: restricted access ('highway'='pedestrian') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Way 'Way 13' -102703
+Route: restricted access (&#039;highway&#039;=&#039;pedestrian&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 13&#039; -102703
 
 </p>
 <p>
-Route: restricted access ('motor_vehicle'='no') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Way 'Way 17' -102697
+Route: restricted access (&#039;motor_vehicle&#039;=&#039;no&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 17&#039; -102697
 
 </p>
 <p>
-Route: restricted access ('motorcar'='no') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Way 'Way 18' -102696
+Route: restricted access (&#039;motorcar&#039;=&#039;no&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 18&#039; -102696
 
 </p>
 <p>
-Route: restricted access ('vehicle'='private') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Way 'Way 16' -102698
+Route: restricted access (&#039;vehicle&#039;=&#039;private&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 16&#039; -102698
 
 </p>
 <p>
-Route: restricted access at barrier ('barrier'='block' with implied 'access'='no') without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Node -152303
+Route: restricted access at barrier (&#039;barrier&#039;=&#039;block&#039; with implied &#039;access&#039;=&#039;no&#039;) without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Node -152303
 
 </p>
 <p>
-Route: restricted access at barrier ('barrier'='bollard' with implied 'access'='no') without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Node -103450
+Route: restricted access at barrier (&#039;barrier&#039;=&#039;bollard&#039; with implied &#039;access&#039;=&#039;no&#039;) without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Node -103450
 
 </p>
 <p>
-Route: unclear access ('bus:conditional'='yes @ operator') to way: Way 'Way 18' -152347
+Route: unclear access (&#039;bus:conditional&#039;=&#039;yes @ operator&#039;) to way: Way &#039;Way 18&#039; -152347
 
 </p>
 <p>
-Route: suspicious 'construction'='secondary' along with 'highway' unequal to 'construction' on way: Way 'Way 19' -152346
+Route: suspicious &#039;construction&#039;=&#039;secondary&#039; along with &#039;highway&#039; unequal to &#039;construction&#039; on way: Way &#039;Way 19&#039; -152346
 
 </p>
 <p>
 &nbsp;
 </p>
 <p>
-Route: restricted access ('access'='private') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Way 'Way 15' -102699
+Route: restricted access (&#039;access&#039;=&#039;private&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 15&#039; -102699
 
 </p>
 <p>
-Route: restricted access ('highway'='construction') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Way 'Way 11' -102701
+Route: restricted access (&#039;highway&#039;=&#039;construction&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 11&#039; -102701
 
 </p>
 <p>
-Route: restricted access ('highway'='path') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Way 'Way 11-15' -102687
+Route: restricted access (&#039;highway&#039;=&#039;path&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 11-15&#039; -102687
 
 </p>
 <p>
-Route: restricted access ('motor_vehicle'='no') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Way 'Way 17' -102697
+Route: restricted access (&#039;motor_vehicle&#039;=&#039;no&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 17&#039; -102697
 
 </p>
 <p>
-Route: restricted access ('motorcar'='no') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Way 'Way 18' -102696
+Route: restricted access (&#039;motorcar&#039;=&#039;no&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 18&#039; -102696
 
 </p>
 <p>
-Route: restricted access ('vehicle'='private') to way without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Way 'Way 16' -102698
+Route: restricted access (&#039;vehicle&#039;=&#039;private&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 16&#039; -102698
 
 </p>
 <p>
-Route: restricted access at barrier ('barrier'='bollard' with implied 'access'='no') without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Node -103450
+Route: restricted access at barrier (&#039;barrier&#039;=&#039;bollard&#039; with implied &#039;access&#039;=&#039;no&#039;) without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Node -103450
 
 </p>
 <p>
-Route: restricted access at barrier ('barrier'='entrance', 'motor_vehicle'='no') without 'psv'='yes', 'bus'='yes', 'bus'='designated', or ...: Node -152329
+Route: restricted access at barrier (&#039;barrier&#039;=&#039;entrance&#039;, &#039;motor_vehicle&#039;=&#039;no&#039;) without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Node -152329
 
 </p>
 <p>
-Route: unclear access ('bus:conditional'='yes @ operator') to way: Way 'Way 18' -152347
+Route: unclear access (&#039;bus:conditional&#039;=&#039;yes @ operator&#039;) to way: Way &#039;Way 18&#039; -152347
 
 </p>
 <p>
-Route: suspicious 'construction'='secondary' along with 'highway' unequal to 'construction' on way: Way 'Way 19' -152346
+Route: suspicious &#039;construction&#039;=&#039;secondary&#039; along with &#039;highway&#039; unequal to &#039;construction&#039; on way: Way &#039;Way 19&#039; -152346
 
 </p>
         <table class="oepnvtable">
@@ -197,8 +197,8 @@ Route: suspicious 'construction'='secondary' along with 'highway' unequal to 'co
 &nbsp;
 </p>
         <hr />
-        <h1 id="networkdetails">3 Details for 'network'-Values</h1>
-        <h2 id="considerednetworks">3.1 Considered 'network'-Values</h2>
+        <h1 id="networkdetails">3 Details for &#039;network&#039;-Values</h1>
+        <h2 id="considerednetworks">3.1 Considered &#039;network&#039;-Values</h2>
 <p>
 This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.
 </p>

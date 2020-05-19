@@ -36,9 +36,9 @@
         </li>
         </ol>
         </li>
-        <li>3 <a href="#networkdetails">Details for 'network'-Values</a>
+        <li>3 <a href="#networkdetails">Details for &#039;network&#039;-Values</a>
         <ol>
-        <li>3.1 <a href="#considerednetworks">Considered 'network'-Values</a>
+        <li>3.1 <a href="#considerednetworks">Considered &#039;network&#039;-Values</a>
         </li>
         </ol>
         </li>
@@ -67,8 +67,8 @@
         </table>
 
         <hr />
-        <h1 id="networkdetails">3 Details for 'network'-Values</h1>
-        <h2 id="considerednetworks">3.1 Considered 'network'-Values</h2>
+        <h1 id="networkdetails">3 Details for &#039;network&#039;-Values</h1>
+        <h2 id="considerednetworks">3.1 Considered &#039;network&#039;-Values</h2>
 <p>
 This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.
 </p>
