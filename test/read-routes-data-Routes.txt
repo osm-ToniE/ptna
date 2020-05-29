@@ -91,16 +91,16 @@
 606;bus;;;;operator
 700;auto;invalid route-type;nowhere;nowhere;noone
 800;bus;!Neue Buslinie ab 09.12.2018!;nowhere;nowhere;noone
-900;bus;External Link with alias: [https://ptna.openstreetmap.de PTNA];from;to;operator1;operator2
-901;bus;External Link without alias: [https://ptna.openstreetmap.de];from;to;operator1;operator2
-902;bus;OSM-Wiki Link with alias: [[M%C3%BCnchen|München]];;to;operator1;operator2
-903;bus;Link without alias: [[München]];from;;operator1;operator2
-904;bus;;;;operator1;operator2
-910;bus;!!!Neue Buslinie ab 09.12.2018!!!;from;to;operator1; operator2
-911;bus;;from;to;operator1; operator2
-912;bus;comment;;to;operator1; operator2
-913;bus;comment;from;;operator1; operator2
-914;bus;;;;operator1; operator2
+900;bus;External Link with alias: [https://ptna.openstreetmap.de PTNA];from;to;"operator1;operator2"
+901;bus;External Link without alias: [https://ptna.openstreetmap.de];from;to;"operator1;operator2"
+902;bus;OSM-Wiki Link with alias: [[M%C3%BCnchen|München]];;to;"operator1;operator2"
+903;bus;Link without alias: [[München]];from;;"operator1;operator2"
+904;bus;;;;"operator1;operator2"
+910;bus;!!!Neue Buslinie ab 09.12.2018!!!;from;to;"operator1; operator2"
+911;bus;;from;to;"operator1; operator2"
+912;bus;comment;;to;"operator1; operator2"
+913;bus;comment;from;;"operator1; operator2"
+914;bus;;;;"operator1; operator2"
 915;bus;;;;'Mein Bus' Gmbh
 916;bus;;;;"'Mein Bus' Gmbh"
 917;bus;;;;"Mein Bus Gmbh"

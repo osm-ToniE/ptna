@@ -82,7 +82,7 @@ sub ReadRoutes {
                     s/\r$//;                                        # remove 'CR'
                     s/^\s*//;                                       # remove space at the beginning
                     s/\s*$//;                                       # remove space at the end
-                    
+
                     next    if ( !$_ );                             # ignore if line is empty
 
                     $NR                         = $.;
@@ -149,7 +149,14 @@ sub ReadRoutes {
                         $hashref->{'from'}           = $ExpFrom      || '';              # 'from'
                         $hashref->{'to'}             = $ExpTo        || '';              # 'to'
                         if ( @rest ) {
-                            # 'operator' may include ';' (the separator)
+                            if ( scalar(@rest) > 1 )
+                            {
+                                $issues_string      = gettext( "'Operator' includes a ';' without being in double quotes. Line %s of Routes-Data. Contents of line: '%s'" );
+                                $hashref->{'type'}  = 'error';                                              # this is an error
+                                $hashref->{'ref'}   = $ExpRef;                                              # this is an error
+                                $hashref->{'error'} = sprintf( decode( 'utf8', $issues_string ), $NR, $hashref->{'contents'} );   # this is an error
+                            }
+                            # 'operator' must not include ';' (the separator) at a later time, put 'operator' also in quotes.
                             $ExpOperator           = join( ';', @rest );
                             $hashref->{'operator'} = $ExpOperator;
                         } else {

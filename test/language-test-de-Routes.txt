@@ -91,16 +91,16 @@
 606;bus;;;;operator
 700;auto;invalid route-type;nowhere;nowhere;noone
 800;bus;!Neue Buslinie ab 09.12.2018!;nowhere;nowhere;noone
-900;bus;comment;from;to;operator1;operator2
-901;bus;;from;to;operator1;operator2
-902;bus;comment;;to;operator1;operator2
-903;bus;comment;from;;operator1;operator2
-904;bus;;;;operator1;operator2
-910;bus;comment;from;to;operator1; operator2
-911;bus;;from;to;operator1; operator2
-912;bus;comment;;to;operator1; operator2
-913;bus;comment;from;;operator1; operator2
-914;bus;;;;operator1; operator2
+900;bus;comment;from;to;"operator1;operator2"
+901;bus;;from;to;"operator1;operator2"
+902;bus;comment;;to;"operator1;operator2"
+903;bus;comment;from;;"operator1;operator2"
+904;bus;;;;"operator1;operator2"
+910;bus;comment;from;to;"operator1; operator2"
+911;bus;;from;to;"operator1; operator2"
+912;bus;comment;;to;"operator1; operator2"
+913;bus;comment;from;;"operator1; operator2"
+914;bus;;;;"operator1; operator2"
 915;bus;;;;'Mein Bus' Gmbh
 916;bus;;;;"'Mein Bus' Gmbh"
 917;bus;;;;"Mein Bus Gmbh"
