@@ -5898,7 +5898,7 @@ sub printRelationTemplate {
 
             if ( $RELATIONS{$val} && $RELATIONS{$val}->{'show_relation'} ) {
                 my $langparam   = $opt_language? '&lang=' . uri_escape($opt_language) : '';
-                my $show_url    = sprintf( "<a href=\"/relation.php?id=%d%s%s%s\" title=\"Show relation on special map\">PTNA</a>", $val, $langparam );
+                my $show_url    = sprintf( "<a href=\"/relation.php?id=%d%s\" title=\"Show relation on special map\">PTNA</a>", $val, $langparam );
                 $val = sprintf( "%s %s%s <small>(%s, %s, %s)</small>", $image_url, $info_string, $relation_url, $id_url, $josm_url, $show_url );
             } else {
                 $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $relation_url, $id_url, $josm_url );
