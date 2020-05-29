@@ -1275,6 +1275,13 @@ sub InitOptionStrings {
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
+    $OptionList[$i]->{'option'}                 = "check-gtfs";
+    $OptionList[$i]->{'default'}                = "OFF";
+    $OptionList[$i]->{'description'}            = gettext( "Check 'gtfs:*' tags for validity, ..." );
+    $OptionList[$i]->{'image'}                  = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+
+    $i++;
     $OptionList[$i]->{'option'}                 = "check-motorway-link";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = gettext( "Check whether motorway links are used without actually using a motorway/trunk road." );
@@ -1403,6 +1410,13 @@ sub InitOptionStrings {
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
+    $OptionList[$i]->{'option'}                 = "link-gtfs";
+    $OptionList[$i]->{'default'}                = "OFF";
+    $OptionList[$i]->{'description'}            = gettext( "Provide links to GTFS-Analysis for 'gtfs:route_id' or 'gtfs:trip_id' tags." );
+    $OptionList[$i]->{'image'}                  = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+
+    $i++;
     $OptionList[$i]->{'option'}                 = "max-error";
     $OptionList[$i]->{'default'}                = "";
     $OptionList[$i]->{'description'}            = gettext( "Limits the number of identical error and note messages for a relation." );
@@ -1460,6 +1474,13 @@ sub InitOptionStrings {
     $OptionList[$i]->{'option'}                 = "relaxed-begin-end-for";
     $OptionList[$i]->{'default'}                = "";
     $OptionList[$i]->{'description'}            = gettext( "Relaxed check of begin and end of routes regarding stop positions (i.e. for 'train', 'tram', 'light_rail')." );
+    $OptionList[$i]->{'image'}                  = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+
+    $i++;
+    $OptionList[$i]->{'option'}                 = "show-gtfs";
+    $OptionList[$i]->{'default'}                = "OFF";
+    $OptionList[$i]->{'description'}            = gettext( "Similar to option '--positive-notes': show values of 'gtfs*' tags in the 'Notes' column." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 

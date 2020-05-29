@@ -90,14 +90,18 @@ my $check_route_ref                 = undef;
 my $check_motorway_link             = undef;
 my $check_version                   = undef;
 my $check_way_type                  = undef;
+my $check_gtfs                      = undef;
 my $expect_network_long             = undef;
 my $expect_network_long_as          = undef;
 my $expect_network_long_for         = undef;
 my $expect_network_short            = undef;
 my $expect_network_short_as         = undef;
 my $expect_network_short_for        = undef;
+my $link_gtfs                       = undef;
 my $multiple_ref_type_entries       = "analyze";
+my $path_to_work_dir                = '/osm/ptna/work';
 my $ptv1_compatibility              = "no";
+my $show_gtfs                       = undef;
 my $strict_network                  = undef;
 my $strict_operator                 = undef;
 my $max_error                       = undef;
@@ -106,7 +110,7 @@ my $man_page                        = undef;
 my $positive_notes                  = undef;
 my $csv_separator                   = ';';
 my $or_separator                    = '|';                 # used to separate several 'ref' values in CSV entry "43|E43;bus;;;;"
-my $ref_separator                   = '/';                 # used to separate several 'ref' values in CSV entry "602/50;bus;;;;"
+my $ref_separator                   = '/';                 # used to separate several 'ref' values in CSV entry "602/50;bus;;;;" for 'ref' from different 'network' (ref:xxx=602 and ref:yyy=50)
 my $coloured_sketchline             = undef;
 my $page_title                      = undef;
 
@@ -130,6 +134,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'check-stop-position'           =>  \$check_stop_position,          # --check-stop-position             check for bus=yes, tram=yes, ... on (stop_positions
             'check-version'                 =>  \$check_version,                # --check-version                   check for PTv2 on route_masters, ...
             'check-way-type'                =>  \$check_way_type,               # --check-way-type                  check for routes: do vehicles use the right way type
+            'check-gtfs'                    =>  \$check_gtfs,                   # --check-gtfs                      check "gtfs:*" tags for validity/uniqueness/...
             'coloured-sketchline'           =>  \$coloured_sketchline,          # --coloured-sketchline             force SketchLine to print coloured icons
             'expect-network-long'           =>  \$expect_network_long,          # --expect-network-long             note if 'network' is not long form in general
             'expect-network-long-as:s'      =>  \$expect_network_long_as,       # --expect-network-long-as="Münchner Verkehrs- und Tarifverbund|Biberger Bürgerbus"
@@ -137,6 +142,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'expect-network-short'          =>  \$expect_network_short,         # --expect-network-short            note if 'network' is not short form in general
             'expect-network-short-as:s'     =>  \$expect_network_short_as,      # --expect-network-short-as='BOB'
             'expect-network-short-for:s'    =>  \$expect_network_short_for,     # --expect-network-short-for='Bayerische Oberlandbahn'        note if 'network' is not short form for ...
+            'link-gtfs'                     =>  \$link_gtfs,                    # --link-gtfs                       create a link to GTFS-Analysis for "gtfs:*" tags
             'routes-file=s'                 =>  \$routes_file,                  # --routes-file=zzz                 CSV file with a list of routes of the of the network
             'max-error=i'                   =>  \$max_error,                    # --max-error=10                    limit number of templates printed for identical error messages
             'multiple-ref-type-entries=s'   =>  \$multiple_ref_type_entries,    # --multiple-ref-type-entries=analyze|allow    how to handle multiple "ref;type" in routes-file
@@ -148,9 +154,11 @@ GetOptions( 'help'                          =>  \$help,                         
             'ptv1-compatibility=s'          =>  \$ptv1_compatibility,           # --ptv1-compatibility=no|show|allow    how to handle "highway=bus_stop" in PTv2
             'relaxed-begin-end-for:s'       =>  \$relaxed_begin_end_for,        # --relaxed-begin-end-for=...       for train/tram/light_rail: first/last stop position does not have to be on first/last node of way, but within first/last way
             'osm-xml-file=s'                =>  \$osm_xml_file,                 # --osm-xml-file=yyy                XML output of Overpass APU query
+            'path-to-work-dir=s'            =>  \$path_to_work_dir,             # --path-to-work-dir=abc            XML output of Overpass APU query
             'separator=s'                   =>  \$csv_separator,                # --separator=';'                   separator in the CSV file
             'or-separator=s'                =>  \$or_separator,                 # --or-separator='|'                separator in the CSV file inside 'ref' values to allow multiple values
             'ref-separator=s'               =>  \$ref_separator,                # --ref-separator='/'               separator in the CSV file inside 'ref' values to show cooperations
+            'show-gtfs'                     =>  \$show_gtfs,                    # --show-gtfs                       print positive information for "gtfs:*" tags
             'strict-network'                =>  \$strict_network,               # --strict-network                  do not consider empty network tags
             'strict-operator'               =>  \$strict_operator,              # --strict-operator                 do not consider empty operator tags
             'test'                          =>  \$opt_test,                     # --test                            to test the SW
@@ -230,6 +238,7 @@ if ( $verbose ) {
     printf STDERR "%20s--allow-coach='%s'\n",              ' ', $allow_coach                ? 'ON'          :'OFF';
     printf STDERR "%20s--check-access='%s'\n",             ' ', $check_access               ? 'ON'          :'OFF';
     printf STDERR "%20s--check-bus-stop='%s'\n",           ' ', $check_bus_stop             ? 'ON'          :'OFF';
+    printf STDERR "%20s--check-gtfs='%s'\n",               ' ', $check_gtfs                 ? 'ON'          :'OFF';
     printf STDERR "%20s--check-motorway-link='%s'\n",      ' ', $check_motorway_link        ? 'ON'          :'OFF';
     printf STDERR "%20s--check-name='%s'\n",               ' ', $check_name                 ? 'ON'          :'OFF';
     printf STDERR "%20s--check-name-relaxed='%s'\n",       ' ', $check_name_relaxed         ? 'ON'          :'OFF';
@@ -248,6 +257,7 @@ if ( $verbose ) {
     printf STDERR "%20s--expect-network-short='%s'\n",     ' ', $expect_network_short       ? 'ON'          :'OFF';
     printf STDERR "%20s--expect-network-short-as='%s'\n",  ' ', $expect_network_short_as    ? $expect_network_short_as     : '';
     printf STDERR "%20s--expect-network-short-for='%s'\n", ' ', $expect_network_short_for   ? $expect_network_short_for    : '';
+    printf STDERR "%20s--link-gtfs='%s'\n",                ' ', $link_gtfs                  ? 'ON'          :'OFF';
     printf STDERR "%20s--max-error='%s'\n",                ' ', $max_error                  ? $max_error                   : '';
     printf STDERR "%20s--multiple-ref-type-entries='%s'\n",' ', $multiple_ref_type_entries  ? $multiple_ref_type_entries   : '';
     printf STDERR "%20s--network-long-regex='%s'\n",       ' ', $network_long_regex         ? $network_long_regex          : '';
@@ -256,13 +266,15 @@ if ( $verbose ) {
     printf STDERR "%20s--positive-notes='%s'\n",           ' ', $positive_notes             ? 'ON'          :'OFF';
     printf STDERR "%20s--ptv1-compatibility='%s'\n",       ' ', $ptv1_compatibility         ? $ptv1_compatibility          : '';
     printf STDERR "%20s--relaxed-begin-end-for='%s'\n",    ' ', $relaxed_begin_end_for      ? $relaxed_begin_end_for       : '';
+    printf STDERR "%20s--show-gtfs='%s'\n",                ' ', $show_gtfs                  ? 'ON'          :'OFF';
     printf STDERR "%20s--strict-network='%s'\n",           ' ', $strict_network             ? 'ON'          :'OFF';
     printf STDERR "%20s--strict-operator='%s'\n",          ' ', $strict_operator            ? 'ON'          :'OFF';
     printf STDERR "%20s--separator='%s'\n",                ' ', $csv_separator              ? $csv_separator               : '';
     printf STDERR "%20s--or-separator='%s'\n",             ' ', $or_separator               ? $or_separator                : '';
     printf STDERR "%20s--ref-separator='%s'\n",            ' ', $ref_separator              ? $ref_separator               : '';
-    printf STDERR "%20s--routes-file='%s'\n",              ' ', decode('utf8', $routes_file )  if ( $routes_file                 );
-    printf STDERR "%20s--osm-xml-file='%s'\n",             ' ', decode('utf8', $osm_xml_file ) if ( $osm_xml_file                );
+    printf STDERR "%20s--routes-file='%s'\n",              ' ', decode('utf8', $routes_file )       if ( $routes_file                 );
+    printf STDERR "%20s--osm-xml-file='%s'\n",             ' ', decode('utf8', $osm_xml_file )      if ( $osm_xml_file                );
+    printf STDERR "%20s--path-to-work-dir='%s'\n",         ' ', decode('utf8', $path_to_work_dir )  if ( $path_to_work_dir            );
 }
 
 
