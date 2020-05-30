@@ -97,6 +97,7 @@ my $expect_network_long_for         = undef;
 my $expect_network_short            = undef;
 my $expect_network_short_as         = undef;
 my $expect_network_short_for        = undef;
+my $gtfs_feed                       = undef;
 my $link_gtfs                       = undef;
 my $multiple_ref_type_entries       = "analyze";
 my $path_to_work_dir                = '/osm/ptna/work';
@@ -142,6 +143,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'expect-network-short'          =>  \$expect_network_short,         # --expect-network-short            note if 'network' is not short form in general
             'expect-network-short-as:s'     =>  \$expect_network_short_as,      # --expect-network-short-as='BOB'
             'expect-network-short-for:s'    =>  \$expect_network_short_for,     # --expect-network-short-for='Bayerische Oberlandbahn'        note if 'network' is not short form for ...
+            'gtfs-feed=s'                   =>  \$gtfs_feed,                    # --gtfs-feed='DE-BY-MVV'
             'link-gtfs'                     =>  \$link_gtfs,                    # --link-gtfs                       create a link to GTFS-Analysis for "gtfs:*" tags
             'routes-file=s'                 =>  \$routes_file,                  # --routes-file=zzz                 CSV file with a list of routes of the of the network
             'max-error=i'                   =>  \$max_error,                    # --max-error=10                    limit number of templates printed for identical error messages
@@ -165,15 +167,16 @@ GetOptions( 'help'                          =>  \$help,                         
             'title=s'                       =>  \$page_title,                   # --title=...                       Title for the HTML page
           );
 
-$page_title                 = decode('utf8', $page_title )                  if ( $page_title                );
-$network_guid               = decode('utf8', $network_guid )                if ( $network_guid              );
-$network_long_regex         = decode('utf8', $network_long_regex )          if ( $network_long_regex        );
-$network_short_regex        = decode('utf8', $network_short_regex )         if ( $network_short_regex       );
-$operator_regex             = decode('utf8', $operator_regex )              if ( $operator_regex            );
-$expect_network_long_as     = decode('utf8', $expect_network_long_as )      if ( $expect_network_long_as    );
-$expect_network_long_for    = decode('utf8', $expect_network_long_for )     if ( $expect_network_long_for   );
-$expect_network_short_as    = decode('utf8', $expect_network_short_as )     if ( $expect_network_short_as   );
-$expect_network_short_for   = decode('utf8', $expect_network_short_for )    if ( $expect_network_short_for  );
+$page_title                 = decode( 'utf8', $page_title )                  if ( $page_title                );
+$gtfs_feed                  = decode( 'utf8', $gtfs_feed )                   if ( $gtfs_feed                 );
+$network_guid               = decode( 'utf8', $network_guid )                if ( $network_guid              );
+$network_long_regex         = decode( 'utf8', $network_long_regex )          if ( $network_long_regex        );
+$network_short_regex        = decode( 'utf8', $network_short_regex )         if ( $network_short_regex       );
+$operator_regex             = decode( 'utf8', $operator_regex )              if ( $operator_regex            );
+$expect_network_long_as     = decode( 'utf8', $expect_network_long_as )      if ( $expect_network_long_as    );
+$expect_network_long_for    = decode( 'utf8', $expect_network_long_for )     if ( $expect_network_long_for   );
+$expect_network_short_as    = decode( 'utf8', $expect_network_short_as )     if ( $expect_network_short_as   );
+$expect_network_short_for   = decode( 'utf8', $expect_network_short_for )    if ( $expect_network_short_for  );
 
 
 if ( $opt_language ) {
@@ -229,6 +232,10 @@ if ( $ptv1_compatibility ne 'no' && $ptv1_compatibility ne 'allow' && $ptv1_comp
     $ptv1_compatibility = 'no';
 }
 
+unless ( $gtfs_feed ) {
+    $gtfs_feed = $network_guid;
+}
+
 
 if ( $verbose ) {
     printf STDERR "%s ptna-routes.pl -v\n", get_time();
@@ -257,6 +264,7 @@ if ( $verbose ) {
     printf STDERR "%20s--expect-network-short='%s'\n",     ' ', $expect_network_short       ? 'ON'          :'OFF';
     printf STDERR "%20s--expect-network-short-as='%s'\n",  ' ', $expect_network_short_as    ? $expect_network_short_as     : '';
     printf STDERR "%20s--expect-network-short-for='%s'\n", ' ', $expect_network_short_for   ? $expect_network_short_for    : '';
+    printf STDERR "%20s--gtfs-feed='%s'\n",                ' ', $gtfs_feed                  ? $gtfs_feed : '';
     printf STDERR "%20s--link-gtfs='%s'\n",                ' ', $link_gtfs                  ? 'ON'          :'OFF';
     printf STDERR "%20s--max-error='%s'\n",                ' ', $max_error                  ? $max_error                   : '';
     printf STDERR "%20s--multiple-ref-type-entries='%s'\n",' ', $multiple_ref_type_entries  ? $multiple_ref_type_entries   : '';
