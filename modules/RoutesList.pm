@@ -58,7 +58,7 @@ sub ReadRoutes {
 
     my %supported_routes_types = ();
 
-    my ($ExpRef,$ExpRouteType,$ExpComment,$ExpFrom,$ExpTo,$ExpOperator);
+    my ($ExpRef,$ExpRouteType,$ExpComment,$ExpFrom,$ExpTo,$ExpOperator,$ExpGtfsFeed,$ExpGtfsRouteId);
     my @rest = ();
 
     $CSV_separator  = $csv_separator;
@@ -118,9 +118,9 @@ sub ReadRoutes {
                         $hashref->{'type'}       = 'route';          # store type
 
                         if ( m/^"/ || m/"$csv_separator/ || m/"$/ ) {
-                            ($ExpRef,$ExpRouteType,$ExpComment,$ExpFrom,$ExpTo,@rest) = parse_csv( $csv_separator, $_ );
+                            ($ExpRef,$ExpRouteType,$ExpComment,$ExpFrom,$ExpTo,$ExpOperator,$ExpGtfsFeed,$ExpGtfsRouteId,@rest) = parse_csv( $csv_separator, $_ );
                         } else {
-                            ($ExpRef,$ExpRouteType,$ExpComment,$ExpFrom,$ExpTo,@rest) = split( $csv_separator, $_ );
+                            ($ExpRef,$ExpRouteType,$ExpComment,$ExpFrom,$ExpTo,$ExpOperator,$ExpGtfsFeed,$ExpGtfsRouteId,@rest) = split( $csv_separator, $_ );
                         }
 
                         if ( $ExpRef ) {
@@ -143,25 +143,31 @@ sub ReadRoutes {
                             $ExpTo =~ s/^\s*//;
                             $ExpTo =~ s/\s*$//;
                         }
-                        $hashref->{'ref'}            = $ExpRef       || '';              # 'ref'=
-                        $hashref->{'route'}          = $ExpRouteType || '';              # 'route/route_master'=
-                        $hashref->{'comment'}        = $ExpComment   || '';              # routes file comment
-                        $hashref->{'from'}           = $ExpFrom      || '';              # 'from'
-                        $hashref->{'to'}             = $ExpTo        || '';              # 'to'
+                        if ( $ExpOperator ) {
+                            $ExpOperator =~ s/^\s*//;
+                            $ExpOperator =~ s/\s*$//;
+                        }
+                        if ( $ExpGtfsFeed ) {
+                            $ExpGtfsFeed =~ s/^\s*//;
+                            $ExpGtfsFeed =~ s/\s*$//;
+                        }
+                        if ( $ExpGtfsRouteId ) {
+                            $ExpGtfsRouteId =~ s/^\s*//;
+                            $ExpGtfsRouteId =~ s/\s*$//;
+                        }
+                        $hashref->{'ref'}            = $ExpRef          || '';              # 'ref'=
+                        $hashref->{'route'}          = $ExpRouteType    || '';              # 'route/route_master'=
+                        $hashref->{'comment'}        = $ExpComment      || '';              # routes file comment
+                        $hashref->{'from'}           = $ExpFrom         || '';              # 'from'
+                        $hashref->{'to'}             = $ExpTo           || '';              # 'to'
+                        $hashref->{'operator'}       = $ExpOperator     || '';              # 'operator'
+                        $hashref->{'gtfs-feed'}      = $ExpGtfsFeed     || '';              # 'gtfs-feed
+                        $hashref->{'gtfs-route-id'}  = $ExpGtfsRouteId  || '';              # 'gtfs-route-id'
                         if ( @rest ) {
-                            if ( scalar(@rest) > 1 )
-                            {
-                                $issues_string      = gettext( "'Operator' includes a ';' without being in double quotes. Line %s of Routes-Data. Contents of line: '%s'" );
-                                $hashref->{'type'}  = 'error';                                              # this is an error
-                                $hashref->{'ref'}   = $ExpRef;                                              # this is an error
-                                $hashref->{'error'} = sprintf( decode( 'utf8', $issues_string ), $NR, $hashref->{'contents'} );   # this is an error
-                            }
-                            # 'operator' must not include ';' (the separator) at a later time, put 'operator' also in quotes.
-                            $ExpOperator           = join( ';', @rest );
-                            $hashref->{'operator'} = $ExpOperator;
-                        } else {
-                            $ExpOperator           = '';
-                            $hashref->{'operator'} = '';              # no 'operator'
+                            $issues_string      = gettext( "CSV data include too many ';'. Line %s of Routes-Data. Contents of line: '%s'" );
+                            $hashref->{'type'}  = 'error';                                              # this is an error
+                            $hashref->{'ref'}   = $ExpRef;                                              # this is an error
+                            $hashref->{'error'} = sprintf( decode( 'utf8', $issues_string ), $NR, $hashref->{'contents'} );   # this is an error
                         }
 
                         if ( $ExpRef ) {

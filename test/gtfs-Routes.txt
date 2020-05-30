@@ -1,0 +1,109 @@
+<pre>
+#
+# Diese Daten sind Input für das Tool: PTNA - Public Transport Network Analysis (https://ptna.openstreetmap.de)
+#
+# Format der Daten:
+#       UTF-8
+#
+# Formatierung:
+#       Die Formatierung lehnt sich ans OSM-Wiki an.
+#
+# Links:
+#       [[...|...]] sind (wie im OSM-Wiki) interne Verweise ins OSM-Wiki
+#       [... ...]   sind (wie im OSM-Wiki) externe Verweise ins Internet
+#
+# Überschriften:
+#       Überschriften beginnen mit '=', '==', '===', '====', ... am Anfang einer Zeile
+#
+# Einfacher Text:
+#       Einfacher Text beginnt mit '-' am Anfang einer Zeile.
+#       Einfacher Text darf überall stehen.
+#
+# Neue Zeile:
+#       Eine neue Zeile (Zeilenvorschub) wird mit Hilfe eines einzelnen '-' in einer Zeile eingeleitet
+#
+# Layout:
+#       !!!Text mit gelbem Hintergrund!!!               in einfachem Text oder Überschriften
+#       '''''Text mit dicken, kursiven Buchstaben'''''  in einfachem Text oder Überschriften
+#       '''Text mit dicken Buchstaben''' in einfachem Text oder Überschriften
+#       ''Text mit kursiven Buchstaben'' in einfachem Text oder Überschriften
+#
+# Kommentare:
+#       Kommentare beginnen mit '#' am Anfang einer Zeile.
+#       Kommentare mittendrin werden nicht erkannt, d.h. '#' darf innerhalb von Text vorkommen.
+#
+# Reservierte Zeichen am Anfang einer Zeile:
+#       '#' Kommentarzeile
+#       '=' Überschriften verschiedener Kategorie
+#       '-' Einfacher Text
+#       '@' am Anfang einer Zeile ist für spätere Erweiterungen reserviert
+#       '+' am Anfang einer Zeile ist für spätere Erweiterungen reserviert
+#       '~' am Anfang einer Zeile ist für spätere Erweiterungen reserviert
+#       '$' am Anfang einer Zeile ist für spätere Erweiterungen reserviert
+#       Sollte eines der reservierten Zeichen am Anfang von 'ref' (s.u.) stehen, so ist 'ref' in dopplete Anführungszeichen zu setzten
+#
+#
+################################
+#
+# Definition von Linieninformationen:
+#       Inhalt im CSV-Format
+#       Alle Felder, die ';' enthalten müssen in doppelten Anführungszeichen stehen (zB. "139;142";bus;;;;"Betreiber1;Betreiber";;)
+#
+# ref;type;comment;from;to;operator;gtfs-feed;gtfs-route-id
+#
+# ref           erforderlich
+#                   == tag 'ref' von route oder route_master
+#                       250             definiert, dass hier Linien mit 'ref'='250' erwartet wird
+#                       250|250a|250b   definiert, dass hier Linien mit 'ref'='250' und 'ref'='250a' und 'ref'='250b' zulässig sind
+#                                       ob das nach PTv1/PTv2 erlaubt ist, ist eine andere Sache
+#                       605/50          definiert, dass hier 'ref' von zwei 'network' gültig sind: es wird geprüft,
+#                                       ob 'ref:network1'='605' und 'ref:network2'='50' existieren
+#                       "139;142"       definiert, dass die Linie mit zwei Nummern im selben 'network' existiert.
+#                       "+210"          ermöglicht das reservierte Zeichen '+' am Anfang von 'ref'
+#
+# type          erforderlich
+#                   == Inhalt des tags 'route' bzw. 'route_master' (bus, train, tram, subway, ...)
+#
+# comment       kann leer sein, wird nicht ausgewertet, lediglich ausgegeben
+#                   == kann Kommentar enthalten wie; Ruftaxi, Bus, Expressbus, ...
+#                       !Text mit gelbem Hintergrund! im comment (umgeben von einfachem !)
+#                       "Kommentar mit ; im Text"
+#
+# from          kann leer sein
+#                   == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+#
+# to            kann leer sein
+#                   == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+#
+# operator      kann leer sein
+#                   == wird bei mehreren Linie mit identischem ref und type zur Differenzierung herangezogen
+#                       Der Wert von 'operator' darf ';' enthalten, muss dann aber in "..." stehen.
+#
+# gtfs-feed     sollte leer sein
+#                   == Hinweis auf eine Quelle in der GTFS-Analyse von PTNA, in der diese Route gefunden werden kann (z.B.: "DE-BY-MVV")
+#                       Diese Angabe sollte nur dann gemacht weden, wenn 'operator:guid' und/oder 'network:guid' der OSM-Relation(en) nicht gesetzt sind
+#
+# gtfs-route-id sollte leer sein
+#                   == Hinweis auf eine "route_id" in den GTFS-Daten, die zu dieser Line gehört
+#                       Diese Angabe sollte nur dann gemacht weden, wenn 'gtfs:route_id' der OSM-Relation(en) nicht gesetzt ist
+#
+################################
+#
+
+= Test file for GTFS integration
+
+
+100;bus;;;;;DE-XX-YYY
+101;bus;;;;;DE-XX-YYY;
+102;bus;;;;;;1-102-s20-1
+103;bus;;;;;DE-XX-YYY;1-102-s20-1
+
+210;bus;;;;
+211;bus;;;;;DE-BY-MVV;19-211-s20-1
+212;bus;;;;;DE-BY-MVV;20-212-s20-1
+
+-
+
+
+
+</pre>

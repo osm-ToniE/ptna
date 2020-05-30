@@ -1160,6 +1160,8 @@ if ( scalar( @RouteList ) ) {
                                              'To'            => $entryref->{'to'},
                                              'To-List'       => $entryref->{'to-list'},
                                              'Operator'      => $entryref->{'operator'},
+                                             'GTFS-Feed'     => $entryref->{'gtfs-feed'},
+                                             'GTFS-Route-Id' => $entryref->{'gtfs-route-id'},
                                            );
                     }
 
@@ -1199,6 +1201,8 @@ if ( scalar( @RouteList ) ) {
                                      'To'            => $entryref->{'to'},
                                      'To-List'       => $entryref->{'to-list'},
                                      'Operator'      => $entryref->{'operator'},
+                                     'GTFS-Feed'     => $entryref->{'gtfs-feed'},
+                                     'GTFS-Route-Id' => $entryref->{'gtfs-route-id'},
                                    );
 
                 $issues_string = gettext( "Missing route for ref='%s' and route='%s'" );
@@ -5799,9 +5803,11 @@ sub printTableSubHeader {
         $csv_text .= sprintf( "%s: %s; ", ( $column_name{'Comment'}  ? $column_name{'Comment'}  : 'Comment' ),  wiki2html( $hash{'Comment'} )  );
         $csv_text =~ s|!([^!]+)!|<span class=\"attention\">$1</span>|;
     }
-    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'From'}     ? $column_name{'From'}     : 'From' ),     html_escape($hash{'From'})     )  if ( $hash{'From'}     );
-    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'To'}       ? $column_name{'To'}       : 'To' ),       html_escape($hash{'To'})       )  if ( $hash{'To'}       );
-    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'Operator'} ? $column_name{'Operator'} : 'Operator' ), html_escape($hash{'Operator'}) )  if ( $hash{'Operator'} );
+    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'From'}          ? $column_name{'From'}          : 'From' ),          html_escape($hash{'From'})     )      if ( $hash{'From'}          );
+    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'To'}            ? $column_name{'To'}            : 'To' ),            html_escape($hash{'To'})       )      if ( $hash{'To'}            );
+    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'Operator'}      ? $column_name{'Operator'}      : 'Operator' ),      html_escape($hash{'Operator'}) )      if ( $hash{'Operator'}      );
+    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'GTFS-Feed'}     ? $column_name{'GTFS-Feed'}     : 'GTFS-Feed' ),     html_escape($hash{'GTFS-Feed'}) )     if ( $hash{'GTFS-Feed'}     );
+    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'GTFS-Route-Id'} ? $column_name{'GTFS-Route-Id'} : 'GTFS-Route-Id' ), html_escape($hash{'GTFS-Route-Id'}) ) if ( $hash{'GTFS-Route-Id'} );
     $csv_text =~ s/; $//;
 
     $info = $csv_text ? $csv_text : '???';

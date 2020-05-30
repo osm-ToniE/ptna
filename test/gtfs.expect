@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>PTNA - Results</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="PTNA">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="keywords" content="OSM Public Transport PTv2">
+        <meta name="description" content="PTNA - Public Transport Network Analysis">
+        <style>
+            #analysis table           { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; }
+            #analysis th              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+            #analysis td              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+            #analysis ol              { list-style: none; }
+            #analysis img             { width: 20px; vertical-align: top; }
+            #analysis .tableheaderrow { background-color: LightSteelBlue;   }
+            #analysis .sketchline     { background-color: LightBlue;        }
+            #analysis .sketch         { text-align:left;  font-weight: 500; }
+            #analysis .csvinfo        { text-align:right; font-size: 0.8em; }
+            #analysis .ref            { white-space:nowrap; }
+            #analysis .relation       { white-space:nowrap; }
+            #analysis .PTv            { text-align:center; }
+            #analysis .number         { text-align:right; }
+            #analysis .attention      { background-color: yellow; font-weight: 500; font-size: 1.2em; }
+        </style>
+    </head>
+    <body>
+        <div id="analysis">
+        <h1>Contents</h1>
+        <ol>
+        <li>1 <a href="#hints">Hints</a>
+        </li>
+        <li>2 <a href="#A2">Test file for GTFS integration</a>
+        </li>
+        <li>3 <a href="#otherlines">Other Public Transport Lines</a>
+        <ol>
+        <li>3.1 <a href="#A3.1">Bus</a>
+        </li>
+        </ol>
+        </li>
+        <li>4 <a href="#networkdetails">Details for &#039;network&#039;-Values</a>
+        <ol>
+        <li>4.1 <a href="#considerednetworks">Considered &#039;network&#039;-Values</a>
+        </li>
+        </ol>
+        </li>
+        </ol>
+        <hr />
+        <h1 id="hints">1 Hints</h1>
+        <p>
+            The data will be updated when the result of the analysis has changed.
+        </p>
+        <p>
+            An explanation of the error texts can be found in the documentation at '<a href='/en/index.php#messages'>Messages</a>'.
+        </p>
+        <hr />
+        <h1 id="A2">2 Test file for GTFS integration</h1>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr id="bus_100" data-info="GTFS-Feed: DE-XX-YYY" data-ref="100" class="sketchline"><td class="sketch">100</td><td class="csvinfo" colspan="5">GTFS-Feed: DE-XX-YYY</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='100' and route='bus'</td><td class="notes"></td></tr>
+                <tr id="bus_101" data-info="GTFS-Feed: DE-XX-YYY" data-ref="101" class="sketchline"><td class="sketch">101</td><td class="csvinfo" colspan="5">GTFS-Feed: DE-XX-YYY</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='101' and route='bus'</td><td class="notes"></td></tr>
+                <tr id="bus_102" data-info="GTFS-Route-Id: 1-102-s20-1" data-ref="102" class="sketchline"><td class="sketch">102</td><td class="csvinfo" colspan="5">GTFS-Route-Id: 1-102-s20-1</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='102' and route='bus'</td><td class="notes"></td></tr>
+                <tr id="bus_103" data-info="GTFS-Feed: DE-XX-YYY; GTFS-Route-Id: 1-102-s20-1" data-ref="103" class="sketchline"><td class="sketch">103</td><td class="csvinfo" colspan="5">GTFS-Feed: DE-XX-YYY; GTFS-Route-Id: 1-102-s20-1</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='103' and route='bus'</td><td class="notes"></td></tr>
+                <tr id="bus_210" data-info="???" data-ref="210" class="sketchline"><td class="sketch">210</td><td class="csvinfo" colspan="5"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='210' and route='bus'</td><td class="notes"></td></tr>
+                <tr id="bus_211" data-info="GTFS-Feed: DE-BY-MVV; GTFS-Route-Id: 19-211-s20-1" data-ref="211" class="sketchline"><td class="sketch">211</td><td class="csvinfo" colspan="5">GTFS-Feed: DE-BY-MVV; GTFS-Route-Id: 19-211-s20-1</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='211' and route='bus'</td><td class="notes"></td></tr>
+                <tr id="bus_212" data-info="GTFS-Feed: DE-BY-MVV; GTFS-Route-Id: 20-212-s20-1" data-ref="212" class="sketchline"><td class="sketch">212</td><td class="csvinfo" colspan="5">GTFS-Feed: DE-BY-MVV; GTFS-Route-Id: 20-212-s20-1</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='212' and route='bus'</td><td class="notes"></td></tr>
+            </tbody>
+        </table>
+
+<p>
+&nbsp;
+</p>
+        <hr />
+        <h1 id="otherlines">3 Other Public Transport Lines</h1>
+        <h2 id="A3.1">3.1 Bus</h2>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="ref">Line (ref=)</th><th class="relation">Relation (id=)</th><th class="type">Type (type=)</th><th class="route_type">Vehicle (route(_master)=)</th><th class="name">Name (name=)</th><th class="network">Network (network=)</th><th class="operator">Operator (operator=)</th><th class="from">From (from=)</th><th class="via">Via (via=)</th><th class="to">To (to=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr id="-39096" data-info="-39096" data-ref="605" class="line"><td class="ref">605</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39096</td><td class="type">route</td><td class="route_type">bus</td><td class="name">Bus 605: from =&gt; to</td><td class="network">network</td><td class="operator">operator</td><td class="from">from</td><td class="via"></td><td class="to">to</td><td class="PTv">2</td><td class="issues">Route without Way(s)<br>PTv2 route: there are no 'public_transport' = 'stop_position' and no 'public_transport' = 'platform'</td><td class="notes">'network' = 'network'<br>'operator' = 'operator'</td></tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <h1 id="networkdetails">4 Details for &#039;network&#039;-Values</h1>
+        <h2 id="considerednetworks">4.1 Considered &#039;network&#039;-Values</h2>
+<p>
+This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="network">Network (network=)</th><th class="number">Number</th><th class="relations">Relations</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="network" data-ref="???" class="line"><td class="network">network</td><td class="number">1</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '605' -39096</td></tr>
+            </tbody>
+        </table>
+
+        </div> <!-- analysis -->
+        <iframe style="display:none" id="hiddenIframe" name="hiddenIframe"></iframe>
+    </body>
+</html>
