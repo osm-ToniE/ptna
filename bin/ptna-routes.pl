@@ -5806,8 +5806,20 @@ sub printTableSubHeader {
     $csv_text .= sprintf( "%s: %s; ", ( $column_name{'From'}          ? $column_name{'From'}          : 'From' ),          html_escape($hash{'From'})     )      if ( $hash{'From'}          );
     $csv_text .= sprintf( "%s: %s; ", ( $column_name{'To'}            ? $column_name{'To'}            : 'To' ),            html_escape($hash{'To'})       )      if ( $hash{'To'}            );
     $csv_text .= sprintf( "%s: %s; ", ( $column_name{'Operator'}      ? $column_name{'Operator'}      : 'Operator' ),      html_escape($hash{'Operator'}) )      if ( $hash{'Operator'}      );
-    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'GTFS-Feed'}     ? $column_name{'GTFS-Feed'}     : 'GTFS-Feed' ),     html_escape($hash{'GTFS-Feed'}) )     if ( $hash{'GTFS-Feed'}     );
-    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'GTFS-Route-Id'} ? $column_name{'GTFS-Route-Id'} : 'GTFS-Route-Id' ), html_escape($hash{'GTFS-Route-Id'}) ) if ( $hash{'GTFS-Route-Id'} );
+    if ( $hash{'GTFS-Feed'} && $hash{'GTFS-Route-Id'} ) {
+        my $country =  $hash{'GTFS-Feed'};
+           $country =~ s/-.*$//;
+        $csv_text .= sprintf( "<a href=\"https://ptna.openstreetmap.de/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS\">GTFS</a>", uri_escape($country), uri_escape($hash{'GTFS-Feed'}), uri_escape($hash{'GTFS-Route-Id'})  );
+    } else {
+        if ( $hash{'GTFS-Feed'} ) {
+            my $country =  $hash{'GTFS-Feed'};
+               $country =~ s/-.*$//;
+            $csv_text .= sprintf( "<a href=\"https://ptna.openstreetmap.de/gtfs/%s/routes.php?network=%s\" title=\"GTFS\">GTFS-Feed</a>", uri_escape($country), uri_escape($hash{'GTFS-Feed'}) );
+        }
+        if ( $hash{'GTFS-Route-Id'} ) {
+            $csv_text .= sprintf( "%s: %s; ", ( $column_name{'GTFS-Route-Id'} ? $column_name{'GTFS-Route-Id'} : 'GTFS-Route-Id' ), html_escape($hash{'GTFS-Route-Id'}) );
+        }
+    }
     $csv_text =~ s/; $//;
 
     $info = $csv_text ? $csv_text : '???';
