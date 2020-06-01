@@ -2482,6 +2482,18 @@ sub analyze_relation {
             }
         }
 
+        if ( $show_gtfs ) {
+            foreach my $special ( 'gtfs:', 'gtfs_' ) {
+                foreach my $tag ( sort(keys(%{$relation_ptr->{'tag'}})) ) {
+                    if ( $tag =~ m/^\Q$special\E/i ) {
+                        if ( $relation_ptr->{'tag'}->{$tag} ) {
+                            push( @{$relation_ptr->{'__notes__'}}, sprintf("'%s' = '%s'", html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag})) )
+                        }
+                    }
+                }
+            }
+        }
+
         if ( $relation_ptr->{'tag'}->{'line'} ) {
             $notes_string = gettext( "The tag 'line' (='%s') is reserved for 'power' = 'line' related tagging. For public transport 'route_master' and 'route' are used." );
             push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, $relation_ptr->{'tag'}->{'line'} ) );
@@ -2496,6 +2508,13 @@ sub analyze_relation {
         } elsif ( $type eq 'route') {
             $return_code = analyze_route_relation( $relation_ptr, $relation_id );
         }
+    }
+
+    #
+    # Link to GTFS data shall be shown
+    #
+    if ( $link_gtfs ) {
+        $relation_ptr->{'GTFS-URL'} = getGtfsUrl( $relation_ptr );
     }
 
     return $return_code;
@@ -5117,6 +5136,33 @@ sub CheckCompletenessOfData {
 }
 
 
+sub getGtfsUrl {
+    my $relation_ptr = shift;
+
+    my $gtfs_guid    = $gtfs_feed;
+    my $gtfs_country = '';
+    my $gtfs_url     = '';
+
+    if ( $relation_ptr && $relation_ptr->{'tag'} ) {
+        if ( $relation_ptr->{'tag'}->{'operator:guid'} ) {
+            $gtfs_guid = $relation_ptr->{'tag'}->{'operator:guid'};
+        } elsif ( $relation_ptr->{'tag'}->{'network:guid'} ) {
+            $gtfs_guid = $relation_ptr->{'tag'}->{'network:guid'};
+        }
+        $gtfs_country =  $gtfs_guid;
+        $gtfs_country =~ s/-.*$//;
+
+        if ( $relation_ptr->{'tag'}->{'type'} eq 'route' && $relation_ptr->{'tag'}->{'gtfs:trip_id'} ) {
+            $gtfs_url = sprintf( "/gtfs/%s/single-trip.php?network=%s&trip_id=%s", uri_escape($gtfs_country), uri_escape($gtfs_guid), uri_escape($relation_ptr->{'tag'}->{'gtfs:trip_id'}) );
+        } elsif ( $relation_ptr->{'tag'}->{'gtfs:route_id'} ) {
+            $gtfs_url = sprintf( "/gtfs/%s/trips.php?network=%s&route_id=%s", uri_escape($gtfs_country), uri_escape($gtfs_guid), uri_escape($relation_ptr->{'tag'}->{'gtfs:route_id'}) );
+        }
+    }
+
+    return $gtfs_url;
+}
+
+
 #############################################################################################
 #
 # functions for printing HTML code
@@ -5809,14 +5855,13 @@ sub printTableSubHeader {
     if ( $hash{'GTFS-Feed'} && $hash{'GTFS-Route-Id'} ) {
         my $country =  $hash{'GTFS-Feed'};
            $country =~ s/-.*$//;
-        $csv_text .= sprintf( "<a href=\"https://ptna.openstreetmap.de/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS\">GTFS</a>", uri_escape($country), uri_escape($hash{'GTFS-Feed'}), uri_escape($hash{'GTFS-Route-Id'})  );
+        $csv_text .= sprintf( "<a href=\"/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS-Feed: %s, GFTS-Route-Id %s \">GTFS</a>", uri_escape($country), uri_escape($hash{'GTFS-Feed'}), uri_escape($hash{'GTFS-Route-Id'}), html_escape($hash{'GTFS-Feed'}), html_escape($hash{'GTFS-Route-Id'})  );
     } else {
         if ( $hash{'GTFS-Feed'} ) {
             my $country =  $hash{'GTFS-Feed'};
                $country =~ s/-.*$//;
-            $csv_text .= sprintf( "<a href=\"https://ptna.openstreetmap.de/gtfs/%s/routes.php?network=%s\" title=\"GTFS\">GTFS-Feed</a>", uri_escape($country), uri_escape($hash{'GTFS-Feed'}) );
-        }
-        if ( $hash{'GTFS-Route-Id'} ) {
+            $csv_text .= sprintf( "<a href=\"/gtfs/%s/routes.php?network=%s\" title=\"GTFS-Feed: %s\">GTFS-Feed</a>", uri_escape($country), uri_escape($hash{'GTFS-Feed'}), html_escape($hash{'GTFS-Feed'}) );
+        } elsif ( $hash{'GTFS-Route-Id'} ) {
             $csv_text .= sprintf( "%s: %s; ", ( $column_name{'GTFS-Route-Id'} ? $column_name{'GTFS-Route-Id'} : 'GTFS-Route-Id' ), html_escape($hash{'GTFS-Route-Id'}) );
         }
     }
@@ -5913,15 +5958,17 @@ sub printXxxTemplate {
 #############################################################################################
 
 sub printRelationTemplate {
-    my $val  = shift;
-    my $tags = shift;
+    my $rel_id  = shift;
+    my $tags    = shift;
 
-    if ( $val ) {
+    my $val     = $rel_id;
+
+    if ( $rel_id ) {
         my $info_string = '';
         if ( $tags ) {
             foreach my $tag ( split( ';', $tags ) ) {
-                if ( $RELATIONS{$val} && $RELATIONS{$val}->{'tag'} && $RELATIONS{$val}->{'tag'}->{$tag} ) {
-                    $info_string .= sprintf( "'%s' ", $RELATIONS{$val}->{'tag'}->{$tag} );
+                if ( $RELATIONS{$rel_id} && $RELATIONS{$rel_id}->{'tag'} && $RELATIONS{$rel_id}->{'tag'}->{$tag} ) {
+                    $info_string .= sprintf( "'%s' ", $RELATIONS{$rel_id}->{'tag'}->{$tag} );
                     last;
                 }
             }
@@ -5929,20 +5976,27 @@ sub printRelationTemplate {
 
         my $image_url = "<img src=\"/img/Relation.svg\" alt=\"Relation\" />";
 
-        if ( $val > 0 ) {
-            my $relation_url = sprintf( "<a href=\"https://osm.org/relation/%s\" title=\"Browse on map\">%s</a>", $val, $val );
-            my $id_url       = sprintf( "<a href=\"https://osm.org/edit?editor=id&amp;relation=%s\" title=\"Edit in iD\">iD</a>", $val );
-            my $josm_url     = sprintf( "<a href=\"http://127.0.0.1:8111/load_object?new_layer=false&amp;relation_members=true&amp;objects=r%s\" target=\"hiddenIframe\" title=\"Edit in JOSM\">JOSM</a>", $val );
+        if ( $rel_id > 0 ) {
+            my $relation_url = sprintf( "<a href=\"https://osm.org/relation/%s\" title=\"Browse on map\">%s</a>", $rel_id, $rel_id );
+            my $id_url       = sprintf( "<a href=\"https://osm.org/edit?editor=id&amp;relation=%s\" title=\"Edit in iD\">iD</a>", $rel_id );
+            my $josm_url     = sprintf( "<a href=\"http://127.0.0.1:8111/load_object?new_layer=false&amp;relation_members=true&amp;objects=r%s\" target=\"hiddenIframe\" title=\"Edit in JOSM\">JOSM</a>", $rel_id );
 
-            if ( $RELATIONS{$val} && $RELATIONS{$val}->{'show_relation'} ) {
+            $val = sprintf( "%s %s%s <small>(%s, %s", $image_url, $info_string, $relation_url, $id_url, $josm_url );
+
+            if ( $RELATIONS{$rel_id} && $RELATIONS{$rel_id}->{'show_relation'} ) {
                 my $langparam   = $opt_language? '&lang=' . uri_escape($opt_language) : '';
-                my $show_url    = sprintf( "<a href=\"/relation.php?id=%d%s\" title=\"Show relation on special map\">PTNA</a>", $val, $langparam );
-                $val = sprintf( "%s %s%s <small>(%s, %s, %s)</small>", $image_url, $info_string, $relation_url, $id_url, $josm_url, $show_url );
-            } else {
-                $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $relation_url, $id_url, $josm_url );
+                my $show_url    = sprintf( "<a href=\"/relation.php?id=%d%s\" title=\"Show relation on special map\">PTNA</a>", $rel_id, $langparam );
+                $val .= sprintf( ", %s", $show_url );
             }
+
+            if ( $RELATIONS{$rel_id} && $RELATIONS{$rel_id}->{'GTFS-URL'} ) {
+                my $gtfs_url    = sprintf( "<a href=\"%s\" title=\"Show related GTFS information\">GTFS</a>", $RELATIONS{$rel_id}->{'GTFS-URL'} );
+                $val .= sprintf( ", %s", $gtfs_url );
+            }
+
+            $val .= ")</small>";
         } else {
-            $val = sprintf( "%s %s%s", $image_url, $info_string, $val );
+            $val = sprintf( "%s %s%s", $image_url, $info_string, $rel_id );
         }
     } else {
         $val = '';

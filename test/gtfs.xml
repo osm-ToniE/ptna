@@ -10,6 +10,8 @@
     <tag k='public_transport:version' v='2' />
     <tag k='ref' v='605' />
     <tag k='route' v='bus' />
+    <tag k='network:guid' v='DE-BY-MVV' />
+    <tag k='gtfs:trip_id' v='was weiß ich' />
     <tag k='to' v='to' />
     <tag k='type' v='route' />
   </relation>
