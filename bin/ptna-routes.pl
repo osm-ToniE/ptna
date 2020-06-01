@@ -5855,7 +5855,7 @@ sub printTableSubHeader {
     if ( $hash{'GTFS-Feed'} && $hash{'GTFS-Route-Id'} ) {
         my $country =  $hash{'GTFS-Feed'};
            $country =~ s/-.*$//;
-        $csv_text .= sprintf( "<a href=\"/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS-Feed: %s, GFTS-Route-Id %s \">GTFS</a>", uri_escape($country), uri_escape($hash{'GTFS-Feed'}), uri_escape($hash{'GTFS-Route-Id'}), html_escape($hash{'GTFS-Feed'}), html_escape($hash{'GTFS-Route-Id'})  );
+        $csv_text .= sprintf( "<a href=\"/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS-Feed: %s, GFTS-Route-Id: %s \">GTFS</a>", uri_escape($country), uri_escape($hash{'GTFS-Feed'}), uri_escape($hash{'GTFS-Route-Id'}), html_escape($hash{'GTFS-Feed'}), html_escape($hash{'GTFS-Route-Id'})  );
     } else {
         if ( $hash{'GTFS-Feed'} ) {
             my $country =  $hash{'GTFS-Feed'};
