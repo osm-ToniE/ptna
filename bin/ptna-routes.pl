@@ -5152,8 +5152,14 @@ sub getGtfsUrl {
         $gtfs_country =  $gtfs_guid;
         $gtfs_country =~ s/-.*$//;
 
-        if ( $relation_ptr->{'tag'}->{'type'} eq 'route' && $relation_ptr->{'tag'}->{'gtfs:trip_id'} ) {
-            $gtfs_url = sprintf( "/gtfs/%s/single-trip.php?network=%s&trip_id=%s", uri_escape($gtfs_country), uri_escape($gtfs_guid), uri_escape($relation_ptr->{'tag'}->{'gtfs:trip_id'}) );
+        if ( $relation_ptr->{'tag'}->{'type'} eq 'route' ) {
+            if ( $relation_ptr->{'tag'}->{'gtfs:trip_id'} ) {
+                $gtfs_url = sprintf( "/gtfs/%s/single-trip.php?network=%s&trip_id=%s", uri_escape($gtfs_country), uri_escape($gtfs_guid), uri_escape($relation_ptr->{'tag'}->{'gtfs:trip_id'}) );
+            } elsif ( $relation_ptr->{'tag'}->{'gtfs:shape_id'} ) {
+                $gtfs_url = sprintf( "/gtfs/%s/single-trip.php?network=%s&shape_id=%s", uri_escape($gtfs_country), uri_escape($gtfs_guid), uri_escape($relation_ptr->{'tag'}->{'gtfs:shape_id'}) );
+            } elsif ( $relation_ptr->{'tag'}->{'gtfs:route_id'} ) {
+                $gtfs_url = sprintf( "/gtfs/%s/trips.php?network=%s&route_id=%s", uri_escape($gtfs_country), uri_escape($gtfs_guid), uri_escape($relation_ptr->{'tag'}->{'gtfs:route_id'}) );
+            }
         } elsif ( $relation_ptr->{'tag'}->{'gtfs:route_id'} ) {
             $gtfs_url = sprintf( "/gtfs/%s/trips.php?network=%s&route_id=%s", uri_escape($gtfs_country), uri_escape($gtfs_guid), uri_escape($relation_ptr->{'tag'}->{'gtfs:route_id'}) );
         }
