@@ -3045,21 +3045,21 @@ sub analyze_ptv2_route_relation {
                             #
                             # bus=yes, tram=yes or share_taxi=yes is not required on public_transport=platform
                             #
-                            #if ( $check_platform ) {
-                            #    if (  $relation_ptr->{'tag'}->{'route'} eq 'bus'                     ||
-                            #         ($relation_ptr->{'tag'}->{'route'} eq 'coach' && $allow_coach)  ||
-                            #          $relation_ptr->{'tag'}->{'route'} eq 'tram'                    ||
-                            #          $relation_ptr->{'tag'}->{'route'} eq 'share_taxi'                 ) {
-                            #        if ( $NODES{$node_ref->{'ref'}}->{'tag'}->{$relation_ptr->{'tag'}->{'route'}}          &&
-                            #             $NODES{$node_ref->{'ref'}}->{'tag'}->{$relation_ptr->{'tag'}->{'route'}} eq "yes"    ) {
+                            if ( $check_platform ) {
+                                if (  $relation_ptr->{'tag'}->{'route'} eq 'bus'                     ||
+                                     ($relation_ptr->{'tag'}->{'route'} eq 'coach' && $allow_coach)  ||
+                                      $relation_ptr->{'tag'}->{'route'} eq 'tram'                    ||
+                                      $relation_ptr->{'tag'}->{'route'} eq 'share_taxi'                 ) {
+                                    if ( $NODES{$node_ref->{'ref'}}->{'tag'}->{$relation_ptr->{'tag'}->{'route'}}          &&
+                                         $NODES{$node_ref->{'ref'}}->{'tag'}->{$relation_ptr->{'tag'}->{'route'}} eq "yes"    ) {
                                         ; # fine
-                            #        }
-                            #        else {
-                            #            $role_mismatch{"missing '".$relation_ptr->{'tag'}->{'route'}."' = 'yes' on 'public_transport' = 'platform'"}->{$node_ref->{'ref'}} = 1;
-                            #            $role_mismatch_found++;
-                            #        }
-                            #    }
-                            #}
+                                    }
+                                    else {
+                                        $role_mismatch{"missing '".$relation_ptr->{'tag'}->{'route'}."' = 'yes' on 'public_transport' = 'platform'"}->{$node_ref->{'ref'}} = 1;
+                                        $role_mismatch_found++;
+                                    }
+                                }
+                            }
                         } elsif ( $NODES{$node_ref->{'ref'}}->{'tag'}->{'public_transport'} ) {
                             $issues_string = gettext( "PTv2 route: mismatch between 'role' = '%s' and 'public_transport' = '%s'" );
                             $help_string   = sprintf( $issues_string, $node_ref->{'role'}, $NODES{$node_ref->{'ref'}}->{'tag'}->{'public_transport'} );
@@ -3315,21 +3315,21 @@ sub analyze_ptv2_route_relation {
                         #
                         # bus=yes, tram=yes or share_taxi=yes is not required on public_transport=platform
                         #
-                        #if ( $check_platform ) {
-                        #    if (  $relation_ptr->{'tag'}->{'route'} eq 'bus'                    ||
-                        #         ($relation_ptr->{'tag'}->{'route'} eq 'coach' && $allow_coach) ||
-                        #          $relation_ptr->{'tag'}->{'route'} eq 'tram'                   ||
-                        #          $relation_ptr->{'tag'}->{'route'} eq 'share_taxi'                ) {
-                        #        if ( $WAYS{$highway_ref->{'ref'}}->{'tag'}->{$relation_ptr->{'tag'}->{'route'}}          &&
-                        #             $WAYS{$highway_ref->{'ref'}}->{'tag'}->{$relation_ptr->{'tag'}->{'route'}} eq "yes"    ) {
+                        if ( $check_platform ) {
+                            if (  $relation_ptr->{'tag'}->{'route'} eq 'bus'                    ||
+                                 ($relation_ptr->{'tag'}->{'route'} eq 'coach' && $allow_coach) ||
+                                  $relation_ptr->{'tag'}->{'route'} eq 'tram'                   ||
+                                  $relation_ptr->{'tag'}->{'route'} eq 'share_taxi'                ) {
+                                if ( $WAYS{$highway_ref->{'ref'}}->{'tag'}->{$relation_ptr->{'tag'}->{'route'}}          &&
+                                     $WAYS{$highway_ref->{'ref'}}->{'tag'}->{$relation_ptr->{'tag'}->{'route'}} eq "yes"    ) {
                                     ; # fine
-                        #        }
-                        #        else {
-                        #            $role_mismatch{"missing '".$relation_ptr->{'tag'}->{'route'}."' = 'yes' on 'public_transport' = 'platform'"}->{$highway_ref->{'ref'}} = 1;
-                        #            $role_mismatch_found++;
-                        #        }
-                        #    }
-                        #}
+                                }
+                                else {
+                                    $role_mismatch{"missing '".$relation_ptr->{'tag'}->{'route'}."' = 'yes' on 'public_transport' = 'platform'"}->{$highway_ref->{'ref'}} = 1;
+                                    $role_mismatch_found++;
+                                }
+                            }
+                        }
                     } elsif ( $WAYS{$highway_ref->{'ref'}}->{'tag'}->{'public_transport'} ) {
                         $issues_string = gettext( "PTv2 route: mismatch between 'role' = '%s' and 'public_transport' = '%s'" );
                         $help_string   = sprintf( $issues_string, $highway_ref->{'role'}, $WAYS{$highway_ref->{'ref'}}->{'tag'}->{'public_transport'} );
@@ -3386,21 +3386,21 @@ sub analyze_ptv2_route_relation {
                         #
                         # bus=yes, tram=yes or share_taxi=yes is not required on public_transport=platform
                         #
-                        #if ( $check_platform ) {
-                        #    if (  $relation_ptr->{'tag'}->{'route'} eq 'bus'                    ||
-                        #         ($relation_ptr->{'tag'}->{'route'} eq 'coach' && $allow_coach) ||
-                        #          $relation_ptr->{'tag'}->{'route'} eq 'tram'                   ||
-                        #          $relation_ptr->{'tag'}->{'route'} eq 'share_taxi'               ) {
-                        #        if ( $RELATIONS{$rel_ref->{'ref'}}->{'tag'}->{$relation_ptr->{'tag'}->{'route'}}          &&
-                        #             $RELATIONS{$rel_ref->{'ref'}}->{'tag'}->{$relation_ptr->{'tag'}->{'route'}} eq "yes"    ) {
-                                    ; # fine
-                        #        }
-                        #        else {
-                        #            $role_mismatch{"missing '".$relation_ptr->{'tag'}->{'route'}."' = 'yes' on 'public_transport' = 'platform'"}->{$rel_ref->{'ref'}} = 1;
-                        #            $role_mismatch_found++;
-                        #        }
-                        #    }
-                        #}
+                        if ( $check_platform ) {
+                            if (  $relation_ptr->{'tag'}->{'route'} eq 'bus'                    ||
+                                 ($relation_ptr->{'tag'}->{'route'} eq 'coach' && $allow_coach) ||
+                                  $relation_ptr->{'tag'}->{'route'} eq 'tram'                   ||
+                                  $relation_ptr->{'tag'}->{'route'} eq 'share_taxi'               ) {
+                                if ( $RELATIONS{$rel_ref->{'ref'}}->{'tag'}->{$relation_ptr->{'tag'}->{'route'}}          &&
+                                     $RELATIONS{$rel_ref->{'ref'}}->{'tag'}->{$relation_ptr->{'tag'}->{'route'}} eq "yes"    ) {
+                                   ; # fine
+                                }
+                                else {
+                                    $role_mismatch{"missing '".$relation_ptr->{'tag'}->{'route'}."' = 'yes' on 'public_transport' = 'platform'"}->{$rel_ref->{'ref'}} = 1;
+                                    $role_mismatch_found++;
+                                }
+                            }
+                        }
                     } elsif ( $RELATIONS{$rel_ref->{'ref'}}                                &&
                               $RELATIONS{$rel_ref->{'ref'}}->{'tag'}->{'public_transport'}    ) {
                         $issues_string = gettext( "PTv2 route: mismatch between 'role' = '%s' and 'public_transport' = '%s'" );
