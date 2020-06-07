@@ -5144,7 +5144,9 @@ sub getGtfsUrl {
     my $gtfs_url     = '';
 
     if ( $relation_ptr && $relation_ptr->{'tag'} ) {
-        if ( $relation_ptr->{'tag'}->{'operator:guid'} ) {
+        if ( $relation_ptr->{'tag'}->{'gtfs:feed'} ) {
+            $gtfs_guid = $relation_ptr->{'tag'}->{'gtfs:feed'};
+        } elsif ( $relation_ptr->{'tag'}->{'operator:guid'} ) {
             $gtfs_guid = $relation_ptr->{'tag'}->{'operator:guid'};
         } elsif ( $relation_ptr->{'tag'}->{'network:guid'} ) {
             $gtfs_guid = $relation_ptr->{'tag'}->{'network:guid'};
