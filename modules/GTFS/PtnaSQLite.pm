@@ -89,7 +89,7 @@ sub getGtfsRouteIdHtmlTag {
     my $route_id       = shift;
 
     my $gtfs_html_tag  = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"'GTFS feed' %s. %s\">GTFS</a>",
-                                  html_escape(gettext("not set")),
+                                  html_escape(gettext("is not set")),
                                   html_escape(gettext("GTFS database not found")) );
 
     if ( AttachToGtfsSqliteDb($gtfs_feed) ) {
@@ -113,7 +113,7 @@ sub getGtfsRouteIdHtmlTag {
                                       uri_escape($gtfs_country),
                                       uri_escape($gtfs_feed),
                                       html_escape($gtfs_feed),
-                                      html_escape(gettext("not set")) );
+                                      html_escape(gettext("is not set")) );
         }
 
     } else {
@@ -137,7 +137,7 @@ sub getGtfsTripIdHtmlTag {
     my $trip_id        = shift;
 
     my $gtfs_html_tag  = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"'GTFS feed' %s. %s\">GTFS</a>",
-                                  html_escape(gettext("not set")),
+                                  html_escape(gettext("is not set")),
                                   html_escape(gettext("GTFS database not found")) );
 
     if ( AttachToGtfsSqliteDb($gtfs_feed) ) {
@@ -161,7 +161,7 @@ sub getGtfsTripIdHtmlTag {
                                       uri_escape($gtfs_country),
                                       uri_escape($gtfs_feed),
                                       html_escape($gtfs_feed),
-                                      html_escape(gettext("not set")) );
+                                      html_escape(gettext("is not set")) );
         }
 
     } else {
@@ -185,7 +185,7 @@ sub getGtfsShapeIdHtmlTag {
     my $shape_id       = shift;
 
     my $gtfs_html_tag  = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"'GTFS feed' %s. %s\">GTFS</a>",
-                                  html_escape(gettext("not set")),
+                                  html_escape(gettext("is not set")),
                                   html_escape(gettext("GTFS database not found")) );
 
     if ( AttachToGtfsSqliteDb($gtfs_feed) ) {
@@ -209,7 +209,7 @@ sub getGtfsShapeIdHtmlTag {
                                       uri_escape($gtfs_country),
                                       uri_escape($gtfs_feed),
                                       html_escape($gtfs_feed),
-                                      html_escape(gettext("not set")) );
+                                      html_escape(gettext("is not set")) );
         }
 
     } else {

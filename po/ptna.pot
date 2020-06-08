@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-05-30 18:27+0200\n"
+"POT-Creation-Date: 2020-06-08 11:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1301,4 +1301,13 @@ msgstr ""
 #, perl-format
 msgid ""
 "CSV data include too many ';'. Line %s of Routes-Data. Contents of line: '%s'"
+msgstr ""
+
+msgid "is not set"
+msgstr ""
+
+msgid "GTFS database not found"
+msgstr ""
+
+msgid "does not exist"
 msgstr ""
