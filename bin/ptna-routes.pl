@@ -21,9 +21,10 @@ binmode STDERR, ":utf8";
 use Locale::gettext qw();       # 'gettext()' will be overwritten in this file (at the end), so don't import from module into our name space
 
 use Getopt::Long;
-use OSM::XML        qw( parse );
-use OSM::Data       qw( %META %NODES %WAYS %RELATIONS );
+use OSM::XML            qw( parse );
+use OSM::Data           qw( %META %NODES %WAYS %RELATIONS );
 use RoutesList;
+use GTFS::PtnaSQLite    qw( getGtfsRouteIdHtmlTag getGtfsTripIdHtmlTag getGtfsShapeIdHtmlTag );
 use Data::Dumper;
 use Encode;
 
@@ -2514,7 +2515,7 @@ sub analyze_relation {
     # Link to GTFS data shall be shown
     #
     if ( $link_gtfs ) {
-        $relation_ptr->{'GTFS-URL'} = getGtfsUrl( $relation_ptr );
+        $relation_ptr->{'GTFS-HTML-TAG'} = getGtfsInfo( $relation_ptr );
     }
 
     return $return_code;
@@ -5136,12 +5137,17 @@ sub CheckCompletenessOfData {
 }
 
 
-sub getGtfsUrl {
-    my $relation_ptr = shift;
+#############################################################################################
+#
+#
+#############################################################################################
 
-    my $gtfs_guid    = $gtfs_feed;
-    my $gtfs_country = '';
-    my $gtfs_url     = '';
+sub getGtfsInfo {
+    my $relation_ptr  = shift;
+
+    my $gtfs_guid     = $gtfs_feed;
+    my $gtfs_country  = '';
+    my $gtfs_html_tag = '';
 
     if ( $relation_ptr && $relation_ptr->{'tag'} ) {
         if ( $relation_ptr->{'tag'}->{'gtfs:feed'} ) {
@@ -5156,18 +5162,18 @@ sub getGtfsUrl {
 
         if ( $relation_ptr->{'tag'}->{'type'} eq 'route' ) {
             if ( $relation_ptr->{'tag'}->{'gtfs:trip_id'} ) {
-                $gtfs_url = sprintf( "/gtfs/%s/single-trip.php?network=%s&trip_id=%s", uri_escape($gtfs_country), uri_escape($gtfs_guid), uri_escape($relation_ptr->{'tag'}->{'gtfs:trip_id'}) );
+                $gtfs_html_tag = GTFS::PtnaSQLite::getGtfsTripIdHtmlTag( $gtfs_guid, $relation_ptr->{'tag'}->{'gtfs:trip_id'} );
             } elsif ( $relation_ptr->{'tag'}->{'gtfs:shape_id'} ) {
-                $gtfs_url = sprintf( "/gtfs/%s/single-trip.php?network=%s&shape_id=%s", uri_escape($gtfs_country), uri_escape($gtfs_guid), uri_escape($relation_ptr->{'tag'}->{'gtfs:shape_id'}) );
+                $gtfs_html_tag = GTFS::PtnaSQLite::getGtfsShapeIdHtmlTag( $gtfs_guid, $relation_ptr->{'tag'}->{'gtfs:shape_id'} );
             } elsif ( $relation_ptr->{'tag'}->{'gtfs:route_id'} ) {
-                $gtfs_url = sprintf( "/gtfs/%s/trips.php?network=%s&route_id=%s", uri_escape($gtfs_country), uri_escape($gtfs_guid), uri_escape($relation_ptr->{'tag'}->{'gtfs:route_id'}) );
+                $gtfs_html_tag = GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $gtfs_guid, $relation_ptr->{'tag'}->{'gtfs:route_id'} );
             }
         } elsif ( $relation_ptr->{'tag'}->{'gtfs:route_id'} ) {
-            $gtfs_url = sprintf( "/gtfs/%s/trips.php?network=%s&route_id=%s", uri_escape($gtfs_country), uri_escape($gtfs_guid), uri_escape($relation_ptr->{'tag'}->{'gtfs:route_id'}) );
+            $gtfs_html_tag = GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $gtfs_guid, $relation_ptr->{'tag'}->{'gtfs:route_id'} );
         }
     }
 
-    return $gtfs_url;
+    return $gtfs_html_tag;
 }
 
 
@@ -5861,14 +5867,10 @@ sub printTableSubHeader {
     $csv_text .= sprintf( "%s: %s; ", ( $column_name{'To'}            ? $column_name{'To'}            : 'To' ),            html_escape($hash{'To'})       )      if ( $hash{'To'}            );
     $csv_text .= sprintf( "%s: %s; ", ( $column_name{'Operator'}      ? $column_name{'Operator'}      : 'Operator' ),      html_escape($hash{'Operator'}) )      if ( $hash{'Operator'}      );
     if ( $hash{'GTFS-Feed'} && $hash{'GTFS-Route-Id'} ) {
-        my $country =  $hash{'GTFS-Feed'};
-           $country =~ s/-.*$//;
-        $csv_text .= sprintf( "<a href=\"/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS-Feed: %s, GFTS-Route-Id: %s \">GTFS</a>", uri_escape($country), uri_escape($hash{'GTFS-Feed'}), uri_escape($hash{'GTFS-Route-Id'}), html_escape($hash{'GTFS-Feed'}), html_escape($hash{'GTFS-Route-Id'})  );
+        $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'},$hash{'GTFS-Route-Id'} );
     } else {
         if ( $hash{'GTFS-Feed'} ) {
-            my $country =  $hash{'GTFS-Feed'};
-               $country =~ s/-.*$//;
-            $csv_text .= sprintf( "<a href=\"/gtfs/%s/routes.php?network=%s\" title=\"GTFS-Feed: %s\">GTFS-Feed</a>", uri_escape($country), uri_escape($hash{'GTFS-Feed'}), html_escape($hash{'GTFS-Feed'}) );
+            $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'},'' );
         } elsif ( $hash{'GTFS-Route-Id'} ) {
             $csv_text .= sprintf( "%s: %s; ", ( $column_name{'GTFS-Route-Id'} ? $column_name{'GTFS-Route-Id'} : 'GTFS-Route-Id' ), html_escape($hash{'GTFS-Route-Id'}) );
         }
@@ -5997,9 +5999,8 @@ sub printRelationTemplate {
                 $val .= sprintf( ", %s", $show_url );
             }
 
-            if ( $RELATIONS{$rel_id} && $RELATIONS{$rel_id}->{'GTFS-URL'} ) {
-                my $gtfs_url    = sprintf( "<a href=\"%s\" title=\"Show related GTFS information\">GTFS</a>", $RELATIONS{$rel_id}->{'GTFS-URL'} );
-                $val .= sprintf( ", %s", $gtfs_url );
+            if ( $RELATIONS{$rel_id} && $RELATIONS{$rel_id}->{'GTFS-HTML-TAG'} ) {
+                $val .= sprintf( ", %s", $RELATIONS{$rel_id}->{'GTFS-HTML-TAG'} );
             }
 
             $val .= ")</small>";
