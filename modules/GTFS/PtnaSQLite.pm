@@ -31,15 +31,6 @@ my %db_handles  = ();
 $config{'path-to-work'} = '/osm/ptna/work';
 $config{'name-suffix'}  = '-ptna-gtfs-sqlite.db';
 
-sub Init {
-    my $hashref = shift;
-
-    if ( $hashref ) {
-        ;
-    }
-
-}
-
 
 #############################################################################################
 #
@@ -58,18 +49,23 @@ sub AttachToGtfsSqliteDb {
 
         $db_file = $config{'path-to-work'} . '/' . $countrydir . '/' . $feed . $config{'name-suffix'};
 
-        #printf STDERR "db_file = %s\n", $db_file;
-
         if ( !-f $db_file ) {
             my $subdir = shift( @prefixparts );
 
             $db_file = $config{'path-to-work'} . '/' . $countrydir . '/' . $subdir . '/' . $feed . $config{'name-suffix'};
-            #printf STDERR "db_file = %s\n", $db_file;
         }
 
         if ( -f $db_file ) {
-            #printf STDERR "db_file found = %s\n", $db_file;
-            return 1;
+
+            if ( !$db_handles{$feed} ) {
+                $db_handles{$feed} = DBI->connect( "DBI:SQLite:dbname=$db_file", "", "", { AutoCommit => 0, RaiseError => 1 } );
+            }
+
+            if ( $db_handles{$feed} ) {
+                return 1;
+            } else {
+                printf STDERR "%s DBI->connect(%s) failed: %s\n", get_time(), $db_file, $DBI::errstr;
+            }
         }
 
     }
@@ -232,7 +228,19 @@ sub ExistsRouteId {
     my $feed        = shift;
     my $route_id    = shift;
 
-    return 1;
+    if ( $feed && $route_id && $db_handles{$feed} ) {
+
+        my $sth = $db_handles{$feed}->prepare( "SELECT   COUNT(route_id)
+                                                FROM     routes
+                                                WHERE    route_id=?;" );
+           $sth->execute( $route_id );
+
+        my @row = $sth->fetchrow_array();
+
+        return $row[0];
+    }
+
+    return 0;
 }
 
 
@@ -246,7 +254,19 @@ sub ExistsTripId {
     my $feed        = shift;
     my $trip_id     = shift;
 
-    return 1;
+    if ( $feed && $trip_id && $db_handles{$feed} ) {
+
+        my $sth = $db_handles{$feed}->prepare( "SELECT   COUNT(trip_id)
+                                                FROM     trips
+                                                WHERE    trip_id=?;" );
+           $sth->execute( $trip_id );
+
+        my @row = $sth->fetchrow_array();
+
+        return $row[0];
+    }
+
+    return 0;
 }
 
 
@@ -258,9 +278,21 @@ sub ExistsTripId {
 
 sub ExistsShapeId {
     my $feed        = shift;
-    my $trip_id     = shift;
+    my $shape_id    = shift;
 
-    return 1;
+    if ( $feed && $shape_id && $db_handles{$feed} ) {
+
+        my $sth = $db_handles{$feed}->prepare( "SELECT   COUNT(shape_id)
+                                                FROM     shapes
+                                                WHERE    shape_id=?;" );
+           $sth->execute( $shape_id );
+
+        my @row = $sth->fetchrow_array();
+
+        return $row[0];
+    }
+
+    return 0;
 }
 
 
@@ -318,6 +350,15 @@ sub ngettext {
     return decode( 'utf8', Locale::gettext::ngettext( @_ ) );
 }
 
+
+#############################################################################################
+
+sub get_time {
+
+    my ($sec,$min,$hour,$day,$month,$year) = localtime();
+
+    return sprintf( "%04d-%02d-%02d %02d:%02d:%02d", $year+1900, $month+1, $day, $hour, $min, $sec );
+}
 
 
 1;
