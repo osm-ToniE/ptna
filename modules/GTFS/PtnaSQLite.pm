@@ -190,9 +190,9 @@ sub getGtfsShapeIdHtmlTag {
 
         if ( $shape_id ) {
             if ( ExistsShapeId($gtfs_feed,$shape_id) ) {
-                $gtfs_html_tag = sprintf( "<a href=\"/gtfs/%s/single-trip.php?network=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s\">GTFS</a>", uri_escape($gtfs_country), uri_escape($gtfs_feed), uri_escape($shape_id), html_escape($gtfs_feed), html_escape($shape_id) );
+                $gtfs_html_tag = sprintf( "<a href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s\">GTFS</a>", uri_escape($gtfs_country), uri_escape($gtfs_feed), uri_escape($shape_id), html_escape($gtfs_feed), html_escape($shape_id) );
             } else {
-                $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/single-trip.php?network=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s: 'shape_id' %s.\">GTFS</a>",
+                $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s: 'shape_id' %s.\">GTFS</a>",
                                           uri_escape($gtfs_country),
                                           uri_escape($gtfs_feed),
                                           uri_escape($shape_id),
