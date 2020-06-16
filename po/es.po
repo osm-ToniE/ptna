@@ -10,15 +10,16 @@
 # David Marín Carreño <davefx@gmail.com>, 2020
 # Yonseca <yonseca@gmail.com>, 2020
 # Paúl Sanz <registro@polkillas.net>, 2020
+# Pat Mat <matespatrick@yahoo.com>, 2020
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-06-08 11:56+0200\n"
+"POT-Creation-Date: 2020-06-16 20:05+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: Paúl Sanz <registro@polkillas.net>, 2020\n"
+"Last-Translator: Pat Mat <matespatrick@yahoo.com>, 2020\n"
 "Language-Team: Spanish (https://www.transifex.com/jungle-bus/teams/97874/"
 "es/)\n"
 "Language: es\n"
@@ -91,7 +92,7 @@ msgid "Type (type=)"
 msgstr "Tipo (type=)"
 
 msgid "Vehicle (route(_master)=)"
-msgstr ""
+msgstr "Vehículo (route(_master)=)"
 
 msgid "PTv"
 msgstr "PTv"
@@ -181,7 +182,11 @@ msgid_plural ""
 "Route-Masters have more Routes than actually match (%d versus %d) in the "
 "given data set"
 msgstr[0] ""
+"La Ruta Maestra tiene más rutas de las que realmente coinciden en el "
+"conjunto de datos dado (%d vs. %d)"
 msgstr[1] ""
+"Las Rutas Maestras tienen más rutas de las que realmente coinciden en el "
+"conjunto de datos dado (%d vs. %d)"
 
 #, perl-format
 msgid ""
@@ -191,13 +196,28 @@ msgid_plural ""
 "Route-Masters have less Routes than actually match (%d versus %d) in the "
 "given data set"
 msgstr[0] ""
+"La Ruta Maestra tiene menos rutas de las que realmente coinciden en el "
+"conjunto de datos dado (%d vs. %d)"
 msgstr[1] ""
+"Las Rutas Maestras tienen menos rutas de las que realmente coinciden en el "
+"conjunto de datos dado (%d vs. %d)"
+
+#, fuzzy, perl-format
+msgid ""
+"Route has 'network' = '%s' value which is part of 'network' = '%s' of Route-"
+"Master: %s"
+msgstr ""
+"'network'='%s' de la ruta no coincide con 'network'='%s' de la Ruta-Maestra: "
+"%s"
 
 #, perl-format
 msgid ""
 "Route might be listed with 'ref' = '%s' in a different section or in section "
 "'Not clearly assigned routes' of this analysis: %s"
 msgstr ""
+"Es posible que la ruta esté listada con 'ref' = '%s' en una sección "
+"diferente o en la sección 'Rutas no claramente asignadas' de este análisis: "
+"%s"
 
 #, perl-format
 msgid ""
@@ -208,6 +228,7 @@ msgstr "Ruta tiene operador distinto  '%s' al de la Ruta-Maestra '%s': %s"
 msgid ""
 "Route has 'operator' = '%s' value which is considered as not relevant: %s"
 msgstr ""
+"La ruta tiene un valor de 'operator' = '%s' que se considera no relevante: %s"
 
 #, perl-format
 msgid ""
@@ -218,24 +239,30 @@ msgstr "Ruta tiene red distinta '%s' al de la Ruta-Maestra '%s': %s"
 msgid ""
 "Route has 'network' = '%s' value which is considered as not relevant: %s"
 msgstr ""
+"La ruta tiene un valor de 'network' = '%s' que se considera no relevante: %s"
 
 #, perl-format
 msgid "Route has not matching 'ref' = '%s': %s"
-msgstr ""
+msgstr "La Ruta no tiene 'ref' = '%s' que concuerde: %s"
 
 #, perl-format
 msgid "Route exists in the given data set but 'ref' tag is not set: %s"
 msgstr ""
+"La ruta existe en el conjunto de datos dado, pero no se ha establecido la "
+"etiqueta 'ref': %s"
 
 #, perl-format
 msgid ""
 "Route has different 'route' = '%s' than Route-Master 'route_master' = '%s': "
 "%s"
 msgstr ""
+"La Ruta tiene 'route' = '%s' diferente a la de la Ruta Maestra "
+"'route_master' = '%s': %s"
 
 #, perl-format
 msgid "Route has 'route' = '%s' value which is considered as not relevant: %s"
 msgstr ""
+"La Ruta tiene un valor de 'route' = '%s' que se considera no relevante: %s"
 
 #, perl-format
 msgid "'route' tag is not set: %s"
@@ -243,7 +270,7 @@ msgstr "Etiqueta 'route' no establecida: %s"
 
 #, perl-format
 msgid "'type' = '%s' is not 'route': %s"
-msgstr ""
+msgstr "'type' = '%s' no es 'route': %s"
 
 #, perl-format
 msgid "'type' tag is not set: %s"
@@ -262,12 +289,17 @@ msgid ""
 "Route-Master might be listed with 'ref' = '%s' in a different section or in "
 "section 'Not clearly assigned routes' of this analysis: %s"
 msgstr ""
+"Es posible que la Ruta Maestra esté listada con 'ref' = '%s' en una sección "
+"diferente o en la sección 'Rutas no claramente asignadas' de este análisis: "
+"%s"
 
 #, perl-format
 msgid ""
 "Route-Master might be listed with unknown 'ref' in section 'Public Transport "
 "Lines without 'ref'' of this analysis: %s"
 msgstr ""
+"Es posible que la Ruta Maestra esté listada con 'ref' desconocido en la "
+"sección \"Líneas de transporte público sin 'ref'\" de este análisis: %s"
 
 #, perl-format
 msgid "This Route is direct member of more than one Route-Master: %s"
@@ -299,6 +331,13 @@ msgid "Route-Master exists in the given data set but 'ref' tag is not set: %s"
 msgstr ""
 "La Ruta-Maestra existe en el conjunto de datos pero no se ha establecido la "
 "etiqueta 'ref': %s"
+
+#, fuzzy, perl-format
+msgid ""
+"'network' = '%s' of Route is a part of 'network' = '%s' of Route-Master: %s"
+msgstr ""
+"'network'='%s' de la ruta no coincide con 'network'='%s' de la Ruta-Maestra: "
+"%s"
 
 #, perl-format
 msgid ""
@@ -415,13 +454,13 @@ msgid "Route-Master with Relation(s) unequal to 'route'"
 msgstr "Ruta Maestra con relación(es) que no son 'route'"
 
 msgid "Route-Master with Way(s)"
-msgstr ""
+msgstr "Ruta Maestra con Vía(s)"
 
 msgid "Route-Master with Node(s)"
-msgstr ""
+msgstr "Ruta Maestra con Nodo(s)"
 
 msgid "'public_transport:version' is not set to '2'"
-msgstr ""
+msgstr "'public_transport:version' no está fijado en '2'"
 
 msgid "Skipping further analysis ..."
 msgstr "Omitiendo análisis adicionales ..."
@@ -448,9 +487,11 @@ msgid ""
 "PTv2 route: there are no 'public_transport' = 'stop_position' and no "
 "'public_transport' = 'platform'"
 msgstr ""
+"Ruta PTv2: no hay ni 'public_transport' = 'stop_position' ni "
+"'public_transport' = 'platform'"
 
 msgid "PTv2 route: there is no 'public_transport' = 'stop_position'"
-msgstr ""
+msgstr "Ruta PTv2: no hay 'public_transport' = 'stop_position'"
 
 msgid "PTv2 route: there is only one 'public_transport' = 'stop_position'"
 msgstr "Ruta PTv2: hay solamente una 'public_transport' = 'stop_position'"
@@ -459,12 +500,15 @@ msgid "PTv2 route: there is no 'public_transport' = 'platform'"
 msgstr "Ruta PTv2: no hay ninguna 'public_transport' = 'platform'"
 
 msgid "PTv2 route: there is only one 'public_transport' = 'platform'"
-msgstr ""
+msgstr "Ruta PTv2: solo hay un 'public_transport' = 'platform'"
 
 msgid ""
 "PTv2 route: first way is a oneway road and ends in a 'stop_position' of this "
 "route and there is no exit. Is the route sorted in reverse order?"
 msgstr ""
+"Ruta PTv2: la primera vía es una calle de sentido único, termina en "
+"\"stop_position\" de esta ruta, y no hay salida. ¿La ruta está ordenada en "
+"orden inverso?"
 
 #, perl-format
 msgid "PTv2 route: has a gap, consists of %d segments. Gap appears at way"
@@ -493,8 +537,9 @@ msgstr[1] "Ruta PTv2: incluye %d rotondas enteras pero usa solo segmentos"
 
 msgid "PTv2 route: using oneway way in wrong direction"
 msgid_plural "PTv2 route: using oneway ways in wrong direction"
-msgstr[0] ""
+msgstr[0] "Ruta PTv2: usando calle de sentido único en la dirección equivocada"
 msgstr[1] ""
+"Ruta PTv2: usando calles de sentido único en la dirección equivocada"
 
 msgid "PTv2 route: using motorway_link way without entering a motorway way"
 msgid_plural ""
@@ -795,7 +840,7 @@ msgid "(consider creating a 'route_ref' = '%s' tag for the stop)"
 msgstr ""
 
 msgid "Error in input data: insufficient data for ways"
-msgstr ""
+msgstr "Error en los datos de entrada: no hay datos suficientes para 'ways'."
 
 msgid "Error in input data: insufficient data for nodes"
 msgstr ""
@@ -994,6 +1039,8 @@ msgid ""
 "This Route relation has been included into the input data as a side-effect, "
 "the member ways and member nodes of this Route have not been included."
 msgstr ""
+"Esta relación de ruta se ha incluido en los datos de entrada como efecto "
+"secundario. No se han incluido las vías y nodos miembros de esta ruta."
 
 #, perl-format
 msgid ""
@@ -1347,17 +1394,17 @@ msgid ""
 "CSV data include too many ';'. Line %s of Routes-Data. Contents of line: '%s'"
 msgstr ""
 
-#, fuzzy
 msgid "is not set"
-msgstr "'ref' no está establecido"
+msgstr ""
 
 msgid "GTFS database not found"
 msgstr ""
 
-#, fuzzy
-msgid "does not exist"
-msgstr "'ref' no está establecido"
+msgid "old"
+msgstr ""
 
-#, fuzzy
-#~ msgid "not set"
-#~ msgstr "'ref' no está establecido"
+msgid "in future"
+msgstr ""
+
+msgid "does not exist"
+msgstr ""

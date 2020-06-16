@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-06-08 11:56+0200\n"
+"POT-Creation-Date: 2020-06-16 20:05+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: Alexandre Oliveira <rockytvbr@gmail.com>, 2020\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/jungle-bus/"
@@ -191,6 +191,12 @@ msgstr[1] ""
 
 #, perl-format
 msgid ""
+"Route has 'network' = '%s' value which is part of 'network' = '%s' of Route-"
+"Master: %s"
+msgstr ""
+
+#, perl-format
+msgid ""
 "Route might be listed with 'ref' = '%s' in a different section or in section "
 "'Not clearly assigned routes' of this analysis: %s"
 msgstr ""
@@ -292,6 +298,11 @@ msgstr ""
 
 #, perl-format
 msgid "Route-Master exists in the given data set but 'ref' tag is not set: %s"
+msgstr ""
+
+#, perl-format
+msgid ""
+"'network' = '%s' of Route is a part of 'network' = '%s' of Route-Master: %s"
 msgstr ""
 
 #, perl-format
@@ -1337,17 +1348,17 @@ msgid ""
 "CSV data include too many ';'. Line %s of Routes-Data. Contents of line: '%s'"
 msgstr ""
 
-#, fuzzy
 msgid "is not set"
-msgstr "Etiqueta \"ref\" não definida"
+msgstr ""
 
 msgid "GTFS database not found"
 msgstr ""
 
-#, fuzzy
-msgid "does not exist"
-msgstr "Etiqueta \"ref\" não definida"
+msgid "old"
+msgstr ""
 
-#, fuzzy
-#~ msgid "not set"
-#~ msgstr "Etiqueta \"ref\" não definida"
+msgid "in future"
+msgstr ""
+
+msgid "does not exist"
+msgstr ""

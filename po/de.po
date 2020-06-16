@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-06-08 11:56+0200\n"
-"PO-Revision-Date: 2020-06-08 11:57+0200\n"
+"POT-Creation-Date: 2020-06-16 20:05+0200\n"
+"PO-Revision-Date: 2020-06-16 20:09+0200\n"
 "Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
 "Language-Team: German (https://www.transifex.com/jungle-bus/teams/97874/"
 "de/)\n"
@@ -201,6 +201,14 @@ msgstr[1] ""
 
 #, perl-format
 msgid ""
+"Route has 'network' = '%s' value which is part of 'network' = '%s' of Route-"
+"Master: %s"
+msgstr ""
+"Route hat einen 'network' = '%s' Wert, der Teil ist von 'network' = '%s' des "
+"Route-Masters: %s"
+
+#, perl-format
+msgid ""
 "Route might be listed with 'ref' = '%s' in a different section or in section "
 "'Not clearly assigned routes' of this analysis: %s"
 msgstr ""
@@ -326,6 +334,13 @@ msgstr "Route-Master hat unpassenden  'ref' = '%s' Wert: %s"
 msgid "Route-Master exists in the given data set but 'ref' tag is not set: %s"
 msgstr ""
 "Route-Master existiert im geladenen Datensatz, 'ref' ist aber nicht gesetzt: "
+"%s"
+
+#, perl-format
+msgid ""
+"'network' = '%s' of Route is a part of 'network' = '%s' of Route-Master: %s"
+msgstr ""
+"'network' = '%s' der Route ist Teil von 'network' = '%s' des Route-Masters: "
 "%s"
 
 #, perl-format
@@ -1648,9 +1663,11 @@ msgstr "ist nicht gesetzt"
 msgid "GTFS database not found"
 msgstr "GTFS Datenbank nicht gefunden"
 
+msgid "old"
+msgstr "alt"
+
+msgid "in future"
+msgstr "in der Zukunft"
+
 msgid "does not exist"
 msgstr "existiert nicht"
-
-#, fuzzy
-#~ msgid "not set"
-#~ msgstr "'ref' ist nicht gesetzt"

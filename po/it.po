@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-06-08 11:56+0200\n"
+"POT-Creation-Date: 2020-06-16 20:05+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2020\n"
 "Language-Team: Italian (https://www.transifex.com/jungle-bus/teams/97874/"
@@ -197,6 +197,14 @@ msgstr[1] ""
 "Gli itinerari ‘master’ hanno meno itinerari di quelli corrispondenti (%d "
 "contro %d) nell’insieme dei dati"
 
+#, fuzzy, perl-format
+msgid ""
+"Route has 'network' = '%s' value which is part of 'network' = '%s' of Route-"
+"Master: %s"
+msgstr ""
+"‘network’=‘%s’ dell’itinerario non corrisponde a ‘network’=‘%s’ "
+"dell’itinerario ‘master’: %s"
+
 #, perl-format
 msgid ""
 "Route might be listed with 'ref' = '%s' in a different section or in section "
@@ -323,6 +331,13 @@ msgstr "L’itinerario ‘master’ non ha ‘ref’=‘%s’ corrispondente: %s
 #, perl-format
 msgid "Route-Master exists in the given data set but 'ref' tag is not set: %s"
 msgstr ""
+
+#, fuzzy, perl-format
+msgid ""
+"'network' = '%s' of Route is a part of 'network' = '%s' of Route-Master: %s"
+msgstr ""
+"‘network’=‘%s’ dell’itinerario non corrisponde a ‘network’=‘%s’ "
+"dell’itinerario ‘master’: %s"
 
 #, perl-format
 msgid ""
@@ -1350,17 +1365,17 @@ msgid ""
 "CSV data include too many ';'. Line %s of Routes-Data. Contents of line: '%s'"
 msgstr ""
 
-#, fuzzy
 msgid "is not set"
-msgstr "‘ref’ non è impostata"
+msgstr ""
 
 msgid "GTFS database not found"
 msgstr ""
 
-#, fuzzy
-msgid "does not exist"
-msgstr "‘ref’ non è impostata"
+msgid "old"
+msgstr ""
 
-#, fuzzy
-#~ msgid "not set"
-#~ msgstr "‘ref’ non è impostata"
+msgid "in future"
+msgstr ""
+
+msgid "does not exist"
+msgstr ""

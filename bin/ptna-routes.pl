@@ -1848,6 +1848,7 @@ sub analyze_route_master_environment {
     my %allowed_refs            = ();
     my $masters_ref             = undef;
     my $members_ref             = undef;
+    my $route_master_network    = undef;
 
     if ( $env_ref && $ref_or_list && $type && $type eq 'route_master' && $route_type && $relation_id ) {
 
@@ -1955,7 +1956,17 @@ sub analyze_route_master_environment {
                                             # 'members_ref' is in the list, check for other problems
                                             #
                                             if ( $relation_ptr->{'tag'}->{'network'} && $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'} ) {
-                                                if ( $relation_ptr->{'tag'}->{'network'} eq $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'} ) {
+
+                                                $route_master_network = ';' . $relation_ptr->{'tag'}->{'network'} . ';';
+
+                                                if ( $relation_ptr->{'tag'}->{'network'} eq $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}  ||
+                                                     $route_master_network =~ m/;\Q$RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}\E;/          ) {
+
+                                                    if ( $route_master_network =~ m/;\Q$RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}\E;/  ) {
+                                                        $notes_string = gettext( "Route has 'network' = '%s' value which is part of 'network' = '%s' of Route-Master: %s" );
+                                                        push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}), html_escape($relation_ptr->{'tag'}->{'network'}), printRelationTemplate($member_ref->{'ref'})) );
+                                                    }
+
                                                     #printf STDERR "%s Route of Route-Master not found although 'ref' is valid and 'network' are equal. Route-Master: %s, Route: %s, 'ref': %s, 'network': %s\n", get_time(), $relation_id, $member_ref->{'ref'}, $members_ref, html_escape($relation_ptr->{'tag'}->{'network'});
                                                     if ( $relation_ptr->{'tag'}->{'operator'} && $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'operator'} ) {
                                                         if ( $relation_ptr->{'tag'}->{'operator'} eq $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'operator'} ) {
@@ -1980,8 +1991,8 @@ sub analyze_route_master_environment {
                                                 }
                                             } elsif ( $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'} ) {
                                                 # 'ref' tag is valid (in the list) but 'network' is strange
-                                                $issues_string = gettext( "Route has 'network' = '%s' value which is considered as not relevant: %s" );
-                                                push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}), printRelationTemplate($member_ref->{'ref'}) ) );
+                                                $notes_string = gettext( "Route has 'network' = '%s' value which is considered as not relevant: %s" );
+                                                push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}), printRelationTemplate($member_ref->{'ref'}) ) );
                                             }
                                             if ( $members_ref ne $masters_ref ) {
                                                 # 'members_ref' is valid (in the list) but differs from 'ref' of route-master, so we have at least two refs in the list (a real list)
@@ -2065,6 +2076,7 @@ sub analyze_route_environment {
     my %allowed_refs                            = ();
     my $masters_ref                             = undef;
     my $routes_ref                              = undef;
+    my $route_master_network                    = undef;
 
     if ( $env_ref && $ref_or_list && $type && $type eq 'route' && $route_type && $relation_id ) {
 
@@ -2166,8 +2178,16 @@ sub analyze_route_environment {
             }
             if ( $relation_ptr->{'tag'}->{'network'} && $RELATIONS{$route_master_rel_id}->{'tag'}->{'network'} &&
                  $relation_ptr->{'tag'}->{'network'} ne $RELATIONS{$route_master_rel_id}->{'tag'}->{'network'}     ) {
-                $issues_string = gettext( "'network' = '%s' of Route does not fit to 'network' = '%s' of Route-Master: %s" );
-                push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($relation_ptr->{'tag'}->{'network'}), html_escape($RELATIONS{$route_master_rel_id}->{'tag'}->{'network'}), printRelationTemplate($route_master_rel_id)) );
+
+                $route_master_network = ';' . $RELATIONS{$route_master_rel_id}->{'tag'}->{'network'} . ';';
+
+                if ( $route_master_network =~ m/;\Q$relation_ptr->{'tag'}->{'network'}\E;/  ) {
+                    $notes_string = gettext( "'network' = '%s' of Route is a part of 'network' = '%s' of Route-Master: %s" );
+                    push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, html_escape($relation_ptr->{'tag'}->{'network'}), html_escape($RELATIONS{$route_master_rel_id}->{'tag'}->{'network'}), printRelationTemplate($route_master_rel_id)) );
+                } else {
+                    $issues_string = gettext( "'network' = '%s' of Route does not fit to 'network' = '%s' of Route-Master: %s" );
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($relation_ptr->{'tag'}->{'network'}), html_escape($RELATIONS{$route_master_rel_id}->{'tag'}->{'network'}), printRelationTemplate($route_master_rel_id)) );
+                }
             }
             if ( $relation_ptr->{'tag'}->{'operator'} && $RELATIONS{$route_master_rel_id}->{'tag'}->{'operator'} &&
                  $relation_ptr->{'tag'}->{'operator'} ne $RELATIONS{$route_master_rel_id}->{'tag'}->{'operator'}     ) {
@@ -2370,8 +2390,8 @@ sub analyze_relation {
                 }
             }
             if ( $we_have_a_match == 0 && ($network_long_regex || $network_short_regex) ) {
-                $issues_string = gettext( "Route has 'network' = '%s' value which is considered as not relevant: %s" );
-                push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($network), printRelationTemplate($relation_id) ) );
+                $notes_string = gettext( "Route has 'network' = '%s' value which is considered as not relevant: %s" );
+                push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, html_escape($network), printRelationTemplate($relation_id) ) );
                 if ( $positive_notes ) {
                     push( @{$relation_ptr->{'__notes__'}}, sprintf( "'network' = '%s'", html_escape($network)) );
                 }
