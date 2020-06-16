@@ -84,19 +84,44 @@ sub getGtfsRouteIdHtmlTag {
     my $gtfs_feed      = shift;
     my $route_id       = shift;
 
-    my $gtfs_html_tag  = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"'GTFS feed' %s. %s\">GTFS</a>",
+    my $gtfs_html_tag  = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"'GTFS feed' %s. %s\">GTFS!</a>",
                                   html_escape(gettext("is not set")),
                                   html_escape(gettext("GTFS database not found")) );
 
     if ( AttachToGtfsSqliteDb($gtfs_feed) ) {
+
         my $gtfs_country =  $gtfs_feed;
            $gtfs_country =~ s/-.*$//;
 
         if ( $route_id ) {
-            if ( ExistsRouteId($gtfs_feed,$route_id) ) {
-                $gtfs_html_tag = sprintf( "<a href=\"/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Route-Id: %s\">GTFS</a>", uri_escape($gtfs_country), uri_escape($gtfs_feed), uri_escape($route_id), html_escape($gtfs_feed), html_escape($route_id) );
+
+            my $RouteIdStatus = _getRouteIdStatus( $gtfs_feed, $route_id );
+
+            if ( $RouteIdStatus eq 'current' ) {
+                $gtfs_html_tag = sprintf( "<a href=\"/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Route-Id: %s\">GTFS</a>",
+                                          uri_escape($gtfs_country),
+                                          uri_escape($gtfs_feed),
+                                          uri_escape($route_id),
+                                          html_escape($gtfs_feed),
+                                          html_escape($route_id) );
+            } elsif ( $RouteIdStatus eq 'old' ) {
+                $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateold\" href=\"/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Route-Id: %s: 'route_id' %s.\">GTFS?</a>",
+                                          uri_escape($gtfs_country),
+                                          uri_escape($gtfs_feed),
+                                          uri_escape($route_id),
+                                          html_escape($gtfs_feed),
+                                          html_escape($route_id),
+                                          html_escape(gettext("old")) );
+            } elsif ( $RouteIdStatus eq 'future' ) {
+                $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateold\" href=\"/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Route-Id: %s: 'route_id' %s.\">GTFS?</a>",
+                                          uri_escape($gtfs_country),
+                                          uri_escape($gtfs_feed),
+                                          uri_escape($route_id),
+                                          html_escape($gtfs_feed),
+                                          html_escape($route_id),
+                                          html_escape(gettext("in future")) );
             } else {
-                $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Route-Id: %s: 'route_id' %s.\">GTFS</a>",
+                $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Route-Id: %s: 'route_id' %s.\">GTFS!</a>",
                                           uri_escape($gtfs_country),
                                           uri_escape($gtfs_feed),
                                           uri_escape($route_id),
@@ -105,7 +130,7 @@ sub getGtfsRouteIdHtmlTag {
                                           html_escape(gettext("does not exist")) );
             }
         } else {
-            $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/routes.php?network=%s\" title=\"GTFS-Feed: %s - 'route_id' %s.\">GTFS</a>",
+            $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/routes.php?network=%s\" title=\"GTFS-Feed: %s - 'route_id' %s.\">GTFS!</a>",
                                       uri_escape($gtfs_country),
                                       uri_escape($gtfs_feed),
                                       html_escape($gtfs_feed),
@@ -113,7 +138,7 @@ sub getGtfsRouteIdHtmlTag {
         }
 
     } else {
-        $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"GTFS-Feed: %s: %s.\">GTFS</a>",
+        $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"GTFS-Feed: %s: %s.\">GTFS!</a>",
                                   html_escape($gtfs_feed),
                                   html_escape(gettext("GTFS database not found")) );
     }
@@ -132,19 +157,44 @@ sub getGtfsTripIdHtmlTag {
     my $gtfs_feed      = shift;
     my $trip_id        = shift;
 
-    my $gtfs_html_tag  = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"'GTFS feed' %s. %s\">GTFS</a>",
+    my $gtfs_html_tag  = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"'GTFS feed' %s. %s\">GTFS!</a>",
                                   html_escape(gettext("is not set")),
                                   html_escape(gettext("GTFS database not found")) );
 
     if ( AttachToGtfsSqliteDb($gtfs_feed) ) {
+
         my $gtfs_country =  $gtfs_feed;
            $gtfs_country =~ s/-.*$//;
 
         if ( $trip_id ) {
-            if ( ExistsTripId($gtfs_feed,$trip_id) ) {
-                $gtfs_html_tag = sprintf( "<a href=\"/gtfs/%s/single-trip.php?network=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Trip-Id: %s\">GTFS</a>", uri_escape($gtfs_country), uri_escape($gtfs_feed), uri_escape($trip_id), html_escape($gtfs_feed), html_escape($trip_id) );
+
+            my $TripIdStatus = _getTripIdStatus( $gtfs_feed, $trip_id );
+
+            if ( $TripIdStatus eq 'current' ) {
+                $gtfs_html_tag = sprintf( "<a href=\"/gtfs/%s/single-trip.php?network=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Trip-Id: %s\">GTFS</a>",
+                                          uri_escape($gtfs_country),
+                                          uri_escape($gtfs_feed),
+                                          uri_escape($trip_id),
+                                          html_escape($gtfs_feed),
+                                          html_escape($trip_id) );
+            } elsif ( $TripIdStatus eq 'old' ) {
+                $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateold\" href=\"/gtfs/%s/single-trip.php?network=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Trip-Id: %s: 'trip_id' %s.\">GTFS?</a>",
+                                          uri_escape($gtfs_country),
+                                          uri_escape($gtfs_feed),
+                                          uri_escape($trip_id),
+                                          html_escape($gtfs_feed),
+                                          html_escape($trip_id),
+                                          html_escape(gettext("old")) );
+            } elsif ( $TripIdStatus eq 'future' ) {
+                $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateold\" href=\"/gtfs/%s/single-trip.php?network=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Trip-Id: %s: 'trip_id' %s.\">GTFS?</a>",
+                                          uri_escape($gtfs_country),
+                                          uri_escape($gtfs_feed),
+                                          uri_escape($trip_id),
+                                          html_escape($gtfs_feed),
+                                          html_escape($trip_id),
+                                          html_escape(gettext("in future")) );
             } else {
-                $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/single-trip.php?network=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Trip-Id: %s: 'trip_id' %s.\">GTFS</a>",
+                $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/single-trip.php?network=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Trip-Id: %s: 'trip_id' %s.\">GTFS!</a>",
                                           uri_escape($gtfs_country),
                                           uri_escape($gtfs_feed),
                                           uri_escape($trip_id),
@@ -153,7 +203,7 @@ sub getGtfsTripIdHtmlTag {
                                           html_escape(gettext("does not exist")) );
             }
         } else {
-            $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/routes.php?network=%s\" title=\"GTFS-Feed: %s - 'trip_id' %s.\">GTFS</a>",
+            $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/routes.php?network=%s\" title=\"GTFS-Feed: %s - 'trip_id' %s.\">GTFS!</a>",
                                       uri_escape($gtfs_country),
                                       uri_escape($gtfs_feed),
                                       html_escape($gtfs_feed),
@@ -161,7 +211,7 @@ sub getGtfsTripIdHtmlTag {
         }
 
     } else {
-        $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"GTFS-Feed: %s: %s.\">GTFS</a>",
+        $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"GTFS-Feed: %s: %s.\">GTFS!</a>",
                                   html_escape($gtfs_feed),
                                   html_escape(gettext("GTFS database not found")) );
     }
@@ -180,19 +230,44 @@ sub getGtfsShapeIdHtmlTag {
     my $gtfs_feed      = shift;
     my $shape_id       = shift;
 
-    my $gtfs_html_tag  = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"'GTFS feed' %s. %s\">GTFS</a>",
+    my $gtfs_html_tag  = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"'GTFS feed' %s. %s\">GTFS!</a>",
                                   html_escape(gettext("is not set")),
                                   html_escape(gettext("GTFS database not found")) );
 
     if ( AttachToGtfsSqliteDb($gtfs_feed) ) {
+
         my $gtfs_country =  $gtfs_feed;
            $gtfs_country =~ s/-.*$//;
 
         if ( $shape_id ) {
-            if ( ExistsShapeId($gtfs_feed,$shape_id) ) {
-                $gtfs_html_tag = sprintf( "<a href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s\">GTFS</a>", uri_escape($gtfs_country), uri_escape($gtfs_feed), uri_escape($shape_id), html_escape($gtfs_feed), html_escape($shape_id) );
+
+            my $ShapeIdStatus = _getShapeIdStatus( $gtfs_feed, $shape_id );
+
+            if ( $ShapeIdStatus eq 'current' ) {
+                $gtfs_html_tag = sprintf( "<a href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s\">GTFS</a>",
+                                           uri_escape($gtfs_country),
+                                           uri_escape($gtfs_feed),
+                                           uri_escape($shape_id),
+                                           html_escape($gtfs_feed),
+                                           html_escape($shape_id) );
+            } elsif ( $ShapeIdStatus eq 'old' ) {
+                $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s: 'shape_id' %s.\">GTFS?</a>",
+                                          uri_escape($gtfs_country),
+                                          uri_escape($gtfs_feed),
+                                          uri_escape($shape_id),
+                                          html_escape($gtfs_feed),
+                                          html_escape($shape_id),
+                                          html_escape(gettext("old")) );
+            } elsif ( $ShapeIdStatus eq 'future' ) {
+                $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s: 'shape_id' %s.\">GTFS?</a>",
+                                          uri_escape($gtfs_country),
+                                          uri_escape($gtfs_feed),
+                                          uri_escape($shape_id),
+                                          html_escape($gtfs_feed),
+                                          html_escape($shape_id),
+                                          html_escape(gettext("in future")) );
             } else {
-                $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s: 'shape_id' %s.\">GTFS</a>",
+                $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s: 'shape_id' %s.\">GTFS!</a>",
                                           uri_escape($gtfs_country),
                                           uri_escape($gtfs_feed),
                                           uri_escape($shape_id),
@@ -201,7 +276,7 @@ sub getGtfsShapeIdHtmlTag {
                                           html_escape(gettext("does not exist")) );
             }
         } else {
-            $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/routes.php?network=%s\" title=\"GTFS-Feed: %s - 'shape_id' %s.\">GTFS</a>",
+            $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/routes.php?network=%s\" title=\"GTFS-Feed: %s - 'shape_id' %s.\">GTFS!</a>",
                                       uri_escape($gtfs_country),
                                       uri_escape($gtfs_feed),
                                       html_escape($gtfs_feed),
@@ -209,7 +284,7 @@ sub getGtfsShapeIdHtmlTag {
         }
 
     } else {
-        $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"GTFS-Feed: %s: %s.\">GTFS</a>",
+        $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"GTFS-Feed: %s: %s.\">GTFS!</a>",
                                   html_escape($gtfs_feed),
                                   html_escape(gettext("GTFS database not found")) );
     }
@@ -224,7 +299,7 @@ sub getGtfsShapeIdHtmlTag {
 #
 #############################################################################################
 
-sub ExistsRouteId {
+sub _getRouteIdStatus {
     my $feed        = shift;
     my $route_id    = shift;
 
@@ -237,10 +312,12 @@ sub ExistsRouteId {
 
         my @row = $sth->fetchrow_array();
 
-        return $row[0];
+        if ( $row[0] > 0 ) {
+            return 'current';
+        }
     }
 
-    return 0;
+    return '';
 }
 
 
@@ -250,7 +327,7 @@ sub ExistsRouteId {
 #
 #############################################################################################
 
-sub ExistsTripId {
+sub _getTripIdStatus {
     my $feed        = shift;
     my $trip_id     = shift;
 
@@ -263,10 +340,12 @@ sub ExistsTripId {
 
         my @row = $sth->fetchrow_array();
 
-        return $row[0];
+        if ( $row[0] > 0 ) {
+            return 'current';
+        }
     }
 
-    return 0;
+    return '';
 }
 
 
@@ -276,7 +355,7 @@ sub ExistsTripId {
 #
 #############################################################################################
 
-sub ExistsShapeId {
+sub _getShapeIdStatus {
     my $feed        = shift;
     my $shape_id    = shift;
 
@@ -289,10 +368,12 @@ sub ExistsShapeId {
 
         my @row = $sth->fetchrow_array();
 
-        return $row[0];
+        if ( $row[0] > 0 ) {
+            return 'current';
+        }
     }
 
-    return 0;
+    return '';
 }
 
 
