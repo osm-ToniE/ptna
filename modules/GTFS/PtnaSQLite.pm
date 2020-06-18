@@ -38,48 +38,6 @@ $config{'name-suffix'}  = '-ptna-gtfs-sqlite.db';
 #
 #############################################################################################
 
-sub AttachToGtfsSqliteDb {
-    my $feed       = shift;
-
-    my $db_file    = '';
-
-    if ( $feed && $feed =~ m/^[a-zA-Z0-9_.-]+$/ ) {
-        my @prefixparts = split( /-/, $feed );
-        my $countrydir  = shift( @prefixparts );
-
-        $db_file = $config{'path-to-work'} . '/' . $countrydir . '/' . $feed . $config{'name-suffix'};
-
-        if ( !-f $db_file ) {
-            my $subdir = shift( @prefixparts );
-
-            $db_file = $config{'path-to-work'} . '/' . $countrydir . '/' . $subdir . '/' . $feed . $config{'name-suffix'};
-        }
-
-        if ( -f $db_file ) {
-
-            if ( !$db_handles{$feed} ) {
-                $db_handles{$feed} = DBI->connect( "DBI:SQLite:dbname=$db_file", "", "", { AutoCommit => 0, RaiseError => 1 } );
-            }
-
-            if ( $db_handles{$feed} ) {
-                return 1;
-            } else {
-                printf STDERR "%s DBI->connect(%s) failed: %s\n", get_time(), $db_file, $DBI::errstr;
-            }
-        }
-
-    }
-
-    return 0;
-}
-
-
-#############################################################################################
-#
-#
-#
-#############################################################################################
-
 sub getGtfsRouteIdHtmlTag {
     my $gtfs_feed      = shift;
     my $route_id       = shift;
@@ -88,7 +46,7 @@ sub getGtfsRouteIdHtmlTag {
                                   html_escape(gettext("is not set")),
                                   html_escape(gettext("GTFS database not found")) );
 
-    if ( AttachToGtfsSqliteDb($gtfs_feed) ) {
+    if ( _AttachToGtfsSqliteDb($gtfs_feed) ) {
 
         my $gtfs_country =  $gtfs_feed;
            $gtfs_country =~ s/-.*$//;
@@ -97,29 +55,29 @@ sub getGtfsRouteIdHtmlTag {
 
             my $RouteIdStatus = _getRouteIdStatus( $gtfs_feed, $route_id );
 
-            if ( $RouteIdStatus eq 'current' ) {
+            if ( $RouteIdStatus eq 'valid' ) {
                 $gtfs_html_tag = sprintf( "<a href=\"/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Route-Id: %s\">GTFS</a>",
                                           uri_escape($gtfs_country),
                                           uri_escape($gtfs_feed),
                                           uri_escape($route_id),
                                           html_escape($gtfs_feed),
                                           html_escape($route_id) );
-            } elsif ( $RouteIdStatus eq 'old' ) {
+            } elsif ( $RouteIdStatus eq 'past' ) {
                 $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateold\" href=\"/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Route-Id: %s: 'route_id' %s.\">GTFS?</a>",
                                           uri_escape($gtfs_country),
                                           uri_escape($gtfs_feed),
                                           uri_escape($route_id),
                                           html_escape($gtfs_feed),
                                           html_escape($route_id),
-                                          html_escape(gettext("old")) );
+                                          html_escape(gettext("is no longer valid (in the past)")) );
             } elsif ( $RouteIdStatus eq 'future' ) {
-                $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateold\" href=\"/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Route-Id: %s: 'route_id' %s.\">GTFS?</a>",
+                $gtfs_html_tag = sprintf( "<a class=\"gtfs-datenew\" href=\"/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Route-Id: %s: 'route_id' %s.\">GTFS?</a>",
                                           uri_escape($gtfs_country),
                                           uri_escape($gtfs_feed),
                                           uri_escape($route_id),
                                           html_escape($gtfs_feed),
                                           html_escape($route_id),
-                                          html_escape(gettext("in future")) );
+                                          html_escape(gettext("is not yet valid (in the future)")) );
             } else {
                 $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Route-Id: %s: 'route_id' %s.\">GTFS!</a>",
                                           uri_escape($gtfs_country),
@@ -161,7 +119,7 @@ sub getGtfsTripIdHtmlTag {
                                   html_escape(gettext("is not set")),
                                   html_escape(gettext("GTFS database not found")) );
 
-    if ( AttachToGtfsSqliteDb($gtfs_feed) ) {
+    if ( _AttachToGtfsSqliteDb($gtfs_feed) ) {
 
         my $gtfs_country =  $gtfs_feed;
            $gtfs_country =~ s/-.*$//;
@@ -170,29 +128,29 @@ sub getGtfsTripIdHtmlTag {
 
             my $TripIdStatus = _getTripIdStatus( $gtfs_feed, $trip_id );
 
-            if ( $TripIdStatus eq 'current' ) {
+            if ( $TripIdStatus eq 'valid' ) {
                 $gtfs_html_tag = sprintf( "<a href=\"/gtfs/%s/single-trip.php?network=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Trip-Id: %s\">GTFS</a>",
                                           uri_escape($gtfs_country),
                                           uri_escape($gtfs_feed),
                                           uri_escape($trip_id),
                                           html_escape($gtfs_feed),
                                           html_escape($trip_id) );
-            } elsif ( $TripIdStatus eq 'old' ) {
+            } elsif ( $TripIdStatus eq 'past' ) {
                 $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateold\" href=\"/gtfs/%s/single-trip.php?network=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Trip-Id: %s: 'trip_id' %s.\">GTFS?</a>",
                                           uri_escape($gtfs_country),
                                           uri_escape($gtfs_feed),
                                           uri_escape($trip_id),
                                           html_escape($gtfs_feed),
                                           html_escape($trip_id),
-                                          html_escape(gettext("old")) );
+                                          html_escape(gettext("is no longer valid (in the past)")) );
             } elsif ( $TripIdStatus eq 'future' ) {
-                $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateold\" href=\"/gtfs/%s/single-trip.php?network=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Trip-Id: %s: 'trip_id' %s.\">GTFS?</a>",
+                $gtfs_html_tag = sprintf( "<a class=\"gtfs-datenew\" href=\"/gtfs/%s/single-trip.php?network=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Trip-Id: %s: 'trip_id' %s.\">GTFS?</a>",
                                           uri_escape($gtfs_country),
                                           uri_escape($gtfs_feed),
                                           uri_escape($trip_id),
                                           html_escape($gtfs_feed),
                                           html_escape($trip_id),
-                                          html_escape(gettext("in future")) );
+                                          html_escape(gettext("is not yet valid (in the future)")) );
             } else {
                 $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/single-trip.php?network=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Trip-Id: %s: 'trip_id' %s.\">GTFS!</a>",
                                           uri_escape($gtfs_country),
@@ -234,7 +192,7 @@ sub getGtfsShapeIdHtmlTag {
                                   html_escape(gettext("is not set")),
                                   html_escape(gettext("GTFS database not found")) );
 
-    if ( AttachToGtfsSqliteDb($gtfs_feed) ) {
+    if ( _AttachToGtfsSqliteDb($gtfs_feed) ) {
 
         my $gtfs_country =  $gtfs_feed;
            $gtfs_country =~ s/-.*$//;
@@ -243,29 +201,37 @@ sub getGtfsShapeIdHtmlTag {
 
             my $ShapeIdStatus = _getShapeIdStatus( $gtfs_feed, $shape_id );
 
-            if ( $ShapeIdStatus eq 'current' ) {
+            if ( $ShapeIdStatus eq 'valid' ) {
                 $gtfs_html_tag = sprintf( "<a href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s\">GTFS</a>",
                                            uri_escape($gtfs_country),
                                            uri_escape($gtfs_feed),
                                            uri_escape($shape_id),
                                            html_escape($gtfs_feed),
                                            html_escape($shape_id) );
-            } elsif ( $ShapeIdStatus eq 'old' ) {
-                $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s: 'shape_id' %s.\">GTFS?</a>",
+            } elsif ( $ShapeIdStatus eq 'past' ) {
+                $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateold\" href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s: 'shape_id' %s.\">GTFS?</a>",
                                           uri_escape($gtfs_country),
                                           uri_escape($gtfs_feed),
                                           uri_escape($shape_id),
                                           html_escape($gtfs_feed),
                                           html_escape($shape_id),
-                                          html_escape(gettext("old")) );
+                                          html_escape(gettext("is no longer valid (in the past)")) );
             } elsif ( $ShapeIdStatus eq 'future' ) {
-                $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s: 'shape_id' %s.\">GTFS?</a>",
+                $gtfs_html_tag = sprintf( "<a class=\"gtfs-datenew\" href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s: 'shape_id' %s.\">GTFS?</a>",
                                           uri_escape($gtfs_country),
                                           uri_escape($gtfs_feed),
                                           uri_escape($shape_id),
                                           html_escape($gtfs_feed),
                                           html_escape($shape_id),
-                                          html_escape(gettext("in future")) );
+                                          html_escape(gettext("is not yet valid (in the future)")) );
+            } elsif ( $ShapeIdStatus eq 'no shapes' ) {
+                $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s: %s.\">GTFS!</a>",
+                                          uri_escape($gtfs_country),
+                                          uri_escape($gtfs_feed),
+                                          uri_escape($shape_id),
+                                          html_escape($gtfs_feed),
+                                          html_escape($shape_id),
+                                          html_escape(gettext("does not provide any 'shape' data")) );
             } else {
                 $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s: 'shape_id' %s.\">GTFS!</a>",
                                           uri_escape($gtfs_country),
@@ -299,21 +265,81 @@ sub getGtfsShapeIdHtmlTag {
 #
 #############################################################################################
 
+sub _AttachToGtfsSqliteDb {
+    my $feed       = shift;
+
+    my $db_file    = '';
+
+    if ( $feed && $feed =~ m/^[a-zA-Z0-9_.-]+$/ ) {
+        my @prefixparts = split( /-/, $feed );
+        my $countrydir  = shift( @prefixparts );
+
+        $db_file = $config{'path-to-work'} . '/' . $countrydir . '/' . $feed . $config{'name-suffix'};
+
+        if ( !-f $db_file ) {
+            my $subdir = shift( @prefixparts );
+
+            $db_file = $config{'path-to-work'} . '/' . $countrydir . '/' . $subdir . '/' . $feed . $config{'name-suffix'};
+        }
+
+        if ( -f $db_file ) {
+
+            if ( !$db_handles{$feed} ) {
+                $db_handles{$feed} = DBI->connect( "DBI:SQLite:dbname=$db_file", "", "", { AutoCommit => 0, RaiseError => 1 } );
+            }
+
+            if ( $db_handles{$feed} ) {
+                return 1;
+            } else {
+                printf STDERR "%s DBI->connect(%s) failed: %s\n", get_time(), $db_file, $DBI::errstr;
+            }
+        }
+
+    }
+
+    return 0;
+}
+
+
+#############################################################################################
+#
+#
+#
+#############################################################################################
+
 sub _getRouteIdStatus {
     my $feed        = shift;
     my $route_id    = shift;
 
+    my @row         = ();
+    my $today       = get_date();
+
     if ( $feed && $route_id && $db_handles{$feed} ) {
 
-        my $sth = $db_handles{$feed}->prepare( "SELECT   COUNT(route_id)
-                                                FROM     routes
-                                                WHERE    route_id=?;" );
-           $sth->execute( $route_id );
+        my $sth = $db_handles{$feed}->prepare( "SELECT DISTINCT trips.route_id,calendar.start_date,calendar.end_date
+                                                FROM            trips
+                                                JOIN            calendar ON trips.service_id = calendar.service_id
+                                                WHERE           trips.route_id=?
+                                                ORDER BY calendar.end_date DESC, calendar.start_date ASC;" );
+            $sth->execute( $route_id );
 
-        my @row = $sth->fetchrow_array();
-
-        if ( $row[0] > 0 ) {
-            return 'current';
+        my $min_start = 20500101;
+        my $max_end   = 19700101;
+        while ( @row = $sth->fetchrow_array() ) {
+            if ( $row[0] && $row[1] && $row[2] && $row[0] eq $route_id ) {
+                if ( $row[1] <= $today && $row[2] >= $today) {
+                    return 'valid';
+                }
+                $min_start = ($row[1] < $min_start) ? $row[1] : $min_start;
+                $max_end   = ($row[2] > $max_end)   ? $row[2] : $max_end;
+            } else {
+                return '';
+            }
+        }
+        if ( $max_end != 19700101 && $today > $max_end ) {
+            return 'past';
+        } elsif ( $min_start != 20500101 && $today < $min_start ) {
+            return 'future';
         }
     }
 
@@ -331,17 +357,34 @@ sub _getTripIdStatus {
     my $feed        = shift;
     my $trip_id     = shift;
 
+    my @row         = ();
+    my $today       = get_date();
+
     if ( $feed && $trip_id && $db_handles{$feed} ) {
 
-        my $sth = $db_handles{$feed}->prepare( "SELECT   COUNT(trip_id)
+        my $sth = $db_handles{$feed}->prepare( "SELECT   trips.trip_id,calendar.start_date,calendar.end_date
                                                 FROM     trips
+                                                JOIN     calendar ON trips.service_id = calendar.service_id
                                                 WHERE    trip_id=?;" );
            $sth->execute( $trip_id );
 
-        my @row = $sth->fetchrow_array();
-
-        if ( $row[0] > 0 ) {
-            return 'current';
+        my $min_start = 20500101;
+        my $max_end   = 19700101;
+        while ( @row = $sth->fetchrow_array() ) {
+            if ( $row[0] && $row[1] && $row[2] && $row[0] eq $trip_id ) {
+                if ( $row[1] <= $today && $row[2] >= $today) {
+                    return 'valid';
+                }
+                $min_start = ($row[1] < $min_start) ? $row[1] : $min_start;
+                $max_end   = ($row[2] > $max_end)   ? $row[2] : $max_end;
+            } else {
+                return '';
+            }
+        }
+        if ( $max_end != 19700101 && $today > $max_end ) {
+            return 'past';
+        } elsif ( $min_start != 20500101 && $today < $min_start ) {
+            return 'future';
         }
     }
 
@@ -359,17 +402,51 @@ sub _getShapeIdStatus {
     my $feed        = shift;
     my $shape_id    = shift;
 
+    my @row                 = ();
+    my $today               = get_date();
+    my $trips_has_shape_id  = 0;
+
+
     if ( $feed && $shape_id && $db_handles{$feed} ) {
 
-        my $sth = $db_handles{$feed}->prepare( "SELECT   COUNT(shape_id)
-                                                FROM     shapes
-                                                WHERE    shape_id=?;" );
-           $sth->execute( $shape_id );
+        my $sth =  $db_handles{$feed}->prepare( "PRAGMA table_info(trips);" );
+           $sth->execute();
 
-        my @row = $sth->fetchrow_array();
+        while ( @row = $sth->fetchrow_array() ) {
+            if ( $row[1] && $row[1] eq 'shape_id' ) {
+                $trips_has_shape_id = 1;
+                last;
+            }
+        }
 
-        if ( $row[0] > 0 ) {
-            return 'current';
+        if ( $trips_has_shape_id ) {
+            $sth = $db_handles{$feed}->prepare( "SELECT   shape_id,calendar.start_date,calendar.end_date
+                                                 FROM     trips
+                                                 JOIN     calendar ON trips.service_id = calendar.service_id
+                                                 WHERE    shape_id=?;
+                                                 ORDER BY calendar.end_date DESC, calendar.start_date ASC;" );
+            $sth->execute( $shape_id );
+
+            my $min_start = 20500101;
+            my $max_end   = 19700101;
+            while ( @row = $sth->fetchrow_array() ) {
+                if ( $row[0] && $row[1] && $row[2] && $row[0] eq $shape_id ) {
+                    if ( $row[1] <= $today && $row[2] >= $today) {
+                        return 'valid';
+                    }
+                    $min_start = ($row[1] < $min_start) ? $row[1] : $min_start;
+                    $max_end   = ($row[2] > $max_end)   ? $row[2] : $max_end;
+                } else {
+                    return '';
+                }
+            }
+            if ( $max_end != 19700101 && $today > $max_end ) {
+                return 'past';
+            } elsif ( $min_start != 20500101 && $today < $min_start ) {
+                return 'future';
+            }
+        } else {
+            return 'no shapes';
         }
     }
 
@@ -439,6 +516,16 @@ sub get_time {
     my ($sec,$min,$hour,$day,$month,$year) = localtime();
 
     return sprintf( "%04d-%02d-%02d %02d:%02d:%02d", $year+1900, $month+1, $day, $hour, $min, $sec );
+}
+
+
+#############################################################################################
+
+sub get_date {
+
+    my ($sec,$min,$hour,$day,$month,$year) = localtime();
+
+    return sprintf( "%04d%02d%02d", $year+1900, $month+1, $day );
 }
 
 

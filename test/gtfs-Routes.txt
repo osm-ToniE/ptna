@@ -93,15 +93,18 @@
 = Test file for GTFS integration
 
 
-100;bus;;;;;DE-XX-YYY
-101;bus;;;;;DE-XX-YYY;
-102;bus;;;;;;1-102-s20-1
-103;bus;;;;;DE-XX-YYY;1-102-s20-1
+100;bus;!GTFS database not found!;;;;DE-XX-YYY
+101;bus;!GTFS database not found!;;;;DE-XX-YYY;
+102;bus;!GTFS-Feed is not set!;;;;;1-102-s20-1
+103;bus;!GTFS database not found!;;;;DE-XX-YYY;1-102-s20-1
 
-210;bus;;;;;DE-BY-MVV
-211;bus;;;;;DE-BY-MVV;19-211-s20-1
-212;bus;;;;;DE-BY-MVV;20-212-s20-1
+210;bus;!Route-Id not set!;;;;DE-BY-MVV
+211;bus;!Valid Route-Id!;;;;DE-BY-MVV;19-211-s20-1
+212;bus;!Route-Id does not exist!;;;;DE-BY-MVV;20-212-s20-1
 
+736;bus;!Old Route-Id!;;;;DE-BY-MVV;33-736-s19-2
+
+S2T-E;bus;!Future Route-Id!;;;;DE-BW-SWEG;14-S2T-E-j20-3
 -
 
 

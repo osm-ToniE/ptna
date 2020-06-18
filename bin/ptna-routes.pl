@@ -5249,6 +5249,9 @@ sub printInitialHeader {
         push( @HTML_start, "            #analysis .PTv            { text-align:center; }\n" );
         push( @HTML_start, "            #analysis .number         { text-align:right; }\n" );
         push( @HTML_start, "            #analysis .attention      { background-color: yellow; font-weight: 500; font-size: 1.2em; }\n" );
+        push( @HTML_start, "            .gtfs-dateold             { text-align:center; background-color: orange; }\n" );
+        push( @HTML_start, "            .gtfs-datenew             { text-align:center; background-color: lightgreen; }\n" );
+        push( @HTML_start, "            .bad-link                 { text-decoration: line-through; background-color: yellow; }\n" );
         push( @HTML_start, "        </style>\n" );
     } else {
         push( @HTML_start, "        <link rel=\"stylesheet\" href=\"/css/main.css\" />\n" );
