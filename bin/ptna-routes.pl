@@ -312,6 +312,7 @@ my %platform_ways           = ();       # all ways  of the XML file that are pla
 my %platform_nodes          = ();       # all nodes of the XML file that are platforms (tag: public_transport=platform)
 my %stop_nodes              = ();       # all nodes of the XML file that are stops (tag: public_transport=stop_position)
 my %used_networks           = ();       # 'network' values that did match
+my %added_networks          = ();       # 'network' values where the 'network'of their route_master matched
 my %unused_networks         = ();       # 'network' values that did not match
 my %unused_operators        = ();       # 'operator' values that did not match but 'network' values did match
 
@@ -1102,6 +1103,7 @@ if ( scalar( @RouteList ) ) {
     my $table_headers_printed           = 0;
     my @list_of_matching_relation_ids   = ();
     my $number_of_matching_entries      = 0;
+    my $CheckNetwork                    = '';
 
     printTableInitialization( 'name', 'type', 'relation', 'PTv', 'issues', 'notes' );
 
@@ -1189,6 +1191,12 @@ if ( scalar( @RouteList ) ) {
                                   );
                     $relation_ptr->{'__printed__'}++;
                     $number_of_positive_relations++;
+
+                    $CheckNetwork = $relation_ptr->{'tag'}->{'network'} || '__unset_network__';
+                    if ( exists($unused_networks{$CheckNetwork}) && exists($unused_networks{$CheckNetwork}->{$relation_id}) ) {
+                        delete( $unused_networks{$CheckNetwork}->{$relation_id} );
+                        $added_networks{$CheckNetwork}->{$relation_id} = 0;
+                    }
                 }
             } else {
                 #
@@ -1241,6 +1249,7 @@ if ( scalar( @RouteList ) ) {
 
     $section = 'positive';
 
+    my $CheckNetwork = '';
     my @relation_ids = ();
 
     foreach $ref ( sort( keys( %{$PT_relations_with_ref{$section}} ) ) ) {
@@ -1287,6 +1296,12 @@ if ( scalar( @RouteList ) ) {
                             'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}} )
                           );
             $number_of_unassigned_relations++;
+
+            $CheckNetwork = $relation_ptr->{'tag'}->{'network'} || '__unset_network__';
+            if ( exists($unused_networks{$CheckNetwork}) && exists($unused_networks{$CheckNetwork}->{$relation_id}) ) {
+                delete( $unused_networks{$CheckNetwork}->{$relation_id} );
+                $added_networks{$CheckNetwork}->{$relation_id} = 0;
+            }
         }
 
         printTableFooter();
@@ -1314,6 +1329,7 @@ $section = 'negative';
 if ( scalar(@line_refs) ) {
     my $help;
     my $route_type_lines = 0;
+    my $CheckNetwork     = '';
 
     printTableInitialization( 'ref', 'relation', 'type', 'route_type', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'issues', 'notes' );
 
@@ -1363,6 +1379,12 @@ if ( scalar(@line_refs) ) {
                                         'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}} )
                                       );
                         $number_of_negative_relations++;
+
+                        $CheckNetwork = $relation_ptr->{'tag'}->{'network'} || '__unset_network__';
+                        if ( exists($unused_networks{$CheckNetwork}) && exists($unused_networks{$CheckNetwork}->{$relation_id}) ) {
+                            delete( $unused_networks{$CheckNetwork}->{$relation_id} );
+                            $added_networks{$CheckNetwork}->{$relation_id} = 0;
+                        }
                     }
                 }
             }
@@ -1485,13 +1507,11 @@ if ( $network_long_regex || $network_short_regex ) {
     printHintNetworks();
 }
 
-if ( keys( %used_networks ) ) {
-    printHintUsedNetworks();
-}
+printHintUsedNetworks();
 
-if ( keys( %unused_networks ) ) {
-    printHintUnusedNetworks();
-}
+printHintAddedNetworks();
+
+printHintUnusedNetworks();
 
 printf STDERR "%s Printed network details\n", get_time()       if ( $verbose );
 
@@ -5606,60 +5626,105 @@ sub printHintUsedNetworks {
     my @relations_of_network  = ();
     my @relations_of_operator = ();
 
-    printHeader( gettext("Considered 'network'-Values"), 2, 'considerednetworks' );
-
-    push( @HTML_main, "<p>\n" );
-    push( @HTML_main, gettext("This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.") );
-    push( @HTML_main, "\n</p>\n" );
-
-    printTableInitialization( 'network', 'number', 'relations' );
-    printTableHeader();
     foreach my $network ( sort( keys( %used_networks ) ) ) {
-        @relations_of_network    = sort( keys( %{$used_networks{$network}} ) );
-        $network = $network eq '__unset_network__' ? '' : $network;
-        if ( scalar @relations_of_network <= 10 ) {
-            printTableLine( 'network'           =>    $network,
-                            'number'            =>    scalar @relations_of_network,
-                            'relations'         =>    join( ',', @relations_of_network )
-                          );
-        } else {
-            printTableLine( 'network'           =>    $network,
-                            'number'            =>    scalar @relations_of_network,
-                            'relations'         =>    join( ',', splice(@relations_of_network,0,10) ),
-                            'and more'          =>    gettext( "and more ..." )
-                          );
-        }
+        push( @relations_of_network, keys( %{$used_networks{$network}} ) );
     }
-    printTableFooter();
 
-    if ( scalar keys (%unused_operators) ) {
+    if ( scalar @relations_of_network > 0 ) {
+        printHeader( gettext("Considered 'network'-Values"), 2, 'considerednetworks' );
+
         push( @HTML_main, "<p>\n" );
-        push( @HTML_main, gettext("This section lists the 'operator'-values which have not been considered.") );
-        push( @HTML_main, "\n" );
-        push( @HTML_main, gettext("They might include typos in values which otherwise should have been considered.") );
+        push( @HTML_main, gettext("This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.") );
         push( @HTML_main, "\n</p>\n" );
 
-        printTableInitialization( 'operator', 'number', 'relations' );
+        printTableInitialization( 'network', 'number', 'relations' );
         printTableHeader();
-        foreach my $operator ( sort( keys( %unused_operators ) ) ) {
-            @relations_of_operator    = sort( keys( %{$unused_operators{$operator}} ) );
-            $operator = $operator eq '__unset_operator__' ? '' : $operator;
+        foreach my $network ( sort( keys( %used_networks ) ) ) {
+            @relations_of_network = sort( keys( %{$used_networks{$network}} ) );
+            $network = $network eq '__unset_network__' ? '' : $network;
             if ( scalar @relations_of_network <= 10 ) {
-                printTableLine( 'operator'          =>    $operator,
-                                'number'            =>    scalar @relations_of_operator,
-                                'relations'         =>    join( ',', @relations_of_operator )
-                              );
+                printTableLine( 'network'           =>    $network,
+                                'number'            =>    scalar @relations_of_network,
+                                'relations'         =>    join( ',', @relations_of_network )
+                            );
             } else {
-                printTableLine( 'operator'          =>    $operator,
-                                'number'            =>    scalar @relations_of_operator,
-                                'relations'         =>    join( ',', splice(@relations_of_operator,0,10) ),
+                printTableLine( 'network'           =>    $network,
+                                'number'            =>    scalar @relations_of_network,
+                                'relations'         =>    join( ',', splice(@relations_of_network,0,10) ),
                                 'and more'          =>    gettext( "and more ..." )
-                              );
+                            );
+            }
+        }
+        printTableFooter();
+
+        if ( scalar keys (%unused_operators) ) {
+            push( @HTML_main, "<p>\n" );
+            push( @HTML_main, gettext("This section lists the 'operator'-values which have not been considered.") );
+            push( @HTML_main, "\n" );
+            push( @HTML_main, gettext("They might include typos in values which otherwise should have been considered.") );
+            push( @HTML_main, "\n</p>\n" );
+
+            printTableInitialization( 'operator', 'number', 'relations' );
+            printTableHeader();
+            foreach my $operator ( sort( keys( %unused_operators ) ) ) {
+                @relations_of_operator    = sort( keys( %{$unused_operators{$operator}} ) );
+                $operator = $operator eq '__unset_operator__' ? '' : $operator;
+                if ( scalar @relations_of_network <= 10 ) {
+                    printTableLine( 'operator'          =>    $operator,
+                                    'number'            =>    scalar @relations_of_operator,
+                                    'relations'         =>    join( ',', @relations_of_operator )
+                                );
+                } else {
+                    printTableLine( 'operator'          =>    $operator,
+                                    'number'            =>    scalar @relations_of_operator,
+                                    'relations'         =>    join( ',', splice(@relations_of_operator,0,10) ),
+                                    'and more'          =>    gettext( "and more ..." )
+                                );
+                }
+            }
+            printTableFooter();
+        }
+    }
+}
+
+
+#############################################################################################
+
+sub printHintAddedNetworks {
+
+    my @relations_of_network  = ();
+
+    foreach my $network ( sort( keys( %added_networks ) ) ) {
+        push( @relations_of_network, keys( %{$added_networks{$network}} ) );
+    }
+
+    if ( scalar @relations_of_network > 0 ) {
+        printHeader( gettext("Additionally considered 'network'-Values"), 2, 'addednetworks' );
+
+        push( @HTML_main, "<p>\n" );
+        push( @HTML_main, gettext("This section lists 'network' values that were additionally considered because the 'network' value of the Route-Master or member Route matched.") );
+        push( @HTML_main, "\n</p>\n" );
+
+        printTableInitialization( 'network', 'number', 'relations' );
+        printTableHeader();
+        foreach my $network ( sort( keys( %added_networks ) ) ) {
+            @relations_of_network    = sort( keys( %{$added_networks{$network}} ) );
+            $network = $network eq '__unset_network__' ? '' : $network;
+            if ( scalar @relations_of_network <= 10 ) {
+                printTableLine( 'network'           =>    $network,
+                                'number'            =>    scalar @relations_of_network,
+                                'relations'         =>    join( ',', @relations_of_network )
+                            );
+            } else {
+                printTableLine( 'network'           =>    $network,
+                                'number'            =>    scalar @relations_of_network,
+                                'relations'         =>    join( ',', splice(@relations_of_network,0,10) ),
+                                'and more'          =>    gettext( "and more ..." )
+                            );
             }
         }
         printTableFooter();
     }
-
 }
 
 
@@ -5669,34 +5734,39 @@ sub printHintUnusedNetworks {
 
     my @relations_of_network = ();
 
-    printHeader( gettext("Not Considered 'network'-Values"), 2, 'notconsiderednetworks' );
-
-    push( @HTML_main, "<p>\n" );
-    push( @HTML_main, gettext("This section lists the 'network'-values which have not been considered.") );
-    push( @HTML_main, "\n" );
-    push( @HTML_main, gettext("They might include typos in values which otherwise should have been considered.") );
-    push( @HTML_main, "\n</p>\n" );
-
-    printTableInitialization( 'network', 'number', 'relations' );
-    printTableHeader();
     foreach my $network ( sort( keys( %unused_networks ) ) ) {
-        @relations_of_network    = sort( keys( %{$unused_networks{$network}} ) );
-        $network = $network eq '__unset_network__' ? '' : $network;
-        if ( scalar @relations_of_network <= 10 ) {
-            printTableLine( 'network'           =>    $network,
-                            'number'            =>    scalar @relations_of_network,
-                            'relations'         =>    join( ',', @relations_of_network )
-                          );
-        } else {
-            printTableLine( 'network'           =>    $network,
-                            'number'            =>    scalar @relations_of_network,
-                            'relations'         =>    join( ',', splice(@relations_of_network,0,10) ),
-                            'and more'          =>    gettext( "and more ..." )
-                          );
-        }
+        push( @relations_of_network, keys( %{$unused_networks{$network}} ) );
     }
-    printTableFooter();
 
+    if ( scalar @relations_of_network > 0 ) {
+        printHeader( gettext("Not Considered 'network'-Values"), 2, 'notconsiderednetworks' );
+
+        push( @HTML_main, "<p>\n" );
+        push( @HTML_main, gettext("This section lists the 'network'-values which have not been considered.") );
+        push( @HTML_main, "\n" );
+        push( @HTML_main, gettext("They might include typos in values which otherwise should have been considered.") );
+        push( @HTML_main, "\n</p>\n" );
+
+        printTableInitialization( 'network', 'number', 'relations' );
+        printTableHeader();
+        foreach my $network ( sort( keys( %unused_networks ) ) ) {
+            @relations_of_network    = sort( keys( %{$unused_networks{$network}} ) );
+            $network = $network eq '__unset_network__' ? '' : $network;
+            if ( scalar @relations_of_network <= 10 ) {
+                printTableLine( 'network'           =>    $network,
+                                'number'            =>    scalar @relations_of_network,
+                                'relations'         =>    join( ',', @relations_of_network )
+                            );
+            } else {
+                printTableLine( 'network'           =>    $network,
+                                'number'            =>    scalar @relations_of_network,
+                                'relations'         =>    join( ',', splice(@relations_of_network,0,10) ),
+                                'and more'          =>    gettext( "and more ..." )
+                            );
+            }
+        }
+        printTableFooter();
+    }
 }
 
 
