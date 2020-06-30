@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-06-23 18:00+0200\n"
+"POT-Creation-Date: 2020-06-30 16:17+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2020\n"
 "Language-Team: French (https://www.transifex.com/jungle-bus/teams/97874/"
@@ -1087,17 +1087,13 @@ msgid ""
 "considered."
 msgstr "Cela correspond par exemples à des fautes d'orthographe ou des typos."
 
-#, fuzzy
 msgid "Additionally considered 'network'-Values"
-msgstr "Valeurs du tag 'network' non prises en compte"
+msgstr ""
 
-#, fuzzy
 msgid ""
 "This section lists 'network' values that were additionally considered "
 "because the 'network' value of the Route-Master or member Route matched."
 msgstr ""
-"Cette section liste les valeurs du tag 'network' qui ont été prises en "
-"compte car elles sont identiques aux valeurs ci-dessus."
 
 msgid "Not Considered 'network'-Values"
 msgstr "Valeurs du tag 'network' non prises en compte"
