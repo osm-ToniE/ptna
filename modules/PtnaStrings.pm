@@ -1430,7 +1430,7 @@ sub InitOptionStrings {
     $i++;
     $OptionList[$i]->{'option'}                 = "gtfs-feed";
     $OptionList[$i]->{'default'}                = "";
-    $OptionList[$i]->{'description'}            = gettext( "Take this value as GTFS feed for option 'link-gtfs' if the relation does not prived the tags 'gtfs:feed', 'operator:guid' or 'network:guid'." );
+    $OptionList[$i]->{'description'}            = gettext( "Take this value as GTFS feed for option 'link-gtfs' if the relation does not provide the tags 'gtfs:feed', 'operator:guid' or 'network:guid'." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
