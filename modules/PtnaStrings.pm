@@ -1402,7 +1402,7 @@ sub InitOptionStrings {
     $i++;
     $OptionList[$i]->{'option'}                 = "expect-network-long-for";
     $OptionList[$i]->{'default'}                = "";
-    $OptionList[$i]->{'description'}            = gettext( "The value of 'network' = '...' is expected in long form, instead of the short form shown here." );
+    $OptionList[$i]->{'description'}            = gettext( "The value of 'network' = '...' is expected in long form instead of the short form shown here." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
@@ -1423,7 +1423,14 @@ sub InitOptionStrings {
     $i++;
     $OptionList[$i]->{'option'}                 = "expect-network-short-for";
     $OptionList[$i]->{'default'}                = "";
-    $OptionList[$i]->{'description'}            = gettext( "The value of 'network' = '...' is expected in short form, instead of the long form shown here." );
+    $OptionList[$i]->{'description'}            = gettext( "The value of 'network' = '...' is expected in short form instead of the long form shown here." );
+    $OptionList[$i]->{'image'}                  = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+
+    $i++;
+    $OptionList[$i]->{'option'}                 = "gtfs-feed";
+    $OptionList[$i]->{'default'}                = "";
+    $OptionList[$i]->{'description'}            = gettext( "Take this value as GTFS feed for option 'link-gtfs' if the relation does not prived the tags 'gtfs:feed', 'operator:guid' or 'network:guid'." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
@@ -1445,7 +1452,10 @@ sub InitOptionStrings {
     $OptionList[$i]->{'option'}                 = "multiple-ref-type-entries";
     $OptionList[$i]->{'default'}                = "analyze";
     $OptionList[$i]->{'description'}            = "allow|analyze|no" . "\n" .
-                                                  gettext( "If the combination of \"ref;type\" (e.g. \"N8;bus\") appears more than once in the route data, the tool expects that there are separate routes with identical 'ref' and 'type' in different cities/villages and that those can be distinguished by also checking 'operator', 'to' and 'from'." );
+                                                  gettext( "Defines how to react if the combination of \"ref;type\" (e.g. \"N8;bus\") appears more than once in the route data. PTNA expects that there are separate routes with identical 'ref' and 'type' in different cities/villages and that those can be distinguished by also checking 'operator', 'to' and 'from'." ) . "\n" .
+                                                  "allow: "   . gettext( "allow further occurances of this entry" ) . ', ' . gettext( "do not analyze 'operator', 'from' and 'to'" ) . "\n" .
+                                                  "analyze: " . gettext( "find out whether 'operator', 'from' and 'to' of the CSV data match the tags of the relation" ) . "\n" .
+                                                  "no: "      . gettext( "ignore any further occurances of this entry" ) . ', ' . gettext( "do not analyze 'operator', 'from' and 'to'" ) . '.';
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
@@ -1484,7 +1494,7 @@ sub InitOptionStrings {
                                                   gettext( "'highway' = 'bus_stop' on a point beside the road is treated as 'public_transport' = 'platform' if 'role' = 'platform'." ) . "\n" .
                                                   "allow: " . gettext( "silently assume compatibility with legacy bus-stops (aka: PTv1)" ) . "\n" .
                                                   "no: "    . gettext( "no compatibility with legacy bus-stops (aka: PTv1)" ) . "\n" .
-                                                  "show: "  . gettext( "assume and show compatibility with legacy bus-stops (aka: PTv1)" );
+                                                  "show: "  . gettext( "assume and show compatibility with legacy bus-stops (aka: PTv1)" ) . '.';
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
