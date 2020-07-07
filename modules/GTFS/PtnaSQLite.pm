@@ -316,30 +316,31 @@ sub _getRouteIdStatus {
 
     if ( $feed && $route_id && $db_handles{$feed} ) {
 
-        my $sth = $db_handles{$feed}->prepare( "SELECT DISTINCT trips.route_id,calendar.start_date,calendar.end_date
+        my $sth = $db_handles{$feed}->prepare( "SELECT DISTINCT trip_id
                                                 FROM            trips
-                                                JOIN            calendar ON trips.service_id = calendar.service_id
-                                                WHERE           trips.route_id=?
-                                                ORDER BY calendar.end_date DESC, calendar.start_date ASC;" );
+                                                WHERE           trips.route_id=?;" );
             $sth->execute( $route_id );
 
         my $min_start = 20500101;
         my $max_end   = 19700101;
+        my $tms       = 0;
+        my $tme       = 0;
         while ( @row = $sth->fetchrow_array() ) {
-            if ( $row[0] && $row[1] && $row[2] && $row[0] eq $route_id ) {
-                if ( $row[1] <= $today && $row[2] >= $today) {
-                    return 'valid';
-                }
-                $min_start = ($row[1] < $min_start) ? $row[1] : $min_start;
-                $max_end   = ($row[2] > $max_end)   ? $row[2] : $max_end;
-            } else {
-                return '';
+            if ( $row[0] ) {
+                ( $tms, $tme ) = _getStartEndDateOfIdenticalTrips( $feed, $row[0] );
+
+                $min_start = ($tms < $min_start) ? $tms : $min_start;
+                $max_end   = ($tme > $max_end)   ? $tme : $max_end;
             }
         }
-        if ( $max_end != 19700101 && $today > $max_end ) {
-            return 'past';
-        } elsif ( $min_start != 20500101 && $today < $min_start ) {
-            return 'future';
+        if ( $min_start != 20500101 && $max_end != 19700101 ) {
+            if  ( $today > $max_end ) {
+                return 'past';
+            } elsif ( $today < $min_start ) {
+                return 'future';
+            } else {
+                return 'valid';
+            }
         }
     }
 
@@ -362,29 +363,16 @@ sub _getTripIdStatus {
 
     if ( $feed && $trip_id && $db_handles{$feed} ) {
 
-        my $sth = $db_handles{$feed}->prepare( "SELECT   trips.trip_id,calendar.start_date,calendar.end_date
-                                                FROM     trips
-                                                JOIN     calendar ON trips.service_id = calendar.service_id
-                                                WHERE    trip_id=?;" );
-           $sth->execute( $trip_id );
+        my ( $min_start, $max_end ) = _getStartEndDateOfIdenticalTrips( $feed, $trip_id );
 
-        my $min_start = 20500101;
-        my $max_end   = 19700101;
-        while ( @row = $sth->fetchrow_array() ) {
-            if ( $row[0] && $row[1] && $row[2] && $row[0] eq $trip_id ) {
-                if ( $row[1] <= $today && $row[2] >= $today) {
-                    return 'valid';
-                }
-                $min_start = ($row[1] < $min_start) ? $row[1] : $min_start;
-                $max_end   = ($row[2] > $max_end)   ? $row[2] : $max_end;
+        if ( $min_start != 20500101 && $max_end != 19700101 ) {
+            if  ( $today > $max_end ) {
+                return 'past';
+            } elsif ( $today < $min_start ) {
+                return 'future';
             } else {
-                return '';
+                return 'valid';
             }
-        }
-        if ( $max_end != 19700101 && $today > $max_end ) {
-            return 'past';
-        } elsif ( $min_start != 20500101 && $today < $min_start ) {
-            return 'future';
         }
     }
 
@@ -406,7 +394,6 @@ sub _getShapeIdStatus {
     my $today               = get_date();
     my $trips_has_shape_id  = 0;
 
-
     if ( $feed && $shape_id && $db_handles{$feed} ) {
 
         my $sth =  $db_handles{$feed}->prepare( "PRAGMA table_info(trips);" );
@@ -420,30 +407,31 @@ sub _getShapeIdStatus {
         }
 
         if ( $trips_has_shape_id ) {
-            $sth = $db_handles{$feed}->prepare( "SELECT   shape_id,calendar.start_date,calendar.end_date
-                                                 FROM     trips
-                                                 JOIN     calendar ON trips.service_id = calendar.service_id
-                                                 WHERE    shape_id=?;
-                                                 ORDER BY calendar.end_date DESC, calendar.start_date ASC;" );
+            $sth = $db_handles{$feed}->prepare( "SELECT DISTINCT trip_id
+                                                 FROM            trips
+                                                 WHERE           shape_id=?;" );
             $sth->execute( $shape_id );
 
             my $min_start = 20500101;
             my $max_end   = 19700101;
+            my $tms       = 0;
+            my $tme       = 0;
             while ( @row = $sth->fetchrow_array() ) {
-                if ( $row[0] && $row[1] && $row[2] && $row[0] eq $shape_id ) {
-                    if ( $row[1] <= $today && $row[2] >= $today) {
-                        return 'valid';
-                    }
-                    $min_start = ($row[1] < $min_start) ? $row[1] : $min_start;
-                    $max_end   = ($row[2] > $max_end)   ? $row[2] : $max_end;
-                } else {
-                    return '';
+                if ( $row[0] ) {
+                    ( $tms, $tme ) = _getStartEndDateOfIdenticalTrips( $feed, $row[0] );
+
+                    $min_start = ($tms < $min_start) ? $tms : $min_start;
+                    $max_end   = ($tme > $max_end)   ? $tme : $max_end;
                 }
             }
-            if ( $max_end != 19700101 && $today > $max_end ) {
-                return 'past';
-            } elsif ( $min_start != 20500101 && $today < $min_start ) {
-                return 'future';
+            if ( $min_start != 20500101 && $max_end != 19700101 ) {
+                if  ( $today > $max_end ) {
+                    return 'past';
+                } elsif ( $today < $min_start ) {
+                    return 'future';
+                } else {
+                    return 'valid';
+                }
             }
         } else {
             return 'no shapes';
@@ -451,6 +439,70 @@ sub _getShapeIdStatus {
     }
 
     return '';
+}
+
+
+#############################################################################################
+
+sub _getStartEndDateOfIdenticalTrips {
+    my $feed    = shift;
+    my $trip_id = shift;
+
+    my $min_start_date = 20500101;
+    my $max_end_date   = 19700101;
+
+    my @row               = ();
+    my $db_has_ptna_trips = 0;
+    my %service_ids       = ();
+    my $where_clause      = '';
+
+    if ( $feed && $trip_id && $db_handles{$feed} ) {
+
+        my $sth =  $db_handles{$feed}->prepare( "SELECT name FROM sqlite_master WHERE type='table' AND name='ptna_trips';" );
+           $sth->execute();
+
+        while ( @row = $sth->fetchrow_array() ) {
+            if ( $row[0] && $row[0] eq 'ptna_trips' ) {
+                $db_has_ptna_trips = 1;
+                last;
+            }
+        }
+
+        if ( $db_has_ptna_trips ) {
+
+            $sth = $db_handles{$feed}->prepare( "SELECT DISTINCT list_service_ids
+                                                 FROM            ptna_trips
+                                                 WHERE           trip_id=?" );
+            $sth->execute( $trip_id );
+
+            while ( @row = $sth->fetchrow_array() ) {
+                if ( $row[0] ) {
+                    map { $service_ids{$_} = 1; } split( '\|', $row[0] );
+
+                    $where_clause = 'service_id=' . join( '', map{ '? OR service_id=' } keys ( %service_ids ) );
+                    $where_clause =~ s/ OR service_id=$//;
+
+                    my $sql = sprintf( "SELECT start_date,end_date
+                                        FROM   calendar
+                                        WHERE  %s;", $where_clause );
+
+                    $sth = $db_handles{$feed}->prepare( $sql );
+                    $sth->execute( keys ( %service_ids ) );
+
+                    while ( @row=$sth->fetchrow_array() ) {
+                        if ( $row[0] < $min_start_date ) {
+                            $min_start_date = $row[0];
+                        }
+                        if ( $row[1] > $max_end_date ) {
+                            $max_end_date   = $row[1];
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return ( $min_start_date, $max_end_date );
 }
 
 
