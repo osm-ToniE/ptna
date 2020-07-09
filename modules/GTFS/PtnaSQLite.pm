@@ -451,11 +451,12 @@ sub _getStartEndDateOfIdenticalTrips {
     my $min_start_date = 20500101;
     my $max_end_date   = 19700101;
 
-    my @row               = ();
-    my $hash_ref          = undef;
-    my $db_has_ptna_trips = 0;
-    my %service_ids       = ();
-    my $where_clause      = '';
+    my @row                     = ();
+    my $hash_ref                = undef;
+    my $db_has_ptna_trips       = 0;
+    my %service_ids             = ();
+    my $where_clause            = '';
+    my $has_list_service_ids    = 0;
 
     if ( $feed && $trip_id && $db_handles{$feed} ) {
 
@@ -478,6 +479,7 @@ sub _getStartEndDateOfIdenticalTrips {
 
             while ( $hash_ref = $sth->fetchrow_hashref() ) {
                 if ( $hash_ref->{'list_service_ids'} ) {
+                    $has_list_service_ids  = 1;
                     map { $service_ids{$_} = 1; } split( '\|', $hash_ref->{'list_service_ids'} );
 
                     $where_clause = 'service_id=' . join( '', map{ '? OR service_id=' } keys ( %service_ids ) );
@@ -498,6 +500,23 @@ sub _getStartEndDateOfIdenticalTrips {
                             $max_end_date   = $row[1];
                         }
                     }
+                }
+            }
+        }
+
+        if ( $has_list_service_ids == 0 ) {
+            $sth = $db_handles{$feed}->prepare( "SELECT start_date,end_date
+                                                 FROM   calendar
+                                                 JOIN   trips ON trips.service_id = calendar.service_id
+                                                 WHERE  trip_id=?;" );
+            $sth->execute( $trip_id );
+
+            while ( @row=$sth->fetchrow_array() ) {
+                if ( $row[0] < $min_start_date ) {
+                    $min_start_date = $row[0];
+                }
+                if ( $row[1] > $max_end_date ) {
+                    $max_end_date   = $row[1];
                 }
             }
         }
