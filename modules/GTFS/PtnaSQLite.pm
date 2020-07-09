@@ -452,6 +452,7 @@ sub _getStartEndDateOfIdenticalTrips {
     my $max_end_date   = 19700101;
 
     my @row               = ();
+    my $hash_ref          = undef;
     my $db_has_ptna_trips = 0;
     my %service_ids       = ();
     my $where_clause      = '';
@@ -470,14 +471,14 @@ sub _getStartEndDateOfIdenticalTrips {
 
         if ( $db_has_ptna_trips ) {
 
-            $sth = $db_handles{$feed}->prepare( "SELECT DISTINCT list_service_ids
+            $sth = $db_handles{$feed}->prepare( "SELECT DISTINCT *
                                                  FROM            ptna_trips
                                                  WHERE           trip_id=?" );
             $sth->execute( $trip_id );
 
-            while ( @row = $sth->fetchrow_array() ) {
-                if ( $row[0] ) {
-                    map { $service_ids{$_} = 1; } split( '\|', $row[0] );
+            while ( $hash_ref = $sth->fetchrow_hashref() ) {
+                if ( $hash_ref->{'list_service_ids'} ) {
+                    map { $service_ids{$_} = 1; } split( '\|', $hash_ref->{'list_service_ids'} );
 
                     $where_clause = 'service_id=' . join( '', map{ '? OR service_id=' } keys ( %service_ids ) );
                     $where_clause =~ s/ OR service_id=$//;
