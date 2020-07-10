@@ -5400,7 +5400,7 @@ sub printTableOfContents {
             $anchor_level   = $1;
             $header_number  = $2;
             $label          = $3;
-            $header_text    = wiki2html($4);
+            $header_text    = wiki2html($4, 1 );
             if ( $anchor_level <= $last_level ) {
                 print "        </li>\n";
             }
@@ -6262,8 +6262,9 @@ sub ctrl_escape {
 #############################################################################################
 
 sub wiki2html {
-    my $text = shift;
-    my $sub  = undef;
+    my $text           = shift;
+    my $suppress_links = shift || 0;
+    my $sub            = undef;
     if ( $text ) {
         $text =~ s/&/&amp;/g;
         $text =~ s/</&lt;/g;
@@ -6273,22 +6274,38 @@ sub wiki2html {
         $text =~ s/\[\[Category:[^\]]+\]\]//g;
         # convert: [[Nürnberg/Transportation/Analyse/DE-BY-VGN-Linien|VGN Linien]]
         while ( $text =~ m/\[\[([^|]+)\|([^\]]+)\]\]/g ) {
-            $sub = sprintf( "<a href=\"https://wiki.openstreetmap.org/wiki/%s\">%s</a>", $1, $2 );
+            if ( $suppress_links ) {
+                $sub = $2;
+            } else {
+                $sub = sprintf( "<a href=\"https://wiki.openstreetmap.org/wiki/%s\">%s</a>", $1, $2 );
+            }
             $text =~ s/\[\[[^|]+\|[^\]]+\]\]/$sub/;
         }
         # convert: [[Nürnberg/Transportation/Analyse/DE-BY-VGN-Linien]]
         while ( $text =~ m/\[\[([^\]]+)\]\]/g ) {
-            $sub = sprintf( "<a href=\"https://wiki.openstreetmap.org/wiki/%s\">%s</a>", $1, $1 );
+            if ( $suppress_links ) {
+                $sub = $1;
+            } else {
+                $sub = sprintf( "<a href=\"https://wiki.openstreetmap.org/wiki/%s\">%s</a>", $1, $1 );
+            }
             $text =~ s/\[\[[^\]]+\]\]/$sub/;
         }
         # convert: [https://example.com/index.html External Link]
         while ( $text =~ m/\[([^ ]+) ([^\]]+)\]/g ) {
-            $sub = sprintf( "<a href=\"%s\">%s</a>", $1, $2 );
+            if ( $suppress_links ) {
+                $sub = $2;
+            } else {
+                $sub = sprintf( "<a href=\"%s\">%s</a>", $1, $2 );
+            }
             $text =~ s/\[[^ ]+ [^\]]+\]/$sub/;
         }
         # convert: [https://example.com/index.html]
         while ( $text =~ m/\[([^\]]+)\]/g ) {
-            $sub = sprintf( "<a href=\"%s\">%s</a>", $1, $1 );
+            if ( $suppress_links ) {
+                $sub = $1;
+            } else {
+                $sub = sprintf( "<a href=\"%s\">%s</a>", $1, $1 );
+            }
             $text =~ s/\[[^\]]+\]/$sub/;
         }
         while ( $text =~ m/!!!(.+?)!!!/g ) {

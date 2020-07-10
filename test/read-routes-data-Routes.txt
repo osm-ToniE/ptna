@@ -42,6 +42,14 @@
 
 ======= Level 7 --> Level 6
 
+== External Link with alias: [https://ptna.openstreetmap.de PTNA]
+
+== External Link without alias: [https://ptna.openstreetmap.de]
+
+== OSM-Wiki Link with alias: [[M%C3%BCnchen|München]]
+
+== OSM-Wiki Link without alias: [[München]]
+
 - simple text in a paragraph
 -
 - new paragraph
