@@ -295,11 +295,11 @@ then
                 echo $(date "+%Y-%m-%d %H:%M:%S") "Creating directory $WORK_LOC"
                 mkdir -p $WORK_LOC
             fi
-        
+
             if [ -d "$WORK_LOC" ]
             then
                     rm -f $WORK_LOC/$DIFF_FILE.diff
-        
+
                     if [ -f "$WORK_LOC/$HTML_FILE" -a -s "$WORK_LOC/$HTML_FILE" ]
                     then
                         mv $WORK_LOC/$HTML_FILE $WORK_LOC/$SAVE_FILE
@@ -320,12 +320,12 @@ then
                                    --osm-xml-file=$OSM_XML_FILE_ABSOLUTE \
                                    2>&1 > $WORK_LOC/$HTML_FILE | tee $WORK_LOC/$HTML_FILE.log
                     END_ANALYSIS=$(date "+%Y-%m-%d %H:%M:%S %Z")
-        
+
                     if [ -s "$WORK_LOC/$HTML_FILE" ]
                     then
                         echo $(date "+%Y-%m-%d %H:%M:%S") "Analysis succeeded, '$WORK_LOC/$HTML_FILE' created"
                         echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WORK_LOC/$HTML_FILE)
-        
+
                         if [ -f "$WORK_LOC/$SAVE_FILE" -a -s "$WORK_LOC/$SAVE_FILE" ]
                         then
                             diff $WORK_LOC/$SAVE_FILE $WORK_LOC/$HTML_FILE > $WORK_LOC/$DIFF_FILE
@@ -364,7 +364,7 @@ then
     if [ -d "$WORK_LOC" ]
     then
         RESULTS_LOC="$PTNA_TARGET_LOC/$PTNA_RESULTS_LOC/$SUB_DIR"
-    
+
         echo $(date "+%Y-%m-%d %H:%M:%S") "Creating analysis details file '$WORK_LOC/$DETAILS_FILE'"
         echo "REGION_NAME=$PTNA_WWW_REGION_NAME"         >  $WORK_LOC/$DETAILS_FILE
         echo "REGION_LINK=$PTNA_WWW_REGION_LINK"         >> $WORK_LOC/$DETAILS_FILE
@@ -395,7 +395,7 @@ then
         echo "operator-regex=$OPERATOR_REGEX"            >> $WORK_LOC/$DETAILS_FILE
 
         echo $(date "+%Y-%m-%d %H:%M:%S")  "Updating '$WORK_LOC/$HTML_FILE' to '$RESULTS_LOC'"
-    
+
         if [ -f $WORK_LOC/$HTML_FILE ]
         then
             if [ -s $WORK_LOC/$HTML_FILE ]
@@ -403,13 +403,13 @@ then
                 # DIFF_LINES_BASE defines how many diff lines we have to tollerate in order to skip the
                 # different time strings of the analysis
                 # only diffs in the analysis result count
-    
+
                 NEW_OSM_Base_Time="$(awk '/OSM-Base Time : .* UTC/ { print $4 "T" $5 "Z"; }' $WORK_LOC/$HTML_FILE)"
                 NEW_Local_OSM_Base_Time="$(TZ=${PTNA_TIMEZONE:-Europe/Berlin} date --date "$NEW_OSM_Base_Time" '+%Y-%m-%d %H:%M:%S %Z' | sed -e 's/ \([+-][0-9]*\)$/ UTC\1/')"
-    
+
                 echo "NEW_DATE_UTC=$NEW_OSM_Base_Time"       >> $WORK_LOC/$DETAILS_FILE
                 echo "NEW_DATE_LOC=$NEW_Local_OSM_Base_Time" >> $WORK_LOC/$DETAILS_FILE
-    
+
                 if [ $(echo $OVERPASS_QUERY | egrep -c '(data=area)|(data=\[timeout:[0-9]+\];area)') = 1 ]
                 then
                     # Overpass-API query includes an area(...), so AREA Time is included in HTML
@@ -420,16 +420,16 @@ then
                     # this is the case for EU-Flixbus and one or two others
                     DIFF_LINES_BASE=4
                 fi
-    
+
                 if [ ! -d "$RESULTS_LOC" ]
                 then
                     echo $(date "+%Y-%m-%d %H:%M:%S") "Creating directory $RESULTS_LOC"
                     mkdir -p $RESULTS_LOC
                 fi
-    
+
                 if [ -d "$RESULTS_LOC" ]
                 then
-    
+
                     echo $(date "+%Y-%m-%d %H:%M:%S")  "Copying '$RESULTS_LOC/$HTML_FILE' to '$WORK_LOC/$SAVE_FILE'"
                     if [ -f $RESULTS_LOC/$HTML_FILE ]
                     then
@@ -438,18 +438,18 @@ then
                         # if there is no *.html file on the Web server side, the we delete also the local *.save file, so that a copy will take place
                         rm -f $WORK_LOC/$SAVE_FILE
                     fi
-    
+
                     if [ -f "$WORK_LOC/$SAVE_FILE" ]
                     then
                         OLD_OSM_Base_Time="$(awk '/OSM-Base Time : .* UTC/ { print $4 "T" $5 "Z"; }' $WORK_LOC/$SAVE_FILE)"
                         OLD_Local_OSM_Base_Time="$(TZ=${PTNA_TIMEZONE:-Europe/Berlin} date --date "$OLD_OSM_Base_Time" '+%Y-%m-%d %H:%M:%S %Z' | sed -e 's/ \([+-][0-9]*\)$/ UTC\1/')"
-    
+
                         if [ "$NEW_OSM_Base_Time" = "$OLD_OSM_Base_Time" ]
                         then
                             # we analyzed the same XML data again, so every diff line counts
                             DIFF_LINES_BASE=0
                         fi
-    
+
                         diff $WORK_LOC/$SAVE_FILE $WORK_LOC/$HTML_FILE > $WORK_LOC/$DIFF_FILE
                         DIFF_LINES=$(cat $WORK_LOC/$DIFF_FILE | wc -l)
                         echo $(date "+%Y-%m-%d %H:%M:%S") "Diff size:  " $(ls -l $WORK_LOC/$DIFF_FILE | awk '{print $5 " " $9}')
@@ -458,12 +458,12 @@ then
                         DIFF_LINES=$(($DIFF_LINES_BASE + 1))
                         rm -f $WORK_LOC/$DIFF_FILE
                     fi
-    
+
                     if [ "$DIFF_LINES" -gt "$DIFF_LINES_BASE" ]
                     then
                         echo $(date "+%Y-%m-%d %H:%M:%S")  "Copying '$WORK_LOC/$HTML_FILE' to '$RESULTS_LOC'"
                         cp $WORK_LOC/$HTML_FILE $RESULTS_LOC
-    
+
                         if [ -n "$(which htmldiff.pl)" ]
                         then
                             if [ -f "$WORK_LOC/$SAVE_FILE" ]
@@ -472,17 +472,17 @@ then
                             else
                                 htmldiff.pl -c $WORK_LOC/$HTML_FILE $WORK_LOC/$HTML_FILE > $WORK_LOC/$DIFF_HTML_FILE
                             fi
-    
+
                             echo $(date "+%Y-%m-%d %H:%M:%S") "Copying '$WORK_LOC/$DIFF_HTML_FILE' to '$RESULTS_LOC'"
                             cp $WORK_LOC/$DIFF_HTML_FILE $RESULTS_LOC
-    
+
                             echo $(date "+%Y-%m-%d %H:%M:%S") "Updating analysis details file '$WORK_LOC/$DETAILS_FILE' old date = new"
                             echo "OLD_DATE_UTC=$NEW_OSM_Base_Time"       >> $WORK_LOC/$DETAILS_FILE
                             echo "OLD_DATE_LOC=$NEW_Local_OSM_Base_Time" >> $WORK_LOC/$DETAILS_FILE
                             echo "OLD_OR_NEW=new"                        >> $WORK_LOC/$DETAILS_FILE
                         else
                             echo $(date "+%Y-%m-%d %H:%M:%S") "no htmldiff.pl tool: no HTML-Diff Analysis page '$HTMLDIFF_FILE'"
-    
+
                             echo $(date "+%Y-%m-%d %H:%M:%S") "Updating analysis details file '$WORK_LOC/$DETAILS_FILE' old date = empty"
                             echo "OLD_DATE_UTC="  >> $WORK_LOC/$DETAILS_FILE
                             echo "OLD_DATE_LOC="  >> $WORK_LOC/$DETAILS_FILE
@@ -490,7 +490,7 @@ then
                         fi
                     else
                         echo $(date "+%Y-%m-%d %H:%M:%S") "No relevant changes on '$HTML_FILE'"
-    
+
                         echo $(date "+%Y-%m-%d %H:%M:%S") "Updating analysis details file '$WORK_LOC/$DETAILS_FILE' old date = old"
                         echo "OLD_DATE_UTC=$OLD_OSM_Base_Time"       >> $WORK_LOC/$DETAILS_FILE
                         echo "OLD_DATE_LOC=$OLD_Local_OSM_Base_Time" >> $WORK_LOC/$DETAILS_FILE
@@ -586,7 +586,3 @@ then
         ptna-wiki-page.pl --watch --page=$ANALYSIS_TALK
     fi
 fi
-
-
-
-
