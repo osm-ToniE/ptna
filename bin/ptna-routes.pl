@@ -6188,7 +6188,6 @@ sub printSketchLineTemplate {
     my $pt_type       = shift || '';
     my $colour        = shift || '';
     my $text          = undef;
-    my $ref_escaped   = $ref;
     my $colour_string = '';
     my $pt_string     = '';
     my $textdeco      = '';
@@ -6198,15 +6197,13 @@ sub printSketchLineTemplate {
     my $fg_colour     = GetForeGroundFromBackGround( $bg_colour );
 
     if ( $bg_colour && $fg_colour && $coloured_sketchline ) {
-        $colour_string = "\&amp;bg=" . $bg_colour . "\&amp;fg=". $fg_colour;
-        $pt_string     = "\&amp;r=1"                                        if ( $pt_type eq 'train' || $pt_type eq 'light_rail'     );
+        $colour_string = "&bg=" . uri_escape($bg_colour) . "&fg=". uri_escape($fg_colour);
+        $pt_string     = "&r=1"                                        if ( $pt_type eq 'train' || $pt_type eq 'light_rail'     );
         $textdeco      = ' style="text-decoration:none;"';
         $span_begin    = sprintf( "<span style=\"color:%s;background-color:%s;\">&nbsp;", $fg_colour, $bg_colour );
         $span_end      = "&nbsp;</span>";
     }
-    $ref_escaped    =~ s/ /+/g;
-    $network        =~ s/ /+/g;
-    $text           = sprintf( "<a href=\"https://overpass-api.de/api/sketch-line?ref=%s\&amp;network=%s\&amp;style=wuppertal%s%s\" title=\"Sketch-Line\"%s>%s%s%s</a>", $ref_escaped, uri_escape($network), uri_escape($colour_string), $pt_string, $textdeco, $span_begin, $ref, $span_end ); # some manual expansion of the template
+    $text = sprintf( "<a href=\"https://overpass-api.de/api/sketch-line?ref=%s&network=%s&style=wuppertal%s%s\" title=\"Sketch-Line\"%s>%s%s%s</a>", uri_escape($ref), uri_escape($network), $colour_string, $pt_string, $textdeco, $span_begin, $ref, $span_end ); # some manual expansion of the template
 
     return $text;
 }
