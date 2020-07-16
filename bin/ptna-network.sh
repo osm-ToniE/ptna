@@ -191,7 +191,7 @@ then
     if [ -d "$OSM_XML_LOC" ]
     then
         START_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
-        wget "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE
+        wget "$CALL_PARAMS" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE
         END_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
         echo $(date "+%Y-%m-%d %H:%M:%S") "wget returns $?"
 
@@ -203,7 +203,7 @@ then
             # try a second, but only a second time
             sleep 60
             START_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
-            wget "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE
+            wget "$CALL_PARAMS" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE
             END_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
             echo $(date "+%Y-%m-%d %H:%M:%S") "wget returns $?"
 
@@ -375,6 +375,7 @@ then
         echo "ROUTES_NAME=$PTNA_WWW_ROUTES_NAME"         >> $WORK_LOC/$DETAILS_FILE
         echo "ROUTES_LINK=$PTNA_WWW_ROUTES_LINK"         >> $WORK_LOC/$DETAILS_FILE
         echo "OVERPASS_QUERY=$OVERPASS_QUERY"            >> $WORK_LOC/$DETAILS_FILE
+        echo "CALL_PARAMS=$CALL_PARAMS"                  >> $WORK_LOC/$DETAILS_FILE
         echo "START_DOWNLOAD=$START_DOWNLOAD"            >> $WORK_LOC/$DETAILS_FILE
         echo "END_DOWNLOAD=$END_DOWNLOAD"                >> $WORK_LOC/$DETAILS_FILE
         if [ -f $OSM_XML_FILE_ABSOLUTE ]
