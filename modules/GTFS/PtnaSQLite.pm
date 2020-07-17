@@ -28,8 +28,8 @@ use DBI;
 my %config      = ();
 my %db_handles  = ();
 
-$config{'path-to-work'} = '/osm/ptna/work';
-$config{'name-suffix'}  = '-ptna-gtfs-sqlite.db';
+$config{'path-to-work'} = '/osm/ptna/work';                 # location where to start looking for the SQLite
+$config{'name-suffix'}  = '-ptna-gtfs-sqlite.db';           # name suffix of current SQLite db
 
 
 #############################################################################################
@@ -79,13 +79,31 @@ sub getGtfsRouteIdHtmlTag {
                                           html_escape($route_id),
                                           html_escape(gettext("is not yet valid (in the future)")) );
             } else {
-                $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Route-Id: %s: 'route_id' %s.\">GTFS!</a>",
-                                          uri_escape($gtfs_country),
-                                          uri_escape($gtfs_feed),
-                                          uri_escape($route_id),
-                                          html_escape($gtfs_feed),
-                                          html_escape($route_id),
-                                          html_escape(gettext("does not exist")) );
+                my $found_in_previous_version = 0;
+
+                if ( _AttachToGtfsSqliteDb($gtfs_feed.'-prev') ) {
+                    $RouteIdStatus = _getRouteIdStatus( $gtfs_feed.'-prev', $route_id );
+                    if ( $RouteIdStatus eq 'valid' || $RouteIdStatus eq 'past' || $RouteIdStatus eq 'future' ) {
+                        $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateprevious\" href=\"/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Route-Id: %s: 'route_id' %s.\">GTFS??</a>",
+                                                  uri_escape($gtfs_country),
+                                                  uri_escape($gtfs_feed.'-prev'),
+                                                  uri_escape($route_id),
+                                                  html_escape($gtfs_feed.'-prev'),
+                                                  html_escape($route_id),
+                                                  html_escape(gettext("outdated, fits to older GTFS version only")) );
+                        $found_in_previous_version = 1;
+                    }
+                }
+
+                if ( !$found_in_previous_version ) {
+                    $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Route-Id: %s: 'route_id' %s.\">GTFS!</a>",
+                                              uri_escape($gtfs_country),
+                                              uri_escape($gtfs_feed),
+                                              uri_escape($route_id),
+                                              html_escape($gtfs_feed),
+                                              html_escape($route_id),
+                                              html_escape(gettext("does not exist")) );
+                }
             }
         } else {
             $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/routes.php?network=%s\" title=\"GTFS-Feed: %s - 'route_id' %s.\">GTFS!</a>",
@@ -152,13 +170,31 @@ sub getGtfsTripIdHtmlTag {
                                           html_escape($trip_id),
                                           html_escape(gettext("is not yet valid (in the future)")) );
             } else {
-                $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/single-trip.php?network=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Trip-Id: %s: 'trip_id' %s.\">GTFS!</a>",
+                my $found_in_previous_version = 0;
+
+                if ( _AttachToGtfsSqliteDb($gtfs_feed.'-prev') ) {
+                    $TripIdStatus = _getTripIdStatus( $gtfs_feed.'-prev', $trip_id );
+                    if ( $TripIdStatus eq 'valid' || $TripIdStatus eq 'past' || $TripIdStatus eq 'future' ) {
+                        $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateprevious\" href=\"/gtfs/%s/single-trip.php?network=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Trip-Id: %s: 'trip_id' %s.\">GTFS??</a>",
+                                                  uri_escape($gtfs_country),
+                                                  uri_escape($gtfs_feed.'-prev'),
+                                                  uri_escape($trip_id),
+                                                  html_escape($gtfs_feed.'-prev'),
+                                                  html_escape($trip_id),
+                                                  html_escape(gettext("outdated, fits to older GTFS version only")) );
+                        $found_in_previous_version = 1;
+                    }
+                }
+
+                if ( !$found_in_previous_version ) {
+                    $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/single-trip.php?network=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Trip-Id: %s: 'trip_id' %s.\">GTFS!</a>",
                                           uri_escape($gtfs_country),
                                           uri_escape($gtfs_feed),
                                           uri_escape($trip_id),
                                           html_escape($gtfs_feed),
                                           html_escape($trip_id),
                                           html_escape(gettext("does not exist")) );
+                }
             }
         } else {
             $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/routes.php?network=%s\" title=\"GTFS-Feed: %s - 'trip_id' %s.\">GTFS!</a>",
@@ -233,13 +269,31 @@ sub getGtfsShapeIdHtmlTag {
                                           html_escape($shape_id),
                                           html_escape(gettext("does not provide any 'shape' data")) );
             } else {
-                $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s: 'shape_id' %s.\">GTFS!</a>",
+                my $found_in_previous_version = 0;
+
+                if ( _AttachToGtfsSqliteDb($gtfs_feed.'-prev') ) {
+                    $ShapeIdStatus = _getShapeIdStatus( $gtfs_feed.'-prev', $shape_id );
+                    if ( $ShapeIdStatus eq 'valid' || $ShapeIdStatus eq 'past' || $ShapeIdStatus eq 'future' ) {
+                        $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateprevious\" href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s: 'shape_id' %s.\">GTFS??</a>",
+                                                  uri_escape($gtfs_country),
+                                                  uri_escape($gtfs_feed.'-prev'),
+                                                  uri_escape($shape_id),
+                                                  html_escape($gtfs_feed.'-prev'),
+                                                  html_escape($shape_id),
+                                                  html_escape(gettext("outdated, fits to older GTFS version only")) );
+                        $found_in_previous_version = 1;
+                    }
+                }
+
+                if ( !$found_in_previous_version ) {
+                    $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s: 'shape_id' %s.\">GTFS!</a>",
                                           uri_escape($gtfs_country),
                                           uri_escape($gtfs_feed),
                                           uri_escape($shape_id),
                                           html_escape($gtfs_feed),
                                           html_escape($shape_id),
                                           html_escape(gettext("does not exist")) );
+                }
             }
         } else {
             $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/routes.php?network=%s\" title=\"GTFS-Feed: %s - 'shape_id' %s.\">GTFS!</a>",

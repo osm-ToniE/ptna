@@ -24,6 +24,7 @@
             #analysis .attention      { background-color: yellow; font-weight: 500; font-size: 1.2em; }
             .gtfs-dateold             { text-align:center; background-color: orange; }
             .gtfs-datenew             { text-align:center; background-color: lightgreen; }
+            .gtfs-dateprevious        { text-align:center; background-color: rgb(128, 128, 255); }
             .bad-link                 { text-decoration: line-through; background-color: yellow; }
         </style>
     </head>
