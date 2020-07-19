@@ -191,7 +191,12 @@ then
     if [ -d "$OSM_XML_LOC" ]
     then
         START_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
-        wget "$CALL_PARAMS" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE
+        if [ -n "$CALL_PARAMS" ]
+        then
+            wget "$CALL_PARAMS" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE
+        else
+            wget "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE
+        fi
         END_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
         echo $(date "+%Y-%m-%d %H:%M:%S") "wget returns $?"
 
@@ -203,7 +208,12 @@ then
             # try a second, but only a second time
             sleep 60
             START_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
-            wget "$CALL_PARAMS" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE
+            if [ -n "$CALL_PARAMS" ]
+            then
+                wget "$CALL_PARAMS" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE
+            else
+                wget "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE
+            fi
             END_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
             echo $(date "+%Y-%m-%d %H:%M:%S") "wget returns $?"
 
