@@ -5203,6 +5203,8 @@ sub getGtfsInfo {
         if ( $relation_ptr->{'tag'}->{'type'} eq 'route' ) {
             if ( $relation_ptr->{'tag'}->{'gtfs:trip_id'} ) {
                 $gtfs_html_tag = GTFS::PtnaSQLite::getGtfsTripIdHtmlTag( $gtfs_guid, $relation_ptr->{'tag'}->{'gtfs:trip_id'} );
+            } elsif ( $relation_ptr->{'tag'}->{'gtfs:trip_id:sample'} ) {
+                $gtfs_html_tag = GTFS::PtnaSQLite::getGtfsTripIdHtmlTag( $gtfs_guid, $relation_ptr->{'tag'}->{'gtfs:trip_id:sample'} );
             } elsif ( $relation_ptr->{'tag'}->{'gtfs:shape_id'} ) {
                 $gtfs_html_tag = GTFS::PtnaSQLite::getGtfsShapeIdHtmlTag( $gtfs_guid, $relation_ptr->{'tag'}->{'gtfs:shape_id'} );
             } elsif ( $relation_ptr->{'tag'}->{'gtfs:route_id'} ) {
