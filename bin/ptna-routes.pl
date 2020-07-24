@@ -4608,11 +4608,12 @@ sub CheckNameRefFromViaToPTV2 {
                     #                                                     ref:LAV='025'
                     #                                                     ref:RVO='9567'
                     #                                                     ref:VLK='11'
+                    my $ref_in_name_w_boundary = ';' . $ref_in_name . ';';
                     foreach my $tag ( sort ( keys ( %{$relation_ptr->{'tag'}} ) ) ) {
-                        if ( $tag =~ m/^ref:(\S+)$/ ) {
+                        if ( $tag =~ m/^ref:(\S+)$/ && $tag !~ m/^ref:FR:STIF/ ) {
                             $number_of_ref_colon_tags++;
-                            $ref_string = $1 . ' ' . $relation_ptr->{'tag'}->{$tag};
-                            if ( index($ref_in_name,$ref_string) == -1 ) {
+                            $ref_string = $relation_ptr->{'tag'}->{$tag};
+                            if ( $ref_in_name_w_boundary !~ m|[ ;/]$ref_string[ ;/:]| ) {
                                 $notes_string = gettext( "PTv2 route: '%s' is not part of 'name' (derived from '%s' = '%s')" );
                                 push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string,html_escape($ref_string),html_escape($tag),html_escape($relation_ptr->{'tag'}->{$tag})) );
                                 $return_code++;
