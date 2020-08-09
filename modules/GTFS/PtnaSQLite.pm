@@ -56,7 +56,7 @@ sub getGtfsRouteIdHtmlTag {
             my $RouteIdStatus = _getRouteIdStatus( $gtfs_feed, $route_id );
 
             if ( $RouteIdStatus eq 'valid' ) {
-                $gtfs_html_tag = sprintf( "<a href=\"/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Route-Id: %s\">GTFS</a>",
+                $gtfs_html_tag = sprintf( "<a class=\"gtfs-datevalid\" href=\"/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Route-Id: %s\">GTFS</a>",
                                           uri_escape($gtfs_country),
                                           uri_escape($gtfs_feed),
                                           uri_escape($route_id),
@@ -81,14 +81,14 @@ sub getGtfsRouteIdHtmlTag {
             } else {
                 my $found_in_previous_version = 0;
 
-                if ( _AttachToGtfsSqliteDb($gtfs_feed.'-prev') ) {
-                    $RouteIdStatus = _getRouteIdStatus( $gtfs_feed.'-prev', $route_id );
+                if ( _AttachToGtfsSqliteDb($gtfs_feed.'-previous') ) {
+                    $RouteIdStatus = _getRouteIdStatus( $gtfs_feed.'-previous', $route_id );
                     if ( $RouteIdStatus eq 'valid' || $RouteIdStatus eq 'past' || $RouteIdStatus eq 'future' ) {
                         $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateprevious\" href=\"/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Route-Id: %s: 'route_id' %s.\">GTFS??</a>",
                                                   uri_escape($gtfs_country),
-                                                  uri_escape($gtfs_feed.'-prev'),
+                                                  uri_escape($gtfs_feed.'-previous'),
                                                   uri_escape($route_id),
-                                                  html_escape($gtfs_feed.'-prev'),
+                                                  html_escape($gtfs_feed.'-previous'),
                                                   html_escape($route_id),
                                                   html_escape(gettext("outdated, fits to older GTFS version only")) );
                         $found_in_previous_version = 1;
@@ -147,7 +147,7 @@ sub getGtfsTripIdHtmlTag {
             my $TripIdStatus = _getTripIdStatus( $gtfs_feed, $trip_id );
 
             if ( $TripIdStatus eq 'valid' ) {
-                $gtfs_html_tag = sprintf( "<a href=\"/gtfs/%s/single-trip.php?network=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Trip-Id: %s\">GTFS</a>",
+                $gtfs_html_tag = sprintf( "<a class=\"gtfs-datevalid\" href=\"/gtfs/%s/single-trip.php?network=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Trip-Id: %s\">GTFS</a>",
                                           uri_escape($gtfs_country),
                                           uri_escape($gtfs_feed),
                                           uri_escape($trip_id),
@@ -172,14 +172,14 @@ sub getGtfsTripIdHtmlTag {
             } else {
                 my $found_in_previous_version = 0;
 
-                if ( _AttachToGtfsSqliteDb($gtfs_feed.'-prev') ) {
-                    $TripIdStatus = _getTripIdStatus( $gtfs_feed.'-prev', $trip_id );
+                if ( _AttachToGtfsSqliteDb($gtfs_feed.'-previous') ) {
+                    $TripIdStatus = _getTripIdStatus( $gtfs_feed.'-previous', $trip_id );
                     if ( $TripIdStatus eq 'valid' || $TripIdStatus eq 'past' || $TripIdStatus eq 'future' ) {
                         $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateprevious\" href=\"/gtfs/%s/single-trip.php?network=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Trip-Id: %s: 'trip_id' %s.\">GTFS??</a>",
                                                   uri_escape($gtfs_country),
-                                                  uri_escape($gtfs_feed.'-prev'),
+                                                  uri_escape($gtfs_feed.'-previous'),
                                                   uri_escape($trip_id),
-                                                  html_escape($gtfs_feed.'-prev'),
+                                                  html_escape($gtfs_feed.'-previous'),
                                                   html_escape($trip_id),
                                                   html_escape(gettext("outdated, fits to older GTFS version only")) );
                         $found_in_previous_version = 1;
@@ -238,7 +238,7 @@ sub getGtfsShapeIdHtmlTag {
             my $ShapeIdStatus = _getShapeIdStatus( $gtfs_feed, $shape_id );
 
             if ( $ShapeIdStatus eq 'valid' ) {
-                $gtfs_html_tag = sprintf( "<a href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s\">GTFS</a>",
+                $gtfs_html_tag = sprintf( "<a class=\"gtfs-datevalid\" href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s\">GTFS</a>",
                                            uri_escape($gtfs_country),
                                            uri_escape($gtfs_feed),
                                            uri_escape($shape_id),
@@ -271,14 +271,14 @@ sub getGtfsShapeIdHtmlTag {
             } else {
                 my $found_in_previous_version = 0;
 
-                if ( _AttachToGtfsSqliteDb($gtfs_feed.'-prev') ) {
-                    $ShapeIdStatus = _getShapeIdStatus( $gtfs_feed.'-prev', $shape_id );
+                if ( _AttachToGtfsSqliteDb($gtfs_feed.'-previous') ) {
+                    $ShapeIdStatus = _getShapeIdStatus( $gtfs_feed.'-previous', $shape_id );
                     if ( $ShapeIdStatus eq 'valid' || $ShapeIdStatus eq 'past' || $ShapeIdStatus eq 'future' ) {
                         $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateprevious\" href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s: 'shape_id' %s.\">GTFS??</a>",
                                                   uri_escape($gtfs_country),
-                                                  uri_escape($gtfs_feed.'-prev'),
+                                                  uri_escape($gtfs_feed.'-previous'),
                                                   uri_escape($shape_id),
-                                                  html_escape($gtfs_feed.'-prev'),
+                                                  html_escape($gtfs_feed.'-previous'),
                                                   html_escape($shape_id),
                                                   html_escape(gettext("outdated, fits to older GTFS version only")) );
                         $found_in_previous_version = 1;
