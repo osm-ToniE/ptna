@@ -270,7 +270,7 @@
             </thead>
             <tbody>
                 <tr id="bus_112_122" data-info="???" data-ref="112/122" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=112%2f122&network=Network&style=wuppertal" title="Sketch-Line">112/122</a></td><td class="csvinfo" colspan="5"></td></tr>
-                <tr id="-110277" data-info="-110277" data-ref="112/122" class="line"><td class="name">Bus RVO 112: Stop 1 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -110277</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'<br>'ref:LAVV' = '122'<br>'ref:RVO' = '112'<br>PTv2 route: 'LAVV 122' is not part of 'name' (derived from 'ref:LAVV' = '122')</td></tr>
+                <tr id="-110277" data-info="-110277" data-ref="112/122" class="line"><td class="name">Bus RVO 112: Stop 1 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -110277</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Network'<br>'ref:LAVV' = '122'<br>'ref:RVO' = '112'<br>PTv2 route: '122' is not part of 'name' (derived from 'ref:LAVV' = '122')</td></tr>
             </tbody>
         </table>
 
