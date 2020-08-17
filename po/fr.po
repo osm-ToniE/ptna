@@ -9,15 +9,16 @@
 # Julien Lepiller <transifex@lepiller.eu>, 2019
 # Adrien Pavie <panieravide@riseup.net>, 2019
 # ToniE <osm-ToniE@web.de>, 2020
+# Lejun, 2020
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-07-17 14:17+0200\n"
+"POT-Creation-Date: 2020-08-17 20:57+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: ToniE <osm-ToniE@web.de>, 2020\n"
+"Last-Translator: Lejun, 2020\n"
 "Language-Team: French (https://www.transifex.com/jungle-bus/teams/97874/"
 "fr/)\n"
 "Language: fr\n"
@@ -204,6 +205,8 @@ msgid ""
 "Route has 'network' = '%s' value which is part of 'network' = '%s' of Route-"
 "Master: %s"
 msgstr ""
+"Le réseau 'network' = '%s' du parcours ne correspond pas au réseau 'network' "
+"= '%s' de la ligne :  %s"
 
 #, perl-format
 msgid ""
@@ -336,6 +339,8 @@ msgstr ""
 msgid ""
 "'network' = '%s' of Route is a part of 'network' = '%s' of Route-Master: %s"
 msgstr ""
+"Le réseau 'network' = '%s' fait partie du réseau 'network' = '%s' de la "
+"ligne :  %s"
 
 #, perl-format
 msgid ""
@@ -491,16 +496,17 @@ msgstr ""
 "de 'public_transport' = 'platforme'"
 
 msgid "PTv2 route: there is no 'public_transport' = 'stop_position'"
-msgstr ""
+msgstr "Parcours PTv2 : il n'y a pas de 'public_transport' = 'stop_position'"
 
 msgid "PTv2 route: there is only one 'public_transport' = 'stop_position'"
 msgstr ""
+"Parcours PTv2 : il n'y a qu'un seul 'public_transport' = 'stop_position'"
 
 msgid "PTv2 route: there is no 'public_transport' = 'platform'"
-msgstr ""
+msgstr "Parcours PTv2 : il n'y a pas de 'public_transport' = 'platform'"
 
 msgid "PTv2 route: there is only one 'public_transport' = 'platform'"
-msgstr ""
+msgstr "Parcours PTv2 : il n'y a qu'un seul 'public_transport' = 'platform'"
 
 msgid ""
 "PTv2 route: first way is a oneway road and ends in a 'stop_position' of this "
@@ -556,38 +562,53 @@ msgstr[1] "Parcours PTv2: les ronds-points apparaissent deux fois, se suivant"
 
 msgid "PTv2 route: first node of oneway way has 'role' = 'stop_exit_only'"
 msgstr ""
+"Parcours PTv2 : Le premier nœud de la route à sens unique a le 'role' = "
+"'stop_exit_only'"
 
 msgid "PTv2 route: last node of oneway way has 'role' = 'stop_entry_only'"
 msgstr ""
+"Parcours PTv2 : Le dernier nœud de la route à sens unique a le 'role' = "
+"'stop_entry_only'"
 
 msgid ""
 "PTv2 route: first node of way has 'role' = 'stop_exit_only'. Is the route "
 "sorted in reverse order?"
 msgstr ""
+"Parcours PTv2 : Le premier nœud du chemin a le 'role' = 'stop_exit_only'. Le "
+"parcours est-il inversé ?"
 
 msgid ""
 "PTv2 route: last node of way has 'role' = 'stop_entry_only'. Is the route "
 "sorted in reverse order?"
 msgstr ""
+"Parcours PTv2 : Le dernier nœud du chemin a le 'role' = 'stop_entry_only'. "
+"Le parcours est-il inversé ?"
 
 msgid "PTv2 route: 'public_transport' = 'stop_position' is not part of way"
 msgstr ""
+"Parcours PTv2 : 'public_transport' = 'stop_position' ne fait pas partie du "
+"chemin"
 
 #, perl-format
 msgid ""
 "PTv2 route: missing '%s' = 'yes' on 'public_transport' = 'stop_position'"
 msgstr ""
+"Parcours PTv2 :  '%s' = 'yes' manquant sur 'public_transport' = "
+"'stop_position'"
 
 #, perl-format
 msgid ""
 "PTv2 route: mismatch between 'role' = '%s' and 'public_transport' = '%s'"
 msgstr ""
+"Parcours PTv2 : Incohérence entre 'role' = '%s' et 'public_transport' = '%s'"
 
 #, perl-format
 msgid ""
 "PTv2 route: 'role' = '%s' and %s: consider setting 'public_transport' = "
 "'stop_position'"
 msgstr ""
+"Parcours PTv2 : 'role' = '%s' et%s. 'public_transport' = 'stop_position' "
+"recommandé"
 
 #, perl-format
 msgid "PTv2 route: 'role' = '%s' but 'public_transport' is not set"
@@ -596,13 +617,15 @@ msgstr ""
 "défini"
 
 msgid "PTv2 route: 'public_transport' = 'platform' is part of way"
-msgstr ""
+msgstr "Parcours PTv2 :  'public_transport' = 'platform' fait partie du chemin"
 
 #, perl-format
 msgid ""
 "PTv2 route: 'role' = '%s' and %s: consider setting 'public_transport' = "
 "'platform'"
 msgstr ""
+"Parcours PTv2 :  'role' = '%s' et %s. 'public_transport' = 'platform' "
+"recommandé"
 
 #, perl-format
 msgid "PTv2 route: wrong 'role' = '%s'"
@@ -616,76 +639,94 @@ msgid ""
 "PTv2 route: first node of way is not the first stop position of this route: "
 "%s versus %s"
 msgstr ""
+"Parcours PTv2 :  Le premier nœud du chemin n'est pas le premier arrêt du "
+"parcours : %s contre %s"
 
 #, perl-format
 msgid ""
 "PTv2 route: consider removing the first way of the route from the relation, "
 "it is a way before the first stop position: %s"
 msgstr ""
+"Parcours PTv2 :  Le premier chemin du parcours précède le premier arrêt %s, "
+"il est recommandé de le retirer de la relation"
 
 #, perl-format
 msgid ""
 "PTv2 route: first stop position on first way is not the first stop position "
 "of this route: %s versus %s"
 msgstr ""
+"Parcours PTv2 :  Le premier arrêt du premier chemin n'est pas le premier "
+"arrêt du parcours : %s contre %s"
 
 #, perl-format
 msgid ""
 "PTv2 route: there is no stop position of this route on the first way: %s"
 msgstr ""
+"Parcours PTv2 : Il n'y a pas d'arrêt du parcours sur le premier chemin %s"
 
 #, perl-format
 msgid "PTv2 route: first node of way is not a stop position of this route: %s"
 msgstr ""
+"Parcours PTv2 :  Le premier nœud du chemin n'est pas un arrêt du parcours %s"
 
 #, perl-format
 msgid ""
 "PTv2 route: last node of way is not the last stop position of this route: %s "
 "versus %s"
 msgstr ""
+"Parcours PTv2 :  Le dernier nœud n'est pas le dernier arrêt du parcours %s "
+"contre %s"
 
 #, perl-format
 msgid ""
 "PTv2 route: consider removing the last way of the route from the relation, "
 "it is a way after the last stop position: %s"
 msgstr ""
+"Parcours PTv2 :  Le dernier chemin du parcours est après le dernier arrêt "
+"%s, il est recommandé de le retirer de la relation"
 
 #, perl-format
 msgid ""
 "PTv2 route: last stop position on last way is not the last stop position of "
 "this route: %s versus %s"
 msgstr ""
+"Parcours PTv2 :  Le dernier arrêt sur le dernier chemin n'est pas le dernier "
+"arrêt du parcours %s contre %s"
 
 #, perl-format
 msgid "PTv2 route: there is no stop position of this route on the last way: %s"
 msgstr ""
+"Parcours PTv2 : Il n'y a pas d'arrêt du parcours sur le dernier chemin %s"
 
 #, perl-format
 msgid "PTv2 route: last node of way is not a stop position of this route: %s"
 msgstr ""
+"Parcours PTv2 : Le dernier nœud du chemin n'est pas un arrêt de ce parcours "
+"%s"
 
 msgid "wrong value"
-msgstr ""
+msgstr "Valeur erronée"
 
 msgid "or"
 msgstr "ou"
 
 msgid "missing key"
-msgstr ""
+msgstr "Clé manquante"
 
 #, perl-format
 msgid "'barrier'='%s' with implied 'access'='no'"
-msgstr ""
+msgstr "'barrier'='%s' avec 'access'='no' implicite"
 
 msgid "PTv2 route: 'name' includes deprecated '&lt;=&gt;'"
-msgstr ""
+msgstr "Parcours PTv2 : 'name' contient '&lt;=&gt;' obsolète"
 
 msgid "PTv2 route: 'name' includes deprecated '==&gt;'"
-msgstr ""
+msgstr "Parcours PTv2 : 'name' contient '==&gt;' obsolète"
 
 #, perl-format
 msgid "PTv2 route: '%s' is not part of 'name' (derived from '%s' = '%s')"
 msgstr ""
+"Parcours PTv2 : '%s' ne fait pas partie de 'name' (dérivé de '%s'='%s')"
 
 msgid "PTv2 route: 'ref' is not part of 'name'"
 msgstr "Parcours PTv2 : le nom 'name' devrait contenir le code de ligne 'ref'"
@@ -761,7 +802,7 @@ msgstr ""
 
 #, perl-format
 msgid "PTv2 route: using wrong way type (%s)"
-msgstr ""
+msgstr "Parcours PTv2 : utilise le mauvais type de chemin (%s)"
 
 #, perl-format
 msgid ""
@@ -771,13 +812,17 @@ msgid_plural ""
 "Route: incorrect access restriction (%s) to ways. Consider tagging as "
 "'%s'='no' and '%s'='yes'"
 msgstr[0] ""
+"Parcours : restriction d'accès au chemin incorrecte (%s). Il est recommandé "
+"d'utiliser '%s'='no' et '%s'='yes'"
 msgstr[1] ""
+"Parcours : restriction d'accès aux chemins incorrecte (%s). Il est "
+"recommandé d'utiliser  '%s'='no' et '%s'='yes'"
 
 #, perl-format
 msgid "Route: unclear access (%s) to way"
 msgid_plural "Route: unclear access (%s) to ways"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Parcours : accès imprécis au chemin (%s)"
+msgstr[1] "Parcours : accès imprécis aux chemins (%s)"
 
 #, perl-format
 msgid ""
@@ -785,7 +830,11 @@ msgid ""
 msgid_plural ""
 "Route: suspicious %s along with 'highway' unequal to 'construction' on ways"
 msgstr[0] ""
+"Parcours : %s douteux avec 'highway' différent de 'construction' sur le "
+"chemin "
 msgstr[1] ""
+"Parcours : %s douteux avec 'highway' différent de 'construction' sur les "
+"chemins "
 
 #, perl-format
 msgid ""
@@ -795,7 +844,11 @@ msgid_plural ""
 "Route: restricted access (%s) to ways without 'psv'='yes', '%s'='yes', "
 "'%s'='designated', or ..."
 msgstr[0] ""
+"Parcours : accès restreint du chemin (%s) sans 'psv'='yes'. '%s'='yes', "
+"'%s'=designated, ou ..."
 msgstr[1] ""
+"Parcours : accès restreint des chemins (%s) sans 'psv'='yes'. '%s'='yes', "
+"'%s'=designated, ou ..."
 
 #, perl-format
 msgid ""
@@ -805,7 +858,11 @@ msgid_plural ""
 "Route: restricted access at barriers (%s) without 'psv'='yes', '%s'='yes', "
 "'%s'='designated', or ..."
 msgstr[0] ""
+"Parcours : accès restreint à la barrière (%s) sans 'psv'='yes', '%s'='yes', "
+"'%s'='designated', ou ..."
 msgstr[1] ""
+"Parcours : accès restreint aux barrières (%s) sans 'psv'='yes. '%s'='yes, "
+"'%s'='designated', ou ..."
 
 msgid "Route: 'highway' = 'bus_stop' is set on way. Allowed on nodes only!"
 msgid_plural ""
@@ -885,7 +942,7 @@ msgid "Date of Data"
 msgstr "Date des données"
 
 msgid "Hints"
-msgstr ""
+msgstr "Astuces"
 
 msgid "The data will be updated when the result of the analysis has changed."
 msgstr ""
@@ -937,17 +994,21 @@ msgstr ""
 "qui suit:"
 
 msgid "Relation"
-msgstr ""
+msgstr "Relation"
 
 msgid ""
 "'network', 'operator', as well as 'from' and 'to' should be tagged with the "
 "relation."
 msgstr ""
+"'network', 'operator', ainsi que 'from' et 'to' devraient être renseignés "
+"avec la relation"
 
 msgid ""
 "If the value of 'operator' is sufficient for differentiation, 'from' and "
 "'to' need not be specified."
 msgstr ""
+"Si la valeur de 'operator' est suffisante pour différenciation, 'from' et "
+"'to' n'ont pas a être précisés"
 
 msgid "CSV file"
 msgstr "Fichier csv"
@@ -956,6 +1017,8 @@ msgid ""
 "'Operator', as well as 'From' and 'To' should be specified in the CSV file "
 "with the same values as with the relation."
 msgstr ""
+"'Operator', ainsi que 'from' et 'to' devraient être indiqués dans le fichier "
+"CSV avec les même valeurs que dans la relation"
 
 msgid "See the instructions for such entries at the beginning of the CSV file."
 msgstr "Voir les instructions pour ces entrées au début du fichier CSV."
@@ -964,50 +1027,57 @@ msgid ""
 "Examples for an entry in the CSV file of the form: 'ref;type;Comment;From;To;"
 "Operator':"
 msgstr ""
+"Exemples d'une entrée du fichier CSV sous la forme : 'ref;type;Comment;From;"
+"To;Operator':"
 
 msgid "provides services in City-A"
-msgstr ""
+msgstr "assure des services dans la ville A"
 
 msgid "First Avenue"
-msgstr ""
+msgstr "Première Avenue"
 
 msgid "Sixth Avenue"
-msgstr ""
+msgstr "Sixième Avenue"
 
 msgid "Operator-X"
-msgstr ""
+msgstr "Opérateur X"
 
 msgid "provides services in Village-B"
-msgstr ""
+msgstr "assure des services dans le village B"
 
 msgid "Main Street"
-msgstr ""
+msgstr "Rue Principale"
 
 msgid "Second Street"
-msgstr ""
+msgstr "Rue Secondaire"
 
 msgid "provides services in Town-C"
-msgstr ""
+msgstr "assure des services dans la ville C"
 
 msgid "Sunset Boulevard"
-msgstr ""
+msgstr "Boulevard du Soleil Couchant"
 
 msgid "Rainbow Boulevard"
-msgstr ""
+msgstr "Boulevard Arc en Ciel"
 
 msgid "Operator-Z"
-msgstr ""
+msgstr "Opérateur Z"
 
 msgid ""
 "1.) and 2.) are only distinguishable by means of 'From'/'from' and "
 "'To'/'to', since 'Operator'/'operator' are identical (='Operator-X')."
 msgstr ""
+"1.) et 2.) sont différienciés à l'aide de 'From'/'from' et 'To'/'to', "
+"puisque 'Operator'/'operator' sont identiques (='Operator-X')."
 
 msgid ""
 "1.) and 3.) as well as 2.) and 3.) can be distinguished by "
 "'Operator'/'operator', as these are different (='Operator-X' or ='Operator-"
 "Z')."
 msgstr ""
+"1.) et 3.) ainsi que 2.) et 3.) sont différenciables à l'aide de "
+"'Operator'/'operator', puisque ceux-ci sont différents (='Operator-X' ou "
+"='Operator-Z')."
 
 msgid "This section lists further relations of the environment of the routes:"
 msgstr "Cette section liste d'autres relations à proximité :"
@@ -1088,12 +1158,14 @@ msgid ""
 msgstr "Cela correspond par exemples à des fautes d'orthographe ou des typos."
 
 msgid "Additionally considered 'network'-Values"
-msgstr ""
+msgstr "Valeurs supplémentaires du tag 'network'"
 
 msgid ""
 "This section lists 'network' values that were additionally considered "
 "because the 'network' value of the Route-Master or member Route matched."
 msgstr ""
+"Cette section liste les valeurs supplémentaires du tag 'network' car la "
+"valeur 'network' de la ligne ou du membre du parcours correspondait"
 
 msgid "Not Considered 'network'-Values"
 msgstr "Valeurs du tag 'network' non prises en compte"
@@ -1120,14 +1192,19 @@ msgid ""
 "but does not exist in the given data set (see also section: \"Overpass API "
 "Query\")."
 msgstr ""
+"Ce parcours est attendu comme '%s' ('bus', 'tram', ...) selon les données "
+"CSV, mais n'existe pas dans les données fournies (voir section : \"API "
+"Requête Overpass\")"
 
 msgid ""
 "The vehicle uses a motorway entrance or exit without using a motorway/trunk "
 "road immediately after or before it."
 msgstr ""
+"Le véhicule utilise une entrée ou sortie d'autoroute sans autoroute ou "
+"nationale le succédant ou le précédant immédiatement"
 
 msgid "This may indicate incorrect tagging of the 'highway' = 'motorway_link'."
-msgstr ""
+msgstr "Cela peut indiquer un tag incorrect 'highway' = 'motorway_link'."
 
 msgid ""
 "But it can also point to a wrong route, e.g. if it was created automatically "
@@ -1142,16 +1219,18 @@ msgid ""
 msgstr ""
 
 msgid "Precondition: the route is without gap(s)."
-msgstr ""
+msgstr "Précondition : le parcours n'a pas de trou(s)."
 
 #, perl-format
 msgid ""
 "The Route is member of this Route-Master, but has no 'ref' tag (%s = ID of "
 "the route)."
 msgstr ""
+"Le parcours fait partie de cette ligne mais n'a pas d'attribut 'ref' (%s= "
+"numéro du parcours)"
 
 msgid "See section: \"Public Transport Lines without 'ref'\" of the analysis."
-msgstr ""
+msgstr "Voir section \"Lignes de transport public sans 'ref'\" de l'analyse"
 
 #, perl-format
 msgid ""
@@ -1162,34 +1241,40 @@ msgstr ""
 "ligne 'ref' = '%s', cela devrait être évité : %s"
 
 msgid "This is currently deactivated."
-msgstr ""
+msgstr "Cela est actuellement désactivé"
 
 msgid ""
 "This Route-Master has less route relations than listed here (Route(s) not "
 "listed in the Route-Master?)."
 msgstr ""
+"Cette ligne a moins de relations parcours que dans la liste (Parcours non "
+"inclus dans la ligne ?)"
 
 msgid ""
 "This route master has more route relations than listed here (route without "
 "or with other 'ref'/'route'/'network' tag?)."
 msgstr ""
+"Cette ligne contient plus de parcours que dans la liste (Parcours sans ou "
+"avec d'autres attributs 'ref'/'route'/'network' ?)"
 
 msgid "The Route-Master relation contains stops or train/bus stops."
-msgstr ""
+msgstr "La ligne contient des arrêts."
 
 msgid ""
 "The Route-Master relation contains relation(s) that are not of type 'route'."
-msgstr ""
+msgstr "La ligne contient des relations qui ne sont pas de type 'route'"
 
 msgid ""
 "The Route-Master relation contains streets/railways/trains/bus stops/..."
-msgstr ""
+msgstr "La ligne contient des rues, des rails, des arrêts, ..."
 
 msgid ""
 "The Route-Master relation does not contain a Route relation (should not "
 "happen with the used Overpass API query, see: 'The overpass API query does "
 "not return')."
 msgstr ""
+"La ligne ne contient pas de parcours (ne devrait pas arriver avec la requête "
+"Overpass API, voir 'La requête Overpass API n'aboutit pas')."
 
 msgid ""
 "The key 'construction' is set and the key 'highway' is not set to "
@@ -1203,6 +1288,9 @@ msgid ""
 "= 'construction' and 'construction' = 'xxx', where 'xxx' is the former value "
 "of the 'highway' key."
 msgstr ""
+"Les travaux de construction sur les voies sont généralement mappés comme la "
+"combinaison 'highway' = 'construction' et 'construction' = 'xxx', où 'xxx' "
+"est l'ancienne valeur de la clé tag 'highway'."
 
 msgid ""
 "When the construction works are finished, the key 'highway' is set to its "
@@ -1232,7 +1320,7 @@ msgid "Check whether the construction works are finished or not."
 msgstr "Vérifiez si les travaux de construction sont terminés ou non."
 
 msgid "If yes, delete the key 'construction'."
-msgstr ""
+msgstr "Si oui, supprimer la clé 'construction'."
 
 msgid "If no, check for an appropriate value of the key 'highway'."
 msgstr "Si non, vérifiez la valeur appropriée de la clé 'highway'."
@@ -1251,12 +1339,14 @@ msgstr ""
 "nécessaire ou non."
 
 msgid "The access restriction does not comply with the map features."
-msgstr ""
+msgstr "La restriction d'accès ne correspond pas aux fonctions de la carte."
 
 msgid ""
 "Please consult the OSM Wiki: https://wiki.openstreetmap.org/wiki/"
 "Map_Features#Restrictions"
 msgstr ""
+"Veuillez consulter le Wiki OSM : https://wiki.openstreetmap.org/wiki/"
+"Map_Features#Restrictions"
 
 msgid "This error is related to:"
 msgstr "Cette erreur est liée à:"
@@ -1272,155 +1362,204 @@ msgid ""
 "Route-Master: There is more than one Route-Master for this line = "
 "'ref' (different 'network'-tags?)."
 msgstr ""
+"Ligne : Il y a plus d'une relation pour cette ligne = 'ref' (attributs "
+"'network' différents ?)"
 
 msgid ""
 "Route: There is more than one Route Master for this line = 'ref' plus the "
 "parent Route Master of this route."
 msgstr ""
+"Parcours : il y a plus d'une relation Ligne pour cette ligne ='ref' et la "
+"ligne parent de ce parcours"
 
 #, perl-format
 msgid ""
 "This Route has more than one parent Route-Master (%s = list of Route-"
 "Masters)."
-msgstr ""
+msgstr "Cette ligne a plus d'une ligne parent (%s = liste de lignes)."
 
 #, perl-format
 msgid "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'"
 msgstr ""
+"Le type 'Route' n'est pas indiqué. Ligne %s des données de parcours. "
+"Contenus de la ligne : '%s'"
 
 #, perl-format
 msgid ""
 "Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line: "
 "'%s'"
 msgstr ""
+"Le type 'Route' n'est pas pris en charge : '%s'. Ligne %s des données de "
+"parcours. Contenus de la ligne : '%s'"
 
 msgid "Defines the language for the output."
-msgstr ""
+msgstr "Défini la langue de sortie."
 
 msgid ""
 "Allow 'route_master' = 'coach' und 'route' = 'coach' (although they are "
 "inofficial)."
 msgstr ""
+"Autorise 'route_master'='coach' et 'route'='coach' (bien que non officiels)"
 
 msgid ""
 "Ways are used which cannot be used explicitly or implicitly ('construction', "
 "'access', ...) and where 'bus' = 'yes', 'bus' = 'designated', 'bus' = "
 "'official', 'psv' =' yes', ... is not set."
 msgstr ""
+"Des chemins ne peuvent être utilisés de manière explicite ou implicite "
+"('construction', 'access', ...) et où 'bus'='yes', 'bus'='designated', "
+"'bus'='official', 'psv'='yes', ... n'est pas indiqué"
 
 msgid "This applies to 'barrier' = '...' as well."
-msgstr ""
+msgstr "Cela s'applique à 'barrier'='...' aussi."
 
 msgid "'highway' = 'bus_stop' can be set on nodes only, not on ways or areas."
 msgstr ""
+"'highway'='bus_stop' s'applique aux nœuds uniquement et pas aux chemins ou "
+"surfaces."
 
 msgid "Check 'gtfs:*' tags for validity, ..."
-msgstr ""
+msgstr "Vérifier les attributs 'gtfs:*' pour validation ..."
 
 msgid ""
 "Check whether motorway links are used without actually using a motorway/"
 "trunk road."
-msgstr ""
+msgstr "Vérifier si les bretelles d'autoroute sont utilisées sans autoroute."
 
 msgid ""
 "Check of 'name' = '...ref: from => to' respectively 'name' ='...ref: from => "
 "via => ... => to'."
 msgstr ""
+"Vérification de 'name'='...ref:from => to' dans 'name' ='...ref: from => via "
+"=> ... => to'."
 
 msgid ""
 "More relaxed check of 'name' ='...: A => B', where 'A' must be part of "
 "'from' and 'B' must be part of 'to'."
 msgstr ""
+"Vérification plus souple de 'name'='...: A => B', où 'A' fait partie de "
+"'from' et 'B' de 'to'"
 
 msgid ""
 "Check the value of 'network', ... whether the separator is actually the "
 "semicolon ';' (w/o Blanks)."
 msgstr ""
+"Vérification de 'network', ... si le sépérateur est bien le point-virgule "
+"';' (sans espace)"
 
 msgid ""
 "Missing 'bus' = 'yes', 'tram' = 'yes' or 'share_taxi' = 'yes' on "
 "'public_transport' = 'platform'."
 msgstr ""
+"'bus' = 'yes', 'tram' = 'yes' ou 'share_taxi' = 'yes' manquant sur "
+"'public_transport' = 'platform'."
 
 msgid ""
 "Check whether roundabouts are used partially (segments only) or completely "
 "(while not being segmented)."
-msgstr ""
+msgstr "Vérifie si les rond-points sont utilisés en partie ou entièrement."
 
 msgid ""
 "Check whether the tag 'route_ref' on the stops of a route includes the value "
 "of 'ref' of the route (provided 'route_ref' exists)."
 msgstr ""
+"Vérifie si l'attribut 'route_ref'  sur les arrêts du parcours contient la "
+"valeur 'ref' (si 'route_ref' existe)."
 
 msgid ""
 "Check also whether the tag 'ref' on the stops of a route accidentially "
 "includes the value of 'ref' of the route."
 msgstr ""
+"Vérifie également si l'attribut 'ref' des arrêts du parcours contiennent par "
+"erreur la valeur 'ref'."
 
 msgid ""
 "Check also for tags 'bus_lines', 'bus_routes', 'lines', 'routes' on the "
 "stops of a route. Those should be replaced by the tag 'route_ref'."
 msgstr ""
+"Vérifie également les attributs 'bus_lines', 'bus_routes', 'lines', 'routes' "
+"des arrêts du parcours devant être remplacés par 'route_ref'."
 
 msgid "Check sequence of ways, are there any gaps?"
-msgstr ""
+msgstr "Vérifie la succession de chemins, y-a-t-il des trous ?"
 
 msgid ""
 "Missing 'bus' = 'yes', 'tram' = 'yes' or 'share_taxi' = 'yes' on "
 "'public_transport' = 'stop_position'."
 msgstr ""
+"'bus' = 'yes', 'tram' = 'yes' ou 'share_taxi' = 'yes' manquant sur "
+"'public_transport' = 'stop_position'."
 
 msgid "Check of 'public_transport:version' = '...' on Route-Master and Route."
 msgstr ""
+"Vérification de 'public_transport:version' = '...' sur ligne et parcours."
 
 msgid ""
 "Check whether the used way types are appropriate for the vehicle type "
 "('train' using 'railway' = 'rail', 'tram' using 'railway' = 'tram', 'bus' "
 "using 'highway' = '...', ...)."
 msgstr ""
+"Vérifie si le type de chemins utilisés est approprié pour le véhicule "
+"('train' utilisant 'railway' = 'rail', 'tram' utilisant 'railway' = 'tram', "
+"'bus' utilisant 'highway' = '...', ...)."
 
 msgid ""
 "SketchLine considers the value of 'colour' = '...' of Route-Master or Route."
 msgstr ""
+"SketchLine considère la valeur de 'colour'='...' de la ligne ou du parcours."
 
 msgid ""
 "The value of 'network' = '...' is expected in long form (see: network-long-"
 "regex)."
 msgstr ""
+"La valeur de 'network'='...' est attendue en forme longue (voir : network-"
+"long-regex)."
 
 msgid "The value of 'network' = '...' is expected in long form, as shown here."
 msgstr ""
+"La valeur de 'network'='...' est attendue en forme longue, comme indiqué ici."
 
 msgid ""
 "The value of 'network' = '...' is expected in long form instead of the short "
 "form shown here."
 msgstr ""
+"La valeur de 'network'='...' est attendue en forme longue à l'inverse de la "
+"forme courte indiquée ici."
 
 msgid ""
 "The value of 'network' = '...' is expected in short form (see: network-short-"
 "regex)."
 msgstr ""
+"La valeur de 'network'='...' est attendue en forme courte (voir : network-"
+"short-regex)."
 
 msgid ""
 "The value of 'network' = '...' is expected in short form, as shown here."
 msgstr ""
+"La valeur de 'network'='...' est attendue en forme corte, comme indiqué ici."
 
 msgid ""
 "The value of 'network' = '...' is expected in short form instead of the long "
 "form shown here."
 msgstr ""
+"La valeur de 'network'='...' est attendue en forme courte à l'inverse de la "
+"forme longue indiquée ici."
 
 msgid ""
 "Take this value as GTFS feed for option 'link-gtfs' if the relation does not "
 "provide the tags 'gtfs:feed', 'operator:guid' or 'network:guid'."
 msgstr ""
+"Cette valeur doit être renseignée flux GTFS dans option 'link-gtfs' si la "
+"relation ne contient pas  'gtfs:feed', 'operator:guid' ou 'network:guid'."
 
 msgid ""
 "Provide links to GTFS-Analysis for 'gtfs:route_id' or 'gtfs:trip_id' tags."
 msgstr ""
+"Fourni des liens vers l'analyse GTFS pour les attributs 'gtfs:route_id' ou "
+"'gtfs:trip_id'."
 
 msgid "Limits the number of identical error and note messages for a relation."
-msgstr ""
+msgstr "Limite le nombre d'erreurs identiques et de notes pour une relation."
 
 msgid ""
 "Defines how to react if the combination of \"ref;type\" (e.g. \"N8;bus\") "
@@ -1429,93 +1568,115 @@ msgid ""
 "and that those can be distinguished by also checking 'operator', 'to' and "
 "'from'."
 msgstr ""
+"Défini comment réagir si la combinaison \"ref;type\" (ex:  \"N8;bus\")  "
+"apparaît plusieurs fois dans les données. PTNA s'attend à des parcours "
+"séparés avec un 'ref' et 'type' identiques dans différents lieux et que ces "
+"derniers sont différenciables à l'aide de 'operator', 'to', et 'from'."
 
 msgid "allow further occurances of this entry"
-msgstr ""
+msgstr "Autorise plus d'apparitions de cette entrée."
 
 msgid "do not analyze 'operator', 'from' and 'to'"
-msgstr ""
+msgstr "Ne pas analyser 'operator', 'from' et 'to'"
 
 msgid ""
 "find out whether 'operator', 'from' and 'to' of the CSV data match the tags "
 "of the relation"
 msgstr ""
+"Vérifie la correspondance de 'operator', 'from' et 'to' entre les données "
+"CSV et les attributs de la relation."
 
 msgid "ignore any further occurances of this entry"
-msgstr ""
+msgstr "Ignore les autres apparitions de cette entrée."
 
 msgid ""
 "The value of 'network' = '...' of the Route-Master and Route relations must "
 "match this regular expression as 'long' form or can be empty (unset)."
 msgstr ""
+"La valeur 'network'='...' de la ligne et du parcours doivent correspondre "
+"cette expression régulière sous forme 'longue' ou peut être vide."
 
 msgid ""
 "The value of 'network' = '...' of the Route-Master and Route relations must "
 "match this regular expression as 'short' form or can be empty (unset)."
 msgstr ""
+"La valeur 'network'='...' de la ligne et du parcours doivent correspondre "
+"cette expression régulière sous forme 'courte' ou peut être vide."
 
 msgid ""
 "The value of 'operator' = '...' of the Route-Master and Route relations must "
 "match this regular expression or can be empty (unset)."
 msgstr ""
+"La valeur 'network'='...' de la ligne et du parcours doivent correspondre "
+"cette expression régulière ou peut être vide."
 
 msgid ""
 "Also show 'network:short' = '...', 'network:guid' = '...' and other tags and "
 "values."
 msgstr ""
+"Montre également 'network:short'='...', 'network:guid'='...' et d'autres "
+"attributs."
 
 msgid ""
 "'highway' = 'bus_stop' on a point beside the road is treated as "
 "'public_transport' = 'platform' if 'role' = 'platform'."
 msgstr ""
+"'highway' = 'bus_stop' sur un point proche de la route est considéré comme "
+"'public_transport' = 'platform' si 'role' = 'platform'."
 
 msgid "silently assume compatibility with legacy bus-stops (aka: PTv1)"
-msgstr ""
+msgstr "Implique la compatibilité avec les bus-stops (aka : PTv1)"
 
 msgid "no compatibility with legacy bus-stops (aka: PTv1)"
-msgstr ""
+msgstr "Incompatible avec les bus-stops (aka : PTv1)"
 
 msgid "assume and show compatibility with legacy bus-stops (aka: PTv1)"
-msgstr ""
+msgstr "Implique et montre la compatibilité avec les bus-stops (aka : PTv1)"
 
 msgid ""
 "Relaxed check of begin and end of routes regarding stop positions (i.e. for "
 "'train', 'tram', 'light_rail')."
 msgstr ""
+"Vérification souple du début et de la fin des parcours sans tenir compte des "
+"arrêts (pour les 'train', 'tram', 'light_rail')."
 
 msgid ""
 "Similar to option '--positive-notes': show values of 'gtfs*' tags in the "
 "'Notes' column."
 msgstr ""
+"Similaire à l'option '--positive-notes' : montre les valeurs de 'gtfs*' dans "
+"la colonne 'Notes'."
 
 msgid "Do not consider Route-Master and Route relations with empty 'network'."
-msgstr ""
+msgstr "Exclut les Lignes et Parcours sans 'network'."
 
 msgid "Do not consider Route-Master and Route relations with empty 'operator'."
-msgstr ""
+msgstr "Exclus les Lignes et Parcours sans 'operator'."
 
 #, perl-format
 msgid ""
 "CSV data include too many ';'. Line %s of Routes-Data. Contents of line: '%s'"
 msgstr ""
+"Les données CSV contiennent trop de ';'. Ligne %s des données de parcours. "
+"Contenus de la ligne : '%s'"
 
 msgid "is not set"
-msgstr ""
+msgstr "N'est pas activé"
 
 msgid "GTFS database not found"
-msgstr ""
+msgstr "Base de GTFS introuvable"
 
 msgid "is no longer valid (in the past)"
-msgstr ""
+msgstr "N'est plus valide (dans le passé)"
 
 msgid "is not yet valid (in the future)"
-msgstr ""
+msgstr "N'est pas encore valide (dans le futur)"
 
 msgid "outdated, fits to older GTFS version only"
-msgstr ""
+msgstr "Obsolète, spécifique aux anciennes versions de GTFS"
 
 msgid "does not exist"
-msgstr ""
+msgstr "N'existe pas"
 
 msgid "does not provide any 'shape' data"
-msgstr ""
+msgstr "Ne contient pas de donnée 'shape'"
