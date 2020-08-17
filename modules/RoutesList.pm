@@ -58,7 +58,7 @@ sub ReadRoutes {
 
     my %supported_routes_types = ();
 
-    my ($ExpRef,$ExpRouteType,$ExpComment,$ExpFrom,$ExpTo,$ExpOperator,$ExpGtfsFeed,$ExpGtfsRouteId);
+    my ($ExpRef,$ExpRouteType,$ExpComment,$ExpFrom,$ExpTo,$ExpOperator,$ExpGtfsFeed,$ExpGtfsRouteId,$ExpGtfsReleaseDate);
     my @rest = ();
 
     $CSV_separator  = $csv_separator;
@@ -118,9 +118,9 @@ sub ReadRoutes {
                         $hashref->{'type'}       = 'route';          # store type
 
                         if ( m/^"/ || m/"$csv_separator/ || m/"$/ ) {
-                            ($ExpRef,$ExpRouteType,$ExpComment,$ExpFrom,$ExpTo,$ExpOperator,$ExpGtfsFeed,$ExpGtfsRouteId,@rest) = parse_csv( $csv_separator, $_ );
+                            ($ExpRef,$ExpRouteType,$ExpComment,$ExpFrom,$ExpTo,$ExpOperator,$ExpGtfsFeed,$ExpGtfsRouteId,$ExpGtfsReleaseDate,@rest) = parse_csv( $csv_separator, $_ );
                         } else {
-                            ($ExpRef,$ExpRouteType,$ExpComment,$ExpFrom,$ExpTo,$ExpOperator,$ExpGtfsFeed,$ExpGtfsRouteId,@rest) = split( $csv_separator, $_ );
+                            ($ExpRef,$ExpRouteType,$ExpComment,$ExpFrom,$ExpTo,$ExpOperator,$ExpGtfsFeed,$ExpGtfsRouteId,$ExpGtfsReleaseDate,@rest) = split( $csv_separator, $_ );
                         }
 
                         if ( $ExpRef ) {
@@ -155,14 +155,19 @@ sub ReadRoutes {
                             $ExpGtfsRouteId =~ s/^\s*//;
                             $ExpGtfsRouteId =~ s/\s*$//;
                         }
-                        $hashref->{'ref'}            = $ExpRef          || '';              # 'ref'=
-                        $hashref->{'route'}          = $ExpRouteType    || '';              # 'route/route_master'=
-                        $hashref->{'comment'}        = $ExpComment      || '';              # routes file comment
-                        $hashref->{'from'}           = $ExpFrom         || '';              # 'from'
-                        $hashref->{'to'}             = $ExpTo           || '';              # 'to'
-                        $hashref->{'operator'}       = $ExpOperator     || '';              # 'operator'
-                        $hashref->{'gtfs-feed'}      = $ExpGtfsFeed     || '';              # 'gtfs-feed
-                        $hashref->{'gtfs-route-id'}  = $ExpGtfsRouteId  || '';              # 'gtfs-route-id'
+                        if ( $ExpGtfsReleaseDate ) {
+                            $ExpGtfsReleaseDate =~ s/^\s*//;
+                            $ExpGtfsReleaseDate =~ s/\s*$//;
+                        }
+                        $hashref->{'ref'}               = $ExpRef              || '';              # 'ref'=
+                        $hashref->{'route'}             = $ExpRouteType        || '';              # 'route/route_master'=
+                        $hashref->{'comment'}           = $ExpComment          || '';              # routes file comment
+                        $hashref->{'from'}              = $ExpFrom             || '';              # 'from'
+                        $hashref->{'to'}                = $ExpTo               || '';              # 'to'
+                        $hashref->{'operator'}          = $ExpOperator         || '';              # 'operator'
+                        $hashref->{'gtfs-feed'}         = $ExpGtfsFeed         || '';              # 'gtfs-feed
+                        $hashref->{'gtfs-route-id'}     = $ExpGtfsRouteId      || '';              # 'gtfs-route-id'
+                        $hashref->{'gtfs-release-date'} = $ExpGtfsReleaseDate  || '';              # 'gtfs-release-date'
                         if ( @rest ) {
                             $issues_string      = gettext( "CSV data include too many ';'. Line %s of Routes-Data. Contents of line: '%s'" );
                             $hashref->{'type'}  = 'error';                                              # this is an error

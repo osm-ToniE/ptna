@@ -25,8 +25,9 @@ use DBI;
 #
 #############################################################################################
 
-my %config      = ();
-my %db_handles  = ();
+my %config               = ();
+my %db_handles           = ();
+my %feed_of_open_db_file = ();
 
 $config{'path-to-work'} = '/osm/ptna/work';                 # location where to start looking for the SQLite
 $config{'name-suffix'}  = '-ptna-gtfs-sqlite.db';           # name suffix of current SQLite db
@@ -324,22 +325,43 @@ sub _AttachToGtfsSqliteDb {
 
     my $db_file    = '';
 
+    #printf STDERR "_AttachToGtfsSqliteDb( %s )\n", $feed;
     if ( $feed && $feed =~ m/^[a-zA-Z0-9_.-]+$/ ) {
         my @prefixparts = split( /-/, $feed );
         my $countrydir  = shift( @prefixparts );
 
         $db_file = $config{'path-to-work'} . '/' . $countrydir . '/' . $feed . $config{'name-suffix'};
 
-        if ( !-f $db_file ) {
+        if ( -f $db_file ) {
+            if ( -l $db_file ) {
+                $db_file = $config{'path-to-work'} . '/' . $countrydir . '/' . readlink( $db_file );
+            }
+        } else {
             my $subdir = shift( @prefixparts );
 
             $db_file = $config{'path-to-work'} . '/' . $countrydir . '/' . $subdir . '/' . $feed . $config{'name-suffix'};
+
+            if ( -l $db_file ) {
+                $db_file = $config{'path-to-work'} . '/' . $countrydir . '/' . $subdir . '/' . readlink( $db_file );
+            }
         }
 
         if ( -f $db_file ) {
+            #printf STDERR "_AttachToGtfsSqliteDb( %s ) attaches to %s\n", $feed, $db_file;
 
             if ( !$db_handles{$feed} ) {
-                $db_handles{$feed} = DBI->connect( "DBI:SQLite:dbname=$db_file", "", "", { AutoCommit => 0, RaiseError => 1 } );
+                if ( $feed_of_open_db_file{$db_file} ) {
+                    my $existing_feed = $feed_of_open_db_file{$db_file};
+
+                    if ( $db_handles{$existing_feed} ) {
+                        $db_handles{$feed} = $db_handles{$existing_feed};
+                        #printf STDERR "_AttachToGtfsSqliteDb( %s ) linked to %s\n", $feed, $existing_feed;
+                    }
+                } else {
+                    $db_handles{$feed} = DBI->connect( "DBI:SQLite:dbname=$db_file", "", "", { AutoCommit => 0, RaiseError => 1 } );
+
+                    $feed_of_open_db_file{$db_file} = $feed;
+                }
             }
 
             if ( $db_handles{$feed} ) {
@@ -379,6 +401,7 @@ sub _getRouteIdStatus {
         my $max_end   = 19700101;
         my $tms       = 0;
         my $tme       = 0;
+
         while ( @row = $sth->fetchrow_array() ) {
             if ( $row[0] ) {
                 ( $tms, $tme ) = _getStartEndDateOfIdenticalTrips( $feed, $row[0] );

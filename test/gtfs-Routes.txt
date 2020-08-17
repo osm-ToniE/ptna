@@ -49,43 +49,44 @@
 #       Inhalt im CSV-Format
 #       Alle Felder, die ';' enthalten müssen in doppelten Anführungszeichen stehen (zB. "139;142";bus;;;;"Betreiber1;Betreiber";;)
 #
-# ref;type;comment;from;to;operator;gtfs-feed;gtfs-route-id
+# ref;type;comment;from;to;operator;gtfs-feed;gtfs-route-id;gtfs-release-date
 #
-# ref           erforderlich
-#                   == tag 'ref' von route oder route_master
-#                       250             definiert, dass hier Linien mit 'ref'='250' erwartet wird
-#                       250|250a|250b   definiert, dass hier Linien mit 'ref'='250' und 'ref'='250a' und 'ref'='250b' zulässig sind
-#                                       ob das nach PTv1/PTv2 erlaubt ist, ist eine andere Sache
-#                       605/50          definiert, dass hier 'ref' von zwei 'network' gültig sind: es wird geprüft,
-#                                       ob 'ref:network1'='605' und 'ref:network2'='50' existieren
-#                       "139;142"       definiert, dass die Linie mit zwei Nummern im selben 'network' existiert.
-#                       "+210"          ermöglicht das reservierte Zeichen '+' am Anfang von 'ref'
+# ref               erforderlich
+#                       == tag 'ref' von route oder route_master
+#                           250             definiert, dass hier Linien mit 'ref'='250' erwartet wird
+#                           250|250a|250b   definiert, dass hier Linien mit 'ref'='250' und 'ref'='250a' und 'ref'='250b' zulässig sind
+#                                           ob das nach PTv1/PTv2 erlaubt ist, ist eine andere Sache
+#                           605/50          definiert, dass hier 'ref' von zwei 'network' gültig sind: es wird geprüft,
+#                                           ob 'ref:network1'='605' und 'ref:network2'='50' existieren
+#                           "139;142"       definiert, dass die Linie mit zwei Nummern im selben 'network' existiert.
+#                           "+210"          ermöglicht das reservierte Zeichen '+' am Anfang von 'ref'
 #
-# type          erforderlich
-#                   == Inhalt des tags 'route' bzw. 'route_master' (bus, train, tram, subway, ...)
+# type              erforderlich
+#                       == Inhalt des tags 'route' bzw. 'route_master' (bus, train, tram, subway, ...)
 #
-# comment       kann leer sein, wird nicht ausgewertet, lediglich ausgegeben
-#                   == kann Kommentar enthalten wie; Ruftaxi, Bus, Expressbus, ...
-#                       !Text mit gelbem Hintergrund! im comment (umgeben von einfachem !)
-#                       "Kommentar mit ; im Text"
+# comment           kann leer sein, wird nicht ausgewertet, lediglich ausgegeben
+#                       == kann Kommentar enthalten wie; Ruftaxi, Bus, Expressbus, ...
+#                           !Text mit gelbem Hintergrund! im comment (umgeben von einfachem !)
+#                           "Kommentar mit ; im Text"
 #
-# from          kann leer sein
-#                   == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# from              kann leer sein
+#                       == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
 #
-# to            kann leer sein
-#                   == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
+# to                kann leer sein
+#                       == wird bei mehreren Linie mit identischem ref, type und operator zur Differenzierung herangezogen
 #
-# operator      kann leer sein
-#                   == wird bei mehreren Linie mit identischem ref und type zur Differenzierung herangezogen
-#                       Der Wert von 'operator' darf ';' enthalten, muss dann aber in "..." stehen.
+# operator          kann leer sein
+#                       == wird bei mehreren Linie mit identischem ref und type zur Differenzierung herangezogen
+#                           Der Wert von 'operator' darf ';' enthalten, muss dann aber in "..." stehen.
 #
-# gtfs-feed     sollte leer sein
-#                   == Hinweis auf eine Quelle in der GTFS-Analyse von PTNA, in der diese Route gefunden werden kann (z.B.: "DE-BY-MVV")
-#                       Diese Angabe sollte nur dann gemacht weden, wenn 'operator:guid' und/oder 'network:guid' der OSM-Relation(en) nicht gesetzt sind
+# gtfs-feed         kann leer sein
+#                       == Hinweis auf eine Quelle in der GTFS-Analyse von PTNA, in der diese Route gefunden werden kann (z.B.: "DE-BY-MVV")
 #
-# gtfs-route-id sollte leer sein
-#                   == Hinweis auf eine "route_id" in den GTFS-Daten, die zu dieser Line gehört
-#                       Diese Angabe sollte nur dann gemacht weden, wenn 'gtfs:route_id' der OSM-Relation(en) nicht gesetzt ist
+# gtfs-route-id     kann leer sein
+#                       == Hinweis auf eine "route_id" in den GTFS-Daten, die zu dieser Linie gehört
+#
+# gtfs-release-date kann leer sein
+#                       == Hinweis auf eine spezielle Version der GTFS-Daten, die zu dieser Linie gehört (z.B. "2020-05-15"
 #
 ################################
 #
@@ -99,10 +100,15 @@
 103;bus;!GTFS database not found!;;;;DE-XX-YYY;1-102-s20-1
 
 210;bus;!Route-Id not set!;;;;DE-BY-MVV
-211;bus;!Valid Route-Id!;;;;DE-BY-MVV;19-211-s20-1
+211;bus;!Valid Route-Id in latest GTFS release, no 'gtfs-release-date'!;;;;DE-BY-MVV;19-211-s20-1
+211;bus;!Valid Route-Id in dedicated GTFS release: '2020-07-24'!;;;;DE-BY-MVV;19-211-s20-1;2020-07-24
 212;bus;!Route-Id does not exist!;;;;DE-BY-MVV;20-212-s20-1
 
-736;bus;!Old Route-Id!;;;;DE-BY-MVV;33-736-s19-2
+736;bus;!Old Route-Id, no 'gtfs-release-date'!;;;;DE-BY-MVV;33-736-s19-2
+
+736;bus;!Route-Id of dedicated GTFS release: '2020-05-15'!;;;;DE-BY-MVV;33-736-s19-2;2020-05-15
+
+736;bus;!Route-Id of dedicated GTFS release: 'previous'!;;;;DE-BY-MVV;33-736-s19-2;previous
 
 S2T-E;bus;!Future Route-Id!;;;;DE-BW-SWEG;14-S2T-E-j20-3
 -

@@ -1131,7 +1131,7 @@ if ( scalar( @RouteList ) ) {
             printTableLine( 'issues' => $entryref->{'error'} );
         } elsif ( $entryref->{'type'} eq 'route' ) {
 
-            printf STDERR "    ref = %s, ref-or-list = '%s', ref-and-list = '%s', route = %s, comment = %s, from = %s, to = %s, operator = %s\n", $entryref->{'ref'}, join( ', ', @{$entryref->{'ref-or-list'}} ), join( ', ', @{$entryref->{'ref-and-list'}} ), $entryref->{'route'}, $entryref->{'comment'}, $entryref->{'from'}, $entryref->{'to'}, $entryref->{'operator'}  if ( $debug );
+            printf STDERR "    ref = %s, ref-or-list = '%s', ref-and-list = '%s', route = %s, comment = %s, from = %s, to = %s, operator = %s, gtfs-feed = %s, gtfs-route_id = %s, gtfs-release-date = %s\n", $entryref->{'ref'}, join( ', ', @{$entryref->{'ref-or-list'}} ), join( ', ', @{$entryref->{'ref-and-list'}} ), $entryref->{'route'}, $entryref->{'comment'}, $entryref->{'from'}, $entryref->{'to'}, $entryref->{'operator'}, $entryref->{'gtfs-feed'}, $entryref->{'gtfs-route-id'}, $entryref->{'gtfs-release-date'}  if ( $debug );
 
             if ( $table_headers_printed == 0 ) {
                 printTableHeader();
@@ -1153,18 +1153,19 @@ if ( scalar( @RouteList ) ) {
                     printf STDERR "%s Found: Relation-ID %s, Type: %s, Ref: %s, RouteType: %s\n", get_time(), $relation_id, $RELATIONS{$relation_id}->{'tag'}->{'type'}, $RELATIONS{$relation_id}->{'tag'}->{'ref'}, $RELATIONS{$relation_id}->{'tag'}->{$RELATIONS{$relation_id}->{'tag'}->{'type'}}    if ( $debug );
 
                     if ( $i == 0 ) {
-                        printTableSubHeader( 'ref-or-list'   => $entryref->{'ref-or-list'},              # is a pointer to an array: ('23') or also ('43', 'E43') for multiple 'ref' values
-                                             'network'       => $relation_ptr->{'tag'}->{'network'},     # take 'network' value from first relation, undef outside this for-loop
-                                             'pt_type'       => $entryref->{'route'},
-                                             'colour'        => $relation_ptr->{'tag'}->{'colour'},      # take 'colour' value from first relation, undef outside this for-loop
-                                             'Comment'       => $entryref->{'comment'},
-                                             'From'          => $entryref->{'from'},
-                                             'From-List'     => $entryref->{'from-list'},
-                                             'To'            => $entryref->{'to'},
-                                             'To-List'       => $entryref->{'to-list'},
-                                             'Operator'      => $entryref->{'operator'},
-                                             'GTFS-Feed'     => $entryref->{'gtfs-feed'},
-                                             'GTFS-Route-Id' => $entryref->{'gtfs-route-id'},
+                        printTableSubHeader( 'ref-or-list'       => $entryref->{'ref-or-list'},              # is a pointer to an array: ('23') or also ('43', 'E43') for multiple 'ref' values
+                                             'network'           => $relation_ptr->{'tag'}->{'network'},     # take 'network' value from first relation, undef outside this for-loop
+                                             'pt_type'           => $entryref->{'route'},
+                                             'colour'            => $relation_ptr->{'tag'}->{'colour'},      # take 'colour' value from first relation, undef outside this for-loop
+                                             'Comment'           => $entryref->{'comment'},
+                                             'From'              => $entryref->{'from'},
+                                             'From-List'         => $entryref->{'from-list'},
+                                             'To'                => $entryref->{'to'},
+                                             'To-List'           => $entryref->{'to-list'},
+                                             'Operator'          => $entryref->{'operator'},
+                                             'GTFS-Feed'         => $entryref->{'gtfs-feed'},
+                                             'GTFS-Route-Id'     => $entryref->{'gtfs-route-id'},
+                                             'GTFS-Release-Date' => $entryref->{'gtfs-release-date'},
                                            );
                     }
 
@@ -1202,16 +1203,17 @@ if ( scalar( @RouteList ) ) {
                 #
                 # we do not have a line which fits to the requested 'ref' and 'route_type' combination
                 #
-                printTableSubHeader( 'ref-or-list'   => $entryref->{'ref-or-list'},
-                                     'pt_type'       => $entryref->{'route'},
-                                     'Comment'       => $entryref->{'comment'},
-                                     'From'          => $entryref->{'from'},
-                                     'From-List'     => $entryref->{'from-list'},
-                                     'To'            => $entryref->{'to'},
-                                     'To-List'       => $entryref->{'to-list'},
-                                     'Operator'      => $entryref->{'operator'},
-                                     'GTFS-Feed'     => $entryref->{'gtfs-feed'},
-                                     'GTFS-Route-Id' => $entryref->{'gtfs-route-id'},
+                printTableSubHeader( 'ref-or-list'       => $entryref->{'ref-or-list'},
+                                     'pt_type'           => $entryref->{'route'},
+                                     'Comment'           => $entryref->{'comment'},
+                                     'From'              => $entryref->{'from'},
+                                     'From-List'         => $entryref->{'from-list'},
+                                     'To'                => $entryref->{'to'},
+                                     'To-List'           => $entryref->{'to-list'},
+                                     'Operator'          => $entryref->{'operator'},
+                                     'GTFS-Feed'         => $entryref->{'gtfs-feed'},
+                                     'GTFS-Route-Id'     => $entryref->{'gtfs-route-id'},
+                                     'GTFS-Release-Date' => $entryref->{'gtfs-release-date'},
                                    );
 
                 $issues_string = gettext( "Missing route for ref='%s' and route='%s'" );
@@ -5201,6 +5203,12 @@ sub getGtfsInfo {
         $gtfs_country =  $gtfs_guid;
         $gtfs_country =~ s/-.*$//;
 
+        if ( $relation_ptr->{'tag'}->{'gtfs:release_date'} ) {
+            $gtfs_guid .= '-' .  $relation_ptr->{'tag'}->{'gtfs:release_date'}
+        } elsif ( $relation_ptr->{'tag'}->{'gtfs:source_date'} ) {
+            $gtfs_guid .= '-' .  $relation_ptr->{'tag'}->{'gtfs:source_date'}
+        }
+
         if ( $relation_ptr->{'tag'}->{'type'} eq 'route' ) {
             if ( $relation_ptr->{'tag'}->{'gtfs:trip_id'} ) {
                 $gtfs_html_tag = GTFS::PtnaSQLite::getGtfsTripIdHtmlTag( $gtfs_guid, $relation_ptr->{'tag'}->{'gtfs:trip_id'} );
@@ -5964,10 +5972,20 @@ sub printTableSubHeader {
     $csv_text .= sprintf( "%s: %s; ", ( $column_name{'To'}            ? $column_name{'To'}            : 'To' ),            html_escape($hash{'To'})       )      if ( $hash{'To'}            );
     $csv_text .= sprintf( "%s: %s; ", ( $column_name{'Operator'}      ? $column_name{'Operator'}      : 'Operator' ),      html_escape($hash{'Operator'}) )      if ( $hash{'Operator'}      );
     if ( $hash{'GTFS-Feed'} && $hash{'GTFS-Route-Id'} ) {
-        $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'},$hash{'GTFS-Route-Id'} );
+        if ( $hash{'GTFS-Release-Date'} ) {
+            printf STDERR "printTableSubHeader(): call GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( %s, %s );\n", $hash{'GTFS-Feed'}.'-'.$hash{'GTFS-Release-Date'},$hash{'GTFS-Route-Id'};
+            $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}.'-'.$hash{'GTFS-Release-Date'},$hash{'GTFS-Route-Id'} );
+            printf STDERR "printTableSubHeader(): csv_text = %s\n", $csv_text;
+        } else {
+            $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'},$hash{'GTFS-Route-Id'} );
+        }
     } else {
         if ( $hash{'GTFS-Feed'} ) {
-            $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'},'' );
+            if ( $hash{'GTFS-Release-Date'} ) {
+                $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}.'-'.$hash{'GTFS-Release-Date'},'' );
+            } else {
+                $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'},'' );
+            }
         } elsif ( $hash{'GTFS-Route-Id'} ) {
             $csv_text .= sprintf( "%s: %s; ", ( $column_name{'GTFS-Route-Id'} ? $column_name{'GTFS-Route-Id'} : 'GTFS-Route-Id' ), html_escape($hash{'GTFS-Route-Id'}) );
         }
