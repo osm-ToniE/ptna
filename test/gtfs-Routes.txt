@@ -86,7 +86,7 @@
 #                       == Hinweis auf eine "route_id" in den GTFS-Daten, die zu dieser Linie gehört
 #
 # gtfs-release-date kann leer sein
-#                       == Hinweis auf eine spezielle Version der GTFS-Daten, die zu dieser Linie gehört (z.B. "2020-05-15"
+#                       == Hinweis auf eine spezielle Version der GTFS-Daten, die zu dieser Linie gehört (z.B. "2020-05-15")
 #
 ################################
 #
