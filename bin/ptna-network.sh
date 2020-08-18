@@ -22,7 +22,7 @@ fi
 SETTINGS_DIR="."
 
 
-TEMP=$(getopt -o acCfgGhoOpPuwWS --long analyze,clean-created,clean-downloaded,get-routes,get-talk,force-download,help,overpass-query,overpass-query-on-zero-xml,push-routes,push-talk,update-result,watch-routes,watch-talk,settings-dir -n 'ptna-network.sh' -- "$@")
+TEMP=$(getopt -o acCfgGhmoOpPuwWS --long analyze,clean-created,clean-downloaded,get-routes,get-talk,force-download,help,modiify-routes-data,overpass-query,overpass-query-on-zero-xml,push-routes,push-talk,update-result,watch-routes,watch-talk,settings-dir -n 'ptna-network.sh' -- "$@")
 
 if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 2 ; fi
 
@@ -37,6 +37,7 @@ while true ; do
         -g|--get-routes)                    getroutes=true              ; shift ;;
         -G|--get-talk)                      gettalk=true                ; shift ;;
         -h|--help)                          help=true                   ; shift ;;
+        -m|--modify-routes-data)            modify=true                 ; shift ;;
         -o|--overpass-query)                overpassquery=true  ; overpassqueryonzeroxml=false ; shift ;;
         -O|--overpass-query-on-zero-xml)    overpassqueryonzeroxml=true  ; overpassquery=false ; shift ;;
         -p|--push-routes)                   pushroutes=true             ; shift ;;
@@ -261,6 +262,70 @@ then
     else
         echo $(date "+%Y-%m-%d %H:%M:%S") "Work dir $WORK_LOC does not exist/could not be created"
     fi
+fi
+
+#
+#
+#
+
+if [ "$modify" = "true" ]
+then
+    echo $(date "+%Y-%m-%d %H:%M:%S") "Modifying Routes Data"
+
+    if [ ! -d "$WORK_LOC" ]
+    then
+        echo $(date "+%Y-%m-%d %H:%M:%S") "Creating directory $WORK_LOC"
+        mkdir -p $WORK_LOC
+    fi
+
+    if [ -d "$WORK_LOC" ]
+    then
+        if [ -n "$WIKI_ROUTES_PAGE" ]
+        then
+            echo $(date "+%Y-%m-%d %H:%M:%S") "Reading Routes Wiki page '$WIKI_ROUTES_PAGE' to file '$WORK_LOC/$ROUTES_FILE'"
+            ptna-wiki-page.pl --pull --page=$WIKI_ROUTES_PAGE --file=$WORK_LOC/$ROUTES_FILE
+            echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WORK_LOC/$ROUTES_FILE)
+
+            # put the code to modify the data here (sed, awk, perl, ... calls)
+
+            #sed -i -e 's/ref;type;comment;from;to;operator;gtfs-feed;gtfs-route-id/&;gtfs-release-date/' $WORK_LOC/$ROUTES_FILE
+
+            #sed -i -e 's/Hinweis auf eine "route_id" in den GTFS-Daten, die zu dieser Line gehört/&\n#\n# gtfs-release-date kann leer sein\n#                       == Hinweis auf eine spezielle Version der GTFS-Daten, die zu dieser Linie gehört (z.B. "2020-05-15")/' $WORK_LOC/$ROUTES_FILE
+
+            #sed -i -e 's/Reference to a "route_id" in the GTFS data that belongs to this route/&\n#\n# gtfs-release-date can be empty\n#                       == Reference to special release of the GTFS data (e.g.: "2020-08-18")/' $WORK_LOC/$ROUTES_FILE
+
+            #sed -i -e 's/Référence à un "route_id" dans les données GTFS qui appartient à cette route/&\n#\n# gtfs-release-date peut être vide\n#                       == Référence à une version spécial des données GTFS (par example : "2020-08-18")/' $WORK_LOC/$ROUTES_FILE
+
+            # end of code here
+
+            echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WORK_LOC/$ROUTES_FILE)
+        else
+            if [ -f "$SETTINGS_DIR/$ROUTES_FILE" ]
+            then
+                echo $(date "+%Y-%m-%d %H:%M:%S") "'$ROUTES_FILE' provided by GitHub,"
+                echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $SETTINGS_DIR/$ROUTES_FILE)
+
+                # put the code to modify the data here (sed, awk, perl, ... calls)
+
+                #sed -i -e 's/ref;type;comment;from;to;operator;gtfs-feed;gtfs-route-id/&;gtfs-release-date/' $SETTINGS_DIR/$ROUTES_FILE
+
+                #sed -i -e 's/Hinweis auf eine "route_id" in den GTFS-Daten, die zu dieser Line gehört/&\n#\n# gtfs-release-date kann leer sein\n#                       == Hinweis auf eine spezielle Version der GTFS-Daten, die zu dieser Linie gehört (z.B. "2020-05-15")/' $SETTINGS_DIR/$ROUTES_FILE
+
+                #sed -i -e 's/Reference to a "route_id" in the GTFS data that belongs to this route/&\n#\n# gtfs-release-date can be empty\n#                       == Reference to special release of the GTFS data (e.g.: "2020-08-18")/' $SETTINGS_DIR/$ROUTES_FILE
+
+                #sed -i -e 's/Référence à un "route_id" dans les données GTFS qui appartient à cette route/&\n#\n# gtfs-release-date peut être vide\n#                       == Référence à une version spécial des données GTFS (par example : "2020-08-18")/' $SETTINGS_DIR/$ROUTES_FILE
+
+                # end of code here
+
+                echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $SETTINGS_DIR/$ROUTES_FILE)
+            else
+                echo $(date "+%Y-%m-%d %H:%M:%S") "no file: '$ROUTES_FILE'"
+            fi
+        fi
+    else
+        echo $(date "+%Y-%m-%d %H:%M:%S") "Work dir $WORK_LOC does not exist/could not be created"
+    fi
+
 fi
 
 #
