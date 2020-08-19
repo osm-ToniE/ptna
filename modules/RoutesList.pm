@@ -104,7 +104,7 @@ sub ReadRoutes {
                         } elsif ( m/^-(.*)/ ) {
                             $hashref->{'type'}       =  'text';       # store type
                             $hashref->{'text'}       =  $1;
-                            $hashref->{'text'}       =~ s/^\s*//;
+                            $hashref->{'text'}       =~ s/^\s(\S)/\1/;  # delete only one and single trailing blank fpllowed by a non-blank character
                         } else {
                             next;   # ignore 'comment' line
                         }

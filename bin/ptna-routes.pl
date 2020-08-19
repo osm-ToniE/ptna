@@ -5855,7 +5855,11 @@ sub printText {
     $printText_buffer = "<p>\n"   unless ( $printText_buffer );
 
     if ( $text ) {
-        $printText_buffer .= sprintf( "%s\n", wiki2html($text) );
+        my $wikitext = wiki2html( $text );
+        while ( $wikitext =~ m/^\s/ ) {
+            $wikitext =~ s/^(\s*)\s/\1&nbsp;/;
+        }
+        $printText_buffer .= sprintf( "%s\n", $wikitext );
     } else {
         if ( $printText_buffer eq "<p>\n" ) {
             push( @HTML_main, $printText_buffer . "&nbsp;\n</p>\n" );
