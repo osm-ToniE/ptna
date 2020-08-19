@@ -5973,9 +5973,7 @@ sub printTableSubHeader {
     $csv_text .= sprintf( "%s: %s; ", ( $column_name{'Operator'}      ? $column_name{'Operator'}      : 'Operator' ),      html_escape($hash{'Operator'}) )      if ( $hash{'Operator'}      );
     if ( $hash{'GTFS-Feed'} && $hash{'GTFS-Route-Id'} ) {
         if ( $hash{'GTFS-Release-Date'} ) {
-            printf STDERR "printTableSubHeader(): call GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( %s, %s );\n", $hash{'GTFS-Feed'}.'-'.$hash{'GTFS-Release-Date'},$hash{'GTFS-Route-Id'};
             $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}.'-'.$hash{'GTFS-Release-Date'},$hash{'GTFS-Route-Id'} );
-            printf STDERR "printTableSubHeader(): csv_text = %s\n", $csv_text;
         } else {
             $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'},$hash{'GTFS-Route-Id'} );
         }
