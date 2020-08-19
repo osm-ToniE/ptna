@@ -76,6 +76,7 @@ my $relaxed_begin_end_for           = undef;
 my $network_guid                    = undef;
 my $network_long_regex              = undef;
 my $network_short_regex             = undef;
+my $no_additional_navigation        = undef;
 my $operator_regex                  = undef;
 my $allow_coach                     = undef;
 my $check_access                    = undef;
@@ -152,6 +153,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'network-guid=s'                =>  \$network_guid,                 # --network-guid='DE-BY-MVV'
             'network-long-regex:s'          =>  \$network_long_regex,           # --network-long-regex='Münchner Verkehrs- und Tarifverbund|Grünwald|Bayerische Oberlandbahn'
             'network-short-regex:s'         =>  \$network_short_regex,          # --network-short-regex='MVV|BOB'
+            'no-additional-navigation'      =>  \$no_additional_navigation,     # --no-additional-navigation
             'operator-regex:s'              =>  \$operator_regex,               # --operator-regex='MVG|Münchner'
             'positive-notes'                =>  \$positive_notes,               # --positive-notes                  print positive information for notes, if e.g. something is fulfilled
             'ptv1-compatibility=s'          =>  \$ptv1_compatibility,           # --ptv1-compatibility=no|show|allow    how to handle "highway=bus_stop" in PTv2
@@ -271,6 +273,7 @@ if ( $verbose ) {
     printf STDERR "%20s--multiple-ref-type-entries='%s'\n",' ', $multiple_ref_type_entries  ? $multiple_ref_type_entries   : '';
     printf STDERR "%20s--network-long-regex='%s'\n",       ' ', $network_long_regex         ? $network_long_regex          : '';
     printf STDERR "%20s--network-short-regex='%s'\n",      ' ', $network_short_regex        ? $network_short_regex         : '';
+    printf STDERR "%20s--no-additional-navigation\n",      ' ', $no_additional_navigation   ? 'ON'          :'OFF';
     printf STDERR "%20s--operator-regex='%s'\n",           ' ', $operator_regex             ? $operator_regex              : '';
     printf STDERR "%20s--positive-notes='%s'\n",           ' ', $positive_notes             ? 'ON'          :'OFF';
     printf STDERR "%20s--ptv1-compatibility='%s'\n",       ' ', $ptv1_compatibility         ? $ptv1_compatibility          : '';
@@ -5241,7 +5244,7 @@ my @html_header_anchors         = ();
 my @html_header_anchor_numbers  = (0,0,0,0,0,0,0);
 my $printText_buffer            = '';
 my %id_markers                  = ();                   # printTableSubHeader() auto-generates id='' strings based on 'route_type' and 'ref'; they may appear multiple times
-
+my $local_navigation_at_index   = 0;
 
 
 sub printInitialHeader {
@@ -5844,6 +5847,8 @@ sub printHeader {
 
         printf STDERR "%s %s %s\n", get_time(), $level, $text    if ( $verbose );
     }
+    push( @HTML_main, "" );
+    $local_navigation_at_index = $#HTML_main;
 }
 
 
@@ -5857,7 +5862,7 @@ sub printText {
     if ( $text ) {
         my $wikitext = wiki2html( $text );
         while ( $wikitext =~ m/^\s/ ) {
-            $wikitext =~ s/^(\s*)\s/\1&nbsp;/;
+            $wikitext =~ s/^(\s*)\s/$1&nbsp;/;
         }
         $printText_buffer .= sprintf( "%s\n", $wikitext );
     } else {
@@ -5941,6 +5946,7 @@ sub printTableSubHeader {
     my @ref_or_array        = ();
     my $ref_or_list_text    = '';
     my $id_string           = '';
+    my $id_label            = '';
 
     if ( $ref_or_list ) {
         @ref_or_array = @{$ref_or_list};
@@ -5957,15 +5963,18 @@ sub printTableSubHeader {
     }
 
     if ( scalar @ref_or_array && $pt_type ) {
-        $id_string = sprintf( "%s_%s", $pt_type, join('_', @ref_or_array ) );
-        $id_string =~ s/[^0-9A-Za-z_.-]/_/g;                                    # other characters are not allowed in 'id'
-        if ( $id_markers{$id_string} ) {                                        # if the same combination appears more than one, add a number as suffix (e.g. "Bus A" of VMS in Saxony, Germany
-            $id_markers{$id_string}++;
-            $id_string = sprintf( "id=\"%s-%d\" ", $id_string, $id_markers{$id_string} );
+        my $id_label  = sprintf( "%s_%s", $pt_type, join('_', @ref_or_array ) );
+           $id_label  =~ s/[^0-9A-Za-z_.-]/_/g;                                # other characters are not allowed in 'id'
+        my $nav_label = '';
+        if ( $id_markers{$id_label} ) {                                        # if the same combination appears more than one, add a number as suffix (e.g. "Bus A" of VMS in Saxony, Germany
+            $id_markers{$id_label}++;
+            $nav_label = sprintf( "%s-%d", $id_label, $id_markers{$id_label} );
         } else {
-            $id_markers{$id_string} = 1;
-            $id_string = sprintf( "id=\"%s\" ", $id_string );
+            $id_markers{$id_label} = 1;
+            $nav_label = $id_label;
         }
+        $id_string = sprintf( "id=\"%s\" ", $nav_label );
+        printAddIdLabelToLocalNavigation( $nav_label, join(' ', @ref_or_array ) );
     }
 
     if ( $hash{'Comment'}  ) {
@@ -6230,6 +6239,22 @@ sub printSketchLineTemplate {
     $text = sprintf( "<a href=\"https://overpass-api.de/api/sketch-line?ref=%s&network=%s&style=wuppertal%s%s\" title=\"Sketch-Line\"%s>%s%s%s</a>", uri_escape($ref), uri_escape($network), $colour_string, $pt_string, $textdeco, $span_begin, $ref, $span_end ); # some manual expansion of the template
 
     return $text;
+}
+
+
+#############################################################################################
+
+sub printAddIdLabelToLocalNavigation {
+    my $id_label        = shift;
+    my $visible_string  = shift;
+
+    if ( !$no_additional_navigation && $local_navigation_at_index && $id_label && $visible_string ) {
+
+        $HTML_main[$local_navigation_at_index] =~ s|</br></br>\n$||;
+        $HTML_main[$local_navigation_at_index] .= sprintf( "<a href=\"#%s\">%s</a> </br></br>\n", html_escape($id_label), html_escape($visible_string) );
+    }
+
+    return;
 }
 
 
