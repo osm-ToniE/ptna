@@ -138,27 +138,27 @@ A simulated Bullet List with indention
 
 </p>
 <p>
-* first level
+<strong>⦿ first level strong</strong>
 
 </p>
 <p>
-&nbsp;&nbsp;&nbsp;&nbsp;** second level
+&nbsp;&nbsp;&nbsp;&nbsp;⦾ second level
 
 </p>
 <p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** third level
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• third level
 
 </p>
 <p>
-&nbsp;&nbsp;&nbsp;&nbsp;** back to second level
+&nbsp;&nbsp;&nbsp;&nbsp;⦾ back to second level
 
 </p>
 <p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** third level
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• third level
 
 </p>
 <p>
-* first level
+⦿ first level
 
 </p>
 <p>
