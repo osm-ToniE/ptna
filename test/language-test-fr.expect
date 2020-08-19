@@ -32,7 +32,7 @@
         <div id="analysis">
         <h1>Résultats</h1>
         <ol>
-        <li>1 <a href="#hints">Hints</a>
+        <li>1 <a href="#hints">Astuces</a>
         </li>
         <li>2 <a href="#A2">Test file for Read Routes Data</a>
         <ol>
@@ -66,7 +66,7 @@
         </li>
         </ol>
         <hr />
-        <h1 id="hints">1 Hints</h1>
+        <h1 id="hints">1 Astuces</h1>
         <p>
             Le tableau sera mis à jour quand les résultats de l'analyse auront changé.
         </p>
@@ -129,9 +129,9 @@ OSM-Wiki Link without alias: <a href="https://wiki.openstreetmap.org/wiki/Münch
                 <tr id="train_010" data-info="Commentaire: ICE; Depuis: Hamburg; Vers: Munich; Transporteur: Deutsche Bahn" data-ref="010" class="sketchline"><td class="sketch">010</td><td class="csvinfo" colspan="5">Commentaire: ICE; Depuis: Hamburg; Vers: Munich; Transporteur: Deutsche Bahn</td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec 'ref' = '010' et 'route' = 'train'</td><td class="notes"></td></tr>
                 <tr data-info="???" data-ref="100" class="sketchline"><td class="sketch">100</td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not set. Line 69 of Routes-Data. Contents of line: '100'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Le type 'Route' n'est pas indiqué. Ligne 69 des données de parcours. Contenus de la ligne : '100'</td><td class="notes"></td></tr>
                 <tr data-info="???" data-ref="200" class="sketchline"><td class="sketch">200</td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not set. Line 70 of Routes-Data. Contents of line: '200;'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Le type 'Route' n'est pas indiqué. Ligne 70 des données de parcours. Contenus de la ligne : '200;'</td><td class="notes"></td></tr>
                 <tr id="bus_201" data-info="???" data-ref="201" class="sketchline"><td class="sketch">201</td><td class="csvinfo" colspan="5"></td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec 'ref' = '201' et 'route' = 'bus'</td><td class="notes"></td></tr>
             </tbody>
@@ -147,13 +147,13 @@ text inside table is now supported
             </thead>
             <tbody>
                 <tr data-info="???" data-ref="300" class="sketchline"><td class="sketch">300</td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not set. Line 75 of Routes-Data. Contents of line: '300;;'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Le type 'Route' n'est pas indiqué. Ligne 75 des données de parcours. Contenus de la ligne : '300;;'</td><td class="notes"></td></tr>
                 <tr id="bus_301" data-info="???" data-ref="301" class="sketchline"><td class="sketch">301</td><td class="csvinfo" colspan="5"></td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec 'ref' = '301' et 'route' = 'bus'</td><td class="notes"></td></tr>
                 <tr id="bus_302" data-info="Commentaire: comment" data-ref="302" class="sketchline"><td class="sketch">302</td><td class="csvinfo" colspan="5">Commentaire: comment</td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec 'ref' = '302' et 'route' = 'bus'</td><td class="notes"></td></tr>
                 <tr data-info="???" data-ref="400" class="sketchline"><td class="sketch">400</td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not set. Line 78 of Routes-Data. Contents of line: '400;;;'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Le type 'Route' n'est pas indiqué. Ligne 78 des données de parcours. Contenus de la ligne : '400;;;'</td><td class="notes"></td></tr>
             </tbody>
         </table>
 
@@ -170,13 +170,13 @@ text inside table is now supported
                 <tr id="bus_402" data-info="Commentaire: comment; Depuis: from" data-ref="402" class="sketchline"><td class="sketch">402</td><td class="csvinfo" colspan="5">Commentaire: comment; Depuis: from</td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec 'ref' = '402' et 'route' = 'bus'</td><td class="notes"></td></tr>
                 <tr data-info="???" data-ref="500" class="sketchline"><td class="sketch">500</td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not set. Line 82 of Routes-Data. Contents of line: '500;;;;'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Le type 'Route' n'est pas indiqué. Ligne 82 des données de parcours. Contenus de la ligne : '500;;;;'</td><td class="notes"></td></tr>
                 <tr id="bus_501" data-info="Commentaire: comment; Depuis: from" data-ref="501" class="sketchline"><td class="sketch">501</td><td class="csvinfo" colspan="5">Commentaire: comment; Depuis: from</td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec 'ref' = '501' et 'route' = 'bus'</td><td class="notes"></td></tr>
                 <tr id="bus_502" data-info="Commentaire: comment; Depuis: from; Vers: to" data-ref="502" class="sketchline"><td class="sketch">502</td><td class="csvinfo" colspan="5">Commentaire: comment; Depuis: from; Vers: to</td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec 'ref' = '502' et 'route' = 'bus'</td><td class="notes"></td></tr>
                 <tr data-info="???" data-ref="600" class="sketchline"><td class="sketch">600</td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not set. Line 85 of Routes-Data. Contents of line: '600;;;;;'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Le type 'Route' n'est pas indiqué. Ligne 85 des données de parcours. Contenus de la ligne : '600;;;;;'</td><td class="notes"></td></tr>
                 <tr id="bus_601" data-info="???" data-ref="601" class="sketchline"><td class="sketch">601</td><td class="csvinfo" colspan="5"></td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec 'ref' = '601' et 'route' = 'bus'</td><td class="notes"></td></tr>
                 <tr id="bus_602" data-info="Commentaire: comment" data-ref="602" class="sketchline"><td class="sketch">602</td><td class="csvinfo" colspan="5">Commentaire: comment</td></tr>
@@ -190,7 +190,7 @@ text inside table is now supported
                 <tr id="bus_606" data-info="Transporteur: operator" data-ref="606" class="sketchline"><td class="sketch">606</td><td class="csvinfo" colspan="5">Transporteur: operator</td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec 'ref' = '606' et 'route' = 'bus'</td><td class="notes"></td></tr>
                 <tr data-info="???" data-ref="700" class="sketchline"><td class="sketch">700</td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Route-Type is not supported: 'auto'. Line 92 of Routes-Data. Contents of line: '700;auto;invalid route-type;nowhere;nowhere;noone'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Le type 'Route' n'est pas pris en charge : 'auto'. Ligne 92 des données de parcours. Contenus de la ligne : '700;auto;invalid route-type;nowhere;nowhere;noone'</td><td class="notes"></td></tr>
                 <tr id="bus_800" data-info="Commentaire: <span class=_attention_>Neue Buslinie ab 09.12.2018</span>; Depuis: nowhere; Vers: nowhere; Transporteur: noone" data-ref="800" class="sketchline"><td class="sketch">800</td><td class="csvinfo" colspan="5">Commentaire: <span class="attention">Neue Buslinie ab 09.12.2018</span>; Depuis: nowhere; Vers: nowhere; Transporteur: noone</td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Parcours manquant avec 'ref' = '800' et 'route' = 'bus'</td><td class="notes"></td></tr>
                 <tr id="bus_900" data-info="Commentaire: comment; Depuis: from; Vers: to; Transporteur: operator1;operator2" data-ref="900" class="sketchline"><td class="sketch">900</td><td class="csvinfo" colspan="5">Commentaire: comment; Depuis: from; Vers: to; Transporteur: operator1;operator2</td></tr>
