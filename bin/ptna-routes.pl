@@ -273,7 +273,7 @@ if ( $verbose ) {
     printf STDERR "%20s--multiple-ref-type-entries='%s'\n",' ', $multiple_ref_type_entries  ? $multiple_ref_type_entries   : '';
     printf STDERR "%20s--network-long-regex='%s'\n",       ' ', $network_long_regex         ? $network_long_regex          : '';
     printf STDERR "%20s--network-short-regex='%s'\n",      ' ', $network_short_regex        ? $network_short_regex         : '';
-    printf STDERR "%20s--no-additional-navigation\n",      ' ', $no_additional_navigation   ? 'ON'          :'OFF';
+    printf STDERR "%20s--no-additional-navigation='%s'\n", ' ', $no_additional_navigation   ? 'ON'          :'OFF';
     printf STDERR "%20s--operator-regex='%s'\n",           ' ', $operator_regex             ? $operator_regex              : '';
     printf STDERR "%20s--positive-notes='%s'\n",           ' ', $positive_notes             ? 'ON'          :'OFF';
     printf STDERR "%20s--ptv1-compatibility='%s'\n",       ' ', $ptv1_compatibility         ? $ptv1_compatibility          : '';
