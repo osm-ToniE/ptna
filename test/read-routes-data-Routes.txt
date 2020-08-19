@@ -72,17 +72,17 @@
 -
 - A simulated Bullet List with indention
 -
-- * first level
+- '''⦿ first level strong'''
 -
--    ** second level
+-    ⦾ second level
 -
--        ** third level
+-        • third level
 -
--    ** back to second level
+-    ⦾ back to second level
 -
--        ** third level
+-        • third level
 -
-- * first level
+- ⦿ first level
 -
 - 1. numbered item
 -
