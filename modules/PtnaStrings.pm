@@ -1474,6 +1474,13 @@ sub InitOptionStrings {
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
+    $OptionList[$i]->{'option'}                 = "no-additional-navigation";
+    $OptionList[$i]->{'default'}                = "OFF";
+    $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'image'}                  = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+
+    $i++;
     $OptionList[$i]->{'option'}                 = "operator-regex";
     $OptionList[$i]->{'default'}                = "";
     $OptionList[$i]->{'description'}            = gettext( "The value of 'operator' = '...' of the Route-Master and Route relations must match this regular expression or can be empty (unset)." );
