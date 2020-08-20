@@ -5974,7 +5974,7 @@ sub printTableSubHeader {
             $nav_label = $id_label;
         }
         $id_string = sprintf( "id=\"%s\" ", $nav_label );
-        printAddIdLabelToLocalNavigation( $nav_label, join(' ', @ref_or_array ) );
+        printAddIdLabelToLocalNavigation( $nav_label, join(' ',@ref_or_array), $colour );
     }
 
     if ( $hash{'Comment'}  ) {
@@ -6247,11 +6247,22 @@ sub printSketchLineTemplate {
 sub printAddIdLabelToLocalNavigation {
     my $id_label        = shift;
     my $visible_string  = shift;
+    my $colour          = shift;
 
     if ( !$no_additional_navigation && $local_navigation_at_index && $id_label && $visible_string ) {
 
+        my $bg_colour   = GetColourFromString( $colour );
+        my $fg_colour   = GetForeGroundFromBackGround( $bg_colour );
+        my $span_begin  = '&nbsp;';
+        my $span_end    = '&nbsp;';
+
+        if ( $bg_colour && $fg_colour && $coloured_sketchline ) {
+            $span_begin = sprintf( "<span style=\"color:%s;background-color:%s;\">&nbsp;", $fg_colour, $bg_colour );
+            $span_end   = "&nbsp;</span>";
+        }
+
         $HTML_main[$local_navigation_at_index] =~ s|</br></br>\n$||;
-        $HTML_main[$local_navigation_at_index] .= sprintf( "<a href=\"#%s\">%s</a> </br></br>\n", html_escape($id_label), html_escape($visible_string) );
+        $HTML_main[$local_navigation_at_index] .= sprintf( "<a href=\"#%s\" style=\"text-decoration:none;\">%s%s%s</a> </br></br>\n", html_escape($id_label), $span_begin, html_escape($visible_string), $span_begin );
     }
 
     return;

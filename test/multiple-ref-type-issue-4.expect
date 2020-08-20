@@ -74,6 +74,7 @@ Two of them have identical &#039;operator&#039; but different &#039;from&#039; a
 
 </p>
         <h2 id="A2.1">2.1 Bus &#039;A&#039; in Annaberg-Buchholz: Barbara-Uthmann-Ring =&gt; Buchholz, operated by Operator RVE</h2>
+<a href="#bus_A" style="text-decoration:none;">&nbsp;A&nbsp;</a> </br></br>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
@@ -87,6 +88,7 @@ Two of them have identical &#039;operator&#039; but different &#039;from&#039; a
         </table>
 
         <h2 id="A2.2">2.2 Bus &#039;A&#039; in Aue: Postplatz =&gt; Postplatz, operated also by Operator RVE but different &#039;from&#039; and &#039;to&#039;</h2>
+<a href="#bus_A-2" style="text-decoration:none;">&nbsp;A&nbsp;</a> </br></br>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
@@ -100,6 +102,7 @@ Two of them have identical &#039;operator&#039; but different &#039;from&#039; a
         </table>
 
         <h2 id="A2.3">2.3 Bus &#039;A&#039; in Burgstädt: Sportzentrum =&gt; Heiersdorf, operated by Operator RBM</h2>
+<a href="#bus_A-3" style="text-decoration:none;">&nbsp;A&nbsp;</a> </br></br>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
@@ -113,6 +116,7 @@ Two of them have identical &#039;operator&#039; but different &#039;from&#039; a
         </table>
 
         <h2 id="A2.4">2.4 Missing Bus &#039;A&#039; in XYZ: Platz1 =&gt; Platz2, operated by Operator ABC</h2>
+<a href="#bus_A-4" style="text-decoration:none;">&nbsp;A&nbsp;</a> </br></br>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>

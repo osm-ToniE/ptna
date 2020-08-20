@@ -59,6 +59,7 @@
         </p>
         <hr />
         <h1 id="A2">2 Test file for GTFS integration</h1>
+<a href="#bus_100" style="text-decoration:none;">&nbsp;100&nbsp;</a> <a href="#bus_101" style="text-decoration:none;">&nbsp;101&nbsp;</a> <a href="#bus_102" style="text-decoration:none;">&nbsp;102&nbsp;</a> <a href="#bus_103" style="text-decoration:none;">&nbsp;103&nbsp;</a> <a href="#bus_210" style="text-decoration:none;">&nbsp;210&nbsp;</a> <a href="#bus_211" style="text-decoration:none;">&nbsp;211&nbsp;</a> <a href="#bus_211-2" style="text-decoration:none;">&nbsp;211&nbsp;</a> <a href="#bus_212" style="text-decoration:none;">&nbsp;212&nbsp;</a> <a href="#bus_736" style="text-decoration:none;">&nbsp;736&nbsp;</a> <a href="#bus_736-2" style="text-decoration:none;">&nbsp;736&nbsp;</a> <a href="#bus_736-3" style="text-decoration:none;">&nbsp;736&nbsp;</a> <a href="#bus_S2T-E" style="text-decoration:none;">&nbsp;S2T-E&nbsp;</a> </br></br>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>

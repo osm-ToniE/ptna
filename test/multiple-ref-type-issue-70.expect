@@ -64,6 +64,7 @@
         <hr />
         <h1 id="A2">2 Test for issue #??</h1>
         <h2 id="A2.1">2.1 multiple appearances of &quot;ref;type&quot; and also &quot;from&quot; or/and &quot;to&quot; appear multiple times, &quot;operator&quot; is identical</h2>
+<a href="#train_RB" style="text-decoration:none;">&nbsp;RB&nbsp;</a> <a href="#train_RB-2" style="text-decoration:none;">&nbsp;RB&nbsp;</a> <a href="#train_RB-3" style="text-decoration:none;">&nbsp;RB&nbsp;</a> <a href="#train_RB-4" style="text-decoration:none;">&nbsp;RB&nbsp;</a> <a href="#train_RB-5" style="text-decoration:none;">&nbsp;RB&nbsp;</a> </br></br>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
@@ -93,6 +94,7 @@
         </table>
 
         <h2 id="A2.2">2.2 multiple appearances of &quot;ref;type&quot; and &quot;operator&quot; is not set, but &quot;from&quot; and &quot;to&quot; are set</h2>
+<a href="#train_R1" style="text-decoration:none;">&nbsp;R1&nbsp;</a> <a href="#train_R1-2" style="text-decoration:none;">&nbsp;R1&nbsp;</a> <a href="#train_R6" style="text-decoration:none;">&nbsp;R6&nbsp;</a> <a href="#train_R6-2" style="text-decoration:none;">&nbsp;R6&nbsp;</a> <a href="#train_R11" style="text-decoration:none;">&nbsp;R11&nbsp;</a> <a href="#train_R11-2" style="text-decoration:none;">&nbsp;R11&nbsp;</a> </br></br>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
@@ -127,6 +129,7 @@
         </table>
 
         <h2 id="A2.3">2.3 multiple appearances with &#039;or&#039; values and &quot;operator&quot; is not set in both CSV data and in Relations</h2>
+<a href="#light_rail_4" style="text-decoration:none;">&nbsp;4&nbsp;</a> <a href="#light_rail_4-2" style="text-decoration:none;">&nbsp;4&nbsp;</a> </br></br>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
@@ -140,6 +143,7 @@
         </table>
 
         <h2 id="A2.4">2.4 multiple appearances with &#039;or&#039; values and &quot;operator&quot; is not set in Relations</h2>
+<a href="#light_rail_4-3" style="text-decoration:none;">&nbsp;4&nbsp;</a> <a href="#light_rail_4-4" style="text-decoration:none;">&nbsp;4&nbsp;</a> </br></br>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
