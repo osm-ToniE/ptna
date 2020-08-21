@@ -6262,7 +6262,7 @@ sub printAddIdLabelToLocalNavigation {
         }
 
         $HTML_main[$local_navigation_at_index] =~ s|</br></br>\n$||;
-        $HTML_main[$local_navigation_at_index] .= sprintf( "<a href=\"#%s\" style=\"text-decoration:none;\">%s%s%s</a> </br></br>\n", html_escape($id_label), $span_begin, html_escape($visible_string), $span_begin );
+        $HTML_main[$local_navigation_at_index] .= sprintf( "<a href=\"#%s\" style=\"border-style: dotted; border-color: gray; border-width: 1px;\">%s%s%s</a> </br></br>\n", html_escape($id_label), $span_begin, html_escape($visible_string), $span_begin );
     }
 
     return;
