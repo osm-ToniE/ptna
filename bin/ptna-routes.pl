@@ -6216,27 +6216,29 @@ sub printNodeTemplate {
 #############################################################################################
 
 sub printSketchLineTemplate {
-    my $ref           = shift;
-    my $network       = shift;
-    my $pt_type       = shift || '';
-    my $colour        = shift || '';
-    my $text          = undef;
-    my $colour_string = '';
-    my $pt_string     = '';
-    my $textdeco      = '';
-    my $span_begin    = '';
-    my $span_end      = '';
-    my $bg_colour     = GetColourFromString( $colour );
-    my $fg_colour     = GetForeGroundFromBackGround( $bg_colour );
+    my $ref               = shift;
+    my $network           = shift;
+    my $pt_type           = shift || '';
+    my $colour            = shift || '';
+    my $text              = undef;
+    my $colour_string     = '';
+    my $pt_string         = '';
+    my $outer_span_begin  = '';
+    my $inner_span_begin  = '';
+    my $outer_span_end    = '';
+    my $inner_span_end    = '';
+    my $bg_colour         = GetColourFromString( $colour );
+    my $fg_colour         = GetForeGroundFromBackGround( $bg_colour );
 
     if ( $bg_colour && $fg_colour && $coloured_sketchline ) {
-        $colour_string = "&bg=" . uri_escape($bg_colour) . "&fg=". uri_escape($fg_colour);
-        $pt_string     = "&r=1"                                        if ( $pt_type eq 'train' || $pt_type eq 'light_rail'     );
-        $textdeco      = ' style="text-decoration:none;"';
-        $span_begin    = sprintf( "<span style=\"color:%s;background-color:%s;\">&nbsp;", $fg_colour, $bg_colour );
-        $span_end      = "&nbsp;</span>";
+        $colour_string    = "&bg=" . uri_escape($bg_colour) . "&fg=". uri_escape($fg_colour);
+        $pt_string        = "&r=1"                                        if ( $pt_type eq 'train' || $pt_type eq 'light_rail'     );
+        $outer_span_begin = sprintf( "<span style=\"background-color: %s; border-style: solid; border-color: gray; border-width: 1px;\">&nbsp;", $bg_colour );
+        $inner_span_begin = sprintf( "<span style=\"color: %s\">", $fg_colour );
+        $outer_span_end   = "&nbsp;</span>";
+        $inner_span_end   = "</span>";
     }
-    $text = sprintf( "<a href=\"https://overpass-api.de/api/sketch-line?ref=%s&network=%s&style=wuppertal%s%s\" title=\"Sketch-Line\"%s>%s%s%s</a>", uri_escape($ref), uri_escape($network), $colour_string, $pt_string, $textdeco, $span_begin, $ref, $span_end ); # some manual expansion of the template
+    $text = sprintf( "%s<a href=\"https://overpass-api.de/api/sketch-line?ref=%s&network=%s&style=wuppertal%s%s\" title=\"Sketch-Line\">%s%s%s</a>%s", $outer_span_begin, uri_escape($ref), uri_escape($network), $colour_string, $pt_string, $inner_span_begin, $ref, $inner_span_end, $outer_span_end );
 
     return $text;
 }
@@ -6253,16 +6255,19 @@ sub printAddIdLabelToLocalNavigation {
 
         my $bg_colour   = GetColourFromString( $colour );
         my $fg_colour   = GetForeGroundFromBackGround( $bg_colour );
-        my $span_begin  = '&nbsp;';
-        my $span_end    = '&nbsp;';
-
-        if ( $bg_colour && $fg_colour && $coloured_sketchline ) {
-            $span_begin = sprintf( "<span style=\"color:%s;background-color:%s;\">&nbsp;", $fg_colour, $bg_colour );
-            $span_end   = "&nbsp;</span>";
-        }
+        my $outer_span_begin  = '';
+        my $inner_span_begin  = '';
+        my $outer_span_end    = '';
+        my $inner_span_end    = '';
 
         $HTML_main[$local_navigation_at_index] =~ s|</br></br>\n$||;
-        $HTML_main[$local_navigation_at_index] .= sprintf( "<a href=\"#%s\" style=\"border-style: dotted; border-color: gray; border-width: 1px;\">%s%s%s</a>&nbsp;</br></br>\n", html_escape($id_label), $span_begin, html_escape($visible_string), $span_begin );
+        if ( $bg_colour && $fg_colour && $coloured_sketchline ) {
+            $outer_span_begin = sprintf( "<span style=\"background-color: %s; border-style: solid; border-color: gray; border-width: 1px;\">&nbsp;", $bg_colour );
+            $inner_span_begin = sprintf( "<span style=\"color: %s\">", $fg_colour );
+            $outer_span_end   = "&nbsp;</span>";
+            $inner_span_end   = "</span>";
+        }
+        $HTML_main[$local_navigation_at_index] .= sprintf( "%s<a href=\"#%s\">%s%s%s</a>%s&nbsp;</br></br>\n", $outer_span_begin, html_escape($id_label), $inner_span_begin, html_escape($visible_string), $inner_span_end, $outer_span_end );
     }
 
     return;
