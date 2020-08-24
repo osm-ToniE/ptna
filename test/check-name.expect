@@ -85,7 +85,7 @@
         <h1 id="A2">2 Test file for --check-name (not relaxed)</h1>
         <h2 id="A2.1">2.1 Positive, no errors</h2>
         <h3 id="A2.1.1">2.1.1 Simple &#039;ref&#039;</h3>
-<a href="#bus_1" style="text-decoration:none;">&nbsp;1&nbsp;</a> <a href="#bus_2" style="text-decoration:none;">&nbsp;2&nbsp;</a> <a href="#bus_3" style="text-decoration:none;">&nbsp;3&nbsp;</a> <a href="#bus_4" style="text-decoration:none;">&nbsp;4&nbsp;</a> <a href="#bus_5" style="text-decoration:none;">&nbsp;5&nbsp;</a> </br></br>
+<a href="#bus_1">1</a> <a href="#bus_2">2</a> <a href="#bus_3">3</a> <a href="#bus_4">4</a> <a href="#bus_5">5</a> </br></br>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
@@ -108,7 +108,7 @@
 &nbsp;
 </p>
         <h3 id="A2.1.2">2.1.2 Combined &#039;ref&#039;</h3>
-<a href="#bus_11_21" style="text-decoration:none;">&nbsp;11/21&nbsp;</a> <a href="#bus_12_22" style="text-decoration:none;">&nbsp;12/22&nbsp;</a> </br></br>
+<a href="#bus_11_21">11/21</a> <a href="#bus_12_22">12/22</a> </br></br>
 <p>
 <strong>Notes:</strong> &#039;ref:LAVV&#039; = &#039;21&#039;; &#039;ref:RVO&#039; = &#039;11&#039;
 
@@ -144,7 +144,7 @@
 &nbsp;
 </p>
         <h3 id="A2.1.3">2.1.3 Normal</h3>
-<a href="#bus_X1" style="text-decoration:none;">&nbsp;X1&nbsp;</a> </br></br>
+<a href="#bus_X1">X1</a> </br></br>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
@@ -160,7 +160,7 @@
 </p>
         <h2 id="A2.2">2.2 Negative, with errors</h2>
         <h3 id="A2.2.1">2.2.1 Simple &#039;ref&#039;</h3>
-<a href="#bus_101" style="text-decoration:none;">&nbsp;101&nbsp;</a> <a href="#bus_102" style="text-decoration:none;">&nbsp;102&nbsp;</a> <a href="#bus_103" style="text-decoration:none;">&nbsp;103&nbsp;</a> <a href="#bus_104" style="text-decoration:none;">&nbsp;104&nbsp;</a> <a href="#bus_105" style="text-decoration:none;">&nbsp;105&nbsp;</a> </br></br>
+<a href="#bus_101">101</a> <a href="#bus_102">102</a> <a href="#bus_103">103</a> <a href="#bus_104">104</a> <a href="#bus_105">105</a> </br></br>
 <p>
 <strong>Errors:</strong> &#039;name&#039; is not set; &#039;network&#039; is not set
 
@@ -247,7 +247,7 @@
 &nbsp;
 </p>
         <h3 id="A2.2.2">2.2.2 Combined &#039;ref&#039;</h3>
-<a href="#bus_111_121" style="text-decoration:none;">&nbsp;111/121&nbsp;</a> <a href="#bus_112_122" style="text-decoration:none;">&nbsp;112/122&nbsp;</a> </br></br>
+<a href="#bus_111_121">111/121</a> <a href="#bus_112_122">112/122</a> </br></br>
 <p>
 <strong>Notes:</strong> &#039;ref:RVO&#039; = &#039;111&#039;
 
@@ -280,7 +280,7 @@
         </table>
 
         <h3 id="A2.2.3">2.2.3 Negative, with special characters</h3>
-<a href="#bus_X2" style="text-decoration:none;">&nbsp;X2&nbsp;</a> <a href="#bus_X3" style="text-decoration:none;">&nbsp;X3&nbsp;</a> </br></br>
+<a href="#bus_X2">X2</a> <a href="#bus_X3">X3</a> </br></br>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
@@ -297,7 +297,7 @@
 &nbsp;
 </p>
         <h3 id="A2.2.4">2.2.4 Negative, identical &#039;name&#039;</h3>
-<a href="#bus_Y" style="text-decoration:none;">&nbsp;Y&nbsp;</a> </br></br>
+<a href="#bus_Y">Y</a> </br></br>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>

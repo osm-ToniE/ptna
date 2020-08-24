@@ -62,7 +62,7 @@
         <hr />
         <h1 id="A2">2 Test file for --check-access</h1>
         <h2 id="A2.1">2.1 Positive, normal situation</h2>
-<a href="#bus_001" style="text-decoration:none;">&nbsp;001&nbsp;</a> </br></br>
+<a href="#bus_001">001</a> </br></br>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
@@ -79,7 +79,7 @@
 &nbsp;
 </p>
         <h2 id="A2.2">2.2 Positive, no errors on ways and nodes, access explicitely allowed: access=yes, psv=yes, bus=yes , ...</h2>
-<a href="#bus_021" style="text-decoration:none;">&nbsp;021&nbsp;</a> </br></br>
+<a href="#bus_021">021</a> </br></br>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
@@ -96,7 +96,7 @@
 &nbsp;
 </p>
         <h2 id="A2.3">2.3 Negative, with errors on ways and nodes</h2>
-<a href="#bus_011" style="text-decoration:none;">&nbsp;011&nbsp;</a> </br></br>
+<a href="#bus_011">011</a> </br></br>
 <p>
 Route: restricted access (&#039;access&#039;=&#039;private&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 15&#039; -102699
 

@@ -66,7 +66,7 @@
         <hr />
         <h1 id="A2">2 Test file for Route-Master having Routes with different &#039;ref&#039; values</h1>
         <h2 id="A2.1">2.1 Fail</h2>
-<a href="#bus_43" style="text-decoration:none;">&nbsp;43&nbsp;</a> <a href="#bus_E43" style="text-decoration:none;">&nbsp;E43&nbsp;</a> <a href="#bus_250" style="text-decoration:none;">&nbsp;250&nbsp;</a> <a href="#bus_250a" style="text-decoration:none;">&nbsp;250a&nbsp;</a> <a href="#bus_250b" style="text-decoration:none;">&nbsp;250b&nbsp;</a> <a href="#bus_255_255a" style="text-decoration:none;">&nbsp;255 255a&nbsp;</a> <a href="#bus_255b" style="text-decoration:none;">&nbsp;255b&nbsp;</a> <a href="#bus_63_E63" style="text-decoration:none;">&nbsp;63 E63&nbsp;</a> <a href="#bus_270_270a_270b" style="text-decoration:none;">&nbsp;270 270a 270b&nbsp;</a> </br></br>
+<a href="#bus_43">43</a> <a href="#bus_E43">E43</a> <a href="#bus_250">250</a> <a href="#bus_250a">250a</a> <a href="#bus_250b">250b</a> <a href="#bus_255_255a">255 255a</a> <a href="#bus_255b">255b</a> <a href="#bus_63_E63">63 E63</a> <a href="#bus_270_270a_270b">270 270a 270b</a> </br></br>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
@@ -98,7 +98,7 @@
         </table>
 
         <h2 id="A2.2">2.2 Success</h2>
-<a href="#bus_53_E53" style="text-decoration:none;">&nbsp;53 E53&nbsp;</a> <a href="#bus_260_260a_260b" style="text-decoration:none;">&nbsp;260 260a 260b&nbsp;</a> </br></br>
+<a href="#bus_53_E53">53 E53</a> <a href="#bus_260_260a_260b">260 260a 260b</a> </br></br>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>

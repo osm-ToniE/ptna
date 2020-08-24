@@ -61,7 +61,7 @@
         </p>
         <hr />
         <h1 id="A2">2 Test file for environment of Route-Master</h1>
-<a href="#bus_43_63" style="text-decoration:none;">&nbsp;43 63&nbsp;</a> <a href="#bus_53" style="text-decoration:none;">&nbsp;53&nbsp;</a> <a href="#bus_100" style="text-decoration:none;">&nbsp;100&nbsp;</a> <a href="#bus_100-2" style="text-decoration:none;">&nbsp;100&nbsp;</a> </br></br>
+<a href="#bus_43_63">43 63</a> <a href="#bus_53">53</a> <a href="#bus_100">100</a> <a href="#bus_100-2">100</a> </br></br>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
