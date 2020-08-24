@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-08-17 20:57+0200\n"
+"POT-Creation-Date: 2020-08-24 12:59+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2020\n"
 "Language-Team: Italian (https://www.transifex.com/jungle-bus/teams/97874/"
@@ -386,18 +386,6 @@ msgid "'name' is not set"
 msgstr "‘name’ non è impostata"
 
 #, perl-format
-msgid ""
-"'network' = '%s' includes the separator value ';' (semi-colon) with "
-"sourrounding blank"
-msgstr ""
-
-#, perl-format
-msgid ""
-"'network' = '%s': ',' (comma) as separator value should be replaced by "
-"';' (semi-colon) without blank"
-msgstr ""
-
-#, perl-format
 msgid "'network' = '%s' should be short form"
 msgstr ""
 
@@ -422,6 +410,18 @@ msgid "'network:long' is long form"
 msgstr ""
 
 msgid "'network:long' matches long form"
+msgstr ""
+
+#, perl-format
+msgid ""
+"'%s' = '%s' includes the separator value ';' (semi-colon) with sourrounding "
+"blank"
+msgstr ""
+
+#, perl-format
+msgid ""
+"'%s' = '%s': ',' (comma) as separator value should be replaced by ';' (semi-"
+"colon) without blank"
 msgstr ""
 
 #, perl-format
@@ -1007,6 +1007,18 @@ msgid "Not Considered 'network'-Values"
 msgstr ""
 
 msgid "This section lists the 'network'-values which have not been considered."
+msgstr ""
+
+#, perl-format
+msgid ""
+"'network' = '%s' includes the separator value ';' (semi-colon) with "
+"sourrounding blank"
+msgstr ""
+
+#, perl-format
+msgid ""
+"'network' = '%s': ',' (comma) as separator value should be replaced by "
+"';' (semi-colon) without blank"
 msgstr ""
 
 msgid "'public_transport:version' is not set"
