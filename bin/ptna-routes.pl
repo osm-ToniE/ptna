@@ -2314,6 +2314,8 @@ sub analyze_relation {
                                             'fixme'         => '__issues__',
                                             'check_date'    => '__notes__'
                                           );
+    my @check_osm_separator_tags        = ( 'network', 'operator', 'ref', 'via', 'gtfs' );
+    my $check_osm_separator_tag         = undef;
     my $reporttype                      = undef;
 
     if ( $relation_ptr ) {
@@ -2322,12 +2324,16 @@ sub analyze_relation {
         $type                           = $relation_ptr->{'tag'}->{'type'};
         $route_type                     = $relation_ptr->{'tag'}->{$type};
 
+        # we need these several times
+
+        my @relation_tags = sort( keys( %{$relation_ptr->{'tag'}} ) );
+
         #
         # now, check existing and defined tags and report them to front of list (ISSUES, NOTES)
         #
 
         foreach $specialtag ( @specialtags ) {
-            foreach my $tag ( sort(keys(%{$relation_ptr->{'tag'}})) ) {
+            foreach my $tag ( @relation_tags ) {
                 if ( $tag =~ m/^\Q$specialtag\E/i ) {
                     if ( $relation_ptr->{'tag'}->{$tag} ) {
                         $reporttype = ( $specialtag2reporttype{$specialtag} ) ? $specialtag2reporttype{$specialtag} : '__notes__';
@@ -2401,15 +2407,6 @@ sub analyze_relation {
                                 push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' ~ '%s'",html_escape($match)) );
                             }
                         }
-                        if ( $network =~ m/;\s+\Q$match\E/    ||
-                             $network =~ m/\Q$match\E\s+;/    ||
-                             $network =~ m/\Q$match\E\s*;\s+/   ) {
-                            $count_error_semikolon_w_blank++;
-                        }
-                        if ( $network =~ m/(,\s*)\Q$match\E/    ||
-                             $network =~ m/\Q$match\E(\s*,)/       ) {
-                            $count_error_comma++;
-                        }
                         $we_have_a_match++;
                     }
                 }
@@ -2419,17 +2416,6 @@ sub analyze_relation {
                 push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, html_escape($network), printRelationTemplate($relation_id) ) );
                 if ( $positive_notes ) {
                     push( @{$relation_ptr->{'__notes__'}}, sprintf( "'network' = '%s'", html_escape($network)) );
-                }
-            }
-
-            if ( $check_osm_separator ) {
-                if ( $count_error_semikolon_w_blank ) {
-                    $issues_string = gettext( "'network' = '%s' includes the separator value ';' (semi-colon) with sourrounding blank" );
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($network)) );
-                }
-                if ( $count_error_comma) {
-                    $issues_string = gettext( "'network' = '%s': ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank" );
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($network)) );
                 }
             }
 
@@ -2506,7 +2492,7 @@ sub analyze_relation {
             }
 
             foreach my $special ( 'network:', 'route:', 'ref:', 'ref_', 'operator' ) {
-                foreach my $tag ( sort(keys(%{$relation_ptr->{'tag'}})) ) {
+                foreach my $tag ( @relation_tags ) {
                     if ( $tag =~ m/^\Q$special\E/i ) {
                         if ( $relation_ptr->{'tag'}->{$tag} ) {
                             if ( $tag =~ m/^network:long$/i && $network_long_regex ){
@@ -2528,9 +2514,28 @@ sub analyze_relation {
             }
         }
 
+        if ( $check_osm_separator ) {
+            foreach $check_osm_separator_tag ( @check_osm_separator_tags ) {
+                foreach my $tag ( @relation_tags ) {
+                    if ( $tag ne 'ref_trips' && $tag =~ m/^\Q$check_osm_separator_tag\E/ ) {
+                        if ( $relation_ptr->{'tag'}->{$tag} ) {
+                            if ( $relation_ptr->{'tag'}->{$tag} =~ m/\s;|;\s/ ) {
+                                $issues_string = gettext( "'%s' = '%s' includes the separator value ';' (semi-colon) with sourrounding blank" );
+                                push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag})) );
+                            }
+                            if ( $tag ne 'via' && $tag ne 'operator' && $tag ne 'operator' && $relation_ptr->{'tag'}->{$tag} =~ m/,/ ) {
+                                $issues_string = gettext( "'%s' = '%s': ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank" );
+                                push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag})) );
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         if ( $show_gtfs ) {
             foreach my $special ( 'gtfs:', 'gtfs_' ) {
-                foreach my $tag ( sort(keys(%{$relation_ptr->{'tag'}})) ) {
+                foreach my $tag ( @relation_tags ) {
                     if ( $tag =~ m/^\Q$special\E/i ) {
                         if ( $relation_ptr->{'tag'}->{$tag} ) {
                             push( @{$relation_ptr->{'__notes__'}}, sprintf("'%s' = '%s'", html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag})) )
