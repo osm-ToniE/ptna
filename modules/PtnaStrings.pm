@@ -88,8 +88,8 @@ sub InitMessageStrings {
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
-    $MessageList[$i]->{'message'}                = gettext( "'network' = '%s' includes the separator value ';' (semi-colon) with sourrounding blank" );
-    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'message'}                = gettext( "'%s' = '%s' includes the separator value ';' (semi-colon) with sourrounding blank" );
+    $MessageList[$i]->{'type'}                   = gettext( "Notes" );
     $MessageList[$i]->{'option'}                 = "";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
@@ -124,8 +124,8 @@ sub InitMessageStrings {
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
-    $MessageList[$i]->{'message'}                = gettext( "'network' = '%s': ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank" );
-    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'message'}                = gettext( "'%s' = '%s': ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank" );
+    $MessageList[$i]->{'type'}                   = gettext( "Notes" );
     $MessageList[$i]->{'option'}                 = "";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
@@ -1102,7 +1102,7 @@ sub InitMessageStrings {
 
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "Route: 'route_ref' = '%s' of stop includes the separator value ';' (semi-colon) with sourrounding blank" );
-    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'type'}                   = gettext( "Notes" );
     $MessageList[$i]->{'option'}                 = "check-route-ref";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
@@ -1111,7 +1111,7 @@ sub InitMessageStrings {
 
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "Route: 'route_ref' = '%s' of stop: ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank" );
-    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'type'}                   = gettext( "Notes" );
     $MessageList[$i]->{'option'}                 = "check-route-ref";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";

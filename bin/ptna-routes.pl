@@ -2520,12 +2520,12 @@ sub analyze_relation {
                     if ( $tag ne 'ref_trips' && $tag =~ m/^\Q$check_osm_separator_tag\E/ ) {
                         if ( $relation_ptr->{'tag'}->{$tag} ) {
                             if ( $relation_ptr->{'tag'}->{$tag} =~ m/\s;|;\s/ ) {
-                                $issues_string = gettext( "'%s' = '%s' includes the separator value ';' (semi-colon) with sourrounding blank" );
-                                push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag})) );
+                                $notes_string = gettext( "'%s' = '%s' includes the separator value ';' (semi-colon) with sourrounding blank" );
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf( $issues_string, html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag})) );
                             }
                             if ( $tag ne 'via' && $tag ne 'operator' && $tag ne 'operator' && $relation_ptr->{'tag'}->{$tag} =~ m/,/ ) {
-                                $issues_string = gettext( "'%s' = '%s': ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank" );
-                                push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag})) );
+                                $notes_string = gettext( "'%s' = '%s': ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank" );
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf( $issues_string, html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag})) );
                             }
                         }
                     }
@@ -4996,12 +4996,12 @@ sub CheckRouteRefOnStops {
                                 if ( $check_osm_separator ) {
                                     if ( $object_ref->{'tag'}->{'route_ref'} =~ m/\s+;/ ||
                                          $object_ref->{'tag'}->{'route_ref'} =~ m/;\s+/    ) {
-                                        $issues_string = gettext( "Route: 'route_ref' = '%s' of stop includes the separator value ';' (semi-colon) with sourrounding blank" );
-                                        $separator_with_blank_on{sprintf($issues_string,html_escape($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
+                                        $notes_string = gettext( "Route: 'route_ref' = '%s' of stop includes the separator value ';' (semi-colon) with sourrounding blank" );
+                                        $separator_with_blank_on{sprintf($notes_string,html_escape($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
                                     }
                                     if ( $object_ref->{'tag'}->{'route_ref'} =~ m/,/ ) {
-                                        $issues_string = gettext( "Route: 'route_ref' = '%s' of stop: ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank" );
-                                        $comma_as_separator{sprintf($issues_string,html_escape($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
+                                        $notes_string = gettext( "Route: 'route_ref' = '%s' of stop: ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank" );
+                                        $comma_as_separator{sprintf($notes_string,html_escape($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
                                     }
                                 }
 
@@ -5073,9 +5073,9 @@ sub CheckRouteRefOnStops {
                 $num_of_errors  = scalar( @help_array );
                 $ret_val       += $num_of_errors;
                 if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $message, join(', ', map { printXxxTemplate($separator_with_blank_on{$message}->{$_},$_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                    push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("%s: %s and %d more ..."), $message, join(', ', map { printXxxTemplate($separator_with_blank_on{$message}->{$_},$_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
                 } else {
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $message, join(', ', map { printXxxTemplate($separator_with_blank_on{$message}->{$_},$_,'name'); } @help_array )) );
+                    push( @{$relation_ptr->{'__notes__'}}, sprintf("%s: %s", $message, join(', ', map { printXxxTemplate($separator_with_blank_on{$message}->{$_},$_,'name'); } @help_array )) );
                 }
             }
             foreach my $message ( sort( keys( %comma_as_separator ) ) ) {
@@ -5083,9 +5083,9 @@ sub CheckRouteRefOnStops {
                 $num_of_errors  = scalar( @help_array );
                 $ret_val       += $num_of_errors;
                 if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $message, join(', ', map { printXxxTemplate($comma_as_separator{$message}->{$_},$_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                    push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("%s: %s and %d more ..."), $message, join(', ', map { printXxxTemplate($comma_as_separator{$message}->{$_},$_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
                 } else {
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $message, join(', ', map { printXxxTemplate($comma_as_separator{$message}->{$_},$_,'name'); } @help_array )) );
+                    push( @{$relation_ptr->{'__notes__'}}, sprintf("%s: %s", $message, join(', ', map { printXxxTemplate($comma_as_separator{$message}->{$_},$_,'name'); } @help_array )) );
                 }
             }
             foreach my $message ( sort( keys( %to_be_replaced ) ) ) {
