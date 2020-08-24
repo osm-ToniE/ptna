@@ -5214,15 +5214,20 @@ sub getGtfsInfo {
 
         if ( $relation_ptr->{'tag'}->{'type'} eq 'route' ) {
             if ( $relation_ptr->{'tag'}->{'gtfs:trip_id'} ) {
+                $relation_ptr->{'tag'}->{'gtfs:trip_id'} =~ s/\s*;\s*/;/g;
                 $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsTripIdHtmlTag( $gtfs_guid, $_ ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:trip_id'} ) );
             } elsif ( $relation_ptr->{'tag'}->{'gtfs:trip_id:sample'} ) {
+                $relation_ptr->{'tag'}->{'gtfs:trip_id:sample'} =~ s/\s*;\s*/;/g;
                 $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsTripIdHtmlTag( $gtfs_guid, $_ ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:trip_id:sample'} ) );
             } elsif ( $relation_ptr->{'tag'}->{'gtfs:shape_id'} ) {
+                $relation_ptr->{'tag'}->{'gtfs:shape_id'} =~ s/\s*;\s*/;/g;
                 $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsShapeIdHtmlTag( $gtfs_guid, $_ ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:shape_id'} ) );
             } elsif ( $relation_ptr->{'tag'}->{'gtfs:route_id'} ) {
+                $relation_ptr->{'tag'}->{'gtfs:route_id'} =~ s/\s*;\s*/;/g;
                 $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $gtfs_guid, $_ ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:route_id'} ) );
             }
         } elsif ( $relation_ptr->{'tag'}->{'gtfs:route_id'} ) {
+                $relation_ptr->{'tag'}->{'gtfs:route_id'} =~ s/\s*;\s*/;/g;
             $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $gtfs_guid, $_ ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:route_id'} ) );
         }
     }
