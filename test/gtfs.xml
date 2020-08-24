@@ -2,17 +2,102 @@
 <osm version='0.6' upload='false' generator='JOSM'>
   <bounds minlat='48.069032' minlon='11.6330838' maxlat='48.0716416' maxlon='11.6389203' origin='CGImap 0.6.1 (13164 thorn-03.openstreetmap.org)' />
   <bounds minlat='48.069032' minlon='11.6330838' maxlat='48.0716416' maxlon='11.6389203' origin='OpenStreetMap server' />
-  <relation id='-39096' action='modify'>
+  <relation id='-99746' action='modify'>
     <tag k='from' v='from' />
+    <tag k='gtfs:trip_id' v='was weiß ich' />
     <tag k='name' v='Bus 605: from =&gt; to' />
     <tag k='network' v='network' />
+    <tag k='network:guid' v='DE-BY-MVV' />
     <tag k='operator' v='operator' />
     <tag k='public_transport:version' v='2' />
     <tag k='ref' v='605' />
     <tag k='route' v='bus' />
-    <tag k='network:guid' v='DE-BY-MVV' />
-    <tag k='gtfs:trip_id' v='was weiß ich' />
     <tag k='to' v='to' />
     <tag k='type' v='route' />
+  </relation>
+  <relation id='-99748' action='modify'>
+    <tag k='from' v='from' />
+    <tag k='gtfs:trip_id' v='43.T0.19-222-s20-2.4.R' />
+    <tag k='name' v='Bus 222: from =&gt; to' />
+    <tag k='network' v='network' />
+    <tag k='network:guid' v='DE-BY-MVV' />
+    <tag k='operator' v='operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='222' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='to' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-99750' action='modify'>
+    <tag k='from' v='from2' />
+    <tag k='gtfs:trip_id' v='43.T0.19-222-s20-2.4.R;93.T0.19-222-s20-4.2.H' />
+    <tag k='name' v='Bus 222: from2 =&gt; to2' />
+    <tag k='network' v='network' />
+    <tag k='network:guid' v='DE-BY-MVV' />
+    <tag k='operator' v='operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='222' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='to2' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-99767' action='modify'>
+    <tag k='from' v='from3' />
+    <tag k='gtfs:feed' v='DE-BY-MVV' />
+    <tag k='gtfs:trip_id' v='93.T0.19-222-s20-4.2.H' />
+    <tag k='name' v='Bus 222: from3 =&gt; to3' />
+    <tag k='network' v='network' />
+    <tag k='network:guid' v='DE-BY-MVV' />
+    <tag k='operator' v='operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='222' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='to3' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-99769' action='modify'>
+    <tag k='from' v='from4' />
+    <tag k='gtfs:feed' v='DE-BY-MVV' />
+    <tag k='gtfs:release_date' v='2020-07-24' />
+    <tag k='gtfs:route_id' v='19-222-s20-4' />
+    <tag k='name' v='Bus 222: from4 =&gt; to4' />
+    <tag k='network' v='network' />
+    <tag k='network:guid' v='DE-BY-MVV' />
+    <tag k='operator' v='operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='222' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='to4' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-99776' action='modify'>
+    <tag k='from' v='from5' />
+    <tag k='gtfs:feed' v='DE-BY-MVV' />
+    <tag k='gtfs:shape_id' v='19-222-s20-4.2.H' />
+    <tag k='name' v='Bus 222: from5 =&gt; to5' />
+    <tag k='network' v='network' />
+    <tag k='network:guid' v='DE-BY-MVV' />
+    <tag k='operator' v='operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='222' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='to5' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-99778' action='modify'>
+    <member type='relation' ref='-99748' role='' />
+    <member type='relation' ref='-99750' role='' />
+    <member type='relation' ref='-99767' role='' />
+    <member type='relation' ref='-99769' role='' />
+    <member type='relation' ref='-99776' role='' />
+    <tag k='gtfs:route_id' v='19-222-s20-2;;19-222-s20-4;20-222-s20-4' />
+    <tag k='name' v='Bus 222' />
+    <tag k='network' v='network' />
+    <tag k='network:guid' v='DE-BY-MVV' />
+    <tag k='operator' v='operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='222' />
+    <tag k='route_master' v='bus' />
+    <tag k='type' v='route_master' />
   </relation>
 </osm>
