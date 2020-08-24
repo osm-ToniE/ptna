@@ -2314,7 +2314,7 @@ sub analyze_relation {
                                             'fixme'         => '__issues__',
                                             'check_date'    => '__notes__'
                                           );
-    my @check_osm_separator_tags        = ( 'network', 'operator', 'ref', 'via', 'gtfs' );
+    my @check_osm_separator_tags        = ( 'network', 'ref', 'gtfs' );
     my $check_osm_separator_tag         = undef;
     my $reporttype                      = undef;
 
@@ -2519,11 +2519,11 @@ sub analyze_relation {
                 foreach my $tag ( @relation_tags ) {
                     if ( $tag ne 'ref_trips' && $tag =~ m/^\Q$check_osm_separator_tag\E/ ) {
                         if ( $relation_ptr->{'tag'}->{$tag} ) {
-                            if ( $relation_ptr->{'tag'}->{$tag} =~ m/\s;|;\s/ ) {
-                                $notes_string = gettext( "'%s' = '%s' includes the separator value ';' (semi-colon) with sourrounding blank" );
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf( $issues_string, html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag})) );
-                            }
-                            if ( $tag ne 'via' && $tag ne 'operator' && $tag ne 'operator' && $relation_ptr->{'tag'}->{$tag} =~ m/,/ ) {
+#                            if ( $relation_ptr->{'tag'}->{$tag} =~ m/\s;|;\s/ ) {
+#                                $notes_string = gettext( "'%s' = '%s' includes the separator value ';' (semi-colon) with sourrounding blank" );
+#                                push( @{$relation_ptr->{'__notes__'}}, sprintf( $issues_string, html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag})) );
+#                            }
+                            if ( $relation_ptr->{'tag'}->{$tag} =~ m/,/ ) {
                                 $notes_string = gettext( "'%s' = '%s': ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank" );
                                 push( @{$relation_ptr->{'__notes__'}}, sprintf( $issues_string, html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag})) );
                             }
@@ -4994,11 +4994,11 @@ sub CheckRouteRefOnStops {
                                 }
 
                                 if ( $check_osm_separator ) {
-                                    if ( $object_ref->{'tag'}->{'route_ref'} =~ m/\s+;/ ||
-                                         $object_ref->{'tag'}->{'route_ref'} =~ m/;\s+/    ) {
-                                        $notes_string = gettext( "Route: 'route_ref' = '%s' of stop includes the separator value ';' (semi-colon) with sourrounding blank" );
-                                        $separator_with_blank_on{sprintf($notes_string,html_escape($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
-                                    }
+#                                    if ( $object_ref->{'tag'}->{'route_ref'} =~ m/\s+;/ ||
+#                                         $object_ref->{'tag'}->{'route_ref'} =~ m/;\s+/    ) {
+#                                        $notes_string = gettext( "Route: 'route_ref' = '%s' of stop includes the separator value ';' (semi-colon) with sourrounding blank" );
+#                                        $separator_with_blank_on{sprintf($notes_string,html_escape($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
+#                                    }
                                     if ( $object_ref->{'tag'}->{'route_ref'} =~ m/,/ ) {
                                         $notes_string = gettext( "Route: 'route_ref' = '%s' of stop: ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank" );
                                         $comma_as_separator{sprintf($notes_string,html_escape($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
