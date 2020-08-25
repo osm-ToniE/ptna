@@ -2365,10 +2365,8 @@ sub analyze_relation {
         $network = $relation_ptr->{'tag'}->{'network'};
 
         if ( $network ) {
-            my $count_error_semikolon_w_blank = 0;
-            my $count_error_comma             = 0;
-            my $match                         = '';
-            my $we_have_a_match               = 0;
+            my $match           = '';
+            my $we_have_a_match = 0;
 
             my $network_with = ';' . $network . ';';        # we match only with sourrounding ';', i.e. 'DB InterCity' does not match network='DB InterCityExpress'
 
@@ -2382,15 +2380,6 @@ sub analyze_relation {
                             } else {
                                 push( @{$relation_ptr->{'__notes__'}}, sprintf( "'network' ~ '%s'", html_escape($match) ) );
                             }
-                        }
-                        if ( $network =~ m/;\s+\Q$match\E/    ||
-                             $network =~ m/\Q$match\E\s+;/    ||
-                             $network =~ m/\Q$match\E\s*;\s+/   ) {
-                            $count_error_semikolon_w_blank++;
-                        }
-                        if ( $network =~ m/(,\s*)\Q$match\E/    ||
-                             $network =~ m/\Q$match\E(\s*,)/       ) {
-                            $count_error_comma++;
                         }
                         $we_have_a_match++;
                     }
@@ -2521,11 +2510,11 @@ sub analyze_relation {
                         if ( $relation_ptr->{'tag'}->{$tag} ) {
 #                            if ( $relation_ptr->{'tag'}->{$tag} =~ m/\s;|;\s/ ) {
 #                                $notes_string = gettext( "'%s' = '%s' includes the separator value ';' (semi-colon) with sourrounding blank" );
-#                                push( @{$relation_ptr->{'__notes__'}}, sprintf( $issues_string, html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag})) );
+#                                push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag})) );
 #                            }
                             if ( $relation_ptr->{'tag'}->{$tag} =~ m/,/ ) {
                                 $notes_string = gettext( "'%s' = '%s': ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank" );
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf( $issues_string, html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag})) );
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag})) );
                             }
                         }
                     }
