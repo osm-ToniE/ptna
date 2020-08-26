@@ -2506,7 +2506,7 @@ sub analyze_relation {
         if ( $check_osm_separator ) {
             foreach $check_osm_separator_tag ( @check_osm_separator_tags ) {
                 foreach my $tag ( @relation_tags ) {
-                    if ( $tag ne 'ref_trips' && $tag =~ m/^\Q$check_osm_separator_tag\E/ ) {
+                    if ( $tag ne 'ref_trips' && $tag ne 'ref_name' && $tag =~ m/^\Q$check_osm_separator_tag\E/ ) {
                         if ( $relation_ptr->{'tag'}->{$tag} ) {
 #                            if ( $relation_ptr->{'tag'}->{$tag} =~ m/\s;|;\s/ ) {
 #                                $notes_string = gettext( "'%s' = '%s' includes the separator value ';' (semi-colon) with sourrounding blank" );
