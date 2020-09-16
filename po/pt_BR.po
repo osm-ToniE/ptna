@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-08-24 12:59+0200\n"
+"POT-Creation-Date: 2020-09-16 21:08+0200\n"
 "PO-Revision-Date: 2020-08-24 13:04+0200\n"
 "Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/jungle-bus/"
@@ -385,14 +385,6 @@ msgstr ""
 
 #, perl-format
 msgid ""
-"'%s' = '%s' includes the separator value ';' (semi-colon) with sourrounding "
-"blank"
-msgstr ""
-"%s' = '%s' inclui o valor do separador ';' (ponto e vírgula) com o espaço em "
-"branco"
-
-#, perl-format
-msgid ""
 "'%s' = '%s': ',' (comma) as separator value should be replaced by ';' (semi-"
 "colon) without blank"
 msgstr ""
@@ -762,12 +754,6 @@ msgstr ""
 
 #, perl-format
 msgid ""
-"Route: 'route_ref' = '%s' of stop includes the separator value ';' (semi-"
-"colon) with sourrounding blank"
-msgstr ""
-
-#, perl-format
-msgid ""
 "Route: 'route_ref' = '%s' of stop: ',' (comma) as separator value should be "
 "replaced by ';' (semi-colon) without blank"
 msgstr ""
@@ -1008,15 +994,11 @@ msgstr ""
 
 #, perl-format
 msgid ""
-"'network' = '%s' includes the separator value ';' (semi-colon) with "
-"sourrounding blank"
+"'%s' = '%s' includes the separator value ';' (semi-colon) with sourrounding "
+"blank"
 msgstr ""
-
-#, perl-format
-msgid ""
-"'network' = '%s': ',' (comma) as separator value should be replaced by "
-"';' (semi-colon) without blank"
-msgstr ""
+"%s' = '%s' inclui o valor do separador ';' (ponto e vírgula) com o espaço em "
+"branco"
 
 msgid "'public_transport:version' is not set"
 msgstr "A etiqueta \"public_transport:version\" não está definida"
@@ -1101,6 +1083,12 @@ msgid ""
 "The Route-Master relation does not contain a Route relation (should not "
 "happen with the used Overpass API query, see: 'The overpass API query does "
 "not return')."
+msgstr ""
+
+#, perl-format
+msgid ""
+"Route: 'route_ref' = '%s' of stop includes the separator value ';' (semi-"
+"colon) with sourrounding blank"
 msgstr ""
 
 msgid ""

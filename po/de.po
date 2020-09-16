@@ -7,13 +7,14 @@
 # Noémie <nlehuby@zaclys.net>, 2019
 # ToniE <osm-ToniE@web.de>, 2020
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-08-24 12:59+0200\n"
-"PO-Revision-Date: 2020-08-24 13:00+0200\n"
-"Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
+"POT-Creation-Date: 2020-09-16 21:08+0200\n"
+"PO-Revision-Date: 2019-04-05 14:25+0000\n"
+"Last-Translator: ToniE <osm-ToniE@web.de>, 2020\n"
 "Language-Team: German (https://www.transifex.com/jungle-bus/teams/97874/"
 "de/)\n"
 "Language: de\n"
@@ -21,7 +22,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.1\n"
 
 msgid "Message"
 msgstr "Meldung"
@@ -425,14 +425,6 @@ msgstr "'network:long' ist Langform"
 
 msgid "'network:long' matches long form"
 msgstr "'network:long' passt zur Langform"
-
-#, perl-format
-msgid ""
-"'%s' = '%s' includes the separator value ';' (semi-colon) with sourrounding "
-"blank"
-msgstr ""
-"'%s' = '%s' enthält das Trennzeichen ';' (Semikolon) mit umgebendem "
-"Leerzeichen"
 
 #, perl-format
 msgid ""
@@ -892,14 +884,6 @@ msgstr ""
 
 #, perl-format
 msgid ""
-"Route: 'route_ref' = '%s' of stop includes the separator value ';' (semi-"
-"colon) with sourrounding blank"
-msgstr ""
-"Route: 'route_ref' = '%s' der Haltestelle enthält das Trennzeichen "
-"';' (Semikolon) mit umgebendem Leerzeichen"
-
-#, perl-format
-msgid ""
 "Route: 'route_ref' = '%s' of stop: ',' (comma) as separator value should be "
 "replaced by ';' (semi-colon) without blank"
 msgstr ""
@@ -1180,19 +1164,11 @@ msgstr ""
 
 #, perl-format
 msgid ""
-"'network' = '%s' includes the separator value ';' (semi-colon) with "
-"sourrounding blank"
+"'%s' = '%s' includes the separator value ';' (semi-colon) with sourrounding "
+"blank"
 msgstr ""
-"'network' = '%s' enthält das Trennzeichen ';' (Semikolon) mit umgebendem "
+"'%s' = '%s' enthält das Trennzeichen ';' (Semikolon) mit umgebendem "
 "Leerzeichen"
-
-#, perl-format
-msgid ""
-"'network' = '%s': ',' (comma) as separator value should be replaced by "
-"';' (semi-colon) without blank"
-msgstr ""
-"'network' = '%s': ',' (Komma) als Trennzeichen sollte durch ';' (Semikolon, "
-"ohne Leerzeichen) ersetzt werden"
 
 msgid "'public_transport:version' is not set"
 msgstr "'public_transport:version' ist nicht gesetzt"
@@ -1301,6 +1277,14 @@ msgstr ""
 "Die Route-Master Relation enthält keine Routen (sollte bei der verwendeten "
 "Overpass-API Abfrage nicht passieren, siehe: \"Die Overpass-API-Abfrage "
 "liefert nicht\")."
+
+#, perl-format
+msgid ""
+"Route: 'route_ref' = '%s' of stop includes the separator value ';' (semi-"
+"colon) with sourrounding blank"
+msgstr ""
+"Route: 'route_ref' = '%s' der Haltestelle enthält das Trennzeichen "
+"';' (Semikolon) mit umgebendem Leerzeichen"
 
 msgid ""
 "The key 'construction' is set and the key 'highway' is not set to "
@@ -1730,3 +1714,17 @@ msgstr "existiert nicht"
 
 msgid "does not provide any 'shape' data"
 msgstr "stelle keine 'shape' Daten zu Verfügung"
+
+#~ msgid ""
+#~ "'network' = '%s' includes the separator value ';' (semi-colon) with "
+#~ "sourrounding blank"
+#~ msgstr ""
+#~ "'network' = '%s' enthält das Trennzeichen ';' (Semikolon) mit umgebendem "
+#~ "Leerzeichen"
+
+#~ msgid ""
+#~ "'network' = '%s': ',' (comma) as separator value should be replaced by "
+#~ "';' (semi-colon) without blank"
+#~ msgstr ""
+#~ "'network' = '%s': ',' (Komma) als Trennzeichen sollte durch "
+#~ "';' (Semikolon, ohne Leerzeichen) ersetzt werden"
