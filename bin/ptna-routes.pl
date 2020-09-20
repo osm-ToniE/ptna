@@ -6311,7 +6311,7 @@ sub html_escape {
 sub uri_escape {
     my $text = shift;
     if ( $text ) {
-        $text =~ s/([ !"#\$%&'()*+,.\/:;<=>?@\[\\\]{|}-])/ sprintf "%%%02x", ord $1 /eg;
+        $text =~ s/([^^A-Za-z0-9\-_.!~*()])/ sprintf "%%%02x", ord $1 /eg;
     }
     return $text;
 }
