@@ -5955,10 +5955,8 @@ sub printTableSubHeader {
         $ref_or_list_text = $ref;
     }
 
-    if ( scalar @ref_or_array && $network ) {
+    if ( scalar @ref_or_array ) {
         $ref_text = join(' ', map { printSketchLineTemplate( $_, $network, $pt_type, $colour ) } @ref_or_array );
-    } elsif ( scalar @ref_or_array ) {
-        $ref_text = join(' ', @ref_or_array );
     }
 
     if ( scalar @ref_or_array && $pt_type ) {
@@ -6227,6 +6225,8 @@ sub printSketchLineTemplate {
     my $text              = undef;
     my $colour_string     = '';
     my $pt_string         = '';
+    my $a_begin           = '';
+    my $a_end             = '';
     my $outer_span_begin  = '';
     my $inner_span_begin  = '';
     my $outer_span_end    = '';
@@ -6242,7 +6242,13 @@ sub printSketchLineTemplate {
         $outer_span_end   = "&nbsp;</span>";
         $inner_span_end   = "</span>";
     }
-    $text = sprintf( "%s<a href=\"https://overpass-api.de/api/sketch-line?ref=%s&network=%s&style=wuppertal%s%s\" title=\"Sketch-Line\">%s%s%s</a>%s", $outer_span_begin, uri_escape($ref), uri_escape($network), $colour_string, $pt_string, $inner_span_begin, $ref, $inner_span_end, $outer_span_end );
+
+    if ( $network ) {
+        $a_begin = sprintf( "<a href=\"https://overpass-api.de/api/sketch-line?ref=%s&network=%s&style=wuppertal%s%s\" title=\"Sketch-Line\">", uri_escape($ref), uri_escape($network), $colour_string, $pt_string );
+        $a_end   = '</a>';
+    }
+
+    $text = sprintf( "%s%s%s%s%s%s%s", $outer_span_begin, $a_begin, $inner_span_begin, $ref, $inner_span_end, $a_end, $outer_span_end );
 
     return $text;
 }
@@ -6305,7 +6311,7 @@ sub html_escape {
 sub uri_escape {
     my $text = shift;
     if ( $text ) {
-        $text =~ s/([^^A-Za-z0-9\-_.!~*()])/ sprintf "%%%02x", ord $1 /eg;
+        $text =~ s/([ !"#\$%&'()*+,.\/:;<=>?@\[\\\]{|}-])/ sprintf "%%%02x", ord $1 /eg;
     }
     return $text;
 }
