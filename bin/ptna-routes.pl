@@ -318,6 +318,8 @@ my %used_networks           = ();       # 'network' values that did match
 my %added_networks          = ();       # 'network' values where the 'network'of their route_master matched
 my %unused_networks         = ();       # 'network' values that did not match
 my %unused_operators        = ();       # 'operator' values that did not match but 'network' values did match
+my %gtfs_relation_info_from = ();       # Relations reference to GTFS feed information using $gtfs_relation_info_from{feed-name}{feed_info_from}{release_date}{release_date_from}{relarionID} = 1;
+my %gtfs_csv_info_from      = ();       # CSV data  reference to GTFS feed information using $gtfs_csv_info_from{feed-name}{release_date} = ( feed_info_from, release_info_from );
 
 my $relation_ptr            = undef;    # a pointer in Perl to a relation structure
 my $relation_id             = undef;    # the OSM ID of a relation
@@ -367,6 +369,10 @@ my %column_name             = ( 'ref'           => gettext('Line (ref=)'),
                                 'From'          => gettext('From'),
                                 'To'            => gettext('To'),
                                 'Operator'      => gettext('Operator'),
+                                'gtfs_feed'     => gettext('GTFS feed'),
+                                'date'          => gettext('Date'),
+                                'feed_from'     => gettext('GTFS feed from'),
+                                'date_from'     => gettext('Date from'),
                               );
 
 my %transport_types         = ( 'bus'           => gettext('Bus'),
@@ -1519,6 +1525,23 @@ printHintAddedNetworks();
 printHintUnusedNetworks();
 
 printf STDERR "%s Printed network details\n", get_time()       if ( $verbose );
+
+
+#############################################################################################
+#
+# now we print the list of all referenced GTFS feeds
+#
+#############################################################################################
+
+if ( scalar(keys(%gtfs_relation_info_from)) || scalar(keys(%gtfs_csv_info_from)) ) {
+    printf STDERR "%s 'GTFS' details\n", get_time()       if ( $verbose );
+
+    printHeader( gettext("References to GTFS feeds and releases"), 1, 'gtfsreferences' );
+
+    printGtfsReferences();
+}
+
+printf STDERR "%s Printed GTFS details\n", get_time()       if ( $verbose );
 
 
 #############################################################################################
@@ -5185,25 +5208,37 @@ sub CheckCompletenessOfData {
 sub getGtfsInfo {
     my $relation_ptr  = shift;
 
-    my $gtfs_guid     = $gtfs_feed;
-    my $gtfs_country  = '';
-    my $gtfs_html_tag = '';
+    my $gtfs_guid         = $gtfs_feed;
+    my $feed_info_from    = '--gtfs-feed';
+    my $gtfs_release_date = ' latest ';
+    my $release_date_from = ' empty ';
+    my $gtfs_country      = '';
+    my $gtfs_html_tag     = '';
+
 
     if ( $relation_ptr && $relation_ptr->{'tag'} ) {
         if ( $relation_ptr->{'tag'}->{'gtfs:feed'} ) {
-            $gtfs_guid = $relation_ptr->{'tag'}->{'gtfs:feed'};
+            $gtfs_guid      = $relation_ptr->{'tag'}->{'gtfs:feed'};
+            $feed_info_from = 'gtfs:feed';
         } elsif ( $relation_ptr->{'tag'}->{'operator:guid'} ) {
-            $gtfs_guid = $relation_ptr->{'tag'}->{'operator:guid'};
+            $gtfs_guid      = $relation_ptr->{'tag'}->{'operator:guid'};
+            $feed_info_from = 'operator:guid';
         } elsif ( $relation_ptr->{'tag'}->{'network:guid'} ) {
-            $gtfs_guid = $relation_ptr->{'tag'}->{'network:guid'};
+            $gtfs_guid      = $relation_ptr->{'tag'}->{'network:guid'};
+            $feed_info_from = 'network:guid';
         }
+        $gtfs_feed    =  $gtfs_guid;
         $gtfs_country =  $gtfs_guid;
         $gtfs_country =~ s/-.*$//;
 
         if ( $relation_ptr->{'tag'}->{'gtfs:release_date'} ) {
-            $gtfs_guid .= '-' .  $relation_ptr->{'tag'}->{'gtfs:release_date'}
+            $gtfs_release_date  = $relation_ptr->{'tag'}->{'gtfs:release_date'};
+            $release_date_from  = 'gtfs:release_date';
+            $gtfs_guid         .= '-' .  $relation_ptr->{'tag'}->{'gtfs:release_date'};
         } elsif ( $relation_ptr->{'tag'}->{'gtfs:source_date'} ) {
-            $gtfs_guid .= '-' .  $relation_ptr->{'tag'}->{'gtfs:source_date'}
+            $gtfs_release_date  = $relation_ptr->{'tag'}->{'gtfs:source_date'};
+            $release_date_from  = 'gtfs:source_date';
+            $gtfs_guid         .= '-' .  $relation_ptr->{'tag'}->{'gtfs:source_date'};
         }
 
         if ( $relation_ptr->{'tag'}->{'type'} eq 'route' ) {
@@ -5221,9 +5256,13 @@ sub getGtfsInfo {
                 $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $gtfs_guid, $_ ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:route_id'} ) );
             }
         } elsif ( $relation_ptr->{'tag'}->{'gtfs:route_id'} ) {
-                $relation_ptr->{'tag'}->{'gtfs:route_id'} =~ s/\s*;\s*/;/g;
+            $relation_ptr->{'tag'}->{'gtfs:route_id'} =~ s/\s*;\s*/;/g;
             $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $gtfs_guid, $_ ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:route_id'} ) );
         }
+    }
+
+    if ( $gtfs_html_tag ) {
+        $gtfs_relation_info_from{$gtfs_feed}{$feed_info_from}{$gtfs_release_date}{$release_date_from}{$relation_ptr->{'id'}} = 1;
     }
 
     return $gtfs_html_tag;
@@ -5786,6 +5825,66 @@ sub printHintUnusedNetworks {
 
 #############################################################################################
 
+sub printGtfsReferences {
+
+    push( @HTML_main, "<p>\n" );
+    push( @HTML_main, gettext("This section lists ...") );
+    push( @HTML_main, "\n</p>\n" );
+
+    if ( scalar(keys(%gtfs_csv_info_from)) ) {
+        printHeader( gettext("References to GTFS from CSV list"), 2, 'gtfsreferences_csv' );
+
+        push( @HTML_main, "<p>\n" );
+        push( @HTML_main, gettext("This section lists ...") );
+        push( @HTML_main, "\n</p>\n" );
+
+        printTableInitialization( 'gtfs_feed', 'date' );
+        printTableHeader();
+        foreach my $gtfs_feed ( sort( keys( %gtfs_csv_info_from ) ) ) {
+            foreach my $gtfs_release_date (  sort( keys( %{$gtfs_csv_info_from{$gtfs_feed}} ) ) ) {
+                $gtfs_release_date =~ s/ latest //;
+                printTableLine( 'gtfs_feed'    =>  $gtfs_feed,
+                                'release_date' =>  $gtfs_release_date
+                              );
+            }
+        }
+        printTableFooter();
+    }
+
+    if ( scalar(keys(%gtfs_relation_info_from)) ) {
+        printHeader( gettext("References to GTFS from relations"), 2, 'gtfsreferences_relations' );
+
+        push( @HTML_main, "<p>\n" );
+        push( @HTML_main, gettext("This section lists ...") );
+        push( @HTML_main, "\n</p>\n" );
+
+        printTableInitialization( 'gtfs_feed', 'feed_from', 'date', 'date_from', 'number' );
+        printTableHeader();
+        foreach my $gtfs_feed ( sort( keys( %gtfs_relation_info_from ) ) ) {
+            foreach my $feed_from ( sort( keys( %{$gtfs_relation_info_from{$gtfs_feed}} ) ) ) {
+                foreach my $gtfs_release_date ( sort( keys( %{$gtfs_relation_info_from{$gtfs_feed}{$feed_from}} ) ) ) {
+                    foreach my $date_from ( sort( keys( %{$gtfs_relation_info_from{$gtfs_feed}{$feed_from}{$gtfs_release_date}} ) ) ) {
+                        my $grd = $gtfs_release_date;
+                           $grd =~ s/ latest //;
+                        my $df  = $date_from;
+                           $df  =~ s/ empty //;
+                        printTableLine( 'gtfs_feed' =>  $gtfs_feed,
+                                        'feed_from' =>  $feed_from,
+                                        'date'      =>  $grd,
+                                        'date_from' =>  $df,
+                                        'number'    =>  scalar( keys( %{$gtfs_relation_info_from{$gtfs_feed}{$feed_from}{$gtfs_release_date}{$date_from}} ) )
+                                      );
+                    }
+                }
+            }
+        }
+        printTableFooter();
+    }
+}
+
+
+#############################################################################################
+
 sub printHeader {
     my $text  = shift;
     my $level = shift || 1;
@@ -5983,15 +6082,19 @@ sub printTableSubHeader {
     $csv_text .= sprintf( "%s: %s; ", ( $column_name{'Operator'}      ? $column_name{'Operator'}      : 'Operator' ),      html_escape($hash{'Operator'}) )      if ( $hash{'Operator'}      );
     if ( $hash{'GTFS-Feed'} && $hash{'GTFS-Route-Id'} ) {
         if ( $hash{'GTFS-Release-Date'} ) {
+            $gtfs_csv_info_from{$hash{'GTFS-Feed'}}{$hash{'GTFS-Release-Date'}} = 1;
             $csv_text .= join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}.'-'.$hash{'GTFS-Release-Date'},$_ ); } split( ';', $hash{'GTFS-Route-Id'} ) );
         } else {
+            $gtfs_csv_info_from{$hash{'GTFS-Feed'}}{' latest '} = 1;
             $csv_text .= join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'},$_ ); } split( ';', $hash{'GTFS-Route-Id'} ) );
         }
     } else {
         if ( $hash{'GTFS-Feed'} ) {
             if ( $hash{'GTFS-Release-Date'} ) {
+                $gtfs_csv_info_from{$hash{'GTFS-Feed'}}{$hash{'GTFS-Release-Date'}} = 1;
                 $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}.'-'.$hash{'GTFS-Release-Date'},'' );
             } else {
+                $gtfs_csv_info_from{$hash{'GTFS-Feed'}}{' latest '} = 1;
                 $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'},'' );
             }
         } elsif ( $hash{'GTFS-Route-Id'} ) {
