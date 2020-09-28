@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-09-16 21:08+0200\n"
+"POT-Creation-Date: 2020-09-28 12:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -99,6 +99,18 @@ msgstr ""
 msgid "Operator"
 msgstr ""
 
+msgid "GTFS feed"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "GTFS feed from"
+msgstr ""
+
+msgid "Date from"
+msgstr ""
+
 msgid "Bus"
 msgstr ""
 
@@ -159,6 +171,9 @@ msgid "More Relations"
 msgstr ""
 
 msgid "Details for 'network'-Values"
+msgstr ""
+
+msgid "References to GTFS feeds and releases"
 msgstr ""
 
 msgid "There is more than one Route-Master"
@@ -952,6 +967,52 @@ msgstr ""
 msgid "This section lists the 'network'-values which have not been considered."
 msgstr ""
 
+msgid ""
+"This section lists references to GTFS feed information found in the CSV list "
+"and in Route-Master and Route relations."
+msgstr ""
+
+msgid "References to GTFS from CSV list"
+msgstr ""
+
+msgid ""
+"This section lists the name of the GTFS feed and the related release date "
+"information as found in the CSV list."
+msgstr ""
+
+msgid ""
+"An empty release date means: reference to the latest GTFS information, the "
+"latest available at PTNA."
+msgstr ""
+
+msgid "Example"
+msgstr ""
+
+msgid ""
+"Where the GTFS feed name is 'DE-BY-MVV' and the release date is '2020-07-24'."
+msgstr ""
+
+msgid "References to GTFS from relations"
+msgstr ""
+
+msgid ""
+"This section lists the name of the GTFS feed and the related release date "
+"information as found in Route-Master and Route relations."
+msgstr ""
+
+msgid ""
+"In addition to that, the source of the information (name and date) is listed."
+msgstr ""
+
+msgid ""
+"The value '--gtfs-feed' refers to the corresponding global analysis option, "
+"because no information about the source of the GTFS feed information was "
+"found in the Route-Master or Route relation."
+msgstr ""
+
+msgid "key = value"
+msgstr ""
+
 #, perl-format
 msgid ""
 "'%s' = '%s' includes the separator value ';' (semi-colon) with sourrounding "
@@ -1066,9 +1127,6 @@ msgstr ""
 msgid ""
 "Sometimes, deleting the key 'construction' is not carried out, which leaves "
 "an artifact and can be seen as an error."
-msgstr ""
-
-msgid "Example"
 msgstr ""
 
 msgid "and"

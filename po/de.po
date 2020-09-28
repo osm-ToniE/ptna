@@ -7,14 +7,13 @@
 # Noémie <nlehuby@zaclys.net>, 2019
 # ToniE <osm-ToniE@web.de>, 2020
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-09-16 21:08+0200\n"
-"PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: ToniE <osm-ToniE@web.de>, 2020\n"
+"POT-Creation-Date: 2020-09-28 12:52+0200\n"
+"PO-Revision-Date: 2020-09-28 13:01+0200\n"
+"Last-Translator: osm-ToniE <osm-ToniE@web.de>\n"
 "Language-Team: German (https://www.transifex.com/jungle-bus/teams/97874/"
 "de/)\n"
 "Language: de\n"
@@ -22,6 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.2.1\n"
 
 msgid "Message"
 msgstr "Meldung"
@@ -106,6 +106,18 @@ msgstr "Nach"
 msgid "Operator"
 msgstr "Betreiber"
 
+msgid "GTFS feed"
+msgstr "GTFS Quelle"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "GTFS feed from"
+msgstr "GTFS Quelle aus"
+
+msgid "Date from"
+msgstr "Datum aus"
+
 msgid "Bus"
 msgstr "Bus"
 
@@ -167,6 +179,9 @@ msgstr "Weitere Relationen"
 
 msgid "Details for 'network'-Values"
 msgstr "Details zu 'network'-Werten"
+
+msgid "References to GTFS feeds and releases"
+msgstr "Verweise auf GTFS Quellen und Versionen"
 
 msgid "There is more than one Route-Master"
 msgstr "Es existiert mehr als ein Route-Master"
@@ -1162,6 +1177,66 @@ msgstr ""
 "Dieser Abschnitt listet die 'network'-Werte auf, die nicht berücksichtigt "
 "wurden."
 
+msgid ""
+"This section lists references to GTFS feed information found in the CSV list "
+"and in Route-Master and Route relations."
+msgstr ""
+"Dieser Abschnitt listet Verweise auf GTFS Quellen auf, wie sie in Route-"
+"Master und Route Relationen gefunden wurden."
+
+msgid "References to GTFS from CSV list"
+msgstr "Verweise auf GTFS in der CSV-Liste"
+
+msgid ""
+"This section lists the name of the GTFS feed and the related release date "
+"information as found in the CSV list."
+msgstr ""
+"Dieser Abschnitt listet Namen und Versionen von GTFS Quellen auf, wie sie "
+"der CSV-Liste gefunden wurden."
+
+msgid ""
+"An empty release date means: reference to the latest GTFS information, the "
+"latest available at PTNA."
+msgstr ""
+"Eine leerer Eintrage für das Datum bedeutet: es ist ein Verweise auf die "
+"aktuellste bei PTNA verfügbare GTSF Quelle."
+
+msgid "Example"
+msgstr "Beispiel"
+
+msgid ""
+"Where the GTFS feed name is 'DE-BY-MVV' and the release date is '2020-07-24'."
+msgstr ""
+"Wo der Name der GTFS Quelle 'DE-BY-MVV' und das Datum der Version "
+"'2020-07-24' ist."
+
+msgid "References to GTFS from relations"
+msgstr "Verweise auf GTFS in Relationen"
+
+msgid ""
+"This section lists the name of the GTFS feed and the related release date "
+"information as found in Route-Master and Route relations."
+msgstr ""
+"Dieser Abschnitt listet Namen und Versionen von GTFS Quellen auf, wie sie in "
+"Route-Master und Route Relationen gefunden wurden."
+
+msgid ""
+"In addition to that, the source of the information (name and date) is listed."
+msgstr ""
+"Zusätzlich wird noch die Quelle der Information (Name und Datum) aufgeführt."
+
+msgid ""
+"The value '--gtfs-feed' refers to the corresponding global analysis option, "
+"because no information about the source of the GTFS feed information was "
+"found in the Route-Master or Route relation."
+msgstr ""
+"Der Wert '--gtfs-feed' verweist auf die entsprechende globale Analyseoption "
+"hin, in den Route-Master und Route Relationen wurden keine Informationen "
+"über die GTFS Quelle gefunden."
+
+msgid "key = value"
+msgstr "Schlüssel = Wert"
+
 #, perl-format
 msgid ""
 "'%s' = '%s' includes the separator value ';' (semi-colon) with sourrounding "
@@ -1316,9 +1391,6 @@ msgid ""
 msgstr ""
 "Manchmal wird vergessen, den Schlüssel 'construction' zu löschen, was als "
 "Fehler angesehen werden kann."
-
-msgid "Example"
-msgstr "Beispiel"
 
 msgid "and"
 msgstr "und"
@@ -1714,17 +1786,3 @@ msgstr "existiert nicht"
 
 msgid "does not provide any 'shape' data"
 msgstr "stelle keine 'shape' Daten zu Verfügung"
-
-#~ msgid ""
-#~ "'network' = '%s' includes the separator value ';' (semi-colon) with "
-#~ "sourrounding blank"
-#~ msgstr ""
-#~ "'network' = '%s' enthält das Trennzeichen ';' (Semikolon) mit umgebendem "
-#~ "Leerzeichen"
-
-#~ msgid ""
-#~ "'network' = '%s': ',' (comma) as separator value should be replaced by "
-#~ "';' (semi-colon) without blank"
-#~ msgstr ""
-#~ "'network' = '%s': ',' (Komma) als Trennzeichen sollte durch "
-#~ "';' (Semikolon, ohne Leerzeichen) ersetzt werden"
