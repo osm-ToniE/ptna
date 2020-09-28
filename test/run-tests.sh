@@ -2,26 +2,34 @@
 
 PATH=$PWD/../bin:$PATH
 
-ERRORS=0
+perl -c ../bin/ptna-routes.pl
 
-for infile in *.osm *.xml
-do
-    TEST=$(basename $infile .osm)
-    TEST=$(basename $TEST   .xml)
-    
-    if [ "$TEST" != '*' ]
-    then
-        if [ -e "$TEST.script" ]
+if [ "$?" = "0" ]
+then
+    ERRORS=0
+
+    for infile in *.osm *.xml
+    do
+        TEST=$(basename $infile .osm)
+        TEST=$(basename $TEST   .xml)
+
+        if [ "$TEST" != '*' ]
         then
-            bash ./$TEST.script $infile
-        else
-            bash ./generic.script $infile
-        fi
-        
-        ERRORS=$(( $ERRORS + $? ))
-    fi
-done
+            if [ -e "$TEST.script" ]
+            then
+                bash ./$TEST.script $infile
+            else
+                bash ./generic.script $infile
+            fi
 
-echo ""
-echo "Tests ended with $ERRORS errors"
-exit $ERRORS
+            ERRORS=$(( $ERRORS + $? ))
+        fi
+    done
+
+    echo ""
+    echo "Tests ended with $ERRORS errors"
+    exit $ERRORS
+else
+    echo ""
+    echo "Test ended mit syntax fehlern in ptnsroutes.pl"
+fi
