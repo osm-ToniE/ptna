@@ -21,6 +21,10 @@
             #analysis .relation       { white-space:nowrap; }
             #analysis .PTv            { text-align:center; }
             #analysis .number         { text-align:right; }
+            #analysis .gtfs_feed      { white-space:nowrap; }
+            #analysis .feed_from      { white-space:nowrap; }
+            #analysis .date           { white-space:nowrap; }
+            #analysis .date_from      { white-space:nowrap; }
             #analysis .attention      { background-color: yellow; font-weight: 500; font-size: 1.2em; }
             .gtfs-dateold             { text-align:center; background-color: orange; }
             .gtfs-datenew             { text-align:center; background-color: lightgreen; }
@@ -39,6 +43,14 @@
         <li>3 <a href="#networkdetails">Details for &#039;network&#039;-Values</a>
         <ol>
         <li>3.1 <a href="#considerednetworks">Considered &#039;network&#039;-Values</a>
+        </li>
+        </ol>
+        </li>
+        <li>4 <a href="#gtfsreferences">References to GTFS feeds and releases</a>
+        <ol>
+        <li>4.1 <a href="#gtfsreferences_csv">References to GTFS from CSV list</a>
+        </li>
+        <li>4.2 <a href="#gtfsreferences_relations">References to GTFS from relations</a>
         </li>
         </ol>
         </li>
@@ -124,6 +136,63 @@ This section lists the 'network'-values which have been considered; i.e. which m
             </thead>
             <tbody>
                 <tr data-info="network" data-ref="???" class="line"><td class="network">network</td><td class="number">7</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '605' -99746 <small>(<a class="bad-link" href="/gtfs/DE/single-trip.php?network=DE-BY-MVV&trip_id=was%20wei%df%20ich" title="GTFS-Feed: DE-BY-MVV, GTFS-Trip-Id: was weiß ich: 'trip_id' does not exist.">GTFS!</a>)</small>, <img src="/img/Relation.svg" alt="Relation" /> '222' -99748 <small>(<a class="gtfs-datevalid" href="/gtfs/DE/single-trip.php?network=DE-BY-MVV&trip_id=43.T0.19-222-s20-2.4.R" title="GTFS-Feed: DE-BY-MVV, GTFS-Trip-Id: 43.T0.19-222-s20-2.4.R">GTFS</a>)</small>, <img src="/img/Relation.svg" alt="Relation" /> '222' -99750 <small>(<a class="gtfs-datevalid" href="/gtfs/DE/single-trip.php?network=DE-BY-MVV&trip_id=43.T0.19-222-s20-2.4.R" title="GTFS-Feed: DE-BY-MVV, GTFS-Trip-Id: 43.T0.19-222-s20-2.4.R">GTFS</a>, <a class="gtfs-datevalid" href="/gtfs/DE/single-trip.php?network=DE-BY-MVV&trip_id=93.T0.19-222-s20-4.2.H" title="GTFS-Feed: DE-BY-MVV, GTFS-Trip-Id: 93.T0.19-222-s20-4.2.H">GTFS</a>)</small>, <img src="/img/Relation.svg" alt="Relation" /> '222' -99767 <small>(<a class="gtfs-datevalid" href="/gtfs/DE/single-trip.php?network=DE-BY-MVV&trip_id=93.T0.19-222-s20-4.2.H" title="GTFS-Feed: DE-BY-MVV, GTFS-Trip-Id: 93.T0.19-222-s20-4.2.H">GTFS</a>)</small>, <img src="/img/Relation.svg" alt="Relation" /> '222' -99769 <small>(<a class="gtfs-datevalid" href="/gtfs/DE/trips.php?network=DE-BY-MVV-2020-07-24&route_id=19-222-s20-4" title="GTFS-Feed: DE-BY-MVV-2020-07-24, GTFS-Route-Id: 19-222-s20-4">GTFS</a>)</small>, <img src="/img/Relation.svg" alt="Relation" /> '222' -99776 <small>(<a class="bad-link" href="/gtfs/DE/single-trip.php?network=DE-BY-MVV&shape_id=19-222-s20-4.2.H" title="GTFS-Feed: DE-BY-MVV, GTFS-Shape-Id: 19-222-s20-4.2.H: does not provide any &#039;shape&#039; data.">GTFS!</a>)</small>, <img src="/img/Relation.svg" alt="Relation" /> '222' -99778 <small>(<a class="gtfs-datevalid" href="/gtfs/DE/trips.php?network=DE-BY-MVV&route_id=19-222-s20-2" title="GTFS-Feed: DE-BY-MVV, GTFS-Route-Id: 19-222-s20-2">GTFS</a>, <a class="bad-link" href="/gtfs/DE/routes.php?network=DE-BY-MVV" title="GTFS-Feed: DE-BY-MVV - 'route_id' is not set.">GTFS!</a>, <a class="gtfs-datevalid" href="/gtfs/DE/trips.php?network=DE-BY-MVV&route_id=19-222-s20-4" title="GTFS-Feed: DE-BY-MVV, GTFS-Route-Id: 19-222-s20-4">GTFS</a>, <a class="bad-link" href="/gtfs/DE/trips.php?network=DE-BY-MVV&route_id=20-222-s20-4" title="GTFS-Feed: DE-BY-MVV, GTFS-Route-Id: 20-222-s20-4: 'route_id' does not exist.">GTFS!</a>)</small></td></tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <h1 id="gtfsreferences">4 References to GTFS feeds and releases</h1>
+<p>
+This section lists references to GTFS feed information found in the CSV list and in Route-Master and Route relations.
+</p>
+        <h2 id="gtfsreferences_csv">4.1 References to GTFS from CSV list</h2>
+<p>
+This section lists the name of the GTFS feed and the related release date information as found in the CSV list.
+An empty release date means: reference to the latest GTFS information, the latest available at PTNA.
+</p>
+<p>
+Example:<br />
+<code>&nbsp;&nbsp;&nbsp;&nbsp;#ref;route;comment;from;to;operator;gtfs_feed;route_id;release_date</code><br />
+<code>&nbsp;&nbsp;&nbsp;&nbsp;210;bus;;Brunnthal, Zusestraße;Neuperlach Süd U S;Verkehrsbetrieb Ettenhuber GmbH;DE-BY-MVV;19-210-s20-1;2020-07-24</code><br />
+Where the GTFS feed name is 'DE-BY-MVV' and the release date is '2020-07-24'.
+
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="gtfs_feed">GTFS feed</th><th class="date">Date</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="???" data-ref="???" class="line"><td class="gtfs_feed">DE-BW-SWEG</td><td class="date"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="gtfs_feed">DE-BY-MVV</td><td class="date"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="gtfs_feed">DE-BY-MVV</td><td class="date"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="gtfs_feed">DE-BY-MVV</td><td class="date"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="gtfs_feed">DE-BY-MVV</td><td class="date"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="gtfs_feed">DE-XX-YYY</td><td class="date"></td></tr>
+            </tbody>
+        </table>
+
+        <h2 id="gtfsreferences_relations">4.2 References to GTFS from relations</h2>
+<p>
+This section lists the name of the GTFS feed and the related release date information as found in Route-Master and Route relations.
+An empty release date means: reference to the latest GTFS information, the latest available at PTNA.
+In addition to that, the source of the information (name and date) is listed.
+The value '--gtfs-feed' refers to the corresponding global analysis option, because no information about the source of the GTFS feed information was found in the Route-Master or Route relation.
+
+</p>
+<p>
+Example (key = value):<br />
+<code>&nbsp;&nbsp;&nbsp;&nbsp;gtfs:feed&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;DE-BY-MVV</code><br />
+<code>&nbsp;&nbsp;&nbsp;&nbsp;gtfs:release_date&nbsp;=&nbsp;2020-07-24</code><br />
+<code>&nbsp;&nbsp;&nbsp;&nbsp;gtfs:route_id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;19-210-s20-1</code><br />
+
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="gtfs_feed">GTFS feed</th><th class="feed_from">GTFS feed from</th><th class="date">Date</th><th class="date_from">Date from</th><th class="number">Number</th><th class="relations">Relations</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="???" data-ref="???" class="line"><td class="gtfs_feed">DE-BY-MVV</td><td class="feed_from">gtfs:feed</td><td class="date"></td><td class="date_from"></td><td class="number">2</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '222' -99767 <small>(<a class="gtfs-datevalid" href="/gtfs/DE/single-trip.php?network=DE-BY-MVV&trip_id=93.T0.19-222-s20-4.2.H" title="GTFS-Feed: DE-BY-MVV, GTFS-Trip-Id: 93.T0.19-222-s20-4.2.H">GTFS</a>)</small>, <img src="/img/Relation.svg" alt="Relation" /> '222' -99776 <small>(<a class="bad-link" href="/gtfs/DE/single-trip.php?network=DE-BY-MVV&shape_id=19-222-s20-4.2.H" title="GTFS-Feed: DE-BY-MVV, GTFS-Shape-Id: 19-222-s20-4.2.H: does not provide any &#039;shape&#039; data.">GTFS!</a>)</small></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="gtfs_feed">DE-BY-MVV</td><td class="feed_from">gtfs:feed</td><td class="date">2020-07-24</td><td class="date_from">gtfs:release_date</td><td class="number">1</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '222' -99769 <small>(<a class="gtfs-datevalid" href="/gtfs/DE/trips.php?network=DE-BY-MVV-2020-07-24&route_id=19-222-s20-4" title="GTFS-Feed: DE-BY-MVV-2020-07-24, GTFS-Route-Id: 19-222-s20-4">GTFS</a>)</small></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="gtfs_feed">DE-BY-MVV</td><td class="feed_from">network:guid</td><td class="date"></td><td class="date_from"></td><td class="number">4</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '605' -99746 <small>(<a class="bad-link" href="/gtfs/DE/single-trip.php?network=DE-BY-MVV&trip_id=was%20wei%df%20ich" title="GTFS-Feed: DE-BY-MVV, GTFS-Trip-Id: was weiß ich: 'trip_id' does not exist.">GTFS!</a>)</small>, <img src="/img/Relation.svg" alt="Relation" /> '222' -99748 <small>(<a class="gtfs-datevalid" href="/gtfs/DE/single-trip.php?network=DE-BY-MVV&trip_id=43.T0.19-222-s20-2.4.R" title="GTFS-Feed: DE-BY-MVV, GTFS-Trip-Id: 43.T0.19-222-s20-2.4.R">GTFS</a>)</small>, <img src="/img/Relation.svg" alt="Relation" /> '222' -99750 <small>(<a class="gtfs-datevalid" href="/gtfs/DE/single-trip.php?network=DE-BY-MVV&trip_id=43.T0.19-222-s20-2.4.R" title="GTFS-Feed: DE-BY-MVV, GTFS-Trip-Id: 43.T0.19-222-s20-2.4.R">GTFS</a>, <a class="gtfs-datevalid" href="/gtfs/DE/single-trip.php?network=DE-BY-MVV&trip_id=93.T0.19-222-s20-4.2.H" title="GTFS-Feed: DE-BY-MVV, GTFS-Trip-Id: 93.T0.19-222-s20-4.2.H">GTFS</a>)</small>, <img src="/img/Relation.svg" alt="Relation" /> '222' -99778 <small>(<a class="gtfs-datevalid" href="/gtfs/DE/trips.php?network=DE-BY-MVV&route_id=19-222-s20-2" title="GTFS-Feed: DE-BY-MVV, GTFS-Route-Id: 19-222-s20-2">GTFS</a>, <a class="bad-link" href="/gtfs/DE/routes.php?network=DE-BY-MVV" title="GTFS-Feed: DE-BY-MVV - 'route_id' is not set.">GTFS!</a>, <a class="gtfs-datevalid" href="/gtfs/DE/trips.php?network=DE-BY-MVV&route_id=19-222-s20-4" title="GTFS-Feed: DE-BY-MVV, GTFS-Route-Id: 19-222-s20-4">GTFS</a>, <a class="bad-link" href="/gtfs/DE/trips.php?network=DE-BY-MVV&route_id=20-222-s20-4" title="GTFS-Feed: DE-BY-MVV, GTFS-Route-Id: 20-222-s20-4: 'route_id' does not exist.">GTFS!</a>)</small></td></tr>
             </tbody>
         </table>
 
