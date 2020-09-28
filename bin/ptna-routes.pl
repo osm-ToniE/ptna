@@ -2800,7 +2800,6 @@ sub analyze_ptv2_route_relation {
     $relation_ptr->{'non_platform_ways'}       = \@relation_route_highways;
     $relation_ptr->{'number_of_segments'}      = 0;
     $relation_ptr->{'gap_at_way'}              = ();
-    $relation_ptr->{'number_of_roundabouts'}   = 0;
     $relation_ptr->{'sorted_in_reverse_order'} = '';
 
     if ( $check_name ) {
@@ -2927,10 +2926,19 @@ sub analyze_ptv2_route_relation {
         push( @{$relation_ptr->{'__issues__'}}, $issues_string );
         $return_code++;
     }
-    if ( $check_roundabouts  && $relation_ptr->{'number_of_roundabouts'} ) {
-        $notes_string = ngettext( "PTv2 route: includes %d entire roundabout but uses only segments", "PTv2 route: includes %d entire roundabouts but uses only segments", $relation_ptr->{'number_of_roundabouts'} );
-        push( @{$relation_ptr->{'__notes__'}},  sprintf( $notes_string, $relation_ptr->{'number_of_roundabouts'} ) );
-        $return_code++;
+    if ( $check_roundabouts ) {
+        my @help_array    = sort( keys( %{$relation_ptr->{'roundabout_segments_at'}} ) );
+        my $num_of_errors = scalar( @help_array );
+        if ( $num_of_errors ) {
+            $notes_string = ngettext( "PTv2 route: includes %d entire roundabout but uses only segments", "PTv2 route: includes %d entire roundabouts but uses only segments", $num_of_errors );
+            my $error_string   = sprintf( $notes_string, $num_of_errors );
+            if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("%s: %s and %d more ..."), $error_string, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+            } else {
+                push( @{$relation_ptr->{'__notes__'}}, sprintf("%s: %s", $error_string, join(', ', map { printWayTemplate($_,'name;ref'); } @help_array )) );
+            }
+            $return_code++;
+        }
     }
     if ( $relation_ptr->{'wrong_direction_oneways'} ) {
         my @help_array     = sort(keys(%{$relation_ptr->{'wrong_direction_oneways'}}));
@@ -3713,7 +3721,7 @@ sub SortRouteWayNodes {
                                                                     join( ', ', @{$WAYS{$current_way_id}->{'chain'}} ),
                                                                     join( ', ', @{$WAYS{$next_way_id}->{'chain'}} )     if ( $debug );
 
-                                $relation_ptr->{'number_of_roundabouts'}++;
+                                $relation_ptr->{'roundabout_segments_at'}{$current_way_id}= 1;
 
                                 if ( isNodeInNodeArray($WAYS{$next_way_id}->{'first_node'},@{$WAYS{$current_way_id}->{'chain'}}) ||
                                      isNodeInNodeArray($WAYS{$next_way_id}->{'last_node'}, @{$WAYS{$current_way_id}->{'chain'}})     ){
