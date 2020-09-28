@@ -31,5 +31,5 @@ then
     exit $ERRORS
 else
     echo ""
-    echo "Test ended mit syntax fehlern in ptnsroutes.pl"
+    echo "Test ended with syntax errors in ptna-routes.pl"
 fi
