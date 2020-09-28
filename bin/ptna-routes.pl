@@ -5328,6 +5328,10 @@ sub printInitialHeader {
         push( @HTML_start, "            #analysis .relation       { white-space:nowrap; }\n" );
         push( @HTML_start, "            #analysis .PTv            { text-align:center; }\n" );
         push( @HTML_start, "            #analysis .number         { text-align:right; }\n" );
+        push( @HTML_start, "            #analysis .gtfs_feed      { white-space:nowrap; }\n" );
+        push( @HTML_start, "            #analysis .feed_from      { white-space:nowrap; }\n" );
+        push( @HTML_start, "            #analysis .date           { white-space:nowrap; }\n" );
+        push( @HTML_start, "            #analysis .date_from      { white-space:nowrap; }\n" );
         push( @HTML_start, "            #analysis .attention      { background-color: yellow; font-weight: 500; font-size: 1.2em; }\n" );
         push( @HTML_start, "            .gtfs-dateold             { text-align:center; background-color: orange; }\n" );
         push( @HTML_start, "            .gtfs-datenew             { text-align:center; background-color: lightgreen; }\n" );
@@ -5836,14 +5840,22 @@ sub printHintUnusedNetworks {
 sub printGtfsReferences {
 
     push( @HTML_main, "<p>\n" );
-    push( @HTML_main, gettext("This section lists ...") );
+    push( @HTML_main, gettext("This section lists references to GTFS feed information found in the CSV list and in Route-Master and Route relations.") );
     push( @HTML_main, "\n</p>\n" );
 
     if ( scalar(keys(%gtfs_csv_info_from)) ) {
         printHeader( gettext("References to GTFS from CSV list"), 2, 'gtfsreferences_csv' );
 
         push( @HTML_main, "<p>\n" );
-        push( @HTML_main, gettext("This section lists ...") );
+        push( @HTML_main, gettext("This section lists the name of the GTFS feed and the related release date information as found in the CSV list.") . "\n" );
+        push( @HTML_main, gettext("An empty release date means: reference to the latest GTFS information, the latest available at PTNA.") );
+        push( @HTML_main, "\n</p>\n" );
+
+        push( @HTML_main, "<p>\n" );
+        push( @HTML_main, gettext("Example") . ":<br />\n" );
+        push( @HTML_main, "<code>&nbsp;&nbsp;&nbsp;&nbsp;#ref;route;comment;from;to;operator;gtfs_feed;route_id;release_date</code><br />\n" );
+        push( @HTML_main, "<code>&nbsp;&nbsp;&nbsp;&nbsp;210;bus;;Brunnthal, Zusestraße;Neuperlach Süd U S;Verkehrsbetrieb Ettenhuber GmbH;DE-BY-MVV;19-210-s20-1;2020-07-24</code><br />\n" );
+        push( @HTML_main, gettext("Where the GTFS feed name is 'DE-BY-MVV' and the release date is '2020-07-24'.") . "\n" );
         push( @HTML_main, "\n</p>\n" );
 
         printTableInitialization( 'gtfs_feed', 'date' );
@@ -5860,13 +5872,26 @@ sub printGtfsReferences {
     }
 
     if ( scalar(keys(%gtfs_relation_info_from)) ) {
+
+        my @relations_of_feed = ();
+
         printHeader( gettext("References to GTFS from relations"), 2, 'gtfsreferences_relations' );
 
         push( @HTML_main, "<p>\n" );
-        push( @HTML_main, gettext("This section lists ...") );
+        push( @HTML_main, gettext("This section lists the name of the GTFS feed and the related release date information as found in Route-Master and Route relations.") . "\n" );
+        push( @HTML_main, gettext("An empty release date means: reference to the latest GTFS information, the latest available at PTNA.") . "\n" );
+        push( @HTML_main, gettext("In addition to that, the source of the information (name and date) is listed.") . "\n" );
+        push( @HTML_main, gettext("The value '--gtfs-feed' refers to the corresponding global analysis option, because no information about the source of the GTFS feed information was found in the Route-Master or Route relation." ) . "\n" );
         push( @HTML_main, "\n</p>\n" );
 
-        printTableInitialization( 'gtfs_feed', 'feed_from', 'date', 'date_from', 'number' );
+        push( @HTML_main, "<p>\n" );
+        push( @HTML_main, gettext("Example" ) . " (" . gettext("key = value") . "):<br />\n" );
+        push( @HTML_main, "<code>&nbsp;&nbsp;&nbsp;&nbsp;gtfs:feed&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;DE-BY-MVV</code><br />\n" );
+        push( @HTML_main, "<code>&nbsp;&nbsp;&nbsp;&nbsp;gtfs:release_date&nbsp;=&nbsp;2020-07-24</code><br />\n" );
+        push( @HTML_main, "<code>&nbsp;&nbsp;&nbsp;&nbsp;gtfs:route_id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;19-210-s20-1</code><br />\n" );
+        push( @HTML_main, "\n</p>\n" );
+
+        printTableInitialization( 'gtfs_feed', 'feed_from', 'date', 'date_from', 'number', 'relations' );
         printTableHeader();
         foreach my $gtfs_feed ( sort( keys( %gtfs_relation_info_from ) ) ) {
             foreach my $feed_from ( sort( keys( %{$gtfs_relation_info_from{$gtfs_feed}} ) ) ) {
@@ -5876,12 +5901,25 @@ sub printGtfsReferences {
                            $grd =~ s/ latest //;
                         my $df  = $date_from;
                            $df  =~ s/ empty //;
-                        printTableLine( 'gtfs_feed' =>  $gtfs_feed,
-                                        'feed_from' =>  $feed_from,
-                                        'date'      =>  $grd,
-                                        'date_from' =>  $df,
-                                        'number'    =>  scalar( keys( %{$gtfs_relation_info_from{$gtfs_feed}{$feed_from}{$gtfs_release_date}{$date_from}} ) )
-                                      );
+                        @relations_of_feed    = sort( keys( %{$gtfs_relation_info_from{$gtfs_feed}{$feed_from}{$gtfs_release_date}{$date_from}} ) );
+                        if ( scalar @relations_of_feed <= 10 ) {
+                            printTableLine( 'gtfs_feed' =>  $gtfs_feed,
+                                            'feed_from' =>  $feed_from,
+                                            'date'      =>  $grd,
+                                            'date_from' =>  $df,
+                                            'number'    =>  scalar @relations_of_feed,
+                                            'relations' =>  join( ',', @relations_of_feed )
+                                        );
+                        } else {
+                            printTableLine( 'gtfs_feed' =>  $gtfs_feed,
+                                            'feed_from' =>  $feed_from,
+                                            'date'      =>  $grd,
+                                            'date_from' =>  $df,
+                                            'number'    =>  scalar @relations_of_feed,
+                                            'relations' =>  join( ',', splice(@relations_of_feed,0,10) ),
+                                            'and more'  =>  gettext( "and more ..." )
+                                        );
+                        }
                     }
                 }
             }
