@@ -41,55 +41,56 @@ $config{'name-suffix'}  = '-ptna-gtfs-sqlite.db';           # name suffix of cur
 
 sub getGtfsRouteIdHtmlTag {
     my $gtfs_feed      = shift;
+    my $release_date   = shift || '';
     my $route_id       = shift;
 
     my $gtfs_html_tag  = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"'GTFS feed' %s. %s\">GTFS!</a>",
                                   html_escape(gettext("is not set")),
                                   html_escape(gettext("GTFS database not found")) );
 
-    if ( _AttachToGtfsSqliteDb($gtfs_feed) ) {
+    if ( _AttachToGtfsSqliteDb($gtfs_feed,$release_date) ) {
 
         my $gtfs_country =  $gtfs_feed;
            $gtfs_country =~ s/-.*$//;
 
         if ( $route_id ) {
 
-            my $RouteIdStatus = _getRouteIdStatus( $gtfs_feed, $route_id );
+            my $RouteIdStatus = _getRouteIdStatus( $gtfs_feed, $release_date, $route_id );
 
             if ( $RouteIdStatus eq 'valid' ) {
-                $gtfs_html_tag = sprintf( "<a class=\"gtfs-datevalid\" href=\"/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Route-Id: %s\">GTFS</a>",
+                $gtfs_html_tag = sprintf( "<a class=\"gtfs-datevalid\" href=\"/gtfs/%s/trips.php?feed=%s&release_date=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Route-Id: %s\">GTFS</a>",
                                           uri_escape($gtfs_country),
-                                          uri_escape($gtfs_feed),
+                                          uri_escape($gtfs_feed), uri_escape($release_date),
                                           uri_escape($route_id),
-                                          html_escape($gtfs_feed),
+                                          html_escape($gtfs_feed), html_escape($release_date),
                                           html_escape($route_id) );
             } elsif ( $RouteIdStatus eq 'past' ) {
-                $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateold\" href=\"/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Route-Id: %s: 'route_id' %s.\">GTFS?</a>",
+                $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateold\" href=\"/gtfs/%s/trips.php?feed=%s&release_date=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Route-Id: %s: 'route_id' %s.\">GTFS?</a>",
                                           uri_escape($gtfs_country),
-                                          uri_escape($gtfs_feed),
+                                          uri_escape($gtfs_feed), uri_escape($release_date),
                                           uri_escape($route_id),
-                                          html_escape($gtfs_feed),
+                                          html_escape($gtfs_feed), html_escape($release_date),
                                           html_escape($route_id),
                                           html_escape(gettext("is no longer valid (in the past)")) );
             } elsif ( $RouteIdStatus eq 'future' ) {
-                $gtfs_html_tag = sprintf( "<a class=\"gtfs-datenew\" href=\"/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Route-Id: %s: 'route_id' %s.\">GTFS?</a>",
+                $gtfs_html_tag = sprintf( "<a class=\"gtfs-datenew\" href=\"/gtfs/%s/trips.php?feed=%s&release_date=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Route-Id: %s: 'route_id' %s.\">GTFS?</a>",
                                           uri_escape($gtfs_country),
-                                          uri_escape($gtfs_feed),
+                                          uri_escape($gtfs_feed), uri_escape($release_date),
                                           uri_escape($route_id),
-                                          html_escape($gtfs_feed),
+                                          html_escape($gtfs_feed), html_escape($release_date),
                                           html_escape($route_id),
                                           html_escape(gettext("is not yet valid (in the future)")) );
             } else {
                 my $found_in_previous_version = 0;
 
-                if ( _AttachToGtfsSqliteDb($gtfs_feed.'-previous') ) {
-                    $RouteIdStatus = _getRouteIdStatus( $gtfs_feed.'-previous', $route_id );
+                if ( _AttachToGtfsSqliteDb($gtfs_feed,'previous') ) {
+                    $RouteIdStatus = _getRouteIdStatus( $gtfs_feed, 'previous', $route_id );
                     if ( $RouteIdStatus eq 'valid' || $RouteIdStatus eq 'past' || $RouteIdStatus eq 'future' ) {
-                        $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateprevious\" href=\"/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Route-Id: %s: 'route_id' %s.\">GTFS??</a>",
+                        $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateprevious\" href=\"/gtfs/%s/trips.php?feed=%s&release_date=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Route-Id: %s: 'route_id' %s.\">GTFS??</a>",
                                                   uri_escape($gtfs_country),
-                                                  uri_escape($gtfs_feed.'-previous'),
+                                                  uri_escape($gtfs_feed) , 'previous',
                                                   uri_escape($route_id),
-                                                  html_escape($gtfs_feed.'-previous'),
+                                                  html_escape($gtfs_feed), 'previous',
                                                   html_escape($route_id),
                                                   html_escape(gettext("outdated, fits to older GTFS version only")) );
                         $found_in_previous_version = 1;
@@ -97,26 +98,26 @@ sub getGtfsRouteIdHtmlTag {
                 }
 
                 if ( !$found_in_previous_version ) {
-                    $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/trips.php?network=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Route-Id: %s: 'route_id' %s.\">GTFS!</a>",
+                    $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/trips.php?feed=%s&release_date=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Route-Id: %s: 'route_id' %s.\">GTFS!</a>",
                                               uri_escape($gtfs_country),
-                                              uri_escape($gtfs_feed),
+                                              uri_escape($gtfs_feed), uri_escape($release_date),
                                               uri_escape($route_id),
-                                              html_escape($gtfs_feed),
+                                              html_escape($gtfs_feed), html_escape($release_date),
                                               html_escape($route_id),
                                               html_escape(gettext("does not exist")) );
                 }
             }
         } else {
-            $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/routes.php?network=%s\" title=\"GTFS-Feed: %s - 'route_id' %s.\">GTFS!</a>",
+            $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/routes.php?feed=%s&release_date=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s - 'route_id' %s.\">GTFS!</a>",
                                       uri_escape($gtfs_country),
-                                      uri_escape($gtfs_feed),
-                                      html_escape($gtfs_feed),
+                                      uri_escape($gtfs_feed), uri_escape($release_date),
+                                      html_escape($gtfs_feed), html_escape($release_date),
                                       html_escape(gettext("is not set")) );
         }
 
     } else {
-        $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"GTFS-Feed: %s: %s.\">GTFS!</a>",
-                                  html_escape($gtfs_feed),
+        $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s: %s.\">GTFS!</a>",
+                                  html_escape($gtfs_feed), html_escape($release_date),
                                   html_escape(gettext("GTFS database not found")) );
     }
 
@@ -132,55 +133,56 @@ sub getGtfsRouteIdHtmlTag {
 
 sub getGtfsTripIdHtmlTag {
     my $gtfs_feed      = shift;
+    my $release_date   = shift || '';
     my $trip_id        = shift;
 
     my $gtfs_html_tag  = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"'GTFS feed' %s. %s\">GTFS!</a>",
                                   html_escape(gettext("is not set")),
                                   html_escape(gettext("GTFS database not found")) );
 
-    if ( _AttachToGtfsSqliteDb($gtfs_feed) ) {
+    if ( _AttachToGtfsSqliteDb($gtfs_feed,$release_date) ) {
 
         my $gtfs_country =  $gtfs_feed;
            $gtfs_country =~ s/-.*$//;
 
         if ( $trip_id ) {
 
-            my $TripIdStatus = _getTripIdStatus( $gtfs_feed, $trip_id );
+            my $TripIdStatus = _getTripIdStatus( $gtfs_feed, $release_date, $trip_id );
 
             if ( $TripIdStatus eq 'valid' ) {
-                $gtfs_html_tag = sprintf( "<a class=\"gtfs-datevalid\" href=\"/gtfs/%s/single-trip.php?network=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Trip-Id: %s\">GTFS</a>",
+                $gtfs_html_tag = sprintf( "<a class=\"gtfs-datevalid\" href=\"/gtfs/%s/single-trip.php?feed=%s&release_date=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Trip-Id: %s\">GTFS</a>",
                                           uri_escape($gtfs_country),
-                                          uri_escape($gtfs_feed),
+                                          uri_escape($gtfs_feed), uri_escape($release_date),
                                           uri_escape($trip_id),
-                                          html_escape($gtfs_feed),
+                                          html_escape($gtfs_feed), html_escape($release_date),
                                           html_escape($trip_id) );
             } elsif ( $TripIdStatus eq 'past' ) {
-                $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateold\" href=\"/gtfs/%s/single-trip.php?network=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Trip-Id: %s: 'trip_id' %s.\">GTFS?</a>",
+                $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateold\" href=\"/gtfs/%s/single-trip.php?feed=%s&release_date=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Trip-Id: %s: 'trip_id' %s.\">GTFS?</a>",
                                           uri_escape($gtfs_country),
-                                          uri_escape($gtfs_feed),
+                                          uri_escape($gtfs_feed), uri_escape($release_date),
                                           uri_escape($trip_id),
-                                          html_escape($gtfs_feed),
+                                          html_escape($gtfs_feed), html_escape($release_date),
                                           html_escape($trip_id),
                                           html_escape(gettext("is no longer valid (in the past)")) );
             } elsif ( $TripIdStatus eq 'future' ) {
-                $gtfs_html_tag = sprintf( "<a class=\"gtfs-datenew\" href=\"/gtfs/%s/single-trip.php?network=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Trip-Id: %s: 'trip_id' %s.\">GTFS?</a>",
+                $gtfs_html_tag = sprintf( "<a class=\"gtfs-datenew\" href=\"/gtfs/%s/single-trip.php?feed=%s&release_date=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Trip-Id: %s: 'trip_id' %s.\">GTFS?</a>",
                                           uri_escape($gtfs_country),
-                                          uri_escape($gtfs_feed),
+                                          uri_escape($gtfs_feed), uri_escape($release_date),
                                           uri_escape($trip_id),
-                                          html_escape($gtfs_feed),
+                                          html_escape($gtfs_feed), html_escape($release_date),
                                           html_escape($trip_id),
                                           html_escape(gettext("is not yet valid (in the future)")) );
             } else {
                 my $found_in_previous_version = 0;
 
-                if ( _AttachToGtfsSqliteDb($gtfs_feed.'-previous') ) {
-                    $TripIdStatus = _getTripIdStatus( $gtfs_feed.'-previous', $trip_id );
+                if ( _AttachToGtfsSqliteDb($gtfs_feed,'previous') ) {
+                    $TripIdStatus = _getTripIdStatus( $gtfs_feed, 'previous', $trip_id );
                     if ( $TripIdStatus eq 'valid' || $TripIdStatus eq 'past' || $TripIdStatus eq 'future' ) {
-                        $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateprevious\" href=\"/gtfs/%s/single-trip.php?network=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Trip-Id: %s: 'trip_id' %s.\">GTFS??</a>",
+                        $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateprevious\" href=\"/gtfs/%s/single-trip.php?feed=%s&release_date=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Trip-Id: %s: 'trip_id' %s.\">GTFS??</a>",
                                                   uri_escape($gtfs_country),
-                                                  uri_escape($gtfs_feed.'-previous'),
+                                                  uri_escape($gtfs_feed), 'previous',
                                                   uri_escape($trip_id),
-                                                  html_escape($gtfs_feed.'-previous'),
+                                                  html_escape($gtfs_feed), 'previous',
                                                   html_escape($trip_id),
                                                   html_escape(gettext("outdated, fits to older GTFS version only")) );
                         $found_in_previous_version = 1;
@@ -188,26 +190,26 @@ sub getGtfsTripIdHtmlTag {
                 }
 
                 if ( !$found_in_previous_version ) {
-                    $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/single-trip.php?network=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Trip-Id: %s: 'trip_id' %s.\">GTFS!</a>",
+                    $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/single-trip.php?feed=%s&release_date=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Trip-Id: %s: 'trip_id' %s.\">GTFS!</a>",
                                           uri_escape($gtfs_country),
-                                          uri_escape($gtfs_feed),
+                                          uri_escape($gtfs_feed), uri_escape($release_date),
                                           uri_escape($trip_id),
-                                          html_escape($gtfs_feed),
+                                          html_escape($gtfs_feed), html_escape($release_date),
                                           html_escape($trip_id),
                                           html_escape(gettext("does not exist")) );
                 }
             }
         } else {
-            $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/routes.php?network=%s\" title=\"GTFS-Feed: %s - 'trip_id' %s.\">GTFS!</a>",
+            $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/routes.php?feed=%s&release_date=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s - 'trip_id' %s.\">GTFS!</a>",
                                       uri_escape($gtfs_country),
-                                      uri_escape($gtfs_feed),
-                                      html_escape($gtfs_feed),
+                                      uri_escape($gtfs_feed), uri_escape($release_date),
+                                      html_escape($gtfs_feed), html_escape($release_date),
                                       html_escape(gettext("is not set")) );
         }
 
     } else {
-        $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"GTFS-Feed: %s: %s.\">GTFS!</a>",
-                                  html_escape($gtfs_feed),
+        $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s: %s.\">GTFS!</a>",
+                                  html_escape($gtfs_feed), html_escape($release_date),
                                   html_escape(gettext("GTFS database not found")) );
     }
 
@@ -223,63 +225,64 @@ sub getGtfsTripIdHtmlTag {
 
 sub getGtfsShapeIdHtmlTag {
     my $gtfs_feed      = shift;
+    my $release_date   = shift || '';
     my $shape_id       = shift;
 
     my $gtfs_html_tag  = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"'GTFS feed' %s. %s\">GTFS!</a>",
                                   html_escape(gettext("is not set")),
                                   html_escape(gettext("GTFS database not found")) );
 
-    if ( _AttachToGtfsSqliteDb($gtfs_feed) ) {
+    if ( _AttachToGtfsSqliteDb($gtfs_feed,$release_date) ) {
 
         my $gtfs_country =  $gtfs_feed;
            $gtfs_country =~ s/-.*$//;
 
         if ( $shape_id ) {
 
-            my $ShapeIdStatus = _getShapeIdStatus( $gtfs_feed, $shape_id );
+            my $ShapeIdStatus = _getShapeIdStatus( $gtfs_feed, $release_date, $shape_id );
 
             if ( $ShapeIdStatus eq 'valid' ) {
-                $gtfs_html_tag = sprintf( "<a class=\"gtfs-datevalid\" href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s\">GTFS</a>",
+                $gtfs_html_tag = sprintf( "<a class=\"gtfs-datevalid\" href=\"/gtfs/%s/single-trip.php?feed=%s&release_date=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Shape-Id: %s\">GTFS</a>",
                                            uri_escape($gtfs_country),
-                                           uri_escape($gtfs_feed),
+                                           uri_escape($gtfs_feed), uri_escape($release_date),
                                            uri_escape($shape_id),
-                                           html_escape($gtfs_feed),
+                                           html_escape($gtfs_feed), html_escape($release_date),
                                            html_escape($shape_id) );
             } elsif ( $ShapeIdStatus eq 'past' ) {
-                $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateold\" href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s: 'shape_id' %s.\">GTFS?</a>",
+                $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateold\" href=\"/gtfs/%s/single-trip.php?feed=%s&release_date=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Shape-Id: %s: 'shape_id' %s.\">GTFS?</a>",
                                           uri_escape($gtfs_country),
-                                          uri_escape($gtfs_feed),
+                                          uri_escape($gtfs_feed), uri_escape($release_date),
                                           uri_escape($shape_id),
-                                          html_escape($gtfs_feed),
+                                          html_escape($gtfs_feed), html_escape($release_date),
                                           html_escape($shape_id),
                                           html_escape(gettext("is no longer valid (in the past)")) );
             } elsif ( $ShapeIdStatus eq 'future' ) {
-                $gtfs_html_tag = sprintf( "<a class=\"gtfs-datenew\" href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s: 'shape_id' %s.\">GTFS?</a>",
+                $gtfs_html_tag = sprintf( "<a class=\"gtfs-datenew\" href=\"/gtfs/%s/single-trip.php?feed=%s&release_date=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Shape-Id: %s: 'shape_id' %s.\">GTFS?</a>",
                                           uri_escape($gtfs_country),
-                                          uri_escape($gtfs_feed),
+                                          uri_escape($gtfs_feed), uri_escape($release_date),
                                           uri_escape($shape_id),
-                                          html_escape($gtfs_feed),
+                                          html_escape($gtfs_feed), html_escape($release_date),
                                           html_escape($shape_id),
                                           html_escape(gettext("is not yet valid (in the future)")) );
             } elsif ( $ShapeIdStatus eq 'no shapes' ) {
-                $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s: %s.\">GTFS!</a>",
+                $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/single-trip.php?feed=%s&release_date=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Shape-Id: %s: %s.\">GTFS!</a>",
                                           uri_escape($gtfs_country),
-                                          uri_escape($gtfs_feed),
+                                          uri_escape($gtfs_feed), uri_escape($release_date),
                                           uri_escape($shape_id),
-                                          html_escape($gtfs_feed),
+                                          html_escape($gtfs_feed), html_escape($release_date),
                                           html_escape($shape_id),
                                           html_escape(gettext("does not provide any 'shape' data")) );
             } else {
                 my $found_in_previous_version = 0;
 
-                if ( _AttachToGtfsSqliteDb($gtfs_feed.'-previous') ) {
-                    $ShapeIdStatus = _getShapeIdStatus( $gtfs_feed.'-previous', $shape_id );
+                if ( _AttachToGtfsSqliteDb($gtfs_feed,'previous') ) {
+                    $ShapeIdStatus = _getShapeIdStatus( $gtfs_feed, 'previous', $shape_id );
                     if ( $ShapeIdStatus eq 'valid' || $ShapeIdStatus eq 'past' || $ShapeIdStatus eq 'future' ) {
-                        $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateprevious\" href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s: 'shape_id' %s.\">GTFS??</a>",
+                        $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateprevious\" href=\"/gtfs/%s/single-trip.php?feed=%s&release_date=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Shape-Id: %s: 'shape_id' %s.\">GTFS??</a>",
                                                   uri_escape($gtfs_country),
-                                                  uri_escape($gtfs_feed.'-previous'),
+                                                  uri_escape($gtfs_feed), 'previous',
                                                   uri_escape($shape_id),
-                                                  html_escape($gtfs_feed.'-previous'),
+                                                  html_escape($gtfs_feed), 'previous',
                                                   html_escape($shape_id),
                                                   html_escape(gettext("outdated, fits to older GTFS version only")) );
                         $found_in_previous_version = 1;
@@ -287,26 +290,26 @@ sub getGtfsShapeIdHtmlTag {
                 }
 
                 if ( !$found_in_previous_version ) {
-                    $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/single-trip.php?network=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Shape-Id: %s: 'shape_id' %s.\">GTFS!</a>",
+                    $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/single-trip.php?feed=%s&release_date=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Shape-Id: %s: 'shape_id' %s.\">GTFS!</a>",
                                           uri_escape($gtfs_country),
-                                          uri_escape($gtfs_feed),
+                                          uri_escape($gtfs_feed), uri_escape($release_date),
                                           uri_escape($shape_id),
-                                          html_escape($gtfs_feed),
+                                          html_escape($gtfs_feed), html_escape($release_date),
                                           html_escape($shape_id),
                                           html_escape(gettext("does not exist")) );
                 }
             }
         } else {
-            $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/routes.php?network=%s\" title=\"GTFS-Feed: %s - 'shape_id' %s.\">GTFS!</a>",
+            $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/routes.php?feed=%s&release_date=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s - 'shape_id' %s.\">GTFS!</a>",
                                       uri_escape($gtfs_country),
-                                      uri_escape($gtfs_feed),
-                                      html_escape($gtfs_feed),
+                                      uri_escape($gtfs_feed), uri_escape($release_date),
+                                      html_escape($gtfs_feed), html_escape($release_date),
                                       html_escape(gettext("is not set")) );
         }
 
     } else {
-        $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"GTFS-Feed: %s: %s.\">GTFS!</a>",
-                                  html_escape($gtfs_feed),
+        $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s: %s.\">GTFS!</a>",
+                                  html_escape($gtfs_feed), html_escape($release_date),
                                   html_escape(gettext("GTFS database not found")) );
     }
 
@@ -321,16 +324,19 @@ sub getGtfsShapeIdHtmlTag {
 #############################################################################################
 
 sub _AttachToGtfsSqliteDb {
-    my $feed       = shift;
+    my $feed           = shift;
+    my $release_date   = shift || '';
+
+    my $name_prefix    = ( $release_date ) ? $feed . '-' . $release_date : $feed;
 
     my $db_file    = '';
 
-    #printf STDERR "_AttachToGtfsSqliteDb( %s )\n", $feed;
+    #printf STDERR "_AttachToGtfsSqliteDb( %s, %s )\n", $feed, $release_date;
     if ( $feed && $feed =~ m/^[a-zA-Z0-9_.-]+$/ ) {
         my @prefixparts = split( /-/, $feed );
         my $countrydir  = shift( @prefixparts );
 
-        $db_file = $config{'path-to-work'} . '/' . $countrydir . '/' . $feed . $config{'name-suffix'};
+        $db_file = $config{'path-to-work'} . '/' . $countrydir . '/' . $name_prefix . $config{'name-suffix'};
 
         if ( -f $db_file ) {
             if ( -l $db_file ) {
@@ -339,7 +345,7 @@ sub _AttachToGtfsSqliteDb {
         } else {
             my $subdir = shift( @prefixparts );
 
-            $db_file = $config{'path-to-work'} . '/' . $countrydir . '/' . $subdir . '/' . $feed . $config{'name-suffix'};
+            $db_file = $config{'path-to-work'} . '/' . $countrydir . '/' . $subdir . '/' . $name_prefix . $config{'name-suffix'};
 
             if ( -l $db_file ) {
                 $db_file = $config{'path-to-work'} . '/' . $countrydir . '/' . $subdir . '/' . readlink( $db_file );
@@ -347,24 +353,24 @@ sub _AttachToGtfsSqliteDb {
         }
 
         if ( -f $db_file ) {
-            #printf STDERR "_AttachToGtfsSqliteDb( %s ) attaches to %s\n", $feed, $db_file;
+            #printf STDERR "_AttachToGtfsSqliteDb( %s, %s ) attaches to %s\n", $feed, $release_date, $db_file;
 
-            if ( !$db_handles{$feed} ) {
+            if ( !$db_handles{$name_prefix} ) {
                 if ( $feed_of_open_db_file{$db_file} ) {
                     my $existing_feed = $feed_of_open_db_file{$db_file};
 
                     if ( $db_handles{$existing_feed} ) {
-                        $db_handles{$feed} = $db_handles{$existing_feed};
-                        #printf STDERR "_AttachToGtfsSqliteDb( %s ) linked to %s\n", $feed, $existing_feed;
+                        $db_handles{$name_prefix} = $db_handles{$existing_feed};
+                        #printf STDERR "_AttachToGtfsSqliteDb( %s, %s ) linked to %s\n", $feed, $release_date, $existing_feed;
                     }
                 } else {
-                    $db_handles{$feed} = DBI->connect( "DBI:SQLite:dbname=$db_file", "", "", { AutoCommit => 0, RaiseError => 1 } );
+                    $db_handles{$name_prefix} = DBI->connect( "DBI:SQLite:dbname=$db_file", "", "", { AutoCommit => 0, RaiseError => 1 } );
 
-                    $feed_of_open_db_file{$db_file} = $feed;
+                    $feed_of_open_db_file{$db_file} = $name_prefix;
                 }
             }
 
-            if ( $db_handles{$feed} ) {
+            if ( $db_handles{$name_prefix} ) {
                 return 1;
             } else {
                 printf STDERR "%s DBI->connect(%s) failed: %s\n", get_time(), $db_file, $DBI::errstr;
@@ -384,17 +390,20 @@ sub _AttachToGtfsSqliteDb {
 #############################################################################################
 
 sub _getRouteIdStatus {
-    my $feed        = shift;
-    my $route_id    = shift;
+    my $feed           = shift;
+    my $release_date   = shift || '';
+    my $route_id       = shift;
+
+    my $name_prefix    = ( $release_date ) ? $feed . '-' . $release_date : $feed;
 
     my @row         = ();
     my $today       = get_date();
 
-    if ( $feed && $route_id && $db_handles{$feed} ) {
+    if ( $name_prefix && $route_id && $db_handles{$name_prefix} ) {
 
-        my $sth = $db_handles{$feed}->prepare( "SELECT DISTINCT trip_id
-                                                FROM            trips
-                                                WHERE           trips.route_id=?;" );
+        my $sth = $db_handles{$name_prefix}->prepare( "SELECT DISTINCT trip_id
+                                                       FROM            trips
+                                                       WHERE           trips.route_id=?;" );
             $sth->execute( $route_id );
 
         my $min_start = 20500101;
@@ -404,7 +413,7 @@ sub _getRouteIdStatus {
 
         while ( @row = $sth->fetchrow_array() ) {
             if ( $row[0] ) {
-                ( $tms, $tme ) = _getStartEndDateOfIdenticalTrips( $feed, $row[0] );
+                ( $tms, $tme ) = _getStartEndDateOfIdenticalTrips( $feed, $release_date, $row[0] );
 
                 $min_start = ($tms < $min_start) ? $tms : $min_start;
                 $max_end   = ($tme > $max_end)   ? $tme : $max_end;
@@ -432,15 +441,18 @@ sub _getRouteIdStatus {
 #############################################################################################
 
 sub _getTripIdStatus {
-    my $feed        = shift;
-    my $trip_id     = shift;
+    my $feed           = shift;
+    my $release_date   = shift || '';
+    my $trip_id        = shift;
+
+    my $name_prefix    = ( $release_date ) ? $feed . '-' . $release_date : $feed;
 
     my @row         = ();
     my $today       = get_date();
 
-    if ( $feed && $trip_id && $db_handles{$feed} ) {
+    if ( $name_prefix && $trip_id && $db_handles{$name_prefix} ) {
 
-        my ( $min_start, $max_end ) = _getStartEndDateOfIdenticalTrips( $feed, $trip_id );
+        my ( $min_start, $max_end ) = _getStartEndDateOfIdenticalTrips( $feed, $release_date, $trip_id );
 
         if ( $min_start != 20500101 && $max_end != 19700101 ) {
             if  ( $today > $max_end ) {
@@ -464,16 +476,19 @@ sub _getTripIdStatus {
 #############################################################################################
 
 sub _getShapeIdStatus {
-    my $feed        = shift;
-    my $shape_id    = shift;
+    my $feed           = shift;
+    my $release_date   = shift || '';
+    my $shape_id       = shift;
+
+    my $name_prefix    = ( $release_date ) ? $feed . '-' . $release_date : $feed;
 
     my @row                 = ();
     my $today               = get_date();
     my $trips_has_shape_id  = 0;
 
-    if ( $feed && $shape_id && $db_handles{$feed} ) {
+    if ( $name_prefix && $shape_id && $db_handles{$name_prefix} ) {
 
-        my $sth =  $db_handles{$feed}->prepare( "PRAGMA table_info(trips);" );
+        my $sth =  $db_handles{$name_prefix}->prepare( "PRAGMA table_info(trips);" );
            $sth->execute();
 
         while ( @row = $sth->fetchrow_array() ) {
@@ -484,9 +499,9 @@ sub _getShapeIdStatus {
         }
 
         if ( $trips_has_shape_id ) {
-            $sth = $db_handles{$feed}->prepare( "SELECT DISTINCT trip_id
-                                                 FROM            trips
-                                                 WHERE           shape_id=?;" );
+            $sth = $db_handles{$name_prefix}->prepare( "SELECT DISTINCT trip_id
+                                                        FROM            trips
+                                                        WHERE           shape_id=?;" );
             $sth->execute( $shape_id );
 
             my $min_start = 20500101;
@@ -495,7 +510,7 @@ sub _getShapeIdStatus {
             my $tme       = 0;
             while ( @row = $sth->fetchrow_array() ) {
                 if ( $row[0] ) {
-                    ( $tms, $tme ) = _getStartEndDateOfIdenticalTrips( $feed, $row[0] );
+                    ( $tms, $tme ) = _getStartEndDateOfIdenticalTrips( $feed, $release_date, $row[0] );
 
                     $min_start = ($tms < $min_start) ? $tms : $min_start;
                     $max_end   = ($tme > $max_end)   ? $tme : $max_end;
@@ -522,8 +537,11 @@ sub _getShapeIdStatus {
 #############################################################################################
 
 sub _getStartEndDateOfIdenticalTrips {
-    my $feed    = shift;
-    my $trip_id = shift;
+    my $feed           = shift;
+    my $release_date   = shift || '';
+    my $trip_id        = shift;
+
+    my $name_prefix    = ( $release_date ) ? $feed . '-' . $release_date : $feed;
 
     my $min_start_date = 20500101;
     my $max_end_date   = 19700101;
@@ -535,9 +553,9 @@ sub _getStartEndDateOfIdenticalTrips {
     my $where_clause            = '';
     my $has_list_service_ids    = 0;
 
-    if ( $feed && $trip_id && $db_handles{$feed} ) {
+    if ( $name_prefix && $trip_id && $db_handles{$name_prefix} ) {
 
-        my $sth =  $db_handles{$feed}->prepare( "SELECT name FROM sqlite_master WHERE type='table' AND name='ptna_trips';" );
+        my $sth =  $db_handles{$name_prefix}->prepare( "SELECT name FROM sqlite_master WHERE type='table' AND name='ptna_trips';" );
            $sth->execute();
 
         while ( @row = $sth->fetchrow_array() ) {
@@ -549,9 +567,9 @@ sub _getStartEndDateOfIdenticalTrips {
 
         if ( $db_has_ptna_trips ) {
 
-            $sth = $db_handles{$feed}->prepare( "SELECT DISTINCT *
-                                                 FROM            ptna_trips
-                                                 WHERE           trip_id=?" );
+            $sth = $db_handles{$name_prefix}->prepare( "SELECT DISTINCT *
+                                                        FROM            ptna_trips
+                                                        WHERE           trip_id=?" );
             $sth->execute( $trip_id );
 
             while ( $hash_ref = $sth->fetchrow_hashref() ) {
@@ -566,7 +584,7 @@ sub _getStartEndDateOfIdenticalTrips {
                                         FROM   calendar
                                         WHERE  %s;", $where_clause );
 
-                    $sth = $db_handles{$feed}->prepare( $sql );
+                    $sth = $db_handles{$name_prefix}->prepare( $sql );
                     $sth->execute( keys ( %service_ids ) );
 
                     while ( @row=$sth->fetchrow_array() ) {
@@ -582,10 +600,10 @@ sub _getStartEndDateOfIdenticalTrips {
         }
 
         if ( $has_list_service_ids == 0 ) {
-            $sth = $db_handles{$feed}->prepare( "SELECT start_date,end_date
-                                                 FROM   calendar
-                                                 JOIN   trips ON trips.service_id = calendar.service_id
-                                                 WHERE  trip_id=?;" );
+            $sth = $db_handles{$name_prefix}->prepare( "SELECT start_date,end_date
+                                                        FROM   calendar
+                                                        JOIN   trips ON trips.service_id = calendar.service_id
+                                                        WHERE  trip_id=?;" );
             $sth->execute( $trip_id );
 
             while ( @row=$sth->fetchrow_array() ) {
