@@ -99,7 +99,7 @@ my $expect_network_long_for         = undef;
 my $expect_network_short            = undef;
 my $expect_network_short_as         = undef;
 my $expect_network_short_for        = undef;
-my $gtfs_feed                       = undef;
+my $opt_gtfs_feed                   = undef;
 my $link_gtfs                       = undef;
 my $multiple_ref_type_entries       = "analyze";
 my $path_to_work_dir                = '/osm/ptna/work';
@@ -145,7 +145,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'expect-network-short'          =>  \$expect_network_short,         # --expect-network-short            note if 'network' is not short form in general
             'expect-network-short-as:s'     =>  \$expect_network_short_as,      # --expect-network-short-as='BOB'
             'expect-network-short-for:s'    =>  \$expect_network_short_for,     # --expect-network-short-for='Bayerische Oberlandbahn'        note if 'network' is not short form for ...
-            'gtfs-feed=s'                   =>  \$gtfs_feed,                    # --gtfs-feed='DE-BY-MVV'
+            'gtfs-feed=s'                   =>  \$opt_gtfs_feed,                # --gtfs-feed='DE-BY-MVV'
             'link-gtfs'                     =>  \$link_gtfs,                    # --link-gtfs                       create a link to GTFS-Analysis for "gtfs:*" tags
             'routes-file=s'                 =>  \$routes_file,                  # --routes-file=zzz                 CSV file with a list of routes of the of the network
             'max-error=i'                   =>  \$max_error,                    # --max-error=10                    limit number of templates printed for identical error messages
@@ -171,7 +171,7 @@ GetOptions( 'help'                          =>  \$help,                         
           );
 
 $page_title                 = decode( 'utf8', $page_title )                  if ( $page_title                );
-$gtfs_feed                  = decode( 'utf8', $gtfs_feed )                   if ( $gtfs_feed                 );
+$opt_gtfs_feed              = decode( 'utf8', $opt_gtfs_feed )               if ( $opt_gtfs_feed             );
 $network_guid               = decode( 'utf8', $network_guid )                if ( $network_guid              );
 $network_long_regex         = decode( 'utf8', $network_long_regex )          if ( $network_long_regex        );
 $network_short_regex        = decode( 'utf8', $network_short_regex )         if ( $network_short_regex       );
@@ -235,8 +235,8 @@ if ( $ptv1_compatibility ne 'no' && $ptv1_compatibility ne 'allow' && $ptv1_comp
     $ptv1_compatibility = 'no';
 }
 
-unless ( $gtfs_feed ) {
-    $gtfs_feed = $network_guid;
+unless ( $opt_gtfs_feed ) {
+    $opt_gtfs_feed = $network_guid;
 }
 
 
@@ -267,7 +267,7 @@ if ( $verbose ) {
     printf STDERR "%20s--expect-network-short='%s'\n",     ' ', $expect_network_short       ? 'ON'          :'OFF';
     printf STDERR "%20s--expect-network-short-as='%s'\n",  ' ', $expect_network_short_as    ? $expect_network_short_as     : '';
     printf STDERR "%20s--expect-network-short-for='%s'\n", ' ', $expect_network_short_for   ? $expect_network_short_for    : '';
-    printf STDERR "%20s--gtfs-feed='%s'\n",                ' ', $gtfs_feed                  ? $gtfs_feed : '';
+    printf STDERR "%20s--gtfs-feed='%s'\n",                ' ', $opt_gtfs_feed              ? $opt_gtfs_feed : '';
     printf STDERR "%20s--link-gtfs='%s'\n",                ' ', $link_gtfs                  ? 'ON'          :'OFF';
     printf STDERR "%20s--max-error='%s'\n",                ' ', $max_error                  ? $max_error                   : '';
     printf STDERR "%20s--multiple-ref-type-entries='%s'\n",' ', $multiple_ref_type_entries  ? $multiple_ref_type_entries   : '';
@@ -5216,27 +5216,28 @@ sub CheckCompletenessOfData {
 sub getGtfsInfo {
     my $relation_ptr  = shift;
 
-    my $gtfs_guid         = $gtfs_feed;
+    my $gtfs_guid         = $opt_gtfs_feed;
+    my $gtfs_feed         = $opt_gtfs_feed;
     my $feed_info_from    = '--gtfs-feed';
-    my $gtfs_release_date = ' latest ';
-    my $release_date_from = ' empty ';
+    my $gtfs_release_date = '';
+    my $release_date_from = '';
     my $gtfs_country      = '';
     my $gtfs_html_tag     = '';
 
 
     if ( $relation_ptr && $relation_ptr->{'tag'} ) {
         if ( $relation_ptr->{'tag'}->{'gtfs:feed'} ) {
-            $gtfs_guid      = $relation_ptr->{'tag'}->{'gtfs:feed'};
+            $gtfs_feed      = $relation_ptr->{'tag'}->{'gtfs:feed'};
             $feed_info_from = 'gtfs:feed';
         } elsif ( $relation_ptr->{'tag'}->{'operator:guid'} ) {
-            $gtfs_guid      = $relation_ptr->{'tag'}->{'operator:guid'};
+            $gtfs_feed      = $relation_ptr->{'tag'}->{'operator:guid'};
             $feed_info_from = 'operator:guid';
         } elsif ( $relation_ptr->{'tag'}->{'network:guid'} ) {
-            $gtfs_guid      = $relation_ptr->{'tag'}->{'network:guid'};
+            $gtfs_feed      = $relation_ptr->{'tag'}->{'network:guid'};
             $feed_info_from = 'network:guid';
         }
-        $gtfs_feed    =  $gtfs_guid;
-        $gtfs_country =  $gtfs_guid;
+        $gtfs_guid    =  $gtfs_feed;
+        $gtfs_country =  $gtfs_feed;
         $gtfs_country =~ s/-.*$//;
 
         if ( $relation_ptr->{'tag'}->{'gtfs:release_date'} ) {
@@ -5252,24 +5253,28 @@ sub getGtfsInfo {
         if ( $relation_ptr->{'tag'}->{'type'} eq 'route' ) {
             if ( $relation_ptr->{'tag'}->{'gtfs:trip_id'} ) {
                 $relation_ptr->{'tag'}->{'gtfs:trip_id'} =~ s/\s*;\s*/;/g;
-                $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsTripIdHtmlTag( $gtfs_guid, $_ ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:trip_id'} ) );
+                $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsTripIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_ ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:trip_id'} ) );
             } elsif ( $relation_ptr->{'tag'}->{'gtfs:trip_id:sample'} ) {
                 $relation_ptr->{'tag'}->{'gtfs:trip_id:sample'} =~ s/\s*;\s*/;/g;
-                $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsTripIdHtmlTag( $gtfs_guid, $_ ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:trip_id:sample'} ) );
+                $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsTripIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_ ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:trip_id:sample'} ) );
             } elsif ( $relation_ptr->{'tag'}->{'gtfs:shape_id'} ) {
                 $relation_ptr->{'tag'}->{'gtfs:shape_id'} =~ s/\s*;\s*/;/g;
-                $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsShapeIdHtmlTag( $gtfs_guid, $_ ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:shape_id'} ) );
+                $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsShapeIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_ ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:shape_id'} ) );
             } elsif ( $relation_ptr->{'tag'}->{'gtfs:route_id'} ) {
                 $relation_ptr->{'tag'}->{'gtfs:route_id'} =~ s/\s*;\s*/;/g;
-                $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $gtfs_guid, $_ ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:route_id'} ) );
+                $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_ ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:route_id'} ) );
             }
         } elsif ( $relation_ptr->{'tag'}->{'gtfs:route_id'} ) {
             $relation_ptr->{'tag'}->{'gtfs:route_id'} =~ s/\s*;\s*/;/g;
-            $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $gtfs_guid, $_ ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:route_id'} ) );
+            $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_ ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:route_id'} ) );
         }
     }
 
     if ( $gtfs_html_tag ) {
+        if ( $gtfs_release_date eq '' ) {
+            $gtfs_release_date = ' latest ';
+            $release_date_from = ' empty ';
+        }
         $gtfs_relation_info_from{$gtfs_feed}{$feed_info_from}{$gtfs_release_date}{$release_date_from}{$relation_ptr->{'id'}} = 1;
     }
 
@@ -6129,19 +6134,19 @@ sub printTableSubHeader {
     if ( $hash{'GTFS-Feed'} && $hash{'GTFS-Route-Id'} ) {
         if ( $hash{'GTFS-Release-Date'} ) {
             $gtfs_csv_info_from{$hash{'GTFS-Feed'}}{$hash{'GTFS-Release-Date'}} = 1;
-            $csv_text .= join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}.'-'.$hash{'GTFS-Release-Date'},$_ ); } split( ';', $hash{'GTFS-Route-Id'} ) );
+            $csv_text .= join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}, $hash{'GTFS-Release-Date'}, $_ ); } split( ';', $hash{'GTFS-Route-Id'} ) );
         } else {
             $gtfs_csv_info_from{$hash{'GTFS-Feed'}}{' latest '} = 1;
-            $csv_text .= join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'},$_ ); } split( ';', $hash{'GTFS-Route-Id'} ) );
+            $csv_text .= join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}, '', $_ ); } split( ';', $hash{'GTFS-Route-Id'} ) );
         }
     } else {
         if ( $hash{'GTFS-Feed'} ) {
             if ( $hash{'GTFS-Release-Date'} ) {
                 $gtfs_csv_info_from{$hash{'GTFS-Feed'}}{$hash{'GTFS-Release-Date'}} = 1;
-                $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}.'-'.$hash{'GTFS-Release-Date'},'' );
+                $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}, $hash{'GTFS-Release-Date'}, '' );
             } else {
                 $gtfs_csv_info_from{$hash{'GTFS-Feed'}}{' latest '} = 1;
-                $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'},'' );
+                $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'},'','' );
             }
         } elsif ( $hash{'GTFS-Route-Id'} ) {
             $csv_text .= join( ', ', map { sprintf( "%s: %s; ", ( $column_name{'GTFS-Route-Id'} ? $column_name{'GTFS-Route-Id'} : 'GTFS-Route-Id' ), html_escape($_) ); } split( ';', $hash{'GTFS-Route-Id'} ) );
