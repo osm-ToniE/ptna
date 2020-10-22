@@ -90,23 +90,28 @@ sub ReadRoutes {
                     $hashref                    = $routes_hash{$NR};
                     $hashref->{'contents'}      = $_;                  # store original contents
 
-                        next    if ( !$_ );                             # ignore if line is empty
-                    if ( m/^[=#-]/ ) {                              # headers, text and comment lines
+                    next    if ( !$_ );                                     # ignore if line is empty
+
+                    if ( m/^[=#@+~\$\|-]/ ) {                                # headers, text, comment lines and reserved characters
                         if ( m/^(=+)([^=].*)/ ) {
-                            $hashref->{'type'}           =  'header';     # store type
-                            $hashref->{'level_string'}   =  $1;
-                            $hashref->{'header'}         =  $2;
-                            $hashref->{'level'}          =  0;
-                            $hashref->{'header'}         =~ s/^\s*//;
-                            $hashref->{'level'}++           while ( $hashref->{'level_string'} =~ m/=/g );
-                            $hashref->{'level'}          =  6  if ( $hashref->{'level'} > 6 );
+                            $hashref->{'type'}          =  'header';        # store type
+                            $hashref->{'level_string'}  =  $1;
+                            $hashref->{'header'}        =  $2;
+                            $hashref->{'level'}         =  0;
+                            $hashref->{'header'}        =~ s/^\s*//;
+                            $hashref->{'level'}++          while ( $hashref->{'level_string'} =~ m/=/g );
+                            $hashref->{'level'}         =  6  if ( $hashref->{'level'} > 6 );
                             delete($hashref->{'level_string'});
                         } elsif ( m/^-(.*)/ ) {
-                            $hashref->{'type'}       =  'text';       # store type
-                            $hashref->{'text'}       =  $1;
-                            $hashref->{'text'}       =~ s/^\s(\S)/\1/;  # delete only one and single trailing blank fpllowed by a non-blank character
-                        } else {
-                            next;   # ignore 'comment' line
+                            $hashref->{'type'}          =  'text';          # store type
+                            $hashref->{'text'}          =  $1;
+                            $hashref->{'text'}          =~ s/^\s(\S)/\1/;   # delete only one and single trailing blank followed by a non-blank character
+                        } elsif ( m/^#/ ) {
+                            next;                                           # ignore 'comment' line
+                        } elsif ( m/^([@+~\$\|])/ ) {
+                            $issues_string          = gettext( "First character of line ('%s') is reserved. Please put the first CSV field into double quotes (\"...\"). Line %s of Routes-Data. Contents of line: '%s'" );
+                            $hashref->{'type'}      = 'reserved';         # store type
+                            $hashref->{'reserved'}  = sprintf( decode( 'utf8', $issues_string ), $1, $NR, $hashref->{'contents'} );   # this is an error
                         }
                     } elsif ( m/<pre>/ ) {                          # ignore lines with HTML <pre>
                         $have_seen_pre = 1;

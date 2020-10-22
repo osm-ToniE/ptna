@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-10-10 18:00+0200\n"
+"POT-Creation-Date: 2020-10-22 21:10+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: Jorge Sanz <sanchi2@gmail.com>, 2020\n"
 "Language-Team: Spanish (https://www.transifex.com/jungle-bus/teams/97874/"
@@ -1469,6 +1469,12 @@ msgid "Do not consider Route-Master and Route relations with empty 'network'."
 msgstr ""
 
 msgid "Do not consider Route-Master and Route relations with empty 'operator'."
+msgstr ""
+
+#, perl-format
+msgid ""
+"First character of line ('%s') is reserved. Please put the first CSV field "
+"into double quotes (\"...\"). Line %s of Routes-Data. Contents of line: '%s'"
 msgstr ""
 
 #, perl-format

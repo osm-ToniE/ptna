@@ -1120,25 +1120,7 @@ if ( scalar( @RouteList ) ) {
 
         #printf STDERR "Entry: type = %s\n", $entryref->{'type'};
 
-        if ( $entryref->{'type'} eq 'header' ) {
-            printf STDERR "    header = %s\n", $entryref->{'header'}  if ( $debug );
-            printTableFooter()                                          if ( $table_headers_printed );
-            $table_headers_printed = 0;
-            printHeader( $entryref->{'header'}, $entryref->{'level'} );
-        } elsif ( $entryref->{'type'} eq 'text' ) {
-            printf STDERR "    text = %s\n", $entryref->{'text'}  if ( $debug );
-            printTableFooter()                                          if ( $table_headers_printed );
-            $table_headers_printed = 0;
-            printText( $entryref->{'text'} );
-        } elsif ( $entryref->{'type'} eq 'error' ) {
-            printf STDERR "    error = %s\n", $entryref->{'error'}  if ( $debug );
-            if ( $table_headers_printed == 0 ) {
-                printTableHeader();
-                $table_headers_printed++;
-            }
-            printTableSubHeader( 'ref' => $entryref->{'ref'} );
-            printTableLine( 'issues' => $entryref->{'error'} );
-        } elsif ( $entryref->{'type'} eq 'route' ) {
+        if ( $entryref->{'type'} eq 'route' ) {
 
             printf STDERR "    ref = %s, ref-or-list = '%s', ref-and-list = '%s', route = %s, comment = %s, from = %s, to = %s, operator = %s, gtfs-feed = %s, gtfs-route_id = %s, gtfs-release-date = %s\n", $entryref->{'ref'}, join( ', ', @{$entryref->{'ref-or-list'}} ), join( ', ', @{$entryref->{'ref-and-list'}} ), $entryref->{'route'}, $entryref->{'comment'}, $entryref->{'from'}, $entryref->{'to'}, $entryref->{'operator'}, $entryref->{'gtfs-feed'}, $entryref->{'gtfs-route-id'}, $entryref->{'gtfs-release-date'}  if ( $debug );
 
@@ -1233,6 +1215,31 @@ if ( scalar( @RouteList ) ) {
                     printTableLine( 'issues' => sprintf($issues_string, '???', $entryref->{'route'} ) );
                 }
             }
+        } elsif ( $entryref->{'type'} eq 'header' ) {
+            printf STDERR "    header = %s\n", $entryref->{'header'}        if ( $debug );
+            printTableFooter()                                              if ( $table_headers_printed );
+            $table_headers_printed = 0;
+            printHeader( $entryref->{'header'}, $entryref->{'level'} );
+        } elsif ( $entryref->{'type'} eq 'text' ) {
+            printf STDERR "    text = %s\n", $entryref->{'text'}            if ( $debug );
+            printTableFooter()                                              if ( $table_headers_printed );
+            $table_headers_printed = 0;
+            printText( $entryref->{'text'} );
+        } elsif ( $entryref->{'type'} eq 'reserved' ) {
+            printf STDERR "    reserved = %s\n", $entryref->{'reserved'}    if ( $debug );
+            printTableFooter()                                              if ( $table_headers_printed );
+            $table_headers_printed = 0;
+            printText( '' );
+            printText( $entryref->{'reserved'} );
+            printText( '' );
+        } elsif ( $entryref->{'type'} eq 'error' ) {
+            printf STDERR "    error = %s\n", $entryref->{'error'}          if ( $debug );
+            if ( $table_headers_printed == 0 ) {
+                printTableHeader();
+                $table_headers_printed++;
+            }
+            printTableSubHeader( 'ref' => $entryref->{'ref'} );
+            printTableLine( 'issues' => $entryref->{'error'} );
         } else {
             printf STDERR "%s Internal error: ref and route_type not set in CSV file. %d\n", get_time(), $entryref->{'NR'};
         }
