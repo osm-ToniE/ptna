@@ -2510,7 +2510,7 @@ sub analyze_relation {
                 }
             }
 
-            foreach my $special ( 'network:', 'route:', 'ref:', 'ref_', 'operator' ) {
+            foreach my $special ( 'network:', 'route:', 'ref:', 'ref_', 'operator', 'timetable' ) {
                 foreach my $tag ( @relation_tags ) {
                     if ( $tag =~ m/^\Q$special\E/i ) {
                         if ( $relation_ptr->{'tag'}->{$tag} ) {
