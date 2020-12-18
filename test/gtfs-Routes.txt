@@ -121,6 +121,9 @@ S2T-E;bus;!Route-Id valid since 2020-09-14!;;;;DE-BW-SWEG;14-S2T-E-j20-3
 
 222;bus;(Multiple) valid Trip-Id in Route-Relation;;;;;;
 605;bus;Unknown Trip-Id in Route-Relation;;;;;;
+
+9999;bus;!Missing double quotes around double route_id!;;;;DE-BY-MVV;20-9999-s20-1;20-9999-s20-2
+
 -
 
 

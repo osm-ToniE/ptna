@@ -5876,7 +5876,7 @@ sub printGtfsReferences {
             foreach my $gtfs_release_date (  sort( keys( %{$gtfs_csv_info_from{$gtfs_feed}} ) ) ) {
                 $gtfs_release_date =~ s/ latest //;
                 printTableLine( 'gtfs_feed'    =>  $gtfs_feed,
-                                'release_date' =>  $gtfs_release_date
+                                'date'         =>  $gtfs_release_date
                               );
             }
         }
@@ -6140,18 +6140,22 @@ sub printTableSubHeader {
     $csv_text .= sprintf( "%s: %s; ", ( $column_name{'Operator'}      ? $column_name{'Operator'}      : 'Operator' ),      html_escape($hash{'Operator'}) )      if ( $hash{'Operator'}      );
     if ( $hash{'GTFS-Feed'} && $hash{'GTFS-Route-Id'} ) {
         if ( $hash{'GTFS-Release-Date'} ) {
+            printf STDERR "printTableSubHeader(1): \$gtfs_csv_info_from{$hash{'GTFS-Feed'}}{$hash{'GTFS-Release-Date'}} = 1;\n" if ( $debug );
             $gtfs_csv_info_from{$hash{'GTFS-Feed'}}{$hash{'GTFS-Release-Date'}} = 1;
             $csv_text .= join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}, $hash{'GTFS-Release-Date'}, $_ ); } split( ';', $hash{'GTFS-Route-Id'} ) );
         } else {
+            printf STDERR "printTableSubHeader(1): \$gtfs_csv_info_from{$hash{'GTFS-Feed'}}{' latest } = 1;\n" if ( $debug );
             $gtfs_csv_info_from{$hash{'GTFS-Feed'}}{' latest '} = 1;
             $csv_text .= join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}, '', $_ ); } split( ';', $hash{'GTFS-Route-Id'} ) );
         }
     } else {
         if ( $hash{'GTFS-Feed'} ) {
             if ( $hash{'GTFS-Release-Date'} ) {
+                printf STDERR "printTableSubHeader(2): \$gtfs_csv_info_from{$hash{'GTFS-Feed'}}{$hash{'GTFS-Release-Date'}} = 1;\n" if ( $debug );
                 $gtfs_csv_info_from{$hash{'GTFS-Feed'}}{$hash{'GTFS-Release-Date'}} = 1;
                 $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}, $hash{'GTFS-Release-Date'}, '' );
             } else {
+                printf STDERR "printTableSubHeader(2): \$gtfs_csv_info_from{$hash{'GTFS-Feed'}}{' latest } = 1;\n" if ( $debug );
                 $gtfs_csv_info_from{$hash{'GTFS-Feed'}}{' latest '} = 1;
                 $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'},'','' );
             }

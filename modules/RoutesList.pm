@@ -163,6 +163,9 @@ sub ReadRoutes {
                         if ( $ExpGtfsReleaseDate ) {
                             $ExpGtfsReleaseDate =~ s/^\s*//;
                             $ExpGtfsReleaseDate =~ s/\s*$//;
+                            printf STDERR "ReadRoutes(): ExpReleaseDate = '%s' in line %d, contents: '%s'\n", $ExpGtfsReleaseDate, $NR, $hashref->{'contents'}      if ( $debug );
+                        } else {
+                            printf STDERR "ReadRoutes(): ExpReleaseDate = '' in line %d, contents: '%s'\n", $NR, $hashref->{'contents'}      if ( $debug );
                         }
                         $hashref->{'ref'}               = $ExpRef              || '';              # 'ref'=
                         $hashref->{'route'}             = $ExpRouteType        || '';              # 'route/route_master'=
@@ -173,58 +176,67 @@ sub ReadRoutes {
                         $hashref->{'gtfs-feed'}         = $ExpGtfsFeed         || '';              # 'gtfs-feed
                         $hashref->{'gtfs-route-id'}     = $ExpGtfsRouteId      || '';              # 'gtfs-route-id'
                         $hashref->{'gtfs-release-date'} = $ExpGtfsReleaseDate  || '';              # 'gtfs-release-date'
-                        if ( @rest ) {
-                            $issues_string      = gettext( "CSV data include too many ';'. Line %s of Routes-Data. Contents of line: '%s'" );
+                        if ( $ExpGtfsReleaseDate                                             &&
+                             $ExpGtfsReleaseDate !~ m/^[\d][\d][\d][\d]-[01][\d]-[0-3][\d]$/ &&
+                             $ExpGtfsReleaseDate ne 'previous'                               &&
+                             $ExpGtfsReleaseDate ne 'latest'                                 &&
+                             $ExpGtfsReleaseDate ne 'long-term'                                 ) {
+                            $issues_string      = gettext( "CSV data: field 'release_date' (= '%s') is wrong. Should be a date (YYYY-MM-DD), 'latest', 'previous' or 'long-term'. Line %s of Routes-Data. Contents of line: '%s'" );
+                            $hashref->{'type'}  = 'error';                                              # this is an error
+                            $hashref->{'ref'}   = $ExpRef;                                              # this is an error
+                            $hashref->{'error'} = sprintf( decode( 'utf8', $issues_string ), $ExpGtfsReleaseDate, $NR, $hashref->{'contents'} );   # this is an error
+                        } elsif ( @rest ) {
+                            $issues_string      = gettext( "CSV data includes too many ';'. Line %s of Routes-Data. Contents of line: '%s'" );
                             $hashref->{'type'}  = 'error';                                              # this is an error
                             $hashref->{'ref'}   = $ExpRef;                                              # this is an error
                             $hashref->{'error'} = sprintf( decode( 'utf8', $issues_string ), $NR, $hashref->{'contents'} );   # this is an error
-                        }
+                        } else {
+                            if ( $ExpRef ) {
+                                my @ref_or_list  = split( $or_separator,  $ExpRef );
+                                my @ref_and_list = split( $ref_separator, $ExpRef );
+                                $hashref->{'ref-or-list'}  = \@ref_or_list;
+                                $hashref->{'ref-and-list'} = \@ref_and_list;
 
-                        if ( $ExpRef ) {
-                            my @ref_or_list  = split( $or_separator,  $ExpRef );
-                            my @ref_and_list = split( $ref_separator, $ExpRef );
-                            $hashref->{'ref-or-list'}  = \@ref_or_list;
-                            $hashref->{'ref-and-list'} = \@ref_and_list;
+                                foreach my $reflistentry ( @ref_or_list ) {
+                                    $seen_ref{$reflistentry} = 0  unless ( $seen_ref{$reflistentry} );
+                                    $seen_ref{$reflistentry}++;
+                                    #printf STDERR "seen_ref{%s} = %d\n", $reflistentry, $seen_ref{$reflistentry}      if ( $debug );
 
-                            foreach my $reflistentry ( @ref_or_list ) {
-                                $seen_ref{$reflistentry} = 0  unless ( $seen_ref{$reflistentry} );
-                                $seen_ref{$reflistentry}++;
-                                #printf STDERR "seen_ref{%s} = %d\n", $reflistentry, $seen_ref{$reflistentry}      if ( $debug );
+                                    if ( $ExpRouteType ) {
+                                        if ( $supported_routes_types{$ExpRouteType} ) {
+                                            $seen_ref_type{$reflistentry}->{$ExpRouteType} = 0    unless ( $seen_ref_type{$reflistentry}->{$ExpRouteType} );
+                                            $seen_ref_type{$reflistentry}->{$ExpRouteType}++;
+                                            #printf STDERR "seen_ref_type{%s}->{%s} = %d\n", $reflistentry, $ExpRouteType, $seen_ref_type{$reflistentry}->{$ExpRouteType}      if ( $debug );
 
-                                if ( $ExpRouteType ) {
-                                    if ( $supported_routes_types{$ExpRouteType} ) {
-                                        $seen_ref_type{$reflistentry}->{$ExpRouteType} = 0    unless ( $seen_ref_type{$reflistentry}->{$ExpRouteType} );
-                                        $seen_ref_type{$reflistentry}->{$ExpRouteType}++;
-                                        #printf STDERR "seen_ref_type{%s}->{%s} = %d\n", $reflistentry, $ExpRouteType, $seen_ref_type{$reflistentry}->{$ExpRouteType}      if ( $debug );
+                                            $seen_ref_type_operator{$reflistentry}->{$ExpRouteType}->{'ExpOperator='.$ExpOperator} = 0   unless ( $seen_ref_type_operator{$reflistentry}->{$ExpRouteType}->{'ExpOperator='.$ExpOperator} );
+                                            $seen_ref_type_operator{$reflistentry}->{$ExpRouteType}->{'ExpOperator='.$ExpOperator}++;
+                                            #printf STDERR "seen_ref_type_operator{%s}->{%s}->{%s} = %d\n", $reflistentry, $ExpRouteType, $ExpOperator, $seen_ref_type_operator{$reflistentry}->{$ExpRouteType}->{'ExpOperator='.$ExpOperator}      if ( $debug );
 
-                                        $seen_ref_type_operator{$reflistentry}->{$ExpRouteType}->{'ExpOperator='.$ExpOperator} = 0   unless ( $seen_ref_type_operator{$reflistentry}->{$ExpRouteType}->{'ExpOperator='.$ExpOperator} );
-                                        $seen_ref_type_operator{$reflistentry}->{$ExpRouteType}->{'ExpOperator='.$ExpOperator}++;
-                                        #printf STDERR "seen_ref_type_operator{%s}->{%s}->{%s} = %d\n", $reflistentry, $ExpRouteType, $ExpOperator, $seen_ref_type_operator{$reflistentry}->{$ExpRouteType}->{'ExpOperator='.$ExpOperator}      if ( $debug );
+                                            $seen_ref_type_operator_fromto{$reflistentry}->{$ExpRouteType}->{'ExpOperator='.$ExpOperator}->{'['.$ExpFrom.'];['.$ExpTo.']'} = 1;
 
-                                        $seen_ref_type_operator_fromto{$reflistentry}->{$ExpRouteType}->{'ExpOperator='.$ExpOperator}->{'['.$ExpFrom.'];['.$ExpTo.']'} = 1;
+                                            if ( $ExpFrom ) {
+                                                my @from_list = split( $or_separator, $ExpFrom );
+                                                $hashref->{'from-list'} = \@from_list;
+                                            }
 
-                                        if ( $ExpFrom ) {
-                                            my @from_list = split( $or_separator, $ExpFrom );
-                                            $hashref->{'from-list'} = \@from_list;
-                                        }
-
-                                        if ( $ExpTo ) {
-                                            my @to_list = split( $or_separator, $ExpTo );
-                                            $hashref->{'to-list'} = \@to_list;
+                                            if ( $ExpTo ) {
+                                                my @to_list = split( $or_separator, $ExpTo );
+                                                $hashref->{'to-list'} = \@to_list;
+                                            }
+                                        } else {
+                                            # this $ExpRouteType is not a valid one
+                                            $issues_string      = gettext( "Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line: '%s'" );
+                                            $hashref->{'type'}  = 'error';                                              # this is an error
+                                            $hashref->{'ref'}   = $ExpRef;                                              # this is an error
+                                            $hashref->{'error'} = sprintf( decode( 'utf8', $issues_string ), $ExpRouteType, $NR, $hashref->{'contents'} );    # this is an error
                                         }
                                     } else {
-                                        # this $ExpRouteType is not a valid one
-                                        $issues_string      = gettext( "Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line: '%s'" );
+                                        # if there is at least one separator, then $ExpRouteType as the second value must not be empty
+                                        $issues_string      = gettext( "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'" );
                                         $hashref->{'type'}  = 'error';                                              # this is an error
                                         $hashref->{'ref'}   = $ExpRef;                                              # this is an error
-                                        $hashref->{'error'} = sprintf( decode( 'utf8', $issues_string ), $ExpRouteType, $NR, $hashref->{'contents'} );    # this is an error
+                                        $hashref->{'error'} = sprintf( decode( 'utf8', $issues_string ), $NR, $hashref->{'contents'} );   # this is an error
                                     }
-                                } else {
-                                    # if there is at least one separator, then $ExpRouteType as the second value must not be empty
-                                    $issues_string      = gettext( "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'" );
-                                    $hashref->{'type'}  = 'error';                                              # this is an error
-                                    $hashref->{'ref'}   = $ExpRef;                                              # this is an error
-                                    $hashref->{'error'} = sprintf( decode( 'utf8', $issues_string ), $NR, $hashref->{'contents'} );   # this is an error
                                 }
                             }
                         }
