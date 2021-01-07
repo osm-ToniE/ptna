@@ -365,10 +365,10 @@ my %column_name             = ( 'ref'           => gettext('Line (ref=)'),
                                 'type'          => gettext('Type (type=)'),
                                 'route_type'    => gettext('Vehicle (route(_master)=)'),
                                 'PTv'           => gettext('PTv'),
-                                'Comment'       => gettext('Comment'),
-                                'From'          => gettext('From'),
-                                'To'            => gettext('To'),
-                                'Operator'      => gettext('Operator'),
+                                'CSV-Comment'   => gettext('Comment'),
+                                'CSV-From'      => gettext('From'),
+                                'CSV-To'        => gettext('To'),
+                                'CSV-Operator'  => gettext('Operator'),
                                 'gtfs_feed'     => gettext('GTFS feed'),
                                 'date'          => gettext('Date'),
                                 'feed_from'     => gettext('GTFS feed from'),
@@ -1146,14 +1146,15 @@ if ( scalar( @RouteList ) ) {
                     if ( $i == 0 ) {
                         printTableSubHeader( 'ref-or-list'       => $entryref->{'ref-or-list'},              # is a pointer to an array: ('23') or also ('43', 'E43') for multiple 'ref' values
                                              'network'           => $relation_ptr->{'tag'}->{'network'},     # take 'network' value from first relation, undef outside this for-loop
+                                             'operator'          => $relation_ptr->{'tag'}->{'operator'},    # take 'operator' value from first relation, undef outside this for-loop
                                              'pt_type'           => $entryref->{'route'},
                                              'colour'            => $relation_ptr->{'tag'}->{'colour'},      # take 'colour' value from first relation, undef outside this for-loop
-                                             'Comment'           => $entryref->{'comment'},
-                                             'From'              => $entryref->{'from'},
-                                             'From-List'         => $entryref->{'from-list'},
-                                             'To'                => $entryref->{'to'},
-                                             'To-List'           => $entryref->{'to-list'},
-                                             'Operator'          => $entryref->{'operator'},
+                                             'CSV-Comment'       => $entryref->{'comment'},
+                                             'CSV-From'          => $entryref->{'from'},
+                                             'CSV-From-List'     => $entryref->{'from-list'},
+                                             'CSV-To'            => $entryref->{'to'},
+                                             'CSV-To-List'       => $entryref->{'to-list'},
+                                             'CSV-Operator'      => $entryref->{'operator'},
                                              'GTFS-Feed'         => $entryref->{'gtfs-feed'},
                                              'GTFS-Route-Id'     => $entryref->{'gtfs-route-id'},
                                              'GTFS-Release-Date' => $entryref->{'gtfs-release-date'},
@@ -1196,12 +1197,12 @@ if ( scalar( @RouteList ) ) {
                 #
                 printTableSubHeader( 'ref-or-list'       => $entryref->{'ref-or-list'},
                                      'pt_type'           => $entryref->{'route'},
-                                     'Comment'           => $entryref->{'comment'},
-                                     'From'              => $entryref->{'from'},
-                                     'From-List'         => $entryref->{'from-list'},
-                                     'To'                => $entryref->{'to'},
-                                     'To-List'           => $entryref->{'to-list'},
-                                     'Operator'          => $entryref->{'operator'},
+                                     'CSV-Comment'       => $entryref->{'comment'},
+                                     'CSV-From'          => $entryref->{'from'},
+                                     'CSV-From-List'     => $entryref->{'from-list'},
+                                     'CSV-To'            => $entryref->{'to'},
+                                     'CSV-To-List'       => $entryref->{'to-list'},
+                                     'CSV-Operator'      => $entryref->{'operator'},
                                      'GTFS-Feed'         => $entryref->{'gtfs-feed'},
                                      'GTFS-Route-Id'     => $entryref->{'gtfs-route-id'},
                                      'GTFS-Release-Date' => $entryref->{'gtfs-release-date'},
@@ -6193,6 +6194,7 @@ sub printTableSubHeader {
     my $ref                 = $hash{'ref'}           || '';
     my $ref_or_list         = $hash{'ref-or-list'};
     my $network             = $hash{'network'}       || '';
+    my $operator            = $hash{'operator'}      || '';
     my $pt_type             = $hash{'pt_type'}       || '';
     my $colour              = $hash{'colour'}        || '';
     my $ref_text            = undef;
@@ -6212,7 +6214,7 @@ sub printTableSubHeader {
     }
 
     if ( scalar @ref_or_array ) {
-        $ref_text = join(' ', map { printSketchLineTemplate( $_, $network, $pt_type, $colour ) } @ref_or_array );
+        $ref_text = join(' ', map { printSketchLineTemplate( $_, $network, $operator, $pt_type, $colour ) } @ref_or_array );
     }
 
     if ( scalar @ref_or_array && $pt_type ) {
@@ -6230,13 +6232,13 @@ sub printTableSubHeader {
         printAddIdLabelToLocalNavigation( $nav_label, join(' ',@ref_or_array), $colour );
     }
 
-    if ( $hash{'Comment'}  ) {
-        $csv_text .= sprintf( "%s: %s; ", ( $column_name{'Comment'}  ? $column_name{'Comment'}  : 'Comment' ),  wiki2html( $hash{'Comment'} )  );
+    if ( $hash{'CSV-Comment'}  ) {
+        $csv_text .= sprintf( "%s: %s; ", ( $column_name{'CSV-Comment'}  ? $column_name{'CSV-Comment'}  : 'Comment' ),  wiki2html( $hash{'CSV-Comment'} )  );
         $csv_text =~ s|!([^!]+)!|<span class=\"attention\">$1</span>|g;
     }
-    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'From'}          ? $column_name{'From'}          : 'From' ),          html_escape($hash{'From'})     )      if ( $hash{'From'}          );
-    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'To'}            ? $column_name{'To'}            : 'To' ),            html_escape($hash{'To'})       )      if ( $hash{'To'}            );
-    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'Operator'}      ? $column_name{'Operator'}      : 'Operator' ),      html_escape($hash{'Operator'}) )      if ( $hash{'Operator'}      );
+    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'CSV-From'}          ? $column_name{'CSV-From'}          : 'From' ),          html_escape($hash{'CSV-From'})     )      if ( $hash{'CSV-From'}          );
+    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'CSV-To'}            ? $column_name{'CSV-To'}            : 'To' ),            html_escape($hash{'CSV-To'})       )      if ( $hash{'CSV-To'}            );
+    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'CSV-Operator'}      ? $column_name{'CSV-Operator'}      : 'Operator' ),      html_escape($hash{'CSV-Operator'}) )      if ( $hash{'CSV-Operator'}      );
     if ( $hash{'GTFS-Feed'} && $hash{'GTFS-Route-Id'} ) {
         if ( $hash{'GTFS-Release-Date'} ) {
             printf STDERR "printTableSubHeader(1): \$gtfs_csv_info_from{$hash{'GTFS-Feed'}}{$hash{'GTFS-Release-Date'}} = 1;\n" if ( $debug );
@@ -6484,6 +6486,7 @@ sub printNodeTemplate {
 sub printSketchLineTemplate {
     my $ref               = shift;
     my $network           = shift;
+    my $operator          = shift || '';
     my $pt_type           = shift || '';
     my $colour            = shift || '';
     my $text              = undef;
@@ -6507,8 +6510,8 @@ sub printSketchLineTemplate {
         $inner_span_end   = "</span>";
     }
 
-    if ( $network ) {
-        $a_begin = sprintf( "<a href=\"https://overpass-api.de/api/sketch-line?ref=%s&network=%s&style=wuppertal%s%s\" title=\"Sketch-Line\">", uri_escape($ref), uri_escape($network), $colour_string, $pt_string );
+    if ( $network || $operator ) {
+        $a_begin = sprintf( "<a href=\"https://overpass-api.de/api/sketch-line?ref=%s&network=%s&operator=%s&style=wuppertal%s%s\" title=\"Sketch-Line\">", uri_escape($ref), uri_escape($network), uri_escape($operator), $colour_string, $pt_string );
         $a_end   = '</a>';
     }
 
