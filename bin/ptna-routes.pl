@@ -2256,16 +2256,52 @@ sub analyze_route_environment {
             if ( $relation_ptr->{'tag'}->{'colour'} ) {
                 if ( $RELATIONS{$route_master_rel_id}->{'tag'}->{'colour'} ) {
                     if ( uc($relation_ptr->{'tag'}->{'colour'}) ne uc($RELATIONS{$route_master_rel_id}->{'tag'}->{'colour'}) ) {
-                        $issues_string = gettext( "'colour' of Route does not fit to 'colour' of Route-Master: %s" );
-                        push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, printRelationTemplate($route_master_rel_id)) );
+                        $issues_string = gettext( "'%s' = '%s' of Route does not fit to '%s' = '%s' of Route-Master: %s" );
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, 'colour', $relation_ptr->{'tag'}->{'colour'}, 'colour', $RELATIONS{$route_master_rel_id}->{'tag'}->{'colour'}, printRelationTemplate($route_master_rel_id)) );
                     }
                 } else {
-                    $issues_string = gettext( "'colour' of Route is set but 'colour' of Route-Master is not set: %s" );
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, printRelationTemplate($route_master_rel_id)) );
+                    $issues_string = gettext( "'%s' = '%s' of Route is set but '%s' of Route-Master is not set: %s" );
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, , 'colour', $relation_ptr->{'tag'}->{'colour'}, 'colour', printRelationTemplate($route_master_rel_id)) );
                 }
             } elsif ( $RELATIONS{$route_master_rel_id}->{'tag'}->{'colour'} ) {
-                $issues_string = gettext( "'colour' of Route is not set but 'colour' of Route-Master is set: %s" );
-                push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, printRelationTemplate($route_master_rel_id)) );
+                $issues_string = gettext( "'%s' of Route is not set but '%s' = '%s' of Route-Master is set: %s" );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, 'colour', 'colour', $RELATIONS{$route_master_rel_id}->{'tag'}->{'colour'}, printRelationTemplate($route_master_rel_id)) );
+            }
+
+            #
+            # --check-gtfs  check gtfs:feed, gtfs:release_date and gtfs:route_id of this route against those of route_master - must match: each of the route's values must be part of route_master's value
+            #
+            if ( $check_gtfs ) {
+                my $help_rtag = '';
+                my $help_mtag = '';
+                my $mcount    = 0;
+                my $tcount    = 0;
+                foreach my $gtfs_tag ( 'gtfs:feed', 'gtfs:release_date', 'gtfs:route_id' ) {
+                    if ( $relation_ptr->{'tag'}->{$gtfs_tag} ) {
+                        if ( $RELATIONS{$route_master_rel_id}->{'tag'}->{$gtfs_tag} ) {
+                            $help_rtag = $relation_ptr->{'tag'}->{$gtfs_tag};
+                            $help_rtag =~ s/\s*;\s*/;/g;
+                            $help_mtag = ';' . $RELATIONS{$route_master_rel_id}->{'tag'}->{$gtfs_tag} . ';';
+                            $help_mtag =~ s/\s*;\s*/;/g;
+                            $tcount = 0;
+                            $mcount = 0;
+                            foreach my $rval ( split( /;/, $help_rtag ) ){
+                                $tcount++;
+                                $mcount++  if ( $help_mtag =~ m/;\Q$rval\E;/ );
+                            }
+                            if ( $mcount != $tcount ) {
+                                $issues_string = gettext( "'%s' = '%s' of Route does not fit to '%s' = '%s' of Route-Master: %s" );
+                                push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, $gtfs_tag, $relation_ptr->{'tag'}->{$gtfs_tag}, $gtfs_tag, $RELATIONS{$route_master_rel_id}->{'tag'}->{$gtfs_tag}, printRelationTemplate($route_master_rel_id)) );
+                            }
+                        } else {
+                            $issues_string = gettext( "'%s' = '%s' of Route is set but '%s' of Route-Master is not set: %s" );
+                            push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, $gtfs_tag, $relation_ptr->{'tag'}->{$gtfs_tag}, $gtfs_tag, printRelationTemplate($route_master_rel_id)) );
+                        }
+                    } elsif ( $RELATIONS{$route_master_rel_id}->{'tag'}->{$gtfs_tag} ) {
+                        $issues_string = gettext( "'%s' of Route is not set but '%s' = '%s' of Route-Master is set: %s" );
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, $gtfs_tag, $gtfs_tag, $RELATIONS{$route_master_rel_id}->{'tag'}->{$gtfs_tag}, printRelationTemplate($route_master_rel_id)) );
+                    }
+                }
             }
         }
 
@@ -2310,6 +2346,69 @@ sub analyze_route_environment {
             if ( !$relation_ptr->{'tag'}->{'public_transport:version'} || $relation_ptr->{'tag'}->{'public_transport:version'} ne '2' ) {
                 $issues_string = gettext( "Multiple Routes but 'public_transport:version' is not set to '2'" );
                 push( @{$relation_ptr->{'__issues__'}}, $issues_string );
+            }
+
+            #
+            # 6.  --check-gtfs  check that gtfs:trip_id, gtfs:trip_id:sample, gtfs:trip_id:like and gtfs:shape_id are unique
+            #
+
+            if ( $check_gtfs ) {
+                my %gtfs_ident = ();
+                my %gtfs_match = ();
+                my $help_val   = '';
+                my $help_pval  = '';
+
+                foreach my $gtfs_tag ( 'gtfs:trip_id', 'gtfs:trip_id:sample', 'gtfs:trip_id:like', 'gtfs:shape_id' ) {
+                    %gtfs_ident = ();
+                    %gtfs_match = ();
+
+                    foreach my $peer_route_relation_id ( keys ( %{$env_ref->{'route'}->{$route_type}} ) ) {
+
+                        next    if ( $relation_id eq $peer_route_relation_id );
+
+                        if ( $relation_ptr->{'tag'}->{$gtfs_tag} && $RELATIONS{$peer_route_relation_id}->{'tag'}->{$gtfs_tag} ) {
+                            if ( $relation_ptr->{'tag'}->{$gtfs_tag} eq $RELATIONS{$peer_route_relation_id}->{'tag'}->{$gtfs_tag} ) {
+                                $gtfs_ident{$peer_route_relation_id} = 1;
+                            } else {
+                                $help_val  = $relation_ptr->{'tag'}->{$gtfs_tag};
+                                $help_pval = ';' . $RELATIONS{$peer_route_relation_id}->{'tag'}->{$gtfs_tag} . ';';
+                                $help_val  =~ s/\s*;\s*/;/g;
+                                $help_pval =~ s/\s*;\s*/;/g;
+                                foreach my $val ( split( /;/,$help_val) ) {
+                                    if ( $help_pval =~ m/;\Q$val\E;/ ) {
+                                        push( @{$gtfs_match{$RELATIONS{$peer_route_relation_id}->{'tag'}->{$gtfs_tag}}}, $peer_route_relation_id );
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if ( scalar( keys ( %gtfs_ident ) ) ) {
+                        my @help_array    = sort( keys ( %gtfs_ident ) );
+                        my $num_of_errors = scalar(@help_array);
+                        $issues_string  = gettext( "'%s' = '%s' of Route is identical to '%s' of other Route(s)" );
+                        my $help_string = sprintf( $issues_string, $gtfs_tag, $relation_ptr->{'tag'}->{$gtfs_tag}, $gtfs_tag );
+                        if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                            push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $help_string, join(', ', map { printRelationTemplate($_); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                        } else {
+                            push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $help_string, join(', ', map { printRelationTemplate($_); } @help_array )) );
+                        }
+                    }
+
+                    if ( scalar( keys ( %gtfs_match ) ) ) {
+                        foreach my $val ( sort( keys ( %gtfs_match ) ) ) {
+                            my @help_array    = sort( @{$gtfs_match{$val}} );
+                            my $num_of_errors = scalar(@help_array);
+                            $issues_string  = gettext( "'%s' = '%s' of Route has a match with '%s' = '%s' of other Route(s)" );
+                            my $help_string = sprintf( $issues_string, $gtfs_tag, $relation_ptr->{'tag'}->{$gtfs_tag}, $gtfs_tag, $val );
+                            if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $help_string, join(', ', map { printRelationTemplate($_); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                            } else {
+                                push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $help_string, join(', ', map { printRelationTemplate($_); } @help_array )) );
+                            }
+                        }
+                    }
+                }
             }
         }
     }

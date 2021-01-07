@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-12-18 18:21+0100\n"
+"POT-Creation-Date: 2021-01-07 17:29+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -326,15 +326,15 @@ msgid ""
 msgstr ""
 
 #, perl-format
-msgid "'colour' of Route does not fit to 'colour' of Route-Master: %s"
+msgid "'%s' = '%s' of Route does not fit to '%s' = '%s' of Route-Master: %s"
 msgstr ""
 
 #, perl-format
-msgid "'colour' of Route is set but 'colour' of Route-Master is not set: %s"
+msgid "'%s' = '%s' of Route is set but '%s' of Route-Master is not set: %s"
 msgstr ""
 
 #, perl-format
-msgid "'colour' of Route is not set but 'colour' of Route-Master is set: %s"
+msgid "'%s' of Route is not set but '%s' = '%s' of Route-Master is set: %s"
 msgstr ""
 
 msgid ""
@@ -347,6 +347,14 @@ msgid "%s: %s and %d more ..."
 msgstr ""
 
 msgid "Multiple Routes but 'public_transport:version' is not set to '2'"
+msgstr ""
+
+#, perl-format
+msgid "'%s' = '%s' of Route is identical to '%s' of other Route(s)"
+msgstr ""
+
+#, perl-format
+msgid "'%s' = '%s' of Route has a match with '%s' = '%s' of other Route(s)"
 msgstr ""
 
 msgid "'ref' is not set"
@@ -1011,6 +1019,18 @@ msgid ""
 msgstr ""
 
 msgid "key = value"
+msgstr ""
+
+#, perl-format
+msgid "'colour' of Route does not fit to 'colour' of Route-Master: %s"
+msgstr ""
+
+#, perl-format
+msgid "'colour' of Route is not set but 'colour' of Route-Master is set: %s"
+msgstr ""
+
+#, perl-format
+msgid "'colour' of Route is set but 'colour' of Route-Master is not set: %s"
 msgstr ""
 
 #, perl-format

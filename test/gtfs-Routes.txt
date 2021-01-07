@@ -100,7 +100,8 @@
 103;bus;!GTFS database not found!;;;;DE-XX-YYY;1-103-s20-1
 104;bus;!GTFS database not found!;;;;DE-XX-YYY;"1-104-s20-1;1-104-s20-2"
 
-210;bus;!Route-Id not set!;;;;DE-BY-MVV
+200;bus;!Route-Id not set!;;;;DE-BY-MVV
+210;bus;!values of routes differ from route_master, routes have identical values!;Neuperlach Süd;Brunnthal, Zusestraße;;DE-BY-MVV;19-211-s21-1;2020-12-10
 211;bus;!Valid Route-Id in latest GTFS release, no 'gtfs-release-date'!;;;;DE-BY-MVV;19-211-s20-1
 211;bus;!Multiple valid Route-Id in latest GTFS release, no 'gtfs-release-date'!;;;;DE-BY-MVV;"19-211-s20-1;19-211-s20-2;19-211-s20-3"
 211;bus;!Multiple valid/not existing Route-Id in latest GTFS release, no 'gtfs-release-date'!;;;;DE-BY-MVV;"19-211-s20-1;20-211-s20-5"
@@ -111,11 +112,11 @@
 212;bus;!Route-Id does not exist!;;;;DE-BY-MVV;20-212-s20-1
 212;bus;!Multiple Route-Id does not exist!;;;;DE-BY-MVV;"20-212-s20-1;20-212-s20-2"
 
-736;bus;!Old Route-Id, no 'gtfs-release-date'!;;;;DE-BY-MVV;33-736-s19-2
+736;bus;!Old Route-Id, no 'gtfs-release-date'!;;;;DE-BY-MVV;33-736-s21-1
 
 736;bus;!Route-Id of dedicated GTFS release: '2020-05-15'!;;;;DE-BY-MVV;33-736-s19-2;2020-05-15
 
-736;bus;!Route-Id of dedicated GTFS release: 'previous'!;;;;DE-BY-MVV;33-736-s19-2;previous
+736;bus;!Route-Id of dedicated GTFS release: 'previous'!;;;;DE-BY-MVV;33-736-s20-1;previous
 
 S2T-E;bus;!Route-Id valid since 2020-09-14!;;;;DE-BW-SWEG;14-S2T-E-j20-3
 

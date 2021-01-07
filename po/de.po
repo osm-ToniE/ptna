@@ -5,16 +5,16 @@
 # 
 # Translators:
 # Noémie <nlehuby@zaclys.net>, 2019
-# ToniE <osm-ToniE@web.de>, 2020
+# ToniE <osm-ToniE@web.de>, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2020-12-18 18:21+0100\n"
+"POT-Creation-Date: 2021-01-07 17:29+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: ToniE <osm-ToniE@web.de>, 2020\n"
+"Last-Translator: ToniE <osm-ToniE@web.de>, 2021\n"
 "Language-Team: German (https://www.transifex.com/jungle-bus/teams/97874/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -377,19 +377,20 @@ msgstr ""
 "Masters: %s"
 
 #, perl-format
-msgid "'colour' of Route does not fit to 'colour' of Route-Master: %s"
-msgstr "'colour' der Route passt nicht zu 'colour' des Route-Masters: %s"
+msgid "'%s' = '%s' of Route does not fit to '%s' = '%s' of Route-Master: %s"
+msgstr ""
+"'%s' = '%s' der Route passt nicht zu '%s' = '%s' des Route-Masters: %s"
 
 #, perl-format
-msgid "'colour' of Route is set but 'colour' of Route-Master is not set: %s"
+msgid "'%s' = '%s' of Route is set but '%s' of Route-Master is not set: %s"
 msgstr ""
-"'colour' der Route ist gesetzt aber 'colour' des Route-Masters ist nicht "
+"'%s' = '%s' der Route ist gesetzt aber '%s' des Route-Masters ist nicht "
 "gesetzt: %s"
 
 #, perl-format
-msgid "'colour' of Route is not set but 'colour' of Route-Master is set: %s"
+msgid "'%s' of Route is not set but '%s' = '%s' of Route-Master is set: %s"
 msgstr ""
-"'colour' der Route ist nicht gesetzt aber 'colour' des Route-Masters ist "
+"'%s' der Route ist nicht gesetzt aber '%s' = '%s' des Route-Masters ist "
 "gesetzt: %s"
 
 msgid ""
@@ -406,6 +407,14 @@ msgstr "%s: %s und %d mehr ..."
 msgid "Multiple Routes but 'public_transport:version' is not set to '2'"
 msgstr ""
 "Mehrere Routen aber 'public_transport:version' ist nicht auf '2' gesetzt"
+
+#, perl-format
+msgid "'%s' = '%s' of Route is identical to '%s' of other Route(s)"
+msgstr "'%s' = '%s' der Route ist identisch zu '%s' anderer Route(n)"
+
+#, perl-format
+msgid "'%s' = '%s' of Route has a match with '%s' = '%s' of other Route(s)"
+msgstr "'%s' = '%s' der Route passt teilweise zu '%s' = '%s' anderer Route(n)"
 
 msgid "'ref' is not set"
 msgstr "'ref' ist nicht gesetzt"
@@ -1250,6 +1259,22 @@ msgstr ""
 
 msgid "key = value"
 msgstr "Schlüssel = Wert"
+
+#, perl-format
+msgid "'colour' of Route does not fit to 'colour' of Route-Master: %s"
+msgstr "'colour' der Route passt nicht zu 'colour' des Route-Masters: %s"
+
+#, perl-format
+msgid "'colour' of Route is not set but 'colour' of Route-Master is set: %s"
+msgstr ""
+"'colour' der Route ist nicht gesetzt aber 'colour' des Route-Masters ist "
+"gesetzt: %s"
+
+#, perl-format
+msgid "'colour' of Route is set but 'colour' of Route-Master is not set: %s"
+msgstr ""
+"'colour' der Route ist gesetzt aber 'colour' des Route-Masters ist nicht "
+"gesetzt: %s"
 
 #, perl-format
 msgid ""

@@ -2,7 +2,7 @@
 <osm version='0.6' upload='never' generator='JOSM'>
   <bounds minlat='48.069032' minlon='11.6330838' maxlat='48.0716416' maxlon='11.6389203' origin='CGImap 0.6.1 (13164 thorn-03.openstreetmap.org)' />
   <bounds minlat='48.069032' minlon='11.6330838' maxlat='48.0716416' maxlon='11.6389203' origin='OpenStreetMap server' />
-  <relation id='-99746' action='modify'>
+  <relation id='-99756' action='modify'>
     <tag k='from' v='from' />
     <tag k='gtfs:trip_id' v='was weiß ich' />
     <tag k='name' v='Bus 605: from =&gt; to' />
@@ -15,7 +15,7 @@
     <tag k='to' v='to' />
     <tag k='type' v='route' />
   </relation>
-  <relation id='-99748' action='modify'>
+  <relation id='-99757' action='modify'>
     <tag k='from' v='from' />
     <tag k='gtfs:trip_id' v='43.T0.19-222-s20-2.4.R' />
     <tag k='name' v='Bus 222: from =&gt; to' />
@@ -28,7 +28,7 @@
     <tag k='to' v='to' />
     <tag k='type' v='route' />
   </relation>
-  <relation id='-99750' action='modify'>
+  <relation id='-99758' action='modify'>
     <tag k='from' v='from2' />
     <tag k='gtfs:trip_id' v='43.T0.19-222-s20-2.4.R;93.T0.19-222-s20-4.2.H' />
     <tag k='name' v='Bus 222: from2 =&gt; to2' />
@@ -85,8 +85,8 @@
     <tag k='type' v='route' />
   </relation>
   <relation id='-99778' action='modify'>
-    <member type='relation' ref='-99748' role='' />
-    <member type='relation' ref='-99750' role='' />
+    <member type='relation' ref='-99757' role='' />
+    <member type='relation' ref='-99758' role='' />
     <member type='relation' ref='-99767' role='' />
     <member type='relation' ref='-99769' role='' />
     <member type='relation' ref='-99776' role='' />
@@ -99,5 +99,52 @@
     <tag k='ref' v='222' />
     <tag k='route_master' v='bus' />
     <tag k='type' v='route_master' />
+  </relation>
+  <relation id='-99780' action='modify'>
+    <member type='relation' ref='-99786' role='' />
+    <member type='relation' ref='-99790' role='' />
+    <tag k='gtfs:feed' v='DE-BY-MVV' />
+    <tag k='gtfs:release_date' v='2020-12-10' />
+    <tag k='gtfs:route_id' v='19-210-s21-1' />
+    <tag k='name' v='Bus 210' />
+    <tag k='network' v='network' />
+    <tag k='network:guid' v='DE-BY-MVV' />
+    <tag k='operator' v='operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='210' />
+    <tag k='route_master' v='bus' />
+    <tag k='type' v='route_master' />
+  </relation>
+  <relation id='-99786' action='modify'>
+    <tag k='from' v='Neuperlach Süd' />
+    <tag k='gtfs:feed' v='DE-BY-MMV' />
+    <tag k='gtfs:release_date' v='2020-12-11' />
+    <tag k='gtfs:route_id' v='19-210-s21-2' />
+    <tag k='gtfs:trip_id' v='1.T0.19-210-s21-1.1.R' />
+    <tag k='name' v='Bus 210: Neuperlach Süd =&gt; Brunnthal, Zusestraße' />
+    <tag k='network' v='network' />
+    <tag k='network:guid' v='DE-BY-MVV' />
+    <tag k='operator' v='operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='210' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='Brunnthal, Zusestraße' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-99790' action='modify'>
+    <tag k='from' v='Brunnthal, Zusestraße' />
+    <tag k='gtfs:feed' v='DE-BY-MMV' />
+    <tag k='gtfs:release_date' v='2020-12-11' />
+    <tag k='gtfs:route_id' v='19-210-s21-2' />
+    <tag k='gtfs:trip_id' v='1.T0.19-210-s21-1.1.R' />
+    <tag k='name' v='Bus 210: Brunnthal, Zusestraße =&gt; Neuperlach Süd' />
+    <tag k='network' v='network' />
+    <tag k='network:guid' v='DE-BY-MVV' />
+    <tag k='operator' v='operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='210' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='Neuperlach Süd' />
+    <tag k='type' v='route' />
   </relation>
 </osm>
