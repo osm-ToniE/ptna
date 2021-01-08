@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2021-01-07 17:29+0100\n"
+"POT-Creation-Date: 2021-01-08 10:21+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2021\n"
 "Language-Team: German (https://www.transifex.com/jungle-bus/teams/97874/de/)\n"
@@ -611,11 +611,8 @@ msgstr ""
 "PTv2 Route: 'public_transport' = 'stop_position' liegt nicht auf dem Fahrweg"
 
 #, perl-format
-msgid ""
-"PTv2 route: missing '%s' = 'yes' on 'public_transport' = 'stop_position'"
-msgstr ""
-"PTv2 Route: fehlende Angabe '%s' = 'yes' an 'public_transport' = "
-"'stop_position'"
+msgid "PTv2 route: missing '%s' = 'yes' on 'public_transport' = '%s'"
+msgstr "PTv2 Route: fehlende Angabe '%s' = 'yes' an 'public_transport' = '%s'"
 
 #, perl-format
 msgid ""
@@ -1261,10 +1258,6 @@ msgid "key = value"
 msgstr "Schlüssel = Wert"
 
 #, perl-format
-msgid "'colour' of Route does not fit to 'colour' of Route-Master: %s"
-msgstr "'colour' der Route passt nicht zu 'colour' des Route-Masters: %s"
-
-#, perl-format
 msgid "'colour' of Route is not set but 'colour' of Route-Master is set: %s"
 msgstr ""
 "'colour' der Route ist nicht gesetzt aber 'colour' des Route-Masters ist "
@@ -1577,13 +1570,6 @@ msgstr ""
 "tatsächlich das Semikolon ';' (ohne Blanks) ist."
 
 msgid ""
-"Missing 'bus' = 'yes', 'tram' = 'yes' or 'share_taxi' = 'yes' on "
-"'public_transport' = 'platform'."
-msgstr ""
-"Fehlendes 'bus' = 'yes', 'tram' = 'yes' oder 'share_taxi' = 'yes' bei einer "
-"Platform: 'public_transport' = 'platform'."
-
-msgid ""
 "Check whether roundabouts are used partially (segments only) or completely "
 "(while not being segmented)."
 msgstr ""
@@ -1614,13 +1600,6 @@ msgstr ""
 
 msgid "Check sequence of ways, are there any gaps?"
 msgstr "Prüfung der Reihenfolge der befahrenen Wege, existieren Lücken?"
-
-msgid ""
-"Missing 'bus' = 'yes', 'tram' = 'yes' or 'share_taxi' = 'yes' on "
-"'public_transport' = 'stop_position'."
-msgstr ""
-"Fehlendes 'bus' = 'yes', 'tram' = 'yes' oder 'share_taxi' = 'yes' bei einer "
-"Haltestelle: 'public_transport' = 'stop_position'."
 
 msgid "Check of 'public_transport:version' = '...' on Route-Master and Route."
 msgstr ""

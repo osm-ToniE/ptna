@@ -52,15 +52,6 @@ sub InitMessageStrings {
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
-    $MessageList[$i]->{'message'}                = gettext( "'colour' of Route does not fit to 'colour' of Route-Master: %s" );
-    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "";
-    $MessageList[$i]->{'description'}            = "";
-    $MessageList[$i]->{'fix'}                    = "";
-    $MessageList[$i]->{'image'}                  = "";
-    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
-
-    $i++;
     $MessageList[$i]->{'message'}                = gettext( "'colour' of Route is not set but 'colour' of Route-Master is set: %s" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
@@ -629,15 +620,6 @@ sub InitMessageStrings {
 
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: mismatch between 'role' = '%s' and 'public_transport' = '%s'" );
-    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "";
-    $MessageList[$i]->{'description'}            = "";
-    $MessageList[$i]->{'fix'}                    = "";
-    $MessageList[$i]->{'image'}                  = "";
-    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
-
-    $i++;
-    $MessageList[$i]->{'message'}                = gettext( "PTv2 route: missing '%s' = 'yes' on 'public_transport' = 'stop_position'" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
     $MessageList[$i]->{'description'}            = "";
@@ -1241,6 +1223,59 @@ sub InitMessageStrings {
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
+    $i++;
+    $MessageList[$i]->{'message'}                = gettext( "'%s' = '%s' of Route does not fit to '%s' = '%s' of Route-Master: %s" );
+    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
+    $MessageList[$i]->{'message'}                = gettext( "'%s' = '%s' of Route has a match with '%s' = '%s' of other Route(s)" );
+    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
+    $MessageList[$i]->{'message'}                = gettext( "'%s' = '%s' of Route is identical to '%s' of other Route(s)" );
+    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
+    $MessageList[$i]->{'message'}                = gettext( "'%s' = '%s' of Route is set but '%s' of Route-Master is not set: %s" );
+    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
+    $MessageList[$i]->{'message'}                = gettext( "'%s' of Route is not set but '%s' = '%s' of Route-Master is set: %s" );
+    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
+    $MessageList[$i]->{'message'}                = gettext( "PTv2 route: missing '%s' = 'yes' on 'public_transport' = '%s'" );
+    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
     return 0;
 }
 
@@ -1328,13 +1363,6 @@ sub InitOptionStrings {
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
-    $OptionList[$i]->{'option'}                 = "check-platform";
-    $OptionList[$i]->{'default'}                = "OFF";
-    $OptionList[$i]->{'description'}            = gettext( "Missing 'bus' = 'yes', 'tram' = 'yes' or 'share_taxi' = 'yes' on 'public_transport' = 'platform'." );
-    $OptionList[$i]->{'image'}                  = "";
-    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
-
-    $i++;
     $OptionList[$i]->{'option'}                 = "check-roundabouts";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = gettext( "Check whether roundabouts are used partially (segments only) or completely (while not being segmented)." );
@@ -1354,13 +1382,6 @@ sub InitOptionStrings {
     $OptionList[$i]->{'option'}                 = "check-sequence";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = gettext( "Check sequence of ways, are there any gaps?" );
-    $OptionList[$i]->{'image'}                  = "";
-    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
-
-    $i++;
-    $OptionList[$i]->{'option'}                 = "check-stop-position";
-    $OptionList[$i]->{'default'}                = "OFF";
-    $OptionList[$i]->{'description'}            = gettext( "Missing 'bus' = 'yes', 'tram' = 'yes' or 'share_taxi' = 'yes' on 'public_transport' = 'stop_position'." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 

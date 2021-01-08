@@ -3177,8 +3177,8 @@ sub analyze_ptv2_route_relation {
                                          $NODES{$node_ref->{'ref'}}->{'tag'}->{$relation_ptr->{'tag'}->{'route'}} eq "yes"    ) {
                                         ; # fine
                                     } else {
-                                        $issues_string = gettext( "PTv2 route: missing '%s' = 'yes' on 'public_transport' = 'stop_position'" );
-                                        $help_string   = sprintf( $issues_string, $relation_ptr->{'tag'}->{'route'} );
+                                        $issues_string = gettext( "PTv2 route: missing '%s' = 'yes' on 'public_transport' = '%s'" );
+                                        $help_string   = sprintf( $issues_string, $relation_ptr->{'tag'}->{'route'}, 'stop_position' );
                                         $role_mismatch{$help_string}->{$node_ref->{'ref'}} = 1;
                                         $role_mismatch_found++;
                                     }
@@ -3233,7 +3233,9 @@ sub analyze_ptv2_route_relation {
                                         ; # fine
                                     }
                                     else {
-                                        $role_mismatch{"missing '".$relation_ptr->{'tag'}->{'route'}."' = 'yes' on 'public_transport' = 'platform'"}->{$node_ref->{'ref'}} = 1;
+                                        $issues_string = gettext( "PTv2 route: missing '%s' = 'yes' on 'public_transport' = '%s'" );
+                                        $help_string   = sprintf( $issues_string, $relation_ptr->{'tag'}->{'route'}, 'platform' );
+                                        $role_mismatch{$help_string}->{$node_ref->{'ref'}} = 1;
                                         $role_mismatch_found++;
                                     }
                                 }
@@ -3503,7 +3505,9 @@ sub analyze_ptv2_route_relation {
                                     ; # fine
                                 }
                                 else {
-                                    $role_mismatch{"missing '".$relation_ptr->{'tag'}->{'route'}."' = 'yes' on 'public_transport' = 'platform'"}->{$highway_ref->{'ref'}} = 1;
+                                    $issues_string = gettext( "PTv2 route: missing '%s' = 'yes' on 'public_transport' = '%s'" );
+                                    $help_string   = sprintf( $issues_string, $relation_ptr->{'tag'}->{'route'}, 'platform' );
+                                    $role_mismatch{$help_string}->{$highway_ref->{'ref'}} = 1;
                                     $role_mismatch_found++;
                                 }
                             }
@@ -3574,7 +3578,9 @@ sub analyze_ptv2_route_relation {
                                    ; # fine
                                 }
                                 else {
-                                    $role_mismatch{"missing '".$relation_ptr->{'tag'}->{'route'}."' = 'yes' on 'public_transport' = 'platform'"}->{$rel_ref->{'ref'}} = 1;
+                                    $issues_string = gettext( "PTv2 route: missing '%s' = 'yes' on 'public_transport' = '%s'" );
+                                    $help_string   = sprintf( $issues_string, $relation_ptr->{'tag'}->{'route'}, 'platform' );
+                                    $role_mismatch{$help_string}->{$rel_ref->{'ref'}} = 1;
                                     $role_mismatch_found++;
                                 }
                             }
