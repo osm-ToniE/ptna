@@ -2350,7 +2350,7 @@ sub analyze_route_environment {
             }
 
             #
-            # 6.  --check-gtfs  check that gtfs:trip_id, gtfs:trip_id:sample, gtfs:trip_id:like and gtfs:shape_id are unique
+            # 6.  --check-gtfs  check that gtfs:trip_id, gtfs:trip_id:sample and gtfs:trip_id:like are unique
             #
 
             if ( $check_gtfs ) {
@@ -2359,7 +2359,7 @@ sub analyze_route_environment {
                 my $help_val   = '';
                 my $help_pval  = '';
 
-                foreach my $gtfs_tag ( 'gtfs:trip_id', 'gtfs:trip_id:sample', 'gtfs:trip_id:like', 'gtfs:shape_id' ) {
+                foreach my $gtfs_tag ( 'gtfs:trip_id', 'gtfs:trip_id:sample', 'gtfs:trip_id:like' ) {
                     %gtfs_ident = ();
                     %gtfs_match = ();
 
