@@ -6293,7 +6293,7 @@ sub printTableLine {
     my $id_string   = '';
 
     if ( $hash{'relation'} ) {
-        $id_string = $hash{'relation'};
+        $id_string = html_escape($hash{'relation'});
         $id_string =~ s/[^0-9A-Za-z_.-]/_/g;                                    # other characters are not allowed in 'id'
         if ( $id_markers{$id_string} ) {                                        # don't print id="<relation-id>" a second time, once is enough
             $id_string = '';
@@ -6301,10 +6301,17 @@ sub printTableLine {
             $id_markers{$id_string} = 1;
             $id_string = sprintf( "id=\"%s\" ", $id_string );
         }
+    } elsif ( $hash{'gtfs_feed'} ) {
+        $info = 'GTFS';
+        if ( $hash{'date'} ) {
+            $ref  = $hash{'gtfs_feed'} . '-' . $hash{'date'};
+        } else {
+            $ref  = $hash{'gtfs_feed'};
+        }
     }
 
     $info =~ s/\"/_/g;
-    push( @HTML_main, sprintf( "%16s<tr %sdata-info=\"%s\" data-ref=\"%s\" class=\"line\">", ' ', $id_string, $info, $ref ) );
+    push( @HTML_main, sprintf( "%16s<tr %sdata-info=\"%s\" data-ref=\"%s\" class=\"line\">", ' ', $id_string, html_escape($info), html_escape($ref) ) );
     for ( $i = 0; $i < $no_of_columns; $i++ ) {
         $val =  $hash{$columns[$i]} || '';
         if ( $columns[$i] eq "relation" ) {
@@ -6317,6 +6324,8 @@ sub printTableLine {
         } elsif ( $columns[$i] eq "notes"  ){
             $val =~ s/__separator__/<br>/g;
             push( @HTML_main, sprintf( "<td class=\"%s\">%s</td>", $columns[$i], $val ) );
+        } elsif ( $columns[$i] eq "gtfs_feed"  ) {
+            push( @HTML_main, sprintf( "<td class=\"%s\">%s</td>", $columns[$i], GTFS::PtnaSQLite::getGtfsLinkToRoutes( $hash{'gtfs_feed'}, $hash{'date'} ))  );
         } else {
             $val = html_escape($val);
             $val =~ s/__separator__/<br>/g;

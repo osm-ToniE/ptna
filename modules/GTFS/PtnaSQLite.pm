@@ -39,6 +39,34 @@ $config{'name-suffix'}  = '-ptna-gtfs-sqlite.db';           # name suffix of cur
 #
 #############################################################################################
 
+sub getGtfsLinkToRoutes {
+    my $gtfs_feed      = shift;
+    my $release_date   = shift || '';
+
+    my $gtfs_html_tag  = html_escape($gtfs_feed);
+
+    if ( _AttachToGtfsSqliteDb($gtfs_feed,$release_date) ) {
+
+        my $gtfs_country =  $gtfs_feed;
+           $gtfs_country =~ s/-.*$//;
+
+            $gtfs_html_tag = sprintf( "<a href=\"/gtfs/%s/routes.php?feed=%s&release_date=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s\">%s</a>",
+                                        uri_escape($gtfs_country),
+                                        uri_escape($gtfs_feed), uri_escape($release_date),
+                                        html_escape($gtfs_feed), html_escape($release_date),
+                                        html_escape($gtfs_feed) );
+    }
+
+    return $gtfs_html_tag;
+}
+
+
+#############################################################################################
+#
+#
+#
+#############################################################################################
+
 sub getGtfsRouteIdHtmlTag {
     my $gtfs_feed      = shift;
     my $release_date   = shift || '';
