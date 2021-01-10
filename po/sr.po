@@ -342,252 +342,291 @@ msgstr "Мастер рута нема 'ref' = '%s' који се поклапа
 #, perl-format
 msgid "Route-Master exists in the given data set but 'ref' tag is not set: %s"
 msgstr ""
+"Мастер рута постоји у задатим подацима, али 'ref' ознака није постављена: %s"
 
 #, perl-format
 msgid ""
 "'network' = '%s' of Route is a part of 'network' = '%s' of Route-Master: %s"
-msgstr ""
+msgstr "'network' = '%s' руте је део 'network' = '%s' мастер руте: %s"
 
 #, perl-format
 msgid ""
 "'network' = '%s' of Route does not fit to 'network' = '%s' of Route-Master: "
 "%s"
-msgstr ""
+msgstr "'network' = '%s' руте се не уклапа у 'network' = '%s' мастер руте: %s"
 
 #, perl-format
 msgid ""
 "'operator' = '%s' of Route does not fit to 'operator' = '%s' of Route-"
 "Master: %s"
 msgstr ""
+"'operator' = '%s' руте се не уклапа у 'operator' = '%s' мастер руте: %s"
 
 #, perl-format
 msgid "'%s' = '%s' of Route does not fit to '%s' = '%s' of Route-Master: %s"
-msgstr ""
+msgstr "'%s' = '%s' руте се не уклапа у '%s' = '%s' мастер руте: %s"
 
 #, perl-format
 msgid "'%s' = '%s' of Route is set but '%s' of Route-Master is not set: %s"
-msgstr ""
+msgstr "'%s' = '%s' руте је постављен, али '%s' мастер руте није: %s"
 
 #, perl-format
 msgid "'%s' of Route is not set but '%s' = '%s' of Route-Master is set: %s"
-msgstr ""
+msgstr "'%s' руте није постављен, али '%s' = '%s' мастер руте: %s јесте"
 
 msgid ""
 "PTv2 route: 'name' of Route is identical to 'name' of other Route(s), "
 "consider setting an appropriate 'via' value and include that into 'name'"
 msgstr ""
+"PTv2 рута: име ('name' ознака) руте је исто као 'name' других рута, "
+"размислите да поставите одговарајућу 'via' вредности и да је уврстите у "
+"'name' таг"
 
 #, perl-format
 msgid "%s: %s and %d more ..."
-msgstr ""
+msgstr "%s: %s и %d још..."
 
 msgid "Multiple Routes but 'public_transport:version' is not set to '2'"
-msgstr ""
+msgstr "Више рута, а 'public_transport:version' ознака није постављена на '2'"
 
 #, perl-format
 msgid "'%s' = '%s' of Route is identical to '%s' of other Route(s)"
-msgstr ""
+msgstr "'%s' = '%s' руте је исти као и '%s' других рута"
 
 #, perl-format
 msgid "'%s' = '%s' of Route has a match with '%s' = '%s' of other Route(s)"
-msgstr ""
+msgstr "'%s' = '%s' руте има поклапање са '%s' = '%s' других рута"
 
 msgid "'ref' is not set"
-msgstr ""
+msgstr "'ref' ознака није постављена"
 
 msgid "'name' is not set"
-msgstr ""
+msgstr "'name' ознака није постављена"
 
 #, perl-format
 msgid "'network' = '%s' should be short form"
-msgstr ""
+msgstr "'network' = '%s' треба бити кратког облика"
 
 #, perl-format
 msgid "'network' = '%s' should be long form"
-msgstr ""
+msgstr "'network' = '%s' треба бити дугачког облика"
 
 msgid "'network' is not set"
-msgstr ""
+msgstr "'network' ознака није постављена"
 
 #, perl-format
 msgid "'colour' has unknown value '%s'. Add '#' as first character."
-msgstr ""
+msgstr "'colour' има непознату вредност '%s'. Додајте '#' као први знак."
 
 #, perl-format
 msgid ""
 "'colour' has unknown value '%s'. Choose one of the 140 well defined HTML/CSS"
 " colour names or the HTML Hex colour codes '#...' or '#......'."
 msgstr ""
+"'colour' има непознату вредност '%s'. Одаберите једно од 140 утврђена "
+"HTML/CSS имена боја или унесите HTML хексадецималну шифру боје '#...' или "
+"'#......' ."
 
 msgid "'network:long' is long form"
-msgstr ""
+msgstr "'network:long' је дугачког облика"
 
 msgid "'network:long' matches long form"
-msgstr ""
+msgstr "'network:long' одговара дугачком облику"
 
 #, perl-format
 msgid ""
 "'%s' = '%s': ',' (comma) as separator value should be replaced by ';' (semi-"
 "colon) without blank"
 msgstr ""
+"'%s' = '%s': ',' (зарез) као вредност за одвајање треба да се замени са ';' "
+"(тачка-зарез) без белина"
 
 #, perl-format
 msgid ""
 "The tag 'line' (='%s') is reserved for 'power' = 'line' related tagging. For"
 " public transport 'route_master' and 'route' are used."
 msgstr ""
+"Ознака 'line' (='%s') је резервисана за означавање везано за 'power' = "
+"'line'. За јавне превозе, користе се 'route_master' и 'route'."
 
 msgid "Route-Master without Route(s)"
-msgstr ""
+msgstr "Мастер рута без рута"
 
 msgid "Route-Master with Relation(s) unequal to 'route'"
-msgstr ""
+msgstr "Мастер рута са чланицама релације које нису 'route'"
 
 msgid "Route-Master with Way(s)"
-msgstr ""
+msgstr "Мастер рута има путеве"
 
 msgid "Route-Master with Node(s)"
-msgstr ""
+msgstr "Мастер рута има тачке"
 
 msgid "'public_transport:version' is not set to '2'"
-msgstr ""
+msgstr "'public_transport:version' није постављен на '2'"
 
 msgid "Skipping further analysis ..."
-msgstr ""
+msgstr "Прескачем даље анализе..."
 
 msgid "Route without Way(s)"
-msgstr ""
+msgstr "Рута без путева"
 
 msgid "Route with only 1 Way"
-msgstr ""
+msgstr "Рута са само једним путем"
 
 msgid "Route without Node(s)"
-msgstr ""
+msgstr "Рута без тачака"
 
 msgid "Route with only 1 Node"
-msgstr ""
+msgstr "Рута са само једном тачком"
 
 msgid "Route with Relation(s)"
-msgstr ""
+msgstr "Рута са релацијама"
 
 msgid "'public_transport:version' is neither '1' nor '2'"
-msgstr ""
+msgstr "'public_transport:version' нема вредност ни '1' ни '2'"
 
 msgid ""
 "PTv2 route: there are no 'public_transport' = 'stop_position' and no "
 "'public_transport' = 'platform'"
 msgstr ""
+"PTv2 рута: не постоје ни 'public_transport' = 'stop_position' ни "
+"'public_transport' = 'platform'"
 
 msgid "PTv2 route: there is no 'public_transport' = 'stop_position'"
-msgstr ""
+msgstr "PTv2 рута: не постоји 'public_transport' = 'stop_position'"
 
 msgid "PTv2 route: there is only one 'public_transport' = 'stop_position'"
-msgstr ""
+msgstr "PTv2 рута: постоји само једна 'public_transport' = 'stop_position'"
 
 msgid "PTv2 route: there is no 'public_transport' = 'platform'"
-msgstr ""
+msgstr "PTv2 рут:а нема ниједна 'public_transport' = 'platform'"
 
 msgid "PTv2 route: there is only one 'public_transport' = 'platform'"
-msgstr ""
+msgstr "PTv2 рута: постоји само једна 'public_transport' = 'platform'"
 
 msgid ""
 "PTv2 route: first way is a oneway road and ends in a 'stop_position' of this"
 " route and there is no exit. Is the route sorted in reverse order?"
 msgstr ""
+"PTv2 рута: први пут је једносмерна улица и завршава се са 'stop_position' "
+"ове руте и нема излаза. Да ова рута није сортирана наопачке?"
 
 #, perl-format
 msgid "PTv2 route: has a gap, consists of %d segments. Gap appears at way"
 msgid_plural ""
 "PTv2 route: has gaps, consists of %d segments. Gaps appear at ways"
 msgstr[0] ""
+"PTv2 рута: постоје неповезани делови, рута садржи %d сегмент. Путеви нису "
+"повезани"
 msgstr[1] ""
+"PTv2 рута: постоје неповезани делови, рута садржи %d сегмента. Путеви нису "
+"повезани"
 msgstr[2] ""
+"PTv2 рута: постоје неповезани делови, рута садржи %d сегмената. Путеви нису "
+"повезани"
 
 msgid ""
 "PTv2 route: incorrect order of 'stop_position', 'platform' and 'way' "
 "(stop/platform after way)"
 msgstr ""
+"PTv2 рута: неисправан редослед 'stop_position', 'platform' и 'way' чланова "
+"(стоп/платформа је после путева)"
 
 #, perl-format
 msgid "PTv2 route: includes %d entire roundabout but uses only segments"
 msgid_plural ""
 "PTv2 route: includes %d entire roundabouts but uses only segments"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "PTv2 рута: укључује %d цео кружни ток, а користи само сегменте"
+msgstr[1] "PTv2 рута: укључује %d цела кружна тока, а користи само сегменте"
 msgstr[2] ""
+"PTv2 рута: укључује %d целих кружних токова, а користи само сегменте"
 
 msgid "PTv2 route: using oneway way in wrong direction"
 msgid_plural "PTv2 route: using oneway ways in wrong direction"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "PTv2 рута: користи се једносмерна улица у погрешном смеру"
+msgstr[1] "PTv2 рута: користе се једносмерне улице у погрешном смеру"
+msgstr[2] "PTv2 рута: користе се једносмерне улице у погрешном смеру"
 
 msgid "PTv2 route: using motorway_link way without entering a motorway way"
 msgid_plural ""
 "PTv2 route: using motorway_link ways without entering a motorway way"
 msgstr[0] ""
+"PTv2 рута: користи се 'motorway_link' пут, а не улази се на 'motorway' пут"
 msgstr[1] ""
+"PTv2 рута: користе се 'motorway_link' путеви, а не улази се на 'motorway' "
+"пут"
 msgstr[2] ""
+"PTv2 рута: користе се 'motorway_link' путеви, а не улази се на 'motorway' "
+"пут"
 
 msgid "PTv2 route: roundabout appears twice, following itself"
 msgid_plural "PTv2 route: roundabouts appear twice, following themselves"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "PTv2 рута: кружни ток се појављује више пута, узастопно"
+msgstr[1] "PTv2 рута: кружни токови се појављују више пута, узастопно"
+msgstr[2] "PTv2 рута: кружни токови се појављују више пута, узастопно"
 
 msgid "PTv2 route: first node of oneway way has 'role' = 'stop_exit_only'"
-msgstr ""
+msgstr "PTv2 рута: први чвор једносмерне улице има 'role' = 'stop_exit_only'"
 
 msgid "PTv2 route: last node of oneway way has 'role' = 'stop_entry_only'"
 msgstr ""
+"PTv2 рута: последњи чвор једносмерне улице има 'role' = 'stop_entry_only'"
 
 msgid ""
 "PTv2 route: first node of way has 'role' = 'stop_exit_only'. Is the route "
 "sorted in reverse order?"
 msgstr ""
+"PTv2 руте: први чвор пута има 'role' = 'stop_exit_only'. Да рута није "
+"сортирана наопачке?"
 
 msgid ""
 "PTv2 route: last node of way has 'role' = 'stop_entry_only'. Is the route "
 "sorted in reverse order?"
 msgstr ""
+"PTv2 рута: последњи чвор пута има 'role' = 'stop_entry_only'. Да рута није "
+"сортирана наопачке?"
 
 msgid "PTv2 route: 'public_transport' = 'stop_position' is not part of way"
-msgstr ""
+msgstr "PTv2 рута: 'public_transport' = 'stop_position' није део пута"
 
 #, perl-format
 msgid "PTv2 route: missing '%s' = 'yes' on 'public_transport' = '%s'"
-msgstr ""
+msgstr "PTv2 рута: недостаје  '%s' = 'yes' на 'public_transport' = '%s'"
 
 #, perl-format
 msgid ""
 "PTv2 route: mismatch between 'role' = '%s' and 'public_transport' = '%s'"
-msgstr ""
+msgstr "PTv2 рута: неслагање између 'role' = '%s' и 'public_transport' = '%s'"
 
 #, perl-format
 msgid ""
 "PTv2 route: 'role' = '%s' and %s: consider setting 'public_transport' = "
 "'stop_position'"
 msgstr ""
+"PTv2 рута: 'role' = '%s' и %s: размислите да додате 'public_transport' = "
+"'stop_position'"
 
 #, perl-format
 msgid "PTv2 route: 'role' = '%s' but 'public_transport' is not set"
-msgstr ""
+msgstr "PTv2 рута: 'role' = '%s', али 'public_transport' није постављен"
 
 msgid "PTv2 route: 'public_transport' = 'platform' is part of way"
-msgstr ""
+msgstr "PTv2 рута: 'public_transport' = 'platform' је део пута"
 
 #, perl-format
 msgid ""
 "PTv2 route: 'role' = '%s' and %s: consider setting 'public_transport' = "
 "'platform'"
 msgstr ""
+"PTv2 рута: 'role' = '%s' и %s: размислите да додате 'public_transport' = "
+"'platform'"
 
 #, perl-format
 msgid "PTv2 route: wrong 'role' = '%s'"
-msgstr ""
+msgstr "PTv2 рута: погрешна 'role' = '%s'"
 
 msgid "PTv2 route: empty 'role'"
-msgstr ""
+msgstr "PTv2 рута: празна 'role'"
 
 #, perl-format
 msgid ""
@@ -831,18 +870,20 @@ msgid "Error in input data: insufficient data for nodes"
 msgstr ""
 
 msgid "Date of Data"
-msgstr ""
+msgstr "Датум података"
 
 msgid "Hints"
 msgstr ""
 
 msgid "The data will be updated when the result of the analysis has changed."
-msgstr ""
+msgstr "Подаци ће бити ажурирани када се промене и резултати анализе."
 
 msgid ""
 "An explanation of the error texts can be found in the documentation at '<a "
 "href='/en/index.php#messages'>Messages</a>'."
 msgstr ""
+"Објашњење грешака можете видети у документацији на '<a "
+"href='/en/index.php#messages'>Поруке</a>'."
 
 msgid "Static Analysis for OpenStreetMap"
 msgstr ""
@@ -857,7 +898,7 @@ msgid "Contents"
 msgstr ""
 
 msgid "This section lists the lines that could not be clearly assigned."
-msgstr ""
+msgstr "Овај одељак излистава линије које нису јасно додељене."
 
 msgid ""
 "The line numbers 'ref' have been specified several times in the CSV file."
@@ -902,6 +943,7 @@ msgid ""
 "Examples for an entry in the CSV file of the form: "
 "'ref;type;Comment;From;To;Operator':"
 msgstr ""
+"Примери за унос у CSV фајлу у облику: 'ref;type;Comment;From;To;Operator':"
 
 msgid "provides services in City-A"
 msgstr ""
@@ -948,7 +990,7 @@ msgid ""
 msgstr ""
 
 msgid "This section lists further relations of the environment of the routes:"
-msgstr ""
+msgstr "Овај одељак излистава даље релације у окружењу рута:"
 
 msgid "potentially wrong 'route' or 'route_master' values?"
 msgstr ""
@@ -983,21 +1025,23 @@ msgid ""
 msgstr ""
 
 msgid "The contents of the 'network' tag will be searched for:"
-msgstr ""
+msgstr "За садржај 'network' ознаке ће бити претраживане следеће вредности:"
 
 msgid "The contents of the 'operator' tag will be searched for:"
-msgstr ""
+msgstr "За садржај 'operator' ознаке ће бити претраживане следеће вредности:"
 
 msgid "'operator' is not set"
 msgstr ""
 
 msgid "Considered 'network'-Values"
-msgstr ""
+msgstr "'network' вредности који се разматрају"
 
 msgid ""
 "This section lists the 'network'-values which have been considered; i.e. "
 "which match to one of the values above."
 msgstr ""
+"Овај одељак излистава вредности 'network' ознаке који се разматрају, тј. "
+"који се поклапају са неким од вредности изнад."
 
 msgid "and more ..."
 msgstr ""
@@ -1005,11 +1049,12 @@ msgstr ""
 msgid ""
 "This section lists the 'operator'-values which have not been considered."
 msgstr ""
+"Овај одељак излистава вредности 'operator' ознаке који се не разматрају."
 
 msgid ""
 "They might include typos in values which otherwise should have been "
 "considered."
-msgstr ""
+msgstr "Овде може да буде и грешака у куцању које иначе треба разматрати."
 
 msgid "Additionally considered 'network'-Values"
 msgstr ""
@@ -1018,18 +1063,23 @@ msgid ""
 "This section lists 'network' values that were additionally considered "
 "because the 'network' value of the Route-Master or member Route matched."
 msgstr ""
+"Овај одељак излистава додатне вредности 'network' ознаке који се још "
+"разматрају пошто се 'network' ознака мастер руте или руте-чланице поклапа."
 
 msgid "Not Considered 'network'-Values"
-msgstr ""
+msgstr "'network' вредности које се не разматрају"
 
 msgid ""
 "This section lists the 'network'-values which have not been considered."
 msgstr ""
+"Овај одељак излистава вредности 'network' ознаке који се не разматрају."
 
 msgid ""
 "This section lists references to GTFS feed information found in the CSV list"
 " and in Route-Master and Route relations."
 msgstr ""
+"Овај одељак излистава референце на GTFS ифромације довода нађене у CSV "
+"листи, као и у релацијама мастер руте и руте."
 
 msgid "References to GTFS from CSV list"
 msgstr ""
@@ -1038,14 +1088,18 @@ msgid ""
 "This section lists the name of the GTFS feed and the related release date "
 "information as found in the CSV list."
 msgstr ""
+"Овај одељак излистава име GTFS довода и повезани датум издавања информација,"
+" на основу података из CSV листе."
 
 msgid ""
 "An empty release date means: reference to the latest GTFS information, the "
 "latest available at PTNA."
 msgstr ""
+"Празан датум издавања значи: референца на последње GTFS информације, "
+"последње доступне на PTNA."
 
 msgid "Example"
-msgstr ""
+msgstr "Пример"
 
 msgid ""
 "Where the GTFS feed name is 'DE-BY-MVV' and the release date is "
@@ -1059,17 +1113,22 @@ msgid ""
 "This section lists the name of the GTFS feed and the related release date "
 "information as found in Route-Master and Route relations."
 msgstr ""
+"Овај одељак излистава име GTFS довода и повезани датум издавања информација,"
+" на основу података из релација мастер руте и руте."
 
 msgid ""
 "In addition to that, the source of the information (name and date) is "
 "listed."
-msgstr ""
+msgstr "Поред тога се исписује и извор информација (име и датум)."
 
 msgid ""
 "The value '--gtfs-feed' refers to the corresponding global analysis option, "
 "because no information about the source of the GTFS feed information was "
 "found in the Route-Master or Route relation."
 msgstr ""
+"Вредност '--gtfs-feed' се односи на одговарајућу опцију глобалне анализе, "
+"пошто није нађен извор информација GTFS довода у релацијама руте и мастер "
+"руте."
 
 msgid "key = value"
 msgstr ""
@@ -1383,7 +1442,7 @@ msgid ""
 msgstr ""
 
 msgid "Limits the number of identical error and note messages for a relation."
-msgstr ""
+msgstr "Ограничи број истих грешака и порука за једну релацију."
 
 msgid ""
 "Defines how to react if the combination of \"ref;type\" (e.g. \"N8;bus\") "

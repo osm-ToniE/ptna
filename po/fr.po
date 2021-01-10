@@ -8,9 +8,9 @@
 # Julien Lepiller <transifex@lepiller.eu>, 2019
 # Adrien Pavie <panieravide@riseup.net>, 2019
 # Lejun, 2020
-# ToniE <osm-ToniE@web.de>, 2020
 # Philippe Verdy, 2020
 # Patchi Atwork <patchi.atwork@gmail.com>, 2020
+# ToniE <osm-ToniE@web.de>, 2021
 # 
 #, fuzzy
 msgid ""
@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
 "POT-Creation-Date: 2021-01-08 10:21+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: Patchi Atwork <patchi.atwork@gmail.com>, 2020\n"
+"Last-Translator: ToniE <osm-ToniE@web.de>, 2021\n"
 "Language-Team: French (https://www.transifex.com/jungle-bus/teams/97874/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -388,14 +388,20 @@ msgstr ""
 #, perl-format
 msgid "'%s' = '%s' of Route does not fit to '%s' = '%s' of Route-Master: %s"
 msgstr ""
+"L'attribut '%s' = '%s' de l'itinéraire ne correspond pas à l'attribut '%s' ="
+" '%s' du groupement d'itinéraires : %s"
 
 #, perl-format
 msgid "'%s' = '%s' of Route is set but '%s' of Route-Master is not set: %s"
 msgstr ""
+"L'attribut '%s' = '%s' de l'itinéraire est définie mais pas l'attribut '%s' "
+"du groupement d'itinéraires : %s"
 
 #, perl-format
 msgid "'%s' of Route is not set but '%s' = '%s' of Route-Master is set: %s"
 msgstr ""
+"L'attribut '%s' de l'itinéraire n'est pas définie contrairement à l'attribut"
+" '%s' = '%s' du groupement d'itinéraires : %s"
 
 msgid ""
 "PTv2 route: 'name' of Route is identical to 'name' of other Route(s), "
@@ -627,6 +633,7 @@ msgstr ""
 #, perl-format
 msgid "PTv2 route: missing '%s' = 'yes' on 'public_transport' = '%s'"
 msgstr ""
+"Itinéraire PTv2 :  '%s' = 'yes' manquant sur 'public_transport' = '%s'"
 
 #, perl-format
 msgid ""
