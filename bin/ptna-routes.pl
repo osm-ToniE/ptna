@@ -2664,6 +2664,15 @@ sub analyze_relation {
             }
         }
 
+        if ( $check_gtfs ) {
+            if ( $relation_ptr->{'tag'}->{'gtfs:shape_id'}                 &&
+                 !defined($relation_ptr->{'tag'}->{'gtfs:trip_id'})        &&
+                 !defined($relation_ptr->{'tag'}->{'gtfs:trip_id:sample'})    ) {
+                $notes_string = gettext( "'gtfs:shape_id' = '%s' is set but neither 'gtfs:trip_id' nor 'gtfs:trip_id:sample' is set: consider setting one of them as they provide additional information about stops (their names, sequence and locations)." );
+                push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, $relation_ptr->{'tag'}->{'gtfs:shape_id'} ) );
+            }
+        }
+
         if ( $relation_ptr->{'tag'}->{'line'} ) {
             $notes_string = gettext( "The tag 'line' (='%s') is reserved for 'power' = 'line' related tagging. For public transport 'route_master' and 'route' are used." );
             push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, $relation_ptr->{'tag'}->{'line'} ) );
