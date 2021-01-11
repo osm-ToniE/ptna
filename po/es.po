@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2021-01-11 12:43+0100\n"
+"POT-Creation-Date: 2021-01-11 13:28+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: Jorge Sanz <sanchi2@gmail.com>, 2020\n"
 "Language-Team: Spanish (https://www.transifex.com/jungle-bus/teams/97874/"
@@ -1094,6 +1094,14 @@ msgid "key = value"
 msgstr ""
 
 #, perl-format
+msgid ""
+"'%s' = '%s' includes the separator value ';' (semi-colon) with sourrounding "
+"blank"
+msgstr ""
+"'%s'='%s' incluye el valor separador ';' (punto y coma) con espacios a sus "
+"lados"
+
+#, perl-format
 msgid "'colour' of Route is not set but 'colour' of Route-Master is set: %s"
 msgstr ""
 "No se ha establecido el 'colour' de la ruta, pero sí el 'colour' de la Ruta-"
@@ -1105,13 +1113,22 @@ msgstr ""
 "Se ha establecido el 'colour' de la ruta, pero el 'colour' de la Ruta-"
 "Maestra no: %s"
 
-#, perl-format
 msgid ""
-"'%s' = '%s' includes the separator value ';' (semi-colon) with sourrounding "
-"blank"
+"GTFS shape data provides (only) information about the itinerary of the "
+"vehicle."
 msgstr ""
-"'%s'='%s' incluye el valor separador ';' (punto y coma) con espacios a sus "
-"lados"
+
+msgid ""
+"In addition, GTFS trip data provides useful information about stops: their "
+"names, their sequences and their locations."
+msgstr ""
+
+msgid ""
+"This additional information can be used to compare OSM data with GTFS data."
+msgstr ""
+
+msgid "Add either 'gtfs:trip_id' or 'gtfs:trip_id:sample' information."
+msgstr ""
 
 msgid "'public_transport:version' is not set"
 msgstr "No se ha establecido 'public_transport:version'"

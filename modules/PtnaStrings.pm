@@ -34,6 +34,15 @@ sub InitMessageStrings {
     my $i = 0;
 
     $i++;
+    $MessageList[$i]->{'message'}                = gettext( "'%s' = '%s' includes the separator value ';' (semi-colon) with sourrounding blank" );
+    $MessageList[$i]->{'type'}                   = gettext( "Notes" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
     $MessageList[$i]->{'message'}                = gettext( "'colour' has unknown value '%s'. Add '#' as first character." );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
@@ -70,17 +79,19 @@ sub InitMessageStrings {
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
-    $MessageList[$i]->{'message'}                = gettext( "'name' is not set" );
-    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "";
-    $MessageList[$i]->{'description'}            = "";
-    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'message'}                = gettext( "'gtfs:shape_id' = '%s' is set but neither 'gtfs:trip_id' nor 'gtfs:trip_id:sample' is set: consider setting one of them as they provide additional information about stops (their names, sequence and locations)." );
+    $MessageList[$i]->{'type'}                   = gettext( "Notes" );
+    $MessageList[$i]->{'option'}                 = "check-gtfs";
+    $MessageList[$i]->{'description'}            = gettext( "GTFS shape data provides (only) information about the itinerary of the vehicle." ) . ' ' .
+                                                   gettext( "In addition, GTFS trip data provides useful information about stops: their names, their sequences and their locations." ) . ' ' .
+                                                   gettext( "This additional information can be used to compare OSM data with GTFS data." );
+    $MessageList[$i]->{'fix'}                    = gettext( "Add either 'gtfs:trip_id' or 'gtfs:trip_id:sample' information." );
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
-    $MessageList[$i]->{'message'}                = gettext( "'%s' = '%s' includes the separator value ';' (semi-colon) with sourrounding blank" );
-    $MessageList[$i]->{'type'}                   = gettext( "Notes" );
+    $MessageList[$i]->{'message'}                = gettext( "'name' is not set" );
+    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
