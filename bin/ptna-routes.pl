@@ -2359,7 +2359,7 @@ sub analyze_route_environment {
                 my $help_val   = '';
                 my $help_pval  = '';
 
-                foreach my $gtfs_tag ( 'gtfs:trip_id', 'gtfs:trip_id:sample', 'gtfs:trip_id:like' ) {
+                foreach my $gtfs_tag ( 'gtfs:trip_id', 'gtfs:trip_id:sample', 'gtfs:trip_id:like', 'gtfs:shape_id:sample' ) {
                     %gtfs_ident = ();
                     %gtfs_match = ();
 
@@ -2664,14 +2664,14 @@ sub analyze_relation {
             }
         }
 
-        if ( $check_gtfs ) {
-            if ( $relation_ptr->{'tag'}->{'gtfs:shape_id'}                 &&
-                 !defined($relation_ptr->{'tag'}->{'gtfs:trip_id'})        &&
-                 !defined($relation_ptr->{'tag'}->{'gtfs:trip_id:sample'})    ) {
-                $notes_string = gettext( "'gtfs:shape_id' = '%s' is set but neither 'gtfs:trip_id' nor 'gtfs:trip_id:sample' is set: consider setting one of them as they provide additional information about stops (their names, sequence and locations)." );
-                push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, $relation_ptr->{'tag'}->{'gtfs:shape_id'} ) );
-            }
-        }
+        #if ( $check_gtfs ) {
+        #    if ( $relation_ptr->{'tag'}->{'gtfs:shape_id'}                 &&
+        #         !defined($relation_ptr->{'tag'}->{'gtfs:trip_id'})        &&
+        #         !defined($relation_ptr->{'tag'}->{'gtfs:trip_id:sample'})    ) {
+        #        $notes_string = gettext( "'gtfs:shape_id' = '%s' is set but neither 'gtfs:trip_id' nor 'gtfs:trip_id:sample' is set: consider setting one of them as they provide additional information about stops (their names, sequence and locations)." );
+        #        push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, $relation_ptr->{'tag'}->{'gtfs:shape_id'} ) );
+        #    }
+        #}
 
         if ( $relation_ptr->{'tag'}->{'line'} ) {
             $notes_string = gettext( "The tag 'line' (='%s') is reserved for 'power' = 'line' related tagging. For public transport 'route_master' and 'route' are used." );
