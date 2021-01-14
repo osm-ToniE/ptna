@@ -1367,6 +1367,13 @@ sub InitOptionStrings {
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
+    $OptionList[$i]->{'option'}                 = "check-platform";
+    $OptionList[$i]->{'default'}                = "OFF";
+    $OptionList[$i]->{'description'}            = gettext( "Check that for instance 'bus' = 'yes' is set on a PTv2 bus stop having 'public_transport' = 'platform'. PTv2 does not require this though." );
+    $OptionList[$i]->{'image'}                  = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+
+    $i++;
     $OptionList[$i]->{'option'}                 = "check-osm-separator";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = gettext( "Check the value of 'network', ... whether the separator is actually the semicolon ';' (w/o Blanks)." );
@@ -1393,6 +1400,13 @@ sub InitOptionStrings {
     $OptionList[$i]->{'option'}                 = "check-sequence";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = gettext( "Check sequence of ways, are there any gaps?" );
+    $OptionList[$i]->{'image'}                  = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+
+    $i++;
+    $OptionList[$i]->{'option'}                 = "check-stop-position";
+    $OptionList[$i]->{'default'}                = "OFF";
+    $OptionList[$i]->{'description'}            = gettext( "Check that for instance 'bus' = 'yes' is set on a PTv2 bus stop having 'public_transport' = 'stop_position'." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 

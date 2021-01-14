@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2021-01-11 13:28+0100\n"
+"POT-Creation-Date: 2021-01-14 18:27+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: Branko Kokanovic <branko@kokanovic.org>, 2021\n"
 "Language-Team: Serbian (https://www.transifex.com/jungle-bus/teams/97874/"
@@ -439,13 +439,6 @@ msgid ""
 msgstr ""
 "'%s' = '%s': ',' (зарез) као вредност за одвајање треба да се замени са "
 "';' (тачка-зарез) без белина"
-
-#, perl-format
-msgid ""
-"'gtfs:shape_id' = '%s' is set but neither 'gtfs:trip_id' nor 'gtfs:trip_id:"
-"sample' is set: consider setting one of them as they provide additional "
-"information about stops (their names, sequence and locations)."
-msgstr ""
 
 #, perl-format
 msgid ""
@@ -1143,6 +1136,13 @@ msgstr ""
 msgid "'colour' of Route is set but 'colour' of Route-Master is not set: %s"
 msgstr ""
 
+#, perl-format
+msgid ""
+"'gtfs:shape_id' = '%s' is set but neither 'gtfs:trip_id' nor 'gtfs:trip_id:"
+"sample' is set: consider setting one of them as they provide additional "
+"information about stops (their names, sequence and locations)."
+msgstr ""
+
 msgid ""
 "GTFS shape data provides (only) information about the itinerary of the "
 "vehicle."
@@ -1375,6 +1375,11 @@ msgid ""
 msgstr ""
 
 msgid ""
+"Check that for instance 'bus' = 'yes' is set on a PTv2 bus stop having "
+"'public_transport' = 'platform'. PTv2 does not require this though."
+msgstr ""
+
+msgid ""
 "Check the value of 'network', ... whether the separator is actually the "
 "semicolon ';' (w/o Blanks)."
 msgstr ""
@@ -1401,6 +1406,14 @@ msgstr ""
 
 msgid "Check sequence of ways, are there any gaps?"
 msgstr ""
+
+#, fuzzy
+msgid ""
+"Check that for instance 'bus' = 'yes' is set on a PTv2 bus stop having "
+"'public_transport' = 'stop_position'."
+msgstr ""
+"PTv2 рута: 'role' = '%s' и %s: размислите да додате 'public_transport' = "
+"'stop_position'"
 
 msgid "Check of 'public_transport:version' = '...' on Route-Master and Route."
 msgstr ""

@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2021-01-11 13:28+0100\n"
+"POT-Creation-Date: 2021-01-14 18:27+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2021\n"
 "Language-Team: French (https://www.transifex.com/jungle-bus/teams/97874/"
@@ -471,13 +471,6 @@ msgid ""
 msgstr ""
 "'%s' = '%s' : la ',' (virgule) comme valeur de séparateur devrait être "
 "remplacée par un ';' (point-virgule) sans espace"
-
-#, perl-format
-msgid ""
-"'gtfs:shape_id' = '%s' is set but neither 'gtfs:trip_id' nor 'gtfs:trip_id:"
-"sample' is set: consider setting one of them as they provide additional "
-"information about stops (their names, sequence and locations)."
-msgstr ""
 
 #, perl-format
 msgid ""
@@ -1309,6 +1302,13 @@ msgstr ""
 "La couleur 'colour' de l'itinéraire est définie mais pas celle du groupement "
 "d'itinéraires : %s"
 
+#, perl-format
+msgid ""
+"'gtfs:shape_id' = '%s' is set but neither 'gtfs:trip_id' nor 'gtfs:trip_id:"
+"sample' is set: consider setting one of them as they provide additional "
+"information about stops (their names, sequence and locations)."
+msgstr ""
+
 msgid ""
 "GTFS shape data provides (only) information about the itinerary of the "
 "vehicle."
@@ -1609,6 +1609,11 @@ msgstr ""
 "'from' et 'B' de 'to'"
 
 msgid ""
+"Check that for instance 'bus' = 'yes' is set on a PTv2 bus stop having "
+"'public_transport' = 'platform'. PTv2 does not require this though."
+msgstr ""
+
+msgid ""
 "Check the value of 'network', ... whether the separator is actually the "
 "semicolon ';' (w/o Blanks)."
 msgstr ""
@@ -1645,6 +1650,14 @@ msgstr ""
 
 msgid "Check sequence of ways, are there any gaps?"
 msgstr "Vérifie la succession de chemins, y-a-t-il des trous ?"
+
+#, fuzzy
+msgid ""
+"Check that for instance 'bus' = 'yes' is set on a PTv2 bus stop having "
+"'public_transport' = 'stop_position'."
+msgstr ""
+"Itinéraire PTv2 : attribut 'role' = '%s' et %s : 'public_transport' = "
+"'stop_position' recommandé"
 
 msgid "Check of 'public_transport:version' = '...' on Route-Master and Route."
 msgstr ""
