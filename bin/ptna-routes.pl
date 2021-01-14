@@ -5534,7 +5534,7 @@ sub printPtnaHeader {
     push( @HTML_start, "                <a target=\"_blank\" href=\"https://www.fossgis.de/datenschutzerklärung\">Datenschutzerklärung</a> | \n" );
     push( @HTML_start, "                <a href=\"/en/index.html\" title=\"english\"><img src=\"/img/GreatBritain16.png\" alt=\"Union Jack\" /></a>\n" );
     push( @HTML_start, "                <a href=\"/de/index.html\" title=\"deutsch\"><img src=\"/img/Germany16.png\" alt=\"deutsche Flagge\" /></a>\n" );
-    push( @HTML_start, "                <!-- <a href=\"/fr/index.html\" title=\"français\"><img src=\"/img/France16.png\" alt=\"Tricolore Française\" /></a> -->\n" );
+    push( @HTML_start, "                <a href=\"/fr/index.html\" title=\"français\"><img src=\"/img/France16.png\" alt=\"drapeau français\" /></a>\n" );
     push( @HTML_start, "            </div>\n" );
     push( @HTML_start, "        </header>\n" );
 
