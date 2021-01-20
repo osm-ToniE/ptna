@@ -1319,7 +1319,7 @@ sub InitOptionStrings {
     $i++;
     $OptionList[$i]->{'option'}                 = "allow-coach";
     $OptionList[$i]->{'default'}                = "OFF";
-    $OptionList[$i]->{'description'}            = gettext( "Allow 'route_master' = 'coach' und 'route' = 'coach' (although they are inofficial)." );
+    $OptionList[$i]->{'description'}            = gettext( "Allow 'route_master' = 'coach' and 'route' = 'coach' (although they are inofficial)." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
