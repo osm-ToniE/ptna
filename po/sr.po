@@ -364,59 +364,59 @@ msgstr ""
 
 #, perl-format
 msgid "'%s' = '%s' of Route does not fit to '%s' = '%s' of Route-Master: %s"
-msgstr "'%s' = '%s' руте се не уклапа у '%s' = '%s' мастер руте: %s"
+msgstr "’%s’ = ’%s’ руте се не уклапа у ’%s’ = ’%s’ мастер руте: %s"
 
 #, perl-format
 msgid "'%s' = '%s' of Route is set but '%s' of Route-Master is not set: %s"
-msgstr "'%s' = '%s' руте је постављен, али '%s' мастер руте није: %s"
+msgstr "’%s’ = ’%s’ руте је постављен, али ’%s’ мастер руте није: %s"
 
 #, perl-format
 msgid "'%s' of Route is not set but '%s' = '%s' of Route-Master is set: %s"
-msgstr "'%s' руте није постављен, али '%s' = '%s' мастер руте: %s јесте"
+msgstr "’%s’ руте није постављен, али ’%s’ = ’%s’ мастер руте: %s јесте"
 
 msgid ""
 "PTv2 route: 'name' of Route is identical to 'name' of other Route(s), "
 "consider setting an appropriate 'via' value and include that into 'name'"
 msgstr ""
-"PTv2 рута: име ('name' ознака) руте је исто као 'name' других рута, "
-"размислите да поставите одговарајућу 'via' вредности и да је уврстите у "
-"'name' таг"
+"PTv2 рута: име (’name’ ознака) руте је исто као ’name’ других рута, "
+"размислите да поставите одговарајућу ’via’ вредности и да је уврстите у "
+"’name’ таг"
 
 #, perl-format
 msgid "%s: %s and %d more ..."
 msgstr "%s: %s и %d још..."
 
 msgid "Multiple Routes but 'public_transport:version' is not set to '2'"
-msgstr "Више рута, а 'public_transport:version' ознака није постављена на '2'"
+msgstr "Више рута, а ’public_transport:version’ ознака није постављена на ’2’"
 
 #, perl-format
 msgid "'%s' = '%s' of Route is identical to '%s' of other Route(s)"
-msgstr "'%s' = '%s' руте је исти као и '%s' других рута"
+msgstr "’%s’ = ’%s’ руте је исти као и ’%s’ других рута"
 
 #, perl-format
 msgid "'%s' = '%s' of Route has a match with '%s' = '%s' of other Route(s)"
-msgstr "'%s' = '%s' руте има поклапање са '%s' = '%s' других рута"
+msgstr "’%s’ = ’%s’ руте има поклапање са ’%s’ = ’%s’ других рута"
 
 msgid "'ref' is not set"
-msgstr "'ref' ознака није постављена"
+msgstr "’ref’ ознака није постављена"
 
 msgid "'name' is not set"
-msgstr "'name' ознака није постављена"
+msgstr "’name’ ознака није постављена"
 
 #, perl-format
 msgid "'network' = '%s' should be short form"
-msgstr "'network' = '%s' треба бити кратког облика"
+msgstr "’network’ = ’%s’ треба бити кратког облика"
 
 #, perl-format
 msgid "'network' = '%s' should be long form"
-msgstr "'network' = '%s' треба бити дугачког облика"
+msgstr "’network’ = ’%s’ треба бити дугачког облика"
 
 msgid "'network' is not set"
-msgstr "'network' ознака није постављена"
+msgstr "’network’ ознака није постављена"
 
 #, perl-format
 msgid "'colour' has unknown value '%s'. Add '#' as first character."
-msgstr "'colour' има непознату вредност '%s'. Додајте '#' као први знак."
+msgstr "’colour’ има непознату вредност ’%s’. Додајте ’#’ као први знак."
 
 #, perl-format
 msgid ""
