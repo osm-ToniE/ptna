@@ -4,8 +4,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Branko Kokanovic <branko@kokanovic.org>, 2021
 # ToniE <osm-ToniE@web.de>, 2021
+# Branko Kokanovic <branko@kokanovic.org>, 2021
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
 "POT-Creation-Date: 2021-01-20 09:48+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: ToniE <osm-ToniE@web.de>, 2021\n"
+"Last-Translator: Branko Kokanovic <branko@kokanovic.org>, 2021\n"
 "Language-Team: Serbian (https://www.transifex.com/jungle-bus/teams/97874/sr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,7 +44,7 @@ msgid "Default Value"
 msgstr "Подразумевана вредност"
 
 msgid "Language test"
-msgstr "Latin 'I' = И, Latin 'T' = Т, Latin 'S' = С, 'Belgrade' = Београд"
+msgstr "Latin ’I’ = И, Latin ’T’ = Т, Latin ’S’ = С, ’Belgrade’ = Београд"
 
 msgid "Line (ref=)"
 msgstr "Линија (ref=)"
@@ -119,7 +119,7 @@ msgid "Bus"
 msgstr "Аутобус"
 
 msgid "Coach"
-msgstr ""
+msgstr "Куше"
 
 msgid "Share-Taxi"
 msgstr "Дељени такси"
@@ -153,10 +153,10 @@ msgstr "Успињача"
 
 #, perl-format
 msgid "Missing route for ref='%s' and route='%s'"
-msgstr "Недостаје рута за ref='%s' и route='%s'"
+msgstr "Недостаје рута за ref=’%s’ и route=’%s’"
 
 msgid "' or ref='"
-msgstr "' или ref='"
+msgstr "’ или ref=’"
 
 #. xgettext: This section will list all routes which could not be clearly
 #. assigned because the combination of "ref;type" appears more than once and
@@ -233,51 +233,51 @@ msgid ""
 " 'Not clearly assigned routes' of this analysis: %s"
 msgstr ""
 "Рута може бити излистана са ознаком ’ref’ = ’%s’ у различитој секцији или у "
-"секцији 'Нејасно придружете руте' анализе: %s"
+"секцији ’Нејасно придружете руте’ анализе: %s"
 
 #, perl-format
 msgid ""
 "Route has different 'operator' = '%s' than Route-Master 'operator' = '%s': "
 "%s"
 msgstr ""
-"Рута има различити 'operator' = '%s' од оператора мастер руте 'operator' = "
-"'%s': %s"
+"Рута има различити ’operator’ = ’%s’ од оператора мастер руте ’operator’ = "
+"’%s’: %s"
 
 #, perl-format
 msgid ""
 "Route has 'operator' = '%s' value which is considered as not relevant: %s"
 msgstr ""
-"Рута има вредност за 'operator' = '%s' која се не сматра релевантном: %s"
+"Рута има вредност за ’operator’ = ’%s’ која се не сматра релевантном: %s"
 
 #, perl-format
 msgid ""
 "Route has different 'network' = '%s' than Route-Master 'network' = '%s': %s"
 msgstr ""
-"Рута има другачији 'network' = '%s' од мастер руте 'network' = '%s': %s"
+"Рута има другачији ’network’ = ’%s’ од мастер руте ’network’ = ’%s’: %s"
 
 #, perl-format
 msgid ""
 "Route has 'network' = '%s' value which is considered as not relevant: %s"
-msgstr "Рута има вредност 'network' = '%s' која се не сматра релевантном: %s"
+msgstr "Рута има вредност ’network’ = ’%s’ која се не сматра релевантном: %s"
 
 #, perl-format
 msgid "Route has not matching 'ref' = '%s': %s"
-msgstr "Рута нема 'ref' = '%s' који се поклапа: %s"
+msgstr "Рута нема ’ref’ = ’%s’ који се поклапа: %s"
 
 #, perl-format
 msgid "Route exists in the given data set but 'ref' tag is not set: %s"
-msgstr "Рута постоји у задатим подацима, али 'ref' ознака није постављена: %s"
+msgstr "Рута постоји у задатим подацима, али ’ref’ ознака није постављена: %s"
 
 #, perl-format
 msgid ""
 "Route has different 'route' = '%s' than Route-Master 'route_master' = '%s': "
 "%s"
 msgstr ""
-"Рута има другачију 'route' = '%s' од мастер руте 'route_master' = '%s': %s"
+"Рута има другачију ’route’ = ’%s’ од мастер руте ’route_master’ = ’%s’: %s"
 
 #, perl-format
 msgid "Route has 'route' = '%s' value which is considered as not relevant: %s"
-msgstr "Рута има вредност 'route' = '%s' која се не сматра релевантном: %s"
+msgstr "Рута има вредност ’route’ = ’%s’ која се не сматра релевантном: %s"
 
 #, perl-format
 msgid "'route' tag is not set: %s"
@@ -285,7 +285,7 @@ msgstr "’route’ ознака није постављена: %s"
 
 #, perl-format
 msgid "'type' = '%s' is not 'route': %s"
-msgstr "'type' = '%s' није 'route': %s"
+msgstr "’type’ = ’%s’ није ’route’: %s"
 
 #, perl-format
 msgid "'type' tag is not set: %s"
@@ -305,7 +305,7 @@ msgid ""
 "section 'Not clearly assigned routes' of this analysis: %s"
 msgstr ""
 "Мастер рута може бити излистана са ознаком ’ref’ = ’%s’ у различитој секцији"
-" или у секцији 'Нејасно придружете руте' анализе: %s"
+" или у секцији ’Нејасно придружете руте’ анализе: %s"
 
 #, perl-format
 msgid ""
@@ -313,7 +313,7 @@ msgid ""
 " Lines without 'ref'' of this analysis: %s"
 msgstr ""
 "Мастер рута може бити излистана са непознатом ’ref’ ознаком у секцији "
-"'Линије јавног превоза без 'ref' ознаке' ове анализе: %s"
+"’Линије јавног превоза без ’ref’ ознаке’ ове анализе: %s"
 
 #, perl-format
 msgid "This Route is direct member of more than one Route-Master: %s"
@@ -333,34 +333,34 @@ msgid ""
 "'route' = '%s' of Route does not fit to 'route_master' = '%s' of Route-"
 "Master: %s"
 msgstr ""
-"'route' = '%s' ове руте се не уклапа у 'route_master' = '%s' мастер руте: %s"
+"’route’ = ’%s’ ове руте се не уклапа у ’route_master’ = ’%s’ мастер руте: %s"
 
 #, perl-format
 msgid "Route-Master has not matching 'ref' = '%s': %s"
-msgstr "Мастер рута нема 'ref' = '%s' који се поклапа: %s"
+msgstr "Мастер рута нема ’ref’ = ’%s’ који се поклапа: %s"
 
 #, perl-format
 msgid "Route-Master exists in the given data set but 'ref' tag is not set: %s"
 msgstr ""
-"Мастер рута постоји у задатим подацима, али 'ref' ознака није постављена: %s"
+"Мастер рута постоји у задатим подацима, али ’ref’ ознака није постављена: %s"
 
 #, perl-format
 msgid ""
 "'network' = '%s' of Route is a part of 'network' = '%s' of Route-Master: %s"
-msgstr "'network' = '%s' руте је део 'network' = '%s' мастер руте: %s"
+msgstr "’network’ = ’%s’ руте је део ’network’ = ’%s’ мастер руте: %s"
 
 #, perl-format
 msgid ""
 "'network' = '%s' of Route does not fit to 'network' = '%s' of Route-Master: "
 "%s"
-msgstr "'network' = '%s' руте се не уклапа у 'network' = '%s' мастер руте: %s"
+msgstr "’network’ = ’%s’ руте се не уклапа у ’network’ = ’%s’ мастер руте: %s"
 
 #, perl-format
 msgid ""
 "'operator' = '%s' of Route does not fit to 'operator' = '%s' of Route-"
 "Master: %s"
 msgstr ""
-"'operator' = '%s' руте се не уклапа у 'operator' = '%s' мастер руте: %s"
+"’operator’ = ’%s’ руте се не уклапа у ’operator’ = ’%s’ мастер руте: %s"
 
 #, perl-format
 msgid "'%s' = '%s' of Route does not fit to '%s' = '%s' of Route-Master: %s"
@@ -1169,7 +1169,7 @@ msgstr ""
 "листи, као и у релацијама мастер руте и руте."
 
 msgid "References to GTFS from CSV list"
-msgstr ""
+msgstr "Референце ка GTFS-у из CSV листе"
 
 msgid ""
 "This section lists the name of the GTFS feed and the related release date "
@@ -1396,16 +1396,23 @@ msgid ""
 " = 'construction' and 'construction' = 'xxx', where 'xxx' is the former "
 "value of the 'highway' key."
 msgstr ""
+"Радови на путу су обично мапирани као комбинација ознака 'higway' = "
+"'construction' и 'construction' = 'xxx',где је 'xxx' ранија вредност "
+"'highway' кључа."
 
 msgid ""
 "When the construction works are finished, the key 'highway' is set to its "
 "former or a different value while the key 'construction' gets delete."
 msgstr ""
+"Када се радови заврше,  'highway' ознака се ставља на стару или на неку "
+"другу вредност, док се 'construction' ознака брише."
 
 msgid ""
 "Sometimes, deleting the key 'construction' is not carried out, which leaves "
 "an artifact and can be seen as an error."
 msgstr ""
+"Некада се не деси брисање 'construction' ознаке, па се онда то види као "
+"грешка."
 
 msgid "and"
 msgstr "и"
@@ -1426,19 +1433,23 @@ msgid ""
 "A conditional access is mapped to a way. PTNA will not analyze the value of "
 "the tag."
 msgstr ""
+"Условни приступ је Мапиран на пут. PTNA неће анализирати вредност ознаке."
 
 msgid ""
 "Please evaluate the value manually and decide whether a fix is needed or "
 "not."
 msgstr ""
+"Испитајте вредност ручно и одлучите да ли је потребна поправка или не."
 
 msgid "The access restriction does not comply with the map features."
-msgstr ""
+msgstr "Ограничење приступа се не поклапа са стварима на карти."
 
 msgid ""
 "Please consult the OSM Wiki: "
 "https://wiki.openstreetmap.org/wiki/Map_Features#Restrictions"
 msgstr ""
+"Погледајте OSM вики: "
+"https://wiki.openstreetmap.org/wiki/Map_Features#Restrictions"
 
 msgid "This error is related to:"
 msgstr "Грешка је повезана са:"
@@ -1473,12 +1484,14 @@ msgstr ""
 #, perl-format
 msgid "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'"
 msgstr ""
+"Тип руте није постављен. Линија %s података руте. Садржај линије: '%s'"
 
 #, perl-format
 msgid ""
 "Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line:"
 " '%s'"
 msgstr ""
+"Тип руте није подржан: '%s'. Линија %s података руте. Садржај линије: '%s'"
 
 msgid "Defines the language for the output."
 msgstr "Дефинише језик излаза."
@@ -1504,112 +1517,152 @@ msgstr "Ово важи и за 'barrier' = '...'."
 
 msgid "'highway' = 'bus_stop' can be set on nodes only, not on ways or areas."
 msgstr ""
+"'highway' = 'bus_stop' се може ставити само на чворове, не и на путеве и "
+"области."
 
 msgid "Check 'gtfs:*' tags for validity, ..."
-msgstr ""
+msgstr "Проверите 'gtfs:*' ознаке за валидност, ..."
 
 msgid ""
 "Check whether motorway links are used without actually using a "
 "motorway/trunk road."
 msgstr ""
+"Проверите да ли се везе са моторним путевима користе без стварног коришћења "
+"моторних путева."
 
 msgid ""
 "Check of 'name' = '...ref: from => to' respectively 'name' ='...ref: from =>"
 " via => ... => to'."
 msgstr ""
+"Провера 'name' = '...ref: from => to' респективно на 'name' ='...ref: from "
+"=> via => ... => to'."
 
 msgid ""
 "More relaxed check of 'name' ='...: A => B', where 'A' must be part of "
 "'from' and 'B' must be part of 'to'."
 msgstr ""
+"Релаксиранија провера 'name' ='...: A => B', где 'A' мора да буде део 'from'"
+" ознаке, а 'B'  да буде део 'to' ознаке."
 
 msgid ""
 "Check that for instance 'bus' = 'yes' is set on a PTv2 bus stop having "
 "'public_transport' = 'platform'. PTv2 does not require this though."
 msgstr ""
+"Проверава да је нпр. 'bus' = 'yes' постављен на PTv2 аутобуску станицу која "
+"има 'public_transport' = 'platform'. PTv2 ово не захтева."
 
 msgid ""
 "Check the value of 'network', ... whether the separator is actually the "
 "semicolon ';' (w/o Blanks)."
 msgstr ""
+"Проверава вредност 'network' ознаке, ... да ли је раздвајач заправо тачка-"
+"зарез ';' (без размака)."
 
 msgid ""
 "Check whether roundabouts are used partially (segments only) or completely "
 "(while not being segmented)."
 msgstr ""
+"Проверава да ли су кружни токови кориштени парцијално (само сегменти) или у "
+"целини (да нису сегментирани)."
 
 msgid ""
 "Check whether the tag 'route_ref' on the stops of a route includes the value"
 " of 'ref' of the route (provided 'route_ref' exists)."
 msgstr ""
+"Проверава да ли ознака 'route_ref' на станицама руте укључује вредност 'ref'"
+" ознаке руте (под условом да 'route_ref' ознака постоји)."
 
 msgid ""
 "Check also whether the tag 'ref' on the stops of a route accidentially "
 "includes the value of 'ref' of the route."
 msgstr ""
+"Такође проверава да ли 'ref' ознака на станицама руте случајно укључује "
+"вредност 'ref' ознаке руте."
 
 msgid ""
 "Check also for tags 'bus_lines', 'bus_routes', 'lines', 'routes' on the "
 "stops of a route. Those should be replaced by the tag 'route_ref'."
 msgstr ""
+"Такође проверава 'bus_lines', 'bus_routes', 'lines', 'routes' ознаке на "
+"станицама руте. Ово треба да буде замењено са 'route_ref' ознаком."
 
 msgid "Check sequence of ways, are there any gaps?"
-msgstr ""
+msgstr "Проверава след путева, да ли има неповезаних путева?"
 
 msgid ""
 "Check that for instance 'bus' = 'yes' is set on a PTv2 bus stop having "
 "'public_transport' = 'stop_position'."
 msgstr ""
+"Провера нпр. да ли је 'bus' = 'yes' постављен на PTv2 аутобуске станице које"
+" имају 'public_transport' = 'stop_position'."
 
 msgid "Check of 'public_transport:version' = '...' on Route-Master and Route."
-msgstr ""
+msgstr "Провера 'public_transport:version' = '...' на рути и мастер рути."
 
 msgid ""
 "Check whether the used way types are appropriate for the vehicle type "
 "('train' using 'railway' = 'rail', 'tram' using 'railway' = 'tram', 'bus' "
 "using 'highway' = '...', ...)."
 msgstr ""
+"Провера да ли су коришћени типови путева пригодни типу возила ('train' "
+"користи 'railway' = 'rail', 'tram' користи 'railway' = 'tram', 'bus' користи"
+" 'highway' = '...', ...)."
 
 msgid ""
 "SketchLine considers the value of 'colour' = '...' of Route-Master or Route."
-msgstr ""
+msgstr "SketchLine гледа вредност 'colour' = '...' руте и мастер руте."
 
 msgid ""
 "The value of 'network' = '...' is expected in long form (see: network-long-"
 "regex)."
 msgstr ""
+"Вредност 'network' = '...' је очекивана у дугачком облику (погледати: "
+"network-long-regex)."
 
 msgid ""
 "The value of 'network' = '...' is expected in long form, as shown here."
 msgstr ""
+"Вредност 'network' = '...' је очекивана у дугачком облику, као што је "
+"приказано овде."
 
 msgid ""
 "The value of 'network' = '...' is expected in long form instead of the short"
 " form shown here."
 msgstr ""
+"Вредност 'network' = '...' је очекивана у дугачком облику уместо у кратком "
+"облику приказаном овде."
 
 msgid ""
 "The value of 'network' = '...' is expected in short form (see: network-"
 "short-regex)."
 msgstr ""
+"Вредност 'network' = '...' је очекивана у кратком облику (погледати: "
+"network-short-regex)."
 
 msgid ""
 "The value of 'network' = '...' is expected in short form, as shown here."
 msgstr ""
+"Вредност 'network' = '...' је очекивана у кратком облику, као што је "
+"приказано овде."
 
 msgid ""
 "The value of 'network' = '...' is expected in short form instead of the long"
 " form shown here."
 msgstr ""
+"Вредност 'network' = '...' је очекивана у кратком облику уместо у дугачком "
+"облику приказаном овде."
 
 msgid ""
 "Take this value as GTFS feed for option 'link-gtfs' if the relation does not"
 " provide the tags 'gtfs:feed', 'operator:guid' or 'network:guid'."
 msgstr ""
+"Узми ову вредност као GTFS довод за опцију 'link-gtfs' уколико релација нема"
+" ознаке 'gtfs:feed', 'operator:guid' или 'network:guid'."
 
 msgid ""
 "Provide links to GTFS-Analysis for 'gtfs:route_id' or 'gtfs:trip_id' tags."
 msgstr ""
+"Пружа везе ка GTFS анализи за 'gtfs:route_id' или 'gtfs:trip_id' ознаке."
 
 msgid "Limits the number of identical error and note messages for a relation."
 msgstr "Ограничи број истих грешака и порука за једну релацију."
@@ -1621,77 +1674,107 @@ msgid ""
 " and that those can be distinguished by also checking 'operator', 'to' and "
 "'from'."
 msgstr ""
+"Дефинише како поступити уколико се комбинација \"ref;type\" (нпр. "
+"\"N8;bus\") појављује више од једном у подацима руте. PTNA очекује различите"
+" руте са идентичним 'ref' и 'type' ознакама у другачијим градовима/селима и "
+"да се они могу разликовати провером 'operator', 'to' и 'from' ознака."
 
 msgid "allow further occurances of this entry"
-msgstr ""
+msgstr "дозволи даља појављивања овог уноса"
 
 msgid "do not analyze 'operator', 'from' and 'to'"
-msgstr ""
+msgstr "не ради анализу 'operator', 'from' и 'to' ознака"
 
 msgid ""
 "find out whether 'operator', 'from' and 'to' of the CSV data match the tags "
 "of the relation"
 msgstr ""
+"гледа да ли се ознаке 'operator', 'from' и 'to' из релације поклапају са CSV"
+" подацима"
 
 msgid "ignore any further occurances of this entry"
-msgstr ""
+msgstr "игнориши даља појављивања овог уноса"
 
 msgid ""
 "The value of 'network' = '...' of the Route-Master and Route relations must "
 "match this regular expression as 'long' form or can be empty (unset)."
 msgstr ""
+"Вредност 'network' = '...' ознаке у релацији руте и мастер руте мора да се "
+"поклапа са регуларним изразом у 'дугачком' облику или да је празан "
+"(непостављен)."
 
 msgid ""
 "The value of 'network' = '...' of the Route-Master and Route relations must "
 "match this regular expression as 'short' form or can be empty (unset)."
 msgstr ""
+"Вредност 'network' = '...' ознаке у релацији руте и мастер руте мора да се "
+"поклапа са регуларним изразом у 'кратком' облику или да је празан "
+"(непостављен)."
 
 msgid ""
 "The value of 'operator' = '...' of the Route-Master and Route relations must"
 " match this regular expression or can be empty (unset)."
 msgstr ""
+"Вредност 'network' = '...' ознаке у релацији руте и мастер руте мора да се "
+"поклапа са регуларним изразом или да је празан (непостављен)."
 
 msgid ""
 "Also show 'network:short' = '...', 'network:guid' = '...' and other tags and"
 " values."
 msgstr ""
+"Прикажи такође и 'network:short' = '...', 'network:guid' = '...' и остаке "
+"ознаке и вредности."
 
 msgid ""
 "'highway' = 'bus_stop' on a point beside the road is treated as "
 "'public_transport' = 'platform' if 'role' = 'platform'."
 msgstr ""
+"'highway' = 'bus_stop' као тачка поред пута се сматра као 'public_transport'"
+" = 'platform' уколико је 'role' = 'platform'."
 
 msgid "silently assume compatibility with legacy bus-stops (aka: PTv1)"
 msgstr ""
+"интерно претпостави компатибилност са старим аутобуским станицама  (тј.: "
+"PTv1)"
 
 msgid "no compatibility with legacy bus-stops (aka: PTv1)"
-msgstr ""
+msgstr "без компатибилности са старим аутобуским станицама (тј.: PTv1)"
 
 msgid "assume and show compatibility with legacy bus-stops (aka: PTv1)"
 msgstr ""
+"претпостави и прикажи компатибилности са старим аутобуским станицама (тј.: "
+"PTv1)"
 
 msgid ""
 "Relaxed check of begin and end of routes regarding stop positions (i.e. for "
 "'train', 'tram', 'light_rail')."
 msgstr ""
+"Опуштенија провера почетка и краја руте гледајући стоп позиције (за нрп. "
+"'train', 'tram', 'light_rail')."
 
 msgid ""
 "Similar to option '--positive-notes': show values of 'gtfs*' tags in the "
 "'Notes' column."
 msgstr ""
+"Слично као опција '--positive-notes': приказује вредности 'gtfs*' ознака у "
+"'Белешке' колони."
 
 msgid "Do not consider Route-Master and Route relations with empty 'network'."
 msgstr ""
+"Не разматрај релације рута и мастер рута са празном 'network' ознаком."
 
 msgid ""
 "Do not consider Route-Master and Route relations with empty 'operator'."
 msgstr ""
+"Не разматрај релације рута и мастер рута са празном 'operator' ознаком."
 
 #, perl-format
 msgid ""
 "First character of line ('%s') is reserved. Please put the first CSV field "
 "into double quotes (\"...\"). Line %s of Routes-Data. Contents of line: '%s'"
 msgstr ""
+"Први карактер линије ('%s') је резервисан. Ставите прво поље CSV-а у дупле "
+"знаке навода (\"...\"). Линија %s података руте. Садржај линије: '%s'"
 
 #, perl-format
 msgid ""
@@ -1699,30 +1782,34 @@ msgid ""
 "DD), 'latest', 'previous' or 'long-term'. Line %s of Routes-Data. Contents "
 "of line: '%s'"
 msgstr ""
+"CSV подаци: поље 'release_date' (= '%s') није исправно. Треба да је датум "
+"(YYYY-MM-DD), 'latest', 'previous' или 'long-term'. Линија %s података руте."
+" Садржај линије: '%s'"
 
 #, perl-format
 msgid ""
 "CSV data includes too many ';'. Line %s of Routes-Data. Contents of line: "
 "'%s'"
 msgstr ""
+"CSV подаци имају превише ';'. Линија %s података руте. Садржај линије: '%s'"
 
 msgid "is not set"
-msgstr ""
+msgstr "није постављено"
 
 msgid "GTFS database not found"
-msgstr ""
+msgstr "GTFS база није нађена"
 
 msgid "is no longer valid (in the past)"
-msgstr ""
+msgstr "није више исправан (у прошлости)"
 
 msgid "is not yet valid (in the future)"
-msgstr ""
+msgstr "није још исправан (у будућности је)"
 
 msgid "outdated, fits to older GTFS version only"
-msgstr ""
+msgstr "застарело, уклапа се само у старије GTFS верзије"
 
 msgid "does not exist"
-msgstr ""
+msgstr "не постоји"
 
 msgid "does not provide any 'shape' data"
-msgstr ""
+msgstr "не пружа никакве 'shape' податке"
