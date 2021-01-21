@@ -423,22 +423,22 @@ msgid ""
 "'colour' has unknown value '%s'. Choose one of the 140 well defined HTML/CSS"
 " colour names or the HTML Hex colour codes '#...' or '#......'."
 msgstr ""
-"'colour' има непознату вредност '%s'. Одаберите једно од 140 утврђена "
-"HTML/CSS имена боја или унесите HTML хексадецималну шифру боје '#...' или "
-"'#......' ."
+"’colour’ има непознату вредност ’%s’. Одаберите једно од 140 утврђена "
+"HTML/CSS имена боја или унесите HTML хексадецималну шифру боје ’#...’ или "
+"’#......’ ."
 
 msgid "'network:long' is long form"
-msgstr "'network:long' је дугачког облика"
+msgstr "’network:long’ је дугачког облика"
 
 msgid "'network:long' matches long form"
-msgstr "'network:long' одговара дугачком облику"
+msgstr "’network:long’ одговара дугачком облику"
 
 #, perl-format
 msgid ""
 "'%s' = '%s': ',' (comma) as separator value should be replaced by ';' (semi-"
 "colon) without blank"
 msgstr ""
-"'%s' = '%s': ',' (зарез) као вредност за одвајање треба да се замени са ';' "
+"’%s’ = ’%s’: ’,’ (зарез) као вредност за одвајање треба да се замени са ’;’ "
 "(тачка-зарез) без белина"
 
 #, perl-format
@@ -446,14 +446,14 @@ msgid ""
 "The tag 'line' (='%s') is reserved for 'power' = 'line' related tagging. For"
 " public transport 'route_master' and 'route' are used."
 msgstr ""
-"Ознака 'line' (='%s') је резервисана за означавање везано за 'power' = "
-"'line'. За јавне превозе, користе се 'route_master' и 'route'."
+"Ознака ’line’ (=’%s’) је резервисана за означавање везано за ’power’ = "
+"’line’. За јавне превозе, користе се ’route_master’ и ’route’."
 
 msgid "Route-Master without Route(s)"
 msgstr "Мастер рута без рута"
 
 msgid "Route-Master with Relation(s) unequal to 'route'"
-msgstr "Мастер рута са чланицама релације које нису 'route'"
+msgstr "Мастер рута са чланицама релације које нису ’route’"
 
 msgid "Route-Master with Way(s)"
 msgstr "Мастер рута има путеве"
@@ -462,7 +462,7 @@ msgid "Route-Master with Node(s)"
 msgstr "Мастер рута има тачке"
 
 msgid "'public_transport:version' is not set to '2'"
-msgstr "'public_transport:version' није постављен на '2'"
+msgstr "’public_transport:version’ није постављен на ’2’"
 
 msgid "Skipping further analysis ..."
 msgstr "Прескачем даље анализе..."
@@ -483,17 +483,17 @@ msgid "Route with Relation(s)"
 msgstr "Рута са релацијама"
 
 msgid "'public_transport:version' is neither '1' nor '2'"
-msgstr "'public_transport:version' нема вредност ни '1' ни '2'"
+msgstr "’public_transport:version’ нема вредност ни ’1’ ни ’2’"
 
 msgid ""
 "PTv2 route: there are no 'public_transport' = 'stop_position' and no "
 "'public_transport' = 'platform'"
 msgstr ""
-"PTv2 рута: не постоје ни 'public_transport' = 'stop_position' ни "
-"'public_transport' = 'platform'"
+"PTv2 рута: не постоје ни ’public_transport’ = ’stop_position’ ни "
+"’public_transport’ = ’platform’"
 
 msgid "PTv2 route: there is no 'public_transport' = 'stop_position'"
-msgstr "PTv2 рута: не постоји 'public_transport' = 'stop_position'"
+msgstr "PTv2 рута: не постоји ’public_transport’ = ’stop_position’"
 
 msgid "PTv2 route: there is only one 'public_transport' = 'stop_position'"
 msgstr "PTv2 рута: постоји само једна 'public_transport' = 'stop_position'"
