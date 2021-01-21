@@ -583,6 +583,8 @@ sub _getStartEndDateOfIdenticalTrips {
 
     if ( $name_prefix && $trip_id && $db_handles{$name_prefix} ) {
 
+        my $representative_trip_id = $trip_id;
+
         my $sth =  $db_handles{$name_prefix}->prepare( "SELECT name FROM sqlite_master WHERE type='table' AND name='ptna_trips';" );
            $sth->execute();
 
@@ -597,10 +599,16 @@ sub _getStartEndDateOfIdenticalTrips {
 
             $sth = $db_handles{$name_prefix}->prepare( "SELECT DISTINCT *
                                                         FROM            ptna_trips
-                                                        WHERE           trip_id=?" );
-            $sth->execute( $trip_id );
+                                                        WHERE           trip_id=? OR
+                                                                        list_trip_ids LIKE ? OR
+                                                                        list_trip_ids LIKE ? OR
+                                                                        list_trip_ids LIKE ?"   );
+            $sth->execute( $trip_id, $trip_id.'|%', '%|'.$trip_id.'|%', '%|'.$trip_id );
 
             while ( $hash_ref = $sth->fetchrow_hashref() ) {
+                if ( $hash_ref->{'trip_id'} )  {
+                    $representative_trip_id =$hash_ref->{'trip_id'};
+                }
                 if ( $hash_ref->{'list_service_ids'} ) {
                     $has_list_service_ids  = 1;
                     map { $service_ids{$_} = 1; } split( '\|', $hash_ref->{'list_service_ids'} );
@@ -632,7 +640,7 @@ sub _getStartEndDateOfIdenticalTrips {
                                                         FROM   calendar
                                                         JOIN   trips ON trips.service_id = calendar.service_id
                                                         WHERE  trip_id=?;" );
-            $sth->execute( $trip_id );
+            $sth->execute( $representative_trip_id );
 
             while ( @row=$sth->fetchrow_array() ) {
                 if ( $row[0] < $min_start_date ) {
