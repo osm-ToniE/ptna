@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2021-01-20 09:48+0100\n"
+"POT-Creation-Date: 2021-01-22 08:59+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: Héctor Ochoa Ortiz <cie.hochoa@gmail.com>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/jungle-bus/teams/97874/es/)\n"
@@ -1096,6 +1096,18 @@ msgid ""
 msgstr ""
 
 msgid "key = value"
+msgstr ""
+
+msgid "Browse on map"
+msgstr ""
+
+msgid "Edit in iD"
+msgstr ""
+
+msgid "Edit in JOSM"
+msgstr ""
+
+msgid "Show relation on special map"
 msgstr ""
 
 #, perl-format

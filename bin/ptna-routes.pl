@@ -6400,15 +6400,15 @@ sub printRelationTemplate {
         my $image_url = "<img src=\"/img/Relation.svg\" alt=\"Relation\" />";
 
         if ( $rel_id > 0 ) {
-            my $relation_url = sprintf( "<a href=\"https://osm.org/relation/%s\" title=\"Browse on map\">%s</a>", $rel_id, $rel_id );
-            my $id_url       = sprintf( "<a href=\"https://osm.org/edit?editor=id&amp;relation=%s\" title=\"Edit in iD\">iD</a>", $rel_id );
-            my $josm_url     = sprintf( "<a href=\"http://127.0.0.1:8111/load_object?new_layer=false&amp;relation_members=true&amp;objects=r%s\" target=\"hiddenIframe\" title=\"Edit in JOSM\">JOSM</a>", $rel_id );
+            my $relation_url = sprintf( "<a href=\"https://osm.org/relation/%s\" title=\"%s\">%s</a>", $rel_id, html_escape(gettext("Browse on map")), $rel_id );
+            my $id_url       = sprintf( "<a href=\"https://osm.org/edit?editor=id&amp;relation=%s\" title=\"%s\">iD</a>", $rel_id, html_escape(gettext("Edit in iD")) );
+            my $josm_url     = sprintf( "<a href=\"http://127.0.0.1:8111/load_object?new_layer=false&amp;relation_members=true&amp;objects=r%s\" target=\"hiddenIframe\" title=\"%s\">JOSM</a>", $rel_id, html_escape(gettext("Edit in JOSM")) );
 
             $val = sprintf( "%s %s%s <small>(%s, %s", $image_url, $info_string, $relation_url, $id_url, $josm_url );
 
             if ( $RELATIONS{$rel_id} && $RELATIONS{$rel_id}->{'show_relation'} ) {
                 my $langparam   = $opt_language? '&lang=' . uri_escape($opt_language) : '';
-                my $show_url    = sprintf( "<a href=\"/relation.php?id=%d%s\" title=\"Show relation on special map\">PTNA</a>", $rel_id, $langparam );
+                my $show_url    = sprintf( "<a href=\"/relation.php?id=%d%s\" title=\"%s\">PTNA</a>", $rel_id, $langparam, html_escape(gettext("Show relation on special map")) );
                 $val .= sprintf( ", %s", $show_url );
             }
 
@@ -6453,9 +6453,9 @@ sub printWayTemplate {
         my $image_url = "<img src=\"/img/Way.svg\" alt=\"Way\" />";
 
         if ( $val > 0 ) {
-            my $way_url   = sprintf( "<a href=\"https://osm.org/way/%s\" title=\"Browse on map\">%s</a>", $val, $val );
-            my $id_url    = sprintf( "<a href=\"https://osm.org/edit?editor=id&amp;way=%s\" title=\"Edit in iD\">iD</a>", $val );
-            my $josm_url  = sprintf( "<a href=\"http://127.0.0.1:8111/load_object?new_layer=false&amp;objects=w%s\" target=\"hiddenIframe\" title=\"Edit in JOSM\">JOSM</a>", $val );
+            my $way_url   = sprintf( "<a href=\"https://osm.org/way/%s\" title=\"%s\">%s</a>", $val, html_escape(gettext("Browse on map")), $val );
+            my $id_url    = sprintf( "<a href=\"https://osm.org/edit?editor=id&amp;way=%s\" title=\"%s\">iD</a>", $val, html_escape(gettext("Edit in iD")) );
+            my $josm_url  = sprintf( "<a href=\"http://127.0.0.1:8111/load_object?new_layer=false&amp;objects=w%s\" target=\"hiddenIframe\" title=\"%s\">JOSM</a>", $val, html_escape(gettext("Edit in JOSM")) );
 
             $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $way_url, $id_url, $josm_url );
         } else {
@@ -6489,9 +6489,9 @@ sub printNodeTemplate {
         my $image_url = "<img src=\"/img/Node.svg\" alt=\"Node\" />";
 
         if ( $val > 0 ) {
-            my $node_url = sprintf( "<a href=\"https://osm.org/node/%s\" title=\"Brose on map\">%s</a>", $val, $val );
-            my $id_url   = sprintf( "<a href=\"https://osm.org/edit?editor=id&amp;node=%s\" title=\"Edit in iD\">iD</a>", $val );
-            my $josm_url = sprintf( "<a href=\"http://127.0.0.1:8111/load_object?new_layer=false&amp;objects=n%s\" target=\"hiddenIframe\" title=\"Edit in JOSM\">JOSM</a>", $val );
+            my $node_url = sprintf( "<a href=\"https://osm.org/node/%s\" title=\"%s\">%s</a>", $val, html_escape(gettext("Browse on map")), $val );
+            my $id_url   = sprintf( "<a href=\"https://osm.org/edit?editor=id&amp;node=%s\" title=\"%s\">iD</a>", $val, html_escape(gettext("Edit in iD")) );
+            my $josm_url = sprintf( "<a href=\"http://127.0.0.1:8111/load_object?new_layer=false&amp;objects=n%s\" target=\"hiddenIframe\" title=\"%s\">JOSM</a>", $val, html_escape(gettext("Edit in JOSM")) );
 
             $val = sprintf( "%s %s%s <small>(%s, %s)</small>", $image_url, $info_string, $node_url, $id_url, $josm_url );
         } else {
