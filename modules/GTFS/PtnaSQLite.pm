@@ -583,7 +583,7 @@ sub _getStartEndDateOfIdenticalTrips {
 
     if ( $name_prefix && $trip_id && $db_handles{$name_prefix} ) {
 
-        my $representative_trip_id = $trip_id;
+        my $representative_trip_id = '';
 
         my $sth =  $db_handles{$name_prefix}->prepare( "SELECT name FROM sqlite_master WHERE type='table' AND name='ptna_trips';" );
            $sth->execute();
@@ -597,45 +597,53 @@ sub _getStartEndDateOfIdenticalTrips {
 
         if ( $db_has_ptna_trips ) {
 
-            $sth = $db_handles{$name_prefix}->prepare( "SELECT DISTINCT *
-                                                        FROM            ptna_trips
-                                                        WHERE           trip_id=? OR
-                                                                        list_trip_ids LIKE ? OR
-                                                                        list_trip_ids LIKE ? OR
-                                                                        list_trip_ids LIKE ?"   );
-            $sth->execute( $trip_id, $trip_id.'|%', '%|'.$trip_id.'|%', '%|'.$trip_id );
-
-            while ( $hash_ref = $sth->fetchrow_hashref() ) {
-                if ( $hash_ref->{'trip_id'} )  {
-                    $representative_trip_id =$hash_ref->{'trip_id'};
+            for ( my $i = 0; $i < 2 && $representative_trip_id eq ''; $i++ ) {
+                if ( $i == 0 ) {
+                    $sth = $db_handles{$name_prefix}->prepare( "SELECT DISTINCT *
+                                                                FROM            ptna_trips
+                                                                WHERE           trip_id=?"   );
+                    $sth->execute( $trip_id );
+                } else {
+                    $sth = $db_handles{$name_prefix}->prepare( "SELECT DISTINCT *
+                                                                FROM            ptna_trips
+                                                                WHERE           list_trip_ids LIKE ? OR
+                                                                                list_trip_ids LIKE ? OR
+                                                                                list_trip_ids LIKE ?"   );
+                    $sth->execute( $trip_id.'|%', '%|'.$trip_id.'|%', '%|'.$trip_id );
                 }
-                if ( $hash_ref->{'list_service_ids'} ) {
-                    $has_list_service_ids  = 1;
-                    map { $service_ids{$_} = 1; } split( '\|', $hash_ref->{'list_service_ids'} );
 
-                    $where_clause = 'service_id=' . join( '', map{ '? OR service_id=' } keys ( %service_ids ) );
-                    $where_clause =~ s/ OR service_id=$//;
+                while ( $hash_ref = $sth->fetchrow_hashref() ) {
+                    if ( $hash_ref->{'trip_id'} )  {
+                        $representative_trip_id =$hash_ref->{'trip_id'};
+                    }
+                    if ( $hash_ref->{'list_service_ids'} ) {
+                        $has_list_service_ids  = 1;
+                        map { $service_ids{$_} = 1; } split( '\|', $hash_ref->{'list_service_ids'} );
 
-                    my $sql = sprintf( "SELECT start_date,end_date
-                                        FROM   calendar
-                                        WHERE  %s;", $where_clause );
+                        $where_clause = 'service_id=' . join( '', map{ '? OR service_id=' } keys ( %service_ids ) );
+                        $where_clause =~ s/ OR service_id=$//;
 
-                    $sth = $db_handles{$name_prefix}->prepare( $sql );
-                    $sth->execute( keys ( %service_ids ) );
+                        my $sql = sprintf( "SELECT start_date,end_date
+                                            FROM   calendar
+                                            WHERE  %s;", $where_clause );
 
-                    while ( @row=$sth->fetchrow_array() ) {
-                        if ( $row[0] < $min_start_date ) {
-                            $min_start_date = $row[0];
-                        }
-                        if ( $row[1] > $max_end_date ) {
-                            $max_end_date   = $row[1];
+                        $sth = $db_handles{$name_prefix}->prepare( $sql );
+                        $sth->execute( keys ( %service_ids ) );
+
+                        while ( @row=$sth->fetchrow_array() ) {
+                            if ( $row[0] < $min_start_date ) {
+                                $min_start_date = $row[0];
+                            }
+                            if ( $row[1] > $max_end_date ) {
+                                $max_end_date   = $row[1];
+                            }
                         }
                     }
                 }
             }
         }
 
-        if ( $has_list_service_ids == 0 ) {
+        if ( $representative_trip_id && $has_list_service_ids == 0 ) {
             $sth = $db_handles{$name_prefix}->prepare( "SELECT start_date,end_date
                                                         FROM   calendar
                                                         JOIN   trips ON trips.service_id = calendar.service_id
