@@ -5529,7 +5529,7 @@ sub printPtnaHeader {
     push( @HTML_start, "            <div id=\"headernav\">\n" );
     push( @HTML_start, sprintf( "                <a href=\"/\">%s</a> | \n", gettext("Home") ) );
     push( @HTML_start, sprintf( "                <a href=\"\" onclick=\"ToggleView(); return false;\" title=\"%s\">%s</a> |\n", gettext("Click here to toggle between 'analysis' page and 'differences' page"), gettext("Toggle View") ) );
-    push( @HTML_start, "                <a href=\"/contact.html\">Contact</a> | \n" );
+    push( @HTML_start, sprintf( "                <a href=\"/contact.html\">%s</a> | \n", gettext("Contact") ) );
     push( @HTML_start, sprintf( "                <a target=\"_blank\" href=\"https://www.openstreetmap.de/impressum.html\">%s</a> | \n", gettext("Imprint") ) );
     push( @HTML_start, sprintf( "                <a target=\"_blank\" href=\"https://www.fossgis.de/datenschutzerklärung\">%s</a> | \n", gettext("Privacy policy") ) );
     push( @HTML_start, "                <a href=\"/en/index.html\" title=\"english\"><img src=\"/img/GreatBritain16.png\" alt=\"Union Jack\" /></a>\n" );

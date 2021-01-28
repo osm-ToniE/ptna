@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2021-01-28 20:40+0100\n"
+"POT-Creation-Date: 2021-01-28 20:52+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2020\n"
 "Language-Team: Italian (https://www.transifex.com/jungle-bus/teams/97874/it/)\n"
@@ -851,6 +851,9 @@ msgid "Click here to toggle between 'analysis' page and 'differences' page"
 msgstr ""
 
 msgid "Toggle View"
+msgstr ""
+
+msgid "Contact"
 msgstr ""
 
 msgid "Imprint"
