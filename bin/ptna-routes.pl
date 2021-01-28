@@ -5527,11 +5527,11 @@ sub printPtnaHeader {
     push( @HTML_start, sprintf( "                <h2>%s</h2>\n", gettext("Static Analysis for OpenStreetMap") ) );
     push( @HTML_start, "            </div>\n" );
     push( @HTML_start, "            <div id=\"headernav\">\n" );
-    push( @HTML_start, "                <a href=\"/\">Home</a> | \n" );
+    push( @HTML_start, sprintf( "                <a href=\"/\">%s</a> | \n", gettext("Home") ) );
     push( @HTML_start, sprintf( "                <a href=\"\" onclick=\"ToggleView(); return false;\" title=\"%s\">%s</a> |\n", gettext("Click here to toggle between 'analysis' page and 'differences' page"), gettext("Toggle View") ) );
     push( @HTML_start, "                <a href=\"/contact.html\">Contact</a> | \n" );
-    push( @HTML_start, "                <a target=\"_blank\" href=\"https://www.openstreetmap.de/impressum.html\">Impressum</a> | \n" );
-    push( @HTML_start, "                <a target=\"_blank\" href=\"https://www.fossgis.de/datenschutzerklärung\">Datenschutzerklärung</a> | \n" );
+    push( @HTML_start, sprintf( "                <a target=\"_blank\" href=\"https://www.openstreetmap.de/impressum.html\">%s</a> | \n", gettext("Imprint") ) );
+    push( @HTML_start, sprintf( "                <a target=\"_blank\" href=\"https://www.fossgis.de/datenschutzerklärung\">%s</a> | \n", gettext("Privacy policy") ) );
     push( @HTML_start, "                <a href=\"/en/index.html\" title=\"english\"><img src=\"/img/GreatBritain16.png\" alt=\"Union Jack\" /></a>\n" );
     push( @HTML_start, "                <a href=\"/de/index.html\" title=\"deutsch\"><img src=\"/img/Germany16.png\" alt=\"deutsche Flagge\" /></a>\n" );
     push( @HTML_start, "                <a href=\"/fr/index.html\" title=\"français\"><img src=\"/img/France16.png\" alt=\"drapeau français\" /></a>\n" );

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2021-01-22 08:59+0100\n"
+"POT-Creation-Date: 2021-01-28 20:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -798,10 +798,19 @@ msgstr ""
 msgid "Static Analysis for OpenStreetMap"
 msgstr ""
 
+msgid "Home"
+msgstr ""
+
 msgid "Click here to toggle between 'analysis' page and 'differences' page"
 msgstr ""
 
 msgid "Toggle View"
+msgstr ""
+
+msgid "Imprint"
+msgstr ""
+
+msgid "Privacy policy"
 msgstr ""
 
 msgid "Contents"
