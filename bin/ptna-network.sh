@@ -247,13 +247,18 @@ then
         if [ -n "$WIKI_ROUTES_PAGE" ]
         then
             echo $(date "+%Y-%m-%d %H:%M:%S") "Reading Routes Wiki page '$WIKI_ROUTES_PAGE' to file '$WORK_LOC/$ROUTES_FILE'"
-            ptna-wiki-page.pl --pull --page=$WIKI_ROUTES_PAGE --file=$WORK_LOC/$ROUTES_FILE
+            log=$(ptna-wiki-page.pl --pull --page=$WIKI_ROUTES_PAGE --file=$WORK_LOC/$ROUTES_FILE 2>&1)
+            echo $log
+            ROUTES_TIMESTAMP_UTC="$(echo $log | fgrep "timestamp =" | sed -e 's/.*timestamp\s*=\s*\(20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]T[0-9][0-9]:[0-9][0-9]:[0-9][0-9]Z\).*/\1/')"
+            ROUTES_TIMESTAMP_LOC="$(date --date "$ROUTES_TIMESTAMP_UTC" '+%Y-%m-%d %H:%M:%S %Z' | sed -e 's/ \([+-][0-9]*\)$/ UTC\1/')"
             echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WORK_LOC/$ROUTES_FILE)
         else
             if [ -f "$SETTINGS_DIR/$ROUTES_FILE" ]
             then
                 echo $(date "+%Y-%m-%d %H:%M:%S") "'$ROUTES_FILE' provided by GitHub, copy to $WORK_LOC"
                 cp $SETTINGS_DIR/$ROUTES_FILE $WORK_LOC/$ROUTES_FILE
+                ROUTES_TIMESTAMP_UTC="$(stat -c '%y' $SETTINGS_DIR/$ROUTES_FILE)"
+                ROUTES_TIMESTAMP_LOC="$(date --date "$ROUTES_TIMESTAMP_UTC" '+%Y-%m-%d %H:%M:%S %Z' | sed -e 's/ \([+-][0-9]*\)$/ UTC\1/')"
                 echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WORK_LOC/$ROUTES_FILE)
             else
                 echo $(date "+%Y-%m-%d %H:%M:%S") "no file: '$ROUTES_FILE'"
@@ -441,18 +446,20 @@ then
         RESULTS_LOC="$PTNA_TARGET_LOC/$PTNA_RESULTS_LOC/$SUB_DIR"
 
         echo $(date "+%Y-%m-%d %H:%M:%S") "Creating analysis details file '$WORK_LOC/$DETAILS_FILE'"
-        echo "REGION_NAME=$PTNA_WWW_REGION_NAME"         >  $WORK_LOC/$DETAILS_FILE
-        echo "REGION_LINK=$PTNA_WWW_REGION_LINK"         >> $WORK_LOC/$DETAILS_FILE
-        echo "NETWORK_NAME=$PTNA_WWW_NETWORK_NAME"       >> $WORK_LOC/$DETAILS_FILE
-        echo "NETWORK_LINK=$PTNA_WWW_NETWORK_LINK"       >> $WORK_LOC/$DETAILS_FILE
-        echo "DISCUSSION_NAME=$PTNA_WWW_DISCUSSION_NAME" >> $WORK_LOC/$DETAILS_FILE
-        echo "DISCUSSION_LINK=$PTNA_WWW_DISCUSSION_LINK" >> $WORK_LOC/$DETAILS_FILE
-        echo "ROUTES_NAME=$PTNA_WWW_ROUTES_NAME"         >> $WORK_LOC/$DETAILS_FILE
-        echo "ROUTES_LINK=$PTNA_WWW_ROUTES_LINK"         >> $WORK_LOC/$DETAILS_FILE
-        echo "OVERPASS_QUERY=$OVERPASS_QUERY"            >> $WORK_LOC/$DETAILS_FILE
-        echo "CALL_PARAMS=$CALL_PARAMS"                  >> $WORK_LOC/$DETAILS_FILE
-        echo "START_DOWNLOAD=$START_DOWNLOAD"            >> $WORK_LOC/$DETAILS_FILE
-        echo "END_DOWNLOAD=$END_DOWNLOAD"                >> $WORK_LOC/$DETAILS_FILE
+        echo "REGION_NAME=$PTNA_WWW_REGION_NAME"            >  $WORK_LOC/$DETAILS_FILE
+        echo "REGION_LINK=$PTNA_WWW_REGION_LINK"            >> $WORK_LOC/$DETAILS_FILE
+        echo "NETWORK_NAME=$PTNA_WWW_NETWORK_NAME"          >> $WORK_LOC/$DETAILS_FILE
+        echo "NETWORK_LINK=$PTNA_WWW_NETWORK_LINK"          >> $WORK_LOC/$DETAILS_FILE
+        echo "DISCUSSION_NAME=$PTNA_WWW_DISCUSSION_NAME"    >> $WORK_LOC/$DETAILS_FILE
+        echo "DISCUSSION_LINK=$PTNA_WWW_DISCUSSION_LINK"    >> $WORK_LOC/$DETAILS_FILE
+        echo "ROUTES_NAME=$PTNA_WWW_ROUTES_NAME"            >> $WORK_LOC/$DETAILS_FILE
+        echo "ROUTES_LINK=$PTNA_WWW_ROUTES_LINK"            >> $WORK_LOC/$DETAILS_FILE
+        echo "ROUTES_TIMESTAMP_UTC=$ROUTES_TIMESTAMP_UTC"   >> $WORK_LOC/$DETAILS_FILE
+        echo "ROUTES_TIMESTAMP_LOC=$ROUTES_TIMESTAMP_LOC"   >> $WORK_LOC/$DETAILS_FILE
+        echo "OVERPASS_QUERY=$OVERPASS_QUERY"               >> $WORK_LOC/$DETAILS_FILE
+        echo "CALL_PARAMS=$CALL_PARAMS"                     >> $WORK_LOC/$DETAILS_FILE
+        echo "START_DOWNLOAD=$START_DOWNLOAD"               >> $WORK_LOC/$DETAILS_FILE
+        echo "END_DOWNLOAD=$END_DOWNLOAD"                   >> $WORK_LOC/$DETAILS_FILE
         if [ -f $OSM_XML_FILE_ABSOLUTE ]
         then
             echo "OSM_XML_FILE=$OSM_XML_FILE_ABSOLUTE"                                                         >> $WORK_LOC/$DETAILS_FILE
@@ -545,6 +552,9 @@ then
                             if [ -f "$WORK_LOC/$SAVE_FILE" ]
                             then
                                 htmldiff.pl -c $WORK_LOC/$SAVE_FILE $WORK_LOC/$HTML_FILE > $WORK_LOC/$DIFF_HTML_FILE
+                                HTML_DIFF=$(fgrep -c 'class="diff-' $WORK_LOC/$DIFF_HTML_FILE)
+                                echo $(date "+%Y-%m-%d %H:%M:%S") "HTML diff:  '$HTML_DIFF'"
+                                echo "HTML_DIFF=$HTML_DIFF" >> $WORK_LOC/$DETAILS_FILE
                             else
                                 htmldiff.pl -c $WORK_LOC/$HTML_FILE $WORK_LOC/$HTML_FILE > $WORK_LOC/$DIFF_HTML_FILE
                             fi
