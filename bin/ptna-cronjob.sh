@@ -76,51 +76,52 @@ if [ -d "$PTNA_NETWORKS_LOC" ]
 then
     if [ -d "$PTNA_WORK_LOC" ]
     then
-    
+
         cd $PTNA_WORK_LOC
-        
+
         LOGFILE=${PTNA_WORK_LOC}/ptna-all-networks$LOGFILE_SUFFIX.log
-        
+
         # c == clean the work area
         # C == clean the XML file
-        
+
         ptna-all-networks.sh -cC > $LOGFILE 2>&1 < /dev/null
-        
+
         # o == do the overpassapi query and download the data (to work area)
         # g == get the OSM-Wiki data for the routes
         # a == do the analysis (in work area)
         # u == update the result from the work area to the location of the web service
-        
+
         ptna-all-networks.sh -ogau >> $LOGFILE 2>&1 < /dev/null
-        
+
         emptyxml=$(find ${PTNA_WORK_LOC} -name '*.xml' -size 0 | wc -l)
-        
+
         if [ "$emptyxml" -gt 0 -a "$emptyxml" -lt 10 ]
         then
             # most of the analysis succeeded, let's try a second time for the others
-            
+
             sleep 300
-            
+
             # O == do the overpassapi query only if the downloaded XML data is empty, otherwiese skip the rest
+            #      g == get the OSM-Wiki data for the routes
             #      a == do the analysis (in work area)
             #      u == update the result from the work area to the location of the web service
 
-            ptna-all-networks.sh -Oau >> $LOGFILE 2>&1 < /dev/null
+            ptna-all-networks.sh -Ogau >> $LOGFILE 2>&1 < /dev/null
         fi
-    
-    
+
+
         # c == clean the work area
         # C == clean the XML file
 
         if [ "$(date '+%u')" = "1" ]    # = Monday
         then
             # on Mondays, do not delete the downloaded XML data
-            
+
             ptna-all-networks.sh -c >> $LOGFILE 2>&1 < /dev/null
         else
             ptna-all-networks.sh -cC >> $LOGFILE 2>&1 < /dev/null
         fi
-        
+
     else
         echo "directory $PTNA_WORK_LOC does not exist ... terminating"
         exit 2
