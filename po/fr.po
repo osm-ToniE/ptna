@@ -1005,7 +1005,7 @@ msgid ""
 "href='/en/index.php#messages'>Messages</a>'."
 msgstr ""
 "Une explication sur chaque erreur peut être trouvée dans la <a "
-"href='/en/index.php#messages'>documentation</a>."
+"href=\"/fr/index.php#messages\">documentation</a>."
 
 msgid "Static Analysis for OpenStreetMap"
 msgstr "Analyse statique pour OpenStreetMap"
