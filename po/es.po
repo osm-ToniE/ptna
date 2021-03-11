@@ -11,6 +11,7 @@
 # ToniE <osm-ToniE@web.de>, 2020
 # Jorge Sanz <sanchi2@gmail.com>, 2020
 # Héctor Ochoa Ortiz <cie.hochoa@gmail.com>, 2021
+# Gonzalo Pesquero <gpesquero@yahoo.es>, 2021
 # 
 #, fuzzy
 msgid ""
@@ -19,7 +20,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
 "POT-Creation-Date: 2021-01-28 20:52+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: Héctor Ochoa Ortiz <cie.hochoa@gmail.com>, 2021\n"
+"Last-Translator: Gonzalo Pesquero <gpesquero@yahoo.es>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/jungle-bus/teams/97874/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,7 +41,7 @@ msgid "Description"
 msgstr "Descripción"
 
 msgid "How to fix it"
-msgstr "Como arreglarlo"
+msgstr "Cómo arreglarlo"
 
 msgid "Image"
 msgstr "Imagen"
@@ -1025,7 +1026,7 @@ msgid "The contents of the 'operator' tag will be searched for:"
 msgstr ""
 
 msgid "'operator' is not set"
-msgstr ""
+msgstr "'operator' no está establecido"
 
 msgid "Considered 'network'-Values"
 msgstr ""
@@ -1041,6 +1042,7 @@ msgstr "y más ..."
 msgid ""
 "This section lists the 'operator'-values which have not been considered."
 msgstr ""
+"Esta sección lista los valores 'operator' que no han sido considerados."
 
 msgid ""
 "They might include typos in values which otherwise should have been "
@@ -1056,7 +1058,7 @@ msgid ""
 msgstr ""
 
 msgid "Not Considered 'network'-Values"
-msgstr ""
+msgstr "Valores 'network' No Considerados"
 
 msgid ""
 "This section lists the 'network'-values which have not been considered."
@@ -1068,7 +1070,7 @@ msgid ""
 msgstr ""
 
 msgid "References to GTFS from CSV list"
-msgstr ""
+msgstr "Referencias a GTFS desde una lista CSV"
 
 msgid ""
 "This section lists the name of the GTFS feed and the related release date "
@@ -1089,7 +1091,7 @@ msgid ""
 msgstr ""
 
 msgid "References to GTFS from relations"
-msgstr ""
+msgstr "Referencias a GTFS desde relaciones"
 
 msgid ""
 "This section lists the name of the GTFS feed and the related release date "
@@ -1108,13 +1110,13 @@ msgid ""
 msgstr ""
 
 msgid "key = value"
-msgstr ""
+msgstr "clave = valor"
 
 msgid "Browse on map"
 msgstr ""
 
 msgid "Edit in iD"
-msgstr ""
+msgstr "Editar en iD"
 
 msgid "Edit in JOSM"
 msgstr ""
@@ -1162,6 +1164,8 @@ msgstr ""
 msgid ""
 "This additional information can be used to compare OSM data with GTFS data."
 msgstr ""
+"Esta información adicional puede ser utilizada para comparar datos OSM con "
+"datos GTFS."
 
 msgid "Add either 'gtfs:trip_id' or 'gtfs:trip_id:sample' information."
 msgstr ""
@@ -1191,6 +1195,7 @@ msgstr ""
 msgid ""
 "This may indicate incorrect tagging of the 'highway' = 'motorway_link'."
 msgstr ""
+"Esto puede indicar un etiquetado incorrecto de 'highway' = 'motorway_link'."
 
 msgid ""
 "But it can also point to a wrong route, e.g. if it was created automatically"
@@ -1214,7 +1219,7 @@ msgid ""
 msgstr ""
 
 msgid "See section: \"Public Transport Lines without 'ref'\" of the analysis."
-msgstr ""
+msgstr "Vea la sección: \"Líneas de Transporte Público sin 'ref'\" del análisis."
 
 #, perl-format
 msgid ""
@@ -1223,7 +1228,7 @@ msgid ""
 msgstr ""
 
 msgid "This is currently deactivated."
-msgstr ""
+msgstr "Esto está actualmente desactivado."
 
 msgid ""
 "This Route-Master has less route relations than listed here (Route(s) not "
@@ -1236,7 +1241,7 @@ msgid ""
 msgstr ""
 
 msgid "The Route-Master relation contains stops or train/bus stops."
-msgstr ""
+msgstr "La relación Ruta Maestra contiene paradas o paradas de tren/autobús."
 
 msgid ""
 "The Route-Master relation contains relation(s) that are not of type 'route'."
@@ -1245,6 +1250,8 @@ msgstr ""
 msgid ""
 "The Route-Master relation contains streets/railways/trains/bus stops/..."
 msgstr ""
+"La relación Ruta Maestra contiene calles/vía férrea/trenes/paradas de "
+"autobús/..."
 
 msgid ""
 "The Route-Master relation does not contain a Route relation (should not "
@@ -1298,11 +1305,15 @@ msgid ""
 "A conditional access is mapped to a way. PTNA will not analyze the value of "
 "the tag."
 msgstr ""
+"Un acceso condicional se ha mapeado a una vía. PTNA no analizará el valor de"
+" la etiqueta."
 
 msgid ""
 "Please evaluate the value manually and decide whether a fix is needed or "
 "not."
 msgstr ""
+"Por favor, analice el valor manualmente y decida si es necesario arreglarlo "
+"o no. "
 
 msgid "The access restriction does not comply with the map features."
 msgstr ""
@@ -1313,7 +1324,7 @@ msgid ""
 msgstr ""
 
 msgid "This error is related to:"
-msgstr ""
+msgstr "Este error está relacionado con:"
 
 msgid ""
 "Further analysis of this Route relation does not make sense without the data"
@@ -1347,7 +1358,7 @@ msgid ""
 msgstr ""
 
 msgid "Defines the language for the output."
-msgstr ""
+msgstr "Define el idioma para la salida."
 
 msgid ""
 "Allow 'route_master' = 'coach' and 'route' = 'coach' (although they are "
@@ -1361,7 +1372,7 @@ msgid ""
 msgstr ""
 
 msgid "This applies to 'barrier' = '...' as well."
-msgstr ""
+msgstr "Esto también aplica a 'barrier' = '...'."
 
 msgid "'highway' = 'bus_stop' can be set on nodes only, not on ways or areas."
 msgstr ""
