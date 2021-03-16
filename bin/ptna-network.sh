@@ -446,20 +446,22 @@ then
         RESULTS_LOC="$PTNA_TARGET_LOC/$PTNA_RESULTS_LOC/$SUB_DIR"
 
         echo $(date "+%Y-%m-%d %H:%M:%S") "Creating analysis details file '$WORK_LOC/$DETAILS_FILE'"
-        echo "REGION_NAME=$PTNA_WWW_REGION_NAME"            >  $WORK_LOC/$DETAILS_FILE
-        echo "REGION_LINK=$PTNA_WWW_REGION_LINK"            >> $WORK_LOC/$DETAILS_FILE
-        echo "NETWORK_NAME=$PTNA_WWW_NETWORK_NAME"          >> $WORK_LOC/$DETAILS_FILE
-        echo "NETWORK_LINK=$PTNA_WWW_NETWORK_LINK"          >> $WORK_LOC/$DETAILS_FILE
-        echo "DISCUSSION_NAME=$PTNA_WWW_DISCUSSION_NAME"    >> $WORK_LOC/$DETAILS_FILE
-        echo "DISCUSSION_LINK=$PTNA_WWW_DISCUSSION_LINK"    >> $WORK_LOC/$DETAILS_FILE
-        echo "ROUTES_NAME=$PTNA_WWW_ROUTES_NAME"            >> $WORK_LOC/$DETAILS_FILE
-        echo "ROUTES_LINK=$PTNA_WWW_ROUTES_LINK"            >> $WORK_LOC/$DETAILS_FILE
-        echo "ROUTES_TIMESTAMP_UTC=$ROUTES_TIMESTAMP_UTC"   >> $WORK_LOC/$DETAILS_FILE
-        echo "ROUTES_TIMESTAMP_LOC=$ROUTES_TIMESTAMP_LOC"   >> $WORK_LOC/$DETAILS_FILE
-        echo "OVERPASS_QUERY=$OVERPASS_QUERY"               >> $WORK_LOC/$DETAILS_FILE
-        echo "CALL_PARAMS=$CALL_PARAMS"                     >> $WORK_LOC/$DETAILS_FILE
-        echo "START_DOWNLOAD=$START_DOWNLOAD"               >> $WORK_LOC/$DETAILS_FILE
-        echo "END_DOWNLOAD=$END_DOWNLOAD"                   >> $WORK_LOC/$DETAILS_FILE
+        echo "REGION_NAME=$PTNA_WWW_REGION_NAME"                            >  $WORK_LOC/$DETAILS_FILE
+        echo "REGION_LINK=$PTNA_WWW_REGION_LINK"                            >> $WORK_LOC/$DETAILS_FILE
+        echo "NETWORK_NAME=$PTNA_WWW_NETWORK_NAME"                          >> $WORK_LOC/$DETAILS_FILE
+        echo "NETWORK_LINK=$PTNA_WWW_NETWORK_LINK"                          >> $WORK_LOC/$DETAILS_FILE
+        echo "DISCUSSION_NAME=$PTNA_WWW_DISCUSSION_NAME"                    >> $WORK_LOC/$DETAILS_FILE
+        echo "DISCUSSION_LINK=$PTNA_WWW_DISCUSSION_LINK"                    >> $WORK_LOC/$DETAILS_FILE
+        echo "ROUTES_NAME=$PTNA_WWW_ROUTES_NAME"                            >> $WORK_LOC/$DETAILS_FILE
+        echo "ROUTES_LINK=$PTNA_WWW_ROUTES_LINK"                            >> $WORK_LOC/$DETAILS_FILE
+        echo "ROUTES_TIMESTAMP_UTC=$ROUTES_TIMESTAMP_UTC"                   >> $WORK_LOC/$DETAILS_FILE
+        echo "ROUTES_TIMESTAMP_LOC=$ROUTES_TIMESTAMP_LOC"                   >> $WORK_LOC/$DETAILS_FILE
+        echo "TZ=${PTNA_TIMEZONE}"                                          >> $WORK_LOC/$DETAILS_FILE
+        echo "UTC=UTC$(TZ=${PTNA_TIMEZONE:-Europe/Berlin} date '+%:::z')"   >> $WORK_LOC/$DETAILS_FILE
+        echo "OVERPASS_QUERY=$OVERPASS_QUERY"                               >> $WORK_LOC/$DETAILS_FILE
+        echo "CALL_PARAMS=$CALL_PARAMS"                                     >> $WORK_LOC/$DETAILS_FILE
+        echo "START_DOWNLOAD=$START_DOWNLOAD"                               >> $WORK_LOC/$DETAILS_FILE
+        echo "END_DOWNLOAD=$END_DOWNLOAD"                                   >> $WORK_LOC/$DETAILS_FILE
         if [ -f $OSM_XML_FILE_ABSOLUTE ]
         then
             echo "OSM_XML_FILE=$OSM_XML_FILE_ABSOLUTE"                                                         >> $WORK_LOC/$DETAILS_FILE
