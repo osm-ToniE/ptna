@@ -457,6 +457,7 @@ then
         echo "ROUTES_TIMESTAMP_UTC=$ROUTES_TIMESTAMP_UTC"                   >> $WORK_LOC/$DETAILS_FILE
         echo "ROUTES_TIMESTAMP_LOC=$ROUTES_TIMESTAMP_LOC"                   >> $WORK_LOC/$DETAILS_FILE
         echo "TZ=${PTNA_TIMEZONE}"                                          >> $WORK_LOC/$DETAILS_FILE
+        echo "TZSHORT=$(TZ=${PTNA_TIMEZONE:-Europe/Berlin} date '+%Z')"     >> $WORK_LOC/$DETAILS_FILE
         echo "UTC=UTC$(TZ=${PTNA_TIMEZONE:-Europe/Berlin} date '+%:::z')"   >> $WORK_LOC/$DETAILS_FILE
         echo "OVERPASS_QUERY=$OVERPASS_QUERY"                               >> $WORK_LOC/$DETAILS_FILE
         echo "CALL_PARAMS=$CALL_PARAMS"                                     >> $WORK_LOC/$DETAILS_FILE
