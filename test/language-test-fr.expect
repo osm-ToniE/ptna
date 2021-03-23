@@ -75,7 +75,7 @@
             Le tableau sera mis à jour quand les résultats de l'analyse auront changé.
         </p>
         <p>
-            Une explication sur chaque erreur peut être trouvée dans la <a href='/en/index.php#messages'>documentation</a>.
+            Une explication sur chaque erreur peut être trouvée dans la <a href="/fr/index.php#messages">documentation</a>.
         </p>
         <hr />
         <h1 id="A2">2 Test file for Read Routes Data</h1>
