@@ -176,7 +176,13 @@ sub ReadRoutes {
                         $hashref->{'gtfs-feed'}         = $ExpGtfsFeed         || '';              # 'gtfs-feed
                         $hashref->{'gtfs-route-id'}     = $ExpGtfsRouteId      || '';              # 'gtfs-route-id'
                         $hashref->{'gtfs-release-date'} = $ExpGtfsReleaseDate  || '';              # 'gtfs-release-date'
-                        if ( $ExpGtfsReleaseDate                                             &&
+                        if ( $ExpGtfsFeed                       &&
+                             $ExpGtfsFeed !~ m/^[0-9A-Za-z_-]+$/    ) {
+                            $issues_string      = gettext( "CSV data: field 'gtfs_feed' (= '%s') is wrong. Line %s of Routes-Data. Contents of line: '%s'" );
+                            $hashref->{'type'}  = 'error';                                              # this is an error
+                            $hashref->{'ref'}   = $ExpRef;                                              # this is an error
+                            $hashref->{'error'} = sprintf( decode( 'utf8', $issues_string ), $ExpGtfsFeed, $NR, $hashref->{'contents'} );   # this is an error
+                        } elsif ( $ExpGtfsReleaseDate                                        &&
                              $ExpGtfsReleaseDate !~ m/^[\d][\d][\d][\d]-[01][\d]-[0-3][\d]$/ &&
                              $ExpGtfsReleaseDate ne 'previous'                               &&
                              $ExpGtfsReleaseDate ne 'latest'                                 &&
