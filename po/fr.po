@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2021-01-28 20:52+0100\n"
+"POT-Creation-Date: 2021-03-29 14:28+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2021\n"
 "Language-Team: French (https://www.transifex.com/jungle-bus/teams/97874/fr/)\n"
@@ -1876,6 +1876,12 @@ msgstr ""
 "Le premier caractère de la ligne ('%s') est réservé. Veuillez mettre le "
 "premier champs CSV dans des guillemets (\"...\"). Ligne des données "
 "d'itinéraires %s . Contenu de la ligne : '%s'"
+
+#, perl-format
+msgid ""
+"CSV data: field 'gtfs_feed' (= '%s') is wrong. Line %s of Routes-Data. "
+"Contents of line: '%s'"
+msgstr ""
 
 #, perl-format
 msgid ""
