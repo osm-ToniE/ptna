@@ -22,7 +22,7 @@ fi
 SETTINGS_DIR="."
 
 
-TEMP=$(getopt -o acCfgGhmoOpPuwWS --long analyze,clean-created,clean-downloaded,get-routes,get-talk,force-download,help,modiify-routes-data,overpass-query,overpass-query-on-zero-xml,push-routes,push-talk,update-result,watch-routes,watch-talk,settings-dir -n 'ptna-network.sh' -- "$@")
+TEMP=$(getopt -o acCfgGhmoOpPuwWS: --long analyze,clean-created,clean-downloaded,get-routes,get-talk,force-download,help,modiify-routes-data,overpass-query,overpass-query-on-zero-xml,push-routes,push-talk,update-result,watch-routes,watch-talk,settings-dir: -n 'ptna-network.sh' -- "$@")
 
 if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 2 ; fi
 
@@ -45,7 +45,7 @@ while true ; do
         -u|--update-result)                 updateresult=true           ; shift ;;
         -w|--watch-routes)                  watchroutes=true            ; shift ;;
         -W|--watch-talk)                    watchtalk=true              ; shift ;;
-        -S|--settings_dir)                  shift; SETTINGS_DIR=$1      ; shift ;;
+        -S|--settings_dir)                  SETTINGS_DIR=$2             ; shift 2 ;;
         --) shift ; break ;;
         *) echo "Internal error!" ; exit 3 ;;
     esac
