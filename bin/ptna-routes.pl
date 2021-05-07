@@ -6536,7 +6536,7 @@ sub printSketchLineTemplate {
     }
 
     if ( $network || $operator ) {
-        $a_begin = sprintf( "<a href=\"https://overpass-api.de/api/sketch-line?ref=%s&network=%s&operator=%s&style=wuppertal%s%s\" title=\"Sketch-Line\">", uri_escape($ref), uri_escape($network), uri_escape($operator), $colour_string, $pt_string );
+        $a_begin = sprintf( "<a href=\"https://overpass-api.de/api/sketch-line?ref=%s&network=%s&operator=%s%s%s\" title=\"Sketch-Line\">", uri_escape($ref), uri_escape($network), uri_escape($operator), $colour_string, $pt_string );
         $a_end   = '</a>';
     }
 
