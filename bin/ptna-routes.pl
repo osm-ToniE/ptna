@@ -5386,6 +5386,8 @@ sub getGtfsInfo {
             } elsif ( $relation_ptr->{'tag'}->{'gtfs:route_id'} ) {
                 $relation_ptr->{'tag'}->{'gtfs:route_id'} =~ s/\s*;\s*/;/g;
                 $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_ ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:route_id'} ) );
+                # we do expect a trip_id or shape_id here, mark that route_id is used here
+                $gtfs_html_tag =~ s/>GTFS/>GTFS(r)/g;
             }
         } elsif ( $relation_ptr->{'tag'}->{'gtfs:route_id'} ) {
             $relation_ptr->{'tag'}->{'gtfs:route_id'} =~ s/\s*;\s*/;/g;
