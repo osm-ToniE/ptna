@@ -194,9 +194,9 @@ then
         START_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
         if [ -n "$CALL_PARAMS" ]
         then
-            wget --user-agent="PTNA on everest.openstreetmap.de" "$CALL_PARAMS" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE
+            wget --user-agent="PTNA script on https://ptna.openstreetmap.de" "$CALL_PARAMS" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE
         else
-            wget --user-agent="PTNA on everest.openstreetmap.de" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE
+            wget --user-agent="PTNA script on https://ptna.openstreetmap.de" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE
         fi
         END_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
         echo $(date "+%Y-%m-%d %H:%M:%S") "wget returns $?"
@@ -211,9 +211,9 @@ then
             START_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
             if [ -n "$CALL_PARAMS" ]
             then
-                wget --user-agent="PTNA on everest.openstreetmap.de" "$CALL_PARAMS" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE
+                wget --user-agent="PTNA script on https://ptna.openstreetmap.de" "$CALL_PARAMS" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE
             else
-                wget --user-agent="PTNA on everest.openstreetmap.de" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE
+                wget --user-agent="PTNA script on https://ptna.openstreetmap.de" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE
             fi
             END_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
             echo $(date "+%Y-%m-%d %H:%M:%S") "wget returns $?"
