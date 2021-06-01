@@ -144,7 +144,8 @@ fi
 if [ "$cleancreated" = "true" ]
 then
     echo $(date "+%Y-%m-%d %H:%M:%S") "Removing temporary files"
-    rm -f $WORK_LOC/$HTML_FILE $WORK_LOC/$DIFF_FILE $WORK_LOC/$DIFF_HTML_FILE $WORK_LOC/$SAVE_FILE
+    rm -f $WORK_LOC/$HTML_FILE $WORK_LOC/$DIFF_FILE $WORK_LOC/$DIFF_HTML_FILE $WORK_LOC/$SAVE_FILE $OSM_XML_FILE_ABSOLUTE.part.*
+    rmdir $OSM_XML_FILE_ABSOLUTE.lock
 fi
 
 #
@@ -154,7 +155,8 @@ fi
 if [ "$cleandownloaded" = "true" ]
 then
     echo $(date "+%Y-%m-%d %H:%M:%S") "Removing XML and Routes file"
-    rm -f $OSM_XML_FILE_ABSOLUTE $WORK_LOC/$ROUTES_FILE
+    rm -f $OSM_XML_FILE_ABSOLUTE $OSM_XML_FILE_ABSOLUTE.part.* $WORK_LOC/$ROUTES_FILE
+    rmdir $OSM_XML_FILE_ABSOLUTE.lock
 fi
 
 #
@@ -179,7 +181,7 @@ fi
 
 if [ "$overpassquery" = "true" ]
 then
-    echo $(date "+%Y-%m-%d %H:%M:%S") "Calling wget for '$PREFIX'"
+    echo $(date "+%Y-%m-%d %H:%M:%S") "Calling Overpass-API for '$PREFIX'"
 
     OSM_XML_LOC=$(dirname $OSM_XML_FILE_ABSOLUTE)
 
@@ -191,39 +193,73 @@ then
 
     if [ -d "$OSM_XML_LOC" ]
     then
-        START_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
-        if [ -n "$CALL_PARAMS" ]
+        mkdir $OSM_XML_FILE_ABSOLUTE.lock
+        if [ $? -ne 0 ]
         then
-            wget --user-agent="PTNA script on https://ptna.openstreetmap.de" "$CALL_PARAMS" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE
-        else
-            wget --user-agent="PTNA script on https://ptna.openstreetmap.de" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE
-        fi
-        END_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
-        echo $(date "+%Y-%m-%d %H:%M:%S") "wget returns $?"
+            # semaphore/mutex (directory) exists already: a parallel job is currently downloading the same data for a reuse
+            # wait for that job to finish the download before skipping the own download
+            # wait max 30 * 10 seconds = 5 minutes
 
-        if [ -s $OSM_XML_FILE_ABSOLUTE ]
-        then
-            echo $(date "+%Y-%m-%d %H:%M:%S") "Success for wget for '$PREFIX'"
+            loops=30
+            echo $(date "+%Y-%m-%d %H:%M:%S") "Another job is downloading the data in parallel, waiting for the completion"
+            while [ -d $OSM_XML_FILE_ABSOLUTE.lock ]
+            do
+                if [ $loops -le 0 ]
+                then
+                    echo $(date "+%Y-%m-%d %H:%M:%S") "... waited too long for the completion"
+                    break
+                fi
+                sleep 10
+                loops=$(( loops -1))
+            done
+            if [ $loops -gt 0 ]
+            then
+                echo $(date "+%Y-%m-%d %H:%M:%S") "... proceeding without own download"
+            fi
         else
-            echo $(date "+%Y-%m-%d %H:%M:%S") "Calling wget for '$PREFIX' a second time"
-            # try a second, but only a second time
-            sleep 60
+            rm -f $OSM_XML_FILE_ABSOLUTE
+            if [ -n "$PTNA_OVERPASS_API_SERVER" ]
+            then
+                OVERPASS_QUERY=$(echo $OVERPASS_QUERY | sed -e "s/overpass-api\.de/$PTNA_OVERPASS_API_SERVER/" -e 's/http:/https:/')
+                echo $(date "+%Y-%m-%d %H:%M:%S") "Overpass-API server changed to 'https://$PTNA_OVERPASS_API_SERVER'"
+            fi
+
             START_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
             if [ -n "$CALL_PARAMS" ]
             then
-                wget --user-agent="PTNA script on https://ptna.openstreetmap.de" "$CALL_PARAMS" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE
+                wget --user-agent="PTNA script on https://ptna.openstreetmap.de" "$CALL_PARAMS" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE.part.$$
             else
-                wget --user-agent="PTNA script on https://ptna.openstreetmap.de" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE
+                wget --user-agent="PTNA script on https://ptna.openstreetmap.de" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE.part.$$
             fi
             END_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
             echo $(date "+%Y-%m-%d %H:%M:%S") "wget returns $?"
 
-            if [ -s $OSM_XML_FILE_ABSOLUTE ]
+            if [ -s $OSM_XML_FILE_ABSOLUTE.part.$$ ]
             then
                 echo $(date "+%Y-%m-%d %H:%M:%S") "Success for wget for '$PREFIX'"
             else
-                echo $(date "+%Y-%m-%d %H:%M:%S") "Failure for wget for '$PREFIX'"
+                echo $(date "+%Y-%m-%d %H:%M:%S") "Calling wget for '$PREFIX' a second time"
+                # try a second, but only a second time
+                sleep 60
+                START_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
+                if [ -n "$CALL_PARAMS" ]
+                then
+                    wget --user-agent="PTNA script on https://ptna.openstreetmap.de" "$CALL_PARAMS" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE.part.$$
+                else
+                    wget --user-agent="PTNA script on https://ptna.openstreetmap.de" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE.part.$$
+                fi
+                END_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
+                echo $(date "+%Y-%m-%d %H:%M:%S") "wget returns $?"
+
+                if [ -s $OSM_XML_FILE_ABSOLUTE.part ]
+                then
+                    echo $(date "+%Y-%m-%d %H:%M:%S") "Success for wget for '$PREFIX'"
+                else
+                    echo $(date "+%Y-%m-%d %H:%M:%S") "Failure for wget for '$PREFIX'"
+                fi
             fi
+            mv $OSM_XML_FILE_ABSOLUTE.part.$$ $OSM_XML_FILE_ABSOLUTE
+            rmdir $OSM_XML_FILE_ABSOLUTE.lock
         fi
     else
         echo $(date "+%Y-%m-%d %H:%M:%S") "Work dir $OSM_XML_LOC does not exist/could not be created"

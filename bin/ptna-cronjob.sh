@@ -79,7 +79,7 @@ then
 
         cd $PTNA_WORK_LOC
 
-        LOGFILE=${PTNA_WORK_LOC}/ptna-all-networks$LOGFILE_SUFFIX.log
+        LOGFILE=${PTNA_WORK_LOC}/log/ptna-all-networks$LOGFILE_SUFFIX.log
 
         # c == clean the work area
         # C == clean the XML file
@@ -91,7 +91,10 @@ then
         # a == do the analysis (in work area)
         # u == update the result from the work area to the location of the web service
 
-        ptna-all-networks.sh -ogau >> $LOGFILE 2>&1 < /dev/null
+        # ptna-all-networks.sh -ogau >> $LOGFILE 2>&1 < /dev/null
+
+        # run jobs in parallel using also a more powerful overpass-api server
+        ptna-all-networks-parallel.sh -ogau >> $LOGFILE 2>&1 < /dev/null
 
         emptyxml=$(find ${PTNA_WORK_LOC} -name '*.xml' -size 0 | wc -l)
 
@@ -101,11 +104,12 @@ then
 
             sleep 300
 
-            # O == do the overpassapi query only if the downloaded XML data is empty, otherwiese skip the rest
+            # O == do the overpassapi query only if the downloaded XML data is empty, otherwise skip the rest
             #      g == get the OSM-Wiki data for the routes
             #      a == do the analysis (in work area)
             #      u == update the result from the work area to the location of the web service
 
+            # run this sequentially
             ptna-all-networks.sh -Ogau >> $LOGFILE 2>&1 < /dev/null
         fi
 

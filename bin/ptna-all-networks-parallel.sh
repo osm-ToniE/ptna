@@ -4,6 +4,7 @@
 # analyze ÖPNV networks
 #
 
+export PTNA_OVERPASS_API_SERVER="overpass.kumi.systems"
 
 cd $PTNA_NETWORKS_LOC
 
