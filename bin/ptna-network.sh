@@ -145,7 +145,7 @@ if [ "$cleancreated" = "true" ]
 then
     echo $(date "+%Y-%m-%d %H:%M:%S") "Removing temporary files"
     rm -f $WORK_LOC/$HTML_FILE $WORK_LOC/$DIFF_FILE $WORK_LOC/$DIFF_HTML_FILE $WORK_LOC/$SAVE_FILE $OSM_XML_FILE_ABSOLUTE.part.*
-    rmdir $OSM_XML_FILE_ABSOLUTE.lock
+    [ -d $OSM_XML_FILE_ABSOLUTE.lock ] && rmdir $OSM_XML_FILE_ABSOLUTE.lock
 fi
 
 #
@@ -156,7 +156,7 @@ if [ "$cleandownloaded" = "true" ]
 then
     echo $(date "+%Y-%m-%d %H:%M:%S") "Removing XML and Routes file"
     rm -f $OSM_XML_FILE_ABSOLUTE $OSM_XML_FILE_ABSOLUTE.part.* $WORK_LOC/$ROUTES_FILE
-    rmdir $OSM_XML_FILE_ABSOLUTE.lock
+    [ -d $OSM_XML_FILE_ABSOLUTE.lock ] && rmdir $OSM_XML_FILE_ABSOLUTE.lock
 fi
 
 #
