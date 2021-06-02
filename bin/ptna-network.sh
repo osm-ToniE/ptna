@@ -111,6 +111,8 @@ else
     OSM_XML_FILE_ABSOLUTE="$WORK_LOC/$PREFIX-Data.xml"
 fi
 
+CALL_PARAMS="--tries=2 --wait=10 --random-wait"
+
 #
 #
 #
@@ -220,8 +222,12 @@ then
             rm -f $OSM_XML_FILE_ABSOLUTE
             if [ -n "$PTNA_OVERPASS_API_SERVER" ]
             then
-                OVERPASS_QUERY=$(echo $OVERPASS_QUERY | sed -e "s/overpass-api\.de/$PTNA_OVERPASS_API_SERVER/" -e 's/http:/https:/')
-                echo $(date "+%Y-%m-%d %H:%M:%S") "Overpass-API server changed to 'https://$PTNA_OVERPASS_API_SERVER'"
+                if [ $(echo "$OVERPASS_QUERY" | fgrep -c 'poly:') -eq 0 ]
+                then
+                    # the alternative Overpass-API server has some problems with areas defined by a polygon
+                    OVERPASS_QUERY=$(echo $OVERPASS_QUERY | sed -e "s/overpass-api\.de/$PTNA_OVERPASS_API_SERVER/" -e 's/http:/https:/')
+                    echo $(date "+%Y-%m-%d %H:%M:%S") "Overpass-API server changed to 'https://$PTNA_OVERPASS_API_SERVER'"
+                fi
             fi
 
             START_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
