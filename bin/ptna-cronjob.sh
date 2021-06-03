@@ -91,10 +91,14 @@ then
         # a == do the analysis (in work area)
         # u == update the result from the work area to the location of the web service
 
-        # ptna-all-networks.sh -ogau >> $LOGFILE 2>&1 < /dev/null
-
-        # run jobs in parallel using also a more powerful overpass-api server
-        ptna-all-networks-parallel.sh -ogau >> $LOGFILE 2>&1 < /dev/null
+        if [ "$1" = "UTC+01" ]
+        then
+            # for timezone UTC+01 run jobs in parallel using also a more powerful overpass-api server
+            ptna-all-networks-parallel.sh -ogau >> $LOGFILE 2>&1 < /dev/null
+        else
+            # for other timezones it is OK to run sequentially and using standard overpass-api server
+            ptna-all-networks.sh -ogau >> $LOGFILE 2>&1 < /dev/null
+        fi
 
         emptyxml=$(find ${PTNA_WORK_LOC} -name '*.xml' -size 0 | wc -l)
 
@@ -109,7 +113,7 @@ then
             #      a == do the analysis (in work area)
             #      u == update the result from the work area to the location of the web service
 
-            # run this sequentially
+            # run this sequentially using standard overpass-api server
             ptna-all-networks.sh -Ogau >> $LOGFILE 2>&1 < /dev/null
         fi
 
