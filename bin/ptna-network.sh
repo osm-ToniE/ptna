@@ -200,9 +200,9 @@ then
         then
             # semaphore/mutex (directory) exists already: a parallel job is currently downloading the same data for a reuse
             # wait for that job to finish the download before skipping the own download
-            # wait max 30 * 10 seconds = 5 minutes
+            # wait max 60 * 10 seconds = 10 minutes
 
-            loops=30
+            loops=60
             echo $(date "+%Y-%m-%d %H:%M:%S") "Another job is downloading the data in parallel, waiting for the completion"
             while [ -d $OSM_XML_FILE_ABSOLUTE.lock ]
             do
