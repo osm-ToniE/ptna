@@ -267,6 +267,17 @@ then
                     echo $(date "+%Y-%m-%d %H:%M:%S") "Failure for wget for '$PREFIX'"
                 fi
             fi
+
+            fsize=$(stat -c '%s' $OSM_XML_FILE_ABSOLUTE.part.$$)
+            if [ "$fsize" -gt 0 -a "$fsize" -lt 1000 ]
+            then
+                echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' is quite small: error during download?"
+                cat $OSM_XML_FILE_ABSOLUTE.part.$$
+                echo $(date "+%Y-%m-%d %H:%M:%S") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
+                rm    $OSM_XML_FILE_ABSOLUTE.part.$$
+                touch $OSM_XML_FILE_ABSOLUTE.part.$$
+            fi
+
             mv $OSM_XML_FILE_ABSOLUTE.part.$$ $OSM_XML_FILE_ABSOLUTE
             rmdir $OSM_XML_FILE_ABSOLUTE.lock
         fi
@@ -423,45 +434,45 @@ then
 
             if [ -d "$WORK_LOC" ]
             then
-                    rm -f $WORK_LOC/$DIFF_FILE.diff
+                rm -f $WORK_LOC/$DIFF_FILE.diff
 
-                    if [ -f "$WORK_LOC/$HTML_FILE" -a -s "$WORK_LOC/$HTML_FILE" ]
+                if [ -f "$WORK_LOC/$HTML_FILE" -a -s "$WORK_LOC/$HTML_FILE" ]
+                then
+                    mv $WORK_LOC/$HTML_FILE $WORK_LOC/$SAVE_FILE
+                fi
+                START_ANALYSIS=$(date "+%Y-%m-%d %H:%M:%S %Z")
+                ptna-routes.pl --v\
+                                --title="$PREFIX" \
+                                --network-guid=$PREFIX \
+                                $ANALYSIS_OPTIONS \
+                                --expect-network-short-as="$EXPECT_NETWORK_SHORT_AS" \
+                                --expect-network-short-for="$EXPECT_NETWORK_SHORT_FOR" \
+                                --expect-network-long-as="$EXPECT_NETWORK_LONG_AS" \
+                                --expect-network-long-for="$EXPECT_NETWORK_LONG_FOR" \
+                                --network-long-regex="$NETWORK_LONG" \
+                                --network-short-regex="$NETWORK_SHORT" \
+                                --operator-regex="$OPERATOR_REGEX" \
+                                --routes-file=$WORK_LOC/$ROUTES_FILE \
+                                --osm-xml-file=$OSM_XML_FILE_ABSOLUTE \
+                                2>&1 > $WORK_LOC/$HTML_FILE | tee $WORK_LOC/$HTML_FILE.log
+                END_ANALYSIS=$(date "+%Y-%m-%d %H:%M:%S %Z")
+
+                if [ -s "$WORK_LOC/$HTML_FILE" ]
+                then
+                    echo $(date "+%Y-%m-%d %H:%M:%S") "Analysis succeeded, '$WORK_LOC/$HTML_FILE' created"
+                    echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WORK_LOC/$HTML_FILE)
+
+                    if [ -f "$WORK_LOC/$SAVE_FILE" -a -s "$WORK_LOC/$SAVE_FILE" ]
                     then
-                        mv $WORK_LOC/$HTML_FILE $WORK_LOC/$SAVE_FILE
-                    fi
-                    START_ANALYSIS=$(date "+%Y-%m-%d %H:%M:%S %Z")
-                    ptna-routes.pl --v\
-                                   --title="$PREFIX" \
-                                   --network-guid=$PREFIX \
-                                   $ANALYSIS_OPTIONS \
-                                   --expect-network-short-as="$EXPECT_NETWORK_SHORT_AS" \
-                                   --expect-network-short-for="$EXPECT_NETWORK_SHORT_FOR" \
-                                   --expect-network-long-as="$EXPECT_NETWORK_LONG_AS" \
-                                   --expect-network-long-for="$EXPECT_NETWORK_LONG_FOR" \
-                                   --network-long-regex="$NETWORK_LONG" \
-                                   --network-short-regex="$NETWORK_SHORT" \
-                                   --operator-regex="$OPERATOR_REGEX" \
-                                   --routes-file=$WORK_LOC/$ROUTES_FILE \
-                                   --osm-xml-file=$OSM_XML_FILE_ABSOLUTE \
-                                   2>&1 > $WORK_LOC/$HTML_FILE | tee $WORK_LOC/$HTML_FILE.log
-                    END_ANALYSIS=$(date "+%Y-%m-%d %H:%M:%S %Z")
-
-                    if [ -s "$WORK_LOC/$HTML_FILE" ]
-                    then
-                        echo $(date "+%Y-%m-%d %H:%M:%S") "Analysis succeeded, '$WORK_LOC/$HTML_FILE' created"
-                        echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WORK_LOC/$HTML_FILE)
-
-                        if [ -f "$WORK_LOC/$SAVE_FILE" -a -s "$WORK_LOC/$SAVE_FILE" ]
-                        then
-                            diff $WORK_LOC/$SAVE_FILE $WORK_LOC/$HTML_FILE > $WORK_LOC/$DIFF_FILE
-                            echo $(date "+%Y-%m-%d %H:%M:%S") "Diff size:  " $(ls -l $WORK_LOC/$DIFF_FILE | awk '{print $5 " " $9}')
-                            echo $(date "+%Y-%m-%d %H:%M:%S") "Diff lines: " $(wc -l $WORK_LOC/$DIFF_FILE)
-                        else
-                            rm -f $WORK_LOC/$SAVE_FILE
-                        fi
+                        diff $WORK_LOC/$SAVE_FILE $WORK_LOC/$HTML_FILE > $WORK_LOC/$DIFF_FILE
+                        echo $(date "+%Y-%m-%d %H:%M:%S") "Diff size:  " $(ls -l $WORK_LOC/$DIFF_FILE | awk '{print $5 " " $9}')
+                        echo $(date "+%Y-%m-%d %H:%M:%S") "Diff lines: " $(wc -l $WORK_LOC/$DIFF_FILE)
                     else
-                        echo $(date "+%Y-%m-%d %H:%M:%S") "'$WORK_LOC/$HTML_FILE' is empty"
+                        rm -f $WORK_LOC/$SAVE_FILE
                     fi
+                else
+                    echo $(date "+%Y-%m-%d %H:%M:%S") "'$WORK_LOC/$HTML_FILE' is empty"
+                fi
             else
                 echo $(date "+%Y-%m-%d %H:%M:%S") "Work dir $WORK_LOC does not exist/could not be created"
             fi
