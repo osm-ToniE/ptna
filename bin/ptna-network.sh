@@ -224,9 +224,12 @@ then
             then
                 if [ $(echo "$OVERPASS_QUERY" | fgrep -c 'poly:') -eq 0 ]
                 then
-                    # the alternative Overpass-API server has some problems with areas defined by a polygon
-                    OVERPASS_QUERY=$(echo $OVERPASS_QUERY | sed -e "s/overpass-api\.de/$PTNA_OVERPASS_API_SERVER/" -e 's/http:/https:/')
-                    echo $(date "+%Y-%m-%d %H:%M:%S") "Overpass-API server changed to 'https://$PTNA_OVERPASS_API_SERVER'"
+                    # the alternative Overpass-API server has some problems with areas defined by a polygon and needs a larger timeout value than the default (180)
+                    OVERPASS_QUERY=$(echo $OVERPASS_QUERY | \
+                                     sed -e "s/overpass-api\.de/$PTNA_OVERPASS_API_SERVER/" \
+                                         -e 's/http:/https:/'                               \
+                                         -e 's/data=area/data=[timeout:300];area/')
+                    echo $(date "+%Y-%m-%d %H:%M:%S") "Overpass-API Query changed to '$OVERPASS_QUERY'"
                 fi
             fi
 
