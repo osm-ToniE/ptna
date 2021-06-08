@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2021-03-29 14:28+0200\n"
+"POT-Creation-Date: 2021-06-08 16:20+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2021\n"
 "Language-Team: German (https://www.transifex.com/jungle-bus/teams/97874/de/)\n"
@@ -722,6 +722,9 @@ msgstr ""
 "PTv2 Route: der letzte Punkt des Weges ist keine 'stop_position' dieser "
 "Route: %s"
 
+msgid "suspicious sub-type"
+msgstr "verdächtige Wegeklassifizierung"
+
 msgid "wrong value"
 msgstr "falscher Wert"
 
@@ -825,8 +828,12 @@ msgstr ""
 "sein"
 
 #, perl-format
-msgid "PTv2 route: using wrong way type (%s)"
-msgstr "PTv2 Route: ein falscher Wegtyp wird benutzt (%s)"
+msgid "Route: using way type (%s)"
+msgstr "Route: benutzter Wegtyp (%s)"
+
+#, perl-format
+msgid "Route: using wrong way type (%s)"
+msgstr "Route: ein falscher Wegtyp wird benutzt (%s)"
 
 #, perl-format
 msgid ""
@@ -1666,6 +1673,12 @@ msgstr ""
 
 msgid "Check sequence of ways, are there any gaps?"
 msgstr "Prüfung der Reihenfolge der befahrenen Wege, existieren Lücken?"
+
+msgid "Check value of 'service' tag for 'highway' = 'service'."
+msgstr "Prüfe den Wert des 'service' Tags für 'highway' = 'service'."
+
+msgid "Suspicious values"
+msgstr "Verdächtige Werte"
 
 msgid ""
 "Check that for instance 'bus' = 'yes' is set on a PTv2 bus stop having "
