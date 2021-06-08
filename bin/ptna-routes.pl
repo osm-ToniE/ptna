@@ -199,6 +199,10 @@ if ( $check_name_relaxed ) {
     $check_name = 1;
 }
 
+if ( $check_service_type ) {
+    $check_way_type = 1;
+}
+
 if ( $csv_separator ) {
     if ( length($csv_separator) > 1 ) {
         printf STDERR "%s analyze-routes.pl: wrong value for option: '--separator' = '%s' - setting it to '--separator' = ';'\n", get_time(), $csv_separator;
