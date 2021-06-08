@@ -81,18 +81,19 @@ my $operator_regex                  = undef;
 my $allow_coach                     = undef;
 my $check_access                    = undef;
 my $check_bus_stop                  = undef;
+my $check_gtfs                      = undef;
+my $check_motorway_link             = undef;
 my $check_name                      = undef;
 my $check_name_relaxed              = undef;
-my $check_stop_position             = undef;
 my $check_osm_separator             = undef;
 my $check_platform                  = undef;
-my $check_sequence                  = undef;
 my $check_roundabouts               = undef;
 my $check_route_ref                 = undef;
-my $check_motorway_link             = undef;
+my $check_sequence                  = undef;
+my $check_service_type              = undef;
+my $check_stop_position             = undef;
 my $check_version                   = undef;
 my $check_way_type                  = undef;
-my $check_gtfs                      = undef;
 my $expect_network_long             = undef;
 my $expect_network_long_as          = undef;
 my $expect_network_long_for         = undef;
@@ -134,6 +135,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'check-roundabouts'             =>  \$check_roundabouts,            # --check-roundabouts               check for roundabouts being included completely
             'check-route-ref'               =>  \$check_route_ref,              # --check-route-ref                 check 'route_ref' tag on highway=bus_stop and public_transport=platform
             'check-sequence'                =>  \$check_sequence,               # --check-sequence                  check for correct sequence of stops, platforms and ways
+            'check-service-type'            =>  \$check_service_type,           # --check-service-type              check for routes: highway=service and correct service=* type?
             'check-stop-position'           =>  \$check_stop_position,          # --check-stop-position             check for bus=yes, tram=yes, ... on (stop_positions
             'check-version'                 =>  \$check_version,                # --check-version                   check for PTv2 on route_masters, ...
             'check-way-type'                =>  \$check_way_type,               # --check-way-type                  check for routes: do vehicles use the right way type
@@ -257,6 +259,7 @@ if ( $verbose ) {
     printf STDERR "%20s--check-roundabouts='%s'\n",        ' ', $check_roundabouts          ? 'ON'          :'OFF';
     printf STDERR "%20s--check-route-ref='%s'\n",          ' ', $check_route_ref            ? 'ON'          :'OFF';
     printf STDERR "%20s--check-sequence='%s'\n",           ' ', $check_sequence             ? 'ON'          :'OFF';
+    printf STDERR "%20s--check-service-type='%s'\n",       ' ', $check_service_type         ? 'ON'          :'OFF';
     printf STDERR "%20s--check-stop-position='%s'\n",      ' ', $check_stop_position        ? 'ON'          :'OFF';
     printf STDERR "%20s--check-version='%s'\n",            ' ', $check_version              ? 'ON'          :'OFF';
     printf STDERR "%20s--check-way-type='%s'\n",           ' ', $check_way_type             ? 'ON'          :'OFF';
@@ -2815,6 +2818,13 @@ sub analyze_route_relation {
     }
 
     #
+    # for WAYS used by vehicles             vehicles must use the right type of way
+    #
+    if ( $check_way_type ) {
+        $return_code += CheckWayType( $relation_ptr );
+    }
+
+    #
     # for WAYS used by vehicles             vehicles must have access permission
     # for NODES of WAYS used by vehicles    vehicles must have access permission on barrier NODES
     #
@@ -3631,13 +3641,6 @@ sub analyze_ptv2_route_relation {
         }
     }
     $return_code += $role_mismatch_found;
-
-    #
-    # for WAYS used by vehicles             vehicles must use the right type of way
-    #
-    if ( $check_way_type ) {
-        $return_code += CheckWayType( $relation_ptr );
-    }
 
     return $return_code;
 }
@@ -4498,8 +4501,20 @@ sub CheckThisWayTypeForThisVehicle {
                     if ( $WAYS{$way_id}->{'tag'}->{$waykey} ) {
                         foreach my $wayvalue ( @{${$transport_type_uses_way_type{$vehicle_type}}{$waykey}}) {
                             if ( $wayvalue eq $WAYS{$way_id}->{'tag'}->{$waykey} ) {
-                                printf STDERR "CheckThisWayTypeForThisVehicle() : way %d has appropriate '%s' = '%s' for vehicle '%s'\n", $way_id, $waykey, $wayvalue, $vehicle_type       if ( $debug );
-                                return '';
+                                if ( $check_service_type                                            &&
+                                     $waykey                              eq 'highway'              &&
+                                     $wayvalue                            eq 'service'              &&
+                                     $WAYS{$way_id}->{'tag'}->{'service'}                           &&
+                                     ($WAYS{$way_id}->{'tag'}->{'service'} eq 'driveway'        ||
+                                      $WAYS{$way_id}->{'tag'}->{'service'} eq 'parking_aisle'   ||
+                                      $WAYS{$way_id}->{'tag'}->{'service'} eq 'drive-trough'    ||
+                                      $WAYS{$way_id}->{'tag'}->{'service'} eq 'emergency_access'  )    ) {
+                                    printf STDERR "CheckThisWayTypeForThisVehicle() : way %d has wrong 'highway' = 'service' and 'service' = '%s' for vehicle '%s'\n", $way_id, $WAYS{$way_id}->{'tag'}->{'service'}, $vehicle_type       if ( $debug );
+                                    return sprintf( "%s: 'service'='%s'", gettext("suspicious sub-type"), $WAYS{$way_id}->{'tag'}->{'service'} );
+                                } else {
+                                    printf STDERR "CheckThisWayTypeForThisVehicle() : way %d has appropriate '%s' = '%s' for vehicle '%s'\n", $way_id, $waykey, $wayvalue, $vehicle_type       if ( $debug );
+                                    return '';
+                                }
                             }
                         }
                         printf STDERR "CheckThisWayTypeForThisVehicle() : way %d has wrong '%s' = '%s' for vehicle '%s'\n", $way_id, $waykey, $WAYS{$way_id}->{'tag'}->{$waykey}, $vehicle_type       if ( $debug );
@@ -4919,18 +4934,26 @@ sub CheckWayType {
             }
         }
         if ( scalar(keys(%using_wrong_way_type)) ) {
+            my $message_type   = '__issues__';
             my $helpstring     = '';
             my @help_array     = ();
             my $num_of_errors  = 0;
             foreach $this_is_wrong ( sort(keys(%using_wrong_way_type)) ) {
+                if ( $this_is_wrong =~ m/: \'service\'=\'/ ) {
+                    $notes_string  = gettext( "Route: using way type (%s)" );
+                    $message_type  = '__notes__';
+                    $helpstring    = sprintf( $notes_string, $this_is_wrong );
+                } else {
+                    $issues_string = gettext( "Route: using wrong way type (%s)" );
+                    $message_type  = '__issues__';
+                    $helpstring    = sprintf( $issues_string, $this_is_wrong );
+                }
                 @help_array     = sort(keys(%{$using_wrong_way_type{$this_is_wrong}}));
                 $num_of_errors  = scalar(@help_array);
-                $issues_string  = gettext( "PTv2 route: using wrong way type (%s)" );
-                $helpstring     = sprintf( $issues_string, $this_is_wrong );
                 if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                    push( @{$relation_ptr->{$message_type}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
                 } else {
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } @help_array )) );
+                    push( @{$relation_ptr->{$message_type}}, sprintf("%s: %s", $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } @help_array )) );
                 }
             }
         }
