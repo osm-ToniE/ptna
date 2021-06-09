@@ -50,7 +50,7 @@ my %transport_type_uses_way_type = ( 'train'     => { 'railway'   => [ 'rail',  
                                      'bus'       => { 'highway'   => [ 'motorway',      'motorway_link',  'trunk',        'trunk_link',    'primary',      'primary_link',
                                                                        'secondary',     'secondary_link', 'tertiary',     'tertiary_link', 'unclassified', 'residential',
                                                                        'service',       'track',          'footway',      'cycleway',      'path',         'pedestrian',
-                                                                       'living_street', 'road',           'bus_guideway', 'construction'
+                                                                       'living_street', 'road',           'bus_guideway', 'busway',        'construction'
                                                                      ]
                                                     },
                                    );
