@@ -269,13 +269,19 @@ then
             fi
 
             fsize=$(stat -c '%s' $OSM_XML_FILE_ABSOLUTE.part.$$)
-            if [ "$fsize" -gt 0 -a "$fsize" -lt 1000 ]
+            if [ "$fsize" -gt 0 ]
             then
-                echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' is quite small: error during download?"
-                cat $OSM_XML_FILE_ABSOLUTE.part.$$
-                echo $(date "+%Y-%m-%d %H:%M:%S") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
-                rm    $OSM_XML_FILE_ABSOLUTE.part.$$
-                touch $OSM_XML_FILE_ABSOLUTE.part.$$
+                if [ "$fsize" -ge 1000 ]
+                then
+                    echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' first 10 lines:"
+                    head -10 $OSM_XML_FILE_ABSOLUTE.part.$$
+                else
+                    echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' is quite small: error during download?"
+                    cat $OSM_XML_FILE_ABSOLUTE.part.$$
+                    echo $(date "+%Y-%m-%d %H:%M:%S") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
+                    rm    $OSM_XML_FILE_ABSOLUTE.part.$$
+                    touch $OSM_XML_FILE_ABSOLUTE.part.$$
+                fi
             fi
 
             mv $OSM_XML_FILE_ABSOLUTE.part.$$ $OSM_XML_FILE_ABSOLUTE
