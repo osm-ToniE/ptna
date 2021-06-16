@@ -247,7 +247,7 @@ then
             then
                 echo $(date "+%Y-%m-%d %H:%M:%S") "Success for wget for '$PREFIX'"
             else
-                echo $(date "+%Y-%m-%d %H:%M:%S") "Calling wget for '$PREFIX' a second time"
+                echo $(date "+%Y-%m-%d %H:%M:%S") "Calling wget for '$PREFIX' a second time in 1 minute"
                 # try a second, but only a second time
                 sleep 60
                 START_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
@@ -275,6 +275,11 @@ then
                 then
                     echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' first 10 lines:"
                     head -10 $OSM_XML_FILE_ABSOLUTE.part.$$
+                    OSM_BASE=$(fgrep -m 1 '<meta osm_base' $OSM_XML_FILE_ABSOLUTE.part.$$ | sed -e 's/^.*osm_base="//' -e 's/".*$//')
+                    if [ -n "$OSM_BASE" ]
+                    then
+                        OSM_BASE=$(date --date "$OSM_BASE" "+%Y-%m-%d %H:%M:%S %Z")
+                    fi
                 else
                     echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' is quite small: error during download?"
                     cat $OSM_XML_FILE_ABSOLUTE.part.$$
@@ -527,6 +532,7 @@ then
         echo "END_DOWNLOAD=$END_DOWNLOAD"                                   >> $WORK_LOC/$DETAILS_FILE
         if [ -f $OSM_XML_FILE_ABSOLUTE ]
         then
+            echo "OSM_BASE=$OSM_BASE"                                                                          >> $WORK_LOC/$DETAILS_FILE
             echo "OSM_XML_FILE=$OSM_XML_FILE_ABSOLUTE"                                                         >> $WORK_LOC/$DETAILS_FILE
             echo "OSM_XML_FILE_SIZE=$(ls -s --format=single-column $OSM_XML_FILE_ABSOLUTE | awk '{print $1}')" >> $WORK_LOC/$DETAILS_FILE
             echo "OSM_XML_FILE_SIZE_BYTE=$(stat -c '%s' $OSM_XML_FILE_ABSOLUTE)"                               >> $WORK_LOC/$DETAILS_FILE
