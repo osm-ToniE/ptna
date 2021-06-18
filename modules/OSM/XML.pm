@@ -20,7 +20,7 @@ my $verbose     = undef;
 ####################################################################################################################
 
 #############################################################################################
-# 
+#
 # read the XML file with the OSM information
 #
 #############################################################################################
@@ -30,12 +30,14 @@ sub parse {
     my $infile = $hash{'data'};
     $debug     = $hash{'debug'};
     $verbose   = $hash{'verbose'};
-    
+
     if ( $infile ) {
         if ( -f $infile && -r $infile ) {
             #
             # this is a hack, because Goe::Parse::OSM does not find 'meta' information
             if ( open(DATA,"< $infile") ) {
+                my ($sec,$min,$hour,$day,$month,$year) = localtime();
+                my $date_and_time = sprintf( "%04d-%02d-%02d %02d:%02d:%02d", $year+1900, $month+1, $day, $hour, $min, $sec );
                 my $count = 0;
                 my $ line = undef;
                 while ( <DATA> ) {
@@ -50,13 +52,14 @@ sub parse {
                             my ( $attr, undef, $val ) = ( shift @res, shift @res, shift @res );
                             $META{$attr} = $val;
                             #printf STDERR "META{%s} = %s\n", $attr, $val;
+                            printf STDERR "%s META : %s = '%s'\n", $date_and_time, $attr, $val      if ( $verbose );
                         }
                     }
                     last if ( $count > 5 );
                 }
                 close( DATA );
                 my $GPO = Geo::Parse::OSM->new( $infile );
-        
+
                 if ( $GPO ) {
                     $GPO->parse( \&_parse_CB );
                     return 1;
@@ -64,7 +67,7 @@ sub parse {
             }
         }
     }
-    
+
     return undef;
 }
 
@@ -75,7 +78,7 @@ sub parse {
 sub _parse_CB {
     my $obj_type = $_[0]->{'type'};
     my $obj_id   = $_[0]->{'id'};
-    
+
     if ( $obj_type ) {
         if ( $obj_type eq 'node' ) {
             if ( $obj_id ) {
