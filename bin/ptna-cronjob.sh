@@ -102,9 +102,9 @@ then
 
         emptyxml=$(find ${PTNA_WORK_LOC} -name '*.xml' -size 0 | wc -l)
 
-        if [ "$emptyxml" -gt 0 -a "$emptyxml" -lt 10 ]
+        if [ "$emptyxml" -gt 0 -a "$emptyxml" -lt 90 ]
         then
-            # most of the analysis succeeded, let's try a second time for the others
+            # most (> 50%) of the analysis succeeded, let's try a second time for the others
 
             sleep 300
 
