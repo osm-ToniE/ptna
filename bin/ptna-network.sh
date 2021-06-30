@@ -234,6 +234,7 @@ then
             fi
 
             START_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
+            DOWNLOAD_TRIES=1
             if [ -n "$CALL_PARAMS" ]
             then
                 wget --user-agent="PTNA script on https://ptna.openstreetmap.de" "$CALL_PARAMS" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE.part.$$
@@ -242,31 +243,6 @@ then
             fi
             END_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
             echo $(date "+%Y-%m-%d %H:%M:%S") "wget returns $?"
-
-            if [ -s $OSM_XML_FILE_ABSOLUTE.part.$$ ]
-            then
-                echo $(date "+%Y-%m-%d %H:%M:%S") "Success for wget for '$PREFIX'"
-            else
-                echo $(date "+%Y-%m-%d %H:%M:%S") "Calling wget for '$PREFIX' a second time in 1 minute"
-                # try a second, but only a second time
-                sleep 60
-                START_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
-                if [ -n "$CALL_PARAMS" ]
-                then
-                    wget --user-agent="PTNA script on https://ptna.openstreetmap.de" "$CALL_PARAMS" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE.part.$$
-                else
-                    wget --user-agent="PTNA script on https://ptna.openstreetmap.de" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE.part.$$
-                fi
-                END_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
-                echo $(date "+%Y-%m-%d %H:%M:%S") "wget returns $?"
-
-                if [ -s $OSM_XML_FILE_ABSOLUTE.part ]
-                then
-                    echo $(date "+%Y-%m-%d %H:%M:%S") "Success for wget for '$PREFIX'"
-                else
-                    echo $(date "+%Y-%m-%d %H:%M:%S") "Failure for wget for '$PREFIX'"
-                fi
-            fi
 
             fsize=$(stat -c '%s' $OSM_XML_FILE_ABSOLUTE.part.$$)
             if [ "$fsize" -gt 0 ]
@@ -286,6 +262,49 @@ then
                     echo $(date "+%Y-%m-%d %H:%M:%S") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
                     rm    $OSM_XML_FILE_ABSOLUTE.part.$$
                     touch $OSM_XML_FILE_ABSOLUTE.part.$$
+                fi
+            else
+                echo $(date "+%Y-%m-%d %H:%M:%S") "Failure for wget for '$PREFIX'"
+            fi
+
+            fsize=$(stat -c '%s' $OSM_XML_FILE_ABSOLUTE.part.$$)
+            if [ "$fsize" -eq 0 ]
+            then
+                echo $(date "+%Y-%m-%d %H:%M:%S") "Calling wget for '$PREFIX' a second time in 1 minute"
+                # try a second, but only a second time
+                sleep 60
+                START_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
+                DOWNLOAD_TRIES=2
+                if [ -n "$CALL_PARAMS" ]
+                then
+                    wget --user-agent="PTNA script on https://ptna.openstreetmap.de" "$CALL_PARAMS" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE.part.$$
+                else
+                    wget --user-agent="PTNA script on https://ptna.openstreetmap.de" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE.part.$$
+                fi
+                END_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
+                echo $(date "+%Y-%m-%d %H:%M:%S") "wget returns $?"
+
+                fsize=$(stat -c '%s' $OSM_XML_FILE_ABSOLUTE.part.$$)
+                if [ "$fsize" -gt 0 ]
+                then
+                    if [ "$fsize" -ge 1000 ]
+                    then
+                        echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' first 10 lines:"
+                        head -10 $OSM_XML_FILE_ABSOLUTE.part.$$
+                        OSM_BASE=$(fgrep -m 1 '<meta osm_base' $OSM_XML_FILE_ABSOLUTE.part.$$ | sed -e 's/^.*osm_base="//' -e 's/".*$//')
+                        if [ -n "$OSM_BASE" ]
+                        then
+                            OSM_BASE=$(date --date "$OSM_BASE" "+%Y-%m-%d %H:%M:%S %Z")
+                        fi
+                    else
+                        echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' is quite small: error during download?"
+                        cat $OSM_XML_FILE_ABSOLUTE.part.$$
+                        echo $(date "+%Y-%m-%d %H:%M:%S") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
+                        rm    $OSM_XML_FILE_ABSOLUTE.part.$$
+                        touch $OSM_XML_FILE_ABSOLUTE.part.$$
+                    fi
+                else
+                    echo $(date "+%Y-%m-%d %H:%M:%S") "Failure for wget for '$PREFIX'"
                 fi
             fi
 
@@ -530,6 +549,7 @@ then
         echo "CALL_PARAMS=$CALL_PARAMS"                                     >> $WORK_LOC/$DETAILS_FILE
         echo "START_DOWNLOAD=$START_DOWNLOAD"                               >> $WORK_LOC/$DETAILS_FILE
         echo "END_DOWNLOAD=$END_DOWNLOAD"                                   >> $WORK_LOC/$DETAILS_FILE
+        echo "DOWNLOAD_TRIES=$DOWNLOAD_TRIES"                               >> $WORK_LOC/$DETAILS_FILE
         if [ -f $OSM_XML_FILE_ABSOLUTE ]
         then
             echo "OSM_BASE=$OSM_BASE"                                                                          >> $WORK_LOC/$DETAILS_FILE
