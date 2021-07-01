@@ -235,12 +235,7 @@ then
 
             START_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
             DOWNLOAD_TRIES=1
-            if [ -n "$CALL_PARAMS" ]
-            then
-                wget --user-agent="PTNA script on https://ptna.openstreetmap.de" "$CALL_PARAMS" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE.part.$$
-            else
-                wget --user-agent="PTNA script on https://ptna.openstreetmap.de" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE.part.$$
-            fi
+            wget $CALL_PARAMS --user-agent="PTNA script on https://ptna.openstreetmap.de" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE.part.$$
             END_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
             echo $(date "+%Y-%m-%d %H:%M:%S") "wget returns $?"
 
@@ -275,12 +270,7 @@ then
                 sleep 60
                 START_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
                 DOWNLOAD_TRIES=2
-                if [ -n "$CALL_PARAMS" ]
-                then
-                    wget --user-agent="PTNA script on https://ptna.openstreetmap.de" "$CALL_PARAMS" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE.part.$$
-                else
-                    wget --user-agent="PTNA script on https://ptna.openstreetmap.de" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE.part.$$
-                fi
+                wget $CALL_PARAMS --user-agent="PTNA script on https://ptna.openstreetmap.de" "$OVERPASS_QUERY" -O $OSM_XML_FILE_ABSOLUTE.part.$$
                 END_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
                 echo $(date "+%Y-%m-%d %H:%M:%S") "wget returns $?"
 
