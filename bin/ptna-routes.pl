@@ -2880,6 +2880,7 @@ sub analyze_ptv2_route_relation {
     my $number_of_route_relation            = $relation_ptr->{'route_relation'} ? scalar( @{$relation_ptr->{'route_relation'}} ) : 0;
 
     my @relation_route_highways             = FindRouteHighWays( $relation_ptr );
+    my %relation_route_highways_hash        = ();
     my $number_of_route_highways            = scalar( @relation_route_highways );
 
     my @relation_route_stop_positions       = FindRouteStopPositions( $relation_ptr );  # stop positions are nodes only
@@ -2893,7 +2894,9 @@ sub analyze_ptv2_route_relation {
     my $number_of_route_platform_relations  = scalar( @relation_route_platform_relations );
     my $number_of_route_platforms           = $number_of_route_platform_nodes + $number_of_route_platform_ways + $number_of_route_platform_relations;
 
-    unless ( $number_of_route_highways ) {
+    if ( $number_of_route_highways ) {
+        map { $relation_route_highways_hash{$_} = 1; } @relation_route_highways;
+    } else {
         $issues_string = gettext( "Route without Way(s)" );
         push( @{$relation_ptr->{'__issues__'}}, $issues_string );
     }
@@ -3503,7 +3506,7 @@ sub analyze_ptv2_route_relation {
         }
     }
     #
-    # WAYS      are either Platforms (which must have a 'role') or Ways (which must not have a 'role')
+    # WAYS      are either Platforms (which must have a 'role') or Ways (which may have a 'role' = 'hail_and_ride')
     #
     $role_mismatch_found = 0;
     %role_mismatch       = ();
@@ -3547,6 +3550,9 @@ sub analyze_ptv2_route_relation {
                         $role_mismatch_found++;
                     }
                 }
+            } elsif ( $highway_ref->{'role'}  =~ m/^hail_and_ride$/       &&
+                      $relation_route_highways_hash{$highway_ref->{'ref'}}    ) {
+                ; # fine, 'hail_and_ride' is allowed on non platform ways only
             } else {
                 $issues_string = gettext( "PTv2 route: wrong 'role' = '%s'" );
                 $help_string   = sprintf( $issues_string, ctrl_escape($highway_ref->{'role'}) );
