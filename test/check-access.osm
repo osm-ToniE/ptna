@@ -189,7 +189,8 @@
   <way id='-152334' action='modify'>
     <nd ref='-152077' />
     <nd ref='-152059' />
-    <tag k='highway' v='secondary' />
+    <tag k='highway' v='pedestrian' />
+    <tag k='motor_vehicle' v='designated' />
     <tag k='name' v='Way 3' />
     <tag k='ref' v='W 3' />
   </way>

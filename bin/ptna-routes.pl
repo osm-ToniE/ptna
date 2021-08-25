@@ -4626,11 +4626,7 @@ sub noAccessOnWay {
         } else {
             foreach my $access_type ( 'vehicle', 'motor_vehicle', 'motorcar', 'access' ) {
                 if ( $way_tag_ref->{$access_type} ) {
-                    if ( $way_tag_ref->{$access_type} eq 'yes'         ||
-                         $way_tag_ref->{$access_type} eq 'permissive'  ||
-                         $way_tag_ref->{$access_type} eq 'official'    ||
-                         $way_tag_ref->{$access_type} eq 'destination' ||
-                         $way_tag_ref->{$access_type} eq 'designated'     ) {
+                    if ( $way_tag_ref->{$access_type} =~ m/yes|permissive|official|destination|designated/ ) {
                         last;
                     } else {
                         printf STDERR "noAccessOnWay() : no access for way %d (%s=%s)\n", $way_id, $access_type, $way_tag_ref->{$access_type}       if ( $debug );
@@ -4640,10 +4636,10 @@ sub noAccessOnWay {
             }
             foreach my $highway_type ( 'pedestrian', 'footway', 'cycleway', 'path', 'construction' ) {
                 if ( $way_tag_ref->{'highway'} && $way_tag_ref->{'highway'} eq $highway_type ) {
-                    if ( ($way_tag_ref->{'access'}          && $way_tag_ref->{'access'}         eq 'yes') ||
-                         ($way_tag_ref->{'vehicle'}         && $way_tag_ref->{'vehicle'}        eq 'yes') ||
-                         ($way_tag_ref->{'motor_vehicle'}   && $way_tag_ref->{'motor_vehicle'}  eq 'yes') ||
-                         ($way_tag_ref->{'motorcar'}        && $way_tag_ref->{'motorcar'}       eq 'yes')    ) {
+                    if ( ($way_tag_ref->{'access'}          && $way_tag_ref->{'access'}         =~ m/yes|permissive|official|destination/           ) ||
+                         ($way_tag_ref->{'vehicle'}         && $way_tag_ref->{'vehicle'}        =~ m/yes|permissive|official|destination|designated/) ||
+                         ($way_tag_ref->{'motor_vehicle'}   && $way_tag_ref->{'motor_vehicle'}  =~ m/yes|permissive|official|destination|designated/) ||
+                         ($way_tag_ref->{'motorcar'}        && $way_tag_ref->{'motorcar'}       =~ m/yes|permissive|official|destination|designated/)    ) {
                         ; # fine
                     } else {
                         printf STDERR "noAccessOnWay() : no access for way %d (%s=%s)\n", $way_id, 'highway', $highway_type       if ( $debug );
