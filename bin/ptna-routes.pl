@@ -4598,12 +4598,24 @@ sub noAccessOnWay {
             #
             printf STDERR "noAccessOnWay() : access for %s for way %d\n", $vehicle_type, $way_id       if ( $debug );
             return '';
-        } elsif ( $vehicle_type && $way_tag_ref->{$vehicle_type.':conditional'} && $way_tag_ref->{$vehicle_type.':conditional'} =~ m/^yes\s*@/ ) {
+        } elsif ( $vehicle_type && $way_tag_ref->{$vehicle_type.':conditional'} ) {
             #
             # to be checked for conditional access for this specific type of vehicle (bus, train, subway, ...) == @supported_route_types
             #
             printf STDERR "noAccessOnWay() : unclear access for %s for way %d\n", $vehicle_type, $way_id       if ( $debug );
             return sprintf( "'%s:conditional'='%s'", $vehicle_type, $way_tag_ref->{$vehicle_type.':conditional'} );
+        } elsif ( $vehicle_type && $way_tag_ref->{$vehicle_type.':forward:conditional'} ) {
+            #
+            # to be checked for conditional access for this specific type of vehicle (bus, train, subway, ...) == @supported_route_types
+            #
+            printf STDERR "noAccessOnWay() : unclear access for %s for way %d\n", $vehicle_type, $way_id       if ( $debug );
+            return sprintf( "'%s:forward:conditional'='%s'", $vehicle_type, $way_tag_ref->{$vehicle_type.':forward:conditional'} );
+        } elsif ( $vehicle_type && $way_tag_ref->{$vehicle_type.':backward:conditional'} ) {
+            #
+            # to be checked for conditional access for this specific type of vehicle (bus, train, subway, ...) == @supported_route_types
+            #
+            printf STDERR "noAccessOnWay() : unclear access for %s for way %d\n", $vehicle_type, $way_id       if ( $debug );
+            return sprintf( "'%s:backward:conditional'='%s'", $vehicle_type, $way_tag_ref->{$vehicle_type.':backward:conditional'} );
         } elsif ( $vehicle_type && $vehicle_type eq 'ferry' && $way_tag_ref->{'route'} && ($way_tag_ref->{'route'} eq 'ferry' || $way_tag_ref->{'route'} eq 'boat') ) {
             #
             # fine for ferries on ferry ways
