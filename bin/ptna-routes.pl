@@ -4636,7 +4636,7 @@ sub noAccessOnWay {
             printf STDERR "noAccessOnWay() : access for %s for way %d for non-PTv2 on Platforms\n", $vehicle_type, $way_id       if ( $debug );
             return '';
         } else {
-            foreach my $access_type ( 'vehicle', 'motor_vehicle', 'motorcar', 'access' ) {
+            foreach my $access_type ( 'motorcar', 'motor_vehicle', 'vehicle', 'access' ) {
                 if ( $way_tag_ref->{$access_type} ) {
                     if ( $way_tag_ref->{$access_type} =~ m/yes|permissive|official|destination|designated/ ) {
                         last;
