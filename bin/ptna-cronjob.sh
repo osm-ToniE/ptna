@@ -94,11 +94,12 @@ then
         if [ "$1" = "UTC+01" ]
         then
             # for timezone UTC+01 run jobs in parallel using also a more powerful overpass-api server
-            ptna-all-networks-parallel.sh -ogau >> $LOGFILE 2>&1 < /dev/null
-        else
+            export PTNA_OVERPASS_API_SERVER="overpass.kumi.systems"
+         else
             # for other timezones it is OK to run sequentially and using standard overpass-api server
-            ptna-all-networks.sh -ogau >> $LOGFILE 2>&1 < /dev/null
+            export PTNA_OVERPASS_API_SERVER=""
         fi
+        ptna-all-networks-parallel.sh -ogau >> $LOGFILE 2>&1 < /dev/null
 
         emptyxml=$(find ${PTNA_WORK_LOC} -name '*.xml' -size 0 | wc -l)
 

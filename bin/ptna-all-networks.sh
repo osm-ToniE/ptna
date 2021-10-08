@@ -22,7 +22,7 @@ do
 
         B=$(basename $D)
 
-        ptna-network.sh $* > $PTNA_WORK_LOC/log/$B.log 2>&1
+        ptna-network.sh $*
 
         cd $WD
     fi
