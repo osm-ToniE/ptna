@@ -17,14 +17,14 @@ do
         echo
         echo $(date "+%Y-%m-%d %H:%M:%S") "$D"
         echo
-    
+
         cd $D
-    
-        ptna-network.sh $*
-    
+
+        B=$(basename $D)
+
+        ptna-network.sh $* > $PTNA_WORK_LOC/log/$B.log 2>&1
+
         cd $WD
     fi
-    
+
 done
-
-
