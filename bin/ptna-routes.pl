@@ -1502,7 +1502,7 @@ if ( scalar(@suspicious_relations) ) {
                         'type'              =>    $relation_ptr->{'tag'}->{'type'},
                         'route_type'        =>    ($relation_ptr->{'tag'}->{'type'} && ($relation_ptr->{'tag'}->{'type'} eq 'route' || $relation_ptr->{'tag'}->{'type'} eq 'route_master')) ? $relation_ptr->{'tag'}->{$relation_ptr->{'tag'}->{'type'}} : '',
                         'ref'               =>    $relation_ptr->{'tag'}->{'ref'},
-                        'name'              =>    $relation_ptr->{'tag'}->{'name'},
+                        'name'              =>    ( $relation_ptr->{'tag'}->{'name'} ) ? $relation_ptr->{'tag'}->{'name'} : ($opt_language && $relation_ptr->{'tag'}->{'name:'.$opt_language}) ? "'name:".$opt_language."' = '".$relation_ptr->{'tag'}->{'name:'.$opt_language}."'" : '',
                         'network'           =>    $relation_ptr->{'tag'}->{'network'},
                         'operator'          =>    $relation_ptr->{'tag'}->{'operator'},
                         'from'              =>    $relation_ptr->{'tag'}->{'from'},
@@ -2497,6 +2497,11 @@ sub analyze_relation {
         unless ( $relation_ptr->{'tag'}->{'name'} ) {
             $issues_string = gettext( "'name' is not set" );
             push( @{$relation_ptr->{'__issues__'}}, $issues_string );
+            foreach my $tag ( @relation_tags ) {
+                if ( $tag =~ m/^name:/ || $tag =~ m/_name$/ ) {
+                    push( @{$relation_ptr->{'__notes__'}}, sprintf( "'%s' = '%s'", html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag}) ) );
+                }
+            }
         }
 
         $network = $relation_ptr->{'tag'}->{'network'};
