@@ -320,23 +320,35 @@ then
 
     if [ -d "$WORK_LOC" ]
     then
+        rm -f "$WORK_LOC/$ROUTES_FILE"
         if [ -n "$WIKI_ROUTES_PAGE" ]
         then
             echo $(date "+%Y-%m-%d %H:%M:%S") "Reading Routes Wiki page '$WIKI_ROUTES_PAGE' to file '$WORK_LOC/$ROUTES_FILE'"
             log=$(ptna-wiki-page.pl --pull --page=$WIKI_ROUTES_PAGE --file=$WORK_LOC/$ROUTES_FILE 2>&1)
-            echo $log
-            ROUTES_TIMESTAMP_UTC="$(echo $log | fgrep "timestamp =" | sed -e 's/.*timestamp\s*=\s*\(20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]T[0-9][0-9]:[0-9][0-9]:[0-9][0-9]Z\).*/\1/')"
-            ROUTES_TIMESTAMP_LOC="$(date --date "$ROUTES_TIMESTAMP_UTC" '+%Y-%m-%d %H:%M:%S %Z' | sed -e 's/ \([+-][0-9]*\)$/ UTC\1/')"
-            echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WORK_LOC/$ROUTES_FILE)
+            ret=$?
+            echo $log | sed -e 's/ \([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9] \)/\n\1/g'
+            echo $(date "+%Y-%m-%d %H:%M:%S") "ptna-wiki-page.pl returned $?"
+            if [ -f "$WORK_LOC/$ROUTES_FILE" ]
+            then
+                ROUTES_SIZE="$(stat -c '%s' $WORK_LOC/$ROUTES_FILE)"
+                ROUTES_TIMESTAMP_UTC="$(echo $log | fgrep "timestamp =" | sed -e 's/.*timestamp\s*=\s*\(20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]T[0-9][0-9]:[0-9][0-9]:[0-9][0-9]Z\).*/\1/')"
+                ROUTES_TIMESTAMP_LOC="$(date --date "$ROUTES_TIMESTAMP_UTC" '+%Y-%m-%d %H:%M:%S %Z' | sed -e 's/ \([+-][0-9]*\)$/ UTC\1/')"
+                echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WORK_LOC/$ROUTES_FILE)
+            else
+                ROUTES_SIZE=-1
+                echo $(date "+%Y-%m-%d %H:%M:%S") "Downloading '$ROUTES_FILE' failed"
+            fi
         else
             if [ -f "$SETTINGS_DIR/$ROUTES_FILE" ]
             then
                 echo $(date "+%Y-%m-%d %H:%M:%S") "'$ROUTES_FILE' provided by GitHub, copy to $WORK_LOC"
                 cp $SETTINGS_DIR/$ROUTES_FILE $WORK_LOC/$ROUTES_FILE
+                ROUTES_SIZE="$(stat -c '%s' $WORK_LOC/$ROUTES_FILE)"
                 ROUTES_TIMESTAMP_UTC="$(stat -c '%y' $SETTINGS_DIR/$ROUTES_FILE)"
                 ROUTES_TIMESTAMP_LOC="$(date --date "$ROUTES_TIMESTAMP_UTC" '+%Y-%m-%d %H:%M:%S %Z' | sed -e 's/ \([+-][0-9]*\)$/ UTC\1/')"
                 echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WORK_LOC/$ROUTES_FILE)
             else
+                ROUTES_SIZE=""
                 echo $(date "+%Y-%m-%d %H:%M:%S") "no file: '$ROUTES_FILE'"
             fi
         fi
@@ -533,6 +545,7 @@ then
         echo "DISCUSSION_LINK=$PTNA_WWW_DISCUSSION_LINK"                    >> $WORK_LOC/$DETAILS_FILE
         echo "ROUTES_NAME=$PTNA_WWW_ROUTES_NAME"                            >> $WORK_LOC/$DETAILS_FILE
         echo "ROUTES_LINK=$PTNA_WWW_ROUTES_LINK"                            >> $WORK_LOC/$DETAILS_FILE
+        echo "ROUTES_SIZE=$ROUTES_SIZE"                                     >> $WORK_LOC/$DETAILS_FILE
         echo "ROUTES_TIMESTAMP_UTC=$ROUTES_TIMESTAMP_UTC"                   >> $WORK_LOC/$DETAILS_FILE
         echo "ROUTES_TIMESTAMP_LOC=$ROUTES_TIMESTAMP_LOC"                   >> $WORK_LOC/$DETAILS_FILE
         echo "TZ=${PTNA_TIMEZONE}"                                          >> $WORK_LOC/$DETAILS_FILE
