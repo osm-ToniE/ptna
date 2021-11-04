@@ -3705,7 +3705,7 @@ sub FindRouteStopPositions {
     foreach $node_ref ( @{$relation_ptr->{'node'}} ) {
         if ( $stop_nodes{$node_ref->{'ref'}} ) {
             push( @relations_route_stop_positions, $node_ref->{'ref'} );
-        } elsif ( $ptv1_compatibility ne "no"  ) {
+        } elsif ( $ptv1_compatibility ne "no" && $node_ref->{'role'} =~ m/^stop/ ) {
             my $compatible_tag = PTv2CompatibleNodeStopTag( $node_ref->{'ref'}, $relation_ptr->{'tag'}->{'route'} );
             if ( $compatible_tag ) {
                 push( @relations_route_stop_positions, $node_ref->{'ref'} );
