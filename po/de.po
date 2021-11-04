@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2021-06-09 13:45+0200\n"
+"POT-Creation-Date: 2021-11-04 18:18+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2021\n"
 "Language-Team: German (https://www.transifex.com/jungle-bus/teams/97874/de/)\n"
@@ -722,9 +722,6 @@ msgstr ""
 "PTv2 Route: der letzte Punkt des Weges ist keine 'stop_position' dieser "
 "Route: %s"
 
-msgid "suspicious sub-type"
-msgstr "verdächtige Wegeklassifizierung"
-
 msgid "wrong value"
 msgstr "falscher Wert"
 
@@ -733,6 +730,9 @@ msgstr "oder"
 
 msgid "missing key"
 msgstr "fehlender Schlüssel"
+
+msgid "suspicious sub-type"
+msgstr "verdächtige Wegeklassifizierung"
 
 #, perl-format
 msgid "'barrier'='%s' with implied 'access'='no'"
@@ -1842,6 +1842,12 @@ msgid "assume and show compatibility with legacy bus-stops (aka: PTv1)"
 msgstr ""
 "die Kompatibilität mit alten bus-stops (aka: PTv1) wird angenommen und "
 "angezeigt"
+
+msgid "See also:"
+msgstr "Siehe auch:"
+
+msgid "Compatibility with well known tags"
+msgstr "Kompatibilität mit bekannten Tags"
 
 msgid ""
 "Relaxed check of begin and end of routes regarding stop positions (i.e. for "

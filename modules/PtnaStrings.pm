@@ -1564,7 +1564,9 @@ sub InitOptionStrings {
                                                   gettext( "'highway' = 'bus_stop' on a point beside the road is treated as 'public_transport' = 'platform' if 'role' = 'platform'." ) . "\n" .
                                                   "allow: " . gettext( "silently assume compatibility with legacy bus-stops (aka: PTv1)" ) . "\n" .
                                                   "no: "    . gettext( "no compatibility with legacy bus-stops (aka: PTv1)" ) . "\n" .
-                                                  "show: "  . gettext( "assume and show compatibility with legacy bus-stops (aka: PTv1)" ) . '.';
+                                                  "show: "  . gettext( "assume and show compatibility with legacy bus-stops (aka: PTv1)" ) . ".\n" .
+                                                  gettext( "See also:" ) . ' <a href="https://wiki.openstreetmap.org/w/index.php?title=Proposed_features/Public_Transport&oldid=625726#Compatibility_with_well_known_tags">' .
+                                                  'OSM-Wiki: ' . gettext( "Compatibility with well known tags" ) . '</a>.';
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
