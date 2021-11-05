@@ -1565,9 +1565,10 @@ sub InitOptionStrings {
                                                   "allow: " . gettext( "silently assume compatibility with legacy bus-stops (aka: PTv1)" ) . "\n" .
                                                   "no: "    . gettext( "no compatibility with legacy bus-stops (aka: PTv1)" ) . "\n" .
                                                   "show: "  . gettext( "assume and show compatibility with legacy bus-stops (aka: PTv1)" ) . ".\n" .
-                                                  gettext( "See also:" ) . ' <a href="https://wiki.openstreetmap.org/w/index.php?title=Proposed_features/Public_Transport&oldid=625726#Compatibility_with_well_known_tags">' .
-                                                  'OSM-Wiki: ' . gettext( "Compatibility with well known tags" ) . '</a>.';
+                                                  gettext( "See also:" ) . ' __LINK_START__' .
+                                                  'OSM-Wiki: ' . gettext( "Compatibility with well known tags" ) . '__LINK_END__.';
     $OptionList[$i]->{'image'}                  = "";
+    $OptionList[$i]->{'link'}                   = "https://wiki.openstreetmap.org/w/index.php?title=Proposed_features/Public_Transport&oldid=625726#Compatibility_with_well_known_tags";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
