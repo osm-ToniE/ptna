@@ -4,7 +4,7 @@ LOCALIZABLE=../bin/*.pl ../modules/*.pm ../modules/GTFS/*.pm
 
 TEMPLATE=ptna.pot
 
-.PHONY: compile up update pull txpull push txpush clean help
+.PHONY: compile up update pull txpull push txpush www clean help
 
 compile:
 	@echo Creating message catalogs ...
@@ -36,8 +36,17 @@ pull txpull:
 	@echo Pulling translations from Transifex ...
 	@cd .. && tx pull
 
+www:
+	@echo Publishing to ptna-wwww ...
+	@ptna-list-strings.pl --what=messages --language=en > ../../ptna-www/en/message-table.inc
+	@ptna-list-strings.pl --what=messages --language=de > ../../ptna-www/de/message-table.inc
+	@ptna-list-strings.pl --what=messages --language=fr > ../../ptna-www/fr/message-table.inc
+	@ptna-list-strings.pl --what=options  --language=en > ../../ptna-www/en/option-table.inc
+	@ptna-list-strings.pl --what=options  --language=de > ../../ptna-www/de/option-table.inc
+	@ptna-list-strings.pl --what=options  --language=fr > ../../ptna-www/fr/option-table.inc
+
 clean:
 	@rm -f *.save
 
 help:
-	@echo 'Available goals: compile, update, txpush, txpull, clean, help.'
+	@echo 'Available goals: compile, update, txpush, txpull, www, clean, help.'
