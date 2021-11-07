@@ -250,6 +250,18 @@ then
                     if [ -n "$OSM_BASE" ]
                     then
                         OSM_BASE=$(date --date "$OSM_BASE" "+%Y-%m-%d %H:%M:%S %Z")
+
+                        OSM_BASE_SEC=$(date --utc --date "$OSM_BASE" "+%s")
+                        NOW_SEC=$(date --utc "+%s")
+                        OSM_AGE=$(( $NOW_SEC - $OSM_BASE_SEC ))
+                        MAX_AGE=$(( 6 * 3600 ))
+                        if [ $OSM_AGE -gt $MAX_AGE ]
+                        then
+                            echo $(date "+%Y-%m-%d %H:%M:%S") "OSM ($OSM_BASE) data is quite old : older than 6 hours"
+                            echo $(date "+%Y-%m-%d %H:%M:%S") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
+                            rm    $OSM_XML_FILE_ABSOLUTE.part.$$
+                            touch $OSM_XML_FILE_ABSOLUTE.part.$$
+                        fi
                     fi
                 else
                     echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' is quite small: error during download?"
@@ -285,6 +297,18 @@ then
                         if [ -n "$OSM_BASE" ]
                         then
                             OSM_BASE=$(date --date "$OSM_BASE" "+%Y-%m-%d %H:%M:%S %Z")
+
+                            OSM_BASE_SEC=$(date --utc --date "$OSM_BASE" "+%s")
+                            NOW_SEC=$(date --utc "+%s")
+                            OSM_AGE=$(( $NOW_SEC - $OSM_BASE_SEC ))
+                            MAX_AGE=$(( 6 * 3600 ))
+                            if [ $OSM_AGE -gt  $MAX_AGE ]
+                            then
+                                echo $(date "+%Y-%m-%d %H:%M:%S") "OSM ($OSM_BASE) data is quite old : older than 6 hours"
+                                echo $(date "+%Y-%m-%d %H:%M:%S") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
+                                rm    $OSM_XML_FILE_ABSOLUTE.part.$$
+                                touch $OSM_XML_FILE_ABSOLUTE.part.$$
+                            fi
                         fi
                     else
                         echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' is quite small: error during download?"
