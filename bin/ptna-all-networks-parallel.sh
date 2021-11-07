@@ -6,13 +6,13 @@
 
 cd $PTNA_NETWORKS_LOC
 
-if [ -n "$PTNA_OVERPASS_API_SERVER"]
+if [ -z "$PTNA_OVERPASS_API_SERVER" ]
 then
-    # 6 jobs in parallel
-    XARG="P6"
-else
     # 1 job at a time only
     XARG="P1"
+else
+    # 6 jobs in parallel
+    XARG="P6"
 fi
 
 find . -name settings.sh | \
