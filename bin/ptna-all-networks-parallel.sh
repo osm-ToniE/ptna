@@ -4,15 +4,18 @@
 # analyze ÖPNV networks
 #
 
+# 6 jobs in parallel
+XARG="P6"
+
 cd $PTNA_NETWORKS_LOC
 
 if [ -z "$PTNA_OVERPASS_API_SERVER" ]
 then
-    # 1 job at a time only
-    XARG="P1"
-else
-    # 6 jobs in parallel
-    XARG="P6"
+    if [ $(echo $* | fgrep -c -i o) -gt 0 ]
+    then
+        # 1 job at a time only if option 'o' = 'overpass' is set
+        XARG="P1"
+    fi
 fi
 
 find . -name settings.sh | \
