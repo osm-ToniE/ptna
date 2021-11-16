@@ -4717,7 +4717,7 @@ sub noAccessOnNode {
              $node_tag_ref->{'barrier'} eq 'entrance'    || $node_tag_ref->{'barrier'} eq 'toll_booth'        ||
              $node_tag_ref->{'barrier'} eq 'bus_trap'    || $node_tag_ref->{'barrier'} eq 'height_restrictor' ||
              $node_tag_ref->{'barrier'} eq 'cattle_grid' || $node_tag_ref->{'barrier'} eq 'border_control'    ||
-             $node_tag_ref->{'barrier'} eq 'sally_port'                                                          ) {
+             $node_tag_ref->{'barrier'} eq 'sally_port'  || $node_tag_ref->{'barrier'} eq 'coupure'              ) {
             printf STDERR "noAccessOnNode() : access for node %d (barrier=%s with implied access=yes)\n", $node_id, $node_tag_ref->{'barrier'}       if ( $debug );
             return '';
         } else {
