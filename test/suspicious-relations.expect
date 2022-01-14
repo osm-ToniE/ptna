@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>PTNA - Results</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="PTNA">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="keywords" content="OSM Public Transport PTv2">
+        <meta name="description" content="PTNA - Public Transport Network Analysis">
+        <style>
+            #analysis table           { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; }
+            #analysis th              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+            #analysis td              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+            #analysis ol              { list-style: none; }
+            #analysis img             { width: 20px; vertical-align: top; }
+            #analysis .tableheaderrow { background-color: LightSteelBlue;   }
+            #analysis .sketchline     { background-color: LightBlue;        }
+            #analysis .sketch         { text-align:left;  font-weight: 500; }
+            #analysis .csvinfo        { text-align:right; font-size: 0.8em; }
+            #analysis .ref            { white-space:nowrap; }
+            #analysis .relation       { white-space:nowrap; }
+            #analysis .PTv            { text-align:center; }
+            #analysis .number         { text-align:right; }
+            #analysis .gtfs_feed      { white-space:nowrap; }
+            #analysis .feed_from      { white-space:nowrap; }
+            #analysis .date           { white-space:nowrap; }
+            #analysis .date_from      { white-space:nowrap; }
+            #analysis .attention      { background-color: yellow; font-weight: 500; font-size: 1.2em; }
+            .gtfs-dateold             { text-align:center; background-color: orange; }
+            .gtfs-datenew             { text-align:center; background-color: lightgreen; }
+            .gtfs-dateprevious        { text-align:center; background-color: rgb(128, 128, 255); }
+            .bad-link                 { text-decoration: line-through; background-color: yellow; }
+        </style>
+    </head>
+    <body>
+        <div id="analysis">
+        <h1>Contents</h1>
+        <ol>
+        <li>1 <a href="#hints">Hints</a>
+        </li>
+        <li>2 <a href="#otherslines">Public Transport Lines</a>
+        <ol>
+        <li>2.1 <a href="#A2.1">Bus</a>
+        </li>
+        </ol>
+        </li>
+        <li>3 <a href="#withoutref">Public Transport Lines without &#039;ref&#039;</a>
+        <ol>
+        <li>3.1 <a href="#A3.1">disused:bus</a>
+        </li>
+        </ol>
+        </li>
+        <li>4 <a href="#morerelations">More Relations</a>
+        </li>
+        <li>5 <a href="#networkdetails">Details for &#039;network&#039;-Values</a>
+        <ol>
+        <li>5.1 <a href="#considerednetworks">Considered &#039;network&#039;-Values</a>
+        </li>
+        <li>5.2 <a href="#notconsiderednetworks">Not Considered &#039;network&#039;-Values</a>
+        </li>
+        </ol>
+        </li>
+        </ol>
+        <hr />
+        <h1 id="hints">1 Hints</h1>
+        <p>
+            The data will be updated when the result of the analysis has changed.
+        </p>
+        <p>
+            An explanation of the error texts can be found in the documentation at '<a href='/en/index.php#messages'>Messages</a>'.
+        </p>
+        <hr />
+        <h1 id="otherslines">2 Public Transport Lines</h1>
+        <h2 id="A2.1">2.1 Bus</h2>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="ref">Line (ref=)</th><th class="relation">Relation (id=)</th><th class="type">Type (type=)</th><th class="route_type">Vehicle (route(_master)=)</th><th class="name">Name (name=)</th><th class="network">Network (network=)</th><th class="operator">Operator (operator=)</th><th class="from">From (from=)</th><th class="via">Via (via=)</th><th class="to">To (to=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr id="-113886" data-info="-113886" data-ref="100" class="line"><td class="ref">100</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113886</td><td class="type">route</td><td class="route_type">bus</td><td class="name">Bus 100: First Street =&gt; Second Street</td><td class="network">network</td><td class="operator">Operator</td><td class="from">First Street</td><td class="via"></td><td class="to">Second Street</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'network'<br>'operator' = 'Operator'</td></tr>
+                <tr id="-113964" data-info="-113964" data-ref="100" class="line"><td class="ref">100</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113964</td><td class="type">route</td><td class="route_type">bus</td><td class="name">Bus 100: First Avenue =&gt; Second Avenue</td><td class="network">network</td><td class="operator">Operator</td><td class="from">First Avenue</td><td class="via"></td><td class="to">Second Avenue</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'network'<br>'operator' = 'Operator'</td></tr>
+                <tr id="-113978" data-info="-113978" data-ref="100" class="line"><td class="ref">100</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113978</td><td class="type">route</td><td class="route_type">bus</td><td class="name">Bus 100: Third Avenue =&gt; Fourth Avenue</td><td class="network">network</td><td class="operator">Operator</td><td class="from">Third Avenue</td><td class="via"></td><td class="to">Fourth Avenue</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'network'<br>'operator' = 'Operator'</td></tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <h1 id="withoutref">3 Public Transport Lines without &#039;ref&#039;</h1>
+        <h2 id="A3.1">3.1 disused:bus</h2>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="relation">Relation (id=)</th><th class="type">Type (type=)</th><th class="route_type">Vehicle (route(_master)=)</th><th class="name">Name (name=)</th><th class="network">Network (network=)</th><th class="operator">Operator (operator=)</th><th class="from">From (from=)</th><th class="via">Via (via=)</th><th class="to">To (to=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr id="-113803" data-info="-113803" data-ref="???" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113803</td><td class="type">route</td><td class="route_type">disused:bus</td><td class="name"></td><td class="network"></td><td class="operator"></td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv"></td><td class="issues">'ref' is not set<br>'name' is not set<br>'network' is not set</td><td class="notes"></td></tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <h1 id="morerelations">4 More Relations</h1>
+<p>
+This section lists further relations of the environment of the routes:
+</p>
+<ul>
+    <li>potentially wrong 'route' or 'route_master' values?
+        <ul>
+        <li>e.g. 'route' = 'suspended_bus' instead of 'route' = 'bus'</li>
+        </ul>
+    </li>
+    <li>but also 'type' = 'network', 'type' = 'set' or 'route' = 'network', i.e. a collection of all routes and route-masters belonging to the 'network'.
+        <ul>
+            <li>such <strong>collections are strictly spoken errors</strong>, since relations shall not represent collections: <a href="https://wiki.openstreetmap.org/wiki/Relations/Relations_are_not_Categories">Relations/Relations are not Categories</a></li>
+        </ul>
+    </li>
+</ul>
+
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="relation">Relation (id=)</th><th class="type">Type (type=)</th><th class="route_type">Vehicle (route(_master)=)</th><th class="ref">Line (ref=)</th><th class="name">Name (name=)</th><th class="network">Network (network=)</th><th class="operator">Operator (operator=)</th><th class="from">From (from=)</th><th class="via">Via (via=)</th><th class="to">To (to=)</th><th class="PTv">PTv</th><th class="public_transport">public_transport</th></tr>
+            </thead>
+            <tbody>
+                <tr id="-113804" data-info="-113804" data-ref="43" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113804</td><td class="type">disused:route_master</td><td class="route_type">&#039;route_master&#039; = &#039;bus&#039;</td><td class="ref">43</td><td class="name">Bus 43</td><td class="network">network</td><td class="operator"></td><td class="from">from</td><td class="via"></td><td class="to">to</td><td class="PTv">2</td><td class="public_transport"></td></tr>
+                <tr id="-113805" data-info="-113805" data-ref="???" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113805</td><td class="type"></td><td class="route_type"></td><td class="ref"></td><td class="name">&#039;type&#039; is not set</td><td class="network"></td><td class="operator"></td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv"></td><td class="public_transport"></td></tr>
+                <tr id="-113806" data-info="-113806" data-ref="???" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113806</td><td class="type">route</td><td class="route_type"></td><td class="ref"></td><td class="name">&#039;route&#039; is not set</td><td class="network"></td><td class="operator"></td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv"></td><td class="public_transport"></td></tr>
+                <tr id="-113807" data-info="-113807" data-ref="43" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113807</td><td class="type">route</td><td class="route_type">&#039;disused:route&#039; = &#039;bus&#039;</td><td class="ref">43</td><td class="name">Bus 43: from =&gt; to</td><td class="network">network2</td><td class="operator"></td><td class="from">from</td><td class="via"></td><td class="to">to</td><td class="PTv">2</td><td class="public_transport"></td></tr>
+                <tr id="-113808" data-info="-113808" data-ref="43" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113808</td><td class="type">route</td><td class="route_type">&#039;disused:route&#039; = &#039;road&#039;</td><td class="ref">43</td><td class="name">Bus 43: from =&gt; to</td><td class="network">network</td><td class="operator"></td><td class="from">from</td><td class="via"></td><td class="to">to</td><td class="PTv">2</td><td class="public_transport"></td></tr>
+                <tr id="-113809" data-info="-113809" data-ref="53" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113809</td><td class="type">route</td><td class="route_type">disused:bus</td><td class="ref">53</td><td class="name">Bus 53: from =&gt; to</td><td class="network">network</td><td class="operator"></td><td class="from">from</td><td class="via"></td><td class="to">to</td><td class="PTv">2</td><td class="public_transport"></td></tr>
+                <tr id="-113810" data-info="-113810" data-ref="43" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113810</td><td class="type">disused:route</td><td class="route_type">&#039;route&#039; = &#039;bus&#039;</td><td class="ref">43</td><td class="name">Bus 43: from =&gt; to</td><td class="network">network</td><td class="operator"></td><td class="from">from</td><td class="via"></td><td class="to">to</td><td class="PTv">2</td><td class="public_transport"></td></tr>
+                <tr id="-113811" data-info="-113811" data-ref="???" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113811</td><td class="type">&#039;disused:type&#039; = &#039;route&#039;</td><td class="route_type">&#039;route&#039; = &#039;bus&#039;</td><td class="ref"></td><td class="name">Bus 43: from =&gt; to</td><td class="network">network</td><td class="operator"></td><td class="from">from</td><td class="via"></td><td class="to">to</td><td class="PTv">2</td><td class="public_transport"></td></tr>
+                <tr id="-113812" data-info="-113812" data-ref="63" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113812</td><td class="type">&#039;disused:type&#039; = &#039;disused:route&#039;</td><td class="route_type">&#039;disused:route&#039; = &#039;disused:bus&#039;</td><td class="ref">63</td><td class="name">Bus 63: from =&gt; to</td><td class="network">network</td><td class="operator"></td><td class="from">from</td><td class="via"></td><td class="to">to</td><td class="PTv">2</td><td class="public_transport"></td></tr>
+                <tr id="-113855" data-info="-113855" data-ref="100" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113855</td><td class="type">&#039;disused:type&#039; = &#039;route_master&#039;<br>&#039;suspended:type&#039; = &#039;suspended:route_master&#039;</td><td class="route_type">&#039;route_master&#039; = &#039;bus&#039;</td><td class="ref">100</td><td class="name">Bus 100</td><td class="network">network</td><td class="operator">Operator</td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv">2</td><td class="public_transport"></td></tr>
+                <tr id="-113982" data-info="-113982" data-ref="100" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113982</td><td class="type">route_master</td><td class="route_type">&#039;disused:route_master&#039; = &#039;bus&#039;</td><td class="ref">100</td><td class="name">Bus 100</td><td class="network">network</td><td class="operator">Operator</td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv">2</td><td class="public_transport"></td></tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <h1 id="networkdetails">5 Details for &#039;network&#039;-Values</h1>
+        <h2 id="considerednetworks">5.1 Considered &#039;network&#039;-Values</h2>
+<p>
+This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="network">Network (network=)</th><th class="number">Number</th><th class="relations">Relations</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="???" data-ref="???" class="line"><td class="network"></td><td class="number">1</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> -113803</td></tr>
+                <tr data-info="network" data-ref="???" class="line"><td class="network">network</td><td class="number">3</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '100' -113886, <img src="/img/Relation.svg" alt="Relation" /> '100' -113964, <img src="/img/Relation.svg" alt="Relation" /> '100' -113978</td></tr>
+            </tbody>
+        </table>
+
+        <h2 id="notconsiderednetworks">5.2 Not Considered &#039;network&#039;-Values</h2>
+<p>
+This section lists the 'network'-values which have not been considered.
+They might include typos in values which otherwise should have been considered.
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="network">Network (network=)</th><th class="number">Number</th><th class="relations">Relations</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="network" data-ref="???" class="line"><td class="network">network</td><td class="number">1</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '53' -113809</td></tr>
+            </tbody>
+        </table>
+
+        </div> <!-- analysis -->
+        <iframe style="display:none" id="hiddenIframe" name="hiddenIframe"></iframe>
+    </body>
+</html>

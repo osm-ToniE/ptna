@@ -1499,8 +1499,8 @@ if ( scalar(@suspicious_relations) ) {
         $relation_ptr = $RELATIONS{$relation_id};
 
         printTableLine( 'relation'          =>    $relation_id,
-                        'type'              =>    $relation_ptr->{'tag'}->{'type'},
-                        'route_type'        =>    ($relation_ptr->{'tag'}->{'type'} && ($relation_ptr->{'tag'}->{'type'} eq 'route' || $relation_ptr->{'tag'}->{'type'} eq 'route_master')) ? $relation_ptr->{'tag'}->{$relation_ptr->{'tag'}->{'type'}} : '',
+                        'type'              =>    getRelationType( $relation_ptr ),
+                        'route_type'        =>    getRelationRouteType( $relation_ptr ),
                         'ref'               =>    $relation_ptr->{'tag'}->{'ref'},
                         'name'              =>    ( $relation_ptr->{'tag'}->{'name'} ) ? $relation_ptr->{'tag'}->{'name'} : ($opt_language && $relation_ptr->{'tag'}->{'name:'.$opt_language}) ? "'name:".$opt_language."' = '".$relation_ptr->{'tag'}->{'name:'.$opt_language}."'" : '',
                         'network'           =>    $relation_ptr->{'tag'}->{'network'},
@@ -5404,6 +5404,73 @@ sub CheckCompletenessOfData {
             }
             $relation_ptr->{'missing_node_data'}   = 1;
             printf STDERR "%s Error in input data: insufficient data for nodes of route ref=%s\n", get_time(), ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref' );
+        }
+    }
+
+    return $ret_val;
+}
+
+
+#############################################################################################
+#
+#
+#############################################################################################
+
+sub getRelationType {
+    my $relation_ptr  = shift;
+    my $ret_val       = '';
+
+    if ( $relation_ptr && $relation_ptr->{'tag'} ) {
+        if ( $relation_ptr->{'tag'}->{'type'} ) {
+            $ret_val = $relation_ptr->{'tag'}->{'type'};
+        } else {
+            my @found_types = ();
+            foreach my $key ( sort( keys(%{$relation_ptr->{'tag'}}) ) ) {
+                if ( $key =~ m/type/ ) {
+                    push( @found_types, sprintf( "'%s' = '%s'", $key, $relation_ptr->{'tag'}->{$key} ) );
+                }
+            }
+            $ret_val = join( '__separator__', @found_types );
+        }
+    }
+
+    return $ret_val;
+}
+
+
+#############################################################################################
+#
+#
+#############################################################################################
+
+sub getRelationRouteType {
+    my $relation_ptr  = shift;
+    my $ret_val       = '';
+    my $type          = '';
+
+    if ( $relation_ptr && $relation_ptr->{'tag'} ) {
+        if ( $relation_ptr->{'tag'}->{'type'} ) {
+            if ( $relation_ptr->{'tag'}->{'type'} =~ m/route_master/ ) {
+                $type = 'route_master';
+            } elsif ( $relation_ptr->{'tag'}->{'type'} =~ m/route/ ) {
+                $type = 'route';
+            }
+        }
+        if ( $type eq $relation_ptr->{'tag'}->{'type'} ) {
+            if ( $relation_ptr->{'tag'}->{$relation_ptr->{'tag'}->{'type'}} ) {
+                $ret_val = $relation_ptr->{'tag'}->{$relation_ptr->{'tag'}->{'type'}};
+            }
+        }
+        if ( !$ret_val ) {
+            my @found_route_types = ();
+            foreach my $key ( sort( keys(%{$relation_ptr->{'tag'}}) ) ) {
+                if ( $key =~ m/route/ ) {
+                    if ( $key ne 'gtfs:route_id' ) {
+                        push( @found_route_types, sprintf( "'%s' = '%s'", $key, $relation_ptr->{'tag'}->{$key} ) );
+                    }
+                }
+            }
+            $ret_val = join( '__separator__', @found_route_types );
         }
     }
 
