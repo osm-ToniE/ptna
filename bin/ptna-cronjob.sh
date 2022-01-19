@@ -114,7 +114,25 @@ then
             #      a == do the analysis (in work area)
             #      u == update the result from the work area to the location of the web service
 
-            # run this sequentially using standard overpass-api server
+            # run this again using the selected overpass-api server
+            ptna-all-networks-parallel.sh -Ogau >> $LOGFILE 2>&1 < /dev/null
+        fi
+
+        if [ "$emptyxml" -gt 0 -a "$emptyxml" -lt 90 ]
+        then
+            # most (> 50%) of the analysis succeeded, let's try a third time for the others
+            # now using the standard overpass api server
+
+            export PTNA_OVERPASS_API_SERVER=""
+
+            sleep 300
+
+            # O == do the overpassapi query only if the downloaded XML data is empty, otherwise skip the rest
+            #      g == get the OSM-Wiki data for the routes
+            #      a == do the analysis (in work area)
+            #      u == update the result from the work area to the location of the web service
+
+            # run this again using the standard overpass-api server
             ptna-all-networks.sh -Ogau >> $LOGFILE 2>&1 < /dev/null
         fi
 
