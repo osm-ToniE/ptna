@@ -5455,10 +5455,10 @@ sub getRelationRouteType {
             } elsif ( $relation_ptr->{'tag'}->{'type'} =~ m/route/ ) {
                 $type = 'route';
             }
-        }
-        if ( $type eq $relation_ptr->{'tag'}->{'type'} ) {
-            if ( $relation_ptr->{'tag'}->{$relation_ptr->{'tag'}->{'type'}} ) {
-                $ret_val = $relation_ptr->{'tag'}->{$relation_ptr->{'tag'}->{'type'}};
+            if ( $type eq $relation_ptr->{'tag'}->{'type'} ) {
+                if ( $relation_ptr->{'tag'}->{$relation_ptr->{'tag'}->{'type'}} ) {
+                    $ret_val = $relation_ptr->{'tag'}->{$relation_ptr->{'tag'}->{'type'}};
+                }
             }
         }
         if ( !$ret_val ) {
