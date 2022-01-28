@@ -10,16 +10,17 @@
 # Lejun, 2020
 # Philippe Verdy, 2020
 # Patchi Atwork <patchi.atwork@gmail.com>, 2020
-# ToniE <osm-ToniE@web.de>, 2021
+# Patchi, 2021
+# ToniE <osm-ToniE@web.de>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2021-06-09 13:45+0200\n"
+"POT-Creation-Date: 2021-11-04 18:18+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: ToniE <osm-ToniE@web.de>, 2021\n"
+"Last-Translator: ToniE <osm-ToniE@web.de>, 2022\n"
 "Language-Team: French (https://www.transifex.com/jungle-bus/teams/97874/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -73,7 +74,7 @@ msgid "Operator (operator=)"
 msgstr "Opérateur (operator=)"
 
 msgid "From (from=)"
-msgstr "Depuis (from=)"
+msgstr "De (from=)"
 
 msgid "Via (via=)"
 msgstr "Par (via=)"
@@ -100,7 +101,7 @@ msgid "Comment"
 msgstr "Commentaire"
 
 msgid "From"
-msgstr "Depuis"
+msgstr "De"
 
 msgid "To"
 msgstr "Vers"
@@ -749,9 +750,6 @@ msgstr ""
 "Itinéraire PTv2 : le dernier nœud de la voie n'est pas un arrêt de cet "
 "itinéraire %s"
 
-msgid "suspicious sub-type"
-msgstr "sous-type douteux"
-
 msgid "wrong value"
 msgstr "Valeur erronée"
 
@@ -760,6 +758,9 @@ msgstr "ou"
 
 msgid "missing key"
 msgstr "Clé manquante"
+
+msgid "suspicious sub-type"
+msgstr "sous-type douteux"
 
 #, perl-format
 msgid "'barrier'='%s' with implied 'access'='no'"
@@ -1018,7 +1019,7 @@ msgid "Static Analysis for OpenStreetMap"
 msgstr "Analyse statique pour OpenStreetMap"
 
 msgid "Home"
-msgstr ""
+msgstr "Accueil"
 
 msgid "Click here to toggle between 'analysis' page and 'differences' page"
 msgstr ""
@@ -1028,13 +1029,13 @@ msgid "Toggle View"
 msgstr "Basculer la vue"
 
 msgid "Contact"
-msgstr ""
+msgstr "Contact"
 
 msgid "Imprint"
-msgstr ""
+msgstr "Mentions légales"
 
 msgid "Privacy policy"
-msgstr ""
+msgstr "Politique de confidentialité"
 
 msgid "Contents"
 msgstr "Résultats"
@@ -1260,7 +1261,7 @@ msgstr ""
 "d'itinéraires."
 
 msgid "References to GTFS from CSV list"
-msgstr "Référence à GTFS depuis la liste CSV"
+msgstr "Référence à GTFS de la liste CSV"
 
 msgid ""
 "This section lists the name of the GTFS feed and the related release date "
@@ -1287,7 +1288,7 @@ msgstr ""
 "'2020-07-24'."
 
 msgid "References to GTFS from relations"
-msgstr "Fait référence à GTFS depuis des relations"
+msgstr "Fait référence à GTFS de des relations"
 
 msgid ""
 "This section lists the name of the GTFS feed and the related release date "
@@ -1315,13 +1316,13 @@ msgid "key = value"
 msgstr "clef 'key' = valeur 'value'"
 
 msgid "Browse on map"
-msgstr ""
+msgstr "Parcourir sur la carte"
 
 msgid "Edit in iD"
-msgstr ""
+msgstr "Modifier avec ID"
 
 msgid "Edit in JOSM"
-msgstr ""
+msgstr "Modifier avec JOSM"
 
 msgid "Show relation on special map"
 msgstr ""
@@ -1702,7 +1703,7 @@ msgid "Check value of 'service' tag for 'highway' = 'service'."
 msgstr ""
 
 msgid "Suspicious values"
-msgstr ""
+msgstr "Valeurs suspectes"
 
 msgid ""
 "Check that for instance 'bus' = 'yes' is set on a PTv2 bus stop having "
@@ -1859,6 +1860,12 @@ msgstr "Incompatible avec les bus-stops (aka : PTv1)"
 
 msgid "assume and show compatibility with legacy bus-stops (aka: PTv1)"
 msgstr "Implique et montre la compatibilité avec les bus-stops (aka : PTv1)"
+
+msgid "See also:"
+msgstr "Voir aussi :"
+
+msgid "Compatibility with well known tags"
+msgstr ""
 
 msgid ""
 "Relaxed check of begin and end of routes regarding stop positions (i.e. for "
