@@ -213,9 +213,9 @@ Route: suspicious &#039;construction&#039;=&#039;secondary&#039; along with &#03
 <p>
 This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.
 </p>
-        <table class="oepnvtable">
+        <table class="oepnvtable js-sort-table">
             <thead>
-                <tr class="tableheaderrow"><th class="network">Network (network=)</th><th class="number">Number</th><th class="relations">Relations</th></tr>
+                <tr class="tableheaderrow"><th class="network">&#x21C5; Network (network=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="number js-sort-number">&#x21C5; Number&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="relations">&#x21C5; Relations&nbsp;&nbsp;&nbsp;&nbsp;</th></tr>
             </thead>
             <tbody>
                 <tr data-info="Test" data-ref="???" class="line"><td class="network">Test</td><td class="number">9</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '001' -152367, <img src="/img/Relation.svg" alt="Relation" /> '001' -152368, <img src="/img/Relation.svg" alt="Relation" /> '001' -152369, <img src="/img/Relation.svg" alt="Relation" /> '011' -152370, <img src="/img/Relation.svg" alt="Relation" /> '011' -152371, <img src="/img/Relation.svg" alt="Relation" /> '011' -152372, <img src="/img/Relation.svg" alt="Relation" /> '021' -152373, <img src="/img/Relation.svg" alt="Relation" /> '021' -152374, <img src="/img/Relation.svg" alt="Relation" /> '021' -152375</td></tr>

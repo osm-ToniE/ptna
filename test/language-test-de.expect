@@ -242,9 +242,9 @@ text inside table is now supported
 <p>
 Dieser Abschnitt listet die 'network'-Werte auf, die berücksichtigt wurden, d.h. die einen der oben aufgeführten Werte enthalten.
 </p>
-        <table class="oepnvtable">
+        <table class="oepnvtable js-sort-table">
             <thead>
-                <tr class="tableheaderrow"><th class="network">Verkehrsverbund (network=)</th><th class="number">Anzahl</th><th class="relations">Relationen</th></tr>
+                <tr class="tableheaderrow"><th class="network">&#x21C5; Verkehrsverbund (network=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="number js-sort-number">&#x21C5; Anzahl&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="relations">&#x21C5; Relationen&nbsp;&nbsp;&nbsp;&nbsp;</th></tr>
             </thead>
             <tbody>
                 <tr data-info="network" data-ref="???" class="line"><td class="network">network</td><td class="number">1</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '605' -39096</td></tr>

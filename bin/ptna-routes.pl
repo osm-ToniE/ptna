@@ -1297,7 +1297,7 @@ if ( scalar( @RouteList ) ) {
         # xgettext: This section will list all routes which could not be clearly assigned because the combination of "ref;type" appears more than once and information like 'operator', 'from' and 'to' is missing
         printHeader( gettext('Not clearly assigned routes'), 1, 'unassigned' );
         printHintUnassignedRelations();
-        printTableHeader();
+        printTableHeader( 'ref' => 'routename', 'relation' => 'number' );
 
         foreach $relation_id ( @relation_ids ) {
             $relation_ptr = $RELATIONS{$relation_id};
@@ -1377,7 +1377,7 @@ if ( scalar(@line_refs) ) {
         if ( $route_type_lines ) {
             $help = sprintf( "%s", ($transport_types{$route_type} ? $transport_types{$route_type} : $route_type) );
             printHeader( $help, 2 );
-            printTableHeader();
+            printTableHeader( 'ref' => 'routename', 'relation' => 'number' );
             foreach $ref ( @line_refs ) {
                 foreach $type ( 'route_master', 'route' ) {
                     foreach $relation_id ( sort( { $PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}->{$a}->{'__sort_name__'} cmp
@@ -1443,7 +1443,7 @@ if ( scalar(@route_types) ) {
     foreach $route_type ( @route_types ) {
         $help = sprintf( "%s", ($transport_types{$route_type} ? $transport_types{$route_type} : $route_type) );
         printHeader( $help, 2 );
-        printTableHeader();
+        printTableHeader( 'relation' => 'number' );
         foreach $relation_id ( sort( { $PT_relations_without_ref{$route_type}->{$a}->{'__sort_name__'} cmp
                                        $PT_relations_without_ref{$route_type}->{$b}->{'__sort_name__'}     }
                                      keys(%{$PT_relations_without_ref{$route_type}})) ) {
@@ -1493,7 +1493,7 @@ if ( scalar(@suspicious_relations) ) {
 
     printHintSuspiciousRelations();
 
-    printTableHeader();
+    printTableHeader( 'relation' => 'number', 'ref' => 'routename' );
 
     foreach $relation_id ( @suspicious_relations ) {
         $relation_ptr = $RELATIONS{$relation_id};
@@ -5634,6 +5634,8 @@ sub printInitialHeader {
         push( @HTML_start, "                window.open( filename, '_self' );\n" );
         push( @HTML_start, "            }\n" );
         push( @HTML_start, "        </script>\n" );
+        push( @HTML_start, "        <script src=\"/script/sort-table.js\"></script>\n" );
+
     }
     push( @HTML_start, "    </head>\n" );
     push( @HTML_start, "    <body>\n" );
@@ -5980,7 +5982,7 @@ sub printHintUsedNetworks {
         push( @HTML_main, "\n</p>\n" );
 
         printTableInitialization( 'network', 'number', 'relations' );
-        printTableHeader();
+        printTableHeader( 'number' => 'number' );
         foreach my $network ( sort( keys( %used_networks ) ) ) {
             @relations_of_network = sort( keys( %{$used_networks{$network}} ) );
             $network = $network eq '__unset_network__' ? '' : $network;
@@ -6007,7 +6009,7 @@ sub printHintUsedNetworks {
             push( @HTML_main, "\n</p>\n" );
 
             printTableInitialization( 'operator', 'number', 'relations' );
-            printTableHeader();
+            printTableHeader( 'number' => 'number' );
             foreach my $operator ( sort( keys( %unused_operators ) ) ) {
                 @relations_of_operator    = sort( keys( %{$unused_operators{$operator}} ) );
                 $operator = $operator eq '__unset_operator__' ? '' : $operator;
@@ -6048,7 +6050,7 @@ sub printHintAddedNetworks {
         push( @HTML_main, "\n</p>\n" );
 
         printTableInitialization( 'network', 'number', 'relations' );
-        printTableHeader();
+        printTableHeader( 'number' => 'number' );
         foreach my $network ( sort( keys( %added_networks ) ) ) {
             @relations_of_network    = sort( keys( %{$added_networks{$network}} ) );
             $network = $network eq '__unset_network__' ? '' : $network;
@@ -6090,7 +6092,7 @@ sub printHintUnusedNetworks {
         push( @HTML_main, "\n</p>\n" );
 
         printTableInitialization( 'network', 'number', 'relations' );
-        printTableHeader();
+        printTableHeader( 'number' => 'number' );
         foreach my $network ( sort( keys( %unused_networks ) ) ) {
             @relations_of_network    = sort( keys( %{$unused_networks{$network}} ) );
             $network = $network eq '__unset_network__' ? '' : $network;
@@ -6136,7 +6138,7 @@ sub printGtfsReferences {
         push( @HTML_main, "\n</p>\n" );
 
         printTableInitialization( 'gtfs_feed', 'date' );
-        printTableHeader();
+        printTableHeader( 'gtfs_feed' => 'string' );
         foreach my $gtfs_feed ( sort( keys( %gtfs_csv_info_from ) ) ) {
             foreach my $gtfs_release_date (  sort( keys( %{$gtfs_csv_info_from{$gtfs_feed}} ) ) ) {
                 $gtfs_release_date =~ s/ latest //;
@@ -6169,7 +6171,7 @@ sub printGtfsReferences {
         push( @HTML_main, "\n</p>\n" );
 
         printTableInitialization( 'gtfs_feed', 'feed_from', 'date', 'date_from', 'number', 'relations' );
-        printTableHeader();
+        printTableHeader( 'number' => 'number' );
         foreach my $gtfs_feed ( sort( keys( %gtfs_relation_info_from ) ) ) {
             foreach my $feed_from ( sort( keys( %{$gtfs_relation_info_from{$gtfs_feed}} ) ) ) {
                 foreach my $gtfs_release_date ( sort( keys( %{$gtfs_relation_info_from{$gtfs_feed}{$feed_from}} ) ) ) {
@@ -6318,7 +6320,10 @@ sub printTableInitialization
 #############################################################################################
 
 sub printTableHeader {
-    my $element = undef;
+    my %js_sort_hash = ( @_ );
+    my $element      = undef;
+    my $suffix       = '';
+    my $prefix       = '';
 
     if ( $printText_buffer ) {
         if ( $printText_buffer eq "<p>\n" ) {
@@ -6330,19 +6335,29 @@ sub printTableHeader {
     }
 
     if ( scalar(@table_columns) ) {
-        push( @HTML_main, sprintf( "%8s<table class=\"oepnvtable\">\n", ' ' ) );
+        if ( scalar(keys(%js_sort_hash)) ) {
+            push( @HTML_main, sprintf( "%8s<table class=\"oepnvtable js-sort-table\">\n", ' ' ) );
+            $prefix = '&#x21C5; ';
+            $suffix = '&nbsp;&nbsp;&nbsp;&nbsp;';
+        } else {
+            push( @HTML_main, sprintf( "%8s<table class=\"oepnvtable\">\n", ' ' ) );
+        }
         push( @HTML_main, sprintf( "%12s<thead>\n", ' ' ) );
         push( @HTML_main, sprintf( "%16s<tr class=\"tableheaderrow\">", ' ' ) );
         if ( $no_of_columns == 0 ) {
-            push( @HTML_main, "<th class=\"name\">Linienverlauf (name=)</th>" );
-            push( @HTML_main, "<th class=\"type\">Typ (type=)</th>" );
-            push( @HTML_main, "<th class=\"relation\">Relation (id=)</th>" );
-            push( @HTML_main, "<th class=\"PTv\">PTv</th>" );
-            push( @HTML_main, "<th class=\"issues\">Fehler</th>" );
-            push( @HTML_main, "<th class=\"notes\">Anmerkungen</th>" );
+            push( @HTML_main, sprintf( "<th class=\"name\">%sLinienverlauf (name=)%s</th>", $prefix, $suffix ) );
+            push( @HTML_main, sprintf( "<th class=\"type\">%sTyp (type=)%s</th>", $prefix, $suffix ) );
+            push( @HTML_main, sprintf( "<th class=\"%srelation js-sort-number\">Relation (id=)%s</th>", $suffix ) );
+            push( @HTML_main, sprintf( "<th class=\"%sPTv\">PTv%s</th>", $prefix, $suffix ) );
+            push( @HTML_main, sprintf( "<th class=\"%sissues\">Fehler%s</th>", $prefix, $suffix ) );
+            push( @HTML_main, sprintf( "<th class=\"%snotes\">Anmerkungen%s</th>", $prefix, $suffix ) );
         } else {
             foreach $element ( @columns ) {
-                push( @HTML_main, sprintf( "<th class=\"%s\">%s</th>", $element, ($column_name{$element} ? $column_name{$element} : $element ) ) );
+                if ( $js_sort_hash{$element} ) {
+                    push( @HTML_main, sprintf( "<th class=\"%s js-sort-%s\">%s%s%s</th>", $element, $js_sort_hash{$element}, $prefix, ($column_name{$element} ? $column_name{$element} : $element ), $suffix ) );
+                } else {
+                    push( @HTML_main, sprintf( "<th class=\"%s\">%s%s%s</th>", $element, $prefix, ($column_name{$element} ? $column_name{$element} : $element ), $suffix ) );
+                }
             }
         }
         push( @HTML_main, "</tr>\n" );

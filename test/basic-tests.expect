@@ -62,9 +62,9 @@
         <hr />
         <h1 id="otherslines">2 Public Transport Lines</h1>
         <h2 id="A2.1">2.1 Bus</h2>
-        <table class="oepnvtable">
+        <table class="oepnvtable js-sort-table">
             <thead>
-                <tr class="tableheaderrow"><th class="ref">Line (ref=)</th><th class="relation">Relation (id=)</th><th class="type">Type (type=)</th><th class="route_type">Vehicle (route(_master)=)</th><th class="name">Name (name=)</th><th class="network">Network (network=)</th><th class="operator">Operator (operator=)</th><th class="from">From (from=)</th><th class="via">Via (via=)</th><th class="to">To (to=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+                <tr class="tableheaderrow"><th class="ref js-sort-routename">&#x21C5; Line (ref=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="relation js-sort-number">&#x21C5; Relation (id=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="type">&#x21C5; Type (type=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="route_type">&#x21C5; Vehicle (route(_master)=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="name">&#x21C5; Name (name=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="network">&#x21C5; Network (network=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="operator">&#x21C5; Operator (operator=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="from">&#x21C5; From (from=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="via">&#x21C5; Via (via=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="to">&#x21C5; To (to=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="PTv">&#x21C5; PTv&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="issues">&#x21C5; Errors&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="notes">&#x21C5; Notes&nbsp;&nbsp;&nbsp;&nbsp;</th></tr>
             </thead>
             <tbody>
                 <tr id="-39139" data-info="-39139" data-ref="001" class="line"><td class="ref">001</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39139</td><td class="type">route_master</td><td class="route_type">bus</td><td class="name">Bus 001</td><td class="network">Test</td><td class="operator">Test</td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Test'<br>'operator' = 'Test'</td></tr>
@@ -79,9 +79,9 @@
 <p>
 This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.
 </p>
-        <table class="oepnvtable">
+        <table class="oepnvtable js-sort-table">
             <thead>
-                <tr class="tableheaderrow"><th class="network">Network (network=)</th><th class="number">Number</th><th class="relations">Relations</th></tr>
+                <tr class="tableheaderrow"><th class="network">&#x21C5; Network (network=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="number js-sort-number">&#x21C5; Number&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="relations">&#x21C5; Relations&nbsp;&nbsp;&nbsp;&nbsp;</th></tr>
             </thead>
             <tbody>
                 <tr data-info="Test" data-ref="???" class="line"><td class="network">Test</td><td class="number">3</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '001' -39120, <img src="/img/Relation.svg" alt="Relation" /> '001' -39126, <img src="/img/Relation.svg" alt="Relation" /> '001' -39139</td></tr>

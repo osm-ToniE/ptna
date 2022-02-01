@@ -166,9 +166,9 @@
 <p>
 This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.
 </p>
-        <table class="oepnvtable">
+        <table class="oepnvtable js-sort-table">
             <thead>
-                <tr class="tableheaderrow"><th class="network">Network (network=)</th><th class="number">Number</th><th class="relations">Relations</th></tr>
+                <tr class="tableheaderrow"><th class="network">&#x21C5; Network (network=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="number js-sort-number">&#x21C5; Number&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="relations">&#x21C5; Relations&nbsp;&nbsp;&nbsp;&nbsp;</th></tr>
             </thead>
             <tbody>
                 <tr data-info="any" data-ref="???" class="line"><td class="network">any</td><td class="number">33</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> 'RB' -102806, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102807, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102808, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102809, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102810, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102811, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102812, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102813, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102814, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102878 and more ...</td></tr>

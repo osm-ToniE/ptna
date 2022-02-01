@@ -93,9 +93,9 @@ The contents of the 'network' tag will be searched for:
 <p>
 This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.
 </p>
-        <table class="oepnvtable">
+        <table class="oepnvtable js-sort-table">
             <thead>
-                <tr class="tableheaderrow"><th class="network">Network (network=)</th><th class="number">Number</th><th class="relations">Relations</th></tr>
+                <tr class="tableheaderrow"><th class="network">&#x21C5; Network (network=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="number js-sort-number">&#x21C5; Number&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="relations">&#x21C5; Relations&nbsp;&nbsp;&nbsp;&nbsp;</th></tr>
             </thead>
             <tbody>
                 <tr data-info="???" data-ref="???" class="line"><td class="network"></td><td class="number">1</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '633' -113933</td></tr>
@@ -107,9 +107,9 @@ This section lists the 'network'-values which have been considered; i.e. which m
 <p>
 This section lists 'network' values that were additionally considered because the 'network' value of the Route-Master or member Route matched.
 </p>
-        <table class="oepnvtable">
+        <table class="oepnvtable js-sort-table">
             <thead>
-                <tr class="tableheaderrow"><th class="network">Network (network=)</th><th class="number">Number</th><th class="relations">Relations</th></tr>
+                <tr class="tableheaderrow"><th class="network">&#x21C5; Network (network=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="number js-sort-number">&#x21C5; Number&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="relations">&#x21C5; Relations&nbsp;&nbsp;&nbsp;&nbsp;</th></tr>
             </thead>
             <tbody>
                 <tr data-info="network2" data-ref="???" class="line"><td class="network">network2</td><td class="number">1</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '633' -113927</td></tr>
