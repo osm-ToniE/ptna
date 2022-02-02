@@ -5597,8 +5597,8 @@ sub printInitialHeader {
         push( @HTML_start, "            #analysis td              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }\n" );
         push( @HTML_start, "            #analysis ol              { list-style: none; }\n" );
         push( @HTML_start, "            #analysis img             { width: 20px; vertical-align: top; }\n" );
-        push( @HTML_start, "            #analysis .tableheaderrow { background-color: LightSteelBlue;   }\n" );
-        push( @HTML_start, "            #analysis .sketchline     { background-color: LightBlue;        }\n" );
+        push( @HTML_start, "            #analysis .tableheaderrow { background-color: #bbbbbb;   }\n" );
+        push( @HTML_start, "            #analysis .sketchline     { background-color: #cccccc;        }\n" );
         push( @HTML_start, "            #analysis .sketch         { text-align:left;  font-weight: 500; }\n" );
         push( @HTML_start, "            #analysis .csvinfo        { text-align:right; font-size: 0.8em; }\n" );
         push( @HTML_start, "            #analysis .ref            { white-space:nowrap; }\n" );
@@ -6322,7 +6322,6 @@ sub printTableInitialization
 sub printTableHeader {
     my %js_sort_hash = ( @_ );
     my $element      = undef;
-    my $suffix       = '';
     my $prefix       = '';
 
     if ( $printText_buffer ) {
@@ -6337,26 +6336,25 @@ sub printTableHeader {
     if ( scalar(@table_columns) ) {
         if ( scalar(keys(%js_sort_hash)) ) {
             push( @HTML_main, sprintf( "%8s<table class=\"oepnvtable js-sort-table\">\n", ' ' ) );
-            $prefix = '&#x21C5; ';
-            $suffix = '&nbsp;&nbsp;&nbsp;&nbsp;';
+            $prefix = '&#x21C5;';
         } else {
             push( @HTML_main, sprintf( "%8s<table class=\"oepnvtable\">\n", ' ' ) );
         }
         push( @HTML_main, sprintf( "%12s<thead>\n", ' ' ) );
         push( @HTML_main, sprintf( "%16s<tr class=\"tableheaderrow\">", ' ' ) );
         if ( $no_of_columns == 0 ) {
-            push( @HTML_main, sprintf( "<th class=\"name\">%sLinienverlauf (name=)%s</th>", $prefix, $suffix ) );
-            push( @HTML_main, sprintf( "<th class=\"type\">%sTyp (type=)%s</th>", $prefix, $suffix ) );
-            push( @HTML_main, sprintf( "<th class=\"%srelation js-sort-number\">Relation (id=)%s</th>", $suffix ) );
-            push( @HTML_main, sprintf( "<th class=\"%sPTv\">PTv%s</th>", $prefix, $suffix ) );
-            push( @HTML_main, sprintf( "<th class=\"%sissues\">Fehler%s</th>", $prefix, $suffix ) );
-            push( @HTML_main, sprintf( "<th class=\"%snotes\">Anmerkungen%s</th>", $prefix, $suffix ) );
+            push( @HTML_main, sprintf( "<th class=\"name\">%sLinienverlauf (name=)</th>", $prefix ) );
+            push( @HTML_main, sprintf( "<th class=\"type\">%sTyp (type=)</th>", $prefix ) );
+            push( @HTML_main, sprintf( "<th class=\"relation js-sort-number\">%sRelation (id=)</th>", $prefix ) );
+            push( @HTML_main, sprintf( "<th class=\"PTv\">%sPTv</th>", $prefix ) );
+            push( @HTML_main, sprintf( "<th class=\"issues\">%sFehler</th>", $prefix ) );
+            push( @HTML_main, sprintf( "<th class=\"notes\">%sAnmerkungen</th>", $prefix ) );
         } else {
             foreach $element ( @columns ) {
                 if ( $js_sort_hash{$element} ) {
-                    push( @HTML_main, sprintf( "<th class=\"%s js-sort-%s\">%s%s%s</th>", $element, $js_sort_hash{$element}, $prefix, ($column_name{$element} ? $column_name{$element} : $element ), $suffix ) );
+                    push( @HTML_main, sprintf( "<th class=\"%s js-sort-%s\">%s%s</th>", $element, $js_sort_hash{$element}, $prefix, ($column_name{$element} ? $column_name{$element} : $element ) ) );
                 } else {
-                    push( @HTML_main, sprintf( "<th class=\"%s\">%s%s%s</th>", $element, $prefix, ($column_name{$element} ? $column_name{$element} : $element ), $suffix ) );
+                    push( @HTML_main, sprintf( "<th class=\"%s\">%s%s</th>", $element, $prefix, ($column_name{$element} ? $column_name{$element} : $element ) ) );
                 }
             }
         }
