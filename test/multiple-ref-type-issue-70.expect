@@ -13,8 +13,8 @@
             #analysis td              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
             #analysis ol              { list-style: none; }
             #analysis img             { width: 20px; vertical-align: top; }
-            #analysis .tableheaderrow { background-color: LightSteelBlue;   }
-            #analysis .sketchline     { background-color: LightBlue;        }
+            #analysis .tableheaderrow { background-color: #bbbbbb;   }
+            #analysis .sketchline     { background-color: #cccccc;        }
             #analysis .sketch         { text-align:left;  font-weight: 500; }
             #analysis .csvinfo        { text-align:right; font-size: 0.8em; }
             #analysis .ref            { white-space:nowrap; }
@@ -168,7 +168,7 @@ This section lists the 'network'-values which have been considered; i.e. which m
 </p>
         <table class="oepnvtable js-sort-table">
             <thead>
-                <tr class="tableheaderrow"><th class="network">&#x21C5; Network (network=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="number js-sort-number">&#x21C5; Number&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="relations">&#x21C5; Relations&nbsp;&nbsp;&nbsp;&nbsp;</th></tr>
+                <tr class="tableheaderrow"><th class="network">&#x21C5;Network (network=)</th><th class="number js-sort-number">&#x21C5;Number</th><th class="relations">&#x21C5;Relations</th></tr>
             </thead>
             <tbody>
                 <tr data-info="any" data-ref="???" class="line"><td class="network">any</td><td class="number">33</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> 'RB' -102806, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102807, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102808, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102809, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102810, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102811, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102812, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102813, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102814, <img src="/img/Relation.svg" alt="Relation" /> 'RB' -102878 and more ...</td></tr>

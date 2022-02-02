@@ -13,8 +13,8 @@
             #analysis td              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
             #analysis ol              { list-style: none; }
             #analysis img             { width: 20px; vertical-align: top; }
-            #analysis .tableheaderrow { background-color: LightSteelBlue;   }
-            #analysis .sketchline     { background-color: LightBlue;        }
+            #analysis .tableheaderrow { background-color: #bbbbbb;   }
+            #analysis .sketchline     { background-color: #cccccc;        }
             #analysis .sketch         { text-align:left;  font-weight: 500; }
             #analysis .csvinfo        { text-align:right; font-size: 0.8em; }
             #analysis .ref            { white-space:nowrap; }
@@ -215,7 +215,7 @@ This section lists the 'network'-values which have been considered; i.e. which m
 </p>
         <table class="oepnvtable js-sort-table">
             <thead>
-                <tr class="tableheaderrow"><th class="network">&#x21C5; Network (network=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="number js-sort-number">&#x21C5; Number&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="relations">&#x21C5; Relations&nbsp;&nbsp;&nbsp;&nbsp;</th></tr>
+                <tr class="tableheaderrow"><th class="network">&#x21C5;Network (network=)</th><th class="number js-sort-number">&#x21C5;Number</th><th class="relations">&#x21C5;Relations</th></tr>
             </thead>
             <tbody>
                 <tr data-info="Test" data-ref="???" class="line"><td class="network">Test</td><td class="number">9</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '001' -152367, <img src="/img/Relation.svg" alt="Relation" /> '001' -152368, <img src="/img/Relation.svg" alt="Relation" /> '001' -152369, <img src="/img/Relation.svg" alt="Relation" /> '011' -152370, <img src="/img/Relation.svg" alt="Relation" /> '011' -152371, <img src="/img/Relation.svg" alt="Relation" /> '011' -152372, <img src="/img/Relation.svg" alt="Relation" /> '021' -152373, <img src="/img/Relation.svg" alt="Relation" /> '021' -152374, <img src="/img/Relation.svg" alt="Relation" /> '021' -152375</td></tr>

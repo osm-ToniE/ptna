@@ -13,8 +13,8 @@
             #analysis td              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
             #analysis ol              { list-style: none; }
             #analysis img             { width: 20px; vertical-align: top; }
-            #analysis .tableheaderrow { background-color: LightSteelBlue;   }
-            #analysis .sketchline     { background-color: LightBlue;        }
+            #analysis .tableheaderrow { background-color: #bbbbbb;   }
+            #analysis .sketchline     { background-color: #cccccc;        }
             #analysis .sketch         { text-align:left;  font-weight: 500; }
             #analysis .csvinfo        { text-align:right; font-size: 0.8em; }
             #analysis .ref            { white-space:nowrap; }
@@ -93,7 +93,7 @@
         <h2 id="A3.1">3.1 Bus</h2>
         <table class="oepnvtable js-sort-table">
             <thead>
-                <tr class="tableheaderrow"><th class="relation js-sort-number">&#x21C5; Relation (id=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="type">&#x21C5; Type (type=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="route_type">&#x21C5; Vehicle (route(_master)=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="name">&#x21C5; Name (name=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="network">&#x21C5; Network (network=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="operator">&#x21C5; Operator (operator=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="from">&#x21C5; From (from=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="via">&#x21C5; Via (via=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="to">&#x21C5; To (to=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="PTv">&#x21C5; PTv&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="issues">&#x21C5; Errors&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="notes">&#x21C5; Notes&nbsp;&nbsp;&nbsp;&nbsp;</th></tr>
+                <tr class="tableheaderrow"><th class="relation js-sort-number">&#x21C5;Relation (id=)</th><th class="type">&#x21C5;Type (type=)</th><th class="route_type">&#x21C5;Vehicle (route(_master)=)</th><th class="name">&#x21C5;Name (name=)</th><th class="network">&#x21C5;Network (network=)</th><th class="operator">&#x21C5;Operator (operator=)</th><th class="from">&#x21C5;From (from=)</th><th class="via">&#x21C5;Via (via=)</th><th class="to">&#x21C5;To (to=)</th><th class="PTv">&#x21C5;PTv</th><th class="issues">&#x21C5;Errors</th><th class="notes">&#x21C5;Notes</th></tr>
             </thead>
             <tbody>
                 <tr id="-113811" data-info="-113811" data-ref="???" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113811</td><td class="type">route</td><td class="route_type">bus</td><td class="name">Bus 43: from =&gt; to</td><td class="network">network</td><td class="operator"></td><td class="from">from</td><td class="via"></td><td class="to">to</td><td class="PTv">2</td><td class="issues">'ref' is not set</td><td class="notes">'comment' = '&#039;ref&#039; is not set'<br>'network' = 'network'</td></tr>
@@ -131,7 +131,7 @@ They represent so called 'well defined' values and are not considered as errors.
 
         <table class="oepnvtable js-sort-table">
             <thead>
-                <tr class="tableheaderrow"><th class="relation js-sort-number">&#x21C5; Relation (id=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="type">&#x21C5; Type (type=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="route_type">&#x21C5; Vehicle (route(_master)=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="ref js-sort-routename">&#x21C5; Line (ref=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="name">&#x21C5; Name (name=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="network">&#x21C5; Network (network=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="operator">&#x21C5; Operator (operator=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="from">&#x21C5; From (from=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="via">&#x21C5; Via (via=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="to">&#x21C5; To (to=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="PTv">&#x21C5; PTv&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="public_transport">&#x21C5; public_transport&nbsp;&nbsp;&nbsp;&nbsp;</th></tr>
+                <tr class="tableheaderrow"><th class="relation js-sort-number">&#x21C5;Relation (id=)</th><th class="type">&#x21C5;Type (type=)</th><th class="route_type">&#x21C5;Vehicle (route(_master)=)</th><th class="ref js-sort-routename">&#x21C5;Line (ref=)</th><th class="name">&#x21C5;Name (name=)</th><th class="network">&#x21C5;Network (network=)</th><th class="operator">&#x21C5;Operator (operator=)</th><th class="from">&#x21C5;From (from=)</th><th class="via">&#x21C5;Via (via=)</th><th class="to">&#x21C5;To (to=)</th><th class="PTv">&#x21C5;PTv</th><th class="public_transport">&#x21C5;public_transport</th></tr>
             </thead>
             <tbody>
                 <tr id="-113803" data-info="-113803" data-ref="???" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -113803</td><td class="type">multipolygon</td><td class="route_type"></td><td class="ref"></td><td class="name">&#039;type&#039; is not &#039;route&#039; or &#039;route_master&#039;</td><td class="network"></td><td class="operator"></td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv"></td><td class="public_transport"></td></tr>
@@ -148,7 +148,7 @@ This section lists the 'network'-values which have been considered; i.e. which m
 </p>
         <table class="oepnvtable js-sort-table">
             <thead>
-                <tr class="tableheaderrow"><th class="network">&#x21C5; Network (network=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="number js-sort-number">&#x21C5; Number&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="relations">&#x21C5; Relations&nbsp;&nbsp;&nbsp;&nbsp;</th></tr>
+                <tr class="tableheaderrow"><th class="network">&#x21C5;Network (network=)</th><th class="number js-sort-number">&#x21C5;Number</th><th class="relations">&#x21C5;Relations</th></tr>
             </thead>
             <tbody>
                 <tr data-info="network" data-ref="???" class="line"><td class="network">network</td><td class="number">10</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '43' -113804, <img src="/img/Relation.svg" alt="Relation" /> '53' -113809, <img src="/img/Relation.svg" alt="Relation" /> '43' -113810, <img src="/img/Relation.svg" alt="Relation" /> -113811, <img src="/img/Relation.svg" alt="Relation" /> '63' -113812, <img src="/img/Relation.svg" alt="Relation" /> '100' -113855, <img src="/img/Relation.svg" alt="Relation" /> '100' -113886, <img src="/img/Relation.svg" alt="Relation" /> '100' -113964, <img src="/img/Relation.svg" alt="Relation" /> '100' -113978, <img src="/img/Relation.svg" alt="Relation" /> '100' -113982</td></tr>

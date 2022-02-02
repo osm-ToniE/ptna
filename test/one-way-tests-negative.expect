@@ -13,8 +13,8 @@
             #analysis td              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
             #analysis ol              { list-style: none; }
             #analysis img             { width: 20px; vertical-align: top; }
-            #analysis .tableheaderrow { background-color: LightSteelBlue;   }
-            #analysis .sketchline     { background-color: LightBlue;        }
+            #analysis .tableheaderrow { background-color: #bbbbbb;   }
+            #analysis .sketchline     { background-color: #cccccc;        }
             #analysis .sketch         { text-align:left;  font-weight: 500; }
             #analysis .csvinfo        { text-align:right; font-size: 0.8em; }
             #analysis .ref            { white-space:nowrap; }
@@ -64,7 +64,7 @@
         <h2 id="A2.1">2.1 Bus</h2>
         <table class="oepnvtable js-sort-table">
             <thead>
-                <tr class="tableheaderrow"><th class="ref js-sort-routename">&#x21C5; Line (ref=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="relation js-sort-number">&#x21C5; Relation (id=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="type">&#x21C5; Type (type=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="route_type">&#x21C5; Vehicle (route(_master)=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="name">&#x21C5; Name (name=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="network">&#x21C5; Network (network=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="operator">&#x21C5; Operator (operator=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="from">&#x21C5; From (from=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="via">&#x21C5; Via (via=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="to">&#x21C5; To (to=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="PTv">&#x21C5; PTv&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="issues">&#x21C5; Errors&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="notes">&#x21C5; Notes&nbsp;&nbsp;&nbsp;&nbsp;</th></tr>
+                <tr class="tableheaderrow"><th class="ref js-sort-routename">&#x21C5;Line (ref=)</th><th class="relation js-sort-number">&#x21C5;Relation (id=)</th><th class="type">&#x21C5;Type (type=)</th><th class="route_type">&#x21C5;Vehicle (route(_master)=)</th><th class="name">&#x21C5;Name (name=)</th><th class="network">&#x21C5;Network (network=)</th><th class="operator">&#x21C5;Operator (operator=)</th><th class="from">&#x21C5;From (from=)</th><th class="via">&#x21C5;Via (via=)</th><th class="to">&#x21C5;To (to=)</th><th class="PTv">&#x21C5;PTv</th><th class="issues">&#x21C5;Errors</th><th class="notes">&#x21C5;Notes</th></tr>
             </thead>
             <tbody>
                 <tr id="-39164" data-info="-39164" data-ref="001" class="line"><td class="ref">001</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -39164</td><td class="type">route_master</td><td class="route_type">bus</td><td class="name">Bus 001</td><td class="network">Test</td><td class="operator">Test</td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Test'<br>'operator' = 'Test'</td></tr>
@@ -81,7 +81,7 @@ This section lists the 'network'-values which have been considered; i.e. which m
 </p>
         <table class="oepnvtable js-sort-table">
             <thead>
-                <tr class="tableheaderrow"><th class="network">&#x21C5; Network (network=)&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="number js-sort-number">&#x21C5; Number&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="relations">&#x21C5; Relations&nbsp;&nbsp;&nbsp;&nbsp;</th></tr>
+                <tr class="tableheaderrow"><th class="network">&#x21C5;Network (network=)</th><th class="number js-sort-number">&#x21C5;Number</th><th class="relations">&#x21C5;Relations</th></tr>
             </thead>
             <tbody>
                 <tr data-info="Test" data-ref="???" class="line"><td class="network">Test</td><td class="number">3</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '001' -39160, <img src="/img/Relation.svg" alt="Relation" /> '001' -39162, <img src="/img/Relation.svg" alt="Relation" /> '001' -39164</td></tr>
