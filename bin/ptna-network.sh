@@ -202,7 +202,7 @@ then
             # wait for that job to finish the download before skipping the own download
             # wait max 60 * 10 seconds = 10 minutes
 
-            loops=60
+            loops=100
             echo $(date "+%Y-%m-%d %H:%M:%S") "Another job is downloading the data in parallel, waiting for the completion"
             while [ -d $OSM_XML_FILE_ABSOLUTE.lock ]
             do
