@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2021-06-09 13:45+0200\n"
+"POT-Creation-Date: 2022-01-28 16:13+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: Gonzalo Pesquero <gpesquero@yahoo.es>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/jungle-bus/teams/97874/es/)\n"
@@ -672,9 +672,6 @@ msgstr ""
 msgid "PTv2 route: last node of way is not a stop position of this route: %s"
 msgstr ""
 
-msgid "suspicious sub-type"
-msgstr ""
-
 msgid "wrong value"
 msgstr "valor erróneo"
 
@@ -683,6 +680,9 @@ msgstr "o"
 
 msgid "missing key"
 msgstr "clave no encontrada"
+
+msgid "suspicious sub-type"
+msgstr ""
 
 #, perl-format
 msgid "'barrier'='%s' with implied 'access'='no'"
@@ -1553,6 +1553,12 @@ msgid "no compatibility with legacy bus-stops (aka: PTv1)"
 msgstr ""
 
 msgid "assume and show compatibility with legacy bus-stops (aka: PTv1)"
+msgstr ""
+
+msgid "See also:"
+msgstr ""
+
+msgid "Compatibility with well known tags"
 msgstr ""
 
 msgid ""
