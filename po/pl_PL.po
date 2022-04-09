@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2022-01-28 16:13+0100\n"
+"POT-Creation-Date: 2022-04-08 09:41+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: A B <transifex@starsep.com>, 2022\n"
 "Language-Team: Polish (Poland) (https://www.transifex.com/jungle-bus/teams/97874/pl_PL/)\n"
@@ -80,7 +80,7 @@ msgid "Errors"
 msgstr "Błędy"
 
 msgid "Notes"
-msgstr "Notatki"
+msgstr "Uwagi"
 
 msgid "Type (type=)"
 msgstr "Typ (type=)"
@@ -383,11 +383,11 @@ msgid "'network' = '%s' should be long form"
 msgstr ""
 
 msgid "'network' is not set"
-msgstr ""
+msgstr "'network' nie jest ustawione"
 
 #, perl-format
 msgid "'colour' has unknown value '%s'. Add '#' as first character."
-msgstr ""
+msgstr "`colour` ma nieznaną wartość '%s'. Dodaj '#' jako pierwszy znak"
 
 #, perl-format
 msgid ""
@@ -625,7 +625,7 @@ msgid "PTv2 route: last node of way is not a stop position of this route: %s"
 msgstr ""
 
 msgid "wrong value"
-msgstr ""
+msgstr "zła wartość"
 
 msgid "or"
 msgstr "lub"
@@ -634,24 +634,24 @@ msgid "missing key"
 msgstr "brakujący klucz"
 
 msgid "suspicious sub-type"
-msgstr ""
+msgstr "podejrzany podtyp"
 
 #, perl-format
 msgid "'barrier'='%s' with implied 'access'='no'"
-msgstr ""
+msgstr "'barrier'='%s' implikuje 'access'='no'"
 
 msgid "PTv2 route: 'name' includes deprecated '&lt;=&gt;'"
-msgstr ""
+msgstr "Trasa PTv2: 'name' zawiera przestarzały '&lt;=&gt;'"
 
 msgid "PTv2 route: 'name' includes deprecated '==&gt;'"
-msgstr ""
+msgstr "Trasa PTv2: 'name' zawiera przestarzały '==&gt;'"
 
 #, perl-format
 msgid "PTv2 route: '%s' is not part of 'name' (derived from '%s' = '%s')"
 msgstr ""
 
 msgid "PTv2 route: 'ref' is not part of 'name'"
-msgstr ""
+msgstr "Trasa PTv2: 'ref' nie jest częścią 'name'"
 
 #, perl-format
 msgid "PTv2 route: from-part ('%s') of 'name' is not part of 'from' = '%s'"
@@ -825,7 +825,7 @@ msgid "Error in input data: insufficient data for nodes"
 msgstr ""
 
 msgid "Date of Data"
-msgstr ""
+msgstr "Data pozyskania danych"
 
 msgid "Hints"
 msgstr ""
@@ -839,10 +839,10 @@ msgid ""
 msgstr ""
 
 msgid "Static Analysis for OpenStreetMap"
-msgstr ""
+msgstr "Statyczna analiza dla OpenStreetMap"
 
 msgid "Home"
-msgstr ""
+msgstr "Strona główna"
 
 msgid "Click here to toggle between 'analysis' page and 'differences' page"
 msgstr ""
@@ -925,10 +925,10 @@ msgid "provides services in Village-B"
 msgstr ""
 
 msgid "Main Street"
-msgstr ""
+msgstr "ulica Główna"
 
 msgid "Second Street"
-msgstr ""
+msgstr "ulica Druga"
 
 msgid "provides services in Town-C"
 msgstr ""
@@ -1248,13 +1248,13 @@ msgid "instead of"
 msgstr "zamiast"
 
 msgid "Check whether the construction works are finished or not."
-msgstr ""
+msgstr "Sprawdź czy prace budowlane są skończone czy nie."
 
 msgid "If yes, delete the key 'construction'."
-msgstr ""
+msgstr "Jeżeli tak to usuń klucz 'construction'."
 
 msgid "If no, check for an appropriate value of the key 'highway'."
-msgstr ""
+msgstr "Jeżeli nie, to sprawdź odpowiednią wartość dla klucza 'highway'."
 
 msgid ""
 "A conditional access is mapped to a way. PTNA will not analyze the value of "
@@ -1267,12 +1267,14 @@ msgid ""
 msgstr ""
 
 msgid "The access restriction does not comply with the map features."
-msgstr ""
+msgstr "Ograniczenia dostępu nie zgadzają z elementami mapy."
 
 msgid ""
 "Please consult the OSM Wiki: "
 "https://wiki.openstreetmap.org/wiki/Map_Features#Restrictions"
 msgstr ""
+"Proszę sprawdź na OSM Wiki: "
+"https://wiki.openstreetmap.org/wiki/Template:Pl:Map_Features:restrictions"
 
 msgid "This error is related to:"
 msgstr "Ten błąd jest związany z:"
@@ -1554,10 +1556,10 @@ msgid "GTFS database not found"
 msgstr ""
 
 msgid "is no longer valid (in the past)"
-msgstr ""
+msgstr "nie jest już ważne (z przeszłości)"
 
 msgid "is not yet valid (in the future)"
-msgstr ""
+msgstr "nie jest jeszcze ważne (z przyszłości)"
 
 msgid "outdated, fits to older GTFS version only"
 msgstr ""
