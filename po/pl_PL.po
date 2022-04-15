@@ -432,22 +432,22 @@ msgid "Skipping further analysis ..."
 msgstr ""
 
 msgid "Route without Way(s)"
-msgstr ""
+msgstr "Trasa bez lini(i)"
 
 msgid "Route with only 1 Way"
-msgstr ""
+msgstr "Trasa z tylko 1 linią"
 
 msgid "Route without Node(s)"
-msgstr ""
+msgstr "Trasa bez węzła(ów)"
 
 msgid "Route with only 1 Node"
-msgstr ""
+msgstr "Trasa z tylko 1 węzłem"
 
 msgid "Route with Relation(s)"
-msgstr ""
+msgstr "Trasa z relacją(ami)"
 
 msgid "'public_transport:version' is neither '1' nor '2'"
-msgstr ""
+msgstr "'public_transport:version' ma wartość inną niż '1' lub '2'"
 
 msgid ""
 "PTv2 route: there are no 'public_transport' = 'stop_position' and no "
@@ -921,10 +921,10 @@ msgid "provides services in City-A"
 msgstr ""
 
 msgid "First Avenue"
-msgstr ""
+msgstr "Pierwsza Aleja"
 
 msgid "Sixth Avenue"
-msgstr ""
+msgstr "Szósta Aleja"
 
 msgid "Operator-X"
 msgstr ""
@@ -1003,7 +1003,7 @@ msgid "The contents of the 'operator' tag will be searched for:"
 msgstr ""
 
 msgid "'operator' is not set"
-msgstr ""
+msgstr "'operator' nie jest ustawiony"
 
 msgid "Considered 'network'-Values"
 msgstr "Brane pod uwagę wartości 'network'"
