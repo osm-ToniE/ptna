@@ -41,11 +41,11 @@ www:
 	@ptna-list-strings.pl --what=messages --language=en 	> ../../ptna-www/en/message-table.inc
 	@ptna-list-strings.pl --what=messages --language=de 	> ../../ptna-www/de/message-table.inc
 	@ptna-list-strings.pl --what=messages --language=fr 	> ../../ptna-www/fr/message-table.inc
-	@ptna-list-strings.pl --what=messages --language=pl_PL 	> ../../ptna-www/pl/message-table.inc
+	@ptna-list-strings.pl --what=messages --language=pl_PL 	> ../../ptna-www/pl_PL/message-table.inc
 	@ptna-list-strings.pl --what=options  --language=en 	> ../../ptna-www/en/option-table.inc
 	@ptna-list-strings.pl --what=options  --language=de 	> ../../ptna-www/de/option-table.inc
 	@ptna-list-strings.pl --what=options  --language=fr 	> ../../ptna-www/fr/option-table.inc
-	@ptna-list-strings.pl --what=options  --language=pl_pl 	> ../../ptna-www/pl/option-table.inc
+	@ptna-list-strings.pl --what=options  --language=pl_pl 	> ../../ptna-www/pl_PL/option-table.inc
 
 clean:
 	@rm -f *.save
