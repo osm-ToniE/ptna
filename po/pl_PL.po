@@ -153,7 +153,7 @@ msgstr "Kolej linowo-terenowa"
 
 #, perl-format
 msgid "Missing route for ref='%s' and route='%s'"
-msgstr "Brakująca trasa dla ref='%s' i trasy='%s'"
+msgstr "Brakująca trasa dla ref='%s' i route='%s'"
 
 msgid "' or ref='"
 msgstr ""
@@ -183,7 +183,7 @@ msgid "References to GTFS feeds and releases"
 msgstr ""
 
 msgid "There is more than one Route-Master"
-msgstr ""
+msgstr "Jest więcej niż jedna relacja route-master"
 
 #, perl-format
 msgid ""
@@ -193,9 +193,17 @@ msgid_plural ""
 "Route-Masters have more Routes than actually match (%d versus %d) in the "
 "given data set"
 msgstr[0] ""
+"Relacja route-master ma więcej tras niż pasuje (%d vs %d) w tym zbiorze "
+"danych"
 msgstr[1] ""
+"Relacje route-master mają więcej tras niż pasuje (%d vs %d) w tym zbiorze "
+"danych"
 msgstr[2] ""
+"Relacje route-master mają więcej tras niż pasuje (%d vs %d) w tym zbiorze "
+"danych"
 msgstr[3] ""
+"Relacje route-master mają więcej tras niż pasuje (%d vs %d) w tym zbiorze "
+"danych"
 
 #, perl-format
 msgid ""
@@ -262,7 +270,7 @@ msgstr ""
 
 #, perl-format
 msgid "'route' tag is not set: %s"
-msgstr ""
+msgstr "Tag 'route' nie jest ustawiony: %s"
 
 #, perl-format
 msgid "'type' = '%s' is not 'route': %s"
@@ -270,7 +278,7 @@ msgstr ""
 
 #, perl-format
 msgid "'type' tag is not set: %s"
-msgstr ""
+msgstr "Tag 'type' nie ustawiony: %s"
 
 #, perl-format
 msgid "Route does not exist in the given data set: %s"
@@ -294,7 +302,7 @@ msgstr ""
 
 #, perl-format
 msgid "This Route is direct member of more than one Route-Master: %s"
-msgstr ""
+msgstr "Ta trasa jest bezpośrednim członkiem wielu relacji route-master: %s"
 
 msgid "Multiple Routes but no Route-Master"
 msgstr ""
@@ -396,10 +404,10 @@ msgid ""
 msgstr ""
 
 msgid "'network:long' is long form"
-msgstr ""
+msgstr "'network:long' to długa forma"
 
 msgid "'network:long' matches long form"
-msgstr ""
+msgstr "'network:long' pasuje do długiej formy"
 
 #, perl-format
 msgid ""
@@ -414,22 +422,22 @@ msgid ""
 msgstr ""
 
 msgid "Route-Master without Route(s)"
-msgstr ""
+msgstr "Relacja route-master bez tras(y)"
 
 msgid "Route-Master with Relation(s) unequal to 'route'"
-msgstr ""
+msgstr "Relacja route-master z relacjami innymi niż trasy"
 
 msgid "Route-Master with Way(s)"
-msgstr ""
+msgstr "Relacja route-master z liniami"
 
 msgid "Route-Master with Node(s)"
-msgstr ""
+msgstr "Relacja route-master z węzłami"
 
 msgid "'public_transport:version' is not set to '2'"
-msgstr ""
+msgstr "'public_transport:version' nie jest ustawione na '2'"
 
 msgid "Skipping further analysis ..."
-msgstr ""
+msgstr "Pomijanie dalszej analizy..."
 
 msgid "Route without Way(s)"
 msgstr "Trasa bez lini(i)"
@@ -492,6 +500,8 @@ msgid ""
 "PTv2 route: incorrect order of 'stop_position', 'platform' and 'way' "
 "(stop/platform after way)"
 msgstr ""
+"Trasa PTv2: zła kolejność punktów zatrzymań, platform i linii (punkty "
+"zatrzymania/platformy po liniach)"
 
 #, perl-format
 msgid "PTv2 route: includes %d entire roundabout but uses only segments"
@@ -504,10 +514,10 @@ msgstr[3] ""
 
 msgid "PTv2 route: using oneway way in wrong direction"
 msgid_plural "PTv2 route: using oneway ways in wrong direction"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Trasa PTv2: używa drogi jednokierunkowej pod prąd"
+msgstr[1] "Trasa PTv2: używa dróg jednokierunkowych pod prąd"
+msgstr[2] "Trasa PTv2: używa dróg jednokierunkowych pod prąd"
+msgstr[3] "Trasa PTv2: używa dróg jednokierunkowych pod prąd"
 
 msgid "PTv2 route: using motorway_link way without entering a motorway way"
 msgid_plural ""
@@ -576,7 +586,7 @@ msgid "PTv2 route: wrong 'role' = '%s'"
 msgstr ""
 
 msgid "PTv2 route: empty 'role'"
-msgstr ""
+msgstr "Trasa PTv2: pusta rola członka relacji"
 
 #, perl-format
 msgid ""
@@ -965,7 +975,7 @@ msgid "This section lists further relations of the environment of the routes:"
 msgstr ""
 
 msgid "potentially wrong 'route' or 'route_master' values?"
-msgstr ""
+msgstr "potencjalnie błędne wartości 'route' lub 'route_master'?"
 
 msgid "e.g. 'route' = 'suspended_bus' instead of 'route' = 'bus'"
 msgstr ""
@@ -1016,7 +1026,7 @@ msgstr ""
 " tych które pasują do wartości powyżej."
 
 msgid "and more ..."
-msgstr ""
+msgstr "i więcej..."
 
 msgid ""
 "This section lists the 'operator'-values which have not been considered."
@@ -1052,7 +1062,7 @@ msgid ""
 msgstr ""
 
 msgid "References to GTFS from CSV list"
-msgstr ""
+msgstr "Powiązania z GTFS z listy CSV"
 
 msgid ""
 "This section lists the name of the GTFS feed and the related release date "
@@ -1073,7 +1083,7 @@ msgid ""
 msgstr ""
 
 msgid "References to GTFS from relations"
-msgstr ""
+msgstr "Powiązania GTFS z relacjami"
 
 msgid ""
 "This section lists the name of the GTFS feed and the related release date "
@@ -1092,10 +1102,10 @@ msgid ""
 msgstr ""
 
 msgid "key = value"
-msgstr ""
+msgstr "klucz = wartość"
 
 msgid "Browse on map"
-msgstr ""
+msgstr "Przeglądaj na mapie"
 
 msgid "Edit in iD"
 msgstr "Edytuj w iD"
@@ -1104,7 +1114,7 @@ msgid "Edit in JOSM"
 msgstr "Edytuj w JOSM"
 
 msgid "Show relation on special map"
-msgstr ""
+msgstr "Pokaż relacje na specjalnej mapie"
 
 #, perl-format
 msgid ""
@@ -1115,10 +1125,13 @@ msgstr ""
 #, perl-format
 msgid "'colour' of Route is not set but 'colour' of Route-Master is set: %s"
 msgstr ""
+"Tag 'colour' dla trasy nie jest ustawiony, ale jest dla relacji route-"
+"master: %s"
 
 #, perl-format
 msgid "'colour' of Route is set but 'colour' of Route-Master is not set: %s"
 msgstr ""
+"Tag 'colour' dla trasy jest ustawiony, ale nie dla relacji route-master: %s"
 
 #, perl-format
 msgid ""
@@ -1142,10 +1155,10 @@ msgid ""
 msgstr ""
 
 msgid "Add either 'gtfs:trip_id' or 'gtfs:trip_id:sample' information."
-msgstr ""
+msgstr "Dodaj tag 'gtfs:trip_id' albo 'gtfs:trip_id:sample'."
 
 msgid "'public_transport:version' is not set"
-msgstr ""
+msgstr "'public_transport:version' nie jest ustawione"
 
 msgid ""
 "This Route relation has been included into the input data as a side-effect, "
@@ -1181,7 +1194,7 @@ msgid ""
 msgstr ""
 
 msgid "Precondition: the route is without gap(s)."
-msgstr ""
+msgstr "Warunek wstępny: trasa jest bez przerw(y)."
 
 #, perl-format
 msgid ""
@@ -1199,7 +1212,7 @@ msgid ""
 msgstr ""
 
 msgid "This is currently deactivated."
-msgstr ""
+msgstr "To jest obecnie dezaktywowane."
 
 msgid ""
 "This Route-Master has less route relations than listed here (Route(s) not "
@@ -1238,6 +1251,8 @@ msgid ""
 "The key 'construction' is set and the key 'highway' is not set to "
 "'construction'."
 msgstr ""
+"Klucz 'construction' jest ustawiony, ale wartość 'highway' nie jest "
+"ustawiona na 'construction'."
 
 msgid ""
 "Construction works on ways are usually mapped as the combination of 'higway'"
@@ -1331,6 +1346,8 @@ msgid ""
 "Allow 'route_master' = 'coach' and 'route' = 'coach' (although they are "
 "inofficial)."
 msgstr ""
+"Pozwalaj na tagi 'route_master' = 'coach' i 'route' = 'coach' (mimo że są "
+"nieoficjalne)."
 
 msgid ""
 "Ways are used which cannot be used explicitly or implicitly ('construction',"
@@ -1339,7 +1356,7 @@ msgid ""
 msgstr ""
 
 msgid "This applies to 'barrier' = '...' as well."
-msgstr ""
+msgstr "To dotyczy także tagu 'barrier' = '...'."
 
 msgid "'highway' = 'bus_stop' can be set on nodes only, not on ways or areas."
 msgstr ""
@@ -1396,7 +1413,7 @@ msgid "Check sequence of ways, are there any gaps?"
 msgstr "Sprawdź sekwencję linii, czy są jakieś przerwy?"
 
 msgid "Check value of 'service' tag for 'highway' = 'service'."
-msgstr ""
+msgstr "Sprawdzaj wartość tagu 'service' dla drogi 'highway' = 'service'."
 
 msgid "Suspicious values"
 msgstr "Podejrzane wartości"
@@ -1427,11 +1444,15 @@ msgstr ""
 msgid ""
 "The value of 'network' = '...' is expected in long form, as shown here."
 msgstr ""
+"Wartość tagu 'network' = '...' jest oczekiwana w długiej formie, tak jak  tu"
+" pokazane."
 
 msgid ""
 "The value of 'network' = '...' is expected in long form instead of the short"
 " form shown here."
 msgstr ""
+"Wartość tagu 'network' = '...' jest oczekiwana w długiej formie zamiast "
+"krótkiej tak jak tu pokazane."
 
 msgid ""
 "The value of 'network' = '...' is expected in short form (see: network-"
@@ -1441,11 +1462,15 @@ msgstr ""
 msgid ""
 "The value of 'network' = '...' is expected in short form, as shown here."
 msgstr ""
+"Wartość tagu 'network' = '...' jest oczekiwana w krótkiej formie, tak jak tu"
+" pokazane."
 
 msgid ""
 "The value of 'network' = '...' is expected in short form instead of the long"
 " form shown here."
 msgstr ""
+"Wartość tagu 'network' = '...' jest oczekiwana w krótkiej formie zamiast "
+"długiej, tak jak tu pokazane."
 
 msgid ""
 "Take this value as GTFS feed for option 'link-gtfs' if the relation does not"
@@ -1468,18 +1493,20 @@ msgid ""
 msgstr ""
 
 msgid "allow further occurances of this entry"
-msgstr ""
+msgstr "pozwalaj na dalsze wystąpienia tego wpisu"
 
 msgid "do not analyze 'operator', 'from' and 'to'"
-msgstr ""
+msgstr "nie analizuj tagów 'operator', 'from' (z) oraz 'to' (do)"
 
 msgid ""
 "find out whether 'operator', 'from' and 'to' of the CSV data match the tags "
 "of the relation"
 msgstr ""
+"sprawdź czy 'operator', 'from' (z) oraz 'to' (do) w CSV pasują do tagów "
+"relacji"
 
 msgid "ignore any further occurances of this entry"
-msgstr ""
+msgstr "ignoruj dalsze wystąpienia tego wpisu"
 
 msgid ""
 "The value of 'network' = '...' of the Route-Master and Route relations must "
@@ -1500,6 +1527,8 @@ msgid ""
 "Also show 'network:short' = '...', 'network:guid' = '...' and other tags and"
 " values."
 msgstr ""
+"Pokazuj także 'network:short' = '...', 'network:guide' = '...' i inne tagi i"
+" wartości."
 
 msgid ""
 "'highway' = 'bus_stop' on a point beside the road is treated as "
@@ -1514,6 +1543,8 @@ msgstr ""
 
 msgid "assume and show compatibility with legacy bus-stops (aka: PTv1)"
 msgstr ""
+"zakładaj i pokaż wsparcie dla przystanków autobusowych w starym tagowaniu "
+"(PTv1)"
 
 msgid "See also:"
 msgstr "Zobacz także:"
@@ -1530,6 +1561,8 @@ msgid ""
 "Similar to option '--positive-notes': show values of 'gtfs*' tags in the "
 "'Notes' column."
 msgstr ""
+"Podobnie do opcji '--positive-notes': pokaż wartości tagów 'gtfs*' w "
+"kolumnie Uwagi."
 
 msgid "Do not consider Route-Master and Route relations with empty 'network'."
 msgstr ""
@@ -1567,7 +1600,7 @@ msgid "is not set"
 msgstr "nie jest ustawione"
 
 msgid "GTFS database not found"
-msgstr ""
+msgstr "baza danych GTFS nie znaleziona"
 
 msgid "is no longer valid (in the past)"
 msgstr "nie jest już ważne (z przeszłości)"
@@ -1576,7 +1609,7 @@ msgid "is not yet valid (in the future)"
 msgstr "nie jest jeszcze ważne (z przyszłości)"
 
 msgid "outdated, fits to older GTFS version only"
-msgstr ""
+msgstr "nieaktualne, pasuje tylko do starszej wersji GTFS"
 
 msgid "does not exist"
 msgstr "nie istnieje"
