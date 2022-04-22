@@ -106,13 +106,13 @@ msgid "GTFS feed"
 msgstr ""
 
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 msgid "GTFS feed from"
 msgstr ""
 
 msgid "Date from"
-msgstr ""
+msgstr "Datum od"
 
 msgid "Bus"
 msgstr "Bus"
@@ -1005,7 +1005,7 @@ msgid ""
 msgstr ""
 
 msgid "and more ..."
-msgstr ""
+msgstr "a další ..."
 
 msgid ""
 "This section lists the 'operator'-values which have not been considered."
@@ -1015,6 +1015,7 @@ msgid ""
 "They might include typos in values which otherwise should have been "
 "considered."
 msgstr ""
+"Mohou obsahovat překlepy v hodnotách, které by jinak měly být zohledněny."
 
 msgid "Additionally considered 'network'-Values"
 msgstr ""
@@ -1037,17 +1038,21 @@ msgid ""
 msgstr ""
 
 msgid "References to GTFS from CSV list"
-msgstr ""
+msgstr "Odkazy na GTFS ze seznamu CSV"
 
 msgid ""
 "This section lists the name of the GTFS feed and the related release date "
 "information as found in the CSV list."
 msgstr ""
+"V této části je uveden název kanálu GTFS a související informace o datu "
+"vydání, jak jsou uvedeny v seznamu CSV."
 
 msgid ""
 "An empty release date means: reference to the latest GTFS information, the "
 "latest available at PTNA."
 msgstr ""
+"Prázdné datum vydání znamená: odkaz na nejnovější informace GTFS, nejnovější"
+" dostupné v PTNA."
 
 msgid "Example"
 msgstr "Příklad"
@@ -1055,41 +1060,46 @@ msgstr "Příklad"
 msgid ""
 "Where the GTFS feed name is 'DE-BY-MVV' and the release date is "
 "'2020-07-24'."
-msgstr ""
+msgstr "Kde název kanálu GTFS je \"DE-BY-MVV\" a datum vydání je \"2020-07-24\"."
 
 msgid "References to GTFS from relations"
-msgstr ""
+msgstr "Odkazy na GTFS ze vztahů"
 
 msgid ""
 "This section lists the name of the GTFS feed and the related release date "
 "information as found in Route-Master and Route relations."
 msgstr ""
+"V této části je uveden název kanálu GTFS a související informace o datu "
+"vydání, jak jsou uvedeny v Route-Master a Route relations."
 
 msgid ""
 "In addition to that, the source of the information (name and date) is "
 "listed."
-msgstr ""
+msgstr "Kromě toho je uveden zdroj informací (jméno a datum)."
 
 msgid ""
 "The value '--gtfs-feed' refers to the corresponding global analysis option, "
 "because no information about the source of the GTFS feed information was "
 "found in the Route-Master or Route relation."
 msgstr ""
+"Hodnota \"--gtfs-feed\" odkazuje na příslušnou možnost globální analýzy, "
+"protože ve vztahu Route-Master nebo Route nebyly nalezeny žádné informace o "
+"zdroji informací GTFS feed."
 
 msgid "key = value"
-msgstr ""
+msgstr "klíč = hodnota"
 
 msgid "Browse on map"
-msgstr ""
+msgstr "Prohlížet na mapě"
 
 msgid "Edit in iD"
-msgstr ""
+msgstr "Upravit v iD"
 
 msgid "Edit in JOSM"
-msgstr ""
+msgstr "Upravit v JOSM"
 
 msgid "Show relation on special map"
-msgstr ""
+msgstr "Zobrazit vztah na speciální mapě"
 
 #, perl-format
 msgid ""
@@ -1115,22 +1125,25 @@ msgstr ""
 msgid ""
 "GTFS shape data provides (only) information about the itinerary of the "
 "vehicle."
-msgstr ""
+msgstr "Tvarová data GTFS poskytují (pouze) informace o trase vozidla."
 
 msgid ""
 "In addition, GTFS trip data provides useful information about stops: their "
 "names, their sequences and their locations."
 msgstr ""
+"Údaje o jízdě v systému GTFS navíc poskytují užitečné informace o "
+"zastávkách: jejich názvy, pořadí a umístění."
 
 msgid ""
 "This additional information can be used to compare OSM data with GTFS data."
 msgstr ""
+"Tyto dodatečné informace lze použít k porovnání údajů OSM s údaji GTFS."
 
 msgid "Add either 'gtfs:trip_id' or 'gtfs:trip_id:sample' information."
 msgstr ""
 
 msgid "'public_transport:version' is not set"
-msgstr ""
+msgstr "'public_transport:version' není nastaveno"
 
 msgid ""
 "This Route relation has been included into the input data as a side-effect, "
