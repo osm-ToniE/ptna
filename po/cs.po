@@ -1372,6 +1372,8 @@ msgid ""
 "Check whether roundabouts are used partially (segments only) or completely "
 "(while not being segmented)."
 msgstr ""
+"Zkontrolujte, zda jsou kruhové objezdy využívány částečně (pouze úseky) nebo"
+" zcela (a přitom nejsou členěny)."
 
 msgid ""
 "Check whether the tag 'route_ref' on the stops of a route includes the value"
@@ -1389,18 +1391,20 @@ msgid ""
 msgstr ""
 
 msgid "Check sequence of ways, are there any gaps?"
-msgstr ""
+msgstr "Zkontrolujte posloupnost cest, jsou tam nějaké mezery?"
 
 msgid "Check value of 'service' tag for 'highway' = 'service'."
 msgstr ""
 
 msgid "Suspicious values"
-msgstr ""
+msgstr "Podezřelé hodnoty"
 
 msgid ""
 "Check that for instance 'bus' = 'yes' is set on a PTv2 bus stop having "
 "'public_transport' = 'stop_position'."
 msgstr ""
+"Zkontrolujte, zda je například u autobusové zastávky PTv2 s parametrem "
+"'public_transport' = 'stop_position' nastaveno 'bus' = 'yes'."
 
 msgid "Check of 'public_transport:version' = '...' on Route-Master and Route."
 msgstr ""
