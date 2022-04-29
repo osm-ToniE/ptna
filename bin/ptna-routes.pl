@@ -1215,10 +1215,10 @@ if ( scalar( @RouteList ) ) {
                                      'GTFS-Release-Date' => $entryref->{'gtfs-release-date'},
                                    );
 
-                $issues_string = gettext( "Missing route for ref='%s' and route='%s'" );
+                $issues_string = gettext( "Missing route for 'ref'='%s' and 'route'='%s'" );
 
                 if ( $entryref->{'ref-or-list'} ) {
-                    printTableLine( 'issues' => sprintf($issues_string, join(gettext("' or ref='"),@{$entryref->{'ref-or-list'}}), $entryref->{'route'} ) );
+                    printTableLine( 'issues' => sprintf($issues_string, join(gettext("' or 'ref'='"),@{$entryref->{'ref-or-list'}}), $entryref->{'route'} ) );
                 } else {
                     printTableLine( 'issues' => sprintf($issues_string, '???', $entryref->{'route'} ) );
                 }
