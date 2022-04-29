@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2022-01-28 16:13+0100\n"
+"POT-Creation-Date: 2022-04-29 17:58+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2022\n"
 "Language-Team: French (https://www.transifex.com/jungle-bus/teams/97874/fr/)\n"
@@ -158,11 +158,11 @@ msgid "Funicular"
 msgstr "Funiculaire"
 
 #, perl-format
-msgid "Missing route for ref='%s' and route='%s'"
+msgid "Missing route for 'ref'='%s' and 'route'='%s'"
 msgstr "Itinéraire manquant avec 'ref' = '%s' et 'route' = '%s'"
 
-msgid "' or ref='"
-msgstr "' ou ref='"
+msgid "' or 'ref'='"
+msgstr "' ou 'ref'='"
 
 #. xgettext: This section will list all routes which could not be clearly
 #. assigned because the combination of "ref;type" appears more than once and

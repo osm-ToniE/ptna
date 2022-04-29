@@ -270,7 +270,7 @@ sub InitMessageStrings {
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
-    $MessageList[$i]->{'message'}                = gettext( "Missing route for ref='%s' and route='%s'" );
+    $MessageList[$i]->{'message'}                = gettext( "Missing route for 'ref'='%s' and 'route'='%s'" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
     $MessageList[$i]->{'description'}            = gettext( "This route is expected as '%s' ('bus', 'tram', ...) according to CSV data, but does not exist in the given data set (see also section: \"Overpass API Query\")." );
