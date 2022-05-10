@@ -11,6 +11,7 @@
 # Jorge Sanz <sanchi2@gmail.com>, 2020
 # Héctor Ochoa Ortiz <cie.hochoa@gmail.com>, 2021
 # Gonzalo Pesquero <gpesquero@yahoo.es>, 2021
+# Oliver Hattshire <hattshire@gmail.com>, 2022
 # ToniE <osm-ToniE@web.de>, 2022
 # 
 #, fuzzy
@@ -189,7 +190,7 @@ msgid "References to GTFS feeds and releases"
 msgstr ""
 
 msgid "There is more than one Route-Master"
-msgstr "Hay más de una Route-Master"
+msgstr "Hay más de una Ruta-Maestra"
 
 #, perl-format
 msgid ""
@@ -202,7 +203,7 @@ msgstr[0] ""
 "La Ruta Maestra tiene más rutas de las que realmente coinciden en el "
 "conjunto de datos dado (%d vs. %d)"
 msgstr[1] ""
-"Las Rutas Maestras tienen más rutas de las que realmente coinciden en el "
+"Las Rutas-Maestras tienen más rutas de las que realmente coinciden en el "
 "conjunto de datos dado (%d vs. %d)"
 
 #, perl-format
@@ -216,7 +217,7 @@ msgstr[0] ""
 "La Ruta Maestra tiene menos rutas de las que realmente coinciden en el "
 "conjunto de datos dado (%d vs. %d)"
 msgstr[1] ""
-"Las Rutas Maestras tienen menos rutas de las que realmente coinciden en el "
+"Las Rutas-Maestras tienen menos rutas de las que realmente coinciden en el "
 "conjunto de datos dado (%d vs. %d)"
 
 #, perl-format
@@ -273,7 +274,7 @@ msgid ""
 "Route has different 'route' = '%s' than Route-Master 'route_master' = '%s': "
 "%s"
 msgstr ""
-"La Ruta tiene 'route' = '%s' diferente a la de la Ruta Maestra "
+"La Ruta tiene 'route' = '%s' diferente a la de la Ruta-Maestra "
 "'route_master' = '%s': %s"
 
 #, perl-format
@@ -306,7 +307,7 @@ msgid ""
 "Route-Master might be listed with 'ref' = '%s' in a different section or in "
 "section 'Not clearly assigned routes' of this analysis: %s"
 msgstr ""
-"Es posible que la Ruta Maestra esté listada con 'ref' = '%s' en una sección "
+"Es posible que la Ruta-Maestra esté listada con 'ref' = '%s' en una sección "
 "diferente o en la sección 'Rutas no claramente asignadas' de este análisis: "
 "%s"
 
@@ -315,7 +316,7 @@ msgid ""
 "Route-Master might be listed with unknown 'ref' in section 'Public Transport"
 " Lines without 'ref'' of this analysis: %s"
 msgstr ""
-"Es posible que la Ruta Maestra esté listada con 'ref' desconocido en la "
+"Es posible que la Ruta-Maestra esté listada con 'ref' desconocido en la "
 "sección \"Líneas de transporte público sin 'ref'\" de este análisis: %s"
 
 #, perl-format
@@ -425,7 +426,7 @@ msgstr "'network' no está establecido"
 #, perl-format
 msgid "'colour' has unknown value '%s'. Add '#' as first character."
 msgstr ""
-"'colour' tiene el valor descnoocido '%s'. Añade '#' como primer carácter."
+"'colour' tiene el valor desconocido '%s'. Añade '#' como primer carácter."
 
 #, perl-format
 msgid ""
@@ -455,20 +456,20 @@ msgid ""
 "The tag 'line' (='%s') is reserved for 'power' = 'line' related tagging. For"
 " public transport 'route_master' and 'route' are used."
 msgstr ""
-"La etiqueta 'line'(='%s') se reserva para 'etiquetado relacionado con "
-"power'='line'. Para transporte público, se usan 'route_master' y 'route'."
+"La etiqueta 'line'(='%s') se reserva para etiquetado relacionado con "
+"'power'='line'. Para transporte público, se usan 'route_master' y 'route'."
 
 msgid "Route-Master without Route(s)"
 msgstr "Ruta-Maestra sin Ruta(s)"
 
 msgid "Route-Master with Relation(s) unequal to 'route'"
-msgstr "Ruta Maestra con relación(es) que no son 'route'"
+msgstr "Ruta-Maestra con relación(es) que no son 'route'"
 
 msgid "Route-Master with Way(s)"
-msgstr "Ruta Maestra con Vía(s)"
+msgstr "Ruta-Maestra con Vía(s)"
 
 msgid "Route-Master with Node(s)"
-msgstr "Ruta Maestra con Nodo(s)"
+msgstr "Ruta-Maestra con Nodo(s)"
 
 msgid "'public_transport:version' is not set to '2'"
 msgstr "'public_transport:version' no está fijado en '2'"
@@ -1248,7 +1249,7 @@ msgid ""
 msgstr ""
 
 msgid "The Route-Master relation contains stops or train/bus stops."
-msgstr "La relación Ruta Maestra contiene paradas o paradas de tren/autobús."
+msgstr "La relación Ruta-Maestra contiene paradas o paradas de tren/autobús."
 
 msgid ""
 "The Route-Master relation contains relation(s) that are not of type 'route'."
@@ -1257,7 +1258,7 @@ msgstr ""
 msgid ""
 "The Route-Master relation contains streets/railways/trains/bus stops/..."
 msgstr ""
-"La relación Ruta Maestra contiene calles/vía férrea/trenes/paradas de "
+"La relación Ruta-Maestra contiene calles/vía férrea/trenes/paradas de "
 "autobús/..."
 
 msgid ""
@@ -1433,7 +1434,7 @@ msgid ""
 msgstr ""
 
 msgid "Check sequence of ways, are there any gaps?"
-msgstr "Comprueba secuencia de vías. ¿Existen huecos?"
+msgstr "Comprueba la secuencia de vías. ¿Existen huecos?"
 
 msgid "Check value of 'service' tag for 'highway' = 'service'."
 msgstr ""
@@ -1519,7 +1520,7 @@ msgid ""
 msgstr ""
 
 msgid "ignore any further occurances of this entry"
-msgstr ""
+msgstr "Ignorar ocurrencias futuras de esta entrada"
 
 msgid ""
 "The value of 'network' = '...' of the Route-Master and Route relations must "
@@ -1622,4 +1623,4 @@ msgid "does not exist"
 msgstr "no existe"
 
 msgid "does not provide any 'shape' data"
-msgstr ""
+msgstr "no provee datos 'shape'"
