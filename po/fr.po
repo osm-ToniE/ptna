@@ -12,6 +12,7 @@
 # Patchi Atwork <patchi.atwork@gmail.com>, 2020
 # Patchi, 2021
 # ToniE <osm-ToniE@web.de>, 2022
+# R B, 2022
 # 
 #, fuzzy
 msgid ""
@@ -20,7 +21,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
 "POT-Creation-Date: 2022-04-29 17:58+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: ToniE <osm-ToniE@web.de>, 2022\n"
+"Last-Translator: R B, 2022\n"
 "Language-Team: French (https://www.transifex.com/jungle-bus/teams/97874/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -424,6 +425,8 @@ msgstr ""
 #, perl-format
 msgid "'%s' = '%s' of Route is identical to '%s' of other Route(s)"
 msgstr ""
+"'%s' = '%s' de l'Itinéraire est identique à '%s' d'un ou plusieurs autres "
+"Itinéraires"
 
 #, perl-format
 msgid "'%s' = '%s' of Route has a match with '%s' = '%s' of other Route(s)"
@@ -526,8 +529,8 @@ msgid ""
 "PTv2 route: there are no 'public_transport' = 'stop_position' and no "
 "'public_transport' = 'platform'"
 msgstr ""
-"Itinéraire PTv2 : il n'y a ni d'arrêt 'public_transport' = 'stop_position' "
-"ni de plateforme 'public_transport' = 'platform'"
+"Itinéraire PTv2 : il n'y a aucun arrêt 'public_transport' = 'stop_position' "
+"ni aucune plateforme 'public_transport' = 'platform'"
 
 msgid "PTv2 route: there is no 'public_transport' = 'stop_position'"
 msgstr ""
@@ -544,7 +547,7 @@ msgstr ""
 
 msgid "PTv2 route: there is only one 'public_transport' = 'platform'"
 msgstr ""
-"Itinéraire PTv2 : il n'y a qu'une seul plateforme 'public_transport' = "
+"Itinéraire PTv2 : il n'y a qu'une seule plateforme 'public_transport' = "
 "'platform'"
 
 msgid ""
@@ -594,7 +597,9 @@ msgid "PTv2 route: using motorway_link way without entering a motorway way"
 msgid_plural ""
 "PTv2 route: using motorway_link ways without entering a motorway way"
 msgstr[0] "Itinéraire PTv2 : utilise des bretelles d'autoroute sans autoroute"
-msgstr[1] "Itinéraire PTv2 : utilise des bretelles d'autoroute sans autoroute"
+msgstr[1] ""
+"Itinéraire PTv2 : utilise des bretelles d'autoroute sans entrer sur "
+"l'autoroute"
 
 msgid "PTv2 route: roundabout appears twice, following itself"
 msgid_plural "PTv2 route: roundabouts appear twice, following themselves"
@@ -1701,6 +1706,7 @@ msgstr "Vérifie la succession de chemins, y-a-t-il des trous ?"
 
 msgid "Check value of 'service' tag for 'highway' = 'service'."
 msgstr ""
+"Vérifiez la valeur de l'attribut 'service' pour 'highway' = 'service'."
 
 msgid "Suspicious values"
 msgstr "Valeurs suspectes"
@@ -1865,7 +1871,7 @@ msgid "See also:"
 msgstr "Voir aussi :"
 
 msgid "Compatibility with well known tags"
-msgstr ""
+msgstr "Compatibilité avec des attributs courants"
 
 msgid ""
 "Relaxed check of begin and end of routes regarding stop positions (i.e. for "
