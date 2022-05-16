@@ -135,6 +135,9 @@
 #
 #
 
+# copied from https://github.com/w3c/htmldiff-ui on 2022-05-16
+# changed one line to : <script src="/script/htmldiff-nav-index.js"></script>
+
 use Getopt::Std;
 
 sub usage {
@@ -329,7 +332,7 @@ sub splitit {
 .diff-old:after
     { content: "\2193" }
 </style>
-<script src="https://w3c.github.io/htmldiff-nav/index.js"></script>);
+<script src="/script/htmldiff-nav-index.js"></script>);
 	if ($opt_t) {
 		$styles .= q(
 <script type="text/javascript">
