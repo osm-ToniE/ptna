@@ -4,8 +4,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Branko Kokanovic <branko@kokanovic.org>, 2021
 # ToniE <osm-ToniE@web.de>, 2022
+# Branko Kokanovic <branko@kokanovic.org>, 2022
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
 "POT-Creation-Date: 2022-04-29 17:58+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: ToniE <osm-ToniE@web.de>, 2022\n"
+"Last-Translator: Branko Kokanovic <branko@kokanovic.org>, 2022\n"
 "Language-Team: Serbian (https://www.transifex.com/jungle-bus/teams/97874/sr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -708,7 +708,7 @@ msgid "missing key"
 msgstr "недостаје кључ"
 
 msgid "suspicious sub-type"
-msgstr ""
+msgstr "сумњив подтип"
 
 #, perl-format
 msgid "'barrier'='%s' with implied 'access'='no'"
@@ -804,7 +804,7 @@ msgstr "PTv2 рута: користи се неисправан тип пута 
 
 #, perl-format
 msgid "Route: using way type (%s)"
-msgstr ""
+msgstr "Рута: користи се тип пута (%s)"
 
 #, perl-format
 msgid ""
@@ -961,7 +961,7 @@ msgid "Static Analysis for OpenStreetMap"
 msgstr "Статичка анализа за OpenStreetMap"
 
 msgid "Home"
-msgstr ""
+msgstr "Почетна"
 
 msgid "Click here to toggle between 'analysis' page and 'differences' page"
 msgstr "Кликните овде да мењате између стране 'анализе' и стране 'промене'"
@@ -970,13 +970,13 @@ msgid "Toggle View"
 msgstr "Измени приказ"
 
 msgid "Contact"
-msgstr ""
+msgstr "Контакт"
 
 msgid "Imprint"
-msgstr ""
+msgstr "Импресум"
 
 msgid "Privacy policy"
-msgstr ""
+msgstr "Политика приватности"
 
 msgid "Contents"
 msgstr "Садржај"
@@ -1240,16 +1240,16 @@ msgid "key = value"
 msgstr "кључ = вредност"
 
 msgid "Browse on map"
-msgstr ""
+msgstr "Гледај на карти"
 
 msgid "Edit in iD"
-msgstr ""
+msgstr "Измени у iD едитору"
 
 msgid "Edit in JOSM"
-msgstr ""
+msgstr "Измени у JOSM-у"
 
 msgid "Show relation on special map"
-msgstr ""
+msgstr "Прикажи релације на посебној карти"
 
 #, perl-format
 msgid ""
@@ -1621,10 +1621,10 @@ msgid "Check sequence of ways, are there any gaps?"
 msgstr "Проверава след путева, да ли има неповезаних путева?"
 
 msgid "Check value of 'service' tag for 'highway' = 'service'."
-msgstr ""
+msgstr "Провери вредност ’service’ ознаке за ’highway’ = ’service’."
 
 msgid "Suspicious values"
-msgstr ""
+msgstr "Сумњиве вредности"
 
 msgid ""
 "Check that for instance 'bus' = 'yes' is set on a PTv2 bus stop having "
@@ -1783,10 +1783,10 @@ msgstr ""
 "PTv1)"
 
 msgid "See also:"
-msgstr ""
+msgstr "Види још:"
 
 msgid "Compatibility with well known tags"
-msgstr ""
+msgstr "Компатибилност са познатим ознакама"
 
 msgid ""
 "Relaxed check of begin and end of routes regarding stop positions (i.e. for "
@@ -1824,6 +1824,8 @@ msgid ""
 "CSV data: field 'gtfs_feed' (= '%s') is wrong. Line %s of Routes-Data. "
 "Contents of line: '%s'"
 msgstr ""
+"CSV подаци: поље ’gtfs_feed’ (= ’%s’) је погрешно. Линија %s података руте. "
+"Садржај линије: ’%s’"
 
 #, perl-format
 msgid ""
