@@ -351,7 +351,7 @@ then
             log=$(ptna-wiki-page.pl --pull --page=$WIKI_ROUTES_PAGE --file=$WORK_LOC/$ROUTES_FILE 2>&1)
             ret=$?
             echo $log | sed -e 's/ \([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9] \)/\n\1/g'
-            echo $(date "+%Y-%m-%d %H:%M:%S") "ptna-wiki-page.pl returned $?"
+            echo $(date "+%Y-%m-%d %H:%M:%S") "ptna-wiki-page.pl returned $ret"
             if [ -f "$WORK_LOC/$ROUTES_FILE" ]
             then
                 ROUTES_SIZE="$(stat -c '%s' $WORK_LOC/$ROUTES_FILE)"

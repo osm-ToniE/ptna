@@ -65,14 +65,14 @@ if ( !$page ) {
 
 my $commands = 0;
 
-if ( $pull  ) { $commands++; } 
-if ( $push  ) { $commands++; } 
-if ( $watch ) { $commands++; } 
+if ( $pull  ) { $commands++; }
+if ( $push  ) { $commands++; }
+if ( $watch ) { $commands++; }
 
 if ( $commands > 1 ) {
     printf STDERR "Please specify either --pull or --push or --watch\n";
     printf STDERR "usage: wiki-page.pl [--pull|--push|--watch] --page=<wikipage> ...\n";
-    exit 1;
+    exit 2;
 } elsif ( $push ) {
     if ( $username || $ENV{'WIKI_USERNAME'} ) {
         if ( !$username ) {
@@ -83,7 +83,7 @@ if ( $commands > 1 ) {
         printf STDERR "usage: wiki-page.pl --push --page=<wikipage> --file=<filename> --username=<user> --password=<passwd> --summary=<summary> ...\n";
         printf STDERR "or\n";
         printf STDERR "WIKI_USER=<user>\nWIKI_PASSWORD=<passwd>\nwiki-page.pl --push --page=<wikipage> --file=<filename> --summary=<summary> ...\n";
-        exit 1;
+        exit 3;
     }
     if ( $password || $ENV{'WIKI_PASSWORD'} ) {
         if ( !$password ) {
@@ -94,7 +94,7 @@ if ( $commands > 1 ) {
         printf STDERR "usage: wiki-page.pl --push --page=<wikipage> --file=<filename> --username=<user> --password=<passwd> --summary=<summary> ...\n";
         printf STDERR "or\n";
         printf STDERR "WIKI_USER=<user>\nWIKI_PASSWORD=<passwd>\nwiki-page.pl --push --page=<wikipage> --file=<filename> --summary=<summary> ...\n";
-        exit 1;
+        exit 4;
     }
     if ( $file && -f $file && -r $file ) {
         ;
@@ -107,7 +107,7 @@ if ( $commands > 1 ) {
         printf STDERR "usage: wiki-page.pl --push --page=<wikipage> --file=<filename> --username=<user> --password=<passwd> --summary=<summary> ...\n";
         printf STDERR "or\n";
         printf STDERR "WIKI_USER=<user>\nWIKI_PASSWORD=<passwd>\nwiki-page.pl --push --page=<wikipage> --file=<filename> --summary=<summary> ...\n";
-        exit 1;
+        exit 5;
     }
 
 } elsif ( $pull ) {
@@ -122,7 +122,7 @@ if ( $commands > 1 ) {
         printf STDERR "usage: wiki-page.pl --push --page=<wikipage> --file=<filename> --username=<user> --password=<passwd> --summary=<summary> ...\n";
         printf STDERR "or\n";
         printf STDERR "WIKI_USER=<user>\nWIKI_PASSWORD=<passwd>\nwiki-page.pl --push --page=<wikipage> --file=<filename> --summary=<summary> ...\n";
-        exit 1;
+        exit 6;
     }
     if ( $password || $ENV{'WIKI_PASSWORD'} ) {
         if ( !$password ) {
@@ -133,12 +133,12 @@ if ( $commands > 1 ) {
         printf STDERR "usage: wiki-page.pl --push --page=<wikipage> --file=<filename> --username=<user> --password=<passwd> --summary=<summary> ...\n";
         printf STDERR "or\n";
         printf STDERR "WIKI_USER=<user>\nWIKI_PASSWORD=<passwd>\nwiki-page.pl --push --page=<wikipage> --file=<filename> --summary=<summary> ...\n";
-        exit 1;
+        exit 7;
     }
 } else {
     printf STDERR "Please specify either --pull or --push or --watch\n\n", $username;
     printf STDERR "usage: wiki-page.pl [--pull|--push|--watch] --page=<wikipage> ...\n";
-    exit 1;
+    exit 8;
 }
 
 #############################################################################################
@@ -151,14 +151,14 @@ my $mw = undef;
 if ( $pull) {
 
     $mw = MediaWiki::API->new();
-    
+
     $mw->{config}->{api_url}    = $wiki_url;
     $mw->{config}->{on_error}   = \&on_error;
-    
+
     printf STDERR "%s Reading Wiki page '%s'\n", get_time(), $page;
-    
+
     my $ref = $mw->get_page( { title => $page } );
-    
+
     if ( $ref ) {
         if ( $ref->{'*'} ) {
             my $timestamp = $ref->{timestamp};
@@ -173,6 +173,7 @@ if ( $pull) {
                     printf STDERR "%s Done ... writing Wiki page '%s' to file '%s'\n", get_time(), $page, $file;
                 } else {
                     printf STDERR "%s Can't open file '%s' for writing\n", get_time(), $file;
+                    exit 10;
                 }
             } else {
                 printf STDERR "%s Writing Wiki page '%s' to STDOUT\n", get_time(), $page;
@@ -181,25 +182,27 @@ if ( $pull) {
             }
         } else {
             printf STDERR "%s Wiki page '%s' does not exist (no contents)\n", get_time(), $page;
+            exit 11;
         }
     } else {
         printf STDERR "%s Reading Wiki page '%s' failed\n", get_time(), $page;
+        exit 12;
     }
 
 } elsif ( $push ) {
 
     $mw = MediaWiki::API->new();
-    
+
     $mw->{config}->{api_url}    = $wiki_url;
     $mw->{config}->{on_error}   = \&on_error;
-    
+
     # log in to the wiki
     if ( $mw->login( { lgname => $username, lgpassword => $password } ) ) {
-        
+
         printf STDERR "%s Reading Wiki page info '%s'\n", get_time(), $page;
 
         my $ref = $mw->get_page( { title => $page } );
-        
+
         if ( $ref ) {
             if ( $ref->{'*'} ) {
                 my $timestamp = $ref->{timestamp};
@@ -214,9 +217,9 @@ if ( $pull) {
                         $text .= $_;
                     }
                     close( IN );
-                    
+
                     printf STDERR "%s Pushing file '%s' to Wiki page '%s' with summary '%s'\n", get_time(), $file, $page, $summary;
-                
+
                     if ( $mw->edit( {
                                 action          => 'edit',
                                 summary         => $summary,
@@ -228,44 +231,51 @@ if ( $pull) {
                         printf STDERR "%s Done ... pushing file '%s' to Wiki page '%s' with summary '%s'\n", get_time(), $file, $page, $summary;
                     } else {
                         printf STDERR "%s Edit Wiki page failed '%s'\n", get_time(), $page;
+                        exit 20;
                     }
 
                 } else {
                     printf STDERR "%s Can't open file '%s' for reading\n", get_time(), $file;
+                    exit 21;
                 }
             } else {
                 printf STDERR "%s Wiki page '%s' does not exist (no contents), will not be created\n", get_time(), $page;
+                exit 22;
             }
         } else {
             printf STDERR "%s Reading Wiki page information '%s' failed\n", get_time(), $page;
+            exit 23;
         }
     } else {
         printf STDERR "%s Login to Wiki failed\n", get_time(), $file;
+        exit 24;
     }
 
 } elsif ( $watch ) {
     $mw = MediaWiki::API->new();
-    
+
     $mw->{config}->{api_url}    = $wiki_url;
     $mw->{config}->{on_error}   = \&on_error;
-    
+
     # log in to the wiki
     if ( $mw->login( { lgname => $username, lgpassword => $password } ) ) {
-        
+
         printf STDERR "%s Setting 'watch' on Wiki page '%s'\n", get_time(), $page;
-        
+
         if ( $mw->edit( { action => 'watch', title => $page } ) ) {
             printf STDERR "%s 'watch' set on Wiki page '%s'\n", get_time(), $page;
         } else {
             printf STDERR "%s Setting 'watch' on Wiki page '%s' failed\n", get_time(), $page;
+            exit 30;
         }
     } else {
         printf STDERR "%s Login to Wiki failed\n", get_time(), $file;
+        exit 31;
     }
-    
+
 }
-  
-  
+
+
 #############################################################################################
 #
 #
@@ -287,11 +297,11 @@ sub on_error {
 #############################################################################################
 
 sub get_time {
-    
+
     my ($sec,$min,$hour,$day,$month,$year) = localtime();
-    
-    return sprintf( "%04d-%02d-%02d %02d:%02d:%02d", $year+1900, $month+1, $day, $hour, $min, $sec ); 
+
+    return sprintf( "%04d-%02d-%02d %02d:%02d:%02d", $year+1900, $month+1, $day, $hour, $min, $sec );
 }
-   
+
 
 1;
