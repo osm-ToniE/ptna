@@ -2762,6 +2762,11 @@ sub analyze_route_master_relation {
     #    push( @{$relation_ptr->{'__notes__'}}, $notes_string )        if ( $check_version );
     #}
 
+    #
+    # relation shall be shown on jungle-bus' unroll page: https://jungle-bus.github.io/unroll/route.html?qa=yes&line=<relation_id>
+    #
+    $relation_ptr->{'unroll_relation'} = 1;
+
     return $return_code;
 }
 
@@ -6573,6 +6578,11 @@ sub printRelationTemplate {
                 my $langparam   = $opt_language? '&lang=' . uri_escape($opt_language) : '';
                 my $show_url    = sprintf( "<a href=\"/relation.php?id=%d%s\" title=\"%s\">PTNA</a>", $rel_id, $langparam, html_escape(gettext("Show relation on special map")) );
                 $val .= sprintf( ", %s", $show_url );
+            }
+
+            if ( $RELATIONS{$rel_id} && $RELATIONS{$rel_id}->{'unroll_relation'} ) {
+                my $unroll_url  = sprintf( "<a href=\"https://jungle-bus.github.io/unroll/route.html?qa=yes&line=%d\" title=\"%s\">UNROLL</a>", $rel_id, html_escape(gettext("Show route details on jungle-bus' unroll page")) );
+                $val .= sprintf( ", %s", $unroll_url );
             }
 
             if ( $RELATIONS{$rel_id} && $RELATIONS{$rel_id}->{'GTFS-HTML-TAG'} ) {
