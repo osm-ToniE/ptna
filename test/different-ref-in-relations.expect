@@ -95,9 +95,9 @@
                 <tr id="bus_255b" data-info="???" data-ref="255b" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=255b&network=network&operator=operator" title="Sketch-Line">255b</a></td><td class="csvinfo" colspan="5"></td></tr>
                 <tr id="-106452" data-info="-106452" data-ref="255b" class="line"><td class="name">Bus 255b: from =&gt; to</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -106452</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'network'<br>'operator' = 'operator'</td></tr>
                 <tr id="bus_63_E63" data-info="???" data-ref="63 E63" class="sketchline"><td class="sketch">63 E63</td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='63' or ref='E63' and route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for 'ref'='63' or 'ref'='E63' and 'route'='bus'</td><td class="notes"></td></tr>
                 <tr id="bus_270_270a_270b" data-info="???" data-ref="270 270a 270b" class="sketchline"><td class="sketch">270 270a 270b</td><td class="csvinfo" colspan="5"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='270' or ref='270a' or ref='270b' and route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for 'ref'='270' or 'ref'='270a' or 'ref'='270b' and 'route'='bus'</td><td class="notes"></td></tr>
             </tbody>
         </table>
 

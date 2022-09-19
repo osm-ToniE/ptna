@@ -127,7 +127,7 @@ Two of them have identical &#039;operator&#039; but different &#039;from&#039; a
             </thead>
             <tbody>
                 <tr id="bus_A-4" data-info="Comment: Bus A fährt in XYZ; From: Platz1; To: Platz2; Operator: ABC" data-ref="A" class="sketchline"><td class="sketch">A</td><td class="csvinfo" colspan="5">Comment: Bus A fährt in XYZ; From: Platz1; To: Platz2; Operator: ABC</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='A' and route='bus'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for 'ref'='A' and 'route'='bus'</td><td class="notes"></td></tr>
             </tbody>
         </table>
 

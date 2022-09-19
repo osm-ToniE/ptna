@@ -128,7 +128,7 @@
                 <tr id="-103782" data-info="-103782" data-ref="R11" class="line"><td class="name">R11: Fürth =&gt; Cadolzburg</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -103782</td><td class="PTv">2</td><td class="issues">'note' = '&#039;operator&#039; not set be intention'<br>There is more than one Route-Master</td><td class="notes">'network' = 'any'</td></tr>
                 <tr id="-103818" data-info="-103818" data-ref="R11" class="line"><td class="name">R11: Cadolzburg =&gt; Fürth</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -103818</td><td class="PTv">2</td><td class="issues">'note' = '&#039;operator&#039; not set be intention'<br>There is more than one Route-Master</td><td class="notes">'network' = 'any'</td></tr>
                 <tr id="train_R11-2" data-info="Comment: Rangaubahn; From: Fürth; To: Cadolzburg; Operator: DB Regio Mittelfranken" data-ref="R11" class="sketchline"><td class="sketch">R11</td><td class="csvinfo" colspan="5">Comment: Rangaubahn; From: Fürth; To: Cadolzburg; Operator: DB Regio Mittelfranken</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='R11' and route='train'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for 'ref'='R11' and 'route'='train'</td><td class="notes"></td></tr>
             </tbody>
         </table>
 
@@ -140,9 +140,9 @@
             </thead>
             <tbody>
                 <tr id="light_rail_4" data-info="From: Käfertal|Wallstadt; To: Oggersheim|Bad Dürkheim" data-ref="4" class="sketchline"><td class="sketch">4</td><td class="csvinfo" colspan="5">From: Käfertal|Wallstadt; To: Oggersheim|Bad Dürkheim</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='4' and route='light_rail'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for 'ref'='4' and 'route'='light_rail'</td><td class="notes"></td></tr>
                 <tr id="light_rail_4-2" data-info="From: Lohmannshof; To: Rathaus" data-ref="4" class="sketchline"><td class="sketch">4</td><td class="csvinfo" colspan="5">From: Lohmannshof; To: Rathaus</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='4' and route='light_rail'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for 'ref'='4' and 'route'='light_rail'</td><td class="notes"></td></tr>
             </tbody>
         </table>
 
@@ -154,9 +154,9 @@
             </thead>
             <tbody>
                 <tr id="light_rail_4-3" data-info="From: Käfertal|Wallstadt; To: Oggersheim|Bad Dürkheim; Operator: Rhein-Neckar-Verkehr GmbH" data-ref="4" class="sketchline"><td class="sketch">4</td><td class="csvinfo" colspan="5">From: Käfertal|Wallstadt; To: Oggersheim|Bad Dürkheim; Operator: Rhein-Neckar-Verkehr GmbH</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='4' and route='light_rail'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for 'ref'='4' and 'route'='light_rail'</td><td class="notes"></td></tr>
                 <tr id="light_rail_4-4" data-info="From: Lohmannshof; To: Rathaus; Operator: moBiel GmbH" data-ref="4" class="sketchline"><td class="sketch">4</td><td class="csvinfo" colspan="5">From: Lohmannshof; To: Rathaus; Operator: moBiel GmbH</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for ref='4' and route='light_rail'</td><td class="notes"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name"></td><td class="type"></td><td class="relation"></td><td class="PTv"></td><td class="issues">Missing route for 'ref'='4' and 'route'='light_rail'</td><td class="notes"></td></tr>
             </tbody>
         </table>
 
