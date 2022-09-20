@@ -4,7 +4,6 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Noémie <nlehuby@zaclys.net>, 2019
 # Julien Lepiller <transifex@lepiller.eu>, 2019
 # Adrien Pavie <panieravide@riseup.net>, 2019
 # Lejun, 2020
@@ -13,21 +12,22 @@
 # Patchi, 2021
 # ToniE <osm-ToniE@web.de>, 2022
 # R B, 2022
+# Noémie <nlehuby@zaclys.net>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2022-04-29 17:58+0200\n"
+"POT-Creation-Date: 2022-09-19 18:41+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: R B, 2022\n"
+"Last-Translator: Noémie <nlehuby@zaclys.net>, 2022\n"
 "Language-Team: French (https://www.transifex.com/jungle-bus/teams/97874/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 msgid "Message"
 msgstr "Message"
@@ -205,6 +205,9 @@ msgstr[0] ""
 msgstr[1] ""
 "Les groupements d'itinéraires ont plus d'itinéraires (%d au lieu de %d) que "
 "dans les données sources"
+msgstr[2] ""
+"Les groupements d'itinéraires ont plus d'itinéraires (%d au lieu de %d) que "
+"dans les données sources"
 
 #, perl-format
 msgid ""
@@ -216,6 +219,9 @@ msgid_plural ""
 msgstr[0] ""
 "La ligne a moins de parcours (%d au lieu de %d) que dans les données sources"
 msgstr[1] ""
+"Les groupements d'itinéraires ont moins d'itinéraires (%d au lieu de %d) que"
+" dans les données sources"
+msgstr[2] ""
 "Les groupements d'itinéraires ont moins d'itinéraires (%d au lieu de %d) que"
 " dans les données sources"
 
@@ -570,6 +576,9 @@ msgstr[0] ""
 msgstr[1] ""
 "Itinéraire PTv2 : a des trous, consistant en %d segments. Les trous "
 "apparaissent sur les chemins"
+msgstr[2] ""
+"Itinéraire PTv2 : a des trous, consistant en %d segments. Les trous "
+"apparaissent sur les chemins"
 
 msgid ""
 "PTv2 route: incorrect order of 'stop_position', 'platform' and 'way' "
@@ -588,11 +597,16 @@ msgstr[0] ""
 msgstr[1] ""
 "Itinéraire PTv2 : utilise %d rond-point complets mais n'utilise que des "
 "segments"
+msgstr[2] ""
+"Itinéraire PTv2 : utilise %d rond-point complets mais n'utilise que des "
+"segments"
 
 msgid "PTv2 route: using oneway way in wrong direction"
 msgid_plural "PTv2 route: using oneway ways in wrong direction"
 msgstr[0] "Parcours PTv2 : utilise un sens-unique dans le mauvais sens"
 msgstr[1] ""
+"Itinéraire PTv2 : utilise des voies en sens-unique dans le mauvais sens"
+msgstr[2] ""
 "Itinéraire PTv2 : utilise des voies en sens-unique dans le mauvais sens"
 
 msgid "PTv2 route: using motorway_link way without entering a motorway way"
@@ -602,11 +616,16 @@ msgstr[0] "Itinéraire PTv2 : utilise des bretelles d'autoroute sans autoroute"
 msgstr[1] ""
 "Itinéraire PTv2 : utilise des bretelles d'autoroute sans entrer sur "
 "l'autoroute"
+msgstr[2] ""
+"Itinéraire PTv2 : utilise des bretelles d'autoroute sans entrer sur "
+"l'autoroute"
 
 msgid "PTv2 route: roundabout appears twice, following itself"
 msgid_plural "PTv2 route: roundabouts appear twice, following themselves"
 msgstr[0] "Parcour PTv2: le rond-point apparaît deux fois, se suivant"
 msgstr[1] ""
+"Itinéraire PTv2: les ronds-points apparaissent deux fois, se suivant"
+msgstr[2] ""
 "Itinéraire PTv2: les ronds-points apparaissent deux fois, se suivant"
 
 msgid "PTv2 route: first node of oneway way has 'role' = 'stop_exit_only'"
@@ -889,12 +908,16 @@ msgstr[0] ""
 msgstr[1] ""
 "Itinéraire : restriction d'accès aux chemins incorrecte (%s). Il est "
 "recommandé d'utiliser  '%s'='no' et '%s'='yes'"
+msgstr[2] ""
+"Itinéraire : restriction d'accès aux chemins incorrecte (%s). Il est "
+"recommandé d'utiliser  '%s'='no' et '%s'='yes'"
 
 #, perl-format
 msgid "Route: unclear access (%s) to way"
 msgid_plural "Route: unclear access (%s) to ways"
 msgstr[0] "Parcours : accès imprécis au chemin (%s)"
 msgstr[1] "Itinéraire : accès imprécis aux voies (%s)"
+msgstr[2] "Itinéraire : accès imprécis aux voies (%s)"
 
 #, perl-format
 msgid ""
@@ -905,6 +928,9 @@ msgstr[0] ""
 "Parcours : %s douteux avec 'highway' différent de 'construction' sur le "
 "chemin "
 msgstr[1] ""
+"Itinéraire : %s douteux avec 'highway' différent de 'construction' sur les "
+"chemins "
+msgstr[2] ""
 "Itinéraire : %s douteux avec 'highway' différent de 'construction' sur les "
 "chemins "
 
@@ -921,6 +947,9 @@ msgstr[0] ""
 msgstr[1] ""
 "Itinéraire : accès restreint des voies (%s) sans 'psv'='yes'. '%s'='yes', "
 "'%s'='designated', ou ..."
+msgstr[2] ""
+"Itinéraire : accès restreint des voies (%s) sans 'psv'='yes'. '%s'='yes', "
+"'%s'='designated', ou ..."
 
 #, perl-format
 msgid ""
@@ -935,6 +964,9 @@ msgstr[0] ""
 msgstr[1] ""
 "Itinéraire : accès restreint aux barrières (%s) sans 'psv'='yes. '%s'='yes, "
 "'%s'='designated', ou ..."
+msgstr[2] ""
+"Itinéraire : accès restreint aux barrières (%s) sans 'psv'='yes. '%s'='yes, "
+"'%s'='designated', ou ..."
 
 msgid "Route: 'highway' = 'bus_stop' is set on way. Allowed on nodes only!"
 msgid_plural ""
@@ -943,6 +975,9 @@ msgstr[0] ""
 "Parcours : le tag 'highway'='bus_stop' est placé sur un chemin. Seul un "
 "noeud peut être un arrêt de bus !"
 msgstr[1] ""
+"Itinéraire : le tag 'highway'='bus_stop' est placé sur des voies. Seuls les "
+"nœuds peuvent être des arrêts de bus !"
+msgstr[2] ""
 "Itinéraire : le tag 'highway'='bus_stop' est placé sur des voies. Seuls les "
 "nœuds peuvent être des arrêts de bus !"
 
@@ -1333,6 +1368,9 @@ msgstr "Modifier avec JOSM"
 
 msgid "Show relation on special map"
 msgstr "Montrer la relation sur la carte spéciale"
+
+msgid "Show route details on jungle-bus' unroll page"
+msgstr "Voir les détails de la ligne sur Jungle Bus Unroll "
 
 #, perl-format
 msgid ""
