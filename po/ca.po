@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2022-01-28 16:13+0100\n"
+"POT-Creation-Date: 2022-09-19 18:41+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Language-Team: Catalan (https://www.transifex.com/jungle-bus/teams/97874/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -147,10 +147,10 @@ msgid "Funicular"
 msgstr ""
 
 #, perl-format
-msgid "Missing route for ref='%s' and route='%s'"
+msgid "Missing route for 'ref'='%s' and 'route'='%s'"
 msgstr ""
 
-msgid "' or ref='"
+msgid "' or 'ref'='"
 msgstr ""
 
 #. xgettext: This section will list all routes which could not be clearly
@@ -1059,6 +1059,9 @@ msgid "Edit in JOSM"
 msgstr ""
 
 msgid "Show relation on special map"
+msgstr ""
+
+msgid "Show route details on jungle-bus' unroll page"
 msgstr ""
 
 #, perl-format
