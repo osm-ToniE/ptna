@@ -120,6 +120,7 @@ CALL_PARAMS="--server-response --tries=2 --wait=10 --random-wait"
 
 if [ "$deletelog" = "true" ]
 then
+    rm -f $PTNA_WORK_LOC/log/$PREFIX.log
     rm -f $WORK_LOC/$HTML_FILE.log
 fi
 

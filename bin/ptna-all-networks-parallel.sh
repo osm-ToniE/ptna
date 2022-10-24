@@ -9,13 +9,6 @@ XARG="P6"
 
 cd $PTNA_NETWORKS_LOC
 
-if [ $(echo $* | fgrep -c L) -gt 0 ]
-then
-    # delete all 'network' specific log files
-    find . -name settings.sh | \
-    xargs -P1 -I@ bash -c 'D=$(dirname @) && B=$(basename $D) && echo $(date "+%Y-%m-%d %H:%M:%S") $B && rm -f $PTNA_WORK_LOC/log/$B.log 2>&1'
-fi
-
 if [ -z "$PTNA_OVERPASS_API_SERVER" ]
 then
     if [ $(echo $* | fgrep -c -i o) -gt 0 ]

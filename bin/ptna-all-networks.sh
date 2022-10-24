@@ -4,7 +4,6 @@
 # analyze ÖPNV networks
 #
 
-
 cd $PTNA_NETWORKS_LOC
 
 WD=$PWD
