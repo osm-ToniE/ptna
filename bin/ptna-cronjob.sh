@@ -83,8 +83,9 @@ then
 
         # c == clean the work area
         # C == clean the XML file
+        # L == delete all old 'network' specific log files
 
-        ptna-all-networks.sh -cC > $LOGFILE 2>&1 < /dev/null
+        ptna-all-networks.sh -cCL > $LOGFILE 2>&1 < /dev/null
 
         # o == do the overpassapi query and download the data (to work area)
         # g == get the OSM-Wiki data for the routes
