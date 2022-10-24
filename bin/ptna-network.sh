@@ -22,7 +22,7 @@ fi
 SETTINGS_DIR="."
 
 
-TEMP=$(getopt -o acCfgGhmoOpPuwWS: --long analyze,clean-created,clean-downloaded,get-routes,get-talk,force-download,help,modiify-routes-data,overpass-query,overpass-query-on-zero-xml,push-routes,push-talk,update-result,watch-routes,watch-talk,settings-dir: -n 'ptna-network.sh' -- "$@")
+TEMP=$(getopt -o acCfgGhLmoOpPuwWS: --long analyze,clean-created,clean-downloaded,get-routes,get-talk,force-download,help,log-delete,modiify-routes-data,overpass-query,overpass-query-on-zero-xml,push-routes,push-talk,update-result,watch-routes,watch-talk,settings-dir: -n 'ptna-network.sh' -- "$@")
 
 if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 2 ; fi
 
@@ -37,6 +37,7 @@ while true ; do
         -g|--get-routes)                    getroutes=true              ; shift ;;
         -G|--get-talk)                      gettalk=true                ; shift ;;
         -h|--help)                          help=true                   ; shift ;;
+        -L|--log-delete)                    deletelog=true              ; shift ;;
         -m|--modify-routes-data)            modify=true                 ; shift ;;
         -o|--overpass-query)                overpassquery=true  ; overpassqueryonzeroxml=false ; shift ;;
         -O|--overpass-query-on-zero-xml)    overpassqueryonzeroxml=true  ; overpassquery=false ; shift ;;
@@ -112,6 +113,15 @@ else
 fi
 
 CALL_PARAMS="--server-response --tries=2 --wait=10 --random-wait"
+
+#
+#
+#
+
+if [ "$deletelog" = "true" ]
+then
+    rm -f $WORK_LOC/$HTML_FILE.log
+fi
 
 #
 #
