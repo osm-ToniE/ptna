@@ -180,8 +180,13 @@ if [ "$overpassqueryonzeroxml" = "true" ]
 then
     if [ -f $OSM_XML_FILE_ABSOLUTE -a -s $OSM_XML_FILE_ABSOLUTE ]
     then
-        echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' exists, no further analysis required, terminating"
-        exit 0
+        if [ $OSM_XML_FILE_ABSOLUTE -nt $WORK_LOC/$HTML_FILE ]
+        then
+            echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' exists and is newer than '$WORK_LOC/$HTML_FILE', starting analysis if requested"
+       else
+            echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' exists and is older than '$WORK_LOC/$HTML_FILE', no further analysis required, terminating"
+            exit 0
+        fi
     else
         echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' does not exist or is empty, starting download"
         overpassquery="true"
