@@ -112,7 +112,7 @@ else
     OSM_XML_FILE_ABSOLUTE="$WORK_LOC/$PREFIX-Data.xml"
 fi
 
-CALL_PARAMS="--server-response --tries=2 --wait=10 --random-wait"
+CALL_PARAMS="--server-response --tries=2 --wait=10 --random-wait --no-verbose"
 
 #
 #
