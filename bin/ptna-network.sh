@@ -262,7 +262,7 @@ then
                 then
                     echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' first 10 lines:"
                     head -10 $OSM_XML_FILE_ABSOLUTE.part.$$
-                    OSM_BASE=$(fgrep -m 1 '<meta osm_base' $OSM_XML_FILE_ABSOLUTE.part.$$ | sed -e 's/^.*osm_base="//' -e 's/".*$//')
+                    OSM_BASE=$(head -10 $OSM_XML_FILE_ABSOLUTE.part.$$ | fgrep -m 1 '<meta osm_base' | sed -e 's/^.*osm_base="//' -e 's/".*$//')
                     if [ -n "$OSM_BASE" ]
                     then
                         OSM_BASE=$(date --date "$OSM_BASE" "+%Y-%m-%d %H:%M:%S %Z")
@@ -309,7 +309,7 @@ then
                     then
                         echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' first 10 lines:"
                         head -10 $OSM_XML_FILE_ABSOLUTE.part.$$
-                        OSM_BASE=$(fgrep -m 1 '<meta osm_base' $OSM_XML_FILE_ABSOLUTE.part.$$ | sed -e 's/^.*osm_base="//' -e 's/".*$//')
+                        OSM_BASE=$(head -10 $OSM_XML_FILE_ABSOLUTE.part.$$ | fgrep -m 1 '<meta osm_base' | sed -e 's/^.*osm_base="//' -e 's/".*$//')
                         if [ -n "$OSM_BASE" ]
                         then
                             OSM_BASE=$(date --date "$OSM_BASE" "+%Y-%m-%d %H:%M:%S %Z")
