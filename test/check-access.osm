@@ -270,8 +270,10 @@
     <nd ref='-152079' />
     <nd ref='-152329' />
     <nd ref='-152111' />
+    <tag k='bus' v='no' />
     <tag k='highway' v='path' />
     <tag k='name' v='Way 11-15' />
+    <tag k='psv' v='yes' />
     <tag k='ref' v='11-15' />
   </way>
   <way id='-152346' action='modify'>
