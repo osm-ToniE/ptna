@@ -262,6 +262,7 @@
   <way id='-152344' action='modify'>
     <nd ref='-152061' />
     <nd ref='-152057' />
+    <tag k='bus' v='yes|yes|designated' />
     <tag k='highway' v='secondary' />
     <tag k='name' v='Way 1-5' />
     <tag k='ref' v='1-5' />

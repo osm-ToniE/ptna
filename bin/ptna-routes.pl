@@ -5078,8 +5078,14 @@ sub CheckAccessOnWaysAndNodes {
                         push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } @help_array )) );
                     }
                 } elsif ( $access_restriction =~ m/^'(trolleybus|share_taxi|bus|coach)'=/ ) {
-                    $issues_string = ngettext( "Route: suspicious access restriction (%s) to way. Check whether this should be '%s'='yes'.", "Route: suspicious access restriction (%s) to ways. Check whether this should be '%s'='yes'.", $num_of_errors );
-                    $helpstring    = sprintf( $issues_string, $access_restriction, $1 );
+                    my $vehicle = $1;
+                    if ( $access_restriction =~ m/^'[^']+'='(.*\|.*)'$/ ) {
+                        $issues_string = ngettext( "Route: suspicious access restriction (%s) to way. Check whether this should be '%s:lanes'='%s'", "Route: suspicious access restriction (%s) to ways. Check whether this should be '%s:lanes'='%s'", $num_of_errors );
+                        $helpstring    = sprintf( $issues_string, $access_restriction, $vehicle, $1 );
+                    } else {
+                        $issues_string = ngettext( "Route: suspicious access restriction (%s) to way. Check whether this should be '%s'='yes' or 'psv'='yes'", "Route: suspicious access restriction (%s) to ways. Check whether this should be '%s'='yes' or 'psv'='yes'", $num_of_errors );
+                        $helpstring    = sprintf( $issues_string, $access_restriction, $vehicle );
+                    }
                     if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
                         push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
                     } else {

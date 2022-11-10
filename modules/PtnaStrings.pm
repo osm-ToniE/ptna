@@ -1139,7 +1139,16 @@ sub InitMessageStrings {
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
-    $MessageList[$i]->{'message'}                = ngettext( "Route: suspicious access restriction (%s) to way. Check whether this should be '%s'='yes'.", "Route: suspicious access restriction (%s) to ways. Check whether this should be '%s'='yes'.", 1 );
+    $MessageList[$i]->{'message'}                = ngettext( "Route: suspicious access restriction (%s) to way. Check whether this should be '%s'='yes' or 'psv'='yes'", "Route: suspicious access restriction (%s) to ways. Check whether this should be '%s'='yes' or 'psv'='yes'", 1 );
+    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
+    $MessageList[$i]->{'message'}                = ngettext( "Route: suspicious access restriction (%s) to way. Check whether this should be '%s:lanes'='%s'", "Route: suspicious access restriction (%s) to ways. Check whether this should be '%s:lanes'='%s'", 1 );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
     $MessageList[$i]->{'description'}            = "";
