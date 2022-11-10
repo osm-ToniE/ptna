@@ -4589,7 +4589,19 @@ sub noAccessOnWay {
     if ( $way_id && $WAYS{$way_id} && $WAYS{$way_id}->{'tag'} ) {
         my $way_tag_ref = $WAYS{$way_id}->{'tag'};
 
-        if ( $vehicle_type && $way_tag_ref->{$vehicle_type} ) {
+        if ( $way_tag_ref->{'psv'} && $way_tag_ref->{'psv'} =~ m/yes|permissive|permit|official|destination|designated/ ) {
+            #
+            # fine for all public service vehicles
+            #
+            printf STDERR "noAccessOnWay() : access for all psv for way %d\n", $way_id       if ( $debug );
+            return '';
+        } elsif ( $way_tag_ref->{'psv:conditional'} ) {
+            #
+            # to be checked for conditional access for public service vehicles
+            #
+            printf STDERR "noAccessOnWay() : unclear access for all psv for way %d\n", $way_id       if ( $debug );
+            return sprintf( "'psv:conditional'='%s'", $way_tag_ref->{'psv:conditional'} );
+        } elsif ( $vehicle_type && $way_tag_ref->{$vehicle_type} ) {
             if ( $way_tag_ref->{$vehicle_type} eq 'yes'         ||
                  $way_tag_ref->{$vehicle_type} eq 'destination' ||
                  $way_tag_ref->{$vehicle_type} eq 'designated'  ||
@@ -4604,18 +4616,6 @@ sub noAccessOnWay {
                 printf STDERR "noAccessOnWay() : no access for %s for way %d\n", $vehicle_type, $way_id    if ( $debug );
                 return sprintf( "'%s'='%s'", $vehicle_type, $way_tag_ref->{$vehicle_type} );
             }
-        } elsif ( $way_tag_ref->{'psv'} && $way_tag_ref->{'psv'} =~ m/yes|permissive|permit|official|destination|designated/ ) {
-            #
-            # fine for all public service vehicles
-            #
-            printf STDERR "noAccessOnWay() : access for all psv for way %d\n", $way_id       if ( $debug );
-            return '';
-        } elsif ( $way_tag_ref->{'psv:conditional'} ) {
-            #
-            # to be checked for conditional access for public service vehicles
-            #
-            printf STDERR "noAccessOnWay() : unclear access for all psv for way %d\n", $way_id       if ( $debug );
-            return sprintf( "'psv:conditional'='%s'", $way_tag_ref->{'psv:conditional'} );
         } elsif ( $vehicle_type && $way_tag_ref->{$vehicle_type.':conditional'} ) {
             #
             # to be checked for conditional access for this specific type of vehicle (bus, train, subway, ...) == @supported_route_types
