@@ -4601,13 +4601,21 @@ sub noAccessOnWay {
             #
             printf STDERR "noAccessOnWay() : unclear access for all psv for way %d\n", $way_id       if ( $debug );
             return sprintf( "'psv:conditional'='%s'", $way_tag_ref->{'psv:conditional'} );
-        } elsif ( $vehicle_type && $way_tag_ref->{$vehicle_type} &&
-                  ($way_tag_ref->{$vehicle_type} eq 'yes' || $way_tag_ref->{$vehicle_type} eq 'destination' || $way_tag_ref->{$vehicle_type} eq 'designated' || $way_tag_ref->{$vehicle_type} eq 'permissive' || $way_tag_ref->{$vehicle_type} eq 'official') ) {
-            #
-            # fine for this specific type of vehicle (bus, train, subway, ...) == @supported_route_types
-            #
-            printf STDERR "noAccessOnWay() : access for %s for way %d\n", $vehicle_type, $way_id       if ( $debug );
-            return '';
+        } elsif ( $vehicle_type && $way_tag_ref->{$vehicle_type} ) {
+            if ( $way_tag_ref->{$vehicle_type} eq 'yes'         ||
+                 $way_tag_ref->{$vehicle_type} eq 'destination' ||
+                 $way_tag_ref->{$vehicle_type} eq 'designated'  ||
+                 $way_tag_ref->{$vehicle_type} eq 'permissive'  ||
+                 $way_tag_ref->{$vehicle_type} eq 'official'       ) {
+                #
+                # fine for this specific type of vehicle (bus, train, subway, ...) == @supported_route_types
+                #
+                printf STDERR "noAccessOnWay() : access for %s for way %d\n", $vehicle_type, $way_id       if ( $debug );
+                return '';
+            } else {
+                printf STDERR "noAccessOnWay() : no access for %s for way %d\n", $vehicle_type, $way_id    if ( $debug );
+                return sprintf( "'%s'='%s'", $vehicle_type, $way_tag_ref->{$vehicle_type} );
+            }
         } elsif ( $vehicle_type && $way_tag_ref->{$vehicle_type.':conditional'} ) {
             #
             # to be checked for conditional access for this specific type of vehicle (bus, train, subway, ...) == @supported_route_types
@@ -5063,8 +5071,21 @@ sub CheckAccessOnWaysAndNodes {
                 $num_of_errors  = scalar(@help_array);
                 if ( $access_restriction =~ m/^'([^']+)'='(trolleybus|share_taxi|bus|coach|psv)'$/ ) {
                     $issues_string = ngettext( "Route: incorrect access restriction (%s) to way. Consider tagging as '%s'='no' and '%s'='yes'", "Route: incorrect access restriction (%s) to ways. Consider tagging as '%s'='no' and '%s'='yes'", $num_of_errors );
-                    #$helpstring    = sprintf( $issues_string, $access_restriction, $1, $2 );
-                    $helpstring    = sprintf( $issues_string, $access_restriction, 'motor_vehicle', $2 );
+                     $helpstring    = sprintf( $issues_string, $access_restriction, 'motor_vehicle', $2 );
+                    if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                    } else {
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } @help_array )) );
+                    }
+                } elsif ( $access_restriction =~ m/^'(trolleybus|share_taxi|bus|coach)'=/ ) {
+                    my $vehicle = $1;
+                    if ( $access_restriction =~ m/^'[^']+'='(.*\|.*)'$/ ) {
+                        $issues_string = ngettext( "Route: suspicious access restriction (%s) to way. Check whether this should be '%s:lanes'='%s'", "Route: suspicious access restriction (%s) to ways. Check whether this should be '%s:lanes'='%s'", $num_of_errors );
+                        $helpstring    = sprintf( $issues_string, $access_restriction, $vehicle, $1 );
+                    } else {
+                        $issues_string = ngettext( "Route: suspicious access restriction (%s) to way. Check whether this should be '%s'='yes' or 'psv'='yes'", "Route: suspicious access restriction (%s) to ways. Check whether this should be '%s'='yes' or 'psv'='yes'", $num_of_errors );
+                        $helpstring    = sprintf( $issues_string, $access_restriction, $vehicle );
+                    }
                     if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
                         push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
                     } else {
