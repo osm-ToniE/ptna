@@ -4,20 +4,31 @@ LOCALIZABLE=../bin/*.pl ../modules/*.pm ../modules/GTFS/*.pm
 
 TEMPLATE=ptna.pot
 
-.PHONY: compile up update pull txpull push txpush www clean help
+.PHONY: check up update pull txpull push txpush compile www clean help
 
-compile:
-	@echo Creating message catalogs ...
-	@for i in $$(ls *.po); do \
-	    mkdir -p $(MO_PATH)$${i%.po}/LC_MESSAGES ; \
-	    msgfmt -v $$i -o $(MO_PATH)$${i%.po}/LC_MESSAGES/ptna.mo; \
-	    echo "$$i -> $(MO_PATH)$${i%.po}/LC_MESSAGES/ptna.mo"; \
-	done
+help:
+	@echo 'Available goals: help, check, update, txpush, txpull, compile, www, clean'
+	@echo 'make check'
+	@echo 'make update'
+	@echo 'make push'
+	@echo 'Translate @ Transifex - https://www.transifex.com/'
+	@echo 'make pull'
+	@echo 'make compile'
+	@echo 'make www'
+
+check:
+	@echo "From ptna-routes.pl"
+	@ptna-check-strings.pl --file=../bin/ptna-routes.pl
+	@echo "From RoutesList.pm"
+	@ptna-check-strings.pl --file=../modules/RoutesList.pm
+	@echo "From PtnaSQLite.pm"
+	@ptna-check-strings.pl --file=../modules/GTFS/PtnaSQLite.pm
+
 
 up update: $(TEMPLATE)
 
 $(TEMPLATE): $(LOCALIZABLE)
-	@echo Gathering translations ...
+	@echo Gathering translations from PTNA code ...
 	@xgettext --language Perl \
 	    --keyword=gettext --keyword=ngettext \
 	    --from-code utf-8 \
@@ -36,6 +47,14 @@ pull txpull:
 	@echo Pulling translations from Transifex ...
 	@cd .. && tx pull
 
+compile:
+	@echo Creating message catalogs ...
+	@for i in $$(ls *.po); do \
+	    mkdir -p $(MO_PATH)$${i%.po}/LC_MESSAGES ; \
+	    msgfmt -v $$i -o $(MO_PATH)$${i%.po}/LC_MESSAGES/ptna.mo; \
+	    echo "$$i -> $(MO_PATH)$${i%.po}/LC_MESSAGES/ptna.mo"; \
+	done
+
 www:
 	@echo Publishing to ptna-wwww ...
 	@ptna-list-strings.pl --what=messages --language=en 	> ../../ptna-www/en/message-table.inc
@@ -49,6 +68,3 @@ www:
 
 clean:
 	@rm -f *.save
-
-help:
-	@echo 'Available goals: compile, update, txpush, txpull, www, clean, help.'
