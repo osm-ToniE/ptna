@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2022-11-16 19:59+0100\n"
+"POT-Creation-Date: 2022-11-16 21:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1124,6 +1124,31 @@ msgstr ""
 msgid "'public_transport:version' is not set"
 msgstr ""
 
+#, perl-format
+msgid ""
+"CSV data includes too many ';'. Line %s of Routes-Data. Contents of line: "
+"'%s'"
+msgstr ""
+
+#, perl-format
+msgid ""
+"CSV data: field 'gtfs_feed' (= '%s') is wrong. Line %s of Routes-Data. "
+"Contents of line: '%s'"
+msgstr ""
+
+#, perl-format
+msgid ""
+"CSV data: field 'release_date' (= '%s') is wrong. Should be a date (YYYY-MM-"
+"DD), 'latest', 'previous' or 'long-term'. Line %s of Routes-Data. Contents "
+"of line: '%s'"
+msgstr ""
+
+#, perl-format
+msgid ""
+"First character of line ('%s') is reserved. Please put the first CSV field "
+"into double quotes (\"...\"). Line %s of Routes-Data. Contents of line: '%s'"
+msgstr ""
+
 msgid ""
 "This Route relation has been included into the input data as a side-effect, "
 "the member ways and member nodes of this Route have not been included."
@@ -1507,31 +1532,6 @@ msgid "Do not consider Route-Master and Route relations with empty 'network'."
 msgstr ""
 
 msgid "Do not consider Route-Master and Route relations with empty 'operator'."
-msgstr ""
-
-#, perl-format
-msgid ""
-"First character of line ('%s') is reserved. Please put the first CSV field "
-"into double quotes (\"...\"). Line %s of Routes-Data. Contents of line: '%s'"
-msgstr ""
-
-#, perl-format
-msgid ""
-"CSV data: field 'gtfs_feed' (= '%s') is wrong. Line %s of Routes-Data. "
-"Contents of line: '%s'"
-msgstr ""
-
-#, perl-format
-msgid ""
-"CSV data: field 'release_date' (= '%s') is wrong. Should be a date (YYYY-MM-"
-"DD), 'latest', 'previous' or 'long-term'. Line %s of Routes-Data. Contents "
-"of line: '%s'"
-msgstr ""
-
-#, perl-format
-msgid ""
-"CSV data includes too many ';'. Line %s of Routes-Data. Contents of line: "
-"'%s'"
 msgstr ""
 
 msgid "is not set"
