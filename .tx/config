@@ -1,9 +1,9 @@
 [main]
 host = https://www.transifex.com
 
-[ptna.ptnapot]
+[o:jungle-bus:p:ptna:r:ptnapot]
 file_filter = po/<lang>.po
 source_file = po/ptna.pot
 source_lang = en
-type = PO
+type        = PO
 

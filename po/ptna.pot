@@ -1201,16 +1201,6 @@ msgid ""
 "colon) with sourrounding blank"
 msgstr ""
 
-#, perl-format
-msgid ""
-"Route: suspicious access restriction (%s) to way. Check whether this should "
-"be '%s'='yes' or 'psv'='yes'."
-msgid_plural ""
-"Route: suspicious access restriction (%s) to ways. Check whether this should "
-"be '%s'='yes' or 'psv'='yes'."
-msgstr[0] ""
-msgstr[1] ""
-
 msgid ""
 "The key 'construction' is set and the key 'highway' is not set to "
 "'construction'."
