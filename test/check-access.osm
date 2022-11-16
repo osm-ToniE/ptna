@@ -262,7 +262,6 @@
   <way id='-152344' action='modify'>
     <nd ref='-152061' />
     <nd ref='-152057' />
-    <tag k='bus' v='yes|yes|designated' />
     <tag k='highway' v='secondary' />
     <tag k='name' v='Way 1-5' />
     <tag k='ref' v='1-5' />
@@ -323,11 +322,10 @@
   <way id='-152351' action='modify'>
     <nd ref='-152079' />
     <nd ref='-152151' />
-    <nd ref='-152083' />
-    <tag k='construction' v='tertiary' />
-    <tag k='highway' v='construction' />
-    <tag k='name' v='Way 11' />
-    <tag k='ref' v='W 11' />
+    <tag k='bus' v='school' />
+    <tag k='highway' v='tertiary' />
+    <tag k='name' v='Way 11b' />
+    <tag k='ref' v='W 11b' />
   </way>
   <way id='-152352' action='modify'>
     <nd ref='-152095' />
@@ -347,6 +345,7 @@
   <way id='-152354' action='modify'>
     <nd ref='-152097' />
     <nd ref='-152099' />
+    <tag k='bus' v='yes|yes|designated' />
     <tag k='highway' v='secondary' />
     <tag k='name' v='Way 20' />
     <tag k='ref' v='W 20' />
@@ -461,6 +460,14 @@
     <tag k='name' v='Way 12-15' />
     <tag k='ref' v='12-15' />
   </way>
+  <way id='-152453' action='modify'>
+    <nd ref='-152151' />
+    <nd ref='-152083' />
+    <tag k='construction' v='tertiary' />
+    <tag k='highway' v='construction' />
+    <tag k='name' v='Way 11a' />
+    <tag k='ref' v='W 11b' />
+  </way>
   <relation id='-152367' action='modify'>
     <member type='node' ref='-152065' role='stop_entry_only' />
     <member type='node' ref='-152067' role='platform_entry_only' />
@@ -530,6 +537,7 @@
     <member type='node' ref='-152081' role='platform' />
     <member type='node' ref='-152097' role='stop' />
     <member type='node' ref='-152089' role='platform' />
+    <member type='way' ref='-152453' role='' />
     <member type='way' ref='-152351' role='' />
     <member type='way' ref='-152355' role='' />
     <member type='way' ref='-152352' role='' />
@@ -540,6 +548,7 @@
     <member type='way' ref='-152347' role='' />
     <member type='way' ref='-152346' role='' />
     <member type='way' ref='-152354' role='' />
+    <tag k='bus' v='school' />
     <tag k='from' v='A-Town' />
     <tag k='name' v='Bus 011: A-Town =&gt; B-Town =&gt; C-Town' />
     <tag k='network' v='Test' />
@@ -566,6 +575,7 @@
     <member type='way' ref='-152370' role='' />
     <member type='way' ref='-152345' role='' />
     <member type='way' ref='-152351' role='' />
+    <member type='way' ref='-152453' role='' />
     <tag k='from' v='C-Town' />
     <tag k='name' v='Bus 011: C-Town =&gt; B-Town =&gt; A-Town' />
     <tag k='network' v='Test' />

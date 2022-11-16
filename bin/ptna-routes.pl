@@ -5069,9 +5069,22 @@ sub CheckAccessOnWaysAndNodes {
             foreach $access_restriction ( sort(keys(%restricted_access_on_ways)) ) {
                 @help_array     = sort(keys(%{$restricted_access_on_ways{$access_restriction}}));
                 $num_of_errors  = scalar(@help_array);
-                if ( $access_restriction =~ m/^'([^']+)'='(trolleybus|share_taxi|bus|coach|psv)'$/ ) {
+                if ( $access_restriction eq "'bus'='school'" ) {
+                    unless ( $relation_ptr->{'tag'}->{'route'} eq 'bus'    &&
+                             $relation_ptr->{'tag'}->{'bus'}               &&
+                             $relation_ptr->{'tag'}->{'bus'}   eq 'school'    ) {
+                        $issues_string = ngettext( "Route: restricted access ('bus'='school') to way for a route relation not tagged with 'bus'='school'", "Route: restricted access ('bus'='school') to ways for a route relation not tagged with 'bus'='school'", $num_of_errors );
+                        $helpstring    = sprintf( $issues_string, $access_restriction, $relation_ptr->{'tag'}->{'route'}, $relation_ptr->{'tag'}->{'route'} );
+                        if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                            push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                        } else {
+                            push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } @help_array )) );
+                        }
+                    }
+                }
+                elsif ( $access_restriction =~ m/^'([^']+)'='(trolleybus|share_taxi|bus|coach|psv)'$/ ) {
                     $issues_string = ngettext( "Route: incorrect access restriction (%s) to way. Consider tagging as '%s'='no' and '%s'='yes'", "Route: incorrect access restriction (%s) to ways. Consider tagging as '%s'='no' and '%s'='yes'", $num_of_errors );
-                     $helpstring    = sprintf( $issues_string, $access_restriction, 'motor_vehicle', $2 );
+                    $helpstring    = sprintf( $issues_string, $access_restriction, 'motor_vehicle', $2 );
                     if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
                         push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
                     } else {
