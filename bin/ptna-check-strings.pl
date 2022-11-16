@@ -29,7 +29,7 @@ my $from_file                      = "ptna-routes.pl";
 
 GetOptions( 'verbose'                       =>  \$verbose,                      # --verbose
             'debug'                         =>  \$debug,                        # --debug
-            'file=s'                        =>  \$from_file                     # --file=ptna-routes.pl 
+            'file=s'                        =>  \$from_file                     # --file=ptna-routes.pl
           );
 
 if ( $verbose ) {
@@ -41,9 +41,9 @@ InitMessageStrings();
 my $found_strings_ref = ReadStringsFromFile( $from_file );
 
 if ( scalar keys %{$found_strings_ref} ) {
-    
+
     my $new_strings_ref = FindNewMessageStrings( $found_strings_ref );
-    
+
     if ( scalar keys %{$new_strings_ref} ) {
         ListNewMessageStringsStatements( $new_strings_ref );
     }
@@ -58,13 +58,13 @@ if ( scalar keys %{$found_strings_ref} ) {
 #############################################################################################
 
 sub ReadStringsFromFile {
-    
+
     my $filename             = shift;
-    
+
     my %strings_to_statement = ();
-    
+
     if ( open(F,"< $filename") ) {
-        
+
         while ( <F> ) {
             s/^\s+//;
             s/\s+$//;
@@ -92,22 +92,27 @@ sub ReadStringsFromFile {
 #############################################################################################
 
 sub FindNewMessageStrings {
-    
+
     my $found_strings_ref = shift;
-    
+
     my %new_strings       = ();
-    
+
     my %existing_messages = ();
-    
+
     map { $existing_messages{$_} = 1; } GetMessageKeys();
-    
+
     foreach my $key ( keys (%{$found_strings_ref}) ) {
         printf STDERR "search for %s\n", $key    if ( $debug );
         if ( exists $existing_messages{$key} ) {
             printf STDERR "Found: %s\n", $key    if ( $debug );
         } else {
-            printf STDERR "Not found: %s\n", $key    if ( $debug );
-            $new_strings{$key} = ${$found_strings_ref}{$key};
+            $key =~ s/\\//g;
+            if ( exists $existing_messages{$key} ) {
+                printf STDERR "Found with '\\': %s\n", $key    if ( $debug );
+            } else {
+                printf STDERR "Not found: %s\n", $key    if ( $debug );
+                $new_strings{$key} = ${$found_strings_ref}{$key};
+            }
         }
     }
 
@@ -126,7 +131,7 @@ sub ListNewMessageStringsStatements {
     my $new_strings_ref = shift;
     my $message_type    = undef;
     my $message_string  = undef;
-    
+
     foreach my $key ( sort ( keys (%{$new_strings_ref}) ) ) {
         $message_type = join( '', sort( keys( %{${$new_strings_ref}{$key}} ) ) );
         if ( $message_type eq 'issues' ) {
@@ -137,7 +142,7 @@ sub ListNewMessageStringsStatements {
             printf STDERR "    \$MessageList[\$i]->{'message'}                = %s\n", ${$new_strings_ref}{$key}->{'issues'};
             printf STDERR "    \$MessageList[\$i]->{'message'}                = %s\n", ${$new_strings_ref}{$key}->{'notes'};
         }
-        
+
         printf "    \$i++;\n";
         printf "    \$MessageList[\$i]->{'message'}                = %s\n", ${$new_strings_ref}{$key}->{$message_type};
         printf "    \$MessageList[\$i]->{'type'}                   = gettext( \"%s\" );\n", $message_string;
@@ -148,9 +153,6 @@ sub ListNewMessageStringsStatements {
         printf "    \$MessageHash{\$MessageList[\$i]->{'message'}}  = \$i;\n";
         printf "\n";
     }
-    
+
     return;
 }
-
-
-
