@@ -244,7 +244,7 @@ then
                     OVERPASS_QUERY=$(echo $OVERPASS_QUERY | \
                                      sed -e "s/overpass-api\.de/$PTNA_OVERPASS_API_SERVER/" \
                                          -e 's/http:/https:/'                               \
-                                         -e 's/data=area/data=[timeout:600];area/')
+                                         -e 's/data=area/data=[timeout:900];area/')
                     echo $(date "+%Y-%m-%d %H:%M:%S") "Overpass-API Query changed to '$OVERPASS_QUERY'"
                 fi
             fi
