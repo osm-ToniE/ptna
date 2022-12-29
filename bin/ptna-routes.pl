@@ -4571,6 +4571,7 @@ sub CheckThisWaySubTypeForThisVehicle {
          ($WAYS{$way_id}->{'tag'}->{'service'} eq 'driveway'        ||
           $WAYS{$way_id}->{'tag'}->{'service'} eq 'parking_aisle'   ||
           $WAYS{$way_id}->{'tag'}->{'service'} eq 'drive-trough'    ||
+          $WAYS{$way_id}->{'tag'}->{'service'} eq 'alley'           ||
           $WAYS{$way_id}->{'tag'}->{'service'} eq 'emergency_access'  )    ) {
         printf STDERR "CheckThisWaySubTypeForThisVehicle() : way %d has wrong 'highway' = 'service' and 'service' = '%s' for vehicle '%s'\n", $way_id, $WAYS{$way_id}->{'tag'}->{'service'}, $vehicle_type       if ( $debug );
         return sprintf( "%s: 'service'='%s'", gettext("suspicious sub-type"), $WAYS{$way_id}->{'tag'}->{'service'} );
