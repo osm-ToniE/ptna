@@ -36,7 +36,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "'%s' = '%s' includes the separator value ';' (semi-colon) with sourrounding blank" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'option'}                 = "check-osm-separator";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -110,7 +110,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "'network' = '%s' should be long form" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'option'}                 = "expect-network-long\nexpect-network-short\nexpect-long-for";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -119,7 +119,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "'network' = '%s' should be short form" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'option'}                 = "expect-network-long\nexpect-network-short\nexpect-short-for";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -128,7 +128,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "'%s' = '%s': ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'option'}                 = "check-osm-separator";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -155,7 +155,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "'network:long' is long form" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'option'}                 = "positive-notes";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -164,7 +164,7 @@ sub InitMessageStrings {
     $i++;
     $MessageList[$i]->{'message'}                = gettext( "'network:long' matches long form" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
-    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'option'}                 = "positive-notes";
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
@@ -953,8 +953,9 @@ sub InitMessageStrings {
     $MessageList[$i]->{'message'}                = gettext( "Route: using way type (%s)" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
     $MessageList[$i]->{'option'}                 = "check-service-type";
-    $MessageList[$i]->{'description'}            = "";
-    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'description'}            = gettext( "The vehicle uses a service way with a 'service' tag which is considered as not suitable for public transport routes." ) . ' ' .
+                                                   gettext( "Public transport routes should not use service ways tagged with 'service' = 'alley', 'driveway', 'emergence', 'drive-through' or 'parking_aisle'.");
+    $MessageList[$i]->{'fix'}                    = gettext( "Check the route and consider deleting the 'service' tag from the way." );
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
@@ -1602,8 +1603,8 @@ sub InitOptionStrings {
     $i++;
     $OptionList[$i]->{'option'}                 = "no-additional-navigation";
     $OptionList[$i]->{'default'}                = "OFF";
-    $OptionList[$i]->{'description'}            = "";
-    $OptionList[$i]->{'image'}                  = "";
+    $OptionList[$i]->{'description'}            = gettext( "Do not print the additional navigation buttons on top of the tables." );
+    $OptionList[$i]->{'image'}                  = "option-no_additional_navigation.png";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
@@ -1665,21 +1666,24 @@ sub InitOptionStrings {
     $i++;
     $OptionList[$i]->{'option'}                 = "separator";
     $OptionList[$i]->{'default'}                = ";";
-    $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'description'}            = gettext( "This sets the field separator in the CSV list of routes." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
     $OptionList[$i]->{'option'}                 = "or-separator";
     $OptionList[$i]->{'default'}                = "|";
-    $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'description'}            = gettext( "This sets the OR separator in the 'ref' field of the CSV list of routes." ) . "\n" .
+                                                  gettext( "Example: '250|250a|250b' : defines that routes with 'ref' = '250' and 'ref' = '250a' and 'ref' = '250b' are allowed here.");
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
     $OptionList[$i]->{'option'}                 = "ref-separator";
     $OptionList[$i]->{'default'}                = "/";
-    $OptionList[$i]->{'description'}            = "";
+    $OptionList[$i]->{'description'}            = gettext( "This sets the 'network-ref' separator in the 'ref' field of the CSV list of routes." ) . "\n" .
+                                                  gettext( "Example: '605/50' : defines that here 'ref' of two 'network' are valid." ) . "\n" .
+                                                  gettext( "It is checked, whether 'ref:network1' = '605' and 'ref:network2' = '50' exist." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
