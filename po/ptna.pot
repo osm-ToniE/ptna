@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2022-11-16 21:15+0100\n"
+"POT-Creation-Date: 2022-12-29 18:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1203,6 +1203,19 @@ msgid "This is currently deactivated."
 msgstr ""
 
 msgid ""
+"The vehicle uses a service way with a 'service' tag which is considered as "
+"not suitable for public transport routes."
+msgstr ""
+
+msgid ""
+"Public transport routes should not use service ways tagged with 'service' = "
+"'alley', 'driveway', 'emergence', 'drive-through' or 'parking_aisle'."
+msgstr ""
+
+msgid "Check the route and consider deleting the 'service' tag from the way."
+msgstr ""
+
+msgid ""
 "This Route-Master has less route relations than listed here (Route(s) not "
 "listed in the Route-Master?)."
 msgstr ""
@@ -1488,6 +1501,9 @@ msgid ""
 "match this regular expression as 'short' form or can be empty (unset)."
 msgstr ""
 
+msgid "Do not print the additional navigation buttons on top of the tables."
+msgstr ""
+
 msgid ""
 "The value of 'operator' = '...' of the Route-Master and Route relations must "
 "match this regular expression or can be empty (unset)."
@@ -1532,6 +1548,31 @@ msgid "Do not consider Route-Master and Route relations with empty 'network'."
 msgstr ""
 
 msgid "Do not consider Route-Master and Route relations with empty 'operator'."
+msgstr ""
+
+msgid "This sets the field separator in the CSV list of routes."
+msgstr ""
+
+msgid ""
+"This sets the OR separator in the 'ref' field of the CSV list of routes."
+msgstr ""
+
+msgid ""
+"Example: '250|250a|250b' : defines that routes with 'ref' = '250' and 'ref' "
+"= '250a' and 'ref' = '250b' are allowed here."
+msgstr ""
+
+msgid ""
+"This sets the 'network-ref' separator in the 'ref' field of the CSV list of "
+"routes."
+msgstr ""
+
+msgid "Example: '605/50' : defines that here 'ref' of two 'network' are valid."
+msgstr ""
+
+msgid ""
+"It is checked, whether 'ref:network1' = '605' and 'ref:network2' = '50' "
+"exist."
 msgstr ""
 
 msgid "is not set"
