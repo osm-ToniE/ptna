@@ -83,37 +83,37 @@ sub getGtfsRouteIdHtmlTag {
 
         if ( $route_id ) {
 
-            my $RouteIdStatus = _getRouteIdStatus( $gtfs_feed, $release_date, $route_id );
+            my @RouteIdStatus = _getRouteIdStatus( $gtfs_feed, $release_date, $route_id );
 
-            if ( $RouteIdStatus eq 'valid' ) {
+            if ( $RouteIdStatus[0] eq 'valid' ) {
                 $gtfs_html_tag = sprintf( "<a class=\"gtfs-datevalid\" href=\"/gtfs/%s/trips.php?feed=%s&release_date=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Route-Id: %s\">GTFS</a>",
                                           uri_escape($gtfs_country),
                                           uri_escape($gtfs_feed), uri_escape($release_date),
                                           uri_escape($route_id),
                                           html_escape($gtfs_feed), html_escape($release_date),
                                           html_escape($route_id) );
-            } elsif ( $RouteIdStatus eq 'past' ) {
+            } elsif ( $RouteIdStatus[0] eq 'past' ) {
                 $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateold\" href=\"/gtfs/%s/trips.php?feed=%s&release_date=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Route-Id: %s: 'route_id' %s.\">GTFS?</a>",
                                           uri_escape($gtfs_country),
                                           uri_escape($gtfs_feed), uri_escape($release_date),
                                           uri_escape($route_id),
                                           html_escape($gtfs_feed), html_escape($release_date),
                                           html_escape($route_id),
-                                          html_escape(gettext("is no longer valid (in the past)")) );
-            } elsif ( $RouteIdStatus eq 'future' ) {
+                                          html_escape(gettext("is no longer valid (in the past)") . ': ' . $RouteIdStatus[1] . ' - ' . $RouteIdStatus[2]) );
+            } elsif ( $RouteIdStatus[0] eq 'future' ) {
                 $gtfs_html_tag = sprintf( "<a class=\"gtfs-datenew\" href=\"/gtfs/%s/trips.php?feed=%s&release_date=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Route-Id: %s: 'route_id' %s.\">GTFS?</a>",
                                           uri_escape($gtfs_country),
                                           uri_escape($gtfs_feed), uri_escape($release_date),
                                           uri_escape($route_id),
                                           html_escape($gtfs_feed), html_escape($release_date),
                                           html_escape($route_id),
-                                          html_escape(gettext("is not yet valid (in the future)")) );
+                                          html_escape(gettext("is not yet valid (in the future)") . ': ' . $RouteIdStatus[1] . ' - ' . $RouteIdStatus[2]) );
             } else {
                 my $found_in_previous_version = 0;
 
                 if ( _AttachToGtfsSqliteDb($gtfs_feed,'previous') ) {
-                    $RouteIdStatus = _getRouteIdStatus( $gtfs_feed, 'previous', $route_id );
-                    if ( $RouteIdStatus eq 'valid' || $RouteIdStatus eq 'past' || $RouteIdStatus eq 'future' ) {
+                    @RouteIdStatus = _getRouteIdStatus( $gtfs_feed, 'previous', $route_id );
+                    if ( $RouteIdStatus[0] eq 'valid' || $RouteIdStatus[0] eq 'past' || $RouteIdStatus[0] eq 'future' ) {
                         $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateprevious\" href=\"/gtfs/%s/trips.php?feed=%s&release_date=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Route-Id: %s: 'route_id' %s.\">GTFS??</a>",
                                                   uri_escape($gtfs_country),
                                                   uri_escape($gtfs_feed) , 'previous',
@@ -175,37 +175,37 @@ sub getGtfsTripIdHtmlTag {
 
         if ( $trip_id ) {
 
-            my $TripIdStatus = _getTripIdStatus( $gtfs_feed, $release_date, $trip_id );
+            my @TripIdStatus = _getTripIdStatus( $gtfs_feed, $release_date, $trip_id );
 
-            if ( $TripIdStatus eq 'valid' ) {
+            if ( $TripIdStatus[0] eq 'valid' ) {
                 $gtfs_html_tag = sprintf( "<a class=\"gtfs-datevalid\" href=\"/gtfs/%s/single-trip.php?feed=%s&release_date=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Trip-Id: %s\">GTFS</a>",
                                           uri_escape($gtfs_country),
                                           uri_escape($gtfs_feed), uri_escape($release_date),
                                           uri_escape($trip_id),
                                           html_escape($gtfs_feed), html_escape($release_date),
                                           html_escape($trip_id) );
-            } elsif ( $TripIdStatus eq 'past' ) {
+            } elsif ( $TripIdStatus[0] eq 'past' ) {
                 $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateold\" href=\"/gtfs/%s/single-trip.php?feed=%s&release_date=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Trip-Id: %s: 'trip_id' %s.\">GTFS?</a>",
                                           uri_escape($gtfs_country),
                                           uri_escape($gtfs_feed), uri_escape($release_date),
                                           uri_escape($trip_id),
                                           html_escape($gtfs_feed), html_escape($release_date),
                                           html_escape($trip_id),
-                                          html_escape(gettext("is no longer valid (in the past)")) );
-            } elsif ( $TripIdStatus eq 'future' ) {
+                                          html_escape(gettext("is no longer valid (in the past)") . ': ' . $TripIdStatus[1] . ' - ' . $TripIdStatus[2]) );
+            } elsif ( $TripIdStatus[0] eq 'future' ) {
                 $gtfs_html_tag = sprintf( "<a class=\"gtfs-datenew\" href=\"/gtfs/%s/single-trip.php?feed=%s&release_date=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Trip-Id: %s: 'trip_id' %s.\">GTFS?</a>",
                                           uri_escape($gtfs_country),
                                           uri_escape($gtfs_feed), uri_escape($release_date),
                                           uri_escape($trip_id),
                                           html_escape($gtfs_feed), html_escape($release_date),
                                           html_escape($trip_id),
-                                          html_escape(gettext("is not yet valid (in the future)")) );
+                                          html_escape(gettext("is not yet valid (in the future)") . ': ' . $TripIdStatus[1] . ' - ' . $TripIdStatus[2]) );
             } else {
                 my $found_in_previous_version = 0;
 
                 if ( _AttachToGtfsSqliteDb($gtfs_feed,'previous') ) {
-                    $TripIdStatus = _getTripIdStatus( $gtfs_feed, 'previous', $trip_id );
-                    if ( $TripIdStatus eq 'valid' || $TripIdStatus eq 'past' || $TripIdStatus eq 'future' ) {
+                    @TripIdStatus = _getTripIdStatus( $gtfs_feed, 'previous', $trip_id );
+                    if ( $TripIdStatus[0] eq 'valid' || $TripIdStatus[0] eq 'past' || $TripIdStatus[0] eq 'future' ) {
                         $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateprevious\" href=\"/gtfs/%s/single-trip.php?feed=%s&release_date=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Trip-Id: %s: 'trip_id' %s.\">GTFS??</a>",
                                                   uri_escape($gtfs_country),
                                                   uri_escape($gtfs_feed), 'previous',
@@ -267,32 +267,32 @@ sub getGtfsShapeIdHtmlTag {
 
         if ( $shape_id ) {
 
-            my $ShapeIdStatus = _getShapeIdStatus( $gtfs_feed, $release_date, $shape_id );
+            my @ShapeIdStatus = _getShapeIdStatus( $gtfs_feed, $release_date, $shape_id );
 
-            if ( $ShapeIdStatus eq 'valid' ) {
+            if ( $ShapeIdStatus[0] eq 'valid' ) {
                 $gtfs_html_tag = sprintf( "<a class=\"gtfs-datevalid\" href=\"/gtfs/%s/single-trip.php?feed=%s&release_date=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Shape-Id: %s\">GTFS</a>",
                                            uri_escape($gtfs_country),
                                            uri_escape($gtfs_feed), uri_escape($release_date),
                                            uri_escape($shape_id),
                                            html_escape($gtfs_feed), html_escape($release_date),
                                            html_escape($shape_id) );
-            } elsif ( $ShapeIdStatus eq 'past' ) {
+            } elsif ( $ShapeIdStatus[0] eq 'past' ) {
                 $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateold\" href=\"/gtfs/%s/single-trip.php?feed=%s&release_date=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Shape-Id: %s: 'shape_id' %s.\">GTFS?</a>",
                                           uri_escape($gtfs_country),
                                           uri_escape($gtfs_feed), uri_escape($release_date),
                                           uri_escape($shape_id),
                                           html_escape($gtfs_feed), html_escape($release_date),
                                           html_escape($shape_id),
-                                          html_escape(gettext("is no longer valid (in the past)")) );
-            } elsif ( $ShapeIdStatus eq 'future' ) {
+                                          html_escape(gettext("is no longer valid (in the past)") . ': ' . $ShapeIdStatus[1] . ' - ' . $ShapeIdStatus[2]) );
+            } elsif ( $ShapeIdStatus[0] eq 'future' ) {
                 $gtfs_html_tag = sprintf( "<a class=\"gtfs-datenew\" href=\"/gtfs/%s/single-trip.php?feed=%s&release_date=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Shape-Id: %s: 'shape_id' %s.\">GTFS?</a>",
                                           uri_escape($gtfs_country),
                                           uri_escape($gtfs_feed), uri_escape($release_date),
                                           uri_escape($shape_id),
                                           html_escape($gtfs_feed), html_escape($release_date),
                                           html_escape($shape_id),
-                                          html_escape(gettext("is not yet valid (in the future)")) );
-            } elsif ( $ShapeIdStatus eq 'no shapes' ) {
+                                          html_escape(gettext("is not yet valid (in the future)") . ': ' . $ShapeIdStatus[1] . ' - ' . $ShapeIdStatus[2]) );
+            } elsif ( $ShapeIdStatus[0] eq 'no shapes' ) {
                 $gtfs_html_tag = sprintf( "<a class=\"bad-link\" href=\"/gtfs/%s/single-trip.php?feed=%s&release_date=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Shape-Id: %s: %s.\">GTFS!</a>",
                                           uri_escape($gtfs_country),
                                           uri_escape($gtfs_feed), uri_escape($release_date),
@@ -304,8 +304,8 @@ sub getGtfsShapeIdHtmlTag {
                 my $found_in_previous_version = 0;
 
                 if ( _AttachToGtfsSqliteDb($gtfs_feed,'previous') ) {
-                    $ShapeIdStatus = _getShapeIdStatus( $gtfs_feed, 'previous', $shape_id );
-                    if ( $ShapeIdStatus eq 'valid' || $ShapeIdStatus eq 'past' || $ShapeIdStatus eq 'future' ) {
+                    @ShapeIdStatus = _getShapeIdStatus( $gtfs_feed, 'previous', $shape_id );
+                    if ( $ShapeIdStatus[0] eq 'valid' || $ShapeIdStatus[0] eq 'past' || $ShapeIdStatus[0] eq 'future' ) {
                         $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateprevious\" href=\"/gtfs/%s/single-trip.php?feed=%s&release_date=%s&shape_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Shape-Id: %s: 'shape_id' %s.\">GTFS??</a>",
                                                   uri_escape($gtfs_country),
                                                   uri_escape($gtfs_feed), 'previous',
@@ -449,16 +449,16 @@ sub _getRouteIdStatus {
         }
         if ( $min_start != 20500101 && $max_end != 19700101 ) {
             if  ( $today > $max_end ) {
-                return 'past';
+                return ( 'past', expand_date($min_start), expand_date($max_end) );
             } elsif ( $today < $min_start ) {
-                return 'future';
+                return ( 'future', expand_date($min_start), expand_date($max_end) );
             } else {
-                return 'valid';
+                return ( 'valid' );
             }
         }
     }
 
-    return '';
+    return ( '' );
 }
 
 
@@ -484,16 +484,16 @@ sub _getTripIdStatus {
 
         if ( $min_start != 20500101 && $max_end != 19700101 ) {
             if  ( $today > $max_end ) {
-                return 'past';
+                return ( 'past', expand_date($min_start), expand_date($max_end) );
             } elsif ( $today < $min_start ) {
-                return 'future';
+                return ( 'future', expand_date($min_start), expand_date($max_end) );
             } else {
-                return 'valid';
+                return ( 'valid' );
             }
         }
     }
 
-    return '';
+    return ( '' );
 }
 
 
@@ -546,19 +546,19 @@ sub _getShapeIdStatus {
             }
             if ( $min_start != 20500101 && $max_end != 19700101 ) {
                 if  ( $today > $max_end ) {
-                    return 'past';
+                    return ( 'past', expand_date($min_start), expand_date($max_end) );
                 } elsif ( $today < $min_start ) {
-                    return 'future';
+                    return ( 'future', expand_date($min_start), expand_date($max_end) );
                 } else {
-                    return 'valid';
+                    return ( 'valid' );
                 }
             }
         } else {
-            return 'no shapes';
+            return ( 'no shapes' );
         }
     }
 
-    return '';
+    return ( '' );
 }
 
 
@@ -737,6 +737,18 @@ sub get_date {
     my ($sec,$min,$hour,$day,$month,$year) = localtime();
 
     return sprintf( "%04d%02d%02d", $year+1900, $month+1, $day );
+}
+
+
+#############################################################################################
+
+sub expand_date {
+
+    my $date = shift;
+
+    $date =~ s/^(\d\d\d\d)(\d\d)(\d\d)$/\1-\2-\3/;
+
+    return $date;
 }
 
 
