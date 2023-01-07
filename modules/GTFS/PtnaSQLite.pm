@@ -26,7 +26,8 @@ use DBI;
 #############################################################################################
 
 my %config               = ();
-my %db_handles           = ();
+my %db_handle            = ();
+my %list_separator       = ();
 my %feed_of_open_db_file = ();
 
 $config{'path-to-work'} = '/osm/ptna/work';                 # location where to start looking for the SQLite
@@ -386,22 +387,32 @@ sub _AttachToGtfsSqliteDb {
         if ( -f $db_file ) {
             #printf STDERR "_AttachToGtfsSqliteDb( %s, %s ) attaches to %s\n", $feed, $release_date, $db_file;
 
-            if ( !$db_handles{$name_prefix} ) {
+            if ( !$db_handle{$name_prefix} ) {
                 if ( $feed_of_open_db_file{$db_file} ) {
                     my $existing_feed = $feed_of_open_db_file{$db_file};
 
-                    if ( $db_handles{$existing_feed} ) {
-                        $db_handles{$name_prefix} = $db_handles{$existing_feed};
+                    if ( $db_handle{$existing_feed} ) {
+                        $db_handle{$name_prefix} = $db_handle{$existing_feed};
                         #printf STDERR "_AttachToGtfsSqliteDb( %s, %s ) linked to %s\n", $feed, $release_date, $existing_feed;
+                        $list_separator{$name_prefix} = $list_separator{$existing_feed};
                     }
                 } else {
-                    $db_handles{$name_prefix} = DBI->connect( "DBI:SQLite:dbname=$db_file", "", "", { AutoCommit => 0, RaiseError => 1 } );
+                    $db_handle{$name_prefix} = DBI->connect( "DBI:SQLite:dbname=$db_file", "", "", { AutoCommit => 0, RaiseError => 1 } );
 
                     $feed_of_open_db_file{$db_file} = $name_prefix;
+
+                    $list_separator{$name_prefix} = '\|';
+                    my $sth = $db_handle{$name_prefix}->prepare( "SELECT * FROM ptna LIMIT 1;" );
+                    $sth->execute();
+                    my $hash_ref = $sth->fetchrow_hashref();
+                    if ( exists($hash_ref->{'list_separator'}) && $hash_ref->{'list_separator'} ) {
+                        $list_separator{$name_prefix} = $hash_ref->{'list_separator'};
+                    }
                 }
             }
 
-            if ( $db_handles{$name_prefix} ) {
+            if ( $db_handle{$name_prefix} && $list_separator{$name_prefix} ) {
+
                 return 1;
             } else {
                 printf STDERR "%s DBI->connect(%s) failed: %s\n", get_time(), $db_file, $DBI::errstr;
@@ -430,9 +441,9 @@ sub _getRouteIdStatus {
     my @row         = ();
     my $today       = get_date();
 
-    if ( $name_prefix && $route_id && $db_handles{$name_prefix} ) {
+    if ( $name_prefix && $route_id && $db_handle{$name_prefix} ) {
 
-        my $sth = $db_handles{$name_prefix}->prepare( "SELECT DISTINCT trip_id
+        my $sth = $db_handle{$name_prefix}->prepare( "SELECT DISTINCT trip_id
                                                        FROM            trips
                                                        WHERE           trips.route_id=?;" );
             $sth->execute( $route_id );
@@ -481,7 +492,7 @@ sub _getTripIdStatus {
     my @row         = ();
     my $today       = get_date();
 
-    if ( $name_prefix && $trip_id && $db_handles{$name_prefix} ) {
+    if ( $name_prefix && $trip_id && $db_handle{$name_prefix} ) {
 
         my ( $min_start, $max_end ) = _getStartEndDateOfIdenticalTrips( $feed, $release_date, $trip_id );
 
@@ -517,9 +528,9 @@ sub _getShapeIdStatus {
     my $today               = get_date();
     my $trips_has_shape_id  = 0;
 
-    if ( $name_prefix && $shape_id && $db_handles{$name_prefix} ) {
+    if ( $name_prefix && $shape_id && $db_handle{$name_prefix} ) {
 
-        my $sth =  $db_handles{$name_prefix}->prepare( "PRAGMA table_info(trips);" );
+        my $sth =  $db_handle{$name_prefix}->prepare( "PRAGMA table_info(trips);" );
            $sth->execute();
 
         while ( @row = $sth->fetchrow_array() ) {
@@ -530,7 +541,7 @@ sub _getShapeIdStatus {
         }
 
         if ( $trips_has_shape_id ) {
-            $sth = $db_handles{$name_prefix}->prepare( "SELECT DISTINCT trip_id
+            $sth = $db_handle{$name_prefix}->prepare( "SELECT DISTINCT trip_id
                                                         FROM            trips
                                                         WHERE           shape_id=?;" );
             $sth->execute( $shape_id );
@@ -584,11 +595,11 @@ sub _getStartEndDateOfIdenticalTrips {
     my $where_clause            = '';
     my $has_list_service_ids    = 0;
 
-    if ( $name_prefix && $trip_id && $db_handles{$name_prefix} ) {
+    if ( $name_prefix && $trip_id && $db_handle{$name_prefix} ) {
 
         my $representative_trip_id = '';
 
-        my $sth =  $db_handles{$name_prefix}->prepare( "SELECT name FROM sqlite_master WHERE type='table' AND name='ptna_trips';" );
+        my $sth =  $db_handle{$name_prefix}->prepare( "SELECT name FROM sqlite_master WHERE type='table' AND name='ptna_trips';" );
            $sth->execute();
 
         while ( @row = $sth->fetchrow_array() ) {
@@ -602,17 +613,17 @@ sub _getStartEndDateOfIdenticalTrips {
 
             for ( my $i = 0; $i < 2 && $representative_trip_id eq ''; $i++ ) {
                 if ( $i == 0 ) {
-                    $sth = $db_handles{$name_prefix}->prepare( "SELECT DISTINCT *
+                    $sth = $db_handle{$name_prefix}->prepare( "SELECT DISTINCT *
                                                                 FROM            ptna_trips
                                                                 WHERE           trip_id=?"   );
                     $sth->execute( $trip_id );
                 } else {
-                    $sth = $db_handles{$name_prefix}->prepare( "SELECT DISTINCT *
+                    $sth = $db_handle{$name_prefix}->prepare( "SELECT DISTINCT *
                                                                 FROM            ptna_trips
                                                                 WHERE           list_trip_ids LIKE ? OR
                                                                                 list_trip_ids LIKE ? OR
                                                                                 list_trip_ids LIKE ?"   );
-                    $sth->execute( $trip_id.'|%', '%|'.$trip_id.'|%', '%|'.$trip_id );
+                    $sth->execute( $trip_id.$list_separator{$name_prefix}.'%', '%'.$list_separator{$name_prefix}.$trip_id.$list_separator{$name_prefix}.'%', '%'.$list_separator{$name_prefix}.$trip_id );
                 }
 
                 while ( $hash_ref = $sth->fetchrow_hashref() ) {
@@ -621,7 +632,7 @@ sub _getStartEndDateOfIdenticalTrips {
                     }
                     if ( $hash_ref->{'list_service_ids'} ) {
                         $has_list_service_ids  = 1;
-                        map { $service_ids{$_} = 1; } split( '\|', $hash_ref->{'list_service_ids'} );
+                        map { $service_ids{$_} = 1; } split( $list_separator{$name_prefix}, $hash_ref->{'list_service_ids'} );
 
                         $where_clause = 'service_id=' . join( '', map{ '? OR service_id=' } keys ( %service_ids ) );
                         $where_clause =~ s/ OR service_id=$//;
@@ -630,7 +641,7 @@ sub _getStartEndDateOfIdenticalTrips {
                                             FROM   calendar
                                             WHERE  %s;", $where_clause );
 
-                        $sth = $db_handles{$name_prefix}->prepare( $sql );
+                        $sth = $db_handle{$name_prefix}->prepare( $sql );
                         $sth->execute( keys ( %service_ids ) );
 
                         while ( @row=$sth->fetchrow_array() ) {
@@ -647,7 +658,7 @@ sub _getStartEndDateOfIdenticalTrips {
         }
 
         if ( $representative_trip_id && $has_list_service_ids == 0 ) {
-            $sth = $db_handles{$name_prefix}->prepare( "SELECT start_date,end_date
+            $sth = $db_handle{$name_prefix}->prepare( "SELECT start_date,end_date
                                                         FROM   calendar
                                                         JOIN   trips ON trips.service_id = calendar.service_id
                                                         WHERE  trip_id=?;" );
