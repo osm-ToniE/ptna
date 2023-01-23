@@ -93,15 +93,17 @@ sub ReadRoutes {
                     next    if ( !$_ );                                     # ignore if line is empty
 
                     if ( m/^[=#@+~\$\|-]/ ) {                                # headers, text, comment lines and reserved characters
-                        if ( m/^(=+)([^=].*)/ ) {
-                            $hashref->{'type'}          =  'header';        # store type
-                            $hashref->{'level_string'}  =  $1;
-                            $hashref->{'header'}        =  $2;
-                            $hashref->{'level'}         =  0;
-                            $hashref->{'header'}        =~ s/^\s*//;
-                            $hashref->{'level'}++          while ( $hashref->{'level_string'} =~ m/=/g );
-                            $hashref->{'level'}         =  6  if ( $hashref->{'level'} > 6 );
-                            delete($hashref->{'level_string'});
+                        if ( m/^=/ ) {
+                            if ( m/^(=+)([^=].*)/ ) {
+                                $hashref->{'type'}          =  'header';        # store type
+                                $hashref->{'level_string'}  =  $1;
+                                $hashref->{'header'}        =  $2;
+                                $hashref->{'level'}         =  0;
+                                $hashref->{'header'}        =~ s/^\s*//;
+                                $hashref->{'level'}++          while ( $hashref->{'level_string'} =~ m/=/g );
+                                $hashref->{'level'}         =  6  if ( $hashref->{'level'} > 6 );
+                                delete($hashref->{'level_string'});
+                            }
                         } elsif ( m/^-(.*)/ ) {
                             $hashref->{'type'}          =  'text';          # store type
                             $hashref->{'text'}          =  $1;
@@ -167,7 +169,7 @@ sub ReadRoutes {
                         } else {
                             printf STDERR "ReadRoutes(): ExpReleaseDate = '' in line %d, contents: '%s'\n", $NR, $hashref->{'contents'}      if ( $debug );
                         }
-                        $hashref->{'ref'}               = ($ExpRef || $ExpRef eq '0') ? $ExpRef: '';              # 'ref'=
+                        $hashref->{'ref'}               = ($ExpRef || $ExpRef eq '0') ? $ExpRef : '';              # 'ref'=
                         $hashref->{'route'}             = $ExpRouteType        || '';              # 'route/route_master'=
                         $hashref->{'comment'}           = $ExpComment          || '';              # routes file comment
                         $hashref->{'from'}              = $ExpFrom             || '';              # 'from'
