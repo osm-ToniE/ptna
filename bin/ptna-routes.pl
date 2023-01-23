@@ -6596,7 +6596,7 @@ sub printRelationTemplate {
         my $info_string = '';
         if ( $tags ) {
             foreach my $tag ( split( ';', $tags ) ) {
-                if ( $RELATIONS{$rel_id} && $RELATIONS{$rel_id}->{'tag'} && $RELATIONS{$rel_id}->{'tag'}->{$tag} ne '' ) {
+                if ( $RELATIONS{$rel_id} && $RELATIONS{$rel_id}->{'tag'} && exists($RELATIONS{$rel_id}->{'tag'}->{$tag}) && $RELATIONS{$rel_id}->{'tag'}->{$tag} ne '' ) {
                     $info_string .= sprintf( "'%s' ", $RELATIONS{$rel_id}->{'tag'}->{$tag} );
                     last;
                 }
