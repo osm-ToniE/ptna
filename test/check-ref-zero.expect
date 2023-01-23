@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>PTNA - Results</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="PTNA">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="keywords" content="OSM Public Transport PTv2">
+        <meta name="description" content="PTNA - Public Transport Network Analysis">
+        <style>
+            #analysis table           { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; }
+            #analysis th              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+            #analysis td              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+            #analysis ol              { list-style: none; }
+            #analysis img             { width: 20px; vertical-align: top; }
+            #analysis .tableheaderrow { background-color: #bbbbbb;   }
+            #analysis .sketchline     { background-color: #cccccc;        }
+            #analysis .sketch         { text-align:left;  font-weight: 500; }
+            #analysis .csvinfo        { text-align:right; font-size: 0.8em; }
+            #analysis .ref            { white-space:nowrap; }
+            #analysis .relation       { white-space:nowrap; }
+            #analysis .PTv            { text-align:center; }
+            #analysis .number         { text-align:right; }
+            #analysis .gtfs_feed      { white-space:nowrap; }
+            #analysis .feed_from      { white-space:nowrap; }
+            #analysis .date           { white-space:nowrap; }
+            #analysis .date_from      { white-space:nowrap; }
+            #analysis .attention      { background-color: yellow; font-weight: 500; font-size: 1.2em; }
+            .gtfs-dateold             { text-align:center; background-color: orange; }
+            .gtfs-datenew             { text-align:center; background-color: lightgreen; }
+            .gtfs-dateprevious        { text-align:center; background-color: rgb(128, 128, 255); }
+            .bad-link                 { text-decoration: line-through; background-color: yellow; }
+        </style>
+    </head>
+    <body>
+        <div id="analysis">
+        <h1>Contents</h1>
+        <ol>
+        <li>1 <a href="#hints">Hints</a>
+        </li>
+        <li>2 <a href="#A2">Test file</a>
+        </li>
+        <li>3 <a href="#networkdetails">Details for &#039;network&#039;-Values</a>
+        <ol>
+        <li>3.1 <a href="#considerednetworks">Considered &#039;network&#039;-Values</a>
+        </li>
+        </ol>
+        </li>
+        </ol>
+        <hr />
+        <h1 id="hints">1 Hints</h1>
+        <p>
+            The data will be updated when the result of the analysis has changed.
+        </p>
+        <p>
+            An explanation of the error texts can be found in the documentation at '<a href='/en/index.php#messages'>Messages</a>'.
+        </p>
+        <hr />
+        <h1 id="A2">2 Test file</h1>
+<a href="#bus_0">0</a> </br></br>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr id="-110492" data-info="-110492" data-ref="???" class="line"><td class="name">Bus 0</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -110492</td><td class="PTv"></td><td class="issues">'network' is not set</td><td class="notes"></td></tr>
+                <tr id="-110275" data-info="-110275" data-ref="???" class="line"><td class="name">Bus 0: Stop 1 =&gt; Stop 2</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -110275</td><td class="PTv">2</td><td class="issues">Route with only 1 Way</td><td class="notes">'network' = 'Network'</td></tr>
+                <tr id="-110437" data-info="-110437" data-ref="???" class="line"><td class="name">Bus 0: Stop 3 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -110437</td><td class="PTv">2</td><td class="issues">Route with only 1 Way</td><td class="notes">'network' = 'Network'</td></tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <h1 id="networkdetails">3 Details for &#039;network&#039;-Values</h1>
+        <h2 id="considerednetworks">3.1 Considered &#039;network&#039;-Values</h2>
+<p>
+This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.
+</p>
+        <table class="oepnvtable js-sort-table">
+            <thead>
+                <tr class="tableheaderrow"><th class="network">&#x21C5;Network (network=)</th><th class="number js-sort-number">&#x21C5;Number</th><th class="relations">&#x21C5;Relations</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="Network" data-ref="???" class="line"><td class="network">Network</td><td class="number">2</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> -110275, <img src="/img/Relation.svg" alt="Relation" /> -110437</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="network"></td><td class="number">1</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> -110492</td></tr>
+            </tbody>
+        </table>
+
+        </div> <!-- analysis -->
+        <iframe style="display:none" id="hiddenIframe" name="hiddenIframe"></iframe>
+    </body>
+</html>

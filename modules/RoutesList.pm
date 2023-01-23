@@ -128,7 +128,7 @@ sub ReadRoutes {
                             ($ExpRef,$ExpRouteType,$ExpComment,$ExpFrom,$ExpTo,$ExpOperator,$ExpGtfsFeed,$ExpGtfsRouteId,$ExpGtfsReleaseDate,@rest) = split( $csv_separator, $_ );
                         }
 
-                        if ( $ExpRef ) {
+                        if ( $ExpRef || $ExpRef eq '0' ) {
                             $ExpRef =~ s/^\s*//;
                             $ExpRef =~ s/\s*$//;
                         }
@@ -167,7 +167,7 @@ sub ReadRoutes {
                         } else {
                             printf STDERR "ReadRoutes(): ExpReleaseDate = '' in line %d, contents: '%s'\n", $NR, $hashref->{'contents'}      if ( $debug );
                         }
-                        $hashref->{'ref'}               = $ExpRef              || '';              # 'ref'=
+                        $hashref->{'ref'}               = ($ExpRef || $ExpRef eq '0') ? $ExpRef: '';              # 'ref'=
                         $hashref->{'route'}             = $ExpRouteType        || '';              # 'route/route_master'=
                         $hashref->{'comment'}           = $ExpComment          || '';              # routes file comment
                         $hashref->{'from'}              = $ExpFrom             || '';              # 'from'
@@ -197,7 +197,7 @@ sub ReadRoutes {
                             $hashref->{'ref'}   = $ExpRef;                                              # this is an error
                             $hashref->{'error'} = sprintf( decode( 'utf8', $issues_string ), $NR, $hashref->{'contents'} );   # this is an error
                         } else {
-                            if ( $ExpRef ) {
+                            if ( $ExpRef || $ExpRef eq '0' ) {
                                 my @ref_or_list  = split( $or_separator,  $ExpRef );
                                 my @ref_and_list = split( $ref_separator, $ExpRef );
                                 $hashref->{'ref-or-list'}  = \@ref_or_list;
@@ -373,7 +373,7 @@ sub RefTypeCount {
     my $ref         = shift;
     my $route_type  = shift;
 
-    return $seen_ref_type{$ref}->{$route_type}        if ( $ref && $route_type && $seen_ref{$ref} && $seen_ref_type{$ref} && $seen_ref_type{$ref}->{$route_type} );
+    return $seen_ref_type{$ref}->{$route_type}        if ( $ref ne '' && $route_type && $seen_ref{$ref} && $seen_ref_type{$ref} && $seen_ref_type{$ref}->{$route_type} );
 
     return 0;
 }
@@ -547,7 +547,7 @@ sub GetRefTypeOperatorFromAndTo {
 sub RelationMatchesExpected {
     my %hash                        = ( @_ );
 
-    my $RelRef                      = $hash{'rel-ref'}                          || '';
+    my $RelRef                      = exists($hash{'rel-ref'}) ? $hash{'rel-ref'} : '';
     my $RelRouteType                = $hash{'rel-route-type'}                   || '';
     my $RelOperator                 = $hash{'rel-operator'}                     || '';
     my $RelFrom                     = $hash{'rel-from'}                         || '';
@@ -556,7 +556,7 @@ sub RelationMatchesExpected {
     my $EntryRef                    = $hash{'EntryRef'};
     my $handle_multiple             = $hash{'multiple_ref_type_entries'}        || 'analyze';
 
-    return 0    unless ( $EntryRef );
+    return 0    unless ( $EntryRef || $EntryRef eq '0' );
 
     my $ExpOperator                 = $EntryRef->{'operator'}                   || '';
     my $ExpFrom                     = $EntryRef->{'from'}                       || '';

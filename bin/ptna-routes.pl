@@ -698,26 +698,27 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
 
     $number_of_relations++;
 
-    $ref        = $RELATIONS{$relation_id}->{'tag'}->{'ref'};
-    $type       = $RELATIONS{$relation_id}->{'tag'}->{'type'};
+    if ( exists($RELATIONS{$relation_id}->{'tag'}->{'type'}) ) {
 
-    if ( $type ) {
+        $type = $RELATIONS{$relation_id}->{'tag'}->{'type'};
         #
         # first analyze route_master and route relations
         #
         if ( $type eq 'route_master' || $type eq 'route' ) {
 
-            $route_type   = $RELATIONS{$relation_id}->{'tag'}->{$RELATIONS{$relation_id}->{'tag'}->{'type'}};
-
             $relation_ptr = undef;
 
-            if ( $route_type ) {
+            if ( exists($RELATIONS{$relation_id}->{'tag'}->{$type}) ) {
+
+                $route_type   = $RELATIONS{$relation_id}->{'tag'}->{$type};
 
                 $number_of_route_relations++;
 
                 $relation_ptr = $RELATIONS{$relation_id};
 
-                if ( $ref ) {
+                if ( exists($RELATIONS{$relation_id}->{'tag'}->{'ref'}) ) {
+                    $ref    = $RELATIONS{$relation_id}->{'tag'}->{'ref'};
+
                     $status = 'keep';
 
                     # match_route_type() returns either "keep" or "suspicious" or "skip"
@@ -774,7 +775,7 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
                         printf STDERR "%-15s: ref=%s", $status, $ref;
                         printf STDERR "\ttype=%s", $type;
                         printf STDERR "\troute_type=%s", $route_type;
-                        printf STDERR "\tnetwork=%s", $relation_ptr->{'tag'}->{'network'};
+                        printf STDERR "\tnetwork=%s", ($relation_ptr->{'tag'}->{'network'} || '');
                         printf STDERR "\toperator=%s", ($relation_ptr->{'tag'}->{'operator'} || '');
                         printf STDERR "\tRelation: %d\n", $relation_id;
                     }
@@ -1665,7 +1666,7 @@ sub match_ref_and_pt_type {
     my $ref             = shift;
     my $pt_type         = shift;
 
-    if ( $ref && $pt_type ) {
+    if ( $ref ne '' && $pt_type ) {
         return 'keep positive'      if ( RoutesList::RefTypeCount( $ref, $pt_type ) );
     } else {
         printf STDERR "%s Skipping unset ref or unset type: %s/%s\n", get_time()        if ( $verbose );
@@ -1689,7 +1690,7 @@ sub SearchMatchingRelations {
     my $SearchListRef               = $hash{'SearchListRef'};
     my $EntryRef                    = $hash{'EntryRef'};
 
-    my $ExpRef                      = $EntryRef->{'ref'}                              || '';
+    my $ExpRef                      = $EntryRef->{'ref'};
     my $ExpRefOrList                = $EntryRef->{'ref-or-list'};
     my $ExpRouteType                = $EntryRef->{'route'}                            || '';
     my $RelRef                      = undef;
@@ -1709,7 +1710,7 @@ sub SearchMatchingRelations {
 
     if ( $ExpRefOrList ) {
         @ExpRefOrArray = @{$ExpRefOrList};
-    } elsif ( $ExpRef ) {
+    } elsif ( $ExpRef || $ExpRef eq '0' ) {
         push( @ExpRefOrArray, $ExpRef );
     }
 
@@ -1735,13 +1736,13 @@ sub SearchMatchingRelations {
 
                             foreach my $rel_id ( keys( %{$SearchListRef->{$ExpRefPart}->{$type}->{$ExpRouteType}} ) ) {
 
-                                $RelRef         = $RELATIONS{$rel_id}->{'tag'}->{'ref'}      || '';
-                                $RelRouteType   = $RELATIONS{$rel_id}->{'tag'}->{$type}      || '';
-                                $RelOperator    = $RELATIONS{$rel_id}->{'tag'}->{'operator'} || '';
-                                $RelFrom        = $RELATIONS{$rel_id}->{'tag'}->{'from'}     || '';
-                                $RelTo          = $RELATIONS{$rel_id}->{'tag'}->{'to'}       || '';
+                                $RelRef         = exists($RELATIONS{$rel_id}->{'tag'}->{'ref'}) ? $RELATIONS{$rel_id}->{'tag'}->{'ref'} : '';
+                                $RelRouteType   = $RELATIONS{$rel_id}->{'tag'}->{$type}              || '';
+                                $RelOperator    = $RELATIONS{$rel_id}->{'tag'}->{'operator'}         || '';
+                                $RelFrom        = $RELATIONS{$rel_id}->{'tag'}->{'from'}             || '';
+                                $RelTo          = $RELATIONS{$rel_id}->{'tag'}->{'to'}               || '';
 
-                                printf STDERR "%s Checking %s relation %s, 'ref' %s and  'operator' %s \n", get_time(), $type, $rel_id, $ExpRefPart, $RelOperator    if ( $debug );
+                                printf STDERR "%s Checking %s relation %s, 'ref' %s and 'operator' %s \n", get_time(), $type, $rel_id, $ExpRefPart, $RelOperator    if ( $debug );
 
                                 $match  = RoutesList::RelationMatchesExpected(  'rel-id'                      => $rel_id,
                                                                                 'rel-ref'                     => $RelRef,
@@ -1765,7 +1766,7 @@ sub SearchMatchingRelations {
                                             printf STDERR "%s Route-Master w/o values: %s - check Member %s\n", get_time(), $rel_id, $member_rel_ref->{'ref'}   if ( $debug );
                                             if ( $selected_routes{$member_rel_ref->{'ref'}} ) {
                                                 # member route has been selected, from and/or to match, so let's assume, the route_master matches as well
-                                                $match = $member_rel_ref->{'ref'};
+                                                $match = 1;
                                                 last;
                                             }
                                         }
@@ -1801,7 +1802,8 @@ sub SearchMatchingRelations {
                  $RELATIONS{$route_master_rel_id}->{'tag'}->{'type'}  eq 'route_master'         &&
                  $RELATIONS{$route_master_rel_id}->{'tag'}->{'route_master'}                    &&
                  $RELATIONS{$route_master_rel_id}->{'tag'}->{'route_master'} eq $ExpRouteType   &&
-                 $RELATIONS{$route_master_rel_id}->{'tag'}->{'ref'}                             &&
+                 exists($RELATIONS{$route_master_rel_id}->{'tag'}->{'ref'})                     &&
+                 $RELATIONS{$route_master_rel_id}->{'tag'}->{'ref'} ne ''                       &&
                  $ExpRefHash{$RELATIONS{$route_master_rel_id}->{'tag'}->{'ref'}}                    ) {
                 printf STDERR "Add route_master %s of route %s\n", $route_master_rel_id, $rel_id   if ( $debug );
                 $selected_route_masters{$route_master_rel_id} = 1;
@@ -1821,7 +1823,8 @@ sub SearchMatchingRelations {
                  $RELATIONS{$member_rel_ref->{'ref'}}->{'tag'}->{'type'}  eq 'route'       &&
                  $RELATIONS{$member_rel_ref->{'ref'}}->{'tag'}->{'route'}                  &&
                  $RELATIONS{$member_rel_ref->{'ref'}}->{'tag'}->{'route'} eq $ExpRouteType &&
-                 $RELATIONS{$member_rel_ref->{'ref'}}->{'tag'}->{'ref'}                    &&
+                 exists($RELATIONS{$member_rel_ref->{'ref'}}->{'tag'}->{'ref'})            &&
+                 $RELATIONS{$member_rel_ref->{'ref'}}->{'tag'}->{'ref'} ne ''              &&
                  $ExpRefHash{$RELATIONS{$member_rel_ref->{'ref'}}->{'tag'}->{'ref'}}          ) {
                 printf STDERR "Add member route %s of route_master %s\n", $member_rel_ref->{'ref'}, $rel_id   if ( $debug );
                 $selected_routes{$member_rel_ref->{'ref'}} = 1;
@@ -2006,10 +2009,10 @@ sub analyze_route_master_environment {
 
                                 if ( $relation_ptr->{'tag'}->{'route_master'} eq $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'route'} ) {
 
-                                    if ( $RELATIONS{$relation_id}->{'tag'}->{'ref'} ) {
+                                    if ( exists($RELATIONS{$relation_id}->{'tag'}->{'ref'}) ) {
                                         $masters_ref = $RELATIONS{$relation_id}->{'tag'}->{'ref'};
                                     }
-                                    if ( $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'ref'} ) {
+                                    if ( exists($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'ref'}) ) {
                                         foreach $members_ref ( @{$ref_or_list} ) {
                                             $allowed_refs{$members_ref} = 1;
                                         }
@@ -2165,7 +2168,7 @@ sub analyze_route_environment {
         if ( $number_of_direct_route_masters > $number_of_route_masters ) {
             foreach my $direct_route_master_rel_id ( keys( %{$RELATIONS{$relation_id}->{'member_of_route_master'}}  ) ) {
                 if ( !defined($env_ref->{'route_master'}->{$route_type}->{$direct_route_master_rel_id}) ) {
-                    if ( $RELATIONS{$direct_route_master_rel_id} && $RELATIONS{$direct_route_master_rel_id}->{'tag'} && $RELATIONS{$direct_route_master_rel_id}->{'tag'}->{'ref'} ) {
+                    if ( $RELATIONS{$direct_route_master_rel_id} && $RELATIONS{$direct_route_master_rel_id}->{'tag'} && exists($RELATIONS{$direct_route_master_rel_id}->{'tag'}->{'ref'}) ) {
                         $masters_ref = $RELATIONS{$direct_route_master_rel_id}->{'tag'}->{'ref'};
                         $issues_string = gettext( "Route-Master might be listed with 'ref' = '%s' in a different section or in section 'Not clearly assigned routes' of this analysis: %s" );
                         push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, $masters_ref, printRelationTemplate($direct_route_master_rel_id) ) );
@@ -2215,7 +2218,7 @@ sub analyze_route_environment {
                 $issues_string = gettext( "'route' = '%s' of Route does not fit to 'route_master' = '%s' of Route-Master: %s" );
                 push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, $relation_ptr->{'tag'}->{'route'}, $RELATIONS{$route_master_rel_id}->{'tag'}->{'route_master'}, printRelationTemplate($route_master_rel_id)) );
             }
-            if ( $RELATIONS{$route_master_rel_id}->{'tag'}->{'ref'} ) {
+            if ( exists($RELATIONS{$route_master_rel_id}->{'tag'}->{'ref'}) && defined($RELATIONS{$route_master_rel_id}->{'tag'}->{'ref'}) && $RELATIONS{$route_master_rel_id}->{'tag'}->{'ref'} ne '' ) {
                 foreach $masters_ref ( @{$ref_or_list} ) {
                     $allowed_refs{$masters_ref} = 1;
                 }
@@ -2225,7 +2228,7 @@ sub analyze_route_environment {
                     #
                     # 'masters_ref' is in the list, check for other problems
                     #
-                    if ( $routes_ref && $routes_ref ne $masters_ref ) {
+                    if ( defined($routes_ref) && $routes_ref ne '' && $routes_ref ne $masters_ref ) {
                         # 'masters_ref' is valid (in the list) but differs from 'ref' of route, so we have at least two refs in the list (a real list)
                         #$notes_string = gettext( "Route has different 'ref' = '%s' than Route-Master 'ref' = '%s' - this should be avoided: %s" );
                         #push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, $routes_ref, $masters_ref, printRelationTemplate($route_master_rel_id) ) );
@@ -2490,11 +2493,11 @@ sub analyze_relation {
         # now check existance of required/optional tags
         #
 
-        unless ( $ref ) {
+        unless ( exists($relation_ptr->{'tag'}->{'ref'}) ) {
             $issues_string = gettext( "'ref' is not set" );
             push( @{$relation_ptr->{'__issues__'}}, $issues_string );
         }
-        unless ( $relation_ptr->{'tag'}->{'name'} ) {
+        unless ( exists($relation_ptr->{'tag'}->{'name'}) ) {
             $issues_string = gettext( "'name' is not set" );
             push( @{$relation_ptr->{'__issues__'}}, $issues_string );
             foreach my $tag ( @relation_tags ) {
@@ -2719,9 +2722,9 @@ sub analyze_route_master_relation {
     my $relation_id     = shift;
     my $return_code     = 0;
 
-    my $ref                            = $relation_ptr->{'tag'}->{'ref'};
-    my $type                           = $relation_ptr->{'tag'}->{'type'};
-    my $route_type                     = $relation_ptr->{'tag'}->{$type};
+    my $ref                            = $relation_ptr->{'tag'}->{'ref'}  || '';
+    my $type                           = $relation_ptr->{'tag'}->{'type'} || '';
+    my $route_type                     = $relation_ptr->{'tag'}->{$type}  || '';
     my $member_index                   = scalar( @{$relation_ptr->{'members'}} );
     my $relation_index                 = scalar( @{$relation_ptr->{'relation'}} );
     my $route_master_relation_index    = scalar( @{$relation_ptr->{'route_master_relation'}} );
@@ -2778,9 +2781,9 @@ sub analyze_route_relation {
     my $relation_id     = shift;
     my $return_code     = 0;
 
-    my $ref                            = $relation_ptr->{'tag'}->{'ref'};
-    my $type                           = $relation_ptr->{'tag'}->{'type'};
-    my $route_type                     = $relation_ptr->{'tag'}->{$type};
+    my $ref                            = $relation_ptr->{'tag'}->{'ref'}  || '';
+    my $type                           = $relation_ptr->{'tag'}->{'type'} || '';
+    my $route_type                     = $relation_ptr->{'tag'}->{$type}  || '';
     my $route_relation_index           = $relation_ptr->{'route_relation'} ? scalar( @{$relation_ptr->{'route_relation'}} ) : 0;
     my $route_highway_index            = $relation_ptr->{'route_highway'}  ? scalar( @{$relation_ptr->{'route_highway'}} )  : 0;
     my $node_index                     = $relation_ptr->{'node'}           ? scalar( @{$relation_ptr->{'node'}} )           : 0;
@@ -4756,16 +4759,16 @@ sub CheckNameRefFromViaToPTV2 {
 
     if ( $relation_ptr && $relation_ptr->{'tag'} ) {
         my $preconditions_failed = 0;
-        my $name = $relation_ptr->{'tag'}->{'name'};
-        my $ref  = $relation_ptr->{'tag'}->{'ref'};
-        my $from = $relation_ptr->{'tag'}->{'from'};
-        my $to   = $relation_ptr->{'tag'}->{'to'};
-        my $via  = $relation_ptr->{'tag'}->{'via'};
+        my $name = $relation_ptr->{'tag'}->{'name'} || '';
+        my $ref  = $relation_ptr->{'tag'}->{'ref'}  || '';
+        my $from = $relation_ptr->{'tag'}->{'from'} || '';
+        my $to   = $relation_ptr->{'tag'}->{'to'}   || '';
+        my $via  = $relation_ptr->{'tag'}->{'via'}  || '';
 
         my $number_of_ref_colon_tags = 0;
         my $ref_string               = '';
 
-        if ( $name ) {
+        if ( $name ne '' ) {
             #
             # basic checks for 'name' w/o any other dependencies to 'ref', 'from', 'to' and 'via'
             #
@@ -4783,7 +4786,7 @@ sub CheckNameRefFromViaToPTV2 {
             }
         }
 
-        if ( $name && $ref && $preconditions_failed == 0) {
+        if ( $name ne '' && $ref ne '' && $preconditions_failed == 0) {
 
             if ( $name =~ m/^(.*):\s{0,1}(.*?)\s{0,1}=>\s{0,1}(.*)\s{0,1}=>\s{0,1}(.*)$/ ||
                  $name =~ m/^(.*):\s{0,1}(.*?)\s{0,1}=>\s{0,1}(.*)$/                     ||
@@ -4941,13 +4944,13 @@ sub CheckNameRefFromViaToPTV2 {
                 $return_code++;
             }
         } else {
-            if ( !$name ) {
+            if ( $name eq '' ) {
                 # already checked at a very early position, but must increase return_code here
                 #$issues_string = gettext( "'name' is not set" );
                 #push( @{$relation_ptr->{'__issues__'}}, $issues_string );
                 $return_code++;
             }
-            if ( !$ref ) {
+            if ( $ref eq '' ) {
                 # already checked at a very early position, but must increase return_code here
                 #$issues_string = gettext( "'ref' is not set" );
                 #push( @{$relation_ptr->{'__issues__'}}, $issues_string );
@@ -5200,8 +5203,8 @@ sub CheckRouteRefOnStops {
     my $ret_val      = 0;
 
     if ( $relation_ptr ) {
-        if ( $relation_ptr->{'tag'} && $relation_ptr->{'tag'}->{'ref'} ) {
-            my $ref                     = $relation_ptr->{'tag'}->{'ref'};
+        if ( $relation_ptr->{'tag'} && exists($relation_ptr->{'tag'}->{'ref'}) ) {
+            my $ref                     = $relation_ptr->{'tag'}->{'ref'} || '';
             my $object_ref              = undef;
             my $platform_or_stop        = undef;
             my $temp_route_ref          = undef;
@@ -5274,7 +5277,7 @@ sub CheckRouteRefOnStops {
                                         $to_be_deleted{sprintf($notes_string,$tag,html_escape($object_ref->{'tag'}->{$tag}),html_escape($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
                                     }
                                 }
-                                if ( $object_ref->{'tag'}->{'ref'} ) {
+                                if ( exists($object_ref->{'tag'}->{'ref'}) ) {
                                     $temp_stop_ref =  ';' . $object_ref->{'tag'}->{'ref'} . ';';
                                     $temp_stop_ref =~ s/\s*;\s*/;/g;
 
@@ -5304,7 +5307,7 @@ sub CheckRouteRefOnStops {
                                         $to_be_replaced{sprintf($notes_string,$tag,html_escape($object_ref->{'tag'}->{$tag}),html_escape($replace_by))}->{$member->{'ref'}} = $member->{'type'};
                                     }
                                 }
-                                if ( $object_ref->{'tag'}->{'ref'} ) {
+                                if ( exists($object_ref->{'tag'}->{'ref'}) ) {
                                     $temp_stop_ref =  ';' . $object_ref->{'tag'}->{'ref'} . ';';
                                     $temp_stop_ref =~ s/\s*;\s*/;/g;
 
@@ -6409,7 +6412,7 @@ sub printTableHeader {
 
 sub printTableSubHeader {
     my %hash                = ( @_ );
-    my $ref                 = $hash{'ref'}           || '';
+    my $ref                 = exists($hash{'ref'}) ? $hash{'ref'} : '';
     my $ref_or_list         = $hash{'ref-or-list'};
     my $network             = $hash{'network'}       || '';
     my $operator            = $hash{'operator'}      || '';
@@ -6426,7 +6429,7 @@ sub printTableSubHeader {
     if ( $ref_or_list ) {
         @ref_or_array = @{$ref_or_list};
         $ref_or_list_text = join(' ', @ref_or_array );
-    } elsif ( $ref ) {
+    } elsif ( $ref ne '' ) {
         push( @ref_or_array, $ref );
         $ref_or_list_text = $ref;
     }
@@ -6487,7 +6490,7 @@ sub printTableSubHeader {
     $info = $csv_text ? $csv_text : '???';
     $info =~ s/\"/_/g;
 
-    if ( $no_of_columns > 1 && $ref_or_list_text && $ref_text ) {
+    if ( $no_of_columns > 1 && $ref_or_list_text ne '' && $ref_text ) {
         push( @HTML_main, sprintf( "%16s<tr %sdata-info=\"%s\" data-ref=\"%s\" class=\"sketchline\"><td class=\"sketch\">%s</td><td class=\"csvinfo\" colspan=\"%d\">%s</td></tr>\n", ' ', $id_string, $info, $ref_or_list_text, $ref_text, $no_of_columns-1, $csv_text ) );
     }
 }
@@ -6593,7 +6596,7 @@ sub printRelationTemplate {
         my $info_string = '';
         if ( $tags ) {
             foreach my $tag ( split( ';', $tags ) ) {
-                if ( $RELATIONS{$rel_id} && $RELATIONS{$rel_id}->{'tag'} && $RELATIONS{$rel_id}->{'tag'}->{$tag} ) {
+                if ( $RELATIONS{$rel_id} && $RELATIONS{$rel_id}->{'tag'} && $RELATIONS{$rel_id}->{'tag'}->{$tag} ne '' ) {
                     $info_string .= sprintf( "'%s' ", $RELATIONS{$rel_id}->{'tag'}->{$tag} );
                     last;
                 }
@@ -6760,7 +6763,7 @@ sub printAddIdLabelToLocalNavigation {
     my $visible_string  = shift;
     my $colour          = shift;
 
-    if ( !$no_additional_navigation && $local_navigation_at_index && $id_label && $visible_string ) {
+    if ( !$no_additional_navigation && $local_navigation_at_index && $id_label && $visible_string ne '' ) {
 
         my $bg_colour   = GetColourFromString( $colour );
         my $fg_colour   = GetForeGroundFromBackGround( $bg_colour );
