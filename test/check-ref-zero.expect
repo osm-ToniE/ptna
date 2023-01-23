@@ -57,15 +57,28 @@
         </p>
         <hr />
         <h1 id="A2">2 Test file</h1>
-<a href="#bus_0">0</a> </br></br>
+<a href="#bus_0">0</a> <a href="#bus_0_1">0/1</a> <a href="#bus_1_0">1/0</a> <a href="#bus_0_1-2">0;1</a> </br></br>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name">Name (name=)</th><th class="type">Type (type=)</th><th class="relation">Relation (id=)</th><th class="PTv">PTv</th><th class="issues">Errors</th><th class="notes">Notes</th></tr>
             </thead>
             <tbody>
-                <tr id="-110492" data-info="-110492" data-ref="???" class="line"><td class="name">Bus 0</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -110492</td><td class="PTv"></td><td class="issues">'network' is not set</td><td class="notes"></td></tr>
+                <tr id="bus_0" data-info="Comment: Autobus 0; From: From1; To: To1,Operator1" data-ref="0" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=0&network=Network&operator=" title="Sketch-Line">0</a></td><td class="csvinfo" colspan="5">Comment: Autobus 0; From: From1; To: To1,Operator1</td></tr>
+                <tr id="-110492" data-info="-110492" data-ref="???" class="line"><td class="name">Bus 0</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -110492</td><td class="PTv"></td><td class="issues"></td><td class="notes">'network' = 'Network'</td></tr>
                 <tr id="-110275" data-info="-110275" data-ref="???" class="line"><td class="name">Bus 0: Stop 1 =&gt; Stop 2</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -110275</td><td class="PTv">2</td><td class="issues">Route with only 1 Way</td><td class="notes">'network' = 'Network'</td></tr>
                 <tr id="-110437" data-info="-110437" data-ref="???" class="line"><td class="name">Bus 0: Stop 3 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -110437</td><td class="PTv">2</td><td class="issues">Route with only 1 Way</td><td class="notes">'network' = 'Network'</td></tr>
+                <tr id="bus_0_1" data-info="Comment: Autobus 0/1; From: From1; To: To1,Operator1" data-ref="0/1" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=0%2f1&network=Network&operator=" title="Sketch-Line">0/1</a></td><td class="csvinfo" colspan="5">Comment: Autobus 0/1; From: From1; To: To1,Operator1</td></tr>
+                <tr id="-110597" data-info="-110597" data-ref="0/1" class="line"><td class="name">Bus 0/1</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -110597</td><td class="PTv"></td><td class="issues"></td><td class="notes">'network' = 'Network'</td></tr>
+                <tr id="-110538" data-info="-110538" data-ref="0/1" class="line"><td class="name">Bus 0/1: Stop 1 =&gt; Stop 2</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -110538</td><td class="PTv">2</td><td class="issues">Route with only 1 Way</td><td class="notes">'network' = 'Network'</td></tr>
+                <tr id="-110558" data-info="-110558" data-ref="0/1" class="line"><td class="name">Bus 0/1: Stop 3 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -110558</td><td class="PTv">2</td><td class="issues">Route with only 1 Way</td><td class="notes">'network' = 'Network'</td></tr>
+                <tr id="bus_1_0" data-info="Comment: Autobus 1/0; From: From1; To: To1,Operator1" data-ref="1/0" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=1%2f0&network=Network&operator=" title="Sketch-Line">1/0</a></td><td class="csvinfo" colspan="5">Comment: Autobus 1/0; From: From1; To: To1,Operator1</td></tr>
+                <tr id="-110653" data-info="-110653" data-ref="1/0" class="line"><td class="name">Bus 1/0</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -110653</td><td class="PTv"></td><td class="issues"></td><td class="notes">'network' = 'Network'</td></tr>
+                <tr id="-110625" data-info="-110625" data-ref="1/0" class="line"><td class="name">Bus 1/0: Stop 1 =&gt; Stop 2</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -110625</td><td class="PTv">2</td><td class="issues">Route with only 1 Way</td><td class="notes">'network' = 'Network'</td></tr>
+                <tr id="-110645" data-info="-110645" data-ref="1/0" class="line"><td class="name">Bus 1/0: Stop 3 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -110645</td><td class="PTv">2</td><td class="issues">Route with only 1 Way</td><td class="notes">'network' = 'Network'</td></tr>
+                <tr id="bus_0_1-2" data-info="Comment: Autobus 1/0; From: From1; To: To1,Operator1" data-ref="0;1" class="sketchline"><td class="sketch"><a href="https://overpass-api.de/api/sketch-line?ref=0%3b1&network=Network&operator=" title="Sketch-Line">0;1</a></td><td class="csvinfo" colspan="5">Comment: Autobus 1/0; From: From1; To: To1,Operator1</td></tr>
+                <tr id="-110708" data-info="-110708" data-ref="0;1" class="line"><td class="name">Bus 0;1</td><td class="type">route_master</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -110708</td><td class="PTv"></td><td class="issues"></td><td class="notes">'network' = 'Network'</td></tr>
+                <tr id="-110682" data-info="-110682" data-ref="0;1" class="line"><td class="name">Bus 0;1: Stop 1 =&gt; Stop 2</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -110682</td><td class="PTv">2</td><td class="issues">Route with only 1 Way</td><td class="notes">'network' = 'Network'</td></tr>
+                <tr id="-110700" data-info="-110700" data-ref="0;1" class="line"><td class="name">Bus 0;1: Stop 3 =&gt; Stop 4</td><td class="type">route</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -110700</td><td class="PTv">2</td><td class="issues">Route with only 1 Way</td><td class="notes">'network' = 'Network'</td></tr>
             </tbody>
         </table>
 
@@ -80,8 +93,7 @@ This section lists the 'network'-values which have been considered; i.e. which m
                 <tr class="tableheaderrow"><th class="network">&#x21C5;Network (network=)</th><th class="number js-sort-number">&#x21C5;Number</th><th class="relations">&#x21C5;Relations</th></tr>
             </thead>
             <tbody>
-                <tr data-info="Network" data-ref="???" class="line"><td class="network">Network</td><td class="number">2</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> -110275, <img src="/img/Relation.svg" alt="Relation" /> -110437</td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="network"></td><td class="number">1</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> -110492</td></tr>
+                <tr data-info="Network" data-ref="???" class="line"><td class="network">Network</td><td class="number">12</td><td class="relations"><img src="/img/Relation.svg" alt="Relation" /> '0' -110275, <img src="/img/Relation.svg" alt="Relation" /> '0' -110437, <img src="/img/Relation.svg" alt="Relation" /> '0' -110492, <img src="/img/Relation.svg" alt="Relation" /> '0/1' -110538, <img src="/img/Relation.svg" alt="Relation" /> '0/1' -110558, <img src="/img/Relation.svg" alt="Relation" /> '0/1' -110597, <img src="/img/Relation.svg" alt="Relation" /> '1/0' -110625, <img src="/img/Relation.svg" alt="Relation" /> '1/0' -110645, <img src="/img/Relation.svg" alt="Relation" /> '1/0' -110653, <img src="/img/Relation.svg" alt="Relation" /> '0;1' -110682 and more ...</td></tr>
             </tbody>
         </table>
 
