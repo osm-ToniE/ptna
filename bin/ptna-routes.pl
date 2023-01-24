@@ -6595,10 +6595,14 @@ sub printRelationTemplate {
     if ( $rel_id ) {
         my $info_string = '';
         if ( $tags ) {
-            foreach my $tag ( split( ';', $tags ) ) {
-                if ( $RELATIONS{$rel_id} && $RELATIONS{$rel_id}->{'tag'} && exists($RELATIONS{$rel_id}->{'tag'}->{$tag}) && $RELATIONS{$rel_id}->{'tag'}->{$tag} ne '' ) {
-                    $info_string .= sprintf( "'%s' ", $RELATIONS{$rel_id}->{'tag'}->{$tag} );
-                    last;
+            if ( $RELATIONS{$rel_id} && $RELATIONS{$rel_id}->{'tag'} ) {
+                foreach my $tag ( split( ';', $tags ) ) {
+                    if ( exists($RELATIONS{$rel_id}->{'tag'}->{$tag})  &&
+                         defined($RELATIONS{$rel_id}->{'tag'}->{$tag}) &&
+                         $RELATIONS{$rel_id}->{'tag'}->{$tag} ne ''        ) {
+                        $info_string .= sprintf( "'%s' ", $RELATIONS{$rel_id}->{'tag'}->{$tag} );
+                        last;
+                    }
                 }
             }
         }
