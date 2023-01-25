@@ -3,6 +3,9 @@
 # This file is distributed under the same license as the ptna package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Štefan Baebler <stefan.baebler@gmail.com>, 2023
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,6 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
 "POT-Creation-Date: 2022-12-29 18:59+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
+"Last-Translator: Štefan Baebler <stefan.baebler@gmail.com>, 2023\n"
 "Language-Team: Slovenian (https://www.transifex.com/jungle-bus/teams/97874/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,82 +22,82 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 msgid "Message"
-msgstr ""
+msgstr "Sporočilo"
 
 msgid "Type"
-msgstr ""
+msgstr "Vrsta"
 
 msgid "Option"
-msgstr ""
+msgstr "Možnost"
 
 msgid "Description"
-msgstr ""
+msgstr "Opis"
 
 msgid "How to fix it"
-msgstr ""
+msgstr "Kako to popraviti"
 
 msgid "Image"
-msgstr ""
+msgstr "Slika"
 
 msgid "Default Value"
-msgstr ""
+msgstr "Privzeta vrednost"
 
 msgid "Language test"
-msgstr ""
+msgstr "Test jezika"
 
 msgid "Line (ref=)"
-msgstr ""
+msgstr "Linija (ref=)"
 
 msgid "Relation (id=)"
-msgstr ""
+msgstr "Relacija (id=)"
 
 msgid "Relations"
-msgstr ""
+msgstr "Relacije"
 
 msgid "Name (name=)"
-msgstr ""
+msgstr "Ime (name=)"
 
 msgid "Number"
-msgstr ""
+msgstr "Številka"
 
 msgid "Network (network=)"
-msgstr ""
+msgstr "Omrežje (network=)"
 
 msgid "Operator (operator=)"
-msgstr ""
+msgstr "Prevoznik (operator=)"
 
 msgid "From (from=)"
-msgstr ""
+msgstr "Od (from=)"
 
 msgid "Via (via=)"
-msgstr ""
+msgstr "Preko (via=)"
 
 msgid "To (to=)"
-msgstr ""
+msgstr "Do (to=)"
 
 msgid "Errors"
-msgstr ""
+msgstr "Napake"
 
 msgid "Notes"
-msgstr ""
+msgstr "Opombe"
 
 msgid "Type (type=)"
-msgstr ""
+msgstr "Vrsta (type=)"
 
 msgid "Vehicle (route(_master)=)"
-msgstr ""
+msgstr "Vozilo (route(_master)=)"
 
 msgid "PTv"
 msgstr ""
 
 msgid "Comment"
-msgstr ""
+msgstr "Komentar"
 
 msgid "From"
-msgstr ""
+msgstr "Od"
 
 msgid "To"
-msgstr ""
+msgstr "Do"
 
 msgid "Operator"
 msgstr ""
@@ -102,7 +106,7 @@ msgid "GTFS feed"
 msgstr ""
 
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 msgid "GTFS feed from"
 msgstr ""
@@ -111,7 +115,7 @@ msgid "Date from"
 msgstr ""
 
 msgid "Bus"
-msgstr ""
+msgstr "Avtobus"
 
 msgid "Coach"
 msgstr ""
@@ -132,10 +136,10 @@ msgid "Light-Rail"
 msgstr ""
 
 msgid "Trolley Bus"
-msgstr ""
+msgstr "Troljebus"
 
 msgid "Ferry"
-msgstr ""
+msgstr "Trajekt"
 
 msgid "Mono-Rail"
 msgstr ""
@@ -144,7 +148,7 @@ msgid "Aerialway"
 msgstr ""
 
 msgid "Funicular"
-msgstr ""
+msgstr "Vzpenjača"
 
 #, perl-format
 msgid "Missing route for 'ref'='%s' and 'route'='%s'"
@@ -364,10 +368,10 @@ msgid "'%s' = '%s' of Route has a match with '%s' = '%s' of other Route(s)"
 msgstr ""
 
 msgid "'ref' is not set"
-msgstr ""
+msgstr "'ref' ni nastavljen"
 
 msgid "'name' is not set"
-msgstr ""
+msgstr "'name' ni nastavljen"
 
 #, perl-format
 msgid "'network' = '%s' should be short form"
@@ -378,7 +382,7 @@ msgid "'network' = '%s' should be long form"
 msgstr ""
 
 msgid "'network' is not set"
-msgstr ""
+msgstr "'network' ni nastavljen"
 
 #, perl-format
 msgid "'colour' has unknown value '%s'. Add '#' as first character."
@@ -855,10 +859,10 @@ msgid "Error in input data: insufficient data for nodes"
 msgstr ""
 
 msgid "Date of Data"
-msgstr ""
+msgstr "Datum podatkov"
 
 msgid "Hints"
-msgstr ""
+msgstr "Namigi"
 
 msgid "The data will be updated when the result of the analysis has changed."
 msgstr ""
@@ -1111,13 +1115,13 @@ msgid "key = value"
 msgstr ""
 
 msgid "Browse on map"
-msgstr ""
+msgstr "Poglej na zemljevidu"
 
 msgid "Edit in iD"
-msgstr ""
+msgstr "Uredi v urejevalniku iD"
 
 msgid "Edit in JOSM"
-msgstr ""
+msgstr "Uredi v urejevalniku JOSM"
 
 msgid "Show relation on special map"
 msgstr ""
@@ -1574,7 +1578,7 @@ msgid "assume and show compatibility with legacy bus-stops (aka: PTv1)"
 msgstr ""
 
 msgid "See also:"
-msgstr ""
+msgstr "Glej tudi:"
 
 msgid "Compatibility with well known tags"
 msgstr ""
@@ -1623,7 +1627,7 @@ msgid ""
 msgstr ""
 
 msgid "is not set"
-msgstr ""
+msgstr "ni nastavljen"
 
 msgid "GTFS database not found"
 msgstr ""
@@ -1638,7 +1642,7 @@ msgid "outdated, fits to older GTFS version only"
 msgstr ""
 
 msgid "does not exist"
-msgstr ""
+msgstr "ne obstaja"
 
 msgid "does not provide any 'shape' data"
 msgstr ""
