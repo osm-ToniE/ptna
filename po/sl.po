@@ -100,7 +100,7 @@ msgid "To"
 msgstr "Do"
 
 msgid "Operator"
-msgstr ""
+msgstr "Operater"
 
 msgid "GTFS feed"
 msgstr ""
@@ -124,13 +124,13 @@ msgid "Share-Taxi"
 msgstr ""
 
 msgid "Train/Suburban-Train"
-msgstr ""
+msgstr "Vlak/Primestni vlak"
 
 msgid "Tram/Streetcar"
-msgstr ""
+msgstr "Tramvaj"
 
 msgid "Subway/Underground"
-msgstr ""
+msgstr "Podzemna železnica"
 
 msgid "Light-Rail"
 msgstr ""
@@ -145,7 +145,7 @@ msgid "Mono-Rail"
 msgstr ""
 
 msgid "Aerialway"
-msgstr ""
+msgstr "Žičnica"
 
 msgid "Funicular"
 msgstr "Vzpenjača"
@@ -873,7 +873,7 @@ msgid ""
 msgstr ""
 
 msgid "Static Analysis for OpenStreetMap"
-msgstr ""
+msgstr "Statična analiza podatkov OpenStreetMap"
 
 msgid "Home"
 msgstr ""
@@ -885,7 +885,7 @@ msgid "Toggle View"
 msgstr ""
 
 msgid "Contact"
-msgstr ""
+msgstr "Stik"
 
 msgid "Imprint"
 msgstr ""
@@ -894,7 +894,7 @@ msgid "Privacy policy"
 msgstr ""
 
 msgid "Contents"
-msgstr ""
+msgstr "Vsebina"
 
 msgid "This section lists the lines that could not be clearly assigned."
 msgstr ""
