@@ -58,7 +58,7 @@ msgid "Name (name=)"
 msgstr "Ime (name=)"
 
 msgid "Number"
-msgstr "Številka"
+msgstr "Število"
 
 msgid "Network (network=)"
 msgstr "Omrežje (network=)"
