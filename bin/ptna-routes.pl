@@ -5047,8 +5047,8 @@ sub CheckAccessOnWaysAndNodes {
     my $ret_val      = 0;
 
     if ( $relation_ptr ) {
-        if ( $relation_ptr->{'tag'}->{'route'} != 'aerialway' &&
-             $relation_ptr->{'tag'}->{'route'} != 'funicular'    ) {
+        if ( $relation_ptr->{'tag'}->{'route'} ne 'aerialway' &&
+             $relation_ptr->{'tag'}->{'route'} ne 'funicular'    ) {
             my $access_restriction          = undef;
             my %restricted_access_on_ways   = ();
             my %restricted_access_on_nodes  = ();
