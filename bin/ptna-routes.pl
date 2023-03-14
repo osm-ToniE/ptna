@@ -1358,7 +1358,7 @@ if ( scalar(@line_refs) ) {
     my $route_type_lines = 0;
     my $CheckNetwork     = '';
 
-    printTableInitialization( 'ref', 'relation', 'type', 'route_type', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'issues', 'notes' );
+    printTableInitialization( 'ref', 'relation', 'type', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'issues', 'notes' );
 
     if ( scalar( @RouteList ) ) {
         printHeader( gettext('Other Public Transport Lines'), 1, 'otherlines' );
@@ -1376,7 +1376,7 @@ if ( scalar(@line_refs) ) {
             }
         }
         if ( $route_type_lines ) {
-            $help = sprintf( "%s", ($transport_types{$route_type} ? $transport_types{$route_type} : $route_type) );
+            $help = sprintf( "%s (%s)", ($transport_types{$route_type} ? $transport_types{$route_type} : $route_type), $route_type );
             printHeader( $help, 2 );
             printTableHeader( 'ref' => 'routename', 'relation' => 'number' );
             foreach $ref ( @line_refs ) {
@@ -1437,12 +1437,12 @@ my @route_types = sort( keys( %PT_relations_without_ref ) );
 if ( scalar(@route_types) ) {
     my $help;
 
-    printTableInitialization( 'relation', 'type', 'route_type', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'issues', 'notes' );
+    printTableInitialization( 'relation', 'type', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'issues', 'notes' );
 
     printHeader( gettext("Public Transport Lines without 'ref'"), 1, 'withoutref' );
 
     foreach $route_type ( @route_types ) {
-        $help = sprintf( "%s", ($transport_types{$route_type} ? $transport_types{$route_type} : $route_type) );
+        $help = sprintf( "%s (%s)", ($transport_types{$route_type} ? $transport_types{$route_type} : $route_type), $route_type );
         printHeader( $help, 2 );
         printTableHeader( 'relation' => 'number' );
         foreach $relation_id ( sort( { $PT_relations_without_ref{$route_type}->{$a}->{'__sort_name__'} cmp
