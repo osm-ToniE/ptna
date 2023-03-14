@@ -8,7 +8,7 @@
         <meta name="keywords" content="OSM Public Transport PTv2">
         <meta name="description" content="PTNA - Public Transport Network Analysis">
         <style>
-            #analysis table           { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; }
+            #analysis table           { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; max-width:100%; }
             #analysis th              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
             #analysis td              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
             #analysis ol              { list-style: none; }
@@ -17,8 +17,8 @@
             #analysis .sketchline     { background-color: #cccccc;        }
             #analysis .sketch         { text-align:left;  font-weight: 500; }
             #analysis .csvinfo        { text-align:right; font-size: 0.8em; }
-            #analysis .ref            { white-space:nowrap; }
-            #analysis .relation       { white-space:nowrap; }
+            #analysis .ref            { text-align:left; }
+            #analysis .relation       { text-align:left; }
             #analysis .PTv            { text-align:center; }
             #analysis .number         { text-align:right; }
             #analysis .gtfs_feed      { white-space:nowrap; }
@@ -44,7 +44,7 @@
         </li>
         <li>4 <a href="#withoutref">Public Transport Lines without &#039;ref&#039;</a>
         <ol>
-        <li>4.1 <a href="#A4.1">Bus</a>
+        <li>4.1 <a href="#A4.1">Bus (bus)</a>
         </li>
         </ol>
         </li>
@@ -93,14 +93,14 @@
 
         <hr />
         <h1 id="withoutref">4 Public Transport Lines without &#039;ref&#039;</h1>
-        <h2 id="A4.1">4.1 Bus</h2>
+        <h2 id="A4.1">4.1 Bus (bus)</h2>
         <table class="oepnvtable js-sort-table">
             <thead>
-                <tr class="tableheaderrow"><th class="relation js-sort-number">&#x21C5;Relation (id=)</th><th class="type">&#x21C5;Type (type=)</th><th class="route_type">&#x21C5;Vehicle (route(_master)=)</th><th class="name">&#x21C5;Name (name=)</th><th class="network">&#x21C5;Network (network=)</th><th class="operator">&#x21C5;Operator (operator=)</th><th class="from">&#x21C5;From (from=)</th><th class="via">&#x21C5;Via (via=)</th><th class="to">&#x21C5;To (to=)</th><th class="PTv">&#x21C5;PTv</th><th class="issues">&#x21C5;Errors</th><th class="notes">&#x21C5;Notes</th></tr>
+                <tr class="tableheaderrow"><th class="relation js-sort-number">&#x21C5;Relation (id=)</th><th class="type">&#x21C5;Type (type=)</th><th class="name">&#x21C5;Name (name=)</th><th class="network">&#x21C5;Network (network=)</th><th class="operator">&#x21C5;Operator (operator=)</th><th class="from">&#x21C5;From (from=)</th><th class="via">&#x21C5;Via (via=)</th><th class="to">&#x21C5;To (to=)</th><th class="PTv">&#x21C5;PTv</th><th class="issues">&#x21C5;Errors</th><th class="notes">&#x21C5;Notes</th></tr>
             </thead>
             <tbody>
-                <tr id="-130953" data-info="-130953" data-ref="???" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -130953</td><td class="type">route_master</td><td class="route_type">bus</td><td class="name">Bus 100</td><td class="network">network</td><td class="operator">Operator</td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv">2</td><td class="issues">'ref' is not set</td><td class="notes">'network' = 'network'<br>'operator' = 'Operator'</td></tr>
-                <tr id="-131169" data-info="-131169" data-ref="???" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -131169</td><td class="type">route</td><td class="route_type">bus</td><td class="name">Bus 101: Third Avenue =&gt; Fourth Avenue</td><td class="network">network</td><td class="operator">Operator</td><td class="from">Third Avenue</td><td class="via"></td><td class="to">Fourth Avenue</td><td class="PTv">2</td><td class="issues">'ref' is not set</td><td class="notes">'network' = 'network'<br>'operator' = 'Operator'</td></tr>
+                <tr id="-130953" data-info="-130953" data-ref="???" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -130953</td><td class="type">route_master</td><td class="name">Bus 100</td><td class="network">network</td><td class="operator">Operator</td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv">2</td><td class="issues">'ref' is not set</td><td class="notes">'network' = 'network'<br>'operator' = 'Operator'</td></tr>
+                <tr id="-131169" data-info="-131169" data-ref="???" class="line"><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -131169</td><td class="type">route</td><td class="name">Bus 101: Third Avenue =&gt; Fourth Avenue</td><td class="network">network</td><td class="operator">Operator</td><td class="from">Third Avenue</td><td class="via"></td><td class="to">Fourth Avenue</td><td class="PTv">2</td><td class="issues">'ref' is not set</td><td class="notes">'network' = 'network'<br>'operator' = 'Operator'</td></tr>
             </tbody>
         </table>
 

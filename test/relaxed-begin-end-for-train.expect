@@ -8,7 +8,7 @@
         <meta name="keywords" content="OSM Public Transport PTv2">
         <meta name="description" content="PTNA - Public Transport Network Analysis">
         <style>
-            #analysis table           { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; }
+            #analysis table           { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; max-width:100%; }
             #analysis th              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
             #analysis td              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
             #analysis ol              { list-style: none; }
@@ -17,8 +17,8 @@
             #analysis .sketchline     { background-color: #cccccc;        }
             #analysis .sketch         { text-align:left;  font-weight: 500; }
             #analysis .csvinfo        { text-align:right; font-size: 0.8em; }
-            #analysis .ref            { white-space:nowrap; }
-            #analysis .relation       { white-space:nowrap; }
+            #analysis .ref            { text-align:left; }
+            #analysis .relation       { text-align:left; }
             #analysis .PTv            { text-align:center; }
             #analysis .number         { text-align:right; }
             #analysis .gtfs_feed      { white-space:nowrap; }
@@ -40,7 +40,7 @@
         </li>
         <li>2 <a href="#otherslines">Public Transport Lines</a>
         <ol>
-        <li>2.1 <a href="#A2.1">Train/Suburban-Train</a>
+        <li>2.1 <a href="#A2.1">Train/Suburban-Train (train)</a>
         </li>
         </ol>
         </li>
@@ -61,17 +61,17 @@
         </p>
         <hr />
         <h1 id="otherslines">2 Public Transport Lines</h1>
-        <h2 id="A2.1">2.1 Train/Suburban-Train</h2>
+        <h2 id="A2.1">2.1 Train/Suburban-Train (train)</h2>
         <table class="oepnvtable js-sort-table">
             <thead>
-                <tr class="tableheaderrow"><th class="ref js-sort-routename">&#x21C5;Line (ref=)</th><th class="relation js-sort-number">&#x21C5;Relation (id=)</th><th class="type">&#x21C5;Type (type=)</th><th class="route_type">&#x21C5;Vehicle (route(_master)=)</th><th class="name">&#x21C5;Name (name=)</th><th class="network">&#x21C5;Network (network=)</th><th class="operator">&#x21C5;Operator (operator=)</th><th class="from">&#x21C5;From (from=)</th><th class="via">&#x21C5;Via (via=)</th><th class="to">&#x21C5;To (to=)</th><th class="PTv">&#x21C5;PTv</th><th class="issues">&#x21C5;Errors</th><th class="notes">&#x21C5;Notes</th></tr>
+                <tr class="tableheaderrow"><th class="ref js-sort-routename">&#x21C5;Line (ref=)</th><th class="relation js-sort-number">&#x21C5;Relation (id=)</th><th class="type">&#x21C5;Type (type=)</th><th class="name">&#x21C5;Name (name=)</th><th class="network">&#x21C5;Network (network=)</th><th class="operator">&#x21C5;Operator (operator=)</th><th class="from">&#x21C5;From (from=)</th><th class="via">&#x21C5;Via (via=)</th><th class="to">&#x21C5;To (to=)</th><th class="PTv">&#x21C5;PTv</th><th class="issues">&#x21C5;Errors</th><th class="notes">&#x21C5;Notes</th></tr>
             </thead>
             <tbody>
-                <tr id="-160544" data-info="-160544" data-ref="1" class="line"><td class="ref">1</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -160544</td><td class="type">route</td><td class="route_type">train</td><td class="name">Linie 1: A 1 =&gt; E 1</td><td class="network">Privat</td><td class="operator">Privat</td><td class="from">A 1</td><td class="via"></td><td class="to">E 1</td><td class="PTv">2</td><td class="issues">PTv2 route: consider removing the first way of the route from the relation, it is a way before the first stop position: <img src="/img/Way.svg" alt="Way" /> 'L1-W1' -160526<br>PTv2 route: consider removing the last way of the route from the relation, it is a way after the last stop position: <img src="/img/Way.svg" alt="Way" /> 'L1-W6' -160529</td><td class="notes">'comment' = 'PTv2 route: consider removing the first way of the route from the relation, it is a way before the first stop position: Way &#039;L1-W1&#039; -39258 PTv2 route: consider removing the last way of the route from the relation, it is a way after the last stop position: Way &#039;L1-W6&#039; -39264'<br>'network' = 'Privat'<br>'operator' = 'Privat'</td></tr>
-                <tr id="-160545" data-info="-160545" data-ref="2" class="line"><td class="ref">2</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -160545</td><td class="type">route</td><td class="route_type">train</td><td class="name">Linie 2: A 2 =&gt; E 2</td><td class="network">Privat</td><td class="operator">Privat</td><td class="from">A 2</td><td class="via"></td><td class="to">E 2</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'comment' = 'No error if --relaxed-begin-end-for=train'<br>'network' = 'Privat'<br>'operator' = 'Privat'</td></tr>
-                <tr id="-160546" data-info="-160546" data-ref="3" class="line"><td class="ref">3</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -160546</td><td class="type">route</td><td class="route_type">train</td><td class="name">Linie 3: A 3 =&gt; E 3</td><td class="network">Privat</td><td class="operator">Privat</td><td class="from">A 3</td><td class="via"></td><td class="to">E 3</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'comment' = 'No error at all'<br>'network' = 'Privat'<br>'operator' = 'Privat'</td></tr>
-                <tr id="-160547" data-info="-160547" data-ref="4" class="line"><td class="ref">4</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -160547</td><td class="type">route</td><td class="route_type">train</td><td class="name">Linie 4: A 4 =&gt; E 4</td><td class="network">Privat</td><td class="operator">Privat</td><td class="from">A 4</td><td class="via"></td><td class="to">E 4</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'comment' = 'No error at all'<br>'network' = 'Privat'<br>'operator' = 'Privat'</td></tr>
-                <tr id="-160548" data-info="-160548" data-ref="5" class="line"><td class="ref">5</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -160548</td><td class="type">route</td><td class="route_type">train</td><td class="name">Linie 5: A 5 =&gt; E 5</td><td class="network">Privat</td><td class="operator">Privat</td><td class="from">A 5</td><td class="via"></td><td class="to">E 5</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'comment' = 'No error at all'<br>'network' = 'Privat'<br>'operator' = 'Privat'</td></tr>
+                <tr id="-160544" data-info="-160544" data-ref="1" class="line"><td class="ref">1</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -160544</td><td class="type">route</td><td class="name">Linie 1: A 1 =&gt; E 1</td><td class="network">Privat</td><td class="operator">Privat</td><td class="from">A 1</td><td class="via"></td><td class="to">E 1</td><td class="PTv">2</td><td class="issues">PTv2 route: consider removing the first way of the route from the relation, it is a way before the first stop position: <img src="/img/Way.svg" alt="Way" /> 'L1-W1' -160526<br>PTv2 route: consider removing the last way of the route from the relation, it is a way after the last stop position: <img src="/img/Way.svg" alt="Way" /> 'L1-W6' -160529</td><td class="notes">'comment' = 'PTv2 route: consider removing the first way of the route from the relation, it is a way before the first stop position: Way &#039;L1-W1&#039; -39258 PTv2 route: consider removing the last way of the route from the relation, it is a way after the last stop position: Way &#039;L1-W6&#039; -39264'<br>'network' = 'Privat'<br>'operator' = 'Privat'</td></tr>
+                <tr id="-160545" data-info="-160545" data-ref="2" class="line"><td class="ref">2</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -160545</td><td class="type">route</td><td class="name">Linie 2: A 2 =&gt; E 2</td><td class="network">Privat</td><td class="operator">Privat</td><td class="from">A 2</td><td class="via"></td><td class="to">E 2</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'comment' = 'No error if --relaxed-begin-end-for=train'<br>'network' = 'Privat'<br>'operator' = 'Privat'</td></tr>
+                <tr id="-160546" data-info="-160546" data-ref="3" class="line"><td class="ref">3</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -160546</td><td class="type">route</td><td class="name">Linie 3: A 3 =&gt; E 3</td><td class="network">Privat</td><td class="operator">Privat</td><td class="from">A 3</td><td class="via"></td><td class="to">E 3</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'comment' = 'No error at all'<br>'network' = 'Privat'<br>'operator' = 'Privat'</td></tr>
+                <tr id="-160547" data-info="-160547" data-ref="4" class="line"><td class="ref">4</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -160547</td><td class="type">route</td><td class="name">Linie 4: A 4 =&gt; E 4</td><td class="network">Privat</td><td class="operator">Privat</td><td class="from">A 4</td><td class="via"></td><td class="to">E 4</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'comment' = 'No error at all'<br>'network' = 'Privat'<br>'operator' = 'Privat'</td></tr>
+                <tr id="-160548" data-info="-160548" data-ref="5" class="line"><td class="ref">5</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -160548</td><td class="type">route</td><td class="name">Linie 5: A 5 =&gt; E 5</td><td class="network">Privat</td><td class="operator">Privat</td><td class="from">A 5</td><td class="via"></td><td class="to">E 5</td><td class="PTv">2</td><td class="issues"></td><td class="notes">'comment' = 'No error at all'<br>'network' = 'Privat'<br>'operator' = 'Privat'</td></tr>
             </tbody>
         </table>
 

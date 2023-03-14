@@ -8,7 +8,7 @@
         <meta name="keywords" content="OSM Public Transport PTv2">
         <meta name="description" content="PTNA - Public Transport Network Analysis">
         <style>
-            #analysis table           { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; }
+            #analysis table           { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; max-width:100%; }
             #analysis th              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
             #analysis td              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
             #analysis ol              { list-style: none; }
@@ -17,8 +17,8 @@
             #analysis .sketchline     { background-color: #cccccc;        }
             #analysis .sketch         { text-align:left;  font-weight: 500; }
             #analysis .csvinfo        { text-align:right; font-size: 0.8em; }
-            #analysis .ref            { white-space:nowrap; }
-            #analysis .relation       { white-space:nowrap; }
+            #analysis .ref            { text-align:left; }
+            #analysis .relation       { text-align:left; }
             #analysis .PTv            { text-align:center; }
             #analysis .number         { text-align:right; }
             #analysis .gtfs_feed      { white-space:nowrap; }
