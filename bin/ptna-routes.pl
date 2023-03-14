@@ -5638,7 +5638,7 @@ sub printInitialHeader {
     push( @HTML_start, "        <meta name=\"description\" content=\"PTNA - Public Transport Network Analysis\">\n" );
     if ( $opt_test ) {
         push( @HTML_start, "        <style>\n" );
-        push( @HTML_start, "            #analysis table           { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; }\n" );
+        push( @HTML_start, "            #analysis table           { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; max-width:100%; }\n" );
         push( @HTML_start, "            #analysis th              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }\n" );
         push( @HTML_start, "            #analysis td              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }\n" );
         push( @HTML_start, "            #analysis ol              { list-style: none; }\n" );
@@ -5647,8 +5647,8 @@ sub printInitialHeader {
         push( @HTML_start, "            #analysis .sketchline     { background-color: #cccccc;        }\n" );
         push( @HTML_start, "            #analysis .sketch         { text-align:left;  font-weight: 500; }\n" );
         push( @HTML_start, "            #analysis .csvinfo        { text-align:right; font-size: 0.8em; }\n" );
-        push( @HTML_start, "            #analysis .ref            { white-space:nowrap; }\n" );
-        push( @HTML_start, "            #analysis .relation       { white-space:nowrap; }\n" );
+        push( @HTML_start, "            #analysis .ref            { text-align:left; }\n" );
+        push( @HTML_start, "            #analysis .relation       { text-align:left; }\n" );
         push( @HTML_start, "            #analysis .PTv            { text-align:center; }\n" );
         push( @HTML_start, "            #analysis .number         { text-align:right; }\n" );
         push( @HTML_start, "            #analysis .gtfs_feed      { white-space:nowrap; }\n" );
