@@ -5,16 +5,16 @@
 # 
 # Translators:
 # Noémie <nlehuby@zaclys.net>, 2019
-# ToniE <osm-ToniE@web.de>, 2022
+# ToniE <osm-ToniE@web.de>, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2022-12-29 18:59+0100\n"
+"POT-Creation-Date: 2023-04-01 14:07+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: ToniE <osm-ToniE@web.de>, 2022\n"
+"Last-Translator: ToniE <osm-ToniE@web.de>, 2023\n"
 "Language-Team: German (https://www.transifex.com/jungle-bus/teams/97874/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -467,6 +467,26 @@ msgid ""
 msgstr ""
 "Das Tag 'line' (='%s') ist reserviert für 'power' = 'line' spezifisches "
 "Tagging. Für Public Transport werden 'route_master' und 'route' genutzt."
+
+#, perl-format
+msgid "The tag '%s' has an empty value."
+msgstr "Das Tag '%s' hat einen leeren Wert."
+
+#, perl-format
+msgid ""
+"The tag '%s' includes whitespace character '%s' (=%#2x) in key. Value of "
+"tag: '%s'"
+msgstr ""
+"Das Tag '%s' enthält das Leerzeichen '%s' (=%#2x) im Schlüssel. Wert des "
+"Tags: '%s'."
+
+#, perl-format
+msgid ""
+"The tag '%s' includes potentially problematic character '%s' in key. Value "
+"of tag: '%s'"
+msgstr ""
+"Das Tag '%s' enthält das potentiell problematische Zeichen '%s' im "
+"Schlüssel. Wert des Tags: '%s'."
 
 msgid "Route-Master without Route(s)"
 msgstr "Route-Master ohne Route(n)"
@@ -1675,6 +1695,12 @@ msgstr ""
 "Fahrzeugtyp wird nicht unterstützt: '%s'. Zeile %s der Routen-Daten. Inhalt "
 "der Zeile: '%s'"
 
+msgid "Values of tags must not be empty."
+msgstr "Werte von Tags dürfen nicht leer sein."
+
+msgid "See also:"
+msgstr "Siehe auch:"
+
 msgid "Defines the language for the output."
 msgstr "Legt die Ausgabesprache fest."
 
@@ -1945,9 +1971,6 @@ msgid "assume and show compatibility with legacy bus-stops (aka: PTv1)"
 msgstr ""
 "die Kompatibilität mit alten bus-stops (aka: PTv1) wird angenommen und "
 "angezeigt"
-
-msgid "See also:"
-msgstr "Siehe auch:"
 
 msgid "Compatibility with well known tags"
 msgstr "Kompatibilität mit bekannten Tags"
