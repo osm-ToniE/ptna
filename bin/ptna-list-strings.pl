@@ -109,6 +109,7 @@ sub ListMessageStringsDetailsHtml {
     my $descr   = undef;
     my $msg     = undef;
     my $opt     = undef;
+    my $link    = undef;
     my $img     = undef;
 
     printf STDOUT "\n";
@@ -140,6 +141,11 @@ sub ListMessageStringsDetailsHtml {
         $opt   =~ s|\n|<br />|g;
         $descr =  html_escape( GetMessageValue( $key, 'description' ) );
         $descr =~ s|\n|<br />|g;
+        $link  =  GetMessageValue( $key, 'link' );
+        if ( $link ) {
+            $descr =~ s|__LINK_START__|<a href="$link">|;
+            $descr =~ s|__LINK_END__|</a>|;
+        }
         $img   =  GetMessageValue( $key, 'image' );
         printf STDOUT "            <tr class=\"message-tablerow\">\n";
         printf STDOUT "                <td class=\"message-text\">%s</td>\n",        $msg;
