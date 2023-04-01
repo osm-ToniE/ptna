@@ -2702,13 +2702,39 @@ sub analyze_relation {
         } elsif ( $type eq 'route') {
             $return_code = analyze_route_relation( $relation_ptr, $relation_id );
         }
-    }
 
-    #
-    # Link to GTFS data shall be shown
-    #
-    if ( $link_gtfs ) {
-        $relation_ptr->{'GTFS-HTML-TAG'} = getGtfsInfo( $relation_ptr );
+        #
+        # search for empty values in tags
+        # search for whitespace characters in key
+        # search for potentially problematic characters in keys
+        #
+        my $value = '';
+        my $char  = '';
+        foreach my $tag ( @relation_tags ) {
+            if ( !exists($relation_ptr->{'tag'}->{$tag})       ||
+                 !defined($relation_ptr->{'tag'}->{$tag})      ||
+                          $relation_ptr->{'tag'}->{$tag} eq ''    ) {
+                $issues_string = gettext( "The tag '%s' has an empty value." );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, $tag ) );
+            }
+            while ( $tag =~ m/([=\+\/\&\<\>;\'\"\?%\#@\\\r\t\n, ])/g ) {
+                $char = $1;
+                $value = $relation_ptr->{'tag'}->{$tag} ? $relation_ptr->{'tag'}->{$tag} : '';
+                if ( $char eq ' ' || $char eq "\r" || $char eq "\n" || $char eq "\t" ) {
+                    $notes_string = gettext( "The tag '%s' includes whitespace character '%s' (=%#2x) in key. Value of tag: '%s'" );
+                    push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, $tag, $char, ord($char), $value ) );
+               } else {
+                    $notes_string = gettext( "The tag '%s' includes potentially problematic character '%s' in key. Value of tag: '%s'" );
+                    push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, $tag, $char, $value ) );
+                }
+            }
+        }
+        #
+        # Link to GTFS data shall be shown
+        #
+        if ( $link_gtfs ) {
+            $relation_ptr->{'GTFS-HTML-TAG'} = getGtfsInfo( $relation_ptr );
+        }
     }
 
     return $return_code;
