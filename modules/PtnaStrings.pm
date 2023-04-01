@@ -1360,6 +1360,36 @@ sub InitMessageStrings {
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
+    $MessageList[$i]->{'message'}                = gettext( "The tag '%s' has an empty value." );
+    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = gettext( "Values of tags must not be empty." );
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
+    $MessageList[$i]->{'message'}                = gettext( "The tag '%s' includes potentially problematic character '%s' in key. Value of tag: '%s'" );
+    $MessageList[$i]->{'type'}                   = gettext( "Notes" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = gettext( "See also:" )  . ' __LINK_START__' . 'taginfo' . '__LINK_END__.';
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageList[$i]->{'link'}                   = "https://taginfo.openstreetmap.org/reports/characters_in_keys#problem";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
+    $MessageList[$i]->{'message'}                = gettext( "The tag '%s' includes whitespace character '%s' (=%#2x) in key. Value of tag: '%s'" );
+    $MessageList[$i]->{'type'}                   = gettext( "Notes" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = gettext( "See also:" )  . ' __LINK_START__' . 'taginfo' . '__LINK_END__.';
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageList[$i]->{'link'}                   = "https://taginfo.openstreetmap.org/reports/characters_in_keys#space";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
     return 0;
 }
 
