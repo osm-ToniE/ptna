@@ -40,7 +40,7 @@ my @well_known_other_route_types            = ( 'bicycle', 'mtb', 'hiking', 'roa
 my @well_known_network_types                = ( 'international', 'national', 'regional', 'local', 'icn', 'ncn', 'rcn', 'lcn', 'iwn', 'nwn', 'rwn', 'lwn', 'road' );
 my @well_known_other_types                  = ( 'restriction', 'enforcement', 'destination_sign' );
 
-my %transport_type_uses_way_type = ( 'train'     => { 'railway'   => [ 'rail',   'light_rail', 'tram', 'narrow_gauge', 'preserved',  'construction' ] },
+my %transport_type_uses_way_type = ( 'train'     => { 'railway'   => [ 'rail',   'light_rail', 'tram', 'narrow_gauge', 'preserved' ] },
                                      'subway'    => { 'railway'   => [ 'subway', 'light_rail', 'tram' ] },
                                      'tram'      => { 'railway'   => [ 'tram',   'rail',       'light_rail', 'narrow_gauge', 'subway' ] },
                                      'monorail'  => { 'railway'   => [ 'monorail'  ] },
