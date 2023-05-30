@@ -4636,6 +4636,7 @@ sub noAccessOnWay {
                  $way_tag_ref->{$vehicle_type} eq 'destination' ||
                  $way_tag_ref->{$vehicle_type} eq 'designated'  ||
                  $way_tag_ref->{$vehicle_type} eq 'permissive'  ||
+                 $way_tag_ref->{$vehicle_type} eq 'permit'      ||
                  $way_tag_ref->{$vehicle_type} eq 'official'       ) {
                 #
                 # fine for this specific type of vehicle (bus, train, subway, ...) == @supported_route_types
@@ -4686,7 +4687,7 @@ sub noAccessOnWay {
         } else {
             foreach my $access_type ( 'motorcar', 'motor_vehicle', 'vehicle', 'access' ) {
                 if ( $way_tag_ref->{$access_type} ) {
-                    if ( $way_tag_ref->{$access_type} =~ m/yes|permissive|official|destination|designated/ ) {
+                    if ( $way_tag_ref->{$access_type} =~ m/yes|permissive|permit|official|destination|designated/ ) {
                         last;
                     } else {
                         printf STDERR "noAccessOnWay() : no access for way %d (%s=%s)\n", $way_id, $access_type, $way_tag_ref->{$access_type}       if ( $debug );
