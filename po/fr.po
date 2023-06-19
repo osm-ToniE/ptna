@@ -11,8 +11,8 @@
 # Patchi Atwork <patchi.atwork@gmail.com>, 2020
 # R B, 2022
 # Noémie <nlehuby@zaclys.net>, 2022
-# Patchi, 2023
 # ToniE <osm-ToniE@web.de>, 2023
+# Patchi, 2023
 # 
 #, fuzzy
 msgid ""
@@ -21,7 +21,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
 "POT-Creation-Date: 2023-04-01 14:31+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: ToniE <osm-ToniE@web.de>, 2023\n"
+"Last-Translator: Patchi, 2023\n"
 "Language-Team: French (https://app.transifex.com/jungle-bus/teams/97874/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -726,16 +726,16 @@ msgid ""
 "PTv2 route: first node of way is not the first stop position of this route: "
 "%s versus %s"
 msgstr ""
-"Itinéraire PTv2 : le premier nœud de la voie n'est pas le premier arrêt du "
-"parcours : %s au lieu de %s"
+"Itinéraire PTv2 : le premier nœud de la voie n'est pas le premier arrêt de "
+"l'itinéraire : %s au lieu de %s"
 
 #, perl-format
 msgid ""
 "PTv2 route: consider removing the first way of the route from the relation, "
 "it is a way before the first stop position: %s"
 msgstr ""
-"Itinéraire PTv2 : la première voie du parcours précède le premier arrêt %s, "
-"il est recommandé de la retirer de cet itinéraire"
+"Itinéraire PTv2 : la première voie de l'itinéraire précède le premier arrêt "
+"%s, il est recommandé de la retirer de cet itinéraire"
 
 #, perl-format
 msgid ""
@@ -885,8 +885,8 @@ msgstr ""
 
 msgid "PTv2 route: 'name' has more than one '=>' but 'via' is not set"
 msgstr ""
-"Parcours PTv2 : le nom comporte plusieurs '=>' mais le tag 'via' n'est pas "
-"défini"
+"Itinéraire PTv2 : le nom comporte plusieurs '=>' mais le tag 'via' n'est pas"
+" défini"
 
 msgid "PTv2 route: 'name' has no via-parts but 'via' is set"
 msgstr ""
@@ -912,7 +912,7 @@ msgstr "Itinéraire PTv2 : utilise le mauvais type de voie (%s)"
 
 #, perl-format
 msgid "Route: using way type (%s)"
-msgstr "Itinéraire : le type de voie utilisé (%s)"
+msgstr "Itinéraire : utilise le type de voie (%s)"
 
 msgid ""
 "Route: restricted access ('bus'='school') to way for a route relation not "
@@ -1017,8 +1017,8 @@ msgstr[1] ""
 "Itinéraire : accès restreint des voies (%s) sans 'psv'='yes'. '%s'='yes', "
 "'%s'='designated', ou ..."
 msgstr[2] ""
-"Itinéraire : accès restreint des voies (%s) sans 'psv'='yes'. '%s'='yes', "
-"'%s'='designated', ou ..."
+"Itinéraire : accès restreint des voies (%s) sans 'psv'='yes', '%s'='yes' ou "
+"'%s'='designated'"
 
 #, perl-format
 msgid ""
@@ -1034,8 +1034,8 @@ msgstr[1] ""
 "Itinéraire : accès restreint aux barrières (%s) sans 'psv'='yes. '%s'='yes, "
 "'%s'='designated', ou ..."
 msgstr[2] ""
-"Itinéraire : accès restreint aux barrières (%s) sans 'psv'='yes. '%s'='yes, "
-"'%s'='designated', ou ..."
+"Itinéraire : accès restreint aux barrières (%s) sans 'psv'='yes', '%s'='yes'"
+" ou '%s'='designated'"
 
 msgid "Route: 'highway' = 'bus_stop' is set on way. Allowed on nodes only!"
 msgid_plural ""
@@ -1477,7 +1477,7 @@ msgid ""
 "vehicle."
 msgstr ""
 "Les données GTFS des tracés (shape) contiennent (uniquement) des "
-"informations à propos du parcours du véhicule."
+"informations à propos de l'itinéraire du véhicule."
 
 msgid ""
 "In addition, GTFS trip data provides useful information about stops: their "
@@ -1590,7 +1590,7 @@ msgid ""
 "the route)."
 msgstr ""
 "L'itinéraire fait partie de ce groupement d'itinéraires mais n'a pas "
-"d'attribut 'ref' (%s= numéro du parcours)"
+"d'attribut 'ref' (%s= numéro de l'itinéraire)"
 
 msgid "See section: \"Public Transport Lines without 'ref'\" of the analysis."
 msgstr "Voir section \"Lignes de transport public sans 'ref'\" de l'analyse"
@@ -2076,11 +2076,15 @@ msgstr ""
 " la colonne 'Notes'."
 
 msgid "Do not consider Route-Master and Route relations with empty 'network'."
-msgstr "Exclut les Lignes et Parcours sans 'network'."
+msgstr ""
+"Exclut les groupement d'itinéraires ('route_master') et itinéraires "
+"('route') sans 'network'."
 
 msgid ""
 "Do not consider Route-Master and Route relations with empty 'operator'."
-msgstr "Exclus les Lignes et Parcours sans 'operator'."
+msgstr ""
+"Exclut les groupement d'itinéraires ('route_master') et itinéraires "
+"('route') sans 'operator'."
 
 msgid "This sets the field separator in the CSV list of routes."
 msgstr "Ceci définit le champ séparateur dans la liste CSV des itinéraires."
