@@ -5,16 +5,17 @@
 # 
 # Translators:
 # Štefan Baebler <stefan.baebler@gmail.com>, 2023
+# ToniE <osm-ToniE@web.de>, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2022-12-29 18:59+0100\n"
+"POT-Creation-Date: 2023-06-20 13:04+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: Štefan Baebler <stefan.baebler@gmail.com>, 2023\n"
-"Language-Team: Slovenian (https://www.transifex.com/jungle-bus/teams/97874/sl/)\n"
+"Last-Translator: ToniE <osm-ToniE@web.de>, 2023\n"
+"Language-Team: Slovenian (https://app.transifex.com/jungle-bus/teams/97874/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -410,6 +411,22 @@ msgstr ""
 msgid ""
 "The tag 'line' (='%s') is reserved for 'power' = 'line' related tagging. For"
 " public transport 'route_master' and 'route' are used."
+msgstr ""
+
+#, perl-format
+msgid "The tag '%s' has an empty value."
+msgstr ""
+
+#, perl-format
+msgid ""
+"The tag '%s' includes whitespace character '%s' (=%#2x) in key. Value of "
+"tag: '%s'"
+msgstr ""
+
+#, perl-format
+msgid ""
+"The tag '%s' includes potentially problematic character '%s' in key. Value "
+"of tag: '%s'"
 msgstr ""
 
 msgid "Route-Master without Route(s)"
@@ -1123,6 +1140,9 @@ msgstr "Uredi v urejevalniku iD"
 msgid "Edit in JOSM"
 msgstr "Uredi v urejevalniku JOSM"
 
+msgid "Edit in Relatify"
+msgstr "Uredi v urejevalniku Relatify"
+
 msgid "Show relation on special map"
 msgstr ""
 
@@ -1383,6 +1403,12 @@ msgid ""
 " '%s'"
 msgstr ""
 
+msgid "Values of tags must not be empty."
+msgstr ""
+
+msgid "See also:"
+msgstr "Glej tudi:"
+
 msgid "Defines the language for the output."
 msgstr ""
 
@@ -1576,9 +1602,6 @@ msgstr ""
 
 msgid "assume and show compatibility with legacy bus-stops (aka: PTv1)"
 msgstr ""
-
-msgid "See also:"
-msgstr "Glej tudi:"
 
 msgid "Compatibility with well known tags"
 msgstr ""

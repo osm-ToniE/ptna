@@ -2895,6 +2895,11 @@ sub analyze_route_relation {
     #
     $relation_ptr->{'show_relation'} = 1;
 
+    #
+    # relation can be editied with "Relatify"
+    #
+    $relation_ptr->{'relatify_relation'} = 1;
+
     return $return_code;
 }
 
@@ -6646,6 +6651,11 @@ sub printRelationTemplate {
             my $josm_url     = sprintf( "<a href=\"http://127.0.0.1:8111/load_object?new_layer=false&amp;relation_members=true&amp;objects=r%s\" target=\"hiddenIframe\" title=\"%s\">JOSM</a>", $rel_id, html_escape(gettext("Edit in JOSM")) );
 
             $val = sprintf( "%s %s%s <small>(%s, %s", $image_url, $info_string, $relation_url, $id_url, $josm_url );
+
+            if ( $RELATIONS{$rel_id} && $RELATIONS{$rel_id}->{'relatify_relation'} ) {
+                my $relatify_url = sprintf( "<a href=\"https://relatify.monicz.dev/?relation=%s&load=1\" target=\"blank\" title=\"%s\">Relatify</a>", $rel_id, html_escape(gettext("Edit in Relatify")) );
+                $val .= sprintf( ", %s", $relatify_url );
+            }
 
             if ( $RELATIONS{$rel_id} && $RELATIONS{$rel_id}->{'show_relation'} ) {
                 my $langparam   = $opt_language? '&lang=' . uri_escape($opt_language) : '';
