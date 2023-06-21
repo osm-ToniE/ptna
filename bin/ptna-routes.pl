@@ -2826,6 +2826,13 @@ sub analyze_route_relation {
             $issues_string = gettext( "Skipping further analysis ..." );
             push( @{$relation_ptr->{'__issues__'}}, $issues_string );
         }
+        #
+        # PTv2 relation can be editied with "Relatify" (currently supports only 'bus' routes)
+        #
+        if ( $route_type eq 'bus' ) {
+            $relation_ptr->{'relatify_relation'} = 1;
+        }
+
     } else {
         unless ( $route_highway_index ) {
             $issues_string = gettext( "Route without Way(s)" );
@@ -2894,11 +2901,6 @@ sub analyze_route_relation {
     # relation shall be shown on PTNA's special map
     #
     $relation_ptr->{'show_relation'} = 1;
-
-    #
-    # relation can be editied with "Relatify"
-    #
-    $relation_ptr->{'relatify_relation'} = 1;
 
     return $return_code;
 }
