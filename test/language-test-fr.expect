@@ -72,7 +72,7 @@
         <hr />
         <h1 id="hints">1 Astuces</h1>
         <p>
-            Le tableau sera mis à jour quand les résultats de l'analyse auront changé.
+            Les données seront mises à jour quand le résultat de l'analyse aura changé.
         </p>
         <p>
             Une explication sur chaque erreur peut être trouvée dans la <a href="/fr/index.php#messages">documentation</a>.
