@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2023-06-20 13:04+0200\n"
+"POT-Creation-Date: 2023-06-22 13:12+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2023\n"
 "Language-Team: French (https://app.transifex.com/jungle-bus/teams/97874/fr/)\n"
@@ -695,6 +695,13 @@ msgid ""
 msgstr ""
 "Itinéraire PTv2 : attribut 'role' = '%s' et %s : utilisation de "
 "'public_transport' = 'stop_position' recommandée"
+
+#, perl-format
+msgid ""
+"PTv2 route: 'role' = '%s' and 'public_transport' is not set but '%s' is set"
+msgstr ""
+"Itinéraire PTv2 : attribut 'role'='%s' et l'attribut 'public_transport' "
+"n'est pas défini mais l'attribut '%s' est défini"
 
 #, perl-format
 msgid "PTv2 route: 'role' = '%s' but 'public_transport' is not set"

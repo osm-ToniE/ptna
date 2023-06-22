@@ -39,6 +39,7 @@ my @supported_route_types                   = ( 'train', 'subway', 'light_rail',
 my @well_known_other_route_types            = ( 'bicycle', 'mtb', 'hiking', 'road', 'foot', 'inline_skates', 'canoe', 'detour', 'fitness_trail', 'horse', 'motorboat', 'nordic_walking', 'pipeline', 'piste', 'power', 'running', 'ski', 'snowmobile', 'cycling' , 'historic', 'motorcycle', 'riding' );
 my @well_known_network_types                = ( 'international', 'national', 'regional', 'local', 'icn', 'ncn', 'rcn', 'lcn', 'iwn', 'nwn', 'rwn', 'lwn', 'road' );
 my @well_known_other_types                  = ( 'restriction', 'enforcement', 'destination_sign' );
+my @lifecycle_prefixes                      = ( 'proposed', 'planned', 'construction', 'disused', 'abandoned', 'ruins', 'demolished', 'razed', 'removed', 'destroyed', 'was' );
 
 my %transport_type_uses_way_type = ( 'train'     => { 'railway'   => [ 'rail',   'light_rail', 'tram', 'narrow_gauge', 'preserved' ] },
                                      'subway'    => { 'railway'   => [ 'subway', 'light_rail', 'tram' ] },
@@ -3272,14 +3273,38 @@ sub analyze_ptv2_route_relation {
                                     $role_mismatch_found++;
                                 }
                             } else {
-                                $issues_string = gettext( "PTv2 route: 'role' = '%s' but 'public_transport' is not set" );
-                                $help_string   = sprintf( $issues_string, $node_ref->{'role'} );
+                                my $with_lifecycle_prefix= '';
+                                foreach my $lcp ( @lifecycle_prefixes ) {
+                                    if ( $NODES{$node_ref->{'ref'}}->{'tag'}->{$lcp.':public_transport'} ) {
+                                        $with_lifecycle_prefix = $lcp . ':public_transport';
+                                        last;
+                                    }
+                                }
+                                if ( $with_lifecycle_prefix) {
+                                    $issues_string = gettext( "PTv2 route: 'role' = '%s' and 'public_transport' is not set but '%s' is set" );
+                                    $help_string   = sprintf( $issues_string, $node_ref->{'role'}, $with_lifecycle_prefix);
+                                } else {
+                                    $issues_string = gettext( "PTv2 route: 'role' = '%s' but 'public_transport' is not set" );
+                                    $help_string   = sprintf( $issues_string, $node_ref->{'role'} );
+                                }
                                 $role_mismatch{$help_string}->{$node_ref->{'ref'}} = 1;
                                 $role_mismatch_found++;
                             }
                         } else {
-                            $issues_string = gettext( "PTv2 route: 'role' = '%s' but 'public_transport' is not set" );
-                            $help_string   = sprintf( $issues_string, $node_ref->{'role'} );
+                            my $with_lifecycle_prefix= '';
+                            foreach my $lcp ( @lifecycle_prefixes ) {
+                                if ( $NODES{$node_ref->{'ref'}}->{'tag'}->{$lcp.':public_transport'} ) {
+                                    $with_lifecycle_prefix = $lcp . ':public_transport';
+                                    last;
+                                }
+                            }
+                            if ( $with_lifecycle_prefix) {
+                                $issues_string = gettext( "PTv2 route: 'role' = '%s' and 'public_transport' is not set but '%s' is set" );
+                                $help_string   = sprintf( $issues_string, $node_ref->{'role'}, $with_lifecycle_prefix);
+                            } else {
+                                $issues_string = gettext( "PTv2 route: 'role' = '%s' but 'public_transport' is not set" );
+                                $help_string   = sprintf( $issues_string, $node_ref->{'role'} );
+                            }
                             $role_mismatch{$help_string}->{$node_ref->{'ref'}} = 1;
                             $role_mismatch_found++;
                         }
@@ -3327,14 +3352,38 @@ sub analyze_ptv2_route_relation {
                                     $role_mismatch_found++;
                                 }
                             } else {
-                                $issues_string = gettext( "PTv2 route: 'role' = '%s' but 'public_transport' is not set" );
-                                $help_string   = sprintf( $issues_string, $node_ref->{'role'} );
+                                my $with_lifecycle_prefix= '';
+                                foreach my $lcp ( @lifecycle_prefixes ) {
+                                    if ( $NODES{$node_ref->{'ref'}}->{'tag'}->{$lcp.':public_transport'} ) {
+                                        $with_lifecycle_prefix = $lcp . ':public_transport';
+                                        last;
+                                    }
+                                }
+                                if ( $with_lifecycle_prefix) {
+                                    $issues_string = gettext( "PTv2 route: 'role' = '%s' and 'public_transport' is not set but '%s' is set" );
+                                    $help_string   = sprintf( $issues_string, $node_ref->{'role'}, $with_lifecycle_prefix);
+                                } else {
+                                    $issues_string = gettext( "PTv2 route: 'role' = '%s' but 'public_transport' is not set" );
+                                    $help_string   = sprintf( $issues_string, $node_ref->{'role'} );
+                                }
                                 $role_mismatch{$help_string}->{$node_ref->{'ref'}} = 1;
                                 $role_mismatch_found++;
                             }
                         } else {
-                            $issues_string = gettext( "PTv2 route: 'role' = '%s' but 'public_transport' is not set" );
-                            $help_string   = sprintf( $issues_string, $node_ref->{'role'} );
+                            my $with_lifecycle_prefix= '';
+                            foreach my $lcp ( @lifecycle_prefixes ) {
+                                if ( $NODES{$node_ref->{'ref'}}->{'tag'}->{$lcp.':public_transport'} ) {
+                                    $with_lifecycle_prefix = $lcp . ':public_transport';
+                                    last;
+                                }
+                            }
+                            if ( $with_lifecycle_prefix) {
+                                $issues_string = gettext( "PTv2 route: 'role' = '%s' and 'public_transport' is not set but '%s' is set" );
+                                $help_string   = sprintf( $issues_string, $node_ref->{'role'}, $with_lifecycle_prefix);
+                            } else {
+                                $issues_string = gettext( "PTv2 route: 'role' = '%s' but 'public_transport' is not set" );
+                                $help_string   = sprintf( $issues_string, $node_ref->{'role'} );
+                            }
                             $role_mismatch{$help_string}->{$node_ref->{'ref'}} = 1;
                             $role_mismatch_found++;
                         }
@@ -3590,8 +3639,20 @@ sub analyze_ptv2_route_relation {
                         $role_mismatch{$help_string}->{$highway_ref->{'ref'}} = 1;
                         $role_mismatch_found++;
                     } else {
-                        $issues_string = gettext( "PTv2 route: 'role' = '%s' but 'public_transport' is not set" );
-                        $help_string   = sprintf( $issues_string, $highway_ref->{'role'} );
+                        my $with_lifecycle_prefix= '';
+                        foreach my $lcp ( @lifecycle_prefixes ) {
+                            if ( $WAYS{$highway_ref->{'ref'}}->{'tag'}->{$lcp.':public_transport'} ) {
+                                $with_lifecycle_prefix = $lcp . ':public_transport';
+                                last;
+                            }
+                        }
+                        if ( $with_lifecycle_prefix) {
+                            $issues_string = gettext( "PTv2 route: 'role' = '%s' and 'public_transport' is not set but '%s' is set" );
+                            $help_string   = sprintf( $issues_string, $highway_ref->{'role'}, $with_lifecycle_prefix);
+                        } else {
+                            $issues_string = gettext( "PTv2 route: 'role' = '%s' but 'public_transport' is not set" );
+                            $help_string   = sprintf( $issues_string, $highway_ref->{'role'} );
+                        }
                         $role_mismatch{$help_string}->{$highway_ref->{'ref'}} = 1;
                         $role_mismatch_found++;
                     }
@@ -3667,8 +3728,20 @@ sub analyze_ptv2_route_relation {
                         $role_mismatch{$help_string}->{$rel_ref->{'ref'}} = 1;
                         $role_mismatch_found++;
                     } else {
-                        $issues_string = gettext( "PTv2 route: 'role' = '%s' but 'public_transport' is not set" );
-                        $help_string   = sprintf( $issues_string, $rel_ref->{'role'} );
+                        my $with_lifecycle_prefix= '';
+                        foreach my $lcp ( @lifecycle_prefixes ) {
+                            if ( $RELATIONS{$rel_ref->{'ref'}}->{'tag'}->{$lcp.':public_transport'} ) {
+                                $with_lifecycle_prefix = $lcp . ':public_transport';
+                                last;
+                            }
+                        }
+                        if ( $with_lifecycle_prefix) {
+                            $issues_string = gettext( "PTv2 route: 'role' = '%s' and 'public_transport' is not set but '%s' is set" );
+                            $help_string   = sprintf( $issues_string, $rel_ref->{'role'}, $with_lifecycle_prefix);
+                        } else {
+                            $issues_string = gettext( "PTv2 route: 'role' = '%s' but 'public_transport' is not set" );
+                            $help_string   = sprintf( $issues_string, $rel_ref->{'role'} );
+                        }
                         $role_mismatch{$help_string}->{$rel_ref->{'ref'}} = 1;
                         $role_mismatch_found++;
                     }
