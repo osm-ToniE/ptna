@@ -6131,9 +6131,11 @@ sub printHintUsedNetworks {
     if ( scalar @relations_of_network > 0 ) {
         printHeader( gettext("Considered 'network'-Values"), 2, 'considerednetworks' );
 
-        push( @HTML_main, "<p>\n" );
-        push( @HTML_main, gettext("This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.") );
-        push( @HTML_main, "\n</p>\n" );
+        if ( $network_long_regex || $network_short_regex ) {
+            push( @HTML_main, "<p>\n" );
+            push( @HTML_main, gettext("This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.") );
+            push( @HTML_main, "\n</p>\n" );
+        }
 
         printTableInitialization( 'network', 'number', 'relations' );
         printTableHeader( 'number' => 'number' );
