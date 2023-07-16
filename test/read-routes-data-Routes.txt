@@ -161,6 +161,7 @@ $ reserved character
 
 -
 
+====== Level 6 with trailing ======
 
 
 </pre>

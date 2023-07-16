@@ -100,6 +100,7 @@ sub ReadRoutes {
                                 $hashref->{'header'}        =  $2;
                                 $hashref->{'level'}         =  0;
                                 $hashref->{'header'}        =~ s/^\s*//;
+                                $hashref->{'header'}        =~ s/[\s=]*$//;
                                 $hashref->{'level'}++          while ( $hashref->{'level_string'} =~ m/=/g );
                                 $hashref->{'level'}         =  6  if ( $hashref->{'level'} > 6 );
                                 delete($hashref->{'level_string'});
