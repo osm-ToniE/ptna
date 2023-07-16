@@ -186,9 +186,6 @@ Examples for an entry in the CSV file of the form: 'ref;type;Comment;From;To;Ope
         <hr />
         <h1 id="networkdetails">4 Details for &#039;network&#039;-Values</h1>
         <h2 id="considerednetworks">4.1 Considered &#039;network&#039;-Values</h2>
-<p>
-This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.
-</p>
         <table class="oepnvtable js-sort-table">
             <thead>
                 <tr class="tableheaderrow"><th class="network">&#x21C5;Network (network=)</th><th class="number js-sort-number">&#x21C5;Number</th><th class="relations">&#x21C5;Relations</th></tr>

@@ -239,9 +239,6 @@ text inside table is now supported
         <hr />
         <h1 id="networkdetails">3 Détails des valeurs pour la balise &#039;network&#039;</h1>
         <h2 id="considerednetworks">3.1 Valeurs de l&#039;attribut &#039;network&#039; prises en compte</h2>
-<p>
-Cette section liste les valeurs de l'attribut 'network' qui ont été prises en compte car elles sont identiques aux valeurs ci-dessus.
-</p>
         <table class="oepnvtable js-sort-table">
             <thead>
                 <tr class="tableheaderrow"><th class="network">&#x21C5;Réseau (network=)</th><th class="number js-sort-number">&#x21C5;Nombre</th><th class="relations">&#x21C5;Relations</th></tr>
