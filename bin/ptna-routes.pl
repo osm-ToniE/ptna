@@ -6604,7 +6604,7 @@ sub printTableSubHeader {
     $info =~ s/\"/_/g;
 
     if ( $no_of_columns > 1 && $ref_or_list_text ne '' && $ref_text ) {
-        push( @HTML_main, sprintf( "%16s<tr %sdata-info=\"%s\" data-ref=\"%s\" class=\"sketchline\"><td class=\"sketch\">%s</td><td class=\"csvinfo\" colspan=\"%d\">%s</td></tr>\n", ' ', $id_string, $info, $ref_or_list_text, $ref_text, $no_of_columns-1, $csv_text ) );
+        push( @HTML_main, sprintf( "%16s<tr %sdata-info=\"%s\" data-ref=\"%s\" class=\"sketchline\"><td class=\"sketch\">%s</td><td class=\"csvinfo\" colspan=\"%d\">%s</td></tr>\n", ' ', $id_string, $info, html_escape($ref_or_list_text), $ref_text, $no_of_columns-1, $csv_text ) );
     }
 }
 
@@ -6872,7 +6872,7 @@ sub printSketchLineTemplate {
         $a_end   = '</a>';
     }
 
-    $text = sprintf( "%s%s%s%s%s%s%s", $outer_span_begin, $a_begin, $inner_span_begin, $ref, $inner_span_end, $a_end, $outer_span_end );
+    $text = sprintf( "%s%s%s%s%s%s%s", $outer_span_begin, $a_begin, $inner_span_begin, html_escape($ref), $inner_span_end, $a_end, $outer_span_end );
 
     return $text;
 }
