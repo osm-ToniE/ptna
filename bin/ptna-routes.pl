@@ -2370,7 +2370,7 @@ sub analyze_route_environment {
                 my $help_val   = '';
                 my $help_pval  = '';
 
-                foreach my $gtfs_tag ( 'gtfs:trip_id', 'gtfs:trip_id:sample', 'gtfs:trip_id:like', 'gtfs:shape_id:sample' ) {
+                foreach my $gtfs_tag ( 'gtfs:trip_id', 'gtfs:trip_id:sample', 'gtfs:trip_id:like' ) {
                     %gtfs_ident = ();
                     %gtfs_match = ();
 
