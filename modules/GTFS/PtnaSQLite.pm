@@ -179,6 +179,10 @@ sub getGtfsTripIdHtmlTag {
 
             my @TripIdStatus = _getTripIdStatus( $gtfs_feed, $release_date, $trip_id );
 
+            #if ( $trip_id eq '101') {
+            #    printf STDERR "getGtfsTripIdHtmlTag(%s,%s,%s) status : '%s'\n", $gtfs_feed, $release_date, $trip_id, join(' - ',@TripIdStatus);
+            #}
+
             if ( $TripIdStatus[0] eq 'valid' ) {
                 $gtfs_html_tag = sprintf( "<a class=\"gtfs-datevalid\" href=\"/gtfs/%s/single-trip.php?feed=%s&release_date=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Trip-Id: %s : %s\">GTFS</a>",
                                           uri_escape($gtfs_country),
@@ -401,7 +405,7 @@ sub _AttachToGtfsSqliteDb {
 
                     $feed_of_open_db_file{$db_file} = $name_prefix;
 
-                    $list_separator{$name_prefix} = '\|';
+                    $list_separator{$name_prefix} = '|';
                     my $sth = $db_handle{$name_prefix}->prepare( "SELECT * FROM ptna LIMIT 1;" );
                     $sth->execute();
                     my $hash_ref = $sth->fetchrow_hashref();
@@ -494,6 +498,10 @@ sub _getTripIdStatus {
 
     if ( $name_prefix && $trip_id && $db_handle{$name_prefix} ) {
 
+        #if ( $trip_id eq '101') {
+        #    printf STDERR "_getTripIdStatus(%s,%s,%s)\n", $feed, $release_date, $trip_id;
+        #}
+
         my ( $min_start, $max_end ) = _getStartEndDateOfIdenticalTrips( $feed, $release_date, $trip_id );
 
         if ( $min_start != 20500101 && $max_end != 19700101 ) {
@@ -506,6 +514,10 @@ sub _getTripIdStatus {
             }
         }
     }
+
+    #if ( $trip_id eq '101') {
+    #    printf STDERR "_getTripIdStatus(%s,%s,%s) = ''\n", $feed, $release_date, $trip_id;
+    #}
 
     return ( '' );
 }
@@ -597,6 +609,10 @@ sub _getStartEndDateOfIdenticalTrips {
 
     if ( $name_prefix && $trip_id && $db_handle{$name_prefix} ) {
 
+        #if ( $trip_id eq '101') {
+        #    printf STDERR "_getStartEndDateOfIdenticalTrips(%s,%s,%s)\n", $feed, $release_date, $trip_id;
+        #}
+
         my $representative_trip_id = '';
 
         my $sth =  $db_handle{$name_prefix}->prepare( "SELECT name FROM sqlite_master WHERE type='table' AND name='ptna_trips';" );
@@ -612,6 +628,9 @@ sub _getStartEndDateOfIdenticalTrips {
         if ( $db_has_ptna_trips ) {
 
             for ( my $i = 0; $i < 2 && $representative_trip_id eq ''; $i++ ) {
+                #if ( $trip_id eq '101') {
+                #    printf STDERR "_getStartEndDateOfIdenticalTrips(%s,%s,%s) i = %d\n", $feed, $release_date, $trip_id, $i;
+                #}
                 if ( $i == 0 ) {
                     $sth = $db_handle{$name_prefix}->prepare( "SELECT DISTINCT *
                                                                 FROM            ptna_trips
@@ -623,6 +642,9 @@ sub _getStartEndDateOfIdenticalTrips {
                                                                 WHERE           list_trip_ids LIKE ? OR
                                                                                 list_trip_ids LIKE ? OR
                                                                                 list_trip_ids LIKE ?"   );
+                    #if ( $trip_id eq '101') {
+                    #    printf STDERR "_getStartEndDateOfIdenticalTrips(%s,%s,%s) sql params = '%s, %s, %s'\n", $feed, $release_date, $trip_id, $trip_id.$list_separator{$name_prefix}.'%', '%'.$list_separator{$name_prefix}.$trip_id.$list_separator{$name_prefix}.'%', '%'.$list_separator{$name_prefix}.$trip_id;
+                    #}
                     $sth->execute( $trip_id.$list_separator{$name_prefix}.'%', '%'.$list_separator{$name_prefix}.$trip_id.$list_separator{$name_prefix}.'%', '%'.$list_separator{$name_prefix}.$trip_id );
                 }
 
@@ -630,8 +652,12 @@ sub _getStartEndDateOfIdenticalTrips {
                     if ( $hash_ref->{'trip_id'} )  {
                         $representative_trip_id =$hash_ref->{'trip_id'};
                     }
+                    #if ( $trip_id eq '101') {
+                    #    printf STDERR "_getStartEndDateOfIdenticalTrips(%s,%s,%s) representative_trip_id = '%s'\n", $feed, $release_date, $trip_id, $representative_trip_id;
+                    #}
                     if ( $hash_ref->{'list_service_ids'} ) {
                         $has_list_service_ids  = 1;
+                        my $this_list_separator = $list_separator{$name_prefix} eq '|' ? '\\'.$list_separator{$name_prefix} : $list_separator{$name_prefix};
                         map { $service_ids{$_} = 1; } split( $list_separator{$name_prefix}, $hash_ref->{'list_service_ids'} );
 
                         $where_clause = 'service_id=' . join( '', map{ '? OR service_id=' } keys ( %service_ids ) );
