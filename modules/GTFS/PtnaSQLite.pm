@@ -179,7 +179,7 @@ sub getGtfsTripIdHtmlTag {
 
             my @TripIdStatus = _getTripIdStatus( $gtfs_feed, $release_date, $trip_id );
 
-            #if ( $trip_id eq '101') {
+            #if ( $trip_id =~ m/1-U1-G-013-1/ ) {
             #    printf STDERR "getGtfsTripIdHtmlTag(%s,%s,%s) status : '%s'\n", $gtfs_feed, $release_date, $trip_id, join(' - ',@TripIdStatus);
             #}
 
@@ -498,7 +498,7 @@ sub _getTripIdStatus {
 
     if ( $name_prefix && $trip_id && $db_handle{$name_prefix} ) {
 
-        #if ( $trip_id eq '101') {
+        #if ( $trip_id =~ m/1-U1-G-013-1/ ) {
         #    printf STDERR "_getTripIdStatus(%s,%s,%s)\n", $feed, $release_date, $trip_id;
         #}
 
@@ -515,7 +515,7 @@ sub _getTripIdStatus {
         }
     }
 
-    #if ( $trip_id eq '101') {
+    #if ( $trip_id =~ m/1-U1-G-013-1/ ) {
     #    printf STDERR "_getTripIdStatus(%s,%s,%s) = ''\n", $feed, $release_date, $trip_id;
     #}
 
@@ -609,7 +609,7 @@ sub _getStartEndDateOfIdenticalTrips {
 
     if ( $name_prefix && $trip_id && $db_handle{$name_prefix} ) {
 
-        #if ( $trip_id eq '101') {
+        #if ( $trip_id =~ m/1-U1-G-013-1/ ) {
         #    printf STDERR "_getStartEndDateOfIdenticalTrips(%s,%s,%s)\n", $feed, $release_date, $trip_id;
         #}
 
@@ -628,7 +628,7 @@ sub _getStartEndDateOfIdenticalTrips {
         if ( $db_has_ptna_trips ) {
 
             for ( my $i = 0; $i < 2 && $representative_trip_id eq ''; $i++ ) {
-                #if ( $trip_id eq '101') {
+                #if ( $trip_id =~ m/1-U1-G-013-1/ ) {
                 #    printf STDERR "_getStartEndDateOfIdenticalTrips(%s,%s,%s) i = %d\n", $feed, $release_date, $trip_id, $i;
                 #}
                 if ( $i == 0 ) {
@@ -642,7 +642,7 @@ sub _getStartEndDateOfIdenticalTrips {
                                                                 WHERE           list_trip_ids LIKE ? OR
                                                                                 list_trip_ids LIKE ? OR
                                                                                 list_trip_ids LIKE ?"   );
-                    #if ( $trip_id eq '101') {
+                    #if ( $trip_id =~ m/1-U1-G-013-1/ ) {
                     #    printf STDERR "_getStartEndDateOfIdenticalTrips(%s,%s,%s) sql params = '%s, %s, %s'\n", $feed, $release_date, $trip_id, $trip_id.$list_separator{$name_prefix}.'%', '%'.$list_separator{$name_prefix}.$trip_id.$list_separator{$name_prefix}.'%', '%'.$list_separator{$name_prefix}.$trip_id;
                     #}
                     $sth->execute( $trip_id.$list_separator{$name_prefix}.'%', '%'.$list_separator{$name_prefix}.$trip_id.$list_separator{$name_prefix}.'%', '%'.$list_separator{$name_prefix}.$trip_id );
@@ -652,13 +652,13 @@ sub _getStartEndDateOfIdenticalTrips {
                     if ( $hash_ref->{'trip_id'} )  {
                         $representative_trip_id =$hash_ref->{'trip_id'};
                     }
-                    #if ( $trip_id eq '101') {
+                    #if ( $trip_id =~ m/1-U1-G-013-1/ ) {
                     #    printf STDERR "_getStartEndDateOfIdenticalTrips(%s,%s,%s) representative_trip_id = '%s'\n", $feed, $release_date, $trip_id, $representative_trip_id;
                     #}
                     if ( $hash_ref->{'list_service_ids'} ) {
                         $has_list_service_ids  = 1;
                         my $this_list_separator = $list_separator{$name_prefix} eq '|' ? '\\'.$list_separator{$name_prefix} : $list_separator{$name_prefix};
-                        map { $service_ids{$_} = 1; } split( $list_separator{$name_prefix}, $hash_ref->{'list_service_ids'} );
+                        map { $service_ids{$_} = 1; } split( $this_list_separator, $hash_ref->{'list_service_ids'} );
 
                         $where_clause = 'service_id=' . join( '', map{ '? OR service_id=' } keys ( %service_ids ) );
                         $where_clause =~ s/ OR service_id=$//;
@@ -701,6 +701,9 @@ sub _getStartEndDateOfIdenticalTrips {
         }
     }
 
+    #if ( $trip_id =~ m/1-U1-G-013-1/ ) {
+    #    printf STDERR "_getStartEndDateOfIdenticalTrips(%s,%s,%s) returns min_start_date = '%s', max_end_date = '%s'\n", $feed, $release_date, $trip_id, $min_start_date, $min_start_date;
+    #}
     return ( $min_start_date, $max_end_date );
 }
 
