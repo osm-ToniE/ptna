@@ -388,8 +388,8 @@ sub _AttachToGtfsSqliteDb {
             }
         }
 
-        if ( -f $db_file ) {
-            #printf STDERR "_AttachToGtfsSqliteDb( %s, %s ) attaches to %s\n", $feed, $release_date, $db_file;
+        if ( -f $db_file && -s $db_file ) {
+            printf STDERR "_AttachToGtfsSqliteDb( %s, %s ) attaches to %s\n", $feed, $release_date, $db_file;
 
             if ( !$db_handle{$name_prefix} ) {
                 if ( $feed_of_open_db_file{$db_file} ) {
