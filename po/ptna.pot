@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2023-10-29 14:32+0100\n"
+"POT-Creation-Date: 2023-10-31 15:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -429,6 +429,12 @@ msgstr ""
 
 msgid "Route-Master with Node(s)"
 msgstr ""
+
+#, perl-format
+msgid "Route-Master has %d member with 'role' being set"
+msgid_plural "Route-Master has %d members with 'role' being set"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "'public_transport:version' is not set to '2'"
 msgstr ""

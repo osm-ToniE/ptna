@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2023-06-22 13:12+0200\n"
+"POT-Creation-Date: 2023-10-31 15:19+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2023\n"
 "Language-Team: German (https://app.transifex.com/jungle-bus/teams/97874/de/)\n"
@@ -499,6 +499,12 @@ msgstr "Route-Master mit Way(s)"
 
 msgid "Route-Master with Node(s)"
 msgstr "Route-Master mit Node(s)"
+
+#, perl-format
+msgid "Route-Master has %d member with 'role' being set"
+msgid_plural "Route-Master has %d members with 'role' being set"
+msgstr[0] "Route-Master hat %d Element, bei dem 'role' gesetzt ist"
+msgstr[1] "Route-Master hat %d Elemente, bei denen 'role' gesetzt ist"
 
 msgid "'public_transport:version' is not set to '2'"
 msgstr "'public_transport:version' ist nicht '2'"

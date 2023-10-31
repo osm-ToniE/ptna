@@ -2759,6 +2759,7 @@ sub analyze_route_master_relation {
     my $way_index                      = scalar( @{$relation_ptr->{'way'}} );
     my $route_highway_index            = scalar( @{$relation_ptr->{'route_highway'}} );
     my $node_index                     = scalar( @{$relation_ptr->{'node'}} );
+    my $members_with_role              = 0;
 
     unless ( $route_master_relation_index ) {
         $issues_string = gettext( "Route-Master without Route(s)" );
@@ -2779,6 +2780,14 @@ sub analyze_route_master_relation {
     if ( $node_index ) {
         $issues_string = gettext( "Route-Master with Node(s)" );
         push( @{$relation_ptr->{'__issues__'}}, $issues_string );
+    }
+    foreach my $member ( @{$relation_ptr->{'members'}} )
+    {
+        $members_with_role++    if ( $member->{'role'} );
+    }
+    if ( $members_with_role ) {
+        $issues_string = ngettext( "Route-Master has %d member with 'role' being set", "Route-Master has %d members with 'role' being set", $members_with_role );
+        push( @{$relation_ptr->{'__issues__'}}, sprintf($issues_string,$members_with_role) );
     }
     if ( $relation_ptr->{'tag'}->{'public_transport:version'} ) {
         if ( $relation_ptr->{'tag'}->{'public_transport:version'} !~ m/^2$/ ) {
