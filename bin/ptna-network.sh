@@ -109,6 +109,7 @@ DIFF_HTML_FILE="$PREFIX-Analysis.diff.html"
 SAVE_FILE="$PREFIX-Analysis.html.save"
 DETAILS_FILE="$PREFIX-Analysis-details.txt"
 STATISTICS_DB="$PREFIX-Analysis-statistics.db"
+SQ_OPTIONS="-init /dev/null"
 
 if [ "$OVERPASS_REUSE_ID" ]
 then
@@ -134,22 +135,22 @@ then
     echo $(date "+%Y-%m-%d %H:%M:%S") "Init Statistics DB $WORK_LOC/$STATISTICS_DB"
 
     ptna_columns="id INTEGER PRIMARY KEY AUTOINCREMENT, start INTEGER DEFAULT 0, stop INTEGER DEFAULT 0, options TEXT DEFAULT ''"
-    sqlite3 $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS ptna ($ptna_columns);"
+    sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS ptna ($ptna_columns);"
 
     download_columns="id INTEGER PRIMARY KEY, start INTEGER DEFAULT 0, stop INTEGER DEFAULT 0, wget_ret INTEGER DEFAULT 0, success INTEGER DEFAULT 0, attempt INTEGER DEFAULT 1, size INTEGER DEFAULT 0, osm_data INTEGER DEFAULT 0"
-    sqlite3 $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS download ($download_columns);"
+    sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS download ($download_columns);"
 
     routes_columns="id INTEGER PRIMARY KEY, start INTEGER DEFAULT 0, stop INTEGER DEFAULT 0, ret INTEGER DEFAULT 0, modified INTEGER DEFAULT 0, location TEXT DEFAULT '', size INTEGER DEFAULT 0"
-    sqlite3 $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS routes ($routes_columns);"
+    sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS routes ($routes_columns);"
 
     analysis_columns="id INTEGER PRIMARY KEY, start INTEGER DEFAULT 0, stop INTEGER DEFAULT 0, size INTEGER DEFAULT 0"
-    sqlite3 $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS analysis ($analysis_columns);"
+    sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS analysis ($analysis_columns);"
 
     updateresult_columns="id INTEGER PRIMARY KEY, start INTEGER DEFAULT 0, stop INTEGER DEFAULT 0, updated INTEGER DEFAULT 0, diff_lines INTEGER DEFAULT 0, html_changes INTEGER DEFAULT 0"
-    sqlite3 $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS updateresult ($updateresult_columns);"
+    sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS updateresult ($updateresult_columns);"
 
-    sqlite3 $WORK_LOC/$STATISTICS_DB "INSERT INTO ptna (start,options) VALUES ($PTNA_NETWORK_CALL_TIME,'$PTNA_NETWORK_OPTIONS');"
-    PTNA_NETWORK_DB_ID=$(sqlite3 $WORK_LOC/$STATISTICS_DB "SELECT seq FROM sqlite_sequence WHERE name='ptna';")
+    sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO ptna (start,options) VALUES ($PTNA_NETWORK_CALL_TIME,'$PTNA_NETWORK_OPTIONS');"
+    PTNA_NETWORK_DB_ID=$(sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "SELECT seq FROM sqlite_sequence WHERE name='ptna';")
     echo $(date "+%Y-%m-%d %H:%M:%S") "Statistic entries with id = $PTNA_NETWORK_DB_ID"
 fi
 
@@ -225,7 +226,7 @@ then
        else
             echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' exists and is older than '$WORK_LOC/$HTML_FILE', no further analysis required, terminating"
             PTNA_NETWORK_STOP_TIME=$(date --utc "+%s")
-            sqlite3 $WORK_LOC/$STATISTICS_DB "UPDATE ptna SET stop=$(date --utc "+%s") WHERE id=$PTNA_NETWORK_DB_ID;"
+            sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "UPDATE ptna SET stop=$(date --utc "+%s") WHERE id=$PTNA_NETWORK_DB_ID;"
             exit 0
         fi
     else
@@ -321,16 +322,16 @@ then
                             then
                                 echo $(date "+%Y-%m-%d %H:%M:%S") "OSM ($OSM_BASE) data is quite old : older than 6 hours"
                                 echo $(date "+%Y-%m-%d %H:%M:%S") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
-                                sqlite3 $WORK_LOC/$STATISTICS_DB "INSERT INTO download (call_time,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_CALL_TIME,$start,$stop,$wget_ret,0,1,$fsize,$OSM_BASE_SEC);"
+                                sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO download (call_time,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_CALL_TIME,$start,$stop,$wget_ret,0,1,$fsize,$OSM_BASE_SEC);"
                                 rm    $OSM_XML_FILE_ABSOLUTE.part.$$
                                 touch $OSM_XML_FILE_ABSOLUTE.part.$$
                             else
-                                sqlite3 $WORK_LOC/$STATISTICS_DB "INSERT INTO download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,1,1,$fsize,$OSM_BASE_SEC);"
+                                sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,1,1,$fsize,$OSM_BASE_SEC);"
                             fi
                         fi
                     else
                         echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' is quite small: error during download?"
-                        sqlite3 $WORK_LOC/$STATISTICS_DB "INSERT INTO download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,0,1,$fsize,0);"
+                        sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,0,1,$fsize,0);"
                         cat $OSM_XML_FILE_ABSOLUTE.part.$$
                         echo $(date "+%Y-%m-%d %H:%M:%S") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
                         rm    $OSM_XML_FILE_ABSOLUTE.part.$$
@@ -338,7 +339,7 @@ then
                     fi
                 else
                     echo $(date "+%Y-%m-%d %H:%M:%S") "Failure for wget for '$PREFIX'"
-                    sqlite3 $WORK_LOC/$STATISTICS_DB "INSERT INTO download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,0,1,$fsize,0);"
+                    sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,0,1,$fsize,0);"
                 fi
 
                 fsize=$(stat -c '%s' $OSM_XML_FILE_ABSOLUTE.part.$$)
@@ -376,16 +377,16 @@ then
                                 then
                                     echo $(date "+%Y-%m-%d %H:%M:%S") "OSM ($OSM_BASE) data is quite old : older than 6 hours"
                                     echo $(date "+%Y-%m-%d %H:%M:%S") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
-                                    sqlite3 $WORK_LOC/$STATISTICS_DB "INSERT INTO download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,0,2,$fsize,$OSM_BASE_SEC);"
+                                    sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,0,2,$fsize,$OSM_BASE_SEC);"
                                     rm    $OSM_XML_FILE_ABSOLUTE.part.$$
                                     touch $OSM_XML_FILE_ABSOLUTE.part.$$
                                 else
-                                    sqlite3 $WORK_LOC/$STATISTICS_DB "INSERT INTO download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,1,1,$fsize,$OSM_BASE_SEC);"
+                                    sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,1,1,$fsize,$OSM_BASE_SEC);"
                                 fi
                             fi
                         else
                             echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' is quite small: error during download?"
-                            sqlite3 $WORK_LOC/$STATISTICS_DB "INSERT INTO download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,0,1,$fsize,0);"
+                            sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,0,1,$fsize,0);"
                             cat $OSM_XML_FILE_ABSOLUTE.part.$$
                             echo $(date "+%Y-%m-%d %H:%M:%S") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
                             rm    $OSM_XML_FILE_ABSOLUTE.part.$$
@@ -393,7 +394,7 @@ then
                         fi
                     else
                         echo $(date "+%Y-%m-%d %H:%M:%S") "Failure for wget for '$PREFIX'"
-                        sqlite3 $WORK_LOC/$STATISTICS_DB "INSERT INTO download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,0,1,$fsize,0);"
+                        sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,0,1,$fsize,0);"
                     fi
                 fi
 
@@ -459,7 +460,7 @@ then
             fi
         fi
         stop=$(date --utc "+%s")
-        sqlite3 $WORK_LOC/$STATISTICS_DB "INSERT INTO routes (id,start,stop,ret,modified,location,size) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$ret,$modified,'$location',$ROUTES_SIZE);"
+        sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO routes (id,start,stop,ret,modified,location,size) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$ret,$modified,'$location',$ROUTES_SIZE);"
     else
         echo $(date "+%Y-%m-%d %H:%M:%S") "Work dir $WORK_LOC does not exist/could not be created"
     fi
@@ -598,7 +599,7 @@ then
                     echo $(date "+%Y-%m-%d %H:%M:%S") "'$WORK_LOC/$HTML_FILE' is empty"
                 fi
                 size="$(stat -c '%s' $WORK_LOC/$HTML_FILE)"
-                sqlite3 $WORK_LOC/$STATISTICS_DB "INSERT INTO analysis (id,start,stop,size) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$size);"
+                sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO analysis (id,start,stop,size) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$size);"
             else
                 echo $(date "+%Y-%m-%d %H:%M:%S") "'$OSM_XML_FILE_ABSOLUTE' is empty"
                 if [ -f "$WORK_LOC/$HTML_FILE" ]
@@ -762,7 +763,7 @@ then
                             echo "OLD_OR_NEW=old" >> $WORK_LOC/$DETAILS_FILE
                         fi
                         stop=$(date --utc "+%s")
-                        sqlite3 $WORK_LOC/$STATISTICS_DB "INSERT INTO updateresult (id,start,stop,updated,diff_lines,html_changes) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,1,$DIFF_LINES,$HTML_DIFF);"
+                        sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO updateresult (id,start,stop,updated,diff_lines,html_changes) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,1,$DIFF_LINES,$HTML_DIFF);"
                     else
                         echo $(date "+%Y-%m-%d %H:%M:%S") "No relevant changes on '$HTML_FILE'"
 
@@ -771,7 +772,7 @@ then
                         echo "OLD_DATE_LOC=$OLD_Local_OSM_Base_Time" >> $WORK_LOC/$DETAILS_FILE
                         echo "OLD_OR_NEW=old"                        >> $WORK_LOC/$DETAILS_FILE
                         stop=$(date --utc "+%s")
-                        sqlite3 $WORK_LOC/$STATISTICS_DB "INSERT INTO updateresult (id,start,stop,updated,diff_lines,html_changes) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,0,$DIFF_LINES,0);"
+                        sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO updateresult (id,start,stop,updated,diff_lines,html_changes) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,0,$DIFF_LINES,0);"
                     fi
                 else
                     echo $(date "+%Y-%m-%d %H:%M:%S") "Target location $RESULTS_LOC does not exist/could not be created"
@@ -868,7 +869,7 @@ if [ -d "$WORK_LOC" ]
 then
     echo $(date "+%Y-%m-%d %H:%M:%S") "Handling Statistics DB $WORK_LOC/$STATISTICS_DB"
 
-    sqlite3 $WORK_LOC/$STATISTICS_DB "UPDATE ptna SET stop=$(date --utc '+%s') WHERE id=$PTNA_NETWORK_DB_ID;"
+    sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "UPDATE ptna SET stop=$(date --utc '+%s') WHERE id=$PTNA_NETWORK_DB_ID;"
 
 else
     echo $(date "+%Y-%m-%d %H:%M:%S") "Work dir $WORK_LOC does not exist/could not be created"
