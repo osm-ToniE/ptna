@@ -81,17 +81,6 @@ then
 
         LOGFILE=${PTNA_WORK_LOC}/log/ptna-all-networks$LOGFILE_SUFFIX.log
 
-        # c == clean the work area
-        # C == clean the XML file
-        # L == delete all old 'network' specific log files
-
-        ptna-all-networks.sh -cCL > $LOGFILE 2>&1 < /dev/null
-
-        # o == do the overpassapi query and download the data (to work area)
-        # g == get the OSM-Wiki data for the routes
-        # a == do the analysis (in work area)
-        # u == update the result from the work area to the location of the web service
-
         if [ "$1" = "UTC+01" ]
         then
             # for timezone UTC+01 run jobs in parallel using also a more powerful overpass-api server
@@ -100,7 +89,16 @@ then
             # for other timezones it is OK to run sequentially and using standard overpass-api server
             export PTNA_OVERPASS_API_SERVER=""
         fi
-        ptna-all-networks-parallel.sh -ogau >> $LOGFILE 2>&1 < /dev/null
+
+        # c == clean the work area
+        # C == clean the XML file
+        # L == delete all old 'network' specific log files
+        # o == do the overpassapi query and download the data (to work area)
+        # g == get the OSM-Wiki data for the routes
+        # a == do the analysis (in work area)
+        # u == update the result from the work area to the location of the web service
+
+        ptna-all-networks-parallel.sh -cCLogau > $LOGFILE 2>&1 < /dev/null
 
         emptyxml=$(find ${PTNA_WORK_LOC} -name '*.xml' -size 0 | wc -l)
 
