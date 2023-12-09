@@ -322,7 +322,7 @@ then
                             then
                                 echo $(date "+%Y-%m-%d %H:%M:%S") "OSM ($OSM_BASE) data is quite old : older than 6 hours"
                                 echo $(date "+%Y-%m-%d %H:%M:%S") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
-                                sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO download (call_time,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_CALL_TIME,$start,$stop,$wget_ret,0,1,$fsize,$OSM_BASE_SEC);"
+                                sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,0,1,$fsize,$OSM_BASE_SEC);"
                                 rm    $OSM_XML_FILE_ABSOLUTE.part.$$
                                 touch $OSM_XML_FILE_ABSOLUTE.part.$$
                             else
