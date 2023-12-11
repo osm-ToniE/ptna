@@ -160,7 +160,6 @@ fi
 
 if [ "$deletelog" = "true" ]
 then
-    rm -f $PTNA_WORK_LOC/log/$PREFIX.log
     rm -f $WORK_LOC/$HTML_FILE.log
 fi
 
