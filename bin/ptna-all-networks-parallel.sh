@@ -17,7 +17,15 @@ then
         XARG="P1"
     fi
 fi
-
-find . -name settings.sh | \
-sort                     | \
-xargs -$XARG -I@ bash -c 'D=$(dirname @) && B=$(basename $D) && echo $(date "+%Y-%m-%d %H:%M:%S") $B && cd $D && ptna-network.sh '$*' >> $PTNA_WORK_LOC/log/$B.log 2>&1'
+if [ $(echo $* | fgrep -c L) -gt 0 ]
+then
+    # overwrite existing logfile, deleting the old information
+    find . -name settings.sh | \
+    sort                     | \
+    xargs -$XARG -I@ bash -c 'D=$(dirname @) && B=$(basename $D) && echo $(date "+%Y-%m-%d %H:%M:%S") $B - options: '$*' && cd $D && ptna-network.sh '$*' > $PTNA_WORK_LOC/log/$B.log 2>&1'
+else
+    # append log info to existing logfile
+    find . -name settings.sh | \
+    sort                     | \
+    xargs -$XARG -I@ bash -c 'D=$(dirname @) && B=$(basename $D) && echo $(date "+%Y-%m-%d %H:%M:%S") $B - options: '$*' && cd $D && ptna-network.sh '$*' >> $PTNA_WORK_LOC/log/$B.log 2>&1'
+fi
