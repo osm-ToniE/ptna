@@ -92,9 +92,12 @@ then
             export PTNA_OVERPASS_API_SERVER=""
         fi
 
-        echo $(date "+%Y-%m-%d %H:%M:%S") "Start main analysis" >> $LOGFILE
-
         # L == delete all old 'network' specific log files
+
+        echo $(date "+%Y-%m-%d %H:%M:%S") "Delete old log files" >> $LOGFILE
+
+        ptna-all-networks-parallel.sh -L >> $LOGFILE 2>&1 < /dev/null
+
         # c == clean the work area
         # C == clean the XML file
         # o == do the overpassapi query and download the data (to work area)
@@ -102,7 +105,9 @@ then
         # a == do the analysis (in work area)
         # u == update the result from the work area to the location of the web service
 
-        ptna-all-networks-parallel.sh -LcCogau >> $LOGFILE 2>&1 < /dev/null
+        echo $(date "+%Y-%m-%d %H:%M:%S") "Start main analysis" >> $LOGFILE
+
+        ptna-all-networks-parallel.sh -cCogau >> $LOGFILE 2>&1 < /dev/null
 
         emptyxml=$(find ${PTNA_WORK_LOC} -name '*.xml' -size 0 | wc -l)
 
@@ -165,9 +170,9 @@ then
         then
             # on Mondays, do not delete the downloaded XML data
 
-            ptna-all-networks.sh -c >> $LOGFILE 2>&1 < /dev/null
+            ptna-all-networks-parallel.sh -c >> $LOGFILE 2>&1 < /dev/null
         else
-            ptna-all-networks.sh -cC >> $LOGFILE 2>&1 < /dev/null
+            ptna-all-networks-parallel.sh -cC >> $LOGFILE 2>&1 < /dev/null
         fi
 
         echo $(date "+%Y-%m-%d %H:%M:%S") "Cron Job stopped" >> $LOGFILE
