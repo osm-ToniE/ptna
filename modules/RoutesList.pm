@@ -180,7 +180,7 @@ sub ReadRoutes {
                         $hashref->{'gtfs-route-id'}     = $ExpGtfsRouteId      || '';              # 'gtfs-route-id'
                         $hashref->{'gtfs-release-date'} = $ExpGtfsReleaseDate  || '';              # 'gtfs-release-date'
                         if ( $ExpGtfsFeed                       &&
-                             $ExpGtfsFeed !~ m/^[0-9A-Za-z_-]+$/    ) {
+                             $ExpGtfsFeed !~ m/^[0-9A-Za-z_.-]+$/    ) {
                             $issues_string      = gettext( "CSV data: field 'gtfs_feed' (= '%s') is wrong. Line %s of Routes-Data. Contents of line: '%s'" );
                             $hashref->{'type'}  = 'error';                                              # this is an error
                             $hashref->{'ref'}   = $ExpRef;                                              # this is an error
