@@ -92,9 +92,14 @@ then
             export PTNA_OVERPASS_API_SERVER=""
         fi
 
-        # L == delete all old 'network' specific log files
         # c == clean the work area
-        # C == clean the XML file
+        # C == clean the XML file (do that here, some 'network' will reuse XML files, so 'C' togehter with 'o' spoils that)
+
+        echo $(date "+%Y-%m-%d %H:%M:%S") "Clean work area and XML files" >> $LOGFILE
+
+        ptna-all-networks-parallel.sh -cC >> $LOGFILE 2>&1 < /dev/null
+
+        # L == delete all old 'network' specific log files (do that here, to keep log files as long as possible)
         # o == do the overpassapi query and download the data (to work area)
         # g == get the OSM-Wiki data for the routes
         # a == do the analysis (in work area)
@@ -102,7 +107,7 @@ then
 
         echo $(date "+%Y-%m-%d %H:%M:%S") "Start main analysis" >> $LOGFILE
 
-        ptna-all-networks-parallel.sh -LcCogau >> $LOGFILE 2>&1 < /dev/null
+        ptna-all-networks-parallel.sh -Logau >> $LOGFILE 2>&1 < /dev/null
 
         emptyxml=$(find ${PTNA_WORK_LOC} -name '*.xml' -size 0 | wc -l)
 
@@ -131,10 +136,10 @@ then
             # let's check again for empty XML files and
             # restart analysis with standard overpass api server
 
-            emptyxml=$(find ${PTNA_WORK_LOC} -name '*.xml' -size 0 | wc -l)
+            # emptyxml=$(find ${PTNA_WORK_LOC} -name '*.xml' -size 0 | wc -l)
 
-            if [ "$emptyxml" -gt 0 -a "$emptyxml" -lt 130 ]
-            then
+            # if [ "$emptyxml" -gt 0 -a "$emptyxml" -lt 130 ]
+            # then
                 # most (> 50%) of the analysis succeeded,
                 # let's try a third time for the others
                 # now using the standard overpass api server
@@ -152,7 +157,7 @@ then
 
                 # run this again using the standard overpass-api server
                 ptna-all-networks-parallel.sh -Ogau >> $LOGFILE 2>&1 < /dev/null
-            fi
+            # fi
         fi
 
 
