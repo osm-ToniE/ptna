@@ -137,8 +137,9 @@ then
     ptna_columns="id INTEGER PRIMARY KEY AUTOINCREMENT, start INTEGER DEFAULT 0, stop INTEGER DEFAULT 0, options TEXT DEFAULT ''"
     sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS ptna ($ptna_columns);"
 
-    download_columns="id INTEGER, start INTEGER DEFAULT 0, stop INTEGER DEFAULT 0, wget_ret INTEGER DEFAULT 0, success INTEGER DEFAULT 0, attempt INTEGER DEFAULT 1, size INTEGER DEFAULT 0, osm_data INTEGER DEFAULT 0"
+    download_columns="id INTEGER PRIMARY KEY, start INTEGER DEFAULT 0, stop INTEGER DEFAULT 0, wget_ret INTEGER DEFAULT 0, success INTEGER DEFAULT 0, attempt INTEGER DEFAULT 1, size INTEGER DEFAULT 0, osm_data INTEGER DEFAULT 0"
     sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS download ($download_columns);"
+    sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS retry_download ($download_columns);"
 
     routes_columns="id INTEGER PRIMARY KEY, start INTEGER DEFAULT 0, stop INTEGER DEFAULT 0, ret INTEGER DEFAULT 0, modified INTEGER DEFAULT 0, location TEXT DEFAULT '', size INTEGER DEFAULT 0"
     sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS routes ($routes_columns);"
@@ -376,16 +377,16 @@ then
                                 then
                                     echo $(date "+%Y-%m-%d %H:%M:%S") "OSM ($OSM_BASE) data is quite old : older than 6 hours"
                                     echo $(date "+%Y-%m-%d %H:%M:%S") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
-                                    sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,0,2,$fsize,$OSM_BASE_SEC);"
+                                    sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO retry_download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,0,$DOWNLOAD_TRIES,$fsize,$OSM_BASE_SEC);"
                                     rm    $OSM_XML_FILE_ABSOLUTE.part.$$
                                     touch $OSM_XML_FILE_ABSOLUTE.part.$$
                                 else
-                                    sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,1,1,$fsize,$OSM_BASE_SEC);"
+                                    sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO retry_download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,1,$DOWNLOAD_TRIES,$fsize,$OSM_BASE_SEC);"
                                 fi
                             fi
                         else
                             echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' is quite small: error during download?"
-                            sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,0,1,$fsize,0);"
+                            sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO retry_download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,0,$DOWNLOAD_TRIES,$fsize,0);"
                             cat $OSM_XML_FILE_ABSOLUTE.part.$$
                             echo $(date "+%Y-%m-%d %H:%M:%S") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
                             rm    $OSM_XML_FILE_ABSOLUTE.part.$$
@@ -393,7 +394,7 @@ then
                         fi
                     else
                         echo $(date "+%Y-%m-%d %H:%M:%S") "Failure for wget for '$PREFIX'"
-                        sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,0,1,$fsize,0);"
+                        sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO retry_download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,0,$DOWNLOAD_TRIES,$fsize,0);"
                     fi
                 fi
 
