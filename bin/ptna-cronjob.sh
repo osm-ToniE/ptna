@@ -83,12 +83,13 @@ then
 
         echo $(date "+%Y-%m-%d %H:%M:%S") "Start Cron Job" > $LOGFILE
 
-        if [ "$1" = "UTC+01" ]
+        if [ "$1" = "UTC+01" -a "$(date '+%H')" = "02" ]
         then
-            # for timezone UTC+01 run jobs in parallel using also a more powerful overpass-api server
+            # for timezone UTC+01 and if running in the nighe at 2 AM
+            # run jobs in parallel using also a more powerful overpass-api server
             export PTNA_OVERPASS_API_SERVER="overpass.kumi.systems"
          else
-            # for other timezones it is OK to run sequentially and using standard overpass-api server
+            # for other timezones and other time it is OK to run sequentially and using standard overpass-api server
             export PTNA_OVERPASS_API_SERVER=""
         fi
 
