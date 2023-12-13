@@ -7,6 +7,7 @@
 PTNA_NETWORK_CALL_TIME=$(date --utc "+%s")
 PTNA_NETWORK_OPTIONS="$@"
 
+echo $(date "+%Y-%m-%d %H:%M:%S") "Start: ptna-networks.sh $PTNA_NETWORK_OPTIONS"
 
 if [ -z "$PTNA_TARGET_LOC"     -o \
      -z "$PTNA_RESULTS_LOC"    -o \
@@ -132,7 +133,7 @@ fi
 
 if [ -d "$WORK_LOC" ]
 then
-    echo $(date "+%Y-%m-%d %H:%M:%S") "Init Statistics DB $WORK_LOC/$STATISTICS_DB"
+   echo $(date "+%Y-%m-%d %H:%M:%S") "Init Statistics DB $WORK_LOC/$STATISTICS_DB"
 
     ptna_columns="id INTEGER PRIMARY KEY AUTOINCREMENT, start INTEGER DEFAULT 0, stop INTEGER DEFAULT 0, options TEXT DEFAULT ''"
     sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS ptna ($ptna_columns);"
