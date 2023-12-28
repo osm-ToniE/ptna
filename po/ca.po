@@ -5,16 +5,17 @@
 # 
 # Translators:
 # Pau Nofuentes Sendra, 2023
+# Carlos Sánchez López <erielkhan@gmail.com>, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2022-12-29 18:59+0100\n"
+"POT-Creation-Date: 2023-12-16 19:38+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: Pau Nofuentes Sendra, 2023\n"
-"Language-Team: Catalan (https://www.transifex.com/jungle-bus/teams/97874/ca/)\n"
+"Last-Translator: Carlos Sánchez López <erielkhan@gmail.com>, 2023\n"
+"Language-Team: Catalan (https://app.transifex.com/jungle-bus/teams/97874/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,7 +26,7 @@ msgid "Message"
 msgstr "Missatge"
 
 msgid "Type"
-msgstr ""
+msgstr "Tipus"
 
 msgid "Option"
 msgstr "Opció"
@@ -34,155 +35,155 @@ msgid "Description"
 msgstr "Descripció"
 
 msgid "How to fix it"
-msgstr ""
+msgstr "Com solucionar-ho"
 
 msgid "Image"
-msgstr ""
+msgstr "Imatge"
 
 msgid "Default Value"
-msgstr ""
+msgstr "Valor per defecte"
 
 msgid "Language test"
-msgstr ""
+msgstr "Prova de llenguatge"
 
 msgid "Line (ref=)"
-msgstr ""
+msgstr "Línia (ref=)"
 
 msgid "Relation (id=)"
-msgstr ""
+msgstr "Relació (id=)"
 
 msgid "Relations"
-msgstr ""
+msgstr "Relacions"
 
 msgid "Name (name=)"
-msgstr ""
+msgstr "Nom (name=)"
 
 msgid "Number"
-msgstr ""
+msgstr "Número"
 
 msgid "Network (network=)"
-msgstr ""
+msgstr "Xarxa (network=)"
 
 msgid "Operator (operator=)"
-msgstr ""
+msgstr "Operador (operator=)"
 
 msgid "From (from=)"
-msgstr ""
+msgstr "Des de (from=)"
 
 msgid "Via (via=)"
-msgstr ""
+msgstr "Via (via=)"
 
 msgid "To (to=)"
-msgstr ""
+msgstr "A (to=)"
 
 msgid "Errors"
-msgstr ""
+msgstr "Errors"
 
 msgid "Notes"
-msgstr ""
+msgstr "Notes"
 
 msgid "Type (type=)"
-msgstr ""
+msgstr "Tipus (type=)"
 
 msgid "Vehicle (route(_master)=)"
-msgstr ""
+msgstr "Suport (route(_master)=)"
 
 msgid "PTv"
-msgstr ""
+msgstr "PTv"
 
 msgid "Comment"
-msgstr ""
+msgstr "Comentari"
 
 msgid "From"
-msgstr ""
+msgstr "Des de"
 
 msgid "To"
-msgstr ""
+msgstr "A"
 
 msgid "Operator"
-msgstr ""
+msgstr "Operador"
 
 msgid "GTFS feed"
-msgstr ""
+msgstr "origen GTFS"
 
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 msgid "GTFS feed from"
-msgstr ""
+msgstr "origen GTFS des de"
 
 msgid "Date from"
-msgstr ""
+msgstr "Des del dia"
 
 msgid "Bus"
-msgstr ""
+msgstr "Bus"
 
 msgid "Coach"
-msgstr ""
+msgstr "Autocar"
 
 msgid "Share-Taxi"
-msgstr ""
+msgstr "Taxi compartit"
 
 msgid "Train/Suburban-Train"
-msgstr ""
+msgstr "Tren/Rodalies"
 
 msgid "Tram/Streetcar"
-msgstr ""
+msgstr "Tramvia"
 
 msgid "Subway/Underground"
-msgstr ""
+msgstr "Metro"
 
 msgid "Light-Rail"
-msgstr ""
+msgstr "Tren lleuger"
 
 msgid "Trolley Bus"
-msgstr ""
+msgstr "Trolebús"
 
 msgid "Ferry"
-msgstr ""
+msgstr "Ferri"
 
 msgid "Mono-Rail"
-msgstr ""
+msgstr "Monorail"
 
 msgid "Aerialway"
-msgstr ""
+msgstr "Aeri"
 
 msgid "Funicular"
-msgstr ""
+msgstr "Funicular"
 
 #, perl-format
 msgid "Missing route for 'ref'='%s' and 'route'='%s'"
-msgstr ""
+msgstr "Falta ruta per a 'ref'='%s' i 'route'='%s'"
 
 msgid "' or 'ref'='"
-msgstr ""
+msgstr "' o 'ref'='"
 
 #. xgettext: This section will list all routes which could not be clearly
 #. assigned because the combination of "ref;type" appears more than once and
 #. information like 'operator', 'from' and 'to' is missing
 msgid "Not clearly assigned routes"
-msgstr ""
+msgstr "Rutes no assignades clarament"
 
 msgid "Other Public Transport Lines"
-msgstr ""
+msgstr "Altres Línies de Transport Públic"
 
 msgid "Public Transport Lines"
-msgstr ""
+msgstr "Línies de Transport Públic"
 
 msgid "Public Transport Lines without 'ref'"
-msgstr ""
+msgstr "Línies de Transport Públic sense 'ref'"
 
 msgid "More Relations"
 msgstr "Més relacions"
 
 msgid "Details for 'network'-Values"
-msgstr ""
+msgstr "Detalls per 'network'-Valors"
 
 msgid "References to GTFS feeds and releases"
-msgstr ""
+msgstr "Referencies a orígens GTFS i llançaments"
 
 msgid "There is more than one Route-Master"
-msgstr ""
+msgstr "Hi ha més d'una Route-Master"
 
 #, perl-format
 msgid ""
@@ -239,7 +240,7 @@ msgstr ""
 
 #, perl-format
 msgid "Route has not matching 'ref' = '%s': %s"
-msgstr ""
+msgstr "La ruta no troba coincidència 'ref' = '%s': %s"
 
 #, perl-format
 msgid "Route exists in the given data set but 'ref' tag is not set: %s"
@@ -257,15 +258,15 @@ msgstr ""
 
 #, perl-format
 msgid "'route' tag is not set: %s"
-msgstr ""
+msgstr "etiqueta 'route' no definida: %s"
 
 #, perl-format
 msgid "'type' = '%s' is not 'route': %s"
-msgstr ""
+msgstr "'type' = '%s' no és una 'route': %s"
 
 #, perl-format
 msgid "'type' tag is not set: %s"
-msgstr ""
+msgstr "etiqueta 'type' no definida %s"
 
 #, perl-format
 msgid "Route does not exist in the given data set: %s"
@@ -408,6 +409,22 @@ msgid ""
 " public transport 'route_master' and 'route' are used."
 msgstr ""
 
+#, perl-format
+msgid "The tag '%s' has an empty value."
+msgstr ""
+
+#, perl-format
+msgid ""
+"The tag '%s' includes whitespace character '%s' (=%#2x) in key. Value of "
+"tag: '%s'"
+msgstr ""
+
+#, perl-format
+msgid ""
+"The tag '%s' includes potentially problematic character '%s' in key. Value "
+"of tag: '%s'"
+msgstr ""
+
 msgid "Route-Master without Route(s)"
 msgstr ""
 
@@ -419,6 +436,12 @@ msgstr ""
 
 msgid "Route-Master with Node(s)"
 msgstr ""
+
+#, perl-format
+msgid "Route-Master has %d member with 'role' being set"
+msgid_plural "Route-Master has %d members with 'role' being set"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "'public_transport:version' is not set to '2'"
 msgstr ""
@@ -533,6 +556,11 @@ msgstr ""
 msgid ""
 "PTv2 route: 'role' = '%s' and %s: consider setting 'public_transport' = "
 "'stop_position'"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'role' = '%s' and 'public_transport' is not set but '%s' is set"
 msgstr ""
 
 #, perl-format
@@ -1091,6 +1119,9 @@ msgstr "Edita a iD"
 msgid "Edit in JOSM"
 msgstr "Edita a JOSM"
 
+msgid "Edit in Relatify"
+msgstr ""
+
 msgid "Show relation on special map"
 msgstr "Mostra la relació a un mapa especial"
 
@@ -1285,10 +1316,10 @@ msgid ""
 msgstr ""
 
 msgid "and"
-msgstr ""
+msgstr "i"
 
 msgid "instead of"
-msgstr ""
+msgstr "en comptes de"
 
 msgid "Check whether the construction works are finished or not."
 msgstr ""
@@ -1308,17 +1339,21 @@ msgid ""
 "Please evaluate the value manually and decide whether a fix is needed or "
 "not."
 msgstr ""
+"Si us plau, avalua el valor de manera manual i decideix si es necessària una"
+" correcció o no."
 
 msgid "The access restriction does not comply with the map features."
-msgstr ""
+msgstr "La restricció d'accés no compleix amb les característiques del mapa."
 
 msgid ""
 "Please consult the OSM Wiki: "
 "https://wiki.openstreetmap.org/wiki/Map_Features#Restrictions"
 msgstr ""
+"Si us plau, consulta la Wiki OSM: "
+"https://wiki.openstreetmap.org/wiki/Map_Features#Restrictions"
 
 msgid "This error is related to:"
-msgstr ""
+msgstr "Aquest error està relacionat amb:"
 
 msgid ""
 "Further analysis of this Route relation does not make sense without the data"
@@ -1351,8 +1386,14 @@ msgid ""
 " '%s'"
 msgstr ""
 
+msgid "Values of tags must not be empty."
+msgstr "Els valors de les etiquetes no poden ser buits."
+
+msgid "See also:"
+msgstr "Veure també:"
+
 msgid "Defines the language for the output."
-msgstr ""
+msgstr "Defineix l'idioma del resultat."
 
 msgid ""
 "Allow 'route_master' = 'coach' and 'route' = 'coach' (although they are "
@@ -1366,13 +1407,13 @@ msgid ""
 msgstr ""
 
 msgid "This applies to 'barrier' = '...' as well."
-msgstr ""
+msgstr "Això també aplica a 'barrier' = '...'."
 
 msgid "'highway' = 'bus_stop' can be set on nodes only, not on ways or areas."
 msgstr ""
 
 msgid "Check 'gtfs:*' tags for validity, ..."
-msgstr ""
+msgstr "Revisa 'gtfs:*' etiquetes per validació, ..."
 
 msgid ""
 "Check whether motorway links are used without actually using a "
@@ -1420,13 +1461,13 @@ msgid ""
 msgstr ""
 
 msgid "Check sequence of ways, are there any gaps?"
-msgstr ""
+msgstr "Revisa la seqüencia de carrers, hi ha algun espai buit?"
 
 msgid "Check value of 'service' tag for 'highway' = 'service'."
-msgstr ""
+msgstr "Revisa el valor de l'etiqueta 'service' per 'highway' = 'service'."
 
 msgid "Suspicious values"
-msgstr ""
+msgstr "Valors sospitosos"
 
 msgid ""
 "Check that for instance 'bus' = 'yes' is set on a PTv2 bus stop having "
@@ -1464,10 +1505,14 @@ msgid ""
 "The value of 'network' = '...' is expected in short form (see: network-"
 "short-regex)."
 msgstr ""
+"El valor de 'network' = '...' s'espera en la forma curta (veure: network-"
+"short-regex)."
 
 msgid ""
 "The value of 'network' = '...' is expected in short form, as shown here."
 msgstr ""
+"El valor de 'network' = '...' s'espera en la forma curta, com es mostra "
+"aquí."
 
 msgid ""
 "The value of 'network' = '...' is expected in short form instead of the long"
@@ -1482,9 +1527,12 @@ msgstr ""
 msgid ""
 "Provide links to GTFS-Analysis for 'gtfs:route_id' or 'gtfs:trip_id' tags."
 msgstr ""
+"proporciona enllaços a GTFS-Analysis per a les etiquetes 'gtfs:route_id' o "
+"'gtfs:trip_id'."
 
 msgid "Limits the number of identical error and note messages for a relation."
 msgstr ""
+"Limita el nombre de missatges amb idèntics errors i notes d'una relació."
 
 msgid ""
 "Defines how to react if the combination of \"ref;type\" (e.g. \"N8;bus\") "
@@ -1498,7 +1546,7 @@ msgid "allow further occurances of this entry"
 msgstr ""
 
 msgid "do not analyze 'operator', 'from' and 'to'"
-msgstr ""
+msgstr "no analitzis 'operator', 'from' i 'to'"
 
 msgid ""
 "find out whether 'operator', 'from' and 'to' of the CSV data match the tags "
@@ -1520,6 +1568,8 @@ msgstr ""
 
 msgid "Do not print the additional navigation buttons on top of the tables."
 msgstr ""
+"No imprimeixis els botons de navegació addicionals a la capçalera de les "
+"taules."
 
 msgid ""
 "The value of 'operator' = '...' of the Route-Master and Route relations must"
@@ -1545,11 +1595,8 @@ msgstr ""
 msgid "assume and show compatibility with legacy bus-stops (aka: PTv1)"
 msgstr ""
 
-msgid "See also:"
-msgstr ""
-
 msgid "Compatibility with well known tags"
-msgstr ""
+msgstr "Compatibilitat amb etiquetes comunes"
 
 msgid ""
 "Relaxed check of begin and end of routes regarding stop positions (i.e. for "
@@ -1588,6 +1635,7 @@ msgstr ""
 msgid ""
 "Example: '605/50' : defines that here 'ref' of two 'network' are valid."
 msgstr ""
+"Exemple: '605/50' : defineix que aquí un 'ref' de dos 'network' és vàlid."
 
 msgid ""
 "It is checked, whether 'ref:network1' = '605' and 'ref:network2' = '50' "
@@ -1595,22 +1643,22 @@ msgid ""
 msgstr ""
 
 msgid "is not set"
-msgstr ""
+msgstr "no s'ha definit"
 
 msgid "GTFS database not found"
-msgstr ""
+msgstr "base de dades GTFS no trobada"
 
 msgid "is no longer valid (in the past)"
-msgstr ""
+msgstr "ja no és vàlid (al passat)"
 
 msgid "is not yet valid (in the future)"
-msgstr ""
+msgstr "ja no és vàlid (al futur)"
 
 msgid "outdated, fits to older GTFS version only"
 msgstr ""
 
 msgid "does not exist"
-msgstr ""
+msgstr "no existeix"
 
 msgid "does not provide any 'shape' data"
-msgstr ""
+msgstr "no s'ha proporcionat cap fitxer 'shape'"
