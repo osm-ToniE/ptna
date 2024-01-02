@@ -400,6 +400,7 @@ then
                 fi
 
                 mv $OSM_XML_FILE_ABSOLUTE.part.$$ $OSM_XML_FILE_ABSOLUTE
+                echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $OSM_XML_FILE_ABSOLUTE)
                 rmdir $OSM_XML_FILE_ABSOLUTE.lock
             fi
         else
@@ -556,6 +557,8 @@ then
     then
         if [ -f $OSM_XML_FILE_ABSOLUTE ]
         then
+            echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $OSM_XML_FILE_ABSOLUTE)
+
             if [ -s $OSM_XML_FILE_ABSOLUTE ]
             then
                 rm -f $WORK_LOC/$DIFF_FILE.diff
