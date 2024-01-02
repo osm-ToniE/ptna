@@ -7,7 +7,7 @@
 PTNA_NETWORK_CALL_TIME=$(date --utc "+%s")
 PTNA_NETWORK_OPTIONS="$@"
 
-echo $(date "+%Y-%m-%d %H:%M:%S") "Start: ptna-networks.sh $PTNA_NETWORK_OPTIONS"
+echo $(date "+%Y-%m-%d %H:%M:%S") "Start: ptna-network.sh $PTNA_NETWORK_OPTIONS"
 
 if [ -z "$PTNA_TARGET_LOC"     -o \
      -z "$PTNA_RESULTS_LOC"    -o \
