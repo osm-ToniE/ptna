@@ -4708,7 +4708,7 @@ sub noAccessOnWay {
     if ( $way_id && $WAYS{$way_id} && $WAYS{$way_id}->{'tag'} ) {
         my $way_tag_ref = $WAYS{$way_id}->{'tag'};
 
-        if ( $way_tag_ref->{'psv'} && $way_tag_ref->{'psv'} =~ m/yes|permissive|permit|official|destination|designated/ ) {
+        if ( $way_tag_ref->{'psv'} && $way_tag_ref->{'psv'} =~ m/yes|private|permissive|permit|official|destination|designated/ ) {
             #
             # fine for all public service vehicles
             #
