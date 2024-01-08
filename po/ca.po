@@ -5,16 +5,16 @@
 # 
 # Translators:
 # Pau Nofuentes Sendra, 2023
-# Carlos Sánchez López <erielkhan@gmail.com>, 2023
+# Carlos Sánchez López <erielkhan@gmail.com>, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2023-12-16 19:38+0100\n"
+"POT-Creation-Date: 2023-10-31 15:19+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: Carlos Sánchez López <erielkhan@gmail.com>, 2023\n"
+"Last-Translator: Carlos Sánchez López <erielkhan@gmail.com>, 2024\n"
 "Language-Team: Catalan (https://app.transifex.com/jungle-bus/teams/97874/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -183,7 +183,7 @@ msgid "References to GTFS feeds and releases"
 msgstr "Referencies a orígens GTFS i llançaments"
 
 msgid "There is more than one Route-Master"
-msgstr "Hi ha més d'una Route-Master"
+msgstr "Hi ha més d'una Ruta Mestra"
 
 #, perl-format
 msgid ""
@@ -193,7 +193,11 @@ msgid_plural ""
 "Route-Masters have more Routes than actually match (%d versus %d) in the "
 "given data set"
 msgstr[0] ""
+"La Ruta Mestra té més Rutes que les actualment coincidents (%d versus %d) "
+"amb el conjunt de dades proporcionat"
 msgstr[1] ""
+"Les Rutes Mestres tenen més Rutes que les actualment coincidents (%d versus "
+"%d) amb el conjunt de dades proporcionat"
 
 #, perl-format
 msgid ""
@@ -203,40 +207,54 @@ msgid_plural ""
 "Route-Masters have less Routes than actually match (%d versus %d) in the "
 "given data set"
 msgstr[0] ""
+"La Ruta Mestra té menys Rutes que les actualment coincidents (%d versus %d) "
+"amb el conjunt de dades proporcionat "
 msgstr[1] ""
+"Les Rutes Mestres tenen menys Rutes que les actualment coincidents (%d "
+"versus %d) amb el conjunt de dades proporcionat "
 
 #, perl-format
 msgid ""
 "Route has 'network' = '%s' value which is part of 'network' = '%s' of Route-"
 "Master: %s"
 msgstr ""
+"Las ruta té el valor 'network' = '%s' el qual és part de 'network' = '%s' de"
+" la Route-Master: %s"
 
 #, perl-format
 msgid ""
 "Route might be listed with 'ref' = '%s' in a different section or in section"
 " 'Not clearly assigned routes' of this analysis: %s"
 msgstr ""
+"La Ruta pot estar llistada amb 'ref' = '%s' en diferents seccions o en una "
+"secció 'Rutes no assignades clarament' d'aquest anàlisi: %s"
 
 #, perl-format
 msgid ""
 "Route has different 'operator' = '%s' than Route-Master 'operator' = '%s': "
 "%s"
 msgstr ""
+"La Ruta té diferent 'operator' = '%s' que la Ruta Mestra 'operator' = '%s': "
+"%s"
 
 #, perl-format
 msgid ""
 "Route has 'operator' = '%s' value which is considered as not relevant: %s"
 msgstr ""
+"La ruta té el valor 'operator' = '%s' el qual és considerat irrellevant: %s"
 
 #, perl-format
 msgid ""
 "Route has different 'network' = '%s' than Route-Master 'network' = '%s': %s"
 msgstr ""
+"La ruta te diferents 'network' = '%s' en comparació amb la Route-Master "
+"'network' = '%s': %s"
 
 #, perl-format
 msgid ""
 "Route has 'network' = '%s' value which is considered as not relevant: %s"
 msgstr ""
+"La ruta té valor 'network' = '%s' el qual és considerant irrellevant: %s"
 
 #, perl-format
 msgid "Route has not matching 'ref' = '%s': %s"
@@ -245,20 +263,25 @@ msgstr "La ruta no troba coincidència 'ref' = '%s': %s"
 #, perl-format
 msgid "Route exists in the given data set but 'ref' tag is not set: %s"
 msgstr ""
+"La ruta existeix al conjunt de dades proporcionat però l'etiqueta 'ref' no "
+"es troba definida: %s"
 
 #, perl-format
 msgid ""
 "Route has different 'route' = '%s' than Route-Master 'route_master' = '%s': "
 "%s"
 msgstr ""
+"La Ruta té diferent 'route' = '%s' que las Ruta Mestra 'route_master' = "
+"'%s': %s"
 
 #, perl-format
 msgid "Route has 'route' = '%s' value which is considered as not relevant: %s"
 msgstr ""
+"La Ruta té valor 'route' = '%s' el qual és considerat com a no rellevant: %s"
 
 #, perl-format
 msgid "'route' tag is not set: %s"
-msgstr "etiqueta 'route' no definida: %s"
+msgstr "l'etiqueta 'route' no està definida: %s"
 
 #, perl-format
 msgid "'type' = '%s' is not 'route': %s"
@@ -270,75 +293,92 @@ msgstr "etiqueta 'type' no definida %s"
 
 #, perl-format
 msgid "Route does not exist in the given data set: %s"
-msgstr ""
+msgstr "La Ruta no existeix al conjunt de dades proporcionat: %s"
 
 #, perl-format
 msgid "Route is not member of Route-Master: %s"
-msgstr ""
+msgstr "La Ruta no és un membre d'una Ruta Mestra: %s"
 
 #, perl-format
 msgid ""
 "Route-Master might be listed with 'ref' = '%s' in a different section or in "
 "section 'Not clearly assigned routes' of this analysis: %s"
 msgstr ""
+"La Ruta Mestra pot ser llistada amb 'ref' = '%s' en una secció diferent o en"
+" la secció 'Rutes no assignades clarament ' d'aquest anàlisi: %s"
 
 #, perl-format
 msgid ""
 "Route-Master might be listed with unknown 'ref' in section 'Public Transport"
 " Lines without 'ref'' of this analysis: %s"
 msgstr ""
+"La Ruta Mestra pot ser llistada amb un 'ref' desconegut a la secció 'Línies "
+"de Transport Públic sense 'ref'' d'aquest anàlisi: %s"
 
 #, perl-format
 msgid "This Route is direct member of more than one Route-Master: %s"
-msgstr ""
+msgstr "Aquesta Ruta és un membre directe de més d'una Ruta Mestra: %s"
 
 msgid "Multiple Routes but no Route-Master"
-msgstr ""
+msgstr "Múltiples Rutes però sense Ruta Mestra"
 
 msgid "Multiple Routes but this Route is not a member of any Route-Master"
-msgstr ""
+msgstr "Múltiples Rutes però aquesta Ruta no és membre de cap Ruta Mestra"
 
 msgid "This Route is not a member of any Route-Master"
-msgstr ""
+msgstr "Aquesta Ruta no és un membre de cap Ruta Mestra"
 
 #, perl-format
 msgid ""
 "'route' = '%s' of Route does not fit to 'route_master' = '%s' of Route-"
 "Master: %s"
 msgstr ""
+"'route' = '%s' de la Ruta no encaixa amb 'route_master' = '%s' de la Ruta "
+"Mestra: %s"
 
 #, perl-format
 msgid "Route-Master has not matching 'ref' = '%s': %s"
-msgstr ""
+msgstr "La Ruta Mestra no té 'ref' = '%s' coincidents: %s"
 
 #, perl-format
 msgid "Route-Master exists in the given data set but 'ref' tag is not set: %s"
 msgstr ""
+"La Ruta Mestra existeix al conjunt de dades proporcionat però no s'ha "
+"definit l'etiqueta 'ref': %s"
 
 #, perl-format
 msgid ""
 "'network' = '%s' of Route is a part of 'network' = '%s' of Route-Master: %s"
 msgstr ""
+"'network' = '%s' de la Ruta és part de 'network' = '%s' de la Ruta Mestra: "
+"%s"
 
 #, perl-format
 msgid ""
 "'network' = '%s' of Route does not fit to 'network' = '%s' of Route-Master: "
 "%s"
 msgstr ""
+"'network' = '%s' de la Ruta no encaixa amb el 'network' = '%s' de la Ruta "
+"Mestra: %s"
 
 #, perl-format
 msgid ""
 "'operator' = '%s' of Route does not fit to 'operator' = '%s' of Route-"
 "Master: %s"
 msgstr ""
+"'operator' = '%s' de la Ruta no encaixa amb el 'operator' = '%s' de la Ruta "
+"Mestra: %s"
 
 #, perl-format
 msgid "'%s' = '%s' of Route does not fit to '%s' = '%s' of Route-Master: %s"
 msgstr ""
+"'%s' = '%s' de la Ruta no encaixa amb '%s' = '%s' de la Ruta Mestra: %s"
 
 #, perl-format
 msgid "'%s' = '%s' of Route is set but '%s' of Route-Master is not set: %s"
 msgstr ""
+"'%s' = '%s' de la Ruta es definit però '%s' de la Ruta Mestra no s'ha "
+"definit: %s"
 
 #, perl-format
 msgid "'%s' of Route is not set but '%s' = '%s' of Route-Master is set: %s"
@@ -348,42 +388,48 @@ msgid ""
 "PTv2 route: 'name' of Route is identical to 'name' of other Route(s), "
 "consider setting an appropriate 'via' value and include that into 'name'"
 msgstr ""
+"Ruta PTv2: 'name' de la Ruta és idèntic al 'name' d'altres Rutes, considera "
+"definir un valor 'via' apropiat i incloure-ho al 'name'"
 
 #, perl-format
 msgid "%s: %s and %d more ..."
-msgstr ""
+msgstr "%s: %s i %d més..."
 
 msgid "Multiple Routes but 'public_transport:version' is not set to '2'"
 msgstr ""
+"Múltiples Rutes però 'public_transport:version' no s'ha definit com a '2'"
 
 #, perl-format
 msgid "'%s' = '%s' of Route is identical to '%s' of other Route(s)"
-msgstr ""
+msgstr "'%s' = '%s' de la Ruta és idèntic a '%s' d'altres Rutes"
 
 #, perl-format
 msgid "'%s' = '%s' of Route has a match with '%s' = '%s' of other Route(s)"
 msgstr ""
+"'%s' = '%s' de la Ruta té una coincidència amb '%s' = '%s' d'altres Rutes"
 
 msgid "'ref' is not set"
-msgstr ""
+msgstr "No s'ha definit 'ref'"
 
 msgid "'name' is not set"
-msgstr ""
+msgstr "No s'ha definit 'name'"
 
 #, perl-format
 msgid "'network' = '%s' should be short form"
-msgstr ""
+msgstr "El valor de 'network' = '%s' ha de ser curt"
 
 #, perl-format
 msgid "'network' = '%s' should be long form"
-msgstr ""
+msgstr "El valor de 'network' = '%s' ha de ser llarg"
 
 msgid "'network' is not set"
-msgstr ""
+msgstr "No s'ha definit 'network'"
 
 #, perl-format
 msgid "'colour' has unknown value '%s'. Add '#' as first character."
 msgstr ""
+"L'etiqueta 'colour' té un valor no reconegut '%s'. Afegeix '#' com a primer "
+"caràcter."
 
 #, perl-format
 msgid ""
@@ -392,10 +438,10 @@ msgid ""
 msgstr ""
 
 msgid "'network:long' is long form"
-msgstr ""
+msgstr "'network:long' és la forma llarga"
 
 msgid "'network:long' matches long form"
-msgstr ""
+msgstr "'network:long' coincideix amb la forma llarga"
 
 #, perl-format
 msgid ""
@@ -408,127 +454,153 @@ msgid ""
 "The tag 'line' (='%s') is reserved for 'power' = 'line' related tagging. For"
 " public transport 'route_master' and 'route' are used."
 msgstr ""
+"L'etiqueta 'line' (='%s') està reservada per a etiquetatge relacionat amb "
+"'power' = 'line'. Per a quan es fa ús de 'route_master' o 'route'."
 
 #, perl-format
 msgid "The tag '%s' has an empty value."
-msgstr ""
+msgstr "L'etiqueta '%s' té un valor buit."
 
 #, perl-format
 msgid ""
 "The tag '%s' includes whitespace character '%s' (=%#2x) in key. Value of "
 "tag: '%s'"
 msgstr ""
+"L'etiqueta '%s' inclou espais en buit '%s' (=%#2x) a la clau. Valor de "
+"l'etiqueta: '%s'"
 
 #, perl-format
 msgid ""
 "The tag '%s' includes potentially problematic character '%s' in key. Value "
 "of tag: '%s'"
 msgstr ""
+"L'etiqueta '%s' inclou potencials problemes amb els caràcter '%s' a la clau."
+" Valor de l'etiqueta: '%s'"
 
 msgid "Route-Master without Route(s)"
-msgstr ""
+msgstr "Route-Master sense Route(s)"
 
 msgid "Route-Master with Relation(s) unequal to 'route'"
-msgstr ""
+msgstr "Route-Master amb Relation(s) no equivalents a 'route'"
 
 msgid "Route-Master with Way(s)"
-msgstr ""
+msgstr "Route-Master amb Way(s)"
 
 msgid "Route-Master with Node(s)"
-msgstr ""
+msgstr "Route-Master amb Node(s)"
 
 #, perl-format
 msgid "Route-Master has %d member with 'role' being set"
 msgid_plural "Route-Master has %d members with 'role' being set"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "La Ruta Mestra té %d membre amb el 'role' definit"
+msgstr[1] "La Ruta Mestra té %d membres amb el 'role' definit"
 
 msgid "'public_transport:version' is not set to '2'"
-msgstr ""
+msgstr "'public_transport:version' no s'ha definit com a '2'"
 
 msgid "Skipping further analysis ..."
-msgstr ""
+msgstr "Omet anàlisis més exhaustiu..."
 
 msgid "Route without Way(s)"
-msgstr ""
+msgstr "Ruta amb vies"
 
 msgid "Route with only 1 Way"
-msgstr ""
+msgstr "Ruta amb una única via"
 
 msgid "Route without Node(s)"
-msgstr ""
+msgstr "Ruta sense nodes"
 
 msgid "Route with only 1 Node"
-msgstr ""
+msgstr "Ruta amb un únic node"
 
 msgid "Route with Relation(s)"
-msgstr ""
+msgstr "Ruta sense relacions"
 
 msgid "'public_transport:version' is neither '1' nor '2'"
-msgstr ""
+msgstr "'public_transport:version' no és '1' o '2'"
 
 msgid ""
 "PTv2 route: there are no 'public_transport' = 'stop_position' and no "
 "'public_transport' = 'platform'"
 msgstr ""
+"Ruta PTv2: no hi ha 'public_transport' = 'stop_position' o "
+"'public_transport' = 'platform'"
 
 msgid "PTv2 route: there is no 'public_transport' = 'stop_position'"
-msgstr ""
+msgstr "Ruta PTv2: no hi ha 'public_transport' = 'stop_position'"
 
 msgid "PTv2 route: there is only one 'public_transport' = 'stop_position'"
-msgstr ""
+msgstr "Ruta PTv2: només hi ha una 'public_transport' = 'stop_position'"
 
 msgid "PTv2 route: there is no 'public_transport' = 'platform'"
-msgstr ""
+msgstr "Ruta PTv2: no hi ha 'public_transport' = 'platform'"
 
 msgid "PTv2 route: there is only one 'public_transport' = 'platform'"
-msgstr ""
+msgstr "Ruta PTv2: només hi ha una 'public_transport' = 'platform'"
 
 msgid ""
 "PTv2 route: first way is a oneway road and ends in a 'stop_position' of this"
 " route and there is no exit. Is the route sorted in reverse order?"
 msgstr ""
+"Ruta PTv2: la primera via és de sentit únic i finalitza en una "
+"'stop_position' d'aquesta ruta i no té sortida. S'ha definit la ruta en "
+"ordre invers?"
 
 #, perl-format
 msgid "PTv2 route: has a gap, consists of %d segments. Gap appears at way"
 msgid_plural ""
 "PTv2 route: has gaps, consists of %d segments. Gaps appear at ways"
 msgstr[0] ""
+"Ruta PTv2: té un espai en buit, consistent en%d segments. Els buits "
+"apareixen a la via"
 msgstr[1] ""
+"Ruta PTv2: té espais en buit, consistents en %d segments. Els buits "
+"apareixen a les vies"
 
 msgid ""
 "PTv2 route: incorrect order of 'stop_position', 'platform' and 'way' "
 "(stop/platform after way)"
 msgstr ""
+"Ruta PTv2: ordre incorrecte de 'stop_position', 'platform' i 'way' "
+"(parada/plataforma desprès de via)"
 
 #, perl-format
 msgid "PTv2 route: includes %d entire roundabout but uses only segments"
 msgid_plural ""
 "PTv2 route: includes %d entire roundabouts but uses only segments"
 msgstr[0] ""
+"Ruta PTv2: inclou %d rotonda sencera però fa ús únicament de segments"
 msgstr[1] ""
+"Ruta PTv2: inclou %d rotondes senceres però fa ús únicament de segments"
 
 msgid "PTv2 route: using oneway way in wrong direction"
 msgid_plural "PTv2 route: using oneway ways in wrong direction"
 msgstr[0] ""
+"Ruta PTv2: fent ús d'una via d'un únic sentit en la direcció incorrecta"
 msgstr[1] ""
+"Ruta PTv2: fent ús de vies d'un únic sentit en la direcció incorrecta"
 
 msgid "PTv2 route: using motorway_link way without entering a motorway way"
 msgid_plural ""
 "PTv2 route: using motorway_link ways without entering a motorway way"
 msgstr[0] ""
+"Ruta PTv2: fent ús d'una via motorway_link sense entrar a una via motorway"
 msgstr[1] ""
+"Ruta PTv2: fent ús de vies motorway_link sense entrar a una via motorway"
 
 msgid "PTv2 route: roundabout appears twice, following itself"
 msgid_plural "PTv2 route: roundabouts appear twice, following themselves"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ruta PTv2: apareix dos cops una rotonda, de manera consecutiva"
+msgstr[1] "Ruta PTv2: apareixen dos cops rotondes, de manera consecutiva"
 
 msgid "PTv2 route: first node of oneway way has 'role' = 'stop_exit_only'"
 msgstr ""
+"Ruta PTv2: el primer node d'una via d'únic sentit té 'role' = "
+"'stop_exit_only'"
 
 msgid "PTv2 route: last node of oneway way has 'role' = 'stop_entry_only'"
 msgstr ""
+"Ruta PTv2: l'últim node d'una via d'únic sentit té 'role' = 'stop_exit_only'"
 
 msgid ""
 "PTv2 route: first node of way has 'role' = 'stop_exit_only'. Is the route "
@@ -541,74 +613,90 @@ msgid ""
 msgstr ""
 
 msgid "PTv2 route: 'public_transport' = 'stop_position' is not part of way"
-msgstr ""
+msgstr "Ruta PTv2: 'public_transport' = 'stop_position' no és part de la via"
 
 #, perl-format
 msgid "PTv2 route: missing '%s' = 'yes' on 'public_transport' = '%s'"
-msgstr ""
+msgstr "Ruta PTv2: manca '%s' = 'yes' a 'public_transport' = '%s'"
 
 #, perl-format
 msgid ""
 "PTv2 route: mismatch between 'role' = '%s' and 'public_transport' = '%s'"
 msgstr ""
+"Ruta PTv2: sense coincidències entre 'role' = '%s' i 'public_transport' = "
+"'%s'"
 
 #, perl-format
 msgid ""
 "PTv2 route: 'role' = '%s' and %s: consider setting 'public_transport' = "
 "'stop_position'"
 msgstr ""
+"Ruta PTv2: 'role' = '%s' i %s: considera definir 'public_transport' = "
+"'stop_position'"
 
 #, perl-format
 msgid ""
 "PTv2 route: 'role' = '%s' and 'public_transport' is not set but '%s' is set"
 msgstr ""
+"Ruta PTv2: 'role' = '%s' i 'public_transport' no s'han definit però si  '%s'"
 
 #, perl-format
 msgid "PTv2 route: 'role' = '%s' but 'public_transport' is not set"
-msgstr ""
+msgstr "Ruta PTv2: 'role' = '%s' però 'public_transport' no s'ha definit"
 
 msgid "PTv2 route: 'public_transport' = 'platform' is part of way"
-msgstr ""
+msgstr "Ruta PTv2: 'public_transport' = 'platform' és part de la via"
 
 #, perl-format
 msgid ""
 "PTv2 route: 'role' = '%s' and %s: consider setting 'public_transport' = "
 "'platform'"
 msgstr ""
+"Ruta PTv2: 'role' = '%s' i %s: considera especificar 'public_transport' = "
+"'platform'"
 
 #, perl-format
 msgid "PTv2 route: wrong 'role' = '%s'"
-msgstr ""
+msgstr "Ruta PTv2: amb 'role' = '%s' incorrecte"
 
 msgid "PTv2 route: empty 'role'"
-msgstr ""
+msgstr "Ruta PTv2: 'role' buit"
 
 #, perl-format
 msgid ""
 "PTv2 route: first node of way is not the first stop position of this route: "
 "%s versus %s"
 msgstr ""
+"Ruta PTv2: el primer node de la via no és el primer punt de parada de la "
+"ruta: %s versus %s"
 
 #, perl-format
 msgid ""
 "PTv2 route: consider removing the first way of the route from the relation, "
 "it is a way before the first stop position: %s"
 msgstr ""
+"Ruta PTv2: considera eliminar la primera via de la relació de la ruta, és "
+"una via abans de la posició del primer punt de parada: %s"
 
 #, perl-format
 msgid ""
 "PTv2 route: first stop position on first way is not the first stop position "
 "of this route: %s versus %s"
 msgstr ""
+"Ruta PTv2: el primer punt de parada a la primera via no és el primer punt de"
+" parada d'aquesta ruta: %s versus %s"
 
 #, perl-format
 msgid ""
 "PTv2 route: there is no stop position of this route on the first way: %s"
 msgstr ""
+"Ruta PTv2: no hi ha cap punt de parada de la ruta a la primera via: %s"
 
 #, perl-format
 msgid "PTv2 route: first node of way is not a stop position of this route: %s"
 msgstr ""
+"Ruta PTv2: el primer node de la via no és un punt de parada d'aquesta ruta: "
+"%s"
 
 #, perl-format
 msgid ""
@@ -631,105 +719,113 @@ msgstr ""
 #, perl-format
 msgid ""
 "PTv2 route: there is no stop position of this route on the last way: %s"
-msgstr ""
+msgstr "Ruta PTv2: no hi ha cap punt de parada a l'última via: %s"
 
 #, perl-format
 msgid "PTv2 route: last node of way is not a stop position of this route: %s"
 msgstr ""
+"Ruta PTv2: l'últim node de la via no és un punt de parada d'aquesta ruta: %s"
 
 msgid "wrong value"
-msgstr ""
+msgstr "valor incorrecte"
 
 msgid "or"
-msgstr ""
+msgstr "o"
 
 msgid "missing key"
-msgstr ""
+msgstr "falta clau"
 
 msgid "suspicious sub-type"
-msgstr ""
+msgstr "sub-type sospitós"
 
 #, perl-format
 msgid "'barrier'='%s' with implied 'access'='no'"
-msgstr ""
+msgstr "'barrier'='%s' amb 'access'='no' implícit"
 
 msgid "PTv2 route: 'name' includes deprecated '&lt;=&gt;'"
-msgstr ""
+msgstr "Ruta PTv2: 'name' inclou '&lt;=&gt;' obsolet"
 
 msgid "PTv2 route: 'name' includes deprecated '==&gt;'"
-msgstr ""
+msgstr "Ruta PTv2: 'name' inclou '==&gt;' obsolet"
 
 #, perl-format
 msgid "PTv2 route: '%s' is not part of 'name' (derived from '%s' = '%s')"
-msgstr ""
+msgstr "Ruta PTv2: '%s' no és part de 'name' (derivat de '%s' = '%s')"
 
 msgid "PTv2 route: 'ref' is not part of 'name'"
-msgstr ""
+msgstr "Ruta PTv2: 'ref' no és part del 'name'"
 
 #, perl-format
 msgid "PTv2 route: from-part ('%s') of 'name' is not part of 'from' = '%s'"
-msgstr ""
+msgstr "Ruta PTv2: from-part ('%s') de 'name' no és part de 'from' = '%s'"
 
 #, perl-format
 msgid "PTv2 route: from-part ('%s') of 'name' is not equal to 'from' = '%s'"
-msgstr ""
+msgstr "Ruta PTv2: from-part ('%s') del 'name' no és igual a 'from' = '%s'"
 
 msgid "PTv2 route: 'from' is not set"
-msgstr ""
+msgstr "Ruta PTv2: 'from' no es troba definit"
 
 #, perl-format
 msgid "PTv2 route: to-part ('%s') of 'name' is not part of 'to' = '%s'"
-msgstr ""
+msgstr "Ruta PTv2: to-part ('%s') de 'name' no és part de 'to' = '%s'"
 
 #, perl-format
 msgid "PTv2 route: to-part ('%s') of 'name' is not equal to 'to' = '%s'"
-msgstr ""
+msgstr "Ruta PTv2: to-part ('%s') de 'name' no és igual a 'to' = '%s'"
 
 msgid "PTv2 route: 'to' is not set"
-msgstr ""
+msgstr "Ruta PTv2: 'to' no es troba definit"
 
 #, perl-format
 msgid ""
 "PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' is not part of %d. "
 "via-value = '%s'"
 msgstr ""
+"Ruta PTv2: s'ha definit 'via': %d. via-part ('%s') de 'name' no és part de "
+"%d. via-value = '%s'"
 
 #, perl-format
 msgid ""
 "PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' is not equal to %d. "
 "via-value = '%s'"
 msgstr ""
+"Ruta PTv2: s'ha definit 'via': %d. via-part ('%s') de 'name' no és igual "
+"a%d. via-value = '%s'"
 
 #, perl-format
 msgid "PTv2 route: there are more via-parts in 'name' (%d) than in 'via' (%d)"
-msgstr ""
+msgstr "Ruta PTv2: hi ha més via-parts a 'name' (%d) que a 'via' (%d)"
 
 #, perl-format
 msgid "PTv2 route: there are less via-parts in 'name' (%d) than in 'via' (%d)"
-msgstr ""
+msgstr "Ruta PTv2: hi ha menys via-parts a 'name' (%d) que a 'via' (%d)"
 
 msgid "PTv2 route: 'name' has more than one '=>' but 'via' is not set"
-msgstr ""
+msgstr "Ruta PTv2: 'name' té més d'un '=>' però no s'ha definit 'via'"
 
 msgid "PTv2 route: 'name' has no via-parts but 'via' is set"
-msgstr ""
+msgstr "Ruta PTv2: 'name' no té via-parts però s'ha definit 'via'"
 
 msgid ""
 "PTv2 route: 'name' should be similar to the form '... ref ...: from => to'"
 msgstr ""
+"Ruta PTv2: 'name' ha de ser similar a la forma '... ref ...: des de => a'"
 
 msgid ""
 "PTv2 route: 'name' should (at least) be of the form '... ref ...: from => "
 "to'"
 msgstr ""
+"Ruta PTv2: 'name' ha de ser (com a mínim) en la forma '... ref ...: des de "
+"=> a'"
 
 #, perl-format
 msgid "PTv2 route: using wrong way type (%s)"
-msgstr ""
+msgstr "Ruta PTv2: fent ús del tipus de via incorrecte (%s)"
 
 #, perl-format
 msgid "Route: using way type (%s)"
-msgstr ""
+msgstr "Ruta: fent ús del tipus de via (%s)"
 
 msgid ""
 "Route: restricted access ('bus'='school') to way for a route relation not "
@@ -773,16 +869,17 @@ msgstr[1] ""
 #, perl-format
 msgid "Route: unclear access (%s) to way"
 msgid_plural "Route: unclear access (%s) to ways"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ruta: accés poc clar (%s) a la via"
+msgstr[1] "Ruta: accés poc clar (%s) a les vies"
 
 #, perl-format
 msgid ""
 "Route: suspicious %s along with 'highway' unequal to 'construction' on way"
 msgid_plural ""
 "Route: suspicious %s along with 'highway' unequal to 'construction' on ways"
-msgstr[0] ""
+msgstr[0] "Ruta: %s sospitós amb 'highway' no igual a 'construction' a la via"
 msgstr[1] ""
+"Ruta: %s sospitós amb 'highway' no igual a 'construction' a les vies"
 
 #, perl-format
 msgid ""
@@ -792,7 +889,11 @@ msgid_plural ""
 "Route: restricted access (%s) to ways without 'psv'='yes', '%s'='yes', "
 "'%s'='designated', or ..."
 msgstr[0] ""
+"Ruta: accés restringit (%s) a la via sense 'psv'='yes', '%s'='yes', "
+"'%s'='designated', o..."
 msgstr[1] ""
+"Ruta: accés restringit (%s) a les vies sense 'psv'='yes', '%s'='yes', "
+"'%s'='designated', o..."
 
 #, perl-format
 msgid ""
@@ -802,16 +903,24 @@ msgid_plural ""
 "Route: restricted access at barriers (%s) without 'psv'='yes', '%s'='yes', "
 "'%s'='designated', or ..."
 msgstr[0] ""
+"Ruta: accés restringit a barrera (%s) sense 'psv'='yes', '%s'='yes', "
+"'%s'='designated', o..."
 msgstr[1] ""
+"Ruta: accés restringit a barreres (%s) sense 'psv'='yes', '%s'='yes', "
+"'%s'='designated', o..."
 
 msgid "Route: 'highway' = 'bus_stop' is set on way. Allowed on nodes only!"
 msgid_plural ""
 "Route: 'highway' = 'bus_stop' is set on ways. Allowed on nodes only!"
 msgstr[0] ""
+"Ruta: 'highway' = 'bus_stop' s'ha definit a la via. Només es permet en "
+"nodes!"
 msgstr[1] ""
+"Ruta: 'highway' = 'bus_stop' s'ha definit a les vies. Només es permet en "
+"nodes!"
 
 msgid "separate multiple values by ';' (semi-colon) without blank"
-msgstr ""
+msgstr "separa valors múltiples per ';' (punt i coma) sense espai en blanc"
 
 #, perl-format
 msgid ""
@@ -829,75 +938,86 @@ msgstr ""
 msgid ""
 "Route: '%s' = '%s' of stop should be deleted, 'route_ref' = '%s' exists"
 msgstr ""
+"Ruta: '%s' = '%s' de la parada hauria d'eliminar-se, 'route_ref' = '%s' "
+"existeix"
 
 #, perl-format
 msgid "(consider adding '%s' to the 'route_ref' tag of the stop)"
-msgstr ""
+msgstr "(considera afegir '%s' a l'etiqueta 'route_ref' de la parada)"
 
 #, perl-format
 msgid ""
 "Route: 'ref' = '%s' of stop should represent the reference of the stop, but "
 "includes the 'ref' = '%s' of this route %s"
 msgstr ""
+"Ruta: 'ref' = '%s' de la parada ha de representar la referència de la parada"
+" però incloure el 'ref' = '%s' d'aquesta ruta %s"
 
 #, perl-format
 msgid "Route: '%s' = '%s' of stop should be replaced by 'route_ref' = '%s'"
 msgstr ""
+"Ruta: '%s' = '%s' de la parada s'ha de reemplaçar per 'route_ref' = '%s'"
 
 #, perl-format
 msgid "(consider creating a 'route_ref' = '%s' tag for the stop)"
-msgstr ""
+msgstr "(considera crear una etiqueta 'route_ref' = '%s' per a la parada)"
 
 msgid "Error in input data: insufficient data for ways"
-msgstr ""
+msgstr "Error a les dades d'entrada: dades insuficients per a les vies"
 
 msgid "Error in input data: insufficient data for nodes"
-msgstr ""
+msgstr "Error a les dades d'entrada: dades insuficients per als nodes"
 
 msgid "Date of Data"
-msgstr ""
+msgstr "Data de les Dades"
 
 msgid "Hints"
-msgstr ""
+msgstr "Pistes"
 
 msgid "The data will be updated when the result of the analysis has changed."
 msgstr ""
+"Les dades seran actualitzades quan es modifiqui el resultat de l'anàlisi. "
 
 msgid ""
 "An explanation of the error texts can be found in the documentation at '<a "
 "href='/en/index.php#messages'>Messages</a>'."
 msgstr ""
+"Una explicació dels texts d'error es pot trobar a la documentació a '<a "
+"href='/en/index.php#messages'>Missatges</a>'."
 
 msgid "Static Analysis for OpenStreetMap"
-msgstr ""
+msgstr "Anàlisi Estàtic per a OpenStreetMap"
 
 msgid "Home"
-msgstr ""
+msgstr "Inici"
 
 msgid "Click here to toggle between 'analysis' page and 'differences' page"
 msgstr ""
+"Clica aquí per a canviar entre la pàgina d''anàlisi' i la pàgina "
+"'diferències'"
 
 msgid "Toggle View"
-msgstr ""
+msgstr "Canvia de Vista"
 
 msgid "Contact"
-msgstr ""
+msgstr "Contacta"
 
 msgid "Imprint"
-msgstr ""
+msgstr "Empremta"
 
 msgid "Privacy policy"
-msgstr ""
+msgstr "Política de privacitat"
 
 msgid "Contents"
-msgstr ""
+msgstr "Continguts"
 
 msgid "This section lists the lines that could not be clearly assigned."
-msgstr ""
+msgstr "Aquesta secció llista les línies que poden ser assignades clarament."
 
 msgid ""
 "The line numbers 'ref' have been specified several times in the CSV file."
 msgstr ""
+"Els números de línia 'ref' s'han especificat diversos cops al fitxer CSV."
 
 msgid ""
 "This means that the same line number exists in the transport network several"
@@ -908,14 +1028,18 @@ msgid ""
 "In order to be able to clearly assign the lines, the following should be "
 "indicated:"
 msgstr ""
+"Per tal de poder assignar clarament les línies, s'ha d'indicar el que "
+"s'enumera a continuació:"
 
 msgid "Relation"
-msgstr ""
+msgstr "Relació"
 
 msgid ""
 "'network', 'operator', as well as 'from' and 'to' should be tagged with the "
 "relation."
 msgstr ""
+"'network', 'operator', així com 'from' i 'to' haurien d'estar etiquetats amb"
+" la relació."
 
 msgid ""
 "If the value of 'operator' is sufficient for differentiation, 'from' and "
@@ -933,44 +1057,47 @@ msgstr ""
 msgid ""
 "See the instructions for such entries at the beginning of the CSV file."
 msgstr ""
+"Mira les instruccions per a aquestes entrades al començament del fitxer CSV."
 
 msgid ""
 "Examples for an entry in the CSV file of the form: "
 "'ref;type;Comment;From;To;Operator':"
 msgstr ""
+"Exemples per a una entrada al fitxer CSV de la forma: "
+"'ref;type;Comment;From;To;Operator':"
 
 msgid "provides services in City-A"
-msgstr ""
+msgstr "proporciona servei a la Ciutat-A"
 
 msgid "First Avenue"
-msgstr ""
+msgstr "Avinguda Meridiana"
 
 msgid "Sixth Avenue"
-msgstr ""
+msgstr "Avinguda Diagonal"
 
 msgid "Operator-X"
-msgstr ""
+msgstr "Operador-X"
 
 msgid "provides services in Village-B"
-msgstr ""
+msgstr "proporciona servei a la Vil·la-B"
 
 msgid "Main Street"
-msgstr ""
+msgstr "Carrer Major"
 
 msgid "Second Street"
-msgstr ""
+msgstr "Carrer Barcelona"
 
 msgid "provides services in Town-C"
-msgstr ""
+msgstr "proporciona servei al Poble-C"
 
 msgid "Sunset Boulevard"
-msgstr ""
+msgstr "Passeig Marítim"
 
 msgid "Rainbow Boulevard"
-msgstr ""
+msgstr "Passeig del Riu"
 
 msgid "Operator-Z"
-msgstr ""
+msgstr "Operdor-Z"
 
 msgid ""
 "1.) and 2.) are only distinguishable by means of 'From'/'from' and "
@@ -984,13 +1111,13 @@ msgid ""
 msgstr ""
 
 msgid "This section lists further relations of the environment of the routes:"
-msgstr ""
+msgstr "Aquesta secció llista relacions ampliades de l'entorn de les rutes:"
 
 msgid "potentially wrong 'route' or 'route_master' values?"
-msgstr ""
+msgstr "valors de 'route' o 'route_master' potencialment erronis?"
 
 msgid "e.g. 'route' = 'suspended_bus' instead of 'route' = 'bus'"
-msgstr ""
+msgstr "ex. 'route' = 'suspended_bus' en comptes de 'route' = 'bus'"
 
 msgid ""
 "but also 'type' = 'network', 'type' = 'set' or 'route' = 'network', i.e. a "
@@ -1001,12 +1128,17 @@ msgid ""
 "such <strong>collections are strictly spoken errors</strong>, since "
 "relations shall not represent collections:"
 msgstr ""
+"aquestes <strong>col·leccions són estrictament errors de "
+"llenguatge</strong>, ja que les relacions no poden representar col·leccions:"
 
 msgid ""
 " <a "
 "href=\"https://wiki.openstreetmap.org/wiki/Relations/Relations_are_not_Categories\">Relations/Relations"
 " are not Categories</a>"
 msgstr ""
+" <a "
+"href=\"https://wiki.openstreetmap.org/wiki/Relations/Relations_are_not_Categories\">Relacions/Relacions"
+" no són Categories</a>"
 
 msgid ""
 "The following values and combinations have been found in the provided data "
@@ -1017,38 +1149,45 @@ msgid ""
 "They represent so called 'well defined' values and are not considered as "
 "errors."
 msgstr ""
+"Representen els valors anomenats 'ben definits' i no son considerats com a "
+"errors."
 
 msgid "The contents of the 'network' tag will be searched for:"
-msgstr ""
+msgstr "Els continguts de l'etiqueta 'network' seran cercats per:"
 
 msgid "The contents of the 'operator' tag will be searched for:"
-msgstr ""
+msgstr "Els continguts de l'etiqueta 'operator' seran cercats per:"
 
 msgid "'operator' is not set"
-msgstr ""
+msgstr "no s'ha definit 'operator'"
 
 msgid "Considered 'network'-Values"
-msgstr ""
+msgstr "Considerats valors 'network'"
 
 msgid ""
 "This section lists the 'network'-values which have been considered; i.e. "
 "which match to one of the values above."
 msgstr ""
+"Aquesta secció llista els valors 'network' que han estat considerats; per "
+"exemple, els que corresponguin a un dels valors indicats abans."
 
 msgid "and more ..."
-msgstr ""
+msgstr "i més..."
 
 msgid ""
 "This section lists the 'operator'-values which have not been considered."
 msgstr ""
+"Aquesta secció llista els valors 'operator' que no han estat considerats."
 
 msgid ""
 "They might include typos in values which otherwise should have been "
 "considered."
 msgstr ""
+"Poden incloure faltes d'ortografia als valors sense les quals haguessin "
+"estat considerats."
 
 msgid "Additionally considered 'network'-Values"
-msgstr ""
+msgstr "Addicionalment considerats valors 'network'"
 
 msgid ""
 "This section lists 'network' values that were additionally considered "
@@ -1056,11 +1195,12 @@ msgid ""
 msgstr ""
 
 msgid "Not Considered 'network'-Values"
-msgstr ""
+msgstr "No Considertas valors 'network'"
 
 msgid ""
 "This section lists the 'network'-values which have not been considered."
 msgstr ""
+"Aquesta secció llista els valors 'network' que no han estat considerats"
 
 msgid ""
 "This section lists references to GTFS feed information found in the CSV list"
@@ -1068,7 +1208,7 @@ msgid ""
 msgstr ""
 
 msgid "References to GTFS from CSV list"
-msgstr ""
+msgstr "Referències a GTFS del llistat en CSV"
 
 msgid ""
 "This section lists the name of the GTFS feed and the related release date "
@@ -1089,12 +1229,14 @@ msgid ""
 msgstr ""
 
 msgid "References to GTFS from relations"
-msgstr ""
+msgstr "Referències a GTFS de les relacions"
 
 msgid ""
 "This section lists the name of the GTFS feed and the related release date "
 "information as found in Route-Master and Route relations."
 msgstr ""
+"Aquesta secció llista els orígens dels GTFS i la data de publicació, tal i "
+"com s'informa a les relacions de Route-Master i Route."
 
 msgid ""
 "In addition to that, the source of the information (name and date) is "
@@ -1111,7 +1253,7 @@ msgid "key = value"
 msgstr "clau = valor"
 
 msgid "Browse on map"
-msgstr ""
+msgstr "Navega-hi al mapa"
 
 msgid "Edit in iD"
 msgstr "Edita a iD"
@@ -1120,27 +1262,31 @@ msgid "Edit in JOSM"
 msgstr "Edita a JOSM"
 
 msgid "Edit in Relatify"
-msgstr ""
+msgstr "Edita a Relatify"
 
 msgid "Show relation on special map"
 msgstr "Mostra la relació a un mapa especial"
 
 msgid "Show route details on jungle-bus' unroll page"
-msgstr ""
+msgstr "Mostra detalls de ruta a la pàgina de desplegament de jungle-bus"
 
 #, perl-format
 msgid ""
 "'%s' = '%s' includes the separator value ';' (semi-colon) with sourrounding "
 "blank"
-msgstr ""
+msgstr "'%s' = '%s' inclou el separador ';' (punt i coma) amb espais en blanc"
 
 #, perl-format
 msgid "'colour' of Route is not set but 'colour' of Route-Master is set: %s"
 msgstr ""
+"L'etiqueta 'colour' de la Ruta no es troba definida però si el 'colour' de "
+"la Ruta Mestra: %s"
 
 #, perl-format
 msgid "'colour' of Route is set but 'colour' of Route-Master is not set: %s"
 msgstr ""
+"'colour' de la Route es troba definit però 'colour' del Route-Master no es "
+"troba definit: %s"
 
 #, perl-format
 msgid ""
@@ -1153,6 +1299,8 @@ msgid ""
 "GTFS shape data provides (only) information about the itinerary of the "
 "vehicle."
 msgstr ""
+"El fitxer GTFS proporciona dades i informació (únicament) sobre l'itinerari "
+"del vehicle."
 
 msgid ""
 "In addition, GTFS trip data provides useful information about stops: their "
@@ -1164,16 +1312,18 @@ msgid ""
 msgstr ""
 
 msgid "Add either 'gtfs:trip_id' or 'gtfs:trip_id:sample' information."
-msgstr ""
+msgstr "Afegeix informació 'gtfs:trip_id' o 'gtfs:trip_id:sample'."
 
 msgid "'public_transport:version' is not set"
-msgstr ""
+msgstr "'public_transport:version' no està definit"
 
 #, perl-format
 msgid ""
 "CSV data includes too many ';'. Line %s of Routes-Data. Contents of line: "
 "'%s'"
 msgstr ""
+"Les dades CSV inclouen masses ';'. Línies %s de Rutes. Continguts de line: "
+"'%s'"
 
 #, perl-format
 msgid ""
@@ -1205,6 +1355,9 @@ msgid ""
 "but does not exist in the given data set (see also section: \"Overpass API "
 "Query\")."
 msgstr ""
+"Aquesta ruta s'esperava com a '%s' ('bus', 'tram', ...) seguint les dades "
+"del CSV, però no existeix al conjunt de dades proporcionat (veure també la "
+"secció: \"Overpass API Query\")."
 
 msgid ""
 "The vehicle uses a motorway entrance or exit without using a motorway/trunk "
@@ -1214,11 +1367,14 @@ msgstr ""
 msgid ""
 "This may indicate incorrect tagging of the 'highway' = 'motorway_link'."
 msgstr ""
+"Això pot indicar etiquetatge incorrecte del 'highway' = 'motorway_link'."
 
 msgid ""
 "But it can also point to a wrong route, e.g. if it was created automatically"
 " by a routing SW."
 msgstr ""
+"Però també pot fer referència a una ruta errònia, per exemple, en el cas "
+"d'haver estat creada automàticament per un programari enrutador."
 
 msgid ""
 "There still seems to be Routing-SW that prefers to use a short stretch of "
@@ -1228,30 +1384,36 @@ msgid ""
 msgstr ""
 
 msgid "Precondition: the route is without gap(s)."
-msgstr ""
+msgstr "Condició prèvia: la ruta es troba constituïda sense espais buits."
 
 #, perl-format
 msgid ""
 "The Route is member of this Route-Master, but has no 'ref' tag (%s = ID of "
 "the route)."
 msgstr ""
+"La Ruta és membre de la Ruta Mestra però, no té etiqueta 'ref' (%s = ID de "
+"la ruta)."
 
 msgid "See section: \"Public Transport Lines without 'ref'\" of the analysis."
-msgstr ""
+msgstr "Veure secció: \"Línies de Transport Públic sense 'ref'\" de l'anàlisi."
 
 #, perl-format
 msgid ""
 "Route has different 'ref' = '%s' than Route-Master 'ref' = '%s' - this "
 "should be avoided: %s"
 msgstr ""
+"La Ruta té diferent 'ref' = '%s' que la Ruta Mestra 'ref' = '%s' - això ha "
+"de ser evitat: %s"
 
 msgid "This is currently deactivated."
-msgstr ""
+msgstr "Això es troba desactivat actualment."
 
 msgid ""
 "The vehicle uses a service way with a 'service' tag which is considered as "
 "not suitable for public transport routes."
 msgstr ""
+"El vehicle fa ús d'una via de servei amb una etiqueta 'service' que es "
+"considera no viable per a rutes de transport públic."
 
 msgid ""
 "Public transport routes should not use service ways tagged with 'service' = "
@@ -1259,12 +1421,14 @@ msgid ""
 msgstr ""
 
 msgid "Check the route and consider deleting the 'service' tag from the way."
-msgstr ""
+msgstr "Comprova la ruta i considera eliminar l'etiqueta 'service' de la via."
 
 msgid ""
 "This Route-Master has less route relations than listed here (Route(s) not "
 "listed in the Route-Master?)."
 msgstr ""
+"Aquesta Ruta Mestra té menys relacions de ruta que les llistades aquí (Rutes"
+" no llistades a la Ruta Mestra?)."
 
 msgid ""
 "This route master has more route relations than listed here (route without "
@@ -1272,15 +1436,18 @@ msgid ""
 msgstr ""
 
 msgid "The Route-Master relation contains stops or train/bus stops."
-msgstr ""
+msgstr "La relació de la Ruta Mestra no conté parades o trens/parades de bus."
 
 msgid ""
 "The Route-Master relation contains relation(s) that are not of type 'route'."
 msgstr ""
+"La relació de la Ruta Mestra conté relacions que no són de tipus 'route'."
 
 msgid ""
 "The Route-Master relation contains streets/railways/trains/bus stops/..."
 msgstr ""
+"La relació de la Ruta Mestra conté carrers/vies fèrries/trens/parades de "
+"bus/.."
 
 msgid ""
 "The Route-Master relation does not contain a Route relation (should not "
@@ -1293,11 +1460,15 @@ msgid ""
 "Route: 'route_ref' = '%s' of stop includes the separator value ';' (semi-"
 "colon) with sourrounding blank"
 msgstr ""
+"Ruta: 'route_ref' = '%s' de la parada inclou el separador ';' (punt i coma) "
+"amb espais en blanc"
 
 msgid ""
 "The key 'construction' is set and the key 'highway' is not set to "
 "'construction'."
 msgstr ""
+"L'etiqueta 'construction' es troba definida i l'etiqueta 'highway' no es "
+"troba definida com a 'construction'."
 
 msgid ""
 "Construction works on ways are usually mapped as the combination of 'higway'"
@@ -1322,13 +1493,13 @@ msgid "instead of"
 msgstr "en comptes de"
 
 msgid "Check whether the construction works are finished or not."
-msgstr ""
+msgstr "Comprova si els treballs de construcció ja han finalitzat o no."
 
 msgid "If yes, delete the key 'construction'."
-msgstr ""
+msgstr "En cas de si, elimina l'etiqueta 'construction'."
 
 msgid "If no, check for an appropriate value of the key 'highway'."
-msgstr ""
+msgstr "En cas de no, comprova un valor apropiat per a l'etiqueta 'highway'."
 
 msgid ""
 "A conditional access is mapped to a way. PTNA will not analyze the value of "
@@ -1364,6 +1535,8 @@ msgid ""
 "Route-Master: There is more than one Route-Master for this line = 'ref' "
 "(different 'network'-tags?)."
 msgstr ""
+"Ruta Mestra: Hi ha més d'una Ruta Mestra per a aquesta line = 'ref' "
+"(etiquetes 'network' diferents?)."
 
 msgid ""
 "Route: There is more than one Route Master for this line = 'ref' plus the "
@@ -1379,12 +1552,16 @@ msgstr ""
 #, perl-format
 msgid "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'"
 msgstr ""
+"El Tipus de Ruta no s'ha definit. Línia %s de les Rutes. Continguts de "
+"línia: '%s'"
 
 #, perl-format
 msgid ""
 "Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line:"
 " '%s'"
 msgstr ""
+"Tipus de Ruta no està suportat: '%s'. Línia %s de Rutes. Continguts de "
+"línia: '%s'"
 
 msgid "Values of tags must not be empty."
 msgstr "Els valors de les etiquetes no poden ser buits."
@@ -1399,6 +1576,8 @@ msgid ""
 "Allow 'route_master' = 'coach' and 'route' = 'coach' (although they are "
 "inofficial)."
 msgstr ""
+"Permet 'route_master' = 'coach' i 'route' = 'coach' (tot i que no siguin "
+"oficials)."
 
 msgid ""
 "Ways are used which cannot be used explicitly or implicitly ('construction',"
@@ -1411,6 +1590,7 @@ msgstr "Això també aplica a 'barrier' = '...'."
 
 msgid "'highway' = 'bus_stop' can be set on nodes only, not on ways or areas."
 msgstr ""
+"'highway' = 'bus_stop' només es pot definir en nodes, no en línies o àrees."
 
 msgid "Check 'gtfs:*' tags for validity, ..."
 msgstr "Revisa 'gtfs:*' etiquetes per validació, ..."
@@ -1419,6 +1599,8 @@ msgid ""
 "Check whether motorway links are used without actually using a "
 "motorway/trunk road."
 msgstr ""
+"Comprova si els enllaços d'autopista/autovia són utilitzats sense accedir a "
+"l'autopista/autovia."
 
 msgid ""
 "Check of 'name' = '...ref: from => to' respectively 'name' ='...ref: from =>"
@@ -1459,6 +1641,9 @@ msgid ""
 "Check also for tags 'bus_lines', 'bus_routes', 'lines', 'routes' on the "
 "stops of a route. Those should be replaced by the tag 'route_ref'."
 msgstr ""
+"Comprovació també per a etiquetes 'bus_lines', 'bus_routes', 'lines', "
+"'routes' a les parades de la ruta. Aquestes haurien de ser reemplaçats per "
+"l'etiqueta 'route_ref'."
 
 msgid "Check sequence of ways, are there any gaps?"
 msgstr "Revisa la seqüencia de carrers, hi ha algun espai buit?"
@@ -1476,6 +1661,7 @@ msgstr ""
 
 msgid "Check of 'public_transport:version' = '...' on Route-Master and Route."
 msgstr ""
+"Comprovació de 'public_transport:version' = '...' a la Ruta Mestra i Ruta."
 
 msgid ""
 "Check whether the used way types are appropriate for the vehicle type "
@@ -1486,20 +1672,27 @@ msgstr ""
 msgid ""
 "SketchLine considers the value of 'colour' = '...' of Route-Master or Route."
 msgstr ""
+"SketchLine considera el valor de 'colour' = '...' de la Ruta Mestra o Ruta."
 
 msgid ""
 "The value of 'network' = '...' is expected in long form (see: network-long-"
 "regex)."
 msgstr ""
+"El valor de 'network' = '...' s'espera en la forma llarga (veure: network-"
+"long-regex)."
 
 msgid ""
 "The value of 'network' = '...' is expected in long form, as shown here."
 msgstr ""
+"El valor de 'network' = '...' s'espera en la forma llarga, com es mostra "
+"aquí."
 
 msgid ""
 "The value of 'network' = '...' is expected in long form instead of the short"
 " form shown here."
 msgstr ""
+"El valor de 'network' = '...' s'espera en forma llarga en comptes de la "
+"forma curta mostrada aquí."
 
 msgid ""
 "The value of 'network' = '...' is expected in short form (see: network-"
@@ -1518,11 +1711,16 @@ msgid ""
 "The value of 'network' = '...' is expected in short form instead of the long"
 " form shown here."
 msgstr ""
+"El valor de 'network' = '...' s'espera en la forma curta en comptes de la "
+"forma llarga mostrada aquí."
 
 msgid ""
 "Take this value as GTFS feed for option 'link-gtfs' if the relation does not"
 " provide the tags 'gtfs:feed', 'operator:guid' or 'network:guid'."
 msgstr ""
+"Pren aquest valor com a origen del GTFS per al camp 'link-gtfs' si la "
+"relació no aporta les etiquetes 'gtfs:feed', 'operator:guid' o "
+"'network:guid'."
 
 msgid ""
 "Provide links to GTFS-Analysis for 'gtfs:route_id' or 'gtfs:trip_id' tags."
@@ -1541,9 +1739,13 @@ msgid ""
 " and that those can be distinguished by also checking 'operator', 'to' and "
 "'from'."
 msgstr ""
+"Defineix com reaccionar si la combinació \"ref;type\" (ex: \"N8;bus\") "
+"apareix més d'un cop a les dades de la ruta. PTNA espera que hi hagi rutes "
+"amb idèntic 'ref' i 'type' en diferents ciutats/pobles i aquests poden ser "
+"diferenciats comprovant també 'operator', 'to' i 'from'."
 
 msgid "allow further occurances of this entry"
-msgstr ""
+msgstr "permet altres resultats similars a aquest"
 
 msgid "do not analyze 'operator', 'from' and 'to'"
 msgstr "no analitzis 'operator', 'from' i 'to'"
@@ -1552,19 +1754,25 @@ msgid ""
 "find out whether 'operator', 'from' and 'to' of the CSV data match the tags "
 "of the relation"
 msgstr ""
+"troba si el 'operator', 'from' i 'to' de les dades del CSV coincideixen amb "
+"les etiquetes de la relació"
 
 msgid "ignore any further occurances of this entry"
-msgstr ""
+msgstr "ignora altres resultats similars a aquest"
 
 msgid ""
 "The value of 'network' = '...' of the Route-Master and Route relations must "
 "match this regular expression as 'long' form or can be empty (unset)."
 msgstr ""
+"El valor 'network' = '...' de les relacions de Ruta i Ruta Mestra ha de "
+"coincidir en la forma 'long' o pot no estar definit."
 
 msgid ""
 "The value of 'network' = '...' of the Route-Master and Route relations must "
 "match this regular expression as 'short' form or can be empty (unset)."
 msgstr ""
+"El valor 'network' = '...' de les relacions de Ruta i Ruta Mestra ha de "
+"coincidir en la forma 'short' o pot no estar definit."
 
 msgid "Do not print the additional navigation buttons on top of the tables."
 msgstr ""
@@ -1575,25 +1783,34 @@ msgid ""
 "The value of 'operator' = '...' of the Route-Master and Route relations must"
 " match this regular expression or can be empty (unset)."
 msgstr ""
+"El valor 'operator' = '...' de les relacions de Ruta i Ruta Mestra ha de "
+"coincidir o pot no estar definit."
 
 msgid ""
 "Also show 'network:short' = '...', 'network:guid' = '...' and other tags and"
 " values."
 msgstr ""
+"Mostra també 'network:short' = '...', 'network:guid' = '...' i altres "
+"etiquetes i valors."
 
 msgid ""
 "'highway' = 'bus_stop' on a point beside the road is treated as "
 "'public_transport' = 'platform' if 'role' = 'platform'."
 msgstr ""
+"'highway' = 'bus_stop' en un punt al costat de la via es tracta com a "
+"'public_transport' = 'platform' si 'role' = 'platform'."
 
 msgid "silently assume compatibility with legacy bus-stops (aka: PTv1)"
 msgstr ""
+"assumeix discretament la compatibilitat amb parades de bus heretades (aka: "
+"PTv1)"
 
 msgid "no compatibility with legacy bus-stops (aka: PTv1)"
-msgstr ""
+msgstr "sense compatibilitat amb parades de bus heretades (aka: PTv1)"
 
 msgid "assume and show compatibility with legacy bus-stops (aka: PTv1)"
 msgstr ""
+"assumeix i mostra compatibilitat amb parades de bus heretades (aka: PTv1)"
 
 msgid "Compatibility with well known tags"
 msgstr "Compatibilitat amb etiquetes comunes"
@@ -1609,28 +1826,33 @@ msgid ""
 msgstr ""
 
 msgid "Do not consider Route-Master and Route relations with empty 'network'."
-msgstr ""
+msgstr "No consideris relacions Ruta o Ruta Mestra amb 'network' buit."
 
 msgid ""
 "Do not consider Route-Master and Route relations with empty 'operator'."
-msgstr ""
+msgstr "No consideris relacions Ruta o Ruta Mestra amb 'operator' buit."
 
 msgid "This sets the field separator in the CSV list of routes."
-msgstr ""
+msgstr "Això defineix el camp separador al llistat de rutes en CSV."
 
 msgid ""
 "This sets the OR separator in the 'ref' field of the CSV list of routes."
 msgstr ""
+"Això defineix el separador OR al camp 'ref' del llistat de rutes en CSV."
 
 msgid ""
 "Example: '250|250a|250b' : defines that routes with 'ref' = '250' and 'ref' "
 "= '250a' and 'ref' = '250b' are allowed here."
 msgstr ""
+"Exemple: '250|250a|250b' : defineix que les rutes amb 'ref' = '250', 'ref' ="
+" '250a' i 'ref' = '250b' són permeses aquí."
 
 msgid ""
 "This sets the 'network-ref' separator in the 'ref' field of the CSV list of "
 "routes."
 msgstr ""
+"Això defineix el separador per a 'network-ref' al camp 'ref' al llistat de "
+"rutes del CSV."
 
 msgid ""
 "Example: '605/50' : defines that here 'ref' of two 'network' are valid."
@@ -1641,6 +1863,7 @@ msgid ""
 "It is checked, whether 'ref:network1' = '605' and 'ref:network2' = '50' "
 "exist."
 msgstr ""
+"S'ha comprovat si 'ref:network1' = '605' i 'ref:network2' = '50' existeixen."
 
 msgid "is not set"
 msgstr "no s'ha definit"
@@ -1655,7 +1878,7 @@ msgid "is not yet valid (in the future)"
 msgstr "ja no és vàlid (al futur)"
 
 msgid "outdated, fits to older GTFS version only"
-msgstr ""
+msgstr "desactualitzat, funciona només amb una versió antiga de GTFS"
 
 msgid "does not exist"
 msgstr "no existeix"
