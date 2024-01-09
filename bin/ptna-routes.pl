@@ -4853,6 +4853,10 @@ sub noAccessOnNode {
                     return '';
                 } elsif ( $node_tag_ref->{$access_type} eq 'no'      ||
                           $node_tag_ref->{$access_type} eq 'private'    ) {
+                    if ( $access_type eq 'psv' && $node_tag_ref->{$access_type} eq 'private' ) {
+                        printf STDERR "noAccessOnNode() : access for node %d (barrier=%s, %s=%s)\n", $node_id, $node_tag_ref->{'barrier'}, $access_type, $node_tag_ref->{$access_type}       if ( $debug );
+                        return '';
+                    }
                     printf STDERR "noAccessOnNode() : no access for node %d (barrier=%s, %s=%s)\n", $node_id, $node_tag_ref->{'barrier'}, $access_type, $node_tag_ref->{$access_type}       if ( $debug );
                     return sprintf( "'barrier'='%s', '%s'='%s'", $node_tag_ref->{'barrier'}, $access_type, $node_tag_ref->{$access_type} );
                 }
