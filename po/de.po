@@ -5,16 +5,16 @@
 # 
 # Translators:
 # Noémie <nlehuby@zaclys.net>, 2019
-# ToniE <osm-ToniE@web.de>, 2023
+# ToniE <osm-ToniE@web.de>, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2023-10-31 15:19+0100\n"
+"POT-Creation-Date: 2024-01-09 15:33+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: ToniE <osm-ToniE@web.de>, 2023\n"
+"Last-Translator: ToniE <osm-ToniE@web.de>, 2024\n"
 "Language-Team: German (https://app.transifex.com/jungle-bus/teams/97874/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2018,6 +2018,13 @@ msgstr ""
 
 msgid "This sets the field separator in the CSV list of routes."
 msgstr "Diese Option setzt der Feld-Separator für die CSV-Liste der Routen."
+
+msgid ""
+"Show also the values of these tags in the table for the list of 'positive' "
+"routes."
+msgstr ""
+"Zeige auch die Werte für diese Tags in der Tabelle der Liste der 'positiven'"
+" Routen."
 
 msgid ""
 "This sets the OR separator in the 'ref' field of the CSV list of routes."

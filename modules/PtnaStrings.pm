@@ -1719,6 +1719,14 @@ sub InitOptionStrings {
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
+    $OptionList[$i]->{'option'}                 = "table-show-also";
+    $OptionList[$i]->{'default'}                = "";
+    $OptionList[$i]->{'description'}            = gettext( "Show also the values of these tags in the table for the list of 'positive' routes." ) . "\n" .
+                                                  gettext( "Example" ) . ": --table-show-also=from,via,to";
+    $OptionList[$i]->{'image'}                  = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+
+    $i++;
     $OptionList[$i]->{'option'}                 = "or-separator";
     $OptionList[$i]->{'default'}                = "|";
     $OptionList[$i]->{'description'}            = gettext( "This sets the OR separator in the 'ref' field of the CSV list of routes." ) . "\n" .

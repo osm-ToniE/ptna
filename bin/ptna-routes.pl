@@ -109,6 +109,7 @@ my $ptv1_compatibility              = "no";
 my $show_gtfs                       = undef;
 my $strict_network                  = undef;
 my $strict_operator                 = undef;
+my $table_show_also                 = undef;
 my $max_error                       = undef;
 my $help                            = undef;
 my $man_page                        = undef;
@@ -169,6 +170,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'show-gtfs'                     =>  \$show_gtfs,                    # --show-gtfs                       print positive information for "gtfs:*" tags
             'strict-network'                =>  \$strict_network,               # --strict-network                  do not consider empty network tags
             'strict-operator'               =>  \$strict_operator,              # --strict-operator                 do not consider empty operator tags
+            'table-show-also=s'             =>  \$table_show_also,              # --table-show-also="from,via,to"   show also their values in columns in the list of 'psotive' routes
             'test'                          =>  \$opt_test,                     # --test                            to test the SW
             'title=s'                       =>  \$page_title,                   # --title=...                       Title for the HTML page
           );
@@ -252,43 +254,44 @@ if ( $verbose ) {
     printf STDERR "%20s--title='%s'\n",                    ' ', $page_title                 ? $page_title   : '';
     printf STDERR "%20s--network-guid='%s'\n",             ' ', $network_guid               ? $network_guid : '';
     printf STDERR "%20s--language='%s'\n",                 ' ', $opt_language               ? $opt_language : 'en';
-    printf STDERR "%20s--allow-coach='%s'\n",              ' ', $allow_coach                ? 'ON'          :'OFF';
-    printf STDERR "%20s--check-access='%s'\n",             ' ', $check_access               ? 'ON'          :'OFF';
-    printf STDERR "%20s--check-bus-stop='%s'\n",           ' ', $check_bus_stop             ? 'ON'          :'OFF';
-    printf STDERR "%20s--check-gtfs='%s'\n",               ' ', $check_gtfs                 ? 'ON'          :'OFF';
-    printf STDERR "%20s--check-motorway-link='%s'\n",      ' ', $check_motorway_link        ? 'ON'          :'OFF';
-    printf STDERR "%20s--check-name='%s'\n",               ' ', $check_name                 ? 'ON'          :'OFF';
-    printf STDERR "%20s--check-name-relaxed='%s'\n",       ' ', $check_name_relaxed         ? 'ON'          :'OFF';
-    printf STDERR "%20s--check-osm-separator='%s'\n",      ' ', $check_osm_separator        ? 'ON'          :'OFF';
-    printf STDERR "%20s--check-platform='%s'\n",           ' ', $check_platform             ? 'ON'          :'OFF';
-    printf STDERR "%20s--check-roundabouts='%s'\n",        ' ', $check_roundabouts          ? 'ON'          :'OFF';
-    printf STDERR "%20s--check-route-ref='%s'\n",          ' ', $check_route_ref            ? 'ON'          :'OFF';
-    printf STDERR "%20s--check-sequence='%s'\n",           ' ', $check_sequence             ? 'ON'          :'OFF';
-    printf STDERR "%20s--check-service-type='%s'\n",       ' ', $check_service_type         ? 'ON'          :'OFF';
-    printf STDERR "%20s--check-stop-position='%s'\n",      ' ', $check_stop_position        ? 'ON'          :'OFF';
-    printf STDERR "%20s--check-version='%s'\n",            ' ', $check_version              ? 'ON'          :'OFF';
-    printf STDERR "%20s--check-way-type='%s'\n",           ' ', $check_way_type             ? 'ON'          :'OFF';
-    printf STDERR "%20s--coloured-sketchline='%s'\n",      ' ', $coloured_sketchline        ? 'ON'          :'OFF';
-    printf STDERR "%20s--expect-network-long='%s'\n",      ' ', $expect_network_long        ? 'ON'          :'OFF';
+    printf STDERR "%20s--allow-coach='%s'\n",              ' ', $allow_coach                ? 'ON'          : 'OFF';
+    printf STDERR "%20s--check-access='%s'\n",             ' ', $check_access               ? 'ON'          : 'OFF';
+    printf STDERR "%20s--check-bus-stop='%s'\n",           ' ', $check_bus_stop             ? 'ON'          : 'OFF';
+    printf STDERR "%20s--check-gtfs='%s'\n",               ' ', $check_gtfs                 ? 'ON'          : 'OFF';
+    printf STDERR "%20s--check-motorway-link='%s'\n",      ' ', $check_motorway_link        ? 'ON'          : 'OFF';
+    printf STDERR "%20s--check-name='%s'\n",               ' ', $check_name                 ? 'ON'          : 'OFF';
+    printf STDERR "%20s--check-name-relaxed='%s'\n",       ' ', $check_name_relaxed         ? 'ON'          : 'OFF';
+    printf STDERR "%20s--check-osm-separator='%s'\n",      ' ', $check_osm_separator        ? 'ON'          : 'OFF';
+    printf STDERR "%20s--check-platform='%s'\n",           ' ', $check_platform             ? 'ON'          : 'OFF';
+    printf STDERR "%20s--check-roundabouts='%s'\n",        ' ', $check_roundabouts          ? 'ON'          : 'OFF';
+    printf STDERR "%20s--check-route-ref='%s'\n",          ' ', $check_route_ref            ? 'ON'          : 'OFF';
+    printf STDERR "%20s--check-sequence='%s'\n",           ' ', $check_sequence             ? 'ON'          : 'OFF';
+    printf STDERR "%20s--check-service-type='%s'\n",       ' ', $check_service_type         ? 'ON'          : 'OFF';
+    printf STDERR "%20s--check-stop-position='%s'\n",      ' ', $check_stop_position        ? 'ON'          : 'OFF';
+    printf STDERR "%20s--check-version='%s'\n",            ' ', $check_version              ? 'ON'          : 'OFF';
+    printf STDERR "%20s--check-way-type='%s'\n",           ' ', $check_way_type             ? 'ON'          : 'OFF';
+    printf STDERR "%20s--coloured-sketchline='%s'\n",      ' ', $coloured_sketchline        ? 'ON'          : 'OFF';
+    printf STDERR "%20s--expect-network-long='%s'\n",      ' ', $expect_network_long        ? 'ON'          : 'OFF';
     printf STDERR "%20s--expect-network-long-as='%s'\n",   ' ', $expect_network_long_as     ? $expect_network_long_as      : '';
     printf STDERR "%20s--expect-network-long-for='%s'\n",  ' ', $expect_network_long_for    ? $expect_network_long_for     : '';
-    printf STDERR "%20s--expect-network-short='%s'\n",     ' ', $expect_network_short       ? 'ON'          :'OFF';
+    printf STDERR "%20s--expect-network-short='%s'\n",     ' ', $expect_network_short       ? 'ON'          : 'OFF';
     printf STDERR "%20s--expect-network-short-as='%s'\n",  ' ', $expect_network_short_as    ? $expect_network_short_as     : '';
     printf STDERR "%20s--expect-network-short-for='%s'\n", ' ', $expect_network_short_for   ? $expect_network_short_for    : '';
     printf STDERR "%20s--gtfs-feed='%s'\n",                ' ', $opt_gtfs_feed              ? $opt_gtfs_feed : '';
-    printf STDERR "%20s--link-gtfs='%s'\n",                ' ', $link_gtfs                  ? 'ON'          :'OFF';
+    printf STDERR "%20s--link-gtfs='%s'\n",                ' ', $link_gtfs                  ? 'ON'          : 'OFF';
     printf STDERR "%20s--max-error='%s'\n",                ' ', $max_error                  ? $max_error                   : '';
     printf STDERR "%20s--multiple-ref-type-entries='%s'\n",' ', $multiple_ref_type_entries  ? $multiple_ref_type_entries   : '';
     printf STDERR "%20s--network-long-regex='%s'\n",       ' ', $network_long_regex         ? $network_long_regex          : '';
     printf STDERR "%20s--network-short-regex='%s'\n",      ' ', $network_short_regex        ? $network_short_regex         : '';
-    printf STDERR "%20s--no-additional-navigation='%s'\n", ' ', $no_additional_navigation   ? 'ON'          :'OFF';
+    printf STDERR "%20s--no-additional-navigation='%s'\n", ' ', $no_additional_navigation   ? 'ON'          : 'OFF';
     printf STDERR "%20s--operator-regex='%s'\n",           ' ', $operator_regex             ? $operator_regex              : '';
-    printf STDERR "%20s--positive-notes='%s'\n",           ' ', $positive_notes             ? 'ON'          :'OFF';
+    printf STDERR "%20s--positive-notes='%s'\n",           ' ', $positive_notes             ? 'ON'          : 'OFF';
     printf STDERR "%20s--ptv1-compatibility='%s'\n",       ' ', $ptv1_compatibility         ? $ptv1_compatibility          : '';
     printf STDERR "%20s--relaxed-begin-end-for='%s'\n",    ' ', $relaxed_begin_end_for      ? $relaxed_begin_end_for       : '';
-    printf STDERR "%20s--show-gtfs='%s'\n",                ' ', $show_gtfs                  ? 'ON'          :'OFF';
-    printf STDERR "%20s--strict-network='%s'\n",           ' ', $strict_network             ? 'ON'          :'OFF';
-    printf STDERR "%20s--strict-operator='%s'\n",          ' ', $strict_operator            ? 'ON'          :'OFF';
+    printf STDERR "%20s--show-gtfs='%s'\n",                ' ', $show_gtfs                  ? 'ON'          : 'OFF';
+    printf STDERR "%20s--strict-network='%s'\n",           ' ', $strict_network             ? 'ON'          : 'OFF';
+    printf STDERR "%20s--strict-operator='%s'\n",          ' ', $strict_operator            ? 'ON'          : 'OFF';
+    printf STDERR "%20s--table-show-also='%s'\n",          ' ', $table_show_also            ? $table_show_also             : '';
     printf STDERR "%20s--separator='%s'\n",                ' ', $csv_separator              ? $csv_separator               : '';
     printf STDERR "%20s--or-separator='%s'\n",             ' ', $or_separator               ? $or_separator                : '';
     printf STDERR "%20s--ref-separator='%s'\n",            ' ', $ref_separator              ? $ref_separator               : '';
@@ -1123,7 +1126,17 @@ if ( scalar( @RouteList ) ) {
     my $number_of_matching_entries      = 0;
     my $CheckNetwork                    = '';
 
-    printTableInitialization( 'name', 'type', 'relation', 'PTv', 'issues', 'notes' );
+    my @start_columns                   = ( 'name', 'type', 'relation' );
+    my @show_also_columns               = ();
+    my @end_columns                     = ( 'PTv', 'issues', 'notes'   );
+
+    if ( $table_show_also ) {
+        my %columns_hash                    = ();
+        map { $columns_hash{$_} = 1; } ( @start_columns, @end_columns );
+        map { push(@show_also_columns,$_) unless ( $columns_hash{$_} ) } split(',', $table_show_also );
+    }
+
+    printTableInitialization( @start_columns, @show_also_columns, @end_columns );
 
     foreach my $entryref ( @RouteList ) {
 
