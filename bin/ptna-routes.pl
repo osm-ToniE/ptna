@@ -24,7 +24,7 @@ use Getopt::Long;
 use OSM::XML            qw( parse );
 use OSM::Data           qw( %META %NODES %WAYS %RELATIONS );
 use RoutesList;
-use GTFS::PtnaSQLite    qw( getGtfsRouteIdHtmlTag getGtfsTripIdHtmlTag getGtfsShapeIdHtmlTag );
+use GTFS::PtnaSQLite    qw( getGtfsRouteIdHtmlTag getGtfsTripIdHtmlTag getGtfsShapeIdHtmlTag getGtfsLinkToRoutes );
 use Data::Dumper;
 use Encode;
 
