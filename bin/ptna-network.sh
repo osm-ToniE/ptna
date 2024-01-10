@@ -671,8 +671,8 @@ then
 
         if [ -f $WORK_LOC/$HTML_FILE ]
         then
-            if [ -s $WORK_LOC/$HTML_FILE ]
-            then
+            #if [ -s $WORK_LOC/$HTML_FILE ]
+            #then
                 # DIFF_LINES_BASE defines how many diff lines we have to tollerate in order to skip the
                 # different time strings of the analysis
                 # only diffs in the analysis result count
@@ -781,10 +781,10 @@ then
                 else
                     echo $(date "+%Y-%m-%d %H:%M:%S") "Target location $RESULTS_LOC does not exist/could not be created"
                 fi
-            else
-                echo $(date "+%Y-%m-%d %H:%M:%S") $WORK_LOC/$HTML_FILE is empty
-                echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WORK_LOC/$HTML_FILE)
-            fi
+            #else
+            #    echo $(date "+%Y-%m-%d %H:%M:%S") $WORK_LOC/$HTML_FILE is empty
+            #    echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WORK_LOC/$HTML_FILE)
+            #fi
         else
             echo $(date "+%Y-%m-%d %H:%M:%S") $WORK_LOC/$HTML_FILE does not exist
         fi
