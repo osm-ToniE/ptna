@@ -62,8 +62,7 @@ my %transport_type_uses_way_type = ( 'train'     => { 'railway'   => [ 'rail',  
 
 
 my %transport_type_to_restriction_type = ( 'trolleybus' => 'bus',
-                                           'coach'      => 'bus',
-                                           'share_taxi' => 'motorcar'
+                                           'coach'      => 'bus'
                                          );
 ####################################################################################################################
 #
