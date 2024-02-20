@@ -76,6 +76,7 @@ sub getGtfsRouteIdHtmlTag {
     my $gtfs_feed      = shift;
     my $release_date   = shift || '';
     my $route_id       = shift;
+    my $relation_id    = shift;
 
     my $gtfs_html_tag  = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"'GTFS feed' %s. %s\">GTFS!</a>",
                                   html_escape(gettext("is not set")),
@@ -172,6 +173,7 @@ sub getGtfsTripIdHtmlTag {
     my $gtfs_feed      = shift;
     my $release_date   = shift || '';
     my $trip_id        = shift;
+    my $relation_id    = shift;
 
     my $gtfs_html_tag  = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"'GTFS feed' %s. %s\">GTFS!</a>",
                                   html_escape(gettext("is not set")),
@@ -199,6 +201,11 @@ sub getGtfsTripIdHtmlTag {
                                             html_escape($gtfs_feed), html_escape($release_date),
                                             html_escape($trip_id),
                                             $TripIdStatus[1] . ' - ' . $TripIdStatus[2] );
+                    $gtfs_html_tag .=  sprintf( ", <a href=\"/gtfs/compare-trips.php?feed=%s&release_date=%s&trip_id=%s&relation=%s\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\"></a>",
+                                            uri_escape($gtfs_feed), uri_escape($release_date),
+                                            uri_escape($trip_id),
+                                            uri_escape($relation_id),
+                                            html_escape(gettext("Compare GTFS trip with OSM route")) );
                 } elsif ( $TripIdStatus[0] eq 'past' ) {
                     $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateold\" href=\"/gtfs/%s/single-trip.php?feed=%s&release_date=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Trip-Id: %s : 'trip_id' %s.\">GTFS?</a>",
                                             uri_escape($gtfs_country),
@@ -207,14 +214,24 @@ sub getGtfsTripIdHtmlTag {
                                             html_escape($gtfs_feed), html_escape($release_date),
                                             html_escape($trip_id),
                                             html_escape(gettext("is no longer valid (in the past)") . ': ' . $TripIdStatus[1] . ' - ' . $TripIdStatus[2]) );
+                    $gtfs_html_tag .=  sprintf( ", <a href=\"/gtfs/compare-trips.php?feed=%s&release_date=%s&trip_id=%s&relation=%s\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\"></a>",
+                                            uri_escape($gtfs_feed), uri_escape($release_date),
+                                            uri_escape($trip_id),
+                                            uri_escape($relation_id),
+                                            html_escape(gettext("Compare GTFS trip with OSM route")) );
                 } elsif ( $TripIdStatus[0] eq 'future' ) {
-                    $gtfs_html_tag = sprintf( "<a class=\"gtfs-datenew\" href=\"/gtfs/%s/single-trip.php?feed=%s&release_date=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Trip-Id: %s : 'trip_id' %s.\">GTFS?</a>",
+                    $gtfs_html_tag = sprintf( ", <a class=\"gtfs-datenew\" href=\"/gtfs/%s/single-trip.php?feed=%s&release_date=%s&trip_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, GTFS-Trip-Id: %s : 'trip_id' %s.\">GTFS?</a>",
                                             uri_escape($gtfs_country),
                                             uri_escape($gtfs_feed), uri_escape($release_date),
                                             uri_escape($trip_id),
                                             html_escape($gtfs_feed), html_escape($release_date),
                                             html_escape($trip_id),
                                             html_escape(gettext("is not yet valid (in the future)") . ': ' . $TripIdStatus[1] . ' - ' . $TripIdStatus[2]) );
+                    $gtfs_html_tag .=  sprintf( ", <a href=\"/gtfs/compare-trips.php?feed=%s&release_date=%s&trip_id=%s&relation=%s\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\"></a>",
+                                            uri_escape($gtfs_feed), uri_escape($release_date),
+                                            uri_escape($trip_id),
+                                            uri_escape($relation_id),
+                                            html_escape(gettext("Compare GTFS trip with OSM route")) );
                 } else {
                     my $found_in_previous_version = 0;
 
@@ -228,6 +245,11 @@ sub getGtfsTripIdHtmlTag {
                                                     html_escape($gtfs_feed), 'previous',
                                                     html_escape($trip_id),
                                                     html_escape(gettext("outdated, fits to older GTFS version only")) );
+                            $gtfs_html_tag .=  sprintf( ", <a href=\"/gtfs/compare-trips.php?feed=%s&release_date=%s&trip_id=%s&relation=%s\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\"></a>",
+                                                    uri_escape($gtfs_feed), 'previous',
+                                                    uri_escape($trip_id),
+                                                    uri_escape($relation_id),
+                                                    html_escape(gettext("Compare GTFS trip with OSM route")) );
                             $found_in_previous_version = 1;
                         }
                     }
@@ -272,6 +294,7 @@ sub getGtfsShapeIdHtmlTag {
     my $gtfs_feed      = shift;
     my $release_date   = shift || '';
     my $shape_id       = shift;
+    my $relation_id    = shift;
 
     my $gtfs_html_tag  = sprintf( "<a class=\"bad-link\" href=\"/gtfs/\" title=\"'GTFS feed' %s. %s\">GTFS!</a>",
                                   html_escape(gettext("is not set")),
