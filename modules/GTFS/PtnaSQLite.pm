@@ -201,7 +201,7 @@ sub getGtfsTripIdHtmlTag {
                                             html_escape($gtfs_feed), html_escape($release_date),
                                             html_escape($trip_id),
                                             $TripIdStatus[1] . ' - ' . $TripIdStatus[2] );
-                    $gtfs_html_tag .=  sprintf( ", <a href=\"/gtfs/compare-trips.php?feed=%s&release_date=%s&trip_id=%s&relation=%s\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\"></a>!",
+                    $gtfs_html_tag .=  sprintf( ", <a href=\"/gtfs/compare-trips.php?feed=%s&release_date=%s&trip_id=%s&relation=%s\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\"></a>",
                                             uri_escape($gtfs_feed), uri_escape($release_date),
                                             uri_escape($trip_id),
                                             uri_escape($relation_id),
@@ -214,7 +214,7 @@ sub getGtfsTripIdHtmlTag {
                                             html_escape($gtfs_feed), html_escape($release_date),
                                             html_escape($trip_id),
                                             html_escape(gettext("is no longer valid (in the past)") . ': ' . $TripIdStatus[1] . ' - ' . $TripIdStatus[2]) );
-                    $gtfs_html_tag .=  sprintf( ", <a href=\"/gtfs/compare-trips.php?feed=%s&release_date=%s&trip_id=%s&relation=%s\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\"></a>!",
+                    $gtfs_html_tag .=  sprintf( ", <a href=\"/gtfs/compare-trips.php?feed=%s&release_date=%s&trip_id=%s&relation=%s\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\"></a>",
                                             uri_escape($gtfs_feed), uri_escape($release_date),
                                             uri_escape($trip_id),
                                             uri_escape($relation_id),
@@ -227,7 +227,7 @@ sub getGtfsTripIdHtmlTag {
                                             html_escape($gtfs_feed), html_escape($release_date),
                                             html_escape($trip_id),
                                             html_escape(gettext("is not yet valid (in the future)") . ': ' . $TripIdStatus[1] . ' - ' . $TripIdStatus[2]) );
-                    $gtfs_html_tag .=  sprintf( ", <a href=\"/gtfs/compare-trips.php?feed=%s&release_date=%s&trip_id=%s&relation=%s\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\"></a>!",
+                    $gtfs_html_tag .=  sprintf( ", <a href=\"/gtfs/compare-trips.php?feed=%s&release_date=%s&trip_id=%s&relation=%s\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\"></a>",
                                             uri_escape($gtfs_feed), uri_escape($release_date),
                                             uri_escape($trip_id),
                                             uri_escape($relation_id),
@@ -245,7 +245,7 @@ sub getGtfsTripIdHtmlTag {
                                                     html_escape($gtfs_feed), 'previous',
                                                     html_escape($trip_id),
                                                     html_escape(gettext("outdated, fits to older GTFS version only")) );
-                            $gtfs_html_tag .=  sprintf( ", <a href=\"/gtfs/compare-trips.php?feed=%s&release_date=%s&trip_id=%s&relation=%s\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\"></a>!",
+                            $gtfs_html_tag .=  sprintf( ", <a href=\"/gtfs/compare-trips.php?feed=%s&release_date=%s&trip_id=%s&relation=%s\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\"></a>",
                                                     uri_escape($gtfs_feed), 'previous',
                                                     uri_escape($trip_id),
                                                     uri_escape($relation_id),
