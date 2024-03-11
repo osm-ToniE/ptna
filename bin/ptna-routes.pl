@@ -1183,6 +1183,7 @@ if ( scalar( @RouteList ) ) {
                                              'GTFS-Feed'         => $entryref->{'gtfs-feed'},
                                              'GTFS-Route-Id'     => $entryref->{'gtfs-route-id'},
                                              'GTFS-Release-Date' => $entryref->{'gtfs-release-date'},
+                                             'relation'          => $relation_id
                                            );
                     }
 
@@ -6569,6 +6570,7 @@ sub printTableSubHeader {
     my $ref                 = exists($hash{'ref'}) ? $hash{'ref'} : '';
     my $ref_or_list         = $hash{'ref-or-list'};
     my $network             = $hash{'network'}       || '';
+    my $relation_id         = $hash{'relation'}      || '';
     my $operator            = $hash{'operator'}      || '';
     my $pt_type             = $hash{'pt_type'}       || '';
     my $colour              = $hash{'colour'}        || '';
@@ -6618,22 +6620,22 @@ sub printTableSubHeader {
         if ( $hash{'GTFS-Release-Date'} ) {
             printf STDERR "printTableSubHeader(1): \$gtfs_csv_info_from{$hash{'GTFS-Feed'}}{$hash{'GTFS-Release-Date'}} = 1;\n" if ( $debug );
             $gtfs_csv_info_from{$hash{'GTFS-Feed'}}{$hash{'GTFS-Release-Date'}} = 1;
-            $csv_text .= join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}, $hash{'GTFS-Release-Date'}, $_ ); } split( ';', $hash{'GTFS-Route-Id'} ) );
+            $csv_text .= join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}, $hash{'GTFS-Release-Date'}, $_, $relation_id ); } split( ';', $hash{'GTFS-Route-Id'} ) );
         } else {
             printf STDERR "printTableSubHeader(1): \$gtfs_csv_info_from{$hash{'GTFS-Feed'}}{' latest } = 1;\n" if ( $debug );
             $gtfs_csv_info_from{$hash{'GTFS-Feed'}}{' latest '} = 1;
-            $csv_text .= join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}, '', $_ ); } split( ';', $hash{'GTFS-Route-Id'} ) );
+            $csv_text .= join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}, '', $_, $relation_id ); } split( ';', $hash{'GTFS-Route-Id'} ) );
         }
     } else {
         if ( $hash{'GTFS-Feed'} ) {
             if ( $hash{'GTFS-Release-Date'} ) {
                 printf STDERR "printTableSubHeader(2): \$gtfs_csv_info_from{$hash{'GTFS-Feed'}}{$hash{'GTFS-Release-Date'}} = 1;\n" if ( $debug );
                 $gtfs_csv_info_from{$hash{'GTFS-Feed'}}{$hash{'GTFS-Release-Date'}} = 1;
-                $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}, $hash{'GTFS-Release-Date'}, '' );
+                $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}, $hash{'GTFS-Release-Date'}, '', $relation_id );
             } else {
                 printf STDERR "printTableSubHeader(2): \$gtfs_csv_info_from{$hash{'GTFS-Feed'}}{' latest } = 1;\n" if ( $debug );
                 $gtfs_csv_info_from{$hash{'GTFS-Feed'}}{' latest '} = 1;
-                $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'},'','' );
+                $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'},'','', $relation_id );
             }
         } elsif ( $hash{'GTFS-Route-Id'} ) {
             $csv_text .= join( ', ', map { sprintf( "%s: %s; ", ( $column_name{'GTFS-Route-Id'} ? $column_name{'GTFS-Route-Id'} : 'GTFS-Route-Id' ), html_escape($_) ); } split( ';', $hash{'GTFS-Route-Id'} ) );
