@@ -5831,7 +5831,12 @@ sub printInitialHeader {
         push( @HTML_start, "            }\n" );
         push( @HTML_start, "        </script>\n" );
         push( @HTML_start, "        <script src=\"/script/sort-table.js\"></script>\n" );
-
+        push( @HTML_start, "        <script> // Run sortTable.init() when the page loads - disabled in sort-table.js for race-condition reasons\n" );
+        push( @HTML_start, "            window.addEventListener\n" );
+        push( @HTML_start, "                ? window.addEventListener('load', sortTable.init, false)\n" );
+        push( @HTML_start, "                : window.attachEvent && window.attachEvent('onload', sortTable.init)\n" );
+        push( @HTML_start, "                ;\n" );
+        push( @HTML_start, "        </script>\n" );
     }
     push( @HTML_start, "    </head>\n" );
     push( @HTML_start, "    <body>\n" );
