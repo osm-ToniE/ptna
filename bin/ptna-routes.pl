@@ -1316,7 +1316,7 @@ if ( scalar( @RouteList ) ) {
         # xgettext: This section will list all routes which could not be clearly assigned because the combination of "ref;type" appears more than once and information like 'operator', 'from' and 'to' is missing
         printHeader( gettext('Not clearly assigned routes'), 1, 'unassigned' );
         printHintUnassignedRelations();
-        printTableHeader( 'ref' => 'routename', 'relation' => 'number' );
+        printTableHeader( 'ref' => 'number', 'relation' => 'number' );
 
         foreach $relation_id ( @relation_ids ) {
             $relation_ptr = $RELATIONS{$relation_id};
@@ -1396,7 +1396,7 @@ if ( scalar(@line_refs) ) {
         if ( $route_type_lines ) {
             $help = sprintf( "%s (%s)", ($transport_types{$route_type} ? $transport_types{$route_type} : $route_type), $route_type );
             printHeader( $help, 2 );
-            printTableHeader( 'ref' => 'routename', 'relation' => 'number' );
+            printTableHeader( 'ref' => 'number', 'relation' => 'number' );
             foreach $ref ( @line_refs ) {
                 foreach $type ( 'route_master', 'route' ) {
                     foreach $relation_id ( sort( { $PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}->{$a}->{'__sort_name__'} cmp
@@ -1512,7 +1512,7 @@ if ( scalar(@suspicious_relations) ) {
 
     printHintSuspiciousRelations();
 
-    printTableHeader( 'relation' => 'number', 'ref' => 'routename' );
+    printTableHeader( 'relation' => 'number', 'ref' => 'number' );
 
     foreach $relation_id ( @suspicious_relations ) {
         $relation_ptr = $RELATIONS{$relation_id};
