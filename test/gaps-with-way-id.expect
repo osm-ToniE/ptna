@@ -64,7 +64,7 @@
         <h2 id="A2.1">2.1 Bus (bus)</h2>
         <table class="oepnvtable js-sort-table">
             <thead>
-                <tr class="tableheaderrow"><th class="ref js-sort-routename">&#x21C5;Line (ref=)</th><th class="relation js-sort-number">&#x21C5;Relation (id=)</th><th class="type">&#x21C5;Type (type=)</th><th class="name">&#x21C5;Name (name=)</th><th class="network">&#x21C5;Network (network=)</th><th class="operator">&#x21C5;Operator (operator=)</th><th class="from">&#x21C5;From (from=)</th><th class="via">&#x21C5;Via (via=)</th><th class="to">&#x21C5;To (to=)</th><th class="PTv">&#x21C5;PTv</th><th class="issues">&#x21C5;Errors</th><th class="notes">&#x21C5;Notes</th></tr>
+                <tr class="tableheaderrow"><th class="ref js-sort-number">&#x21C5;Line (ref=)</th><th class="relation js-sort-number">&#x21C5;Relation (id=)</th><th class="type">&#x21C5;Type (type=)</th><th class="name">&#x21C5;Name (name=)</th><th class="network">&#x21C5;Network (network=)</th><th class="operator">&#x21C5;Operator (operator=)</th><th class="from">&#x21C5;From (from=)</th><th class="via">&#x21C5;Via (via=)</th><th class="to">&#x21C5;To (to=)</th><th class="PTv">&#x21C5;PTv</th><th class="issues">&#x21C5;Errors</th><th class="notes">&#x21C5;Notes</th></tr>
             </thead>
             <tbody>
                 <tr id="-102596" data-info="-102596" data-ref="001" class="line"><td class="ref">001</td><td class="relation"><img src="/img/Relation.svg" alt="Relation" /> -102596</td><td class="type">route_master</td><td class="name">Bus 001</td><td class="network">Test</td><td class="operator"></td><td class="from"></td><td class="via"></td><td class="to"></td><td class="PTv">2</td><td class="issues"></td><td class="notes">'network' = 'Test'</td></tr>
