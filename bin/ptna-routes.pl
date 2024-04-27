@@ -2755,10 +2755,23 @@ sub analyze_relation {
             }
         }
         #
-        # Link to GTFS data shall be shown
+        # Link to GTFS data shall be shown and/or problems shall be reported
         #
-        if ( $link_gtfs ) {
-            $relation_ptr->{'GTFS-HTML-TAG'} = getGtfsInfo( $relation_ptr );
+        if ( $link_gtfs || $check_gtfs ) {
+            my $gtfs_info = getGtfsInfo( $relation_ptr );
+            if ( $link_gtfs ) {
+                $relation_ptr->{'GTFS-HTML-TAG'} = $gtfs_info;
+            }
+            if ( $check_gtfs ) {
+                if ( $gtfs_info =~ m/>GTFS[!?]/ ) {
+                    $gtfs_info =~ s/^.*GTFS-Feed: /GTFS-Feed: /;
+                    $gtfs_info =~ s/\.\".*$//;
+                    $gtfs_info =~ s/GTFS-Release-Date: , //;
+                    $gtfs_info =~ s/GTFS-Release-Date: previous, //;
+                    # printf STDERR "%s : %s -> %s\n", $ref, $relation_id, $gtfs_info;
+                    push( @{$relation_ptr->{'__issues__'}}, $gtfs_info );
+                }
+            }
         }
     }
 
