@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2024-02-21 21:43+0100\n"
+"POT-Creation-Date: 2024-04-27 17:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1340,8 +1340,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"Route-Master: There is more than one Route-Master for this line = "
-"'ref' (different 'network'-tags?)."
+"Route-Master: There is more than one Route-Master for this line = 'ref' "
+"(different 'network'-tags?)."
 msgstr ""
 
 msgid ""
@@ -1386,6 +1386,24 @@ msgid ""
 msgstr ""
 
 msgid "This applies to 'barrier' = '...' as well."
+msgstr ""
+
+msgid "Check OSM route_master/route data against GTFS feed data."
+msgstr ""
+
+msgid "no checking"
+msgstr ""
+
+msgid "check against GTFS feed data specified in"
+msgstr ""
+
+msgid "CSV entry in the routes file"
+msgstr ""
+
+msgid "tags in the route_master and route relations"
+msgstr ""
+
+msgid "check against 'csv' and 'tags'."
 msgstr ""
 
 msgid "'highway' = 'bus_stop' can be set on nodes only, not on ways or areas."
@@ -1617,6 +1635,9 @@ msgid "is not set"
 msgstr ""
 
 msgid "GTFS database not found"
+msgstr ""
+
+msgid "Compare GTFS route with OSM route_master/route"
 msgstr ""
 
 msgid "is no longer valid (in the past)"

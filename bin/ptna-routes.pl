@@ -84,6 +84,7 @@ my $no_additional_navigation        = undef;
 my $operator_regex                  = undef;
 my $allow_coach                     = undef;
 my $check_access                    = undef;
+my $check_against_gtfs              = undef;
 my $check_bus_stop                  = undef;
 my $check_gtfs                      = undef;
 my $check_motorway_link             = undef;
@@ -131,7 +132,9 @@ GetOptions( 'help'                          =>  \$help,                         
             'debug'                         =>  \$debug,                        # --debug
             'allow-coach'                   =>  \$allow_coach,                  # --allow-coach                     allow 'coach' als valid routetype
             'check-access'                  =>  \$check_access,                 # --check-access                    check for access restrictions on highways
+            'check-against-gtfs=s'          =>  \$check_against_gtfs,           # --check-against-gtfs              check against GTFS data using 'gtfs:*' tags in relation (=tags) or using CVS data in 'routes_file' (=csv) or both (=tags,csv)
             'check-bus-stop'                =>  \$check_bus_stop,               # --check-bus-stop                  check for strict highway=bus_stop on nodes only
+            'check-gtfs'                    =>  \$check_gtfs,                   # --check-gtfs                      check "gtfs:*" tags for validity/uniqueness/...
             'check-motorway-link'           =>  \$check_motorway_link,          # --check-motorway-link             check for motorway_link followed/preceeded by motorway or trunk
             'check-name'                    =>  \$check_name,                   # --check-name                      check for strict name conventions (name='... ref: from => to'
             'check-name-relaxed'            =>  \$check_name_relaxed,           # --check-name-relaxed              check for relaxed name conventions (name='... ref: from => to'
@@ -144,7 +147,6 @@ GetOptions( 'help'                          =>  \$help,                         
             'check-stop-position'           =>  \$check_stop_position,          # --check-stop-position             check for bus=yes, tram=yes, ... on (stop_positions
             'check-version'                 =>  \$check_version,                # --check-version                   check for PTv2 on route_masters, ...
             'check-way-type'                =>  \$check_way_type,               # --check-way-type                  check for routes: do vehicles use the right way type
-            'check-gtfs'                    =>  \$check_gtfs,                   # --check-gtfs                      check "gtfs:*" tags for validity/uniqueness/...
             'coloured-sketchline'           =>  \$coloured_sketchline,          # --coloured-sketchline             force SketchLine to print coloured icons
             'expect-network-long'           =>  \$expect_network_long,          # --expect-network-long             note if 'network' is not long form in general
             'expect-network-long-as:s'      =>  \$expect_network_long_as,       # --expect-network-long-as="Münchner Verkehrs- und Tarifverbund|Biberger Bürgerbus"
@@ -259,6 +261,7 @@ if ( $verbose ) {
     printf STDERR "%20s--language='%s'\n",                 ' ', $opt_language               ? $opt_language : 'en';
     printf STDERR "%20s--allow-coach='%s'\n",              ' ', $allow_coach                ? 'ON'          : 'OFF';
     printf STDERR "%20s--check-access='%s'\n",             ' ', $check_access               ? 'ON'          : 'OFF';
+    printf STDERR "%20s--check-against-gtfs='%s'\n",       ' ', $check_against_gtfs         ? $check_against_gtfs          : '';
     printf STDERR "%20s--check-bus-stop='%s'\n",           ' ', $check_bus_stop             ? 'ON'          : 'OFF';
     printf STDERR "%20s--check-gtfs='%s'\n",               ' ', $check_gtfs                 ? 'ON'          : 'OFF';
     printf STDERR "%20s--check-motorway-link='%s'\n",      ' ', $check_motorway_link        ? 'ON'          : 'OFF';
@@ -1192,7 +1195,7 @@ if ( scalar( @RouteList ) ) {
 
                     $status = analyze_environment( \@list_of_matching_relation_ids, $entryref->{'ref-or-list'}, $relation_ptr->{'tag'}->{'type'}, $entryref->{'route'}, $relation_id );
 
-                    $status = analyze_relation( $relation_ptr, $relation_id );
+                    $status = analyze_relation( $relation_ptr, $relation_id, $entryref );
 
                     printTableLine( 'ref'           =>    $relation_ptr->{'tag'}->{'ref'},
                                     'relation'      =>    $relation_id,
@@ -2451,6 +2454,7 @@ sub analyze_route_environment {
 sub analyze_relation {
     my $relation_ptr    = shift;
     my $relation_id     = shift;
+    my $entryref        = shift || undef;
     my $return_code     = 0;
 
     my $ref                             = '';
@@ -2697,14 +2701,17 @@ sub analyze_relation {
             }
         }
 
-        #if ( $check_gtfs ) {
+        if ( $check_gtfs ) {
+            if ( $entryref ) {
+                ;
+            }
         #    if ( $relation_ptr->{'tag'}->{'gtfs:shape_id'}                 &&
         #         !defined($relation_ptr->{'tag'}->{'gtfs:trip_id'})        &&
         #         !defined($relation_ptr->{'tag'}->{'gtfs:trip_id:sample'})    ) {
         #        $notes_string = gettext( "'gtfs:shape_id' = '%s' is set but neither 'gtfs:trip_id' nor 'gtfs:trip_id:sample' is set: consider setting one of them as they provide additional information about stops (their names, sequence and locations)." );
         #        push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, $relation_ptr->{'tag'}->{'gtfs:shape_id'} ) );
         #    }
-        #}
+        }
 
         if ( $relation_ptr->{'tag'}->{'line'} ) {
             $notes_string = gettext( "The tag 'line' (='%s') is reserved for 'power' = 'line' related tagging. For public transport 'route_master' and 'route' are used." );
@@ -2716,9 +2723,9 @@ sub analyze_relation {
         #
 
         if ( $type eq 'route_master' ) {
-            $return_code = analyze_route_master_relation( $relation_ptr, $relation_id );
+            $return_code = analyze_route_master_relation( $relation_ptr, $relation_id, $entryref );
         } elsif ( $type eq 'route') {
-            $return_code = analyze_route_relation( $relation_ptr, $relation_id );
+            $return_code = analyze_route_relation( $relation_ptr, $relation_id, $entryref );
         }
 
         #
@@ -2764,6 +2771,7 @@ sub analyze_relation {
 sub analyze_route_master_relation {
     my $relation_ptr    = shift;
     my $relation_id     = shift;
+    my $entryref        = shift || undef;
     my $return_code     = 0;
 
     my $ref                            = $relation_ptr->{'tag'}->{'ref'}  || '';
@@ -2832,6 +2840,7 @@ sub analyze_route_master_relation {
 sub analyze_route_relation {
     my $relation_ptr    = shift;
     my $relation_id     = shift;
+    my $entryref        = shift || undef;
     my $return_code     = 0;
 
     my $ref                            = $relation_ptr->{'tag'}->{'ref'}  || '';
@@ -2938,6 +2947,7 @@ sub analyze_route_relation {
 sub analyze_ptv2_route_relation {
     my $relation_ptr    = shift;
     my $relation_id     = shift;
+    my $entryref        = shift || undef;
     my $return_code     = 0;
 
     my $type                                = $relation_ptr->{'tag'}->{'type'};
