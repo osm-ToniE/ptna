@@ -1456,11 +1456,11 @@ sub InitOptionStrings {
     $OptionList[$i]->{'option'}                 = "check-against-gtfs";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = "OFF|tags|csv|csv,tags" . "\n" .
-                                                  gettext( "Check OSM route_master/route data against GTFS feed data." ) . "\n" .
+                                                  gettext( "Check OSM route_master/route data against GTFS feed data" ) . ".\n" .
                                                   "OFF: "      . gettext( "no checking" ) . "\n" .
                                                   "csv: "      . gettext( "check against GTFS feed data specified in" ) . ' '          . gettext( "CSV entry in the routes file" ) . "\n" .
-                                                  "tags: "     . gettext( "check against GTFS feed data specified in" ) . ' "gtfs:*" ' . gettext( "tags in the route_master and route relations" ) . "\n" .
-                                                  "csv,tags: " . gettext( "check against 'csv' and 'tags'." );
+                                                  "tags: "     . gettext( "check against GTFS feed data specified in" ) . " 'gtfs:*' " . gettext( "tags in the route_master and route relations" ) . "\n" .
+                                                  "csv,tags: " . gettext( "check against 'csv' and 'tags'" ) . '.';
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 

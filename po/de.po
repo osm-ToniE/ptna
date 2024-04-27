@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2024-02-21 21:43+0100\n"
+"POT-Creation-Date: 2024-04-27 17:37+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2024\n"
 "Language-Team: German (https://app.transifex.com/jungle-bus/teams/97874/de/)\n"
@@ -1739,6 +1739,24 @@ msgstr ""
 msgid "This applies to 'barrier' = '...' as well."
 msgstr "Das gilt auch für 'barrier'."
 
+msgid "Check OSM route_master/route data against GTFS feed data"
+msgstr "Prüfe OSM route_master/route Daten gegen GTFS feed Daten"
+
+msgid "no checking"
+msgstr "keine Prüfung"
+
+msgid "check against GTFS feed data specified in"
+msgstr "prüfe gegen die Daten des GTFS feed, definiert in "
+
+msgid "CSV entry in the routes file"
+msgstr "CSV Eintrag in der Routes Datei"
+
+msgid "tags in the route_master and route relations"
+msgstr "tags in den route_master und route Relationen"
+
+msgid "check against 'csv' and 'tags'"
+msgstr "prüfe gegen 'csv' und 'tags'"
+
 msgid "'highway' = 'bus_stop' can be set on nodes only, not on ways or areas."
 msgstr ""
 "'highway' = 'bus_stop' ist nur auf Nodes erlaubt, nicht auf Ways oder Areas."
@@ -2064,6 +2082,9 @@ msgstr "ist nicht gesetzt"
 
 msgid "GTFS database not found"
 msgstr "GTFS Datenbank nicht gefunden"
+
+msgid "Compare GTFS route with OSM route_master/route"
+msgstr "Vergleiche GTFS route mit OSM route_master/route"
 
 msgid "is no longer valid (in the past)"
 msgstr "ist nicht mehr gültig (liegt in der Vergangenheit)"
