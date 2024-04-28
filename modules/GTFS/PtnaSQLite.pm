@@ -101,7 +101,7 @@ sub getGtfsRouteIdHtmlTag {
                                             html_escape($route_id),
                                             $RouteIdStatus[1] . ' - ' . $RouteIdStatus[2] );
                     if ( $relation_id ) {
-                        $gtfs_html_tag .= sprintf( ", <a href=\"/gtfs/compare-routes.php?feed=%s&release_date=%s&route_id=%s&relation=%s#routes-table\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\">new!</a>",
+                        $gtfs_html_tag .= sprintf( ", <a href=\"/gtfs/compare-routes.php?feed=%s&release_date=%s&route_id=%s&relation=%s#routes-table\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\"></a>",
                                                 uri_escape($gtfs_feed), uri_escape($release_date),
                                                 uri_escape($route_id),
                                                 uri_escape($relation_id),
@@ -116,7 +116,7 @@ sub getGtfsRouteIdHtmlTag {
                                             html_escape($route_id),
                                             html_escape(gettext("is no longer valid (in the past)") . ': ' . $RouteIdStatus[1] . ' - ' . $RouteIdStatus[2]) );
                     if ( $relation_id ) {
-                        $gtfs_html_tag .= sprintf( ", <a href=\"/gtfs/compare-routes.php?feed=%s&release_date=%s&route_id=%s&relation=%s#routes-table\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\">new!</a>",
+                        $gtfs_html_tag .= sprintf( ", <a href=\"/gtfs/compare-routes.php?feed=%s&release_date=%s&route_id=%s&relation=%s#routes-table\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\"></a>",
                                                 uri_escape($gtfs_feed), uri_escape($release_date),
                                                 uri_escape($route_id),
                                                 uri_escape($relation_id),
@@ -131,7 +131,7 @@ sub getGtfsRouteIdHtmlTag {
                                             html_escape($route_id),
                                             html_escape(gettext("is not yet valid (in the future)") . ': ' . $RouteIdStatus[1] . ' - ' . $RouteIdStatus[2]) );
                     if ( $relation_id ) {
-                        $gtfs_html_tag .= sprintf( ", <a href=\"/gtfs/compare-routes.php?feed=%s&release_date=%s&route_id=%s&relation=%s#routes-table\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\">new!</a>",
+                        $gtfs_html_tag .= sprintf( ", <a href=\"/gtfs/compare-routes.php?feed=%s&release_date=%s&route_id=%s&relation=%s#routes-table\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\"></a>",
                                                 uri_escape($gtfs_feed), uri_escape($release_date),
                                                 uri_escape($route_id),
                                                 uri_escape($relation_id),
@@ -151,7 +151,7 @@ sub getGtfsRouteIdHtmlTag {
                                                     html_escape($route_id),
                                                     html_escape(gettext("is outdated, fits to older GTFS version only")) );
                             if ( $relation_id ) {
-                                $gtfs_html_tag .= sprintf( ", <a href=\"/gtfs/compare-routes.php?feed=%s&release_date=%s&route_id=%s&relation=%s#routes-table\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\">new!</a>",
+                                $gtfs_html_tag .= sprintf( ", <a href=\"/gtfs/compare-routes.php?feed=%s&release_date=%s&route_id=%s&relation=%s#routes-table\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\"></a>",
                                                         uri_escape($gtfs_feed), 'previous',
                                                         uri_escape($route_id),
                                                         uri_escape($relation_id),
