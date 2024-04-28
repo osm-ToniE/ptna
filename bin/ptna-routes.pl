@@ -2764,7 +2764,9 @@ sub analyze_relation {
             }
             if ( $check_gtfs ) {
                 if ( $gtfs_info =~ m/>GTFS[!?]/ ) {
-                    $gtfs_info =~ s/^.*GTFS-Feed: /GTFS-Feed: /;
+                    $gtfs_info =~ s/^.*'route_id'/'gtfs:route_id'/;
+                    $gtfs_info =~ s/^.*'trip_id'/'gtfs:trip_id'/;
+                    $gtfs_info =~ s/^.*'shape_id'/'gtfs:shape_id'/;
                     $gtfs_info =~ s/\.\".*$//;
                     $gtfs_info =~ s/GTFS-Release-Date: , //;
                     $gtfs_info =~ s/GTFS-Release-Date: previous, //;

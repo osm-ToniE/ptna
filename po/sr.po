@@ -12,10 +12,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2022-09-19 18:41+0200\n"
+"POT-Creation-Date: 2024-04-28 13:39+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: Branko Kokanovic <branko@kokanovic.org>, 2022\n"
-"Language-Team: Serbian (https://www.transifex.com/jungle-bus/teams/97874/sr/)\n"
+"Language-Team: Serbian (https://app.transifex.com/jungle-bus/teams/97874/sr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -449,6 +449,22 @@ msgstr ""
 "Ознака ’line’ (=’%s’) је резервисана за означавање везано за ’power’ = "
 "’line’. За јавне превозе, користе се ’route_master’ и ’route’."
 
+#, perl-format
+msgid "The tag '%s' has an empty value."
+msgstr ""
+
+#, perl-format
+msgid ""
+"The tag '%s' includes whitespace character '%s' (=%#2x) in key. Value of "
+"tag: '%s'"
+msgstr ""
+
+#, perl-format
+msgid ""
+"The tag '%s' includes potentially problematic character '%s' in key. Value "
+"of tag: '%s'"
+msgstr ""
+
 msgid "Route-Master without Route(s)"
 msgstr "Мастер рута без рута"
 
@@ -460,6 +476,13 @@ msgstr "Мастер рута има путеве"
 
 msgid "Route-Master with Node(s)"
 msgstr "Мастер рута има тачке"
+
+#, perl-format
+msgid "Route-Master has %d member with 'role' being set"
+msgid_plural "Route-Master has %d members with 'role' being set"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "'public_transport:version' is not set to '2'"
 msgstr "’public_transport:version’ није постављен на ’2’"
@@ -605,6 +628,11 @@ msgid ""
 msgstr ""
 "PTv2 рута: 'role' = '%s' и %s: размислите да додате 'public_transport' = "
 "'stop_position'"
+
+#, perl-format
+msgid ""
+"PTv2 route: 'role' = '%s' and 'public_transport' is not set but '%s' is set"
+msgstr ""
 
 #, perl-format
 msgid "PTv2 route: 'role' = '%s' but 'public_transport' is not set"
@@ -806,6 +834,16 @@ msgstr "PTv2 рута: користи се неисправан тип пута 
 msgid "Route: using way type (%s)"
 msgstr "Рута: користи се тип пута (%s)"
 
+msgid ""
+"Route: restricted access ('bus'='school') to way for a route relation not "
+"tagged with 'bus'='school'"
+msgid_plural ""
+"Route: restricted access ('bus'='school') to ways for a route relation not "
+"tagged with 'bus'='school'"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 #, perl-format
 msgid ""
 "Route: incorrect access restriction (%s) to way. Consider tagging as "
@@ -822,6 +860,28 @@ msgstr[1] ""
 msgstr[2] ""
 "Рута: неисправна права приступа (%s) путева. Размислите да означите као "
 "'%s'='no' и '%s'='yes'"
+
+#, perl-format
+msgid ""
+"Route: suspicious access restriction (%s) to way. Check whether this should "
+"be '%s:lanes'='%s'"
+msgid_plural ""
+"Route: suspicious access restriction (%s) to ways. Check whether this should"
+" be '%s:lanes'='%s'"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, perl-format
+msgid ""
+"Route: suspicious access restriction (%s) to way. Check whether this should "
+"be '%s'='yes' or 'psv'='yes'"
+msgid_plural ""
+"Route: suspicious access restriction (%s) to ways. Check whether this should"
+" be '%s'='yes' or 'psv'='yes'"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #, perl-format
 msgid "Route: unclear access (%s) to way"
@@ -1248,6 +1308,9 @@ msgstr "Измени у iD едитору"
 msgid "Edit in JOSM"
 msgstr "Измени у JOSM-у"
 
+msgid "Edit in Relatify"
+msgstr ""
+
 msgid "Show relation on special map"
 msgstr "Прикажи релације на посебној карти"
 
@@ -1307,6 +1370,39 @@ msgstr "Додајте или 'gtfs:trip_id' или 'gtfs:trip_id:sample' инф
 
 msgid "'public_transport:version' is not set"
 msgstr "'public_transport:version' ознака није постављена"
+
+#, perl-format
+msgid ""
+"CSV data includes too many ';'. Line %s of Routes-Data. Contents of line: "
+"'%s'"
+msgstr ""
+"CSV подаци имају превише ';'. Линија %s података руте. Садржај линије: '%s'"
+
+#, perl-format
+msgid ""
+"CSV data: field 'gtfs_feed' (= '%s') is wrong. Line %s of Routes-Data. "
+"Contents of line: '%s'"
+msgstr ""
+"CSV подаци: поље ’gtfs_feed’ (= ’%s’) је погрешно. Линија %s података руте. "
+"Садржај линије: ’%s’"
+
+#, perl-format
+msgid ""
+"CSV data: field 'release_date' (= '%s') is wrong. Should be a date (YYYY-MM-"
+"DD), 'latest', 'previous' or 'long-term'. Line %s of Routes-Data. Contents "
+"of line: '%s'"
+msgstr ""
+"CSV подаци: поље 'release_date' (= '%s') није исправно. Треба да је датум "
+"(YYYY-MM-DD), 'latest', 'previous' или 'long-term'. Линија %s података руте."
+" Садржај линије: '%s'"
+
+#, perl-format
+msgid ""
+"First character of line ('%s') is reserved. Please put the first CSV field "
+"into double quotes (\"...\"). Line %s of Routes-Data. Contents of line: '%s'"
+msgstr ""
+"Први карактер линије ('%s') је резервисан. Ставите прво поље CSV-а у дупле "
+"знаке навода (\"...\"). Линија %s података руте. Садржај линије: '%s'"
 
 msgid ""
 "This Route relation has been included into the input data as a side-effect, "
@@ -1376,6 +1472,19 @@ msgstr ""
 
 msgid "This is currently deactivated."
 msgstr "Ово је тренутно деактивирано."
+
+msgid ""
+"The vehicle uses a service way with a 'service' tag which is considered as "
+"not suitable for public transport routes."
+msgstr ""
+
+msgid ""
+"Public transport routes should not use service ways tagged with 'service' = "
+"'alley', 'driveway', 'emergence', 'drive-through' or 'parking_aisle'."
+msgstr ""
+
+msgid "Check the route and consider deleting the 'service' tag from the way."
+msgstr ""
 
 msgid ""
 "This Route-Master has less route relations than listed here (Route(s) not "
@@ -1527,6 +1636,12 @@ msgid ""
 msgstr ""
 "Тип руте није подржан: '%s'. Линија %s података руте. Садржај линије: '%s'"
 
+msgid "Values of tags must not be empty."
+msgstr ""
+
+msgid "See also:"
+msgstr "Види још:"
+
 msgid "Defines the language for the output."
 msgstr "Дефинише језик излаза."
 
@@ -1548,6 +1663,24 @@ msgstr ""
 
 msgid "This applies to 'barrier' = '...' as well."
 msgstr "Ово важи и за 'barrier' = '...'."
+
+msgid "Check OSM route_master/route data against GTFS feed data"
+msgstr ""
+
+msgid "no checking"
+msgstr ""
+
+msgid "check against GTFS feed data specified in"
+msgstr ""
+
+msgid "CSV entry in the routes file"
+msgstr ""
+
+msgid "tags in the route_master and route relations"
+msgstr ""
+
+msgid "check against 'csv' and 'tags'"
+msgstr ""
 
 msgid "'highway' = 'bus_stop' can be set on nodes only, not on ways or areas."
 msgstr ""
@@ -1751,6 +1884,9 @@ msgstr ""
 "поклапа са регуларним изразом у 'кратком' облику или да је празан "
 "(непостављен)."
 
+msgid "Do not print the additional navigation buttons on top of the tables."
+msgstr ""
+
 msgid ""
 "The value of 'operator' = '...' of the Route-Master and Route relations must"
 " match this regular expression or can be empty (unset)."
@@ -1785,9 +1921,6 @@ msgstr ""
 "претпостави и прикажи компатибилности са старим аутобуским станицама (тј.: "
 "PTv1)"
 
-msgid "See also:"
-msgstr "Види још:"
-
 msgid "Compatibility with well known tags"
 msgstr "Компатибилност са познатим ознакама"
 
@@ -1814,38 +1947,36 @@ msgid ""
 msgstr ""
 "Не разматрај релације рута и мастер рута са празном 'operator' ознаком."
 
-#, perl-format
-msgid ""
-"First character of line ('%s') is reserved. Please put the first CSV field "
-"into double quotes (\"...\"). Line %s of Routes-Data. Contents of line: '%s'"
+msgid "This sets the field separator in the CSV list of routes."
 msgstr ""
-"Први карактер линије ('%s') је резервисан. Ставите прво поље CSV-а у дупле "
-"знаке навода (\"...\"). Линија %s података руте. Садржај линије: '%s'"
 
-#, perl-format
 msgid ""
-"CSV data: field 'gtfs_feed' (= '%s') is wrong. Line %s of Routes-Data. "
-"Contents of line: '%s'"
+"Show also the values of these tags in the table for the list of 'positive' "
+"routes."
 msgstr ""
-"CSV подаци: поље ’gtfs_feed’ (= ’%s’) је погрешно. Линија %s података руте. "
-"Садржај линије: ’%s’"
 
-#, perl-format
 msgid ""
-"CSV data: field 'release_date' (= '%s') is wrong. Should be a date (YYYY-MM-"
-"DD), 'latest', 'previous' or 'long-term'. Line %s of Routes-Data. Contents "
-"of line: '%s'"
+"This sets the OR separator in the 'ref' field of the CSV list of routes."
 msgstr ""
-"CSV подаци: поље 'release_date' (= '%s') није исправно. Треба да је датум "
-"(YYYY-MM-DD), 'latest', 'previous' или 'long-term'. Линија %s података руте."
-" Садржај линије: '%s'"
 
-#, perl-format
 msgid ""
-"CSV data includes too many ';'. Line %s of Routes-Data. Contents of line: "
-"'%s'"
+"Example: '250|250a|250b' : defines that routes with 'ref' = '250' and 'ref' "
+"= '250a' and 'ref' = '250b' are allowed here."
 msgstr ""
-"CSV подаци имају превише ';'. Линија %s података руте. Садржај линије: '%s'"
+
+msgid ""
+"This sets the 'network-ref' separator in the 'ref' field of the CSV list of "
+"routes."
+msgstr ""
+
+msgid ""
+"Example: '605/50' : defines that here 'ref' of two 'network' are valid."
+msgstr ""
+
+msgid ""
+"It is checked, whether 'ref:network1' = '605' and 'ref:network2' = '50' "
+"exist."
+msgstr ""
 
 msgid "is not set"
 msgstr "није постављено"
@@ -1853,17 +1984,23 @@ msgstr "није постављено"
 msgid "GTFS database not found"
 msgstr "GTFS база није нађена"
 
+msgid "Compare GTFS route with OSM route_master/route"
+msgstr ""
+
 msgid "is no longer valid (in the past)"
 msgstr "није више исправан (у прошлости)"
 
 msgid "is not yet valid (in the future)"
 msgstr "није још исправан (у будућности је)"
 
-msgid "outdated, fits to older GTFS version only"
-msgstr "застарело, уклапа се само у старије GTFS верзије"
+msgid "is outdated, fits to older GTFS version only"
+msgstr ""
 
 msgid "does not exist"
 msgstr "не постоји"
+
+msgid "Compare GTFS trip with OSM route"
+msgstr ""
 
 msgid "does not provide any 'shape' data"
 msgstr "не пружа никакве 'shape' податке"
