@@ -2763,7 +2763,7 @@ sub analyze_relation {
                 $relation_ptr->{'GTFS-HTML-TAG'} = $gtfs_info;
             }
             if ( $check_gtfs ) {
-                if ( $gtfs_info =~ m/>GTFS[!?]/ ) {
+                if ( $gtfs_info =~ m/>GTFS[!?]/ || $gtfs_info =~ m/>GTFS\(r\)[!?]/ ) {
                     $gtfs_info =~ s/^.*'route_id'/'gtfs:route_id'/;
                     $gtfs_info =~ s/^.*'trip_id'/'gtfs:trip_id'/;
                     $gtfs_info =~ s/^.*'shape_id'/'gtfs:shape_id'/;
