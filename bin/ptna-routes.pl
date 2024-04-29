@@ -2764,9 +2764,7 @@ sub analyze_relation {
             }
             if ( $check_gtfs ) {
                 if ( $gtfs_info =~ m/>GTFS[!?]/ || $gtfs_info =~ m/>GTFS\(r\)[!?]/ ) {
-                    $gtfs_info =~ s/^.*'route_id'/'gtfs:route_id'/;
-                    $gtfs_info =~ s/^.*'trip_id'/'gtfs:trip_id'/;
-                    $gtfs_info =~ s/^.*'shape_id'/'gtfs:shape_id'/;
+                    $gtfs_info =~ s/^.*'gtfs:/'gtfs:/;
                     $gtfs_info =~ s/\.\".*$//;
                     $gtfs_info =~ s/GTFS-Release-Date: , //;
                     $gtfs_info =~ s/GTFS-Release-Date: previous, //;
@@ -5744,22 +5742,22 @@ sub getGtfsInfo {
         if ( $relation_ptr->{'tag'}->{'type'} eq 'route' ) {
             if ( $relation_ptr->{'tag'}->{'gtfs:trip_id'} ) {
                 $relation_ptr->{'tag'}->{'gtfs:trip_id'} =~ s/\s*;\s*/;/g;
-                $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsTripIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'} ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:trip_id'} ) );
+                $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsTripIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'}, 'gtfs:trip_id' ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:trip_id'} ) );
             } elsif ( $relation_ptr->{'tag'}->{'gtfs:trip_id:sample'} ) {
                 $relation_ptr->{'tag'}->{'gtfs:trip_id:sample'} =~ s/\s*;\s*/;/g;
-                $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsTripIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'} ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:trip_id:sample'} ) );
+                $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsTripIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'}, 'gtfs:trip_id:sample' ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:trip_id:sample'} ) );
             } elsif ( $relation_ptr->{'tag'}->{'gtfs:shape_id'} ) {
                 $relation_ptr->{'tag'}->{'gtfs:shape_id'} =~ s/\s*;\s*/;/g;
-                $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsShapeIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'} ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:shape_id'} ) );
+                $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsShapeIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'}, 'gtfs:shape_id' ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:shape_id'} ) );
             } elsif ( $relation_ptr->{'tag'}->{'gtfs:route_id'} ) {
                 $relation_ptr->{'tag'}->{'gtfs:route_id'} =~ s/\s*;\s*/;/g;
-                $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'} ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:route_id'} ) );
+                $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'}, 'gtfs:route_id' ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:route_id'} ) );
                 # we do expect a trip_id or shape_id here, mark that route_id is used here
                 $gtfs_html_tag =~ s/>GTFS/>GTFS(r)/g;
             }
         } elsif ( $relation_ptr->{'tag'}->{'gtfs:route_id'} ) {
             $relation_ptr->{'tag'}->{'gtfs:route_id'} =~ s/\s*;\s*/;/g;
-            $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'} ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:route_id'} ) );
+            $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'}, 'gtfs:route_id' ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:route_id'} ) );
         }
     }
 
@@ -5806,9 +5804,9 @@ sub printInitialHeader {
     push( @HTML_start, sprintf( "<html lang=\"%s\">\n", $html_lang ) );
     push( @HTML_start, "    <head>\n" );
     push( @HTML_start, sprintf( "        <title>PTNA - %s</title>\n", ($title ? html_escape($title) : 'Results') ) );
-    push( @HTML_start, "        <meta charset=\"utf8\" />\n" );
+    push( @HTML_start, "        <meta charset=\"utf-8\" />\n" );
     push( @HTML_start, "        <meta name=\"generator\" content=\"PTNA\">\n" );
-    push( @HTML_start, "        <meta http-equiv=\"content-type\" content=\"text/html; charset=utf8\" />\n" );
+    push( @HTML_start, "        <meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\" />\n" );
     push( @HTML_start, "        <meta name=\"keywords\" content=\"OSM Public Transport PTv2\">\n" );
     push( @HTML_start, "        <meta name=\"description\" content=\"PTNA - Public Transport Network Analysis\">\n" );
     if ( $opt_test ) {
@@ -6650,22 +6648,22 @@ sub printTableSubHeader {
         if ( $hash{'GTFS-Release-Date'} ) {
             printf STDERR "printTableSubHeader(1): \$gtfs_csv_info_from{$hash{'GTFS-Feed'}}{$hash{'GTFS-Release-Date'}} = 1;\n" if ( $debug );
             $gtfs_csv_info_from{$hash{'GTFS-Feed'}}{$hash{'GTFS-Release-Date'}} = 1;
-            $csv_text .= join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}, $hash{'GTFS-Release-Date'}, $_, $relation_id ); } split( ';', $hash{'GTFS-Route-Id'} ) );
+            $csv_text .= join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}, $hash{'GTFS-Release-Date'}, $_, $relation_id, 'GTFS-Route-Id' ); } split( ';', $hash{'GTFS-Route-Id'} ) );
         } else {
             printf STDERR "printTableSubHeader(1): \$gtfs_csv_info_from{$hash{'GTFS-Feed'}}{' latest } = 1;\n" if ( $debug );
             $gtfs_csv_info_from{$hash{'GTFS-Feed'}}{' latest '} = 1;
-            $csv_text .= join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}, '', $_, $relation_id ); } split( ';', $hash{'GTFS-Route-Id'} ) );
+            $csv_text .= join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}, '', $_, $relation_id, 'GTFS-Route-Id' ); } split( ';', $hash{'GTFS-Route-Id'} ) );
         }
     } else {
         if ( $hash{'GTFS-Feed'} ) {
             if ( $hash{'GTFS-Release-Date'} ) {
                 printf STDERR "printTableSubHeader(2): \$gtfs_csv_info_from{$hash{'GTFS-Feed'}}{$hash{'GTFS-Release-Date'}} = 1;\n" if ( $debug );
                 $gtfs_csv_info_from{$hash{'GTFS-Feed'}}{$hash{'GTFS-Release-Date'}} = 1;
-                $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}, $hash{'GTFS-Release-Date'}, '', $relation_id );
+                $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}, $hash{'GTFS-Release-Date'}, '', $relation_id, 'GTFS-Route-Id' );
             } else {
                 printf STDERR "printTableSubHeader(2): \$gtfs_csv_info_from{$hash{'GTFS-Feed'}}{' latest } = 1;\n" if ( $debug );
                 $gtfs_csv_info_from{$hash{'GTFS-Feed'}}{' latest '} = 1;
-                $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'},'','', $relation_id );
+                $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'},'','', $relation_id, 'GTFS-Route-Id' );
             }
         } elsif ( $hash{'GTFS-Route-Id'} ) {
             $csv_text .= join( ', ', map { sprintf( "%s: %s; ", ( $column_name{'GTFS-Route-Id'} ? $column_name{'GTFS-Route-Id'} : 'GTFS-Route-Id' ), html_escape($_) ); } split( ';', $hash{'GTFS-Route-Id'} ) );
