@@ -2764,6 +2764,7 @@ sub analyze_relation {
             }
             if ( $check_gtfs ) {
                 if ( $gtfs_info =~ m/>GTFS[!?]/ || $gtfs_info =~ m/>GTFS\(r\)[!?]/ ) {
+                    $gtfs_info =~ s/^.*"GTFS-Feed:/GTFS-Feed:/;
                     $gtfs_info =~ s/^.*'gtfs:/'gtfs:/;
                     $gtfs_info =~ s/\.\".*$//;
                     $gtfs_info =~ s/GTFS-Release-Date: , //;
