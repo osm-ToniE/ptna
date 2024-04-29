@@ -5806,9 +5806,9 @@ sub printInitialHeader {
     push( @HTML_start, sprintf( "<html lang=\"%s\">\n", $html_lang ) );
     push( @HTML_start, "    <head>\n" );
     push( @HTML_start, sprintf( "        <title>PTNA - %s</title>\n", ($title ? html_escape($title) : 'Results') ) );
-    push( @HTML_start, "        <meta charset=\"utf-8\" />\n" );
+    push( @HTML_start, "        <meta charset=\"utf8\" />\n" );
     push( @HTML_start, "        <meta name=\"generator\" content=\"PTNA\">\n" );
-    push( @HTML_start, "        <meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\" />\n" );
+    push( @HTML_start, "        <meta http-equiv=\"content-type\" content=\"text/html; charset=utf8\" />\n" );
     push( @HTML_start, "        <meta name=\"keywords\" content=\"OSM Public Transport PTv2\">\n" );
     push( @HTML_start, "        <meta name=\"description\" content=\"PTNA - Public Transport Network Analysis\">\n" );
     if ( $opt_test ) {
@@ -6941,7 +6941,7 @@ sub printSketchLineTemplate {
     }
 
     if ( $network || $operator ) {
-        $a_begin = sprintf( "<a href=\"https://overpass-api.de/api/sketch-line?ref=%s&network=%s&operator=%s%s%s\" title=\"Sketch-Line\">", uri_escape($ref), uri_escape($network), uri_escape($operator), $colour_string, $pt_string );
+        $a_begin = sprintf( "<a href=\"https://overpass-api.de/api/sketch-line?ref=%s&network=%s&operator=%s%s%s\" title=\"Sketch-Line\">", uri_escape($ref), uri_escape(decode('utf8',encode('utf8',$network))), uri_escape(decode('utf8',encode('utf8',$operator))), $colour_string, $pt_string );
         $a_end   = '</a>';
     }
 
