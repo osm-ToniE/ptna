@@ -7008,7 +7008,6 @@ sub html_escape {
 sub uri_escape {
     my $text = shift;
     if ( $text ) {
-        $text = encode( 'utf8', $text );
         $text =~ s/([ !"#\$%&'()*+,.\/:;<=>?@\[\\\]{|}-])/ sprintf "%%%0x", ord $1 /eg;
     }
     return $text;
