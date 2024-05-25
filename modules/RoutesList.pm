@@ -59,6 +59,8 @@ sub ReadRoutes {
     my %supported_routes_types = ();
 
     my ($ExpRef,$ExpRouteType,$ExpComment,$ExpFrom,$ExpTo,$ExpOperator,$ExpGtfsFeed,$ExpGtfsRouteId,$ExpGtfsReleaseDate);
+    my $ExpVia    = undef; # not in CSV as a field but coded in value of $ExpComment as @(via=...)
+    my $ExpColour = undef; # not in CSV as a field but coded in value of $ExpComment as @(colour=...)
     my @rest = ();
 
     $CSV_separator  = $csv_separator;
@@ -142,6 +144,11 @@ sub ReadRoutes {
                         if ( $ExpComment ) {
                             $ExpComment =~ s/^\s*//;
                             $ExpComment =~ s/\s*$//;
+                            while ( $ExpComment =~ m/\@\(([^=]+)=([^)]*)\)/g ) {
+                                $ExpColour = $2 if ( $1 == 'colour' );
+                                $ExpVia    = $2 if ( $1 == 'via'    );
+                                printf STDERR "ReadRoutes() found '%s' = '%s' in comment = '%s' in line %d\n", $1, $2, $ExpComment, $NR  if ( $debug );
+                            }
                         }
                         if ( $ExpFrom ) {
                             $ExpFrom =~ s/^\s*//;
@@ -179,6 +186,8 @@ sub ReadRoutes {
                         $hashref->{'gtfs-feed'}         = $ExpGtfsFeed         || '';              # 'gtfs-feed
                         $hashref->{'gtfs-route-id'}     = $ExpGtfsRouteId      || '';              # 'gtfs-route-id'
                         $hashref->{'gtfs-release-date'} = $ExpGtfsReleaseDate  || '';              # 'gtfs-release-date'
+                        $hashref->{'via'}               = $ExpVia              || '';              # 'via' coded as @(via=...) in ExpComment field
+                        $hashref->{'colour'}            = $ExpColour           || '';              # 'colour' coded as @(colour=...) in ExpComment field
                         if ( $ExpGtfsFeed                       &&
                              $ExpGtfsFeed !~ m/^[0-9A-Za-z_.-]+$/    ) {
                             $issues_string      = gettext( "CSV data: field 'gtfs_feed' (= '%s') is wrong. Line %s of Routes-Data. Contents of line: '%s'" );
@@ -288,11 +297,11 @@ sub ReadRoutes {
 
                                 foreach $ExpOperator ( sort ( keys %{$seen_ref_type_operator{$ExpRef}->{$ExpRouteType}} ) ) {
                                     if ( $seen_ref_type_operator{$ExpRef}->{$ExpRouteType}->{$ExpOperator} > 1 ) {
-                                        printf STDERR "CSV-File %s: problem with entry: ref=%s, type=%s and operator=%s ==> %d\n", $infile, $ExpRef, $ExpRouteType, $ExpOperator, $seen_ref_type_operator{$ExpRef}->{$ExpRouteType}->{$ExpOperator}           if ( $debug );
+                                        printf STDERR "CSV-File %s: problem with entry: ref=%s, type=%s and operator=%s == %d\n", $infile, $ExpRef, $ExpRouteType, $ExpOperator, $seen_ref_type_operator{$ExpRef}->{$ExpRouteType}->{$ExpOperator}           if ( $debug );
 
                                         foreach my $fromto ( sort ( keys %{$seen_ref_type_operator_fromto{$ExpRef}->{$ExpRouteType}->{$ExpOperator}} ) ) {
                                             if ( $seen_ref_type_operator_fromto{$ExpRef}->{$ExpRouteType}->{$ExpOperator}->{$fromto} > 1 ) {
-                                                printf STDERR "CSV-File %s: big trouble with entry: ref=%s, type=%s, operator=%s, fromto=%s ==> %d\n", $infile, $ExpRef, $ExpRouteType, $ExpOperator, $fromto, $seen_ref_type_operator_fromto{$ExpRef}->{$ExpRouteType}->{$ExpOperator}->{$fromto}           if ( $debug );
+                                                printf STDERR "CSV-File %s: big trouble with entry: ref=%s, type=%s, operator=%s, fromto=%s == %d\n", $infile, $ExpRef, $ExpRouteType, $ExpOperator, $fromto, $seen_ref_type_operator_fromto{$ExpRef}->{$ExpRouteType}->{$ExpOperator}->{$fromto}           if ( $debug );
                                             }
                                         }
 
@@ -537,6 +546,8 @@ sub GetRefTypeOperatorFromAndTo {
 
     }
 
+    printf STDERR "%s GetRefTypeOperatorFromAndTo(): returning \@ret_list = '%s'\n",  get_time(), join(';',@ret_list)  if ( $Debug );
+
     return @ret_list;
 }
 
@@ -555,6 +566,8 @@ sub RelationMatchesExpected {
     my $RelOperator                 = $hash{'rel-operator'}                     || '';
     my $RelFrom                     = $hash{'rel-from'}                         || '';
     my $RelTo                       = $hash{'rel-to'}                           || '';
+    my $RelVia                      = $hash{'rel-via'}                          || '';
+    my $RelColour                   = $hash{'rel-colour'}                       || '';
     my $RelID                       = $hash{'rel-id'}                           || '';
     my $EntryRef                    = $hash{'EntryRef'};
     my $handle_multiple             = $hash{'multiple_ref_type_entries'}        || 'analyze';
@@ -564,13 +577,14 @@ sub RelationMatchesExpected {
     my $ExpOperator                 = $EntryRef->{'operator'}                   || '';
     my $ExpFrom                     = $EntryRef->{'from'}                       || '';
     my $ExpTo                       = $EntryRef->{'to'}                         || '';
+    my $NR                          = $EntryRef->{'NR'}                         || -1;
 
     my $number_of_ref_type          = RefTypeCount( $RelRef, $RelRouteType );
     my $number_of_ref_type_operator = 0;
 
     my $match                       = undef;
 
-    printf STDERR "%s Checking %s relation %s, 'ref' %s and  'operator' %s, ref-type-count %d\n", get_time(), $RelRouteType, $RelID, $RelRef, $RelOperator, $number_of_ref_type     if ( $Debug );
+    printf STDERR "%s Line %d Checking %s relation %s, 'ref' %s and  'operator' %s, ref-type-count %d\n", get_time(), $NR, $RelRouteType, $RelID, $RelRef, $RelOperator, $number_of_ref_type     if ( $Debug );
 
     if ( $number_of_ref_type > 1 && $handle_multiple eq 'analyze' ) {
 
@@ -589,41 +603,41 @@ sub RelationMatchesExpected {
 
                 my $ExpectedCombination              = '['.$ExpFrom.'];['.$ExpTo.']';
 
-                printf STDERR "%s Checking %s relation %s, 'ref'= '%s' and  'operator'= '%s', ref-type-operator-count = '%d': expected combination: = '%s'\n", get_time(), $RelRouteType, $RelID, $RelRef, $RelOperator, $number_of_ref_type_operator, $ExpectedCombination     if ( $Debug );
+                printf STDERR "%s Line %d Checking %s relation %s, 'ref'= '%s' and  'operator'= '%s', ref-type-operator-count = '%d': expected combination: = '%s'\n", get_time(), $NR, $RelRouteType, $RelID, $RelRef, $RelOperator, $number_of_ref_type_operator, $ExpectedCombination; #     if ( $Debug );
 
                 my @CombinationsWithMatchingFromAndTo = GetRefTypeOperatorFromAndTo( $RelRef, $RelRouteType, $RelOperator, $RelFrom, $RelTo, $ExpectedCombination );
 
                 if ( scalar(@CombinationsWithMatchingFromAndTo) == 0 ) {
 
-                    printf STDERR "%s Skipping relation %s, 'ref' = '%s' and  'operator' = '%s': NO match for from = '%s' and/or 'to' = '%s'\n", get_time(), $RelID, $RelRef, $RelOperator, $RelFrom, $RelTo     if ( $Debug );
+                    printf STDERR "%s Line %d Skipping relation %s, 'ref' = '%s' and  'operator' = '%s': NO match for from = '%s' and/or 'to' = '%s'\n", get_time(), $NR, $RelID, $RelRef, $RelOperator, $RelFrom, $RelTo     if ( $Debug );
                     return 0;
 
                 } elsif ( scalar(@CombinationsWithMatchingFromAndTo) == 1 ) {
 
                     if ( $CombinationsWithMatchingFromAndTo[0] eq $ExpectedCombination ) {
-                        printf STDERR "%s Selecting relation %s, 'ref' = '%s' and  'operator' = '%s': EXACT match for from = '%s' and/or 'to' = '%s'\n", get_time(), $RelID, $RelRef, $RelOperator, $RelFrom, $RelTo     if ( $Debug );
+                        printf STDERR "%s Line %d Selecting relation %s, 'ref' = '%s' and  'operator' = '%s': EXACT match for from = '%s' and/or 'to' = '%s'\n", get_time(), $NR, $RelID, $RelRef, $RelOperator, $RelFrom, $RelTo     if ( $Debug );
                         return 1;
                     } else {
-                        printf STDERR "%s skipping relation %s, 'ref' = '%s' and  'operator' = '%s': match = '%s', not the expected one = '%s'\n", get_time(), $RelID, $RelRef, $RelOperator, $match, $ExpectedCombination     if ( $Debug );
+                        printf STDERR "%s Line %d skipping relation %s, 'ref' = '%s' and  'operator' = '%s': match = '%s', not the expected one = '%s'\n", get_time(), $NR, $RelID, $RelRef, $RelOperator, $match, $ExpectedCombination     if ( $Debug );
                         return 0;
                     }
 
                 } else {
-                    printf STDERR "%s Skipping relation %s, 'ref' = '%s' and  'operator' = '%s': TOO MANY matches (%d) for from = '%s' and 'to' = '%s'\n", get_time(), $RelID, $RelRef, $RelOperator, scalar(@CombinationsWithMatchingFromAndTo), $RelFrom, $RelTo     if ( $Debug );
+                    printf STDERR "%s Line %d Skipping relation %s, 'ref' = '%s' and  'operator' = '%s': TOO MANY matches (%d) for from = '%s' and 'to' = '%s'\n", get_time(), $NR, $RelID, $RelRef, $RelOperator, scalar(@CombinationsWithMatchingFromAndTo), $RelFrom, $RelTo; #     if ( $Debug );
                     return 0;
 
                 }
             } else {
-                printf STDERR "%s Selecting relation %s, 'ref' %s 'operator' matches single expected operator (%s vs %s)\n", get_time(), $RelID, $RelRef, $RelOperator, $RelOperator     if ( $Debug );
+                printf STDERR "%s Line %d Selecting relation %s, 'ref' %s 'operator' matches single expected operator (%s vs %s)\n", get_time(), $NR, $RelID, $RelRef, $RelOperator, $RelOperator     if ( $Debug );
                 return 1;
             }
         } else {
-            printf STDERR "%s Skipping relation %s, 'ref' %s: 'operator' does not match expected operator (%s vs %s)\n", get_time(), $RelID, $RelRef, $RelOperator, $RelOperator       if ( $Debug );
+            printf STDERR "%s Line %d Skipping relation %s, 'ref' %s: 'operator' does not match expected operator (%s vs %s)\n", get_time(), $NR, $RelID, $RelRef, $RelOperator, $RelOperator       if ( $Debug );
             return 0;
         }
     } else {
         # we do not have multiple entries or we are not interested to distinguish between them
-        printf STDERR "%s Selecting relation %s, 'ref' %s and  'operator' %s: no multiple entries\n", get_time(), $RelID, $RelRef, $RelOperator     if ( $Debug );
+        printf STDERR "%s Line %d Selecting relation %s, 'ref' %s and  'operator' %s: no multiple entries\n", get_time(), $NR, $RelID, $RelRef, $RelOperator     if ( $Debug );
         return 1;
     }
 

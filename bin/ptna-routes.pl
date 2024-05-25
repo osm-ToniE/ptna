@@ -1719,6 +1719,8 @@ sub SearchMatchingRelations {
     my $RelOperator                 = undef;
     my $RelFrom                     = undef;
     my $RelTo                       = undef;
+    my $RelVia                      = undef;
+    my $RelColour                   = undef;
     my $match                       = undef;
 
     my @return_list                 = ();
@@ -1762,6 +1764,8 @@ sub SearchMatchingRelations {
                                 $RelOperator    = $RELATIONS{$rel_id}->{'tag'}->{'operator'}         || '';
                                 $RelFrom        = $RELATIONS{$rel_id}->{'tag'}->{'from'}             || '';
                                 $RelTo          = $RELATIONS{$rel_id}->{'tag'}->{'to'}               || '';
+                                $RelVia         = $RELATIONS{$rel_id}->{'tag'}->{'via'}              || '';
+                                $RelColour      = $RELATIONS{$rel_id}->{'tag'}->{'to'}               || '';
 
                                 printf STDERR "%s Checking %s relation %s, 'ref' %s and 'operator' %s \n", get_time(), $type, $rel_id, $ExpRefPart, $RelOperator    if ( $debug );
 
@@ -1771,6 +1775,8 @@ sub SearchMatchingRelations {
                                                                                 'rel-operator'                => $RelOperator,
                                                                                 'rel-from'                    => $RelFrom,
                                                                                 'rel-to'                      => $RelTo,
+                                                                                'rel-via'                     => $RelVia,
+                                                                                'rel-colour'                  => $RelColour,
                                                                                 'EntryRef'                    => $EntryRef,
                                                                                 'multiple_ref_type_entries'   => $multiple_ref_type_entries,
                                                                              );
