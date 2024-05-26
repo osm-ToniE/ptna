@@ -603,7 +603,7 @@ sub RelationMatchesExpected {
 
                 my $ExpectedCombination              = '['.$ExpFrom.'];['.$ExpTo.']';
 
-                printf STDERR "%s Line %d Checking %s relation %s, 'ref'= '%s' and  'operator'= '%s', ref-type-operator-count = '%d': expected combination: = '%s'\n", get_time(), $NR, $RelRouteType, $RelID, $RelRef, $RelOperator, $number_of_ref_type_operator, $ExpectedCombination; #     if ( $Debug );
+                printf STDERR "%s Line %d Checking %s relation %s, 'ref'= '%s' and  'operator'= '%s', ref-type-operator-count = '%d': expected combination: = '%s'\n", get_time(), $NR, $RelRouteType, $RelID, $RelRef, $RelOperator, $number_of_ref_type_operator, $ExpectedCombination     if ( $Debug );
 
                 my @CombinationsWithMatchingFromAndTo = GetRefTypeOperatorFromAndTo( $RelRef, $RelRouteType, $RelOperator, $RelFrom, $RelTo, $ExpectedCombination );
 
@@ -623,7 +623,7 @@ sub RelationMatchesExpected {
                     }
 
                 } else {
-                    printf STDERR "%s Line %d Skipping relation %s, 'ref' = '%s' and  'operator' = '%s': TOO MANY matches (%d) for from = '%s' and 'to' = '%s'\n", get_time(), $NR, $RelID, $RelRef, $RelOperator, scalar(@CombinationsWithMatchingFromAndTo), $RelFrom, $RelTo; #     if ( $Debug );
+                    printf STDERR "%s Line %d Skipping relation %s, 'ref' = '%s' and  'operator' = '%s': TOO MANY matches (%d) for from = '%s' and 'to' = '%s'\n", get_time(), $NR, $RelID, $RelRef, $RelOperator, scalar(@CombinationsWithMatchingFromAndTo), $RelFrom, $RelTo     if ( $Debug );
                     return 0;
 
                 }
