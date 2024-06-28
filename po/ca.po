@@ -1703,21 +1703,22 @@ msgstr "Això també aplica a 'barrier' = '...'."
 
 msgid "Check OSM route_master/route data against GTFS feed data"
 msgstr ""
+"Comproveu les dades d'OSM route_master/route amb les dades de l'origen GTFS"
 
 msgid "no checking"
-msgstr ""
+msgstr "cap comprovació"
 
 msgid "check against GTFS feed data specified in"
-msgstr ""
+msgstr "comproveu les dades de l'origen GTFS especificades a"
 
 msgid "CSV entry in the routes file"
-msgstr ""
+msgstr "Entrada CSV al fitxer de rutes"
 
 msgid "tags in the route_master and route relations"
-msgstr ""
+msgstr "etiquetes a la route_master i a les relacions de route"
 
 msgid "check against 'csv' and 'tags'"
-msgstr ""
+msgstr "comproveu amb 'csv' i 'etiquetes'"
 
 msgid "'highway' = 'bus_stop' can be set on nodes only, not on ways or areas."
 msgstr ""
@@ -1993,6 +1994,8 @@ msgid ""
 "Show also the values of these tags in the table for the list of 'positive' "
 "routes."
 msgstr ""
+"Mostra també els valors d'aquestes etiquetes a la taula per a la llista de "
+"rutes 'positives'."
 
 msgid ""
 "This sets the OR separator in the 'ref' field of the CSV list of routes."
@@ -2031,7 +2034,7 @@ msgid "GTFS database not found"
 msgstr "base de dades GTFS no trobada"
 
 msgid "Compare GTFS route with OSM route_master/route"
-msgstr ""
+msgstr "Compara la ruta GTFS amb la route_master/route d'OSM"
 
 msgid "is no longer valid (in the past)"
 msgstr "ja no és vàlid (al passat)"
@@ -2040,13 +2043,13 @@ msgid "is not yet valid (in the future)"
 msgstr "ja no és vàlid (al futur)"
 
 msgid "is outdated, fits to older GTFS version only"
-msgstr ""
+msgstr "està obsolet, només s'adapta a la versió anterior de GTFS"
 
 msgid "does not exist"
 msgstr "no existeix"
 
 msgid "Compare GTFS trip with OSM route"
-msgstr ""
+msgstr "Compara la ruta GTFS amb la ruta OSM"
 
 msgid "does not provide any 'shape' data"
 msgstr "no s'ha proporcionat cap fitxer 'shape'"
