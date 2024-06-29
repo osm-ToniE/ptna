@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2024-04-28 13:39+0200\n"
+"POT-Creation-Date: 2024-06-29 18:22+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2024\n"
 "Language-Team: German (https://app.transifex.com/jungle-bus/teams/97874/de/)\n"
@@ -754,6 +754,22 @@ msgid "PTv2 route: last node of way is not a stop position of this route: %s"
 msgstr ""
 "PTv2 Route: der letzte Punkt des Weges ist keine 'stop_position' dieser "
 "Route: %s"
+
+#, perl-format
+msgid "PTv2 route: wrong 'role' = '%s' for first stop"
+msgstr "PTv2 Route: falsche 'role' = '%s' für die erste Stopposition"
+
+#, perl-format
+msgid "PTv2 route: wrong 'role' = '%s' for last stop"
+msgstr "PTv2 Route: falsche 'role' = '%s' für die letzte Stopposition"
+
+#, perl-format
+msgid "PTv2 route: wrong 'role' = '%s' for first platform"
+msgstr "PTv2 Route: falsche 'role' = '%s' für die erste Platform"
+
+#, perl-format
+msgid "PTv2 route: wrong 'role' = '%s' for last platform"
+msgstr "PTv2 Route: falsche 'role' = '%s' für die letzte Platform"
 
 msgid "wrong value"
 msgstr "falscher Wert"
@@ -2103,3 +2119,6 @@ msgstr "Vergleiche GTFS trip mit OSM route"
 
 msgid "does not provide any 'shape' data"
 msgstr "stellt keine 'shape' Daten zu Verfügung"
+
+msgid "internal error"
+msgstr "interner Fehler"
