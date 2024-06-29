@@ -3827,6 +3827,60 @@ sub analyze_ptv2_route_relation {
     }
     $return_code += $role_mismatch_found;
 
+    if ( $check_sequence ) {
+        #
+        # check whether first stop/platform includes 'exit'  in 'role'
+        # check whether last  stop/platform includes 'entry' in 'role'
+        #
+        my $first_stop_role     = '';
+        my $first_platform_role = '';
+        my $last_stop_role      = '';
+        my $last_platform_role  = '';
+        my $number_of_stops     = 0;
+        my $number_of_platforms = 0;
+        foreach my $item ( @{$relation_ptr->{'members'}} ) {
+            if ( $item->{'role'} ) {
+                if ( $item->{'role'} =~ m/^stop/ ) {
+                    $first_stop_role = $item->{'role'}        unless ( $number_of_stops );
+                    $last_stop_role  = $item->{'role'};
+                    $number_of_stops++;
+                } elsif ( $item->{'role'} =~ m/^platform/ ) {
+                    $first_platform_role = $item->{'role'}    unless ( $number_of_platforms );
+                    $last_platform_role  = $item->{'role'};
+                    $number_of_platforms++;
+                }
+            }
+        }
+        if ( $number_of_stops > 1 ) {
+            if ( $first_stop_role eq 'stop_exit_only' ) {
+                $issues_string = gettext( "PTv2 route: wrong 'role' = '%s' for first stop" );
+                $help_string = sprintf( $issues_string, ctrl_escape($first_stop_role) );
+                push( @{$relation_ptr->{'__issues__'}}, $help_string );
+                $return_code++;
+            }
+            if ( $last_stop_role eq 'stop_entry_only' ) {
+                $issues_string = gettext( "PTv2 route: wrong 'role' = '%s' for last stop" );
+                $help_string = sprintf( $issues_string, ctrl_escape($last_stop_role) );
+                push( @{$relation_ptr->{'__issues__'}}, $help_string );
+                $return_code++;
+            }
+        }
+        if ( $number_of_platforms > 1 ) {
+            if ( $first_platform_role eq 'platform_exit_only' ) {
+                $issues_string = gettext( "PTv2 route: wrong 'role' = '%s' for first platform" );
+                $help_string = sprintf( $issues_string, ctrl_escape($first_platform_role) );
+                push( @{$relation_ptr->{'__issues__'}}, $help_string );
+                $return_code++;
+            }
+            if ( $last_platform_role eq 'platform_entry_only' ) {
+                $issues_string = gettext( "PTv2 route: wrong 'role' = '%s' for last platform" );
+                $help_string = sprintf( $issues_string, ctrl_escape($last_platform_role) );
+                push( @{$relation_ptr->{'__issues__'}}, $help_string );
+                $return_code++;
+            }
+        }
+    }
+
     return $return_code;
 }
 
