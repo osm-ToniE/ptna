@@ -54,6 +54,11 @@ sub parse {
                             #printf STDERR "META{%s} = %s\n", $attr, $val;
                             printf STDERR "%s META : %s = '%s'\n", $date_and_time, $attr, $val      if ( $verbose );
                         }
+                    } elsif ( $line =~ m{osmosis_replication_timestamp=([0-9TZ:-]*)}xo ) {
+                        # META attributes
+                        # <osm version="0.6" generator="https://ptna.openstreetmap.de osmosis_replication_timestamp=2024-07-10T20:21:22Z">
+
+                        $META{'osm_base'} = $1;
                     }
                     last if ( $count > 5 );
                 }
