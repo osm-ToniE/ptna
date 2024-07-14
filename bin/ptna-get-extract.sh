@@ -1,8 +1,8 @@
 #!/bin/bash
 
-BASEURL="http://download.openstreetmap.fr/extracts"
-SOURCE="europe/germany-latest.osm.pbf"
-TARGET=germany.osm.pbf
+BASEURL="$1"
+SOURCE="$2"
+TARGET="$3"
 
 CALL_PARAMS="--server-response --no-verbose"
 
