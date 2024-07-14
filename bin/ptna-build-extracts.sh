@@ -14,7 +14,7 @@ SOURCE="$1"
 # example for state   'bavaria' in 'germany': /osm/ptna/ptna-networks/UTC+01/DE/BY/osmium.config
 CONFIG="$2"
 
-if [ -n "$SOURCE" - -f "$SOURCE" -a -s "$SOURCE" -a -n "$CONFIG" -a -f "$CONFIG" -a -s "$CONFIG" ]
+if [ -n "$SOURCE" -a -f "$SOURCE" -a -s "$SOURCE" -a -n "$CONFIG" -a -f "$CONFIG" -a -s "$CONFIG" ]
 then
     osmium extract --verbose --strategy=smart --config="$CONFIG" --overwrite --fsync "$SOURCE"
 
