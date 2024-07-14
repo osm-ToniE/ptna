@@ -18,7 +18,7 @@ then
                --output-header="generator=https://ptna.openstreetmap.de osmosis_replication_timestamp=$TS" \
                -i route=tracks,railway,bicycle,mtb,hiking,road,foot,inline_skates,canoe,detour,fitness_trail,horse,motorboat,nordic_walking,pipeline,piste,power,running,ski,snowmobile,cycling,historic,motorcycle,riding \
                landuse building natural
-        rm -f "$PREFIX-Data-filtered.osm.pbf"
+        rm -f "$TARGET-Data-filtered.osm.pbf"
     else
         echo $(date "+%Y-%m-%d %H:%M:%S") "Filtered file has not been created or is empty"
         exit 1
