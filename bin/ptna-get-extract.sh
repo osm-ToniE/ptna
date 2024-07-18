@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BASEURL="$1"
+BASEURL="${1%/}"
 SOURCE="$2"
 TARGET="$3"
 
