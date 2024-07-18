@@ -16,7 +16,7 @@ then
     then
         echo $(date "+%Y-%m-%d %H:%M:%S") "Check extract: from '$BASEURL/$SOURCE' for '$TARGET'"
 
-        if [ !-f "$TARGET" -o !-s "$TARGET" ]
+        if [ ! -f "$TARGET" -o ! -s "$TARGET" ]
         then
             echo $(date "+%Y-%m-%d %H:%M:%S") "Call 'ptna-get-extract.sh $BASEURL $SOURCE $TARGET"
 
