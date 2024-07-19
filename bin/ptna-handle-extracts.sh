@@ -8,8 +8,6 @@ NETWORKDIR="${1%/}"
 
 if [ -n "$NETWORKDIR" -a -d "$NETWORKDIR" ]
 then
-
-
     echo $(date "+%Y-%m-%d %H:%M:%S") "Start handling planet extracts for '$NETWORKDIR' in '$PWD'"
 
     if [ -f "$NETWORKDIR/extract-settings.sh" ]
@@ -77,15 +75,13 @@ then
 
         if [ -d "$subdir" ]
         then
-            pushd $subdir 2> /dev/null
+            pushd $subdir > /dev/null
 
             #echo $(date "+%Y-%m-%d %H:%M:%S") "Calling 'ptna-handle-extracts.sh $newdir' in '$PWD'"
 
             ptna-handle-extracts.sh $newdir
 
-            popd 2> /dev/null
-        else
-            echo $(date "+%Y-%m-%d %H:%M:%S") "'$subdir' does not exist in '$PWD' for analysis of '$newdir'"
+            popd > /dev/null
         fi
     done
 
