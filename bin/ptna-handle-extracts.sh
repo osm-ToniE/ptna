@@ -71,7 +71,7 @@ then
         fi
     fi
 
-    for subdir in $(find . -mindepth 0 -maxdepth 1 -type d -name '[A-Z]*' | sort)
+    for subdir in $(find "$NETWORKDIR" -mindepth 0 -maxdepth 1 -type d -name '[A-Z]*' | sort)
     do
         pushd $subdir
 
