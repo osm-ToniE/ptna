@@ -85,7 +85,7 @@ then
 
             popd 2> /dev/null
         else
-            echo $(date "+%Y-%m-%d %H:%M:%S") "'$subdir" does not exist in '$PWD' for analysis of '$newdir''"
+            echo $(date "+%Y-%m-%d %H:%M:%S") "'$subdir' does not exist in '$PWD' for analysis of '$newdir'"
         fi
     done
 
