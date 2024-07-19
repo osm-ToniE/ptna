@@ -67,7 +67,7 @@ then
             echo $(date "+%Y-%m-%d %H:%M:%S") "'$PBF_FILE' file not found in '$PWD' or the file is empty for '$config'"
             exit 1
         fi
-    fi
+    done
 
     for newdir in $(find "$NETWORKDIR" -mindepth 1 -maxdepth 1 -type d -name '[A-Z]*' | sort)
     do
