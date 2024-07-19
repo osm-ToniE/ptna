@@ -55,9 +55,9 @@ then
 
         if [ -n "$PBF_FILE" -a -f "$PBF_FILE" -a -s "$PBF_FILE" ]
         then
-                echo $(date "+%Y-%m-%d %H:%M:%S") "Call 'ptna-split-extract.sh $PBF_FILE $NETWORKDIR/osmium.config'"
+                echo $(date "+%Y-%m-%d %H:%M:%S") "Call 'ptna-split-extract.sh $PBF_FILE $config'"
 
-                ptna-split-extract.sh "$PBF_FILE" "$NETWORKDIR/osmium.config"
+                ptna-split-extract.sh "$PBF_FILE" "$config"
 
                 split_ret=$?
 
@@ -69,7 +69,7 @@ then
         fi
     done
 
-    for newdir in $(find "$NETWORKDIR" -mindepth 1 -maxdepth 1 -type d -name '[A-Z]*' | sort)
+    for newdir in $(find "$NETWORKDIR" -mindepth 1 -maxdepth 1 -type d -name '[A-Z0-9]*' | sort)
     do
         subdir=$(basename $newdir)
 
