@@ -75,9 +75,9 @@ then
     do
         pushd $subdir 2> /dev/null
 
-        #echo $(date "+%Y-%m-%d %H:%M:%S") "Calling 'ptna-handle-extracts.sh $NETWORKDIR/$subdir' in '$PWD'"
+        #echo $(date "+%Y-%m-%d %H:%M:%S") "Calling 'ptna-handle-extracts.sh $subdir' in '$PWD'"
 
-        ptna-handle-extracts.sh $NETWORKDIR/$subdir
+        ptna-handle-extracts.sh $subdir
 
         popd 2> /dev/null
     done
