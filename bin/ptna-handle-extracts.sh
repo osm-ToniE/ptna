@@ -85,6 +85,11 @@ then
     #echo $(date "+%Y-%m-%d %H:%M:%S") "End handling planet extracts for '$NETWORKDIR' in '$PWD'"
 
 else
-    echo $(date "+%Y-%m-%d %H:%M:%S") "Please specify directory where to start the analysis"
+    if [ -n "$NETWORKDIR" ]
+    then
+        echo $(date "+%Y-%m-%d %H:%M:%S") "'$NETWORKDIR' does not exist"
+    else
+        echo $(date "+%Y-%m-%d %H:%M:%S") "Please specify directory where to start the analysis"
+    fi
     exit 1
 fi
