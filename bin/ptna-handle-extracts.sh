@@ -14,7 +14,7 @@ then
 
     if [ -f "$NETWORKDIR/extract-settings.sh" ]
     then
-        echo $(date "+%Y-%m-%d %H:%M:%S") "We have an 'extract-settings.sh' file in '$NETWORKDIR', 'source ...' it"
+        #echo $(date "+%Y-%m-%d %H:%M:%S") "We have an 'extract-settings.sh' file in '$NETWORKDIR', 'source ...' it"
         source "$NETWORKDIR/extract-settings.sh"
         if [ -n "$BASEURL" -a -n "$SOURCE" -a -n "$TARGET" ]
         then
@@ -22,24 +22,24 @@ then
 
             if [ ! -f "$TARGET" -o ! -s "$TARGET" ]
             then
-                echo $(date "+%Y-%m-%d %H:%M:%S") "Call 'ptna-get-extract.sh $BASEURL $SOURCE $TARGET"
+                #echo $(date "+%Y-%m-%d %H:%M:%S") "Call 'ptna-get-extract.sh $BASEURL $SOURCE $TARGET"
 
                 ptna-get-extract.sh "$BASEURL" "$SOURCE" "$TARGET"
 
                 get_ret=$?
 
-                echo $(date "+%Y-%m-%d %H:%M:%S") "ptna-get-extract.sh returned $get_ret"
+                #echo $(date "+%Y-%m-%d %H:%M:%S") "ptna-get-extract.sh returned $get_ret"
             fi
 
             if [ -f "$TARGET" -a -s "$TARGET" ]
             then
-                echo $(date "+%Y-%m-%d %H:%M:%S") "Call 'ptna-update-extract.sh $TARGET'"
+                #echo $(date "+%Y-%m-%d %H:%M:%S") "Call 'ptna-update-extract.sh $TARGET'"
 
                 ptna-update-extract.sh "$TARGET"
 
                 update_ret=$?
 
-                echo $(date "+%Y-%m-%d %H:%M:%S") "ptna-update-extract.sh returned $update_ret"
+                #echo $(date "+%Y-%m-%d %H:%M:%S") "ptna-update-extract.sh returned $update_ret"
             fi
 
 
@@ -51,19 +51,19 @@ then
 
     if [ -f "$NETWORKDIR/osmium.config" ]
     then
-        echo $(date "+%Y-%m-%d %H:%M:%S") "We have an 'osmium.config' file in '$NETWORKDIR', do we have a '*.osm.pbf' in '$PWD'$?"
+        #echo $(date "+%Y-%m-%d %H:%M:%S") "We have an 'osmium.config' file in '$NETWORKDIR', do we have a '*.osm.pbf' in '$PWD'$?"
         # there should be only one *.osm.pbf file in this directory
         PBF_FILE=$(find . -mindepth 0 -maxdepth 1 -type f -name '*.osm.pbf')
 
         if [ -n "$PBF_FILE" -a -f "$PBF_FILE" -a -s "$PBF_FILE" ]
         then
-                echo $(date "+%Y-%m-%d %H:%M:%S") "Call 'ptna-split-extract.sh $PBF_FILE $NETWORKDIR/osmium.config'"
+                #echo $(date "+%Y-%m-%d %H:%M:%S") "Call 'ptna-split-extract.sh $PBF_FILE $NETWORKDIR/osmium.config'"
 
                 ptna-split-extract.sh "$PBF_FILE" "$NETWORKDIR/osmium.config"
 
                 split_ret=$?
 
-                echo $(date "+%Y-%m-%d %H:%M:%S") "ptna-plit-extract.sh returned $split_ret"
+                #echo $(date "+%Y-%m-%d %H:%M:%S") "ptna-plit-extract.sh returned $split_ret"
 
         else
             echo $(date "+%Y-%m-%d %H:%M:%S") "No '*.osb.pbf' file ('$PBF_FILE') found in '$PWD' or the file is empty"
@@ -75,14 +75,14 @@ then
     do
         pushd $subdir
 
-        echo $(date "+%Y-%m-%d %H:%M:%S") "Calling 'ptna-handle-extracts.sh $NETWORKDIR/$subdir' in '$PWD'"
+        #echo $(date "+%Y-%m-%d %H:%M:%S") "Calling 'ptna-handle-extracts.sh $NETWORKDIR/$subdir' in '$PWD'"
 
         ptna-handle-extracts.sh $NETWORKDIR/$subdir
 
         popd
     done
 
-    echo $(date "+%Y-%m-%d %H:%M:%S") "End handling planet extracts for '$NETWORKDIR' in '$PWD'"
+    #echo $(date "+%Y-%m-%d %H:%M:%S") "End handling planet extracts for '$NETWORKDIR' in '$PWD'"
 
 else
     echo $(date "+%Y-%m-%d %H:%M:%S") "Please specify directory where to start the analysis"
