@@ -10,10 +10,10 @@ if [ -n "$NETWORKDIR" -a -d "$NETWORKDIR" ]
 then
     echo $(date "+%Y-%m-%d %H:%M:%S") "Start handling planet extracts for '$NETWORKDIR' in '$PWD'"
 
-    if [ -f "$NETWORKDIR/extract-settings.sh" ]
-    then
-        #echo $(date "+%Y-%m-%d %H:%M:%S") "We have an 'extract-settings.sh' file in '$NETWORKDIR', 'source ...' it"
-        source "$NETWORKDIR/extract-settings.sh"
+    for setting in $(find "$NETWORKDIR" -maxdepth 1 -type f -name '*-extract-settings.sh')
+    do
+        echo $(date "+%Y-%m-%d %H:%M:%S") "We have '$setting' file, 'source ...' it"
+        source "$setting"
         if [ -n "$BASEURL" -a -n "$SOURCE" -a -n "$TARGET" ]
         then
             echo $(date "+%Y-%m-%d %H:%M:%S") "Check extract: from '$BASEURL/$SOURCE' for '$TARGET'"
@@ -42,20 +42,20 @@ then
 
 
         else
-            echo $(date "+%Y-%m-%d %H:%M:%S") "Parameter(s) not set in '$NETWORKDIR/extract-settings.sh': BASEURL='$BASEURL', SOURCE='$SOURCE', TARGET='$TARGET'"
+            echo $(date "+%Y-%m-%d %H:%M:%S") "Parameter(s) not set in '$setting': BASEURL='$BASEURL', SOURCE='$SOURCE', TARGET='$TARGET'"
             exit 1
         fi
-    fi
+    done
 
-    if [ -f "$NETWORKDIR/osmium.config" ]
-    then
-        #echo $(date "+%Y-%m-%d %H:%M:%S") "We have an 'osmium.config' file in '$NETWORKDIR', do we have a '*.osm.pbf' in '$PWD'$?"
-        # there should be only one *.osm.pbf file in this directory
-        PBF_FILE=$(find . -mindepth 0 -maxdepth 1 -type f -name '*.osm.pbf')
+    for config in $(find "$NETWORKDIR" -maxdepth 1 -type f -name '*-osmium.config')
+    do
+        echo $(date "+%Y-%m-%d %H:%M:%S") "We have a '$config' file, do we have a '*.osm.pbf' in '$PWD'?"
+
+        PBF_FILE=${config%-osmium.config}.osm.pbf
 
         if [ -n "$PBF_FILE" -a -f "$PBF_FILE" -a -s "$PBF_FILE" ]
         then
-                #echo $(date "+%Y-%m-%d %H:%M:%S") "Call 'ptna-split-extract.sh $PBF_FILE $NETWORKDIR/osmium.config'"
+                echo $(date "+%Y-%m-%d %H:%M:%S") "Call 'ptna-split-extract.sh $PBF_FILE $NETWORKDIR/osmium.config'"
 
                 ptna-split-extract.sh "$PBF_FILE" "$NETWORKDIR/osmium.config"
 
@@ -64,7 +64,7 @@ then
                 #echo $(date "+%Y-%m-%d %H:%M:%S") "ptna-plit-extract.sh returned $split_ret"
 
         else
-            echo $(date "+%Y-%m-%d %H:%M:%S") "No '*.osb.pbf' file ('$PBF_FILE') found in '$PWD' or the file is empty"
+            echo $(date "+%Y-%m-%d %H:%M:%S") "'$PBF_FILE' file not found in '$PWD' or the file is empty for '$config'"
             exit 1
         fi
     fi
