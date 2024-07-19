@@ -71,15 +71,22 @@ then
         fi
     fi
 
-    for subdir in $(find "$NETWORKDIR" -mindepth 0 -maxdepth 1 -type d -name '[A-Z]*' | sort)
+    for newdir in $(find "$NETWORKDIR" -mindepth 1 -maxdepth 1 -type d -name '[A-Z]*' | sort)
     do
-        pushd $subdir 2> /dev/null
+        subdir=$(basename $newdir)
 
-        #echo $(date "+%Y-%m-%d %H:%M:%S") "Calling 'ptna-handle-extracts.sh $subdir' in '$PWD'"
+        if [ -d "$subdir" ]
+        then
+            pushd $subdir 2> /dev/null
 
-        ptna-handle-extracts.sh $subdir
+            #echo $(date "+%Y-%m-%d %H:%M:%S") "Calling 'ptna-handle-extracts.sh $newdir' in '$PWD'"
 
-        popd 2> /dev/null
+            ptna-handle-extracts.sh $newdir
+
+            popd 2> /dev/null
+        else
+            echo $(date "+%Y-%m-%d %H:%M:%S") "'$subdir" does not exist in '$PWD' for analysis of '$newdir''"
+        fi
     done
 
     #echo $(date "+%Y-%m-%d %H:%M:%S") "End handling planet extracts for '$NETWORKDIR' in '$PWD'"
