@@ -51,7 +51,7 @@ then
     do
         echo $(date "+%Y-%m-%d %H:%M:%S") "We have a '$config' file, do we have a '*.osm.pbf' in '$PWD'?"
 
-        PBF_FILE=${config%-osmium.config}.osm.pbf
+        PBF_FILE=$(basename ${config%-osmium.config}).osm.pbf
 
         if [ -n "$PBF_FILE" -a -f "$PBF_FILE" -a -s "$PBF_FILE" ]
         then
