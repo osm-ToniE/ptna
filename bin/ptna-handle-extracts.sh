@@ -73,13 +73,13 @@ then
 
     for subdir in $(find "$NETWORKDIR" -mindepth 0 -maxdepth 1 -type d -name '[A-Z]*' | sort)
     do
-        pushd $subdir
+        pushd $subdir 2> /dev/null
 
         #echo $(date "+%Y-%m-%d %H:%M:%S") "Calling 'ptna-handle-extracts.sh $NETWORKDIR/$subdir' in '$PWD'"
 
         ptna-handle-extracts.sh $NETWORKDIR/$subdir
 
-        popd
+        popd 2> /dev/null
     done
 
     #echo $(date "+%Y-%m-%d %H:%M:%S") "End handling planet extracts for '$NETWORKDIR' in '$PWD'"
