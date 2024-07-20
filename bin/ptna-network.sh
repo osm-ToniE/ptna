@@ -27,7 +27,7 @@ fi
 SETTINGS_DIR="."
 
 
-TEMP=$(getopt -o acCfgGhLmoOpPuwWS: --long analyze,clean-created,clean-downloaded,get-routes,get-talk,force-download,help,log-delete,modiify-routes-data,overpass-query,overpass-query-on-zero-xml,push-routes,push-talk,update-result,watch-routes,watch-talk,settings-dir: -n 'ptna-network.sh' -- "$@")
+TEMP=$(getopt -o acCefgGhLmoOpPuwWS: --long analyze,clean-created,clean-downloaded,use-extracts,get-routes,get-talk,force-download,help,log-delete,modiify-routes-data,overpass-query,overpass-query-on-zero-xml,push-routes,push-talk,update-result,watch-routes,watch-talk,settings-dir: -n 'ptna-network.sh' -- "$@")
 
 if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 2 ; fi
 
@@ -38,14 +38,15 @@ while true ; do
         -a|--analyze)                       analyze=true                ; shift ;;
         -c|--clean-created)                 cleancreated=true           ; shift ;;
         -C|--clean-downloaded)              cleandownloaded=true        ; shift ;;
+        -e|--use-extracts)                  use_extracts=true ; overpassquery=false ; overpassqueryonzeroxml=false ; shift ;;
         -f|--force-download)                forcedownload=true          ; shift ;;
         -g|--get-routes)                    getroutes=true              ; shift ;;
         -G|--get-talk)                      gettalk=true                ; shift ;;
         -h|--help)                          help=true                   ; shift ;;
         -L|--log-delete)                    deletelog=true              ; shift ;;
         -m|--modify-routes-data)            modify=true                 ; shift ;;
-        -o|--overpass-query)                overpassquery=true  ; overpassqueryonzeroxml=false ; shift ;;
-        -O|--overpass-query-on-zero-xml)    overpassqueryonzeroxml=true  ; overpassquery=false ; shift ;;
+        -o|--overpass-query)                overpassquery=true  ; overpassqueryonzeroxml=false ; use_extracts=false ; shift ;;
+        -O|--overpass-query-on-zero-xml)    overpassqueryonzeroxml=true  ; overpassquery=false ; use_extracts=false ; shift ;;
         -p|--push-routes)                   pushroutes=true             ; shift ;;
         -P|--push-talk)                     pushtalk=true               ; shift ;;
         -u|--update-result)                 updateresult=true           ; shift ;;
@@ -185,6 +186,24 @@ then
     echo $(date "+%Y-%m-%d %H:%M:%S") "Removing XML and Routes file"
     rm -f $OSM_XML_FILE_ABSOLUTE $OSM_XML_FILE_ABSOLUTE.part.* $WORK_LOC/$ROUTES_FILE
     [ -d $OSM_XML_FILE_ABSOLUTE.lock ] && rmdir $OSM_XML_FILE_ABSOLUTE.lock
+fi
+
+#
+#
+#
+
+if [ "$use_extracts" = "true" ]
+then
+    echo $(date "+%Y-%m-%d %H:%M:%S") "Use extracts from planet / country dumps"
+    echo $(date "+%Y-%m-%d %H:%M:%S") "For the time being, handled as 'Overpass-API calls'"
+
+    # to do: check whether 'osmium' and 'pyosmium-up-to-date'
+    #        if not, fall back to 'overpassquery'
+
+    # for the time being, handled as 'overpassquery'
+    overpassquery=true
+    overpassqueryonzeroxml=false
+    use_extracts=false
 fi
 
 #
