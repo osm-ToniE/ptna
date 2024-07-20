@@ -7,8 +7,6 @@
 # 6 jobs in parallel
 XARG="P6"
 
-cd $PTNA_NETWORKS_LOC
-
 if [ -z "$PTNA_OVERPASS_API_SERVER" ]
 then
     if [ $(echo $* | fgrep -c -i o) -gt 0 ]
@@ -17,6 +15,18 @@ then
         XARG="P1"
     fi
 fi
+
+if [ $(echo $* | fgrep -c e) -gt 0 ]
+then
+    # use "e"xtracts from planet dumps if configured, otherwise 'ptna-network.sh' will fall-back to Overpass-API ("o")
+    # download, update and split relevant planet extracts before analyzing the data
+    cd $PTNA_WORK_LOC
+
+    ptna-handle-extracts.sh $PTNA_NETWORKS_LOC
+fi
+
+cd $PTNA_NETWORKS_LOC
+
 if [ $(echo $* | fgrep -c L) -gt 0 ]
 then
     # overwrite existing logfile, deleting the old information

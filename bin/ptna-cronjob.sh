@@ -101,14 +101,15 @@ then
         ptna-all-networks-parallel.sh -cC >> $LOGFILE 2>&1 < /dev/null
 
         # L == delete all old 'network' specific log files (do that here, to keep log files as long as possible)
-        # o == do the overpassapi query and download the data (to work area)
+        #   e == use planet extracts instead of overpass api query (if not configured or it failed, there's a fall-back to 'o')
+        #   o == do the overpass api query and download the data (to work area)
         # g == get the OSM-Wiki data for the routes
         # a == do the analysis (in work area)
         # u == update the result from the work area to the location of the web service
 
         echo $(date "+%Y-%m-%d %H:%M:%S") "Start main analysis" >> $LOGFILE
 
-        ptna-all-networks-parallel.sh -Logau >> $LOGFILE 2>&1 < /dev/null
+        ptna-all-networks-parallel.sh -Legau >> $LOGFILE 2>&1 < /dev/null
 
         emptyxml=$(find ${PTNA_WORK_LOC} -name '*.xml' -size 0 | wc -l)
 
