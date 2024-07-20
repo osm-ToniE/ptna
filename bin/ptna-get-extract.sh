@@ -6,7 +6,7 @@ TARGET="$3"
 
 CALL_PARAMS="--server-response --no-verbose"
 
-echo $(date "+%Y-%m-%d %H:%M:%S") "Call wget for '$TARGET' from '$BASEURL/$SOURCE'"
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call wget for '$TARGET' from '$BASEURL/$SOURCE'"
 
 # create empty file, so that we can check size even if wget does not change the file at all
 
@@ -16,24 +16,24 @@ wget $CALL_PARAMS --user-agent="PTNA script on https://ptna.openstreetmap.de" -O
 
 wget_ret=$?
 
-echo $(date "+%Y-%m-%d %H:%M:%S") "wget retuned $wget_ref"
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "wget retuned $wget_ref"
 
 fsize=$(stat -c '%s' $TARGET.part.$$)
 if [ "$fsize" -gt 0 ]
 then
-    echo $(date "+%Y-%m-%d %H:%M:%S") "Overwriting old '$TARGET' with new data: size $fsize bytes"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Overwriting old '$TARGET' with new data: size $fsize bytes"
     mv $TARGET.part.$$ $TARGET
 
-    echo $(date "+%Y-%m-%d %H:%M:%S") "Call 'osmium fileinfo' for '$TARGET'"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium fileinfo' for '$TARGET'"
 
     osmium fileinfo $TARGET
 
     osmium_ret=$?
 
-    echo $(date "+%Y-%m-%d %H:%M:%S") "osmium returned $osmium_ret"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret"
 
     exit $osmium_ret
 else
-    echo $(date "+%Y-%m-%d %H:%M:%S") "Failure for wget for '$TARGET' from '$BASEURL/$SOURCE': retrieved file is empty"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Failure for wget for '$TARGET' from '$BASEURL/$SOURCE': retrieved file is empty"
     exit 1
 fi

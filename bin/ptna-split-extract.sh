@@ -16,16 +16,16 @@ CONFIG="$2"
 
 if [ -n "$SOURCE" -a -f "$SOURCE" -a -s "$SOURCE" -a -n "$CONFIG" -a -f "$CONFIG" -a -s "$CONFIG" ]
 then
-    echo $(date "+%Y-%m-%d %H:%M:%S") "Call 'osmium extract' for '$SOURCE' and '$CONFIG'"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium extract' for '$SOURCE' and '$CONFIG'"
 
     osmium extract --verbose --strategy=smart --config="$CONFIG" --overwrite --fsync "$SOURCE"
 
     osmium_ret=$?
 
-    echo $(date "+%Y-%m-%d %H:%M:%S") "osmium returned $osmium_ret"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret"
 
     exit $osmium_ret
 else
-    echo $(date "+%Y-%m-%d %H:%M:%S") "There is no source file (1st parameter) and/or no config file (2nd parameter)"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "There is no source file (1st parameter) and/or no config file (2nd parameter)"
     exit 1
 fi

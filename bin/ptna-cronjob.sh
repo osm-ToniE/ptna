@@ -81,7 +81,7 @@ then
 
         LOGFILE=${PTNA_WORK_LOC}/log/ptna-all-networks$LOGFILE_SUFFIX.log
 
-        echo $(date "+%Y-%m-%d %H:%M:%S") "Start Cron Job" > $LOGFILE
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start Cron Job" > $LOGFILE
 
         if [ "$1" = "UTC+01" -a "$(date '+%H')" = "02" ]
         then
@@ -96,7 +96,7 @@ then
         # c == clean the work area
         # C == clean the XML file (do that here, some 'network' will reuse XML files, so 'C' togehter with 'o' spoils that)
 
-        echo $(date "+%Y-%m-%d %H:%M:%S") "Clean work area and XML files" >> $LOGFILE
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Clean work area and XML files" >> $LOGFILE
 
         ptna-all-networks-parallel.sh -cC >> $LOGFILE 2>&1 < /dev/null
 
@@ -107,7 +107,7 @@ then
         # a == do the analysis (in work area)
         # u == update the result from the work area to the location of the web service
 
-        echo $(date "+%Y-%m-%d %H:%M:%S") "Start main analysis" >> $LOGFILE
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start main analysis" >> $LOGFILE
 
         ptna-all-networks-parallel.sh -Legau >> $LOGFILE 2>&1 < /dev/null
 
@@ -121,7 +121,7 @@ then
 
             sleep 300
 
-            echo $(date "+%Y-%m-%d %H:%M:%S") "Start catch-up with selected overpass api server '$PTNA_OVERPASS_API_SERVER'" >> $LOGFILE
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start catch-up with selected overpass api server '$PTNA_OVERPASS_API_SERVER'" >> $LOGFILE
 
             # O == do the overpassapi query only if the downloaded XML data is empty, otherwise skip the rest
             #      g == get the OSM-Wiki data for the routes
@@ -150,7 +150,7 @@ then
 
                 sleep 300
 
-                echo $(date "+%Y-%m-%d %H:%M:%S") "Start catch-up with standard overpass api server" >> $LOGFILE
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start catch-up with standard overpass api server" >> $LOGFILE
 
                 # O == do the overpassapi query only if the downloaded XML data is empty, otherwise skip the rest
                 #      g == get the OSM-Wiki data for the routes
@@ -166,7 +166,7 @@ then
         # c == clean the work area
         # C == clean the XML file
 
-        echo $(date "+%Y-%m-%d %H:%M:%S") "Start clean-up" >> $LOGFILE
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start clean-up" >> $LOGFILE
 
         if [ "$(date '+%u')" = "1" ]    # = Monday
         then
@@ -177,7 +177,7 @@ then
             ptna-all-networks-parallel.sh -cC >> $LOGFILE 2>&1 < /dev/null
         fi
 
-        echo $(date "+%Y-%m-%d %H:%M:%S") "Cron Job stopped" >> $LOGFILE
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Cron Job stopped" >> $LOGFILE
 
     else
         echo "directory $PTNA_WORK_LOC does not exist ... terminating"

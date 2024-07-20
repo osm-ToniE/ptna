@@ -14,7 +14,7 @@ do
     if [ -d $D ]
     then
         echo
-        echo $(date "+%Y-%m-%d %H:%M:%S") "$D"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$D"
         echo
 
         cd $D

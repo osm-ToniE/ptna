@@ -7,7 +7,7 @@
 PTNA_NETWORK_CALL_TIME=$(date --utc "+%s")
 PTNA_NETWORK_OPTIONS="$@"
 
-echo $(date "+%Y-%m-%d %H:%M:%S") "Start: ptna-network.sh $PTNA_NETWORK_OPTIONS"
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start: ptna-network.sh $PTNA_NETWORK_OPTIONS"
 
 if [ -z "$PTNA_TARGET_LOC"     -o \
      -z "$PTNA_RESULTS_LOC"    -o \
@@ -128,13 +128,13 @@ CALL_PARAMS="--server-response --read-timeout=1200 --tries=2 --wait=10 --random-
 
 if [ ! -d "$WORK_LOC" ]
 then
-    echo $(date "+%Y-%m-%d %H:%M:%S") "Creating directory $WORK_LOC"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Creating directory $WORK_LOC"
     mkdir -p $WORK_LOC
 fi
 
 if [ -d "$WORK_LOC" ]
 then
-   echo $(date "+%Y-%m-%d %H:%M:%S") "Init Statistics DB $WORK_LOC/$STATISTICS_DB"
+   echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Init Statistics DB $WORK_LOC/$STATISTICS_DB"
 
     ptna_columns="id INTEGER PRIMARY KEY AUTOINCREMENT, start INTEGER DEFAULT 0, stop INTEGER DEFAULT 0, options TEXT DEFAULT ''"
     sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS ptna ($ptna_columns);"
@@ -154,7 +154,7 @@ then
 
     sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO ptna (start,options) VALUES ($PTNA_NETWORK_CALL_TIME,'$PTNA_NETWORK_OPTIONS');"
     PTNA_NETWORK_DB_ID=$(sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "SELECT seq FROM sqlite_sequence WHERE name='ptna';")
-    echo $(date "+%Y-%m-%d %H:%M:%S") "Statistic entries with id = $PTNA_NETWORK_DB_ID"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Statistic entries with id = $PTNA_NETWORK_DB_ID"
 fi
 
 #
@@ -172,7 +172,7 @@ fi
 
 if [ "$cleancreated" = "true" ]
 then
-    echo $(date "+%Y-%m-%d %H:%M:%S") "Removing temporary files"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Removing temporary files"
     rm -f $WORK_LOC/$HTML_FILE $WORK_LOC/$DIFF_FILE $WORK_LOC/$DIFF_HTML_FILE $WORK_LOC/$SAVE_FILE $OSM_XML_FILE_ABSOLUTE.part.*
     [ -d $OSM_XML_FILE_ABSOLUTE.lock ] && rmdir $OSM_XML_FILE_ABSOLUTE.lock
 fi
@@ -183,7 +183,7 @@ fi
 
 if [ "$cleandownloaded" = "true" ]
 then
-    echo $(date "+%Y-%m-%d %H:%M:%S") "Removing XML and Routes file"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Removing XML and Routes file"
     rm -f $OSM_XML_FILE_ABSOLUTE $OSM_XML_FILE_ABSOLUTE.part.* $WORK_LOC/$ROUTES_FILE
     [ -d $OSM_XML_FILE_ABSOLUTE.lock ] && rmdir $OSM_XML_FILE_ABSOLUTE.lock
 fi
@@ -194,8 +194,8 @@ fi
 
 if [ "$use_extracts" = "true" ]
 then
-    echo $(date "+%Y-%m-%d %H:%M:%S") "Use extracts from planet / country dumps"
-    echo $(date "+%Y-%m-%d %H:%M:%S") "For the time being, handled as 'Overpass-API calls'"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Use extracts from planet / country dumps"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "For the time being, handled as 'Overpass-API calls'"
 
     # to do: check whether 'osmium' and 'pyosmium-up-to-date'
     #        if not, fall back to 'overpassquery'
@@ -224,9 +224,9 @@ then
 
         if [ "$age" -lt 5400 ]
         then
-            echo $(date "+%Y-%m-%d %H:%M:%S") "Skipping download via Overpass Query API to $OSM_XML_FILE_ABSOLUTE"
-            echo $(date "+%Y-%m-%d %H:%M:%S") "Age of file: $age seconds is less than 5400 seconds = 1.5 hours"
-            echo $(date "+%Y-%m-%d %H:%M:%S") "Use option -f if you want to force the download"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Skipping download via Overpass Query API to $OSM_XML_FILE_ABSOLUTE"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Age of file: $age seconds is less than 5400 seconds = 1.5 hours"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Use option -f if you want to force the download"
             overpassquery="false"
         fi
     fi
@@ -242,15 +242,15 @@ then
     then
         if [ $OSM_XML_FILE_ABSOLUTE -nt $WORK_LOC/$HTML_FILE ]
         then
-            echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' exists and is newer than '$WORK_LOC/$HTML_FILE', starting analysis if requested"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "File '$OSM_XML_FILE_ABSOLUTE' exists and is newer than '$WORK_LOC/$HTML_FILE', starting analysis if requested"
        else
-            echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' exists and is older than '$WORK_LOC/$HTML_FILE', no further analysis required, terminating"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "File '$OSM_XML_FILE_ABSOLUTE' exists and is older than '$WORK_LOC/$HTML_FILE', no further analysis required, terminating"
             PTNA_NETWORK_STOP_TIME=$(date --utc "+%s")
             sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "UPDATE ptna SET stop=$(date --utc "+%s") WHERE id=$PTNA_NETWORK_DB_ID;"
             exit 0
         fi
     else
-        echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' does not exist or is empty, starting download"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "File '$OSM_XML_FILE_ABSOLUTE' does not exist or is empty, starting download"
         overpassquery="true"
     fi
 fi
@@ -261,7 +261,7 @@ fi
 
 if [ "$overpassquery" = "true" ]
 then
-    echo $(date "+%Y-%m-%d %H:%M:%S") "Calling Overpass-API for '$PREFIX'"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Calling Overpass-API for '$PREFIX'"
 
     if [ -d "$WORK_LOC" ]
     then
@@ -269,7 +269,7 @@ then
 
         if [ ! -d "$OSM_XML_LOC" ]
         then
-            echo $(date "+%Y-%m-%d %H:%M:%S") "Creating directory $OSM_XML_LOC"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Creating directory $OSM_XML_LOC"
             mkdir -p $OSM_XML_LOC
         fi
 
@@ -283,12 +283,12 @@ then
                 # wait max 60 * 10 seconds = 10 minutes
 
                 loops=100
-                echo $(date "+%Y-%m-%d %H:%M:%S") "Another job is downloading the data in parallel, waiting for the completion"
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Another job is downloading the data in parallel, waiting for the completion"
                 while [ -d $OSM_XML_FILE_ABSOLUTE.lock ]
                 do
                     if [ $loops -le 0 ]
                     then
-                        echo $(date "+%Y-%m-%d %H:%M:%S") "... waited too long for the completion"
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "... waited too long for the completion"
                         break
                     fi
                     sleep 10
@@ -296,7 +296,7 @@ then
                 done
                 if [ $loops -gt 0 ]
                 then
-                    echo $(date "+%Y-%m-%d %H:%M:%S") "... proceeding without own download"
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "... proceeding without own download"
                 fi
             else
                 rm -f $OSM_XML_FILE_ABSOLUTE
@@ -309,7 +309,7 @@ then
                                         sed -e "s/overpass-api\.de/$PTNA_OVERPASS_API_SERVER/" \
                                             -e 's/http:/https:/'                               \
                                             -e 's/data=area/data=[timeout:900];area/')
-                        echo $(date "+%Y-%m-%d %H:%M:%S") "Overpass-API Query changed to '$OVERPASS_QUERY'"
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Overpass-API Query changed to '$OVERPASS_QUERY'"
                     fi
                 fi
 
@@ -320,14 +320,14 @@ then
                 wget_ret=$?
                 END_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
                 stop=$(date --utc "+%s")
-                echo $(date "+%Y-%m-%d %H:%M:%S") "wget returns $wget_ret"
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "wget returns $wget_ret"
 
                 fsize=$(stat -c '%s' $OSM_XML_FILE_ABSOLUTE.part.$$)
                 if [ "$fsize" -gt 0 ]
                 then
                     if [ "$fsize" -ge 1000 ]
                     then
-                        echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' first 10 lines:"
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "File '$OSM_XML_FILE_ABSOLUTE' first 10 lines:"
                         head -10 $OSM_XML_FILE_ABSOLUTE.part.$$
                         OSM_BASE=$(head -10 $OSM_XML_FILE_ABSOLUTE.part.$$ | fgrep -m 1 '<meta osm_base' | sed -e 's/^.*osm_base="//' -e 's/".*$//')
                         if [ -n "$OSM_BASE" ]
@@ -340,8 +340,8 @@ then
                             MAX_AGE=$(( 6 * 3600 ))
                             if [ $OSM_AGE -gt $MAX_AGE ]
                             then
-                                echo $(date "+%Y-%m-%d %H:%M:%S") "OSM ($OSM_BASE) data is quite old : older than 6 hours"
-                                echo $(date "+%Y-%m-%d %H:%M:%S") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
+                                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "OSM ($OSM_BASE) data is quite old : older than 6 hours"
+                                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
                                 sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,0,1,$fsize,$OSM_BASE_SEC);"
                                 rm    $OSM_XML_FILE_ABSOLUTE.part.$$
                                 touch $OSM_XML_FILE_ABSOLUTE.part.$$
@@ -350,22 +350,22 @@ then
                             fi
                         fi
                     else
-                        echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' is quite small: error during download?"
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "File '$OSM_XML_FILE_ABSOLUTE' is quite small: error during download?"
                         sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,0,1,$fsize,0);"
                         cat $OSM_XML_FILE_ABSOLUTE.part.$$
-                        echo $(date "+%Y-%m-%d %H:%M:%S") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
                         rm    $OSM_XML_FILE_ABSOLUTE.part.$$
                         touch $OSM_XML_FILE_ABSOLUTE.part.$$
                     fi
                 else
-                    echo $(date "+%Y-%m-%d %H:%M:%S") "Failure for wget for '$PREFIX'"
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Failure for wget for '$PREFIX'"
                     sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,0,1,$fsize,0);"
                 fi
 
                 fsize=$(stat -c '%s' $OSM_XML_FILE_ABSOLUTE.part.$$)
                 if [ "$fsize" -eq 0 ]
                 then
-                    echo $(date "+%Y-%m-%d %H:%M:%S") "Calling wget for '$PREFIX' a second time in 1 minute"
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Calling wget for '$PREFIX' a second time in 1 minute"
                     # try a second, but only a second time
                     sleep 60
                     START_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
@@ -375,14 +375,14 @@ then
                     wget_ret=$?
                     END_DOWNLOAD=$(date "+%Y-%m-%d %H:%M:%S %Z")
                     stop=$(date --utc "+%s")
-                    echo $(date "+%Y-%m-%d %H:%M:%S") "wget returns $wget_ret"
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "wget returns $wget_ret"
 
                     fsize=$(stat -c '%s' $OSM_XML_FILE_ABSOLUTE.part.$$)
                     if [ "$fsize" -gt 0 ]
                     then
                         if [ "$fsize" -ge 1000 ]
                         then
-                            echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' first 10 lines:"
+                            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "File '$OSM_XML_FILE_ABSOLUTE' first 10 lines:"
                             head -10 $OSM_XML_FILE_ABSOLUTE.part.$$
                             OSM_BASE=$(head -10 $OSM_XML_FILE_ABSOLUTE.part.$$ | fgrep -m 1 '<meta osm_base' | sed -e 's/^.*osm_base="//' -e 's/".*$//')
                             if [ -n "$OSM_BASE" ]
@@ -395,8 +395,8 @@ then
                                 MAX_AGE=$(( 6 * 3600 ))
                                 if [ $OSM_AGE -gt $MAX_AGE ]
                                 then
-                                    echo $(date "+%Y-%m-%d %H:%M:%S") "OSM ($OSM_BASE) data is quite old : older than 6 hours"
-                                    echo $(date "+%Y-%m-%d %H:%M:%S") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
+                                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "OSM ($OSM_BASE) data is quite old : older than 6 hours"
+                                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
                                     sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO retry_download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,0,$DOWNLOAD_TRIES,$fsize,$OSM_BASE_SEC);"
                                     rm    $OSM_XML_FILE_ABSOLUTE.part.$$
                                     touch $OSM_XML_FILE_ABSOLUTE.part.$$
@@ -405,28 +405,28 @@ then
                                 fi
                             fi
                         else
-                            echo $(date "+%Y-%m-%d %H:%M:%S") "File '$OSM_XML_FILE_ABSOLUTE' is quite small: error during download?"
+                            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "File '$OSM_XML_FILE_ABSOLUTE' is quite small: error during download?"
                             sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO retry_download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,0,$DOWNLOAD_TRIES,$fsize,0);"
                             cat $OSM_XML_FILE_ABSOLUTE.part.$$
-                            echo $(date "+%Y-%m-%d %H:%M:%S") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
+                            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
                             rm    $OSM_XML_FILE_ABSOLUTE.part.$$
                             touch $OSM_XML_FILE_ABSOLUTE.part.$$
                         fi
                     else
-                        echo $(date "+%Y-%m-%d %H:%M:%S") "Failure for wget for '$PREFIX'"
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Failure for wget for '$PREFIX'"
                         sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO retry_download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,0,$DOWNLOAD_TRIES,$fsize,0);"
                     fi
                 fi
 
                 mv $OSM_XML_FILE_ABSOLUTE.part.$$ $OSM_XML_FILE_ABSOLUTE
-                echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $OSM_XML_FILE_ABSOLUTE)
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $OSM_XML_FILE_ABSOLUTE)
                 rmdir $OSM_XML_FILE_ABSOLUTE.lock
             fi
         else
-            echo $(date "+%Y-%m-%d %H:%M:%S") "Work dir $OSM_XML_LOC does not exist/could not be created"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Work dir $OSM_XML_LOC does not exist/could not be created"
         fi
     else
-        echo $(date "+%Y-%m-%d %H:%M:%S") "Work dir $WORK_LOC does not exist/could not be created"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Work dir $WORK_LOC does not exist/could not be created"
     fi
 fi
 
@@ -444,46 +444,46 @@ then
         if [ -n "$WIKI_ROUTES_PAGE" ]
         then
             location="$WIKI_ROUTES_PAGE"
-            echo $(date "+%Y-%m-%d %H:%M:%S") "Reading Routes Wiki page '$WIKI_ROUTES_PAGE' to file '$WORK_LOC/$ROUTES_FILE'"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Reading Routes Wiki page '$WIKI_ROUTES_PAGE' to file '$WORK_LOC/$ROUTES_FILE'"
             log=$(ptna-wiki-page.pl --pull --page=$WIKI_ROUTES_PAGE --file=$WORK_LOC/$ROUTES_FILE 2>&1)
             ret=$?
             echo $log | sed -e 's/ \([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9] \)/\n\1/g'
-            echo $(date "+%Y-%m-%d %H:%M:%S") "ptna-wiki-page.pl returned $ret"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-wiki-page.pl returned $ret"
             if [ -f "$WORK_LOC/$ROUTES_FILE" ]
             then
                 ROUTES_SIZE="$(stat -c '%s' $WORK_LOC/$ROUTES_FILE)"
                 ROUTES_TIMESTAMP_UTC="$(echo $log | fgrep "timestamp =" | sed -e 's/.*timestamp\s*=\s*\(20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]T[0-9][0-9]:[0-9][0-9]:[0-9][0-9]Z\).*/\1/')"
                 ROUTES_TIMESTAMP_LOC="$(date --date "$ROUTES_TIMESTAMP_UTC" '+%Y-%m-%d %H:%M:%S %Z' | sed -e 's/ \([+-][0-9]*\)$/ UTC\1/')"
                 modified="$(date --utc --date "$ROUTES_TIMESTAMP_UTC" '+%s')"
-                echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WORK_LOC/$ROUTES_FILE)
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $WORK_LOC/$ROUTES_FILE)
             else
                 ROUTES_SIZE=-1
                 modified=0
-                echo $(date "+%Y-%m-%d %H:%M:%S") "Downloading '$ROUTES_FILE' failed"
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Downloading '$ROUTES_FILE' failed"
             fi
         else
             location=""$SETTINGS_DIR/$ROUTES_FILE""
             if [ -f "$SETTINGS_DIR/$ROUTES_FILE" ]
             then
-                echo $(date "+%Y-%m-%d %H:%M:%S") "'$ROUTES_FILE' provided by GitHub, copy to $WORK_LOC"
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'$ROUTES_FILE' provided by GitHub, copy to $WORK_LOC"
                 cp $SETTINGS_DIR/$ROUTES_FILE $WORK_LOC/$ROUTES_FILE
                 ret=$?
                 ROUTES_SIZE="$(stat -c '%s' $WORK_LOC/$ROUTES_FILE)"
                 ROUTES_TIMESTAMP_UTC="$(stat -c '%y' $SETTINGS_DIR/$ROUTES_FILE)"
                 ROUTES_TIMESTAMP_LOC="$(date --date "$ROUTES_TIMESTAMP_UTC" '+%Y-%m-%d %H:%M:%S %Z' | sed -e 's/ \([+-][0-9]*\)$/ UTC\1/')"
                 modified="$(date --utc --date "$ROUTES_TIMESTAMP_UTC" '+%s')"
-                echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WORK_LOC/$ROUTES_FILE)
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $WORK_LOC/$ROUTES_FILE)
             else
                 ROUTES_SIZE=0
                 modified=0
                 ret=0
-                echo $(date "+%Y-%m-%d %H:%M:%S") "no file: '$ROUTES_FILE'"
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "no file: '$ROUTES_FILE'"
             fi
         fi
         stop=$(date --utc "+%s")
         sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO routes (id,start,stop,ret,modified,location,size) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$ret,$modified,'$location',$ROUTES_SIZE);"
     else
-        echo $(date "+%Y-%m-%d %H:%M:%S") "Work dir $WORK_LOC does not exist/could not be created"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Work dir $WORK_LOC does not exist/could not be created"
     fi
 fi
 
@@ -493,15 +493,15 @@ fi
 
 if [ "$modify" = "true" ]
 then
-    echo $(date "+%Y-%m-%d %H:%M:%S") "Modifying Routes Data"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Modifying Routes Data"
 
     if [ -d "$WORK_LOC" ]
     then
         if [ -n "$WIKI_ROUTES_PAGE" ]
         then
-            echo $(date "+%Y-%m-%d %H:%M:%S") "Reading Routes Wiki page '$WIKI_ROUTES_PAGE' to file '$WORK_LOC/$ROUTES_FILE'"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Reading Routes Wiki page '$WIKI_ROUTES_PAGE' to file '$WORK_LOC/$ROUTES_FILE'"
             ptna-wiki-page.pl --pull --page=$WIKI_ROUTES_PAGE --file=$WORK_LOC/$ROUTES_FILE
-            echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WORK_LOC/$ROUTES_FILE)
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $WORK_LOC/$ROUTES_FILE)
 
             # put the code to modify the data here (sed, awk, perl, ... calls)
 
@@ -515,12 +515,12 @@ then
 
             # end of code here
 
-            echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WORK_LOC/$ROUTES_FILE)
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $WORK_LOC/$ROUTES_FILE)
         else
             if [ -f "$SETTINGS_DIR/$ROUTES_FILE" ]
             then
-                echo $(date "+%Y-%m-%d %H:%M:%S") "'$ROUTES_FILE' provided by GitHub,"
-                echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $SETTINGS_DIR/$ROUTES_FILE)
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'$ROUTES_FILE' provided by GitHub,"
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $SETTINGS_DIR/$ROUTES_FILE)
 
                 # put the code to modify the data here (sed, awk, perl, ... calls)
 
@@ -534,13 +534,13 @@ then
 
                 # end of code here
 
-                echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $SETTINGS_DIR/$ROUTES_FILE)
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $SETTINGS_DIR/$ROUTES_FILE)
             else
-                echo $(date "+%Y-%m-%d %H:%M:%S") "no file: '$ROUTES_FILE'"
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "no file: '$ROUTES_FILE'"
             fi
         fi
     else
-        echo $(date "+%Y-%m-%d %H:%M:%S") "Work dir $WORK_LOC does not exist/could not be created"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Work dir $WORK_LOC does not exist/could not be created"
     fi
 
 fi
@@ -555,12 +555,12 @@ then
     then
         if [ -n "$ANALYSIS_TALK" ]
         then
-            echo $(date "+%Y-%m-%d %H:%M:%S") "Reading Analysis Talk Wiki page '$ANALYSIS_TALK' to file '$WORK_LOC/$TALK_FILE'"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Reading Analysis Talk Wiki page '$ANALYSIS_TALK' to file '$WORK_LOC/$TALK_FILE'"
             ptna-wiki-page.pl --pull --page=$ANALYSIS_TALK --file=$WORK_LOC/$TALK_FILE
-            echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WORK_LOC/$TALK_FILE)
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $WORK_LOC/$TALK_FILE)
         fi
     else
-        echo $(date "+%Y-%m-%d %H:%M:%S") "Work dir $WORK_LOC does not exist/could not be created"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Work dir $WORK_LOC does not exist/could not be created"
     fi
 fi
 
@@ -570,13 +570,13 @@ fi
 
 if [ "$analyze" = "true" ]
 then
-    echo $(date "+%Y-%m-%d %H:%M:%S")  "Analyze $PREFIX"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z")  "Analyze $PREFIX"
 
     if [ -d "$WORK_LOC" ]
     then
         if [ -f $OSM_XML_FILE_ABSOLUTE ]
         then
-            echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $OSM_XML_FILE_ABSOLUTE)
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $OSM_XML_FILE_ABSOLUTE)
 
             if [ -s $OSM_XML_FILE_ABSOLUTE ]
             then
@@ -607,34 +607,34 @@ then
 
                 if [ -s "$WORK_LOC/$HTML_FILE" ]
                 then
-                    echo $(date "+%Y-%m-%d %H:%M:%S") "Analysis succeeded, '$WORK_LOC/$HTML_FILE' created"
-                    echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WORK_LOC/$HTML_FILE)
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Analysis succeeded, '$WORK_LOC/$HTML_FILE' created"
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $WORK_LOC/$HTML_FILE)
 
                     if [ -f "$WORK_LOC/$SAVE_FILE" -a -s "$WORK_LOC/$SAVE_FILE" ]
                     then
                         diff $WORK_LOC/$SAVE_FILE $WORK_LOC/$HTML_FILE > $WORK_LOC/$DIFF_FILE
-                        echo $(date "+%Y-%m-%d %H:%M:%S") "Diff size:  " $(ls -l $WORK_LOC/$DIFF_FILE | awk '{print $5 " " $9}')
-                        echo $(date "+%Y-%m-%d %H:%M:%S") "Diff lines: " $(wc -l $WORK_LOC/$DIFF_FILE)
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Diff size:  " $(ls -l $WORK_LOC/$DIFF_FILE | awk '{print $5 " " $9}')
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Diff lines: " $(wc -l $WORK_LOC/$DIFF_FILE)
                     else
                         rm -f $WORK_LOC/$SAVE_FILE
                     fi
                 else
-                    echo $(date "+%Y-%m-%d %H:%M:%S") "'$WORK_LOC/$HTML_FILE' is empty"
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'$WORK_LOC/$HTML_FILE' is empty"
                 fi
                 size="$(stat -c '%s' $WORK_LOC/$HTML_FILE)"
                 sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO analysis (id,start,stop,size) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$size);"
             else
-                echo $(date "+%Y-%m-%d %H:%M:%S") "'$OSM_XML_FILE_ABSOLUTE' is empty"
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'$OSM_XML_FILE_ABSOLUTE' is empty"
                 if [ -f "$WORK_LOC/$HTML_FILE" ]
                 then
-                    echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WORK_LOC/$HTML_FILE)
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $WORK_LOC/$HTML_FILE)
                 fi
             fi
          else
-            echo $(date "+%Y-%m-%d %H:%M:%S") "'$OSM_XML_FILE_ABSOLUTE' does not exist"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'$OSM_XML_FILE_ABSOLUTE' does not exist"
         fi
     else
-        echo $(date "+%Y-%m-%d %H:%M:%S") "Work dir $WORK_LOC does not exist/could not be created"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Work dir $WORK_LOC does not exist/could not be created"
     fi
 fi
 
@@ -648,7 +648,7 @@ then
     then
         RESULTS_LOC="$PTNA_TARGET_LOC/$PTNA_RESULTS_LOC/$SUB_DIR"
 
-        echo $(date "+%Y-%m-%d %H:%M:%S") "Creating analysis details file '$WORK_LOC/$DETAILS_FILE'"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Creating analysis details file '$WORK_LOC/$DETAILS_FILE'"
         echo "REGION_NAME=$PTNA_WWW_REGION_NAME"                            >  $WORK_LOC/$DETAILS_FILE
         echo "REGION_LINK=$PTNA_WWW_REGION_LINK"                            >> $WORK_LOC/$DETAILS_FILE
         echo "NETWORK_NAME=$PTNA_WWW_NETWORK_NAME"                          >> $WORK_LOC/$DETAILS_FILE
@@ -686,7 +686,7 @@ then
         echo "network-short-regex=$NETWORK_SHORT"        >> $WORK_LOC/$DETAILS_FILE
         echo "operator-regex=$OPERATOR_REGEX"            >> $WORK_LOC/$DETAILS_FILE
 
-        echo $(date "+%Y-%m-%d %H:%M:%S")  "Updating '$WORK_LOC/$HTML_FILE' to '$RESULTS_LOC'"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z")  "Updating '$WORK_LOC/$HTML_FILE' to '$RESULTS_LOC'"
 
         if [ -f $WORK_LOC/$HTML_FILE ]
         then
@@ -715,14 +715,14 @@ then
 
                 if [ ! -d "$RESULTS_LOC" ]
                 then
-                    echo $(date "+%Y-%m-%d %H:%M:%S") "Creating directory $RESULTS_LOC"
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Creating directory $RESULTS_LOC"
                     mkdir -p $RESULTS_LOC
                 fi
 
                 if [ -d "$RESULTS_LOC" ]
                 then
                     start=$(date --utc "+%s")
-                    echo $(date "+%Y-%m-%d %H:%M:%S")  "Copying '$RESULTS_LOC/$HTML_FILE' to '$WORK_LOC/$SAVE_FILE'"
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z")  "Copying '$RESULTS_LOC/$HTML_FILE' to '$WORK_LOC/$SAVE_FILE'"
                     if [ -f $RESULTS_LOC/$HTML_FILE ]
                     then
                         cp $RESULTS_LOC/$HTML_FILE $WORK_LOC/$SAVE_FILE
@@ -744,8 +744,8 @@ then
 
                         diff $WORK_LOC/$SAVE_FILE $WORK_LOC/$HTML_FILE > $WORK_LOC/$DIFF_FILE
                         DIFF_LINES=$(cat $WORK_LOC/$DIFF_FILE | wc -l)
-                        echo $(date "+%Y-%m-%d %H:%M:%S") "Diff size:  " $(ls -l $WORK_LOC/$DIFF_FILE | awk '{print $5 " " $9}')
-                        echo $(date "+%Y-%m-%d %H:%M:%S") "Diff lines: " $DIFF_LINES $WORK_LOC/$DIFF_FILE
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Diff size:  " $(ls -l $WORK_LOC/$DIFF_FILE | awk '{print $5 " " $9}')
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Diff lines: " $DIFF_LINES $WORK_LOC/$DIFF_FILE
                     else
                         DIFF_LINES=$(($DIFF_LINES_BASE + 1))
                         rm -f $WORK_LOC/$DIFF_FILE
@@ -753,7 +753,7 @@ then
 
                     if [ "$DIFF_LINES" -gt "$DIFF_LINES_BASE" ]
                     then
-                        echo $(date "+%Y-%m-%d %H:%M:%S")  "Copying '$WORK_LOC/$HTML_FILE' to '$RESULTS_LOC'"
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z")  "Copying '$WORK_LOC/$HTML_FILE' to '$RESULTS_LOC'"
                         cp $WORK_LOC/$HTML_FILE $RESULTS_LOC
 
                         if [ -n "$(which htmldiff.pl)" ]
@@ -762,25 +762,25 @@ then
                             then
                                 htmldiff.pl -c $WORK_LOC/$SAVE_FILE $WORK_LOC/$HTML_FILE > $WORK_LOC/$DIFF_HTML_FILE
                                 HTML_DIFF=$(fgrep -c 'class="diff-' $WORK_LOC/$DIFF_HTML_FILE)
-                                echo $(date "+%Y-%m-%d %H:%M:%S") "HTML diff:  '$HTML_DIFF'"
+                                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "HTML diff:  '$HTML_DIFF'"
                                 echo "HTML_DIFF=$HTML_DIFF" >> $WORK_LOC/$DETAILS_FILE
                             else
                                 htmldiff.pl -c $WORK_LOC/$HTML_FILE $WORK_LOC/$HTML_FILE > $WORK_LOC/$DIFF_HTML_FILE
                                 HTML_DIFF=0
                             fi
 
-                            echo $(date "+%Y-%m-%d %H:%M:%S") "Copying '$WORK_LOC/$DIFF_HTML_FILE' to '$RESULTS_LOC'"
+                            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Copying '$WORK_LOC/$DIFF_HTML_FILE' to '$RESULTS_LOC'"
                             cp $WORK_LOC/$DIFF_HTML_FILE $RESULTS_LOC
 
-                            echo $(date "+%Y-%m-%d %H:%M:%S") "Updating analysis details file '$WORK_LOC/$DETAILS_FILE' old date = new"
+                            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Updating analysis details file '$WORK_LOC/$DETAILS_FILE' old date = new"
                             echo "OLD_DATE_UTC=$NEW_OSM_Base_Time"       >> $WORK_LOC/$DETAILS_FILE
                             echo "OLD_DATE_LOC=$NEW_Local_OSM_Base_Time" >> $WORK_LOC/$DETAILS_FILE
                             echo "OLD_OR_NEW=new"                        >> $WORK_LOC/$DETAILS_FILE
                         else
-                            echo $(date "+%Y-%m-%d %H:%M:%S") "no htmldiff.pl tool: no HTML-Diff Analysis page '$HTMLDIFF_FILE'"
+                            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "no htmldiff.pl tool: no HTML-Diff Analysis page '$HTMLDIFF_FILE'"
                             HTML_DIFF=0
 
-                            echo $(date "+%Y-%m-%d %H:%M:%S") "Updating analysis details file '$WORK_LOC/$DETAILS_FILE' old date = empty"
+                            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Updating analysis details file '$WORK_LOC/$DETAILS_FILE' old date = empty"
                             echo "OLD_DATE_UTC="  >> $WORK_LOC/$DETAILS_FILE
                             echo "OLD_DATE_LOC="  >> $WORK_LOC/$DETAILS_FILE
                             echo "OLD_OR_NEW=old" >> $WORK_LOC/$DETAILS_FILE
@@ -788,9 +788,9 @@ then
                         stop=$(date --utc "+%s")
                         sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO updateresult (id,start,stop,updated,diff_lines,html_changes) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,1,$DIFF_LINES,$HTML_DIFF);"
                     else
-                        echo $(date "+%Y-%m-%d %H:%M:%S") "No relevant changes on '$HTML_FILE'"
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "No relevant changes on '$HTML_FILE'"
 
-                        echo $(date "+%Y-%m-%d %H:%M:%S") "Updating analysis details file '$WORK_LOC/$DETAILS_FILE' old date = old"
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Updating analysis details file '$WORK_LOC/$DETAILS_FILE' old date = old"
                         echo "OLD_DATE_UTC=$OLD_OSM_Base_Time"       >> $WORK_LOC/$DETAILS_FILE
                         echo "OLD_DATE_LOC=$OLD_Local_OSM_Base_Time" >> $WORK_LOC/$DETAILS_FILE
                         echo "OLD_OR_NEW=old"                        >> $WORK_LOC/$DETAILS_FILE
@@ -798,17 +798,17 @@ then
                         sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO updateresult (id,start,stop,updated,diff_lines,html_changes) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,0,$DIFF_LINES,0);"
                     fi
                 else
-                    echo $(date "+%Y-%m-%d %H:%M:%S") "Target location $RESULTS_LOC does not exist/could not be created"
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Target location $RESULTS_LOC does not exist/could not be created"
                 fi
             #else
-            #    echo $(date "+%Y-%m-%d %H:%M:%S") $WORK_LOC/$HTML_FILE is empty
-            #    echo $(date "+%Y-%m-%d %H:%M:%S") $(ls -l $WORK_LOC/$HTML_FILE)
+            #    echo $(date "+%Y-%m-%d %H:%M:%S %Z") $WORK_LOC/$HTML_FILE is empty
+            #    echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $WORK_LOC/$HTML_FILE)
             #fi
         else
-            echo $(date "+%Y-%m-%d %H:%M:%S") $WORK_LOC/$HTML_FILE does not exist
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") $WORK_LOC/$HTML_FILE does not exist
         fi
     else
-        echo $(date "+%Y-%m-%d %H:%M:%S") "Work dir $WORK_LOC does not exist/could not be created"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Work dir $WORK_LOC does not exist/could not be created"
     fi
 fi
 
@@ -824,16 +824,16 @@ then
         then
             if [ -s $WORK_LOC/$ROUTES_FILE ]
             then
-                echo $(date "+%Y-%m-%d %H:%M:%S") "Writing Routes file '$WORK_LOC/$ROUTES_FILE' to Wiki page '$WIKI_ROUTES_PAGE'"
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Writing Routes file '$WORK_LOC/$ROUTES_FILE' to Wiki page '$WIKI_ROUTES_PAGE'"
                 ptna-wiki-page.pl --push --page=$WIKI_ROUTES_PAGE --file=$WORK_LOC/$ROUTES_FILE --summary="update by PTNA"
             else
-                echo $(date "+%Y-%m-%d %H:%M:%S") $WORK_LOC/$ROUTES_FILE is empty
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") $WORK_LOC/$ROUTES_FILE is empty
             fi
         else
-            echo $(date "+%Y-%m-%d %H:%M:%S") $WORK_LOC/$ROUTES_FILE does not exist
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") $WORK_LOC/$ROUTES_FILE does not exist
         fi
     else
-        echo $(date "+%Y-%m-%d %H:%M:%S") "'$ROUTES_FILE' stored in GitHub"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'$ROUTES_FILE' stored in GitHub"
     fi
 fi
 
@@ -849,13 +849,13 @@ then
         then
             if [ -s $WORK_LOC/$TALK_FILE ]
             then
-                echo $(date "+%Y-%m-%d %H:%M:%S") "Writing Analysis Talk file '$WORK_LOC/$TALK_FILE' to Wiki page '$ANALYSIS_TALK'"
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Writing Analysis Talk file '$WORK_LOC/$TALK_FILE' to Wiki page '$ANALYSIS_TALK'"
                 ptna-wiki-page.pl --push --page=$ANALYSIS_TALK --file=$WORK_LOC/$TALK_FILE --summary="update by PTNA"
             else
-                echo $(date "+%Y-%m-%d %H:%M:%S") $WORK_LOC/$TALK_FILE is empty
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") $WORK_LOC/$TALK_FILE is empty
             fi
         else
-            echo $(date "+%Y-%m-%d %H:%M:%S") $WORK_LOC/$TALK_FILE does not exist
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") $WORK_LOC/$TALK_FILE does not exist
         fi
     fi
 fi
@@ -868,10 +868,10 @@ if [ "$watchroutes" = "true" ]
 then
     if [ -n "$WIKI_ROUTES_PAGE" ]
     then
-        echo $(date "+%Y-%m-%d %H:%M:%S") "Setting 'watch' on Wiki page '$WIKI_ROUTES_PAGE'"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Setting 'watch' on Wiki page '$WIKI_ROUTES_PAGE'"
         ptna-wiki-page.pl --watch --page=$WIKI_ROUTES_PAGE
     else
-        echo $(date "+%Y-%m-%d %H:%M:%S") "'$ROUTES_FILE' provided by GitHub"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'$ROUTES_FILE' provided by GitHub"
     fi
 fi
 
@@ -883,17 +883,17 @@ if [ "$watchtalk" = "true" ]
 then
     if [ -n "$ANALYSIS_TALK" ]
     then
-        echo $(date "+%Y-%m-%d %H:%M:%S") "Setting 'watch' on Wiki page '$ANALYSIS_TALK'"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Setting 'watch' on Wiki page '$ANALYSIS_TALK'"
         ptna-wiki-page.pl --watch --page=$ANALYSIS_TALK
     fi
 fi
 
 if [ -d "$WORK_LOC" ]
 then
-    echo $(date "+%Y-%m-%d %H:%M:%S") "Handling Statistics DB $WORK_LOC/$STATISTICS_DB"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Handling Statistics DB $WORK_LOC/$STATISTICS_DB"
 
     sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "UPDATE ptna SET stop=$(date --utc '+%s') WHERE id=$PTNA_NETWORK_DB_ID;"
 
 else
-    echo $(date "+%Y-%m-%d %H:%M:%S") "Work dir $WORK_LOC does not exist/could not be created"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Work dir $WORK_LOC does not exist/could not be created"
 fi
