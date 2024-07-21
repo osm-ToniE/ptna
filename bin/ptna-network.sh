@@ -199,11 +199,27 @@ then
     if [ -n "$PTNA_EXTRACT_SOURCE" -a -f "$WORK_LOC/$PTNA_EXTRACT_SOURCE" -a -s "$WORK_LOC/$PTNA_EXTRACT_SOURCE" ]
     then
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-filter extract.sh $WORK_LOC/$PTNA_EXTRACT_SOURCE $OSM_XML_FILE_ABSOLUTE'"
+        start=$(date --utc "+%s")
+        START_FILTER=$(date --date @$start "+%Y-%m-%d %H:%M:%S %Z")
+
         ptna-filter-extract.sh "$WORK_LOC/$PTNA_EXTRACT_SOURCE" "$OSM_XML_FILE_ABSOLUTE"
 
-        if [ ! -f "$OSM_XML_FILE_ABSOLUTE" -o ! -s "$OSM_XML_FILE_ABSOLUTE" ]
+        stop=$(date --utc "+%s")
+        END_FILTER=$(date --date @$stop "+%Y-%m-%d %H:%M:%S %Z")
+
+        if [ -f "$OSM_XML_FILE_ABSOLUTE" ]
         then
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'use extracts': result file '$OSM_XML_FILE_ABSOLUTE' does not exist or is empty, handle as 'Overpass-API call'"
+            if [ -s "$OSM_XML_FILE_ABSOLUTE" ]
+            then
+                EXTRACT_SIZE=$(stat -c '%s' "$WORK_LOC/$PTNA_EXTRACT_SOURCE")
+            else
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'use extracts': result file '$OSM_XML_FILE_ABSOLUTE' is empty, handle as 'Overpass-API call'"
+                overpassquery=true
+                overpassqueryonzeroxml=false
+                use_extracts=false
+            fi
+        else
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'use extracts': result file '$OSM_XML_FILE_ABSOLUTE' does not exist, handle as 'Overpass-API call'"
             overpassquery=true
             overpassqueryonzeroxml=false
             use_extracts=false
@@ -692,6 +708,13 @@ then
             echo "OSM_XML_FILE=$OSM_XML_FILE_ABSOLUTE"                                                         >> $WORK_LOC/$DETAILS_FILE
             echo "OSM_XML_FILE_SIZE=$(ls -s --format=single-column $OSM_XML_FILE_ABSOLUTE | awk '{print $1}')" >> $WORK_LOC/$DETAILS_FILE
             echo "OSM_XML_FILE_SIZE_BYTE=$(stat -c '%s' $OSM_XML_FILE_ABSOLUTE)"                               >> $WORK_LOC/$DETAILS_FILE
+        fi
+        if [ -n "$PTNA_EXTRACT_SOURCE" ]
+        then
+            echo "START_FILTER=$START_FILTER"                                                                  >> $WORK_LOC/$DETAILS_FILE
+            echo "END_FILTER=$END_FILTER"                                                                      >> $WORK_LOC/$DETAILS_FILE
+            echo "EXTRACT_FILE=$WORK_LOC/$PTNA_EXTRACT_SOURCE"                                                 >> $WORK_LOC/$DETAILS_FILE
+            echo "EXTRACT_SIZE_BYTE=$EXTRACT_SIZE"                                                             >> $WORK_LOC/$DETAILS_FILE
         fi
         echo "START_ANALYSIS=$START_ANALYSIS"            >> $WORK_LOC/$DETAILS_FILE
         echo "END_ANALYSIS=$END_ANALYSIS"                >> $WORK_LOC/$DETAILS_FILE
