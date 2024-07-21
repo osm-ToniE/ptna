@@ -198,7 +198,7 @@ then
 
     if [ -n "$PTNA_EXTRACT_SOURCE" -a -f "$WORK_LOC/$PTNA_EXTRACT_SOURCE" -a -s "$WORK_LOC/$PTNA_EXTRACT_SOURCE" ]
     then
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-filter extract.sh $WORK_LOC/$PTNA_EXTRACT_SOURCE $OSM_XML_FILE_ABSOLUTE'"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-filter-extract.sh $WORK_LOC/$PTNA_EXTRACT_SOURCE $OSM_XML_FILE_ABSOLUTE'"
         start=$(date --utc "+%s")
         START_FILTER=$(date --date @$start "+%Y-%m-%d %H:%M:%S %Z")
 
