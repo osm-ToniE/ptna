@@ -213,7 +213,7 @@ then
             then
                 EXTRACT_SIZE=$(stat -c '%s' "$WORK_LOC/$PTNA_EXTRACT_SOURCE")
                 head -10 $OSM_XML_FILE_ABSOLUTE
-                OSM_BASE=$(head -10 $OSM_XML_FILE_ABSOLUTE$ | fgrep -m 1 'osmosis_replication_timestamp' | sed -e 's/^.*osmosis_replication_timestamp="//' -e 's/".*$//')
+                OSM_BASE=$(head -10 $OSM_XML_FILE_ABSOLUTE | fgrep -m 1 'osmosis_replication_timestamp' | sed -e 's/^.*osmosis_replication_timestamp="//' -e 's/".*$//')
                 if [ -n "$OSM_BASE" ]
                 then
                     OSM_BASE=$(date --date "$OSM_BASE" "+%Y-%m-%d %H:%M:%S %Z")
