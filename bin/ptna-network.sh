@@ -195,15 +195,33 @@ fi
 if [ "$use_extracts" = "true" ]
 then
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Use extracts from planet / country dumps"
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "For the time being, handled as 'Overpass-API calls'"
 
-    # to do: check whether 'osmium' and 'pyosmium-up-to-date'
-    #        if not, fall back to 'overpassquery'
+    if [ -n "$PTNA_EXTRACT_SOURCE" -a -f "$$WORK_LOC/$PTNA_EXTRACT_SOURCE" -a -s "$WORK_LOC/$PTNA_EXTRACT_SOURCE" ]
+    then
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-filter extract.sh $WORK_LOC/$PTNA_EXTRACT_SOURCE $OSM_XML_FILE_ABSOLUTE'"
+        ptna-filter-extract.sh "$WORK_LOC/$PTNA_EXTRACT_SOURCE" "$OSM_XML_FILE_ABSOLUTE"
 
-    # for the time being, handled as 'overpassquery'
-    overpassquery=true
-    overpassqueryonzeroxml=false
-    use_extracts=false
+        if [ ! -f "$OSM_XML_FILE_ABSOLUTE" -o ! -s "$OSM_XML_FILE_ABSOLUTE" ]
+        then
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'use extracts': result file '$OSM_XML_FILE_ABSOLUTE' does not exist or is empty, handle as 'Overpass-API call'"
+            overpassquery=true
+            overpassqueryonzeroxml=false
+            use_extracts=false
+        fi
+    else
+        if [ -z "$PTNA_EXTRACT_SOURCE" ]
+        then
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'use extracts' is not (yet) configured, for the time being, handle as 'Overpass-API call'"
+        elif [ ! -f "$WORK_LOC/$PTNA_EXTRACT_SOURCE" ]
+        then
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'use extracts': file '$WORK_LOC/$PTNA_EXTRACT_SOURCE' does not exist, handle as 'Overpass-API call'"
+        else
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'use extracts': file '$WORK_LOC/$PTNA_EXTRACT_SOURCE' is empty, handle as 'Overpass-API call'"
+        fi
+        overpassquery=true
+        overpassqueryonzeroxml=false
+        use_extracts=false
+    fi
 fi
 
 #
