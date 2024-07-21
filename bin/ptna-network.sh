@@ -196,7 +196,7 @@ if [ "$use_extracts" = "true" ]
 then
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Use extracts from planet / country dumps"
 
-    if [ -n "$PTNA_EXTRACT_SOURCE" -a -f "$$WORK_LOC/$PTNA_EXTRACT_SOURCE" -a -s "$WORK_LOC/$PTNA_EXTRACT_SOURCE" ]
+    if [ -n "$PTNA_EXTRACT_SOURCE" -a -f "$WORK_LOC/$PTNA_EXTRACT_SOURCE" -a -s "$WORK_LOC/$PTNA_EXTRACT_SOURCE" ]
     then
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-filter extract.sh $WORK_LOC/$PTNA_EXTRACT_SOURCE $OSM_XML_FILE_ABSOLUTE'"
         ptna-filter-extract.sh "$WORK_LOC/$PTNA_EXTRACT_SOURCE" "$OSM_XML_FILE_ABSOLUTE"
