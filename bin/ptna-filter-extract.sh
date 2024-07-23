@@ -16,7 +16,7 @@ then
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium tags-filter' for '$SOURCE' to filter with positive list"
 
     osmium tags-filter -v -F pbf -f pbf -O -o "$TARGET-Data-filtered.osm.pbf" "$SOURCE" \
-           r/type=*route r/type=public_transport,network r/disused:type r/supspended:type r/removed:type r/route_master r/route network name ref from to via public_transport public_transport:version highway=bus_stop,platform railway=stop,tram_stop,halt,station,platform
+           r/type=*route r/type=public_transport,network r/disused:type r/suspended:type r/removed:type r/route_master r/route network name ref from to via public_transport public_transport:version highway=bus_stop,platform railway=stop,tram_stop,halt,station,platform
 
     osmium_ret=$?
 
