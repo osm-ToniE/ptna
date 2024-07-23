@@ -29,9 +29,11 @@ then
 
         osmium tags-filter -v -F pbf -f osm -O -o "$TARGET" \
                --output-header="generator=https://ptna.openstreetmap.de osmosis_replication_timestamp=$TS" "$TARGET-Data-filtered.osm.pbf" \
-               -i r/route=tracks,railway,bicycle,mtb,hiking,road,foot,inline_skates,canoe,detour,fitness_trail,horse,waterway,motorboat,boat,nordic_walking,pipeline,piste,power,running,ski,snowmobile,cycling,historic,motorcycle,riding,junction \
-                  r/type=defaults,area,person,treaty,cemetery,election,level,restriction,boundary,building,waterway,building:part,organization,set,bridge,site,health,junction,right_of_way,dual_carriageway,street,associated_street,cluster,tunnel,tmc,TMC,tmc:point,traffic_signals,place_numbers,shop,group,collection r/type=*golf r/highway=pedestrian,service \
-                  cemetery historic power amenity boundary admin_level place tourism parking landuse building room natural shop office craft man_made leisure playground
+               -i r/route_master=tracks,railway,bicycle,mtb,hiking,road,foot,inline_skates,canoe,detour,fitness_trail,horse,waterway,motorboat,boat,nordic_walking,pipeline,piste,power,running,ski,snowmobile,cycling,historic,motorcycle,riding,junction \
+                  r/route=tracks,railway,bicycle,mtb,hiking,road,foot,inline_skates,canoe,detour,fitness_trail,horse,waterway,motorboat,boat,nordic_walking,pipeline,piste,power,running,ski,snowmobile,cycling,historic,motorcycle,riding,junction \
+                  r/type=defaults,area,destination_sign,enforcement,person,treaty,cemetery,election,level,restriction,boundary,building,waterway,building:part,organization,set,bridge,site,health,junction,right_of_way,dual_carriageway,street,associated_street,cluster,tunnel,tmc,TMC,tmc:point,traffic_signals,place_numbers,shop,group,collection \
+                  r/type=*golf r/highway=pedestrian,service,living_street,footway r/network=lcn,rcn,icn,lwn,rwn,iwn,foot,bicycle \
+                  indoor=corridor,room area:hightway cemetery historic power amenity boundary admin_level place tourism junction parking landuse landcover building roof:shape room natural shop office craft man_made leisure playground golf
 
         osmium_ret=$?
 
