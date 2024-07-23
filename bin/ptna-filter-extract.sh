@@ -16,7 +16,7 @@ then
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium tags-filter' for '$SOURCE' to filter with positive list"
 
     osmium tags-filter -v -F pbf -f pbf -O -o "$TARGET-Data-filtered.osm.pbf" "$SOURCE" \
-           r/type=*route r/type=public_transport r/type=network r/route_master r/route public_transport highway=bus_stop,platform railway=stop,tram_stop,halt,station,platform
+           r/type=*route r/type=public_transport,network r/route_master r/route network name ref from to via public_transport public_transport:version highway=bus_stop,platform railway=stop,tram_stop,halt,station,platform
 
     osmium_ret=$?
 
@@ -28,8 +28,8 @@ then
 
         osmium tags-filter -v -F pbf -f osm -O -o "$TARGET" \
                --output-header="generator=https://ptna.openstreetmap.de osmosis_replication_timestamp=$TS" "$TARGET-Data-filtered.osm.pbf" \
-               -i route=tracks,railway,bicycle,mtb,hiking,road,foot,inline_skates,canoe,detour,fitness_trail,horse,motorboat,nordic_walking,pipeline,piste,power,running,ski,snowmobile,cycling,historic,motorcycle,riding \
-                  r/type=restriction landuse building natural shop office
+               -i r/route=tracks,railway,bicycle,mtb,hiking,road,foot,inline_skates,canoe,detour,fitness_trail,horse,motorboat,nordic_walking,pipeline,piste,power,running,ski,snowmobile,cycling,historic,motorcycle,riding \
+                  r/type=restriction,boundary admin_level landuse building natural shop office craft
 
         osmium_ret=$?
 
