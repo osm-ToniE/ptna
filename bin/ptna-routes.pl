@@ -2872,11 +2872,12 @@ sub analyze_route_relation {
 
     $relation_ptr->{'missing_way_data'}   = 0;
     $relation_ptr->{'missing_node_data'}  = 0;
+    $relation_ptr->{'missing_relation_data'}  = 0;
 
     $return_code += CheckCompletenessOfData( $relation_ptr );
 
     if ( $relation_ptr->{'tag'}->{'public_transport:version'} && $relation_ptr->{'tag'}->{'public_transport:version'} eq '2' ) {
-        if ( $relation_ptr->{'missing_way_data'} == 0 && $relation_ptr->{'missing_node_data'} == 0 ) {
+        if ( $relation_ptr->{'missing_way_data'} == 0 && $relation_ptr->{'missing_node_data'} == 0 && $relation_ptr->{'missing_relation_data'} == 0 ) {
             $return_code = analyze_ptv2_route_relation( $relation_ptr );
         } else {
             $issues_string = gettext( "Skipping further analysis ..." );
@@ -5629,6 +5630,34 @@ sub CheckCompletenessOfData {
     my $relation_ptr = shift;
     my $ret_val      = 0;
 
+    #
+    # for all RELATIONS  check for completeness of data
+    #
+    if ( $xml_has_relations ) {
+        my %incomplete_data_for_relations   = ();
+        foreach my $rel_ref ( @{$relation_ptr->{'relation'}} ) {
+            if ( $RELATIONS{$rel_ref->{'ref'}} ) {
+                # node exists in downloaded data
+                # check for more
+                # $incomplete_data_for_nodes{$node_ref->{'ref'}} = 1    if ( !$NODES{$node_ref->{'ref'}}->{'tag'} );
+            } else {
+                $incomplete_data_for_relations{$rel_ref->{'ref'}} = 1;
+            }
+        }
+        if ( keys(%incomplete_data_for_relations) ) {
+            my @help_array     = sort(keys(%incomplete_data_for_relations));
+            my $num_of_errors  = scalar(@help_array);
+               $ret_val       += $num_of_errors;
+               $issues_string  = gettext( "Error in input data: insufficient data for relations" );
+            if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $issues_string, join(', ', map { printRelationTemplate($_); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+            } else {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $issues_string, join(', ', map { printRelationTemplate($_); } @help_array )) );
+            }
+            $relation_ptr->{'missing_relation_data'}   = 1;
+            printf STDERR "%s Error in input data: insufficient data for relations of route ref=%s\n", get_time(), ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref' );
+        }
+    }
     #
     # for all WAYS  check for completeness of data
     #
