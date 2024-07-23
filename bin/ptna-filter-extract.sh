@@ -29,9 +29,9 @@ then
 
         osmium tags-filter -v -F pbf -f osm -O -o "$TARGET" \
                --output-header="generator=https://ptna.openstreetmap.de osmosis_replication_timestamp=$TS" "$TARGET-Data-filtered.osm.pbf" \
-               -i r/route=tracks,railway,bicycle,mtb,hiking,road,foot,inline_skates,canoe,detour,fitness_trail,horse,motorboat,nordic_walking,pipeline,piste,power,running,ski,snowmobile,cycling,historic,motorcycle,riding \
-                  r/type=defaults,person,treaty,election,level,restriction,boundary,building,building:part,organization,set,waterway,bridge,site,health,junction,right_of_way,dual_carriageway,street,associated_street,cluster,tunnel,tmc,TMC,traffic_signals,place_numbers,shop,gropu,collection \
-                  r/type=*golf r/highway=pedestrian admin_level landuse building natural shop office craft leisure
+               -i r/route=tracks,railway,bicycle,mtb,hiking,road,foot,inline_skates,canoe,detour,fitness_trail,horse,waterway,motorboat,boat,nordic_walking,pipeline,piste,power,running,ski,snowmobile,cycling,historic,motorcycle,riding,junction \
+                  r/type=defaults,area,person,treaty,cemetery,election,level,restriction,boundary,building,building:part,organization,set,bridge,site,health,junction,right_of_way,dual_carriageway,street,associated_street,cluster,tunnel,tmc,TMC,tmc:point,traffic_signals,place_numbers,shop,group,collection r/type=*golf r/highway=pedestrian,service \
+                  historic power amenity boundary admin_level place tourism parking landuse building building:part room natural shop office craft man_made leisure playground
 
         osmium_ret=$?
 
