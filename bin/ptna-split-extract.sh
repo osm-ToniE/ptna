@@ -18,8 +18,7 @@ if [ -n "$SOURCE" -a -f "$SOURCE" -a -s "$SOURCE" -a -n "$CONFIG" -a -f "$CONFIG
 then
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium extract' for '$SOURCE' and '$CONFIG'"
 
-    osmium extract --verbose --clean=user --clean=uid --clean=timestamp --clean=version --clean=changeset \
-                   --strategy=smart --option=types=any --option=complete-partial-relations=1 \
+    osmium extract --verbose --strategy=smart --option=types=any --option=complete-partial-relations=1 \
                    --config="$CONFIG" --overwrite --fsync "$SOURCE"
 
     osmium_ret=$?
