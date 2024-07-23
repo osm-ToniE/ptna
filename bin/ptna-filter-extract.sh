@@ -16,7 +16,8 @@ then
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium tags-filter' for '$SOURCE' to filter with positive list"
 
     osmium tags-filter -v -F pbf -f pbf -O -o "$TARGET-Data-filtered.osm.pbf" "$SOURCE" \
-           r/type=*route r/type=public_transport,network r/disused:type r/suspended:type r/removed:type r/route_master r/route network name ref from to via public_transport public_transport:version highway=bus_stop,platform railway=stop,tram_stop,halt,station,platform
+           r/type=*route r/type=public_transport,network r/abandoned:type r/disused:type r/suspended:type r/razed:type r/removed:type r/route_master r/route r/network r/name r/ref r/from r/to r/via r/public_transport:version r/ref_trips \
+           public_transport highway=bus_stop,platform railway=stop,tram_stop,halt,station,platform route_ref gtfs:feed gtfs:route_id gtfs:stop_id gtfs:trip_id gtfs:trip_id:sample gtfs:shape_id
 
     osmium_ret=$?
 
@@ -29,7 +30,8 @@ then
         osmium tags-filter -v -F pbf -f osm -O -o "$TARGET" \
                --output-header="generator=https://ptna.openstreetmap.de osmosis_replication_timestamp=$TS" "$TARGET-Data-filtered.osm.pbf" \
                -i r/route=tracks,railway,bicycle,mtb,hiking,road,foot,inline_skates,canoe,detour,fitness_trail,horse,motorboat,nordic_walking,pipeline,piste,power,running,ski,snowmobile,cycling,historic,motorcycle,riding \
-                  r/type=restriction,boundary,building,waterway,bridge,site,street,associated_street,cluster r/type=*golf admin_level landuse building natural shop office craft leisure
+                  r/type=defaults,person,treaty,election,level,restriction,boundary,building,building:part,organization,set,waterway,bridge,site,health,junction,right_of_way,dual_carriageway,street,associated_street,cluster,tunnel,tmc,TMC,traffic_signals,place_numbers,shop,gropu,collection \
+                  r/type=*golf r/highway=pedestrian admin_level landuse building natural shop office craft leisure
 
         osmium_ret=$?
 
