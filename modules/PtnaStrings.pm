@@ -291,7 +291,7 @@ sub InitMessageStrings {
     $MessageList[$i]->{'message'}                = gettext( "Error in input data: insufficient data for nodes" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
-    $MessageList[$i]->{'description'}            = gettext( "This Route relation has been included into the input data as a side-effect, the member ways and member nodes of this Route have not been included." );
+    $MessageList[$i]->{'description'}            = gettext( "This Route relation has been included into the input data as a side-effect, the members (relations, ways, nodes) of this Route have not been included." );
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
@@ -300,7 +300,16 @@ sub InitMessageStrings {
     $MessageList[$i]->{'message'}                = gettext( "Error in input data: insufficient data for ways" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
-    $MessageList[$i]->{'description'}            = gettext( "This Route relation has been included into the input data as a side-effect, the member ways and member nodes of this Route have not been included." );
+    $MessageList[$i]->{'description'}            = gettext( "This Route relation has been included into the input data as a side-effect, the members (relations, ways, nodes) of this Route have not been included." );
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
+    $MessageList[$i]->{'message'}                = gettext( "Error in input data: insufficient data for relations" );
+    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = gettext( "This Route relation has been included into the input data as a side-effect, the members (relations, ways, nodes) of this Route have not been included." );
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
