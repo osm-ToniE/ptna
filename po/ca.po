@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2024-04-28 13:39+0200\n"
+"POT-Creation-Date: 2024-07-23 15:52+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: Carlos Sánchez López <erielkhan@gmail.com>, 2024\n"
 "Language-Team: Catalan (https://app.transifex.com/jungle-bus/teams/97874/ca/)\n"
@@ -742,6 +742,22 @@ msgid "PTv2 route: last node of way is not a stop position of this route: %s"
 msgstr ""
 "Ruta PTv2: l'últim node de la via no és un punt de parada d'aquesta ruta: %s"
 
+#, perl-format
+msgid "PTv2 route: wrong 'role' = '%s' for first stop"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: wrong 'role' = '%s' for last stop"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: wrong 'role' = '%s' for first platform"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: wrong 'role' = '%s' for last platform"
+msgstr ""
+
 msgid "wrong value"
 msgstr "valor incorrecte"
 
@@ -997,6 +1013,9 @@ msgstr ""
 #, perl-format
 msgid "(consider creating a 'route_ref' = '%s' tag for the stop)"
 msgstr "(considera crear una etiqueta 'route_ref' = '%s' per a la parada)"
+
+msgid "Error in input data: insufficient data for relations"
+msgstr ""
 
 msgid "Error in input data: insufficient data for ways"
 msgstr "Error a les dades d'entrada: dades insuficients per a les vies"
@@ -1426,10 +1445,8 @@ msgstr ""
 
 msgid ""
 "This Route relation has been included into the input data as a side-effect, "
-"the member ways and member nodes of this Route have not been included."
+"the members (relations, ways, nodes) of this Route have not been included."
 msgstr ""
-"Aquesta relació de Ruta s'ha inclòs a les dades d'entrada, com a "
-"conseqüència, les vies i nodes membres d'aquesta Ruta no s'han inclòs."
 
 #, perl-format
 msgid ""
@@ -2053,3 +2070,6 @@ msgstr "Compara la ruta GTFS amb la ruta OSM"
 
 msgid "does not provide any 'shape' data"
 msgstr "no s'ha proporcionat cap fitxer 'shape'"
+
+msgid "internal error"
+msgstr ""

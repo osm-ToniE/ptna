@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2024-06-29 18:22+0200\n"
+"POT-Creation-Date: 2024-07-23 15:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -854,6 +854,9 @@ msgstr ""
 msgid "(consider creating a 'route_ref' = '%s' tag for the stop)"
 msgstr ""
 
+msgid "Error in input data: insufficient data for relations"
+msgstr ""
+
 msgid "Error in input data: insufficient data for ways"
 msgstr ""
 
@@ -1197,7 +1200,7 @@ msgstr ""
 
 msgid ""
 "This Route relation has been included into the input data as a side-effect, "
-"the member ways and member nodes of this Route have not been included."
+"the members (relations, ways, nodes) of this Route have not been included."
 msgstr ""
 
 #, perl-format

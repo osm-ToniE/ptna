@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2024-04-28 13:39+0200\n"
+"POT-Creation-Date: 2024-07-23 15:52+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: Matheus Gomes, 2023\n"
 "Language-Team: Portuguese (Brazil) (https://app.transifex.com/jungle-bus/teams/97874/pt_BR/)\n"
@@ -657,6 +657,22 @@ msgstr ""
 msgid "PTv2 route: last node of way is not a stop position of this route: %s"
 msgstr ""
 
+#, perl-format
+msgid "PTv2 route: wrong 'role' = '%s' for first stop"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: wrong 'role' = '%s' for last stop"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: wrong 'role' = '%s' for first platform"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: wrong 'role' = '%s' for last platform"
+msgstr ""
+
 msgid "wrong value"
 msgstr "valor inválido"
 
@@ -888,6 +904,9 @@ msgstr ""
 #, perl-format
 msgid "(consider creating a 'route_ref' = '%s' tag for the stop)"
 msgstr "(considere criar uma etiqueta \"route_ref\" com o valor \"%s\" para o ponto)"
+
+msgid "Error in input data: insufficient data for relations"
+msgstr ""
 
 msgid "Error in input data: insufficient data for ways"
 msgstr ""
@@ -1252,10 +1271,8 @@ msgstr ""
 
 msgid ""
 "This Route relation has been included into the input data as a side-effect, "
-"the member ways and member nodes of this Route have not been included."
+"the members (relations, ways, nodes) of this Route have not been included."
 msgstr ""
-"Esta relação de rota foi incluída nos dados de entrada como um efeito "
-"colateral. Os caminhos e os nós dos membros desta rota não foram incluídos."
 
 #, perl-format
 msgid ""
@@ -1739,3 +1756,6 @@ msgstr ""
 
 msgid "does not provide any 'shape' data"
 msgstr "não fornece dados de polígonos (shape)"
+
+msgid "internal error"
+msgstr ""

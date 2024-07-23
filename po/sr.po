@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2024-04-28 13:39+0200\n"
+"POT-Creation-Date: 2024-07-23 15:52+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: Branko Kokanovic <branko@kokanovic.org>, 2022\n"
 "Language-Team: Serbian (https://app.transifex.com/jungle-bus/teams/97874/sr/)\n"
@@ -726,6 +726,22 @@ msgstr ""
 "PTv2 рута: последњи лвор пута није стоп позиција (stop position) ове руте: "
 "%s"
 
+#, perl-format
+msgid "PTv2 route: wrong 'role' = '%s' for first stop"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: wrong 'role' = '%s' for last stop"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: wrong 'role' = '%s' for first platform"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: wrong 'role' = '%s' for last platform"
+msgstr ""
+
 msgid "wrong value"
 msgstr "погрешна вредност"
 
@@ -994,6 +1010,9 @@ msgstr "Рута: '%s' = '%s' станице треба да се замени �
 #, perl-format
 msgid "(consider creating a 'route_ref' = '%s' tag for the stop)"
 msgstr "(размислите да додате 'route_ref' = '%s' ознаку на станицу)"
+
+msgid "Error in input data: insufficient data for relations"
+msgstr ""
 
 msgid "Error in input data: insufficient data for ways"
 msgstr "Грешка у улазним подацима: недовољно података за путеве"
@@ -1406,10 +1425,8 @@ msgstr ""
 
 msgid ""
 "This Route relation has been included into the input data as a side-effect, "
-"the member ways and member nodes of this Route have not been included."
+"the members (relations, ways, nodes) of this Route have not been included."
 msgstr ""
-"Ова релација руте је укључена у улазне податке као нуспојава, путеви чланови"
-" и чворови чланови ове руте нису укључени."
 
 #, perl-format
 msgid ""
@@ -2004,3 +2021,6 @@ msgstr ""
 
 msgid "does not provide any 'shape' data"
 msgstr "не пружа никакве 'shape' податке"
+
+msgid "internal error"
+msgstr ""

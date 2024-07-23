@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2023-06-20 13:04+0200\n"
+"POT-Creation-Date: 2024-07-23 15:52+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2023\n"
 "Language-Team: Spanish (https://app.transifex.com/jungle-bus/teams/97874/es/)\n"
@@ -493,6 +493,13 @@ msgstr "Ruta-Maestra con Vía(s)"
 msgid "Route-Master with Node(s)"
 msgstr "Ruta-Maestra con Nodo(s)"
 
+#, perl-format
+msgid "Route-Master has %d member with 'role' being set"
+msgid_plural "Route-Master has %d members with 'role' being set"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 msgid "'public_transport:version' is not set to '2'"
 msgstr "'public_transport:version' no está fijado en '2'"
 
@@ -630,6 +637,11 @@ msgid ""
 msgstr ""
 
 #, perl-format
+msgid ""
+"PTv2 route: 'role' = '%s' and 'public_transport' is not set but '%s' is set"
+msgstr ""
+
+#, perl-format
 msgid "PTv2 route: 'role' = '%s' but 'public_transport' is not set"
 msgstr ""
 
@@ -701,6 +713,22 @@ msgstr ""
 
 #, perl-format
 msgid "PTv2 route: last node of way is not a stop position of this route: %s"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: wrong 'role' = '%s' for first stop"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: wrong 'role' = '%s' for last stop"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: wrong 'role' = '%s' for first platform"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: wrong 'role' = '%s' for last platform"
 msgstr ""
 
 msgid "wrong value"
@@ -921,6 +949,9 @@ msgstr ""
 
 #, perl-format
 msgid "(consider creating a 'route_ref' = '%s' tag for the stop)"
+msgstr ""
+
+msgid "Error in input data: insufficient data for relations"
 msgstr ""
 
 msgid "Error in input data: insufficient data for ways"
@@ -1282,10 +1313,8 @@ msgstr ""
 
 msgid ""
 "This Route relation has been included into the input data as a side-effect, "
-"the member ways and member nodes of this Route have not been included."
+"the members (relations, ways, nodes) of this Route have not been included."
 msgstr ""
-"Esta relación de ruta se ha incluido en los datos de entrada como efecto "
-"secundario. No se han incluido las vías y nodos miembros de esta ruta."
 
 #, perl-format
 msgid ""
@@ -1500,6 +1529,24 @@ msgstr ""
 msgid "This applies to 'barrier' = '...' as well."
 msgstr "Esto también aplica a 'barrier' = '...'."
 
+msgid "Check OSM route_master/route data against GTFS feed data"
+msgstr ""
+
+msgid "no checking"
+msgstr ""
+
+msgid "check against GTFS feed data specified in"
+msgstr ""
+
+msgid "CSV entry in the routes file"
+msgstr ""
+
+msgid "tags in the route_master and route relations"
+msgstr ""
+
+msgid "check against 'csv' and 'tags'"
+msgstr ""
+
 msgid "'highway' = 'bus_stop' can be set on nodes only, not on ways or areas."
 msgstr ""
 
@@ -1701,6 +1748,11 @@ msgid "This sets the field separator in the CSV list of routes."
 msgstr ""
 
 msgid ""
+"Show also the values of these tags in the table for the list of 'positive' "
+"routes."
+msgstr ""
+
+msgid ""
 "This sets the OR separator in the 'ref' field of the CSV list of routes."
 msgstr ""
 
@@ -1729,17 +1781,26 @@ msgstr ""
 msgid "GTFS database not found"
 msgstr ""
 
+msgid "Compare GTFS route with OSM route_master/route"
+msgstr ""
+
 msgid "is no longer valid (in the past)"
 msgstr ""
 
 msgid "is not yet valid (in the future)"
 msgstr ""
 
-msgid "outdated, fits to older GTFS version only"
+msgid "is outdated, fits to older GTFS version only"
 msgstr ""
 
 msgid "does not exist"
 msgstr "no existe"
 
+msgid "Compare GTFS trip with OSM route"
+msgstr ""
+
 msgid "does not provide any 'shape' data"
 msgstr "no provee datos 'shape'"
+
+msgid "internal error"
+msgstr ""

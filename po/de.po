@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2024-06-29 18:22+0200\n"
+"POT-Creation-Date: 2024-07-23 15:52+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2024\n"
 "Language-Team: German (https://app.transifex.com/jungle-bus/teams/97874/de/)\n"
@@ -1043,6 +1043,9 @@ msgstr ""
 msgid "(consider creating a 'route_ref' = '%s' tag for the stop)"
 msgstr "(erzeuge gegebenenfalls 'route_ref' = '%s' für die Haltestelle)"
 
+msgid "Error in input data: insufficient data for relations"
+msgstr "Fehler in den Inputdaten: nicht genügend Daten für 'relations'"
+
 msgid "Error in input data: insufficient data for ways"
 msgstr "Fehler in den Inputdaten: nicht genügend Daten für 'ways'"
 
@@ -1478,11 +1481,11 @@ msgstr ""
 
 msgid ""
 "This Route relation has been included into the input data as a side-effect, "
-"the member ways and member nodes of this Route have not been included."
+"the members (relations, ways, nodes) of this Route have not been included."
 msgstr ""
 "Diese Routen-Relation wurde durch einen Seiteneffekt in die Input-Daten "
-"einbezogen, die zugehörigen Ways und Nodes sind nicht in den Input-Daten "
-"enthalten."
+"einbezogen, die zugehörigen Elemente (Relations, Ways und Nodes) sind nicht "
+"in den Input-Daten enthalten."
 
 #, perl-format
 msgid ""
