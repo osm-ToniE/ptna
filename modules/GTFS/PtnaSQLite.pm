@@ -478,7 +478,7 @@ sub _AttachToGtfsSqliteDb {
                         $list_separator{$name_prefix} = $list_separator{$existing_feed};
                     }
                 } else {
-                    $db_handle{$name_prefix} = DBI->connect( "DBI:SQLite:dbname=$db_file", "", "", { AutoCommit => 0, RaiseError => 1 } );
+                    $db_handle{$name_prefix} = DBI->connect( "DBI:SQLite:dbname=$db_file", "", "", { AutoCommit => 0, RaiseError => 1, ReadOnly => 1 } );
 
                     $feed_of_open_db_file{$db_file} = $name_prefix;
 
