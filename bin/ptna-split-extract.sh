@@ -16,7 +16,7 @@ CONFIG="$2"
 
 if [ -n "$SOURCE" -a -f "$SOURCE" -a -s "$SOURCE" -a -n "$CONFIG" -a -f "$CONFIG" -a -s "$CONFIG" ]
 then
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium extract' for '$SOURCE' and '$CONFIG'"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Split extract: call 'osmium extract' for '$SOURCE' and '$CONFIG'"
 
     osmium extract --verbose --strategy=smart --option=types=route,route_master,multipolygon,public_transport --option=complete-partial-relations=1 \
                    --config="$CONFIG" --overwrite --fsync "$SOURCE"

@@ -4,7 +4,7 @@ SOURCE="$1"
 
 if [ -n "$SOURCE" -a -f "$SOURCE" -a -s "$SOURCE" ]
 then
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium fileinfo' for '$SOURCE'"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Update extract: call 'osmium fileinfo' for '$SOURCE'"
 
     osmium fileinfo $SOURCE
 

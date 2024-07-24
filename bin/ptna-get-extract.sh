@@ -6,7 +6,7 @@ TARGET="$3"
 
 CALL_PARAMS="--server-response --no-verbose"
 
-echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call wget for '$TARGET' from '$BASEURL/$SOURCE'"
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Get extract: call wget for '$TARGET' from '$BASEURL/$SOURCE'"
 
 # create empty file, so that we can check size even if wget does not change the file at all
 
@@ -16,7 +16,7 @@ wget $CALL_PARAMS --user-agent="PTNA script on https://ptna.openstreetmap.de" -O
 
 wget_ret=$?
 
-echo $(date "+%Y-%m-%d %H:%M:%S %Z") "wget retuned $wget_ref"
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "wget retuned $wget_ret"
 
 fsize=$(stat -c '%s' $TARGET.part.$$)
 if [ "$fsize" -gt 0 ]
