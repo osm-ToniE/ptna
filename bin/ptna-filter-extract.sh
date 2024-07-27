@@ -5,12 +5,6 @@ TARGET=$2
 
 if [ -n "$SOURCE" -a -f "$SOURCE" -a -s "$SOURCE" -a -n "$TARGET" ]
 then
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Filter extract: call 'osmium fileinfo' for '$SOURCE' to get replication timestamp"
-
-    TS=$(osmium fileinfo "$SOURCE" | grep osmosis_replication_timestamp | head -1 | sed -e 's/^.*=//')
-
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'osmium replication timestamp' = '$TS'"
-
     rm -f "$TARGET-[12].$$"
 
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium tags-filter' for '$SOURCE' to filter with standard positive filter list"
@@ -23,13 +17,19 @@ then
 
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret"
 
-    if [ -f "$TARGET-1.$$" -a -s "$TARGET-1.$$" ]
+    if [ $osmium_ret -eq 0 -a -f "$TARGET-1.$$" -a -s "$TARGET-1.$$" ]
     then
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium tags-filter' for '$SOURCE' to filter with standard negative filter list"
 
         OUTPUTFORMAT="${TARGET##*.}"
         if [ "$OUTPUTFORMAT" == 'xml' ]
         then
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Filter extract: call 'osmium fileinfo' for '$SOURCE' to get replication timestamp"
+
+            TS=$(osmium fileinfo "$SOURCE" | grep osmosis_replication_timestamp | head -1 | sed -e 's/^.*=//')
+
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'osmium replication timestamp' = '$TS'"
+
             OUTPUTHEADER='--output-header=generator=https://ptna.openstreetmap.de osmosis_replication_timestamp=$TS"'
         fi
 
@@ -45,20 +45,31 @@ then
 
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret"
 
-        mv "$TARGET-2.$$" "$TARGET"
-
-        rm -f "$TARGET-[12].$$"
-
-        if [ "$OUTPUTFORMAT" != 'xml' ]
+        if [ $osmium_ret -eq 0 ]
         then
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium fileinfo' for '$TARGET'"
+            fsizep=$(stat -c '%s' "$SOURCE")
+            fsize1=$(stat -c '%s' "$TARGET-1.$$")
+            fsize2=$(stat -c '%s' "$TARGET-2.$$")
 
-            osmium fileinfo "$TARGET"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "File sizes: source = '$fsizep', after positive filter = '$fsize1', target = '$fsize2'"
 
-            osmium_ret=$?
+            mv "$TARGET-2.$$" "$TARGET"
 
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret"
+            rm -f "$TARGET-[12].$$"
+
+            if [ "$OUTPUTFORMAT" != 'xml' ]
+            then
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium fileinfo' for '$TARGET'"
+
+                osmium fileinfo "$TARGET"
+
+                fileinfo_ret=$?
+
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $fileinfo_ret"
+            fi
         fi
+
+        exit $osmium_ret
     else
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Filtered file (positive list) has not been created or is empty"
         exit 1
