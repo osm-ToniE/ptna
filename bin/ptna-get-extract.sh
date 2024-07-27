@@ -21,7 +21,7 @@ echo $(date "+%Y-%m-%d %H:%M:%S %Z") "wget retuned $wget_ret"
 fsize=$(stat -c '%s' $TARGET.part.$$)
 if [ "$fsize" -gt 0 ]
 then
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Overwriting old '$TARGET' with new data: size $fsize bytes"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Overwriting '$TARGET' with new data: size $fsize bytes"
     mv $TARGET.part.$$ $TARGET
 
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium fileinfo' for '$TARGET'"
