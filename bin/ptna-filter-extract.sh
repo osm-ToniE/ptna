@@ -19,8 +19,6 @@ then
 
     if [ $osmium_ret -eq 0 -a -f "$TARGET-1.$$.osm.pbf" -a -s "$TARGET-1.$$.osm.pbf" ]
     then
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium tags-filter' for '$SOURCE' to filter with standard negative filter list"
-
         OUTPUTFORMAT="${TARGET##*.}"
         if [ "$OUTPUTFORMAT" == 'xml' ]
         then
@@ -30,8 +28,10 @@ then
 
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'osmium replication timestamp' = '$TS'"
 
-            OUTPUTHEADER='--output-header=generator=https://ptna.openstreetmap.de osmosis_replication_timestamp=$TS"'
+            OUTPUTHEADER='--output-header="generator=https://ptna.openstreetmap.de osmosis_replication_timestamp=$TS"'
         fi
+
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium tags-filter' for '$TARGET-1.$$.osm.pbf' to filter with standard negative filter list"
 
         osmium tags-filter -v -F pbf -f "$OUTPUTFORMAT" -O -o "$TARGET-2.$$.osm.pbf" \
                "$OUTPUTHEADER" "$TARGET-1.$$.osm.pbf" \
