@@ -32,7 +32,7 @@ then
 
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium tags-filter' for '$TARGET-1.$$.osm.pbf' to filter with standard negative filter list (output format '$OUTPUTFORMAT')"
 
-            osmium tags-filter -v -F pbf -f "$OUTPUTFORMAT" -O -o "$TARGET-2.$$.osm.pbf" "$TARGET-1.$$.osm.pbf" \
+            osmium tags-filter -v -F pbf -f "$OUTPUTFORMAT" -O -o "$TARGET-2.$$.osm.$OUTPUTFORMAT" "$TARGET-1.$$.osm.pbf" \
                    --output-header="generator=https://ptna.openstreetmap.de osmosis_replication_timestamp=$TS" \
                    -i r/route_master=tracks,railway,bicycle,mtb,hiking,road,foot,inline_skates,canoe,detour,fitness_trail,horse,waterway,motorboat,boat,nordic_walking,pipeline,piste,power,running,ski,snowmobile,cycling,historic,motorcycle,riding,junction \
                        r/route=tracks,railway,bicycle,mtb,hiking,road,foot,inline_skates,canoe,detour,fitness_trail,horse,waterway,motorboat,boat,nordic_walking,pipeline,piste,power,running,ski,snowmobile,cycling,historic,motorcycle,riding,junction,canyoning,climbing,sled,TMC \
@@ -45,7 +45,7 @@ then
 
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium tags-filter' for '$TARGET-1.$$.osm.pbf' to filter with standard negative filter list (output format '$OUTPUTFORMAT')"
 
-            osmium tags-filter -v -F pbf -f "$OUTPUTFORMAT" -O -o "$TARGET-2.$$.osm.pbf" "$TARGET-1.$$.osm.pbf" \
+            osmium tags-filter -v -F pbf -f "$OUTPUTFORMAT" -O -o "$TARGET-2.$$.osm.$OUTPUTFORMAT" "$TARGET-1.$$.osm.pbf" \
                 -i r/route_master=tracks,railway,bicycle,mtb,hiking,road,foot,inline_skates,canoe,detour,fitness_trail,horse,waterway,motorboat,boat,nordic_walking,pipeline,piste,power,running,ski,snowmobile,cycling,historic,motorcycle,riding,junction \
                     r/route=tracks,railway,bicycle,mtb,hiking,road,foot,inline_skates,canoe,detour,fitness_trail,horse,waterway,motorboat,boat,nordic_walking,pipeline,piste,power,running,ski,snowmobile,cycling,historic,motorcycle,riding,junction,canyoning,climbing,sled,TMC \
                     r/type=defaults,area,destination_sign,enforcement,person,treaty,cemetery,pipeline,election,level,restriction,boundary,building,waterway,building:part,organization,set,bridge,site,health,junction,right_of_way,dual_carriageway,street,associated_street,cluster,tunnel,tmc,TMC,tmc:point,tmc:area,traffic_signals,place_numbers,shop,group,collection \
