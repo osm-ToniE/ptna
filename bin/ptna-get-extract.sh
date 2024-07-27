@@ -34,6 +34,6 @@ then
 
     exit $osmium_ret
 else
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Failure for wget for '$TARGET' from '$BASEURL/$SOURCE': retrieved file is empty"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Failure for wget for '$TARGET' from '$BASEURL/$SOURCE': no data retrieved"
     exit 1
 fi
