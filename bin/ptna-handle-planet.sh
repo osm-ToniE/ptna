@@ -4,7 +4,7 @@
 
 PTNA_WORK_LOC="${PTNA_WORK_LOC:-/osm/ptna/work}"
 
-BASEURL="$https://planet.openstreetmap.org"
+BASEURL="https://planet.openstreetmap.org"
 SOURCE="pbf/planet-latest.osm.pbf"
 TARGET="planet.osm.pbf"
 
