@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# we are working in PTNA_WORK_DIR and further down
+# we are working in PTNA_WORK_LOC and further down
 # NETWORKDIR is usually, when called from "ptna-all-networks-parallel.sh", something like "/osm/ptna/ptna-networks/UTC+01"
 # we will recursively call this file here for sub-directories of the initial NETWORKDIR and also step downwards in the local dir
 
