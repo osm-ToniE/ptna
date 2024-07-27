@@ -17,7 +17,8 @@ then
 
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start handling planet file in '$PWD'"
 
-    if [ ! -f "$TARGET" -o ! -s "$TARGET" ]
+    fsize=$(stat -c '%s' $TARGET)
+    if [ ! -f "$TARGET" -o ! "$fsize" -lt 4096 ]
     then
         #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-get-extract.sh $BASEURL $SOURCE $TARGET"
 
@@ -28,7 +29,8 @@ then
         #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-get-extract.sh returned $get_ret"
     fi
 
-    if [ -f "$TARGET" -a -s "$TARGET" ]
+    fsize=$(stat -c '%s' $TARGET)
+    if [ -f "$TARGET" -a "$fsize" -gt 4096 ]
     then
         #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-update-extract.sh $TARGET'"
 
@@ -39,9 +41,10 @@ then
         #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-update-extract.sh returned $update_ret"
     fi
 
-    if [ -f "$TARGET" -a -s "$TARGET" ]
+    fsize=$(stat -c '%s' $TARGET)
+    if [ -f "$TARGET" -a "$fsize" -gt 4096 ]
     then
-        FILTEREDTARGET=${TARGET%%.*}-filtered.osm.pbf
+        FILTEREDTARGET="${TARGET%%.*}-filtered.osm.pbf"
         #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-filter-extract.sh $TARGET $FILTEREDTARGET'"
 
         ptna-filter-extract.sh "$TARGET" "$FILTEREDTARGET"
@@ -49,6 +52,14 @@ then
         filter_ret=$?
 
         #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-filter-extract.sh returned $filter_ret"
+
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium fileinfo' for '$FILTEREDTARGET'"
+
+        osmium fileinfo "$FILTEREDTARGET"
+
+        osmium_ret=$?
+
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret"
     fi
 
 else

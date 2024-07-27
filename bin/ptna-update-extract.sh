@@ -26,7 +26,7 @@ then
         then
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium fileinfo' for '$SOURCE'"
 
-            osmium fileinfo $SOURCE
+            osmium fileinfo "$SOURCE"
 
             osmium_ret=$?
 
