@@ -4,10 +4,18 @@
 
 PREPARE_FOR_TIMEZONE="$1"
 
+# source $HOME/.ptna-config to overwrite the settings above
+# and mybe to set some perl related variables (copied from .bashrc)
+
+[ -f $HOME/.ptna-config ] && source $HOME/.ptna-config
+
 # where can we find all the executables of PTNA
 
-PTNA_BIN="${PTNA_BIN:-$HOME/ptna/bin}"
-export PATH="$PTNA_BIN:$HOME/bin:$PATH"
+if [ -z "$PTNA_BIN" ]
+then
+    PTNA_BIN="$HOME/ptna/bin"
+    export PATH="$PTNA_BIN:$HOME/bin:$PATH"
+fi
 
 # we are working in PTNA_WORK_LOC
 
