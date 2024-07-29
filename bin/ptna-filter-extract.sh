@@ -7,8 +7,8 @@ if [ -n "$SOURCE" -a -f "$SOURCE" -a -s "$SOURCE" -a -n "$TARGET" ]
 then
     INPUTFORMAT="${SOURCE##*.}"
     OUTPUTFORMAT="${TARGET##*.}"
-    TMP1="${TARGET%.*}-$$-1.${TARGET##*.}"
-    TMP2="${TARGET%.*}-$$-2.${TARGET##*.}"
+    TMP1="${TARGET%.*}.$$-1.${TARGET##*.}"
+    TMP2="${TARGET%.*}.$$-2.${TARGET##*.}"
 
     rm -f "$TMP1" "$TMP2"
 
