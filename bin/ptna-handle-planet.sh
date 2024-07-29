@@ -18,7 +18,7 @@ then
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start handling planet file in '$PWD'"
 
     fsize=$(stat -c '%s' $TARGET)
-    if [ ! -f "$TARGET" -o ! "$fsize" -lt 4096 ]
+    if [ ! -f "$TARGET" -o "$fsize" -lt 4096 ]
     then
         #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-get-extract.sh $BASEURL $SOURCE $TARGET"
 
