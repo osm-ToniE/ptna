@@ -17,6 +17,10 @@ then
     export PATH="$PTNA_BIN:$HOME/bin:$PATH"
 fi
 
+# we can we find config files for osmium to split the planet file into pieces
+
+PTNA_NETWORKS_LOC="${PTNA_NETWORKS_LOC:-/osm/ptna/ptna-networks}"
+
 # we are working in PTNA_WORK_LOC
 
 PTNA_WORK_LOC="${PTNA_WORK_LOC:-/osm/ptna/work}"
@@ -75,10 +79,12 @@ then
 
     if [ -f "$FILTEREDTARGET" -a $(stat -c '%s' $FILTEREDTARGET) -gt 4096 ]
     then
-        UTC_CONFIG="${TARGET%%.*}-$PREPARE_FOR_TIMEZONE-osmium.config"
+        UTC_CONFIG="$PTNA_NETWORKS_LOC/${TARGET%%.*}-$PREPARE_FOR_TIMEZONE-osmium.config"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Looking for osmium config file '$UTC_CONFIG'"
+
         if [ -f "$UTC_CONFIG" -a -s "$UTC_CONFIG" ]
         then
-            #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-split-extract.sh $FILTEREDTARGET $UTC_CONFIG'"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-split-extract.sh $FILTEREDTARGET $UTC_CONFIG'"
 
             ptna-split-extract.sh "$FILTEREDTARGET" "$UTC_CONFIG"
 
