@@ -4,6 +4,11 @@
 
 PREPARE_FOR_TIMEZONE="$1"
 
+# where can we find all the executables of PTNA
+
+PTNA_BIN="${PTNA_BIN:-$HOME/ptna/bin}"
+export PATH="$PTNA_BIN:$HOME/bin:$PATH"
+
 # we are working in PTNA_WORK_LOC
 
 PTNA_WORK_LOC="${PTNA_WORK_LOC:-/osm/ptna/work}"
