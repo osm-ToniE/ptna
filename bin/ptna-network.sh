@@ -215,7 +215,7 @@ then
                 TS=$(osmium fileinfo "$WORK_LOC/$PTNA_EXTRACT_SOURCE" | grep osmosis_replication_timestamp | head -1 | sed -e 's/^.*=//')
                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium cat ...' and add timestamp '$TS' to output file"
 
-                osmium cat -F "$INPUTFORMAT" -f "$OUTPUTFORMAT" -O \
+                osmium cat -c user -c version -c timestamp -c uid --fsync -F "$INPUTFORMAT" -f "$OUTPUTFORMAT" -O \
                     -o "$OSM_XML_FILE_ABSOLUTE" "$WORK_LOC/$PTNA_EXTRACT_SOURCE" \
                     --output-header="generator=https://ptna.openstreetmap.de osmosis_replication_timestamp=$TS"
             else
