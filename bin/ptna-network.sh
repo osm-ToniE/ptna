@@ -198,11 +198,30 @@ then
 
     if [ -n "$PTNA_EXTRACT_SOURCE" -a -f "$WORK_LOC/$PTNA_EXTRACT_SOURCE" -a -s "$WORK_LOC/$PTNA_EXTRACT_SOURCE" ]
     then
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-filter-extract.sh $WORK_LOC/$PTNA_EXTRACT_SOURCE $OSM_XML_FILE_ABSOLUTE'"
         start=$(date --utc "+%s")
         START_FILTER=$(date --date @$start "+%Y-%m-%d %H:%M:%S %Z")
 
-        ptna-filter-extract.sh "$WORK_LOC/$PTNA_EXTRACT_SOURCE" "$OSM_XML_FILE_ABSOLUTE"
+        if [ -f "$SETTINGS_DIR/osmium-positive-filters.txt" -o -f "$SETTINGS_DIR/osmium-negative-filters.txt"  ]
+        then
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Not yet implemented: Call 'ptna-filter-extract.sh -p $SETTINGS_DIR/$PREFIX-positive-filters.txt -n $SETTINGS_DIR/$PREFIX-negative-filters.txt $WORK_LOC/$PTNA_EXTRACT_SOURCE $OSM_XML_FILE_ABSOLUTE'"
+
+            # ptna-filter-extract.sh -p "$SETTINGS_DIR/$PREFIX-positive-filters.txt" -n "$SETTINGS_DIR/$PREFIX-negative-filters.txt" "$WORK_LOC/$PTNA_EXTRACT_SOURCE" "$OSM_XML_FILE_ABSOLUTE"
+        else
+            INPUTFORMAT="${WORK_LOC/$PTNA_EXTRACT_SOURCE##*.}"
+            OUTPUTFORMAT="${OSM_XML_FILE_ABSOLUTE##*.}"
+
+            if [ "$OUTPUTFORMAT" == 'xml' -a "$INPUTFORMAT" != "$OUTPUTFORMAT" ]
+            then
+                TS=$(osmium fileinfo "$WORK_LOC/$PTNA_EXTRACT_SOURCE" | grep osmosis_replication_timestamp | head -1 | sed -e 's/^.*=//')
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium cat ...' and add timestamp '$TS' to output file"
+
+                osmium cat -F "$INPUTFORMAT" -f "$OUTPUTFORMAT" -O \
+                    -o "$OSM_XML_FILE_ABSOLUTE" "$WORK_LOC/$PTNA_EXTRACT_SOURCE" \
+                    --output-header="generator=https://ptna.openstreetmap.de osmosis_replication_timestamp=$TS"
+            else
+                cat "$WORK_LOC/$PTNA_EXTRACT_SOURCE" > "$OSM_XML_FILE_ABSOLUTE"
+            fi
+        fi
 
         stop=$(date --utc "+%s")
         END_FILTER=$(date --date @$stop "+%Y-%m-%d %H:%M:%S %Z")
