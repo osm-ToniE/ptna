@@ -207,7 +207,7 @@ then
 
             # ptna-filter-extract.sh -p "$SETTINGS_DIR/$PREFIX-positive-filters.txt" -n "$SETTINGS_DIR/$PREFIX-negative-filters.txt" "$WORK_LOC/$PTNA_EXTRACT_SOURCE" "$OSM_XML_FILE_ABSOLUTE"
         else
-            INPUTFORMAT="${WORK_LOC/$PTNA_EXTRACT_SOURCE##*.}"
+            INPUTFORMAT="${PTNA_EXTRACT_SOURCE##*.}"
             OUTPUTFORMAT="${OSM_XML_FILE_ABSOLUTE##*.}"
 
             if [ "$OUTPUTFORMAT" == 'xml' -a "$INPUTFORMAT" != "$OUTPUTFORMAT" ]
