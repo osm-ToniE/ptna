@@ -79,18 +79,21 @@ then
 
     if [ -f "$FILTEREDTARGET" -a $(stat -c '%s' $FILTEREDTARGET) -gt 4096 ]
     then
-        UTC_CONFIG="$PTNA_NETWORKS_LOC/${TARGET%%.*}-$PREPARE_FOR_TIMEZONE-osmium.config"
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Looking for osmium config file '$UTC_CONFIG'"
-
-        if [ -f "$UTC_CONFIG" -a -s "$UTC_CONFIG" ]
+        if [ -n "$PREPARE_FOR_TIMEZONE" ]
         then
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-split-extract.sh $FILTEREDTARGET $UTC_CONFIG'"
+            UTC_CONFIG="$PTNA_NETWORKS_LOC/${TARGET%%.*}-$PREPARE_FOR_TIMEZONE-osmium.config"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Looking for osmium config file '$UTC_CONFIG'"
 
-            ptna-split-extract.sh "$FILTEREDTARGET" "$UTC_CONFIG"
+            if [ -f "$UTC_CONFIG" -a -s "$UTC_CONFIG" ]
+            then
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-split-extract.sh $FILTEREDTARGET $UTC_CONFIG'"
 
-            split_ret=$?
+                ptna-split-extract.sh "$FILTEREDTARGET" "$UTC_CONFIG"
 
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-split-extract.sh returned $split_ret"
+                split_ret=$?
+
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-split-extract.sh returned $split_ret"
+            fi
         fi
     fi
 else
