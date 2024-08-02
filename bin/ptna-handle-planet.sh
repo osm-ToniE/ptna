@@ -95,11 +95,17 @@ then
                     split_ret=$?
 
                     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-split-extract.sh returned $split_ret"
+
+                    if [ $split_ret -eq 0 ]
+                    then
+                        rm -f "$FILTEREDTARGET"
+                    fi
                 fi
             fi
         fi
     else
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "No preparation for a timezime, also no filtering of planet data"
+        rm -f "$FILTEREDTARGET"
     fi
 else
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'$PTNA_WORK_LOC' does not exist"
