@@ -104,7 +104,7 @@ then
             fi
         fi
     else
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "No preparation for a timezime, also no filtering of planet data"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "No preparation for a timezome, and no filtering of planet data"
         rm -f "$FILTEREDTARGET"
     fi
 else
