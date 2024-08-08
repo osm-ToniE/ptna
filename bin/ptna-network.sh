@@ -228,7 +228,8 @@ then
 
         if [ -f "$OSM_XML_FILE_ABSOLUTE" ]
         then
-            if [ -s "$OSM_XML_FILE_ABSOLUTE" ]
+            fsize=$(stat -c '%s' "$OSM_XML_FILE_ABSOLUTE")
+            if [ "$fsize" -gt 4096 ]
             then
                 EXTRACT_SIZE=$(stat -c '%s' "$WORK_LOC/$PTNA_EXTRACT_SOURCE")
                 head -10 $OSM_XML_FILE_ABSOLUTE
@@ -238,7 +239,7 @@ then
                     OSM_BASE=$(date --date "$OSM_BASE" "+%Y-%m-%d %H:%M:%S %Z")
                 fi
             else
-                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'use extracts': result file '$OSM_XML_FILE_ABSOLUTE' is empty, handle as 'Overpass-API call'"
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'use extracts': result file '$OSM_XML_FILE_ABSOLUTE' is too small (size=$fsize), handle as 'Overpass-API call'"
                 overpassquery=true
                 overpassqueryonzeroxml=false
                 use_extracts=false
