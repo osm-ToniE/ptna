@@ -47,7 +47,7 @@ then
         fi
     done
 
-    for config in $(find "$NETWORKDIR" -maxdepth 1 -type f -name '*-osmium.config')
+    for config in $(find "$NETWORKDIR" -maxdepth 1 -type f -name '*-osmium.config' | sort)
     do
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "We have a '$config' file, do we have a '*.osm.pbf' in '$PWD'?"
 
