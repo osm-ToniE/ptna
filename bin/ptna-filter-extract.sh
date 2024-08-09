@@ -48,11 +48,12 @@ then
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium tags-filter' for '$TMP1' to filter with standard negative filter list (output format '$OUTPUTFORMAT')"
 
             osmium tags-filter -v -F "$INPUTFORMAT" -f "$OUTPUTFORMAT" -O -o "$TMP2" "$TMP1" \
-                -i r/route_master=tracks,railway,bicycle,mtb,hiking,road,foot,inline_skates,canoe,detour,fitness_trail,horse,waterway,motorboat,boat,nordic_walking,pipeline,piste,power,running,ski,snowmobile,cycling,historic,motorcycle,riding,junction \
-                    r/route=tracks,railway,bicycle,mtb,hiking,road,foot,inline_skates,canoe,detour,fitness_trail,horse,waterway,motorboat,boat,nordic_walking,pipeline,piste,power,running,ski,snowmobile,cycling,historic,motorcycle,riding,junction,canyoning,climbing,sled,TMC \
-                    r/type=defaults,area,destination_sign,enforcement,person,treaty,cemetery,pipeline,election,level,restriction,boundary,building,waterway,building:part,organization,set,bridge,site,health,junction,right_of_way,dual_carriageway,street,associated_street,cluster,tunnel,tmc,TMC,tmc:point,tmc:area,traffic_signals,place_numbers,shop,group,collection \
-                    r/type=*golf r/highway=pedestrian,service,living_street,footway r/network=lcn,rcn,ncn,icn,lwn,rwn,nwn,iwn,foot,bicycle,hiking \
-                    n/highway=stop,give_way,street_lamp,crossing,traffic_signals n/emergency=fire_hydrant,assemply_point,emergency_access_point indoor=room attraction area:highway aeroway cemetery historic power amenity boundary admin_level place tourism junction parking landuse landcover building roof:shape room natural shop sport telecom office craft man_made leisure playground golf piste:type
+                -i r/route_master=tracks,railway,bicycle,mtb,hiking,road,foot,walking,inline_skates,canoe,detour,alpine_coaster,fitness_trail,horse,waterway,motorboat,boat,worship,roller_coaster,nordic_walking,pipeline,piste,power,running,ski,snowmobile,cycling,historic,motorcycle,riding,junction \
+                    r/route=tracks,railway,bicycle,mtb,hiking,road,foot,walking,inline_skates,canoe,detour,alpine_coaster,fitness_trail,horse,waterway,motorboat,boat,worship,roller_coaster,nordic_walking,pipeline,piste,power,running,ski,snowmobile,cycling,historic,motorcycle,riding,junction,canyoning,climbing,sled,TMC \
+                    r/type=defaults,area,destination_sign,enforcement,person,treaty,cemetery,pipeline,election,level,restriction,boundary,building,waterway,building:part,organization,set,bridge,site,health,junction,right_of_way,dual_carriageway,street,associated_street,cluster,tunnel,tmc,TMC,tmc:point,tmc:area,traffic_signals,place_numbers,shop,group,collection,power \
+                    r/route_master=*historic r/route=*historic r/type=*golf r/type=*whitewater r/highway=pedestrian,service,living_street,footway r/network=lcn,rcn,ncn,icn,lwn,rwn,nwn,iwn,foot,bicycle,hiking,waterway \
+                    n/highway=stop,give_way,street_lamp,crossing,traffic_signals ra/highway=rest_area,services n/emergency=fire_hydrant,assemply_point,emergency_access_point indoor=room attraction area:highway aeroway cemetery historic power amenity boundary admin_level place tourism junction parking landuse landcover building roof:shape room natural shop sport telecom office craft man_made leisure playground golf piste:type \
+                    wikidata=Q55085720 heritage
 
             osmium_ret=$?
         fi
