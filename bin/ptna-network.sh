@@ -200,6 +200,7 @@ then
     then
         start=$(date --utc "+%s")
         START_FILTER=$(date --date @$start "+%Y-%m-%d %H:%M:%S %Z")
+        EXTRACT_SIZE=$(stat -c '%s' "$WORK_LOC/$PTNA_EXTRACT_SOURCE")
 
         if [ -f "$SETTINGS_DIR/osmium-positive-filters.txt" -o -f "$SETTINGS_DIR/osmium-negative-filters.txt"  ]
         then
@@ -218,8 +219,17 @@ then
                 osmium cat -c user -c version -c timestamp -c uid -c changeset --fsync -F "$INPUTFORMAT" -f "$OUTPUTFORMAT" -O \
                        -o "$OSM_XML_FILE_ABSOLUTE" "$WORK_LOC/$PTNA_EXTRACT_SOURCE" \
                        --output-header="generator=https://ptna.openstreetmap.de osmosis_replication_timestamp=$TS"
+                osmium_ret=$?
+
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret"
+
+                if [ $osmium_ret -eq 0 -a "$(basename $PTNA_EXTRACT_SOURCE)" != "planet.osm.pbf" ]
+                then
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Split extract: remove '$WORK_LOC/$PTNA_EXTRACT_SOURCE', we don't need that any longer"
+                    rm -f "$WORK_LOC/$PTNA_EXTRACT_SOURCE"
+                fi
             else
-                cat "$WORK_LOC/$PTNA_EXTRACT_SOURCE" > "$OSM_XML_FILE_ABSOLUTE"
+                mv "$WORK_LOC/$PTNA_EXTRACT_SOURCE" "$OSM_XML_FILE_ABSOLUTE"
             fi
         fi
 
@@ -231,7 +241,6 @@ then
             fsize=$(stat -c '%s' "$OSM_XML_FILE_ABSOLUTE")
             if [ "$fsize" -gt 4096 ]
             then
-                EXTRACT_SIZE=$(stat -c '%s' "$WORK_LOC/$PTNA_EXTRACT_SOURCE")
                 head -10 $OSM_XML_FILE_ABSOLUTE
                 OSM_BASE=$(head -10 $OSM_XML_FILE_ABSOLUTE | fgrep -m 1 'osmosis_replication_timestamp' | sed -e 's/^.*osmosis_replication_timestamp=//' -e 's/".*$//')
                 if [ -n "$OSM_BASE" ]

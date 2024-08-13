@@ -33,10 +33,6 @@ if [ -d "$PTNA_WORK_LOC" ]
 then
     cd "$PTNA_WORK_LOC"
 
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Remove all created '*.osm.pbf' files execpt '$TARGET'"
-
-    find . -name '*.osm.pbf' -not -name "$TARGET" -exec rm {} \;
-
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start handling planet file in '$PWD'"
 
     if [ ! -f "$TARGET" -o $(stat -c '%s' $TARGET) -lt 4096 ]

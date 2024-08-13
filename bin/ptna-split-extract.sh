@@ -25,6 +25,12 @@ then
 
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret"
 
+    if [ $osmium_ret -eq 0 -a "$SOURCE" != "planet.osm.pbf" ]
+    then
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Split extract: remove '$SOURCE', we don't need that any longer"
+        rm -f "$SOURCE"
+    fi
+
     exit $osmium_ret
 else
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "There is no source file (1st parameter) and/or no config file (2nd parameter)"
