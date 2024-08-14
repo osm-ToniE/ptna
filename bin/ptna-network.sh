@@ -174,7 +174,14 @@ if [ "$cleancreated" = "true" ]
 then
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Removing temporary files"
     rm -f $WORK_LOC/$HTML_FILE $WORK_LOC/$DIFF_FILE $WORK_LOC/$DIFF_HTML_FILE $WORK_LOC/$SAVE_FILE $OSM_XML_FILE_ABSOLUTE.part.*
-    [ -d $OSM_XML_FILE_ABSOLUTE.lock ] && rmdir $OSM_XML_FILE_ABSOLUTE.lock
+    if [ -d $OSM_XML_FILE_ABSOLUTE.lock ]
+    then
+        rmdir $OSM_XML_FILE_ABSOLUTE.lock
+    fi
+    if [ -n "$PTNA_EXTRACT_SOURCE" -a "$(basename $PTNA_EXTRACT_SOURCE)" != "planet.osm.pbf" ]
+    then
+        rm -f "$WORK_LOC/$PTNA_EXTRACT_SOURCE"
+    fi
 fi
 
 #
@@ -222,14 +229,9 @@ then
                 osmium_ret=$?
 
                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret"
-
-                if [ $osmium_ret -eq 0 -a "$(basename $PTNA_EXTRACT_SOURCE)" != "planet.osm.pbf" ]
-                then
-                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Split extract: remove '$WORK_LOC/$PTNA_EXTRACT_SOURCE', we don't need that any longer"
-                    rm -f "$WORK_LOC/$PTNA_EXTRACT_SOURCE"
-                fi
             else
-                mv "$WORK_LOC/$PTNA_EXTRACT_SOURCE" "$OSM_XML_FILE_ABSOLUTE"
+                # we do not 'mv' here: some analysis runs share the file (FR-IDF-*, ...)
+                cat "$WORK_LOC/$PTNA_EXTRACT_SOURCE" > "$OSM_XML_FILE_ABSOLUTE"
             fi
         fi
 
