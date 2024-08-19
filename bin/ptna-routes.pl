@@ -2160,6 +2160,7 @@ sub analyze_route_master_environment {
                     #
                     $issues_string = gettext( "Route does not exist in the given data set: %s" );
                     push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, printRelationTemplate($member_ref->{'ref'}) ) );
+                    printf STDERR "%s Error in input data: insufficient data for relations of route_master ref=%s\n", get_time(), ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref' );
                 }
             }
         }
@@ -5666,13 +5667,6 @@ sub CheckCompletenessOfData {
     #
     if ( $xml_has_relations ) {
         my %incomplete_data_for_relations   = ();
-        foreach my $rel_ref ( @{$relation_ptr->{'route_master_relation'}} ) {
-            if ( $RELATIONS{$rel_ref->{'ref'}} ) {
-                ;
-            } else {
-                $incomplete_data_for_relations{$rel_ref->{'ref'}} = 1;
-            }
-        }
         foreach my $rel_ref ( @{$relation_ptr->{'relation'}} ) {
             if ( $RELATIONS{$rel_ref->{'ref'}} ) {
                 ;
