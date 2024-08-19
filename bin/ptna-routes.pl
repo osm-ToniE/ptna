@@ -1517,28 +1517,53 @@ if ( scalar(@suspicious_relations) ) {
 
     printTableHeader( 'relation' => 'number', 'ref' => 'number' );
 
+    my $print_it = 0;
+
     foreach $relation_id ( @suspicious_relations ) {
         $relation_ptr = $RELATIONS{$relation_id};
+        foreach my $tag ( keys ( %{$relation_ptr->{'tag'}} ) ) {
+            $print_it     = 0;
+            if ( $tag =~ m/^(platform|ref|local_ref|from|via|to|gtfs|ref_trips|route_ref|public_transport)$/i ) {
+                $print_it = 1;
+                last;
+            } elsif (  $tag =~ m/type|boundary/i && $relation_ptr->{'tag'}->{$tag} =~ m/route|public_transport|platform|network/i ) {
+                $print_it = 1;
+                last;
+            } elsif ( $tag =~ m/route/i ) {
+                foreach my $supported ( @supported_route_types ) {
+                    if ( $relation_ptr->{'tag'}->{$tag} =~ m/$supported/i ) {
+                        $print_it = 1;
+                        last;
+                    }
+                    last if ( $print_it );
+                }
+            } elsif ( $tag !~ m/name|fixme|comment|note|description|inscription/i && $relation_ptr->{'tag'}->{$tag} =~ m/route|stop_position|platform|stop_area|bus_stop/i ) {
+                $print_it = 1;
+                last;
+            }
+        }
 
-        printTableLine( 'relation'          =>    $relation_id,
-                        'type'              =>    getRelationType( $relation_ptr ),
-                        'route_type'        =>    getRelationRouteType( $relation_ptr ),
-                        'ref'               =>    $relation_ptr->{'tag'}->{'ref'},
-                        'name'              =>    ( $relation_ptr->{'tag'}->{'name'} ) ? $relation_ptr->{'tag'}->{'name'} : ($opt_language && $relation_ptr->{'tag'}->{'name:'.$opt_language}) ? "'name:".$opt_language."' = '".$relation_ptr->{'tag'}->{'name:'.$opt_language}."'" : '',
-                        'network'           =>    $relation_ptr->{'tag'}->{'network'},
-                        'operator'          =>    $relation_ptr->{'tag'}->{'operator'},
-                        'from'              =>    $relation_ptr->{'tag'}->{'from'},
-                        'via'               =>    $relation_ptr->{'tag'}->{'via'},
-                        'to'                =>    $relation_ptr->{'tag'}->{'to'},
-                        'PTv'               =>    $relation_ptr->{'tag'}->{'public_transport:version'},
-                        'public_transport'  =>    $relation_ptr->{'tag'}->{'public_transport'},
-                      );
-        $number_of_suspicious_relations++;
+        if ( $print_it ) {
+            printTableLine( 'relation'          =>    $relation_id,
+                            'type'              =>    getRelationType( $relation_ptr ),
+                            'route_type'        =>    getRelationRouteType( $relation_ptr ),
+                            'ref'               =>    $relation_ptr->{'tag'}->{'ref'},
+                            'name'              =>    ( $relation_ptr->{'tag'}->{'name'} ) ? $relation_ptr->{'tag'}->{'name'} : ($opt_language && $relation_ptr->{'tag'}->{'name:'.$opt_language}) ? "'name:".$opt_language."' = '".$relation_ptr->{'tag'}->{'name:'.$opt_language}."'" : '',
+                            'network'           =>    $relation_ptr->{'tag'}->{'network'},
+                            'operator'          =>    $relation_ptr->{'tag'}->{'operator'},
+                            'from'              =>    $relation_ptr->{'tag'}->{'from'},
+                            'via'               =>    $relation_ptr->{'tag'}->{'via'},
+                            'to'                =>    $relation_ptr->{'tag'}->{'to'},
+                            'PTv'               =>    $relation_ptr->{'tag'}->{'public_transport:version'},
+                            'public_transport'  =>    $relation_ptr->{'tag'}->{'public_transport'},
+                        );
+            $number_of_suspicious_relations++;
+        }
     }
     printTableFooter();
 }
 
-printf STDERR "%s Printed suspicious: %d\n", get_time(), $number_of_suspicious_relations       if ( $verbose );
+printf STDERR "%s Printed suspicious: %d out of %d candidates\n", get_time(), $number_of_suspicious_relations, scalar(@suspicious_relations)       if ( $verbose );
 
 
 #############################################################################################
@@ -2000,7 +2025,6 @@ sub analyze_route_master_environment {
             if ( $number_of_my_routes > $number_of_routes ) {
                 $issues_string = ngettext( "Route-Master has more Routes than actually match (%d versus %d) in the given data set", "Route-Masters have more Routes than actually match (%d versus %d) in the given data set", $number_of_route_masters );
                 push( @{$relation_ptr->{'__issues__'}}, sprintf($issues_string, $number_of_my_routes, $number_of_routes) );
-                printf STDERR "%s Error in input data: insufficient data for relations of route ref=%s\n", get_time(), ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref' );
             } elsif ( $number_of_my_routes < $number_of_routes ) {
                 $issues_string = ngettext( "Route-Master has less Routes than actually match (%d versus %d) in the given data set", "Route-Masters have less Routes than actually match (%d versus %d) in the given data set", $number_of_route_masters );
                 push( @{$relation_ptr->{'__issues__'}}, sprintf($issues_string, $number_of_my_routes, $number_of_routes) );
@@ -2012,7 +2036,6 @@ sub analyze_route_master_environment {
             if ( $number_of_my_routes > $number_of_routes ) {
                 $issues_string = ngettext( "Route-Master has more Routes than actually match (%d versus %d) in the given data set", "Route-Masters have more Routes than actually match (%d versus %d) in the given data set", $number_of_route_masters );
                 push( @{$relation_ptr->{'__issues__'}}, sprintf($issues_string, $number_of_my_routes, $number_of_routes) );
-                printf STDERR "%s Error in input data: insufficient data for relations of route ref=%s\n", get_time(), ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref' );
             } elsif ( $number_of_my_routes < $number_of_routes ) {
                 $issues_string = ngettext( "Route-Master has less Routes than actually match (%d versus %d) in the given data set", "Route-Masters have less Routes than actually match (%d versus %d) in the given data set", $number_of_route_masters );
                 push( @{$relation_ptr->{'__issues__'}}, sprintf($issues_string, $number_of_my_routes, $number_of_routes) );
@@ -2807,6 +2830,12 @@ sub analyze_route_master_relation {
     my $route_highway_index            = scalar( @{$relation_ptr->{'route_highway'}} );
     my $node_index                     = scalar( @{$relation_ptr->{'node'}} );
     my $members_with_role              = 0;
+
+    $relation_ptr->{'missing_way_data'}   = 0;
+    $relation_ptr->{'missing_node_data'}  = 0;
+    $relation_ptr->{'missing_relation_data'}  = 0;
+
+    $return_code += CheckCompletenessOfData( $relation_ptr );
 
     unless ( $route_master_relation_index ) {
         $issues_string = gettext( "Route-Master without Route(s)" );
@@ -5637,11 +5666,16 @@ sub CheckCompletenessOfData {
     #
     if ( $xml_has_relations ) {
         my %incomplete_data_for_relations   = ();
+        foreach my $rel_ref ( @{$relation_ptr->{'route_master_relation'}} ) {
+            if ( $RELATIONS{$rel_ref->{'ref'}} ) {
+                ;
+            } else {
+                $incomplete_data_for_relations{$rel_ref->{'ref'}} = 1;
+            }
+        }
         foreach my $rel_ref ( @{$relation_ptr->{'relation'}} ) {
             if ( $RELATIONS{$rel_ref->{'ref'}} ) {
-                # node exists in downloaded data
-                # check for more
-                # $incomplete_data_for_nodes{$node_ref->{'ref'}} = 1    if ( !$NODES{$node_ref->{'ref'}}->{'tag'} );
+                ;
             } else {
                 $incomplete_data_for_relations{$rel_ref->{'ref'}} = 1;
             }

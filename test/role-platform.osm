@@ -248,14 +248,14 @@
   <relation id='-111658' action='modify'>
     <member type='way' ref='-112916' role='outer' />
     <member type='way' ref='-112917' role='inner' />
-    <tag k='name' v='C-Village' />
+    <tag k='name' v='C-Village (right)' />
     <tag k='public_transport' v='platform' />
     <tag k='type' v='multipolygon' />
   </relation>
   <relation id='-111734' action='modify'>
     <member type='way' ref='-112918' role='outer' />
     <member type='way' ref='-112919' role='inner' />
-    <tag k='name' v='C-Village' />
+    <tag k='name' v='C-Village (left)' />
     <tag k='type' v='multipolygon' />
   </relation>
   <relation id='-112807' action='modify'>
