@@ -2160,7 +2160,7 @@ sub analyze_route_master_environment {
                     #
                     $issues_string = gettext( "Route does not exist in the given data set: %s" );
                     push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, printRelationTemplate($member_ref->{'ref'}) ) );
-                    printf STDERR "%s Error in input data: insufficient data for relations of route_master ref=%s\n", get_time(), ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref' );
+                    printf STDERR "%s Error in input data: insufficient data for relations of route_master 'ref' = '%s': %s\n", get_time(), ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref', $member_ref->{'ref'} );
                 }
             }
         }
@@ -5685,7 +5685,7 @@ sub CheckCompletenessOfData {
                 push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $issues_string, join(', ', map { printRelationTemplate($_); } @help_array )) );
             }
             $relation_ptr->{'missing_relation_data'}   = 1;
-            printf STDERR "%s Error in input data: insufficient data for relations of route ref=%s\n", get_time(), ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref' );
+            printf STDERR "%s Error in input data: insufficient data for relations of route 'ref' = '%s'\n", get_time(), ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref' );
         }
     }
     #
@@ -5714,7 +5714,7 @@ sub CheckCompletenessOfData {
                 push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $issues_string, join(', ', map { printWayTemplate($_); } @help_array )) );
             }
             $relation_ptr->{'missing_way_data'}   = 1;
-            printf STDERR "%s Error in input data: insufficient data for ways of route ref=%s\n", get_time(), ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref' );
+            printf STDERR "%s Error in input data: insufficient data for ways of route 'ref' = '%s'\n", get_time(), ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref' );
         }
     }
     #
@@ -5742,7 +5742,7 @@ sub CheckCompletenessOfData {
                 push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $issues_string, join(', ', map { printNodeTemplate($_); } @help_array )) );
             }
             $relation_ptr->{'missing_node_data'}   = 1;
-            printf STDERR "%s Error in input data: insufficient data for nodes of route ref=%s\n", get_time(), ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref' );
+            printf STDERR "%s Error in input data: insufficient data for nodes of route 'ref' = '%s'\n", get_time(), ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref' );
         }
     }
 
