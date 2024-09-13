@@ -49,9 +49,9 @@ then
 
     for config in $(find "$NETWORKDIR" -maxdepth 1 -type f -name '*-osmium.config' | sort)
     do
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "We have a '$config' file, do we have a '*.osm.pbf' in '$PWD'?"
-
         PBF_FILE=$(basename ${config%-osmium.config}).osm.pbf
+
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "We have a '$config' file, looking for '$PBF_FILE' in '$PWD'?"
 
         if [ -n "$PBF_FILE" -a -f "$PBF_FILE" -a -s "$PBF_FILE" ]
         then
