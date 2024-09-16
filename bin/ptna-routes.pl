@@ -24,7 +24,7 @@ use Getopt::Long;
 use OSM::XML            qw( parse );
 use OSM::Data           qw( %META %NODES %WAYS %RELATIONS );
 use RoutesList;
-use GTFS::PtnaSQLite    qw( getRouteIdStatus getTripIdStatus getShapeIdStatus getGtfsRouteIdHtmlTag getGtfsTripIdHtmlTag getGtfsShapeIdHtmlTag getGtfsLinkToRoutes );
+use GTFS::PtnaSQLite    qw( getRouteIdStatus getTripIdStatus getShapeIdStatus getGtfsRouteIdHtmlTag getGtfsRouteIdIconTag getGtfsTripIdHtmlTag getGtfsShapeIdHtmlTag getGtfsLinkToRoutes );
 use Data::Dumper;
 use Encode;
 
@@ -5874,10 +5874,16 @@ sub getGtfsInfo {
                 $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'}, 'gtfs:route_id' ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:route_id'} ) );
                 # we do expect a trip_id or shape_id here, mark that route_id is used here
                 $gtfs_html_tag =~ s/>GTFS/>GTFS(r)/g;
+                if ( $gtfs_html_tag !~ m/(bad-link|gtfs-dateprevious)/ ) {
+                    $gtfs_html_tag .= GTFS::PtnaSQLite::getGtfsRouteIdIconTag( $gtfs_feed, $gtfs_release_date, $relation_ptr->{'tag'}->{'gtfs:route_id'}, $relation_ptr->{'id'}, 'gtfs:route_id' );
+                }
             }
         } elsif ( $relation_ptr->{'tag'}->{'gtfs:route_id'} ) {
             $relation_ptr->{'tag'}->{'gtfs:route_id'} =~ s/\s*;\s*/;/g;
             $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'}, 'gtfs:route_id' ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:route_id'} ) );
+            if ( $gtfs_html_tag !~ m/(bad-link|gtfs-dateprevious)/ ) {
+                $gtfs_html_tag .= GTFS::PtnaSQLite::getGtfsRouteIdIconTag( $gtfs_feed, $gtfs_release_date, $relation_ptr->{'tag'}->{'gtfs:route_id'}, $relation_ptr->{'id'}, 'gtfs:route_id' );
+            }
         }
     }
 
@@ -6769,10 +6775,16 @@ sub printTableSubHeader {
             printf STDERR "printTableSubHeader(1): \$gtfs_csv_info_from{$hash{'GTFS-Feed'}}{$hash{'GTFS-Release-Date'}} = 1;\n" if ( $debug );
             $gtfs_csv_info_from{$hash{'GTFS-Feed'}}{$hash{'GTFS-Release-Date'}} = 1;
             $csv_text .= join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}, $hash{'GTFS-Release-Date'}, $_, $relation_id, 'GTFS-Route-Id' ); } split( ';', $hash{'GTFS-Route-Id'} ) );
+            if ( $csv_text != m/(bad-link|gtfs-dateprevious)/ ) {
+                $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdIconTag( $hash{'GTFS-Feed'}, $hash{'GTFS-Release-Date'}, $hash{'GTFS-Route-Id'}, $relation_id, 'GTFS-Route-Id' );
+            }
         } else {
             printf STDERR "printTableSubHeader(1): \$gtfs_csv_info_from{$hash{'GTFS-Feed'}}{' latest } = 1;\n" if ( $debug );
             $gtfs_csv_info_from{$hash{'GTFS-Feed'}}{' latest '} = 1;
             $csv_text .= join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}, '', $_, $relation_id, 'GTFS-Route-Id' ); } split( ';', $hash{'GTFS-Route-Id'} ) );
+            if ( $csv_text !~ m/(bad-link|gtfs-dateprevious)/ ) {
+                $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdIconTag( $hash{'GTFS-Feed'}, '', $hash{'GTFS-Route-Id'}, $relation_id, 'GTFS-Route-Id' );
+            }
         }
     } else {
         if ( $hash{'GTFS-Feed'} ) {
@@ -6783,7 +6795,7 @@ sub printTableSubHeader {
             } else {
                 printf STDERR "printTableSubHeader(2): \$gtfs_csv_info_from{$hash{'GTFS-Feed'}}{' latest } = 1;\n" if ( $debug );
                 $gtfs_csv_info_from{$hash{'GTFS-Feed'}}{' latest '} = 1;
-                $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'},'','', $relation_id, 'GTFS-Route-Id' );
+                $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}, '', '', $relation_id, 'GTFS-Route-Id' );
             }
         } elsif ( $hash{'GTFS-Route-Id'} ) {
             $csv_text .= join( ', ', map { sprintf( "%s: %s; ", ( $column_name{'GTFS-Route-Id'} ? $column_name{'GTFS-Route-Id'} : 'GTFS-Route-Id' ), html_escape($_) ); } split( ';', $hash{'GTFS-Route-Id'} ) );

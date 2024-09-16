@@ -14,7 +14,7 @@ use Encode;
 use Exporter;
 use base qw (Exporter);
 
-our @EXPORT_OK  = qw( getRouteIdStatus getTripIdStatus getShapeIdStatus getGtfsRouteIdHtmlTag getGtfsTripIdHtmlTag getGtfsShapeIdHtmlTag getGtfsLinkToRoutes );
+our @EXPORT_OK  = qw( getRouteIdStatus getTripIdStatus getShapeIdStatus getGtfsRouteIdHtmlTag getGtfsRouteIdIconTag getGtfsTripIdHtmlTag getGtfsShapeIdHtmlTag getGtfsLinkToRoutes );
 
 use DBI;
 
@@ -108,13 +108,6 @@ sub getGtfsRouteIdHtmlTag {
                                             html_escape($gtfs_feed), html_escape($release_date),
                                             html_escape($tag_name), html_escape($route_id),
                                             $RouteIdStatus[1] . ' - ' . $RouteIdStatus[2] );
-                    if ( $relation_id ) {
-                        $gtfs_html_tag .= sprintf( ", <a href=\"/gtfs/compare-routes.php?feed=%s&release_date=%s&route_id=%s&relation=%s#routes-table\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\"></a>",
-                                                uri_escape($gtfs_feed), uri_escape($release_date),
-                                                uri_escape(encode('utf8',$route_id)),
-                                                uri_escape($relation_id),
-                                                html_escape(gettext("Compare GTFS route with OSM route_master/route")) );
-                    }
                 } elsif ( $RouteIdStatus[0] eq 'past' ) {
                     $gtfs_html_tag = sprintf( "<a class=\"gtfs-dateold\" href=\"/gtfs/%s/trips.php?feed=%s&release_date=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, '%s' = '%s' %s.\">GTFS?</a>",
                                             uri_escape($gtfs_country),
@@ -123,13 +116,6 @@ sub getGtfsRouteIdHtmlTag {
                                             html_escape($gtfs_feed), html_escape($release_date),
                                             html_escape($tag_name), html_escape($route_id),
                                             html_escape(gettext("is no longer valid (in the past)") . ': ' . $RouteIdStatus[1] . ' - ' . $RouteIdStatus[2]) );
-                    if ( $relation_id ) {
-                        $gtfs_html_tag .= sprintf( ", <a href=\"/gtfs/compare-routes.php?feed=%s&release_date=%s&route_id=%s&relation=%s#routes-table\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\"></a>",
-                                                uri_escape($gtfs_feed), uri_escape($release_date),
-                                                uri_escape(encode('utf8',$route_id)),
-                                                uri_escape($relation_id),
-                                                html_escape(gettext("Compare GTFS route with OSM route_master/route")) );
-                    }
                 } elsif ( $RouteIdStatus[0] eq 'future' ) {
                     $gtfs_html_tag = sprintf( "<a class=\"gtfs-datenew\" href=\"/gtfs/%s/trips.php?feed=%s&release_date=%s&route_id=%s\" title=\"GTFS-Feed: %s, GTFS-Release-Date: %s, '%s' = '%s' %s.\">GTFS?</a>",
                                             uri_escape($gtfs_country),
@@ -138,13 +124,6 @@ sub getGtfsRouteIdHtmlTag {
                                             html_escape($gtfs_feed), html_escape($release_date),
                                             html_escape($tag_name), html_escape($route_id),
                                             html_escape(gettext("is not yet valid (in the future)") . ': ' . $RouteIdStatus[1] . ' - ' . $RouteIdStatus[2]) );
-                    if ( $relation_id ) {
-                        $gtfs_html_tag .= sprintf( ", <a href=\"/gtfs/compare-routes.php?feed=%s&release_date=%s&route_id=%s&relation=%s#routes-table\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\"></a>",
-                                                uri_escape($gtfs_feed), uri_escape($release_date),
-                                                uri_escape(encode('utf8',$route_id)),
-                                                uri_escape($relation_id),
-                                                html_escape(gettext("Compare GTFS route with OSM route_master/route")) );
-                    }
                 } else {
                     my $found_in_previous_version = 0;
 
@@ -158,13 +137,6 @@ sub getGtfsRouteIdHtmlTag {
                                                     html_escape($gtfs_feed), 'previous',
                                                     html_escape($tag_name), html_escape($route_id),
                                                     html_escape(gettext("is outdated, fits to older GTFS version only")) );
-                            if ( $relation_id ) {
-                                $gtfs_html_tag .= sprintf( ", <a href=\"/gtfs/compare-routes.php?feed=%s&release_date=%s&route_id=%s&relation=%s#routes-table\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\"></a>",
-                                                        uri_escape($gtfs_feed), 'previous',
-                                                        uri_escape(encode('utf8',$route_id)),
-                                                        uri_escape($relation_id),
-                                                        html_escape(gettext("Compare GTFS route with OSM route_master/route")) );
-                            }
                             $found_in_previous_version = 1;
                         }
                     }
@@ -196,6 +168,32 @@ sub getGtfsRouteIdHtmlTag {
     warn sprintf( "getGtfsRouteIdHtmlTag(%s,%s,%s): %s",$gtfs_feed,$release_date,$route_id,$@ ) if ( $@ );
 
     return $gtfs_html_tag;
+}
+
+
+#############################################################################################
+#
+#
+#
+#############################################################################################
+
+sub getGtfsRouteIdIconTag {
+    my $gtfs_feed      = shift;
+    my $release_date   = shift || '';
+    my $route_id       = shift;
+    my $relation_id    = shift;
+    my $tag_name       = shift || 'route_id';
+    my $gtfs_icon_tag  = '';
+
+    if ( $route_id && $relation_id ) {
+        $gtfs_icon_tag .= sprintf( ", <a href=\"/gtfs/compare-routes.php?feed=%s&release_date=%s&route_id=%s&relation=%s#routes-table\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\"></a>",
+                                uri_escape($gtfs_feed), uri_escape($release_date),
+                                uri_escape(encode('utf8',$route_id)),
+                                uri_escape($relation_id),
+                                html_escape(gettext("Compare GTFS route with OSM route_master/route")) );
+    }
+
+    return $gtfs_icon_tag;
 }
 
 
