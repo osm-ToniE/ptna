@@ -178,9 +178,12 @@ then
     then
         rmdir $OSM_XML_FILE_ABSOLUTE.lock
     fi
-    if [ -n "$PTNA_EXTRACT_SOURCE" -a "$(basename $PTNA_EXTRACT_SOURCE)" != "planet.osm.pbf" ]
+    if [ -n "$PTNA_EXTRACT_SOURCE" ]
     then
-        rm -f "$WORK_LOC/$PTNA_EXTRACT_SOURCE"
+        if [ "$(basename $PTNA_EXTRACT_SOURCE)" != "planet.osm.pbf" ]
+        then
+            rm -f "$WORK_LOC/$PTNA_EXTRACT_SOURCE"
+        fi
     fi
 fi
 
