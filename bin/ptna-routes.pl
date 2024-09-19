@@ -2082,7 +2082,7 @@ sub analyze_route_master_environment {
 
                                                     if ( $route_master_network =~ m/;\Q$RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}\E;/  ) {
                                                         $notes_string = gettext( "Route has 'network' = '%s' value which is part of 'network' = '%s' of Route-Master: %s" );
-                                                        push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}), html_escape($relation_ptr->{'tag'}->{'network'}), printRelationTemplate($member_ref->{'ref'})) );
+                                                        push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, handle_foreign($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}), handle_foreign($relation_ptr->{'tag'}->{'network'}), printRelationTemplate($member_ref->{'ref'})) );
                                                     }
 
                                                     #printf STDERR "%s Route of Route-Master not found although 'ref' is valid and 'network' are equal. Route-Master: %s, Route: %s, 'ref': %s, 'network': %s\n", get_time(), $relation_id, $member_ref->{'ref'}, $members_ref, html_escape($relation_ptr->{'tag'}->{'network'});
@@ -2095,22 +2095,22 @@ sub analyze_route_master_environment {
                                                         } else {
                                                             # 'ref' tag is valid (in the list) but 'operator' is set and differs
                                                             $issues_string = gettext( "Route has different 'operator' = '%s' than Route-Master 'operator' = '%s': %s" );
-                                                            push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'operator'}), html_escape($relation_ptr->{'tag'}->{'operator'}), printRelationTemplate($member_ref->{'ref'}) ) );
+                                                            push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, handle_foreign($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'operator'}), handle_foreign($relation_ptr->{'tag'}->{'operator'}), printRelationTemplate($member_ref->{'ref'}) ) );
                                                         }
                                                     } elsif ( $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'operator'} ) {
                                                         # 'ref' tag is valid (in the list) but 'operator' is strange
                                                         $issues_string = gettext( "Route has 'operator' = '%s' value which is considered as not relevant: %s" );
-                                                        push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'operator'}), printRelationTemplate($member_ref->{'ref'}) ) );
+                                                        push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, handle_foreign($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'operator'}), printRelationTemplate($member_ref->{'ref'}) ) );
                                                     }
                                                 } else {
                                                     # 'ref' tag is valid (in the list) but 'network' is set and differs
                                                     $issues_string = gettext( "Route has different 'network' = '%s' than Route-Master 'network' = '%s': %s" );
-                                                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}), html_escape($relation_ptr->{'tag'}->{'network'}), printRelationTemplate($member_ref->{'ref'}) ) );
+                                                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, handle_foreign($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}), handle_foreign($relation_ptr->{'tag'}->{'network'}), printRelationTemplate($member_ref->{'ref'}) ) );
                                                 }
                                             } elsif ( $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'} ) {
                                                 # 'ref' tag is valid (in the list) but 'network' is strange
                                                 $notes_string = gettext( "Route has 'network' = '%s' value which is considered as not relevant: %s" );
-                                                push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}), printRelationTemplate($member_ref->{'ref'}) ) );
+                                                push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, handle_foreign($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}), printRelationTemplate($member_ref->{'ref'}) ) );
                                             }
                                             if ( $members_ref ne $masters_ref ) {
                                                 # 'members_ref' is valid (in the list) but differs from 'ref' of route-master, so we have at least two refs in the list (a real list)
@@ -2121,7 +2121,7 @@ sub analyze_route_master_environment {
                                         } else {
                                             # 'ref' tag is set but is not valid, not in list
                                             $issues_string = gettext( "Route has not matching 'ref' = '%s': %s" );
-                                            push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, $members_ref, printRelationTemplate($member_ref->{'ref'}) ) );
+                                            push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, '<span class="foreign" dir="auto">'.$members_ref.'</span>', printRelationTemplate($member_ref->{'ref'}) ) );
                                         }
                                     } else {
                                         # 'ref' tag is not set
@@ -2131,13 +2131,13 @@ sub analyze_route_master_environment {
                                 } else {
                                     # 'ref' tag is valid (in the list) but 'route' is set and differs from 'route_master'
                                     $issues_string = gettext( "Route has different 'route' = '%s' than Route-Master 'route_master' = '%s': %s" );
-                                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'route'}), html_escape($relation_ptr->{'tag'}->{'route_master'}), printRelationTemplate($member_ref->{'ref'}) ) );
+                                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, handle_foreign($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'route'}), handle_foreign($relation_ptr->{'tag'}->{'route_master'}), printRelationTemplate($member_ref->{'ref'}) ) );
                                 }
                             } else {
                                 if ( $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'route'} ) {
                                     # 'route' is strange
                                     $issues_string = gettext( "Route has 'route' = '%s' value which is considered as not relevant: %s" );
-                                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'route'}), printRelationTemplate($member_ref->{'ref'}) ) );
+                                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, handle_foreign($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'route'}), printRelationTemplate($member_ref->{'ref'}) ) );
                                 } else {
                                     # 'route' is not set
                                     $issues_string = gettext( "'route' tag is not set: %s" );
@@ -2147,7 +2147,7 @@ sub analyze_route_master_environment {
                         } else {
                             # 'type' is strange
                             $issues_string = gettext( "'type' = '%s' is not 'route': %s" );
-                            push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'type'}), printRelationTemplate($member_ref->{'ref'}) ) );
+                            push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, handle_foreign($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'type'}), printRelationTemplate($member_ref->{'ref'}) ) );
                         }
                     } else {
                         # 'type' is not set
@@ -2302,10 +2302,10 @@ sub analyze_route_environment {
 
                 if ( $route_master_network =~ m/;\Q$relation_ptr->{'tag'}->{'network'}\E;/  ) {
                     $notes_string = gettext( "'network' = '%s' of Route is a part of 'network' = '%s' of Route-Master: %s" );
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, html_escape($relation_ptr->{'tag'}->{'network'}), html_escape($RELATIONS{$route_master_rel_id}->{'tag'}->{'network'}), printRelationTemplate($route_master_rel_id)) );
+                    push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, handle_foreign($relation_ptr->{'tag'}->{'network'}), handle_foreign($RELATIONS{$route_master_rel_id}->{'tag'}->{'network'}), printRelationTemplate($route_master_rel_id)) );
                 } else {
                     $issues_string = gettext( "'network' = '%s' of Route does not fit to 'network' = '%s' of Route-Master: %s" );
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($relation_ptr->{'tag'}->{'network'}), html_escape($RELATIONS{$route_master_rel_id}->{'tag'}->{'network'}), printRelationTemplate($route_master_rel_id)) );
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, handle_foreign($relation_ptr->{'tag'}->{'network'}), handle_foreign($RELATIONS{$route_master_rel_id}->{'tag'}->{'network'}), printRelationTemplate($route_master_rel_id)) );
                 }
             }
             if ( $relation_ptr->{'tag'}->{'operator'} && $RELATIONS{$route_master_rel_id}->{'tag'}->{'operator'} &&
@@ -2314,7 +2314,7 @@ sub analyze_route_environment {
                 my $help_route_operator        = ';' . $relation_ptr->{'tag'}->{'operator'} . ';';
                 unless ( $help_route_master_opeartor =~ m/\Q$help_route_operator\E/ ) {
                     $issues_string = gettext( "'operator' = '%s' of Route does not fit to 'operator' = '%s' of Route-Master: %s" );
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($relation_ptr->{'tag'}->{'operator'}), html_escape($RELATIONS{$route_master_rel_id}->{'tag'}->{'operator'}), printRelationTemplate($route_master_rel_id)) );
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, handle_foreign($relation_ptr->{'tag'}->{'operator'}), handle_foreign($RELATIONS{$route_master_rel_id}->{'tag'}->{'operator'}), printRelationTemplate($route_master_rel_id)) );
                 }
             }
             if ( $relation_ptr->{'tag'}->{'colour'} ) {
@@ -2532,11 +2532,11 @@ sub analyze_relation {
                     if ( $relation_ptr->{'tag'}->{$tag} ) {
                         $reporttype = ( $specialtag2reporttype{$specialtag} ) ? $specialtag2reporttype{$specialtag} : '__notes__';
                         if ( $tag =~ m/^note$/i && $relation_ptr->{'tag'}->{$tag} =~ m|^https{0,1}://wiki.openstreetmap.org\S+\s*[;,_+#\.\-]*\s*(.*)| ) {
-                            unshift( @{$relation_ptr->{$reporttype}}, sprintf("'%s' ~ '%s'", $tag, html_escape($1)) )  if ( $1 );
+                            unshift( @{$relation_ptr->{$reporttype}}, sprintf("'%s' ~ '%s'", handle_foreign($tag), handle_foreign($1)) )  if ( $1 );
                         } elsif ( $tag =~ m/^note$/i && $relation_ptr->{'tag'}->{$tag} =~ m|^https{0,1}://ptna.openstreetmap.de\S+\s*[;,_+#\.\-]*\s*(.*)| ) {
-                            unshift( @{$relation_ptr->{$reporttype}}, sprintf("'%s' ~ '%s'", $tag, html_escape($1)) )  if ( $1 );
+                            unshift( @{$relation_ptr->{$reporttype}}, sprintf("'%s' ~ '%s'", handle_foreign($tag), handle_foreign($1)) )  if ( $1 );
                         } else {
-                            unshift( @{$relation_ptr->{$reporttype}}, sprintf("'%s' = '%s'", $tag, html_escape($relation_ptr->{'tag'}->{$tag})) )
+                            unshift( @{$relation_ptr->{$reporttype}}, sprintf("'%s' = '%s'", handle_foreign($tag), handle_foreign($relation_ptr->{'tag'}->{$tag})) )
                         }
                     }
                 }
@@ -2556,7 +2556,7 @@ sub analyze_relation {
             push( @{$relation_ptr->{'__issues__'}}, $issues_string );
             foreach my $tag ( @relation_tags ) {
                 if ( $tag =~ m/^name:/ || $tag =~ m/_name$/ ) {
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf( "'%s' = '%s'", html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag}) ) );
+                    push( @{$relation_ptr->{'__notes__'}}, sprintf( "'%s' = '%s'", handle_foreign($tag), handle_foreign($relation_ptr->{'tag'}->{$tag}) ) );
                 }
             }
         }
@@ -2575,9 +2575,9 @@ sub analyze_relation {
                         $match = $1;
                         if ( $positive_notes ) {
                             if ( $network eq $match ) {
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf( "'network' = '%s'", html_escape($match)) );
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf( "'network' = '%s'", handle_foreign($match)) );
                             } else {
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf( "'network' ~ '%s'", html_escape($match) ) );
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf( "'network' ~ '%s'", handle_foreign($match) ) );
                             }
                         }
                         $we_have_a_match++;
@@ -2590,9 +2590,9 @@ sub analyze_relation {
                         $match = $1;
                         if ( $positive_notes ) {
                             if ( $network eq $match ) {
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' = '%s'",html_escape($match)) );
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' = '%s'",handle_foreign($match)) );
                             } else {
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' ~ '%s'",html_escape($match)) );
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' ~ '%s'",handle_foreign($match)) );
                             }
                         }
                         $we_have_a_match++;
@@ -2601,9 +2601,9 @@ sub analyze_relation {
             }
             if ( $we_have_a_match == 0 && ($network_long_regex || $network_short_regex) ) {
                 $notes_string = gettext( "Route has 'network' = '%s' value which is considered as not relevant: %s" );
-                push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, html_escape($network), printRelationTemplate($relation_id) ) );
+                push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, handle_foreign($network), printRelationTemplate($relation_id) ) );
                 if ( $positive_notes ) {
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf( "'network' = '%s'", html_escape($network)) );
+                    push( @{$relation_ptr->{'__notes__'}}, sprintf( "'network' = '%s'", handle_foreign($network)) );
                 }
             }
 
@@ -2621,12 +2621,12 @@ sub analyze_relation {
                 if ( $match_long ) {
                     if ( $match_long ne $expect_long_as ) {
                         $notes_string = gettext( "'network' = '%s' should be short form" );
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, html_escape($match_long) ) );
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, handle_foreign($match_long) ) );
                     }
                 } elsif ( $match_short ) {
                     if ( $match_short eq $expect_long_for ) {
                         $notes_string = gettext( "'network' = '%s' should be long form" );
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, html_escape($match_short) ) );
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, handle_foreign($match_short) ) );
                     }
                 }
             } elsif ( $expect_network_long  ) {
@@ -2643,12 +2643,12 @@ sub analyze_relation {
                 if ( $match_short ) {
                     if ( $match_short ne $expect_short_as ) {
                         $notes_string = gettext( "'network' = '%s' should be long form" );
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, html_escape($match_short) ) );
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, handle_foreign($match_short) ) );
                     }
                 } elsif ( $match_long ) {
                     if ( $match_long eq $expect_short_for ) {
                         $notes_string = gettext( "'network' = '%s' should be short form" );
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, html_escape($match_long) ) );
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, handle_foreign($match_long) ) );
                     }
                 }
             }
@@ -2665,7 +2665,7 @@ sub analyze_relation {
                     push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($relation_ptr->{'tag'}->{'colour'}) ) );
                 } else {
                     $issues_string = gettext( "'colour' has unknown value '%s'. Choose one of the 140 well defined HTML/CSS colour names or the HTML Hex colour codes '#...' or '#......'." );
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($relation_ptr->{'tag'}->{'colour'}) ) );
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, handle_foreign($relation_ptr->{'tag'}->{'colour'}) ) );
                 }
             }
         }
@@ -2675,7 +2675,7 @@ sub analyze_relation {
             if ( !$network_long_regex && !$network_short_regex ) {
                 # we do not filter for any 'network' values, so let's print also the value of 'network'
                 if ( $relation_ptr->{'tag'}->{'network'} ) {
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' = '%s'", html_escape($relation_ptr->{'tag'}->{'network'})) )
+                    push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' = '%s'", handle_foreign($relation_ptr->{'tag'}->{'network'})) )
                 }
             }
 
@@ -2691,10 +2691,10 @@ sub analyze_relation {
                                     $notes_string = gettext( "'network:long' matches long form" );
                                     push( @{$relation_ptr->{'__notes__'}}, $notes_string );
                                 } else {
-                                    push( @{$relation_ptr->{'__notes__'}}, sprintf("'network:long' = '%s'", html_escape($relation_ptr->{'tag'}->{$tag})) )
+                                    push( @{$relation_ptr->{'__notes__'}}, sprintf("'network:long' = '%s'", handle_foreign($relation_ptr->{'tag'}->{$tag})) )
                                 }
                             } else {
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf("'%s' = '%s'", html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag})) )
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf("'%s' = '%s'", handle_foreign($tag), handle_foreign($relation_ptr->{'tag'}->{$tag})) )
                             }
                         }
                     }
@@ -2709,11 +2709,11 @@ sub analyze_relation {
                         if ( $relation_ptr->{'tag'}->{$tag} ) {
 #                            if ( $relation_ptr->{'tag'}->{$tag} =~ m/\s;|;\s/ ) {
 #                                $notes_string = gettext( "'%s' = '%s' includes the separator value ';' (semi-colon) with sourrounding blank" );
-#                                push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag})) );
+#                                push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, handle_foreign($tag), handle_foreign($relation_ptr->{'tag'}->{$tag})) );
 #                            }
                             if ( $relation_ptr->{'tag'}->{$tag} =~ m/,/ ) {
                                 $notes_string = gettext( "'%s' = '%s': ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank" );
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag})) );
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, handle_foreign($tag), handle_foreign($relation_ptr->{'tag'}->{$tag})) );
                             }
                         }
                     }
@@ -2726,7 +2726,7 @@ sub analyze_relation {
                 foreach my $tag ( @relation_tags ) {
                     if ( $tag =~ m/^\Q$special\E/i ) {
                         if ( $relation_ptr->{'tag'}->{$tag} ) {
-                            push( @{$relation_ptr->{'__notes__'}}, sprintf("'%s' = '%s'", html_escape($tag), html_escape($relation_ptr->{'tag'}->{$tag})) )
+                            push( @{$relation_ptr->{'__notes__'}}, sprintf("'%s' = '%s'", handle_foreign($tag), handle_foreign($relation_ptr->{'tag'}->{$tag})) )
                         }
                     }
                 }
@@ -2741,13 +2741,13 @@ sub analyze_relation {
         #         !defined($relation_ptr->{'tag'}->{'gtfs:trip_id'})        &&
         #         !defined($relation_ptr->{'tag'}->{'gtfs:trip_id:sample'})    ) {
         #        $notes_string = gettext( "'gtfs:shape_id' = '%s' is set but neither 'gtfs:trip_id' nor 'gtfs:trip_id:sample' is set: consider setting one of them as they provide additional information about stops (their names, sequence and locations)." );
-        #        push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, $relation_ptr->{'tag'}->{'gtfs:shape_id'} ) );
+        #        push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, handle_foreign($relation_ptr->{'tag'}->{'gtfs:shape_id'}) ) );
         #    }
         }
 
         if ( $relation_ptr->{'tag'}->{'line'} ) {
             $notes_string = gettext( "The tag 'line' (='%s') is reserved for 'power' = 'line' related tagging. For public transport 'route_master' and 'route' are used." );
-            push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, $relation_ptr->{'tag'}->{'line'} ) );
+            push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, handle_foreign($relation_ptr->{'tag'}->{'line'}) ) );
         }
 
         #
@@ -2871,7 +2871,7 @@ sub analyze_route_master_relation {
             $issues_string = gettext( "'public_transport:version' is not set to '2'" );
             push( @{$relation_ptr->{'__issues__'}}, $issues_string )        if ( $check_version );
         } else {
-            ; #push( @{$relation_ptr->{'__notes__'}}, sprintf("'public_transport:version' = '%s'",html_escape($relation_ptr->{'tag'}->{'public_transport:version'})) )    if ( $positive_notes );
+            ; #push( @{$relation_ptr->{'__notes__'}}, sprintf("'public_transport:version' = '%s'",handle_foreign($relation_ptr->{'tag'}->{'public_transport:version'})) )    if ( $positive_notes );
         }
     } # else {
     #    $notes_string = gettext( "'public_transport:version' is not set" );
@@ -2948,7 +2948,7 @@ sub analyze_route_relation {
                 $issues_string = gettext( "'public_transport:version' is neither '1' nor '2'" );
                 push( @{$relation_ptr->{'__issues__'}}, $issues_string );
             } else {
-                #push( @{$relation_ptr->{'__notes__'}}, sprintf("'public_transport:version' = '%s'",html_escape($relation_ptr->{'tag'}->{'public_transport:version'})) )    if ( $positive_notes );
+                #push( @{$relation_ptr->{'__notes__'}}, sprintf("'public_transport:version' = '%s'",handle_foreign($relation_ptr->{'tag'}->{'public_transport:version'})) )    if ( $positive_notes );
             }
         } #else {
         #    $notes_string = gettext( "'public_transport:version' is not set" );
@@ -5097,7 +5097,7 @@ sub CheckNameRefFromViaToPTV2 {
                             $ref_string = $relation_ptr->{'tag'}->{$tag};
                             if ( $ref_in_name_w_boundary !~ m|[ ;/]$ref_string[ ;/:]| ) {
                                 $notes_string = gettext( "PTv2 route: '%s' is not part of 'name' (derived from '%s' = '%s')" );
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string,html_escape($ref_string),html_escape($tag),html_escape($relation_ptr->{'tag'}->{$tag})) );
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string,handle_foreign($ref_string),handle_foreign($tag),handle_foreign($relation_ptr->{'tag'}->{$tag})) );
                                 $return_code++;
                             }
                         }
@@ -5118,12 +5118,12 @@ sub CheckNameRefFromViaToPTV2 {
                             $temp_from_in_name    =~ s/,//g;
                             if ( index($temp_from,$temp_from_in_name) == -1 ) {
                                 $notes_string = gettext( "PTv2 route: from-part ('%s') of 'name' is not part of 'from' = '%s'" );
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, html_escape($from_in_name), html_escape($from)) );
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, handle_foreign($from_in_name), handle_foreign($from)) );
                                 $return_code++;
                             }
                         } else {
                             $notes_string = gettext( "PTv2 route: from-part ('%s') of 'name' is not equal to 'from' = '%s'" );
-                            push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, html_escape($from_in_name), html_escape($from)) );
+                            push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, handle_foreign($from_in_name), handle_foreign($from)) );
                             $return_code++;
                         }
                     }
@@ -5142,12 +5142,12 @@ sub CheckNameRefFromViaToPTV2 {
                             $temp_to_in_name    =~ s/,//g;
                             if ( index($temp_to,$temp_to_in_name) == -1 ) {
                                 $notes_string = gettext( "PTv2 route: to-part ('%s') of 'name' is not part of 'to' = '%s'" );
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, html_escape($to_in_name), html_escape($to)) );
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, handle_foreign($to_in_name), handle_foreign($to)) );
                                 $return_code++;
                             }
                         } else {
                             $notes_string = gettext( "PTv2 route: to-part ('%s') of 'name' is not equal to 'to' = '%s'" );
-                            push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, html_escape($to_in_name), html_escape($to)) );
+                            push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, handle_foreign($to_in_name), handle_foreign($to)) );
                             $return_code++;
                         }
                     }
@@ -5168,12 +5168,12 @@ sub CheckNameRefFromViaToPTV2 {
                                         #printf STDERR "check %d via = %s against %s\n", $index, $via_values[$index], $via_parts_in_name[$index];
                                         if ( index($via_values[$index],$via_parts_in_name[$index]) == -1 ) {
                                             $notes_string = gettext( "PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' is not part of %d. via-value = '%s'" );
-                                            push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string,$index+1,html_escape($via_parts_in_name[$index]),$index+1,html_escape($via_values[$index])) );
+                                            push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string,$index+1,handle_foreign($via_parts_in_name[$index]),$index+1,handle_foreign($via_values[$index])) );
                                             $return_code++;
                                         }
                                     } else {
                                         $notes_string = gettext( "PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' is not equal to %d. via-value = '%s'" );
-                                        push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string,$index+1,html_escape($via_parts_in_name[$index]),$index+1,html_escape($via_values[$index])) );
+                                        push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string,$index+1,handle_foreign($via_parts_in_name[$index]),$index+1,handle_foreign($via_values[$index])) );
                                         $return_code++;
                                     }
                                 }
@@ -5525,7 +5525,7 @@ sub CheckRouteRefOnStops {
                                             $hint = ' (' . gettext("separate multiple values by ';' (semi-colon) without blank") . ')';
                                         }
                                         $issues_string = gettext( "Route: 'route_ref' = '%s' of stop does not include 'ref' = '%s' value of this route%s" );
-                                        $not_set_on{sprintf($issues_string,html_escape($object_ref->{'tag'}->{'route_ref'}),html_escape($sub_ref),$hint)}->{$member->{'ref'}} = $member->{'type'};
+                                        $not_set_on{sprintf($issues_string,handle_foreign($object_ref->{'tag'}->{'route_ref'}),handle_foreign($sub_ref),$hint)}->{$member->{'ref'}} = $member->{'type'};
                                     }
                                 }
 
@@ -5533,18 +5533,18 @@ sub CheckRouteRefOnStops {
 #                                    if ( $object_ref->{'tag'}->{'route_ref'} =~ m/\s+;/ ||
 #                                         $object_ref->{'tag'}->{'route_ref'} =~ m/;\s+/    ) {
 #                                        $notes_string = gettext( "Route: 'route_ref' = '%s' of stop includes the separator value ';' (semi-colon) with sourrounding blank" );
-#                                        $separator_with_blank_on{sprintf($notes_string,html_escape($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
+#                                        $separator_with_blank_on{sprintf($notes_string,handle_foreign($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
 #                                    }
                                     if ( $object_ref->{'tag'}->{'route_ref'} =~ m/,/ ) {
                                         $notes_string = gettext( "Route: 'route_ref' = '%s' of stop: ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank" );
-                                        $comma_as_separator{sprintf($notes_string,html_escape($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
+                                        $comma_as_separator{sprintf($notes_string,handle_foreign($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
                                     }
                                 }
 
                                 foreach my $tag ( 'bus_lines', 'bus_routes', 'lines', 'routes', 'line' ) {
                                     if ( $object_ref->{'tag'}->{$tag} ) {
                                         $notes_string = gettext( "Route: '%s' = '%s' of stop should be deleted, 'route_ref' = '%s' exists" );
-                                        $to_be_deleted{sprintf($notes_string,$tag,html_escape($object_ref->{'tag'}->{$tag}),html_escape($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
+                                        $to_be_deleted{sprintf($notes_string,$tag,handle_foreign($object_ref->{'tag'}->{$tag}),handle_foreign($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
                                     }
                                 }
                                 if ( exists($object_ref->{'tag'}->{'ref'}) ) {
@@ -5553,9 +5553,9 @@ sub CheckRouteRefOnStops {
 
                                     foreach my $sub_ref ( split( $ref_separator, $ref ) ) {
                                         if ( $temp_stop_ref =~ m/;\Q$sub_ref\E;/ ) {
-                                            $hint = sprintf( gettext( "(consider adding '%s' to the 'route_ref' tag of the stop)" ), html_escape($sub_ref) );
+                                            $hint = sprintf( gettext( "(consider adding '%s' to the 'route_ref' tag of the stop)" ), handle_foreign($sub_ref) );
                                             $notes_string = gettext( "Route: 'ref' = '%s' of stop should represent the reference of the stop, but includes the 'ref' = '%s' of this route %s" );
-                                            $to_be_replaced{sprintf($notes_string,html_escape($object_ref->{'tag'}->{'ref'}),html_escape($sub_ref),$hint)}->{$member->{'ref'}} = $member->{'type'};
+                                            $to_be_replaced{sprintf($notes_string,handle_foreign($object_ref->{'tag'}->{'ref'}),handle_foreign($sub_ref),$hint)}->{$member->{'ref'}} = $member->{'type'};
                                         }
                                     }
                                 }
@@ -5574,7 +5574,7 @@ sub CheckRouteRefOnStops {
                                         delete( $included_refs{'yes'} );
                                         $replace_by = join( ';', sort( { if ( $a =~ m/^[0-9]+$/ && $b =~ m/^[0-9]+$/ ) { $a <=> $b } else { $a cmp $b } } keys( %included_refs ) ) );
                                         $notes_string = gettext( "Route: '%s' = '%s' of stop should be replaced by 'route_ref' = '%s'" );
-                                        $to_be_replaced{sprintf($notes_string,$tag,html_escape($object_ref->{'tag'}->{$tag}),html_escape($replace_by))}->{$member->{'ref'}} = $member->{'type'};
+                                        $to_be_replaced{sprintf($notes_string,$tag,handle_foreign($object_ref->{'tag'}->{$tag}),handle_foreign($replace_by))}->{$member->{'ref'}} = $member->{'type'};
                                     }
                                 }
                                 if ( exists($object_ref->{'tag'}->{'ref'}) ) {
@@ -5583,9 +5583,9 @@ sub CheckRouteRefOnStops {
 
                                     foreach my $sub_ref ( split( $ref_separator, $ref ) ) {
                                         if ( $temp_stop_ref =~ m/;\Q$sub_ref\E;/ ) {
-                                            $hint = sprintf( gettext( "(consider creating a 'route_ref' = '%s' tag for the stop)" ), html_escape($sub_ref) );
+                                            $hint = sprintf( gettext( "(consider creating a 'route_ref' = '%s' tag for the stop)" ), handle_foreign($sub_ref) );
                                             $notes_string = gettext( "Route: 'ref' = '%s' of stop should represent the reference of the stop, but includes the 'ref' = '%s' of this route %s" );
-                                            $to_be_replaced{sprintf($notes_string,html_escape($object_ref->{'tag'}->{'ref'}),html_escape($sub_ref),$hint)}->{$member->{'ref'}} = $member->{'type'};
+                                            $to_be_replaced{sprintf($notes_string,handle_foreign($object_ref->{'tag'}->{'ref'}),handle_foreign($sub_ref),$hint)}->{$member->{'ref'}} = $member->{'type'};
                                         }
                                     }
                                 }
@@ -6286,12 +6286,12 @@ sub printHintNetworks {
         push( @HTML_main, "<ul>\n" );
         if ( $network_long_regex ) {
             foreach my $nw ( split( '\|', $network_long_regex ) ) {
-                push( @HTML_main, sprintf( "    <li>%s</li>\n", html_escape($nw) ) );
+                push( @HTML_main, sprintf( "    <li>%s</li>\n", handle_foreign($nw) ) );
             }
         }
         if ( $network_short_regex ) {
             foreach my $nw ( split( '\|', $network_short_regex ) ) {
-                push( @HTML_main, sprintf( "    <li>%s</li>\n", html_escape($nw) ) );
+                push( @HTML_main, sprintf( "    <li>%s</li>\n", handle_foreign($nw) ) );
             }
         }
         if ( !$strict_network ) {
@@ -6308,7 +6308,7 @@ sub printHintNetworks {
         push( @HTML_main, "<ul>\n" );
         if ( $operator_regex ) {
             foreach my $nw ( split( '\|', $operator_regex ) ) {
-                push( @HTML_main, sprintf( "    <li>%s</li>\n", html_escape($nw) ) );
+                push( @HTML_main, sprintf( "    <li>%s</li>\n", handle_foreign($nw) ) );
             }
         }
         if ( !$strict_operator ) {
@@ -6710,9 +6710,9 @@ sub printTableHeader {
         } else {
             foreach $element ( @columns ) {
                 if ( $js_sort_hash{$element} ) {
-                    push( @HTML_main, sprintf( "<th class=\"%s js-sort-%s\">%s%s</th>", $element, $js_sort_hash{$element}, $prefix, ($column_name{$element} ? $column_name{$element} : $element ) ) );
+                    push( @HTML_main, sprintf( "<th class=\"%s js-sort-%s\" dir=\"auto\">%s%s</th>", $element, $js_sort_hash{$element}, $prefix, ($column_name{$element} ? $column_name{$element} : $element ) ) );
                 } else {
-                    push( @HTML_main, sprintf( "<th class=\"%s\">%s%s</th>", $element, $prefix, ($column_name{$element} ? $column_name{$element} : $element ) ) );
+                    push( @HTML_main, sprintf( "<th class=\"%s\" dir=\"auto\">%s%s</th>", $element, $prefix, ($column_name{$element} ? $column_name{$element} : $element ) ) );
                 }
             }
         }
@@ -6773,9 +6773,9 @@ sub printTableSubHeader {
         $csv_text .= sprintf( "%s: %s; ", ( $column_name{'CSV-Comment'}  ? $column_name{'CSV-Comment'}  : 'Comment' ),  wiki2html( $hash{'CSV-Comment'} )  );
         $csv_text =~ s|!([^!]+)!|<span class=\"attention\">$1</span>|g;
     }
-    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'CSV-From'}          ? $column_name{'CSV-From'}          : 'From' ),          html_escape($hash{'CSV-From'})     )      if ( $hash{'CSV-From'}          );
-    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'CSV-To'}            ? $column_name{'CSV-To'}            : 'To' ),            html_escape($hash{'CSV-To'})       )      if ( $hash{'CSV-To'}            );
-    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'CSV-Operator'}      ? $column_name{'CSV-Operator'}      : 'Operator' ),      html_escape($hash{'CSV-Operator'}) )      if ( $hash{'CSV-Operator'}      );
+    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'CSV-From'}          ? $column_name{'CSV-From'}          : 'From' ),          handle_foreign($hash{'CSV-From'})     )      if ( $hash{'CSV-From'}          );
+    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'CSV-To'}            ? $column_name{'CSV-To'}            : 'To' ),            handle_foreign($hash{'CSV-To'})       )      if ( $hash{'CSV-To'}            );
+    $csv_text .= sprintf( "%s: %s; ", ( $column_name{'CSV-Operator'}      ? $column_name{'CSV-Operator'}      : 'Operator' ),      handle_foreign($hash{'CSV-Operator'}) )      if ( $hash{'CSV-Operator'}      );
     if ( $hash{'GTFS-Feed'} && $hash{'GTFS-Route-Id'} ) {
         if ( $hash{'GTFS-Release-Date'} ) {
             printf STDERR "printTableSubHeader(1): \$gtfs_csv_info_from{$hash{'GTFS-Feed'}}{$hash{'GTFS-Release-Date'}} = 1;\n" if ( $debug );
@@ -6810,7 +6810,7 @@ sub printTableSubHeader {
                 $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $hash{'GTFS-Feed'}, '', '', $relation_id, 'GTFS-Route-Id' );
             }
         } elsif ( $hash{'GTFS-Route-Id'} ) {
-            $csv_text .= join( ', ', map { sprintf( "%s: %s; ", ( $column_name{'GTFS-Route-Id'} ? $column_name{'GTFS-Route-Id'} : 'GTFS-Route-Id' ), html_escape($_) ); } split( ';', $hash{'GTFS-Route-Id'} ) );
+            $csv_text .= join( ', ', map { sprintf( "%s: %s; ", ( $column_name{'GTFS-Route-Id'} ? $column_name{'GTFS-Route-Id'} : 'GTFS-Route-Id' ), handle_foreign($_) ); } split( ';', $hash{'GTFS-Route-Id'} ) );
         }
     }
     $csv_text =~ s/; $//;
@@ -6819,7 +6819,7 @@ sub printTableSubHeader {
     $info =~ s/\"/_/g;
 
     if ( $no_of_columns > 1 && $ref_or_list_text ne '' && $ref_text ) {
-        push( @HTML_main, sprintf( "%16s<tr %sdata-info=\"%s\" data-ref=\"%s\" class=\"sketchline\"><td class=\"sketch\">%s</td><td class=\"csvinfo\" colspan=\"%d\">%s</td></tr>\n", ' ', $id_string, $info, html_escape($ref_or_list_text), $ref_text, $no_of_columns-1, $csv_text ) );
+        push( @HTML_main, sprintf( "%16s<tr %sdata-info=\"%s\" data-ref=\"%s\" class=\"sketchline\"><td class=\"sketch\" dir=\"auto\">%s</td><td class=\"csvinfo\" colspan=\"%d\" dir=\"auto\">%s</td></tr>\n", ' ', $id_string, $info, html_escape($ref_or_list_text), $ref_text, $no_of_columns-1, $csv_text ) );
     }
 }
 
@@ -6858,21 +6858,21 @@ sub printTableLine {
     for ( $i = 0; $i < $no_of_columns; $i++ ) {
         $val =  $hash{$columns[$i]} || '';
         if ( $columns[$i] eq "relation" ) {
-            push( @HTML_main, sprintf( "<td class=\"relation\">%s</td>", printRelationTemplate($val) ) );
+            push( @HTML_main, sprintf( "<td class=\"relation\" dir=\"auto\">%s</td>", printRelationTemplate($val) ) );
         } elsif ( $columns[$i] eq "relations"  ){
-            push( @HTML_main, sprintf( "<td class=\"relations\">%s%s</td>", join( ', ', map { printRelationTemplate($_,'ref'); } split( ',', $val ) ), $andmore ) );
+            push( @HTML_main, sprintf( "<td class=\"relations\" dir=\"auto\">%s%s</td>", join( ', ', map { printRelationTemplate($_,'ref'); } split( ',', $val ) ), $andmore ) );
         } elsif ( $columns[$i] eq "issues"  ){
             $val =~ s/__separator__/<br>/g;
-            push( @HTML_main, sprintf( "<td class=\"%s\">%s</td>", $columns[$i], $val ) );
+            push( @HTML_main, sprintf( "<td class=\"%s\" dir=\"auto\">%s</td>", $columns[$i], $val ) );
         } elsif ( $columns[$i] eq "notes"  ){
             $val =~ s/__separator__/<br>/g;
-            push( @HTML_main, sprintf( "<td class=\"%s\">%s</td>", $columns[$i], $val ) );
+            push( @HTML_main, sprintf( "<td class=\"%s\" dir=\"auto\">%s</td>", $columns[$i], $val ) );
         } elsif ( $columns[$i] eq "gtfs_feed"  ) {
-            push( @HTML_main, sprintf( "<td class=\"%s\">%s</td>", $columns[$i], GTFS::PtnaSQLite::getGtfsLinkToRoutes( $hash{'gtfs_feed'}, $hash{'date'} ))  );
+            push( @HTML_main, sprintf( "<td class=\"%s\" dir=\"auto\">%s</td>", $columns[$i], GTFS::PtnaSQLite::getGtfsLinkToRoutes( $hash{'gtfs_feed'}, $hash{'date'} ))  );
         } else {
             $val = html_escape($val);
             $val =~ s/__separator__/<br>/g;
-            push( @HTML_main, sprintf( "<td class=\"%s\">%s</td>", $columns[$i], $val ) );
+            push( @HTML_main, sprintf( "<td class=\"%s foreign\" dir=\"auto\">%s</td>", $columns[$i], $val ) );
         }
     }
     push( @HTML_main, "</tr>\n" );
@@ -6928,7 +6928,7 @@ sub printRelationTemplate {
                     if ( exists($RELATIONS{$rel_id}->{'tag'}->{$tag})  &&
                          defined($RELATIONS{$rel_id}->{'tag'}->{$tag}) &&
                          $RELATIONS{$rel_id}->{'tag'}->{$tag} ne ''        ) {
-                        $info_string .= sprintf( "'%s' ", $RELATIONS{$rel_id}->{'tag'}->{$tag} );
+                        $info_string .= sprintf( "'%s' ", handle_foreign($RELATIONS{$rel_id}->{'tag'}->{$tag}) );
                         last;
                     }
                 }
@@ -6992,7 +6992,7 @@ sub printWayTemplate {
         if ( $tags ) {
             foreach my $tag ( split( ';', $tags ) ) {
                 if ( $WAYS{$val} && $WAYS{$val}->{'tag'} && $WAYS{$val}->{'tag'}->{$tag} ) {
-                    $info_string .= sprintf( "'%s' ", $WAYS{$val}->{'tag'}->{$tag} );
+                    $info_string .= sprintf( "'%s' ", handle_foreign($WAYS{$val}->{'tag'}->{$tag}) );
                     last;
                 }
             }
@@ -7028,7 +7028,7 @@ sub printNodeTemplate {
         if ( $tags ) {
             foreach my $tag ( split( ';', $tags ) ) {
                 if ( $NODES{$val} && $NODES{$val}->{'tag'} && $NODES{$val}->{'tag'}->{$tag} ) {
-                    $info_string = sprintf( "'%s' ", $NODES{$val}->{'tag'}->{$tag} );
+                    $info_string = sprintf( "'%s' ", handle_foreign($NODES{$val}->{'tag'}->{$tag}) );
                     last;
                 }
             }
@@ -7116,7 +7116,7 @@ sub printAddIdLabelToLocalNavigation {
             $outer_span_end   = "&nbsp;</nobr></span>";
             $inner_span_end   = "</span>";
         }
-        $HTML_main[$local_navigation_at_index] .= sprintf( "%s<a href=\"#%s\">%s%s%s</a>%s </br></br>\n", $outer_span_begin, html_escape($id_label), $inner_span_begin, html_escape($visible_string), $inner_span_end, $outer_span_end );
+        $HTML_main[$local_navigation_at_index] .= sprintf( "%s<a href=\"#%s\">%s%s%s</a>%s </br></br>\n", $outer_span_begin, html_escape($id_label), $inner_span_begin, handle_foreign($visible_string), $inner_span_end, $outer_span_end );
     }
 
     return;
@@ -7167,6 +7167,14 @@ sub ctrl_escape {
         $text =~ s/ /<blank>/g;
     }
     return html_escape($text);
+}
+
+
+#############################################################################################
+
+sub handle_foreign {
+    my $text = shift;
+    return '<span class="foreign" dir="auto">'.html_escape($text).'</span>';
 }
 
 
