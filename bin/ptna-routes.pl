@@ -632,9 +632,7 @@ if ( $osm_xml_file ) {
 }
 
 if ( $xml_has_relations == 0 ) {
-    printf STDERR "No relations found in XML file %s - exiting\n", decode('utf8', $osm_xml_file );
-
-    exit 1;
+    printf STDERR "No relations found in XML file %s\n", decode('utf8', $osm_xml_file );
 }
 
 
@@ -1121,7 +1119,7 @@ printInitialHeader( $page_title, $osm_base, $areas  );
 #############################################################################################
 
 printf STDERR "%s Printing positives\n", get_time()       if ( $verbose );
-$number_of_positive_relations= 0;
+$number_of_positive_relations = 0;
 
 if ( scalar( @RouteList ) ) {
 
@@ -1572,19 +1570,22 @@ printf STDERR "%s Printed suspicious: %d out of %d candidates\n", get_time(), $n
 #
 #############################################################################################
 
-printf STDERR "%s 'network' details\n", get_time()       if ( $verbose );
+printf STDERR "%s Printing network details\n", get_time()       if ( $verbose );
 
-printHeader( gettext("Details for 'network'-Values"), 1, 'networkdetails' );
+if ( scalar(keys(%used_networks)) || scalar(keys(%added_networks)) || scalar(keys(%unused_networks)) ) {
 
-if ( $network_long_regex || $network_short_regex ) {
-    printHintNetworks();
+    printHeader( gettext("Details for 'network'-Values"), 1, 'networkdetails' );
+
+    if ( $network_long_regex || $network_short_regex ) {
+        printHintNetworks();
+    }
+
+    printHintUsedNetworks();
+
+    printHintAddedNetworks();
+
+    printHintUnusedNetworks();
 }
-
-printHintUsedNetworks();
-
-printHintAddedNetworks();
-
-printHintUnusedNetworks();
 
 printf STDERR "%s Printed network details\n", get_time()       if ( $verbose );
 
@@ -1595,8 +1596,9 @@ printf STDERR "%s Printed network details\n", get_time()       if ( $verbose );
 #
 #############################################################################################
 
+printf STDERR "%s Printing GTFS details\n", get_time()       if ( $verbose );
+
 if ( scalar(keys(%gtfs_relation_info_from)) || scalar(keys(%gtfs_csv_info_from)) ) {
-    printf STDERR "%s 'GTFS' details\n", get_time()       if ( $verbose );
 
     printHeader( gettext("References to GTFS feeds and releases"), 1, 'gtfsreferences' );
 
@@ -1604,6 +1606,18 @@ if ( scalar(keys(%gtfs_relation_info_from)) || scalar(keys(%gtfs_csv_info_from))
 }
 
 printf STDERR "%s Printed GTFS details\n", get_time()       if ( $verbose );
+
+
+#############################################################################################
+#
+# Did we print anything
+#
+#############################################################################################
+
+
+if ( $xml_has_relations == 0 ) {
+    printText( "No route relations found!");
+}
 
 
 #############################################################################################
@@ -6052,6 +6066,15 @@ sub printPtnaHeader {
 #############################################################################################
 
 sub printFinalFooter {
+
+    if ( $printText_buffer ) {
+        if ( $printText_buffer eq "<p>\n" ) {
+            push( @HTML_main, $printText_buffer . "&nbsp;\n</p>\n" );
+        } else {
+            push( @HTML_main, $printText_buffer . "\n</p>\n" );
+        }
+        $printText_buffer = '';
+    }
 
     push( @HTML_main, "        </div> <!-- analysis -->\n" );
     if ( !$opt_test ) {

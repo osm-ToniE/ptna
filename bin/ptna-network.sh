@@ -427,9 +427,9 @@ then
                         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "File '$OSM_XML_FILE_ABSOLUTE' is quite small: error during download?"
                         sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,0,1,$fsize,0);"
                         cat $OSM_XML_FILE_ABSOLUTE.part.$$
-                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
-                        rm    $OSM_XML_FILE_ABSOLUTE.part.$$
-                        touch $OSM_XML_FILE_ABSOLUTE.part.$$
+                        #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
+                        #rm    $OSM_XML_FILE_ABSOLUTE.part.$$
+                        #touch $OSM_XML_FILE_ABSOLUTE.part.$$
                     fi
                 else
                     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Failure for wget for '$PREFIX'"
