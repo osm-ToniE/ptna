@@ -17,7 +17,7 @@ then
     export PATH="$PTNA_BIN:$HOME/bin:$PATH"
 fi
 
-# we can we find config files for osmium to split the planet file into pieces
+# where can we find config files for osmium to split the planet file into pieces
 
 PTNA_NETWORKS_LOC="${PTNA_NETWORKS_LOC:-/osm/ptna/ptna-networks}"
 

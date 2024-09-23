@@ -1,10 +1,10 @@
 #!/bin/bash
 
 #
-# Public Transport Network Analysis via cronjob
+# Public Transport Network Analysis for a timezone
 #
 
-# we can we find all the executables of PTNA
+# where can we find all the executables of PTNA
 
 export PTNA_BIN="$HOME/ptna/bin"
 
