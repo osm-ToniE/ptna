@@ -4875,6 +4875,12 @@ sub noAccessOnWay {
             #
             printf STDERR "noAccessOnWay() : unclear access for all psv for way %d\n", $way_id       if ( $debug );
             return sprintf( "'psv:conditional'='%s'", $way_tag_ref->{'psv:conditional'} );
+        } elsif (  $way_tag_ref->{'busway'} || $way_tag_ref->{'busway:both'} || $way_tag_ref->{'busway:right'} || $way_tag_ref->{'busway:left'} ) {
+            #
+            # fine as this implies 'psv' = 'designated' (or 'bus' = 'designated')
+            #
+            printf STDERR "noAccessOnWay() : access for all psv for busway %d\n", $way_id       if ( $debug );
+            return '';
         } elsif ( $access_type && $way_tag_ref->{$access_type} ) {
             if ( $way_tag_ref->{$access_type} eq 'yes'         ||
                  $way_tag_ref->{$access_type} eq 'destination' ||
