@@ -531,7 +531,7 @@ then
                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Downloading '$ROUTES_FILE' failed"
             fi
         else
-            location=""$SETTINGS_DIR/$ROUTES_FILE""
+            location="$SETTINGS_DIR/$ROUTES_FILE"
             if [ -f "$SETTINGS_DIR/$ROUTES_FILE" ]
             then
                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'$ROUTES_FILE' provided by GitHub, copy to $WORK_LOC"
@@ -550,6 +550,7 @@ then
             fi
         fi
         stop=$(date --utc "+%s")
+        ROUTES_RET="$ret"
         sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO routes (id,start,stop,ret,modified,location,size) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$ret,$modified,'$location',$ROUTES_SIZE);"
     else
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Work dir $WORK_LOC does not exist/could not be created"
@@ -729,6 +730,7 @@ then
         echo "ROUTES_SIZE=$ROUTES_SIZE"                                     >> $WORK_LOC/$DETAILS_FILE
         echo "ROUTES_TIMESTAMP_UTC=$ROUTES_TIMESTAMP_UTC"                   >> $WORK_LOC/$DETAILS_FILE
         echo "ROUTES_TIMESTAMP_LOC=$ROUTES_TIMESTAMP_LOC"                   >> $WORK_LOC/$DETAILS_FILE
+        echo "ROUTES_RET=$ROUTES_RET"                                       >> $WORK_LOC/$DETAILS_FILE
         echo "TZ=${PTNA_TIMEZONE}"                                          >> $WORK_LOC/$DETAILS_FILE
         echo "TZSHORT=$(TZ=${PTNA_TIMEZONE:-Europe/Berlin} date '+%Z')"     >> $WORK_LOC/$DETAILS_FILE
         echo "UTC=UTC$(TZ=${PTNA_TIMEZONE:-Europe/Berlin} date '+%:::z')"   >> $WORK_LOC/$DETAILS_FILE
