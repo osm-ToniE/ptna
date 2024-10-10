@@ -4707,11 +4707,13 @@ sub isOneway {
         if ( $vehicle_type ) {
             ; # todo
         } else {
-            if ( ($WAYS{$way_id}->{'tag'}->{'oneway:bus'} && $WAYS{$way_id}->{'tag'}->{'oneway:bus'} eq 'no')            ||
-                 ($WAYS{$way_id}->{'tag'}->{'oneway:psv'} && $WAYS{$way_id}->{'tag'}->{'oneway:psv'} eq 'no')            ||
-                 ($WAYS{$way_id}->{'tag'}->{'busway'}     && $WAYS{$way_id}->{'tag'}->{'busway'}     eq 'opposite_lane')    ) {
+            if ( ($WAYS{$way_id}->{'tag'}->{'oneway:bus'}   && $WAYS{$way_id}->{'tag'}->{'oneway:bus'}   eq 'no')            ||
+                 ($WAYS{$way_id}->{'tag'}->{'oneway:psv'}   && $WAYS{$way_id}->{'tag'}->{'oneway:psv'}   eq 'no')            ||
+                 ($WAYS{$way_id}->{'tag'}->{'busway'}       && $WAYS{$way_id}->{'tag'}->{'busway'}       eq 'opposite_lane') ||
+                 ($WAYS{$way_id}->{'tag'}->{'busway:left'}  && $WAYS{$way_id}->{'tag'}->{'busway:left'}  eq 'opposite_lane') ||
+                 ($WAYS{$way_id}->{'tag'}->{'busway:right'} && $WAYS{$way_id}->{'tag'}->{'busway:right'} eq 'opposite_lane')    ) {
                 # bus may enter the road in either direction, return 0: don't care about entry point
-                printf STDERR "isOneway() : no for bus/psv for Way %d\n", $way_id       if ( $debug );
+                printf STDERR "isOneway() : no for bus/psv/busway*=opposite_lane for Way %d\n", $way_id       if ( $debug );
                 return 0;
             } elsif ( $WAYS{$way_id}->{'tag'}->{'oneway'} && $WAYS{$way_id}->{'tag'}->{'oneway'} eq 'yes' ) {
                 $entry_node_id = $WAYS{$way_id}->{'first_node'};
