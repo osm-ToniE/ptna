@@ -3096,27 +3096,29 @@ sub analyze_ptv2_route_relation {
         #
         my $first_way_id    = $relation_route_highways[0];
         my $second_way_id   = $relation_route_highways[1];
-        my $entry_node_id   = undef;
-        my $node_id         = undef;
+        my $entry_node_id1  = undef;
+        my $exit_node_id1   = undef;
+        my $entry_node_id2  = undef;
+        my $exit_node_id2   = undef;
         printf STDERR "analyze_ptv2_route_relation() : at least two ways exist: 1st = %d, 2nd = %s\n", $first_way_id, $second_way_id     if ( $debug );
         if ( !isClosedWay($first_way_id) ) {
             printf STDERR "analyze_ptv2_route_relation() : first way is not a closed way\n"     if ( $debug );
-            if ( ($entry_node_id = isOneway($first_way_id,undef)) ) {
-                printf STDERR "analyze_ptv2_route_relation() : first way is onway with entry_node_id = %d\n", $entry_node_id     if ( $debug );
-                if ( $entry_node_id == $WAYS{$first_way_id}->{'first_node'} ) {
-                    $node_id = $WAYS{$first_way_id}->{'last_node'};
-                    printf STDERR "analyze_ptv2_route_relation() : node_id = %d is 'last_node\n", $node_id     if ( $debug );
+            if ( 0 != ($entry_node_id1 = isOneway($first_way_id,undef)) ) {
+                printf STDERR "analyze_ptv2_route_relation() : first way is onway with entry_node_id1 = %d\n", $entry_node_id1     if ( $debug );
+                if ( $entry_node_id1 == $WAYS{$first_way_id}->{'first_node'} ) {
+                    $exit_node_id1 = $WAYS{$first_way_id}->{'last_node'};
+                    printf STDERR "analyze_ptv2_route_relation() : exit_node_id1 = %d is 'last_node'\n", $exit_node_id1     if ( $debug );
                 } else {
-                    $node_id = $WAYS{$first_way_id}->{'first_node'};
-                    printf STDERR "analyze_ptv2_route_relation() : node_id = %d is 'first_node\n", $node_id     if ( $debug );
+                    $exit_node_id1 = $WAYS{$first_way_id}->{'first_node'};
+                    printf STDERR "analyze_ptv2_route_relation() : exit_node_id1 = %d is 'first_node'\n", $exit_node_id1     if ( $debug );
                 }
-                printf STDERR "analyze_ptv2_route_relation() : node_id is in relations's stop node array\n" if ( isNodeInNodeArray($node_id,@relation_route_stop_positions) && $debug );
-                if ( isNodeInNodeArray($node_id,@relation_route_stop_positions) ) {
+                if ( isNodeInNodeArray($exit_node_id1,@relation_route_stop_positions) ) {
+                    printf STDERR "analyze_ptv2_route_relation() : exit_node_id1 is in relations's stop node array\n" if ( $debug );
                     #
                     # OK, let's check whether this stop-position is not a connecting node to the second way
                     #
-                    if ( $node_id == $WAYS{$second_way_id}->{'first_node'} ||
-                         $node_id == $WAYS{$second_way_id}->{'last_node'}     ) {
+                    if ( $exit_node_id1 == $WAYS{$second_way_id}->{'first_node'} ||
+                         $exit_node_id1 == $WAYS{$second_way_id}->{'last_node'}     ) {
                         #
                         # OK: so it's: ->->->->Sn----Cn------Cn--- which means, the route starts too early (found and reported later on)
                         #
@@ -3128,10 +3130,17 @@ sub analyze_ptv2_route_relation {
                         #
                         $relation_ptr->{'sorted_in_reverse_order'} = 1;
                     }
-                } elsif ( $entry_node_id == $WAYS{$second_way_id}->{'first_node'} ||
-                          $entry_node_id == $WAYS{$second_way_id}->{'last_node'}     ) {
-                    printf STDERR "analyze_ptv2_route_relation() : entering first way (=oneway) in wrong direction %s:", $first_way_id     if ( $debug );
-                    $relation_ptr->{'wrong_direction_oneways'}->{$first_way_id} = 1;
+                } else {
+                    if ( 0 == isOneway($second_way_id,undef) ) {
+                        #
+                        # second way is not a oneway
+                        #
+                        if ( $entry_node_id1 == $WAYS{$second_way_id}->{'first_node'} ||
+                             $entry_node_id1 == $WAYS{$second_way_id}->{'last_node'}     ) {
+                            printf STDERR "analyze_ptv2_route_relation() : entering first way (=oneway) in wrong direction %s:", $first_way_id     if ( $debug );
+                            $relation_ptr->{'wrong_direction_oneways'}->{$first_way_id} = 1;
+                        }
+                    }
                 }
             }
         }
