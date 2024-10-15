@@ -2930,9 +2930,9 @@ sub analyze_route_relation {
             push( @{$relation_ptr->{'__issues__'}}, $issues_string );
         }
         #
-        # PTv2 relation can be editied with "Relatify" (currently supports only 'bus' routes)
+        # PTv2 relation can be editied with "Relatify" (initially supported only 'bus' routes, since 2024-10-* also 'tram')
         #
-        if ( $route_type eq 'bus' ) {
+        if ( $route_type eq 'bus' || $route_type eq 'tram' ) {
             $relation_ptr->{'relatify_relation'} = 1;
         }
 
