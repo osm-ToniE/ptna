@@ -760,28 +760,31 @@ sub _getStartEndDateOfIdenticalTrips {
                     if ( $hash_ref->{'list_service_ids'} ) {
                         $has_list_service_ids  = 1;
                         my $this_list_separator = $list_separator{$name_prefix} eq '|' ? '\\'.$list_separator{$name_prefix} : $list_separator{$name_prefix};
-                        map { $service_ids{$_} = 1; } split( $this_list_separator, $hash_ref->{'list_service_ids'} );
+                        my @array_service_ids = split( $this_list_separator, $hash_ref->{'list_service_ids'} );
 
-                        if ( scalar( keys ( %service_ids ) ) > 990 ) {
-                            printf STDERR "_getStartEndDateOfIdenticalTrips(%s,%s,%s) number of service ids = %d\n", $feed, $release_date, $trip_id, scalar( keys ( %service_ids ) );
-                        } else {
-                            $where_clause = 'service_id=' . join( '', map{ '? OR service_id=' } keys ( %service_ids ) );
-                            $where_clause =~ s/ OR service_id=$//;
+                        if ( scalar( @array_service_ids ) > 990 ) {
+                            printf STDERR "_getStartEndDateOfIdenticalTrips(%s,%s,%s) number of service ids = %d\n", $feed, $release_date, $trip_id, scalar( @array_service_ids );
+                            splice( @array_service_ids, 990 );
+                        }
 
-                            my $sql = sprintf( "SELECT start_date,end_date
-                                                FROM   calendar
-                                                WHERE  %s;", $where_clause );
+                        map { $service_ids{$_} = 1; } @array_service_ids;
 
-                            $sth = $db_handle{$name_prefix}->prepare( $sql );
-                            $sth->execute( keys ( %service_ids ) );
+                        $where_clause = 'service_id=' . join( '', map{ '? OR service_id=' } keys ( %service_ids ) );
+                        $where_clause =~ s/ OR service_id=$//;
 
-                            while ( @row=$sth->fetchrow_array() ) {
-                                if ( $row[0] < $min_start_date ) {
-                                    $min_start_date = $row[0];
-                                }
-                                if ( $row[1] > $max_end_date ) {
-                                    $max_end_date   = $row[1];
-                                }
+                        my $sql = sprintf( "SELECT start_date,end_date
+                                            FROM   calendar
+                                            WHERE  %s;", $where_clause );
+
+                        $sth = $db_handle{$name_prefix}->prepare( $sql );
+                        $sth->execute( keys ( %service_ids ) );
+
+                        while ( @row=$sth->fetchrow_array() ) {
+                            if ( $row[0] < $min_start_date ) {
+                                $min_start_date = $row[0];
+                            }
+                            if ( $row[1] > $max_end_date ) {
+                                $max_end_date   = $row[1];
                             }
                         }
                     }
