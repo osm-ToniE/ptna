@@ -67,7 +67,7 @@ then
     if [ -n "$1" ]
     then
         PTNA_NETWORKS_LOC="$PTNA_NETWORKS_LOC/$1"
-        LOGFILE_SUFFIX="-$1"
+        LOGFILE_SUFFIX="$(echo $1 | sed -e 's/\//-/g')"
     fi
 fi
 
@@ -79,7 +79,7 @@ then
 
         cd $PTNA_WORK_LOC
 
-        LOGFILE=${PTNA_WORK_LOC}/log/ptna-all-networks$LOGFILE_SUFFIX.log
+        LOGFILE=${PTNA_WORK_LOC}/log/ptna-all-networks-$LOGFILE_SUFFIX.log
 
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start Cron Job" > $LOGFILE
 
