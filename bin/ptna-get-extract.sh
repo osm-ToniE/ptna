@@ -6,7 +6,7 @@ TARGET="$3"
 
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Get extract: call wget for '$TARGET' from '$BASEURL/$SOURCE'"
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
-echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df -h /osm)"
 
 # create empty file, so that we can check size even if wget does not change the file at all
 
@@ -18,7 +18,7 @@ wget_ret=$?
 
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "wget retuned $wget_ret"
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
-echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df -h /osm)"
 
 fsize=$(stat -c '%s' "$TARGET.part.$$")
 if [ "$fsize" -gt 0 ]
