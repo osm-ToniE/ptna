@@ -107,14 +107,14 @@ then
         # a == do the analysis (in work area)
         # u == update the result from the work area to the location of the web service
 
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start main analysis" >> $LOGFILE
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df -h /osm)"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start main analysis"           >> $LOGFILE
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')" >> $LOGFILE
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df -h /osm)"                 >> $LOGFILE
 
-        ptna-all-networks-parallel.sh -Legau >> $LOGFILE 2>&1 < /dev/null
+        ptna-all-networks-parallel.sh -Legau                                 >> $LOGFILE 2>&1 < /dev/null
 
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df -h /osm)"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')" >> $LOGFILE
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df -h /osm)"                 >> $LOGFILE
 
         emptyxml=$(find ${PTNA_WORK_LOC} -name '*.xml' -size 0 | wc -l)
 
@@ -177,7 +177,7 @@ then
         then
             # on Mondays, do not delete the downloaded XML data
 
-            ptna-all-networks-parallel.sh -c >> $LOGFILE 2>&1 < /dev/null
+            ptna-all-networks-parallel.sh -c  >> $LOGFILE 2>&1 < /dev/null
         else
             ptna-all-networks-parallel.sh -cC >> $LOGFILE 2>&1 < /dev/null
         fi
