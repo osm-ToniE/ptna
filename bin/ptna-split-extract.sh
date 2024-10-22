@@ -17,6 +17,8 @@ CONFIG="$2"
 if [ -n "$SOURCE" -a -f "$SOURCE" -a -s "$SOURCE" -a -n "$CONFIG" -a -f "$CONFIG" -a -s "$CONFIG" ]
 then
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Split extract: call 'osmium extract' for '$SOURCE' and '$CONFIG'"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
     osmium extract --verbose --strategy=smart --option=types=any --option=complete-partial-relations=1 \
                    --config="$CONFIG" --overwrite --fsync "$SOURCE"
@@ -24,6 +26,8 @@ then
     osmium_ret=$?
 
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
     exit $osmium_ret
 else

@@ -36,8 +36,11 @@ ptna-handle-planet.sh UTC+03 > $PTNA_WORK_LOC/ptna-handle-planet-UTC+03.log 2>&1
 for utc in UTC+03 UTC+02 UTC+01 UTC+00
 do
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-timezone.sh $utc"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
 
     ptna-handle-timezone.sh $utc > $PTNA_WORK_LOC/ptna-handle-timezone-$utc.log 2>&1 < /dev/null
+
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
 done
 
 for pbf in $(find $PTNA_WORK_LOC -name '*.osm.pbf' ! -name "planet.osm.pbf")

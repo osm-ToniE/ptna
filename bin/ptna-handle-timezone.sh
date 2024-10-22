@@ -108,8 +108,13 @@ then
         # u == update the result from the work area to the location of the web service
 
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start main analysis" >> $LOGFILE
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
         ptna-all-networks-parallel.sh -Legau >> $LOGFILE 2>&1 < /dev/null
+
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
         emptyxml=$(find ${PTNA_WORK_LOC} -name '*.xml' -size 0 | wc -l)
 

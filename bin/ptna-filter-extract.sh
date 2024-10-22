@@ -13,6 +13,7 @@ then
     rm -f "$TMP1" "$TMP2"
 
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium tags-filter' for '$SOURCE' to filter with standard positive filter list"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
 
     osmium tags-filter -v -F "$INPUTFORMAT" -f "$INPUTFORMAT" -O -o "$TMP1" "$SOURCE" \
            r/type=*route r/type=public_transport,network r/proposed:type r/planned:type r/construction:type r/ruins:type r/demolished:type r/destroyed:type r/abandoned:type r/disused:type r/suspended:type r/razed:type r/removed:type r/was:type \
@@ -24,6 +25,7 @@ then
     osmium_ret=$?
 
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
 
     if [ $osmium_ret -eq 0 -a -f "$TMP1" -a -s "$TMP1" ]
     then
@@ -36,6 +38,7 @@ then
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'osmium replication timestamp' = '$TS'"
 
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium tags-filter' for '$TMP1' to filter with standard negative filter list (output format '$OUTPUTFORMAT')"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
 
             osmium tags-filter -v -F "$INPUTFORMAT" -f "$OUTPUTFORMAT" -O -o "$TMP2" "$TMP1" \
                    --output-header="generator=https://ptna.openstreetmap.de osmosis_replication_timestamp=$TS" \
@@ -51,6 +54,7 @@ then
         else
 
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium tags-filter' for '$TMP1' to filter with standard negative filter list (output format '$OUTPUTFORMAT')"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
 
             osmium tags-filter -v -F "$INPUTFORMAT" -f "$OUTPUTFORMAT" -O -o "$TMP2" "$TMP1" \
                    -i r/route_master=tracks,railway,bicycle,mtb,hiking,road,foot,walking,inline_skates,canoe,detour,alpine_coaster,fitness_trail,horse,waterway,motorboat,boat,worship,roller_coaster,nordic_walking,pipeline,piste,power,running,ski,snowmobile,cycling,historic,motorcycle,riding,junction \
@@ -64,6 +68,7 @@ then
         fi
 
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
 
         if [ $osmium_ret -eq 0 ]
         then
