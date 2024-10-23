@@ -87,7 +87,8 @@ then
         then
             # for timezone UTC+01 and if running in the nighe at 2 AM
             # run jobs in parallel using also a more powerful overpass-api server
-            export PTNA_OVERPASS_API_SERVER="overpass.kumi.systems"
+            # no longer use "overpass.kumi.systems" they are not up-to-date
+            export PTNA_OVERPASS_API_SERVER=""
          else
             # for other timezones and other time it is OK to run sequentially and using standard overpass-api server
             export PTNA_OVERPASS_API_SERVER=""
