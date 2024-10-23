@@ -109,12 +109,12 @@ then
 
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start main analysis"           >> $LOGFILE
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')" >> $LOGFILE
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df -h | grep 'osm')"                 >> $LOGFILE
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"            >> $LOGFILE
 
         ptna-all-networks-parallel.sh -Legau                                 >> $LOGFILE 2>&1 < /dev/null
 
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')" >> $LOGFILE
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df -h | grep 'osm')"                 >> $LOGFILE
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"            >> $LOGFILE
 
         emptyxml=$(find ${PTNA_WORK_LOC} -name '*.xml' -size 0 | wc -l)
 

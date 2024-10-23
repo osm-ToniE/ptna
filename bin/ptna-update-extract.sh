@@ -16,7 +16,7 @@ then
     then
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'pyosmium-up-to-date' for '$SOURCE'"
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df -h | grep 'osm')"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
         pyosmium-up-to-date -v "$SOURCE"
 
@@ -24,7 +24,7 @@ then
 
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "pyosmium returned $py_ret"
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df -h | grep 'osm')"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
         if [ $py_ret -eq 0 ]
         then
