@@ -51,3 +51,6 @@ do
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "remove '$pbf', we don't need that any longer"
     rm -f "$pbf"
 done
+
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
