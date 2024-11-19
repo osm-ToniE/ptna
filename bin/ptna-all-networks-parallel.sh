@@ -27,15 +27,6 @@ fi
 
 cd $PTNA_NETWORKS_LOC
 
-if [ $(echo $* | fgrep -c L) -gt 0 ]
-then
-    # overwrite existing logfile, deleting the old information
-    find . -name settings.sh | \
-    sort                     | \
-    xargs -$XARG -I@ bash -c 'D=$(dirname @) && cd $D && echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(basename $PWD) - options: '$*' && ptna-network.sh '$*' > $PTNA_WORK_LOC/log/$(basename $PWD).log 2>&1'
-else
-    # append log info to existing logfile
-    find . -name settings.sh | \
-    sort                     | \
-    xargs -$XARG -I@ bash -c 'D=$(dirname @) && cd $D && echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(basename $PWD) - options: '$*' && ptna-network.sh '$*' >> $PTNA_WORK_LOC/log/$(basename $PWD).log 2>&1'
-fi
+find . -name settings.sh | \
+sort                     | \
+xargs -$XARG -I@ bash -c 'D=$(dirname @) && cd $D && echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(basename $PWD) - options: '$*' && ptna-network.sh '$*''
