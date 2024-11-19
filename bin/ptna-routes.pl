@@ -3001,6 +3001,16 @@ sub analyze_route_relation {
     }
 
     #
+    # check whether 'gtfs:agency_name' fits to 'gtfs_agancy_id'
+    # check whether 'gtfs:route_id' belongs to 'gtfs:agency_id'
+    # check whether 'gtfs:trip_id'/'gtfs:trip_id:sample' belongs to 'gtfs:route_id'
+    # check whether 'gtfs:shape_id' belongs to 'gtfs:trip_id'/'gtfs:trip_id:sample'
+    #
+    if ( $check_gtfs ) {
+        ;
+    }
+
+    #
     # relation shall be shown on PTNA's special map
     #
     $relation_ptr->{'show_relation'} = 1;
