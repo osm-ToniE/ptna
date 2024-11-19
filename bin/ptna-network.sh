@@ -7,8 +7,6 @@
 PTNA_NETWORK_CALL_TIME=$(date --utc "+%s")
 PTNA_NETWORK_OPTIONS="$@"
 
-echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start: ptna-network.sh $PTNA_NETWORK_OPTIONS"
-
 if [ -z "$PTNA_TARGET_LOC"     -o \
      -z "$PTNA_RESULTS_LOC"    -o \
      -z "$PTNA_NETWORKS_LOC"   -o \
@@ -27,32 +25,33 @@ fi
 SETTINGS_DIR="."
 
 
-TEMP=$(getopt -o acCefgGhLmoOpPuwWS: --long analyze,clean-created,clean-downloaded,use-extracts,get-routes,get-talk,force-download,help,log-delete,modiify-routes-data,overpass-query,overpass-query-on-zero-xml,push-routes,push-talk,update-result,watch-routes,watch-talk,settings-dir: -n 'ptna-network.sh' -- "$@")
+TEMP=$(getopt -o acCefgGhlLmoOpPuwWS: --long analyze,clean-created,clean-downloaded,use-extracts,get-routes,get-talk,force-download,help,logging,log-delete,modiify-routes-data,overpass-query,overpass-query-on-zero-xml,push-routes,push-talk,update-result,watch-routes,watch-talk,settings-dir: -n 'ptna-network.sh' -- "$@")
 
-if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 2 ; fi
+if [ $? != 0 ] ; then echo "Terminating..." ; exit 2 ; fi
 
 eval set -- "$TEMP"
 
 while true ; do
     case "$1" in
-        -a|--analyze)                       analyze=true                ; shift ;;
-        -c|--clean-created)                 cleancreated=true           ; shift ;;
-        -C|--clean-downloaded)              cleandownloaded=true        ; shift ;;
+        -a|--analyze)                       analyze=true                    ; shift ;;
+        -c|--clean-created)                 cleancreated=true               ; shift ;;
+        -C|--clean-downloaded)              cleandownloaded=true            ; shift ;;
         -e|--use-extracts)                  use_extracts=true ; overpassquery=false ; overpassqueryonzeroxml=false ; shift ;;
-        -f|--force-download)                forcedownload=true          ; shift ;;
-        -g|--get-routes)                    getroutes=true              ; shift ;;
-        -G|--get-talk)                      gettalk=true                ; shift ;;
-        -h|--help)                          help=true                   ; shift ;;
-        -L|--log-delete)                    deletelog=true              ; shift ;;
-        -m|--modify-routes-data)            modify=true                 ; shift ;;
+        -f|--force-download)                forcedownload=true              ; shift ;;
+        -g|--get-routes)                    getroutes=true                  ; shift ;;
+        -G|--get-talk)                      gettalk=true                    ; shift ;;
+        -h|--help)                          help=true                       ; shift ;;
+        -l|--logging)                       logging=true                    ; shift ;;
+        -L|--log-delete)                    deletelog=true ; logging=true   ; shift ;;
+        -m|--modify-routes-data)            modify=true                     ; shift ;;
         -o|--overpass-query)                overpassquery=true  ; overpassqueryonzeroxml=false ; use_extracts=false ; shift ;;
         -O|--overpass-query-on-zero-xml)    overpassqueryonzeroxml=true  ; overpassquery=false ; use_extracts=false ; shift ;;
-        -p|--push-routes)                   pushroutes=true             ; shift ;;
-        -P|--push-talk)                     pushtalk=true               ; shift ;;
-        -u|--update-result)                 updateresult=true           ; shift ;;
-        -w|--watch-routes)                  watchroutes=true            ; shift ;;
-        -W|--watch-talk)                    watchtalk=true              ; shift ;;
-        -S|--settings_dir)                  SETTINGS_DIR=$2             ; shift 2 ;;
+        -p|--push-routes)                   pushroutes=true                 ; shift ;;
+        -P|--push-talk)                     pushtalk=true                   ; shift ;;
+        -u|--update-result)                 updateresult=true               ; shift ;;
+        -w|--watch-routes)                  watchroutes=true                ; shift ;;
+        -W|--watch-talk)                    watchtalk=true                  ; shift ;;
+        -S|--settings_dir)                  SETTINGS_DIR=$2                 ; shift 2 ;;
         --) shift ; break ;;
         *) echo "Internal error!" ; exit 3 ;;
     esac
@@ -101,6 +100,8 @@ COUNTRY_DIR="${PREFIX%%-*}"
 
 WORK_LOC="$PTNA_WORK_LOC/$SUB_DIR"
 
+EXECUTION_MUTEX="$WORK_LOC/$PREFIX-Mutex.lock"
+
 ROUTES_FILE="$PREFIX-Routes.txt"
 SETTINGS_FILE="settings.sh"
 TALK_FILE="$PREFIX-Talk.wiki"
@@ -130,41 +131,82 @@ if [ ! -d "$WORK_LOC" ]
 then
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Creating directory $WORK_LOC"
     mkdir -p $WORK_LOC
+
+    if [ ! -d "$WORK_LOC" ]
+    then
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Creating directory $WORK_LOC failed, terminating"
+        exit 6
+    fi
+
 fi
 
-if [ -d "$WORK_LOC" ]
+#
+# critical sections start here
+# protect all work now with a MUTEX (realized by mkdir directory)
+#
+
+mkdir $EXECUTION_MUTEX 2> /dev/null
+if [ $? -ne 0 ]
 then
-   echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Init Statistics DB $WORK_LOC/$STATISTICS_DB"
-
-    ptna_columns="id INTEGER PRIMARY KEY AUTOINCREMENT, start INTEGER DEFAULT 0, stop INTEGER DEFAULT 0, options TEXT DEFAULT ''"
-    sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS ptna ($ptna_columns);"
-
-    download_columns="id INTEGER PRIMARY KEY, start INTEGER DEFAULT 0, stop INTEGER DEFAULT 0, wget_ret INTEGER DEFAULT 0, success INTEGER DEFAULT 0, attempt INTEGER DEFAULT 1, size INTEGER DEFAULT 0, osm_data INTEGER DEFAULT 0"
-    sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS download ($download_columns);"
-    sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS retry_download ($download_columns);"
-
-    routes_columns="id INTEGER PRIMARY KEY, start INTEGER DEFAULT 0, stop INTEGER DEFAULT 0, ret INTEGER DEFAULT 0, modified INTEGER DEFAULT 0, location TEXT DEFAULT '', size INTEGER DEFAULT 0"
-    sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS routes ($routes_columns);"
-
-    analysis_columns="id INTEGER PRIMARY KEY, start INTEGER DEFAULT 0, stop INTEGER DEFAULT 0, size INTEGER DEFAULT 0"
-    sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS analysis ($analysis_columns);"
-
-    updateresult_columns="id INTEGER PRIMARY KEY, start INTEGER DEFAULT 0, stop INTEGER DEFAULT 0, updated INTEGER DEFAULT 0, diff_lines INTEGER DEFAULT 0, html_changes INTEGER DEFAULT 0"
-    sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS updateresult ($updateresult_columns);"
-
-    sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO ptna (start,options) VALUES ($PTNA_NETWORK_CALL_TIME,'$PTNA_NETWORK_OPTIONS');"
-    PTNA_NETWORK_DB_ID=$(sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "SELECT seq FROM sqlite_sequence WHERE name='ptna';")
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Statistic entries with id = $PTNA_NETWORK_DB_ID"
+    LOCKED_AT=$(stat -c "%w" $EXECUTION_MUTEX)
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Execution has been locked by another task using MUTEX $EXECUTION_MUTEX, locked at $LOCKED_AT"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "... terminating"
+    exit 99
 fi
 
 #
-#
+# redirect logging to $PREFIX.log file
 #
 
-if [ "$deletelog" = "true" ]
+if [ "$logging" = "true" ]
 then
-    rm -f $WORK_LOC/$HTML_FILE.log
+    if [ ! -d "$PTNA_WORK_LOC/log" ]
+    then
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Creating directory $PTNA_WORK_LOC/log"
+        mkdir -p $PTNA_WORK_LOC/log
+    fi
+
+    if [ -d "$PTNA_WORK_LOC/log" ]
+    then
+        if [ "$deletelog" = "true" ]
+        then
+            exec 1> $PTNA_WORK_LOC/log/$PREFIX.log 2>&1
+            rm -f $WORK_LOC/$HTML_FILE.log
+        else
+            exec 1>> $PTNA_WORK_LOC/log/$PREFIX.log 2>&1
+        fi
+    else
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Creating directory $PTNA_WORK_LOC/log failed, logging to STDOUT and STDERR"
+    fi
 fi
+
+
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start: ptna-network.sh $PTNA_NETWORK_OPTIONS"
+LOCKED_AT=$(stat -c "%w" $EXECUTION_MUTEX)
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Execution is now locked using MUTEX $EXECUTION_MUTEX, locked at $LOCKED_AT"
+
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Init Statistics DB $WORK_LOC/$STATISTICS_DB"
+
+ptna_columns="id INTEGER PRIMARY KEY AUTOINCREMENT, start INTEGER DEFAULT 0, stop INTEGER DEFAULT 0, options TEXT DEFAULT ''"
+sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS ptna ($ptna_columns);"
+
+download_columns="id INTEGER PRIMARY KEY, start INTEGER DEFAULT 0, stop INTEGER DEFAULT 0, wget_ret INTEGER DEFAULT 0, success INTEGER DEFAULT 0, attempt INTEGER DEFAULT 1, size INTEGER DEFAULT 0, osm_data INTEGER DEFAULT 0"
+sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS download ($download_columns);"
+sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS retry_download ($download_columns);"
+
+routes_columns="id INTEGER PRIMARY KEY, start INTEGER DEFAULT 0, stop INTEGER DEFAULT 0, ret INTEGER DEFAULT 0, modified INTEGER DEFAULT 0, location TEXT DEFAULT '', size INTEGER DEFAULT 0"
+sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS routes ($routes_columns);"
+
+analysis_columns="id INTEGER PRIMARY KEY, start INTEGER DEFAULT 0, stop INTEGER DEFAULT 0, size INTEGER DEFAULT 0"
+sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS analysis ($analysis_columns);"
+
+updateresult_columns="id INTEGER PRIMARY KEY, start INTEGER DEFAULT 0, stop INTEGER DEFAULT 0, updated INTEGER DEFAULT 0, diff_lines INTEGER DEFAULT 0, html_changes INTEGER DEFAULT 0"
+sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "CREATE TABLE IF NOT EXISTS updateresult ($updateresult_columns);"
+
+sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO ptna (start,options) VALUES ($PTNA_NETWORK_CALL_TIME,'$PTNA_NETWORK_OPTIONS');"
+PTNA_NETWORK_DB_ID=$(sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "SELECT seq FROM sqlite_sequence WHERE name='ptna';")
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Statistic entries with id = $PTNA_NETWORK_DB_ID"
+
 
 #
 #
@@ -321,6 +363,12 @@ then
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "File '$OSM_XML_FILE_ABSOLUTE' exists and is older than '$WORK_LOC/$HTML_FILE', no further analysis required, terminating"
             PTNA_NETWORK_STOP_TIME=$(date --utc "+%s")
             sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "UPDATE ptna SET stop=$(date --utc "+%s") WHERE id=$PTNA_NETWORK_DB_ID;"
+            if [ -d "$EXECUTION_MUTEX" ]
+            then
+                LOCKED_AT=$(stat -c "%w" $EXECUTION_MUTEX)
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Release execution MUTEX $EXECUTION_MUTEX, has been locked at $LOCKED_AT"
+                rmdir $EXECUTION_MUTEX
+            fi
             exit 0
         fi
     else
@@ -974,4 +1022,11 @@ then
 
 else
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Work dir $WORK_LOC does not exist/could not be created"
+fi
+
+if [ -d "$EXECUTION_MUTEX" ]
+then
+    LOCKED_AT=$(stat -c "%w" $EXECUTION_MUTEX)
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Release MUTEX $EXECUTION_MUTEX, has been locked at $LOCKED_AT"
+    rmdir $EXECUTION_MUTEX
 fi
