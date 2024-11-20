@@ -88,7 +88,7 @@ then
 
         if [ "$1" = "UTC+01" -a "$(date '+%H')" = "02" ]
         then
-            # for timezone UTC+01 and if running in the nighe at 2 AM
+            # for timezone UTC+01 and if running in the night at 2 AM
             # run jobs in parallel using also a more powerful overpass-api server
             # no longer use "overpass.kumi.systems" they are not up-to-date
             export PTNA_OVERPASS_API_SERVER=""
@@ -97,14 +97,15 @@ then
             export PTNA_OVERPASS_API_SERVER=""
         fi
 
+        # L == delete old 'network' specific log files (do that here, to keep log files as long as possible)
         # c == clean the work area
         # C == clean the XML file (do that here, some 'network' will reuse XML files, so 'C' togehter with 'o' spoils that)
 
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Clean work area and XML files" >> $LOGFILE
 
-        ptna-all-networks-parallel.sh -cC >> $LOGFILE 2>&1 < /dev/null
+        ptna-all-networks-parallel.sh -LcC >> $LOGFILE 2>&1 < /dev/null
 
-        # L == delete all old 'network' specific log files (do that here, to keep log files as long as possible)
+        # l == log (append) to 'network' specific logfile
         #   e == use planet extracts instead of overpass api query (if not configured or it failed, there's a fall-back to 'o')
         #   o == do the overpass api query and download the data (to work area)
         # g == get the OSM-Wiki data for the routes
@@ -115,7 +116,7 @@ then
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')" >> $LOGFILE
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"            >> $LOGFILE
 
-        ptna-all-networks-parallel.sh -Legau                                 >> $LOGFILE 2>&1 < /dev/null
+        ptna-all-networks-parallel.sh -legau                                 >> $LOGFILE 2>&1 < /dev/null
 
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')" >> $LOGFILE
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"            >> $LOGFILE
@@ -132,13 +133,14 @@ then
 
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start catch-up with selected overpass api server '$PTNA_OVERPASS_API_SERVER'" >> $LOGFILE
 
+            # l == log (append) to 'network' specific logfile
             # O == do the overpassapi query only if the downloaded XML data is empty, otherwise skip the rest
             #      g == get the OSM-Wiki data for the routes
             #      a == do the analysis (in work area)
             #      u == update the result from the work area to the location of the web service
 
             # run this again using the selected overpass-api server
-            ptna-all-networks-parallel.sh -Ogau >> $LOGFILE 2>&1 < /dev/null
+            ptna-all-networks-parallel.sh -lOgau >> $LOGFILE 2>&1 < /dev/null
         fi
 
         if [ -n "$PTNA_OVERPASS_API_SERVER" ]
@@ -161,17 +163,19 @@ then
 
                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start catch-up with standard overpass api server" >> $LOGFILE
 
+                # l == log (append) to 'network' specific logfile
                 # O == do the overpassapi query only if the downloaded XML data is empty, otherwise skip the rest
                 #      g == get the OSM-Wiki data for the routes
                 #      a == do the analysis (in work area)
                 #      u == update the result from the work area to the location of the web service
 
                 # run this again using the standard overpass-api server
-                ptna-all-networks-parallel.sh -Ogau >> $LOGFILE 2>&1 < /dev/null
+                ptna-all-networks-parallel.sh -lOgau >> $LOGFILE 2>&1 < /dev/null
             # fi
         fi
 
 
+        # l == log (append) to 'network' specific logfile
         # c == clean the work area
         # C == clean the XML file
 
@@ -181,9 +185,9 @@ then
         then
             # on Mondays, do not delete the downloaded XML data
 
-            ptna-all-networks-parallel.sh -c  >> $LOGFILE 2>&1 < /dev/null
+            ptna-all-networks-parallel.sh -lc  >> $LOGFILE 2>&1 < /dev/null
         else
-            ptna-all-networks-parallel.sh -cC >> $LOGFILE 2>&1 < /dev/null
+            ptna-all-networks-parallel.sh -lcC >> $LOGFILE 2>&1 < /dev/null
         fi
 
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"    >> $LOGFILE
