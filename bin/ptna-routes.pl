@@ -6060,7 +6060,9 @@ sub printInitialHeader {
     push( @HTML_main, sprintf( "%8s<p>\n",  ' ' ) );
     push( @HTML_main, sprintf( "%12s%s\n",  ' ', gettext("An explanation of the error texts can be found in the documentation at '<a href='/en/index.php#messages'>Messages</a>'.") ) );
     push( @HTML_main, sprintf( "%8s</p>\n", ' ' ) );
-
+    if ( !$opt_test ) {
+        push( @HTML_main, sprintf( "%s:\n<a target=\"_blank\" href=\"/results/queue.php\" title=\"%s\"><button class=\"button-create\" type=\"button\">%s</button></a>\n", gettext("New"), gettext("Request start of new analysis"), gettext("Request start of new analysis") ) );
+    }
 }
 
 
