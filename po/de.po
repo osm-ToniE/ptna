@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2024-07-23 15:52+0200\n"
+"POT-Creation-Date: 2024-11-25 22:55+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2024\n"
 "Language-Team: German (https://app.transifex.com/jungle-bus/teams/97874/de/)\n"
@@ -1070,6 +1070,12 @@ msgstr ""
 "Eine Erläuterung der Fehlertexte ist in der Dokumentation unter '<a "
 "href='/de/index.php#messages'>Meldungen</a>' zu finden."
 
+msgid "New"
+msgstr "Neu"
+
+msgid "Request start of new analysis"
+msgstr "Start einer neuen Analyse anfordern"
+
 msgid "Static Analysis for OpenStreetMap"
 msgstr "Statische Auswertungen für OpenStreetMap"
 
@@ -2102,9 +2108,6 @@ msgstr "ist nicht gesetzt"
 msgid "GTFS database not found"
 msgstr "GTFS Datenbank nicht gefunden"
 
-msgid "Compare GTFS route with OSM route_master/route"
-msgstr "Vergleiche GTFS route mit OSM route_master/route"
-
 msgid "is no longer valid (in the past)"
 msgstr "ist nicht mehr gültig (liegt in der Vergangenheit)"
 
@@ -2116,6 +2119,9 @@ msgstr "ist veraltet, passt nur zur Vorgängerversion der GTFS-Daten"
 
 msgid "does not exist"
 msgstr "existiert nicht"
+
+msgid "Compare GTFS route with OSM route_master/route"
+msgstr "Vergleiche GTFS route mit OSM route_master/route"
 
 msgid "Compare GTFS trip with OSM route"
 msgstr "Vergleiche GTFS trip mit OSM route"
