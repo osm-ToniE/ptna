@@ -36,17 +36,14 @@ then
     exit 99
 fi
 
-LOCKED_AT=$(stat -c "%w" $EXECUTION_MUTEX)
-echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Execution is now locked using MUTEX '$EXECUTION_MUTEX', locked at $LOCKED_AT"
+# LOCKED_AT=$(stat -c "%w" $EXECUTION_MUTEX)
+# echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Execution is now locked using MUTEX '$EXECUTION_MUTEX', locked at $LOCKED_AT"
 
 ###############################################################
 #
 # start working
 #
 ###############################################################
-
-echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
-echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
 SQ_OPTIONS="-init /dev/null -noheader -csv"
 
@@ -59,7 +56,7 @@ fi
 
 if [ -f $ANALYSIS_QUEUE ]
 then
-    sqlite3 $SQ_OPTIONS -header $ANALYSIS_QUEUE "SELECT id,network,status,queued,started,stopped,changes FROM queue;"
+    sqlite3 $SQ_OPTIONS -header $ANALYSIS_QUEUE "SELECT id,network,status,queued,started,stopped,changes FROM queue WHERE status='queued' OR status='started';"
 
     started_count=$(sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "SELECT COUNT(*) FROM queue WHERE status='started';")
 
@@ -67,45 +64,53 @@ then
     then
         queue_count=$(sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "SELECT COUNT(*) FROM queue WHERE status='queued';")
 
-        while [ $queue_count -gt 0 ]
-        do
-            id=$(sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "SELECT id FROM queue WHERE status='queued' ORDER BY queued ASC LIMIT 1;")
-            if [ -n "$id" ]
-            then
-                network=$(sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "SELECT network FROM queue WHERE id=$id;")
+        if [ $queue_count -gt 0 ]
+        then
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
-                settings_dir=$(find $PTNA_NETWORKS_LOC -type d -name "$network")
-                if [ -n "$settings_dir" ]
+            while [ $queue_count -gt 0 ]
+            do
+                id=$(sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "SELECT id FROM queue WHERE status='queued' ORDER BY queued ASC LIMIT 1;")
+                if [ -n "$id" ]
                 then
-                    sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='started'      WHERE id=$id;"
-                    sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='outdated'     WHERE network='$network' AND status='stopped';"
-                    sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET started=$(date '+%s') WHERE id=$id;"
+                    network=$(sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "SELECT network FROM queue WHERE id=$id;")
 
-                    cd $settings_dir
-                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start 'ptna-network.sh -LcCogau' for network '$network'"
-                    ptna-network.sh -LcCogau
-                    ret_code=$?
-                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'ptna-network.sh -LcCogau' returned with '$ret_code'"
+                    settings_dir=$(find $PTNA_NETWORKS_LOC -type d -name "$network")
+                    if [ -n "$settings_dir" ]
+                    then
+                        sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='started'      WHERE id=$id;"
+                        sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='outdated'     WHERE network='$network' AND status='stopped';"
+                        sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET started=$(date '+%s') WHERE id=$id;"
 
-                    if [ $ret_code -eq 0 ]
-                    then
-                        sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='stopped'          WHERE id=$id;"
-                    elif [ $ret_code -eq 99 ]
-                    then
-                        sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='locked'           WHERE id=$id;"
+                        cd $settings_dir
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start 'ptna-network.sh -LcCogau' for network '$network'"
+                        ptna-network.sh -LcCogau
+                        ret_code=$?
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'ptna-network.sh -LcCogau' returned with '$ret_code'"
+
+                        if [ $ret_code -eq 0 ]
+                        then
+                            sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='stopped'          WHERE id=$id;"
+                        elif [ $ret_code -eq 99 ]
+                        then
+                            sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='locked'           WHERE id=$id;"
+                        else
+                            sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='failed $ret_code' WHERE id=$id;"
+                        fi
+                        sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET stopped=$(date '+%s') WHERE id=$id;"
                     else
-                        sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='failed $ret_code' WHERE id=$id;"
+                        sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='failed dir'   WHERE id=$id;"
                     fi
-                    sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET stopped=$(date '+%s') WHERE id=$id;"
                 else
-                    sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='failed dir'   WHERE id=$id;"
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "sqlite3 DB '$ANALYSIS_QUEUE' could not get 'id' of task to be started"
+                    break
                 fi
-            else
-                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "sqlite3 DB '$ANALYSIS_QUEUE' could not get 'id' of task to be started"
-                break
-            fi
-            queue_count=$(sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "SELECT COUNT(*) FROM queue WHERE status='queued';")
-        done
+                queue_count=$(sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "SELECT COUNT(*) FROM queue WHERE status='queued';")
+            done
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
+        fi
     else
         started=$(sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "SELECT network FROM queue WHERE status='started';")
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Another task is analyzing 'network' = '$started'"
@@ -114,12 +119,10 @@ else
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "sqlite3 DB '$ANALYSIS_QUEUE' could not be created"
 fi
 
-echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
-echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 if [ -d "$EXECUTION_MUTEX" ]
 then
-    LOCKED_AT=$(stat -c "%w" $EXECUTION_MUTEX)
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Release MUTEX '$EXECUTION_MUTEX', has been locked at '$LOCKED_AT'"
+#    LOCKED_AT=$(stat -c "%w" $EXECUTION_MUTEX)
+#    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Release MUTEX '$EXECUTION_MUTEX', has been locked at '$LOCKED_AT'"
     rmdir $EXECUTION_MUTEX
 fi
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Stop 'ptna-cron-analysis-queue.sh'"
