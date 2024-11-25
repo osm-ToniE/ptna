@@ -36,6 +36,9 @@ then
     exit 99
 fi
 
+LOCKED_AT=$(stat -c "%w" $EXECUTION_MUTEX)
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Execution is now locked using MUTEX '$EXECUTION_MUTEX', locked at $LOCKED_AT"
+
 ###############################################################
 #
 # start working
