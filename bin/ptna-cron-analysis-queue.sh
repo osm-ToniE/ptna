@@ -91,7 +91,16 @@ then
 
                         if [ $ret_code -eq 0 ]
                         then
-                            sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='stopped'          WHERE id=$id;"
+                            sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='stopped' WHERE id=$id;"
+                            details_file=$(find $PTNA_WORK_LOC -type f -name "$network-Analysis-details.txt")
+                            if [ -n "$details_file" ]
+                            then
+                                htmldiff=$(grep "HTML_DIFF" $details_file | sed -e '/s/^.*=//' | egrep '^[0-9]+$')
+                                if [ -n "$htmldiff" ]
+                                then
+                                    sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET changes=$htmldiff WHERE id=$id;"
+                                fi
+                            fi
                         elif [ $ret_code -eq 99 ]
                         then
                             sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='locked'           WHERE id=$id;"
