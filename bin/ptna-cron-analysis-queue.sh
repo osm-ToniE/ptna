@@ -80,7 +80,6 @@ then
                     if [ -n "$settings_dir" ]
                     then
                         sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='started'      WHERE id=$id;"
-                        sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='outdated'     WHERE network='$network' AND status='stopped';"
                         sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET started=$(date '+%s') WHERE id=$id;"
 
                         cd $settings_dir
@@ -91,7 +90,8 @@ then
 
                         if [ $ret_code -eq 0 ]
                         then
-                            sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='stopped' WHERE id=$id;"
+                            sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='outdated' WHERE network='$network' AND status='stopped';"
+                            sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='stopped'  WHERE id=$id;"
                             details_file=$(find $PTNA_WORK_LOC -type f -name "$network-Analysis-details.txt")
                             if [ -n "$details_file" ]
                             then
