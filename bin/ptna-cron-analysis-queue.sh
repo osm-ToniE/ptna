@@ -95,7 +95,7 @@ then
                             details_file=$(find $PTNA_WORK_LOC -type f -name "$network-Analysis-details.txt")
                             if [ -n "$details_file" ]
                             then
-                                htmldiff=$(grep "HTML_DIFF" $details_file | sed -e '/s/^.*=//' | egrep '^[0-9]+$')
+                                htmldiff=$(grep "HTML_DIFF" $details_file | sed -e 's/^.*=//' | egrep '^[0-9]+$')
                                 if [ -n "$htmldiff" ]
                                 then
                                     sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET changes=$htmldiff WHERE id=$id;"
