@@ -573,8 +573,16 @@ then
                 ROUTES_SIZE="$(stat -c '%s' $WORK_LOC/$ROUTES_FILE)"
                 ROUTES_TIMESTAMP_UTC="$(echo $log | fgrep "timestamp =" | sed -e 's/.*timestamp\s*=\s*\(20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]T[0-9][0-9]:[0-9][0-9]:[0-9][0-9]Z\).*/\1/')"
                 ROUTES_TIMESTAMP_LOC="$(date --date "$ROUTES_TIMESTAMP_UTC" '+%Y-%m-%d %H:%M:%S %Z' | sed -e 's/ \([+-][0-9]*\)$/ UTC\1/')"
-                modified="$(date --utc --date "$ROUTES_TIMESTAMP_UTC" '+%s')"
-                echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $WORK_LOC/$ROUTES_FILE)
+                if [ $(grep -c '#REDIRECT *\[\[' $WORK_LOC/$ROUTES_FILE) -eq 0 ]
+                then
+                    modified="$(date --utc --date "$ROUTES_TIMESTAMP_UTC" '+%s')"
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $WORK_LOC/$ROUTES_FILE)
+                else
+                    ROUTES_SIZE=-2
+                    modified=0
+                    ret=99
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'$ROUTES_FILE' includes a '#REDIRECT'"
+                fi
             else
                 ROUTES_SIZE=-1
                 modified=0
