@@ -192,7 +192,7 @@ then
 
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"    >> $LOGFILE
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"               >> $LOGFILE
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Cron Job stopped"                 >> $LOGFILE
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Cron Job finished"                >> $LOGFILE
 
     else
         echo "directory $PTNA_WORK_LOC does not exist ... terminating"

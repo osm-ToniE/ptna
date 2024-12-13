@@ -49,14 +49,14 @@ SQ_OPTIONS="-init /dev/null -noheader -csv"
 
 if [ ! -f "$ANALYSIS_QUEUE" ]
 then
-    sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "CREATE TABLE queue (id INTEGER DEFAULT 1 PRIMARY KEY, network TEXT DEFAULT '', status TEXT DEFAULT '', queued INTEGER DEFAULT 0, started INTEGER DEFAULT 0, stopped INTEGER DEFAULT 0, changes INTEGER DEFAULT 0, ip TEXT DEFAULT '');"
+    sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "CREATE TABLE queue (id INTEGER DEFAULT 1 PRIMARY KEY, network TEXT DEFAULT '', status TEXT DEFAULT '', queued INTEGER DEFAULT 0, started INTEGER DEFAULT 0, finished INTEGER DEFAULT 0, changes INTEGER DEFAULT 0, ip TEXT DEFAULT '');"
     chmod 666 $ANALYSIS_QUEUE
     chmod 777 $(dirname $ANALYSIS_QUEUE)
 fi
 
 if [ -f $ANALYSIS_QUEUE ]
 then
-    sqlite3 $SQ_OPTIONS -header $ANALYSIS_QUEUE "SELECT id,network,status,queued,started,stopped,changes FROM queue WHERE status='queued' OR status='started';"
+    sqlite3 $SQ_OPTIONS -header $ANALYSIS_QUEUE "SELECT id,network,status,queued,started,finished,changes FROM queue WHERE status='queued' OR status='started';"
 
     started_count=$(sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "SELECT COUNT(*) FROM queue WHERE status='started';")
 
@@ -90,8 +90,8 @@ then
 
                         if [ $ret_code -eq 0 ]
                         then
-                            sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='outdated' WHERE network='$network' AND status='stopped';"
-                            sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='stopped'  WHERE id=$id;"
+                            sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='outdated' WHERE network='$network' AND status='finished';"
+                            sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='finished'  WHERE id=$id;"
                             details_file=$(find $PTNA_WORK_LOC -type f -name "$network-Analysis-details.txt")
                             if [ -n "$details_file" ]
                             then
@@ -107,7 +107,7 @@ then
                         else
                             sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='failed $ret_code' WHERE id=$id;"
                         fi
-                        sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET stopped=$(date '+%s') WHERE id=$id;"
+                        sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET finished=$(date '+%s') WHERE id=$id;"
                     else
                         sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='failed dir'   WHERE id=$id;"
                     fi

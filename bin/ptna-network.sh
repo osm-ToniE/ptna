@@ -934,11 +934,11 @@ then
                         sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO updateresult (id,start,stop,updated,diff_lines,html_changes) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,0,$DIFF_LINES,0);"
                     fi
 
-                    # mark all stopped analysis runs in analysis queue for this network as 'outdated'
+                    # mark all finished analysis runs in analysis queue for this network as 'outdated'
 
                     if [ -f $ANALYSIS_QUEUE ]
                     then
-                        sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='outdated' WHERE network='$PREFIX' AND status='stopped';"
+                        sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='outdated' WHERE network='$PREFIX' AND status='finished';"
                     fi
 
                 else
