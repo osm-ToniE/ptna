@@ -224,8 +224,13 @@ then
     fi
     if [ -n "$PTNA_EXTRACT_SOURCE" ]
     then
-        if [ "$(basename $PTNA_EXTRACT_SOURCE)" != "planet.osm.pbf" ]
+        FILENAME="$(basename $PTNA_EXTRACT_SOURCE)"
+        FILEPREFIX="${FILENAME%%.*}
+        if [ "$FILEPREFIX" = "$PREFIX" ]
         then
+            # delete only osm.pbf files which are not shared with other 'network' config settings
+            # e.g. delete dedicated DE-BY-MVV.osm.pbf
+            # e.g. do not delete shared ile-de-france.osm.pbf, used by FR-IDF-ceat and FR-IDF-cif and ...
             rm -f "$WORK_LOC/$PTNA_EXTRACT_SOURCE"
         fi
     fi
@@ -258,9 +263,9 @@ then
 
         if [ -f "$SETTINGS_DIR/osmium-positive-filters.txt" -o -f "$SETTINGS_DIR/osmium-negative-filters.txt"  ]
         then
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Not yet implemented: Call 'ptna-filter-extract.sh -p $SETTINGS_DIR/$PREFIX-positive-filters.txt -n $SETTINGS_DIR/$PREFIX-negative-filters.txt $WORK_LOC/$PTNA_EXTRACT_SOURCE $OSM_XML_FILE_ABSOLUTE'"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Not yet implemented: Call 'ptna-filter-extract.sh -p $SETTINGS_DIR/osmium-positive-filters.txt -n $SETTINGS_DIR/osmium-negative-filters.txt $WORK_LOC/$PTNA_EXTRACT_SOURCE $OSM_XML_FILE_ABSOLUTE'"
 
-            # ptna-filter-extract.sh -p "$SETTINGS_DIR/$PREFIX-positive-filters.txt" -n "$SETTINGS_DIR/$PREFIX-negative-filters.txt" "$WORK_LOC/$PTNA_EXTRACT_SOURCE" "$OSM_XML_FILE_ABSOLUTE"
+            # ptna-filter-extract.sh -p "$SETTINGS_DIR/osmium-positive-filters.txt" -n "$SETTINGS_DIR/osmium-negative-filters.txt" "$WORK_LOC/$PTNA_EXTRACT_SOURCE" "$OSM_XML_FILE_ABSOLUTE"
         else
             INPUTFORMAT="${PTNA_EXTRACT_SOURCE##*.}"
             OUTPUTFORMAT="${OSM_XML_FILE_ABSOLUTE##*.}"
