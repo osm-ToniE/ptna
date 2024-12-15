@@ -225,7 +225,7 @@ then
     if [ -n "$PTNA_EXTRACT_SOURCE" ]
     then
         FILENAME="$(basename $PTNA_EXTRACT_SOURCE)"
-        FILEPREFIX="${FILENAME%%.*}
+        FILEPREFIX="${FILENAME%%.*}"
         if [ "$FILEPREFIX" = "$PREFIX" ]
         then
             # delete only osm.pbf files which are not shared with other 'network' config settings
