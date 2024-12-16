@@ -473,10 +473,10 @@ then
                         if [ $OSM_AGE -gt $MAX_AGE ]
                         then
                             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "OSM ($OSM_BASE) data is quite old : older than 6 hours"
-                            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
-                            sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,0,1,$fsize,$OSM_BASE_SEC);"
-                            rm    $OSM_XML_FILE_ABSOLUTE.part.$$
-                            touch $OSM_XML_FILE_ABSOLUTE.part.$$
+                            #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
+                            sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,1,1,$fsize,$OSM_BASE_SEC);"
+                            #rm    $OSM_XML_FILE_ABSOLUTE.part.$$
+                            #touch $OSM_XML_FILE_ABSOLUTE.part.$$
                         else
                             sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,1,1,$fsize,$OSM_BASE_SEC);"
                         fi
@@ -526,10 +526,10 @@ then
                             if [ $OSM_AGE -gt $MAX_AGE ]
                             then
                                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "OSM ($OSM_BASE) data is quite old : older than 6 hours"
-                                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
-                                sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO retry_download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,0,$DOWNLOAD_TRIES,$fsize,$OSM_BASE_SEC);"
-                                rm    $OSM_XML_FILE_ABSOLUTE.part.$$
-                                touch $OSM_XML_FILE_ABSOLUTE.part.$$
+                                #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Simulating failure for '$OSM_XML_FILE_ABSOLUTE': zero size"
+                                sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO retry_download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,1,$DOWNLOAD_TRIES,$fsize,$OSM_BASE_SEC);"
+                                #rm    $OSM_XML_FILE_ABSOLUTE.part.$$
+                                #touch $OSM_XML_FILE_ABSOLUTE.part.$$
                             else
                                 sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO retry_download (id,start,stop,wget_ret,success,attempt,size,osm_data) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$wget_ret,1,$DOWNLOAD_TRIES,$fsize,$OSM_BASE_SEC);"
                             fi
