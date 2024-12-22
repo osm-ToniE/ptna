@@ -82,9 +82,6 @@ then
         LOGFILE=${PTNA_WORK_LOC}/log/ptna-all-networks-$LOGFILE_SUFFIX.log
 
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start Cron Job"                >  $LOGFILE
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')" >> $LOGFILE
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"            >> $LOGFILE
-
 
         if [ "$1" = "UTC+01" -a "$(date '+%H')" = "02" ]
         then
@@ -100,23 +97,17 @@ then
         # L == delete old 'network' specific log files (do that here, to keep log files as long as possible)
         # c == clean the work area
         # C == clean the XML file (do that here, some 'network' will reuse XML files, so 'C' togehter with 'o' spoils that)
-
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Clean work area and XML files" >> $LOGFILE
-
-        ptna-all-networks-parallel.sh -LcC >> $LOGFILE 2>&1 < /dev/null
-
-        # l == log (append) to 'network' specific logfile
         #   e == use planet extracts instead of overpass api query (if not configured or it failed, there's a fall-back to 'o')
         #   o == do the overpass api query and download the data (to work area)
         # g == get the OSM-Wiki data for the routes
         # a == do the analysis (in work area)
         # u == update the result from the work area to the location of the web service
 
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start main analysis"           >> $LOGFILE
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start analysis"                >> $LOGFILE
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')" >> $LOGFILE
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"            >> $LOGFILE
 
-        ptna-all-networks-parallel.sh -legau                                 >> $LOGFILE 2>&1 < /dev/null
+        ptna-all-networks-parallel.sh -LcCegau                               >> $LOGFILE 2>&1 < /dev/null
 
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')" >> $LOGFILE
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"            >> $LOGFILE
