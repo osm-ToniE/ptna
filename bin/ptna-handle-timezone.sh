@@ -103,14 +103,24 @@ then
         # a == do the analysis (in work area)
         # u == update the result from the work area to the location of the web service
 
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start analysis"                >> $LOGFILE
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')" >> $LOGFILE
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"            >> $LOGFILE
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start clean-up"                       >> $LOGFILE
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"        >> $LOGFILE
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"                   >> $LOGFILE
 
-        ptna-all-networks-parallel.sh -LcCegau                               >> $LOGFILE 2>&1 < /dev/null
+        # option 'C' will delete also downloaded (overpass) and/or extracted (planet) data
 
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')" >> $LOGFILE
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"            >> $LOGFILE
+        ptna-all-networks-parallel.sh -LcC                                          >> $LOGFILE 2>&1 < /dev/null
+
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start extracts and main analysis"     >> $LOGFILE
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"        >> $LOGFILE
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"                   >> $LOGFILE
+
+        # now it is safe to download (o = overpass) or extract (e = planet) data and start analysis
+
+        ptna-all-networks-parallel.sh -legau                                        >> $LOGFILE 2>&1 < /dev/null
+
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"        >> $LOGFILE
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"                   >> $LOGFILE
 
         emptyxml=$(find ${PTNA_WORK_LOC} -name '*.xml' -size 0 | wc -l)
 
