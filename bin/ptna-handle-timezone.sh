@@ -182,9 +182,9 @@ then
 
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start clean-up" >> $LOGFILE
 
-        if [ "$(date '+%u')" = "1" ]    # = Monday
+        if [ "$(date '+%u')" = "7" ]    # = Sunday
         then
-            # on Mondays, do not delete the downloaded XML data
+            # on Sundays, do not delete the downloaded XML data
 
             ptna-all-networks-parallel.sh -lc  >> $LOGFILE 2>&1 < /dev/null
         else
