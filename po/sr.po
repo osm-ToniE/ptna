@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2024-07-23 15:52+0200\n"
+"POT-Creation-Date: 2025-01-05 14:34+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: Branko Kokanovic <branko@kokanovic.org>, 2022\n"
 "Language-Team: Serbian (https://app.transifex.com/jungle-bus/teams/97874/sr/)\n"
@@ -487,8 +487,8 @@ msgstr[2] ""
 msgid "'public_transport:version' is not set to '2'"
 msgstr "’public_transport:version’ није постављен на ’2’"
 
-msgid "Skipping further analysis ..."
-msgstr "Прескачем даље анализе..."
+msgid "Skipping further analysis. PTNA did not download all needed OSM data."
+msgstr ""
 
 msgid "Route without Way(s)"
 msgstr "Рута без путева"
@@ -1035,6 +1035,12 @@ msgid ""
 msgstr ""
 "Објашњење грешака можете видети у документацији на '<a "
 "href='/en/index.php#messages'>Поруке</a>'."
+
+msgid "New"
+msgstr ""
+
+msgid "Request start of new analysis"
+msgstr ""
 
 msgid "Static Analysis for OpenStreetMap"
 msgstr "Статичка анализа за OpenStreetMap"
@@ -1616,9 +1622,8 @@ msgstr "Грешка је повезана са:"
 
 msgid ""
 "Further analysis of this Route relation does not make sense without the data"
-" for ways and nodes."
+" for ways, nodes or relations."
 msgstr ""
-"Даља анализа ове релације руте нема смисла без података за путеве и чворове."
 
 msgid ""
 "Route-Master: There is more than one Route-Master for this line = 'ref' "
@@ -2001,9 +2006,6 @@ msgstr "није постављено"
 msgid "GTFS database not found"
 msgstr "GTFS база није нађена"
 
-msgid "Compare GTFS route with OSM route_master/route"
-msgstr ""
-
 msgid "is no longer valid (in the past)"
 msgstr "није више исправан (у прошлости)"
 
@@ -2015,6 +2017,9 @@ msgstr ""
 
 msgid "does not exist"
 msgstr "не постоји"
+
+msgid "Compare GTFS route with OSM route_master/route"
+msgstr ""
 
 msgid "Compare GTFS trip with OSM route"
 msgstr ""

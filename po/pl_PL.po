@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2024-04-28 13:39+0200\n"
+"POT-Creation-Date: 2025-01-05 14:34+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2023\n"
 "Language-Team: Polish (Poland) (https://app.transifex.com/jungle-bus/teams/97874/pl_PL/)\n"
@@ -461,8 +461,8 @@ msgstr[3] ""
 msgid "'public_transport:version' is not set to '2'"
 msgstr "'public_transport:version' nie jest ustawione na '2'"
 
-msgid "Skipping further analysis ..."
-msgstr "Pomijanie dalszej analizy..."
+msgid "Skipping further analysis. PTNA did not download all needed OSM data."
+msgstr ""
 
 msgid "Route without Way(s)"
 msgstr "Trasa bez lini(i)"
@@ -670,6 +670,22 @@ msgstr ""
 
 #, perl-format
 msgid "PTv2 route: last node of way is not a stop position of this route: %s"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: wrong 'role' = '%s' for first stop"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: wrong 'role' = '%s' for last stop"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: wrong 'role' = '%s' for first platform"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: wrong 'role' = '%s' for last platform"
 msgstr ""
 
 msgid "wrong value"
@@ -901,6 +917,9 @@ msgstr ""
 msgid "(consider creating a 'route_ref' = '%s' tag for the stop)"
 msgstr ""
 
+msgid "Error in input data: insufficient data for relations"
+msgstr ""
+
 msgid "Error in input data: insufficient data for ways"
 msgstr ""
 
@@ -922,6 +941,12 @@ msgid ""
 msgstr ""
 "Wyjaśnienie tekstów błędów można znaleźć w dokumentacji na stronie '<a "
 "href=\"/pl_PL/index.php#messages\">wiadomości</a>'."
+
+msgid "New"
+msgstr ""
+
+msgid "Request start of new analysis"
+msgstr ""
 
 msgid "Static Analysis for OpenStreetMap"
 msgstr "Statyczna analiza dla OpenStreetMap"
@@ -1260,7 +1285,7 @@ msgstr ""
 
 msgid ""
 "This Route relation has been included into the input data as a side-effect, "
-"the member ways and member nodes of this Route have not been included."
+"the members (relations, ways, nodes) of this Route have not been included."
 msgstr ""
 
 #, perl-format
@@ -1421,7 +1446,7 @@ msgstr "Ten błąd jest związany z:"
 
 msgid ""
 "Further analysis of this Route relation does not make sense without the data"
-" for ways and nodes."
+" for ways, nodes or relations."
 msgstr ""
 
 msgid ""
@@ -1743,9 +1768,6 @@ msgstr "nie jest ustawione"
 msgid "GTFS database not found"
 msgstr "baza danych GTFS nie znaleziona"
 
-msgid "Compare GTFS route with OSM route_master/route"
-msgstr ""
-
 msgid "is no longer valid (in the past)"
 msgstr "nie jest już ważne (z przeszłości)"
 
@@ -1758,8 +1780,14 @@ msgstr ""
 msgid "does not exist"
 msgstr "nie istnieje"
 
+msgid "Compare GTFS route with OSM route_master/route"
+msgstr ""
+
 msgid "Compare GTFS trip with OSM route"
 msgstr ""
 
 msgid "does not provide any 'shape' data"
+msgstr ""
+
+msgid "internal error"
 msgstr ""

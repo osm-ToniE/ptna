@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2024-07-23 15:52+0200\n"
+"POT-Creation-Date: 2025-01-05 14:34+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: Carlos Sánchez López <erielkhan@gmail.com>, 2024\n"
 "Language-Team: Catalan (https://app.transifex.com/jungle-bus/teams/97874/ca/)\n"
@@ -504,8 +504,8 @@ msgstr[1] "La Ruta Mestra té %d membres amb el 'role' definit"
 msgid "'public_transport:version' is not set to '2'"
 msgstr "'public_transport:version' no s'ha definit com a '2'"
 
-msgid "Skipping further analysis ..."
-msgstr "Omet anàlisis més exhaustiu..."
+msgid "Skipping further analysis. PTNA did not download all needed OSM data."
+msgstr ""
 
 msgid "Route without Way(s)"
 msgstr "Ruta amb vies"
@@ -1039,6 +1039,12 @@ msgid ""
 msgstr ""
 "Una explicació dels texts d'error es pot trobar a la documentació a '<a "
 "href='/en/index.php#messages'>Missatges</a>'."
+
+msgid "New"
+msgstr ""
+
+msgid "Request start of new analysis"
+msgstr ""
 
 msgid "Static Analysis for OpenStreetMap"
 msgstr "Anàlisi Estàtic per a OpenStreetMap"
@@ -1651,10 +1657,8 @@ msgstr "Aquest error està relacionat amb:"
 
 msgid ""
 "Further analysis of this Route relation does not make sense without the data"
-" for ways and nodes."
+" for ways, nodes or relations."
 msgstr ""
-"Un anàlisi més exhaustiu d'aquesta relació de Ruta no té sentit sense les "
-"dades per vies i nodes."
 
 msgid ""
 "Route-Master: There is more than one Route-Master for this line = 'ref' "
@@ -2050,9 +2054,6 @@ msgstr "no s'ha definit"
 msgid "GTFS database not found"
 msgstr "base de dades GTFS no trobada"
 
-msgid "Compare GTFS route with OSM route_master/route"
-msgstr "Compara la ruta GTFS amb la route_master/route d'OSM"
-
 msgid "is no longer valid (in the past)"
 msgstr "ja no és vàlid (al passat)"
 
@@ -2064,6 +2065,9 @@ msgstr "està obsolet, només s'adapta a la versió anterior de GTFS"
 
 msgid "does not exist"
 msgstr "no existeix"
+
+msgid "Compare GTFS route with OSM route_master/route"
+msgstr "Compara la ruta GTFS amb la route_master/route d'OSM"
 
 msgid "Compare GTFS trip with OSM route"
 msgstr "Compara la ruta GTFS amb la ruta OSM"

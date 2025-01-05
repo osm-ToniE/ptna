@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2024-07-23 15:52+0200\n"
+"POT-Creation-Date: 2025-01-05 14:34+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: Matheus Gomes, 2023\n"
 "Language-Team: Portuguese (Brazil) (https://app.transifex.com/jungle-bus/teams/97874/pt_BR/)\n"
@@ -461,8 +461,8 @@ msgstr[2] ""
 msgid "'public_transport:version' is not set to '2'"
 msgstr "A etiqueta \"public_transport:version\" não possui o valor \"2\""
 
-msgid "Skipping further analysis ..."
-msgstr "Pulando análises adicionais..."
+msgid "Skipping further analysis. PTNA did not download all needed OSM data."
+msgstr ""
 
 msgid "Route without Way(s)"
 msgstr "A rota não possui caminho(s)"
@@ -930,6 +930,12 @@ msgid ""
 msgstr ""
 "A explicação das mensagens de erro pode ser encontrada na documentação em "
 "\"<a href='/en/index.php#messages'>Mensagens</a>\"."
+
+msgid "New"
+msgstr ""
+
+msgid "Request start of new analysis"
+msgstr ""
 
 msgid "Static Analysis for OpenStreetMap"
 msgstr "Análise estática para o OpenStreetMap"
@@ -1428,7 +1434,7 @@ msgstr "Este erro está relacionado a:"
 
 msgid ""
 "Further analysis of this Route relation does not make sense without the data"
-" for ways and nodes."
+" for ways, nodes or relations."
 msgstr ""
 
 msgid ""
@@ -1736,9 +1742,6 @@ msgstr "não está definido(a)"
 msgid "GTFS database not found"
 msgstr "Banco de dados GTFS não encontrado"
 
-msgid "Compare GTFS route with OSM route_master/route"
-msgstr ""
-
 msgid "is no longer valid (in the past)"
 msgstr "não é mais válido (no passado)"
 
@@ -1750,6 +1753,9 @@ msgstr ""
 
 msgid "does not exist"
 msgstr "não existe"
+
+msgid "Compare GTFS route with OSM route_master/route"
+msgstr ""
 
 msgid "Compare GTFS trip with OSM route"
 msgstr ""

@@ -4,7 +4,6 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Julien Lepiller <transifex@lepiller.eu>, 2019
 # Adrien Pavie <panieravide@riseup.net>, 2019
 # Lejun, 2020
 # Philippe Verdy, 2020
@@ -19,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2024-11-25 22:55+0100\n"
+"POT-Creation-Date: 2025-01-05 14:34+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: Patchi, 2024\n"
 "Language-Team: French (https://app.transifex.com/jungle-bus/teams/97874/fr/)\n"
@@ -531,8 +530,8 @@ msgstr[2] "La ligne maître a %d membres avec un rôle"
 msgid "'public_transport:version' is not set to '2'"
 msgstr "L'attribut 'public_transport:version' n'est pas défini sur '2'"
 
-msgid "Skipping further analysis ..."
-msgstr "Omission des analyses suivantes…"
+msgid "Skipping further analysis. PTNA did not download all needed OSM data."
+msgstr ""
 
 msgid "Route without Way(s)"
 msgstr "Ligne sans voie(s)"
@@ -1765,10 +1764,8 @@ msgstr "Cette erreur est liée à :"
 
 msgid ""
 "Further analysis of this Route relation does not make sense without the data"
-" for ways and nodes."
+" for ways, nodes or relations."
 msgstr ""
-"Une analyse plus approfondie de cette relation ligne n'a pas de sens sans "
-"les données des voies et des nœuds."
 
 msgid ""
 "Route-Master: There is more than one Route-Master for this line = 'ref' "
