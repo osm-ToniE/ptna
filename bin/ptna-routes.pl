@@ -2926,7 +2926,7 @@ sub analyze_route_relation {
         if ( $relation_ptr->{'missing_way_data'} == 0 && $relation_ptr->{'missing_node_data'} == 0 && $relation_ptr->{'missing_relation_data'} == 0 ) {
             $return_code = analyze_ptv2_route_relation( $relation_ptr );
         } else {
-            $issues_string = gettext( "Skipping further analysis ..." );
+            $issues_string = gettext( "Skipping further analysis. PTNA did not download all needed OSM data." );
             push( @{$relation_ptr->{'__issues__'}}, $issues_string );
         }
         #

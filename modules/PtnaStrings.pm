@@ -1303,14 +1303,15 @@ sub InitMessageStrings {
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
-    $MessageList[$i]->{'message'}                = gettext( "Skipping further analysis ..." );
+    $MessageList[$i]->{'message'}                = gettext( "Skipping further analysis. PTNA did not download all needed OSM data." );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
     $MessageList[$i]->{'description'}            = gettext( "This error is related to:" ) . " '" .
-                                                   gettext( "Error in input data: insufficient data for nodes" ) . "' " .
+                                                   gettext( "Error in input data: insufficient data for nodes" )     . "', '" .
+                                                   gettext( "Error in input data: insufficient data for ways" )      . "' "   .
                                                    gettext( "and" ) . " '" .
-                                                   gettext( "Error in input data: insufficient data for ways" ) . "'. " .
-                                                   gettext( "Further analysis of this Route relation does not make sense without the data for ways and nodes." );
+                                                   gettext( "Error in input data: insufficient data for relations" ) . "'. "  .
+                                                   gettext( "Further analysis of this Route relation does not make sense without the data for ways, nodes or relations." );
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
