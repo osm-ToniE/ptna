@@ -186,7 +186,7 @@ sub getGtfsRouteIdIconTag {
     my $gtfs_icon_tag  = '';
 
     if ( $route_id && $relation_id ) {
-        $gtfs_icon_tag .= sprintf( ", <a href=\"/gtfs/compare-routes.php?feed=%s&release_date=%s&route_id=%s&relation=%s#routes-table\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\"></a>",
+        $gtfs_icon_tag .= sprintf( ", <a href=\"/gtfs/compare-routes.php?feed=%s&release_date=%s&route_id=%s&relation=%s\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\"></a>",
                                 uri_escape($gtfs_feed), uri_escape($release_date),
                                 uri_escape(encode('utf8',$route_id)),
                                 uri_escape($relation_id),
