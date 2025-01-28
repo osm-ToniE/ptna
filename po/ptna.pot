@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-01-05 14:34+0100\n"
+"POT-Creation-Date: 2025-01-28 17:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -400,6 +400,12 @@ msgstr ""
 msgid ""
 "The tag 'line' (='%s') is reserved for 'power' = 'line' related tagging. For "
 "public transport 'route_master' and 'route' are used."
+msgstr ""
+
+#, perl-format
+msgid ""
+"The tag 'public_transport' (='%s') is not defined for 'route_master' and "
+"'route' relations. Do you mean 'public_transport:version'='2'?"
 msgstr ""
 
 #, perl-format

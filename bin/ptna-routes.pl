@@ -2764,6 +2764,11 @@ sub analyze_relation {
             push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, handle_foreign($relation_ptr->{'tag'}->{'line'}) ) );
         }
 
+        if ( $relation_ptr->{'tag'}->{'public_transport'} ) {
+            $issues_string = gettext( "The tag 'public_transport' (='%s') is not defined for 'route_master' and 'route' relations. Do you mean 'public_transport:version'='2'?" );
+            push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, handle_foreign($relation_ptr->{'tag'}->{'public_transport'}) ) );
+        }
+
         #
         # check route_master/route specific things
         #

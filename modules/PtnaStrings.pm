@@ -1326,6 +1326,15 @@ sub InitMessageStrings {
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
+    $MessageList[$i]->{'message'}                = gettext( "The tag 'public_transport' (='%s') is not defined for 'route_master' and 'route' relations. Do you mean 'public_transport:version'='2'?" );
+    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
     $MessageList[$i]->{'message'}                = gettext( "There is more than one Route-Master" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
