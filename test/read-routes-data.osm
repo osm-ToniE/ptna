@@ -2,7 +2,7 @@
 <osm version='0.6' upload='never' generator='JOSM'>
   <bounds minlat='48.069032' minlon='11.6330838' maxlat='48.0716416' maxlon='11.6389203' origin='CGImap 0.6.1 (13164 thorn-03.openstreetmap.org)' />
   <bounds minlat='48.069032' minlon='11.6330838' maxlat='48.0716416' maxlon='11.6389203' origin='OpenStreetMap server' />
-  <relation id='-39096' action='modify'>
+  <relation id='-99787' action='modify'>
     <tag k='from' v='from' />
     <tag k='name' v='Bus 605: from =&gt; to' />
     <tag k='network' v='network' />
@@ -12,5 +12,7 @@
     <tag k='route' v='bus' />
     <tag k='to' v='to' />
     <tag k='type' v='route' />
+    <tag k='colour' v='blue' />
+    <tag k='colour:text' v='red' />
   </relation>
 </osm>

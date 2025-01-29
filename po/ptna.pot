@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-01-28 17:37+0100\n"
+"POT-Creation-Date: 2025-01-29 15:02+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -375,12 +375,12 @@ msgid "'network' is not set"
 msgstr ""
 
 #, perl-format
-msgid "'colour' has unknown value '%s'. Add '#' as first character."
+msgid "'%s' has unknown value '%s'. Add '#' as first character."
 msgstr ""
 
 #, perl-format
 msgid ""
-"'colour' has unknown value '%s'. Choose one of the 140 well defined HTML/CSS "
+"'%s' has unknown value '%s'. Choose one of the 140 well defined HTML/CSS "
 "colour names or the HTML Hex colour codes '#...' or '#......'."
 msgstr ""
 
@@ -1151,11 +1151,11 @@ msgid ""
 msgstr ""
 
 #, perl-format
-msgid "'colour' of Route is not set but 'colour' of Route-Master is set: %s"
+msgid "'%s' of Route is not set but '%s' of Route-Master is set: %s"
 msgstr ""
 
 #, perl-format
-msgid "'colour' of Route is set but 'colour' of Route-Master is not set: %s"
+msgid "'%s' of Route is set but '%s' of Route-Master is not set: %s"
 msgstr ""
 
 #, perl-format

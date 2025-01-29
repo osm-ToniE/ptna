@@ -1175,6 +1175,7 @@ if ( scalar( @RouteList ) ) {
                                              'operator'          => $relation_ptr->{'tag'}->{'operator'},    # take 'operator' value from first relation, undef outside this for-loop
                                              'pt_type'           => $entryref->{'route'},
                                              'colour'            => $relation_ptr->{'tag'}->{'colour'},      # take 'colour' value from first relation, undef outside this for-loop
+                                             'colour:text'       => $relation_ptr->{'tag'}->{'colour:text'}, # take 'colour:text' value from first relation, undef outside this for-loop
                                              'CSV-Comment'       => $entryref->{'comment'},
                                              'CSV-From'          => $entryref->{'from'},
                                              'CSV-From-List'     => $entryref->{'from-list'},
@@ -1804,7 +1805,7 @@ sub SearchMatchingRelations {
                                 $RelFrom        = $RELATIONS{$rel_id}->{'tag'}->{'from'}             || '';
                                 $RelTo          = $RELATIONS{$rel_id}->{'tag'}->{'to'}               || '';
                                 $RelVia         = $RELATIONS{$rel_id}->{'tag'}->{'via'}              || '';
-                                $RelColour      = $RELATIONS{$rel_id}->{'tag'}->{'to'}               || '';
+                                $RelColour      = $RELATIONS{$rel_id}->{'tag'}->{'colour'}           || '';
 
                                 printf STDERR "%s Checking %s relation %s, 'ref' %s and 'operator' %s \n", get_time(), $type, $rel_id, $ExpRefPart, $RelOperator    if ( $debug );
 
@@ -2331,19 +2332,21 @@ sub analyze_route_environment {
                     push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, handle_foreign($relation_ptr->{'tag'}->{'operator'}), handle_foreign($RELATIONS{$route_master_rel_id}->{'tag'}->{'operator'}), printRelationTemplate($route_master_rel_id)) );
                 }
             }
-            if ( $relation_ptr->{'tag'}->{'colour'} ) {
-                if ( $RELATIONS{$route_master_rel_id}->{'tag'}->{'colour'} ) {
-                    if ( uc($relation_ptr->{'tag'}->{'colour'}) ne uc($RELATIONS{$route_master_rel_id}->{'tag'}->{'colour'}) ) {
-                        $issues_string = gettext( "'%s' = '%s' of Route does not fit to '%s' = '%s' of Route-Master: %s" );
-                        push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, 'colour', $relation_ptr->{'tag'}->{'colour'}, 'colour', $RELATIONS{$route_master_rel_id}->{'tag'}->{'colour'}, printRelationTemplate($route_master_rel_id)) );
+            foreach my $colour_tag ( 'colour', 'colour:text' ) {
+                if ( $relation_ptr->{'tag'}->{$colour_tag} ) {
+                    if ( $RELATIONS{$route_master_rel_id}->{'tag'}->{$colour_tag} ) {
+                        if ( uc($relation_ptr->{'tag'}->{$colour_tag}) ne uc($RELATIONS{$route_master_rel_id}->{'tag'}->{$colour_tag}) ) {
+                            $issues_string = gettext( "'%s' = '%s' of Route does not fit to '%s' = '%s' of Route-Master: %s" );
+                            push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, $colour_tag, $relation_ptr->{'tag'}->{$colour_tag}, $colour_tag, $RELATIONS{$route_master_rel_id}->{'tag'}->{$colour_tag}, printRelationTemplate($route_master_rel_id)) );
+                        }
+                    } else {
+                        $issues_string = gettext( "'%s' = '%s' of Route is set but '%s' of Route-Master is not set: %s" );
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, , $colour_tag, handle_foreign($relation_ptr->{'tag'}->{$colour_tag}), $colour_tag, printRelationTemplate($route_master_rel_id)) );
                     }
-                } else {
-                    $issues_string = gettext( "'%s' = '%s' of Route is set but '%s' of Route-Master is not set: %s" );
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, , 'colour', $relation_ptr->{'tag'}->{'colour'}, 'colour', printRelationTemplate($route_master_rel_id)) );
+                } elsif ( $RELATIONS{$route_master_rel_id}->{'tag'}->{$colour_tag} ) {
+                    $issues_string = gettext( "'%s' of Route is not set but '%s' = '%s' of Route-Master is set: %s" );
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, $colour_tag, $colour_tag, $RELATIONS{$route_master_rel_id}->{'tag'}->{$colour_tag}, printRelationTemplate($route_master_rel_id)) );
                 }
-            } elsif ( $RELATIONS{$route_master_rel_id}->{'tag'}->{'colour'} ) {
-                $issues_string = gettext( "'%s' of Route is not set but '%s' = '%s' of Route-Master is set: %s" );
-                push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, 'colour', 'colour', $RELATIONS{$route_master_rel_id}->{'tag'}->{'colour'}, printRelationTemplate($route_master_rel_id)) );
             }
 
             #
@@ -2671,15 +2674,17 @@ sub analyze_relation {
             push( @{$relation_ptr->{'__issues__'}}, $issues_string );
         }
 
-        if ( $relation_ptr->{'tag'}->{'colour'} ) {
-            my $colour = GetColourFromString( $relation_ptr->{'tag'}->{'colour'} );
-            unless ( $colour ) {
-                if ( $relation_ptr->{'tag'}->{'colour'} =~ m/^[0-9A-Fa-f]{3,6}$/ ) {
-                    $issues_string = gettext( "'colour' has unknown value '%s'. Add '#' as first character." );
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, html_escape($relation_ptr->{'tag'}->{'colour'}) ) );
-                } else {
-                    $issues_string = gettext( "'colour' has unknown value '%s'. Choose one of the 140 well defined HTML/CSS colour names or the HTML Hex colour codes '#...' or '#......'." );
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, handle_foreign($relation_ptr->{'tag'}->{'colour'}) ) );
+        foreach my $colour_tag ( 'colour', 'colour:text' ) {
+            if ( $relation_ptr->{'tag'}->{$colour_tag} ) {
+                my $colour = GetColourFromString( $relation_ptr->{'tag'}->{$colour_tag} );
+                unless ( $colour ) {
+                    if ( $relation_ptr->{'tag'}->{$colour_tag} =~ m/^[0-9A-Fa-f]{3,6}$/ ) {
+                        $issues_string = gettext( "'%s' has unknown value '%s'. Add '#' as first character." );
+                        push( @{$relation_ptr->{'__issues__'}}, $colour_tag, sprintf( $issues_string, html_escape($relation_ptr->{'tag'}->{$colour_tag}) ) );
+                    } else {
+                        $issues_string = gettext( "'%s' has unknown value '%s'. Choose one of the 140 well defined HTML/CSS colour names or the HTML Hex colour codes '#...' or '#......'." );
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, $colour_tag, handle_foreign($relation_ptr->{'tag'}->{$colour_tag}) ) );
+                    }
                 }
             }
         }
@@ -6794,6 +6799,7 @@ sub printTableSubHeader {
     my $operator            = $hash{'operator'}      || '';
     my $pt_type             = $hash{'pt_type'}       || '';
     my $colour              = $hash{'colour'}        || '';
+    my $text_colour         = $hash{'colour:text'}   || '';
     my $ref_text            = undef;
     my $csv_text            = '';       # some information comming from the CSV input file
     my $info                = '';
@@ -6811,7 +6817,7 @@ sub printTableSubHeader {
     }
 
     if ( scalar @ref_or_array ) {
-        $ref_text = join(' ', map { printSketchLineTemplate( $_, $network, $operator, $pt_type, $colour ) } @ref_or_array );
+        $ref_text = join(' ', map { printSketchLineTemplate( $_, $network, $operator, $pt_type, $colour, $text_colour ) } @ref_or_array );
     }
 
     if ( scalar @ref_or_array && $pt_type ) {
@@ -6826,7 +6832,7 @@ sub printTableSubHeader {
             $nav_label = $id_label;
         }
         $id_string = sprintf( "id=\"%s\" ", $nav_label );
-        printAddIdLabelToLocalNavigation( $nav_label, join(' ',@ref_or_array), $colour );
+        printAddIdLabelToLocalNavigation( $nav_label, join(' ',@ref_or_array), $colour, $text_colour );
     }
 
     if ( $hash{'CSV-Comment'}  ) {
@@ -7121,6 +7127,7 @@ sub printSketchLineTemplate {
     my $operator          = shift || '';
     my $pt_type           = shift || '';
     my $colour            = shift || '';
+    my $text_colour       = shift || '';
     my $text              = undef;
     my $colour_string     = '';
     my $pt_string         = '';
@@ -7131,7 +7138,7 @@ sub printSketchLineTemplate {
     my $outer_span_end    = '';
     my $inner_span_end    = '';
     my $bg_colour         = GetColourFromString( $colour );
-    my $fg_colour         = GetForeGroundFromBackGround( $bg_colour );
+    my $fg_colour         = ($text_colour ne '') ? GetColourFromString($text_colour) : GetForeGroundFromBackGround($bg_colour);
 
     if ( $bg_colour && $fg_colour && $coloured_sketchline ) {
         $colour_string    = "&bg=" . uri_escape($bg_colour) . "&fg=". uri_escape($fg_colour);
@@ -7159,11 +7166,12 @@ sub printAddIdLabelToLocalNavigation {
     my $id_label        = shift;
     my $visible_string  = shift;
     my $colour          = shift;
+    my $text_colour     = shift || '';
 
     if ( !$no_additional_navigation && $local_navigation_at_index && $id_label && $visible_string ne '' ) {
 
         my $bg_colour   = GetColourFromString( $colour );
-        my $fg_colour   = GetForeGroundFromBackGround( $bg_colour );
+        my $fg_colour   = ($text_colour ne '') ? GetColourFromString($text_colour) : GetForeGroundFromBackGround($bg_colour);
         my $outer_span_begin  =  '';
         my $inner_span_begin  =  '';
         my $outer_span_end    =  '';
