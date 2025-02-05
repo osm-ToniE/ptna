@@ -11,7 +11,7 @@
 # R B, 2022
 # Noémie <nlehuby@zaclys.net>, 2022
 # ToniE <osm-ToniE@web.de>, 2024
-# Patchi, 2024
+# Patchi, 2025
 # 
 #, fuzzy
 msgid ""
@@ -20,7 +20,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
 "POT-Creation-Date: 2025-01-29 15:02+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: Patchi, 2024\n"
+"Last-Translator: Patchi, 2025\n"
 "Language-Team: French (https://app.transifex.com/jungle-bus/teams/97874/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -450,13 +450,15 @@ msgstr "L'attribut 'network' n'est pas défini"
 
 #, perl-format
 msgid "'%s' has unknown value '%s'. Add '#' as first character."
-msgstr ""
+msgstr "'%s' a une valeur inconnue '%s'. Ajouter '#' comme premier caractère."
 
 #, perl-format
 msgid ""
 "'%s' has unknown value '%s'. Choose one of the 140 well defined HTML/CSS "
 "colour names or the HTML Hex colour codes '#...' or '#......'."
 msgstr ""
+"'%s' a une valeur inconnue '%s'. Choisissez l'une des 140 couleurs HTML / "
+"CSS bien définies ou les codes de couleur HTML Hex '#...' ou '#......'."
 
 msgid "'network:long' is long form"
 msgstr "L'attribut 'network:long' est une forme longue"
@@ -486,6 +488,9 @@ msgid ""
 "The tag 'public_transport' (='%s') is not defined for 'route_master' and "
 "'route' relations. Do you mean 'public_transport:version'='2'?"
 msgstr ""
+"L'attribut 'public_transport' (='%s') n'est pas défini pour les relations "
+"maitre 'route_master' et 'route'. Est-ce que vous voulez dire "
+"'public_transport:version'='2' ?"
 
 #, perl-format
 msgid "The tag '%s' has an empty value."
@@ -533,6 +538,8 @@ msgstr "L'attribut 'public_transport:version' n'est pas défini sur '2'"
 
 msgid "Skipping further analysis. PTNA did not download all needed OSM data."
 msgstr ""
+"Ignore l'analyse plus poussée. PTNA n'a pas chargé toutes les données OSM "
+"nécessaires."
 
 msgid "Route without Way(s)"
 msgstr "Ligne sans voie(s)"
@@ -1472,10 +1479,14 @@ msgstr ""
 #, perl-format
 msgid "'%s' of Route is not set but '%s' of Route-Master is set: %s"
 msgstr ""
+"L'attribut '%s' de la ligne n'est pas défini contrairement à l'attribut '%s'"
+" de la ligne maître : %s"
 
 #, perl-format
 msgid "'%s' of Route is set but '%s' of Route-Master is not set: %s"
 msgstr ""
+"L'attribut '%s' de la ligne est définie contrairement à l'attribut '%s'  de "
+"la ligne maitre : %s"
 
 #, perl-format
 msgid ""
@@ -1763,6 +1774,8 @@ msgid ""
 "Further analysis of this Route relation does not make sense without the data"
 " for ways, nodes or relations."
 msgstr ""
+"Une analyse plus approfondie de cette relation ligne n'a pas de sens sans "
+"les données des voies, nœuds ou relations."
 
 msgid ""
 "Route-Master: There is more than one Route-Master for this line = 'ref' "
