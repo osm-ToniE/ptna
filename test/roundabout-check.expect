@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>PTNA - Results</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="PTNA">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="keywords" content="OSM Public Transport PTv2">
+        <meta name="description" content="PTNA - Public Transport Network Analysis">
+        <style>
+            #analysis table           { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; max-width:100%; }
+            #analysis th              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+            #analysis td              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+            #analysis ol              { list-style: none; }
+            #analysis img             { width: 20px; vertical-align: top; }
+            #analysis .tableheaderrow { background-color: #bbbbbb;   }
+            #analysis .sketchline     { background-color: #cccccc;        }
+            #analysis .sketch         { text-align:left;  font-weight: 500; }
+            #analysis .csvinfo        { text-align:right; font-size: 0.8em; }
+            #analysis .ref            { text-align:left; }
+            #analysis .relation       { text-align:left; }
+            #analysis .PTv            { text-align:center; }
+            #analysis .number         { text-align:right; }
+            #analysis .gtfs_feed      { white-space:nowrap; }
+            #analysis .feed_from      { white-space:nowrap; }
+            #analysis .date           { white-space:nowrap; }
+            #analysis .date_from      { white-space:nowrap; }
+            #analysis .attention      { background-color: yellow; font-weight: 500; font-size: 1.2em; }
+            .gtfs-dateold             { text-align:center; background-color: orange; }
+            .gtfs-datenew             { text-align:center; background-color: lightgreen; }
+            .gtfs-dateprevious        { text-align:center; background-color: rgb(128, 128, 255); }
+            .bad-link                 { text-decoration: line-through; background-color: yellow; }
+        </style>
+    </head>
+    <body>
+        <div id="analysis">
+        <h1>Contents</h1>
+        <ol>
+        <li>1 <a href="#hints">Hints</a>
+        </li>
+        <li>2 <a href="#otherslines">Public Transport Lines</a>
+        <ol>
+        <li>2.1 <a href="#A2.1">Bus (bus)</a>
+        </li>
+        </ol>
+        </li>
+        <li>3 <a href="#networkdetails">Details for &#039;network&#039;-Values</a>
+        <ol>
+        <li>3.1 <a href="#considerednetworks">Considered &#039;network&#039;-Values</a>
+        </li>
+        </ol>
+        </li>
+        </ol>
+        <hr />
+        <h1 id="hints">1 Hints</h1>
+        <p>
+            The data will be updated when the result of the analysis has changed.
+        </p>
+        <p>
+            An explanation of the error texts can be found in the documentation at '<a href='/en/index.php#messages'>Messages</a>'.
+        </p>
+        <hr />
+        <h1 id="otherslines">2 Public Transport Lines</h1>
+        <h2 id="A2.1">2.1 Bus (bus)</h2>
+        <table class="oepnvtable js-sort-table">
+            <thead>
+                <tr class="tableheaderrow"><th class="ref js-sort-number" dir="auto">&#x21C5;Line (ref=)</th><th class="relation js-sort-number" dir="auto">&#x21C5;Relation (id=)</th><th class="type" dir="auto">&#x21C5;Type (type=)</th><th class="name" dir="auto">&#x21C5;Name (name=)</th><th class="network" dir="auto">&#x21C5;Network (network=)</th><th class="operator" dir="auto">&#x21C5;Operator (operator=)</th><th class="from" dir="auto">&#x21C5;From (from=)</th><th class="via" dir="auto">&#x21C5;Via (via=)</th><th class="to" dir="auto">&#x21C5;To (to=)</th><th class="PTv" dir="auto">&#x21C5;PTv</th><th class="issues" dir="auto">&#x21C5;Errors</th><th class="notes" dir="auto">&#x21C5;Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr id="-102497" data-info="-102497" data-ref="001" class="line"><td class="ref foreign" dir="auto">001</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -102497</td><td class="type foreign" dir="auto">route</td><td class="name foreign" dir="auto">Bus 001: A-Town-1 =&gt; B-Town-1 =&gt; C-Town-1</td><td class="network foreign" dir="auto">Test</td><td class="operator foreign" dir="auto"></td><td class="from foreign" dir="auto">A-Town-1</td><td class="via foreign" dir="auto">B-Town-1</td><td class="to foreign" dir="auto">C-Town-1</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto"></td><td class="notes" dir="auto">'network' = '<span class="foreign" dir="auto">Test</span>'<br>PTv2 route: includes 1 entire roundabout but uses only segments: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Roundabout-1-no-split</span>' -102771</td></tr>
+                <tr id="-102498" data-info="-102498" data-ref="002" class="line"><td class="ref foreign" dir="auto">002</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -102498</td><td class="type foreign" dir="auto">route</td><td class="name foreign" dir="auto">Bus 002: A-Town-2 =&gt; B-Town-2 =&gt; C-Town-2</td><td class="network foreign" dir="auto">Test</td><td class="operator foreign" dir="auto"></td><td class="from foreign" dir="auto">A-Town-2</td><td class="via foreign" dir="auto">B-Town-2</td><td class="to foreign" dir="auto">C-Town-2</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto"></td><td class="notes" dir="auto">'network' = '<span class="foreign" dir="auto">Test</span>'</td></tr>
+                <tr id="-102499" data-info="-102499" data-ref="003" class="line"><td class="ref foreign" dir="auto">003</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -102499</td><td class="type foreign" dir="auto">route</td><td class="name foreign" dir="auto">Bus 003: A-Town-3 =&gt; B-Town-3 =&gt; C-Town-3</td><td class="network foreign" dir="auto">Test</td><td class="operator foreign" dir="auto"></td><td class="from foreign" dir="auto">A-Town-3</td><td class="via foreign" dir="auto">B-Town-3</td><td class="to foreign" dir="auto">C-Town-3</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto">PTv2 route: 'public_transport' = 'stop_position' is not part of way: <img src="/img/Node.svg" alt="Node" /> '<span class="foreign" dir="auto">B-City-3</span>' -102853</td><td class="notes" dir="auto">'network' = '<span class="foreign" dir="auto">Test</span>'<br>PTv2 route: includes 1 entire roundabout but uses only segments: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Roundabout-3-no-split</span>' -102780</td></tr>
+                <tr id="-102500" data-info="-102500" data-ref="004" class="line"><td class="ref foreign" dir="auto">004</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -102500</td><td class="type foreign" dir="auto">route</td><td class="name foreign" dir="auto">Bus 004: A-Town-4 =&gt; B-Town-4 =&gt; C-Town-4</td><td class="network foreign" dir="auto">Test</td><td class="operator foreign" dir="auto"></td><td class="from foreign" dir="auto">A-Town-4</td><td class="via foreign" dir="auto">B-Town-4</td><td class="to foreign" dir="auto">C-Town-4</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto">PTv2 route: 'public_transport' = 'stop_position' is not part of way: <img src="/img/Node.svg" alt="Node" /> '<span class="foreign" dir="auto">B-City-4</span>' -102856</td><td class="notes" dir="auto">'network' = '<span class="foreign" dir="auto">Test</span>'</td></tr>
+                <tr id="-102502" data-info="-102502" data-ref="005" class="line"><td class="ref foreign" dir="auto">005</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -102502</td><td class="type foreign" dir="auto">route</td><td class="name foreign" dir="auto">Bus 005: A-Town-5 =&gt; B-Town-5 =&gt; C-Town-5</td><td class="network foreign" dir="auto">Test</td><td class="operator foreign" dir="auto"></td><td class="from foreign" dir="auto">A-Town-5</td><td class="via foreign" dir="auto">B-Town-5</td><td class="to foreign" dir="auto">C-Town-5</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto"></td><td class="notes" dir="auto">'network' = '<span class="foreign" dir="auto">Test</span>'</td></tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <h1 id="networkdetails">3 Details for &#039;network&#039;-Values</h1>
+<p>
+The contents of the 'network' tag will be searched for:
+</p>
+<ul>
+    <li><span class="foreign" dir="auto">Test</span></li>
+    <li>'network' is not set</li>
+</ul>
+        <h2 id="considerednetworks">3.1 Considered &#039;network&#039;-Values</h2>
+<p>
+This section lists the 'network'-values which have been considered; i.e. which match to one of the values above.
+</p>
+        <table class="oepnvtable js-sort-table">
+            <thead>
+                <tr class="tableheaderrow"><th class="network" dir="auto">&#x21C5;Network (network=)</th><th class="number js-sort-number" dir="auto">&#x21C5;Number</th><th class="relations" dir="auto">&#x21C5;Relations</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="Test" data-ref="???" class="line"><td class="network foreign" dir="auto">Test</td><td class="number foreign" dir="auto">5</td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">001</span>' -102497, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">002</span>' -102498, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">003</span>' -102499, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">004</span>' -102500, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">005</span>' -102502</td></tr>
+            </tbody>
+        </table>
+
+        </div> <!-- analysis -->
+        <iframe style="display:none" id="hiddenIframe" name="hiddenIframe"></iframe>
+    </body>
+</html>
