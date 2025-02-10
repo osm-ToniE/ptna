@@ -4080,6 +4080,7 @@ sub SortRouteWayNodes {
     my $next_way_id                 = undef;
     my $node_id                     = undef;
     my @control_nodes               = ();
+    my @stop_positions              = ();
     my $counter                     = 0;
     my $index                       = undef;
     my $way_index                   = 0;
@@ -4088,10 +4089,13 @@ sub SortRouteWayNodes {
     my $access_restriction          = undef;
     my $number_of_ways              = 0;
     my %expect_motorway_or_motorway_link_after = ();
+    my $stop_in_roundabout          = 0;
 
     printf STDERR "SortRouteWayNodes() : processing Ways:\nWays: %s\n", join( ', ', @{$relations_route_ways_ref} )     if ( $debug );
 
     if ( $relation_ptr && $relations_route_ways_ref ) {
+
+        @stop_positions = FindRouteStopPositions( $relation_ptr );
 
         $number_of_ways = scalar @{$relations_route_ways_ref} ;
         if ( $number_of_ways ) {
@@ -4130,11 +4134,21 @@ sub SortRouteWayNodes {
                         if ( ($index=IndexOfNodeInNodeArray($connecting_node_id,@{$WAYS{$current_way_id}->{'chain'}})) >= 0 ) {
                             printf STDERR "SortRouteWayNodes() : handle Nodes of closed Way %s with Index %d:\nNodes: %s\n", $current_way_id, $index, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                             my $i = 0;
+                            $stop_in_roundabout = 0;
                             for ( $i = $index+1; $i <= $#{$WAYS{$current_way_id}->{'chain'}}; $i++ ) {
                                 push( @sorted_nodes, ${$WAYS{$current_way_id}->{'chain'}}[$i] );
+                                if ( isNodeInNodeArray(${$WAYS{$current_way_id}->{'chain'}}[$i],@stop_positions) ) {
+                                    $stop_in_roundabout = 1;
+                                    printf STDERR "SortRouteWayNodes() : this is bus ref : %s\n", $relation_ptr->{'tag'}{'ref'}     if ( $debug );
+                                    printf STDERR "SortRouteWayNodes() : stop_position in roundabout %s = %s with Index %d:\nNodes: %s\n", $current_way_id, $WAYS{$current_way_id}->{'tag'}{'name'}, $i, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                                }
                             }
                             for ( $i = 1; $i <= $index; $i++ ) {
                                 push( @sorted_nodes, ${$WAYS{$current_way_id}->{'chain'}}[$i] );
+                                if ( isNodeInNodeArray(${$WAYS{$current_way_id}->{'chain'}}[$i],@stop_positions) ) {
+                                    $stop_in_roundabout = 1;
+                                    printf STDERR "SortRouteWayNodes() : stop_position in roundabout %s with Index %d:\nNodes: %s\n", $current_way_id, $i, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                                }
                             }
 
                             #
@@ -4169,6 +4183,16 @@ sub SortRouteWayNodes {
                                     # there is a match with first or last node of next way and some node of this roundabout
                                     # so we're deleting superflous nodes from the top of sorted_nodes until we hit the connecting node
                                     #
+                                    if ( $stop_in_roundabout ) {
+                                        # copy the same roundabout a second time into the sorted_nodes
+                                        printf STDERR "SortRouteWayNodes() : copy the same roundabout  %s = %s a second time into the sorted_nodes\n", $current_way_id, $WAYS{$current_way_id}->{'tag'}{'name'}     if ( $debug );
+                                        for ( $i = $index+1; $i <= $#{$WAYS{$current_way_id}->{'chain'}}; $i++ ) {
+                                            push( @sorted_nodes, ${$WAYS{$current_way_id}->{'chain'}}[$i] );
+                                        }
+                                        for ( $i = 1; $i <= $index; $i++ ) {
+                                            push( @sorted_nodes, ${$WAYS{$current_way_id}->{'chain'}}[$i] );
+                                        }
+                                    }
                                     while ( $sorted_nodes[$#sorted_nodes] != $WAYS{$next_way_id}->{'first_node'} &&
                                             $sorted_nodes[$#sorted_nodes] != $WAYS{$next_way_id}->{'last_node'}     ) {
                                         printf STDERR "SortRouteWayNodes() : pop() Node %s from \@sorted_nodes\n", $sorted_nodes[$#sorted_nodes]     if ( $debug );
