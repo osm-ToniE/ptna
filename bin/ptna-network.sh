@@ -742,14 +742,16 @@ then
                     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Analysis succeeded, '$WORK_LOC/$HTML_FILE' created"
                     echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $WORK_LOC/$HTML_FILE)
 
-                    if [ -f "$WORK_LOC/$SAVE_FILE" -a -s "$WORK_LOC/$SAVE_FILE" ]
-                    then
-                        diff $WORK_LOC/$SAVE_FILE $WORK_LOC/$HTML_FILE > $WORK_LOC/$DIFF_FILE
-                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Diff size:  " $(ls -l $WORK_LOC/$DIFF_FILE | awk '{print $5 " " $9}')
-                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Diff lines: " $(wc -l $WORK_LOC/$DIFF_FILE)
-                    else
+                    #if [ -f "$WORK_LOC/$SAVE_FILE" -a -s "$WORK_LOC/$SAVE_FILE" ]
+                    #then
+                    #    diff $WORK_LOC/$SAVE_FILE $WORK_LOC/$HTML_FILE > $WORK_LOC/$DIFF_FILE
+                    #    DIFF_SIZE=$(stat -c '%s' $WORK_LOC/$DIFF_FILE)
+                    #    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Diff size:  $DIFF_SIZE $WORK_LOC/$DIFF_FILE"
+                    #    DIFF_LINES=$(grep '^[<>]' $WORK_LOC/$DIFF_FILE | grep -E -v -c '(OSM-Base|Areas) Time')
+                    #    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Diff lines: $DIFF_LINES $WORK_LOC/$DIFF_FILE"
+                    #else
                         rm -f $WORK_LOC/$SAVE_FILE
-                    fi
+                    #fi
                 else
                     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'$WORK_LOC/$HTML_FILE' is empty"
                 fi
@@ -832,26 +834,11 @@ then
         then
             #if [ -s $WORK_LOC/$HTML_FILE ]
             #then
-                # DIFF_LINES_BASE defines how many diff lines we have to tollerate in order to skip the
-                # different time strings of the analysis
-                # only diffs in the analysis result count
-
-                NEW_OSM_Base_Time="$(awk '/OSM-Base Time : .* UTC/ { print $4 "T" $5 "Z"; }' $WORK_LOC/$HTML_FILE)"
+                NEW_OSM_Base_Time="$(awk '/OSM-Base Time : .* UTC/ { print $4 "T" $5 "Z"; exit; }' $WORK_LOC/$HTML_FILE)"
                 NEW_Local_OSM_Base_Time="$(TZ=${PTNA_TIMEZONE:-Europe/Berlin} date --date "$NEW_OSM_Base_Time" '+%Y-%m-%d %H:%M:%S %Z' | sed -e 's/ \([+-][0-9]*\)$/ UTC\1/')"
 
                 echo "NEW_DATE_UTC=$NEW_OSM_Base_Time"       >> $WORK_LOC/$DETAILS_FILE
                 echo "NEW_DATE_LOC=$NEW_Local_OSM_Base_Time" >> $WORK_LOC/$DETAILS_FILE
-
-                if [ $(echo $OVERPASS_QUERY | egrep -c '(data=area)|(data=\[timeout:[0-9]+\];area)') = 1 ]
-                then
-                    # Overpass-API query includes an area(...), so AREA Time is included in HTML
-                    # this is the case for most 'network' analyzes
-                    DIFF_LINES_BASE=8
-                else
-                    # Overpass-API query includes definition of a poly('...'), so no AREA Time is included in HTML
-                    # this is the case for EU-Flixbus and one or two others
-                    DIFF_LINES_BASE=4
-                fi
 
                 if [ ! -d "$RESULTS_LOC" ]
                 then
@@ -871,27 +858,25 @@ then
                         rm -f $WORK_LOC/$SAVE_FILE
                     fi
 
+                    HAS_RELEVANT_DIFF=true
                     if [ -f "$WORK_LOC/$SAVE_FILE" ]
                     then
-                        OLD_OSM_Base_Time="$(awk '/OSM-Base Time : .* UTC/ { print $4 "T" $5 "Z"; }' $WORK_LOC/$SAVE_FILE)"
+                        OLD_OSM_Base_Time="$(awk '/OSM-Base Time : .* UTC/ { print $4 "T" $5 "Z"; exit; }' $WORK_LOC/$SAVE_FILE)"
                         OLD_Local_OSM_Base_Time="$(TZ=${PTNA_TIMEZONE:-Europe/Berlin} date --date "$OLD_OSM_Base_Time" '+%Y-%m-%d %H:%M:%S %Z' | sed -e 's/ \([+-][0-9]*\)$/ UTC\1/')"
 
-                        if [ "$NEW_OSM_Base_Time" = "$OLD_OSM_Base_Time" ]
-                        then
-                            # we analyzed the same XML data again, so every diff line counts
-                            DIFF_LINES_BASE=0
-                        fi
-
                         diff $WORK_LOC/$SAVE_FILE $WORK_LOC/$HTML_FILE > $WORK_LOC/$DIFF_FILE
-                        DIFF_LINES=$(cat $WORK_LOC/$DIFF_FILE | wc -l)
-                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Diff size:  " $(ls -l $WORK_LOC/$DIFF_FILE | awk '{print $5 " " $9}')
-                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Diff lines: " $DIFF_LINES $WORK_LOC/$DIFF_FILE
-                    else
-                        DIFF_LINES=$(($DIFF_LINES_BASE + 1))
-                        rm -f $WORK_LOC/$DIFF_FILE
+
+                        DIFF_SIZE=$(stat -c '%s' $WORK_LOC/$DIFF_FILE)
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Diff size:  $DIFF_SIZE $WORK_LOC/$DIFF_FILE"
+                        DIFF_LINES=$(grep '^[<>]' $WORK_LOC/$DIFF_FILE | grep -E -v -c '(OSM-Base|Areas) Time')
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Diff lines: $DIFF_LINES $WORK_LOC/$DIFF_FILE"
+                        if [ $DIFF_LINES -eq 0 ]
+                        then
+                            HAS_RELEVANT_DIFF=false
+                        fi
                     fi
 
-                    if [ "$DIFF_LINES" -gt "$DIFF_LINES_BASE" ]
+                    if [ "$HAS_RELEVANT_DIFF" == "true" ]
                     then
                         echo $(date "+%Y-%m-%d %H:%M:%S %Z")  "Copying '$WORK_LOC/$HTML_FILE' to '$RESULTS_LOC'"
                         cp $WORK_LOC/$HTML_FILE $RESULTS_LOC
@@ -935,7 +920,7 @@ then
                         echo "OLD_DATE_LOC=$OLD_Local_OSM_Base_Time" >> $WORK_LOC/$DETAILS_FILE
                         echo "OLD_OR_NEW=old"                        >> $WORK_LOC/$DETAILS_FILE
                         stop=$(date --utc "+%s")
-                        sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO updateresult (id,start,stop,updated,diff_lines,html_changes) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,0,$DIFF_LINES,0);"
+                        sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO updateresult (id,start,stop,updated,diff_lines,html_changes) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,0,0,0);"
                     fi
 
                     # mark all finished analysis runs in analysis queue for this network as 'outdated'
