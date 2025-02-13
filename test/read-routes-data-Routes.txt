@@ -109,7 +109,10 @@
 | Body 2,1 | Body 2,2 | Body 2,3:|
 -
 
-@ reserved character
+@bus
+@ref~^2.$
+@@
+@ reserved character with following char other than @a-z
 + reserved character
 ~ reserved character
 $ reserved character

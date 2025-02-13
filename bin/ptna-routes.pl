@@ -1261,6 +1261,8 @@ if ( scalar( @RouteList ) ) {
             printText( '' );
             printText( $entryref->{'reserved'} );
             printText( '' );
+        } elsif ( exists($entryref->{'type'}) && $entryref->{'type'} eq 'ignore' ) {
+            printf STDERR "%s %s\n", get_time(), $entryref->{'ignore'};
         } elsif ( exists($entryref->{'type'}) && $entryref->{'type'} eq 'error' ) {
             printf STDERR "    error = %s\n", $entryref->{'error'}          if ( $debug );
             if ( $table_headers_printed == 0 ) {

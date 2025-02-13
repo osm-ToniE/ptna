@@ -114,9 +114,14 @@ sub ReadRoutes {
                         } elsif ( m/^#/ ) {
                             next;                                           # ignore 'comment' line
                         } elsif ( m/^([@+~\$\|])/ ) {
-                            $issues_string          = gettext( "First character of line ('%s') is reserved. Please put the first CSV field into double quotes (\"...\"). Line %s of Routes-Data. Contents of line: '%s'" );
-                            $hashref->{'type'}      = 'reserved';         # store type
-                            $hashref->{'reserved'}  = sprintf( decode( 'utf8', $issues_string ), $1, $NR, $hashref->{'contents'} );   # this is an error
+                            if ( m/^@[a-z\@]/ ) {
+                                $hashref->{'type'}      = 'ignore';         # store type
+                                $hashref->{'ignore'}    = decode( 'utf8', $_ );
+                            } else {
+                                $issues_string          = gettext( "First character of line ('%s') is reserved. Please put the first CSV field into double quotes (\"...\"). Line %s of Routes-Data. Contents of line: '%s'" );
+                                $hashref->{'type'}      = 'reserved';         # store type
+                                $hashref->{'reserved'}  = sprintf( decode( 'utf8', $issues_string ), $1, $NR, $hashref->{'contents'} );   # this is an error
+                            }
                         }
                     } elsif ( m/<pre>/ ) {                          # ignore lines with HTML <pre>
                         $have_seen_pre = 1;
