@@ -1,3 +1,5 @@
+This page follows the PTNA CSV format. For more information, see [[Public Transport Network Analysis/Syntax]].
+
 <pre>
 #
 # Format:

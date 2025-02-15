@@ -81,6 +81,7 @@ my $network_guid                    = undef;
 my $network_long_regex              = undef;
 my $network_short_regex             = undef;
 my $no_additional_navigation        = undef;
+my $nopre                           = undef;
 my $operator_regex                  = undef;
 my $allow_coach                     = undef;
 my $check_access                    = undef;
@@ -163,6 +164,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'network-long-regex:s'          =>  \$network_long_regex,           # --network-long-regex='Münchner Verkehrs- und Tarifverbund|Grünwald|Bayerische Oberlandbahn'
             'network-short-regex:s'         =>  \$network_short_regex,          # --network-short-regex='MVV|BOB'
             'no-additional-navigation'      =>  \$no_additional_navigation,     # --no-additional-navigation
+            'nopre'                         =>  \$nopre,                        # --nopre                           CSV data read from GitHub does not include <pre> ... </pre>
             'operator-regex:s'              =>  \$operator_regex,               # --operator-regex='MVG|Münchner'
             'positive-notes'                =>  \$positive_notes,               # --positive-notes                  print positive information for notes, if e.g. something is fulfilled
             'ptv1-compatibility=s'          =>  \$ptv1_compatibility,           # --ptv1-compatibility=no|show|allow    how to handle "highway=bus_stop" in PTv2
@@ -290,6 +292,7 @@ if ( $verbose ) {
     printf STDERR "%20s--network-long-regex='%s'\n",       ' ', $network_long_regex         ? $network_long_regex          : '';
     printf STDERR "%20s--network-short-regex='%s'\n",      ' ', $network_short_regex        ? $network_short_regex         : '';
     printf STDERR "%20s--no-additional-navigation='%s'\n", ' ', $no_additional_navigation   ? 'ON'          : 'OFF';
+    printf STDERR "%20s--nopre='%s'\n",                    ' ', $nopre                      ? 'ON'          : 'OFF';
     printf STDERR "%20s--operator-regex='%s'\n",           ' ', $operator_regex             ? $operator_regex              : '';
     printf STDERR "%20s--positive-notes='%s'\n",           ' ', $positive_notes             ? 'ON'          : 'OFF';
     printf STDERR "%20s--ptv1-compatibility='%s'\n",       ' ', $ptv1_compatibility         ? $ptv1_compatibility          : '';
@@ -591,7 +594,8 @@ if ( $routes_file ) {
                                             'or-separator'           => $or_separator,
                                             'supported_route_types'  => \@supported_route_types,
                                             'verbose'                => $verbose,
-                                            'debug'                  => $debug
+                                            'debug'                  => $debug,
+                                            'nopre'                  => $nopre
                                           );
 
     if ( $ReadError ) {

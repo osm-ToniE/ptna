@@ -718,6 +718,10 @@ then
                 then
                     mv $WORK_LOC/$HTML_FILE $WORK_LOC/$SAVE_FILE
                 fi
+                if [ -z "$WIKI_ROUTES_PAGE" ]
+                then
+                    OPTION_NOPRE='--nopre'          # CSV data from WIKI have <pre> ... </pre>, others have not
+                fi
                 start=$(date --utc "+%s")
                 START_ANALYSIS=$(date --date @$start "+%Y-%m-%d %H:%M:%S %Z")
                 ptna-routes.pl --v\
@@ -733,6 +737,7 @@ then
                                 --operator-regex="$OPERATOR_REGEX" \
                                 --routes-file=$WORK_LOC/$ROUTES_FILE \
                                 --osm-xml-file=$OSM_XML_FILE_ABSOLUTE \
+                                $OPTION_NOPRE \
                                 2>&1 > $WORK_LOC/$HTML_FILE | tee $WORK_LOC/$HTML_FILE.log
                 stop=$(date --utc "+%s")
                 END_ANALYSIS=$(date --date @$stop "+%Y-%m-%d %H:%M:%S %Z")

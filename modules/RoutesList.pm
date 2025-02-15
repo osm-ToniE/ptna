@@ -50,6 +50,7 @@ sub ReadRoutes {
     my $debug               = $hash{'debug'};
     my $verbose             = $hash{'verbose'};
     my $ref_list_supported  = $hash{'supported_route_types'};
+    my $nopre               = $hash{'nopre'} || 0;
 
     my $NR                  = undef;
     my $hashref             = undef;
@@ -93,8 +94,13 @@ sub ReadRoutes {
                     $hashref->{'contents'}      = $_;                  # store original contents
 
                     next    if ( !$_ );                                     # ignore if line is empty
+                    if ( m/<pre>/ ) {                                       # ignore lines with HTML <pre>
+                        $have_seen_pre = 1;
+                        next;
+                    }
+                    next    if ( !$have_seen_pre && !$nopre );              # in case of "pre" option, wait for <pre> to appear, ignore anything before that
 
-                    if ( m/^[=#@+~\$\|-]/ ) {                                # headers, text, comment lines and reserved characters
+                    if ( m/^[=#@+~\$\|-]/ ) {                               # headers, text, comment lines and reserved characters
                         if ( m/^=/ ) {
                             if ( m/^(=+)([^=].*)/ ) {
                                 $hashref->{'type'}          =  'header';        # store type
@@ -123,11 +129,8 @@ sub ReadRoutes {
                                 $hashref->{'reserved'}  = sprintf( decode( 'utf8', $issues_string ), $1, $NR, $hashref->{'contents'} );   # this is an error
                             }
                         }
-                    } elsif ( m/<pre>/ ) {                          # ignore lines with HTML <pre>
-                        $have_seen_pre = 1;
-                        next;
-                    } elsif ( m|</pre>| ) {                         # ignore lines with HTML </pre>
-                        last    if ( $have_seen_pre );              # terminate when this is aclosing </pre>
+                    } elsif ( m|</pre>| ) {                                    # ignore lines with HTML </pre>
+                        last    if ( $have_seen_pre && !$nopre );              # terminate when this is aclosing </pre> and we handle <pre>
                         next;
                     } else {
                         $hashref->{'type'}       = 'route';          # store type
