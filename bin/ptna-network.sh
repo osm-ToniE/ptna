@@ -625,45 +625,78 @@ fi
 
 if [ "$modify" = "true" ]
 then
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Modifying Routes Data"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Modifying Routes Data without reading or writing from/to OSM-Wiki (GitHub)"
 
     if [ -d "$WORK_LOC" ]
     then
         if [ -n "$WIKI_ROUTES_PAGE" ]
         then
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Reading Routes Wiki page '$WIKI_ROUTES_PAGE' to file '$WORK_LOC/$ROUTES_FILE'"
-            ptna-wiki-page.pl --pull --page=$WIKI_ROUTES_PAGE --file=$WORK_LOC/$ROUTES_FILE
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $WORK_LOC/$ROUTES_FILE)
+            if [ -f "$WORK_LOC/$ROUTES_FILE" ]
+            then
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $WORK_LOC/$ROUTES_FILE)
 
-            # put the code to modify the data here (sed, awk, perl, ... calls)
+                # put the code to modify the data here (sed, awk, perl, ... calls)
 
-            #sed -i -e 's/ref;type;comment;from;to;operator;gtfs-feed;gtfs-route-id/&;gtfs-release-date/' $WORK_LOC/$ROUTES_FILE
+#                if [ "$COUNTRY_DIR" == "DE" -o "$COUNTRY_DIR" == "AT" ]
+#                then
+#                    awk 'BEGIN { print_em=0; }
+#                            /^<pre>/ { print "Diese Seite entspricht dem PTNA-CSV-Format. Für weitere Informationen siehe [[DE:Public Transport Network Analysis/Syntax der CSV-Daten]].\n\n<pre>"; getline; print $0; getline; print $0; getline; print $0; next; }
+#                            /^#/ { if ( print_em == 1 ) { print $0; } next; }
+#                            /^.*/ { print_em = 1; print $0; }
+#                        ' $WORK_LOC/$ROUTES_FILE > $WORK_LOC/$ROUTES_FILE.manipulated
+#                elif [ "$COUNTRY_DIR" == "FR" ]
+#                then
+#                    awk 'BEGIN { print_em=0; }
+#                            /^<pre>/ { print "Cette page respecte le format CSV de PTNA. Pour plus d%%%informations, voir [[FR:Public Transport Network Analysis/Syntaxe des données CSV]].\n\n<pre>"; getline; print $0; getline; print $0; getline; print $0; next; }
+#                            /^#/ { if ( print_em == 1 ) { print $0; } next; }
+#                            /^.*/ { print_em = 1; print $0; }
+#                        ' $WORK_LOC/$ROUTES_FILE | sed -e "s/d%%%informations/d'informations/" > $WORK_LOC/$ROUTES_FILE.manipulated
+#                else
+#                    awk 'BEGIN { print_em=0; }
+#                            /^<pre>/ { print "This page follows the PTNA CSV format. For more information, see [[Public Transport Network Analysis/Syntax of CSV data]].\n\n<pre>"; getline; print $0; getline; print $0; getline; print $0; next; }
+#                            /^#/ { if ( print_em == 1 ) { print $0; } next; }
+#                            /^.*/ { print_em = 1; print $0; }
+#                        ' $WORK_LOC/$ROUTES_FILE > $WORK_LOC/$ROUTES_FILE.manipulated
+#                fi
+#
+#                mv $WORK_LOC/$ROUTES_FILE.manipulated $WORK_LOC/$ROUTES_FILE
+                # end of code here
 
-            #sed -i -e 's/Hinweis auf eine "route_id" in den GTFS-Daten, die zu dieser Line gehört/&\n#\n# gtfs-release-date kann leer sein\n#                       == Hinweis auf eine spezielle Version der GTFS-Daten, die zu dieser Linie gehört (z.B. "2020-05-15")/' $WORK_LOC/$ROUTES_FILE
-
-            #sed -i -e 's/Reference to a "route_id" in the GTFS data that belongs to this route/&\n#\n# gtfs-release-date can be empty\n#                       == Reference to special release of the GTFS data (e.g.: "2020-08-18")/' $WORK_LOC/$ROUTES_FILE
-
-            #sed -i -e 's/Référence à un "route_id" dans les données GTFS qui appartient à cette route/&\n#\n# gtfs-release-date peut être vide\n#                       == Référence à une version spécial des données GTFS (par example : "2020-08-18")/' $WORK_LOC/$ROUTES_FILE
-
-            # end of code here
-
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $WORK_LOC/$ROUTES_FILE)
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $WORK_LOC/$ROUTES_FILE)
+            else
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$WIKI_ROUTES_PAGE configured but does not yet exist"
+            fi
         else
             if [ -f "$SETTINGS_DIR/$ROUTES_FILE" ]
             then
-                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'$ROUTES_FILE' provided by GitHub,"
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'$ROUTES_FILE' provided by GitHub"
                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $SETTINGS_DIR/$ROUTES_FILE)
 
                 # put the code to modify the data here (sed, awk, perl, ... calls)
 
-                #sed -i -e 's/ref;type;comment;from;to;operator;gtfs-feed;gtfs-route-id/&;gtfs-release-date/' $SETTINGS_DIR/$ROUTES_FILE
-
-                #sed -i -e 's/Hinweis auf eine "route_id" in den GTFS-Daten, die zu dieser Line gehört/&\n#\n# gtfs-release-date kann leer sein\n#                       == Hinweis auf eine spezielle Version der GTFS-Daten, die zu dieser Linie gehört (z.B. "2020-05-15")/' $SETTINGS_DIR/$ROUTES_FILE
-
-                #sed -i -e 's/Reference to a "route_id" in the GTFS data that belongs to this route/&\n#\n# gtfs-release-date can be empty\n#                       == Reference to special release of the GTFS data (e.g.: "2020-08-18")/' $SETTINGS_DIR/$ROUTES_FILE
-
-                #sed -i -e 's/Référence à un "route_id" dans les données GTFS qui appartient à cette route/&\n#\n# gtfs-release-date peut être vide\n#                       == Référence à une version spécial des données GTFS (par example : "2020-08-18")/' $SETTINGS_DIR/$ROUTES_FILE
-
+#                if [ "$COUNTRY_DIR" == "DE" -o "$COUNTRY_DIR" == "AT" ]
+#                then
+#                    awk 'BEGIN { print_em=0; }
+#                            { if ( NR==1 ) { print "#\n# Diese Seite entspricht dem PTNA-CSV-Format. Für weitere Informationen siehe https://wiki.openstreetmap.org/wiki/DE:Public_Transport_Network_Analysis/Syntax_der_CSV-Daten\n#"; getline; print $0; getline; print $0; next; } }
+#                            /^#/ { if ( print_em == 1 ) { print $0; } next; }
+#                            /^.*/ { print_em = 1; print $0; }
+#                        ' $WORK_LOC/$ROUTES_FILE > $WORK_LOC/$ROUTES_FILE.manipulated
+#                elif [ "$COUNTRY_DIR" == "FR" ]
+#                then
+#                    awk 'BEGIN { print_em=0; }
+#                            { if ( NR==1 ) { print "#\n# Cette page respecte le format CSV de PTNA. Pour plus d%%%informations, voir https://wiki.openstreetmap.org/wiki/FR:Public_Transport_Network_Analysis/Syntaxe_des_données_CSV\n#"; getline; print $0; getline; print $0; next; } }
+#                            /^#/ { if ( print_em == 1 ) { print $0; } next; }
+#                            /^.*/ { print_em = 1; print $0; }
+#                        ' $WORK_LOC/$ROUTES_FILE | sed -e "s/d%%%informations/d'informations/" > $WORK_LOC/$ROUTES_FILE.manipulated
+#                else
+#                    awk 'BEGIN { print_em=0; }
+#                            { if ( NR==1 ) { print "#\n# This page follows the PTNA CSV format. For more information, see https://wiki.openstreetmap.org/wiki/Public_Transport_Network_Analysis/Syntax_of_CSV_data\n#"; getline; print $0; getline; print $0; next; } }
+#                            /^#/ { if ( print_em == 1 ) { print $0; } next; }
+#                            /^.*/ { print_em = 1; print $0; }
+#                        ' $WORK_LOC/$ROUTES_FILE > $WORK_LOC/$ROUTES_FILE.manipulated
+#                fi
+#
+#                mv $WORK_LOC/$ROUTES_FILE.manipulated $WORK_LOC/$ROUTES_FILE
                 # end of code here
 
                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $SETTINGS_DIR/$ROUTES_FILE)
@@ -956,22 +989,24 @@ fi
 
 if [ "$pushroutes" = "true" ]
 then
-    if [ -n "$WIKI_ROUTES_PAGE" ]
+    if [ -f $WORK_LOC/$ROUTES_FILE ]
     then
-        if [ -f $WORK_LOC/$ROUTES_FILE ]
+        if [ -s $WORK_LOC/$ROUTES_FILE ]
         then
-            if [ -s $WORK_LOC/$ROUTES_FILE ]
+            if [ -n "$WIKI_ROUTES_PAGE" ]
             then
                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Writing Routes file '$WORK_LOC/$ROUTES_FILE' to Wiki page '$WIKI_ROUTES_PAGE'"
-                ptna-wiki-page.pl --push --page=$WIKI_ROUTES_PAGE --file=$WORK_LOC/$ROUTES_FILE --summary="update by PTNA"
+                ptna-wiki-page.pl --push --page=$WIKI_ROUTES_PAGE --file=$WORK_LOC/$ROUTES_FILE --summary="Documentation of syntax of this file moved to OSM-Wiki"
+                sleep 10   # to avoid being blocked by rate limit of wiki
             else
-                echo $(date "+%Y-%m-%d %H:%M:%S %Z") $WORK_LOC/$ROUTES_FILE is empty
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'$ROUTES_FILE' provided by GitHub, copy from $WORK_LOC"
+                cp $WORK_LOC/$ROUTES_FILE $SETTINGS_DIR/$ROUTES_FILE
             fi
         else
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") $WORK_LOC/$ROUTES_FILE does not exist
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") $WORK_LOC/$ROUTES_FILE is empty
         fi
     else
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'$ROUTES_FILE' stored in GitHub"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") $WORK_LOC/$ROUTES_FILE does not exist
     fi
 fi
 
