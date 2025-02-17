@@ -162,12 +162,14 @@ $ reserved character
 915;bus;;;;'Mein Bus' Gmbh
 916;bus;;;;"'Mein Bus' Gmbh"
 917;bus;;;;"Mein Bus Gmbh"
-918;bus;;;;"Mein Bus" Gmbh
-919;bus;double-quote inside field works if none of the files is surrounded by double-qutes (split(',',...) is used);as"df;to;myop
-920;bus;"Missing double-quote and yz at end of 'from'";"wx"yz";to;myop
-921;bus;;""source;station
-922;bus;surrounding single-quotes in 'from';'jk"lm';to;myop
-923;bus;surrounding single-quotes in 'from';'jk"lm';to;"myop"
+918;bus;918 Error double-quote inside text w/o terminating double-qoute;;;"Mein Bus" Gmbh
+919;bus;919 Error double-quote inside field;as"df;to;myop
+919b;bus;919 Error escaped double-quote inside field;as""df;to;myop
+920;bus;"920 Error double-quotes have to be escaped by a double-quote";"wx"yz";to;myop
+920b;bus;"No Error because of escaped double-quote";"wx""yz";to;myop
+921;bus;921 Error;""source;station
+922;bus;922 Error double-quote in surrounding single-quotes in 'from';'jk"lm';to;myop
+923;bus;923 Error double-quote in surrounding single-quotes in 'from';'jk"lm';to;"myop"
 924;bus;;;;operator's son
 "998;999";bus;;;;operator
 
