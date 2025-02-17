@@ -7289,58 +7289,39 @@ sub wiki2html {
         $text =~ s/"/&quot;/g;
         # ignore: [[Category:Nürnberg]]
         $text =~ s/\[\[Category:[^\]]+\]\]//g;
-        # convert: [[Nürnberg/Transportation/Analyse/DE-BY-VGN-Linien|VGN Linien]]
-        while ( $text =~ m/\[\[([^|]+)\|([^\]]+)\]\]/g ) {
-            if ( $suppress_links ) {
-                $sub = $2;
-            } else {
-                $sub = sprintf( "<a href=\"https://wiki.openstreetmap.org/wiki/%s\">%s</a>", $1, $2 );
-            }
-            $text =~ s/\[\[[^|]+\|[^\]]+\]\]/$sub/;
+
+        if ( $suppress_links ) {
+            # convert: [[Nürnberg/Transportation/Analyse/DE-BY-VGN-Linien|VGN Linien]]
+            $text =~ s/\[\[([^|\]]+)\|([^\]]+)\]\]/$2/;
+            printf STDERR "wiki2html(s1) : text = '%s'\n", $text    if ( $debug );
+            # convert: [[Nürnberg/Transportation/Analyse/DE-BY-VGN-Linien]]
+            $text =~ s/\[\[([^\|\]]+?)\]\]/$1/;
+            printf STDERR "wiki2html(s2) : text = '%s'\n", $text    if ( $debug );
+            # convert: [https://example.com/index.html External Link]
+            $text =~ s/\[([^ \]]+) ([^\]]+)\]/$2/g;
+            printf STDERR "wiki2html(s3) : text = '%s'\n", $text    if ( $debug );
+            # convert: [https://example.com/index.html]
+            $text =~ s/\[([^ \]]+)\]/$1/g;
+            printf STDERR "wiki2html(s4) : text = '%s'\n", $text    if ( $debug );
+        } else {
+            # convert: [[Nürnberg/Transportation/Analyse/DE-BY-VGN-Linien|VGN Linien]]
+            $text =~ s/\[\[([^|\]]+)\|([^\]]+)\]\]/<a href="https:\/\/wiki.openstreetmap.org\/wiki\/$1">$2<\/a>/g;
+            printf STDERR "wiki2html(s1) : text = '%s'\n", $text    if ( $debug );
+            # convert: [[Nürnberg/Transportation/Analyse/DE-BY-VGN-Linien]]
+            $text =~ s/\[\[([^\|\]]+?)\]\]/<a href="https:\/\/wiki.openstreetmap.org\/wiki\/$1">$1<\/a>/g;
+            printf STDERR "wiki2html(s2) : text = '%s'\n", $text    if ( $debug );
+            # convert: [https://example.com/index.html External Link]
+            $text =~ s/\[([^ \]]+) ([^\]]+)\]/<a href="$1">$2<\/a>/g;
+            printf STDERR "wiki2html(s3) : text = '%s'\n", $text    if ( $debug );
+            # convert: [https://example.com/index.html]
+            $text =~ s/\[([^ \]]+)\]/<a href="$1">$1<\/a>/g;
+            printf STDERR "wiki2html(s4) : text = '%s'\n", $text    if ( $debug );
         }
-        # convert: [[Nürnberg/Transportation/Analyse/DE-BY-VGN-Linien]]
-        while ( $text =~ m/\[\[([^\]]+)\]\]/g ) {
-            if ( $suppress_links ) {
-                $sub = $1;
-            } else {
-                $sub = sprintf( "<a href=\"https://wiki.openstreetmap.org/wiki/%s\">%s</a>", $1, $1 );
-            }
-            $text =~ s/\[\[[^\]]+\]\]/$sub/;
-        }
-        # convert: [https://example.com/index.html External Link]
-        while ( $text =~ m/\[([^ ]+) ([^\]]+)\]/g ) {
-            if ( $suppress_links ) {
-                $sub = $2;
-            } else {
-                $sub = sprintf( "<a href=\"%s\">%s</a>", $1, $2 );
-            }
-            $text =~ s/\[[^ ]+ [^\]]+\]/$sub/;
-        }
-        # convert: [https://example.com/index.html]
-        while ( $text =~ m/\[([^\]]+)\]/g ) {
-            if ( $suppress_links ) {
-                $sub = $1;
-            } else {
-                $sub = sprintf( "<a href=\"%s\">%s</a>", $1, $1 );
-            }
-            $text =~ s/\[[^\]]+\]/$sub/;
-        }
-        while ( $text =~ m/!!!(.+?)!!!/g ) {
-            $sub = sprintf( "<span class=\"attention\">%s</span>", $1 );
-            $text =~ s/!!!(.+?)!!!/$sub/;
-        }
-        while ( $text =~ m/'''''(.+?)'''''/g ) {
-            $sub = sprintf( "<strong><em>%s</em></strong>", $1 );
-            $text =~ s/'''''(.+?)'''''/$sub/;
-        }
-        while ( $text =~ m/'''(.+?)'''/g ) {
-            $sub = sprintf( "<strong>%s</strong>", $1 );
-            $text =~ s/'''(.+?)'''/$sub/;
-        }
-        while ( $text =~ m/''(.+?)''/g ) {
-            $sub = sprintf( "<em>%s</em>", $1 );
-            $text =~ s/''(.+?)''/$sub/;
-        }
+
+        $text =~ s/!!!(.+?)!!!/<span class="attention">$1<\/span>/g;
+        $text =~ s/'''''(.+?)'''''/<strong><em>$1<\/em><\/strong>/g;
+        $text =~ s/'''(.+?)'''/<strong>$1<\/strong>/g;
+        $text =~ s/''(.+?)''/<em>$1<\/em>/g;
         $text =~ s/'/&#039;/g;
     }
     return $text;

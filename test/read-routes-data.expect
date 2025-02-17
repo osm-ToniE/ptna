@@ -110,7 +110,7 @@
         <h2 id="A2.3">2.3 External Link without alias: <a href="https://ptna.openstreetmap.de">https://ptna.openstreetmap.de</a></h2>
         <h2 id="A2.4">2.4 OSM-Wiki Link with alias: <a href="https://wiki.openstreetmap.org/wiki/M%C3%BCnchen">München</a></h2>
         <h2 id="A2.5">2.5 OSM-Wiki Link without alias: <a href="https://wiki.openstreetmap.org/wiki/München">München</a></h2>
-<a href="#train_010"><span class="foreign" dir="auto">010</span></a> <a href="#bus_201"><span class="foreign" dir="auto">201</span></a> <a href="#bus_301"><span class="foreign" dir="auto">301</span></a> <a href="#bus_302"><span class="foreign" dir="auto">302</span></a> <a href="#bus_401"><span class="foreign" dir="auto">401</span></a> <a href="#bus_402"><span class="foreign" dir="auto">402</span></a> <a href="#bus_501"><span class="foreign" dir="auto">501</span></a> <a href="#bus_502"><span class="foreign" dir="auto">502</span></a> <a href="#bus_601"><span class="foreign" dir="auto">601</span></a> <a href="#bus_602"><span class="foreign" dir="auto">602</span></a> <a href="#bus_603"><span class="foreign" dir="auto">603</span></a> <a href="#bus_604"><span class="foreign" dir="auto">604</span></a> <span style="background-color: #0000ff; border-style: solid; border-color: gray; border-width: 1px;"><nobr>&nbsp;<a href="#bus_605"><span style="color: #ff0000"><span class="foreign" dir="auto">605</span></span></a>&nbsp;</nobr></span> <a href="#bus_606"><span class="foreign" dir="auto">606</span></a> <a href="#bus_800"><span class="foreign" dir="auto">800</span></a> <a href="#bus_900"><span class="foreign" dir="auto">900</span></a> <a href="#bus_901"><span class="foreign" dir="auto">901</span></a> <a href="#bus_902"><span class="foreign" dir="auto">902</span></a> <a href="#bus_903"><span class="foreign" dir="auto">903</span></a> <a href="#bus_904"><span class="foreign" dir="auto">904</span></a> <a href="#bus_910"><span class="foreign" dir="auto">910</span></a> <a href="#bus_911"><span class="foreign" dir="auto">911</span></a> <a href="#bus_912"><span class="foreign" dir="auto">912</span></a> <a href="#bus_913"><span class="foreign" dir="auto">913</span></a> <a href="#bus_914"><span class="foreign" dir="auto">914</span></a> <a href="#bus_915"><span class="foreign" dir="auto">915</span></a> <a href="#bus_916"><span class="foreign" dir="auto">916</span></a> <a href="#bus_917"><span class="foreign" dir="auto">917</span></a> <a href="#bus_918"><span class="foreign" dir="auto">918</span></a> <a href="#bus_919"><span class="foreign" dir="auto">919</span></a> <a href="#bus_998_999"><span class="foreign" dir="auto">998;999</span></a> </br></br>
+<a href="#train_010"><span class="foreign" dir="auto">010</span></a> <a href="#bus_201"><span class="foreign" dir="auto">201</span></a> <a href="#bus_301"><span class="foreign" dir="auto">301</span></a> <a href="#bus_302"><span class="foreign" dir="auto">302</span></a> <a href="#bus_401"><span class="foreign" dir="auto">401</span></a> <a href="#bus_402"><span class="foreign" dir="auto">402</span></a> <a href="#bus_501"><span class="foreign" dir="auto">501</span></a> <a href="#bus_502"><span class="foreign" dir="auto">502</span></a> <a href="#bus_601"><span class="foreign" dir="auto">601</span></a> <a href="#bus_602"><span class="foreign" dir="auto">602</span></a> <a href="#bus_603"><span class="foreign" dir="auto">603</span></a> <a href="#bus_604"><span class="foreign" dir="auto">604</span></a> <span style="background-color: #0000ff; border-style: solid; border-color: gray; border-width: 1px;"><nobr>&nbsp;<a href="#bus_605"><span style="color: #ff0000"><span class="foreign" dir="auto">605</span></span></a>&nbsp;</nobr></span> <a href="#bus_606"><span class="foreign" dir="auto">606</span></a> <a href="#bus_800"><span class="foreign" dir="auto">800</span></a> <a href="#bus_900"><span class="foreign" dir="auto">900</span></a> <a href="#bus_901"><span class="foreign" dir="auto">901</span></a> <a href="#bus_902"><span class="foreign" dir="auto">902</span></a> <a href="#bus_903"><span class="foreign" dir="auto">903</span></a> <a href="#bus_904"><span class="foreign" dir="auto">904</span></a> <a href="#bus_910"><span class="foreign" dir="auto">910</span></a> <a href="#bus_911"><span class="foreign" dir="auto">911</span></a> <a href="#bus_912"><span class="foreign" dir="auto">912</span></a> <a href="#bus_913"><span class="foreign" dir="auto">913</span></a> <a href="#bus_914"><span class="foreign" dir="auto">914</span></a> <a href="#bus_915"><span class="foreign" dir="auto">915</span></a> <a href="#bus_916"><span class="foreign" dir="auto">916</span></a> <a href="#bus_917"><span class="foreign" dir="auto">917</span></a> <a href="#bus_918"><span class="foreign" dir="auto">918</span></a> <a href="#bus_919"><span class="foreign" dir="auto">919</span></a> <a href="#bus_920"><span class="foreign" dir="auto">920</span></a> <a href="#bus_921"><span class="foreign" dir="auto">921</span></a> <a href="#bus_922"><span class="foreign" dir="auto">922</span></a> <a href="#bus_923"><span class="foreign" dir="auto">923</span></a> <a href="#bus_924"><span class="foreign" dir="auto">924</span></a> <a href="#bus_998_999"><span class="foreign" dir="auto">998;999</span></a> </br></br>
 <p>
 simple text in a paragraph
 
@@ -120,7 +120,7 @@ new paragraph
 
 </p>
 <p>
-simple text in <strong><em>strong and em</em></strong>er and <strong><em>stronger and more em</em></strong>
+simple text in <strong><em>strong and em</em></strong> and <strong><em>stronger and more em</em></strong>
 
 </p>
 <p>
@@ -149,6 +149,10 @@ OSM-Wiki Link with alias: <a href="https://wiki.openstreetmap.org/wiki/M%C3%BCnc
 </p>
 <p>
 OSM-Wiki Link without alias: <a href="https://wiki.openstreetmap.org/wiki/München">München</a>
+
+</p>
+<p>
+Multiple OSM-Wiki Links: <a href="https://wiki.openstreetmap.org/wiki/Israel#Trains">Israel#Trains</a>, <a href="https://wiki.openstreetmap.org/wiki/IsraelTrains">List of Trains in Israel</a> and <a href="https://wiki.openstreetmap.org/wiki/Talk:IsraelTrains">Talk:IsraelTrains</a>.
 
 </p>
 <p>
@@ -223,21 +227,21 @@ Header: left, center, right (default: center) aligned, colour:blue (default: gra
 &nbsp;
 </p>
 <p>
-First character of line (&#039;|&#039;) is reserved. Please put the first CSV field into double quotes (&quot;...&quot;). Line 109 of Routes-Data. Contents of line: &#039;|:Header 1 |:Header 2:| Header 3:|@blue&#039;
+First character of line (&#039;|&#039;) is reserved. Please put the first CSV field into double quotes (&quot;...&quot;). Line 111 of Routes-Data. Contents of line: &#039;|:Header 1 |:Header 2:| Header 3:|@blue&#039;
 
 </p>
 <p>
 &nbsp;
 </p>
 <p>
-First character of line (&#039;|&#039;) is reserved. Please put the first CSV field into double quotes (&quot;...&quot;). Line 110 of Routes-Data. Contents of line: &#039;| Body 1,1 | Body 1,2 | Body 1,3:|@yellow&#039;
+First character of line (&#039;|&#039;) is reserved. Please put the first CSV field into double quotes (&quot;...&quot;). Line 112 of Routes-Data. Contents of line: &#039;| Body 1,1 | Body 1,2 | Body 1,3:|@yellow&#039;
 
 </p>
 <p>
 &nbsp;
 </p>
 <p>
-First character of line (&#039;|&#039;) is reserved. Please put the first CSV field into double quotes (&quot;...&quot;). Line 111 of Routes-Data. Contents of line: &#039;| Body 2,1 | Body 2,2 | Body 2,3:|&#039;
+First character of line (&#039;|&#039;) is reserved. Please put the first CSV field into double quotes (&quot;...&quot;). Line 113 of Routes-Data. Contents of line: &#039;| Body 2,1 | Body 2,2 | Body 2,3:|&#039;
 
 </p>
 <p>
@@ -247,35 +251,35 @@ First character of line (&#039;|&#039;) is reserved. Please put the first CSV fi
 &nbsp;
 </p>
 <p>
-First character of line (&#039;@&#039;) is reserved. Please put the first CSV field into double quotes (&quot;...&quot;). Line 117 of Routes-Data. Contents of line: &#039;@ reserved character with following char other than @a-z&#039;
+First character of line (&#039;@&#039;) is reserved. Please put the first CSV field into double quotes (&quot;...&quot;). Line 119 of Routes-Data. Contents of line: &#039;@ reserved character with following char other than @a-z&#039;
 
 </p>
 <p>
 &nbsp;
 </p>
 <p>
-First character of line (&#039;+&#039;) is reserved. Please put the first CSV field into double quotes (&quot;...&quot;). Line 118 of Routes-Data. Contents of line: &#039;+ reserved character&#039;
+First character of line (&#039;+&#039;) is reserved. Please put the first CSV field into double quotes (&quot;...&quot;). Line 120 of Routes-Data. Contents of line: &#039;+ reserved character&#039;
 
 </p>
 <p>
 &nbsp;
 </p>
 <p>
-First character of line (&#039;~&#039;) is reserved. Please put the first CSV field into double quotes (&quot;...&quot;). Line 119 of Routes-Data. Contents of line: &#039;~ reserved character&#039;
+First character of line (&#039;~&#039;) is reserved. Please put the first CSV field into double quotes (&quot;...&quot;). Line 121 of Routes-Data. Contents of line: &#039;~ reserved character&#039;
 
 </p>
 <p>
 &nbsp;
 </p>
 <p>
-First character of line (&#039;$&#039;) is reserved. Please put the first CSV field into double quotes (&quot;...&quot;). Line 120 of Routes-Data. Contents of line: &#039;$ reserved character&#039;
+First character of line (&#039;$&#039;) is reserved. Please put the first CSV field into double quotes (&quot;...&quot;). Line 122 of Routes-Data. Contents of line: &#039;$ reserved character&#039;
 
 </p>
 <p>
 &nbsp;
 </p>
 <p>
-First character of line (&#039;|&#039;) is reserved. Please put the first CSV field into double quotes (&quot;...&quot;). Line 121 of Routes-Data. Contents of line: &#039;| reserved character&#039;
+First character of line (&#039;|&#039;) is reserved. Please put the first CSV field into double quotes (&quot;...&quot;). Line 123 of Routes-Data. Contents of line: &#039;| reserved character&#039;
 
 </p>
         <table class="oepnvtable">
@@ -286,9 +290,9 @@ First character of line (&#039;|&#039;) is reserved. Please put the first CSV fi
                 <tr id="train_010" data-info="Comment: ICE; From: <span class=_foreign_ dir=_auto_>Hamburg</span>; To: <span class=_foreign_ dir=_auto_>Munich</span>; Operator: <span class=_foreign_ dir=_auto_>Deutsche Bahn</span>" data-ref="010" class="sketchline"><td class="sketch" dir="auto">010</td><td class="csvinfo" colspan="5" dir="auto">Comment: ICE; From: <span class="foreign" dir="auto">Hamburg</span>; To: <span class="foreign" dir="auto">Munich</span>; Operator: <span class="foreign" dir="auto">Deutsche Bahn</span></td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Missing route for 'ref'='010' and 'route'='train'</td><td class="notes" dir="auto"></td></tr>
                 <tr data-info="???" data-ref="100" class="sketchline"><td class="sketch" dir="auto">100</td><td class="csvinfo" colspan="5" dir="auto"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Route-Type is not set. Line 125 of Routes-Data. Contents of line: '100'</td><td class="notes" dir="auto"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Route-Type is not set. Line 127 of Routes-Data. Contents of line: '100'</td><td class="notes" dir="auto"></td></tr>
                 <tr data-info="???" data-ref="200" class="sketchline"><td class="sketch" dir="auto">200</td><td class="csvinfo" colspan="5" dir="auto"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Route-Type is not set. Line 126 of Routes-Data. Contents of line: '200;'</td><td class="notes" dir="auto"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Route-Type is not set. Line 128 of Routes-Data. Contents of line: '200;'</td><td class="notes" dir="auto"></td></tr>
                 <tr id="bus_201" data-info="???" data-ref="201" class="sketchline"><td class="sketch" dir="auto">201</td><td class="csvinfo" colspan="5" dir="auto"></td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Missing route for 'ref'='201' and 'route'='bus'</td><td class="notes" dir="auto"></td></tr>
             </tbody>
@@ -304,13 +308,13 @@ text inside table is now supported
             </thead>
             <tbody>
                 <tr data-info="???" data-ref="300" class="sketchline"><td class="sketch" dir="auto">300</td><td class="csvinfo" colspan="5" dir="auto"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Route-Type is not set. Line 131 of Routes-Data. Contents of line: '300;;'</td><td class="notes" dir="auto"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Route-Type is not set. Line 133 of Routes-Data. Contents of line: '300;;'</td><td class="notes" dir="auto"></td></tr>
                 <tr id="bus_301" data-info="???" data-ref="301" class="sketchline"><td class="sketch" dir="auto">301</td><td class="csvinfo" colspan="5" dir="auto"></td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Missing route for 'ref'='301' and 'route'='bus'</td><td class="notes" dir="auto"></td></tr>
                 <tr id="bus_302" data-info="Comment: comment" data-ref="302" class="sketchline"><td class="sketch" dir="auto">302</td><td class="csvinfo" colspan="5" dir="auto">Comment: comment</td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Missing route for 'ref'='302' and 'route'='bus'</td><td class="notes" dir="auto"></td></tr>
                 <tr data-info="???" data-ref="400" class="sketchline"><td class="sketch" dir="auto">400</td><td class="csvinfo" colspan="5" dir="auto"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Route-Type is not set. Line 134 of Routes-Data. Contents of line: '400;;;'</td><td class="notes" dir="auto"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Route-Type is not set. Line 136 of Routes-Data. Contents of line: '400;;;'</td><td class="notes" dir="auto"></td></tr>
             </tbody>
         </table>
 
@@ -327,13 +331,13 @@ text inside table is now supported
                 <tr id="bus_402" data-info="Comment: comment; From: <span class=_foreign_ dir=_auto_>from</span>" data-ref="402" class="sketchline"><td class="sketch" dir="auto">402</td><td class="csvinfo" colspan="5" dir="auto">Comment: comment; From: <span class="foreign" dir="auto">from</span></td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Missing route for 'ref'='402' and 'route'='bus'</td><td class="notes" dir="auto"></td></tr>
                 <tr data-info="???" data-ref="500" class="sketchline"><td class="sketch" dir="auto">500</td><td class="csvinfo" colspan="5" dir="auto"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Route-Type is not set. Line 138 of Routes-Data. Contents of line: '500;;;;'</td><td class="notes" dir="auto"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Route-Type is not set. Line 140 of Routes-Data. Contents of line: '500;;;;'</td><td class="notes" dir="auto"></td></tr>
                 <tr id="bus_501" data-info="Comment: comment; From: <span class=_foreign_ dir=_auto_>from</span>" data-ref="501" class="sketchline"><td class="sketch" dir="auto">501</td><td class="csvinfo" colspan="5" dir="auto">Comment: comment; From: <span class="foreign" dir="auto">from</span></td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Missing route for 'ref'='501' and 'route'='bus'</td><td class="notes" dir="auto"></td></tr>
                 <tr id="bus_502" data-info="Comment: comment; From: <span class=_foreign_ dir=_auto_>from</span>; To: <span class=_foreign_ dir=_auto_>to</span>" data-ref="502" class="sketchline"><td class="sketch" dir="auto">502</td><td class="csvinfo" colspan="5" dir="auto">Comment: comment; From: <span class="foreign" dir="auto">from</span>; To: <span class="foreign" dir="auto">to</span></td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Missing route for 'ref'='502' and 'route'='bus'</td><td class="notes" dir="auto"></td></tr>
                 <tr data-info="???" data-ref="600" class="sketchline"><td class="sketch" dir="auto">600</td><td class="csvinfo" colspan="5" dir="auto"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Route-Type is not set. Line 141 of Routes-Data. Contents of line: '600;;;;;'</td><td class="notes" dir="auto"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Route-Type is not set. Line 143 of Routes-Data. Contents of line: '600;;;;;'</td><td class="notes" dir="auto"></td></tr>
                 <tr id="bus_601" data-info="???" data-ref="601" class="sketchline"><td class="sketch" dir="auto">601</td><td class="csvinfo" colspan="5" dir="auto"></td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Missing route for 'ref'='601' and 'route'='bus'</td><td class="notes" dir="auto"></td></tr>
                 <tr id="bus_602" data-info="Comment: comment" data-ref="602" class="sketchline"><td class="sketch" dir="auto">602</td><td class="csvinfo" colspan="5" dir="auto">Comment: comment</td></tr>
@@ -347,7 +351,7 @@ text inside table is now supported
                 <tr id="bus_606" data-info="Operator: <span class=_foreign_ dir=_auto_>operator</span>" data-ref="606" class="sketchline"><td class="sketch" dir="auto">606</td><td class="csvinfo" colspan="5" dir="auto">Operator: <span class="foreign" dir="auto">operator</span></td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Missing route for 'ref'='606' and 'route'='bus'</td><td class="notes" dir="auto"></td></tr>
                 <tr data-info="???" data-ref="700" class="sketchline"><td class="sketch" dir="auto">700</td><td class="csvinfo" colspan="5" dir="auto"></td></tr>
-                <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Route-Type is not supported: 'auto'. Line 148 of Routes-Data. Contents of line: '700;auto;invalid route-type;nowhere;nowhere;noone'</td><td class="notes" dir="auto"></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Route-Type is not supported: 'auto'. Line 150 of Routes-Data. Contents of line: '700;auto;invalid route-type;nowhere;nowhere;noone'</td><td class="notes" dir="auto"></td></tr>
                 <tr id="bus_800" data-info="Comment: <span class=_attention_>Neue Buslinie ab 09.12.2018</span>; From: <span class=_foreign_ dir=_auto_>nowhere</span>; To: <span class=_foreign_ dir=_auto_>nowhere</span>; Operator: <span class=_foreign_ dir=_auto_>noone</span>" data-ref="800" class="sketchline"><td class="sketch" dir="auto">800</td><td class="csvinfo" colspan="5" dir="auto">Comment: <span class="attention">Neue Buslinie ab 09.12.2018</span>; From: <span class="foreign" dir="auto">nowhere</span>; To: <span class="foreign" dir="auto">nowhere</span>; Operator: <span class="foreign" dir="auto">noone</span></td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Missing route for 'ref'='800' and 'route'='bus'</td><td class="notes" dir="auto"></td></tr>
                 <tr id="bus_900" data-info="Comment: External Link with alias: <a href=_https://ptna.openstreetmap.de_>PTNA</a>; From: <span class=_foreign_ dir=_auto_>from</span>; To: <span class=_foreign_ dir=_auto_>to</span>; Operator: <span class=_foreign_ dir=_auto_>operator1;operator2</span>" data-ref="900" class="sketchline"><td class="sketch" dir="auto">900</td><td class="csvinfo" colspan="5" dir="auto">Comment: External Link with alias: <a href="https://ptna.openstreetmap.de">PTNA</a>; From: <span class="foreign" dir="auto">from</span>; To: <span class="foreign" dir="auto">to</span>; Operator: <span class="foreign" dir="auto">operator1;operator2</span></td></tr>
@@ -378,8 +382,18 @@ text inside table is now supported
                 <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Missing route for 'ref'='917' and 'route'='bus'</td><td class="notes" dir="auto"></td></tr>
                 <tr id="bus_918" data-info="Operator: <span class=_foreign_ dir=_auto_>&quot;Mein Bus&quot; Gmbh</span>" data-ref="918" class="sketchline"><td class="sketch" dir="auto">918</td><td class="csvinfo" colspan="5" dir="auto">Operator: <span class="foreign" dir="auto">&quot;Mein Bus&quot; Gmbh</span></td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Missing route for 'ref'='918' and 'route'='bus'</td><td class="notes" dir="auto"></td></tr>
-                <tr id="bus_919" data-info="Operator: <span class=_foreign_ dir=_auto_>operator&#039;s son</span>" data-ref="919" class="sketchline"><td class="sketch" dir="auto">919</td><td class="csvinfo" colspan="5" dir="auto">Operator: <span class="foreign" dir="auto">operator&#039;s son</span></td></tr>
+                <tr id="bus_919" data-info="Comment: double-quote inside field works if none of the files is surrounded by double-qutes (split(&#039;,&#039;,...) is used); From: <span class=_foreign_ dir=_auto_>as&quot;df</span>; To: <span class=_foreign_ dir=_auto_>to</span>; Operator: <span class=_foreign_ dir=_auto_>myop</span>" data-ref="919" class="sketchline"><td class="sketch" dir="auto">919</td><td class="csvinfo" colspan="5" dir="auto">Comment: double-quote inside field works if none of the files is surrounded by double-qutes (split(&#039;,&#039;,...) is used); From: <span class="foreign" dir="auto">as&quot;df</span>; To: <span class="foreign" dir="auto">to</span>; Operator: <span class="foreign" dir="auto">myop</span></td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Missing route for 'ref'='919' and 'route'='bus'</td><td class="notes" dir="auto"></td></tr>
+                <tr id="bus_920" data-info="Comment: Missing double-quote and yz at end of &#039;from&#039;; From: <span class=_foreign_ dir=_auto_>wx</span>; To: <span class=_foreign_ dir=_auto_>to</span>; Operator: <span class=_foreign_ dir=_auto_>myop</span>" data-ref="920" class="sketchline"><td class="sketch" dir="auto">920</td><td class="csvinfo" colspan="5" dir="auto">Comment: Missing double-quote and yz at end of &#039;from&#039;; From: <span class="foreign" dir="auto">wx</span>; To: <span class="foreign" dir="auto">to</span>; Operator: <span class="foreign" dir="auto">myop</span></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Missing route for 'ref'='920' and 'route'='bus'</td><td class="notes" dir="auto"></td></tr>
+                <tr id="bus_921" data-info="From: <span class=_foreign_ dir=_auto_>&quot;&quot;source</span>; To: <span class=_foreign_ dir=_auto_>station</span>" data-ref="921" class="sketchline"><td class="sketch" dir="auto">921</td><td class="csvinfo" colspan="5" dir="auto">From: <span class="foreign" dir="auto">&quot;&quot;source</span>; To: <span class="foreign" dir="auto">station</span></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Missing route for 'ref'='921' and 'route'='bus'</td><td class="notes" dir="auto"></td></tr>
+                <tr id="bus_922" data-info="Comment: surrounding single-quotes in &#039;from&#039;; From: <span class=_foreign_ dir=_auto_>&#039;jk&quot;lm&#039;</span>; To: <span class=_foreign_ dir=_auto_>to</span>; Operator: <span class=_foreign_ dir=_auto_>myop</span>" data-ref="922" class="sketchline"><td class="sketch" dir="auto">922</td><td class="csvinfo" colspan="5" dir="auto">Comment: surrounding single-quotes in &#039;from&#039;; From: <span class="foreign" dir="auto">&#039;jk&quot;lm&#039;</span>; To: <span class="foreign" dir="auto">to</span>; Operator: <span class="foreign" dir="auto">myop</span></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Missing route for 'ref'='922' and 'route'='bus'</td><td class="notes" dir="auto"></td></tr>
+                <tr id="bus_923" data-info="Comment: surrounding single-quotes in &#039;from&#039;; From: <span class=_foreign_ dir=_auto_>&#039;jk&quot;lm&#039;</span>; To: <span class=_foreign_ dir=_auto_>to</span>; Operator: <span class=_foreign_ dir=_auto_>myop</span>" data-ref="923" class="sketchline"><td class="sketch" dir="auto">923</td><td class="csvinfo" colspan="5" dir="auto">Comment: surrounding single-quotes in &#039;from&#039;; From: <span class="foreign" dir="auto">&#039;jk&quot;lm&#039;</span>; To: <span class="foreign" dir="auto">to</span>; Operator: <span class="foreign" dir="auto">myop</span></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Missing route for 'ref'='923' and 'route'='bus'</td><td class="notes" dir="auto"></td></tr>
+                <tr id="bus_924" data-info="Operator: <span class=_foreign_ dir=_auto_>operator&#039;s son</span>" data-ref="924" class="sketchline"><td class="sketch" dir="auto">924</td><td class="csvinfo" colspan="5" dir="auto">Operator: <span class="foreign" dir="auto">operator&#039;s son</span></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Missing route for 'ref'='924' and 'route'='bus'</td><td class="notes" dir="auto"></td></tr>
                 <tr id="bus_998_999" data-info="Operator: <span class=_foreign_ dir=_auto_>operator</span>" data-ref="998;999" class="sketchline"><td class="sketch" dir="auto">998;999</td><td class="csvinfo" colspan="5" dir="auto">Operator: <span class="foreign" dir="auto">operator</span></td></tr>
                 <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Missing route for 'ref'='998;999' and 'route'='bus'</td><td class="notes" dir="auto"></td></tr>
             </tbody>

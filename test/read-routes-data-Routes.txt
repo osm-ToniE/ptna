@@ -56,7 +56,7 @@ This page follows the PTNA CSV format. For more information, see [[Public Transp
 -
 - new paragraph
 -
-- simple text in '''''strong and em'''''er and '''''stronger and more em'''''
+- simple text in '''''strong and em''''' and '''''stronger and more em'''''
 -
 - simple text in '''strong'''er and '''stronger'''
 -
@@ -71,6 +71,8 @@ This page follows the PTNA CSV format. For more information, see [[Public Transp
 - OSM-Wiki Link with alias: [[M%C3%BCnchen|München]]
 -
 - OSM-Wiki Link without alias: [[München]]
+-
+- Multiple OSM-Wiki Links: [[Israel#Trains]], [[IsraelTrains|List of Trains in Israel]] and [[Talk:IsraelTrains]].
 -
 - A simulated Bullet List with indention
 -
@@ -161,7 +163,12 @@ $ reserved character
 916;bus;;;;"'Mein Bus' Gmbh"
 917;bus;;;;"Mein Bus Gmbh"
 918;bus;;;;"Mein Bus" Gmbh
-919;bus;;;;operator's son
+919;bus;double-quote inside field works if none of the files is surrounded by double-qutes (split(',',...) is used);as"df;to;myop
+920;bus;"Missing double-quote and yz at end of 'from'";"wx"yz";to;myop
+921;bus;;""source;station
+922;bus;surrounding single-quotes in 'from';'jk"lm';to;myop
+923;bus;surrounding single-quotes in 'from';'jk"lm';to;"myop"
+924;bus;;;;operator's son
 "998;999";bus;;;;operator
 
 -
