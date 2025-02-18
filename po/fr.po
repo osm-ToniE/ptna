@@ -10,17 +10,17 @@
 # Patchi Atwork <patchi.atwork@gmail.com>, 2020
 # R B, 2022
 # Noémie <nlehuby@zaclys.net>, 2022
-# ToniE <osm-ToniE@web.de>, 2024
 # Patchi, 2025
+# ToniE <osm-ToniE@web.de>, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-01-29 15:02+0100\n"
+"POT-Creation-Date: 2025-02-18 14:20+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: Patchi, 2025\n"
+"Last-Translator: ToniE <osm-ToniE@web.de>, 2025\n"
 "Language-Team: French (https://app.transifex.com/jungle-bus/teams/97874/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1528,39 +1528,37 @@ msgid "'public_transport:version' is not set"
 msgstr "L'attribut 'public_transport:version' n'est pas défini"
 
 #, perl-format
-msgid ""
-"CSV data includes too many ';'. Line %s of Routes-Data. Contents of line: "
-"'%s'"
+msgid "CSV data includes errors. Line %s of Routes-Data. Contents: '%s'"
 msgstr ""
-"Données CSV contiennent trop de ';'. Ligne des données d'itinéraires %s. "
-"Contenu de la ligne : '%s'"
+"Les données CSV contiennent des erreurs. Ligne %s des données de parcours. "
+"Contenu : '%s'"
 
 #, perl-format
 msgid ""
 "CSV data: field 'gtfs_feed' (= '%s') is wrong. Line %s of Routes-Data. "
-"Contents of line: '%s'"
+"Contents: '%s'"
 msgstr ""
 "Données CSV : le champ 'gtfs_feed' (= '%s') est incorrect. Ligne %s de "
-"Routes-Data. Contenu de la ligne: '%s'"
+"Routes-Data. Contenu : '%s'"
 
 #, perl-format
 msgid ""
 "CSV data: field 'release_date' (= '%s') is wrong. Should be a date (YYYY-MM-"
-"DD), 'latest', 'previous' or 'long-term'. Line %s of Routes-Data. Contents "
-"of line: '%s'"
+"DD), 'latest', 'previous' or 'long-term'. Line %s of Routes-Data. Contents: "
+"'%s'"
 msgstr ""
 "Données CSV : champs 'release_date' (= '%s') erroné. Ce devrait être une "
 "date (YYYY-MM-DD), 'latest', 'previous' ou 'long-term'. Ligne des données "
-"d'itinéraires %s. Contenu de la ligne : '%s'"
+"d'itinéraires %s. Contenu : '%s'"
 
 #, perl-format
 msgid ""
 "First character of line ('%s') is reserved. Please put the first CSV field "
-"into double quotes (\"...\"). Line %s of Routes-Data. Contents of line: '%s'"
+"into double quotes (\"...\"). Line %s of Routes-Data. Contents: '%s'"
 msgstr ""
 "Le premier caractère de la ligne ('%s') est réservé. Veuillez mettre le "
 "premier champs CSV dans des guillemets (\"...\"). Ligne des données "
-"d'itinéraires %s . Contenu de la ligne : '%s'"
+"d'itinéraires %s . Contenu : '%s'"
 
 msgid ""
 "This Route relation has been included into the input data as a side-effect, "
@@ -1798,18 +1796,23 @@ msgid ""
 msgstr "Cette ligne a plusieurs lignes maître (%s = liste des lignes maître)."
 
 #, perl-format
-msgid "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'"
+msgid "Route-Ref is not set. Line %s of Routes-Data. Contents: '%s'"
+msgstr ""
+"Le 'ref' n'est pas indiqué. Ligne %s des données d'itinéraires. Contenu : "
+"'%s'"
+
+#, perl-format
+msgid "Route-Type is not set. Line %s of Routes-Data. Contents: '%s'"
 msgstr ""
 "Le type 'Route' n'est pas indiqué. Ligne %s des données d'itinéraires. "
-"Contenus de la ligne : '%s'"
+"Contenu : '%s'"
 
 #, perl-format
 msgid ""
-"Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line:"
-" '%s'"
+"Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents: '%s'"
 msgstr ""
 "Le type 'Route' n'est pas pris en charge : '%s'. Ligne %s des données "
-"d'itinéraires. Contenus de la ligne : '%s'"
+"d'itinéraires. Contenu : '%s'"
 
 msgid "Values of tags must not be empty."
 msgstr "Les valeurs des attributs ne doivent pas être vides."

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-01-29 15:02+0100\n"
+"POT-Creation-Date: 2025-02-18 14:20+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: Carlos Sánchez López <erielkhan@gmail.com>, 2024\n"
 "Language-Team: Catalan (https://app.transifex.com/jungle-bus/teams/97874/ca/)\n"
@@ -1413,39 +1413,27 @@ msgid "'public_transport:version' is not set"
 msgstr "'public_transport:version' no està definit"
 
 #, perl-format
-msgid ""
-"CSV data includes too many ';'. Line %s of Routes-Data. Contents of line: "
-"'%s'"
+msgid "CSV data includes errors. Line %s of Routes-Data. Contents: '%s'"
 msgstr ""
-"Les dades CSV inclouen masses ';'. Línies %s de Rutes. Continguts de line: "
-"'%s'"
 
 #, perl-format
 msgid ""
 "CSV data: field 'gtfs_feed' (= '%s') is wrong. Line %s of Routes-Data. "
-"Contents of line: '%s'"
+"Contents: '%s'"
 msgstr ""
-"Dades CSV: el camp 'gtfs_feed' (= '%s') és erroni. Línia %s de les Rutes. "
-"Continguts de la línia: '%s'"
 
 #, perl-format
 msgid ""
 "CSV data: field 'release_date' (= '%s') is wrong. Should be a date (YYYY-MM-"
-"DD), 'latest', 'previous' or 'long-term'. Line %s of Routes-Data. Contents "
-"of line: '%s'"
+"DD), 'latest', 'previous' or 'long-term'. Line %s of Routes-Data. Contents: "
+"'%s'"
 msgstr ""
-"Dades CSV: el camp 'release_date' (= '%s') és erroni. Hauria de ser una data"
-" (AAAA-MM-DD), 'latest', 'previous' o 'long-term'. Línia %s de les Rutes. "
-"Continguts de la línia: '%s'"
 
 #, perl-format
 msgid ""
 "First character of line ('%s') is reserved. Please put the first CSV field "
-"into double quotes (\"...\"). Line %s of Routes-Data. Contents of line: '%s'"
+"into double quotes (\"...\"). Line %s of Routes-Data. Contents: '%s'"
 msgstr ""
-"El primer caràcter de la línia ('%s') està reservat. Si us plau, col·loca el"
-" primer camp del CSV entre cometes dobles (\"...\"). Línia %s de les Rutes. "
-"Continguts de la línia: '%s'"
 
 msgid ""
 "This Route relation has been included into the input data as a side-effect, "
@@ -1679,18 +1667,17 @@ msgid ""
 msgstr "Aquesta Ruta té més d'una Ruta Mestra (%s = llista de Rutes Mestres)."
 
 #, perl-format
-msgid "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'"
+msgid "Route-Ref is not set. Line %s of Routes-Data. Contents: '%s'"
 msgstr ""
-"El Tipus de Ruta no s'ha definit. Línia %s de les Rutes. Continguts de "
-"línia: '%s'"
+
+#, perl-format
+msgid "Route-Type is not set. Line %s of Routes-Data. Contents: '%s'"
+msgstr ""
 
 #, perl-format
 msgid ""
-"Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line:"
-" '%s'"
+"Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents: '%s'"
 msgstr ""
-"Tipus de Ruta no està suportat: '%s'. Línia %s de Rutes. Continguts de "
-"línia: '%s'"
 
 msgid "Values of tags must not be empty."
 msgstr "Els valors de les etiquetes no poden ser buits."

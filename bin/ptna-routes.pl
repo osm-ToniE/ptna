@@ -6846,9 +6846,13 @@ sub printTableSubHeader {
         $ref_or_list_text = $ref;
     }
 
+    printf STDERR "printTableSubHeader(): ref_or_list_text = '%s'\n", $ref_or_list_text    if ( $debug );
+
     if ( scalar @ref_or_array ) {
         $ref_text = join(' ', map { printSketchLineTemplate( $_, $network, $operator, $pt_type, $colour, $text_colour ) } @ref_or_array );
     }
+    printf STDERR "printTableSubHeader(): ref_text = '%s'\n", $ref_text    if ( defined($ref_text) && $debug );
+
 
     if ( scalar @ref_or_array && $pt_type ) {
         my $id_label  = sprintf( "%s_%s", $pt_type, join('_', @ref_or_array ) );
@@ -6866,7 +6870,7 @@ sub printTableSubHeader {
     }
 
     if ( $hash{'CSV-Comment'}  ) {
-        $csv_text .= sprintf( "%s: %s; ", ( $column_name{'CSV-Comment'}  ? $column_name{'CSV-Comment'}  : 'Comment' ),  wiki2html( $hash{'CSV-Comment'} )  );
+        $csv_text .= sprintf( "%s: <span class=\"foreign\" dir=\"auto\">%s</span>; ", ( $column_name{'CSV-Comment'}  ? $column_name{'CSV-Comment'}  : 'Comment' ),  wiki2html( $hash{'CSV-Comment'} )  );
         $csv_text =~ s|!([^!]+)!|<span class=\"attention\">$1</span>|g;
     }
     $csv_text .= sprintf( "%s: %s; ", ( $column_name{'CSV-From'}          ? $column_name{'CSV-From'}          : 'From' ),          handle_foreign($hash{'CSV-From'})     )      if ( $hash{'CSV-From'}          );
@@ -6914,7 +6918,7 @@ sub printTableSubHeader {
     $info = $csv_text ? $csv_text : '???';
     $info =~ s/\"/_/g;
 
-    if ( $no_of_columns > 1 && $ref_or_list_text ne '' && $ref_text ) {
+    if ( $no_of_columns > 1 && $ref_or_list_text ne '' && defined($ref_text) && $ref_text ne '' ) {
         push( @HTML_main, sprintf( "%16s<tr %sdata-info=\"%s\" data-ref=\"%s\" class=\"sketchline\"><td class=\"sketch\" dir=\"auto\">%s</td><td class=\"csvinfo\" colspan=\"%d\" dir=\"auto\">%s</td></tr>\n", ' ', $id_string, $info, html_escape($ref_or_list_text), $ref_text, $no_of_columns-1, $csv_text ) );
     }
 }

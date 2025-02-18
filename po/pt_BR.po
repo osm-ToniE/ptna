@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-01-29 15:02+0100\n"
+"POT-Creation-Date: 2025-02-18 14:20+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: Matheus Gomes, 2023\n"
 "Language-Team: Portuguese (Brazil) (https://app.transifex.com/jungle-bus/teams/97874/pt_BR/)\n"
@@ -1254,28 +1254,26 @@ msgid "'public_transport:version' is not set"
 msgstr "A etiqueta \"public_transport:version\" não está definida"
 
 #, perl-format
-msgid ""
-"CSV data includes too many ';'. Line %s of Routes-Data. Contents of line: "
-"'%s'"
+msgid "CSV data includes errors. Line %s of Routes-Data. Contents: '%s'"
 msgstr ""
 
 #, perl-format
 msgid ""
 "CSV data: field 'gtfs_feed' (= '%s') is wrong. Line %s of Routes-Data. "
-"Contents of line: '%s'"
+"Contents: '%s'"
 msgstr ""
 
 #, perl-format
 msgid ""
 "CSV data: field 'release_date' (= '%s') is wrong. Should be a date (YYYY-MM-"
-"DD), 'latest', 'previous' or 'long-term'. Line %s of Routes-Data. Contents "
-"of line: '%s'"
+"DD), 'latest', 'previous' or 'long-term'. Line %s of Routes-Data. Contents: "
+"'%s'"
 msgstr ""
 
 #, perl-format
 msgid ""
 "First character of line ('%s') is reserved. Please put the first CSV field "
-"into double quotes (\"...\"). Line %s of Routes-Data. Contents of line: '%s'"
+"into double quotes (\"...\"). Line %s of Routes-Data. Contents: '%s'"
 msgstr ""
 
 msgid ""
@@ -1457,16 +1455,17 @@ msgid ""
 msgstr ""
 
 #, perl-format
-msgid "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'"
+msgid "Route-Ref is not set. Line %s of Routes-Data. Contents: '%s'"
+msgstr ""
+
+#, perl-format
+msgid "Route-Type is not set. Line %s of Routes-Data. Contents: '%s'"
 msgstr ""
 
 #, perl-format
 msgid ""
-"Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line:"
-" '%s'"
+"Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents: '%s'"
 msgstr ""
-"Tipo de rota inválido: \"%s\". Linha %s dos dados de rotas. Conteúdo da "
-"linha: \"%s\""
 
 msgid "Values of tags must not be empty."
 msgstr ""

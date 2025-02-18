@@ -83,7 +83,8 @@ sub ReadRoutes {
                 binmode CSV, ":utf8";
 
                 $csv_module = Text::CSV_XS->new( { sep_char            => ';',
-                                                   quote_char          => '"'
+                                                   quote_char          => '"',
+                                                   allow_whitespace    => 1             # allow and remove leading and trailing whitespace
                                                  }
                                                );
 
@@ -131,7 +132,7 @@ sub ReadRoutes {
                                 $hashref->{'type'}      = 'ignore';         # store type
                                 $hashref->{'ignore'}    = decode( 'utf8', $_ );
                             } else {
-                                $issues_string          = gettext( "First character of line ('%s') is reserved. Please put the first CSV field into double quotes (\"...\"). Line %s of Routes-Data. Contents of line: '%s'" );
+                                $issues_string          = gettext( "First character of line ('%s') is reserved. Please put the first CSV field into double quotes (\"...\"). Line %s of Routes-Data. Contents: '%s'" );
                                 $hashref->{'type'}      = 'reserved';         # store type
                                 $hashref->{'reserved'}  = sprintf( decode( 'utf8', $issues_string ), $1, $NR, $hashref->{'contents'} );   # this is an error
                             }
@@ -149,19 +150,13 @@ sub ReadRoutes {
 #                            ($ExpRef,$ExpRouteType,$ExpComment,$ExpFrom,$ExpTo,$ExpOperator,$ExpGtfsFeed,$ExpGtfsRouteId,$ExpGtfsReleaseDate,@rest) = split( $csv_separator, $_ );
 #                        }
 
-                        if ( $ExpRef || $ExpRef eq '0' ) {
-                            $ExpRef =~ s/^\s*//;
-                            $ExpRef =~ s/\s*$//;
+                        if ( defined($ExpRef) ) {
                             printf STDERR "ReadRoutes(): ExpRef = '%s' in line %d, contents: '%s'\n", $ExpRef, $NR, $hashref->{'contents'}      if ( $debug );
                         }
                         if ( $ExpRouteType ) {
-                            $ExpRouteType =~ s/^\s*//;
-                            $ExpRouteType =~ s/\s*$//;
                             printf STDERR "ReadRoutes(): ExpRouteType = '%s' in line %d, contents: '%s'\n", $ExpRouteType, $NR, $hashref->{'contents'}      if ( $debug );
                         }
                         if ( $ExpComment ) {
-                            $ExpComment =~ s/^\s*//;
-                            $ExpComment =~ s/\s*$//;
                             printf STDERR "ReadRoutes(): ExpComment = '%s' in line %d, contents: '%s'\n", $ExpComment, $NR, $hashref->{'contents'}      if ( $debug );
                             while ( $ExpComment =~ m/\@\(([^=]+)=([^)]*)\)/g ) {
                                 $ExpColour = $2 if ( $1 == 'colour' );
@@ -170,36 +165,24 @@ sub ReadRoutes {
                             }
                         }
                         if ( $ExpFrom ) {
-                            $ExpFrom =~ s/^\s*//;
-                            $ExpFrom =~ s/\s*$//;
                             printf STDERR "ReadRoutes(): ExpFrom = '%s' in line %d, contents: '%s'\n", $ExpFrom, $NR, $hashref->{'contents'}      if ( $debug );
                         }
                         if ( $ExpTo ) {
-                            $ExpTo =~ s/^\s*//;
-                            $ExpTo =~ s/\s*$//;
                             printf STDERR "ReadRoutes(): ExpTo = '%s' in line %d, contents: '%s'\n", $ExpTo, $NR, $hashref->{'contents'}      if ( $debug );
                         }
                         if ( $ExpOperator ) {
-                            $ExpOperator =~ s/^\s*//;
-                            $ExpOperator =~ s/\s*$//;
                             printf STDERR "ReadRoutes(): ExpOperator = '%s' in line %d, contents: '%s'\n", $ExpOperator, $NR, $hashref->{'contents'}      if ( $debug );
                         }
                         if ( $ExpGtfsFeed ) {
-                            $ExpGtfsFeed =~ s/^\s*//;
-                            $ExpGtfsFeed =~ s/\s*$//;
                             printf STDERR "ReadRoutes(): ExpGtfsFeed = '%s' in line %d, contents: '%s'\n", $ExpGtfsFeed, $NR, $hashref->{'contents'}      if ( $debug );
                         }
                         if ( $ExpGtfsRouteId ) {
-                            $ExpGtfsRouteId =~ s/^\s*//;
-                            $ExpGtfsRouteId =~ s/\s*$//;
                             printf STDERR "ReadRoutes(): ExpGtfsRouteId = '%s' in line %d, contents: '%s'\n", $ExpGtfsRouteId, $NR, $hashref->{'contents'}      if ( $debug );
                         }
                         if ( $ExpGtfsReleaseDate ) {
-                            $ExpGtfsReleaseDate =~ s/^\s*//;
-                            $ExpGtfsReleaseDate =~ s/\s*$//;
                             printf STDERR "ReadRoutes(): ExpReleaseDate = '%s' in line %d, contents: '%s'\n", $ExpGtfsReleaseDate, $NR, $hashref->{'contents'}      if ( $debug );
                         }
-                        $hashref->{'ref'}               = ($ExpRef || $ExpRef eq '0') ? $ExpRef : '';              # 'ref'=
+                        $hashref->{'ref'}               = defined($ExpRef) ? $ExpRef : '';         # 'ref'=
                         $hashref->{'route'}             = $ExpRouteType        || '';              # 'route/route_master'=
                         $hashref->{'comment'}           = $ExpComment          || '';              # routes file comment
                         $hashref->{'from'}              = $ExpFrom             || '';              # 'from'
@@ -212,7 +195,7 @@ sub ReadRoutes {
                         $hashref->{'colour'}            = $ExpColour           || '';              # 'colour' coded as @(colour=...) in ExpComment field
                         if ( $ExpGtfsFeed                       &&
                              $ExpGtfsFeed !~ m/^[0-9A-Za-z_.-]+$/    ) {
-                            $issues_string      = gettext( "CSV data: field 'gtfs_feed' (= '%s') is wrong. Line %s of Routes-Data. Contents of line: '%s'" );
+                            $issues_string      = gettext( "CSV data: field 'gtfs_feed' (= '%s') is wrong. Line %s of Routes-Data. Contents: '%s'" );
                             $hashref->{'type'}  = 'error';                                              # this is an error
                             $hashref->{'ref'}   = $ExpRef;                                              # this is an error
                             $hashref->{'error'} = sprintf( decode( 'utf8', $issues_string ), $ExpGtfsFeed, $NR, $hashref->{'contents'} );   # this is an error
@@ -221,17 +204,17 @@ sub ReadRoutes {
                              $ExpGtfsReleaseDate ne 'previous'                               &&
                              $ExpGtfsReleaseDate ne 'latest'                                 &&
                              $ExpGtfsReleaseDate ne 'long-term'                                 ) {
-                            $issues_string      = gettext( "CSV data: field 'release_date' (= '%s') is wrong. Should be a date (YYYY-MM-DD), 'latest', 'previous' or 'long-term'. Line %s of Routes-Data. Contents of line: '%s'" );
+                            $issues_string      = gettext( "CSV data: field 'release_date' (= '%s') is wrong. Should be a date (YYYY-MM-DD), 'latest', 'previous' or 'long-term'. Line %s of Routes-Data. Contents: '%s'" );
                             $hashref->{'type'}  = 'error';                                              # this is an error
                             $hashref->{'ref'}   = $ExpRef;                                              # this is an error
                             $hashref->{'error'} = sprintf( decode( 'utf8', $issues_string ), $ExpGtfsReleaseDate, $NR, $hashref->{'contents'} );   # this is an error
                         } elsif ( @rest ) {
-                            $issues_string      = gettext( "CSV data includes errors. Line %s of Routes-Data. Contents of line: '%s'" );
+                            $issues_string      = gettext( "CSV data includes errors. Line %s of Routes-Data. Contents: '%s'" );
                             $hashref->{'type'}  = 'error';                                              # this is an error
                             $hashref->{'ref'}   = $ExpRef || "Error";                                   # this is an error
                             $hashref->{'error'} = sprintf( decode( 'utf8', "Error: '%s'. ".$issues_string ), join(', ',@rest), $NR, $hashref->{'contents'} );   # this is an error
                         } else {
-                            if ( $ExpRef || $ExpRef eq '0' ) {
+                            if ( defined($ExpRef) && $ExpRef ne '' ) {
                                 my @ref_or_list  = split( $or_separator,  $ExpRef );
                                 my @ref_and_list = split( $ref_separator, $ExpRef );
                                 $hashref->{'ref-or-list'}  = \@ref_or_list;
@@ -265,19 +248,25 @@ sub ReadRoutes {
                                             }
                                         } else {
                                             # this $ExpRouteType is not a valid one
-                                            $issues_string      = gettext( "Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line: '%s'" );
+                                            $issues_string      = gettext( "Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents: '%s'" );
                                             $hashref->{'type'}  = 'error';                                              # this is an error
                                             $hashref->{'ref'}   = $ExpRef;                                              # this is an error
                                             $hashref->{'error'} = sprintf( decode( 'utf8', $issues_string ), $ExpRouteType, $NR, $hashref->{'contents'} );    # this is an error
                                         }
                                     } else {
                                         # if there is at least one separator, then $ExpRouteType as the second value must not be empty
-                                        $issues_string      = gettext( "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'" );
+                                        $issues_string      = gettext( "Route-Type is not set. Line %s of Routes-Data. Contents: '%s'" );
                                         $hashref->{'type'}  = 'error';                                              # this is an error
                                         $hashref->{'ref'}   = $ExpRef;                                              # this is an error
                                         $hashref->{'error'} = sprintf( decode( 'utf8', $issues_string ), $NR, $hashref->{'contents'} );   # this is an error
                                     }
                                 }
+                            } elsif ( defined($ExpRef) ) {
+                                # is empty string
+                                $issues_string      = gettext( "Route-Ref is not set. Line %s of Routes-Data. Contents: '%s'" );
+                                $hashref->{'type'}  = 'error';                                              # this is an error
+                                $hashref->{'ref'}   = 'Error';                                              # this is an error
+                                $hashref->{'error'} = sprintf( decode( 'utf8', $issues_string ), $NR, $hashref->{'contents'} );   # this is an error
                             }
                         }
                     }
@@ -386,20 +375,20 @@ sub parse_by_csv_module {
 
     $text =~ s/\r?\n$//;
 
-    printf STDERR "parse_by_csv_module() read %s\n", $text;
+    # printf STDERR "parse_by_csv_module() read %s\n", $text;
 
     if ( $csv_mod->parse($text) ) {
         @fields = $csv_mod->fields();
-        printf STDERR "parse_by_csv_module() got %s\n", join( '$', @fields );
-        push( @ret_array, ( $fields[0] || $fields[0] == 0 ) ? $fields[0] : '' );
-        push( @ret_array, $fields[1] ? $fields[1] : '' );
-        push( @ret_array, $fields[2] ? $fields[2] : '' );
-        push( @ret_array, $fields[3] ? $fields[3] : '' );
-        push( @ret_array, $fields[4] ? $fields[4] : '' );
-        push( @ret_array, $fields[5] ? $fields[5] : '' );
-        push( @ret_array, $fields[6] ? $fields[6] : '' );
-        push( @ret_array, $fields[7] ? $fields[7] : '' );
-        push( @ret_array, $fields[8] ? $fields[8] : '' );
+        # printf STDERR "parse_by_csv_module() got >>%s<<\n", join( '<< >>$', @fields );
+        push( @ret_array, defined($fields[0]) ? $fields[0] : '' );
+        push( @ret_array, defined($fields[1]) ? $fields[1] : '' );
+        push( @ret_array, defined($fields[2]) ? $fields[2] : '' );
+        push( @ret_array, defined($fields[3]) ? $fields[3] : '' );
+        push( @ret_array, defined($fields[4]) ? $fields[4] : '' );
+        push( @ret_array, defined($fields[5]) ? $fields[5] : '' );
+        push( @ret_array, defined($fields[6]) ? $fields[6] : '' );
+        push( @ret_array, defined($fields[7]) ? $fields[7] : '' );
+        push( @ret_array, defined($fields[8]) ? $fields[8] : '' );
     } else {
         my $errors = $csv_mod->error_diag();
         printf STDERR "parse_by_csv_module() error %s\n", $errors;
@@ -432,7 +421,7 @@ sub GetRoutesList {
 sub RefCount {
     my $ref         = shift;
 
-    return $seen_ref{$ref}        if ( $ref && $seen_ref{$ref} );
+    return $seen_ref{$ref}        if ( $ref ne ''  && $seen_ref{$ref} );
 
     return 0;
 }
@@ -465,7 +454,7 @@ sub RefTypeOperatorCount {
     my $route_type  = shift;
     my $operator    = shift;
 
-    if ( $ref && $route_type                                                           &&
+    if ( $ref ne ''  && $route_type                                                           &&
          $seen_ref{$ref}                                                               &&
          $seen_ref_type{$ref} && $seen_ref_type{$ref}->{$route_type}                   &&
          $seen_ref_type_operator{$ref} && $seen_ref_type_operator{$ref}->{$route_type} &&
@@ -503,7 +492,7 @@ sub GetRefTypeOperatorFromAndTo {
 
     printf STDERR "%s GetRefTypeOperatorFromAndTo( %s, %s, %s, %s, %s );\n", get_time(), $RelRef, $RelRouteType, $RelOperator, $RelFrom, $RelTo  if ( $Debug );
 
-    if ( $RelRef                                                                                 &&
+    if ( $RelRef ne ''                                                                           &&
          $RelRouteType                                                                           &&
          $seen_ref_type_operator_fromto{$RelRef}                                                 &&
          $seen_ref_type_operator_fromto{$RelRef}->{$RelRouteType}                                &&
