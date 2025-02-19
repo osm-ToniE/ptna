@@ -2686,7 +2686,7 @@ sub analyze_relation {
                 unless ( $colour ) {
                     if ( $relation_ptr->{'tag'}->{$colour_tag} =~ m/^[0-9A-Fa-f]{3,6}$/ ) {
                         $issues_string = gettext( "'%s' has unknown value '%s'. Add '#' as first character." );
-                        push( @{$relation_ptr->{'__issues__'}}, $colour_tag, sprintf( $issues_string, html_escape($relation_ptr->{'tag'}->{$colour_tag}) ) );
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, $colour_tag, html_escape($relation_ptr->{'tag'}->{$colour_tag}) ) );
                     } else {
                         $issues_string = gettext( "'%s' has unknown value '%s'. Choose one of the 140 well defined HTML/CSS colour names or the HTML Hex colour codes '#...' or '#......'." );
                         push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, $colour_tag, handle_foreign($relation_ptr->{'tag'}->{$colour_tag}) ) );
