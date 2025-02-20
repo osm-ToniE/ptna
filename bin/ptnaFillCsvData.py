@@ -50,7 +50,7 @@ def format_as_csv(output_line):
         need_quote = need_quote or '\n' in v
         need_quote = need_quote or v.strip() != v # better safe than sorry - quote surrounding whitespace
         if need_quote:
-            output_line[i] = f'"{v.replace('"', '""')}"'
+            output_line[i] = '"' + v.replace('"', '""') + '"'
     return ';'.join(output_line) + '\n'
     
 def output_route(route, of):
@@ -138,7 +138,7 @@ def process_template(template_file, out_file, routes):
 
                 output_routes_with_filters(routes, filters, of)
 
-                of.write(f'@@{' '.join(filters)}\n')
+                of.write(f"@@{' '.join(filters)}\n")
             else:
                 # echo all other lines
                 of.write(line)
