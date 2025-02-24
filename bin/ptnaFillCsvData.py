@@ -1,19 +1,22 @@
 #!/usr/bin/env python3
 
+# Copyright 2025 Nitai Sasson
+# Licensed under GNU GPLv3 or later
+
 import re
 import argparse
 import json
 from collections import Counter
 
-def main(routes_file, template_file, out_file):
+def main(routes_file, template_file, out_file, show_hidden_variables):
     routes = load_routes(routes_file)
     print(f"Loaded {len(routes)} routes. Types:")
-    for route_type, count in Counter(route.get('route_type', '(missing route_type)') for route in routes).most_common():
+    for route_type, count in Counter(route.get('type', '(missing route type)') for route in routes).most_common():
         print(count, route_type)
     check_route_unique_ids(routes)
-    process_template(template_file, out_file, routes)
-    print(f"Routes remaining: {len(routes)}. Types:")
-    for route_type, count in Counter(route.get('route_type', '(missing route_type)') for route in routes).most_common():
+    process_template(template_file, out_file, routes, show_hidden_variables)
+    print(f"Routes remaining: {len(routes)}." + (" Types:" if routes else ""))
+    for route_type, count in Counter(route.get('type', '(missing route type)') for route in routes).most_common():
         print(count, route_type)
 
 def load_routes(routes_file):
@@ -28,13 +31,13 @@ def check_route_unique_ids(routes):
     routes_by_id = {}
 
     for route in routes:
-        route_id = (route.get('ref', ''), route.get('route_type', ''), route.get('operator', ''), route.get('from', ''), route.get('to', ''))
+        route_id = (route.get('ref', ''), route.get('type', ''), route.get('operator', ''), route.get('from', ''), route.get('to', ''))
         routes_by_id.setdefault(route_id, []).append(route)
 
-        if not (route.get('ref') and route.get('route_type')):
-            print("Error: each route must have ref and route_type, but this route does not:")
+        if not (route.get('ref') and route.get('type')):
+            print("Error: each route must have ref and type, but this route does not:")
             print(route)
-    
+
     for routes_with_same_id in routes_by_id.values():
         if len(routes_with_same_id) != 1:
             print("Error: the following routes can't be differentiated by PTNA:")
@@ -52,69 +55,71 @@ def format_as_csv(output_line):
         if need_quote:
             output_line[i] = '"' + v.replace('"', '""') + '"'
     return ';'.join(output_line) + '\n'
-    
-def output_route(route, of):
-    # ref; route_type; comment; from; to; operator; gtfs_feed; route_id; gtfs_release_date
-    output_line = [
-        route.get('ref', ''),
-        route.get('route_type', ''),
-        route.get('comment', ''),
-        route.get('from', ''),
-        route.get('to', ''),
-        route.get('operator', ''),
-        route.get('gtfs_feed', ''),
-        route.get('route_id', ''),
-        route.get('gtfs_release_date', '')
-        ]
+
+def output_route(route, of, show_hidden_variables):
+    csv_fields = ['ref', 'type', 'comment', 'from', 'to', 'operator', 'gtfs_feed', 'route_id', 'gtfs_release_date' ]
+    output_line = [route.get(key, '') for key in csv_fields]
     # remove empty trailing items
     while not output_line[-1]:
         del output_line[-1]
+    if show_hidden_variables:
+        hidden_vars_strings = [f"{k}: {v!r}" for k, v in route.items() if k not in csv_fields]
+        of.write("\n- " + ', '.join(hidden_vars_strings) + '\n')
     of.write(format_as_csv(output_line))
 
-def route_passes_filters(route, filters):
-    for f in filters:
+def parse_filter(filter_string):
+    key, op, pattern = re.split(r'(!?[=~])', filter_string, maxsplit=1)
+    assert op in ['=', '~', '!=', '!~'], f"Impossible value for op: {op}"
+    if '=' in op:
+        # = equality
+        f = lambda route: key in route and str(route[key]) == pattern
+    else:
+        # ~ regex
+        pattern = re.compile(pattern)
+        f = lambda route: key in route and bool(pattern.search(str(route[key])))
+
+    if '!' in op:
+        # ! flip result
+        g = f
+        f = lambda route: not g(route)
+
+    return f
+
+def create_filters_function(filters):
+    # parse the filters and return a function that accepts a route and returns whether it passes all the filters
+    for i, f in enumerate(filters):
         if not re.search('[=~]', f):
-            # @bus -> @route_type=bus
-            f = f"route_type={f}"
-        op = re.search('!?[=~]', f).group()
-        key, op, value = f.partition(op)
-        if op == '=':
-            if key not in route:
-                return False
-            if str(route[key]) != value:
-                return False
-        elif op == '~':
-            if key not in route:
-                return False
-            if not re.search(value, str(route[key])):
-                return False
-        elif op == '!=':
-            if key in route and str(route[key]) == value:
-                return False
-        elif op == '!~':
-            if key in route and re.search(value, str(route[key])):
-                return False
-        else:
-            raise RuntimeError(f"Impossible value for op: {op}")
+            # @bus -> @type=bus
+            # change should be visible in the closing @@ as well
+            filters[i] = f"type={f}"
 
-    return True
+    filters = [parse_filter(f) for f in filters]
+    return lambda r: all(f(r) for f in filters)
 
-def output_routes_with_filters(routes, filters, of):
-    print("Outputting routes with filters:")
-    print('\n'.join(f"@{f}" for f in filters))
-    used_indexes = []
-    for i, route in enumerate(routes):
-        if route_passes_filters(route, filters):
-            output_route(route, of)
-            used_indexes.append(i)
-    # prevent repeats of printed lines
-    for i in reversed(used_indexes):
-        del routes[i]
-    if not used_indexes:
-        of.write("- No routes match the filter criteria\n")
-    print(f"Result: {len(used_indexes)} routes")
+def output_routes_with_filters(routes, filters, of, show_hidden_variables):
+    try:
+        route_passes_filters = create_filters_function(filters) # also changes @* to @type=* in filters, affects output
+        print("Outputting routes with filters:")
+        print('\n'.join(f"@{f}" for f in filters))
+        used_indexes = []
+        for i, route in enumerate(routes):
+            if route_passes_filters(route):
+                output_route(route, of, show_hidden_variables)
+                used_indexes.append(i)
+        # prevent repeats of printed lines
+        for i in reversed(used_indexes):
+            del routes[i]
+        if not used_indexes:
+            of.write("-\n- No routes match the filter criteria\n-\n")
+        print(f"Result: {len(used_indexes)} routes")
+    except re.error as err:
+        print(f"Regular expression patter error: {err}, pattern: {err.pattern}")
+        of.write("-\n- Error: regular expression error in filters\n")
+        of.write(f"- {err}\n")
+        of.write(f"- {err.pattern}\n")
+        of.write(f"- {' ' * err.pos}^\n-\n") # this will not be readable in the analysis page, but I don't care
 
-def process_template(template_file, out_file, routes):
+def process_template(template_file, out_file, routes, show_hidden_variables):
     with open(template_file, encoding='utf-8') as tf, open(out_file, 'w', encoding='utf-8') as of:
         for line in tf:
             stripped_line = line.strip()
@@ -135,8 +140,11 @@ def process_template(template_file, out_file, routes):
                         line = line.removeprefix('@')
                         of.write(f"@{line}\n")
                         filters.append(line)
+                    elif line.startswith('#'):
+                        # preserve comments
+                        of.write(line + "\n")
 
-                output_routes_with_filters(routes, filters, of)
+                output_routes_with_filters(routes, filters, of, show_hidden_variables)
 
                 of.write(f"@@{' '.join(filters)}\n")
             else:
@@ -148,5 +156,6 @@ if __name__ == '__main__':
     parser.add_argument("-r", "--routes", required=True, help="json file containing the routes in this area")
     parser.add_argument("-t", "--template", required=True, help="PTNA CSV file, downloaded from the wiki")
     parser.add_argument("-o", "--outfile", required=True, help="output file, to be uploaded to the wiki")
+    parser.add_argument("-v", "--show-hidden-variables", action='store_true', help="precede each CSV line with a text line listing its hidden variables which can be used for filtering")
     args = parser.parse_args()
-    main(args.routes, args.template, args.outfile)
+    main(args.routes, args.template, args.outfile, args.show_hidden_variables)
