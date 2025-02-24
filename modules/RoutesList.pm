@@ -130,7 +130,7 @@ sub ReadRoutes {
                         } elsif ( m/^([@+~\$\|])/ ) {
                             if ( m/^@[a-z\@]/ ) {
                                 $hashref->{'type'}      = 'ignore';         # store type
-                                $hashref->{'ignore'}    = decode( 'utf8', $_ );
+                                $hashref->{'ignore'}    = $_;
                             } else {
                                 $issues_string          = gettext( "First character of line ('%s') is reserved. Please put the first CSV field into double quotes (\"...\"). Line %s of Routes-Data. Contents: '%s'" );
                                 $hashref->{'type'}      = 'reserved';         # store type
