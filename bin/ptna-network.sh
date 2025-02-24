@@ -136,6 +136,10 @@ then
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Creating directory $WORK_LOC"
     mkdir -p $WORK_LOC
 
+    # we need a temp folder with full access for webserver, ...
+    mkdir -p $WORK_LOC/tmp
+    chmod 777 $WORK_LOC $WORK_LOC/tmp
+
     if [ ! -d "$WORK_LOC" ]
     then
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Creating directory $WORK_LOC failed, terminating"
