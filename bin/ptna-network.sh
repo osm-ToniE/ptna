@@ -25,7 +25,7 @@ fi
 SETTINGS_DIR="."
 
 
-TEMP=$(getopt -o acCefgGhlLmoOpPuwWS: --long analyze,clean-created,clean-downloaded,use-extracts,get-routes,get-talk,force-download,help,logging,log-delete,modiify-routes-data,overpass-query,overpass-query-on-zero-xml,push-routes,push-talk,update-result,watch-routes,watch-talk,settings-dir: -n 'ptna-network.sh' -- "$@")
+TEMP=$(getopt -o acCefgGhilLmoOpPuwWS: --long analyze,clean-created,clean-downloaded,use-extracts,get-routes,get-talk,force-download,help,inject,logging,log-delete,modiify-routes-data,overpass-query,overpass-query-on-zero-xml,push-routes,push-talk,update-result,watch-routes,watch-talk,settings-dir: -n 'ptna-network.sh' -- "$@")
 
 if [ $? != 0 ] ; then echo "Terminating..." ; exit 2 ; fi
 
@@ -41,6 +41,7 @@ while true ; do
         -g|--get-routes)                    getroutes=true                  ; shift ;;
         -G|--get-talk)                      gettalk=true                    ; shift ;;
         -h|--help)                          help=true                       ; shift ;;
+        -i|--inject)                        inject=true                     ; shift ;;
         -l|--logging)                       logging=true                    ; shift ;;
         -L|--log-delete)                    deletelog=true ; logging=true   ; shift ;;
         -m|--modify-routes-data)            modify=true                     ; shift ;;
@@ -113,6 +114,7 @@ DIFF_FILE="$PREFIX-Analysis.html.diff"
 DIFF_HTML_FILE="$PREFIX-Analysis.diff.html"
 SAVE_FILE="$PREFIX-Analysis.html.save"
 DETAILS_FILE="$PREFIX-Analysis-details.txt"
+CATALOG_FILE="$PREFIX-catalog.json"
 STATISTICS_DB="$PREFIX-Analysis-statistics.db"
 SQ_OPTIONS="-init /dev/null"
 
@@ -700,6 +702,65 @@ then
                 # end of code here
 
                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $SETTINGS_DIR/$ROUTES_FILE)
+            else
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "no file: '$ROUTES_FILE'"
+            fi
+        fi
+    else
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Work dir $WORK_LOC does not exist/could not be created"
+    fi
+
+fi
+
+#
+#
+#
+
+if [ "$inject" = "true" ]
+then
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Inject GTFS catalog into read Routes Data, writing to OSM-Wiki if there is a diff"
+
+    if [ -d "$WORK_LOC" ]
+    then
+        if [ -n "$WIKI_ROUTES_PAGE" ]
+        then
+            if [ -f "$WORK_LOC/$ROUTES_FILE" ]
+            then
+                if [ -f "$WORK_LOC/$CATALOG_FILE" ]
+                then
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $WORK_LOC/$ROUTES_FILE)
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "calling: ptnaFillCsvData.py --routes $WORK_LOC/$CATALOG_FILE --template $WORK_LOC/$ROUTES_FILE --outfile $WORK_LOC/$ROUTES_FILE.new"
+                    ptnaFillCsvData.py --routes $WORK_LOC/$CATALOG_FILE --template $WORK_LOC/$ROUTES_FILE --outfile $WORK_LOC/$ROUTES_FILE.new
+                    ret=$?
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptnaFillCsvData.py returned $ret"
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $WORK_LOC/$ROUTES_FILE.new)
+                    diff $WORK_LOC/$ROUTES_FILE $WORK_LOC/$ROUTES_FILE.new > $WORK_LOC/$ROUTES_FILE.diff
+                    diff_size=$(stat -c '%s' $WORK_LOC/$ROUTES_FILE.diff)
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Diff size:  $diff_size $WORK_LOC/$ROUTES_FILE"
+                    if [ $diff_size -gt 0 ]
+                    then
+                        mv $WORK_LOC/$ROUTES_FILE.new $WORK_LOC/$ROUTES_FILE
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Writing Routes file '$WORK_LOC/$ROUTES_FILE' to Wiki page '$WIKI_ROUTES_PAGE'"
+                        #log=$ptna-wiki-page.pl --push --page=$WIKI_ROUTES_PAGE --file=$WORK_LOC/$ROUTES_FILE --summary="GTFS to CSV injection" 2>&1)
+                        ret=$?
+                        echo $log | sed -e 's/ \([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9] \)/\n\1/g'
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-wiki-page.pl returned $ret"
+                        sleep 10   # to avoid being blocked by rate limit of wiki
+                    else
+                        rm -f $WORK_LOC/$ROUTES_FILE.new
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$WIKI_ROUTES_PAGE not changed by injection"
+                    fi
+                    rm -f $WORK_LOC/$ROUTES_FILE.diff
+                else
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$WORK_LOC/$CATALOG_FILE not available, no injection"
+                fi
+            else
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$WIKI_ROUTES_PAGE configured but does not yet exist"
+            fi
+        else
+            if [ -f "$SETTINGS_DIR/$ROUTES_FILE" ]
+            then
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'$ROUTES_FILE' provided by GitHub"
             else
                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "no file: '$ROUTES_FILE'"
             fi
