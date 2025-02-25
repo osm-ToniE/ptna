@@ -122,7 +122,7 @@ The following values and combinations have been found in the provided data but t
 They represent so called 'well defined' values and are not considered as errors.
 </p>
 <ul>
-    <li>'type' = 'route_master', 'type' = 'route''
+    <li>'type' = 'route_master', 'type' = 'route'
         <ul>
     <li>'route_master' = 'road', 'route' = 'road'</li>
         </ul>
