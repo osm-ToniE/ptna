@@ -100,6 +100,7 @@ then
         #   e == use planet extracts instead of overpass api query (if not configured or it failed, there's a fall-back to 'o')
         #   o == do the overpass api query and download the data (to work area)
         # g == get the OSM-Wiki data for the routes
+        # i == inject GTFS data into OSM-Wiki routes data
         # a == do the analysis (in work area)
         # u == update the result from the work area to the location of the web service
 
@@ -117,7 +118,7 @@ then
 
         # now it is safe to download (o = overpass) or extract (e = planet) data and start analysis
 
-        ptna-all-networks-parallel.sh -legau                                        >> $LOGFILE 2>&1 < /dev/null
+        ptna-all-networks-parallel.sh -legiau                                        >> $LOGFILE 2>&1 < /dev/null
 
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"        >> $LOGFILE
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"                   >> $LOGFILE
@@ -137,11 +138,12 @@ then
             # l == log (append) to 'network' specific logfile
             # O == do the overpassapi query only if the downloaded XML data is empty, otherwise skip the rest
             #      g == get the OSM-Wiki data for the routes
+            #      i == inject GTFS data into OSM-Wiki routes data
             #      a == do the analysis (in work area)
             #      u == update the result from the work area to the location of the web service
 
             # run this again using the selected overpass-api server
-            ptna-all-networks-parallel.sh -lOgau >> $LOGFILE 2>&1 < /dev/null
+            ptna-all-networks-parallel.sh -lOgiau >> $LOGFILE 2>&1 < /dev/null
         fi
 
         if [ -n "$PTNA_OVERPASS_API_SERVER" ]
@@ -167,11 +169,12 @@ then
                 # l == log (append) to 'network' specific logfile
                 # O == do the overpassapi query only if the downloaded XML data is empty, otherwise skip the rest
                 #      g == get the OSM-Wiki data for the routes
+                #      i == inject GTFS data into OSM-Wiki routes data
                 #      a == do the analysis (in work area)
                 #      u == update the result from the work area to the location of the web service
 
                 # run this again using the standard overpass-api server
-                ptna-all-networks-parallel.sh -lOgau >> $LOGFILE 2>&1 < /dev/null
+                ptna-all-networks-parallel.sh -lOgiau >> $LOGFILE 2>&1 < /dev/null
             # fi
         fi
 
