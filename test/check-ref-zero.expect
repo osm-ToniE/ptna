@@ -40,9 +40,11 @@
         </li>
         <li>2 <a href="#A2">Test file</a>
         </li>
-        <li>3 <a href="#networkdetails">Details for &#039;network&#039;-Values</a>
+        <li>3 <a href="#unassigned">Not clearly assigned routes</a>
+        </li>
+        <li>4 <a href="#networkdetails">Details for &#039;network&#039;-Values</a>
         <ol>
-        <li>3.1 <a href="#considerednetworks">Considered &#039;network&#039;-Values</a>
+        <li>4.1 <a href="#considerednetworks">Considered &#039;network&#039;-Values</a>
         </li>
         </ol>
         </li>
@@ -57,16 +59,18 @@
         </p>
         <hr />
         <h1 id="A2">2 Test file</h1>
-<a href="#bus_0"><span class="foreign" dir="auto">0</span></a> <a href="#bus_0_1"><span class="foreign" dir="auto">0/1</span></a> <a href="#bus_1_0"><span class="foreign" dir="auto">1/0</span></a> <a href="#bus_0_1-2"><span class="foreign" dir="auto">0;1</span></a> </br></br>
+<a href="#bus_0"><span class="foreign" dir="auto">0</span></a> <a href="#bus_0-2"><span class="foreign" dir="auto">0</span></a> <a href="#bus_0-3"><span class="foreign" dir="auto">0</span></a> <a href="#bus_0_1"><span class="foreign" dir="auto">0/1</span></a> <a href="#bus_1_0"><span class="foreign" dir="auto">1/0</span></a> <a href="#bus_0_1-2"><span class="foreign" dir="auto">0;1</span></a> </br></br>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name" dir="auto">Name (name=)</th><th class="type" dir="auto">Type (type=)</th><th class="relation" dir="auto">Relation (id=)</th><th class="PTv" dir="auto">PTv</th><th class="issues" dir="auto">Errors</th><th class="notes" dir="auto">Notes</th></tr>
             </thead>
             <tbody>
-                <tr id="bus_0" data-info="Comment: <span class=_foreign_ dir=_auto_>Autobus 0</span>; From: <span class=_foreign_ dir=_auto_>From1</span>; To: <span class=_foreign_ dir=_auto_>To1,Operator1</span>" data-ref="0" class="sketchline"><td class="sketch" dir="auto"><a href="https://overpass-api.de/api/sketch-line?ref=0&network=Network&operator=" title="Sketch-Line">0</a></td><td class="csvinfo" colspan="5" dir="auto">Comment: <span class="foreign" dir="auto">Autobus 0</span>; From: <span class="foreign" dir="auto">From1</span>; To: <span class="foreign" dir="auto">To1,Operator1</span></td></tr>
-                <tr id="-110492" data-info="-110492" data-ref="???" class="line"><td class="name foreign" dir="auto">Bus 0</td><td class="type foreign" dir="auto">route_master</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -110492</td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto"></td><td class="notes" dir="auto">'network' = '<span class="foreign" dir="auto">Network</span>'</td></tr>
-                <tr id="-110275" data-info="-110275" data-ref="???" class="line"><td class="name foreign" dir="auto">Bus 0: Stop 1 =&gt; Stop 2</td><td class="type foreign" dir="auto">route</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -110275</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto">Route with only 1 Way</td><td class="notes" dir="auto">'network' = '<span class="foreign" dir="auto">Network</span>'</td></tr>
-                <tr id="-110437" data-info="-110437" data-ref="???" class="line"><td class="name foreign" dir="auto">Bus 0: Stop 3 =&gt; Stop 4</td><td class="type foreign" dir="auto">route</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -110437</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto">Route with only 1 Way</td><td class="notes" dir="auto">'network' = '<span class="foreign" dir="auto">Network</span>'</td></tr>
+                <tr id="bus_0" data-info="Comment: <span class=_foreign_ dir=_auto_>Autobus 0</span>; From: <span class=_foreign_ dir=_auto_>From1</span>; To: <span class=_foreign_ dir=_auto_>To1,Operator1</span>" data-ref="0" class="sketchline"><td class="sketch" dir="auto">0</td><td class="csvinfo" colspan="5" dir="auto">Comment: <span class="foreign" dir="auto">Autobus 0</span>; From: <span class="foreign" dir="auto">From1</span>; To: <span class="foreign" dir="auto">To1,Operator1</span></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Missing route for 'ref'='0' and 'route'='bus'</td><td class="notes" dir="auto"></td></tr>
+                <tr id="bus_0-2" data-info="Comment: <span class=_foreign_ dir=_auto_>Autobus 0</span>; From: <span class=_foreign_ dir=_auto_>From1</span>; To: <span class=_foreign_ dir=_auto_>To1,Operator2</span>" data-ref="0" class="sketchline"><td class="sketch" dir="auto">0</td><td class="csvinfo" colspan="5" dir="auto">Comment: <span class="foreign" dir="auto">Autobus 0</span>; From: <span class="foreign" dir="auto">From1</span>; To: <span class="foreign" dir="auto">To1,Operator2</span></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Missing route for 'ref'='0' and 'route'='bus'</td><td class="notes" dir="auto"></td></tr>
+                <tr id="bus_0-3" data-info="Comment: <span class=_foreign_ dir=_auto_>Autobus 0</span>; From: <span class=_foreign_ dir=_auto_>From2</span>; To: <span class=_foreign_ dir=_auto_>To2,Operator2</span>" data-ref="0" class="sketchline"><td class="sketch" dir="auto">0</td><td class="csvinfo" colspan="5" dir="auto">Comment: <span class="foreign" dir="auto">Autobus 0</span>; From: <span class="foreign" dir="auto">From2</span>; To: <span class="foreign" dir="auto">To2,Operator2</span></td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="name foreign" dir="auto"></td><td class="type foreign" dir="auto"></td><td class="relation" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto">Missing route for 'ref'='0' and 'route'='bus'</td><td class="notes" dir="auto"></td></tr>
                 <tr id="bus_0_1" data-info="Comment: <span class=_foreign_ dir=_auto_>Autobus 0/1</span>; From: <span class=_foreign_ dir=_auto_>From1</span>; To: <span class=_foreign_ dir=_auto_>To1,Operator1</span>" data-ref="0/1" class="sketchline"><td class="sketch" dir="auto"><a href="https://overpass-api.de/api/sketch-line?ref=0%2f1&network=Network&operator=" title="Sketch-Line">0/1</a></td><td class="csvinfo" colspan="5" dir="auto">Comment: <span class="foreign" dir="auto">Autobus 0/1</span>; From: <span class="foreign" dir="auto">From1</span>; To: <span class="foreign" dir="auto">To1,Operator1</span></td></tr>
                 <tr id="-110597" data-info="-110597" data-ref="0/1" class="line"><td class="name foreign" dir="auto">Bus 0/1</td><td class="type foreign" dir="auto">route_master</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -110597</td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto"></td><td class="notes" dir="auto">'network' = '<span class="foreign" dir="auto">Network</span>'</td></tr>
                 <tr id="-110538" data-info="-110538" data-ref="0/1" class="line"><td class="name foreign" dir="auto">Bus 0/1: Stop 1 =&gt; Stop 2</td><td class="type foreign" dir="auto">route</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -110538</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto">Route with only 1 Way</td><td class="notes" dir="auto">'network' = '<span class="foreign" dir="auto">Network</span>'</td></tr>
@@ -83,8 +87,60 @@
         </table>
 
         <hr />
-        <h1 id="networkdetails">3 Details for &#039;network&#039;-Values</h1>
-        <h2 id="considerednetworks">3.1 Considered &#039;network&#039;-Values</h2>
+        <h1 id="unassigned">3 Not clearly assigned routes</h1>
+<p>
+This section lists the lines that could not be clearly assigned. The line numbers 'ref' have been specified several times in the CSV file. This means that the same line number exists in the transport network several times in different municipalities / cities. In order to be able to clearly assign the lines, the following should be indicated:
+</p><ul>
+    <li>Relation:
+        <ul>
+            <li>'network', 'operator', as well as 'from' and 'to' should be tagged with the relation.
+                <ul>
+                    <li>If the value of 'operator' is sufficient for differentiation, 'from' and 'to' need not be specified.</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>CSV file:
+        <ul>
+            <li>'Operator', as well as 'From' and 'To' should be specified in the CSV file with the same values as with the relation.
+                <ul>
+                    <li>See the instructions for such entries at the beginning of the CSV file.</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+<p>
+Examples for an entry in the CSV file of the form: 'ref;type;Comment;From;To;Operator':
+</p>
+<table>
+    <thead class="tableheaderrow">
+        <tr><th>&nbsp;</th><th>ref</th><th>type</th><th>Comment</th><th>From</th><th>To</th><th>Operator</th></tr>
+    </thead>
+    <tbody>
+        <tr><td><strong>1.)</strong> </td><td>9</td><td>bus</td><td>Bus 9 provides services in City-A</td><td>First Avenue</td><td>Sixth Avenue</td><td>Operator-X</td></tr>
+        <tr><td><strong>2.)</strong> </td><td>9</td><td>bus</td><td>Bus 9 provides services in Village-B</td><td>Main Street</td><td>Second Street</td><td>Operator-X</td></tr>
+        <tr><td><strong>3.)</strong> </td><td>9</td><td>bus</td><td>Bus 9 provides services in Town-C</td><td>Sunset Boulevard</td><td>Rainbow Boulevard</td><td>Operator-Z</td></tr>
+    </tbody>
+</table>
+<p>
+   1.) and 2.) are only distinguishable by means of 'From'/'from' and 'To'/'to', since 'Operator'/'operator' are identical (='Operator-X').<br>
+   1.) and 3.) as well as 2.) and 3.) can be distinguished by 'Operator'/'operator', as these are different (='Operator-X' or ='Operator-Z').
+</p>
+        <table class="oepnvtable js-sort-table">
+            <thead>
+                <tr class="tableheaderrow"><th class="ref js-sort-number" dir="auto">&#x21C5;Line (ref=)</th><th class="relation js-sort-number" dir="auto">&#x21C5;Relation (id=)</th><th class="type" dir="auto">&#x21C5;Type (type=)</th><th class="route_type" dir="auto">&#x21C5;Vehicle (route(_master)=)</th><th class="name" dir="auto">&#x21C5;Name (name=)</th><th class="network" dir="auto">&#x21C5;Network (network=)</th><th class="operator" dir="auto">&#x21C5;Operator (operator=)</th><th class="from" dir="auto">&#x21C5;From (from=)</th><th class="via" dir="auto">&#x21C5;Via (via=)</th><th class="to" dir="auto">&#x21C5;To (to=)</th><th class="PTv" dir="auto">&#x21C5;PTv</th><th class="issues" dir="auto">&#x21C5;Errors</th><th class="notes" dir="auto">&#x21C5;Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr id="-110492" data-info="-110492" data-ref="???" class="line"><td class="ref foreign" dir="auto">0</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -110492</td><td class="type foreign" dir="auto">route_master</td><td class="route_type foreign" dir="auto">bus</td><td class="name foreign" dir="auto">Bus 0</td><td class="network foreign" dir="auto">Network</td><td class="operator foreign" dir="auto"></td><td class="from foreign" dir="auto"></td><td class="via foreign" dir="auto"></td><td class="to foreign" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="issues" dir="auto"></td><td class="notes" dir="auto">'network' = '<span class="foreign" dir="auto">Network</span>'</td></tr>
+                <tr id="-110275" data-info="-110275" data-ref="???" class="line"><td class="ref foreign" dir="auto">0</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -110275</td><td class="type foreign" dir="auto">route</td><td class="route_type foreign" dir="auto">bus</td><td class="name foreign" dir="auto">Bus 0: Stop 1 =&gt; Stop 2</td><td class="network foreign" dir="auto">Network</td><td class="operator foreign" dir="auto"></td><td class="from foreign" dir="auto">Stop 1</td><td class="via foreign" dir="auto"></td><td class="to foreign" dir="auto">Stop 2</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto">Route with only 1 Way</td><td class="notes" dir="auto">'network' = '<span class="foreign" dir="auto">Network</span>'</td></tr>
+                <tr id="-110437" data-info="-110437" data-ref="???" class="line"><td class="ref foreign" dir="auto">0</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -110437</td><td class="type foreign" dir="auto">route</td><td class="route_type foreign" dir="auto">bus</td><td class="name foreign" dir="auto">Bus 0: Stop 3 =&gt; Stop 4</td><td class="network foreign" dir="auto">Network</td><td class="operator foreign" dir="auto"></td><td class="from foreign" dir="auto">Stop 3</td><td class="via foreign" dir="auto"></td><td class="to foreign" dir="auto">Stop 4</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto">Route with only 1 Way</td><td class="notes" dir="auto">'network' = '<span class="foreign" dir="auto">Network</span>'</td></tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <h1 id="networkdetails">4 Details for &#039;network&#039;-Values</h1>
+        <h2 id="considerednetworks">4.1 Considered &#039;network&#039;-Values</h2>
         <table class="oepnvtable js-sort-table">
             <thead>
                 <tr class="tableheaderrow"><th class="network" dir="auto">&#x21C5;Network (network=)</th><th class="number js-sort-number" dir="auto">&#x21C5;Number</th><th class="relations" dir="auto">&#x21C5;Relations</th></tr>

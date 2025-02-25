@@ -42,6 +42,8 @@
 = Test file
 
 0;bus;Autobus 0;From1;To1,Operator1
+0;bus;Autobus 0;From1;To1,Operator2
+0;bus;Autobus 0;From2;To2,Operator2
 0/1;bus;Autobus 0/1;From1;To1,Operator1
 1/0;bus;Autobus 1/0;From1;To1,Operator1
 "0;1";bus;Autobus 1/0;From1;To1,Operator1

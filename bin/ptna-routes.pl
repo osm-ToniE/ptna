@@ -2850,7 +2850,7 @@ sub analyze_route_master_relation {
     my $entryref        = shift || undef;
     my $return_code     = 0;
 
-    my $ref                            = $relation_ptr->{'tag'}->{'ref'}  || '';
+    my $ref                            = ($relation_ptr->{'tag'}->{'ref'} || $relation_ptr->{'tag'}->{'ref'} == 0) ? $relation_ptr->{'tag'}->{'ref'} : '';
     my $type                           = $relation_ptr->{'tag'}->{'type'} || '';
     my $route_type                     = $relation_ptr->{'tag'}->{$type}  || '';
     my $member_index                   = scalar( @{$relation_ptr->{'members'}} );
@@ -2925,7 +2925,7 @@ sub analyze_route_relation {
     my $entryref        = shift || undef;
     my $return_code     = 0;
 
-    my $ref                            = $relation_ptr->{'tag'}->{'ref'}  || '';
+    my $ref                            = ($relation_ptr->{'tag'}->{'ref'} || $relation_ptr->{'tag'}->{'ref'} == 0) ? $relation_ptr->{'tag'}->{'ref'} : '';
     my $type                           = $relation_ptr->{'tag'}->{'type'} || '';
     my $route_type                     = $relation_ptr->{'tag'}->{$type}  || '';
     my $route_relation_index           = $relation_ptr->{'route_relation'} ? scalar( @{$relation_ptr->{'route_relation'}} ) : 0;
@@ -3218,7 +3218,7 @@ sub analyze_ptv2_route_relation {
         }
     }
 
-    printf STDERR "analyze_ptv2_route_relation() : SortRouteWayNodes() for relation ref=%s, name=%s\n", ($relation_ptr->{'tag'}->{'ref'} || ''), ($relation_ptr->{'tag'}->{'name'} || '')   if ( $debug );
+    printf STDERR "analyze_ptv2_route_relation() : SortRouteWayNodes() for relation ref=%s, name=%s\n", (($relation_ptr->{'tag'}->{'ref'} || $relation_ptr->{'tag'}->{'ref'} == 0) ? $relation_ptr->{'tag'}->{'ref'} : ''), ($relation_ptr->{'tag'}->{'name'} || '')   if ( $debug );
 
     @sorted_way_nodes    = SortRouteWayNodes( $relation_ptr, $relation_ptr->{'non_platform_ways'} );
 
@@ -5108,7 +5108,7 @@ sub CheckNameRefFromViaToPTV2 {
     if ( $relation_ptr && $relation_ptr->{'tag'} ) {
         my $preconditions_failed = 0;
         my $name = $relation_ptr->{'tag'}->{'name'} || '';
-        my $ref  = $relation_ptr->{'tag'}->{'ref'}  || '';
+        my $ref  = ($relation_ptr->{'tag'}->{'ref'} || $relation_ptr->{'tag'}->{'ref'} == 0) ? $relation_ptr->{'tag'}->{'ref'} : '';
         my $from = $relation_ptr->{'tag'}->{'from'} || '';
         my $to   = $relation_ptr->{'tag'}->{'to'}   || '';
         my $via  = $relation_ptr->{'tag'}->{'via'}  || '';
@@ -5558,7 +5558,7 @@ sub CheckRouteRefOnStops {
 
     if ( $relation_ptr ) {
         if ( $relation_ptr->{'tag'} && exists($relation_ptr->{'tag'}->{'ref'}) ) {
-            my $ref                     = $relation_ptr->{'tag'}->{'ref'} || '';
+            my $ref                     = ($relation_ptr->{'tag'}->{'ref'} || $relation_ptr->{'tag'}->{'ref'} == 0) ? $relation_ptr->{'tag'}->{'ref'} : '';
             my $object_ref              = undef;
             my $platform_or_stop        = undef;
             my $temp_route_ref          = undef;
@@ -6956,7 +6956,7 @@ sub printTableLine {
     $info =~ s/\"/_/g;
     push( @HTML_main, sprintf( "%16s<tr %sdata-info=\"%s\" data-ref=\"%s\" class=\"line\">", ' ', $id_string, html_escape($info), html_escape($ref) ) );
     for ( $i = 0; $i < $no_of_columns; $i++ ) {
-        $val =  $hash{$columns[$i]} || '';
+        $val =  ($hash{$columns[$i]} || $hash{$columns[$i]} == 0) ? $hash{$columns[$i]} : '';
         if ( $columns[$i] eq "relation" ) {
             push( @HTML_main, sprintf( "<td class=\"relation\" dir=\"auto\">%s</td>", printRelationTemplate($val) ) );
         } elsif ( $columns[$i] eq "relations"  ){

@@ -62,7 +62,7 @@
     <tag k='public_transport:version' v='2' />
     <tag k='ref' v='0' />
     <tag k='route' v='bus' />
-    <tag k='to' v='Stop 5' />
+    <tag k='to' v='Stop 2' />
     <tag k='type' v='route' />
   </relation>
   <relation id='-110437' action='modify'>
