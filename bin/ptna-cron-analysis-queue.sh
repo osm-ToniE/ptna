@@ -83,10 +83,10 @@ then
                         sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET started=$(date '+%s') WHERE id=$id;"
 
                         cd $settings_dir
-                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start 'ptna-network.sh -LcCogau' for network '$network'"
-                        ptna-network.sh -LcCogau
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start 'ptna-network.sh -LcCogiau' for network '$network'"
+                        ptna-network.sh -LcCogiau
                         ret_code=$?
-                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'ptna-network.sh -LcCogau' returned with '$ret_code'"
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'ptna-network.sh -LcCogiau' returned with '$ret_code'"
 
                         if [ $ret_code -eq 0 ]
                         then
