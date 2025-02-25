@@ -6340,7 +6340,7 @@ sub printHintSuspiciousRelations {
         push( @HTML_main, "\n</p>\n" );
         push( @HTML_main, "<ul>\n" );
         if ( $hswkort ) {
-            push( @HTML_main, "    <li>'type' = 'route_master', 'type' = 'route''\n" );
+            push( @HTML_main, "    <li>'type' = 'route_master', 'type' = 'route'\n" );
             push( @HTML_main, "        <ul>\n" );
             foreach my $rt (  sort ( keys %have_seen_well_known_other_route_types ) ) {
                 push( @HTML_main, sprintf( "    <li>'route_master' = '%s', 'route' = '%s'</li>\n", $rt, $rt ) );
