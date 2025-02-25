@@ -745,7 +745,7 @@ then
                     then
                         mv $WORK_LOC/$ROUTES_FILE.new $WORK_LOC/$ROUTES_FILE
                         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Writing Routes file '$WORK_LOC/$ROUTES_FILE' to Wiki page '$WIKI_ROUTES_PAGE'"
-                        log=$ptna-wiki-page.pl --push --page=$WIKI_ROUTES_PAGE --file=$WORK_LOC/$ROUTES_FILE --summary="GTFS to CSV injection" 2>&1)
+                        log=$(ptna-wiki-page.pl --push --page=$WIKI_ROUTES_PAGE --file=$WORK_LOC/$ROUTES_FILE --summary="GTFS to CSV injection" 2>&1)
                         ret=$?
                         echo $log | sed -e 's/ \([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9] \)/\n\1/g'
                         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-wiki-page.pl returned $ret"
