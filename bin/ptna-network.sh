@@ -116,7 +116,7 @@ SAVE_FILE="$PREFIX-Analysis.html.save"
 DETAILS_FILE="$PREFIX-Analysis-details.txt"
 CATALOG_FILE="$PREFIX-catalog.json"
 STATISTICS_DB="$PREFIX-Analysis-statistics.db"
-SQ_OPTIONS="-init /dev/null"
+SQ_OPTIONS="-init /dev/null -batch"
 
 if [ "$OVERPASS_REUSE_ID" ]
 then
