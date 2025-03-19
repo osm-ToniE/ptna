@@ -96,7 +96,7 @@ sub getGtfsRouteIdHtmlTag {
             my $gtfs_country =  $gtfs_feed;
             $gtfs_country =~ s/-.*$//;
 
-            if ( $route_id ) {
+            if ( defined($route_id) && $route_id ne '' ) {
 
                 my @RouteIdStatus = getRouteIdStatus( $gtfs_feed, $release_date, $route_id );
 
@@ -185,7 +185,7 @@ sub getGtfsRouteIdIconTag {
     my $tag_name       = shift || 'route_id';
     my $gtfs_icon_tag  = '';
 
-    if ( $route_id && $relation_id ) {
+    if ( defined($route_id) && $route_id ne '' && $relation_id ) {
         $gtfs_icon_tag .= sprintf( ", <a href=\"/gtfs/compare-routes.php?feed=%s&release_date=%s&route_id=%s&relation=%s\" target=\"_blank\"><img src=\"/img/compare19.png\" title=\"%s\" style=\"height: 15px;width: 15px;vertical-align: middle;\"></a>",
                                 uri_escape($gtfs_feed), uri_escape($release_date),
                                 uri_escape(encode('utf8',$route_id)),
@@ -518,7 +518,7 @@ sub getRouteIdStatus {
 
     my $name_prefix    = ( $release_date ) ? $feed . '-' . $release_date : $feed;
 
-    if ( $name_prefix && $route_id ) {
+    if ( $name_prefix && defined($route_id) && $route_id ne '' ) {
         eval {
             if ( _AttachToGtfsSqliteDb($feed,$release_date) ) {
 
@@ -558,7 +558,7 @@ sub getRouteIdStatus {
         };
         warn sprintf( "getRouteIdStatus(%s,%s,%s): %s",$feed,$release_date,$route_id,$@ ) if ( $@ );
     } else {
-        if ( $route_id ) {
+        if ( defined($route_id) && $route_id ne '' ) {
             @ret_array = ( '', '', '', gettext("internal error") + ": \$feed " + gettext("is not set") );
         } else {
             @ret_array = ( '', '', '', gettext("is not set") );

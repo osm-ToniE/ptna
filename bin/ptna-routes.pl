@@ -2552,7 +2552,7 @@ sub analyze_relation {
         foreach $specialtag ( @specialtags ) {
             foreach my $tag ( @relation_tags ) {
                 if ( $tag =~ m/^\Q$specialtag\E/i ) {
-                    if ( $relation_ptr->{'tag'}->{$tag} ) {
+                    if ( defined($relation_ptr->{'tag'}->{$tag}) ) {
                         $reporttype = ( $specialtag2reporttype{$specialtag} ) ? $specialtag2reporttype{$specialtag} : '__notes__';
                         if ( $tag =~ m/^note$/i && $relation_ptr->{'tag'}->{$tag} =~ m|^https{0,1}://wiki.openstreetmap.org\S+\s*[;,_+#\.\-]*\s*(.*)| ) {
                             unshift( @{$relation_ptr->{$reporttype}}, sprintf("'%s' ~ '%s'", handle_foreign($tag), handle_foreign($1)) )  if ( $1 );
@@ -2707,7 +2707,7 @@ sub analyze_relation {
             foreach my $special ( 'network:', 'route:', 'ref:', 'ref_', 'operator', 'timetable' ) {
                 foreach my $tag ( @relation_tags ) {
                     if ( $tag =~ m/^\Q$special\E/i ) {
-                        if ( $relation_ptr->{'tag'}->{$tag} ) {
+                        if ( defined($relation_ptr->{'tag'}->{$tag}) ) {
                             if ( $tag =~ m/^network:long$/i && $network_long_regex ){
                                 if ( $relation_ptr->{'tag'}->{$tag} =~ m/^$network_long_regex$/ ) {
                                     $notes_string = gettext( "'network:long' is long form" );
@@ -2731,7 +2731,7 @@ sub analyze_relation {
             foreach $check_osm_separator_tag ( @check_osm_separator_tags ) {
                 foreach my $tag ( @relation_tags ) {
                     if ( $tag ne 'ref_trips' && $tag ne 'ref_name' && $tag =~ m/^\Q$check_osm_separator_tag\E/ ) {
-                        if ( $relation_ptr->{'tag'}->{$tag} ) {
+                        if ( defined($relation_ptr->{'tag'}->{$tag}) ) {
 #                            if ( $relation_ptr->{'tag'}->{$tag} =~ m/\s;|;\s/ ) {
 #                                $notes_string = gettext( "'%s' = '%s' includes the separator value ';' (semi-colon) with sourrounding blank" );
 #                                push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, handle_foreign($tag), handle_foreign($relation_ptr->{'tag'}->{$tag})) );
@@ -2750,7 +2750,7 @@ sub analyze_relation {
             foreach my $special ( 'gtfs:', 'gtfs_' ) {
                 foreach my $tag ( @relation_tags ) {
                     if ( $tag =~ m/^\Q$special\E/i ) {
-                        if ( $relation_ptr->{'tag'}->{$tag} ) {
+                        if ( defined($relation_ptr->{'tag'}->{$tag}) ) {
                             push( @{$relation_ptr->{'__notes__'}}, sprintf("'%s' = '%s'", handle_foreign($tag), handle_foreign($relation_ptr->{'tag'}->{$tag})) )
                         }
                     }
@@ -5944,16 +5944,16 @@ sub getGtfsInfo {
         }
 
         if ( $relation_ptr->{'tag'}->{'type'} eq 'route' ) {
-            if ( $relation_ptr->{'tag'}->{'gtfs:trip_id'} ) {
+            if ( defined($relation_ptr->{'tag'}->{'gtfs:trip_id'}) && $relation_ptr->{'tag'}->{'gtfs:trip_id'} ne '' ) {
                 $relation_ptr->{'tag'}->{'gtfs:trip_id'} =~ s/\s*;\s*/;/g;
                 $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsTripIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'}, 'gtfs:trip_id' ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:trip_id'} ) );
-            } elsif ( $relation_ptr->{'tag'}->{'gtfs:trip_id:sample'} ) {
+            } elsif ( defined($relation_ptr->{'tag'}->{'gtfs:trip_id:sample'}) && $relation_ptr->{'tag'}->{'gtfs:trip_id:sample'} ne '' ) {
                 $relation_ptr->{'tag'}->{'gtfs:trip_id:sample'} =~ s/\s*;\s*/;/g;
                 $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsTripIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'}, 'gtfs:trip_id:sample' ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:trip_id:sample'} ) );
-            } elsif ( $relation_ptr->{'tag'}->{'gtfs:shape_id'} ) {
+            } elsif ( defined($relation_ptr->{'tag'}->{'gtfs:shape_id'}) && $relation_ptr->{'tag'}->{'gtfs:shape_id'} ne '' ) {
                 $relation_ptr->{'tag'}->{'gtfs:shape_id'} =~ s/\s*;\s*/;/g;
                 $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsShapeIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'}, 'gtfs:shape_id' ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:shape_id'} ) );
-            } elsif ( $relation_ptr->{'tag'}->{'gtfs:route_id'} ) {
+            } elsif ( defined($relation_ptr->{'tag'}->{'gtfs:route_id'}) && $relation_ptr->{'tag'}->{'gtfs:route_id'} ne '' ) {
                 $relation_ptr->{'tag'}->{'gtfs:route_id'} =~ s/\s*;\s*/;/g;
                 $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'}, 'gtfs:route_id' ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:route_id'} ) );
                 # we do expect a trip_id or shape_id here, mark that route_id is used here
@@ -5965,9 +5965,10 @@ sub getGtfsInfo {
                     }
                 }
             }
-        } elsif ( $relation_ptr->{'tag'}->{'gtfs:route_id'} ) {
+        } elsif ( defined($relation_ptr->{'tag'}->{'gtfs:route_id'}) && $relation_ptr->{'tag'}->{'gtfs:route_id'} ne '' ) {
             $relation_ptr->{'tag'}->{'gtfs:route_id'} =~ s/\s*;\s*/;/g;
             $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'}, 'gtfs:route_id' ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:route_id'} ) );
+            # printf STDERR "getGtfsInfo() handling gtfs:route_id eq '0' -> %s\n", $gtfs_html_tag    if ( $relation_ptr->{'tag'}->{'gtfs:route_id'} eq '0' );
             if ( $gtfs_html_tag !~ m/bad-link/ ) {
                 if ( $relation_ptr->{'tag'}->{'gtfs:route_id'} !~ m/;/ || $gtfs_html_tag !~ m/gtfs-dateprevious/ ) {
                     my $grd = ( $gtfs_html_tag =~ m/gtfs-dateprevious/ ) ? 'previous' : $gtfs_release_date;
