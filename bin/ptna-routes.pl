@@ -2863,8 +2863,8 @@ sub analyze_relation {
                                 # $@ is set when an exception occurs: i.e. the date does not exist
                                 if ( $@ ) {
                                     printf STDERR "%s' = '%s-%s-%s': The date does not exist\n", $tag, $1, $2, $3  if ( $debug );
-                                    $issues_string = "'%s' = '%s': "  . gettext( "The date does not exist" );
-                                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, $tag, $datevalue ) );
+                                    $issues_string = gettext( "The date does not exist" );
+                                    push( @{$relation_ptr->{'__issues__'}}, sprintf( "'%s' = '%s': %s",, $tag, $datevalue, $issues_string ) );
                                 }
 
                             }
