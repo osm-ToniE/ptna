@@ -26,6 +26,7 @@ use OSM::Data           qw( %META %NODES %WAYS %RELATIONS );
 use RoutesList;
 use GTFS::PtnaSQLite    qw( getRouteIdStatus getTripIdStatus getShapeIdStatus getGtfsRouteIdHtmlTag getGtfsRouteIdIconTag getGtfsTripIdHtmlTag getGtfsShapeIdHtmlTag getGtfsLinkToRoutes );
 use Data::Dumper;
+use Time::Local         qw ( timelocal );
 use Encode;
 
 
@@ -87,6 +88,7 @@ my $allow_coach                     = undef;
 my $check_access                    = undef;
 my $check_against_gtfs              = undef;
 my $check_bus_stop                  = undef;
+my $check_dates                     = undef;
 my $check_gtfs                      = undef;
 my $check_motorway_link             = undef;
 my $check_name                      = undef;
@@ -135,6 +137,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'check-access'                  =>  \$check_access,                 # --check-access                    check for access restrictions on highways
             'check-against-gtfs=s'          =>  \$check_against_gtfs,           # --check-against-gtfs              check against GTFS data using 'gtfs:*' tags in relation (=tags) or using CVS data in 'routes_file' (=csv) or both (=tags,csv)
             'check-bus-stop'                =>  \$check_bus_stop,               # --check-bus-stop                  check for strict highway=bus_stop on nodes only
+            'check-dates'                   =>  \$check_dates,                  # --check-dates                     check dates to follo ISO format: YYYY-MM-DD
             'check-gtfs'                    =>  \$check_gtfs,                   # --check-gtfs                      check "gtfs:*" tags for validity/uniqueness/...
             'check-motorway-link'           =>  \$check_motorway_link,          # --check-motorway-link             check for motorway_link followed/preceeded by motorway or trunk
             'check-name'                    =>  \$check_name,                   # --check-name                      check for strict name conventions (name='... ref: from => to'
@@ -265,6 +268,7 @@ if ( $verbose ) {
     printf STDERR "%20s--check-access='%s'\n",             ' ', $check_access               ? 'ON'          : 'OFF';
     printf STDERR "%20s--check-against-gtfs='%s'\n",       ' ', $check_against_gtfs         ? $check_against_gtfs          : '';
     printf STDERR "%20s--check-bus-stop='%s'\n",           ' ', $check_bus_stop             ? 'ON'          : 'OFF';
+    printf STDERR "%20s--check-dates='%s'\n",              ' ', $check_dates                ? 'ON'          : 'OFF';
     printf STDERR "%20s--check-gtfs='%s'\n",               ' ', $check_gtfs                 ? 'ON'          : 'OFF';
     printf STDERR "%20s--check-motorway-link='%s'\n",      ' ', $check_motorway_link        ? 'ON'          : 'OFF';
     printf STDERR "%20s--check-name='%s'\n",               ' ', $check_name                 ? 'ON'          : 'OFF';
@@ -2534,6 +2538,9 @@ sub analyze_relation {
     my @check_osm_separator_tags        = ( 'network', 'ref', 'gtfs' );
     my $check_osm_separator_tag         = undef;
     my $reporttype                      = undef;
+    my @datetags                        = ( 'check_date', 'timetable' );
+    my $datetag                         = undef;
+    my $datevalue                       = undef;
 
     if ( $relation_ptr ) {
 
@@ -2833,6 +2840,36 @@ sub analyze_relation {
                     $gtfs_info =~ s/GTFS-Release-Date: previous, //;
                     # printf STDERR "%s : %s -> %s\n", $ref, $relation_id, $gtfs_info;
                     push( @{$relation_ptr->{'__issues__'}}, $gtfs_info );
+                }
+            }
+        }
+        #
+        #
+        #
+        if ( $check_dates ) {
+            foreach $datetag ( @datetags ) {
+                foreach my $tag ( @relation_tags ) {
+                    if ( $tag =~ m/^\Q$datetag\E/i ) {
+                        if ( defined($relation_ptr->{'tag'}->{$tag}) ) {
+                            $datevalue = $relation_ptr->{'tag'}->{$tag};
+                            if ( $datevalue !~ m/^([0-9][0-9][0-9][0-9])-([01][0-9])-([0-3][0-9])$/ ) {
+                                $notes_string = gettext( "The value of '%s' (= '%s') should be specified in ISO 8601 format: YYYY-MM-DD" );
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, $tag, $datevalue ) );
+                            } else {
+                                printf STDERR "Checking for correct date: '%s' = '%s-%s-%s'\n", $tag, $1, $2, $3  if ( $debug );
+                                eval {
+                                    timelocal (0, 0, 0, $3, $2-1, $1-1900);
+                                };
+                                # $@ is set when an exception occurs: i.e. the date does not exist
+                                if ( $@ ) {
+                                    printf STDERR "%s' = '%s-%s-%s': The date does not exist\n", $tag, $1, $2, $3  if ( $debug );
+                                    $issues_string = "'%s' = '%s': "  . gettext( "The date does not exist" );
+                                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, $tag, $datevalue ) );
+                                }
+
+                            }
+                        }
+                    }
                 }
             }
         }
