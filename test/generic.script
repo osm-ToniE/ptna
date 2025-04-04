@@ -18,7 +18,7 @@ then
         ROUTES_OPTION="--routes-file=$TEST-Routes.txt"
     fi
 
-    ptna-routes.pl --max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-version --check-motorway-link --check-route-ref --check-way-type \
+    ptna-routes.pl --max-error=10 --check-access --check-dates --check-name --check-stop-position --check-sequence --check-version --check-motorway-link --check-route-ref --check-way-type \
                    --multiple-ref-type-entries=analyze --positive-notes --coloured-sketchline --verbose --debug --relaxed-begin-end-for=train \
                    --test --osm-xml-file=$TESTFILE $ROUTES_OPTION > $TEST.html 2> $TEST.log
 
