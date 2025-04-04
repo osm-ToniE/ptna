@@ -2538,7 +2538,7 @@ sub analyze_relation {
     my @check_osm_separator_tags        = ( 'network', 'ref', 'gtfs' );
     my $check_osm_separator_tag         = undef;
     my $reporttype                      = undef;
-    my @datetags                        = ( 'check_date', 'timetable' );
+    my @datetags                        = ( 'check_date', 'gtfs:release_date' );
     my $datetag                         = undef;
     my $datevalue                       = undef;
 
@@ -2849,7 +2849,7 @@ sub analyze_relation {
         if ( $check_dates ) {
             foreach $datetag ( @datetags ) {
                 foreach my $tag ( @relation_tags ) {
-                    if ( $tag =~ m/^\Q$datetag\E/i ) {
+                    if ( $tag =~ m/^\Q$datetag\E$/ ) {
                         if ( defined($relation_ptr->{'tag'}->{$tag}) ) {
                             $datevalue = $relation_ptr->{'tag'}->{$tag};
                             if ( $datevalue !~ m/^([0-9][0-9][0-9][0-9])-([01][0-9])-([0-3][0-9])$/ ) {
@@ -2864,7 +2864,7 @@ sub analyze_relation {
                                 if ( $@ ) {
                                     printf STDERR "%s' = '%s-%s-%s': The date does not exist\n", $tag, $1, $2, $3  if ( $debug );
                                     $issues_string = gettext( "The date does not exist" );
-                                    push( @{$relation_ptr->{'__issues__'}}, sprintf( "'%s' = '%s': %s",, $tag, $datevalue, $issues_string ) );
+                                    push( @{$relation_ptr->{'__issues__'}}, sprintf( "'%s' = '%s': %s", $tag, $datevalue, $issues_string ) );
                                 }
 
                             }
