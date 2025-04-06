@@ -115,6 +115,12 @@ sub ReadRoutes {
 
                     next    if ( !$_ );                                     # ignore if line is empty
 
+                    s/&lt;/</g;                                             # parsed data from Wiki has escaped HTML tags, un-escape them
+                    s/&gt;/>/g;                                             # parsed data from Wiki has escaped HTML tags, un-escape them
+                    s/&amp;/&/g;                                            # parsed data from Wiki has escaped HTML tags, un-escape them
+                    s/&#160;/ /g;                                           # parsed data from Wiki has escaped HTML tags, un-escape them
+                    s/&#xA0;/ /ig;                                          # parsed data from Wiki has escaped HTML tags, un-escape them
+
                     if ( m/^[=#@+~\$\|-]/ ) {                               # headers, text, comment lines and reserved characters
                         if ( m/^=/ ) {
                             if ( m/^(=+)([^=].*)/ ) {
