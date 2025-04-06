@@ -162,27 +162,38 @@ if ( $parse ) {
 
     printf STDERR "%s Parsing Wiki page '%s'\n", get_time(), $page;
 
-    my $ref = $mw->api( { action => 'parse', page => $page } );
+    # read raw to get the timestamp
 
-    if ( $ref && $ref->{'parse'} ) {
-        printf STDERR "%s ref = %s\n",  get_time(), Dumper($ref)     if ( $verbose );
-        if ( $ref->{'parse'}->{'text'} && $ref->{'parse'}->{'text'}->{'*'} ) {
-            printf STDERR "%s timestamp = %s\n", get_time(), get_timestamp();
-            if ( $file ) {
-                if ( open(OUT,">$file") ) {
-                    printf STDERR "%s writing parsed Wiki page '%s' to file '%s'\n", get_time(), $page, $file;
-                    binmode OUT, ":utf8";
-                    printf OUT "%s", $ref->{'parse'}->{'text'}->{'*'};
-                    close( OUT );
-                    printf STDERR "%s Done ... parsing Wiki page '%s' to file '%s'\n", get_time(), $page, $file;
-                } else {
-                    printf STDERR "%s Can't open file '%s' for writing parsed Wiki page\n", get_time(), $file;
-                    exit 10;
+    my $ref = $mw->get_page( { title => $page } );
+
+    if ( $ref ) {
+        if ( $ref->{'*'} ) {
+            my $timestamp = $ref->{timestamp};
+            printf STDERR "%s timestamp = %s\n", get_time(), ($timestamp ? $timestamp : '?');
+
+            # now read parsed data
+            $ref = $mw->api( { action => 'parse', page => $page, prop => 'text' } );
+
+            if ( $ref && $ref->{'parse'} ) {
+                printf STDERR "%s ref = %s\n",  get_time(), Dumper($ref)     if ( $verbose );
+                if ( $ref->{'parse'}->{'text'} && $ref->{'parse'}->{'text'}->{'*'} ) {
+                    if ( $file ) {
+                        if ( open(OUT,">$file") ) {
+                            printf STDERR "%s writing parsed Wiki page '%s' to file '%s'\n", get_time(), $page, $file;
+                            binmode OUT, ":utf8";
+                            printf OUT "%s", $ref->{'parse'}->{'text'}->{'*'};
+                            close( OUT );
+                            printf STDERR "%s Done ... parsing Wiki page '%s' to file '%s'\n", get_time(), $page, $file;
+                        } else {
+                            printf STDERR "%s Can't open file '%s' for writing parsed Wiki page\n", get_time(), $file;
+                            exit 10;
+                        }
+                    } else {
+                        printf STDERR "%s writing parsed Wiki page '%s' to STDOUT\n", get_time(), $page;
+                        printf "%s", $ref->{'parse'}->{'text'}->{'*'};
+                        printf STDERR "%s Done ... writing parsed Wiki page '%s' to STDOUT\n", get_time(), $page;
+                    }
                 }
-            } else {
-                printf STDERR "%s writing parsed Wiki page '%s' to STDOUT\n", get_time(), $page;
-                printf "%s", $ref->{'parse'}->{'text'}->{'*'};
-                printf STDERR "%s Done ... writing parsed Wiki page '%s' to STDOUT\n", get_time(), $page;
             }
         } else {
             printf STDERR "%s Wiki page '%s' does not exist (no contents)\n", get_time(), $page;
@@ -346,21 +357,6 @@ sub get_time {
     my ($sec,$min,$hour,$day,$month,$year) = localtime();
 
     return sprintf( "%04d-%02d-%02d %02d:%02d:%02d", $year+1900, $month+1, $day, $hour, $min, $sec );
-}
-
-
-#############################################################################################
-#
-#
-#
-#############################################################################################
-
-sub get_timestamp {
-
-    my ($sec,$min,$hour,$day,$month,$year) = gmtime();
-
-    # 2025-03-31T22:40:16Z
-    return sprintf( "%04d-%02d-%02dZ%02d:%02d:%02dZ", $year+1900, $month+1, $day, $hour, $min, $sec );
 }
 
 
