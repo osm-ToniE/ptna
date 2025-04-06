@@ -36,9 +36,11 @@ This page follows the PTNA CSV format. For more information, see [[Public Transp
 
 === Level 3
 
-==== Level 4
+==== Level 4 </pre>
 
-===== Level 5
+to be ignored
+
+<pre> ===== Level 5
 
 ====== Level 6
 

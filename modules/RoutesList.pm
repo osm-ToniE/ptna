@@ -106,8 +106,14 @@ sub ReadRoutes {
                         s/^.*<pre>\s*//i;                                   # delete anything before the last <pre> and the <pre> and following white spaces and continue
                     }
 
-                    next    if ( !$_ );                                     # ignore if line is empty
                     next    if ( !$have_seen_pre && !$nopre );              # in case of "pre" option, wait for <pre> to appear, ignore anything before that
+
+                    if ( m|</pre>| ) {                                      # ignore anything after </pre>
+                        $have_seen_pre = 0;
+                        s|\s*</pre>.*$||i;                                  # delete anything after the first </pre> and the </pre> and folpreceedinglowing white spaces and continue
+                    }
+
+                    next    if ( !$_ );                                     # ignore if line is empty
 
                     if ( m/^[=#@+~\$\|-]/ ) {                               # headers, text, comment lines and reserved characters
                         if ( m/^=/ ) {
@@ -138,9 +144,6 @@ sub ReadRoutes {
                                 $hashref->{'reserved'}  = sprintf( decode( 'utf8', $issues_string ), $1, $NR, $hashref->{'contents'} );   # this is an error
                             }
                         }
-                    } elsif ( m|</pre>| ) {                                    # ignore lines with HTML </pre>
-                        last    if ( $have_seen_pre && !$nopre );              # terminate when this is aclosing </pre> and we handle <pre>
-                        next;
                     } else {
                         $hashref->{'type'}       = 'route';          # store type
 
