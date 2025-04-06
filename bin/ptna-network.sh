@@ -572,62 +572,52 @@ then
     then
         if [ -n "$WIKI_ROUTES_PAGE" ]
         then
-            if [ -f "$WORK_LOC/$ROUTES_FILE" ]
+            if [ -f "$WORK_LOC/$CATALOG_FILE" ]
             then
-                if [ -f "$WORK_LOC/$CATALOG_FILE" ]
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Reading raw routes Wiki page '$WIKI_ROUTES_PAGE' to file '$WORK_LOC/$ROUTES_FILE'"
+                log=$(ptna-wiki-page.pl --pull --page=$WIKI_ROUTES_PAGE --file=$WORK_LOC/$ROUTES_FILE 2>&1)
+                ret=$?
+                echo $log | sed -e 's/ \([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9] \)/\n\1/g'
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-wiki-page.pl returned $ret"
+                if [ -f "$WORK_LOC/$ROUTES_FILE" ]
                 then
-                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Reading raw routes Wiki page '$WIKI_ROUTES_PAGE' to file '$WORK_LOC/$ROUTES_FILE'"
-                    log=$(ptna-wiki-page.pl --pull --page=$WIKI_ROUTES_PAGE --file=$WORK_LOC/$ROUTES_FILE 2>&1)
-                    ret=$?
-                    echo $log | sed -e 's/ \([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9] \)/\n\1/g'
-                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-wiki-page.pl returned $ret"
-                    if [ -f "$WORK_LOC/$ROUTES_FILE" ]
+                    ROUTES_SIZE="$(stat -c '%s' $WORK_LOC/$ROUTES_FILE)"
+                    ROUTES_TIMESTAMP_UTC="$(echo $log | fgrep "timestamp =" | sed -e 's/.*timestamp\s*=\s*\(20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]T[0-9][0-9]:[0-9][0-9]:[0-9][0-9]Z\).*/\1/')"
+                    ROUTES_TIMESTAMP_LOC="$(date --date "$ROUTES_TIMESTAMP_UTC" '+%Y-%m-%d %H:%M:%S %Z' | sed -e 's/ \([+-][0-9]*\)$/ UTC\1/')"
+                    if [ $(grep -c '#REDIRECT *\[\[' $WORK_LOC/$ROUTES_FILE) -eq 0 ]
                     then
-                        ROUTES_SIZE="$(stat -c '%s' $WORK_LOC/$ROUTES_FILE)"
-                        ROUTES_TIMESTAMP_UTC="$(echo $log | fgrep "timestamp =" | sed -e 's/.*timestamp\s*=\s*\(20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]T[0-9][0-9]:[0-9][0-9]:[0-9][0-9]Z\).*/\1/')"
-                        ROUTES_TIMESTAMP_LOC="$(date --date "$ROUTES_TIMESTAMP_UTC" '+%Y-%m-%d %H:%M:%S %Z' | sed -e 's/ \([+-][0-9]*\)$/ UTC\1/')"
-                        if [ $(grep -c '#REDIRECT *\[\[' $WORK_LOC/$ROUTES_FILE) -eq 0 ]
+                        modified="$(date --utc --date "$ROUTES_TIMESTAMP_UTC" '+%s')"
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $WORK_LOC/$ROUTES_FILE)
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "calling: ptnaFillCsvData.py --routes $WORK_LOC/$CATALOG_FILE --template $WORK_LOC/$ROUTES_FILE --outfile $WORK_LOC/$ROUTES_FILE.new"
+                        ptnaFillCsvData.py --routes $WORK_LOC/$CATALOG_FILE --template $WORK_LOC/$ROUTES_FILE --outfile $WORK_LOC/$ROUTES_FILE.new
+                        ret=$?
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptnaFillCsvData.py returned $ret"
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $WORK_LOC/$ROUTES_FILE.new)
+                        diff $WORK_LOC/$ROUTES_FILE $WORK_LOC/$ROUTES_FILE.new > $WORK_LOC/$ROUTES_FILE.diff
+                        diff_size=$(stat -c '%s' $WORK_LOC/$ROUTES_FILE.diff)
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Diff size:  $diff_size $WORK_LOC/$ROUTES_FILE"
+                        if [ $diff_size -gt 0 ]
                         then
-                            modified="$(date --utc --date "$ROUTES_TIMESTAMP_UTC" '+%s')"
-                            echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $WORK_LOC/$ROUTES_FILE)
-                            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "calling: ptnaFillCsvData.py --routes $WORK_LOC/$CATALOG_FILE --template $WORK_LOC/$ROUTES_FILE --outfile $WORK_LOC/$ROUTES_FILE.new"
-                            ptnaFillCsvData.py --routes $WORK_LOC/$CATALOG_FILE --template $WORK_LOC/$ROUTES_FILE --outfile $WORK_LOC/$ROUTES_FILE.new
+                            mv $WORK_LOC/$ROUTES_FILE.new $WORK_LOC/$ROUTES_FILE
+                            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Writing Routes file '$WORK_LOC/$ROUTES_FILE' to Wiki page '$WIKI_ROUTES_PAGE'"
+                            log=$(ptna-wiki-page.pl --push --page=$WIKI_ROUTES_PAGE --file=$WORK_LOC/$ROUTES_FILE --summary="GTFS to CSV injection" 2>&1)
                             ret=$?
-                            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptnaFillCsvData.py returned $ret"
-                            echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $WORK_LOC/$ROUTES_FILE.new)
-                            diff $WORK_LOC/$ROUTES_FILE $WORK_LOC/$ROUTES_FILE.new > $WORK_LOC/$ROUTES_FILE.diff
-                            diff_size=$(stat -c '%s' $WORK_LOC/$ROUTES_FILE.diff)
-                            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Diff size:  $diff_size $WORK_LOC/$ROUTES_FILE"
-                            if [ $diff_size -gt 0 ]
-                            then
-                                mv $WORK_LOC/$ROUTES_FILE.new $WORK_LOC/$ROUTES_FILE
-                                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Writing Routes file '$WORK_LOC/$ROUTES_FILE' to Wiki page '$WIKI_ROUTES_PAGE'"
-                                log=$(ptna-wiki-page.pl --push --page=$WIKI_ROUTES_PAGE --file=$WORK_LOC/$ROUTES_FILE --summary="GTFS to CSV injection" 2>&1)
-                                ret=$?
-                                echo $log | sed -e 's/ \([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9] \)/\n\1/g'
-                                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-wiki-page.pl returned $ret"
-                                sleep 10   # to avoid being blocked by rate limit of wiki
-                            else
-                                rm -f $WORK_LOC/$ROUTES_FILE.new
-                                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$WIKI_ROUTES_PAGE not changed by injection"
-                            fi
-                            rm -f $WORK_LOC/$ROUTES_FILE.diff
+                            echo $log | sed -e 's/ \([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9] \)/\n\1/g'
+                            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-wiki-page.pl returned $ret"
+                            sleep 10   # to avoid being blocked by rate limit of wiki
                         else
-                            ROUTES_SIZE=-2
-                            modified=0
-                            ret=99
-                            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'$ROUTES_FILE' includes a '#REDIRECT'"
+                            rm -f $WORK_LOC/$ROUTES_FILE.new
+                            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$WIKI_ROUTES_PAGE not changed by injection"
                         fi
+                        rm -f $WORK_LOC/$ROUTES_FILE.diff
                     else
-                        ROUTES_SIZE=-1
-                        modified=0
-                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Downloading '$ROUTES_FILE' failed"
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'$ROUTES_FILE' includes a '#REDIRECT'"
                     fi
                 else
-                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$WORK_LOC/$CATALOG_FILE not available, no injection"
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Downloading '$ROUTES_FILE' failed"
                 fi
             else
-                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$WIKI_ROUTES_PAGE configured but does not yet exist"
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$WORK_LOC/$CATALOG_FILE not available, no injection"
             fi
         else
             if [ -f "$SETTINGS_DIR/$ROUTES_FILE" ]
