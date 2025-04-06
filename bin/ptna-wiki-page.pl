@@ -30,6 +30,7 @@ my $man_page                        = undef;
 my $verbose                         = undef;
 my $file                            = undef;                    # --file=input_or_output_filename
 my $page                            = $PAGE;                    # --page=Sandbox
+my $parse                           = undef;                    # --parse
 my $pull                            = undef;                    # --pull
 my $push                            = undef;                    # --push
 my $username                        = undef;                    # --username=user           - alternatively use    $ENV{'WIKI_USERNAME'} instead
@@ -45,6 +46,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'debug'                         =>  \$debug,                        # --debug
             'file=s'                        =>  \$file,                         # --file=input_filename
             'page=s'                        =>  \$page,                         # --page=München/Transportation/Analyse
+            'parse'                         =>  \$parse,                        # --parse
             'pull'                          =>  \$pull,                         # --pull
             'push'                          =>  \$push,                         # --push
             'username=s'                    =>  \$username,                     # --username=user               - alternatively use    $ENV{'WIKI_USERNAME'} instead
@@ -58,20 +60,21 @@ $page       = decode('utf8', $page    ) if ( $page    );
 $summary    = decode('utf8', $summary ) if ( $summary );
 
 if ( !$page ) {
-    printf STDERR "Please specify the Wiki page to pull or to push to\n";
-    printf STDERR "usage: wiki-page.pl [--pull|--push|--watch] --page=<wikipage> ...\n";
+    printf STDERR "Please specify the Wiki page to parse, pull, push or watch\n";
+    printf STDERR "usage: wiki-page.pl [--parse|--pull|--push|--watch] --page=<wikipage> ...\n";
     exit 1;
 }
 
 my $commands = 0;
 
+if ( $parse ) { $commands++; }
 if ( $pull  ) { $commands++; }
 if ( $push  ) { $commands++; }
 if ( $watch ) { $commands++; }
 
 if ( $commands > 1 ) {
-    printf STDERR "Please specify either --pull or --push or --watch\n";
-    printf STDERR "usage: wiki-page.pl [--pull|--push|--watch] --page=<wikipage> ...\n";
+    printf STDERR "Please specify either --parse or --pull or --push or --watch\n";
+    printf STDERR "usage: wiki-page.pl [--parse|--pull|--push|--watch] --page=<wikipage> ...\n";
     exit 2;
 } elsif ( $push ) {
     if ( $username || $ENV{'WIKI_USERNAME'} ) {
@@ -110,7 +113,7 @@ if ( $commands > 1 ) {
         exit 5;
     }
 
-} elsif ( $pull ) {
+} elsif ( $parse || $pull ) {
     ;
 } elsif ( $watch ) {
     if ( $username || $ENV{'WIKI_USERNAME'} ) {
@@ -119,9 +122,9 @@ if ( $commands > 1 ) {
         }
     } else {
         printf STDERR "Username for Wiki not specified\n";
-        printf STDERR "usage: wiki-page.pl --push --page=<wikipage> --file=<filename> --username=<user> --password=<passwd> --summary=<summary> ...\n";
+        printf STDERR "usage: wiki-page.pl --watch --page=<wikipage> --file=<filename> --username=<user> --password=<passwd> --summary=<summary> ...\n";
         printf STDERR "or\n";
-        printf STDERR "WIKI_USER=<user>\nWIKI_PASSWORD=<passwd>\nwiki-page.pl --push --page=<wikipage> --file=<filename> --summary=<summary> ...\n";
+        printf STDERR "WIKI_USER=<user>\nWIKI_PASSWORD=<passwd>\nwiki-page.pl --watch --page=<wikipage> --file=<filename> --summary=<summary> ...\n";
         exit 6;
     }
     if ( $password || $ENV{'WIKI_PASSWORD'} ) {
@@ -130,14 +133,14 @@ if ( $commands > 1 ) {
         }
     } else {
         printf STDERR "Password for User '%s' for Wiki not specified\n", $username;
-        printf STDERR "usage: wiki-page.pl --push --page=<wikipage> --file=<filename> --username=<user> --password=<passwd> --summary=<summary> ...\n";
+        printf STDERR "usage: wiki-page.pl --watch --page=<wikipage> --file=<filename> --username=<user> --password=<passwd> --summary=<summary> ...\n";
         printf STDERR "or\n";
-        printf STDERR "WIKI_USER=<user>\nWIKI_PASSWORD=<passwd>\nwiki-page.pl --push --page=<wikipage> --file=<filename> --summary=<summary> ...\n";
+        printf STDERR "WIKI_USER=<user>\nWIKI_PASSWORD=<passwd>\nwiki-page.pl --watch --page=<wikipage> --file=<filename> --summary=<summary> ...\n";
         exit 7;
     }
 } else {
-    printf STDERR "Please specify either --pull or --push or --watch\n\n", $username;
-    printf STDERR "usage: wiki-page.pl [--pull|--push|--watch] --page=<wikipage> ...\n";
+    printf STDERR "Please specify either --parse or --pull or --push or --watch\n\n", $username;
+    printf STDERR "usage: wiki-page.pl [--parse|--pull|--push|--watch] --page=<wikipage> ...\n";
     exit 8;
 }
 
@@ -148,7 +151,47 @@ if ( $commands > 1 ) {
 my $mw = undef;
 
 
-if ( $pull) {
+if ( $parse ) {
+
+    $mw = MediaWiki::API->new();
+
+    $mw->{config}->{api_url}    = $wiki_url;
+    $mw->{config}->{on_error}   = \&on_error;
+
+    printf STDERR "%s Parsing Wiki page '%s'\n", get_time(), $page;
+
+    my $ref = $mw->api( { action => 'parse', page => $page, prop => 'text' } );
+
+    if ( $ref && $ref->{'parse'} ) {
+        printf STDERR "%s title = %s\n",  get_time(), ($ref->{'parse'}->{'title'}  ? $ref->{'parse'}->{'title'}  : '?')     if ( $verbose );
+        printf STDERR "%s pageid = %s\n", get_time(), ($ref->{'parse'}->{'pageid'} ? $ref->{'parse'}->{'pageid'} : '?')     if ( $verbose );
+        if ( $ref->{'parse'}->{'text'} && $ref->{'parse'}->{'text'}->{'*'} ) {
+            if ( $file ) {
+                if ( open(OUT,">$file") ) {
+                    printf STDERR "%s writing parsed Wiki page '%s' to file '%s'\n", get_time(), $page, $file;
+                    binmode OUT, ":utf8";
+                    printf OUT "%s", $ref->{'parse'}->{'text'}->{'*'};
+                    close( OUT );
+                    printf STDERR "%s Done ... parsing Wiki page '%s' to file '%s'\n", get_time(), $page, $file;
+                } else {
+                    printf STDERR "%s Can't open file '%s' for writing parsed Wiki page\n", get_time(), $file;
+                    exit 10;
+                }
+            } else {
+                printf STDERR "%s writing parsed Wiki page '%s' to STDOUT\n", get_time(), $page;
+                printf "%s", $ref->{'parse'}->{'text'}->{'*'};
+                printf STDERR "%s Done ... writing parsed Wiki page '%s' to STDOUT\n", get_time(), $page;
+            }
+        } else {
+            printf STDERR "%s Wiki page '%s' does not exist (no contents)\n", get_time(), $page;
+            exit 11;
+        }
+    } else {
+        printf STDERR "%s Parsing Wiki page '%s' failed\n", get_time(), $page;
+        exit 12;
+    }
+
+} elsif ( $pull) {
 
     $mw = MediaWiki::API->new();
 
