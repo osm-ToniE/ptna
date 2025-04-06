@@ -101,11 +101,12 @@ sub ReadRoutes {
                     $hashref                    = $routes_hash{$NR};
                     $hashref->{'contents'}      = $_;                  # store original contents
 
-                    next    if ( !$_ );                                     # ignore if line is empty
-                    if ( m/<pre>/ ) {                                       # ignore lines with HTML <pre>
+                    if ( m/<pre>/i ) {                                      # ignore beginning of lines with HTML <pre>
                         $have_seen_pre = 1;
-                        next;
+                        s/^.*<pre>\s*//i;                                   # delete anything before the last <pre> and the <pre> and following white spaces and continue
                     }
+
+                    next    if ( !$_ );                                     # ignore if line is empty
                     next    if ( !$have_seen_pre && !$nopre );              # in case of "pre" option, wait for <pre> to appear, ignore anything before that
 
                     if ( m/^[=#@+~\$\|-]/ ) {                               # headers, text, comment lines and reserved characters

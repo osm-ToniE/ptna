@@ -1,6 +1,6 @@
 This page follows the PTNA CSV format. For more information, see [[Public Transport Network Analysis/Syntax]].
 
-<pre>
+<pre> - Text before the last 'pre' is ignored <pre> - Text after the last 'pre'
 #
 # Format:
 #
