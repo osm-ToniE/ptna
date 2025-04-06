@@ -12,6 +12,8 @@ use Getopt::Long;
 
 use MediaWiki::API;
 
+use Data::Dumper;
+
 use Encode;
 
 
@@ -160,12 +162,12 @@ if ( $parse ) {
 
     printf STDERR "%s Parsing Wiki page '%s'\n", get_time(), $page;
 
-    my $ref = $mw->api( { action => 'parse', page => $page, prop => 'text' } );
+    my $ref = $mw->api( { action => 'parse', page => $page } );
 
     if ( $ref && $ref->{'parse'} ) {
-        printf STDERR "%s title = %s\n",  get_time(), ($ref->{'parse'}->{'title'}  ? $ref->{'parse'}->{'title'}  : '?')     if ( $verbose );
-        printf STDERR "%s pageid = %s\n", get_time(), ($ref->{'parse'}->{'pageid'} ? $ref->{'parse'}->{'pageid'} : '?')     if ( $verbose );
+        printf STDERR "%s ref = %s\n",  get_time(), Dumper($ref)     if ( $verbose );
         if ( $ref->{'parse'}->{'text'} && $ref->{'parse'}->{'text'}->{'*'} ) {
+            printf STDERR "%s timestamp = %s\n", get_time(), get_timestamp();
             if ( $file ) {
                 if ( open(OUT,">$file") ) {
                     printf STDERR "%s writing parsed Wiki page '%s' to file '%s'\n", get_time(), $page, $file;
@@ -344,6 +346,21 @@ sub get_time {
     my ($sec,$min,$hour,$day,$month,$year) = localtime();
 
     return sprintf( "%04d-%02d-%02d %02d:%02d:%02d", $year+1900, $month+1, $day, $hour, $min, $sec );
+}
+
+
+#############################################################################################
+#
+#
+#
+#############################################################################################
+
+sub get_timestamp {
+
+    my ($sec,$min,$hour,$day,$month,$year) = gmtime();
+
+    # 2025-03-31T22:40:16Z
+    return sprintf( "%04d-%02d-%02dZ%02d:%02d:%02dZ", $year+1900, $month+1, $day, $hour, $min, $sec );
 }
 
 
