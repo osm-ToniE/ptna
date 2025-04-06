@@ -101,6 +101,10 @@ to be ignored
 -        1.2.1. third level
 -
 - 2. first level
+
+-
+- Test for HTML tags '&lt;' = '<' and '&gt;' = '>' and '&amp;' = '&' and '&#160;' = nbsp and '&#xA0;' = nbsp
+-
 -
 - '''Future extension to support tables'''
 -
@@ -153,6 +157,8 @@ $ reserved character
 604;bus;comment;from;to;
 605;bus;comment;from;to;operator
 606;bus;;;;operator
+610;bus;A-&gt;B;A;B;operator
+611;bus;A&lt;-&gt;B;A;B;"Operator&amp;Cie"
 700;auto;invalid route-type;nowhere;nowhere;noone
 800;bus;!Neue Buslinie ab 09.12.2018!;nowhere;nowhere;noone
 900;bus;External Link with alias: [https://ptna.openstreetmap.de PTNA];from;to;"operator1;operator2"
