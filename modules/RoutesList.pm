@@ -141,7 +141,7 @@ sub ReadRoutes {
                         } elsif ( m/^#/ ) {
                             next;                                           # ignore 'comment' line
                         } elsif ( m/^([@+~\$\|])/ ) {
-                            if ( m/^@[a-z\@]/ ) {
+                            if ( m/^@[a-z\@!]/ ) {
                                 $hashref->{'type'}      = 'ignore';         # store type
                                 $hashref->{'ignore'}    = $_;
                             } else {
