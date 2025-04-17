@@ -999,6 +999,8 @@ then
                         then
                             HAS_RELEVANT_DIFF=false
                         fi
+                    else
+                        DIFF_LINES=$(wc -l $WORK_LOC/$HTML_FILE | sed -e 's/ .*$//')
                     fi
 
                     if [ "$HAS_RELEVANT_DIFF" == "true" ]
@@ -1016,7 +1018,7 @@ then
                                 echo "HTML_DIFF=$HTML_DIFF" >> $WORK_LOC/$DETAILS_FILE
                             else
                                 htmldiff.pl -c $WORK_LOC/$HTML_FILE $WORK_LOC/$HTML_FILE > $WORK_LOC/$DIFF_HTML_FILE
-                                HTML_DIFF=0
+                                HTML_DIFF=$DIFF_LINES
                             fi
 
                             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Copying '$WORK_LOC/$DIFF_HTML_FILE' to '$RESULTS_LOC'"
