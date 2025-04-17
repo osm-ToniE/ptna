@@ -86,19 +86,29 @@ def parse_filter(filter_string):
     return f
 
 def create_filters_function(filters):
-    # parse the filters and return a function that accepts a route and returns whether it passes all the filters
+    """parse the filters and return a function that accepts a route and returns whether it passes all the filters"""
     for i, f in enumerate(filters):
+        # changes here will be visible in the closing @@ as well
+
         if not re.search('[=~]', f):
             # @bus -> @type=bus
-            # change should be visible in the closing @@ as well
-            filters[i] = f"type={f}"
+            f = f"type={f}"
+        assert re.search('[=~]', f)
+
+        # @route-id=X-X -> @route_id=X-X
+        f = re.split(r'([=~])', f, maxsplit=1)
+        f[0] = f[0].replace('-', '_')
+        f = ''.join(f)
+
+        filters[i] = f
+
 
     filters = [parse_filter(f) for f in filters]
     return lambda r: all(f(r) for f in filters)
 
 def output_routes_with_filters(routes, filters, of, show_hidden_variables):
     try:
-        route_passes_filters = create_filters_function(filters) # also changes @* to @type=* in filters, affects output
+        route_passes_filters = create_filters_function(filters) # modifies filters, affects output in next line
         print("Outputting routes with filters:")
         print('\n'.join(f"@{f}" for f in filters))
         used_indexes = []
