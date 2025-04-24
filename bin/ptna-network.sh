@@ -302,7 +302,7 @@ then
             if [ "$fsize" -gt 4096 ]
             then
                 head -10 $OSM_XML_FILE_ABSOLUTE
-                OSM_BASE=$(head -10 $OSM_XML_FILE_ABSOLUTE | fgrep -m 1 'osmosis_replication_timestamp' | sed -e 's/^.*osmosis_replication_timestamp=//' -e 's/".*$//')
+                OSM_BASE=$(head -10 $OSM_XML_FILE_ABSOLUTE | grep -F -m 1 'osmosis_replication_timestamp' | sed -e 's/^.*osmosis_replication_timestamp=//' -e 's/".*$//')
                 if [ -n "$OSM_BASE" ]
                 then
                     OSM_BASE=$(date --date "$OSM_BASE" "+%Y-%m-%d %H:%M:%S %Z")
@@ -437,7 +437,7 @@ then
                 rm -f $OSM_XML_FILE_ABSOLUTE
                 if [ -n "$PTNA_OVERPASS_API_SERVER" ]
                 then
-                    if [ $(echo "$OVERPASS_QUERY" | fgrep -c 'poly:') -eq 0 ]
+                    if [ $(echo "$OVERPASS_QUERY" | grep -F -c 'poly:') -eq 0 ]
                     then
                         # the alternative Overpass-API server has some problems with areas defined by a polygon and needs a larger timeout value than the default (180)
                         OVERPASS_QUERY=$(echo $OVERPASS_QUERY | \
@@ -467,7 +467,7 @@ then
 
                     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "File '$OSM_XML_FILE_ABSOLUTE' first 10 lines:"
                     head -10 $OSM_XML_FILE_ABSOLUTE.part.$$
-                    OSM_BASE=$(head -10 $OSM_XML_FILE_ABSOLUTE.part.$$ | fgrep -m 1 '<meta osm_base' | sed -e 's/^.*osm_base="//' -e 's/".*$//')
+                    OSM_BASE=$(head -10 $OSM_XML_FILE_ABSOLUTE.part.$$ | grep -F -m 1 '<meta osm_base' | sed -e 's/^.*osm_base="//' -e 's/".*$//')
                     if [ -n "$OSM_BASE" ]
                     then
                         OSM_BASE=$(date --date "$OSM_BASE" "+%Y-%m-%d %H:%M:%S %Z")
@@ -520,7 +520,7 @@ then
 
                         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "File '$OSM_XML_FILE_ABSOLUTE' first 10 lines:"
                         head -10 $OSM_XML_FILE_ABSOLUTE.part.$$
-                        OSM_BASE=$(head -10 $OSM_XML_FILE_ABSOLUTE.part.$$ | fgrep -m 1 '<meta osm_base' | sed -e 's/^.*osm_base="//' -e 's/".*$//')
+                        OSM_BASE=$(head -10 $OSM_XML_FILE_ABSOLUTE.part.$$ | grep -F -m 1 '<meta osm_base' | sed -e 's/^.*osm_base="//' -e 's/".*$//')
                         if [ -n "$OSM_BASE" ]
                         then
                             OSM_BASE=$(date --date "$OSM_BASE" "+%Y-%m-%d %H:%M:%S %Z")
@@ -582,7 +582,7 @@ then
                 if [ -f "$WORK_LOC/$ROUTES_FILE" ]
                 then
                     ROUTES_SIZE="$(stat -c '%s' $WORK_LOC/$ROUTES_FILE)"
-                    ROUTES_TIMESTAMP_UTC="$(echo $log | fgrep "timestamp =" | sed -e 's/.*timestamp\s*=\s*\(20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]T[0-9][0-9]:[0-9][0-9]:[0-9][0-9]Z\).*/\1/')"
+                    ROUTES_TIMESTAMP_UTC="$(echo $log | grep -F "timestamp =" | sed -e 's/.*timestamp\s*=\s*\(20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]T[0-9][0-9]:[0-9][0-9]:[0-9][0-9]Z\).*/\1/')"
                     ROUTES_TIMESTAMP_LOC="$(date --date "$ROUTES_TIMESTAMP_UTC" '+%Y-%m-%d %H:%M:%S %Z' | sed -e 's/ \([+-][0-9]*\)$/ UTC\1/')"
                     if [ $(grep -c '#REDIRECT *\[\[' $WORK_LOC/$ROUTES_FILE) -eq 0 ]
                     then
@@ -753,7 +753,7 @@ then
             if [ -f "$WORK_LOC/$ROUTES_FILE" ]
             then
                 ROUTES_SIZE="$(stat -c '%s' $WORK_LOC/$ROUTES_FILE)"
-                ROUTES_TIMESTAMP_UTC="$(echo $log | fgrep "timestamp =" | sed -e 's/.*timestamp\s*=\s*\(20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]T[0-9][0-9]:[0-9][0-9]:[0-9][0-9]Z\).*/\1/')"
+                ROUTES_TIMESTAMP_UTC="$(echo $log | grep -F "timestamp =" | sed -e 's/.*timestamp\s*=\s*\(20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]T[0-9][0-9]:[0-9][0-9]:[0-9][0-9]Z\).*/\1/')"
                 ROUTES_TIMESTAMP_LOC="$(date --date "$ROUTES_TIMESTAMP_UTC" '+%Y-%m-%d %H:%M:%S %Z' | sed -e 's/ \([+-][0-9]*\)$/ UTC\1/')"
                 if [ $(grep -c '#REDIRECT *\[\[' $WORK_LOC/$ROUTES_FILE) -eq 0 ]
                 then
@@ -1013,7 +1013,7 @@ then
                             if [ -f "$WORK_LOC/$SAVE_FILE" ]
                             then
                                 htmldiff.pl -c $WORK_LOC/$SAVE_FILE $WORK_LOC/$HTML_FILE > $WORK_LOC/$DIFF_HTML_FILE
-                                HTML_DIFF=$(fgrep -c 'class="diff-' $WORK_LOC/$DIFF_HTML_FILE)
+                                HTML_DIFF=$(grep -F -c 'class="diff-' $WORK_LOC/$DIFF_HTML_FILE)
                                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "HTML diff:  '$HTML_DIFF'"
                                 echo "HTML_DIFF=$HTML_DIFF" >> $WORK_LOC/$DETAILS_FILE
                             else
