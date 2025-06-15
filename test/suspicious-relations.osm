@@ -330,11 +330,11 @@
   <relation id='-113855' action='modify'>
     <member type='relation' ref='-113886' role='' />
     <tag k='disused:type' v='route_master' />
-    <tag k='name' v='Bus 100' />
+    <tag k='name' v='Bus 101' />
     <tag k='network' v='network' />
     <tag k='operator' v='Operator' />
     <tag k='public_transport:version' v='2' />
-    <tag k='ref' v='100' />
+    <tag k='ref' v='101' />
     <tag k='route_master' v='bus' />
     <tag k='suspended:type' v='suspended:route_master' />
   </relation>

@@ -50,13 +50,19 @@
         </li>
         </ol>
         </li>
-        <li>4 <a href="#morerelations">More Relations</a>
-        </li>
-        <li>5 <a href="#networkdetails">Details for &#039;network&#039;-Values</a>
+        <li>4 <a href="#life-cycle-prefix">Routes with life-cycle prefix</a>
         <ol>
-        <li>5.1 <a href="#considerednetworks">Considered &#039;network&#039;-Values</a>
+        <li>4.1 <a href="#A4.1">Bus (bus)</a>
         </li>
-        <li>5.2 <a href="#notconsiderednetworks">Not Considered &#039;network&#039;-Values</a>
+        </ol>
+        </li>
+        <li>5 <a href="#morerelations">More Relations</a>
+        </li>
+        <li>6 <a href="#networkdetails">Details for &#039;network&#039;-Values</a>
+        <ol>
+        <li>6.1 <a href="#considerednetworks">Considered &#039;network&#039;-Values</a>
+        </li>
+        <li>6.2 <a href="#notconsiderednetworks">Not Considered &#039;network&#039;-Values</a>
         </li>
         </ol>
         </li>
@@ -96,7 +102,20 @@
         </table>
 
         <hr />
-        <h1 id="morerelations">4 More Relations</h1>
+        <h1 id="life-cycle-prefix">4 Routes with life-cycle prefix</h1>
+        <h2 id="A4.1">4.1 Bus (bus)</h2>
+        <table class="oepnvtable js-sort-table">
+            <thead>
+                <tr class="tableheaderrow"><th class="ref js-sort-number" dir="auto">&#x21C5;Line (ref=)</th><th class="relation js-sort-number" dir="auto">&#x21C5;Relation (id=)</th><th class="type" dir="auto">&#x21C5;Type (type=)</th><th class="life-cycle-prefix" dir="auto">&#x21C5;prefix:route(_master)</th><th class="name" dir="auto">&#x21C5;Name (name=)</th><th class="network" dir="auto">&#x21C5;Network (network=)</th><th class="operator" dir="auto">&#x21C5;Operator (operator=)</th><th class="from" dir="auto">&#x21C5;From (from=)</th><th class="via" dir="auto">&#x21C5;Via (via=)</th><th class="to" dir="auto">&#x21C5;To (to=)</th><th class="PTv" dir="auto">&#x21C5;PTv</th><th class="issues" dir="auto">&#x21C5;Errors</th><th class="notes" dir="auto">&#x21C5;Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr id="-113982" data-info="-113982" data-ref="100" class="line"><td class="ref foreign" dir="auto">100</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -113982</td><td class="type foreign" dir="auto">route_master</td><td class="life-cycle-prefix foreign" dir="auto">disused:route_master</td><td class="name foreign" dir="auto">Bus 100</td><td class="network foreign" dir="auto">network</td><td class="operator foreign" dir="auto">Operator</td><td class="from foreign" dir="auto"></td><td class="via foreign" dir="auto"></td><td class="to foreign" dir="auto"></td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto"></td><td class="notes" dir="auto">'network' = '<span class="foreign" dir="auto">network</span>'<br>'<span class="foreign" dir="auto">operator</span>' = '<span class="foreign" dir="auto">Operator</span>'</td></tr>
+                <tr id="-113807" data-info="-113807" data-ref="43" class="line"><td class="ref foreign" dir="auto">43</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -113807</td><td class="type foreign" dir="auto">route</td><td class="life-cycle-prefix foreign" dir="auto">disused:route</td><td class="name foreign" dir="auto">Bus 43: from =&gt; to</td><td class="network foreign" dir="auto">network2</td><td class="operator foreign" dir="auto"></td><td class="from foreign" dir="auto">from</td><td class="via foreign" dir="auto"></td><td class="to foreign" dir="auto">to</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto"></td><td class="notes" dir="auto">'<span class="foreign" dir="auto">comment</span>' = '<span class="foreign" dir="auto">&#039;network&#039; is different</span>'<br>'network' = '<span class="foreign" dir="auto">network2</span>'</td></tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <h1 id="morerelations">5 More Relations</h1>
 <p>
 This section lists further relations of the environment of the routes:
 </p>
@@ -112,6 +131,17 @@ This section lists further relations of the environment of the routes:
         </ul>
     </li>
 </ul>
+<p>
+The following values and combinations have been found in the provided data but they will not be listed here.
+They represent so called 'well defined' values and are not considered as errors.
+</p>
+<ul>
+    <li>'type' = 'route_master', 'type' = 'route'
+        <ul>
+    <li>'route_master' = 'road', 'route' = 'road'</li>
+        </ul>
+    </li>
+</ul>
 
         <table class="oepnvtable js-sort-table">
             <thead>
@@ -120,31 +150,29 @@ This section lists further relations of the environment of the routes:
             <tbody>
                 <tr id="-113804" data-info="-113804" data-ref="43" class="line"><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -113804</td><td class="type foreign" dir="auto">disused:route_master</td><td class="route_type foreign" dir="auto">&#039;route_master&#039; = &#039;bus&#039;</td><td class="ref foreign" dir="auto">43</td><td class="name foreign" dir="auto">Bus 43</td><td class="network foreign" dir="auto">network</td><td class="operator foreign" dir="auto"></td><td class="from foreign" dir="auto">from</td><td class="via foreign" dir="auto"></td><td class="to foreign" dir="auto">to</td><td class="PTv foreign" dir="auto">2</td><td class="public_transport foreign" dir="auto"></td></tr>
                 <tr id="-113806" data-info="-113806" data-ref="???" class="line"><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -113806</td><td class="type foreign" dir="auto">route</td><td class="route_type foreign" dir="auto"></td><td class="ref foreign" dir="auto"></td><td class="name foreign" dir="auto">&#039;route&#039; is not set</td><td class="network foreign" dir="auto"></td><td class="operator foreign" dir="auto"></td><td class="from foreign" dir="auto"></td><td class="via foreign" dir="auto"></td><td class="to foreign" dir="auto"></td><td class="PTv foreign" dir="auto"></td><td class="public_transport foreign" dir="auto"></td></tr>
-                <tr id="-113807" data-info="-113807" data-ref="43" class="line"><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -113807</td><td class="type foreign" dir="auto">route</td><td class="route_type foreign" dir="auto">&#039;disused:route&#039; = &#039;bus&#039;</td><td class="ref foreign" dir="auto">43</td><td class="name foreign" dir="auto">Bus 43: from =&gt; to</td><td class="network foreign" dir="auto">network2</td><td class="operator foreign" dir="auto"></td><td class="from foreign" dir="auto">from</td><td class="via foreign" dir="auto"></td><td class="to foreign" dir="auto">to</td><td class="PTv foreign" dir="auto">2</td><td class="public_transport foreign" dir="auto"></td></tr>
-                <tr id="-113808" data-info="-113808" data-ref="43" class="line"><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -113808</td><td class="type foreign" dir="auto">route</td><td class="route_type foreign" dir="auto">&#039;disused:route&#039; = &#039;road&#039;</td><td class="ref foreign" dir="auto">43</td><td class="name foreign" dir="auto">Bus 43: from =&gt; to</td><td class="network foreign" dir="auto">network</td><td class="operator foreign" dir="auto"></td><td class="from foreign" dir="auto">from</td><td class="via foreign" dir="auto"></td><td class="to foreign" dir="auto">to</td><td class="PTv foreign" dir="auto">2</td><td class="public_transport foreign" dir="auto"></td></tr>
                 <tr id="-113809" data-info="-113809" data-ref="53" class="line"><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -113809</td><td class="type foreign" dir="auto">route</td><td class="route_type foreign" dir="auto">disused:bus</td><td class="ref foreign" dir="auto">53</td><td class="name foreign" dir="auto">Bus 53: from =&gt; to</td><td class="network foreign" dir="auto">network</td><td class="operator foreign" dir="auto"></td><td class="from foreign" dir="auto">from</td><td class="via foreign" dir="auto"></td><td class="to foreign" dir="auto">to</td><td class="PTv foreign" dir="auto">2</td><td class="public_transport foreign" dir="auto"></td></tr>
                 <tr id="-113810" data-info="-113810" data-ref="43" class="line"><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -113810</td><td class="type foreign" dir="auto">disused:route</td><td class="route_type foreign" dir="auto">&#039;route&#039; = &#039;bus&#039;</td><td class="ref foreign" dir="auto">43</td><td class="name foreign" dir="auto">Bus 43: from =&gt; to</td><td class="network foreign" dir="auto">network</td><td class="operator foreign" dir="auto"></td><td class="from foreign" dir="auto">from</td><td class="via foreign" dir="auto"></td><td class="to foreign" dir="auto">to</td><td class="PTv foreign" dir="auto">2</td><td class="public_transport foreign" dir="auto"></td></tr>
                 <tr id="-113811" data-info="-113811" data-ref="???" class="line"><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -113811</td><td class="type foreign" dir="auto">&#039;disused:type&#039; = &#039;route&#039;</td><td class="route_type foreign" dir="auto">&#039;route&#039; = &#039;bus&#039;</td><td class="ref foreign" dir="auto"></td><td class="name foreign" dir="auto">Bus 43: from =&gt; to</td><td class="network foreign" dir="auto">network</td><td class="operator foreign" dir="auto"></td><td class="from foreign" dir="auto">from</td><td class="via foreign" dir="auto"></td><td class="to foreign" dir="auto">to</td><td class="PTv foreign" dir="auto">2</td><td class="public_transport foreign" dir="auto"></td></tr>
                 <tr id="-113812" data-info="-113812" data-ref="63" class="line"><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -113812</td><td class="type foreign" dir="auto">&#039;disused:type&#039; = &#039;disused:route&#039;</td><td class="route_type foreign" dir="auto">&#039;disused:route&#039; = &#039;disused:bus&#039;</td><td class="ref foreign" dir="auto">63</td><td class="name foreign" dir="auto">Bus 63: from =&gt; to</td><td class="network foreign" dir="auto">network</td><td class="operator foreign" dir="auto"></td><td class="from foreign" dir="auto">from</td><td class="via foreign" dir="auto"></td><td class="to foreign" dir="auto">to</td><td class="PTv foreign" dir="auto">2</td><td class="public_transport foreign" dir="auto"></td></tr>
-                <tr id="-113855" data-info="-113855" data-ref="100" class="line"><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -113855</td><td class="type foreign" dir="auto">&#039;disused:type&#039; = &#039;route_master&#039;<br>&#039;suspended:type&#039; = &#039;suspended:route_master&#039;</td><td class="route_type foreign" dir="auto">&#039;route_master&#039; = &#039;bus&#039;</td><td class="ref foreign" dir="auto">100</td><td class="name foreign" dir="auto">Bus 100</td><td class="network foreign" dir="auto">network</td><td class="operator foreign" dir="auto">Operator</td><td class="from foreign" dir="auto"></td><td class="via foreign" dir="auto"></td><td class="to foreign" dir="auto"></td><td class="PTv foreign" dir="auto">2</td><td class="public_transport foreign" dir="auto"></td></tr>
-                <tr id="-113982" data-info="-113982" data-ref="100" class="line"><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -113982</td><td class="type foreign" dir="auto">route_master</td><td class="route_type foreign" dir="auto">&#039;disused:route_master&#039; = &#039;bus&#039;</td><td class="ref foreign" dir="auto">100</td><td class="name foreign" dir="auto">Bus 100</td><td class="network foreign" dir="auto">network</td><td class="operator foreign" dir="auto">Operator</td><td class="from foreign" dir="auto"></td><td class="via foreign" dir="auto"></td><td class="to foreign" dir="auto"></td><td class="PTv foreign" dir="auto">2</td><td class="public_transport foreign" dir="auto"></td></tr>
+                <tr id="-113855" data-info="-113855" data-ref="101" class="line"><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -113855</td><td class="type foreign" dir="auto">&#039;disused:type&#039; = &#039;route_master&#039;<br>&#039;suspended:type&#039; = &#039;suspended:route_master&#039;</td><td class="route_type foreign" dir="auto">&#039;route_master&#039; = &#039;bus&#039;</td><td class="ref foreign" dir="auto">101</td><td class="name foreign" dir="auto">Bus 101</td><td class="network foreign" dir="auto">network</td><td class="operator foreign" dir="auto">Operator</td><td class="from foreign" dir="auto"></td><td class="via foreign" dir="auto"></td><td class="to foreign" dir="auto"></td><td class="PTv foreign" dir="auto">2</td><td class="public_transport foreign" dir="auto"></td></tr>
             </tbody>
         </table>
 
         <hr />
-        <h1 id="networkdetails">5 Details for &#039;network&#039;-Values</h1>
-        <h2 id="considerednetworks">5.1 Considered &#039;network&#039;-Values</h2>
+        <h1 id="networkdetails">6 Details for &#039;network&#039;-Values</h1>
+        <h2 id="considerednetworks">6.1 Considered &#039;network&#039;-Values</h2>
         <table class="oepnvtable js-sort-table">
             <thead>
                 <tr class="tableheaderrow"><th class="network" dir="auto">&#x21C5;Network (network=)</th><th class="number js-sort-number" dir="auto">&#x21C5;Number</th><th class="relations" dir="auto">&#x21C5;Relations</th></tr>
             </thead>
             <tbody>
                 <tr data-info="???" data-ref="???" class="line"><td class="network foreign" dir="auto"></td><td class="number foreign" dir="auto">1</td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -113803</td></tr>
-                <tr data-info="network" data-ref="???" class="line"><td class="network foreign" dir="auto">network</td><td class="number foreign" dir="auto">3</td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">100</span>' -113886, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">100</span>' -113964, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">100</span>' -113978</td></tr>
+                <tr data-info="network" data-ref="???" class="line"><td class="network foreign" dir="auto">network</td><td class="number foreign" dir="auto">4</td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">100</span>' -113886, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">100</span>' -113964, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">100</span>' -113978, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">100</span>' -113982</td></tr>
+                <tr data-info="network2" data-ref="???" class="line"><td class="network foreign" dir="auto">network2</td><td class="number foreign" dir="auto">1</td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">43</span>' -113807</td></tr>
             </tbody>
         </table>
 
-        <h2 id="notconsiderednetworks">5.2 Not Considered &#039;network&#039;-Values</h2>
+        <h2 id="notconsiderednetworks">6.2 Not Considered &#039;network&#039;-Values</h2>
 <p>
 This section lists the 'network'-values which have not been considered.
 They might include typos in values which otherwise should have been considered.

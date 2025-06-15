@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-04-04 20:30+0200\n"
+"POT-Creation-Date: 2025-06-15 14:09+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2025\n"
 "Language-Team: German (https://app.transifex.com/jungle-bus/teams/97874/de/)\n"
@@ -174,6 +174,9 @@ msgstr "ÖPNV Linien"
 
 msgid "Public Transport Lines without 'ref'"
 msgstr "ÖPNV Linien ohne 'ref'-Wert"
+
+msgid "Routes with life-cycle prefix"
+msgstr "ÖPNV-Linien mit life-cycle prefix"
 
 msgid "More Relations"
 msgstr "Weitere Relationen"
