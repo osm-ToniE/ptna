@@ -16,11 +16,11 @@ then
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
 
     osmium tags-filter -v -F "$INPUTFORMAT" -f "$INPUTFORMAT" -O -o "$TMP1" "$SOURCE" \
-           r/type=*route r/type=public_transport,network r/proposed:type r/planned:type r/construction:type r/ruins:type r/demolished:type r/destroyed:type r/abandoned:type r/disused:type r/suspended:type r/razed:type r/removed:type r/was:type \
-           r/route_master r/proposed:route_master r/planned:route_master r/construction:route_master r/ruins:route_master r/demolished:route_master r/destroyed:route_master r/abandoned:route_master r/disused:route_master r/suspended:route_master r/razed:route_master r/removed:route_master r/was:route_master \
-           r/route r/proposed:route r/planned:route r/construction:route r/ruins:route r/demolished:route r/destroyed:route r/abandoned:route r/disused:route r/suspended:route r/razed:route r/removed:route r/was:route \
+           r/type=*route r/type=public_transport,network r/*:type \
+           r/route_master r/*:route_master \
+           r/route r/*:route \
            r/network r/name r/ref r/from r/to r/via r/public_transport:version r/ref_trips \
-           public_transport highway=bus_stop,platform railway=stop,tram_stop,halt,station,platform route_ref gtfs:feed gtfs:route_id gtfs:stop_id gtfs:trip_id gtfs:trip_id:sample gtfs:shape_id
+           public_transport highway=bus_stop,platform railway=stop,tram_stop,halt,station,platform route_ref* gtfs*
 
     osmium_ret=$?
 
