@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-06-15 14:09+0200\n"
+"POT-Creation-Date: 2025-06-30 18:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1450,6 +1450,9 @@ msgid "check against 'csv' and 'tags'"
 msgstr ""
 
 msgid "'highway' = 'bus_stop' can be set on nodes only, not on ways or areas."
+msgstr ""
+
+msgid "Check dates to follow ISO format: YYYY-MM-DD"
 msgstr ""
 
 msgid "Check 'gtfs:*' tags for validity, ..."
