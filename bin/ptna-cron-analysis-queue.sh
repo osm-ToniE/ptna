@@ -60,69 +60,75 @@ then
 
     started_count=$(sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "SELECT COUNT(*) FROM queue WHERE status='started';")
 
-    if [ $started_count -eq 0 ]
+    if [ -n "$started_count" ]
     then
-        queue_count=$(sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "SELECT COUNT(*) FROM queue WHERE status='queued';")
-
-        if [ $queue_count -gt 0 ]
+        if [ $started_count -eq 0 ]
         then
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
+            queue_count=$(sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "SELECT COUNT(*) FROM queue WHERE status='queued';")
 
-            while [ $queue_count -gt 0 ]
-            do
-                id=$(sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "SELECT id FROM queue WHERE status='queued' ORDER BY queued ASC LIMIT 1;")
-                if [ -n "$id" ]
-                then
-                    network=$(sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "SELECT network FROM queue WHERE id=$id;")
+            if [ $queue_count -gt 0 ]
+            then
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
-                    settings_dir=$(find $PTNA_NETWORKS_LOC -type d -name "$network")
-                    if [ -n "$settings_dir" ]
+                while [ $queue_count -gt 0 ]
+                do
+                    id=$(sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "SELECT id FROM queue WHERE status='queued' ORDER BY queued ASC LIMIT 1;")
+                    if [ -n "$id" ]
                     then
-                        sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='started'      WHERE id=$id;"
-                        sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET started=$(date '+%s') WHERE id=$id;"
+                        network=$(sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "SELECT network FROM queue WHERE id=$id;")
 
-                        cd $settings_dir
-                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start 'ptna-network.sh -LcCoigau' for network '$network'"
-                        ptna-network.sh -LcCoigau
-                        ret_code=$?
-                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'ptna-network.sh -LcCoigau' returned with '$ret_code'"
-
-                        if [ $ret_code -eq 0 ]
+                        settings_dir=$(find $PTNA_NETWORKS_LOC -type d -name "$network")
+                        if [ -n "$settings_dir" ]
                         then
-                            sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='outdated' WHERE network='$network' AND status='finished';"
-                            sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='finished'  WHERE id=$id;"
-                            details_file=$(find $PTNA_WORK_LOC -type f -name "$network-Analysis-details.txt")
-                            if [ -n "$details_file" ]
+                            sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='started'      WHERE id=$id;"
+                            sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET started=$(date '+%s') WHERE id=$id;"
+
+                            cd $settings_dir
+                            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start 'ptna-network.sh -LcCoigau' for network '$network'"
+                            ptna-network.sh -LcCoigau
+                            ret_code=$?
+                            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'ptna-network.sh -LcCoigau' returned with '$ret_code'"
+
+                            if [ $ret_code -eq 0 ]
                             then
-                                htmldiff=$(grep "HTML_DIFF" $details_file | sed -e 's/^.*=//' | egrep '^[0-9]+$')
-                                if [ -n "$htmldiff" ]
+                                sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='outdated' WHERE network='$network' AND status='finished';"
+                                sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='finished'  WHERE id=$id;"
+                                details_file=$(find $PTNA_WORK_LOC -type f -name "$network-Analysis-details.txt")
+                                if [ -n "$details_file" ]
                                 then
-                                    sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET changes=$htmldiff WHERE id=$id;"
+                                    htmldiff=$(grep "HTML_DIFF" $details_file | sed -e 's/^.*=//' | egrep '^[0-9]+$')
+                                    if [ -n "$htmldiff" ]
+                                    then
+                                        sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET changes=$htmldiff WHERE id=$id;"
+                                    fi
                                 fi
+                            elif [ $ret_code -eq 99 ]
+                            then
+                                sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='locked'           WHERE id=$id;"
+                            else
+                                sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='failed $ret_code' WHERE id=$id;"
                             fi
-                        elif [ $ret_code -eq 99 ]
-                        then
-                            sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='locked'           WHERE id=$id;"
+                            sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET finished=$(date '+%s') WHERE id=$id;"
                         else
-                            sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='failed $ret_code' WHERE id=$id;"
+                            sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='failed dir'   WHERE id=$id;"
                         fi
-                        sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET finished=$(date '+%s') WHERE id=$id;"
                     else
-                        sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='failed dir'   WHERE id=$id;"
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "sqlite3 DB '$ANALYSIS_QUEUE' could not get 'id' of task to be started"
+                        break
                     fi
-                else
-                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "sqlite3 DB '$ANALYSIS_QUEUE' could not get 'id' of task to be started"
-                    break
-                fi
-                queue_count=$(sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "SELECT COUNT(*) FROM queue WHERE status='queued';")
-            done
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
+                    queue_count=$(sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "SELECT COUNT(*) FROM queue WHERE status='queued';")
+                done
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
+            fi
+        else
+            started=$(sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "SELECT network FROM queue WHERE status='started';")
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Another task is analyzing 'network' = '$started'"
         fi
     else
         started=$(sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "SELECT network FROM queue WHERE status='started';")
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Another task is analyzing 'network' = '$started'"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Analysis queue data base seems to be locked"
     fi
 else
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "sqlite3 DB '$ANALYSIS_QUEUE' could not be created"
