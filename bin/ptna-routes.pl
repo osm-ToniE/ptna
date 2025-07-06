@@ -27,6 +27,7 @@ use RoutesList;
 use GTFS::PtnaSQLite    qw( getRouteIdStatus getTripIdStatus getShapeIdStatus getGtfsRouteIdHtmlTag getGtfsRouteIdIconTag getGtfsTripIdHtmlTag getGtfsShapeIdHtmlTag getGtfsLinkToRoutes );
 use Data::Dumper;
 use Time::Local         qw ( timelocal );
+use GIS::Distance;
 use Encode;
 
 
@@ -373,6 +374,8 @@ my @HTML_main                       = ();
 
 my $issues_string                   = '';   # to be used with ALL 'issues' and gettext/ngettext - a separate tool parses this code, extracts those statements and creates a list of all issues
 my $notes_string                    = '';   # to be used with ALL 'notes'  and gettext/ngettext - a separate tool parses this code, extracts those statements and creates a list of all notes
+
+my $gis                             = GIS::Distance->new();
 
 my %column_name             = ( 'ref'               => gettext('Line (ref=)'),
                                 'relation'          => gettext('Relation (id=)'),
@@ -4092,10 +4095,17 @@ sub analyze_ptv2_route_relation {
         #
         my $first_stop_role     = '';
         my $first_platform_role = '';
+        my $first_platform_type = '';
+        my $first_platform_id   = '';
+        my $first_way_id        = '';
         my $last_stop_role      = '';
         my $last_platform_role  = '';
+        my $last_platform_type  = '';
+        my $last_platform_id    = '';
+        my $last_way_id         = '';
         my $number_of_stops     = 0;
         my $number_of_platforms = 0;
+        my $number_of_ways      = 0;
         foreach my $item ( @{$relation_ptr->{'members'}} ) {
             if ( $item->{'role'} ) {
                 if ( $item->{'role'} =~ m/^stop/ ) {
@@ -4103,9 +4113,22 @@ sub analyze_ptv2_route_relation {
                     $last_stop_role  = $item->{'role'};
                     $number_of_stops++;
                 } elsif ( $item->{'role'} =~ m/^platform/ ) {
-                    $first_platform_role = $item->{'role'}    unless ( $number_of_platforms );
+                    unless ( $number_of_platforms ) {
+                        $first_platform_role = $item->{'role'};
+                        $first_platform_type = $item->{'type'};
+                        $first_platform_id   = $item->{'ref'};
+                    }
                     $last_platform_role  = $item->{'role'};
+                    $last_platform_type  = $item->{'type'};
+                    $last_platform_id    = $item->{'ref'};
                     $number_of_platforms++;
+                }
+            } else {
+                # this is then assumed to be a highway/railway member, so do not consider nodes or relations here
+                if ( $item->{'type'} eq 'way' ) {
+                    $first_way_id   = $item->{'ref'}    unless ( $number_of_ways );
+                    $last_way_id    = $item->{'ref'};
+                    $number_of_ways++;
                 }
             }
         }
@@ -4135,6 +4158,24 @@ sub analyze_ptv2_route_relation {
                 $help_string = sprintf( $issues_string, ctrl_escape($last_platform_role) );
                 push( @{$relation_ptr->{'__issues__'}}, $help_string );
                 $return_code++;
+            }
+            if ( $number_of_ways > 0 ) {
+                my $distance             = 0;
+                my $max_allowed_distance = 20; # meters
+                $distance      = ObjectToObjectDistance( $first_platform_type, $first_platform_id, 'way', $first_way_id, $max_allowed_distance );
+                if ( $distance > $max_allowed_distance ) {
+                    $issues_string = gettext( "PTv2 route: First way (%s) is not near the first platform stop (%s)." ) . " ". gettext("Distance = %d meters." );
+                    $help_string = sprintf( $issues_string, printWayTemplate($first_way_id), printXxxTemplate($first_platform_type,$first_platform_id), $distance );
+                    push( @{$relation_ptr->{'__issues__'}}, $help_string );
+                    $return_code++;
+                }
+                $distance      = ObjectToObjectDistance( $last_platform_type, $last_platform_id, 'way', $last_way_id, $max_allowed_distance );
+                if ( $distance > $max_allowed_distance ) {
+                    $issues_string = gettext( "PTv2 route: Last way (%s) is not near the last platform stop (%s)." ) . " ". gettext("Distance = %d meters." );
+                    $help_string = sprintf( $issues_string, printWayTemplate($last_way_id), printXxxTemplate($last_platform_type,$last_platform_id), $distance );
+                    push( @{$relation_ptr->{'__issues__'}}, $help_string );
+                    $return_code++;
+                }
             }
         }
     }
@@ -4434,8 +4475,7 @@ sub SortRouteWayNodes {
                                     push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                                 }
                                 $relation_ptr->{'wrong_direction_oneways'}->{$current_way_id} = 1;
-                            }
-                            else {
+                            } else {
                                 #
                                 # no match, i.e. a gap between this (current) way and the way before
                                 #
@@ -6168,6 +6208,78 @@ sub getGtfsInfo {
 
 #############################################################################################
 #
+# functions for GEO handling using lat/lon of objects
+#
+#############################################################################################
+
+sub ObjectToObjectDistance {
+    my $type1           = shift || '';
+    my $id1             = shift || 0;
+    my $type2           = shift || '';
+    my $id2             = shift || 0;
+    my $ok_if_le_than   = shift || 0;       # don't evaluate further if the distance is less or equal than xx meters
+    my $distance_obj    = undef;
+    my $distance        = 0;
+    my $min_distance    = 100000000;
+
+    printf STDERR "%s ObjectToObjectDistance( '%s', '%s', '%s', '%s', %d)\n", get_time(), $type1, $id1, $type2, $id2, $ok_if_le_than        if ( $debug );
+
+    if ( $type1 eq 'node' ) {
+        if ( $type2 eq 'node' ) {
+            $distance = $gis->distance_metal( $NODES{$id1}->{'lat'}, $NODES{$id1}->{'lon'}, $NODES{$id2}->{'lat'},$NODES{$id2}->{'lon'} ) * 1000;
+            printf STDERR "%s ObjectToObjectDistance( '%s', ['%s','%s'], '%s', ['%s','%s'], %d) = %f\n", get_time(), $type1, $NODES{$id1}->{'lat'}, $NODES{$id1}->{'lon'}, $type2, $NODES{$id2}->{'lat'},$NODES{$id2}->{'lon'}, $ok_if_le_than, $distance        if ( $debug );
+            return $distance;
+        } elsif ( $type2 eq 'way' ) {
+            for ( my $i = 0; $i <= $#{$WAYS{$id2}->{'chain'}}; $i++ ) {
+                $distance = ObjectToObjectDistance( 'node', $id1, 'node', ${$WAYS{$id2}->{'chain'}}[$i], $ok_if_le_than );
+                if ( $distance <= $ok_if_le_than ) {
+                    $min_distance = $distance;
+                    last;
+                } else {
+                    $min_distance = ($min_distance > $distance) ? $distance : $min_distance;
+                }
+            }
+            printf STDERR "%s ObjectToObjectDistance( '%s', ['%s','%s'], '%s', '%s', %d) = %f\n", get_time(), $type1, $NODES{$id1}->{'lat'}, $NODES{$id1}->{'lon'}, $type2, $id2, $ok_if_le_than, $min_distance        if ( $debug );
+            return $min_distance;
+        } elsif ( $type2 eq 'relation' ) {
+            printf STDERR "%s ObjectToObjectDistance( '%s', ['%s','%s'], '%s', '%s', %d) = %f\n", get_time(), $type1, $NODES{$id1}->{'lat'}, $NODES{$id1}->{'lon'}, $type2, $id2, $ok_if_le_than, $min_distance        if ( $debug );
+            ;
+        } else {
+            printf STDERR "%s Internal error in ObjectToObjectDistance( '%s', '%s', '%s', '%s', %d)\n", get_time(), $type1, $id1, $type2, $id2, $ok_if_le_than;
+        }
+    } elsif ( $type1 eq 'way' ) {
+        if ( $type2 eq 'node' ) {
+            printf STDERR "%s ObjectToObjectDistance( '%s', '%s', '%s', ['%s','%s'], %d) = %f\n", get_time(), $type1, $id1, $type2, $NODES{$id2}->{'lat'},$NODES{$id2}->{'lat'}, $ok_if_le_than, $min_distance        if ( $debug );
+            ;
+        } elsif ( $type2 eq 'way' ) {
+            printf STDERR "%s ObjectToObjectDistance( '%s', '%s', '%s', %s , %d) = %f\n", get_time(), $type1, $id1, $type2, $id2, $ok_if_le_than, $min_distance        if ( $debug );
+        } elsif ( $type2 eq 'relation' ) {
+            printf STDERR "%s ObjectToObjectDistance( '%s', '%s', '%s', %s, %d) = %f\n", get_time(), $type1, $id1, $type2, $id2, $ok_if_le_than, $min_distance        if ( $debug );
+        } else {
+            printf STDERR "%s Internal error in ObjectToObjectDistance( '%s', '%s', '%s', '%s', %d)\n", get_time(), $type1, $id1, $type2, $id2, $ok_if_le_than;
+        }
+
+    } elsif ( $type1 eq 'relation' ) {
+        if ( $type2 eq 'node' ) {
+            printf STDERR "%s ObjectToObjectDistance( '%s', '%s', '%s', ['%s','%s'], %d) = %f\n", get_time(), $type1, $id1, $type2, $NODES{$id2}->{'lat'},$NODES{$id2}->{'lat'}, $ok_if_le_than, $min_distance        if ( $debug );
+        } elsif ( $type2 eq 'way' ) {
+            printf STDERR "%s ObjectToObjectDistance( '%s', '%s', '%s', %s , %d) = %f\n", get_time(), $type1, $id1, $type2, $id2, $ok_if_le_than, $min_distance        if ( $debug );
+        } elsif ( $type2 eq 'relation' ) {
+            printf STDERR "%s ObjectToObjectDistance( '%s', '%s', '%s', %s, %d) = %f\n", get_time(), $type1, $id1, $type2, $id2, $ok_if_le_than, $min_distance        if ( $debug );
+        } else {
+            printf STDERR "%s Internal error in ObjectToObjectDistance( '%s', '%s', '%s', '%s', %d)\n", get_time(), $type1, $id1, $type2, $id2, $ok_if_le_than;
+        }
+
+    } else {
+        printf STDERR "%s Internal error in ObjectToObjectDistance( '%s', '%s', '%s', '%s', %d)\n", get_time(), $type1, $id1, $type2, $id2, $ok_if_le_than;
+    }
+
+    return 0;  # in meters
+}
+
+
+#############################################################################################
+#
 # functions for printing HTML code
 #
 #############################################################################################
@@ -6278,7 +6390,7 @@ sub printInitialHeader {
     push( @HTML_main, sprintf( "%12s%s\n",  ' ', gettext("An explanation of the error texts can be found in the documentation at '<a href='/en/index.php#messages'>Messages</a>'.") ) );
     push( @HTML_main, sprintf( "%8s</p>\n", ' ' ) );
     if ( !$opt_test ) {
-        push( @HTML_main, sprintf( "%s:\n<a target=\"_blank\" href=\"/results/queue.php\" title=\"%s\"><button class=\"button-create\" type=\"button\">%s</button></a>\n", gettext("New"), gettext("Request start of new analysis"), gettext("Request start of new analysis") ) );
+        push( @HTML_main, sprintf( "\n<a target=\"_blank\" href=\"/results/queue.php\" title=\"%s\"><button class=\"button-create\" type=\"button\">%s</button></a>\n", gettext("Request start of new analysis"), gettext("Request start of new analysis") ) );
     }
 }
 
