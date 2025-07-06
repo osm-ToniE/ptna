@@ -4164,15 +4164,15 @@ sub analyze_ptv2_route_relation {
                 my $max_allowed_distance = 20; # meters
                 $distance      = ObjectToObjectDistance( $first_platform_type, $first_platform_id, 'way', $first_way_id, $max_allowed_distance );
                 if ( $distance > $max_allowed_distance ) {
-                    $issues_string = gettext( "PTv2 route: First way (%s) is not near the first platform stop (%s)." ) . " ". gettext("Distance = %d meters." );
-                    $help_string = sprintf( $issues_string, printWayTemplate($first_way_id), printXxxTemplate($first_platform_type,$first_platform_id), $distance );
+                    $issues_string = gettext( "PTv2 route: first way (%s) is not near the first platform stop (%s)." ) . " ". gettext("Distance = %d meters." );
+                    $help_string = sprintf( $issues_string, printWayTemplate($first_way_id,'name;ref'), printXxxTemplate($first_platform_type,$first_platform_id,'name;ref'), $distance );
                     push( @{$relation_ptr->{'__issues__'}}, $help_string );
                     $return_code++;
                 }
                 $distance      = ObjectToObjectDistance( $last_platform_type, $last_platform_id, 'way', $last_way_id, $max_allowed_distance );
                 if ( $distance > $max_allowed_distance ) {
-                    $issues_string = gettext( "PTv2 route: Last way (%s) is not near the last platform stop (%s)." ) . " ". gettext("Distance = %d meters." );
-                    $help_string = sprintf( $issues_string, printWayTemplate($last_way_id), printXxxTemplate($last_platform_type,$last_platform_id), $distance );
+                    $issues_string = gettext( "PTv2 route: last way (%s) is not near the last platform stop (%s)." ) . " ". gettext("Distance = %d meters." );
+                    $help_string = sprintf( $issues_string, printWayTemplate($last_way_id,'name;ref'), printXxxTemplate($last_platform_type,$last_platform_id,'name;ref'), $distance );
                     push( @{$relation_ptr->{'__issues__'}}, $help_string );
                     $return_code++;
                 }

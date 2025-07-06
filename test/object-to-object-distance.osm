@@ -6,374 +6,374 @@
   <bounds minlat='48.183228' minlon='11.3739771' maxlat='48.1839111' maxlon='11.3746101' origin='OpenStreetMap server' />
   <bounds minlat='48.1831421' minlon='11.3738966' maxlat='48.1858604' maxlon='11.3749695' origin='openstreetmap-cgimap 2.0.1 (3864007 spike-08.openstreetmap.org)' />
   <bounds minlat='48.1831421' minlon='11.3738966' maxlat='48.1858604' maxlon='11.3749695' origin='OpenStreetMap server' />
-  <node id='-160607' action='modify' lat='48.18519156167' lon='11.37416042528'>
+  <node id='-160903' action='modify' lat='48.18519156167' lon='11.37416042528'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='B' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-160904' action='modify' lat='48.18495908264' lon='11.37416042528'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='C' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-160905' action='modify' lat='48.18472660257' lon='11.37416042528' />
+  <node id='-160906' action='modify' lat='48.18449412143' lon='11.37416042528'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='D' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-160907' action='modify' lat='48.18426163925' lon='11.37416042528' />
+  <node id='-160908' action='modify' lat='48.184029156' lon='11.37416042528'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='E' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-160909' action='modify' lat='48.18379667171' lon='11.37416042528' />
+  <node id='-160910' action='modify' lat='48.18356418636' lon='11.37416042528' />
+  <node id='-160911' action='modify' lat='48.18333169995' lon='11.37416042528'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='F' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-160912' action='modify' lat='48.18542403964' lon='11.37416042528' />
+  <node id='-160913' action='modify' lat='48.18565651655' lon='11.37416042528'>
     <tag k='bus' v='yes' />
     <tag k='name' v='A' />
     <tag k='public_transport' v='stop_position' />
   </node>
-  <node id='-160608' action='modify' lat='48.18495908264' lon='11.37416042528'>
-    <tag k='bus' v='yes' />
-    <tag k='name' v='A' />
-    <tag k='public_transport' v='stop_position' />
-  </node>
-  <node id='-160609' action='modify' lat='48.18472660257' lon='11.37416042528' />
-  <node id='-160610' action='modify' lat='48.18449412143' lon='11.37416042528'>
-    <tag k='bus' v='yes' />
-    <tag k='name' v='A' />
-    <tag k='public_transport' v='stop_position' />
-  </node>
-  <node id='-160611' action='modify' lat='48.18426163925' lon='11.37416042528' />
-  <node id='-160612' action='modify' lat='48.184029156' lon='11.37416042528'>
-    <tag k='bus' v='yes' />
-    <tag k='name' v='A' />
-    <tag k='public_transport' v='stop_position' />
-  </node>
-  <node id='-160613' action='modify' lat='48.18379667171' lon='11.37416042528' />
-  <node id='-160614' action='modify' lat='48.18356418636' lon='11.37416042528' />
-  <node id='-160615' action='modify' lat='48.18333169995' lon='11.37416042528'>
-    <tag k='bus' v='yes' />
-    <tag k='name' v='A' />
-    <tag k='public_transport' v='stop_position' />
-  </node>
-  <node id='-160616' action='modify' lat='48.18542403964' lon='11.37416042528' />
-  <node id='-160617' action='modify' lat='48.18565651655' lon='11.37416042528'>
-    <tag k='bus' v='yes' />
-    <tag k='name' v='A' />
-    <tag k='public_transport' v='stop_position' />
-  </node>
-  <node id='-160629' action='modify' lat='48.18565651655' lon='11.37471734941'>
+  <node id='-160914' action='modify' lat='48.18565651655' lon='11.37471734941'>
     <tag k='bus' v='yes' />
     <tag k='name' v='A3' />
     <tag k='public_transport' v='stop_position' />
   </node>
-  <node id='-160630' action='modify' lat='48.18542403964' lon='11.37471734941' />
-  <node id='-160631' action='modify' lat='48.18519156167' lon='11.37471734941'>
+  <node id='-160915' action='modify' lat='48.18542403964' lon='11.37471734941' />
+  <node id='-160916' action='modify' lat='48.18519156167' lon='11.37471734941'>
     <tag k='bus' v='yes' />
     <tag k='name' v='B3' />
     <tag k='public_transport' v='stop_position' />
   </node>
-  <node id='-160632' action='modify' lat='48.18495908264' lon='11.37471734941'>
+  <node id='-160917' action='modify' lat='48.18495908264' lon='11.37471734941'>
     <tag k='bus' v='yes' />
     <tag k='name' v='C3' />
     <tag k='public_transport' v='stop_position' />
   </node>
-  <node id='-160633' action='modify' lat='48.18472660257' lon='11.37471734941' />
-  <node id='-160634' action='modify' lat='48.18449412143' lon='11.37471734941'>
+  <node id='-160918' action='modify' lat='48.18472660257' lon='11.37471734941' />
+  <node id='-160919' action='modify' lat='48.18449412143' lon='11.37471734941'>
     <tag k='bus' v='yes' />
     <tag k='name' v='D3' />
     <tag k='public_transport' v='stop_position' />
   </node>
-  <node id='-160635' action='modify' lat='48.18426163925' lon='11.37471734941' />
-  <node id='-160636' action='modify' lat='48.184029156' lon='11.37471734941'>
+  <node id='-160920' action='modify' lat='48.18426163925' lon='11.37471734941' />
+  <node id='-160921' action='modify' lat='48.184029156' lon='11.37471734941'>
     <tag k='bus' v='yes' />
     <tag k='name' v='E3' />
     <tag k='public_transport' v='stop_position' />
   </node>
-  <node id='-160637' action='modify' lat='48.18379667171' lon='11.37471734941' />
-  <node id='-160638' action='modify' lat='48.18356418636' lon='11.37471734941' />
-  <node id='-160639' action='modify' lat='48.18333169995' lon='11.37471734941'>
+  <node id='-160922' action='modify' lat='48.18379667171' lon='11.37471734941' />
+  <node id='-160923' action='modify' lat='48.18356418636' lon='11.37471734941' />
+  <node id='-160924' action='modify' lat='48.18333169995' lon='11.37471734941'>
     <tag k='bus' v='yes' />
     <tag k='name' v='F3' />
     <tag k='public_transport' v='stop_position' />
   </node>
-  <node id='-160651' action='modify' lat='48.18565651655' lon='11.37446522176'>
+  <node id='-160925' action='modify' lat='48.18565651655' lon='11.37446522176'>
     <tag k='bus' v='yes' />
     <tag k='name' v='A2' />
     <tag k='public_transport' v='stop_position' />
   </node>
-  <node id='-160652' action='modify' lat='48.18542403964' lon='11.37446522176' />
-  <node id='-160653' action='modify' lat='48.18519156167' lon='11.37446522176'>
+  <node id='-160926' action='modify' lat='48.18542403964' lon='11.37446522176' />
+  <node id='-160927' action='modify' lat='48.18519156167' lon='11.37446522176'>
     <tag k='bus' v='yes' />
     <tag k='name' v='B2' />
     <tag k='public_transport' v='stop_position' />
   </node>
-  <node id='-160654' action='modify' lat='48.18495908264' lon='11.37446522176'>
+  <node id='-160928' action='modify' lat='48.18495908264' lon='11.37446522176'>
     <tag k='bus' v='yes' />
     <tag k='name' v='C2' />
     <tag k='public_transport' v='stop_position' />
   </node>
-  <node id='-160655' action='modify' lat='48.18472660257' lon='11.37446522176' />
-  <node id='-160656' action='modify' lat='48.18449412143' lon='11.37446522176'>
+  <node id='-160929' action='modify' lat='48.18472660257' lon='11.37446522176' />
+  <node id='-160930' action='modify' lat='48.18449412143' lon='11.37446522176'>
     <tag k='bus' v='yes' />
     <tag k='name' v='D2' />
     <tag k='public_transport' v='stop_position' />
   </node>
-  <node id='-160657' action='modify' lat='48.18426163925' lon='11.37446522176' />
-  <node id='-160658' action='modify' lat='48.184029156' lon='11.37446522176'>
+  <node id='-160931' action='modify' lat='48.18426163925' lon='11.37446522176' />
+  <node id='-160932' action='modify' lat='48.184029156' lon='11.37446522176'>
     <tag k='bus' v='yes' />
     <tag k='name' v='E2' />
     <tag k='public_transport' v='stop_position' />
   </node>
-  <node id='-160659' action='modify' lat='48.18379667171' lon='11.37446522176' />
-  <node id='-160660' action='modify' lat='48.18356418636' lon='11.37446522176' />
-  <node id='-160661' action='modify' lat='48.18333169995' lon='11.37446522176'>
+  <node id='-160933' action='modify' lat='48.18379667171' lon='11.37446522176' />
+  <node id='-160934' action='modify' lat='48.18356418636' lon='11.37446522176' />
+  <node id='-160935' action='modify' lat='48.18333169995' lon='11.37446522176'>
     <tag k='bus' v='yes' />
     <tag k='name' v='F2' />
     <tag k='public_transport' v='stop_position' />
   </node>
-  <node id='-160662' action='modify' lat='48.18565651655' lon='11.37401997507'>
+  <node id='-160936' action='modify' lat='48.18565651655' lon='11.37401997507'>
     <tag k='bus' v='yes' />
     <tag k='name' v='A' />
     <tag k='public_transport' v='platform' />
   </node>
-  <node id='-160735' action='modify' lat='48.18519513826' lon='11.37399315298'>
+  <node id='-160937' action='modify' lat='48.18519513826' lon='11.37399315298'>
     <tag k='bus' v='yes' />
-    <tag k='name' v='A' />
+    <tag k='name' v='B' />
     <tag k='public_transport' v='platform' />
   </node>
-  <node id='-160736' action='modify' lat='48.18496981247' lon='11.37399851739'>
+  <node id='-160938' action='modify' lat='48.18496981247' lon='11.37399851739'>
     <tag k='bus' v='yes' />
-    <tag k='name' v='A' />
+    <tag k='name' v='C' />
     <tag k='public_transport' v='platform' />
   </node>
-  <node id='-160737' action='modify' lat='48.18450485135' lon='11.37398242414'>
+  <node id='-160939' action='modify' lat='48.18450485135' lon='11.37398242414'>
     <tag k='bus' v='yes' />
-    <tag k='name' v='A' />
+    <tag k='name' v='D' />
     <tag k='public_transport' v='platform' />
   </node>
-  <node id='-160738' action='modify' lat='48.18403273268' lon='11.37398778856'>
+  <node id='-160940' action='modify' lat='48.18403273268' lon='11.37398778856'>
     <tag k='bus' v='yes' />
-    <tag k='name' v='A' />
+    <tag k='name' v='E' />
     <tag k='public_transport' v='platform' />
   </node>
-  <node id='-160739' action='modify' lat='48.18334600684' lon='11.37400924623'>
+  <node id='-160941' action='modify' lat='48.18334600684' lon='11.37400924623'>
     <tag k='bus' v='yes' />
-    <tag k='name' v='A' />
+    <tag k='name' v='F' />
     <tag k='public_transport' v='platform' />
   </node>
-  <node id='-160821' action='modify' lat='48.18565472827' lon='11.37437353898'>
+  <node id='-160942' action='modify' lat='48.18565472827' lon='11.37437353898'>
     <tag k='bus' v='yes' />
     <tag k='name' v='A2' />
     <tag k='public_transport' v='platform' />
   </node>
-  <node id='-160843' action='modify' lat='48.18519692477' lon='11.37436866492'>
+  <node id='-160943' action='modify' lat='48.18519692477' lon='11.37436866492'>
     <tag k='bus' v='yes' />
     <tag k='name' v='B2' />
     <tag k='public_transport' v='platform' />
   </node>
-  <node id='-160844' action='modify' lat='48.18496086916' lon='11.37437134713'>
+  <node id='-160944' action='modify' lat='48.18496086916' lon='11.37437134713'>
     <tag k='bus' v='yes' />
     <tag k='name' v='C2' />
     <tag k='public_transport' v='platform' />
   </node>
-  <node id='-160845' action='modify' lat='48.18450127293' lon='11.37437939376'>
+  <node id='-160945' action='modify' lat='48.18450127293' lon='11.37437939376'>
     <tag k='bus' v='yes' />
     <tag k='name' v='D2' />
     <tag k='public_transport' v='platform' />
   </node>
-  <node id='-160846' action='modify' lat='48.18403630756' lon='11.37437134713'>
+  <node id='-160946' action='modify' lat='48.18403630756' lon='11.37437134713'>
     <tag k='bus' v='yes' />
     <tag k='name' v='E2' />
     <tag k='public_transport' v='platform' />
   </node>
-  <node id='-160847' action='modify' lat='48.18333885161' lon='11.37438207597'>
+  <node id='-160947' action='modify' lat='48.18333885161' lon='11.37438207597'>
     <tag k='bus' v='yes' />
     <tag k='name' v='F2' />
     <tag k='public_transport' v='platform' />
   </node>
-  <node id='-160867' action='modify' lat='48.18565293999' lon='11.37462078989'>
+  <node id='-160948' action='modify' lat='48.18565293999' lon='11.37462078989'>
     <tag k='bus' v='yes' />
     <tag k='name' v='A3' />
     <tag k='public_transport' v='platform' />
   </node>
-  <node id='-160876' action='modify' lat='48.18519334818' lon='11.37463420361'>
+  <node id='-160949' action='modify' lat='48.18519334818' lon='11.37463420361'>
     <tag k='bus' v='yes' />
     <tag k='name' v='B3' />
     <tag k='public_transport' v='platform' />
   </node>
-  <node id='-160877' action='modify' lat='48.18496444577' lon='11.37463420361'>
+  <node id='-160950' action='modify' lat='48.18496444577' lon='11.37463420361'>
     <tag k='bus' v='yes' />
     <tag k='name' v='C3' />
     <tag k='public_transport' v='platform' />
   </node>
-  <node id='-160878' action='modify' lat='48.18449411964' lon='11.37462615699'>
+  <node id='-160951' action='modify' lat='48.18449411964' lon='11.37462615699'>
     <tag k='bus' v='yes' />
     <tag k='name' v='D3' />
     <tag k='public_transport' v='platform' />
   </node>
-  <node id='-160879' action='modify' lat='48.18402915422' lon='11.37462079257'>
+  <node id='-160952' action='modify' lat='48.18402915422' lon='11.37462079257'>
     <tag k='bus' v='yes' />
     <tag k='name' v='E3' />
     <tag k='public_transport' v='platform' />
   </node>
-  <node id='-160880' action='modify' lat='48.18334063997' lon='11.37461811036'>
+  <node id='-160953' action='modify' lat='48.18334063997' lon='11.37461811036'>
     <tag k='bus' v='yes' />
     <tag k='name' v='F3' />
     <tag k='public_transport' v='platform' />
   </node>
-  <way id='-160575' action='modify'>
-    <nd ref='-160617' />
-    <nd ref='-160616' />
+  <way id='-160652' action='modify'>
+    <nd ref='-160913' />
+    <nd ref='-160912' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160609' action='modify'>
-    <nd ref='-160639' />
-    <nd ref='-160638' />
+  <way id='-160653' action='modify'>
+    <nd ref='-160924' />
+    <nd ref='-160923' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160612' action='modify'>
-    <nd ref='-160651' />
-    <nd ref='-160652' />
+  <way id='-160654' action='modify'>
+    <nd ref='-160925' />
+    <nd ref='-160926' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160614' action='modify'>
-    <nd ref='-160652' />
-    <nd ref='-160653' />
+  <way id='-160655' action='modify'>
+    <nd ref='-160926' />
+    <nd ref='-160927' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160615' action='modify'>
-    <nd ref='-160653' />
-    <nd ref='-160654' />
+  <way id='-160656' action='modify'>
+    <nd ref='-160927' />
+    <nd ref='-160928' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160616' action='modify'>
-    <nd ref='-160654' />
-    <nd ref='-160655' />
+  <way id='-160657' action='modify'>
+    <nd ref='-160928' />
+    <nd ref='-160929' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160617' action='modify'>
-    <nd ref='-160655' />
-    <nd ref='-160656' />
+  <way id='-160658' action='modify'>
+    <nd ref='-160929' />
+    <nd ref='-160930' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160618' action='modify'>
-    <nd ref='-160656' />
-    <nd ref='-160657' />
+  <way id='-160659' action='modify'>
+    <nd ref='-160930' />
+    <nd ref='-160931' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160619' action='modify'>
-    <nd ref='-160657' />
-    <nd ref='-160658' />
+  <way id='-160660' action='modify'>
+    <nd ref='-160931' />
+    <nd ref='-160932' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160620' action='modify'>
-    <nd ref='-160658' />
-    <nd ref='-160659' />
+  <way id='-160661' action='modify'>
+    <nd ref='-160932' />
+    <nd ref='-160933' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160621' action='modify'>
-    <nd ref='-160659' />
-    <nd ref='-160660' />
+  <way id='-160662' action='modify'>
+    <nd ref='-160933' />
+    <nd ref='-160934' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160622' action='modify'>
-    <nd ref='-160660' />
-    <nd ref='-160661' />
+  <way id='-160663' action='modify'>
+    <nd ref='-160934' />
+    <nd ref='-160935' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160625' action='modify'>
-    <nd ref='-160638' />
-    <nd ref='-160637' />
+  <way id='-160664' action='modify'>
+    <nd ref='-160923' />
+    <nd ref='-160922' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160626' action='modify'>
-    <nd ref='-160637' />
-    <nd ref='-160636' />
+  <way id='-160665' action='modify'>
+    <nd ref='-160922' />
+    <nd ref='-160921' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160627' action='modify'>
-    <nd ref='-160636' />
-    <nd ref='-160635' />
+  <way id='-160666' action='modify'>
+    <nd ref='-160921' />
+    <nd ref='-160920' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160628' action='modify'>
-    <nd ref='-160635' />
-    <nd ref='-160634' />
+  <way id='-160667' action='modify'>
+    <nd ref='-160920' />
+    <nd ref='-160919' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160629' action='modify'>
-    <nd ref='-160634' />
-    <nd ref='-160633' />
+  <way id='-160668' action='modify'>
+    <nd ref='-160919' />
+    <nd ref='-160918' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160630' action='modify'>
-    <nd ref='-160633' />
-    <nd ref='-160632' />
+  <way id='-160669' action='modify'>
+    <nd ref='-160918' />
+    <nd ref='-160917' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160631' action='modify'>
-    <nd ref='-160632' />
-    <nd ref='-160631' />
+  <way id='-160670' action='modify'>
+    <nd ref='-160917' />
+    <nd ref='-160916' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160632' action='modify'>
-    <nd ref='-160631' />
-    <nd ref='-160630' />
+  <way id='-160671' action='modify'>
+    <nd ref='-160916' />
+    <nd ref='-160915' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160633' action='modify'>
-    <nd ref='-160630' />
-    <nd ref='-160629' />
+  <way id='-160672' action='modify'>
+    <nd ref='-160915' />
+    <nd ref='-160914' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160636' action='modify'>
-    <nd ref='-160616' />
-    <nd ref='-160607' />
+  <way id='-160673' action='modify'>
+    <nd ref='-160912' />
+    <nd ref='-160903' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160637' action='modify'>
-    <nd ref='-160607' />
-    <nd ref='-160608' />
+  <way id='-160674' action='modify'>
+    <nd ref='-160903' />
+    <nd ref='-160904' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160638' action='modify'>
-    <nd ref='-160608' />
-    <nd ref='-160609' />
+  <way id='-160675' action='modify'>
+    <nd ref='-160904' />
+    <nd ref='-160905' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160639' action='modify'>
-    <nd ref='-160609' />
-    <nd ref='-160610' />
+  <way id='-160676' action='modify'>
+    <nd ref='-160905' />
+    <nd ref='-160906' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160640' action='modify'>
-    <nd ref='-160610' />
-    <nd ref='-160611' />
+  <way id='-160677' action='modify'>
+    <nd ref='-160906' />
+    <nd ref='-160907' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160641' action='modify'>
-    <nd ref='-160611' />
-    <nd ref='-160612' />
+  <way id='-160678' action='modify'>
+    <nd ref='-160907' />
+    <nd ref='-160908' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160642' action='modify'>
-    <nd ref='-160612' />
-    <nd ref='-160613' />
+  <way id='-160679' action='modify'>
+    <nd ref='-160908' />
+    <nd ref='-160909' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160643' action='modify'>
-    <nd ref='-160613' />
-    <nd ref='-160614' />
+  <way id='-160680' action='modify'>
+    <nd ref='-160909' />
+    <nd ref='-160910' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='-160644' action='modify'>
-    <nd ref='-160614' />
-    <nd ref='-160615' />
+  <way id='-160681' action='modify'>
+    <nd ref='-160910' />
+    <nd ref='-160911' />
     <tag k='highway' v='residential' />
   </way>
-  <relation id='-160573' action='modify'>
-    <member type='node' ref='-160617' role='stop' />
-    <member type='node' ref='-160662' role='platform' />
-    <member type='node' ref='-160607' role='stop' />
-    <member type='node' ref='-160735' role='platform' />
-    <member type='node' ref='-160608' role='stop' />
-    <member type='node' ref='-160736' role='platform' />
-    <member type='node' ref='-160610' role='stop' />
-    <member type='node' ref='-160737' role='platform' />
-    <member type='node' ref='-160612' role='stop' />
-    <member type='node' ref='-160738' role='platform' />
-    <member type='node' ref='-160615' role='stop' />
-    <member type='node' ref='-160739' role='platform' />
-    <member type='way' ref='-160575' role='' />
-    <member type='way' ref='-160636' role='' />
-    <member type='way' ref='-160637' role='' />
-    <member type='way' ref='-160638' role='' />
-    <member type='way' ref='-160639' role='' />
-    <member type='way' ref='-160640' role='' />
-    <member type='way' ref='-160641' role='' />
-    <member type='way' ref='-160642' role='' />
-    <member type='way' ref='-160643' role='' />
-    <member type='way' ref='-160644' role='' />
+  <relation id='-160624' action='modify'>
+    <member type='node' ref='-160913' role='stop_entry_only' />
+    <member type='node' ref='-160936' role='platform_entry_only' />
+    <member type='node' ref='-160903' role='stop' />
+    <member type='node' ref='-160937' role='platform' />
+    <member type='node' ref='-160904' role='stop' />
+    <member type='node' ref='-160938' role='platform' />
+    <member type='node' ref='-160906' role='stop' />
+    <member type='node' ref='-160939' role='platform' />
+    <member type='node' ref='-160908' role='stop' />
+    <member type='node' ref='-160940' role='platform' />
+    <member type='node' ref='-160911' role='stop_exit_only' />
+    <member type='node' ref='-160941' role='platform_exit_only' />
+    <member type='way' ref='-160652' role='' />
+    <member type='way' ref='-160673' role='' />
+    <member type='way' ref='-160674' role='' />
+    <member type='way' ref='-160675' role='' />
+    <member type='way' ref='-160676' role='' />
+    <member type='way' ref='-160677' role='' />
+    <member type='way' ref='-160678' role='' />
+    <member type='way' ref='-160679' role='' />
+    <member type='way' ref='-160680' role='' />
+    <member type='way' ref='-160681' role='' />
     <tag k='from' v='A' />
     <tag k='name' v='sorting good: A =&gt; B =&gt; C =&gt; D =&gt; E =&gt; F' />
     <tag k='network' v='test' />
@@ -384,29 +384,29 @@
     <tag k='type' v='route' />
     <tag k='via' v='B;C;D;E' />
   </relation>
-  <relation id='-160598' action='modify'>
-    <member type='node' ref='-160651' role='stop' />
-    <member type='node' ref='-160821' role='platform' />
-    <member type='node' ref='-160653' role='stop' />
-    <member type='node' ref='-160843' role='platform' />
-    <member type='node' ref='-160654' role='stop' />
-    <member type='node' ref='-160844' role='platform' />
-    <member type='node' ref='-160656' role='stop' />
-    <member type='node' ref='-160845' role='platform' />
-    <member type='node' ref='-160658' role='stop' />
-    <member type='node' ref='-160846' role='platform' />
-    <member type='node' ref='-160661' role='stop' />
-    <member type='node' ref='-160847' role='platform' />
-    <member type='way' ref='-160612' role='' />
-    <member type='way' ref='-160614' role='' />
-    <member type='way' ref='-160615' role='' />
-    <member type='way' ref='-160616' role='' />
-    <member type='way' ref='-160618' role='' />
-    <member type='way' ref='-160619' role='' />
-    <member type='way' ref='-160620' role='' />
-    <member type='way' ref='-160621' role='' />
-    <member type='way' ref='-160622' role='' />
-    <member type='way' ref='-160617' role='' />
+  <relation id='-160625' action='modify'>
+    <member type='node' ref='-160925' role='stop_entry_only' />
+    <member type='node' ref='-160942' role='platform_entry_only' />
+    <member type='node' ref='-160927' role='stop' />
+    <member type='node' ref='-160943' role='platform' />
+    <member type='node' ref='-160928' role='stop' />
+    <member type='node' ref='-160944' role='platform' />
+    <member type='node' ref='-160930' role='stop' />
+    <member type='node' ref='-160945' role='platform' />
+    <member type='node' ref='-160932' role='stop' />
+    <member type='node' ref='-160946' role='platform' />
+    <member type='node' ref='-160935' role='stop_exit_only' />
+    <member type='node' ref='-160947' role='platform_exit_only' />
+    <member type='way' ref='-160654' role='' />
+    <member type='way' ref='-160655' role='' />
+    <member type='way' ref='-160656' role='' />
+    <member type='way' ref='-160657' role='' />
+    <member type='way' ref='-160659' role='' />
+    <member type='way' ref='-160660' role='' />
+    <member type='way' ref='-160661' role='' />
+    <member type='way' ref='-160662' role='' />
+    <member type='way' ref='-160663' role='' />
+    <member type='way' ref='-160658' role='' />
     <tag k='from' v='A2' />
     <tag k='name' v='sorting bad2: A2 =&gt; B2 =&gt; C2 =&gt; D2 =&gt; E2 =&gt; F2' />
     <tag k='network' v='test2' />
@@ -417,29 +417,29 @@
     <tag k='type' v='route' />
     <tag k='via' v='B2;C2;D2;E2' />
   </relation>
-  <relation id='-160622' action='modify'>
-    <member type='node' ref='-160629' role='stop' />
-    <member type='node' ref='-160867' role='platform' />
-    <member type='node' ref='-160631' role='stop' />
-    <member type='node' ref='-160876' role='platform' />
-    <member type='node' ref='-160632' role='stop' />
-    <member type='node' ref='-160877' role='platform' />
-    <member type='node' ref='-160634' role='stop' />
-    <member type='node' ref='-160878' role='platform' />
-    <member type='node' ref='-160636' role='stop' />
-    <member type='node' ref='-160879' role='platform' />
-    <member type='node' ref='-160639' role='stop' />
-    <member type='node' ref='-160880' role='platform' />
-    <member type='way' ref='-160628' role='' />
-    <member type='way' ref='-160633' role='' />
-    <member type='way' ref='-160632' role='' />
-    <member type='way' ref='-160631' role='' />
-    <member type='way' ref='-160630' role='' />
-    <member type='way' ref='-160629' role='' />
-    <member type='way' ref='-160627' role='' />
-    <member type='way' ref='-160626' role='' />
-    <member type='way' ref='-160625' role='' />
-    <member type='way' ref='-160609' role='' />
+  <relation id='-160626' action='modify'>
+    <member type='node' ref='-160914' role='stop_entry_only' />
+    <member type='node' ref='-160948' role='platform_entry_only' />
+    <member type='node' ref='-160916' role='stop' />
+    <member type='node' ref='-160949' role='platform' />
+    <member type='node' ref='-160917' role='stop' />
+    <member type='node' ref='-160950' role='platform' />
+    <member type='node' ref='-160919' role='stop' />
+    <member type='node' ref='-160951' role='platform' />
+    <member type='node' ref='-160921' role='stop' />
+    <member type='node' ref='-160952' role='platform' />
+    <member type='node' ref='-160924' role='stop_exit_only' />
+    <member type='node' ref='-160953' role='platform_exit_only' />
+    <member type='way' ref='-160667' role='' />
+    <member type='way' ref='-160672' role='' />
+    <member type='way' ref='-160671' role='' />
+    <member type='way' ref='-160670' role='' />
+    <member type='way' ref='-160669' role='' />
+    <member type='way' ref='-160668' role='' />
+    <member type='way' ref='-160666' role='' />
+    <member type='way' ref='-160665' role='' />
+    <member type='way' ref='-160664' role='' />
+    <member type='way' ref='-160653' role='' />
     <tag k='from' v='A3' />
     <tag k='name' v='sorting bad3: A3 =&gt; B3 =&gt; C3 =&gt; D3 =&gt; E3 =&gt; F3' />
     <tag k='network' v='test3' />
