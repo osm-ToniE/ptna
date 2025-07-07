@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-06-30 18:45+0200\n"
+"POT-Creation-Date: 2025-07-07 14:50+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2025\n"
 "Language-Team: German (https://app.transifex.com/jungle-bus/teams/97874/de/)\n"
@@ -795,6 +795,22 @@ msgstr "PTv2 Route: falsche 'role' = '%s' für die erste Platform"
 msgid "PTv2 route: wrong 'role' = '%s' for last platform"
 msgstr "PTv2 Route: falsche 'role' = '%s' für die letzte Platform"
 
+#, perl-format
+msgid "PTv2 route: first way (%s) is not near the first platform stop (%s)."
+msgstr ""
+"PTv2 Route: der erste Weg (%s) ist nicht in der Nähe der ersten "
+"Haltestellenplatform (%s)."
+
+#, perl-format
+msgid "Distance = %d meters."
+msgstr "Distanz = %d Meter."
+
+#, perl-format
+msgid "PTv2 route: last way (%s) is not near the last platform stop (%s)."
+msgstr ""
+"PTv2 Route: der letzte Weg (%s) ist nicht in der Nähe der letzten "
+"Haltestellenplatform (%s)."
+
 msgid "wrong value"
 msgstr "falscher Wert"
 
@@ -1093,9 +1109,6 @@ msgid ""
 msgstr ""
 "Eine Erläuterung der Fehlertexte ist in der Dokumentation unter '<a "
 "href='/de/index.php#messages'>Meldungen</a>' zu finden."
-
-msgid "New"
-msgstr "Neu"
 
 msgid "Request start of new analysis"
 msgstr "Start einer neuen Analyse anfordern"
@@ -1521,6 +1534,43 @@ msgstr ""
 "Diese Route wird laut CSV-Daten als '%s' ('bus', 'tram', ...) erwartet, "
 "existiert aber nicht im gegebenen Datensatz (siehe Abschnitt: \"Overpass-API"
 " Abfrage\")."
+
+#, perl-format
+msgid ""
+"The first way ('role' = '') of the relation is far from the first 'role' = "
+"'platform', more than %d meters."
+msgstr ""
+
+msgid ""
+"This could be an indication that the ways of the route are not well sorted, "
+"that the route has a gap."
+msgstr ""
+
+msgid ""
+"This could be an indication that the real first platform is missing or that "
+"the platforms are not well sorted."
+msgstr ""
+
+msgid ""
+"Check that the first way in the route relation is actually the first way of "
+"the trip before using 'Relatify'."
+msgstr ""
+
+#, perl-format
+msgid ""
+"The last way ('role' = '') of the relation is far from the last 'role' = "
+"'platform', more than %d meters."
+msgstr ""
+
+msgid ""
+"This could be an indication that the real last platform is missing or that "
+"the platforms are not well sorted."
+msgstr ""
+
+msgid ""
+"Check that the last way in the route relation is actually the last way of "
+"the trip before using 'Relatify'."
+msgstr ""
 
 msgid ""
 "The vehicle uses a motorway entrance or exit without using a motorway/trunk "

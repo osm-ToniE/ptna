@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-02-18 14:20+0100\n"
+"POT-Creation-Date: 2025-07-07 14:50+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2025\n"
 "Language-Team: French (https://app.transifex.com/jungle-bus/teams/97874/fr/)\n"
@@ -178,6 +178,9 @@ msgstr "Lignes de transport en commun"
 
 msgid "Public Transport Lines without 'ref'"
 msgstr "Lignes de transport en commun sans 'ref '"
+
+msgid "Routes with life-cycle prefix"
+msgstr ""
 
 msgid "More Relations"
 msgstr "Autres relations"
@@ -512,6 +515,15 @@ msgstr ""
 "L'attribut '%s' possède vraisemblablement des caractères problématiques '%s'"
 " dans sa valeur. Valeur de l'attribut : '%s'"
 
+#, perl-format
+msgid ""
+"The value of '%s' (= '%s') should be specified in ISO 8601 format: YYYY-MM-"
+"DD"
+msgstr ""
+
+msgid "The date does not exist"
+msgstr ""
+
 msgid "Route-Master without Route(s)"
 msgstr "Ligne maître sans ligne(s)"
 
@@ -813,6 +825,18 @@ msgstr "Ligne PTv2 : mauvais 'role' = '%s' pour la première plateforme"
 #, perl-format
 msgid "PTv2 route: wrong 'role' = '%s' for last platform"
 msgstr "Ligne PTv2 : mauvais 'role' = '%s' pour la dernière plateforme"
+
+#, perl-format
+msgid "PTv2 route: first way (%s) is not near the first platform stop (%s)."
+msgstr ""
+
+#, perl-format
+msgid "Distance = %d meters."
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: last way (%s) is not near the last platform stop (%s)."
+msgstr ""
 
 msgid "wrong value"
 msgstr "Valeur erronée"
@@ -1146,9 +1170,6 @@ msgid ""
 msgstr ""
 "Une explication sur chaque erreur peut être trouvée dans la <a "
 "href=\"/fr/index.php#messages\">documentation</a>."
-
-msgid "New"
-msgstr "Nouveau"
 
 msgid "Request start of new analysis"
 msgstr "Demande de lancement d'une nouvelle analyse"
@@ -1578,6 +1599,43 @@ msgstr ""
 "CSV, mais n'existe pas dans les données fournies (voir section : \"API "
 "Requête Overpass\")."
 
+#, perl-format
+msgid ""
+"The first way ('role' = '') of the relation is far from the first 'role' = "
+"'platform', more than %d meters."
+msgstr ""
+
+msgid ""
+"This could be an indication that the ways of the route are not well sorted, "
+"that the route has a gap."
+msgstr ""
+
+msgid ""
+"This could be an indication that the real first platform is missing or that "
+"the platforms are not well sorted."
+msgstr ""
+
+msgid ""
+"Check that the first way in the route relation is actually the first way of "
+"the trip before using 'Relatify'."
+msgstr ""
+
+#, perl-format
+msgid ""
+"The last way ('role' = '') of the relation is far from the last 'role' = "
+"'platform', more than %d meters."
+msgstr ""
+
+msgid ""
+"This could be an indication that the real last platform is missing or that "
+"the platforms are not well sorted."
+msgstr ""
+
+msgid ""
+"Check that the last way in the route relation is actually the last way of "
+"the trip before using 'Relatify'."
+msgstr ""
+
 msgid ""
 "The vehicle uses a motorway entrance or exit without using a motorway/trunk "
 "road immediately after or before it."
@@ -1863,6 +1921,9 @@ msgid "'highway' = 'bus_stop' can be set on nodes only, not on ways or areas."
 msgstr ""
 "'highway'='bus_stop' s'applique aux nœuds uniquement et pas aux voies ou "
 "surfaces."
+
+msgid "Check dates to follow ISO format: YYYY-MM-DD"
+msgstr ""
 
 msgid "Check 'gtfs:*' tags for validity, ..."
 msgstr "Vérifier les attributs 'gtfs:*' pour validation ..."
