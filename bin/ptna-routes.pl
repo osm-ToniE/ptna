@@ -27,6 +27,7 @@ use RoutesList;
 use GTFS::PtnaSQLite    qw( getRouteIdStatus getTripIdStatus getShapeIdStatus getGtfsRouteIdHtmlTag getGtfsRouteIdIconTag getGtfsTripIdHtmlTag getGtfsShapeIdHtmlTag getGtfsLinkToRoutes );
 use Data::Dumper;
 use Time::Local         qw ( timelocal );
+use Time::HiRes;
 use GIS::Distance;
 use Encode;
 
@@ -376,6 +377,8 @@ my $issues_string                   = '';   # to be used with ALL 'issues' and g
 my $notes_string                    = '';   # to be used with ALL 'notes'  and gettext/ngettext - a separate tool parses this code, extracts those statements and creates a list of all notes
 
 my $gis                             = GIS::Distance->new();
+my @distance_measurements           = ();
+my $duration_distance_measurements  = 0;
 
 my %column_name             = ( 'ref'               => gettext('Line (ref=)'),
                                 'relation'          => gettext('Relation (id=)'),
@@ -1769,6 +1772,13 @@ if ( $xml_has_relations == 0 ) {
 
 printFinalFooter();
 
+
+printf STDERR "%s total duration of distance measurements = %.9f seconds\n", , get_time(),  $duration_distance_measurements;
+if ( $debug ) {
+    foreach my $item ( @distance_measurements ) {
+        printf STDERR "%s what = %s, type1 = %s, type2 = %s, distance = %d meters, duration = %.9f seconds\n", get_time(), $item->{'what'}, $item->{'type1'}, $item->{'type2'}, $item->{'distance'}, $item->{'duration'};
+    }
+}
 printf STDERR "%s Done ...\n", get_time()       if ( $verbose );
 
 
@@ -4160,16 +4170,23 @@ sub analyze_ptv2_route_relation {
                 $return_code++;
             }
             if ( $number_of_ways > 0 ) {
-                my $distance             = 0;
                 my $max_allowed_distance = 20; # meters
-                $distance      = ObjectToObjectDistance( $first_platform_type, $first_platform_id, 'way', $first_way_id, $max_allowed_distance );
+                my $start_time = Time::HiRes::time();
+                my $distance   = ObjectToObjectDistance( $first_platform_type, $first_platform_id, 'way', $first_way_id, $max_allowed_distance );
+                my $duration   = Time::HiRes::time() - $start_time;
+                $duration_distance_measurements += $duration;
+                push( @distance_measurements, { 'what' => 'first', 'type1' => $first_platform_type, 'type2' => 'way', 'distance' => $distance, 'duration' => $duration } );
                 if ( $distance > $max_allowed_distance ) {
                     $issues_string = gettext( "PTv2 route: first way (%s) is not near the first platform stop (%s)." ) . " ". gettext("Distance = %d meters." );
                     $help_string = sprintf( $issues_string, printWayTemplate($first_way_id,'name;ref'), printXxxTemplate($first_platform_type,$first_platform_id,'name;ref'), $distance );
                     push( @{$relation_ptr->{'__issues__'}}, $help_string );
                     $return_code++;
                 }
-                $distance      = ObjectToObjectDistance( $last_platform_type, $last_platform_id, 'way', $last_way_id, $max_allowed_distance );
+                $start_time = Time::HiRes::time();
+                $distance   = ObjectToObjectDistance( $last_platform_type, $last_platform_id, 'way', $last_way_id, $max_allowed_distance );
+                $duration   = Time::HiRes::time() - $start_time;
+                $duration_distance_measurements += $duration;
+                push( @distance_measurements, { 'what' => 'last', 'type1' => $last_platform_type, 'type2' => 'way', 'distance' => $distance, 'duration' => $duration } );
                 if ( $distance > $max_allowed_distance ) {
                     $issues_string = gettext( "PTv2 route: last way (%s) is not near the last platform stop (%s)." ) . " ". gettext("Distance = %d meters." );
                     $help_string = sprintf( $issues_string, printWayTemplate($last_way_id,'name;ref'), printXxxTemplate($last_platform_type,$last_platform_id,'name;ref'), $distance );
@@ -6218,7 +6235,6 @@ sub ObjectToObjectDistance {
     my $type2           = shift || '';
     my $id2             = shift || 0;
     my $ok_if_le_than   = shift || 0;       # don't evaluate further if the distance is less or equal than xx meters
-    my $distance_obj    = undef;
     my $distance        = 0;
     my $min_distance    = 100000000;
 
