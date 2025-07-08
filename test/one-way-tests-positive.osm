@@ -186,8 +186,6 @@
     <tag k='ref' v='S 1' />
   </way>
   <way id='-39935' action='modify'>
-    <nd ref='-39922' />
-    <nd ref='-39923' />
     <nd ref='-39924' />
     <nd ref='-39925' />
     <nd ref='-39926' />
@@ -197,7 +195,7 @@
     <nd ref='-39930' />
     <nd ref='-39931' />
     <tag k='highway' v='residential' />
-    <tag k='name' v='At D-Place' />
+    <tag k='name' v='At D-Place after stop' />
     <tag k='oneway' v='yes' />
   </way>
   <way id='-40003' action='modify'>
@@ -222,6 +220,14 @@
     <nd ref='-39898' />
     <tag k='highway' v='residential' />
     <tag k='name' v='D-Place to Mainstreet' />
+  </way>
+  <way id='-40027' action='modify'>
+    <nd ref='-39922' />
+    <nd ref='-39923' />
+    <nd ref='-39924' />
+    <tag k='highway' v='residential' />
+    <tag k='name' v='At D-Place before stop' />
+    <tag k='oneway' v='yes' />
   </way>
   <relation id='-39436' action='modify'>
     <member type='node' ref='-39909' role='stop_entry_only' />
