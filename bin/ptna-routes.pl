@@ -76,7 +76,7 @@ my %max_allowed_platform_distances     = ( 'train'      => 30,
                                            'funicular'  => 30,
                                            'ferry'      => 30,
                                            'aerialway'  => 30,
-                                           'bus'        => 25,
+                                           'bus'        => 30,
                                            'coach'      => 30,
                                            'share_taxi' => 30,
                                            'trolleybus' => 30
@@ -3738,8 +3738,9 @@ sub analyze_ptv2_route_relation {
                 $role_mismatch_found++;
             }
         } else {
+            # add here for issue #161
             $issues_string = gettext( "PTv2 route: empty 'role'" );
-            $role_mismatch{$issues_string}->{$node_ref->{'ref'}} = 1;
+            $role_mismatch{$issues_string}->{$node_ref->{'ref'}} = 1;  # = if ( public_transport eq platform ) gettext( "consider setting role=platform or =platform_entry_ony or = platform_exit_only" )
             $role_mismatch_found++;
         }
     }
@@ -4009,9 +4010,10 @@ sub analyze_ptv2_route_relation {
                 $role_mismatch_found++;
             }
         } else {
+            # add here for issue #161
             if ( $platform_ways{$highway_ref->{'ref'}} ) {
                 $issues_string = gettext( "PTv2 route: empty 'role'" );
-                $role_mismatch{$issues_string}->{$highway_ref->{'ref'}} = 1;
+                $role_mismatch{$issues_string}->{$highway_ref->{'ref'}} = 1;  # = if ( public_transport eq platform ) gettext( "consider setting role=platform or =platform_entry_ony or = platform_exit_only" )
                 $role_mismatch_found++;
             }
         }
@@ -4095,8 +4097,9 @@ sub analyze_ptv2_route_relation {
                 $role_mismatch_found++;
             }
         } else {
+            # add here for issue #161
             $issues_string = gettext( "PTv2 route: empty 'role'" );
-            $role_mismatch{$issues_string}->{$rel_ref->{'ref'}} = 1;
+            $role_mismatch{$issues_string}->{$rel_ref->{'ref'}} = 1; # = if ( public_transport eq platform ) gettext( "consider setting role=platform or =platform_entry_ony or = platform_exit_only" )
             $role_mismatch_found++;
         }
     }
@@ -4194,7 +4197,8 @@ sub analyze_ptv2_route_relation {
                 $duration_distance_measurements += $duration;
                 push( @platform_distance_measurements, { 'what' => 'first', 'type1' => $first_platform_type, 'type2' => 'way', 'distance' => $distance, 'duration' => $duration } );
                 if ( $distance > $max_allowed_distance ) {
-                    $issues_string = gettext( "PTv2 route: first way (%s) is not near the first platform stop (%s)." ) . " ". gettext("Distance = %d meters." );
+                    $issues_string  = gettext( "PTv2 route: the beginning of the route on the first way (%s) is not near the first platform stop (%s)." );
+                    $issues_string .= " " . gettext( "Distance = %d meters." );
                     $help_string = sprintf( $issues_string, printWayTemplate($first_way_id,'name;ref'), printXxxTemplate($first_platform_type,$first_platform_id,'name;ref'), $distance );
                     push( @{$relation_ptr->{'__issues__'}}, $help_string );
                     $return_code++;
@@ -4205,7 +4209,8 @@ sub analyze_ptv2_route_relation {
                 $duration_distance_measurements += $duration;
                 push( @platform_distance_measurements, { 'what' => 'last', 'type1' => $last_platform_type, 'type2' => 'way', 'distance' => $distance, 'duration' => $duration } );
                 if ( $distance > $max_allowed_distance ) {
-                    $issues_string = gettext( "PTv2 route: last way (%s) is not near the last platform stop (%s)." ) . " ". gettext("Distance = %d meters." );
+                    $issues_string  = gettext( "PTv2 route: the end of the route on the last way (%s) is not near the last platform stop (%s)." );
+                    $issues_string .= " " . gettext( "Distance = %d meters." );
                     $help_string = sprintf( $issues_string, printWayTemplate($last_way_id,'name;ref'), printXxxTemplate($last_platform_type,$last_platform_id,'name;ref'), $distance );
                     push( @{$relation_ptr->{'__issues__'}}, $help_string );
                     $return_code++;

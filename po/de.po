@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-07-07 14:50+0200\n"
+"POT-Creation-Date: 2025-07-09 14:23+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2025\n"
 "Language-Team: German (https://app.transifex.com/jungle-bus/teams/97874/de/)\n"
@@ -796,20 +796,24 @@ msgid "PTv2 route: wrong 'role' = '%s' for last platform"
 msgstr "PTv2 Route: falsche 'role' = '%s' für die letzte Platform"
 
 #, perl-format
-msgid "PTv2 route: first way (%s) is not near the first platform stop (%s)."
+msgid ""
+"PTv2 route: the beginning of the route on the first way (%s) is not near the"
+" first platform stop (%s)."
 msgstr ""
-"PTv2 Route: der erste Weg (%s) ist nicht in der Nähe der ersten "
-"Haltestellenplatform (%s)."
+"PTv2 Route: der Startpunkt der Route auf dem ersten Weg (%s) ist nicht in "
+"der Nähe der ersten Haltestellenplattform (%s)."
 
 #, perl-format
 msgid "Distance = %d meters."
 msgstr "Distanz = %d Meter."
 
 #, perl-format
-msgid "PTv2 route: last way (%s) is not near the last platform stop (%s)."
+msgid ""
+"PTv2 route: the end of the route on the last way (%s) is not near the last "
+"platform stop (%s)."
 msgstr ""
-"PTv2 Route: der letzte Weg (%s) ist nicht in der Nähe der letzten "
-"Haltestellenplatform (%s)."
+"PTv2 Route: das Ende der Route auf dem letzten Weg (%s) ist nicht in der "
+"Nähe der letzten Haltestellenplattform (%s)."
 
 msgid "wrong value"
 msgstr "falscher Wert"
@@ -1537,8 +1541,8 @@ msgstr ""
 
 #, perl-format
 msgid ""
-"The first way ('role' = '') of the relation is far from the first 'role' = "
-"'platform', more than %d meters."
+"The starting point on the first way ('role' = '') of the relation is far "
+"from the first 'role' = 'platform', more than %d meters."
 msgstr ""
 
 msgid ""
@@ -1558,8 +1562,8 @@ msgstr ""
 
 #, perl-format
 msgid ""
-"The last way ('role' = '') of the relation is far from the last 'role' = "
-"'platform', more than %d meters."
+"The final point of the last way ('role' = '') of the relation is far from "
+"the last 'role' = 'platform', more than %d meters."
 msgstr ""
 
 msgid ""

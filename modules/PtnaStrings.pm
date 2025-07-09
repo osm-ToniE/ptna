@@ -603,18 +603,6 @@ sub InitMessageStrings {
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
-    $MessageList[$i]->{'message'}                = gettext( "PTv2 route: first way (%s) is not near the first platform stop (%s)." ) . " ". gettext("Distance = %d meters." );
-    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "check-sequence";
-    $MessageList[$i]->{'description'}            = gettext("The first way ('role' = '') of the relation is far from the first 'role' = 'platform', more than %d meters.") . " " .
-                                                   gettext("This could be an indication that the ways of the route are not well sorted, that the route has a gap.") . " " .
-                                                   gettext("This could be an indication that the real first platform is missing or that the platforms are not well sorted.");
-    $MessageList[$i]->{'description'}            =~ s/%d/20/;
-    $MessageList[$i]->{'fix'}                    = gettext("Check that the first way in the route relation is actually the first way of the trip before using 'Relatify'.");
-    $MessageList[$i]->{'image'}                  = "";
-    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
-
-    $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: from-part ('%s') of 'name' is not equal to 'from' = '%s'" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
     $MessageList[$i]->{'option'}                 = "check-name";
@@ -696,18 +684,6 @@ sub InitMessageStrings {
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
-    $MessageList[$i]->{'message'}                = gettext( "PTv2 route: last way (%s) is not near the last platform stop (%s)." ) . " ". gettext("Distance = %d meters." );
-    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "check-sequence";
-    $MessageList[$i]->{'description'}            = gettext("The last way ('role' = '') of the relation is far from the last 'role' = 'platform', more than %d meters.") . " " .
-                                                   gettext("This could be an indication that the ways of the route are not well sorted, that the route has a gap.") . " " .
-                                                   gettext("This could be an indication that the real last platform is missing or that the platforms are not well sorted.");
-    $MessageList[$i]->{'description'}            =~ s/%d/20/;
-    $MessageList[$i]->{'fix'}                    = gettext("Check that the last way in the route relation is actually the last way of the trip before using 'Relatify'.");
-    $MessageList[$i]->{'image'}                  = "";
-    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
-
-    $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: last stop position on last way is not the last stop position of this route: %s versus %s" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "check-sequence";
@@ -732,6 +708,30 @@ sub InitMessageStrings {
     $MessageList[$i]->{'description'}            = "";
     $MessageList[$i]->{'fix'}                    = "";
     $MessageList[$i]->{'image'}                  = "message-roundabout_appears_twice.png";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
+    $MessageList[$i]->{'message'}                = gettext( "PTv2 route: the beginning of the route on the first way (%s) is not near the first platform stop (%s)." );
+    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'option'}                 = "check-sequence";
+    $MessageList[$i]->{'description'}            = gettext("The starting point on the first way ('role' = '') of the relation is far from the first 'role' = 'platform', more than %d meters.") . " " .
+                                                   gettext("This could be an indication that the ways of the route are not well sorted, that the route has a gap.") . " " .
+                                                   gettext("This could be an indication that the real first platform is missing or that the platforms are not well sorted.");
+    $MessageList[$i]->{'description'}            =~ s/%d/20/;
+    $MessageList[$i]->{'fix'}                    = gettext("Check that the first way in the route relation is actually the first way of the trip before using 'Relatify'.");
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
+    $MessageList[$i]->{'message'}                = gettext( "PTv2 route: the end of the route on the last way (%s) is not near the last platform stop (%s)." );
+    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'option'}                 = "check-sequence";
+    $MessageList[$i]->{'description'}            = gettext("The final point of the last way ('role' = '') of the relation is far from the last 'role' = 'platform', more than %d meters.") . " " .
+                                                   gettext("This could be an indication that the ways of the route are not well sorted, that the route has a gap.") . " " .
+                                                   gettext("This could be an indication that the real last platform is missing or that the platforms are not well sorted.");
+    $MessageList[$i]->{'description'}            =~ s/%d/20/;
+    $MessageList[$i]->{'fix'}                    = gettext("Check that the last way in the route relation is actually the last way of the trip before using 'Relatify'.");
+    $MessageList[$i]->{'image'}                  = "";
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;

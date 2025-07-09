@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-07-07 14:50+0200\n"
+"POT-Creation-Date: 2025-07-09 14:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -663,7 +663,9 @@ msgid "PTv2 route: wrong 'role' = '%s' for last platform"
 msgstr ""
 
 #, perl-format
-msgid "PTv2 route: first way (%s) is not near the first platform stop (%s)."
+msgid ""
+"PTv2 route: the beginning of the route on the first way (%s) is not near the "
+"first platform stop (%s)."
 msgstr ""
 
 #, perl-format
@@ -671,7 +673,9 @@ msgid "Distance = %d meters."
 msgstr ""
 
 #, perl-format
-msgid "PTv2 route: last way (%s) is not near the last platform stop (%s)."
+msgid ""
+"PTv2 route: the end of the route on the last way (%s) is not near the last "
+"platform stop (%s)."
 msgstr ""
 
 msgid "wrong value"
@@ -1242,8 +1246,8 @@ msgstr ""
 
 #, perl-format
 msgid ""
-"The first way ('role' = '') of the relation is far from the first 'role' = "
-"'platform', more than %d meters."
+"The starting point on the first way ('role' = '') of the relation is far "
+"from the first 'role' = 'platform', more than %d meters."
 msgstr ""
 
 msgid ""
@@ -1263,8 +1267,8 @@ msgstr ""
 
 #, perl-format
 msgid ""
-"The last way ('role' = '') of the relation is far from the last 'role' = "
-"'platform', more than %d meters."
+"The final point of the last way ('role' = '') of the relation is far from "
+"the last 'role' = 'platform', more than %d meters."
 msgstr ""
 
 msgid ""
