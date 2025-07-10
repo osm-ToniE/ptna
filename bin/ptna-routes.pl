@@ -23,12 +23,12 @@ use Locale::gettext qw();       # 'gettext()' will be overwritten in this file (
 use Getopt::Long;
 use OSM::XML            qw( parse );
 use OSM::Data           qw( %META %NODES %WAYS %RELATIONS );
+use OSM::Geo            qw( Init PlatformToNodeDistance Summary );
 use RoutesList;
 use GTFS::PtnaSQLite    qw( getRouteIdStatus getTripIdStatus getShapeIdStatus getGtfsRouteIdHtmlTag getGtfsRouteIdIconTag getGtfsTripIdHtmlTag getGtfsShapeIdHtmlTag getGtfsLinkToRoutes );
 use Data::Dumper;
 use Time::Local         qw ( timelocal );
 use Time::HiRes;
-use GIS::Distance;
 use Encode;
 
 
@@ -391,9 +391,7 @@ my @HTML_main                       = ();
 my $issues_string                   = '';   # to be used with ALL 'issues' and gettext/ngettext - a separate tool parses this code, extracts those statements and creates a list of all issues
 my $notes_string                    = '';   # to be used with ALL 'notes'  and gettext/ngettext - a separate tool parses this code, extracts those statements and creates a list of all notes
 
-my $gis                             = GIS::Distance->new();
-my @platform_distance_measurements  = ();
-my $duration_distance_measurements  = 0;
+OSM::Geo::Init( 'debug' => $debug, 'verbose' => $verbose );
 
 my %column_name             = ( 'ref'               => gettext('Line (ref=)'),
                                 'relation'          => gettext('Relation (id=)'),
@@ -1787,13 +1785,8 @@ if ( $xml_has_relations == 0 ) {
 
 printFinalFooter();
 
+OSM::Geo::Summary();
 
-printf STDERR "%s total duration of distance measurements = %.9f seconds\n", , get_time(),  $duration_distance_measurements;
-if ( $debug ) {
-    foreach my $item ( @platform_distance_measurements ) {
-        printf STDERR "%s what = %s, type1 = %s, type2 = %s, distance = %d meters, duration = %.9f seconds\n", get_time(), $item->{'what'}, $item->{'type1'}, $item->{'type2'}, $item->{'distance'}, $item->{'duration'};
-    }
-}
 printf STDERR "%s Done ...\n", get_time()       if ( $verbose );
 
 
@@ -4187,15 +4180,14 @@ sub analyze_ptv2_route_relation {
                 push( @{$relation_ptr->{'__issues__'}}, $help_string );
                 $return_code++;
             }
-            if ( $number_of_ways > 0 ) {
+            if ( $number_of_ways > 1 ) {
+                #
+                # will report false positive messages if there is only one way and the 1. platform is near the last node
+                #
                 my $max_allowed_distance = (defined($relation_ptr->{'route_type_value'}) && defined($max_allowed_platform_distances{$relation_ptr->{'route_type_value'}}))
                                            ? $max_allowed_platform_distances{$relation_ptr->{'route_type_value'}}
                                            : 30;
-                my $start_time = Time::HiRes::time();
-                my $distance   = PlatformToNodeDistance( $first_platform_type, $first_platform_id, $sorted_way_nodes[0], $max_allowed_distance );
-                my $duration   = Time::HiRes::time() - $start_time;
-                $duration_distance_measurements += $duration;
-                push( @platform_distance_measurements, { 'what' => 'first', 'type1' => $first_platform_type, 'type2' => 'way', 'distance' => $distance, 'duration' => $duration } );
+                my $distance = OSM::Geo::PlatformToNodeDistance( $first_platform_type, $first_platform_id, $sorted_way_nodes[0], $max_allowed_distance );
                 if ( $distance > $max_allowed_distance ) {
                     $issues_string  = gettext( "PTv2 route: the beginning of the route on the first way (%s) is not near the first platform stop (%s)." );
                     $issues_string .= " " . gettext( "Distance = %d meters." );
@@ -4203,11 +4195,7 @@ sub analyze_ptv2_route_relation {
                     push( @{$relation_ptr->{'__issues__'}}, $help_string );
                     $return_code++;
                 }
-                $start_time = Time::HiRes::time();
-                $distance   = PlatformToNodeDistance( $last_platform_type, $last_platform_id, $sorted_way_nodes[$#sorted_way_nodes], $max_allowed_distance );
-                $duration   = Time::HiRes::time() - $start_time;
-                $duration_distance_measurements += $duration;
-                push( @platform_distance_measurements, { 'what' => 'last', 'type1' => $last_platform_type, 'type2' => 'way', 'distance' => $distance, 'duration' => $duration } );
+                $distance = OSM::Geo::PlatformToNodeDistance( $last_platform_type, $last_platform_id, $sorted_way_nodes[$#sorted_way_nodes], $max_allowed_distance );
                 if ( $distance > $max_allowed_distance ) {
                     $issues_string  = gettext( "PTv2 route: the end of the route on the last way (%s) is not near the last platform stop (%s)." );
                     $issues_string .= " " . gettext( "Distance = %d meters." );
@@ -6242,97 +6230,6 @@ sub getGtfsInfo {
     }
 
     return $gtfs_html_tag;
-}
-
-
-#############################################################################################
-#
-# functions for GEO handling using lat/lon of objects
-#
-#############################################################################################
-
-#sub ObjectToObjectDistance {
-#    my $type1           = shift || '';
-#    my $id1             = shift || 0;
-#    my $type2           = shift || '';
-#    my $id2             = shift || 0;
-#    my $distance        = 0;
-#    my $min_distance    = 100000000;
-#
-#    printf STDERR "%s ObjectToObjectDistance( '%s', '%s', '%s', '%s' )\n", get_time(), $type1, $id1, $type2, $id2        if ( $debug );
-#
-#    if ( $type1 eq 'node' ) {
-#        if ( $type2 eq 'node' ) {
-#            $distance = $gis->distance_metal( $NODES{$id1}->{'lat'}, $NODES{$id1}->{'lon'}, $NODES{$id2}->{'lat'},$NODES{$id2}->{'lon'} ) * 1000;
-#            printf STDERR "%s ObjectToObjectDistance( '%s', ['%s','%s'], '%s', ['%s','%s'], %d) = %f\n", get_time(), $type1, $NODES{$id1}->{'lat'}, $NODES{$id1}->{'lon'}, $type2, $NODES{$id2}->{'lat'},$NODES{$id2}->{'lon'}, $distance        if ( $debug );
-#            return $distance;
-#        } elsif ( $type2 eq 'way' ) {
-#            for ( my $i = 0; $i <= $#{$WAYS{$id2}->{'chain'}}; $i++ ) {
-#                $distance = ObjectToObjectDistance( 'node', $id1, 'node', ${$WAYS{$id2}->{'chain'}}[$i] );
-#                $min_distance = ($min_distance > $distance) ? $distance : $min_distance;
-#            }
-#            printf STDERR "%s ObjectToObjectDistance( '%s', ['%s','%s'], '%s', '%s') = %f\n", get_time(), $type1, $NODES{$id1}->{'lat'}, $NODES{$id1}->{'lon'}, $type2, $id2, $min_distance        if ( $debug );
-#            return $min_distance;
-#        } elsif ( $type2 eq 'relation' ) {
-#            printf STDERR "%s ObjectToObjectDistance( '%s', ['%s','%s'], '%s', '%s') = %f\n", get_time(), $type1, $NODES{$id1}->{'lat'}, $NODES{$id1}->{'lon'}, $type2, $id2, $min_distance        if ( $debug );
-#            ;
-#        } else {
-#            printf STDERR "%s Internal error in ObjectToObjectDistance( '%s', '%s', '%s', '%s')\n", get_time(), $type1, $id1, $type2, $id2;
-#        }
-#    } elsif ( $type1 eq 'way' ) {
-#        if ( $type2 eq 'node' ) {
-#            printf STDERR "%s ObjectToObjectDistance( '%s', '%s', '%s', ['%s','%s'] ) = %f\n", get_time(), $type1, $id1, $type2, $NODES{$id2}->{'lat'},$NODES{$id2}->{'lat'}, $min_distance        if ( $debug );
-#            ;
-#        } elsif ( $type2 eq 'way' ) {
-#            printf STDERR "%s ObjectToObjectDistance( '%s', '%s', '%s', %s ) = %f\n", get_time(), $type1, $id1, $type2, $id2, $min_distance        if ( $debug );
-#        } elsif ( $type2 eq 'relation' ) {
-#            printf STDERR "%s ObjectToObjectDistance( '%s', '%s', '%s', %s ) = %f\n", get_time(), $type1, $id1, $type2, $id2, $min_distance        if ( $debug );
-#        } else {
-#            printf STDERR "%s Internal error in ObjectToObjectDistance( '%s', '%s', '%s', '%s' )\n", get_time(), $type1, $id1, $type2, $id2;
-#        }
-#    } elsif ( $type1 eq 'relation' ) {
-#        if ( $type2 eq 'node' ) {
-#            printf STDERR "%s ObjectToObjectDistance( '%s', '%s', '%s', ['%s','%s'] ) = %f\n", get_time(), $type1, $id1, $type2, $NODES{$id2}->{'lat'},$NODES{$id2}->{'lat'}, $min_distance        if ( $debug );
-#        } elsif ( $type2 eq 'way' ) {
-#            printf STDERR "%s ObjectToObjectDistance( '%s', '%s', '%s', %s ) = %f\n", get_time(), $type1, $id1, $type2, $id2, $min_distance        if ( $debug );
-#        } elsif ( $type2 eq 'relation' ) {
-#            printf STDERR "%s ObjectToObjectDistance( '%s', '%s', '%s', %s ) = %f\n", get_time(), $type1, $id1, $type2, $id2, $min_distance        if ( $debug );
-#        } else {
-#            printf STDERR "%s Internal error in ObjectToObjectDistance( '%s', '%s', '%s', '%s' )\n", get_time(), $type1, $id1, $type2, $id2;
-#        }
-#    } else {
-#        printf STDERR "%s Internal error in ObjectToObjectDistance( '%s', '%s', '%s', '%s' )\n", get_time(), $type1, $id1, $type2, $id2;
-#    }
-#
-#    return 0;  # in meters
-#}
-
-
-#############################################################################################
-
-sub PlatformToNodeDistance {
-    my $platform_type = shift || '';
-    my $platform_id   = shift || 0;
-    my $node_id       = shift || 0;
-    my $ok_if_le_than = shift || 0;       # don't evaluate further if the distance is less or equal than xx meters
-    my $distance      = 0;
-    my $min_distance  = 100000000;
-
-    printf STDERR "%s PlatformToNodeDistance( '%s', '%s', '%s', %d)\n", get_time(), $platform_type, $platform_id, $node_id, $ok_if_le_than        if ( $debug );
-
-    if ( $platform_type eq 'node' ) {
-        $distance = $gis->distance_metal( $NODES{$platform_id}->{'lat'}, $NODES{$platform_id}->{'lon'}, $NODES{$node_id}->{'lat'}, $NODES{$node_id}->{'lon'} ) * 1000;
-        printf STDERR "%s PlatformToNodeDistance( '%s', ['%s','%s'], ['%s','%s'], %d) = %f\n", get_time(), $platform_type, $NODES{$platform_id}->{'lat'}, $NODES{$platform_id}->{'lon'}, $NODES{$node_id}->{'lat'}, $NODES{$node_id}->{'lon'}, $ok_if_le_than, $min_distance        if ( $debug );
-        return $distance;
-    } elsif ( $platform_type eq 'way' ) {
-        printf STDERR "%s PlatformToNodeDistance( '%s', '%s', ['%s','%s'], %d) = %f\n", get_time(), $platform_type, $platform_id, $NODES{$node_id}->{'lat'}, $NODES{$node_id}->{'lon'}, $ok_if_le_than, $min_distance        if ( $debug );
-    } elsif ( $platform_type eq 'relation' ) {
-        printf STDERR "%s PlatformToNodeDistance( '%s', '%s', ['%s','%s'], %d) = %f\n", get_time(), $platform_type, $platform_id, $NODES{$node_id}->{'lat'}, $NODES{$node_id}->{'lon'}, $ok_if_le_than, $min_distance        if ( $debug );
-    } else {
-        printf STDERR "%s Internal error in PlatformToNodeDistance( '%s', '%s', '%s', %d)\n", get_time(), $platform_type, $platform_id, $node_id, $ok_if_le_than;
-    }
-
-    return 0;  # in meters
 }
 
 
