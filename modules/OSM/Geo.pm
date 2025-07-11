@@ -184,7 +184,7 @@ sub PlatformToNodeDistance {
 #
 # find the shortest distance from a point to a line
 #
-# ideally, the height of the triangle formed by the line as the hypotenuse and the point as the common point of the ankathetes
+# ideally, the height of the triangle formed by the line as the hypotenuse and the point as the common point of the ankathets
 #
 # otherwise, the shortest distance of the point to one of the two points of the line
 #
