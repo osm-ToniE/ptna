@@ -181,6 +181,18 @@ sub PlatformToNodeDistance {
 
 
 #############################################################################################
+#
+# find the shortest distance from a point to a line
+#
+# ideally, the height of the triangle formed by the line as the hypotenuse and the point as the common point of the ankathetes
+#
+# otherwise, the shortest distance of the point to one of the two points of the line
+#
+# or zero if the point is on the line
+#
+# adapted from https://www.sitepoint.com/community/t/distance-between-long-lat-point-and-line-segment/50583
+#
+#############################################################################################
 
 sub PointToSegmentDistance {
     my $point_id          = shift || 0;
