@@ -10,8 +10,9 @@ use OSM::Data     qw( %META %NODES %WAYS %RELATIONS );
 
 use GIS::Distance;
 use Math::Trig;
+use Math::Units;
 
-our @EXPORT_OK  = qw( Init PlatformToNodeDistance Summary );
+our @EXPORT_OK  = qw( Init PlatformToNodeDistance ConvertMetersToFeet Summary );
 
 my $debug       = undef;
 my $verbose     = undef;
@@ -227,6 +228,14 @@ sub PointToSegmentDistance {
     printf STDERR "%s PointToSegmentDistance( ['%s','%s'], ['%s','%s'], ['%s','%s'] ) = %f\n", get_time(), $Px, $Py, $Ax, $Ay, $Bx, $By, $distance        if ( $debug );
 
     return $distance; # in meters
+}
+
+
+#############################################################################################
+
+sub ConvertMetersToFeet {
+    my $meters = shift || 0;
+    return Math::Units::convert( $meters, 'm', 'ft' );
 }
 
 
