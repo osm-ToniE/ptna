@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-07-12 11:34+0200\n"
+"POT-Creation-Date: 2025-07-12 16:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -676,6 +676,27 @@ msgstr ""
 msgid ""
 "PTv2 route: the end of the route on the last way (%s) is not near the last "
 "platform stop (%s)."
+msgstr ""
+
+msgid ""
+"PTv2 route: 'roundtrip' is not set and the first and the last platform stops "
+"are the same."
+msgstr ""
+
+#, perl-format
+msgid "Consider setting 'roundtrip' = '%s'."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'roundtrip' = '%s' and the first and the last platform stops are "
+"the same."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'roundtrip' = '%s' and the first and the last platform stops are "
+"not the same."
 msgstr ""
 
 msgid "wrong value"

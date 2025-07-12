@@ -495,6 +495,33 @@ sub InitMessageStrings {
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
+    $MessageList[$i]->{'message'}                = gettext( "PTv2 route: 'roundtrip' = '%s' and the first and the last platform stops are not the same."  );
+    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
+    $MessageList[$i]->{'message'}                = gettext( "PTv2 route: 'roundtrip' = '%s' and the first and the last platform stops are the same." );
+    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
+    $MessageList[$i]->{'message'}                = gettext( "PTv2 route: 'roundtrip' is not set and the first and the last platform stops are the same." );
+    $MessageList[$i]->{'type'}                   = gettext( "Notes" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: 'to' is not set" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
     $MessageList[$i]->{'option'}                 = "check-name";

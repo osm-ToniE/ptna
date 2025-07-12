@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-07-12 11:34+0200\n"
+"POT-Creation-Date: 2025-07-12 16:06+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2025\n"
 "Language-Team: German (https://app.transifex.com/jungle-bus/teams/97874/de/)\n"
@@ -814,6 +814,33 @@ msgid ""
 msgstr ""
 "PTv2 Route: das Ende der Route auf dem letzten Weg (%s) ist nicht in der "
 "Nähe der letzten Haltestellenplattform (%s)."
+
+msgid ""
+"PTv2 route: 'roundtrip' is not set and the first and the last platform stops"
+" are the same."
+msgstr ""
+"PTv2 Route: 'rountrip' ist nicht gesetzt und die erste und letzte "
+"Haltestellenplattformen sind identisch."
+
+#, perl-format
+msgid "Consider setting 'roundtrip' = '%s'."
+msgstr "Setze gegebenenfalls 'roundtrip' = '%s'."
+
+#, perl-format
+msgid ""
+"PTv2 route: 'roundtrip' = '%s' and the first and the last platform stops are"
+" the same."
+msgstr ""
+"PTv2 Route: 'rountrip' = '%s' und die erste und letzte "
+"Haltestellenplattformen sind identisch."
+
+#, perl-format
+msgid ""
+"PTv2 route: 'roundtrip' = '%s' and the first and the last platform stops are"
+" not the same."
+msgstr ""
+"PTv2 Route: 'rountrip' = '%s' und die erste und letzte "
+"Haltestellenplattformen sind nicht identisch."
 
 msgid "wrong value"
 msgstr "falscher Wert"

@@ -4204,6 +4204,26 @@ sub analyze_ptv2_route_relation {
                     $return_code++;
                 }
             }
+            if ( $first_platform_type eq $last_platform_type && $first_platform_id == $last_platform_id ) {
+                if ( !defined($relation_ptr->{'tag'}->{'roundtrip'}) ) {
+                    $notes_string  = gettext( "PTv2 route: 'roundtrip' is not set and the first and the last platform stops are the same." );
+                    $notes_string .= ' ' .  gettext( "Consider setting 'roundtrip' = '%s'." );
+                    push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, 'yes' ) );
+                    $return_code++;
+                } elsif ( $relation_ptr->{'tag'}->{'roundtrip'} ne 'yes' ) {
+                    $issues_string  = gettext( "PTv2 route: 'roundtrip' = '%s' and the first and the last platform stops are the same." );
+                    $issues_string .= ' ' . gettext( "Consider setting 'roundtrip' = '%s'." );
+                    push( @{$relation_ptr->{'__issues__'}},  sprintf( $issues_string, html_escape($relation_ptr->{'tag'}->{'roundtrip'}), 'yes' ) );
+                    $return_code++;
+                }
+            } else {
+                if ( defined($relation_ptr->{'tag'}->{'roundtrip'}) && $relation_ptr->{'tag'}->{'roundtrip'} ne 'no' ) {
+                    $issues_string  = gettext( "PTv2 route: 'roundtrip' = '%s' and the first and the last platform stops are not the same."  );
+                    $issues_string .= ' ' . gettext( "Consider setting 'roundtrip' = '%s'." );
+                    push( @{$relation_ptr->{'__issues__'}},  sprintf( $issues_string, html_escape($relation_ptr->{'tag'}->{'roundtrip'}), 'no' ) );
+                    $return_code++;
+                }
+            }
         }
     }
 
