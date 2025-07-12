@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-07-11 10:50+0200\n"
+"POT-Creation-Date: 2025-07-12 11:34+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2025\n"
 "Language-Team: German (https://app.transifex.com/jungle-bus/teams/97874/de/)\n"
@@ -804,7 +804,7 @@ msgstr ""
 "der Nähe der ersten Haltestellenplattform (%s)."
 
 #, perl-format
-msgid "Distance = %d meters / %d feet."
+msgid "Distance = %d metres / %d feet."
 msgstr "Distanz = %d Meter / %d Fuß."
 
 #, perl-format
