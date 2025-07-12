@@ -819,7 +819,7 @@ msgid ""
 "PTv2 route: 'roundtrip' is not set and the first and the last platform stops"
 " are the same."
 msgstr ""
-"PTv2 Route: 'rountrip' ist nicht gesetzt und die erste und letzte "
+"PTv2 Route: 'roundtrip' ist nicht gesetzt und die erste und letzte "
 "Haltestellenplattformen sind identisch."
 
 #, perl-format
@@ -831,7 +831,7 @@ msgid ""
 "PTv2 route: 'roundtrip' = '%s' and the first and the last platform stops are"
 " the same."
 msgstr ""
-"PTv2 Route: 'rountrip' = '%s' und die erste und letzte "
+"PTv2 Route: 'roundtrip' = '%s' und die erste und letzte "
 "Haltestellenplattformen sind identisch."
 
 #, perl-format
@@ -839,7 +839,7 @@ msgid ""
 "PTv2 route: 'roundtrip' = '%s' and the first and the last platform stops are"
 " not the same."
 msgstr ""
-"PTv2 Route: 'rountrip' = '%s' und die erste und letzte "
+"PTv2 Route: 'roundtrip' = '%s' und die erste und letzte "
 "Haltestellenplattformen sind nicht identisch."
 
 msgid "wrong value"
