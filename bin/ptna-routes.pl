@@ -4190,7 +4190,7 @@ sub analyze_ptv2_route_relation {
                 my $distance = OSM::Geo::PlatformToNodeDistance( $first_platform_type, $first_platform_id, $sorted_way_nodes[0], $max_allowed_distance );
                 if ( $distance > $max_allowed_distance ) {
                     $issues_string  = gettext( "PTv2 route: the beginning of the route on the first way (%s) is not near the first platform stop (%s)." );
-                    $issues_string .= " " . gettext( "Distance = %d meters / %d feet." );
+                    $issues_string .= " " . gettext( "Distance = %d metres / %d feet." );
                     $help_string = sprintf( $issues_string, printWayTemplate($first_way_id,'name;ref'), printXxxTemplate($first_platform_type,$first_platform_id,'name;ref'), $distance, OSM::Geo::ConvertMetersToFeet($distance) );
                     push( @{$relation_ptr->{'__issues__'}}, $help_string );
                     $return_code++;
@@ -4198,7 +4198,7 @@ sub analyze_ptv2_route_relation {
                 $distance = OSM::Geo::PlatformToNodeDistance( $last_platform_type, $last_platform_id, $sorted_way_nodes[$#sorted_way_nodes], $max_allowed_distance );
                 if ( $distance > $max_allowed_distance ) {
                     $issues_string  = gettext( "PTv2 route: the end of the route on the last way (%s) is not near the last platform stop (%s)." );
-                    $issues_string .= " " . gettext( "Distance = %d meters / %d feet." );
+                    $issues_string .= " " . gettext( "Distance = %d metres / %d feet." );
                     $help_string = sprintf( $issues_string, printWayTemplate($last_way_id,'name;ref'), printXxxTemplate($last_platform_type,$last_platform_id,'name;ref'), $distance, OSM::Geo::ConvertMetersToFeet($distance) );
                     push( @{$relation_ptr->{'__issues__'}}, $help_string );
                     $return_code++;
