@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-02-18 14:20+0100\n"
+"POT-Creation-Date: 2025-07-14 17:51+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: Carlos Sánchez López <erielkhan@gmail.com>, 2024\n"
 "Language-Team: Catalan (https://app.transifex.com/jungle-bus/teams/97874/ca/)\n"
@@ -172,6 +172,9 @@ msgstr "Línies de Transport Públic"
 
 msgid "Public Transport Lines without 'ref'"
 msgstr "Línies de Transport Públic sense 'ref'"
+
+msgid "Routes with life-cycle prefix"
+msgstr ""
 
 msgid "More Relations"
 msgstr "Més relacions"
@@ -485,6 +488,15 @@ msgstr ""
 "L'etiqueta '%s' inclou potencials problemes amb els caràcter '%s' a la clau."
 " Valor de l'etiqueta: '%s'"
 
+#, perl-format
+msgid ""
+"The value of '%s' (= '%s') should be specified in ISO 8601 format: YYYY-MM-"
+"DD"
+msgstr ""
+
+msgid "The date does not exist"
+msgstr ""
+
 msgid "Route-Master without Route(s)"
 msgstr "Route-Master sense Route(s)"
 
@@ -515,11 +527,11 @@ msgstr "Ruta amb vies"
 msgid "Route with only 1 Way"
 msgstr "Ruta amb una única via"
 
-msgid "Route without Node(s)"
-msgstr "Ruta sense nodes"
+msgid "Route without Stops(Nodes)"
+msgstr ""
 
-msgid "Route with only 1 Node"
-msgstr "Ruta amb un únic node"
+msgid "Route with only 1 Stop(Node)"
+msgstr ""
 
 msgid "Route with Relation(s)"
 msgstr "Ruta sense relacions"
@@ -528,23 +540,26 @@ msgid "'public_transport:version' is neither '1' nor '2'"
 msgstr "'public_transport:version' no és '1' o '2'"
 
 msgid ""
-"PTv2 route: there are no 'public_transport' = 'stop_position' and no "
-"'public_transport' = 'platform'"
+"PTv2 route: there is no 'public_transport' = 'stop_position' (Node) and no "
+"'public_transport' = 'platform' (Node, Way, Area or Relation)"
 msgstr ""
-"Ruta PTv2: no hi ha 'public_transport' = 'stop_position' o "
-"'public_transport' = 'platform'"
 
-msgid "PTv2 route: there is no 'public_transport' = 'stop_position'"
-msgstr "Ruta PTv2: no hi ha 'public_transport' = 'stop_position'"
+msgid "PTv2 route: there is no 'public_transport' = 'stop_position' (Node)"
+msgstr ""
 
-msgid "PTv2 route: there is only one 'public_transport' = 'stop_position'"
-msgstr "Ruta PTv2: només hi ha una 'public_transport' = 'stop_position'"
+msgid ""
+"PTv2 route: there is only one 'public_transport' = 'stop_position' (Node)"
+msgstr ""
 
-msgid "PTv2 route: there is no 'public_transport' = 'platform'"
-msgstr "Ruta PTv2: no hi ha 'public_transport' = 'platform'"
+msgid ""
+"PTv2 route: there is no 'public_transport' = 'platform' (Node, Way, Area or "
+"Relation)"
+msgstr ""
 
-msgid "PTv2 route: there is only one 'public_transport' = 'platform'"
-msgstr "Ruta PTv2: només hi ha una 'public_transport' = 'platform'"
+msgid ""
+"PTv2 route: there is only one 'public_transport' = 'platform' (Node, Way, "
+"Area or Relation)"
+msgstr ""
 
 msgid ""
 "PTv2 route: first way is a oneway road and ends in a 'stop_position' of this"
@@ -758,6 +773,43 @@ msgstr ""
 
 #, perl-format
 msgid "PTv2 route: wrong 'role' = '%s' for last platform"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: the beginning of the route on the first way (%s) is not near the"
+" first platform stop (%s)."
+msgstr ""
+
+#, perl-format
+msgid "Distance = %d metres / %d feet."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: the end of the route on the last way (%s) is not near the last "
+"platform stop (%s)."
+msgstr ""
+
+msgid ""
+"PTv2 route: 'roundtrip' is not set and the first and the last platform stops"
+" are the same."
+msgstr ""
+
+#, perl-format
+msgid "Consider setting 'roundtrip' = '%s'."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'roundtrip' = '%s' and the first and the last platform stops are"
+" the same."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'roundtrip' = '%s' and the first and the last platform stops are"
+" not the same."
 msgstr ""
 
 msgid "wrong value"
@@ -1041,9 +1093,6 @@ msgid ""
 msgstr ""
 "Una explicació dels texts d'error es pot trobar a la documentació a '<a "
 "href='/en/index.php#messages'>Missatges</a>'."
-
-msgid "New"
-msgstr ""
 
 msgid "Request start of new analysis"
 msgstr ""
@@ -1450,6 +1499,43 @@ msgstr ""
 "del CSV, però no existeix al conjunt de dades proporcionat (veure també la "
 "secció: \"Overpass API Query\")."
 
+#, perl-format
+msgid ""
+"The starting point on the first way ('role' = '') of the relation is far "
+"from the first 'role' = 'platform', more than %d meters."
+msgstr ""
+
+msgid ""
+"This could be an indication that the ways of the route are not well sorted, "
+"that the route has a gap."
+msgstr ""
+
+msgid ""
+"This could be an indication that the real first platform is missing or that "
+"the platforms are not well sorted."
+msgstr ""
+
+msgid ""
+"Check that the first way in the route relation is actually the first way of "
+"the trip before using 'Relatify'."
+msgstr ""
+
+#, perl-format
+msgid ""
+"The final point of the last way ('role' = '') of the relation is far from "
+"the last 'role' = 'platform', more than %d meters."
+msgstr ""
+
+msgid ""
+"This could be an indication that the real last platform is missing or that "
+"the platforms are not well sorted."
+msgstr ""
+
+msgid ""
+"Check that the last way in the route relation is actually the last way of "
+"the trip before using 'Relatify'."
+msgstr ""
+
 msgid ""
 "The vehicle uses a motorway entrance or exit without using a motorway/trunk "
 "road immediately after or before it."
@@ -1729,6 +1815,9 @@ msgstr "comproveu amb 'csv' i 'etiquetes'"
 msgid "'highway' = 'bus_stop' can be set on nodes only, not on ways or areas."
 msgstr ""
 "'highway' = 'bus_stop' només es pot definir en nodes, no en línies o àrees."
+
+msgid "Check dates to follow ISO format: YYYY-MM-DD"
+msgstr ""
 
 msgid "Check 'gtfs:*' tags for validity, ..."
 msgstr "Revisa 'gtfs:*' etiquetes per validació, ..."

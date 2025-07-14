@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-01-29 15:02+0100\n"
+"POT-Creation-Date: 2025-07-14 17:51+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2023\n"
 "Language-Team: Italian (https://app.transifex.com/jungle-bus/teams/97874/it/)\n"
@@ -172,6 +172,9 @@ msgstr "Linee di trasporto pubblico"
 
 msgid "Public Transport Lines without 'ref'"
 msgstr "Linee di trasporto pubblico senza ‘ref’"
+
+msgid "Routes with life-cycle prefix"
+msgstr ""
 
 msgid "More Relations"
 msgstr "Altre relazioni"
@@ -473,6 +476,15 @@ msgid ""
 "of tag: '%s'"
 msgstr ""
 
+#, perl-format
+msgid ""
+"The value of '%s' (= '%s') should be specified in ISO 8601 format: YYYY-MM-"
+"DD"
+msgstr ""
+
+msgid "The date does not exist"
+msgstr ""
+
 msgid "Route-Master without Route(s)"
 msgstr "Itinerario ‘master’ senza itinerari"
 
@@ -504,11 +516,11 @@ msgstr "Itinerario senza percorsi"
 msgid "Route with only 1 Way"
 msgstr "Itinerario con un solo percorso"
 
-msgid "Route without Node(s)"
-msgstr "Itinerario senza nodi"
+msgid "Route without Stops(Nodes)"
+msgstr ""
 
-msgid "Route with only 1 Node"
-msgstr "Itinerario con un solo nodo"
+msgid "Route with only 1 Stop(Node)"
+msgstr ""
 
 msgid "Route with Relation(s)"
 msgstr "Itinerario con almeno una relazione"
@@ -517,20 +529,25 @@ msgid "'public_transport:version' is neither '1' nor '2'"
 msgstr "‘public_transport:version’ non è né ‘1’ né ‘2’"
 
 msgid ""
-"PTv2 route: there are no 'public_transport' = 'stop_position' and no "
-"'public_transport' = 'platform'"
+"PTv2 route: there is no 'public_transport' = 'stop_position' (Node) and no "
+"'public_transport' = 'platform' (Node, Way, Area or Relation)"
 msgstr ""
 
-msgid "PTv2 route: there is no 'public_transport' = 'stop_position'"
+msgid "PTv2 route: there is no 'public_transport' = 'stop_position' (Node)"
 msgstr ""
 
-msgid "PTv2 route: there is only one 'public_transport' = 'stop_position'"
+msgid ""
+"PTv2 route: there is only one 'public_transport' = 'stop_position' (Node)"
 msgstr ""
 
-msgid "PTv2 route: there is no 'public_transport' = 'platform'"
+msgid ""
+"PTv2 route: there is no 'public_transport' = 'platform' (Node, Way, Area or "
+"Relation)"
 msgstr ""
 
-msgid "PTv2 route: there is only one 'public_transport' = 'platform'"
+msgid ""
+"PTv2 route: there is only one 'public_transport' = 'platform' (Node, Way, "
+"Area or Relation)"
 msgstr ""
 
 msgid ""
@@ -705,6 +722,43 @@ msgstr ""
 
 #, perl-format
 msgid "PTv2 route: wrong 'role' = '%s' for last platform"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: the beginning of the route on the first way (%s) is not near the"
+" first platform stop (%s)."
+msgstr ""
+
+#, perl-format
+msgid "Distance = %d metres / %d feet."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: the end of the route on the last way (%s) is not near the last "
+"platform stop (%s)."
+msgstr ""
+
+msgid ""
+"PTv2 route: 'roundtrip' is not set and the first and the last platform stops"
+" are the same."
+msgstr ""
+
+#, perl-format
+msgid "Consider setting 'roundtrip' = '%s'."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'roundtrip' = '%s' and the first and the last platform stops are"
+" the same."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'roundtrip' = '%s' and the first and the last platform stops are"
+" not the same."
 msgstr ""
 
 msgid "wrong value"
@@ -948,9 +1002,6 @@ msgstr ""
 msgid ""
 "An explanation of the error texts can be found in the documentation at '<a "
 "href='/en/index.php#messages'>Messages</a>'."
-msgstr ""
-
-msgid "New"
 msgstr ""
 
 msgid "Request start of new analysis"
@@ -1258,28 +1309,26 @@ msgid "'public_transport:version' is not set"
 msgstr ""
 
 #, perl-format
-msgid ""
-"CSV data includes too many ';'. Line %s of Routes-Data. Contents of line: "
-"'%s'"
+msgid "CSV data includes errors. Line %s of Routes-Data. Contents: '%s'"
 msgstr ""
 
 #, perl-format
 msgid ""
 "CSV data: field 'gtfs_feed' (= '%s') is wrong. Line %s of Routes-Data. "
-"Contents of line: '%s'"
+"Contents: '%s'"
 msgstr ""
 
 #, perl-format
 msgid ""
 "CSV data: field 'release_date' (= '%s') is wrong. Should be a date (YYYY-MM-"
-"DD), 'latest', 'previous' or 'long-term'. Line %s of Routes-Data. Contents "
-"of line: '%s'"
+"DD), 'latest', 'previous' or 'long-term'. Line %s of Routes-Data. Contents: "
+"'%s'"
 msgstr ""
 
 #, perl-format
 msgid ""
 "First character of line ('%s') is reserved. Please put the first CSV field "
-"into double quotes (\"...\"). Line %s of Routes-Data. Contents of line: '%s'"
+"into double quotes (\"...\"). Line %s of Routes-Data. Contents: '%s'"
 msgstr ""
 
 msgid ""
@@ -1292,6 +1341,43 @@ msgid ""
 "This route is expected as '%s' ('bus', 'tram', ...) according to CSV data, "
 "but does not exist in the given data set (see also section: \"Overpass API "
 "Query\")."
+msgstr ""
+
+#, perl-format
+msgid ""
+"The starting point on the first way ('role' = '') of the relation is far "
+"from the first 'role' = 'platform', more than %d meters."
+msgstr ""
+
+msgid ""
+"This could be an indication that the ways of the route are not well sorted, "
+"that the route has a gap."
+msgstr ""
+
+msgid ""
+"This could be an indication that the real first platform is missing or that "
+"the platforms are not well sorted."
+msgstr ""
+
+msgid ""
+"Check that the first way in the route relation is actually the first way of "
+"the trip before using 'Relatify'."
+msgstr ""
+
+#, perl-format
+msgid ""
+"The final point of the last way ('role' = '') of the relation is far from "
+"the last 'role' = 'platform', more than %d meters."
+msgstr ""
+
+msgid ""
+"This could be an indication that the real last platform is missing or that "
+"the platforms are not well sorted."
+msgstr ""
+
+msgid ""
+"Check that the last way in the route relation is actually the last way of "
+"the trip before using 'Relatify'."
 msgstr ""
 
 msgid ""
@@ -1463,13 +1549,16 @@ msgid ""
 msgstr ""
 
 #, perl-format
-msgid "Route-Type is not set. Line %s of Routes-Data. Contents of line: '%s'"
+msgid "Route-Ref is not set. Line %s of Routes-Data. Contents: '%s'"
+msgstr ""
+
+#, perl-format
+msgid "Route-Type is not set. Line %s of Routes-Data. Contents: '%s'"
 msgstr ""
 
 #, perl-format
 msgid ""
-"Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents of line:"
-" '%s'"
+"Route-Type is not supported: '%s'. Line %s of Routes-Data. Contents: '%s'"
 msgstr ""
 
 msgid "Values of tags must not be empty."
@@ -1514,6 +1603,9 @@ msgid "check against 'csv' and 'tags'"
 msgstr ""
 
 msgid "'highway' = 'bus_stop' can be set on nodes only, not on ways or areas."
+msgstr ""
+
+msgid "Check dates to follow ISO format: YYYY-MM-DD"
 msgstr ""
 
 msgid "Check 'gtfs:*' tags for validity, ..."

@@ -3159,11 +3159,11 @@ sub analyze_route_relation {
             push( @{$relation_ptr->{'__issues__'}}, $issues_string );
         }
         unless ( $node_index ) {
-            $issues_string = gettext( "Route without Node(s)" );
+            $issues_string = gettext( "Route without Stops(Nodes)" );
             push( @{$relation_ptr->{'__issues__'}}, $issues_string );
         }
         if ( $node_index == 1 ) {
-            $issues_string = gettext( "Route with only 1 Node" );
+            $issues_string = gettext( "Route with only 1 Stop(Node)" );
             push( @{$relation_ptr->{'__issues__'}}, $issues_string );
         }
         if ( $route_relation_index ) {
@@ -3278,23 +3278,23 @@ sub analyze_ptv2_route_relation {
         push( @{$relation_ptr->{'__issues__'}}, $issues_string );
     }
     if ( $number_of_route_stop_positions == 0 && $number_of_route_platforms == 0 ) {
-        $issues_string = gettext( "PTv2 route: there are no 'public_transport' = 'stop_position' and no 'public_transport' = 'platform'" );
+        $issues_string = gettext( "PTv2 route: there is no 'public_transport' = 'stop_position' (Node) and no 'public_transport' = 'platform' (Node, Way, Area or Relation)" );
         push( @{$relation_ptr->{'__issues__'}}, $issues_string );
     } else {
         unless ( $number_of_route_stop_positions ) {
-            $notes_string = gettext( "PTv2 route: there is no 'public_transport' = 'stop_position'" );
+            $notes_string = gettext( "PTv2 route: there is no 'public_transport' = 'stop_position' (Node)" );
             push( @{$relation_ptr->{'__notes__'}}, $notes_string );
         }
         if ( $number_of_route_stop_positions == 1 ) {
-            $issues_string = gettext( "PTv2 route: there is only one 'public_transport' = 'stop_position'" );
+            $issues_string = gettext( "PTv2 route: there is only one 'public_transport' = 'stop_position' (Node)" );
             push( @{$relation_ptr->{'__issues__'}}, $issues_string );
         }
         unless ( $number_of_route_platforms ) {
-            $notes_string = gettext( "PTv2 route: there is no 'public_transport' = 'platform'" );
+            $notes_string = gettext( "PTv2 route: there is no 'public_transport' = 'platform' (Node, Way, Area or Relation)" );
             push( @{$relation_ptr->{'__notes__'}},$notes_string );
         }
         if ( $number_of_route_platforms == 1 ) {
-            $issues_string = gettext( "PTv2 route: there is only one 'public_transport' = 'platform'" );
+            $issues_string = gettext( "PTv2 route: there is only one 'public_transport' = 'platform' (Node, Way, Area or Relation)" );
             push( @{$relation_ptr->{'__issues__'}}, $issues_string );
         }
     }

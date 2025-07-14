@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-02-18 14:20+0100\n"
+"POT-Creation-Date: 2025-07-14 17:51+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: Branko Kokanovic <branko@kokanovic.org>, 2022\n"
 "Language-Team: Serbian (https://app.transifex.com/jungle-bus/teams/97874/sr/)\n"
@@ -172,6 +172,9 @@ msgstr "Линије јавног превоза"
 
 msgid "Public Transport Lines without 'ref'"
 msgstr "Линије јавног превоза без ’ref’ ознаке"
+
+msgid "Routes with life-cycle prefix"
+msgstr ""
 
 msgid "More Relations"
 msgstr "Још релација"
@@ -468,6 +471,15 @@ msgid ""
 "of tag: '%s'"
 msgstr ""
 
+#, perl-format
+msgid ""
+"The value of '%s' (= '%s') should be specified in ISO 8601 format: YYYY-MM-"
+"DD"
+msgstr ""
+
+msgid "The date does not exist"
+msgstr ""
+
 msgid "Route-Master without Route(s)"
 msgstr "Мастер рута без рута"
 
@@ -499,11 +511,11 @@ msgstr "Рута без путева"
 msgid "Route with only 1 Way"
 msgstr "Рута са само једним путем"
 
-msgid "Route without Node(s)"
-msgstr "Рута без тачака"
+msgid "Route without Stops(Nodes)"
+msgstr ""
 
-msgid "Route with only 1 Node"
-msgstr "Рута са само једном тачком"
+msgid "Route with only 1 Stop(Node)"
+msgstr ""
 
 msgid "Route with Relation(s)"
 msgstr "Рута са релацијама"
@@ -512,23 +524,26 @@ msgid "'public_transport:version' is neither '1' nor '2'"
 msgstr "’public_transport:version’ нема вредност ни ’1’ ни ’2’"
 
 msgid ""
-"PTv2 route: there are no 'public_transport' = 'stop_position' and no "
-"'public_transport' = 'platform'"
+"PTv2 route: there is no 'public_transport' = 'stop_position' (Node) and no "
+"'public_transport' = 'platform' (Node, Way, Area or Relation)"
 msgstr ""
-"PTv2 рута: не постоје ни ’public_transport’ = ’stop_position’ ни "
-"’public_transport’ = ’platform’"
 
-msgid "PTv2 route: there is no 'public_transport' = 'stop_position'"
-msgstr "PTv2 рута: не постоји ’public_transport’ = ’stop_position’"
+msgid "PTv2 route: there is no 'public_transport' = 'stop_position' (Node)"
+msgstr ""
 
-msgid "PTv2 route: there is only one 'public_transport' = 'stop_position'"
-msgstr "PTv2 рута: постоји само једна 'public_transport' = 'stop_position'"
+msgid ""
+"PTv2 route: there is only one 'public_transport' = 'stop_position' (Node)"
+msgstr ""
 
-msgid "PTv2 route: there is no 'public_transport' = 'platform'"
-msgstr "PTv2 рут:а нема ниједна 'public_transport' = 'platform'"
+msgid ""
+"PTv2 route: there is no 'public_transport' = 'platform' (Node, Way, Area or "
+"Relation)"
+msgstr ""
 
-msgid "PTv2 route: there is only one 'public_transport' = 'platform'"
-msgstr "PTv2 рута: постоји само једна 'public_transport' = 'platform'"
+msgid ""
+"PTv2 route: there is only one 'public_transport' = 'platform' (Node, Way, "
+"Area or Relation)"
+msgstr ""
 
 msgid ""
 "PTv2 route: first way is a oneway road and ends in a 'stop_position' of this"
@@ -743,6 +758,43 @@ msgstr ""
 
 #, perl-format
 msgid "PTv2 route: wrong 'role' = '%s' for last platform"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: the beginning of the route on the first way (%s) is not near the"
+" first platform stop (%s)."
+msgstr ""
+
+#, perl-format
+msgid "Distance = %d metres / %d feet."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: the end of the route on the last way (%s) is not near the last "
+"platform stop (%s)."
+msgstr ""
+
+msgid ""
+"PTv2 route: 'roundtrip' is not set and the first and the last platform stops"
+" are the same."
+msgstr ""
+
+#, perl-format
+msgid "Consider setting 'roundtrip' = '%s'."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'roundtrip' = '%s' and the first and the last platform stops are"
+" the same."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'roundtrip' = '%s' and the first and the last platform stops are"
+" not the same."
 msgstr ""
 
 msgid "wrong value"
@@ -1038,9 +1090,6 @@ msgid ""
 msgstr ""
 "Објашњење грешака можете видети у документацији на '<a "
 "href='/en/index.php#messages'>Поруке</a>'."
-
-msgid "New"
-msgstr ""
 
 msgid "Request start of new analysis"
 msgstr ""
@@ -1433,6 +1482,43 @@ msgstr ""
 "не постоји у датом скупу података (погледајте и одељак: \"Overpass API "
 "упит\")."
 
+#, perl-format
+msgid ""
+"The starting point on the first way ('role' = '') of the relation is far "
+"from the first 'role' = 'platform', more than %d meters."
+msgstr ""
+
+msgid ""
+"This could be an indication that the ways of the route are not well sorted, "
+"that the route has a gap."
+msgstr ""
+
+msgid ""
+"This could be an indication that the real first platform is missing or that "
+"the platforms are not well sorted."
+msgstr ""
+
+msgid ""
+"Check that the first way in the route relation is actually the first way of "
+"the trip before using 'Relatify'."
+msgstr ""
+
+#, perl-format
+msgid ""
+"The final point of the last way ('role' = '') of the relation is far from "
+"the last 'role' = 'platform', more than %d meters."
+msgstr ""
+
+msgid ""
+"This could be an indication that the real last platform is missing or that "
+"the platforms are not well sorted."
+msgstr ""
+
+msgid ""
+"Check that the last way in the route relation is actually the last way of "
+"the trip before using 'Relatify'."
+msgstr ""
+
 msgid ""
 "The vehicle uses a motorway entrance or exit without using a motorway/trunk "
 "road immediately after or before it."
@@ -1698,6 +1784,9 @@ msgid "'highway' = 'bus_stop' can be set on nodes only, not on ways or areas."
 msgstr ""
 "'highway' = 'bus_stop' се може ставити само на чворове, не и на путеве и "
 "области."
+
+msgid "Check dates to follow ISO format: YYYY-MM-DD"
+msgstr ""
 
 msgid "Check 'gtfs:*' tags for validity, ..."
 msgstr "Проверите 'gtfs:*' ознаке за валидност, ..."

@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-07-07 14:50+0200\n"
+"POT-Creation-Date: 2025-07-14 17:51+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2025\n"
 "Language-Team: French (https://app.transifex.com/jungle-bus/teams/97874/fr/)\n"
@@ -559,11 +559,11 @@ msgstr "Ligne sans voie(s)"
 msgid "Route with only 1 Way"
 msgstr "Ligne avec seulement 1 voie"
 
-msgid "Route without Node(s)"
-msgstr "Ligne sans nœud(s)"
+msgid "Route without Stops(Nodes)"
+msgstr ""
 
-msgid "Route with only 1 Node"
-msgstr "Ligne avec seulement 1 nœud"
+msgid "Route with only 1 Stop(Node)"
+msgstr ""
 
 msgid "Route with Relation(s)"
 msgstr "Ligne avec relation(s)"
@@ -572,28 +572,26 @@ msgid "'public_transport:version' is neither '1' nor '2'"
 msgstr "L'attribut 'public_transport:version' n'est ni '1' ni '2'"
 
 msgid ""
-"PTv2 route: there are no 'public_transport' = 'stop_position' and no "
-"'public_transport' = 'platform'"
+"PTv2 route: there is no 'public_transport' = 'stop_position' (Node) and no "
+"'public_transport' = 'platform' (Node, Way, Area or Relation)"
 msgstr ""
-"Ligne PTv2 : il n'y a aucun arrêt 'public_transport' = 'stop_position' ni "
-"aucune plateforme 'public_transport' = 'platform'"
 
-msgid "PTv2 route: there is no 'public_transport' = 'stop_position'"
+msgid "PTv2 route: there is no 'public_transport' = 'stop_position' (Node)"
 msgstr ""
-"Ligne PTv2 : il n'y a pas d'arrêt 'public_transport' = 'stop_position'"
 
-msgid "PTv2 route: there is only one 'public_transport' = 'stop_position'"
+msgid ""
+"PTv2 route: there is only one 'public_transport' = 'stop_position' (Node)"
 msgstr ""
-"Ligne PTv2 : il n'y a qu'un seul arrêt 'public_transport' = 'stop_position'"
 
-msgid "PTv2 route: there is no 'public_transport' = 'platform'"
+msgid ""
+"PTv2 route: there is no 'public_transport' = 'platform' (Node, Way, Area or "
+"Relation)"
 msgstr ""
-"Ligne PTv2 : il n'y a pas de plateforme 'public_transport' = 'platform'"
 
-msgid "PTv2 route: there is only one 'public_transport' = 'platform'"
+msgid ""
+"PTv2 route: there is only one 'public_transport' = 'platform' (Node, Way, "
+"Area or Relation)"
 msgstr ""
-"Ligne PTv2 : il n'y a qu'une seule plateforme 'public_transport' = "
-"'platform'"
 
 msgid ""
 "PTv2 route: first way is a oneway road and ends in a 'stop_position' of this"
@@ -827,15 +825,40 @@ msgid "PTv2 route: wrong 'role' = '%s' for last platform"
 msgstr "Ligne PTv2 : mauvais 'role' = '%s' pour la dernière plateforme"
 
 #, perl-format
-msgid "PTv2 route: first way (%s) is not near the first platform stop (%s)."
+msgid ""
+"PTv2 route: the beginning of the route on the first way (%s) is not near the"
+" first platform stop (%s)."
 msgstr ""
 
 #, perl-format
-msgid "Distance = %d meters."
+msgid "Distance = %d metres / %d feet."
 msgstr ""
 
 #, perl-format
-msgid "PTv2 route: last way (%s) is not near the last platform stop (%s)."
+msgid ""
+"PTv2 route: the end of the route on the last way (%s) is not near the last "
+"platform stop (%s)."
+msgstr ""
+
+msgid ""
+"PTv2 route: 'roundtrip' is not set and the first and the last platform stops"
+" are the same."
+msgstr ""
+
+#, perl-format
+msgid "Consider setting 'roundtrip' = '%s'."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'roundtrip' = '%s' and the first and the last platform stops are"
+" the same."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'roundtrip' = '%s' and the first and the last platform stops are"
+" not the same."
 msgstr ""
 
 msgid "wrong value"
@@ -1601,8 +1624,8 @@ msgstr ""
 
 #, perl-format
 msgid ""
-"The first way ('role' = '') of the relation is far from the first 'role' = "
-"'platform', more than %d meters."
+"The starting point on the first way ('role' = '') of the relation is far "
+"from the first 'role' = 'platform', more than %d meters."
 msgstr ""
 
 msgid ""
@@ -1622,8 +1645,8 @@ msgstr ""
 
 #, perl-format
 msgid ""
-"The last way ('role' = '') of the relation is far from the last 'role' = "
-"'platform', more than %d meters."
+"The final point of the last way ('role' = '') of the relation is far from "
+"the last 'role' = 'platform', more than %d meters."
 msgstr ""
 
 msgid ""
