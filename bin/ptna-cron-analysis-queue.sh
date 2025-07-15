@@ -78,7 +78,7 @@ then
                     then
                         network=$(sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "SELECT network FROM queue WHERE id=$id;")
 
-                        if [ -n "network" ]
+                        if [ -n "$network" ]
                         then
                             settings_dir=$(find $PTNA_NETWORKS_LOC -type d -name "$network")
                             if [ -n "$settings_dir" ]
