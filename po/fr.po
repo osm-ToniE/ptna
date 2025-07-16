@@ -10,8 +10,8 @@
 # Patchi Atwork <patchi.atwork@gmail.com>, 2020
 # R B, 2022
 # Noémie <nlehuby@zaclys.net>, 2022
-# Patchi, 2025
 # ToniE <osm-ToniE@web.de>, 2025
+# Patchi, 2025
 # 
 #, fuzzy
 msgid ""
@@ -20,7 +20,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
 "POT-Creation-Date: 2025-07-14 17:51+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: ToniE <osm-ToniE@web.de>, 2025\n"
+"Last-Translator: Patchi, 2025\n"
 "Language-Team: French (https://app.transifex.com/jungle-bus/teams/97874/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -180,7 +180,7 @@ msgid "Public Transport Lines without 'ref'"
 msgstr "Lignes de transport en commun sans 'ref '"
 
 msgid "Routes with life-cycle prefix"
-msgstr ""
+msgstr "Lignes avec préfixe life-cycle"
 
 msgid "More Relations"
 msgstr "Autres relations"
@@ -520,9 +520,11 @@ msgid ""
 "The value of '%s' (= '%s') should be specified in ISO 8601 format: YYYY-MM-"
 "DD"
 msgstr ""
+"La valeur de '%s' (= '%s') devrait être définie avec le format ISO 8601 : "
+"AAAA-MM-JJ"
 
 msgid "The date does not exist"
-msgstr ""
+msgstr "La date n'existe pas"
 
 msgid "Route-Master without Route(s)"
 msgstr "Ligne maître sans ligne(s)"
@@ -560,10 +562,10 @@ msgid "Route with only 1 Way"
 msgstr "Ligne avec seulement 1 voie"
 
 msgid "Route without Stops(Nodes)"
-msgstr ""
+msgstr "Ligne sans aucun arrêt (nœud)"
 
 msgid "Route with only 1 Stop(Node)"
-msgstr ""
+msgstr "Ligne avec 1 seul arrêt (nœud)"
 
 msgid "Route with Relation(s)"
 msgstr "Ligne avec relation(s)"
@@ -575,23 +577,31 @@ msgid ""
 "PTv2 route: there is no 'public_transport' = 'stop_position' (Node) and no "
 "'public_transport' = 'platform' (Node, Way, Area or Relation)"
 msgstr ""
+"Ligne PTv2 : il n'y a aucun 'public_transport' = 'stop_position' (nœud) et "
+"aucun 'public_transport' = 'platform' (nœud, chemin, surface ou relation)"
 
 msgid "PTv2 route: there is no 'public_transport' = 'stop_position' (Node)"
 msgstr ""
+"Ligne PTv2 : il n'y a aucun 'public_transport' = 'stop_position' (nœud)"
 
 msgid ""
 "PTv2 route: there is only one 'public_transport' = 'stop_position' (Node)"
 msgstr ""
+"Ligne PTv2 : il y a seulement un 'public_transport' = 'stop_position' (nœud)"
 
 msgid ""
 "PTv2 route: there is no 'public_transport' = 'platform' (Node, Way, Area or "
 "Relation)"
 msgstr ""
+"Ligne PTv2 : il n'y a aucun 'public_transport' = 'platform' (nœud, chemin, "
+"surface ou relation)"
 
 msgid ""
 "PTv2 route: there is only one 'public_transport' = 'platform' (Node, Way, "
 "Area or Relation)"
 msgstr ""
+"Ligne PTv2 : il y a un seul 'public_transport' = 'platform' (nœud, chemin, "
+"surface ou relation)"
 
 msgid ""
 "PTv2 route: first way is a oneway road and ends in a 'stop_position' of this"
@@ -829,37 +839,47 @@ msgid ""
 "PTv2 route: the beginning of the route on the first way (%s) is not near the"
 " first platform stop (%s)."
 msgstr ""
+"Ligne PTv2 : le début de la ligne / la première voie (%s) n'est pas à coté "
+"de la première plateforme (%s)."
 
 #, perl-format
 msgid "Distance = %d metres / %d feet."
-msgstr ""
+msgstr "Distance = %d mètres / %d pieds."
 
 #, perl-format
 msgid ""
 "PTv2 route: the end of the route on the last way (%s) is not near the last "
 "platform stop (%s)."
 msgstr ""
+"Ligne PTv2  : la fin de la ligne / la dernière voie (%s) n'est pas à coté de"
+" la dernière plateforme (%s)."
 
 msgid ""
 "PTv2 route: 'roundtrip' is not set and the first and the last platform stops"
 " are the same."
 msgstr ""
+"Ligne PTv2 : l'attribut 'roundtrip' n'est pas indiqué alors que la première "
+"et dernière plateformes sont identiques."
 
 #, perl-format
 msgid "Consider setting 'roundtrip' = '%s'."
-msgstr ""
+msgstr "Il est recommandé de mettre l'attribut 'roundtrip' = '%s'."
 
 #, perl-format
 msgid ""
 "PTv2 route: 'roundtrip' = '%s' and the first and the last platform stops are"
 " the same."
 msgstr ""
+"Ligne PTv2 : l'attribut 'roundtrip' = '%s' alors que la première et dernière"
+" plateforme sont identiques."
 
 #, perl-format
 msgid ""
 "PTv2 route: 'roundtrip' = '%s' and the first and the last platform stops are"
 " not the same."
 msgstr ""
+"Ligne PTv2 : l'attribut 'roundtrip' = '%s' alors que la première et dernière"
+" plateforme ne sont identiques."
 
 msgid "wrong value"
 msgstr "Valeur erronée"
@@ -1627,37 +1647,51 @@ msgid ""
 "The starting point on the first way ('role' = '') of the relation is far "
 "from the first 'role' = 'platform', more than %d meters."
 msgstr ""
+"Le premier nœud de la première voie ('role' = '') de la relation est éloigné"
+" du premier 'role' = 'platform', plus que %d mètres."
 
 msgid ""
 "This could be an indication that the ways of the route are not well sorted, "
 "that the route has a gap."
 msgstr ""
+"Ceci pourrait être une indication que les voies de la ligne ne sont pas "
+"triées de la bonne façon ou qu'il y a un trou."
 
 msgid ""
 "This could be an indication that the real first platform is missing or that "
 "the platforms are not well sorted."
 msgstr ""
+"Ceci pourrait être une indication que la vraie première plateforme est "
+"manquante ou que les plateformes ne sont pas triées de la bonne façon."
 
 msgid ""
 "Check that the first way in the route relation is actually the first way of "
 "the trip before using 'Relatify'."
 msgstr ""
+"Vérifiez que la première voie de la ligne est en fait la première voie du "
+"parcours avant d'utiliser 'Relatify'."
 
 #, perl-format
 msgid ""
 "The final point of the last way ('role' = '') of the relation is far from "
 "the last 'role' = 'platform', more than %d meters."
 msgstr ""
+"Le dernier nœud de la dernière voie ('role' = '') de la relation est éloigné"
+" du dernier 'role' = 'platform', plus que %d mètres."
 
 msgid ""
 "This could be an indication that the real last platform is missing or that "
 "the platforms are not well sorted."
 msgstr ""
+"Ceci pourrait être une indication que la vraie dernière plateforme est "
+"manquante ou que les plateformes ne sont pas triées de la bonne façon."
 
 msgid ""
 "Check that the last way in the route relation is actually the last way of "
 "the trip before using 'Relatify'."
 msgstr ""
+"Vérifiez que la dernière voie de la ligne est en fait la dernière voie du "
+"parcours avant d'utiliser 'Relatify'."
 
 msgid ""
 "The vehicle uses a motorway entrance or exit without using a motorway/trunk "
@@ -1946,7 +1980,7 @@ msgstr ""
 "surfaces."
 
 msgid "Check dates to follow ISO format: YYYY-MM-DD"
-msgstr ""
+msgstr "Vérifiez que les dates sont au format ISO : AAAA-MM-JJ"
 
 msgid "Check 'gtfs:*' tags for validity, ..."
 msgstr "Vérifier les attributs 'gtfs:*' pour validation ..."
