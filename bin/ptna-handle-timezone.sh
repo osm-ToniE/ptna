@@ -133,7 +133,9 @@ then
 
             sleep 300
 
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start catch-up with selected overpass api server '$PTNA_OVERPASS_API_SERVER'" >> $LOGFILE
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start catch-up with selected overpass api server '$PTNA_OVERPASS_API_SERVER' for '$emptyxml' networks (single execution)" >> $LOGFILE
+            find ${PTNA_WORK_LOC} -name '*.xml' -size 0        >> $LOGFILE
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "End of list" >> $LOGFILE
 
             # l == log (append) to 'network' specific logfile
             # O == do the overpassapi query only if the downloaded XML data is empty, otherwise skip the rest
@@ -144,6 +146,11 @@ then
 
             # run this again using the selected overpass-api server
             ptna-all-networks-parallel.sh -lOigau >> $LOGFILE 2>&1 < /dev/null
+        elif [ "$emptyxml" -gt 0 ]
+        then
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "No catch-up with selected overpass api server '$PTNA_OVERPASS_API_SERVER, there are too many failed downloads ($emptyxml)'" >> $LOGFILE
+            find ${PTNA_WORK_LOC} -name '*.xml' -size 0        >> $LOGFILE
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "End of list" >> $LOGFILE
         fi
 
         if [ -n "$PTNA_OVERPASS_API_SERVER" ]
@@ -152,7 +159,7 @@ then
             # let's check again for empty XML files and
             # restart analysis with standard overpass api server
 
-            # emptyxml=$(find ${PTNA_WORK_LOC} -name '*.xml' -size 0 | wc -l)
+            emptyxml=$(find ${PTNA_WORK_LOC} -name '*.xml' -size 0 | wc -l)
 
             # if [ "$emptyxml" -gt 0 -a "$emptyxml" -lt 130 ]
             # then
@@ -164,7 +171,9 @@ then
 
                 sleep 300
 
-                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start catch-up with standard overpass api server" >> $LOGFILE
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start catch-up with standard overpass api server for '$emptyxml' networks (single execution)" >> $LOGFILE
+                find ${PTNA_WORK_LOC} -name '*.xml' -size 0        >> $LOGFILE
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "End of list" >> $LOGFILE
 
                 # l == log (append) to 'network' specific logfile
                 # O == do the overpassapi query only if the downloaded XML data is empty, otherwise skip the rest
