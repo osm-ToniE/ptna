@@ -103,10 +103,10 @@ sub _parse_CB {
             } else {
                 printf STDERR "id not set for type: %s\n",$obj_type;
             }
-        } elsif ( $obj_type eq 'bounds' ) {
+        } elsif ( $obj_type eq 'bound' || $obj_type eq 'bounds' ) {
             ; # ignore
         } else {
-            printf STDERR "unknown type %s\n", $obj_type;
+            printf STDERR "unknown type '%s'\n", $obj_type;
         }
     } else {
         printf STDERR "type not set\n"      unless ( $obj_type );
