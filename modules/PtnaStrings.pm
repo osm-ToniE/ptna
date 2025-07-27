@@ -1272,6 +1272,33 @@ sub InitMessageStrings {
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
+    $MessageList[$i]->{'message'}                = ngettext( "Route: incorrect access restriction (%s) to way. Consider tagging as 'busway'='%s'", "Route: incorrect access restriction (%s) to ways. Consider tagging as 'busway'='%s'", 1 );
+    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
+    $MessageList[$i]->{'message'}                = ngettext( "Route: restricted access (%s) to way. Consider tagging as '%s'='yes', '%s'=designated, or ... along with 'motor_vehicle='no'", "Route: restricted access (%s) to ways. Consider tagging as '%s'='yes', '%s'=designated, or ... along with 'motor_vehicle='no'", 1 );
+    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
+    $MessageList[$i]->{'message'}                = ngettext( "Route: restricted access (%s) to way. The key '%s' also includes public transport buses", "Route: restricted access (%s) to ways, The key '%s' also includes public transport buses", 1 );
+    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
     $MessageList[$i]->{'message'}                = ngettext( "Route: restricted access (%s) to way without 'psv'='yes', '%s'='yes', '%s'='designated', or ...", "Route: restricted access (%s) to ways without 'psv'='yes', '%s'='yes', '%s'='designated', or ...", 1 );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "check-access";
@@ -1281,7 +1308,7 @@ sub InitMessageStrings {
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
-    $MessageList[$i]->{'message'}                = ngettext( "Route: restricted access ('bus'='school') to way for a route relation not tagged with 'bus'='school'", "Route: restricted access ('bus'='school') to ways for a route relation not tagged with 'bus'='school'", 1 );
+    $MessageList[$i]->{'message'}                = ngettext( "Route: restricted access ('%s'='school') to way for a route relation not tagged with 'bus'='school'", "Route: restricted access ('%s'='school') to ways for a route relation not tagged with 'bus'='school'", 1 );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
     $MessageList[$i]->{'description'}            = "";
@@ -1308,7 +1335,7 @@ sub InitMessageStrings {
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
-    $MessageList[$i]->{'message'}                = ngettext( "Route: suspicious access restriction (%s) to way. Check whether this should be '%s:lanes'='%s'", "Route: suspicious access restriction (%s) to ways. Check whether this should be '%s:lanes'='%s'", 1 );
+    $MessageList[$i]->{'message'}                = ngettext( "Route: suspicious access restriction (%s) to way. Check whether this should be '%s:lanes%s'='%s'", "Route: suspicious access restriction (%s) to ways. Check whether this should be '%s:lanes%s'='%s'", 1 );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
     $MessageList[$i]->{'description'}            = "";

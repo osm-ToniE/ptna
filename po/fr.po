@@ -10,17 +10,17 @@
 # Patchi Atwork <patchi.atwork@gmail.com>, 2020
 # R B, 2022
 # Noémie <nlehuby@zaclys.net>, 2022
-# ToniE <osm-ToniE@web.de>, 2025
 # Patchi, 2025
+# ToniE <osm-ToniE@web.de>, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-07-14 17:51+0200\n"
+"POT-Creation-Date: 2025-07-27 23:26+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: Patchi, 2025\n"
+"Last-Translator: ToniE <osm-ToniE@web.de>, 2025\n"
 "Language-Team: French (https://app.transifex.com/jungle-bus/teams/97874/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -859,7 +859,7 @@ msgid ""
 " are the same."
 msgstr ""
 "Ligne PTv2 : l'attribut 'roundtrip' n'est pas indiqué alors que la première "
-"et dernière plateformes sont identiques."
+"et la dernière plateforme sont identiques."
 
 #, perl-format
 msgid "Consider setting 'roundtrip' = '%s'."
@@ -879,7 +879,7 @@ msgid ""
 " not the same."
 msgstr ""
 "Ligne PTv2 : l'attribut 'roundtrip' = '%s' alors que la première et dernière"
-" plateforme ne sont identiques."
+" plateforme ne sont pas identiques."
 
 msgid "wrong value"
 msgstr "Valeur erronée"
@@ -999,21 +999,85 @@ msgstr "Ligne PTv2 : utilise le mauvais type de voie (%s)"
 msgid "Route: using way type (%s)"
 msgstr "Ligne : utilise le type de voie (%s)"
 
+#, perl-format
+msgid "Route: unclear access (%s) to way"
+msgid_plural "Route: unclear access (%s) to ways"
+msgstr[0] "Parcours : accès imprécis au chemin (%s)"
+msgstr[1] "Itinéraire : accès imprécis aux voies (%s)"
+msgstr[2] "Ligne : accès imprécis aux voies (%s)"
+
+#, perl-format
 msgid ""
-"Route: restricted access ('bus'='school') to way for a route relation not "
+"Route: suspicious access restriction (%s) to way. Check whether this should "
+"be '%s:lanes%s'='%s'"
+msgid_plural ""
+"Route: suspicious access restriction (%s) to ways. Check whether this should"
+" be '%s:lanes%s'='%s'"
+msgstr[0] ""
+"Itinéraire : restriction (%s) d'accès douteuse sur une voie. Vérifier si "
+"celle-ci devrait être '%s;lanes%s'='%s'"
+msgstr[1] ""
+"Itinéraire : restriction (%s) d'accès douteuse sur des voies. Vérifier si "
+"celle-ci devrait être '%s:lanes%s'='%s'"
+msgstr[2] ""
+"Itinéraire : restriction (%s) d'accès douteuse sur des voies. Vérifier si "
+"celle-ci devrait être '%s:lanes%s'='%s'"
+
+#, perl-format
+msgid ""
+"Route: restricted access ('%s'='school') to way for a route relation not "
 "tagged with 'bus'='school'"
 msgid_plural ""
-"Route: restricted access ('bus'='school') to ways for a route relation not "
+"Route: restricted access ('%s'='school') to ways for a route relation not "
 "tagged with 'bus'='school'"
 msgstr[0] ""
-"Itinéraire : restriction d'accès ('bus'='school') sur une voie d'un "
+"Itinéraire : restriction d'accès ('%s'='school') sur une voie d'un "
 "itinéraire sans attribut bus scolaire 'bus'='school'"
 msgstr[1] ""
-"Itinéraire : restriction d'accès ('bus'='school') sur des voies d'un "
+"Itinéraire : restriction d'accès ('%s'='school') sur des voies d'un "
 "itinéraire sans attribut bus scolaire 'bus'='school'"
 msgstr[2] ""
-"Ligne : restriction d'accès ('bus'='school') sur des voies d'une ligne sans "
-"attribut bus scolaire 'bus'='school'"
+"Itinéraire : restriction d'accès ('%s'='school') sur des voies d'une ligne "
+"sans attribut bus scolaire 'bus'='school'"
+
+#, perl-format
+msgid ""
+"Route: incorrect access restriction (%s) to way. Consider tagging as "
+"'busway'='%s'"
+msgid_plural ""
+"Route: incorrect access restriction (%s) to ways. Consider tagging as "
+"'busway'='%s'"
+msgstr[0] ""
+"Itinéraire : restriction d'accès au chemin incorrecte (%s). Il est "
+"recommandé d'utiliser 'busway'='%s'"
+msgstr[1] ""
+"Itinéraire : restriction d'accès aux chemins incorrecte (%s). Il est "
+"recommandé d'utiliser 'busway'='%s'"
+msgstr[2] ""
+"Itinéraire : restriction d'accès incorrecte (%s). Il est recommandé "
+"d'utiliser 'busway'='%s'"
+
+#, perl-format
+msgid ""
+"Route: restricted access (%s) to way. The key '%s' also includes public "
+"transport buses"
+msgid_plural ""
+"Route: restricted access (%s) to ways, The key '%s' also includes public "
+"transport buses"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, perl-format
+msgid ""
+"Route: restricted access (%s) to way. Consider tagging as '%s'='yes', "
+"'%s'=designated, or ... along with 'motor_vehicle='no'"
+msgid_plural ""
+"Route: restricted access (%s) to ways. Consider tagging as '%s'='yes', "
+"'%s'=designated, or ... along with 'motor_vehicle='no'"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #, perl-format
 msgid ""
@@ -1035,23 +1099,6 @@ msgstr[2] ""
 #, perl-format
 msgid ""
 "Route: suspicious access restriction (%s) to way. Check whether this should "
-"be '%s:lanes'='%s'"
-msgid_plural ""
-"Route: suspicious access restriction (%s) to ways. Check whether this should"
-" be '%s:lanes'='%s'"
-msgstr[0] ""
-"Itinéraire : restriction (%s) d'accès douteuse sur une voie. Vérifier si "
-"celle-ci devrait être '%s;lanes'='%s'"
-msgstr[1] ""
-"Itinéraire : restriction (%s) d'accès douteuse sur des voies. Vérifier si "
-"celle-ci devrait être '%s:lanes'='%s'"
-msgstr[2] ""
-"Ligne : restriction (%s) d'accès douteuse sur des voies. Vérifier si celle-"
-"ci devrait être '%s:lanes'='%s'"
-
-#, perl-format
-msgid ""
-"Route: suspicious access restriction (%s) to way. Check whether this should "
 "be '%s'='yes' or 'psv'='yes'"
 msgid_plural ""
 "Route: suspicious access restriction (%s) to ways. Check whether this should"
@@ -1065,13 +1112,6 @@ msgstr[1] ""
 msgstr[2] ""
 "Ligne : restriction (%s) d'accès douteuse sur des voies. Vérifier si celle-"
 "ci devrait être '%s'='yes' ou 'psv'='yes'"
-
-#, perl-format
-msgid "Route: unclear access (%s) to way"
-msgid_plural "Route: unclear access (%s) to ways"
-msgstr[0] "Parcours : accès imprécis au chemin (%s)"
-msgstr[1] "Itinéraire : accès imprécis aux voies (%s)"
-msgstr[2] "Ligne : accès imprécis aux voies (%s)"
 
 #, perl-format
 msgid ""
