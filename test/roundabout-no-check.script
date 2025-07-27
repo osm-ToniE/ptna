@@ -31,8 +31,10 @@ then
         if [ -s $TEST.diff ]
         then
             echo -e "failed with diff\t$TEST"
+            htmldiff $TEST.expect $TEST.html > $TEST.diff.html
             ERRORS=$(( $ERRORS + 1 ))
         else
+            rm -f $TEST.diff $TEST.diff.html
             echo -e "passed\t\t\t$TEST"
         fi
     else
