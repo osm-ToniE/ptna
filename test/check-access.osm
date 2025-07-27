@@ -466,7 +466,7 @@
     <tag k='construction' v='tertiary' />
     <tag k='highway' v='construction' />
     <tag k='name' v='Way 11a' />
-    <tag k='ref' v='W 11b' />
+    <tag k='ref' v='W 11a' />
   </way>
   <relation id='-152367' action='modify'>
     <member type='node' ref='-152065' role='stop_entry_only' />
