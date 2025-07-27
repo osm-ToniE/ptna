@@ -5738,24 +5738,24 @@ sub CheckAccessOnWaysAndNodes {
                 if ( $relation_ptr->{'ways_used_with_relevant_forward_backward_tags'} &&
                      $relation_ptr->{'ways_used_with_relevant_forward_backward_tags'}->{$route_highway->{'ref'}} ) {
                     foreach my $forward_or_backward ( keys ( %{$relation_ptr->{'ways_used_with_relevant_forward_backward_tags'}->{$route_highway->{'ref'}}} ) ) {
-                        printf STDERR "Calling 'noAccessOnWay( way_id = %s, route = %s, ptv =  %s, fw/bw = %s )'\n", $route_highway->{'ref'}, $relation_ptr->{'route_type_value'}, $relation_ptr->{'tag'}->{'public_transport:version'}, $forward_or_backward;
+                        printf STDERR "Calling 'noAccessOnWay( way_id = %s, route = %s, ptv =  %s, fw/bw = %s )'\n", $route_highway->{'ref'}, $relation_ptr->{'route_type_value'}, $relation_ptr->{'tag'}->{'public_transport:version'}, $forward_or_backward    if ($debug );
                         @access_restrictions = noAccessOnWay( $route_highway->{'ref'},
                                                               $relation_ptr->{'route_type_value'},
                                                               $relation_ptr->{'tag'}->{'public_transport:version'},
                                                               $forward_or_backward );
                         foreach $access_restriction ( @access_restrictions ) {
-                            printf STDERR "noAccessOnWay() = '%s'\n", $access_restriction;
+                            printf STDERR "noAccessOnWay() = '%s'\n", $access_restriction    if ($debug );
                             $restricted_access_on_ways{$access_restriction}->{$route_highway->{'ref'}} = 1;
                             $ret_val++;
                         }
                     }
                 } else {
-                    printf STDERR "Calling 'noAccessOnWay( way_id = %s, route = %s, ptv = %s )'\n", $route_highway->{'ref'}, $relation_ptr->{'route_type_value'}, $relation_ptr->{'tag'}->{'public_transport:version'}?$relation_ptr->{'tag'}->{'public_transport:version'}:'';
+                    printf STDERR "Calling 'noAccessOnWay( way_id = %s, route = %s, ptv = %s )'\n", $route_highway->{'ref'}, $relation_ptr->{'route_type_value'}, $relation_ptr->{'tag'}->{'public_transport:version'}?$relation_ptr->{'tag'}->{'public_transport:version'}:''    if ($debug );
                     @access_restrictions = noAccessOnWay( $route_highway->{'ref'},
                                                           $relation_ptr->{'route_type_value'},
                                                           $relation_ptr->{'tag'}->{'public_transport:version'} );
                     foreach $access_restriction ( @access_restrictions ) {
-                        printf STDERR "noAccessOnWay() = '%s'\n", $access_restriction;
+                        printf STDERR "noAccessOnWay() = '%s'\n", $access_restriction    if ($debug );
                         $restricted_access_on_ways{$access_restriction}->{$route_highway->{'ref'}} = 1;
                         $ret_val++;
                     }
