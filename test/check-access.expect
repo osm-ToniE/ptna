@@ -54,6 +54,8 @@
         </li>
         </ol>
         </li>
+        <li>4 <a href="#conditional_on_ways">Conditional access statements found on ways</a>
+        </li>
         </ol>
         <hr />
         <h1 id="hints">1 Hints</h1>
@@ -101,97 +103,6 @@
 </p>
         <h2 id="A2.3">2.3 Negative, with errors on ways and nodes</h2>
 <a href="#bus_011"><span class="foreign" dir="auto">011</span></a> </br></br>
-<p>
-Route: restricted access (&#039;access&#039;=&#039;private&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 15&#039; -102699
-
-</p>
-<p>
-Route: restricted access (&#039;highway&#039;=&#039;construction&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 11&#039; -102701
-
-</p>
-<p>
-Route: restricted access (&#039;highway&#039;=&#039;cycleway&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 12&#039; -102713
-
-</p>
-<p>
-Route: restricted access (&#039;highway&#039;=&#039;footway&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 4&#039; -102708
-
-</p>
-<p>
-Route: restricted access (&#039;highway&#039;=&#039;pedestrian&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 13&#039; -102703
-
-</p>
-<p>
-Route: restricted access (&#039;motor_vehicle&#039;=&#039;no&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 17&#039; -102697
-
-</p>
-<p>
-Route: restricted access (&#039;motorcar&#039;=&#039;no&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 18&#039; -102696
-
-</p>
-<p>
-Route: restricted access (&#039;vehicle&#039;=&#039;private&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 16&#039; -102698
-
-</p>
-<p>
-Route: restricted access at barrier (&#039;barrier&#039;=&#039;block&#039; with implied &#039;access&#039;=&#039;no&#039;) without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Node -152303
-
-</p>
-<p>
-Route: restricted access at barrier (&#039;barrier&#039;=&#039;bollard&#039; with implied &#039;access&#039;=&#039;no&#039;) without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Node -103450
-
-</p>
-<p>
-Route: unclear access (&#039;bus:conditional&#039;=&#039;yes @ operator&#039;) to way: Way &#039;Way 18&#039; -152347
-
-</p>
-<p>
-Route: suspicious &#039;construction&#039;=&#039;secondary&#039; along with &#039;highway&#039; unequal to &#039;construction&#039; on way: Way &#039;Way 19&#039; -152346
-
-</p>
-<p>
-&nbsp;
-</p>
-<p>
-Route: restricted access (&#039;access&#039;=&#039;private&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 15&#039; -102699
-
-</p>
-<p>
-Route: restricted access (&#039;highway&#039;=&#039;construction&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 11&#039; -102701
-
-</p>
-<p>
-Route: restricted access (&#039;highway&#039;=&#039;path&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 11-15&#039; -102687
-
-</p>
-<p>
-Route: restricted access (&#039;motor_vehicle&#039;=&#039;no&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 17&#039; -102697
-
-</p>
-<p>
-Route: restricted access (&#039;motorcar&#039;=&#039;no&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 18&#039; -102696
-
-</p>
-<p>
-Route: restricted access (&#039;vehicle&#039;=&#039;private&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Way &#039;Way 16&#039; -102698
-
-</p>
-<p>
-Route: restricted access at barrier (&#039;barrier&#039;=&#039;bollard&#039; with implied &#039;access&#039;=&#039;no&#039;) without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Node -103450
-
-</p>
-<p>
-Route: restricted access at barrier (&#039;barrier&#039;=&#039;entrance&#039;, &#039;motor_vehicle&#039;=&#039;no&#039;) without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...: Node -152329
-
-</p>
-<p>
-Route: unclear access (&#039;bus:conditional&#039;=&#039;yes @ operator&#039;) to way: Way &#039;Way 18&#039; -152347
-
-</p>
-<p>
-Route: suspicious &#039;construction&#039;=&#039;secondary&#039; along with &#039;highway&#039; unequal to &#039;construction&#039; on way: Way &#039;Way 19&#039; -152346
-
-</p>
         <table class="oepnvtable">
             <thead>
                 <tr class="tableheaderrow"><th class="name" dir="auto">Name (name=)</th><th class="type" dir="auto">Type (type=)</th><th class="relation" dir="auto">Relation (id=)</th><th class="PTv" dir="auto">PTv</th><th class="issues" dir="auto">Errors</th><th class="notes" dir="auto">Notes</th></tr>
@@ -199,8 +110,8 @@ Route: suspicious &#039;construction&#039;=&#039;secondary&#039; along with &#03
             <tbody>
                 <tr id="bus_011" data-info="From: <span class=_foreign_ dir=_auto_>A-Town</span>; To: <span class=_foreign_ dir=_auto_>C-Town</span>; Operator: <span class=_foreign_ dir=_auto_>Test</span>" data-ref="011" class="sketchline"><td class="sketch" dir="auto"><a href="https://overpass-api.de/api/sketch-line?ref=011&network=Test&operator=" title="Sketch-Line">011</a></td><td class="csvinfo" colspan="5" dir="auto">From: <span class="foreign" dir="auto">A-Town</span>; To: <span class="foreign" dir="auto">C-Town</span>; Operator: <span class="foreign" dir="auto">Test</span></td></tr>
                 <tr id="-152372" data-info="-152372" data-ref="011" class="line"><td class="name foreign" dir="auto">Bus 011</td><td class="type foreign" dir="auto">route_master</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -152372</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto"></td><td class="notes" dir="auto">'network' = '<span class="foreign" dir="auto">Test</span>'</td></tr>
-                <tr id="-152370" data-info="-152370" data-ref="011" class="line"><td class="name foreign" dir="auto">Bus 011: A-Town =&gt; B-Town =&gt; C-Town</td><td class="type foreign" dir="auto">route</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -152370</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto"><span class="foreign" dir="auto">Route: restricted access (&#039;access&#039;=&#039;private&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 15</span>' -152350<br><span class="foreign" dir="auto">Route: suspicious access restriction (&#039;bus&#039;=&#039;yes|yes|designated&#039;) to way. Check whether this should be &#039;bus:lanes&#039;=&#039;yes|yes|designated&#039;</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 20</span>' -152354<br><span class="foreign" dir="auto">Route: restricted access (&#039;highway&#039;=&#039;construction&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 11a</span>' -152453<br><span class="foreign" dir="auto">Route: restricted access (&#039;highway&#039;=&#039;cycleway&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 12</span>' -152355<br><span class="foreign" dir="auto">Route: restricted access (&#039;highway&#039;=&#039;footway&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 4</span>' -152353<br><span class="foreign" dir="auto">Route: restricted access (&#039;highway&#039;=&#039;pedestrian&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 13</span>' -152352<br><span class="foreign" dir="auto">Route: restricted access (&#039;motor_vehicle&#039;=&#039;no&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 17</span>' -152348<br><span class="foreign" dir="auto">Route: restricted access (&#039;vehicle&#039;=&#039;private&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 16</span>' -152349<br><span class="foreign" dir="auto">Route: restricted access at barrier (&#039;barrier&#039;=&#039;block&#039; with implied &#039;access&#039;=&#039;no&#039;) without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Node.svg" alt="Node" /> -152303<br><span class="foreign" dir="auto">Route: restricted access at barrier (&#039;barrier&#039;=&#039;bollard&#039; with implied &#039;access&#039;=&#039;no&#039;) without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Node.svg" alt="Node" /> -152151</td><td class="notes" dir="auto">'network' = '<span class="foreign" dir="auto">Test</span>'<br><span class="foreign" dir="auto">Route: unclear access (&#039;bus:conditional&#039;=&#039;yes @ operator&#039;) to way</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 18</span>' -152347<br><span class="foreign" dir="auto">Route: suspicious &#039;construction&#039;=&#039;secondary&#039; along with &#039;highway&#039; unequal to &#039;construction&#039; on way</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 19</span>' -152346</td></tr>
-                <tr id="-152371" data-info="-152371" data-ref="011" class="line"><td class="name foreign" dir="auto">Bus 011: C-Town =&gt; B-Town =&gt; A-Town</td><td class="type foreign" dir="auto">route</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -152371</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto"><span class="foreign" dir="auto">Route: restricted access (&#039;access&#039;=&#039;private&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 15</span>' -152350<br><span class="foreign" dir="auto">Route: restricted access (&#039;bus&#039;=&#039;no&#039;) to ways, The key &#039;bus&#039; also includes public transport buses</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 11-12</span>' -152345, <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 12-15</span>' -152370<br><span class="foreign" dir="auto">Route: restricted access (&#039;bus&#039;=&#039;school&#039;) to way for a route relation not tagged with &#039;bus&#039;=&#039;school&#039;</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 11b</span>' -152351<br><span class="foreign" dir="auto">Route: suspicious access restriction (&#039;bus&#039;=&#039;yes|yes|designated&#039;) to way. Check whether this should be &#039;bus:lanes&#039;=&#039;yes|yes|designated&#039;</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 20</span>' -152354<br><span class="foreign" dir="auto">Route: restricted access (&#039;highway&#039;=&#039;construction&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 11a</span>' -152453<br><span class="foreign" dir="auto">Route: restricted access (&#039;motor_vehicle&#039;=&#039;no&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 17</span>' -152348<br><span class="foreign" dir="auto">Route: restricted access (&#039;vehicle&#039;=&#039;private&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 16</span>' -152349<br><span class="foreign" dir="auto">Route: restricted access at barrier (&#039;barrier&#039;=&#039;bollard&#039; with implied &#039;access&#039;=&#039;no&#039;) without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Node.svg" alt="Node" /> -152151<br><span class="foreign" dir="auto">Route: restricted access at barrier (&#039;barrier&#039;=&#039;entrance&#039;, &#039;motor_vehicle&#039;=&#039;no&#039;) without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Node.svg" alt="Node" /> -152329</td><td class="notes" dir="auto">'network' = '<span class="foreign" dir="auto">Test</span>'<br><span class="foreign" dir="auto">Route: unclear access (&#039;bus:conditional&#039;=&#039;yes @ operator&#039;) to way</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 18</span>' -152347<br><span class="foreign" dir="auto">Route: suspicious &#039;construction&#039;=&#039;secondary&#039; along with &#039;highway&#039; unequal to &#039;construction&#039; on way</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 19</span>' -152346</td></tr>
+                <tr id="-152370" data-info="-152370" data-ref="011" class="line"><td class="name foreign" dir="auto">Bus 011: A-Town =&gt; B-Town =&gt; C-Town</td><td class="type foreign" dir="auto">route</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -152370</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto"><span class="foreign" dir="auto">Route: restricted access (&#039;access&#039;=&#039;private&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 15</span>' -152350<br><span class="foreign" dir="auto">Route: suspicious access restriction (&#039;bus&#039;=&#039;yes|yes|designated&#039;) to way. Check whether this should be &#039;bus:lanes&#039;=&#039;yes|yes|designated&#039;</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 20</span>' -152354<br><span class="foreign" dir="auto">Route: restricted access (&#039;highway&#039;=&#039;construction&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 11a</span>' -152453<br><span class="foreign" dir="auto">Route: restricted access (&#039;highway&#039;=&#039;cycleway&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 12</span>' -152355<br><span class="foreign" dir="auto">Route: restricted access (&#039;highway&#039;=&#039;footway&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 4</span>' -152353<br><span class="foreign" dir="auto">Route: restricted access (&#039;highway&#039;=&#039;pedestrian&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 13</span>' -152352<br><span class="foreign" dir="auto">Route: restricted access (&#039;motor_vehicle&#039;=&#039;no&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 17</span>' -152348<br><span class="foreign" dir="auto">Route: restricted access (&#039;vehicle&#039;=&#039;private&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 16</span>' -152349<br><span class="foreign" dir="auto">Route: restricted access at barrier (&#039;barrier&#039;=&#039;block&#039; with implied &#039;access&#039;=&#039;no&#039;) without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Node.svg" alt="Node" /> -152303<br><span class="foreign" dir="auto">Route: restricted access at barrier (&#039;barrier&#039;=&#039;bollard&#039; with implied &#039;access&#039;=&#039;no&#039;) without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Node.svg" alt="Node" /> -152151</td><td class="notes" dir="auto">'network' = '<span class="foreign" dir="auto">Test</span>'<br><span class="foreign" dir="auto">Route: see</span> <a href="#conditional_on_ways"><span class="foreign" dir="auto">Conditional access statements found on ways</span></a><br><span class="foreign" dir="auto">Route: suspicious &#039;construction&#039;=&#039;secondary&#039; along with &#039;highway&#039; unequal to &#039;construction&#039; on way</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 19</span>' -152346</td></tr>
+                <tr id="-152371" data-info="-152371" data-ref="011" class="line"><td class="name foreign" dir="auto">Bus 011: C-Town =&gt; B-Town =&gt; A-Town</td><td class="type foreign" dir="auto">route</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -152371</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto"><span class="foreign" dir="auto">Route: restricted access (&#039;access&#039;=&#039;private&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 15</span>' -152350<br><span class="foreign" dir="auto">Route: restricted access (&#039;bus&#039;=&#039;no&#039;) to ways, The key &#039;bus&#039; also includes public transport buses</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 11-12</span>' -152345, <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 12-15</span>' -152370<br><span class="foreign" dir="auto">Route: restricted access (&#039;bus&#039;=&#039;school&#039;) to way for a route relation not tagged with &#039;bus&#039;=&#039;school&#039;</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 11b</span>' -152351<br><span class="foreign" dir="auto">Route: suspicious access restriction (&#039;bus&#039;=&#039;yes|yes|designated&#039;) to way. Check whether this should be &#039;bus:lanes&#039;=&#039;yes|yes|designated&#039;</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 20</span>' -152354<br><span class="foreign" dir="auto">Route: restricted access (&#039;highway&#039;=&#039;construction&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 11a</span>' -152453<br><span class="foreign" dir="auto">Route: restricted access (&#039;motor_vehicle&#039;=&#039;no&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 17</span>' -152348<br><span class="foreign" dir="auto">Route: restricted access (&#039;vehicle&#039;=&#039;private&#039;) to way without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 16</span>' -152349<br><span class="foreign" dir="auto">Route: restricted access at barrier (&#039;barrier&#039;=&#039;bollard&#039; with implied &#039;access&#039;=&#039;no&#039;) without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Node.svg" alt="Node" /> -152151<br><span class="foreign" dir="auto">Route: restricted access at barrier (&#039;barrier&#039;=&#039;entrance&#039;, &#039;motor_vehicle&#039;=&#039;no&#039;) without &#039;psv&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;yes&#039;, &#039;bus&#039;=&#039;designated&#039;, or ...</span>: <img src="/img/Node.svg" alt="Node" /> -152329</td><td class="notes" dir="auto">'network' = '<span class="foreign" dir="auto">Test</span>'<br><span class="foreign" dir="auto">Route: see</span> <a href="#conditional_on_ways"><span class="foreign" dir="auto">Conditional access statements found on ways</span></a><br><span class="foreign" dir="auto">Route: suspicious &#039;construction&#039;=&#039;secondary&#039; along with &#039;highway&#039; unequal to &#039;construction&#039; on way</span>: <img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 19</span>' -152346</td></tr>
             </tbody>
         </table>
 
@@ -216,6 +127,31 @@ Route: suspicious &#039;construction&#039;=&#039;secondary&#039; along with &#03
             </thead>
             <tbody>
                 <tr data-info="Test" data-ref="???" class="line"><td class="network foreign" dir="auto">Test</td><td class="number foreign" dir="auto">9</td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">001</span>' -152367, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">001</span>' -152368, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">001</span>' -152369, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">011</span>' -152370, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">011</span>' -152371, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">011</span>' -152372, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">021</span>' -152373, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">021</span>' -152374, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">021</span>' -152375</td></tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <h1 id="conditional_on_ways">4 Conditional access statements found on ways</h1>
+<p>
+This section lists conditional access statements found on ways by public transport vehicles.
+PTNA will not completely evaluate conditional access statements, they are too complex.
+If a statement inludes a 'yes', 'permissive', 'permit', 'official', 'destination' or 'designated' as first word, PTNA will assume 'access granted'.
+Otherwise, PTNA will ignore the statement and search for and analyse further statements tagged on this way.
+</p>
+<p>
+Take a look at the list of conditional access statements.
+Some of them might be outdated, i.e., the restriction was valid in the past.
+<br />
+Example:<br />
+<code>&nbsp;&nbsp;&nbsp;&nbsp;'access:conditional'='no @ (2024 Aug 01-2024 Oct 30)'</code><br />
+Consider removing these restrictions at some point.
+</p>
+        <table class="oepnvtable js-sort-table">
+            <thead>
+                <tr class="tableheaderrow"><th class="conditional_access js-sort-string" dir="auto">&#x21C5;Conditional Access</th><th class="ways js-sort-none" dir="auto">&#x21C5;Ways</th><th class="relations js-sort-none" dir="auto">&#x21C5;Relations</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="???" data-ref="???" class="line"><td class="conditional_access foreign" dir="auto">&#039;bus:conditional&#039;=&#039;yes @ operator&#039;</td><td class="ways" dir="auto"><img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 18</span>' -152347</td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">011</span>' -152370, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">011</span>' -152371</td></tr>
             </tbody>
         </table>
 

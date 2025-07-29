@@ -235,7 +235,7 @@ if ( $check_service_type ) {
 
 if ( $csv_separator ) {
     if ( length($csv_separator) > 1 ) {
-        printf STDERR "%s analyze-routes.pl: wrong value for option: '--separator' = '%s' - setting it to '--separator' = ';'\n", get_time(), $csv_separator;
+        printf STDERR "%s ptna-routes.pl: wrong value for option: '--separator' = '%s' - setting it to '--separator' = ';'\n", get_time(), $csv_separator;
         $csv_separator = ';'
     }
     $csv_separator = '\\' . $csv_separator;
@@ -243,7 +243,7 @@ if ( $csv_separator ) {
 
 if ( $or_separator ) {
     if ( length($or_separator) > 1 ) {
-        printf STDERR "%s analyze-routes.pl: wrong value for option: '--or-separator' = '%s' - setting it to '--or-separator' = '|'\n", get_time(), $or_separator;
+        printf STDERR "%s ptna-routes.pl: wrong value for option: '--or-separator' = '%s' - setting it to '--or-separator' = '|'\n", get_time(), $or_separator;
         $or_separator = '|';
     }
     $or_separator = '\\' . $or_separator;
@@ -251,7 +251,7 @@ if ( $or_separator ) {
 
 if ( $ref_separator ) {
     if ( length($ref_separator) > 1 ) {
-        printf STDERR "%s analyze-routes.pl: wrong value for option: '--ref-separator' = '%s' - setting it to '--ref-separator' = '/'\n", get_time(), $ref_separator;
+        printf STDERR "%s ptna-routes.pl: wrong value for option: '--ref-separator' = '%s' - setting it to '--ref-separator' = '/'\n", get_time(), $ref_separator;
         $ref_separator = '/';
     }
     $ref_separator = '\\' . $ref_separator;
@@ -262,12 +262,12 @@ if ( $allow_coach ) {
 }
 
 if ( $multiple_ref_type_entries ne 'analyze' && $multiple_ref_type_entries ne 'allow' ) {
-    printf STDERR "%s analyze-routes.pl: wrong value for option: '--multiple_ref_type_entries' = '%s' - setting it to '--multiple_ref_type_entries' = 'analyze'\n", get_time(), $multiple_ref_type_entries;
+    printf STDERR "%s ptna-routes.pl: wrong value for option: '--multiple_ref_type_entries' = '%s' - setting it to '--multiple_ref_type_entries' = 'analyze'\n", get_time(), $multiple_ref_type_entries;
     $multiple_ref_type_entries = 'analyze';
 }
 
 if ( $ptv1_compatibility ne 'no' && $ptv1_compatibility ne 'allow' && $ptv1_compatibility ne 'show' ) {
-    printf STDERR "%s analyze-routes.pl: wrong value for option: '--ptv1_compatibility' = '%s' - setting it to '--ptv1_compatibility' = 'no'\n", get_time(), $ptv1_compatibility;
+    printf STDERR "%s ptna-routes.pl: wrong value for option: '--ptv1_compatibility' = '%s' - setting it to '--ptv1_compatibility' = 'no'\n", get_time(), $ptv1_compatibility;
     $ptv1_compatibility = 'no';
 }
 
@@ -361,6 +361,7 @@ my %unused_networks         = ();       # 'network' values that did not match
 my %unused_operators        = ();       # 'operator' values that did not match but 'network' values did match
 my %gtfs_relation_info_from = ();       # Relations reference to GTFS feed information using $gtfs_relation_info_from{feed-name}{feed_info_from}{release_date}{release_date_from}{relarionID} = 1;
 my %gtfs_csv_info_from      = ();       # CSV data  reference to GTFS feed information using $gtfs_csv_info_from{feed-name}{release_date} = ( feed_info_from, release_info_from );
+my %conditional_access      = ();       # e.g. key: "'access:conditional'='no @ (2025 Jun 30-2025 Aug 10)'" refers to way_id refers to relation_id, value = 1 or !exists
 
 my $relation_ptr            = undef;    # a pointer in Perl to a relation structure
 my $relation_id             = undef;    # the OSM ID of a relation
@@ -417,6 +418,8 @@ my %column_name             = ( 'ref'               => gettext('Line (ref=)'),
                                 'date'              => gettext('Date'),
                                 'feed_from'         => gettext('GTFS feed from'),
                                 'date_from'         => gettext('Date from'),
+                                'conditional_access'=> gettext('Conditional Access'),
+                                'ways'              => gettext('Ways')
                               );
 
 my %transport_types         = ( 'bus'           => gettext('Bus'),
@@ -1767,6 +1770,24 @@ if ( scalar(keys(%gtfs_relation_info_from)) || scalar(keys(%gtfs_csv_info_from))
 }
 
 printf STDERR "%s Printed GTFS details\n", get_time()       if ( $verbose );
+
+
+#############################################################################################
+#
+# now we print the list conditional access tags
+#
+#############################################################################################
+
+printf STDERR "%s Printing conditional access details\n", get_time()       if ( $verbose );
+
+if ( scalar(keys(%conditional_access)) ) {
+
+    printHeader( gettext("Conditional access statements found on ways"), 1, 'conditional_on_ways' );
+
+    printConditionalAccessOnWays();
+}
+
+printf STDERR "%s Printed conditional access details\n", get_time()       if ( $verbose );
 
 
 #############################################################################################
@@ -5244,6 +5265,8 @@ sub noAccessOnWay {
     my $access_type         = $vehicle_type;
     my $tag_suffix          = $forward_or_backward || '';
 
+    my @ret_val             = ();
+
     my @list_of_access_levels = ( 'psv', 'motorcar', 'motor_vehicle', 'vehicle', 'access' );
     my $tmp_access_level      = undef;
 
@@ -5263,7 +5286,7 @@ sub noAccessOnWay {
                 # fine for ferries on ferry ways
                 #
                 printf STDERR "noAccessOnWay() : access for %s for way %d\n", $vehicle_type, $way_id       if ( $debug );
-                return ();
+                return @ret_val;
             } elsif ( ($vehicle_type eq 'tram' || $vehicle_type eq 'train' || $vehicle_type eq 'light_rail' || $vehicle_type eq 'subway') &&
                        $way_tag_ref->{'railway'}                                                                                          &&
                       ($way_tag_ref->{'railway'} eq 'tram' || $way_tag_ref->{'railway'} eq 'train' || $way_tag_ref->{'railway'} eq 'light_rail' || $way_tag_ref->{'railway'} eq 'subway' || $way_tag_ref->{'railway'} eq 'rail')  ) {
@@ -5271,7 +5294,7 @@ sub noAccessOnWay {
                 # fine for rail bounded vehicles rails
                 #
                 printf STDERR "noAccessOnWay() : access for %s for way %d railway=%s)\n", $vehicle_type, $way_id, $way_tag_ref->{'railway'}       if ( $debug );
-                return ();
+                return @ret_val;
             }
         }
         foreach my $access_level ( @list_of_access_levels ) {
@@ -5280,32 +5303,40 @@ sub noAccessOnWay {
                 if ( $way_tag_ref->{$tmp_access_level} ) {
                     if ( $way_tag_ref->{$tmp_access_level} =~ m/^[a-z; ]*(yes|permissive|permit|official|destination|designated)[a-z; ]*$/ ) {
                         # fine, we have access permission
-                        last;
+                        return @ret_val;
                     } else {
                         printf STDERR "noAccessOnWay() : no access for way %d (%s=%s)\n", $way_id, $tmp_access_level, $way_tag_ref->{$tmp_access_level}       if ( $debug );
-                        return ( sprintf( "'%s'='%s'", $tmp_access_level, $way_tag_ref->{$tmp_access_level} ) );
+                        push ( @ret_val, sprintf( "'%s'='%s'", $tmp_access_level, $way_tag_ref->{$tmp_access_level} ) );
+                        return @ret_val;
                     }
                 }
                 $tmp_access_level = $access_level . ':' . $tag_suffix . ':conditional';
                 if ( $way_tag_ref->{$tmp_access_level} ) {
                     printf STDERR "noAccessOnWay() : unclear access for way %d\n", $way_id       if ( $debug );
-                    return ( sprintf( "'%s'='%s'", $tmp_access_level, $way_tag_ref->{$tmp_access_level} ) );
+                    push ( @ret_val, sprintf( "'%s'='%s'", $tmp_access_level, $way_tag_ref->{$tmp_access_level} ) );
+                    if ( $way_tag_ref->{$tmp_access_level} =~ m/^(yes|permissive|permit|official|destination|designated)/ ) {
+                        return @ret_val;
+                    }
                 }
             }
             $tmp_access_level = $access_level;
             if ( $way_tag_ref->{$tmp_access_level} ) {
                 if ( $way_tag_ref->{$tmp_access_level} =~ m/^[a-z; ]*(yes|permissive|permit|official|destination|designated)[a-z; ]*$/ ) {
                     # fine, we have access permission
-                    last;
+                    return @ret_val;
                 } else {
                     printf STDERR "noAccessOnWay() : no access for way %d (%s=%s)\n", $way_id, $tmp_access_level, $way_tag_ref->{$tmp_access_level}       if ( $debug );
-                    return ( sprintf( "'%s'='%s'", $tmp_access_level, $way_tag_ref->{$tmp_access_level} ) );
+                    push ( @ret_val, sprintf( "'%s'='%s'", $tmp_access_level, $way_tag_ref->{$tmp_access_level} ) );
+                    return @ret_val;
                 }
             }
             $tmp_access_level = $access_level . ':conditional';
             if ( $way_tag_ref->{$tmp_access_level} ) {
                 printf STDERR "noAccessOnWay() : unclear access for way %d\n", $way_id       if ( $debug );
-                return ( sprintf( "'%s'='%s'", $tmp_access_level, $way_tag_ref->{$tmp_access_level} ) );
+                push ( @ret_val, sprintf( "'%s'='%s'", $tmp_access_level, $way_tag_ref->{$tmp_access_level} ) );
+                if ( $way_tag_ref->{$tmp_access_level} =~ m/^(yes|permissive|permit|official|destination|designated)/ ) {
+                    return @ret_val;
+                }
             }
         }
         if (  ($way_tag_ref->{'busway'} || $way_tag_ref->{'busway:both'} || $way_tag_ref->{'busway:right'} || $way_tag_ref->{'busway:left'}) &&
@@ -5316,13 +5347,13 @@ sub noAccessOnWay {
             # except if this is a 'highway' = 'construction'
             #
             printf STDERR "noAccessOnWay() : access for all psv for busway on non construction highway %d\n", $way_id       if ( $debug );
-            return ();
+            return @ret_val;
         } elsif ( (!defined($ptv) || $ptv ne '2') && $way_tag_ref->{'public_transport'} && $way_tag_ref->{'public_transport'} eq 'platform' ) {
             #
             # don't check for public_transport=platform (for PTv2 defined only) even if PTv2 is not defined or not '2'
             #
             printf STDERR "noAccessOnWay() : access for %s for way %d for non-PTv2 on Platforms\n", $vehicle_type, $way_id       if ( $debug );
-            return ();
+            return @ret_val;
         } else {
             foreach my $highway_type ( 'pedestrian', 'footway', 'cycleway', 'path', 'construction' ) {
                 if ( $way_tag_ref->{'highway'} && $way_tag_ref->{'highway'} eq $highway_type ) {
@@ -5336,20 +5367,41 @@ sub noAccessOnWay {
                                 $have_access = 1;
                                 next;
                             }
+                            $tmp_access_level = $access_level . ':' . $tag_suffix . ':conditional';
+                            if ( $way_tag_ref->{$tmp_access_level} ) {
+                                printf STDERR "noAccessOnWay() : access for way %d (%s=%s) because of '%s'='%s'\n", $way_id, 'highway', $highway_type, $tmp_access_level, $way_tag_ref->{$tmp_access_level}      if ( $debug );
+                                push ( @ret_val, sprintf( "'%s'='%s'", $tmp_access_level, $way_tag_ref->{$tmp_access_level} ) );
+                                # assume, we have access permission, report this and check next highway_type
+                                if ( $way_tag_ref->{$tmp_access_level} =~ m/^(yes|permissive|permit|official|destination|designated)/ ) {
+                                    $have_access = 1;
+                                    next;
+                                }
+                            }
                         }
                         $tmp_access_level = $access_level;
                         if ( $way_tag_ref->{$tmp_access_level} && $way_tag_ref->{$tmp_access_level} =~ m/^[a-z; ]*(yes|permissive|permit|official|destination|designated)[a-z; ]*$/ ) {
                             printf STDERR "noAccessOnWay() : access for way %d (%s=%s) because of '%s'='%s'\n", $way_id, 'highway', $highway_type, $tmp_access_level, $way_tag_ref->{$tmp_access_level}      if ( $debug );
-                                # fine, we have access permission, check next highway_type
+                            # fine, we have access permission, check next highway_type
                             $have_access = 1;
                             next;
+                        }
+                        $tmp_access_level = $access_level . ':conditional';
+                        if ( $way_tag_ref->{$tmp_access_level} ) {
+                            printf STDERR "noAccessOnWay() : access for way %d (%s=%s) because of '%s'='%s'\n", $way_id, 'highway', $highway_type, $tmp_access_level, $way_tag_ref->{$tmp_access_level}      if ( $debug );
+                            push ( @ret_val, sprintf( "'%s'='%s'", $tmp_access_level, $way_tag_ref->{$tmp_access_level} ) );
+                            # assume, we have access permission, report this and check next highway_type
+                            if ( $way_tag_ref->{$tmp_access_level} =~ m/^(yes|permissive|permit|official|destination|designated)/ ) {
+                                $have_access = 1;
+                                next;
+                            }
                         }
                     }
                     if ( $have_access > 0 ) {
                         next;
                     } else {
                         printf STDERR "noAccessOnWay() : no access for way %d (%s=%s) - '%s'='%s'\n", $way_id, 'highway', $highway_type, $tmp_access_level?$tmp_access_level:'', $way_tag_ref->{$tmp_access_level}?$way_tag_ref->{$tmp_access_level}:''       if ( $debug );
-                        return ( sprintf( "'highway'='%s'", $highway_type ) );
+                        push ( @ret_val, sprintf( "'highway'='%s'", $highway_type ) );
+                        return @ret_val;
                     }
                 }
             }
@@ -5360,12 +5412,13 @@ sub noAccessOnWay {
                  $way_tag_ref->{'construction'} ne 'minor'    &&
                  $way_tag_ref->{'construction'} ne 'widening'    ) {
                 printf STDERR "noAccessOnWay(%s) : suspicious 'construction' = '%s' on 'highway' = '%s'\n", $way_id, $way_tag_ref->{'construction'}, $way_tag_ref->{'highway'}      if ( $debug );
-                return ( sprintf( "'construction'='%s'", $way_tag_ref->{'construction'} ) );
+                push ( @ret_val, sprintf( "'construction'='%s'", $way_tag_ref->{'construction'} ) );
+                return @ret_val;
             }
         }
     }
     printf STDERR "noAccessOnWay() : access for all for way %d\n", $way_id       if ( $debug );
-    return ();
+    return @ret_val;
 }
 
 
@@ -5778,13 +5831,23 @@ sub CheckAccessOnWaysAndNodes {
                     @help_array     = sort(keys(%{$restricted_access_on_ways{$access_restriction}}));
                     $num_of_errors  = scalar(@help_array);
                     if ( $access_restriction =~ m/conditional/ ) {
-                        $notes_string = ngettext( "Route: unclear access (%s) to way", "Route: unclear access (%s) to ways", $num_of_errors );
-                        $helpstring   = handle_foreign(sprintf( $notes_string, $access_restriction ));
-                        if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                            push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
-                        } else {
-                            push( @{$relation_ptr->{'__notes__'}}, sprintf("%s: %s", $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } @help_array )) );
+                        foreach my $way_id ( @help_array ) {
+                            $conditional_access{$access_restriction}->{'ways'}->{$way_id}->{$relation_ptr->{'id'}} = 1;
+                            $conditional_access{$access_restriction}->{'relations'}->{$relation_ptr->{'id'}}->{$way_id} = 1;
                         }
+                        unless ( exists($relation_ptr->{'notes_on_conditional_access_added'}) ) {
+                            $notes_string = gettext( "Route: see" );
+                            $helpstring   = sprintf( "%s <a href=\"#conditional_on_ways\">%s</a>",handle_foreign($notes_string),handle_foreign(gettext("Conditional access statements found on ways")) );
+                            push( @{$relation_ptr->{'__notes__'}}, $helpstring );
+                            $relation_ptr->{'notes_on_conditional_access_added'} = 1;
+                        }
+                        #$notes_string = ngettext( "Route: unclear access (%s) to way", "Route: unclear access (%s) to ways", $num_of_errors );
+                        #$helpstring   = handle_foreign(sprintf( $notes_string, $access_restriction ));
+                        #if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                        #    push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                        #} else {
+                        #    push( @{$relation_ptr->{'__notes__'}}, sprintf("%s: %s", $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } @help_array )) );
+                        #}
                     } elsif ( $access_restriction =~ m/^'([^']+)'='(.*\|.*)'$/ ) {
                         my $access_type = $1;
                         my $restriction = $2;
@@ -7049,6 +7112,37 @@ sub printGtfsReferences {
 
 #############################################################################################
 
+sub printConditionalAccessOnWays {
+
+    push( @HTML_main, "<p>\n" );
+    push( @HTML_main, gettext("This section lists conditional access statements found on ways used by public transport vehicles.") . "\n" );
+    push( @HTML_main, gettext("PTNA will not completely evaluate conditional access statements, they are too complex.") . "\n" );
+    push( @HTML_main, gettext("If a statement includes a 'yes', 'permissive', 'permit', 'official', 'destination' or 'designated' as first word, PTNA will assume 'access granted'.") . "\n" );
+    push( @HTML_main, gettext("Otherwise, PTNA will ignore the statement and search for and analyse further statements tagged on this way.") . "\n" );
+    push( @HTML_main, "</p>\n" );
+    push( @HTML_main, "<p>\n" );
+    push( @HTML_main, gettext("Take a look at the list of conditional access statements.") . "\n" );
+    push( @HTML_main, gettext("Some of them might be outdated, i.e., the restriction was valid in the past.") . "\n" );
+    push( @HTML_main, "<br />\n" . gettext("Example") . ":<br />\n" );
+    push( @HTML_main, "<code>&nbsp;&nbsp;&nbsp;&nbsp;'access:conditional'='no @ (2024 Aug 01-2024 Oct 30)'</code><br />\n" );
+    push( @HTML_main, gettext("Consider removing these restrictions at some point.") . "\n" );
+    push( @HTML_main, "</p>\n" );
+
+    printTableInitialization( 'conditional_access', 'ways', 'relations' );
+    printTableHeader( 'conditional_access' => 'string', 'ways' => 'none', 'relations' => 'none' );
+    foreach my $access_restriction ( sort( keys( %conditional_access ) ) ) {
+        printTableLine( 'conditional_access' =>  $access_restriction,
+                        'ways'               =>  join( ',', sort( keys( %{$conditional_access{$access_restriction}->{'ways'}} ) ) ),
+                        'relations'          =>  join( ',', sort( keys( %{$conditional_access{$access_restriction}->{'relations'}} ) ) )
+                      );
+    }
+    printTableFooter();
+
+}
+
+
+#############################################################################################
+
 sub printHeader {
     my $text  = shift;
     my $level = shift || 1;
@@ -7345,8 +7439,10 @@ sub printTableLine {
         $val =  ($columns[$i] && defined($hash{$columns[$i]})) ? $hash{$columns[$i]} : '';
         if ( $columns[$i] eq "relation" ) {
             push( @HTML_main, sprintf( "<td class=\"relation\" dir=\"auto\">%s</td>", printRelationTemplate($val) ) );
-        } elsif ( $columns[$i] eq "relations"  ){
+        } elsif ( $columns[$i] eq "relations" ){
             push( @HTML_main, sprintf( "<td class=\"relations\" dir=\"auto\">%s%s</td>", join( ', ', map { printRelationTemplate($_,'ref'); } split( ',', $val ) ), $andmore ) );
+        } elsif ( $columns[$i] eq "ways" ){
+            push( @HTML_main, sprintf( "<td class=\"ways\" dir=\"auto\">%s%s</td>", join( ', ', map { printWayTemplate($_,'name;ref'); } split( ',', $val ) ), $andmore ) );
         } elsif ( $columns[$i] eq "issues"  ){
             $val =~ s/__separator__/<br>/g;
             push( @HTML_main, sprintf( "<td class=\"%s\" dir=\"auto\">%s</td>", $columns[$i], $val ) );

@@ -362,7 +362,7 @@
     <nd ref='-152333' />
     <nd ref='-152145' />
     <tag k='highway' v='path' />
-    <tag k='name' v='Way 11-15' />
+    <tag k='name' v='Way 31-35' />
     <tag k='psv' v='yes' />
     <tag k='ref' v='11-15' />
   </way>
@@ -370,8 +370,8 @@
     <nd ref='-152135' />
     <nd ref='-152139' />
     <tag k='highway' v='secondary' />
-    <tag k='name' v='Way 19' />
-    <tag k='ref' v='W 19' />
+    <tag k='name' v='Way 39' />
+    <tag k='ref' v='W 39' />
   </way>
   <way id='-152358' action='modify'>
     <nd ref='-152139' />
@@ -379,16 +379,16 @@
     <tag k='bus' v='designated' />
     <tag k='highway' v='secondary' />
     <tag k='motorcar' v='no' />
-    <tag k='name' v='Way 18' />
-    <tag k='ref' v='W 18' />
+    <tag k='name' v='Way 38' />
+    <tag k='ref' v='W 38' />
   </way>
   <way id='-152359' action='modify'>
     <nd ref='-152141' />
     <nd ref='-152143' />
     <tag k='bus' v='yes' />
     <tag k='highway' v='secondary' />
-    <tag k='name' v='Way 16' />
-    <tag k='ref' v='W 16' />
+    <tag k='name' v='Way 36' />
+    <tag k='ref' v='W 36' />
     <tag k='vehicle' v='private' />
   </way>
   <way id='-152360' action='modify'>
@@ -396,9 +396,9 @@
     <nd ref='-152141' />
     <tag k='highway' v='secondary' />
     <tag k='motor_vehicle' v='no' />
-    <tag k='name' v='Way 17' />
+    <tag k='name' v='Way 37' />
     <tag k='psv' v='designated' />
-    <tag k='ref' v='W 17' />
+    <tag k='ref' v='W 37' />
   </way>
   <way id='-152361' action='modify'>
     <nd ref='-152143' />
@@ -406,9 +406,9 @@
     <nd ref='-152145' />
     <tag k='access' v='private' />
     <tag k='highway' v='secondary' />
-    <tag k='name' v='Way 15' />
+    <tag k='name' v='Way 35' />
     <tag k='psv' v='yes' />
-    <tag k='ref' v='W 15' />
+    <tag k='ref' v='W 35' />
   </way>
   <way id='-152362' action='modify'>
     <nd ref='-152115' />
@@ -417,7 +417,7 @@
     <tag k='access' v='yes' />
     <tag k='construction' v='tertiary' />
     <tag k='highway' v='construction' />
-    <tag k='name' v='Way 11' />
+    <tag k='name' v='Way 31' />
     <tag k='ref' v='W 11' />
   </way>
   <way id='-152363' action='modify'>
@@ -426,31 +426,31 @@
     <nd ref='-152149' />
     <tag k='highway' v='pedestrian' />
     <tag k='motor_vehicle' v='yes' />
-    <tag k='name' v='Way 13' />
-    <tag k='ref' v='W 13' />
+    <tag k='name' v='Way 33' />
+    <tag k='ref' v='W 33' />
   </way>
   <way id='-152364' action='modify'>
     <nd ref='-152145' />
     <nd ref='-152131' />
     <tag k='highway' v='footway' />
-    <tag k='name' v='Way 4' />
-    <tag k='ref' v='W 4' />
+    <tag k='name' v='Way 34' />
+    <tag k='ref' v='W 34' />
     <tag k='vehicle' v='yes' />
   </way>
   <way id='-152365' action='modify'>
     <nd ref='-152133' />
     <nd ref='-152135' />
     <tag k='highway' v='secondary' />
-    <tag k='name' v='Way 20' />
-    <tag k='ref' v='W 20' />
+    <tag k='name' v='Way 40' />
+    <tag k='ref' v='W 40' />
   </way>
   <way id='-152366' action='modify'>
     <nd ref='-152149' />
     <nd ref='-152115' />
     <tag k='highway' v='cycleway' />
     <tag k='motorcar' v='yes' />
-    <tag k='name' v='Way 12' />
-    <tag k='ref' v='W 12' />
+    <tag k='name' v='Way 32' />
+    <tag k='ref' v='W 32' />
   </way>
   <way id='-152370' action='modify'>
     <nd ref='-152329' />
