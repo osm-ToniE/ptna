@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-07-29 23:57+0200\n"
+"POT-Creation-Date: 2025-07-30 00:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -678,15 +678,14 @@ msgstr ""
 
 msgid ""
 "PTv2 route: empty 'role' for a way object which has "
-"'public_transport'='stop_position' set."
-msgstr ""
-
-msgid "For PTv2, 'public_transport'='stop_position' is allow on nodes only"
+"'public_transport'='stop_position' set. For PTv2, "
+"'public_transport'='stop_position' is allow on nodes only"
 msgstr ""
 
 msgid ""
 "PTv2 route: empty 'role' for a relation object which has "
-"'public_transport'='stop_position' set."
+"'public_transport'='stop_position' set. For PTv2, "
+"'public_transport'='stop_position' is allow on nodes only"
 msgstr ""
 
 #, perl-format

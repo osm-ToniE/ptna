@@ -4044,8 +4044,8 @@ sub analyze_ptv2_route_relation {
                 my $helpstring;
                 if ( $WAYS{$highway_ref->{'ref'}}->{'tag'} && $WAYS{$highway_ref->{'ref'}}->{'tag'}->{'public_transport'} ) {
                     if ( $WAYS{$highway_ref->{'ref'}}->{'tag'}->{'public_transport'} eq 'stop_position' ) {
-                        $issues_string = gettext( "PTv2 route: empty 'role' for a way object which has 'public_transport'='stop_position' set." );
-                        $helpstring    = $issues_string . ' ' . gettext ("For PTv2, 'public_transport'='stop_position' is allow on nodes only");
+                        $issues_string = gettext( "PTv2 route: empty 'role' for a way object which has 'public_transport'='stop_position' set. For PTv2, 'public_transport'='stop_position' is allow on nodes only" );
+                        $helpstring    = $issues_string;
                     } elsif ( $WAYS{$highway_ref->{'ref'}}->{'tag'}->{'public_transport'} eq 'platform') {
                         $issues_string = gettext( "PTv2 route: empty 'role'. Consider setting 'role'='platform' or 'role'='platform_entry_ony' or 'role'='platform_exit_only'" );
                         $helpstring    = $issues_string;
@@ -4145,8 +4145,8 @@ sub analyze_ptv2_route_relation {
             my $helpstring;
             if ( $RELATIONS{$rel_ref->{'ref'}}->{'tag'} && $RELATIONS{$rel_ref->{'ref'}}->{'tag'}->{'public_transport'} ) {
                 if ( $RELATIONS{$rel_ref->{'ref'}}->{'tag'}->{'public_transport'} eq 'stop_position' ) {
-                    $issues_string = gettext( "PTv2 route: empty 'role' for a relation object which has 'public_transport'='stop_position' set." );
-                    $helpstring    = $issues_string . ' ' . gettext ("For PTv2, 'public_transport'='stop_position' is allow on nodes only");
+                    $issues_string = gettext( "PTv2 route: empty 'role' for a relation object which has 'public_transport'='stop_position' set. For PTv2, 'public_transport'='stop_position' is allow on nodes only" );
+                    $helpstring    = $issues_string;
                 } elsif ( $RELATIONS{$rel_ref->{'ref'}}->{'tag'}->{'public_transport'} eq 'platform') {
                     $issues_string = gettext( "PTv2 route: empty 'role'. Consider setting 'role'='platform' or 'role'='platform_entry_ony' or 'role'='platform_exit_only'" );
                     $helpstring    = $issues_string;
