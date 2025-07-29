@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-07-27 23:26+0200\n"
+"POT-Creation-Date: 2025-07-29 09:54+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2025\n"
 "Language-Team: German (https://app.transifex.com/jungle-bus/teams/97874/de/)\n"
@@ -117,6 +117,12 @@ msgstr "GTFS Quelle aus"
 msgid "Date from"
 msgstr "Datum aus"
 
+msgid "Conditional Access"
+msgstr "Bedingte Zufahrtsberechtigung"
+
+msgid "Ways"
+msgstr "Wege"
+
 msgid "Bus"
 msgstr "Bus"
 
@@ -186,6 +192,9 @@ msgstr "Details zu 'network'-Werten"
 
 msgid "References to GTFS feeds and releases"
 msgstr "Verweise auf GTFS Quellen und Versionen"
+
+msgid "Conditional access statements found on ways"
+msgstr "Auf Wegen gefundene bedingte Zufahrtsberechtigungen"
 
 msgid "There is more than one Route-Master"
 msgstr "Es existiert mehr als ein Route-Master"
@@ -965,11 +974,8 @@ msgstr "PTv2 Route: ein falscher Wegtyp wird benutzt (%s)"
 msgid "Route: using way type (%s)"
 msgstr "Route: benutzter Wegtyp (%s)"
 
-#, perl-format
-msgid "Route: unclear access (%s) to way"
-msgid_plural "Route: unclear access (%s) to ways"
-msgstr[0] "Route: unklare Befahrbarkeit (%s) auf Weg"
-msgstr[1] "Route: unklare Befahrbarkeit (%s) auf Wegen"
+msgid "Route: see"
+msgstr "Route: siehe"
 
 #, perl-format
 msgid ""
@@ -1498,6 +1504,52 @@ msgstr ""
 msgid "key = value"
 msgstr "Schlüssel = Wert"
 
+msgid ""
+"This section lists conditional access statements found on ways used by "
+"public transport vehicles."
+msgstr ""
+"Dieser Abschnitt listet gefundenen Anweisungen über bedingte "
+"Zufahrtsberechtigungen auf Wegen auf, die auf von ÖPNV-Fahrzeugen benutzt "
+"werden."
+
+msgid ""
+"PTNA will not completely evaluate conditional access statements, they are "
+"too complex."
+msgstr ""
+"PTNA wird Aussagen über bedingte Zufahrtsberechtigungen nicht komplett "
+"analysieren, die sind zu komplex."
+
+msgid ""
+"If a statement includes a 'yes', 'permissive', 'permit', 'official', "
+"'destination' or 'designated' as first word, PTNA will assume 'access "
+"granted'."
+msgstr ""
+"Enthält eine Anweisung als erstes Wort ein 'yes', 'permissive', 'permit', "
+"'official', 'destination' or 'designated', geht PTNA von „Zufahrt gewährt“ "
+"aus."
+
+msgid ""
+"Otherwise, PTNA will ignore the statement and search for and analyse further"
+" statements tagged on this way."
+msgstr ""
+"Andernfalls wird PTNA die Anweisungen ignorieren und nach weiteren auf diese"
+" Weise gekennzeichneten Anweisungen suchen und diese analysieren."
+
+msgid "Take a look at the list of conditional access statements."
+msgstr ""
+"Wirf einen Blick auf die Liste der Anweisungen für die bedingten "
+"Zufahrtsberechtigungen."
+
+msgid ""
+"Some of them might be outdated, i.e., the restriction was valid in the past."
+msgstr ""
+"Einige von ihnen könnten veraltet sein, d.h. die Beschränkung war in der "
+"Vergangenheit gültig."
+
+msgid "Consider removing these restrictions at some point."
+msgstr ""
+"Ziehe in Erwägung, diese Beschränkungen zu einem späteren Zeitpunkt löschen."
+
 msgid "Browse on map"
 msgstr "Auf der Karte anzeigen"
 
@@ -1820,6 +1872,12 @@ msgstr "Wenn ja, lösche den Schlüssel 'construction'."
 msgid "If no, check for an appropriate value of the key 'highway'."
 msgstr ""
 "Wenn nein, prüfe, welcher Wert für den Schlüssel 'highway' passend ist."
+
+#, perl-format
+msgid "Route: unclear access (%s) to way"
+msgid_plural "Route: unclear access (%s) to ways"
+msgstr[0] "Route: unklare Befahrbarkeit (%s) auf Weg"
+msgstr[1] "Route: unklare Befahrbarkeit (%s) auf Wegen"
 
 msgid ""
 "A conditional access is mapped to a way. PTNA will not analyze the value of "
