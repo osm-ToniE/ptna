@@ -133,9 +133,9 @@
         <hr />
         <h1 id="conditional_on_ways">4 Conditional access statements found on ways</h1>
 <p>
-This section lists conditional access statements found on ways by public transport vehicles.
+This section lists conditional access statements found on ways used by public transport vehicles.
 PTNA will not completely evaluate conditional access statements, they are too complex.
-If a statement inludes a 'yes', 'permissive', 'permit', 'official', 'destination' or 'designated' as first word, PTNA will assume 'access granted'.
+If a statement includes a 'yes', 'permissive', 'permit', 'official', 'destination' or 'designated' as first word, PTNA will assume 'access granted'.
 Otherwise, PTNA will ignore the statement and search for and analyse further statements tagged on this way.
 </p>
 <p>
