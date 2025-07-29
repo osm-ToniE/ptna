@@ -567,15 +567,6 @@ sub InitMessageStrings {
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
-    $MessageList[$i]->{'message'}                = gettext( "PTv2 route: empty 'role'" );
-    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
-    $MessageList[$i]->{'option'}                 = "";
-    $MessageList[$i]->{'description'}            = "";
-    $MessageList[$i]->{'fix'}                    = "";
-    $MessageList[$i]->{'image'}                  = "";
-    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
-
-    $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: empty 'role' and 'public_transport' is not set on object" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";

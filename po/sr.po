@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-07-14 17:51+0200\n"
+"POT-Creation-Date: 2025-07-29 23:15+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: Branko Kokanovic <branko@kokanovic.org>, 2022\n"
 "Language-Team: Serbian (https://app.transifex.com/jungle-bus/teams/97874/sr/)\n"
@@ -115,6 +115,12 @@ msgstr "GTFS довод од"
 msgid "Date from"
 msgstr "Датум од"
 
+msgid "Conditional Access"
+msgstr ""
+
+msgid "Ways"
+msgstr ""
+
 msgid "Bus"
 msgstr "Аутобус"
 
@@ -184,6 +190,9 @@ msgstr "Детаљи ’network’ вредности"
 
 msgid "References to GTFS feeds and releases"
 msgstr "Референце ка GTFS доводима и издањима"
+
+msgid "Conditional access statements found on ways"
+msgstr ""
 
 msgid "There is more than one Route-Master"
 msgstr "Има више од једне мастер руте"
@@ -671,8 +680,24 @@ msgstr ""
 msgid "PTv2 route: wrong 'role' = '%s'"
 msgstr "PTv2 рута: погрешна 'role' = '%s'"
 
-msgid "PTv2 route: empty 'role'"
-msgstr "PTv2 рута: празна 'role'"
+msgid ""
+"PTv2 route: empty 'role'. Consider setting 'role'='stop' or "
+"'role'='stop_entry_only' or 'role'='stop_exit_only'"
+msgstr ""
+
+msgid ""
+"PTv2 route: empty 'role'. Consider setting 'role'='platform' or "
+"'role'='platform_entry_ony' or 'role'='platform_exit_only'"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: empty 'role'. Unknown value for 'public_transport' on object "
+"(='%s')"
+msgstr ""
+
+msgid "PTv2 route: empty 'role' and 'public_transport' is not set on object"
+msgstr ""
 
 #, perl-format
 msgid ""
@@ -905,12 +930,60 @@ msgstr "PTv2 рута: користи се неисправан тип пута 
 msgid "Route: using way type (%s)"
 msgstr "Рута: користи се тип пута (%s)"
 
+msgid "Route: see"
+msgstr ""
+
+#, perl-format
 msgid ""
-"Route: restricted access ('bus'='school') to way for a route relation not "
+"Route: suspicious access restriction (%s) to way. Check whether this should "
+"be '%s:lanes%s'='%s'"
+msgid_plural ""
+"Route: suspicious access restriction (%s) to ways. Check whether this should"
+" be '%s:lanes%s'='%s'"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, perl-format
+msgid ""
+"Route: restricted access ('%s'='school') to way for a route relation not "
 "tagged with 'bus'='school'"
 msgid_plural ""
-"Route: restricted access ('bus'='school') to ways for a route relation not "
+"Route: restricted access ('%s'='school') to ways for a route relation not "
 "tagged with 'bus'='school'"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, perl-format
+msgid ""
+"Route: incorrect access restriction (%s) to way. Consider tagging as "
+"'busway'='%s'"
+msgid_plural ""
+"Route: incorrect access restriction (%s) to ways. Consider tagging as "
+"'busway'='%s'"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, perl-format
+msgid ""
+"Route: restricted access (%s) to way. The key '%s' also includes public "
+"transport buses"
+msgid_plural ""
+"Route: restricted access (%s) to ways, The key '%s' also includes public "
+"transport buses"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, perl-format
+msgid ""
+"Route: restricted access (%s) to way. Consider tagging as '%s'='yes', "
+"'%s'=designated, or ... along with 'motor_vehicle='no'"
+msgid_plural ""
+"Route: restricted access (%s) to ways. Consider tagging as '%s'='yes', "
+"'%s'=designated, or ... along with 'motor_vehicle='no'"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
@@ -935,17 +1008,6 @@ msgstr[2] ""
 #, perl-format
 msgid ""
 "Route: suspicious access restriction (%s) to way. Check whether this should "
-"be '%s:lanes'='%s'"
-msgid_plural ""
-"Route: suspicious access restriction (%s) to ways. Check whether this should"
-" be '%s:lanes'='%s'"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-#, perl-format
-msgid ""
-"Route: suspicious access restriction (%s) to way. Check whether this should "
 "be '%s'='yes' or 'psv'='yes'"
 msgid_plural ""
 "Route: suspicious access restriction (%s) to ways. Check whether this should"
@@ -953,13 +1015,6 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-
-#, perl-format
-msgid "Route: unclear access (%s) to way"
-msgid_plural "Route: unclear access (%s) to ways"
-msgstr[0] "Рута: нејасан приступ (%s) путу"
-msgstr[1] "Рута: нејасан приступ (%s) пута"
-msgstr[2] "Рута: нејасан приступ (%s) путевима"
 
 #, perl-format
 msgid ""
@@ -1376,6 +1431,37 @@ msgstr ""
 msgid "key = value"
 msgstr "кључ = вредност"
 
+msgid ""
+"This section lists conditional access statements found on ways used by "
+"public transport vehicles."
+msgstr ""
+
+msgid ""
+"PTNA will not completely evaluate conditional access statements, they are "
+"too complex."
+msgstr ""
+
+msgid ""
+"If a statement includes a 'yes', 'permissive', 'permit', 'official', "
+"'destination' or 'designated' as first word, PTNA will assume 'access "
+"granted'."
+msgstr ""
+
+msgid ""
+"Otherwise, PTNA will ignore the statement and search for and analyse further"
+" statements tagged on this way."
+msgstr ""
+
+msgid "Take a look at the list of conditional access statements."
+msgstr ""
+
+msgid ""
+"Some of them might be outdated, i.e., the restriction was valid in the past."
+msgstr ""
+
+msgid "Consider removing these restrictions at some point."
+msgstr ""
+
 msgid "Browse on map"
 msgstr "Гледај на карти"
 
@@ -1669,6 +1755,13 @@ msgstr "Ако јесу, избришите кључ 'construction'."
 
 msgid "If no, check for an appropriate value of the key 'highway'."
 msgstr "Ако нису, проверите праву вредност кључа 'highway'."
+
+#, perl-format
+msgid "Route: unclear access (%s) to way"
+msgid_plural "Route: unclear access (%s) to ways"
+msgstr[0] "Рута: нејасан приступ (%s) путу"
+msgstr[1] "Рута: нејасан приступ (%s) пута"
+msgstr[2] "Рута: нејасан приступ (%s) путевима"
 
 msgid ""
 "A conditional access is mapped to a way. PTNA will not analyze the value of "

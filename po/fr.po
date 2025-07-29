@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-07-27 23:26+0200\n"
+"POT-Creation-Date: 2025-07-29 23:15+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2025\n"
 "Language-Team: French (https://app.transifex.com/jungle-bus/teams/97874/fr/)\n"
@@ -121,6 +121,12 @@ msgstr "Flux GTFS de"
 msgid "Date from"
 msgstr "Date à partir de"
 
+msgid "Conditional Access"
+msgstr ""
+
+msgid "Ways"
+msgstr ""
+
 msgid "Bus"
 msgstr "Bus"
 
@@ -190,6 +196,9 @@ msgstr "Détails des valeurs pour la balise 'network'"
 
 msgid "References to GTFS feeds and releases"
 msgstr "Fait référence aux flux et versions GTFS"
+
+msgid "Conditional access statements found on ways"
+msgstr ""
 
 msgid "There is more than one Route-Master"
 msgstr "Il y a plusieurs lignes maître"
@@ -745,8 +754,24 @@ msgstr ""
 msgid "PTv2 route: wrong 'role' = '%s'"
 msgstr "Ligne PTv2 : mauvais attribut 'role' = '%s'"
 
-msgid "PTv2 route: empty 'role'"
-msgstr "Ligne PTv2 : attribut 'role' vide"
+msgid ""
+"PTv2 route: empty 'role'. Consider setting 'role'='stop' or "
+"'role'='stop_entry_only' or 'role'='stop_exit_only'"
+msgstr ""
+
+msgid ""
+"PTv2 route: empty 'role'. Consider setting 'role'='platform' or "
+"'role'='platform_entry_ony' or 'role'='platform_exit_only'"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: empty 'role'. Unknown value for 'public_transport' on object "
+"(='%s')"
+msgstr ""
+
+msgid "PTv2 route: empty 'role' and 'public_transport' is not set on object"
+msgstr ""
 
 #, perl-format
 msgid ""
@@ -999,12 +1024,8 @@ msgstr "Ligne PTv2 : utilise le mauvais type de voie (%s)"
 msgid "Route: using way type (%s)"
 msgstr "Ligne : utilise le type de voie (%s)"
 
-#, perl-format
-msgid "Route: unclear access (%s) to way"
-msgid_plural "Route: unclear access (%s) to ways"
-msgstr[0] "Parcours : accès imprécis au chemin (%s)"
-msgstr[1] "Itinéraire : accès imprécis aux voies (%s)"
-msgstr[2] "Ligne : accès imprécis aux voies (%s)"
+msgid "Route: see"
+msgstr ""
 
 #, perl-format
 msgid ""
@@ -1554,6 +1575,37 @@ msgstr ""
 msgid "key = value"
 msgstr "clef 'key' = valeur 'value'"
 
+msgid ""
+"This section lists conditional access statements found on ways used by "
+"public transport vehicles."
+msgstr ""
+
+msgid ""
+"PTNA will not completely evaluate conditional access statements, they are "
+"too complex."
+msgstr ""
+
+msgid ""
+"If a statement includes a 'yes', 'permissive', 'permit', 'official', "
+"'destination' or 'designated' as first word, PTNA will assume 'access "
+"granted'."
+msgstr ""
+
+msgid ""
+"Otherwise, PTNA will ignore the statement and search for and analyse further"
+" statements tagged on this way."
+msgstr ""
+
+msgid "Take a look at the list of conditional access statements."
+msgstr ""
+
+msgid ""
+"Some of them might be outdated, i.e., the restriction was valid in the past."
+msgstr ""
+
+msgid "Consider removing these restrictions at some point."
+msgstr ""
+
 msgid "Browse on map"
 msgstr "Parcourir sur la carte"
 
@@ -1895,6 +1947,13 @@ msgstr "Si oui, supprimer la clé 'construction'."
 
 msgid "If no, check for an appropriate value of the key 'highway'."
 msgstr "Si non, vérifiez la valeur appropriée de la clé 'highway'."
+
+#, perl-format
+msgid "Route: unclear access (%s) to way"
+msgid_plural "Route: unclear access (%s) to ways"
+msgstr[0] "Parcours : accès imprécis au chemin (%s)"
+msgstr[1] "Itinéraire : accès imprécis aux voies (%s)"
+msgstr[2] "Ligne : accès imprécis aux voies (%s)"
 
 msgid ""
 "A conditional access is mapped to a way. PTNA will not analyze the value of "
