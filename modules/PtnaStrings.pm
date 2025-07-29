@@ -576,6 +576,24 @@ sub InitMessageStrings {
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
+    $MessageList[$i]->{'message'}                = gettext( "PTv2 route: empty 'role' for a relation object which has 'public_transport'='stop_position' set." );
+    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
+    $MessageList[$i]->{'message'}                = gettext( "PTv2 route: empty 'role' for a way object which has 'public_transport'='stop_position' set." );
+    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
     $MessageList[$i]->{'message'}                = gettext( "PTv2 route: empty 'role'. Consider setting 'role'='platform' or 'role'='platform_entry_ony' or 'role'='platform_exit_only'" );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
