@@ -3752,9 +3752,24 @@ sub analyze_ptv2_route_relation {
                 $role_mismatch_found++;
             }
         } else {
-            # add here for issue #161
-            $issues_string = gettext( "PTv2 route: empty 'role'" );
-            $role_mismatch{$issues_string}->{$node_ref->{'ref'}} = 1;  # = if ( public_transport eq platform ) gettext( "consider setting role=platform or =platform_entry_ony or = platform_exit_only" )
+            # code for issue #161
+            my $helpstring;
+            if ( $NODES{$node_ref->{'ref'}}->{'tag'} && $NODES{$node_ref->{'ref'}}->{'tag'}->{'public_transport'} ) {
+                if ( $NODES{$node_ref->{'ref'}}->{'tag'}->{'public_transport'} eq 'stop_position' ) {
+                    $issues_string = gettext( "PTv2 route: empty 'role'. Consider setting 'role'='stop' or 'role'='stop_entry_only' or 'role'='stop_exit_only'" );
+                    $helpstring    = $issues_string;
+                } elsif ( $NODES{$node_ref->{'ref'}}->{'tag'}->{'public_transport'} eq 'platform') {
+                    $issues_string = gettext( "PTv2 route: empty 'role'. Consider setting 'role'='platform' or 'role'='platform_entry_ony' or 'role'='platform_exit_only'" );
+                    $helpstring    = $issues_string;
+                } else {
+                    $issues_string = gettext( "PTv2 route: empty 'role'. Unknown value for 'public_transport' on object (='%s')" );
+                    $helpstring    = sprintf( $issues_string, $NODES{$node_ref->{'ref'}}->{'tag'}->{'public_transport'} );
+                }
+            } else {
+                $issues_string = gettext( "PTv2 route: empty 'role' and 'public_transport' is not set on object" );
+                $helpstring    = $issues_string;
+            }
+            $role_mismatch{$helpstring}->{$node_ref->{'ref'}} = 1;
             $role_mismatch_found++;
         }
     }
@@ -4024,10 +4039,25 @@ sub analyze_ptv2_route_relation {
                 $role_mismatch_found++;
             }
         } else {
-            # add here for issue #161
             if ( $platform_ways{$highway_ref->{'ref'}} ) {
-                $issues_string = gettext( "PTv2 route: empty 'role'" );
-                $role_mismatch{$issues_string}->{$highway_ref->{'ref'}} = 1;  # = if ( public_transport eq platform ) gettext( "consider setting role=platform or =platform_entry_ony or = platform_exit_only" )
+                # code for issue #161
+                my $helpstring;
+                if ( $WAYS{$highway_ref->{'ref'}}->{'tag'} && $WAYS{$highway_ref->{'ref'}}->{'tag'}->{'public_transport'} ) {
+                    if ( $WAYS{$highway_ref->{'ref'}}->{'tag'}->{'public_transport'} eq 'stop_position' ) {
+                        $issues_string = gettext( "PTv2 route: empty 'role'. Consider setting 'role'='stop' or 'role'='stop_entry_only' or 'role'='stop_exit_only'" );
+                        $helpstring    = $issues_string;
+                    } elsif ( $WAYS{$highway_ref->{'ref'}}->{'tag'}->{'public_transport'} eq 'platform') {
+                        $issues_string = gettext( "PTv2 route: empty 'role'. Consider setting 'role'='platform' or 'role'='platform_entry_ony' or 'role'='platform_exit_only'" );
+                        $helpstring    = $issues_string;
+                    } else {
+                        $issues_string = gettext( "PTv2 route: empty 'role'. Unknown value for 'public_transport' on object (='%s')" );
+                        $helpstring    = sprintf( $issues_string, $WAYS{$highway_ref->{'ref'}}->{'tag'}->{'public_transport'} );
+                    }
+                } else {
+                    $issues_string = gettext( "PTv2 route: empty 'role' and 'public_transport' is not set on object" );
+                    $helpstring    = $issues_string;
+                }
+                $role_mismatch{$helpstring}->{$highway_ref->{'ref'}} = 1;
                 $role_mismatch_found++;
             }
         }
@@ -4111,9 +4141,24 @@ sub analyze_ptv2_route_relation {
                 $role_mismatch_found++;
             }
         } else {
-            # add here for issue #161
-            $issues_string = gettext( "PTv2 route: empty 'role'" );
-            $role_mismatch{$issues_string}->{$rel_ref->{'ref'}} = 1; # = if ( public_transport eq platform ) gettext( "consider setting role=platform or =platform_entry_ony or = platform_exit_only" )
+            # code for issue #161
+            my $helpstring;
+            if ( $RELATIONS{$rel_ref->{'ref'}}->{'tag'} && $RELATIONS{$rel_ref->{'ref'}}->{'tag'}->{'public_transport'} ) {
+                if ( $RELATIONS{$rel_ref->{'ref'}}->{'tag'}->{'public_transport'} eq 'stop_position' ) {
+                    $issues_string = gettext( "PTv2 route: empty 'role'. Consider setting 'role'='stop' or 'role'='stop_entry_only' or 'role'='stop_exit_only'" );
+                    $helpstring    = $issues_string;
+                } elsif ( $RELATIONS{$rel_ref->{'ref'}}->{'tag'}->{'public_transport'} eq 'platform') {
+                    $issues_string = gettext( "PTv2 route: empty 'role'. Consider setting 'role'='platform' or 'role'='platform_entry_ony' or 'role'='platform_exit_only'" );
+                    $helpstring    = $issues_string;
+                } else {
+                    $issues_string = gettext( "PTv2 route: empty 'role'. Unknown value for 'public_transport' on object (='%s')" );
+                    $helpstring    = sprintf( $issues_string, $RELATIONS{$rel_ref->{'ref'}}->{'tag'}->{'public_transport'} );
+                }
+            } else {
+                $issues_string = gettext( "PTv2 route: empty 'role' and 'public_transport' is not set on object" );
+                $helpstring    = $issues_string;
+            }
+            $role_mismatch{$helpstring}->{$rel_ref->{'ref'}} = 1;
             $role_mismatch_found++;
         }
     }
