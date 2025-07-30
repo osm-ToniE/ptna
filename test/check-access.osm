@@ -4,6 +4,8 @@
   <bounds minlat='48.7201523' minlon='13.532238' maxlat='48.7204213' maxlon='13.5327423' origin='OpenStreetMap server' />
   <bounds minlat='48.7198471' minlon='13.531601' maxlat='48.7205991' maxlon='13.5331674' origin='CGImap 0.6.0 (30584 thorn-01.openstreetmap.org)' />
   <bounds minlat='48.7198471' minlon='13.531601' maxlat='48.7205991' maxlon='13.5331674' origin='OpenStreetMap server' />
+  <bounds minlat='48.7196427' minlon='13.5316157' maxlat='48.7205841' maxlon='13.5332894' origin='openstreetmap-cgimap 2.1.0 (740511 spike-06.openstreetmap.org)' />
+  <bounds minlat='48.7196427' minlon='13.5316157' maxlat='48.7205841' maxlon='13.5332894' origin='OpenStreetMap server' />
   <node id='-152043' action='modify' lat='48.72038791521' lon='13.53308975558'>
     <tag k='bus' v='yes' />
     <tag k='name' v='C-Village' />
@@ -109,7 +111,7 @@
   <node id='-152111' action='modify' lat='48.72020242572' lon='13.53239859261' />
   <node id='-152113' action='modify' lat='48.72026162727' lon='13.53206829816' />
   <node id='-152115' action='modify' lat='48.7200218801' lon='13.53200098943' />
-  <node id='-152117' action='modify' lat='48.71996648739' lon='13.53249419808'>
+  <node id='-152117' action='modify' lat='48.71997769456' lon='13.53249728667'>
     <tag k='bus' v='yes' />
     <tag k='name' v='B-City' />
     <tag k='public_transport' v='platform' />
@@ -133,7 +135,7 @@
     <tag k='name' v='B-City' />
     <tag k='public_transport' v='platform' />
   </node>
-  <node id='-152127' action='modify' lat='48.71996069884' lon='13.53310495281'>
+  <node id='-152127' action='modify' lat='48.71996783068' lon='13.53310495281'>
     <tag k='bus' v='yes' />
     <tag k='name' v='C-City' />
     <tag k='public_transport' v='platform' />
@@ -186,6 +188,38 @@
   <node id='-152376' action='modify' lat='48.72039305377' lon='13.53183767612'>
     <tag k='barrier' v='sally_port' />
   </node>
+  <node id='-152409' action='modify' lat='48.7198219958' lon='13.53169643603'>
+    <tag k='name' v='A-School' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-152410' action='modify' lat='48.71987004327' lon='13.53169590379'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='A-School' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-152420' action='modify' lat='48.71981799168' lon='13.53250587703'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='B-School' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-152421' action='modify' lat='48.71987075193' lon='13.53250368789'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='B-School' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-152436' action='modify' lat='48.71987053455' lon='13.53198464981' />
+  <node id='-152437' action='modify' lat='48.71987165285' lon='13.53233676554' />
+  <node id='-152454' action='modify' lat='48.71986745119' lon='13.53311524828'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='C-School' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-152456' action='modify' lat='48.7198173603' lon='13.53311716816'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='C-School' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-152462' action='modify' lat='48.71986993567' lon='13.53265492296' />
   <way id='-152334' action='modify'>
     <nd ref='-152077' />
     <nd ref='-152059' />
@@ -468,6 +502,47 @@
     <tag k='name' v='Way 11a' />
     <tag k='ref' v='W 11a' />
   </way>
+  <way id='-152481' action='modify'>
+    <nd ref='-152410' />
+    <nd ref='-152436' />
+    <tag k='highway' v='service' />
+    <tag k='name' v='Way 41' />
+    <tag k='ref' v='W 41' />
+    <tag k='school_bus' v='designated' />
+    <tag k='vehicle' v='no' />
+  </way>
+  <way id='-152495' action='modify'>
+    <nd ref='-152436' />
+    <nd ref='-152437' />
+    <tag k='highway' v='residential' />
+    <tag k='name' v='Way 42' />
+    <tag k='ref' v='W 42' />
+  </way>
+  <way id='-152496' action='modify'>
+    <nd ref='-152437' />
+    <nd ref='-152421' />
+    <tag k='highway' v='service' />
+    <tag k='name' v='Way 43' />
+    <tag k='ref' v='W 43' />
+    <tag k='school_bus' v='yes' />
+    <tag k='vehicle' v='no' />
+  </way>
+  <way id='-152590' action='modify'>
+    <nd ref='-152421' />
+    <nd ref='-152462' />
+    <tag k='highway' v='service' />
+    <tag k='name' v='Way 44' />
+    <tag k='ref' v='W 44' />
+    <tag k='school_bus' v='no' />
+    <tag k='vehicle' v='no' />
+  </way>
+  <way id='-152594' action='modify'>
+    <nd ref='-152462' />
+    <nd ref='-152454' />
+    <tag k='highway' v='residential' />
+    <tag k='name' v='Way 45' />
+    <tag k='ref' v='W 45' />
+  </way>
   <relation id='-152367' action='modify'>
     <member type='node' ref='-152065' role='stop_entry_only' />
     <member type='node' ref='-152067' role='platform_entry_only' />
@@ -657,5 +732,52 @@
     <tag k='ref' v='021' />
     <tag k='route_master' v='bus' />
     <tag k='type' v='route_master' />
+  </relation>
+  <relation id='-152391' action='modify'>
+    <member type='node' ref='-152410' role='stop' />
+    <member type='node' ref='-152409' role='platform' />
+    <member type='node' ref='-152421' role='stop' />
+    <member type='node' ref='-152420' role='platform' />
+    <member type='node' ref='-152454' role='stop' />
+    <member type='node' ref='-152456' role='platform' />
+    <member type='way' ref='-152481' role='' />
+    <member type='way' ref='-152495' role='' />
+    <member type='way' ref='-152496' role='' />
+    <member type='way' ref='-152590' role='' />
+    <member type='way' ref='-152594' role='' />
+    <tag k='from' v='A-School' />
+    <tag k='name' v='Bus SB01: A-School =&gt; C-School' />
+    <tag k='network' v='Test' />
+    <tag k='note' v='school=yes is not set on route relation, vehicle=no applies for Way 41, Way 43, and Way 44' />
+    <tag k='operator' v='operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='SB01' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='C-School' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-152393' action='modify'>
+    <member type='node' ref='-152410' role='stop' />
+    <member type='node' ref='-152409' role='platform' />
+    <member type='node' ref='-152421' role='stop' />
+    <member type='node' ref='-152420' role='platform' />
+    <member type='node' ref='-152454' role='stop' />
+    <member type='node' ref='-152456' role='platform' />
+    <member type='way' ref='-152481' role='' />
+    <member type='way' ref='-152495' role='' />
+    <member type='way' ref='-152496' role='' />
+    <member type='way' ref='-152590' role='' />
+    <member type='way' ref='-152594' role='' />
+    <tag k='from' v='A-School' />
+    <tag k='name' v='Bus SB02: A-School =&gt; C-School' />
+    <tag k='network' v='Test' />
+    <tag k='note' v='school=yes is set on route relation, Way 41 and Way 43 are OK, but there is a single way (Way 44) with school_bus=no in addition to vehicle=no' />
+    <tag k='operator' v='operator' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='SB02' />
+    <tag k='route' v='bus' />
+    <tag k='school' v='yes' />
+    <tag k='to' v='C-School' />
+    <tag k='type' v='route' />
   </relation>
 </osm>
