@@ -10,17 +10,17 @@
 # Patchi Atwork <patchi.atwork@gmail.com>, 2020
 # R B, 2022
 # Noémie <nlehuby@zaclys.net>, 2022
-# Patchi, 2025
 # ToniE <osm-ToniE@web.de>, 2025
+# Patchi, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-07-29 23:15+0200\n"
+"POT-Creation-Date: 2025-07-30 00:04+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: ToniE <osm-ToniE@web.de>, 2025\n"
+"Last-Translator: Patchi, 2025\n"
 "Language-Team: French (https://app.transifex.com/jungle-bus/teams/97874/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -122,10 +122,10 @@ msgid "Date from"
 msgstr "Date à partir de"
 
 msgid "Conditional Access"
-msgstr ""
+msgstr "Condition d'accès"
 
 msgid "Ways"
-msgstr ""
+msgstr "Voies"
 
 msgid "Bus"
 msgstr "Bus"
@@ -198,7 +198,7 @@ msgid "References to GTFS feeds and releases"
 msgstr "Fait référence aux flux et versions GTFS"
 
 msgid "Conditional access statements found on ways"
-msgstr ""
+msgstr "Conditions d'accès trouvées sur voies"
 
 msgid "There is more than one Route-Master"
 msgstr "Il y a plusieurs lignes maître"
@@ -758,20 +758,27 @@ msgid ""
 "PTv2 route: empty 'role'. Consider setting 'role'='stop' or "
 "'role'='stop_entry_only' or 'role'='stop_exit_only'"
 msgstr ""
+"Ligne PTv2 : 'role' vide. Il est recommandé de mettre 'role'='stop' ou "
+"'role'='stop_entry_only' ou 'role'='stop_exit_only'"
 
 msgid ""
 "PTv2 route: empty 'role'. Consider setting 'role'='platform' or "
 "'role'='platform_entry_ony' or 'role'='platform_exit_only'"
 msgstr ""
+"Ligne PTv2 : 'role' vide. Il est recommandé de mettre 'role'='platform' ou "
+"'role'='platform_entry_ony' ou 'role'='platform_exit_only'"
 
 #, perl-format
 msgid ""
 "PTv2 route: empty 'role'. Unknown value for 'public_transport' on object "
 "(='%s')"
 msgstr ""
+"Ligne PTv2  : 'role' vide. Valeur inconnue pour 'public_transport' sur "
+"l'objet (='%s')"
 
 msgid "PTv2 route: empty 'role' and 'public_transport' is not set on object"
 msgstr ""
+"Ligne PTv2  : 'role' vide et 'public_transport' n'est pas défini sur l'objet"
 
 #, perl-format
 msgid ""
@@ -842,6 +849,24 @@ msgstr ""
 msgid "PTv2 route: last node of way is not a stop position of this route: %s"
 msgstr ""
 "Ligne PTv2 : le dernier nœud de la voie n'est pas un arrêt de cette ligne %s"
+
+msgid ""
+"PTv2 route: empty 'role' for a way object which has "
+"'public_transport'='stop_position' set. For PTv2, "
+"'public_transport'='stop_position' is allow on nodes only"
+msgstr ""
+"Ligne PTv2 : 'role' vide pour une voie qui possède l'attribut "
+"'public_transport'='stop_position'. Avec le schéma PTv2, "
+"'public_transport'='stop_position' n'est possible que sur des nœuds"
+
+msgid ""
+"PTv2 route: empty 'role' for a relation object which has "
+"'public_transport'='stop_position' set. For PTv2, "
+"'public_transport'='stop_position' is allow on nodes only"
+msgstr ""
+"Ligne PTv2 : 'role' vide pour une relation qui possède l'attribut "
+"'public_transport'='stop_position'. Avec le schéma PTv2, "
+"'public_transport'='stop_position' n'est possible que sur des nœuds"
 
 #, perl-format
 msgid "PTv2 route: wrong 'role' = '%s' for first stop"
@@ -1025,7 +1050,7 @@ msgid "Route: using way type (%s)"
 msgstr "Ligne : utilise le type de voie (%s)"
 
 msgid "Route: see"
-msgstr ""
+msgstr "Ligne : voir"
 
 #, perl-format
 msgid ""
@@ -1086,8 +1111,14 @@ msgid_plural ""
 "Route: restricted access (%s) to ways, The key '%s' also includes public "
 "transport buses"
 msgstr[0] ""
+"Ligne : accès restreint sur la voie (%s), la clé '%s' inclus également des "
+"lignes de transport en commun"
 msgstr[1] ""
+"Ligne : accès restreint sur les voies (%s), la clé '%s' inclus également des"
+" lignes de transport en commun"
 msgstr[2] ""
+"Ligne : accès restreint sur les voies (%s), la clé '%s' inclus également des"
+" lignes de transport en commun"
 
 #, perl-format
 msgid ""
@@ -1097,8 +1128,14 @@ msgid_plural ""
 "Route: restricted access (%s) to ways. Consider tagging as '%s'='yes', "
 "'%s'=designated, or ... along with 'motor_vehicle='no'"
 msgstr[0] ""
+"Ligne : accès restreint sur la voie (%s). Il est recommandé d'avoir "
+"'%s'='yes' ou '%s'=designated' en plus de 'motor_vehicle='no'"
 msgstr[1] ""
+"Ligne : accès restreint sur les voies (%s). Il est recommandé d'avoir "
+"'%s'='yes' ou '%s'=designated' en plus de 'motor_vehicle='no'"
 msgstr[2] ""
+"Ligne : accès restreint sur les voies (%s). Il est recommandé d'avoir "
+"'%s'='yes' ou '%s'=designated' en plus de 'motor_vehicle='no'"
 
 #, perl-format
 msgid ""
@@ -1573,38 +1610,48 @@ msgstr ""
 "d'informations GTFS a été trouvée dans les ligne maître ou lignes."
 
 msgid "key = value"
-msgstr "clef 'key' = valeur 'value'"
+msgstr "clé 'key' = valeur 'value'"
 
 msgid ""
 "This section lists conditional access statements found on ways used by "
 "public transport vehicles."
 msgstr ""
+"Cette section répertorie les conditions d'accès trouvées sur les voies "
+"empruntées par les véhicules de transports publics."
 
 msgid ""
 "PTNA will not completely evaluate conditional access statements, they are "
 "too complex."
 msgstr ""
+"PTNA ne va pas évaluer les conditions d'accès, elles sont trop complexes."
 
 msgid ""
 "If a statement includes a 'yes', 'permissive', 'permit', 'official', "
 "'destination' or 'designated' as first word, PTNA will assume 'access "
 "granted'."
 msgstr ""
+"Si une condition inclus un 'yes', 'permissive', 'permit', 'official', "
+"'destination' ou 'designated' comme premier mot, PTNA considèrera l'accès "
+"comme validé."
 
 msgid ""
 "Otherwise, PTNA will ignore the statement and search for and analyse further"
 " statements tagged on this way."
 msgstr ""
+"Sinon PTNA  va ignorer cette condition d'accès et rechercher et analyser "
+"d'autres conditions indiquées sur la voie."
 
 msgid "Take a look at the list of conditional access statements."
-msgstr ""
+msgstr "Vérifiez la liste des conditions d'accès."
 
 msgid ""
 "Some of them might be outdated, i.e., the restriction was valid in the past."
 msgstr ""
+"Certaines pourraient être obsolètes, par exemple celles qui était valides "
+"dans le passé."
 
 msgid "Consider removing these restrictions at some point."
-msgstr ""
+msgstr "Il est recommandé dans ce cas de retirer la condition d'accès."
 
 msgid "Browse on map"
 msgstr "Parcourir sur la carte"
