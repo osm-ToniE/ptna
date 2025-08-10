@@ -233,7 +233,7 @@ then
     if [ -n "$PTNA_EXTRACT_SOURCE" ]
     then
         FILENAME="$(basename $PTNA_EXTRACT_SOURCE)"
-        if [ $(echo $FILENAME | egrep -c "^$PREFIX") -eq 1 ]
+        if [ $(echo $FILENAME | grep -E -c "^$PREFIX") -eq 1 ]
         then
             # delete only osm.pbf files which are not shared with other 'network' config settings
             # e.g. delete dedicated DE-BY-MVV.osm.pbf
