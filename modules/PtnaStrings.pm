@@ -1924,6 +1924,13 @@ sub InitOptionStrings {
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
+    $OptionList[$i]->{'option'}                 = "roundtrip-distance";
+    $OptionList[$i]->{'default'}                = "0";
+    $OptionList[$i]->{'description'}            = gettext( "Consider a route tagged with 'roundtrip'='yes' as OK if the distance between first and last platform stops does not exceed the defined value." );
+    $OptionList[$i]->{'image'}                  = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+
+    $i++;
     $OptionList[$i]->{'option'}                 = "show-gtfs";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = gettext( "Similar to option '--positive-notes': show values of 'gtfs*' tags in the 'Notes' column." );

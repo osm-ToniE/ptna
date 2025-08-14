@@ -130,6 +130,7 @@ my $link_gtfs                       = undef;
 my $multiple_ref_type_entries       = "analyze";
 my $path_to_work_dir                = '/osm/ptna/work';
 my $ptv1_compatibility              = "no";
+my $roundtrip_distance              = 0;
 my $show_gtfs                       = undef;
 my $strict_network                  = undef;
 my $strict_operator                 = undef;
@@ -194,6 +195,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'separator=s'                   =>  \$csv_separator,                # --separator=';'                   separator in the CSV file
             'or-separator=s'                =>  \$or_separator,                 # --or-separator='|'                separator in the CSV file inside 'ref' values to allow multiple values
             'ref-separator=s'               =>  \$ref_separator,                # --ref-separator='/'               separator in the CSV file inside 'ref' values to show cooperations
+            'roundtrip-distance=i'          =>  \$roundtrip_distance,           # --roundtrip-distance=0            if 'roundtrip'='yes' is set on route relation and start and end stops are not the same, start and end must be not more far away than xx metres
             'show-gtfs'                     =>  \$show_gtfs,                    # --show-gtfs                       print positive information for "gtfs:*" tags
             'strict-network'                =>  \$strict_network,               # --strict-network                  do not consider empty network tags
             'strict-operator'               =>  \$strict_operator,              # --strict-operator                 do not consider empty operator tags
@@ -318,6 +320,7 @@ if ( $verbose ) {
     printf STDERR "%20s--positive-notes='%s'\n",           ' ', $positive_notes             ? 'ON'          : 'OFF';
     printf STDERR "%20s--ptv1-compatibility='%s'\n",       ' ', $ptv1_compatibility         ? $ptv1_compatibility          : '';
     printf STDERR "%20s--relaxed-begin-end-for='%s'\n",    ' ', $relaxed_begin_end_for      ? $relaxed_begin_end_for       : '';
+    printf STDERR "%20s--roundtrip-distance='%d'\n",       ' ', $roundtrip_distance         ? $roundtrip_distance          : 0;
     printf STDERR "%20s--show-gtfs='%s'\n",                ' ', $show_gtfs                  ? 'ON'          : 'OFF';
     printf STDERR "%20s--strict-network='%s'\n",           ' ', $strict_network             ? 'ON'          : 'OFF';
     printf STDERR "%20s--strict-operator='%s'\n",          ' ', $strict_operator            ? 'ON'          : 'OFF';
@@ -4280,6 +4283,19 @@ sub analyze_ptv2_route_relation {
                     $issues_string  = gettext( "PTv2 route: 'roundtrip' = '%s' and the first and the last platform stops are the same." );
                     $issues_string .= ' ' . gettext( "Consider setting 'roundtrip' = '%s'." );
                     push( @{$relation_ptr->{'__issues__'}},  sprintf( $issues_string, html_escape($relation_ptr->{'tag'}->{'roundtrip'}), 'yes' ) );
+                    $return_code++;
+                }
+            } elsif ( $roundtrip_distance > 0 && defined($relation_ptr->{'tag'}->{'roundtrip'}) && $relation_ptr->{'tag'}->{'roundtrip'} eq 'yes' ) {
+                my $distance = OSM::Geo::ObjectToObjectDistance( $first_platform_type, $first_platform_id, $last_platform_type, $last_platform_id, $roundtrip_distance );
+                if ( $distance > $roundtrip_distance ) {
+                    $issues_string  = gettext( "PTv2 route: 'roundtrip' = 'yes' and the first and the last platform stops are more than %d metres / %d feet apart (actual distance = %d metres / %d feet)."  );
+                    $issues_string .= ' ' . gettext( "Consider setting 'roundtrip' = '%s'." );
+                    push( @{$relation_ptr->{'__issues__'}},  sprintf( $issues_string, $roundtrip_distance, OSM::Geo::ConvertMetersToFeet($roundtrip_distance), $distance, OSM::Geo::ConvertMetersToFeet($distance), 'no' ) );
+                    $return_code++;
+                } else {
+                    $notes_string  = gettext( "PTv2 route: 'roundtrip' = 'yes' and the first and the last platform stops are less than %d metres / %d feet apart (actual distance = %d metres / %d feet)."  );
+                    $notes_string .= ' ' . gettext( "This is considered as acceptable." );
+                    push( @{$relation_ptr->{'__notes__'}},  sprintf( $notes_string, $roundtrip_distance, OSM::Geo::ConvertMetersToFeet($roundtrip_distance), $distance, OSM::Geo::ConvertMetersToFeet($distance) ) );
                     $return_code++;
                 }
             } else {
