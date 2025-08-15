@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-07-30 00:04+0200\n"
+"POT-Creation-Date: 2025-08-15 19:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -737,8 +737,25 @@ msgstr ""
 
 #, perl-format
 msgid ""
-"PTv2 route: 'roundtrip' = '%s' and the first and the last platform stops are "
+"PTv2 route: 'roundtrip' = '%s' but the first and the last platform stops are "
 "not the same."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'roundtrip' = 'yes' but the first and the last platform stops "
+"are more than %d metres / %d feet apart (actual distance = %d metres / %d "
+"feet)."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'roundtrip' = 'yes' and the first and the last platform stops "
+"are less than %d metres / %d feet apart (actual distance = %d metres / %d "
+"feet)."
+msgstr ""
+
+msgid "This is considered as acceptable."
 msgstr ""
 
 msgid "wrong value"
@@ -1070,8 +1087,8 @@ msgid "See the instructions for such entries at the beginning of the CSV file."
 msgstr ""
 
 msgid ""
-"Examples for an entry in the CSV file of the form: 'ref;type;Comment;From;To;"
-"Operator':"
+"Examples for an entry in the CSV file of the form: "
+"'ref;type;Comment;From;To;Operator':"
 msgstr ""
 
 msgid "provides services in City-A"
@@ -1306,9 +1323,9 @@ msgstr ""
 
 #, perl-format
 msgid ""
-"'gtfs:shape_id' = '%s' is set but neither 'gtfs:trip_id' nor 'gtfs:trip_id:"
-"sample' is set: consider setting one of them as they provide additional "
-"information about stops (their names, sequence and locations)."
+"'gtfs:shape_id' = '%s' is set but neither 'gtfs:trip_id' nor "
+"'gtfs:trip_id:sample' is set: consider setting one of them as they provide "
+"additional information about stops (their names, sequence and locations)."
 msgstr ""
 
 msgid ""
@@ -1812,6 +1829,11 @@ msgstr ""
 msgid ""
 "Relaxed check of begin and end of routes regarding stop positions (i.e. for "
 "'train', 'tram', 'light_rail')."
+msgstr ""
+
+msgid ""
+"Consider a route tagged with 'roundtrip'='yes' as OK if the distance between "
+"first and last platform stops does not exceed the defined value."
 msgstr ""
 
 msgid ""

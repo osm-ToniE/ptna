@@ -130,7 +130,7 @@ my $link_gtfs                       = undef;
 my $multiple_ref_type_entries       = "analyze";
 my $path_to_work_dir                = '/osm/ptna/work';
 my $ptv1_compatibility              = "no";
-my $roundtrip_distance              = 0;
+my $roundtrip_distance              = 50;
 my $show_gtfs                       = undef;
 my $strict_network                  = undef;
 my $strict_operator                 = undef;
@@ -4286,9 +4286,14 @@ sub analyze_ptv2_route_relation {
                     $return_code++;
                 }
             } elsif ( $roundtrip_distance > 0 && defined($relation_ptr->{'tag'}->{'roundtrip'}) && $relation_ptr->{'tag'}->{'roundtrip'} eq 'yes' ) {
-                my $distance = OSM::Geo::ObjectToObjectDistance( $first_platform_type, $first_platform_id, $last_platform_type, $last_platform_id, $roundtrip_distance );
-                if ( $distance > $roundtrip_distance ) {
-                    $issues_string  = gettext( "PTv2 route: 'roundtrip' = 'yes' and the first and the last platform stops are more than %d metres / %d feet apart (actual distance = %d metres / %d feet)."  );
+                my $distance = OSM::Geo::ObjectToObjectDistance( $first_platform_type, $first_platform_id, $last_platform_type, $last_platform_id );
+                if ( $distance < 0 ) {
+                    $issues_string  = gettext( "PTv2 route: 'roundtrip' = '%s' but the first and the last platform stops are not the same."  );
+                    $issues_string .= ' ' . gettext( "Consider setting 'roundtrip' = '%s'." );
+                    push( @{$relation_ptr->{'__issues__'}},  sprintf( $issues_string, 'yes', 'no' ) );
+                    $return_code++;
+                } elsif ( $distance > $roundtrip_distance ) {
+                    $issues_string  = gettext( "PTv2 route: 'roundtrip' = 'yes' but the first and the last platform stops are more than %d metres / %d feet apart (actual distance = %d metres / %d feet)."  );
                     $issues_string .= ' ' . gettext( "Consider setting 'roundtrip' = '%s'." );
                     push( @{$relation_ptr->{'__issues__'}},  sprintf( $issues_string, $roundtrip_distance, OSM::Geo::ConvertMetersToFeet($roundtrip_distance), $distance, OSM::Geo::ConvertMetersToFeet($distance), 'no' ) );
                     $return_code++;
@@ -4300,7 +4305,7 @@ sub analyze_ptv2_route_relation {
                 }
             } else {
                 if ( defined($relation_ptr->{'tag'}->{'roundtrip'}) && $relation_ptr->{'tag'}->{'roundtrip'} ne 'no' ) {
-                    $issues_string  = gettext( "PTv2 route: 'roundtrip' = '%s' and the first and the last platform stops are not the same."  );
+                    $issues_string  = gettext( "PTv2 route: 'roundtrip' = '%s' but the first and the last platform stops are not the same."  );
                     $issues_string .= ' ' . gettext( "Consider setting 'roundtrip' = '%s'." );
                     push( @{$relation_ptr->{'__issues__'}},  sprintf( $issues_string, html_escape($relation_ptr->{'tag'}->{'roundtrip'}), 'no' ) );
                     $return_code++;

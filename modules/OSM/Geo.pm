@@ -61,7 +61,7 @@ sub ObjectToObjectDistance {
     my $id1             = shift || 0;
     my $type2           = shift || '';
     my $id2             = shift || 0;
-    my $ok_if_le_than   = shift || 0;       # don't evaluate further if the distance is less or equal than xx meters
+    my $ok_if_le_than   = shift || 0;       # don't evaluate further if the distance is less than or equal to xx meters
     my $recursion_depth = shift || 0;
     my $distance        = 0;
     my $min_distance    = 100000000;
@@ -76,25 +76,42 @@ sub ObjectToObjectDistance {
             $min_distance = $gis->distance_metal( $NODES{$id1}->{'lat'}, $NODES{$id1}->{'lon'}, $NODES{$id2}->{'lat'},$NODES{$id2}->{'lon'} ) * 1000;
             printf STDERR "%s ObjectToObjectDistance( '%s', ['%s','%s'], '%s', ['%s','%s'], %d) = %f\n", get_time(), $type1, $NODES{$id1}->{'lat'}, $NODES{$id1}->{'lon'}, $type2, $NODES{$id2}->{'lat'},$NODES{$id2}->{'lon'}, $min_distance        if ( $debug );
         } elsif ( $type2 eq 'way' ) {
+            my $current_platform_node_id  = 0;
+            my $previous_platform_node_id = 0;
             for ( my $i = 0; $i <= $#{$WAYS{$id2}->{'chain'}}; $i++ ) {
-                $distance = ObjectToObjectDistance( 'node', $id1, 'node', ${$WAYS{$id2}->{'chain'}}[$i], $ok_if_le_than, $recursion_depth );
-                $min_distance = ($min_distance > $distance) ? $distance : $min_distance;
+                $previous_platform_node_id = $current_platform_node_id  unless ( $i == 0 );
+                $current_platform_node_id  = ${$WAYS{$id2}->{'chain'}}[$i];
+                $distance                  = ObjectToObjectDistance( 'node', $id1, 'node', ${$WAYS{$id2}->{'chain'}}[$i], $ok_if_le_than, $recursion_depth );
+                $min_distance              = ($min_distance > $distance) ? $distance : $min_distance;
                 last if ( $min_distance <= $ok_if_le_than );
+                if ( $i > 0 && $previous_platform_node_id != $current_platform_node_id ) {
+                    $distance = PointToSegmentDistance($id1,$previous_platform_node_id,$current_platform_node_id );
+                    $min_distance = ($min_distance > $distance) ? $distance : $min_distance;
+                    last if ( $min_distance <= $ok_if_le_than );
+                }
             }
             printf STDERR "%s ObjectToObjectDistance( '%s', ['%s','%s'], '%s', '%s') = %f\n", get_time(), $type1, $NODES{$id1}->{'lat'}, $NODES{$id1}->{'lon'}, $type2, $id2, $min_distance        if ( $debug );
         } elsif ( $type2 eq 'relation' ) {
-            $min_distance = 0;
-            printf STDERR "%s ObjectToObjectDistance( '%s', ['%s','%s'], '%s', '%s') = %f\n", get_time(), $type1, $NODES{$id1}->{'lat'}, $NODES{$id1}->{'lon'}, $type2, $id2, $min_distance        if ( $debug );
+            $min_distance = -1; # not yet implemented
+            printf STDERR "%s ObjectToObjectDistance( '%s', ['%s','%s'], '%s', '%s') = %f\n", get_time(), $type1, $NODES{$id1}->{'lat'}, $NODES{$id1}->{'lon'}, $type2, $id2, $min_distance; #        if ( $debug );
         } else {
-            $min_distance = 0;
             printf STDERR "%s Internal error in ObjectToObjectDistance( '%s', '%s', '%s', '%s')\n", get_time(), $type1, $id1, $type2, $id2;
         }
     } elsif ( $type1 eq 'way' ) {
         if ( $type2 eq 'node' ) {
-            for ( my $i = 0; $i <= $#{$WAYS{$id2}->{'chain'}}; $i++ ) {
+            my $current_platform_node_id  = 0;
+            my $previous_platform_node_id = 0;
+            for ( my $i = 0; $i <= $#{$WAYS{$id1}->{'chain'}}; $i++ ) {
+                $previous_platform_node_id = $current_platform_node_id  unless ( $i == 0 );
+                $current_platform_node_id  = ${$WAYS{$id1}->{'chain'}}[$i];
                 $distance = ObjectToObjectDistance( 'node', $id2, 'node', ${$WAYS{$id1}->{'chain'}}[$i] );
                 $min_distance = ($min_distance > $distance) ? $distance : $min_distance;
-                last if ( $min_distance <= $min_distance );
+                last if ( $min_distance <= $ok_if_le_than );
+                if ( $i > 0 && $previous_platform_node_id != $current_platform_node_id ) {
+                    $distance = PointToSegmentDistance($id2,$previous_platform_node_id,$current_platform_node_id );
+                    $min_distance = ($min_distance > $distance) ? $distance : $min_distance;
+                    last if ( $min_distance <= $ok_if_le_than );
+                }
             }
             printf STDERR "%s ObjectToObjectDistance( '%s', '%s', '%s', ['%s','%s'] ) = %f\n", get_time(), $type1, $id1, $type2, $NODES{$id2}->{'lat'},$NODES{$id2}->{'lat'}, $min_distance        if ( $debug );
         } elsif ( $type2 eq 'way' ) {
@@ -102,35 +119,42 @@ sub ObjectToObjectDistance {
                 for ( my $i2 = 0; $i2 <= $#{$WAYS{$id2}->{'chain'}}; $i2++ ) {
                     $distance = ObjectToObjectDistance( 'node', ${$WAYS{$id1}->{'chain'}}[$i1], 'node', ${$WAYS{$id2}->{'chain'}}[$i2], $ok_if_le_than, $recursion_depth );
                     $min_distance = ($min_distance > $distance) ? $distance : $min_distance;
-                    last if ( $min_distance <= $min_distance );
+                    last if ( $min_distance <= $ok_if_le_than );
+                    if ( $i1 > 0 && ${$WAYS{$id1}->{'chain'}}[$i1-1] != ${$WAYS{$id1}->{'chain'}}[$i1] ) {
+                        $distance = PointToSegmentDistance(${$WAYS{$id2}->{'chain'}}[$i2],${$WAYS{$id1}->{'chain'}}[$i1-1],${$WAYS{$id1}->{'chain'}}[$i1] );
+                        $min_distance = ($min_distance > $distance) ? $distance : $min_distance;
+                        last if ( $min_distance <= $ok_if_le_than );
+                    }
+                    if ( $i2 > 0 && ${$WAYS{$id2}->{'chain'}}[$i2-1] != ${$WAYS{$id1}->{'chain'}}[$i2] ) {
+                        $distance = PointToSegmentDistance(${$WAYS{$id1}->{'chain'}}[$i1],${$WAYS{$id2}->{'chain'}}[$i2-1],${$WAYS{$id2}->{'chain'}}[$i2] );
+                        $min_distance = ($min_distance > $distance) ? $distance : $min_distance;
+                        last if ( $min_distance <= $ok_if_le_than );
+                    }
                 }
                 last if ( $min_distance <= $ok_if_le_than );
             }
             printf STDERR "%s ObjectToObjectDistance( '%s', '%s', '%s', %s ) = %f\n", get_time(), $type1, $id1, $type2, $id2, $min_distance        if ( $debug );
         } elsif ( $type2 eq 'relation' ) {
-            $min_distance = 0;
-            printf STDERR "%s ObjectToObjectDistance( '%s', '%s', '%s', %s ) = %f\n", get_time(), $type1, $id1, $type2, $id2, $min_distance        if ( $debug );
+            $min_distance = -1; # not yet implemented
+            printf STDERR "%s ObjectToObjectDistance( '%s', '%s', '%s', %s ) = %f\n", get_time(), $type1, $id1, $type2, $id2, $min_distance; #        if ( $debug );
         } else {
             printf STDERR "%s Internal error in ObjectToObjectDistance( '%s', '%s', '%s', '%s' )\n", get_time(), $type1, $id1, $type2, $id2;
-            $min_distance = 0;
         }
     } elsif ( $type1 eq 'relation' ) {
         if ( $type2 eq 'node' ) {
-            $min_distance = 0;
-            printf STDERR "%s ObjectToObjectDistance( '%s', '%s', '%s', ['%s','%s'] ) = %f\n", get_time(), $type1, $id1, $type2, $NODES{$id2}->{'lat'},$NODES{$id2}->{'lat'}, $min_distance        if ( $debug );
+            $min_distance = -1; # not yet implemented
+            printf STDERR "%s ObjectToObjectDistance( '%s', '%s', '%s', ['%s','%s'] ) = %f\n", get_time(), $type1, $id1, $type2, $NODES{$id2}->{'lat'},$NODES{$id2}->{'lat'}, $min_distance; #        if ( $debug );
         } elsif ( $type2 eq 'way' ) {
-            $min_distance = 0;
-            printf STDERR "%s ObjectToObjectDistance( '%s', '%s', '%s', %s ) = %f\n", get_time(), $type1, $id1, $type2, $id2, $min_distance        if ( $debug );
+            $min_distance = -1; # not yet implemented
+            printf STDERR "%s ObjectToObjectDistance( '%s', '%s', '%s', %s ) = %f\n", get_time(), $type1, $id1, $type2, $id2, $min_distance; #        if ( $debug );
         } elsif ( $type2 eq 'relation' ) {
-            $min_distance = 0;
-            printf STDERR "%s ObjectToObjectDistance( '%s', '%s', '%s', %s ) = %f\n", get_time(), $type1, $id1, $type2, $id2, $min_distance        if ( $debug );
+            $min_distance = -1; # not yet implemented
+            printf STDERR "%s ObjectToObjectDistance( '%s', '%s', '%s', %s ) = %f\n", get_time(), $type1, $id1, $type2, $id2, $min_distance; #        if ( $debug );
         } else {
             printf STDERR "%s Internal error in ObjectToObjectDistance( '%s', '%s', '%s', '%s' )\n", get_time(), $type1, $id1, $type2, $id2;
-            $min_distance = 0;
         }
     } else {
         printf STDERR "%s Internal error in ObjectToObjectDistance( '%s', '%s', '%s', '%s' )\n", get_time(), $type1, $id1, $type2, $id2;
-        $min_distance = 0;
     }
 
     $duration_distance_measurements += (Time::HiRes::time() - $start_time)      if ( $recursion_depth == 1 );
@@ -145,7 +169,7 @@ sub PlatformToNodeDistance {
     my $platform_type   = shift || '';
     my $platform_id     = shift || 0;
     my $node_id         = shift || 0;
-    my $ok_if_le_than   = shift || 0;       # don't evaluate further if the distance is less or equal than xx meters
+    my $ok_if_le_than   = shift || 0;       # don't evaluate further if the distance is less than or equal to xx meters
     my $recursion_depth = shift || 0;
     my $distance      = 0;
     my $min_distance  = 100000000;

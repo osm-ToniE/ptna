@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-07-30 00:04+0200\n"
+"POT-Creation-Date: 2025-08-15 19:12+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: Patchi, 2025\n"
 "Language-Team: French (https://app.transifex.com/jungle-bus/teams/97874/fr/)\n"
@@ -925,11 +925,26 @@ msgstr ""
 
 #, perl-format
 msgid ""
-"PTv2 route: 'roundtrip' = '%s' and the first and the last platform stops are"
+"PTv2 route: 'roundtrip' = '%s' but the first and the last platform stops are"
 " not the same."
 msgstr ""
-"Ligne PTv2 : l'attribut 'roundtrip' = '%s' alors que la première et dernière"
-" plateforme ne sont pas identiques."
+
+#, perl-format
+msgid ""
+"PTv2 route: 'roundtrip' = 'yes' but the first and the last platform stops "
+"are more than %d metres / %d feet apart (actual distance = %d metres / %d "
+"feet)."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'roundtrip' = 'yes' and the first and the last platform stops "
+"are less than %d metres / %d feet apart (actual distance = %d metres / %d "
+"feet)."
+msgstr ""
+
+msgid "This is considered as acceptable."
+msgstr ""
 
 msgid "wrong value"
 msgstr "Valeur erronée"
@@ -2373,6 +2388,11 @@ msgid ""
 msgstr ""
 "Vérification souple du début et de la fin des lignes sans tenir compte des "
 "arrêts (pour les 'train', 'tram', 'light_rail')."
+
+msgid ""
+"Consider a route tagged with 'roundtrip'='yes' as OK if the distance between"
+" first and last platform stops does not exceed the defined value."
+msgstr ""
 
 msgid ""
 "Similar to option '--positive-notes': show values of 'gtfs*' tags in the "
