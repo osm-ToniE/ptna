@@ -4299,7 +4299,7 @@ sub analyze_ptv2_route_relation {
                     $return_code++;
                 } else {
                     $notes_string  = gettext( "PTv2 route: 'roundtrip' = 'yes' and the first and the last platform stops are less than %d metres / %d feet apart (actual distance = %d metres / %d feet)."  );
-                    $notes_string .= ' ' . gettext( "This is considered as acceptable." );
+                    $notes_string .= ' ' . gettext( "This is considered acceptable." );
                     push( @{$relation_ptr->{'__notes__'}},  sprintf( $notes_string, $roundtrip_distance, OSM::Geo::ConvertMetersToFeet($roundtrip_distance), $distance, OSM::Geo::ConvertMetersToFeet($distance) ) );
                     $return_code++;
                 }
