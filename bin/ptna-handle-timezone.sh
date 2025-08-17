@@ -127,9 +127,11 @@ then
 
         if [ "$emptyxml" -gt 0 -a "$emptyxml" -lt 130 ]
         then
-            # most (> 50%) of the analysis succeeded,
+            # most of the analysis succeeded,
             # let's try a second time for the others
             # using the selected overpass api server
+
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$emptyxml analysis runs have failed (size of XML == 0). Let's wait 5 minutes and then try again." >> $LOGFILE
 
             sleep 300
 
