@@ -711,7 +711,7 @@ sub InitMessageStrings {
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
-    $MessageList[$i]->{'message'}                = ngettext( "PTv2 route: has a gap, consists of %d segments. Gap appears at way", "PTv2 route: has gaps, consists of %d segments. Gaps appear at ways", 1 );
+    $MessageList[$i]->{'message'}                = ngettext( "PTv2 route: consists of %d segments, has a gap. Gap appears at way", "PTv2 route: consists of %d segments, has gaps. Gaps appear at ways", 1 );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "check-sequence";
     $MessageList[$i]->{'description'}            = "";

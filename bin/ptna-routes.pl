@@ -3451,7 +3451,7 @@ sub analyze_ptv2_route_relation {
     if ( $relation_ptr->{'number_of_segments'} > 1 ) {
         my @help_array     = @{$relation_ptr->{'gap_at_way'}};
         my $num_of_errors  = scalar(@help_array);
-        $issues_string     = ngettext( "PTv2 route: has a gap, consists of %d segments. Gap appears at way", "PTv2 route: has gaps, consists of %d segments. Gaps appear at ways", $relation_ptr->{'number_of_segments'}-1 );
+        $issues_string     = ngettext( "PTv2 route: consists of %d segments, has a gap. Gap appears at way", "PTv2 route: consists of %d segments, has gaps. Gaps appear at ways", $relation_ptr->{'number_of_segments'}-1 );
         my $error_string   = sprintf( $issues_string, $relation_ptr->{'number_of_segments'});
         if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
             push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $error_string, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
