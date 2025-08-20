@@ -1943,7 +1943,7 @@ sub InitOptionStrings {
 
     $i++;
     $OptionList[$i]->{'option'}                 = "roundtrip-distance";
-    $OptionList[$i]->{'default'}                = "0";
+    $OptionList[$i]->{'default'}                = "50";
     $OptionList[$i]->{'description'}            = gettext( "Consider a route tagged with 'roundtrip'='yes' as OK if the distance between first and last platform stops does not exceed the defined value." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
