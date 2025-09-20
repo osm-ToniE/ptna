@@ -1,0 +1,607 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' upload='never' generator='JOSM'>
+  <bounds minlat='48.7201523' minlon='13.532238' maxlat='48.7204213' maxlon='13.5327423' origin='CGImap 0.6.0 (30594 thorn-01.openstreetmap.org)' />
+  <bounds minlat='48.7201523' minlon='13.532238' maxlat='48.7204213' maxlon='13.5327423' origin='OpenStreetMap server' />
+  <bounds minlat='48.7198471' minlon='13.531601' maxlat='48.7205991' maxlon='13.5331674' origin='CGImap 0.6.0 (30584 thorn-01.openstreetmap.org)' />
+  <bounds minlat='48.7198471' minlon='13.531601' maxlat='48.7205991' maxlon='13.5331674' origin='OpenStreetMap server' />
+  <bounds minlat='48.7205523' minlon='13.5316265' maxlat='48.7207186' maxlon='13.5333163' origin='openstreetmap-cgimap 2.0.1 (3448773 spike-06.openstreetmap.org)' />
+  <bounds minlat='48.7205523' minlon='13.5316265' maxlat='48.7207186' maxlon='13.5333163' origin='OpenStreetMap server' />
+  <bounds minlat='48.7198374' minlon='13.5315926' maxlat='48.7207278' maxlon='13.5338471' origin='openstreetmap-cgimap 2.0.1 (3448763 spike-06.openstreetmap.org)' />
+  <bounds minlat='48.7198374' minlon='13.5315926' maxlat='48.7207278' maxlon='13.5338471' origin='OpenStreetMap server' />
+  <bounds minlat='48.6877166' minlon='13.4896231' maxlat='48.6912295' maxlon='13.4967041' origin='openstreetmap-cgimap 2.0.1 (3448781 spike-06.openstreetmap.org)' />
+  <bounds minlat='48.6877166' minlon='13.4896231' maxlat='48.6912295' maxlon='13.4967041' origin='OpenStreetMap server' />
+  <node id='-102821' action='modify' lat='48.69085527463' lon='13.49032892451' />
+  <node id='-102822' action='modify' lat='48.69084473103' lon='13.49086318397'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='B-City-1' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-102823' action='modify' lat='48.69082228863' lon='13.49038355578' />
+  <node id='-102824' action='modify' lat='48.69094148905' lon='13.49116613159'>
+    <tag k='name' v='A-City-1' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-102825' action='modify' lat='48.69081683702' lon='13.49045713111' />
+  <node id='-102826' action='modify' lat='48.69088679641' lon='13.49116864227'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='A-City-1' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-102827' action='modify' lat='48.69088554471' lon='13.49055196829' />
+  <node id='-102828' action='modify' lat='48.690841007' lon='13.49052148107' />
+  <node id='-102829' action='modify' lat='48.6909661217' lon='13.49048251518' />
+  <node id='-102830' action='modify' lat='48.69093326706' lon='13.49053703356' />
+  <node id='-102831' action='modify' lat='48.69097160357' lon='13.49040916389' />
+  <node id='-102832' action='modify' lat='48.69094762616' lon='13.49034489858' />
+  <node id='-102833' action='modify' lat='48.69101031076' lon='13.48998526976'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='C-City-1' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-102834' action='modify' lat='48.69107692137' lon='13.48998109227'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='C-City-1' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-102853' action='modify' lat='48.69090316575' lon='13.4903141537' />
+  <node id='-102854' action='modify' lat='48.6908783405' lon='13.49086378313'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='B-City-1' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103095' action='modify' lat='48.69084762266' lon='13.4929154552'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='B-City-1' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-103096' action='modify' lat='48.69088123212' lon='13.49291605436'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='B-City-1' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103097' action='modify' lat='48.69090605738' lon='13.49236642493' />
+  <node id='-103098' action='modify' lat='48.69085816625' lon='13.49238119574' />
+  <node id='-103099' action='modify' lat='48.69094438067' lon='13.49321840282'>
+    <tag k='name' v='A-City-2' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103100' action='modify' lat='48.69082518026' lon='13.49243582701' />
+  <node id='-103101' action='modify' lat='48.69088968803' lon='13.4932209135'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='A-City-2' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-103102' action='modify' lat='48.69081972864' lon='13.49250940234' />
+  <node id='-103103' action='modify' lat='48.69084389863' lon='13.4925737523' />
+  <node id='-103104' action='modify' lat='48.69088843634' lon='13.49260423952' />
+  <node id='-103105' action='modify' lat='48.69093615869' lon='13.49258930479' />
+  <node id='-103106' action='modify' lat='48.69096901332' lon='13.49253478641' />
+  <node id='-103107' action='modify' lat='48.69095051778' lon='13.49239716981' />
+  <node id='-103108' action='modify' lat='48.69097449519' lon='13.49246143512' />
+  <node id='-103109' action='modify' lat='48.69107981299' lon='13.4920333635'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='C-City-2' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103110' action='modify' lat='48.69101320238' lon='13.49203754099'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='C-City-2' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-103147' action='modify' lat='48.69089310971' lon='13.49047466978' />
+  <node id='-103148' action='modify' lat='48.69088691267' lon='13.49040895566' />
+  <node id='-103158' action='modify' lat='48.69089665088' lon='13.49252521858' />
+  <node id='-103159' action='modify' lat='48.69089222442' lon='13.49245279893' />
+  <node id='-103162' action='modify' lat='48.69077448009' lon='13.49017023973' />
+  <node id='-103167' action='modify' lat='48.69079971095' lon='13.49226102166' />
+  <node id='-103320' action='modify' lat='48.69036949406' lon='13.49088234076'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='B-City-3' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-103321' action='modify' lat='48.69040310385' lon='13.49088293992'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='B-City-3' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103322' action='modify' lat='48.69042792933' lon='13.49033331049' />
+  <node id='-103323' action='modify' lat='48.69038003776' lon='13.4903480813' />
+  <node id='-103324' action='modify' lat='48.69046625299' lon='13.49118528838'>
+    <tag k='name' v='A-City-3' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103325' action='modify' lat='48.69034705145' lon='13.49040271257' />
+  <node id='-103326' action='modify' lat='48.69041155983' lon='13.49118779906'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='A-City-3' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-103327' action='modify' lat='48.69034159978' lon='13.4904762879' />
+  <node id='-103328' action='modify' lat='48.69036577' lon='13.49054063786' />
+  <node id='-103329' action='modify' lat='48.69041030813' lon='13.49057112508' />
+  <node id='-103330' action='modify' lat='48.69045803093' lon='13.49055619035' />
+  <node id='-103331' action='modify' lat='48.69049088587' lon='13.49050167197' />
+  <node id='-103332' action='modify' lat='48.69047239016' lon='13.49036405537' />
+  <node id='-103333' action='modify' lat='48.69049636779' lon='13.49042832068' />
+  <node id='-103334' action='modify' lat='48.69060168659' lon='13.49000024906'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='C-City-3' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103335' action='modify' lat='48.69053507535' lon='13.49000442655'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='C-City-3' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-103336' action='modify' lat='48.6904178732' lon='13.49049382658' />
+  <node id='-103337' action='modify' lat='48.6904116761' lon='13.49042811246' />
+  <node id='-103338' action='modify' lat='48.69029924246' lon='13.49018939653' />
+  <node id='-103361' action='modify' lat='48.69096481826' lon='13.4899449335'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='C-City-1' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103364' action='modify' lat='48.69080989226' lon='13.4908649312'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='B-City-1' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103366' action='modify' lat='48.69083556574' lon='13.49117070302'>
+    <tag k='name' v='A-City-1' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103389' action='modify' lat='48.69097809761' lon='13.49200487003'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='C-City-2' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103391' action='modify' lat='48.69080900697' lon='13.49291011557'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='B-City-1' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103394' action='modify' lat='48.69084264808' lon='13.49322393402'>
+    <tag k='name' v='A-City-2' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103397' action='modify' lat='48.69048587494' lon='13.48997175425'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='C-City-3' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103399' action='modify' lat='48.69032475035' lon='13.49088102311'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='B-City-3' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103401' action='modify' lat='48.69033714457' lon='13.49118679494'>
+    <tag k='name' v='A-City-3' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103480' action='modify' lat='48.69046200845' lon='13.49251802126' />
+  <node id='-103481' action='modify' lat='48.69042915348' lon='13.49257253964' />
+  <node id='-103482' action='modify' lat='48.69046749037' lon='13.49244466997' />
+  <node id='-103483' action='modify' lat='48.69044351273' lon='13.49238040466' />
+  <node id='-103484' action='modify' lat='48.69050619795' lon='13.49202077584'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='C-City-4' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-103485' action='modify' lat='48.69057280923' lon='13.49201659835'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='C-City-4' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103486' action='modify' lat='48.69038964528' lon='13.49250845343' />
+  <node id='-103487' action='modify' lat='48.69037422637' lon='13.49289928921'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='B-City-4' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103488' action='modify' lat='48.69034061656' lon='13.49289869005'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='B-City-4' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-103489' action='modify' lat='48.69038521878' lon='13.49243603379' />
+  <node id='-103490' action='modify' lat='48.69035116027' lon='13.49236443059' />
+  <node id='-103491' action='modify' lat='48.69039905187' lon='13.49234965978' />
+  <node id='-103492' action='modify' lat='48.69031817394' lon='13.49241906186' />
+  <node id='-103493' action='modify' lat='48.69043737555' lon='13.49320163767'>
+    <tag k='name' v='A-City-4' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103494' action='modify' lat='48.69031272227' lon='13.49249263719' />
+  <node id='-103495' action='modify' lat='48.69038268236' lon='13.49320414835'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='A-City-4' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-103496' action='modify' lat='48.69038143066' lon='13.49258747437' />
+  <node id='-103497' action='modify' lat='48.6903368925' lon='13.49255698715' />
+  <node id='-103498' action='modify' lat='48.69029270437' lon='13.49224425651' />
+  <node id='-103499' action='modify' lat='48.69047109283' lon='13.49198810488'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='C-City-4' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103500' action='modify' lat='48.69030200048' lon='13.49289335042'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='B-City-4' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-103501' action='modify' lat='48.69033564194' lon='13.49320716888'>
+    <tag k='name' v='A-City-4' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <way id='-102778' action='modify'>
+    <nd ref='-102827' />
+    <nd ref='-103147' />
+    <nd ref='-103148' />
+    <nd ref='-102821' />
+    <tag k='highway' v='tertiary' />
+    <tag k='name' v='1st-Street-1' />
+    <tag k='ref' v='S 1-1' />
+  </way>
+  <way id='-102779' action='modify'>
+    <nd ref='-102832' />
+    <nd ref='-102833' />
+    <tag k='highway' v='secondary' />
+    <tag k='name' v='3rd-Street-1' />
+    <tag k='ref' v='S 3-1' />
+  </way>
+  <way id='-102780' action='modify'>
+    <nd ref='-102832' />
+    <nd ref='-102853' />
+    <nd ref='-102821' />
+    <nd ref='-102823' />
+    <nd ref='-102825' />
+    <nd ref='-102828' />
+    <nd ref='-102827' />
+    <nd ref='-102830' />
+    <nd ref='-102829' />
+    <nd ref='-102831' />
+    <nd ref='-102832' />
+    <tag k='highway' v='tertiary' />
+    <tag k='junction' v='roundabout' />
+    <tag k='name' v='Roundabout-2-no-split-1' />
+    <tag k='ref' v='R 2-1' />
+  </way>
+  <way id='-102943' action='modify'>
+    <nd ref='-103104' />
+    <nd ref='-103158' />
+    <nd ref='-103159' />
+    <nd ref='-103098' />
+    <tag k='highway' v='tertiary' />
+    <tag k='name' v='1st-Street-2' />
+    <tag k='ref' v='S 1-2' />
+  </way>
+  <way id='-102944' action='modify'>
+    <nd ref='-103098' />
+    <nd ref='-103100' />
+    <nd ref='-103102' />
+    <nd ref='-103103' />
+    <nd ref='-103104' />
+    <tag k='highway' v='tertiary' />
+    <tag k='junction' v='roundabout' />
+    <tag k='name' v='Roundabout-2-split-3-2' />
+    <tag k='ref' v='R 2-2' />
+  </way>
+  <way id='-102945' action='modify'>
+    <nd ref='-103107' />
+    <nd ref='-103110' />
+    <tag k='highway' v='secondary' />
+    <tag k='name' v='3rd-Street-2' />
+    <tag k='ref' v='S 3-2' />
+  </way>
+  <way id='-102988' action='modify'>
+    <nd ref='-103104' />
+    <nd ref='-103105' />
+    <nd ref='-103106' />
+    <nd ref='-103108' />
+    <nd ref='-103107' />
+    <tag k='highway' v='tertiary' />
+    <tag k='junction' v='roundabout' />
+    <tag k='name' v='Roundabout-2-split-1-2' />
+    <tag k='ref' v='R 2-2' />
+  </way>
+  <way id='-103010' action='modify'>
+    <nd ref='-102821' />
+    <nd ref='-103162' />
+    <tag k='highway' v='tertiary' />
+    <tag k='name' v='unused-1st-Street-1' />
+    <tag k='ref' v='U 1-1' />
+  </way>
+  <way id='-103020' action='modify'>
+    <nd ref='-103098' />
+    <nd ref='-103167' />
+    <tag k='highway' v='tertiary' />
+    <tag k='name' v='unused-1st-Street-2' />
+    <tag k='ref' v='U 1-2' />
+  </way>
+  <way id='-103054' action='modify'>
+    <nd ref='-103107' />
+    <nd ref='-103097' />
+    <nd ref='-103098' />
+    <tag k='highway' v='tertiary' />
+    <tag k='junction' v='roundabout' />
+    <tag k='name' v='Roundabout-2-split-2-2' />
+    <tag k='ref' v='R 2-2' />
+  </way>
+  <way id='-103174' action='modify'>
+    <nd ref='-103332' />
+    <nd ref='-103322' />
+    <nd ref='-103323' />
+    <nd ref='-103325' />
+    <nd ref='-103327' />
+    <nd ref='-103328' />
+    <nd ref='-103329' />
+    <nd ref='-103330' />
+    <nd ref='-103331' />
+    <nd ref='-103333' />
+    <nd ref='-103332' />
+    <tag k='highway' v='tertiary' />
+    <tag k='junction' v='roundabout' />
+    <tag k='name' v='Roundabout-2-no-split-3' />
+    <tag k='ref' v='R 2-3' />
+  </way>
+  <way id='-103175' action='modify'>
+    <nd ref='-103332' />
+    <nd ref='-103335' />
+    <tag k='highway' v='secondary' />
+    <tag k='name' v='3rd-Street-3' />
+    <tag k='ref' v='S 3-3' />
+  </way>
+  <way id='-103176' action='modify'>
+    <nd ref='-103326' />
+    <nd ref='-103320' />
+    <nd ref='-103329' />
+    <nd ref='-103336' />
+    <nd ref='-103337' />
+    <nd ref='-103323' />
+    <tag k='highway' v='tertiary' />
+    <tag k='name' v='1st-Street-3' />
+    <tag k='ref' v='S 1-3' />
+  </way>
+  <way id='-103177' action='modify'>
+    <nd ref='-103323' />
+    <nd ref='-103338' />
+    <tag k='highway' v='tertiary' />
+    <tag k='name' v='unused-1st-Street-3' />
+    <tag k='ref' v='U 1-3' />
+  </way>
+  <way id='-103178' action='modify'>
+    <nd ref='-103101' />
+    <nd ref='-103095' />
+    <nd ref='-103104' />
+    <tag k='highway' v='tertiary' />
+    <tag k='name' v='1st-Street-2' />
+    <tag k='ref' v='S 1-2' />
+  </way>
+  <way id='-103181' action='modify'>
+    <nd ref='-102826' />
+    <nd ref='-102822' />
+    <nd ref='-102827' />
+    <tag k='highway' v='tertiary' />
+    <tag k='name' v='1st-Street-1' />
+    <tag k='ref' v='S 1-1' />
+  </way>
+  <way id='-103297' action='modify'>
+    <nd ref='-103483' />
+    <nd ref='-103484' />
+    <tag k='highway' v='secondary' />
+    <tag k='name' v='3rd-Street-4' />
+    <tag k='ref' v='S 3-4' />
+  </way>
+  <way id='-103298' action='modify'>
+    <nd ref='-103496' />
+    <nd ref='-103481' />
+    <nd ref='-103480' />
+    <nd ref='-103482' />
+    <nd ref='-103483' />
+    <tag k='highway' v='tertiary' />
+    <tag k='junction' v='roundabout' />
+    <tag k='name' v='Roundabout-2-split-1-4' />
+    <tag k='ref' v='R 2-2' />
+  </way>
+  <way id='-103299' action='modify'>
+    <nd ref='-103490' />
+    <nd ref='-103498' />
+    <tag k='highway' v='tertiary' />
+    <tag k='name' v='unused-1st-Street-4' />
+    <tag k='ref' v='U 1-4' />
+  </way>
+  <way id='-103300' action='modify'>
+    <nd ref='-103490' />
+    <nd ref='-103492' />
+    <nd ref='-103494' />
+    <nd ref='-103497' />
+    <nd ref='-103496' />
+    <tag k='highway' v='tertiary' />
+    <tag k='junction' v='roundabout' />
+    <tag k='name' v='Roundabout-2-split-3-4' />
+    <tag k='ref' v='R 2-4' />
+  </way>
+  <way id='-103301' action='modify'>
+    <nd ref='-103483' />
+    <nd ref='-103491' />
+    <nd ref='-103490' />
+    <tag k='highway' v='tertiary' />
+    <tag k='junction' v='roundabout' />
+    <tag k='name' v='Roundabout-2-split-2-4' />
+    <tag k='ref' v='R 2-2' />
+  </way>
+  <way id='-103302' action='modify'>
+    <nd ref='-103495' />
+    <nd ref='-103488' />
+    <nd ref='-103496' />
+    <nd ref='-103486' />
+    <nd ref='-103489' />
+    <nd ref='-103490' />
+    <tag k='highway' v='tertiary' />
+    <tag k='name' v='1st-Street-4' />
+    <tag k='ref' v='S 1-4' />
+  </way>
+  <relation id='-102499' action='modify'>
+    <member type='node' ref='-102824' role='platform' />
+    <member type='node' ref='-102826' role='stop' />
+    <member type='node' ref='-102854' role='platform' />
+    <member type='node' ref='-102822' role='stop' />
+    <member type='node' ref='-102834' role='platform' />
+    <member type='node' ref='-102833' role='stop' />
+    <member type='way' ref='-103181' role='' />
+    <member type='way' ref='-102780' role='' />
+    <member type='way' ref='-102779' role='' />
+    <tag k='from' v='A-Town-1' />
+    <tag k='name' v='Good Bus 001-1: A-Town-1 =&gt; B-Town-1 =&gt; C-Town-1' />
+    <tag k='network' v='Test' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='001-1' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='C-Town-1' />
+    <tag k='type' v='route' />
+    <tag k='via' v='B-Town-1' />
+  </relation>
+  <relation id='-102536' action='modify'>
+    <member type='node' ref='-103101' role='stop' />
+    <member type='node' ref='-103099' role='platform' />
+    <member type='node' ref='-103095' role='stop' />
+    <member type='node' ref='-103096' role='platform' />
+    <member type='node' ref='-103110' role='stop' />
+    <member type='node' ref='-103109' role='platform' />
+    <member type='way' ref='-103178' role='' />
+    <member type='way' ref='-102988' role='' />
+    <member type='way' ref='-102945' role='' />
+    <tag k='from' v='A-Town-2' />
+    <tag k='name' v='Good Bus 002-1: A-Town-2 =&gt; B-Town-2 =&gt; C-Town-2' />
+    <tag k='network' v='Test' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='002-1' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='C-Town-2' />
+    <tag k='type' v='route' />
+    <tag k='via' v='B-Town-2' />
+  </relation>
+  <relation id='-102550' action='modify'>
+    <member type='node' ref='-102833' role='stop' />
+    <member type='node' ref='-103361' role='platform' />
+    <member type='node' ref='-102822' role='stop' />
+    <member type='node' ref='-103364' role='platform' />
+    <member type='node' ref='-102826' role='stop' />
+    <member type='node' ref='-103366' role='platform' />
+    <member type='way' ref='-102779' role='' />
+    <member type='way' ref='-102780' role='' />
+    <member type='way' ref='-103181' role='' />
+    <tag k='from' v='C-Town-1' />
+    <tag k='name' v='Good Bus 001-2: C-Town-1 =&gt; B-Town-1 =&gt; A-Town-1' />
+    <tag k='network' v='Test' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='001-2' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='A-Town-1' />
+    <tag k='type' v='route' />
+    <tag k='via' v='B-Town-1' />
+  </relation>
+  <relation id='-102558' action='modify'>
+    <member type='node' ref='-103110' role='stop' />
+    <member type='node' ref='-103389' role='platform' />
+    <member type='node' ref='-103095' role='stop' />
+    <member type='node' ref='-103391' role='platform' />
+    <member type='node' ref='-103101' role='stop' />
+    <member type='node' ref='-103394' role='platform' />
+    <member type='way' ref='-102945' role='' />
+    <member type='way' ref='-103054' role='' />
+    <member type='way' ref='-102944' role='' />
+    <member type='way' ref='-103178' role='' />
+    <tag k='from' v='C-Town-2' />
+    <tag k='name' v='Good Bus 002-2: C-Town-2 =&gt; B-Town-2 =&gt; A-Town-2' />
+    <tag k='network' v='Test' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='002-2' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='A-Town-2' />
+    <tag k='type' v='route' />
+    <tag k='via' v='B-Town-2' />
+  </relation>
+  <relation id='-102571' action='modify'>
+    <member type='node' ref='-103326' role='stop' />
+    <member type='node' ref='-103324' role='platform' />
+    <member type='node' ref='-103320' role='stop' />
+    <member type='node' ref='-103321' role='platform' />
+    <member type='node' ref='-103335' role='stop' />
+    <member type='node' ref='-103334' role='platform' />
+    <member type='way' ref='-103176' role='' />
+    <member type='way' ref='-103174' role='' />
+    <member type='way' ref='-103175' role='' />
+    <tag k='from' v='A-Town-3' />
+    <tag k='name' v='Bad Bus 003-1: A-Town-3 =&gt; B-Town-3 =&gt; C-Town-3' />
+    <tag k='network' v='Test' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='003-1' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='C-Town-3' />
+    <tag k='type' v='route' />
+    <tag k='via' v='B-Town-3' />
+  </relation>
+  <relation id='-102574' action='modify'>
+    <member type='node' ref='-103484' role='stop' />
+    <member type='node' ref='-103499' role='platform' />
+    <member type='node' ref='-103488' role='stop' />
+    <member type='node' ref='-103500' role='platform' />
+    <member type='node' ref='-103495' role='stop' />
+    <member type='node' ref='-103501' role='platform' />
+    <member type='way' ref='-103297' role='' />
+    <member type='way' ref='-103301' role='' />
+    <member type='way' ref='-103300' role='' />
+    <member type='way' ref='-103302' role='' />
+    <tag k='from' v='C-Town-4' />
+    <tag k='name' v='Bad Bus 004-2: C-Town-4 =&gt; B-Town-4 =&gt; A-Town-4' />
+    <tag k='network' v='Test' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='004-2' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='A-Town-4' />
+    <tag k='type' v='route' />
+    <tag k='via' v='B-Town-4' />
+  </relation>
+  <relation id='-102581' action='modify'>
+    <member type='node' ref='-103495' role='stop' />
+    <member type='node' ref='-103493' role='platform' />
+    <member type='node' ref='-103488' role='stop' />
+    <member type='node' ref='-103487' role='platform' />
+    <member type='node' ref='-103484' role='stop' />
+    <member type='node' ref='-103485' role='platform' />
+    <member type='way' ref='-103302' role='' />
+    <member type='way' ref='-103298' role='' />
+    <member type='way' ref='-103297' role='' />
+    <tag k='from' v='A-Town-4' />
+    <tag k='name' v='Bad Bus 004-1: A-Town-4 =&gt; B-Town-4 =&gt; C-Town-4' />
+    <tag k='network' v='Test' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='004-1' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='C-Town-4' />
+    <tag k='type' v='route' />
+    <tag k='via' v='B-Town-4' />
+  </relation>
+  <relation id='-102596' action='modify'>
+    <member type='node' ref='-103335' role='stop' />
+    <member type='node' ref='-103397' role='platform' />
+    <member type='node' ref='-103320' role='stop' />
+    <member type='node' ref='-103399' role='platform' />
+    <member type='node' ref='-103326' role='stop' />
+    <member type='node' ref='-103401' role='platform' />
+    <member type='way' ref='-103175' role='' />
+    <member type='way' ref='-103174' role='' />
+    <member type='way' ref='-103176' role='' />
+    <tag k='from' v='C-Town-3' />
+    <tag k='name' v='Bad Bus 003-2: C-Town-3 =&gt; B-Town-3 =&gt; A-Town-3' />
+    <tag k='network' v='Test' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='003-2' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='A-Town-3' />
+    <tag k='type' v='route' />
+    <tag k='via' v='B-Town-3' />
+  </relation>
+</osm>
