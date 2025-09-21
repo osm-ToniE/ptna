@@ -23,7 +23,7 @@ use Locale::gettext qw();       # 'gettext()' will be overwritten in this file (
 use Getopt::Long;
 use OSM::XML            qw( parse );
 use OSM::Data           qw( %META %NODES %WAYS %RELATIONS );
-use OSM::Geo            qw( Init PlatformToNodeDistance Summary );
+use OSM::Geo            qw( Init PlatformToNodeDistance ConvertMetersToFeet isNodeInsidePolygon Summary );
 use RoutesList;
 use GTFS::PtnaSQLite    qw( getRouteIdStatus getTripIdStatus getShapeIdStatus getGtfsRouteIdHtmlTag getGtfsRouteIdIconTag getGtfsTripIdHtmlTag getGtfsShapeIdHtmlTag getGtfsLinkToRoutes );
 use Data::Dumper;

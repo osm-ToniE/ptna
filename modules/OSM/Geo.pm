@@ -11,16 +11,18 @@ use OSM::Data     qw( %META %NODES %WAYS %RELATIONS );
 use GIS::Distance;
 use Math::Trig;
 use Math::Units;
+use Math::Polygon;
 
-our @EXPORT_OK  = qw( Init PlatformToNodeDistance ConvertMetersToFeet Summary );
+our @EXPORT_OK  = qw( Init PlatformToNodeDistance ConvertMetersToFeet isNodeInsidePolygon Summary );
 
 my $debug       = undef;
 my $verbose     = undef;
 
 my $gis         = undef;
 
-my @distance_measurements           = ();
-my $duration_distance_measurements  = 0;
+my @distance_measurements                   = ();
+my $duration_distance_measurements          = 0;
+my $duration_is_inside_polygon_measurements = 0;
 
 
 
@@ -48,6 +50,7 @@ sub Summary {
                                                                                                                           $item->{'returns'} || '';
         }
     }
+    printf STDERR "%s total duration of 'isPointInsidePolygon()' measurements = %.9f seconds\n", , get_time(),  $duration_is_inside_polygon_measurements;
 }
 
 #############################################################################################
@@ -298,6 +301,27 @@ sub PointToSegmentDistance {
 sub ConvertMetersToFeet {
     my $meters = shift || 0;
     return Math::Units::convert( $meters, 'm', 'ft' );
+}
+
+
+#############################################################################################
+
+sub isPointInsidePolygon {
+    my $ref_point   = shift || undef;       # ref to ([lat,lon])
+    my $ref_polygon = shift || undef;       # ref to ([lat0,lon0],[lat1,lon1],[lat2,lon2],[lat3,lon3], ..., [lat0,lon0]) --> closed way
+    my $ret_val     = 0;
+
+    my $start_time  = Time::HiRes::time();
+
+    if ( $ref_point && $ref_polygon ) {
+        my $p = Math::Polygon->new( points => $ref_polygon );
+
+        $ret_val = $p->contains( @{$ref_point} );
+    }
+
+    $duration_is_inside_polygon_measurements += (Time::HiRes::time() - $start_time);
+
+    return $ret_val;
 }
 
 
