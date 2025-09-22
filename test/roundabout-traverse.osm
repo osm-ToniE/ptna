@@ -1,17 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <osm version='0.6' upload='never' generator='JOSM'>
-  <bounds minlat='48.7201523' minlon='13.532238' maxlat='48.7204213' maxlon='13.5327423' origin='CGImap 0.6.0 (30594 thorn-01.openstreetmap.org)' />
-  <bounds minlat='48.7201523' minlon='13.532238' maxlat='48.7204213' maxlon='13.5327423' origin='OpenStreetMap server' />
-  <bounds minlat='48.7198471' minlon='13.531601' maxlat='48.7205991' maxlon='13.5331674' origin='CGImap 0.6.0 (30584 thorn-01.openstreetmap.org)' />
-  <bounds minlat='48.7198471' minlon='13.531601' maxlat='48.7205991' maxlon='13.5331674' origin='OpenStreetMap server' />
-  <bounds minlat='48.7205523' minlon='13.5316265' maxlat='48.7207186' maxlon='13.5333163' origin='openstreetmap-cgimap 2.0.1 (3448773 spike-06.openstreetmap.org)' />
-  <bounds minlat='48.7205523' minlon='13.5316265' maxlat='48.7207186' maxlon='13.5333163' origin='OpenStreetMap server' />
-  <bounds minlat='48.7198374' minlon='13.5315926' maxlat='48.7207278' maxlon='13.5338471' origin='openstreetmap-cgimap 2.0.1 (3448763 spike-06.openstreetmap.org)' />
-  <bounds minlat='48.7198374' minlon='13.5315926' maxlat='48.7207278' maxlon='13.5338471' origin='OpenStreetMap server' />
-  <bounds minlat='48.6877166' minlon='13.4896231' maxlat='48.6912295' maxlon='13.4967041' origin='openstreetmap-cgimap 2.0.1 (3448781 spike-06.openstreetmap.org)' />
-  <bounds minlat='48.6877166' minlon='13.4896231' maxlat='48.6912295' maxlon='13.4967041' origin='OpenStreetMap server' />
-  <bounds minlat='48.6877591' minlon='13.4895372' maxlat='48.6912154' maxlon='13.496747' origin='openstreetmap-cgimap 2.1.0 (682954 spike-08.openstreetmap.org)' />
-  <bounds minlat='48.6877591' minlon='13.4895372' maxlat='48.6912154' maxlon='13.496747' origin='OpenStreetMap server' />
   <node id='-104260' action='modify' lat='48.69085527463' lon='13.49032892451' />
   <node id='-104261' action='modify' lat='48.69084473103' lon='13.49086318397'>
     <tag k='bus' v='yes' />
