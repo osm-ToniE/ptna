@@ -4802,7 +4802,7 @@ sub SortRouteWayNodes {
                             # no match at all into next, closed way, i.e. a gap between this (current) way and the next, closed way
                             # take nodes of this way in normal order and mark a gap after that
                             #
-                            printf STDERR "SortRouteWayNodes() : handle Nodes of single Way %s before a closed Way %s:\nNodes: %s, G\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, oin( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
+                            printf STDERR "SortRouteWayNodes() : handle Nodes of single Way %s before a closed Way %s:\nNodes: %s, G\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
                             push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                             push( @sorted_nodes, 0 );                   # mark a gap in the sorted nodes
                             $relation_ptr->{'number_of_segments'}++;
@@ -5343,19 +5343,11 @@ sub isNodeArrayClosedWay {
 # - so, at least the connecting node of the way is on the roundabout (== geometry: inside)
 # - if there is a second one, then this is inside or on the roundabout
 #
-# iterate nodes of way until node_id is zero, node does not exist or is outside the roundabout
-#
-# Return
-# - TRUE:  if there is more than one node inside/on the roundabout
-# - FALSE: if there is no or only one node inside/on the roundabout
-# - FALSE: if the roundabout is not a close way
-#
 #############################################################################################
 
 sub doesWayTraverseRoundAbout {
-    my $ref_way              = shift || undef;
-    my $ref_roundabout      = shift || undef;
-    my $nodes_on_roundabout = 0;
+    my $ref_way                = shift || undef;
+    my $ref_roundabout         = shift || undef;
 
     if ( $ref_way && $ref_roundabout ) {
         my $count_way_nodes         = scalar( @{$ref_way} );
@@ -5363,14 +5355,14 @@ sub doesWayTraverseRoundAbout {
         if ( $count_way_nodes > 1 && $count_roundabout_nodes > 2 ) {
             if ( $ref_roundabout->[0] && $ref_roundabout->[$count_roundabout_nodes-1] &&
                  $ref_roundabout->[0] == $ref_roundabout->[$count_roundabout_nodes-1]    ) {
-                my @way_polygon             = ();
-                my @roundabout_polygon     = ();
+                my @way_polygon        = ();
+                my @roundabout_polygon = ();
+                my @common_nodes       = ();
 
                 for ( my $i = 0; $i < $count_way_nodes; $i++ ) {
                     if ( $ref_way->[$i] && $NODES{$ref_way->[$i]} ) {
-                        if ( isNodeInNodeArray($ref_way->[$i],@{$ref_roundabout}) )
-                        {
-                            $nodes_on_roundabout++;
+                        if ( isNodeInNodeArray($ref_way->[$i],@{$ref_roundabout}) ) {
+                            push( @common_nodes, $ref_way->[$i] );
                         } else {
                             # the other nodes are outside or inside the roundabout
                             push( @way_polygon, [$NODES{$ref_way->[$i]}->{'lat'},$NODES{$ref_way->[$i]}->{'lon'}] );
@@ -5382,33 +5374,53 @@ sub doesWayTraverseRoundAbout {
                         push( @roundabout_polygon, [$NODES{$ref_roundabout->[$i]}->{'lat'},$NODES{$ref_roundabout->[$i]}->{'lon'}] );
                     }
                 }
-                if ( scalar(@way_polygon) && scalar(@roundabout_polygon) ) {
+
+                my $count_common_nodes          = scalar( @common_nodes );
+                my $number_of_way_points        = scalar( @way_polygon );
+                my $number_of_roundabout_points = scalar( @roundabout_polygon );
+
+                if ( $number_of_way_points && $number_of_roundabout_points ) {
                     my $nodes_inside = OSM::Geo::NumberOfPointsInsidePolygon( \@way_polygon, \@roundabout_polygon );
 
-                    if ( ($nodes_on_roundabout+$nodes_inside) > 1 ) {
-                        if ( $nodes_on_roundabout > 1 && $nodes_inside == 0 && $count_way_nodes > 2 ) {
-                            # this might be a loop outside the roundabout, a bus_bay, separated from the way
-                            printf STDERR "doesWayTraverseRoundAbout() : no -> on-rim = %d, inside = %d\n", $nodes_on_roundabout, $nodes_inside     if ( $debug );
+                    if ( $nodes_inside == 0 ) {
+                        # handle secant of circle with no node inside the polygon and at least one node outside
+                        # handle loop outside the roundabout
+                        if ( $count_common_nodes > 1 && $count_way_nodes > 2 ) {
+                            my $index1 = -1;
+                            my $index2 = -1;
+                            printf STDERR "doesWayTraverseRoundAbout() : secant or outer loop?\n"       if ( $debug );
+                            for ( my $i = 0; $i < $count_common_nodes -1; $i++ ) {
+                                $index1 = IndexOfNodeInNodeArray( $common_nodes[$i], @{$ref_way} );
+                                $index2 = IndexOfNodeInNodeArray( $common_nodes[$i+1], @{$ref_way} );
+                                if ( $index1 == $index2+1 || $index1 == $index2-1 ) {
+                                    printf STDERR "doesWayTraverseRoundAbout() : yes (secant) -> index1 = %d, index2 = %d\n", $index1, $index2       if ( $debug );
+                                    return 1;
+                                } else {
+                                    printf STDERR "doesWayTraverseRoundAbout() : no (outer loop) -> index1 = %d, index2 = %d\n", $index1, $index2       if ( $debug );
+                                }
+                            }
                         } else {
-                            printf STDERR "doesWayTraverseRoundAbout() : yes -> on-rim = %d, inside = %d\n", $nodes_on_roundabout, $nodes_inside       if ( $debug );
-                            return 1;
+                            printf STDERR "doesWayTraverseRoundAbout() : no (way ends on rim1) -> on-rim = %d, count_way_nodes = %d, inside = %d\n", $count_common_nodes, $count_way_nodes, $nodes_inside     if ( $debug );
                         }
+                    } elsif ( ($count_common_nodes+$nodes_inside) > 1 ) {
+                        printf STDERR "doesWayTraverseRoundAbout() : yes (common nodes and inside) -> on-rim = %d, inside = %d\n", $count_common_nodes, $nodes_inside       if ( $debug );
+                        return 1;
                     } else {
-                        printf STDERR "doesWayTraverseRoundAbout() : no -> on-rim = %d, inside = %d\n", $nodes_on_roundabout, $nodes_inside     if ( $debug );
+                        printf STDERR "doesWayTraverseRoundAbout() : no (way ends on rim2) -> on-rim = %d, inside = %d\n", $count_common_nodes, $nodes_inside     if ( $debug );
                     }
                 } else {
-                    if ( scalar(@roundabout_polygon) && $nodes_on_roundabout == $count_way_nodes ) {
-                            printf STDERR "doesWayTraverseRoundAbout() : yes -> on-rim = %d, count_way_points=%d, count_roundabout_points=%d\n", $nodes_on_roundabout, scalar(@way_polygon), scalar(@roundabout_polygon)       if ( $debug );
+                    if ( $number_of_roundabout_points && $count_common_nodes == $count_way_nodes ) {
+                            printf STDERR "doesWayTraverseRoundAbout() : yes (chord of circle) -> on-rim = %d, count_way_points = %d, count_roundabout_points = %d\n", $count_common_nodes, $number_of_way_points, $number_of_roundabout_points       if ( $debug );
                             return 1;
                     } else {
-                        printf STDERR "doesWayTraverseRoundAbout() : ?? -> on-rim = %d, count_way_points=%d, count_roundabout_points=%d\n", $nodes_on_roundabout, scalar(@way_polygon), scalar(@roundabout_polygon)       if ( $debug );
+                        printf STDERR "doesWayTraverseRoundAbout() : ?? -> on-rim = %d, count_way_points = %d, count_roundabout_points = %d\n", $count_common_nodes, $number_of_way_points, $number_of_roundabout_points       if ( $debug );
                     }
                 }
             } else {
                 printf STDERR "doesWayTraverseRoundAbout() : ?? -> roundabout is not closed way\n"       if ( $debug );
             }
         } else {
-            printf STDERR "doesWayTraverseRoundAbout() : ?? -> count_way_nodes=%d, count_roundabout_nodes=%d\n", $count_way_nodes, $count_roundabout_nodes       if ( $debug );
+            printf STDERR "doesWayTraverseRoundAbout() : ?? -> count_way_nodes = %d, count_roundabout_nodes = %d\n", $count_way_nodes, $count_roundabout_nodes       if ( $debug );
         }
     } else {
         printf STDERR "doesWayTraverseRoundAbout() : ?? -> parameter(s) not defined\n"       if ( $debug );
