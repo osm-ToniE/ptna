@@ -13,7 +13,7 @@ use Math::Trig;
 use Math::Units;
 use Math::Polygon;
 
-our @EXPORT_OK  = qw( Init PlatformToNodeDistance ConvertMetersToFeet isNodeInsidePolygon Summary );
+our @EXPORT_OK  = qw( Init PlatformToNodeDistance ConvertMetersToFeet isNodeInsidePolygon NumberOfPointsInsidePolygon Summary );
 
 my $debug       = undef;
 my $verbose     = undef;
@@ -317,6 +317,39 @@ sub isPointInsidePolygon {
         my $p = Math::Polygon->new( points => $ref_polygon );
 
         $ret_val = $p->contains( @{$ref_point} );
+    }
+
+    $duration_is_inside_polygon_measurements += (Time::HiRes::time() - $start_time);
+
+    return $ret_val;
+}
+
+
+#############################################################################################
+
+sub NumberOfPointsInsidePolygon {
+    my $ref_points  = shift || undef;       # ref to ([lat0,lon0],[lat1,lon1],[lat2,lon2],[lat3,lon3], ...)
+    my $ref_polygon = shift || undef;       # ref to ([lat0,lon0],[lat1,lon1],[lat2,lon2],[lat3,lon3], ..., [lat0,lon0]) --> closed way
+    my $ret_val     = 0;
+
+    my $start_time  = Time::HiRes::time();
+
+    if ( $ref_points && $ref_polygon ) {
+        my $count_points = scalar(@{$ref_points});
+        my $p = Math::Polygon->new( points => $ref_polygon );
+
+        printf STDERR "NumberOfPointsInsidePolygon( %s, %s ) \n", Data::Dumper::Dumper($ref_points), Data::Dumper::Dumper($ref_polygon)     if ( $debug );
+
+        if ( $count_points ) {
+            for ( my $i = 0; $i < $count_points; $i++ ) {
+                if ( $p->contains( $ref_points->[$i] ) ) {
+                    printf STDERR "NumberOfPointsInsidePolygon() call \$p->contains( [%s,%s] ) = yes\n", $ref_points->[$i][0], $ref_points->[$i][1]    if ( $debug );
+                    $ret_val++;
+                } else {
+                    printf STDERR "NumberOfPointsInsidePolygon() call \$p->contains( [%s,%s] ) = no\n", $ref_points->[$i][0], $ref_points->[$i][1]    if ( $debug );
+                }
+            }
+        }
     }
 
     $duration_is_inside_polygon_measurements += (Time::HiRes::time() - $start_time);

@@ -23,7 +23,7 @@ use Locale::gettext qw();       # 'gettext()' will be overwritten in this file (
 use Getopt::Long;
 use OSM::XML            qw( parse );
 use OSM::Data           qw( %META %NODES %WAYS %RELATIONS );
-use OSM::Geo            qw( Init PlatformToNodeDistance ConvertMetersToFeet isNodeInsidePolygon Summary );
+use OSM::Geo            qw( Init PlatformToNodeDistance ConvertMetersToFeet isNodeInsidePolygon NumberOfPointsInsidePolygon Summary );
 use RoutesList;
 use GTFS::PtnaSQLite    qw( getRouteIdStatus getTripIdStatus getShapeIdStatus getGtfsRouteIdHtmlTag getGtfsRouteIdIconTag getGtfsTripIdHtmlTag getGtfsShapeIdHtmlTag getGtfsLinkToRoutes );
 use Data::Dumper;
@@ -3327,10 +3327,12 @@ sub analyze_ptv2_route_relation {
         push( @{$relation_ptr->{'__issues__'}}, $issues_string );
     }
 
-    $relation_ptr->{'non_platform_ways'}       = \@relation_route_highways;
-    $relation_ptr->{'number_of_segments'}      = 0;
-    $relation_ptr->{'gap_at_way'}              = ();
-    $relation_ptr->{'sorted_in_reverse_order'} = '';
+    $relation_ptr->{'non_platform_ways'}                = \@relation_route_highways;
+    $relation_ptr->{'number_of_segments'}               = 0;
+    $relation_ptr->{'gap_at_way'}                       = ();
+    $relation_ptr->{'number_of_traversed_roundabouts'}  = 0;
+    $relation_ptr->{'traversed_roundabout'}             = ();
+    $relation_ptr->{'sorted_in_reverse_order'}          = '';
 
     if ( $check_name ) {
         $return_code += CheckNameRefFromViaToPTV2( $relation_ptr );
@@ -3459,6 +3461,20 @@ sub analyze_ptv2_route_relation {
             push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $error_string, join(', ', map { printWayTemplate($_,'name;ref'); } @help_array )) );
         }
         $return_code += $relation_ptr->{'number_of_segments'} - 1;
+    }
+    if ( $relation_ptr->{'number_of_traversed_roundabouts'} > 0 ) {
+        foreach my $roundabout_id ( keys %{$relation_ptr->{'traversed_roundabout'}} ) {
+            my @help_array     = keys %{$relation_ptr->{'traversed_roundabout'}->{$roundabout_id}};
+            my $num_of_errors  = scalar(@help_array);
+            $issues_string     = ngettext( "PTv2 route: way leads into/through roundabout/closed way %s", "PTv2 route: ways lead into/through roundabout/closed way %s", $num_of_errors );
+            my $error_string   = sprintf( $issues_string, printWayTemplate($roundabout_id,'name;ref'));
+            if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $error_string, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+            } else {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $error_string, join(', ', map { printWayTemplate($_,'name;ref'); } @help_array )) );
+            }
+        }
+        $return_code += $relation_ptr->{'number_of_traversed_roundabouts'};
     }
     if ( $relation_ptr->{'wrong_sequence'} ) {
         $issues_string = gettext( "PTv2 route: incorrect order of 'stop_position', 'platform' and 'way' (stop/platform after way)" );
@@ -4433,6 +4449,7 @@ sub SortRouteWayNodes {
     my $relations_route_ways_ref    = shift;
     my @sorted_nodes                = ();
     my $connecting_node_id          = 0;
+    my $previous_way_id             = undef;
     my $current_way_id              = undef;
     my $next_way_id                 = undef;
     my $node_id                     = undef;
@@ -4465,6 +4482,7 @@ sub SortRouteWayNodes {
 
         while ( ${$relations_route_ways_ref}[$way_index] ) {
 
+            $previous_way_id = ($way_index > 0) ? ${$relations_route_ways_ref}[$way_index-1] : 0;
             $current_way_id  = ${$relations_route_ways_ref}[$way_index];
             $next_way_id     = ${$relations_route_ways_ref}[$way_index+1];
             $way_index++;
@@ -4489,7 +4507,7 @@ sub SortRouteWayNodes {
                         # check whether connecting node is a node of this, closed way
                         #
                         if ( ($index=IndexOfNodeInNodeArray($connecting_node_id,@{$WAYS{$current_way_id}->{'chain'}})) >= 0 ) {
-                            printf STDERR "SortRouteWayNodes() : handle Nodes of closed Way %s with Index %d:\nNodes: %s\n", $current_way_id, $index, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                            printf STDERR "SortRouteWayNodes() : handle Nodes of closed Way %s with Index %d:\nNodes: %s\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, $index, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                             my $i = 0;
                             $stop_in_roundabout = 0;
                             for ( $i = $index+1; $i <= $#{$WAYS{$current_way_id}->{'chain'}}; $i++ ) {
@@ -4497,14 +4515,14 @@ sub SortRouteWayNodes {
                                 if ( isNodeInNodeArray(${$WAYS{$current_way_id}->{'chain'}}[$i],@stop_positions) ) {
                                     $stop_in_roundabout = 1;
                                     printf STDERR "SortRouteWayNodes() : this is bus ref : %s\n", $relation_ptr->{'tag'}{'ref'}     if ( $debug );
-                                    printf STDERR "SortRouteWayNodes() : stop_position in roundabout %s = %s with Index %d:\nNodes: %s\n", $current_way_id, $WAYS{$current_way_id}->{'tag'}{'name'}, $i, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                                    printf STDERR "SortRouteWayNodes() : stop_position in roundabout %s = %s with Index %d:\nNodes: %s\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, $WAYS{$current_way_id}->{'tag'}{'name'}, $i, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                                 }
                             }
                             for ( $i = 1; $i <= $index; $i++ ) {
                                 push( @sorted_nodes, ${$WAYS{$current_way_id}->{'chain'}}[$i] );
                                 if ( isNodeInNodeArray(${$WAYS{$current_way_id}->{'chain'}}[$i],@stop_positions) ) {
                                     $stop_in_roundabout = 1;
-                                    printf STDERR "SortRouteWayNodes() : stop_position in roundabout %s with Index %d:\nNodes: %s\n", $current_way_id, $i, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                                    printf STDERR "SortRouteWayNodes() : stop_position in roundabout %s with Index %d:\nNodes: %s\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, $i, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                                 }
                             }
 
@@ -4517,18 +4535,35 @@ sub SortRouteWayNodes {
                                  $sorted_nodes[$#sorted_nodes] == $WAYS{$next_way_id}->{'last_node'}     ) {
                                 #
                                 # perfect: this is a turnig roundabout where the 'bus' leaves where it entered the closed way, no reason to complain
+                                # error; roundabout is in member list but a way traverses the roundabout at this point
                                 #
                                 printf STDERR "SortRouteWayNodes() : handle turning roundabout %s at node %s for %s:\nNodes here : %s\nNodes there: %s\n",
-                                                                    $current_way_id,
+                                                                    $WAYS{$current_way_id}->{'tag'}->{'name'},
                                                                     $sorted_nodes[$#sorted_nodes],
-                                                                    $next_way_id,
+                                                                    $WAYS{$next_way_id}->{'tag'}->{'name'},
                                                                     join( ', ', @{$WAYS{$current_way_id}->{'chain'}} ),
                                                                     join( ', ', @{$WAYS{$next_way_id}->{'chain'}} )     if ( $debug );
+                                if ( $previous_way_id && !isClosedWay($previous_way_id) ) {
+                                    printf STDERR "SortRouteWayNodes() : call doesWayTraverseRoundAbout() for %s, %s, %s\n", $relation_ptr->{'tag'}->{'name'}, $WAYS{$previous_way_id}->{'tag'}->{'name'}, , $WAYS{$current_way_id}->{'tag'}->{'name'}    if ( $debug );
+                                    if ( doesWayTraverseRoundAbout( \@{$WAYS{$previous_way_id}->{'chain'}}, \@{$WAYS{$current_way_id}->{'chain'}} ) ) {
+                                        $relation_ptr->{'number_of_traversed_roundabouts'}++;
+                                        $relation_ptr->{'traversed_roundabout'}->{$current_way_id}->{$previous_way_id} = 1;
+                                        printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_traversed_roundabouts'}++ = %d at first, closed, single Way being traversed by previous way (%s) %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $WAYS{$previous_way_id}->{'tag'}->{'name'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                                    }
+                                }
+                                if ( $next_way_id && !isClosedWay($next_way_id) ) {
+                                    printf STDERR "SortRouteWayNodes() : call doesWayTraverseRoundAbout() for %s, %s, %s\n", $relation_ptr->{'tag'}->{'name'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, , $WAYS{$current_way_id}->{'tag'}->{'name'}    if ( $debug );
+                                    if ( doesWayTraverseRoundAbout( \@{$WAYS{$next_way_id}->{'chain'}}, \@{$WAYS{$current_way_id}->{'chain'}} ) ) {
+                                        $relation_ptr->{'number_of_traversed_roundabouts'}++;
+                                        $relation_ptr->{'traversed_roundabout'}->{$current_way_id}->{$next_way_id} = 1;
+                                        printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_traversed_roundabouts'}++ = %d at first, closed, single Way being traversed by previous way (%s) %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                                    }
+                                }
                             } else {
                                 printf STDERR "SortRouteWayNodes() : handle partially used roundabout %s at node %s for %s:\nNodes here : %s\nNodes there: %s\n",
-                                                                    $current_way_id,
+                                                                    $WAYS{$current_way_id}->{'tag'}->{'name'},
                                                                     $sorted_nodes[$#sorted_nodes],
-                                                                    $next_way_id,
+                                                                    $WAYS{$next_way_id}->{'tag'}->{'name'},
                                                                     join( ', ', @{$WAYS{$current_way_id}->{'chain'}} ),
                                                                     join( ', ', @{$WAYS{$next_way_id}->{'chain'}} )     if ( $debug );
 
@@ -4555,24 +4590,41 @@ sub SortRouteWayNodes {
                                         printf STDERR "SortRouteWayNodes() : pop() Node %s from \@sorted_nodes\n", $sorted_nodes[$#sorted_nodes]     if ( $debug );
                                         pop( @sorted_nodes );
                                     }
+
+                                    if ( $previous_way_id && !isClosedWay($previous_way_id) ) {
+                                        printf STDERR "SortRouteWayNodes() : call doesWayTraverseRoundAbout() for %s, %s, %s\n", $relation_ptr->{'tag'}->{'name'}, $WAYS{$previous_way_id}->{'tag'}->{'name'}, , $WAYS{$current_way_id}->{'tag'}->{'name'}    if ( $debug );
+                                        if ( doesWayTraverseRoundAbout( \@{$WAYS{$previous_way_id}->{'chain'}}, \@{$WAYS{$current_way_id}->{'chain'}} ) ) {
+                                            $relation_ptr->{'number_of_traversed_roundabouts'}++;
+                                            $relation_ptr->{'traversed_roundabout'}->{$current_way_id}->{$previous_way_id} = 1;
+                                            printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_traversed_roundabouts'}++ = %d at first, closed, single Way being traversed by previous way (%s) %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $WAYS{$previous_way_id}->{'tag'}->{'name'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                                        }
+                                    }
+                                    if ( $next_way_id && !isClosedWay($next_way_id) ) {
+                                        printf STDERR "SortRouteWayNodes() : call doesWayTraverseRoundAbout() for %s, %s, %s\n", $relation_ptr->{'tag'}->{'name'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, , $WAYS{$current_way_id}->{'tag'}->{'name'}    if ( $debug );
+                                        if ( doesWayTraverseRoundAbout( \@{$WAYS{$next_way_id}->{'chain'}}, \@{$WAYS{$current_way_id}->{'chain'}} ) ) {
+                                            $relation_ptr->{'number_of_traversed_roundabouts'}++;
+                                            $relation_ptr->{'traversed_roundabout'}->{$current_way_id}->{$next_way_id} = 1;
+                                            printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_traversed_roundabouts'}++ = %d at first, closed, single Way being traversed by previous way (%s) %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                                        }
+                                    }
                                 } else {
                                     #
                                     # no way out, we do not have any connection between any node of this way and the next way
                                     #
-                                    printf STDERR "SortRouteWayNodes() : no match between this closed Way %s and the next Way %s\n", $current_way_id, $next_way_id      if ( $debug );
+                                    printf STDERR "SortRouteWayNodes() : no match between this closed Way %s and the next Way %s\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, $WAYS{$next_way_id}->{'tag'}->{'name'}      if ( $debug );
                                     push( @sorted_nodes, 0 );      # mark a gap in the sorted nodes
                                     $relation_ptr->{'number_of_segments'}++;
                                     push( @{$relation_ptr->{'gap_at_way'}}, $current_way_id );
-                                    printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d at Way %s and the next Way %s\n", $relation_ptr->{'number_of_segments'}, $current_way_id, $next_way_id      if ( $debug );
+                                    printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d at Way %s and the next Way %s\n", $relation_ptr->{'number_of_segments'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, $WAYS{$next_way_id}->{'tag'}->{'name'}      if ( $debug );
                                 }
                             }
                         } else {
-                            printf STDERR "SortRouteWayNodes() : handle Nodes of first, closed, single Way %s:\nNodes: %s\n", $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                            printf STDERR "SortRouteWayNodes() : handle Nodes of first, closed, single Way %s:\nNodes: %s\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                             push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                             push( @sorted_nodes, 0 );      # mark a gap in the sorted nodes
                             $relation_ptr->{'number_of_segments'}++;
                             push( @{$relation_ptr->{'gap_at_way'}}, $current_way_id );
-                            printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d at first, closed, single Way %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                            printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d at first, closed, single Way %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                         }
                     } elsif ( 0 != ($entry_node_id=isOneway($current_way_id,undef)) ) {
                         if ( $connecting_node_id == $entry_node_id ) {
@@ -4583,14 +4635,14 @@ sub SortRouteWayNodes {
                                 #
                                 # perfect order for this way (oneway=yes, junction=roundabout): last node of former segment is first node of this way
                                 #
-                                printf STDERR "SortRouteWayNodes() : handle Nodes of oneway Way %s:\nNodes: %s\n", $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                                printf STDERR "SortRouteWayNodes() : handle Nodes of oneway Way %s:\nNodes: %s\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                                 pop( @sorted_nodes );     # don't add connecting node twice
                                 push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                             } else {
                                 #
                                 # not so perfect (oneway=-1), but we can take the nodes of this way in reverse order
                                 #
-                                printf STDERR "SortRouteWayNodes() : handle Nodes of oneway Way %s:\nNodes: reverse( %s )\n", $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                                printf STDERR "SortRouteWayNodes() : handle Nodes of oneway Way %s:\nNodes: reverse( %s )\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                                 pop( @sorted_nodes );     # don't add connecting node twice
                                 push( @sorted_nodes, reverse(@{$WAYS{$current_way_id}->{'chain'}}) );
                             }
@@ -4601,11 +4653,11 @@ sub SortRouteWayNodes {
                                 # oops! entering oneway in wrong direction, copying nodes assuming we are allowd to do so
                                 #
                                 if ( $entry_node_id == $WAYS{$current_way_id}->{'first_node'} ) {
-                                    printf STDERR "SortRouteWayNodes() : entering oneway in wrong direction Way %s:\nNodes: %s, reverse( %s )\n", $current_way_id, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
+                                    printf STDERR "SortRouteWayNodes() : entering oneway in wrong direction Way %s:\nNodes: %s, reverse( %s )\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
                                     push( @sorted_nodes, reverse(@{$WAYS{$current_way_id}->{'chain'}}) );
                                 } else {
                                     # not so perfect (oneway=-1), but we can take the nodes of this way in direct order
-                                    printf STDERR "SortRouteWayNodes() : entering oneway in wrong direction Way %s:\nNodes: %s, %s\n", $current_way_id, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
+                                    printf STDERR "SortRouteWayNodes() : entering oneway in wrong direction Way %s:\nNodes: %s, %s\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
                                     push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                                 }
                                 $relation_ptr->{'wrong_direction_oneways'}->{$current_way_id} = 1;
@@ -4615,11 +4667,11 @@ sub SortRouteWayNodes {
                                 #
                                 push( @sorted_nodes, 0 );      # mark a gap in the sorted nodes
                                 if ( $entry_node_id == $WAYS{$current_way_id}->{'first_node'} ) {
-                                    printf STDERR "SortRouteWayNodes() : mark a gap before oneway Way %s:\nNodes: %s, G, %s\n", $current_way_id, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
+                                    printf STDERR "SortRouteWayNodes() : mark a gap before oneway Way %s:\nNodes: %s, G, %s\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
                                     push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                                 } else {
                                     # not so perfect (oneway=-1), but we can take the nodes of this way in revers order
-                                    printf STDERR "SortRouteWayNodes() : mark a gap before oneway Way %s:\nNodes: %s, G, reverse(%)s\n", $current_way_id, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
+                                    printf STDERR "SortRouteWayNodes() : mark a gap before oneway Way %s:\nNodes: %s, G, reverse(%)s\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
                                     push( @sorted_nodes, reverse(@{$WAYS{$current_way_id}->{'chain'}}) );
                                 }
                                 printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ at gap between this (current) way and the way before\n"     if ( $debug );
@@ -4632,26 +4684,26 @@ sub SortRouteWayNodes {
                         #
                         # perfect order for this way: last node of former segment is first node of this way
                         #
-                        printf STDERR "SortRouteWayNodes() : handle Nodes of Way %s:\nNodes: %s\n", $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                        printf STDERR "SortRouteWayNodes() : handle Nodes of Way %s:\nNodes: %s\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                         pop( @sorted_nodes );     # don't add connecting node twice
                         push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                     } elsif ( $connecting_node_id eq $WAYS{$current_way_id}->{'last_node'} ) {
                         #
                         # not so perfect, but we can take the nodes of this way in reverse order
                         #
-                        printf STDERR "SortRouteWayNodes() : handle Nodes of Way %s:\nNodes: reverse( %s )\n", $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                        printf STDERR "SortRouteWayNodes() : handle Nodes of Way %s:\nNodes: reverse( %s )\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                         pop( @sorted_nodes );     # don't add connecting node twice
                         push( @sorted_nodes, reverse(@{$WAYS{$current_way_id}->{'chain'}}) );
                     } else {
                         #
                         # no match, i.e. a gap between this (current) way and the way before
                         #
-                        printf STDERR "SortRouteWayNodes() : mark a gap before Way %s:\nNodes: %s, G, %s\n", $current_way_id, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
+                        printf STDERR "SortRouteWayNodes() : mark a gap before Way %s:\nNodes: %s, G, %s\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
                         push( @sorted_nodes, 0 );      # mark a gap in the sorted nodes
                         push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                         $relation_ptr->{'number_of_segments'}++;
                         push( @{$relation_ptr->{'gap_at_way'}}, $current_way_id );
-                        printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d before Way %s:\nNodes: %s, G, %s\n", $relation_ptr->{'number_of_segments'}, $current_way_id, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
+                        printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d before Way %s:\nNodes: %s, G, %s\n", $relation_ptr->{'number_of_segments'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
                         $connecting_node_id = 0;
                     }
                 }
@@ -4668,7 +4720,7 @@ sub SortRouteWayNodes {
                         #
                         if ( ($index=IndexOfNodeInNodeArray($WAYS{$next_way_id}->{'first_node'},@{$WAYS{$current_way_id}->{'chain'}})) >= 0 ||
                              ($index=IndexOfNodeInNodeArray($WAYS{$next_way_id}->{'last_node'}, @{$WAYS{$current_way_id}->{'chain'}})) >= 0    ) {
-                            printf STDERR "SortRouteWayNodes() : handle Nodes of first, closed Way %s with Index %d:\nNodes: %s\n", $current_way_id, $index, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                            printf STDERR "SortRouteWayNodes() : handle Nodes of first, closed Way %s with Index %d:\nNodes: %s\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, $index, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                             my $i = 0;
                             for ( $i = $index+1; $i <= $#{$WAYS{$current_way_id}->{'chain'}}; $i++ ) {
                                 push( @sorted_nodes, ${$WAYS{$current_way_id}->{'chain'}}[$i] );
@@ -4676,13 +4728,21 @@ sub SortRouteWayNodes {
                             for ( $i = 1; $i <= $index; $i++ ) {
                                 push( @sorted_nodes, ${$WAYS{$current_way_id}->{'chain'}}[$i] );
                             }
+                            if ( $next_way_id && !isClosedWay($next_way_id) ) {
+                                printf STDERR "SortRouteWayNodes() : call doesWayTraverseRoundAbout() for %s, %s, %s\n", $relation_ptr->{'tag'}->{'name'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, , $WAYS{$current_way_id}->{'tag'}->{'name'}    if ( $debug );
+                                if ( doesWayTraverseRoundAbout( \@{$WAYS{$next_way_id}->{'chain'}}, \@{$WAYS{$current_way_id}->{'chain'}} ) ) {
+                                    $relation_ptr->{'number_of_traversed_roundabouts'}++;
+                                    $relation_ptr->{'traversed_roundabout'}->{$current_way_id}->{$next_way_id} = 1;
+                                    printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_traversed_roundabouts'}++ = %d at first, closed, single Way being traversed by previous way (%s) %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                                }
+                            }
                         } else {
-                            printf STDERR "SortRouteWayNodes() : handle Nodes of first, closed, single Way %s:\nNodes: %s\n", $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                            printf STDERR "SortRouteWayNodes() : handle Nodes of first, closed, single Way %s:\nNodes: %s\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                             push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                             push( @sorted_nodes, 0 );                   # mark a gap in the sorted nodes
                             $relation_ptr->{'number_of_segments'}++;
                             push( @{$relation_ptr->{'gap_at_way'}}, $current_way_id );
-                            printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d at Nodes of first, closed, single Way %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                            printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d at Nodes of first, closed, single Way %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
 
                         }
                     } elsif ( 0 != ($entry_node_id=isOneway($current_way_id,undef)) ) {
@@ -4690,14 +4750,22 @@ sub SortRouteWayNodes {
                             #
                             # perfect order for this way (oneway=yes, junction=roundabout): start at first node of this way
                             #
-                            printf STDERR "SortRouteWayNodes() : handle Nodes of first oneway Way %s:\nNodes: %s\n", $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                            printf STDERR "SortRouteWayNodes() : handle Nodes of first oneway Way %s:\nNodes: %s\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                             push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                         } else {
                             #
                             # not so perfect (oneway=-1), but we can take the nodes of this way in reverse order
                             #
-                            printf STDERR "SortRouteWayNodes() : handle Nodes of first oneway Way %s:\nNodes: reverse( %s )\n", $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                            printf STDERR "SortRouteWayNodes() : handle Nodes of first oneway Way %s:\nNodes: reverse( %s )\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                             push( @sorted_nodes, reverse(@{$WAYS{$current_way_id}->{'chain'}}) );
+                        }
+                        if ( $next_way_id && !isClosedWay($next_way_id) ) {
+                            printf STDERR "SortRouteWayNodes() : call doesWayTraverseRoundAbout() for %s, %s, %s\n", $relation_ptr->{'tag'}->{'name'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, , $WAYS{$current_way_id}->{'tag'}->{'name'}    if ( $debug );
+                            if ( doesWayTraverseRoundAbout( \@{$WAYS{$next_way_id}->{'chain'}}, \@{$WAYS{$current_way_id}->{'chain'}} ) ) {
+                                $relation_ptr->{'number_of_traversed_roundabouts'}++;
+                                $relation_ptr->{'traversed_roundabout'}->{$current_way_id}->{$next_way_id} = 1;
+                                printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_traversed_roundabouts'}++ = %d at first, closed, single Way being traversed by previous way (%s) %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                            }
                         }
                     } elsif ( isClosedWay($next_way_id) ) {
                         #
@@ -4708,51 +4776,63 @@ sub SortRouteWayNodes {
                             #
                             # perfect match, last node of this way is a node of the next roundabout
                             #
-                            printf STDERR "SortRouteWayNodes() : handle Nodes for last Node %s of first Way %s connecting to a closed Way %s with Index %d:\nNodes: %s\n", $WAYS{$current_way_id}->{'first_node'}, $current_way_id, $next_way_id, $index, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                            printf STDERR "SortRouteWayNodes() : handle Nodes for last Node %s of first Way %s connecting to a closed Way %s with Index %d:\nNodes: %s\n", $WAYS{$current_way_id}->{'first_node'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, $index, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                             push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
+                            printf STDERR "SortRouteWayNodes() : call doesWayTraverseRoundAbout() for %s, %s, %s\n", $relation_ptr->{'tag'}->{'name'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, , $WAYS{$next_way_id}->{'tag'}->{'name'}    if ( $debug );
+                            if ( doesWayTraverseRoundAbout( \@{$WAYS{$current_way_id}->{'chain'}}, \@{$WAYS{$next_way_id}->{'chain'}} ) ) {
+                                $relation_ptr->{'number_of_traversed_roundabouts'}++;
+                                $relation_ptr->{'traversed_roundabout'}->{$next_way_id}->{$current_way_id} = 1;
+                                printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_traversed_roundabouts'}++ = %d at first, closed, single Way being traversed by previous way (%s) %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                            }
                         } elsif ( ($index=IndexOfNodeInNodeArray($WAYS{$current_way_id}->{'first_node'},@{$WAYS{$next_way_id}->{'chain'}})) >= 0 ) {
                             #
                             # not so perfect match, but first node of this way is a node of the next roundabout
                             # take nodes of this way in reverse order
                             #
-                            printf STDERR "SortRouteWayNodes() : handle Nodes for first Node %s of first Way %s connecting to a closed Way %s with Index %s:\nNodes: reverse( %s )\n", $WAYS{$current_way_id}->{'first_node'}, $current_way_id, $next_way_id, $index, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                            printf STDERR "SortRouteWayNodes() : handle Nodes for first Node %s of first Way %s connecting to a closed Way %s with Index %s:\nNodes: reverse( %s )\n", $WAYS{$current_way_id}->{'first_node'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, $index, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                             push( @sorted_nodes, reverse(@{$WAYS{$current_way_id}->{'chain'}}) );
+                            printf STDERR "SortRouteWayNodes() : call doesWayTraverseRoundAbout() for %s, %s, %s\n", $relation_ptr->{'tag'}->{'name'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, , $WAYS{$next_way_id}->{'tag'}->{'name'}    if ( $debug );
+                            if ( doesWayTraverseRoundAbout( \@{$WAYS{$current_way_id}->{'chain'}}, \@{$WAYS{$next_way_id}->{'chain'}} ) ) {
+                                $relation_ptr->{'number_of_traversed_roundabouts'}++;
+                                $relation_ptr->{'traversed_roundabout'}->{$next_way_id}->{$current_way_id} = 1;
+                                printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_traversed_roundabouts'}++ = %d at first, closed, single Way being traversed by previous way (%s) %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                            }
                         } else {
                             #
                             # no match at all into next, closed way, i.e. a gap between this (current) way and the next, closed way
                             # take nodes of this way in normal order and mark a gap after that
                             #
-                            printf STDERR "SortRouteWayNodes() : handle Nodes of single Way %s before a closed Way %s:\nNodes: %s, G\n", $current_way_id, $next_way_id, oin( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
+                            printf STDERR "SortRouteWayNodes() : handle Nodes of single Way %s before a closed Way %s:\nNodes: %s, G\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, oin( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
                             push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                             push( @sorted_nodes, 0 );                   # mark a gap in the sorted nodes
                             $relation_ptr->{'number_of_segments'}++;
                             push( @{$relation_ptr->{'gap_at_way'}}, $current_way_id );
-                            printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d at Nodes of single Way %s before a closed Way %s:\nNodes: %s, G\n", $relation_ptr->{'number_of_segments'}, $current_way_id, $next_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
+                            printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d at Nodes of single Way %s before a closed Way %s:\nNodes: %s, G\n", $relation_ptr->{'number_of_segments'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
                         }
                     } elsif ( $WAYS{$current_way_id}->{'last_node'} == $WAYS{$next_way_id}->{'first_node'}   ||
                             $WAYS{$current_way_id}->{'last_node'} == $WAYS{$next_way_id}->{'last_node'}       ) {
                         #
                         # perfect order for this way: last node of this segment is first or last node of next segment
                         #
-                        printf STDERR "SortRouteWayNodes() : handle Nodes of first Way %s:\nNodes: %s\n", $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                        printf STDERR "SortRouteWayNodes() : handle Nodes of first Way %s:\nNodes: %s\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                         push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                     } elsif ( $WAYS{$current_way_id}->{'first_node'} == $WAYS{$next_way_id}->{'first_node'}   ||
                             $WAYS{$current_way_id}->{'first_node'} == $WAYS{$next_way_id}->{'last_node'}       ) {
                         #
                         # not so perfect, but we can take the nodes of this way in reverse order
                         #
-                        printf STDERR "SortRouteWayNodes() : handle Nodes of first Way %s:\nNodes: reverse( %s )\n", $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                        printf STDERR "SortRouteWayNodes() : handle Nodes of first Way %s:\nNodes: reverse( %s )\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                         push( @sorted_nodes, reverse(@{$WAYS{$current_way_id}->{'chain'}}) );
                     } else {
                         #
                         # no match at all, i.e. a gap between this (current) way and the next way
                         #
-                        printf STDERR "SortRouteWayNodes() : handle Nodes of single Way %s:\nNodes: %s, G\n", $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                        printf STDERR "SortRouteWayNodes() : handle Nodes of single Way %s:\nNodes: %s, G\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                         push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                         push( @sorted_nodes, 0 );                   # mark a gap in the sorted nodes
                         $relation_ptr->{'number_of_segments'}++;
                         push( @{$relation_ptr->{'gap_at_way'}}, $current_way_id );
-                        printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d at Nodes of single Way %s:\nNodes: %s, G\n", $relation_ptr->{'number_of_segments'}, $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                        printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d at Nodes of single Way %s:\nNodes: %s, G\n", $relation_ptr->{'number_of_segments'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                     }
                 }
             } else {
@@ -4771,7 +4851,7 @@ sub SortRouteWayNodes {
                         # check whether connecting node is a node of this, closed way
                         #
                         if ( ($index=IndexOfNodeInNodeArray($connecting_node_id,@{$WAYS{$current_way_id}->{'chain'}})) >= 0 ) {
-                            printf STDERR "SortRouteWayNodes() : handle Nodes of last, closed Way %s with Index %d:\nNodes: %s\n", $current_way_id, $index, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                            printf STDERR "SortRouteWayNodes() : handle Nodes of last, closed Way %s with Index %d:\nNodes: %s\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, $index, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                             my $i = 0;
                             for ( $i = $index+1; $i <= $#{$WAYS{$current_way_id}->{'chain'}}; $i++ ) {
                                 push( @sorted_nodes, ${$WAYS{$current_way_id}->{'chain'}}[$i] );
@@ -4779,13 +4859,21 @@ sub SortRouteWayNodes {
                             for ( $i = 1; $i <= $index; $i++ ) {
                                 push( @sorted_nodes, ${$WAYS{$current_way_id}->{'chain'}}[$i] );
                             }
+                            if ( $previous_way_id && !isClosedWay($previous_way_id) ) {
+                                printf STDERR "SortRouteWayNodes() : call doesWayTraverseRoundAbout() for %s, %s, %s\n", $relation_ptr->{'tag'}->{'name'}, $WAYS{$previous_way_id}->{'tag'}->{'name'}, , $WAYS{$current_way_id}->{'tag'}->{'name'}    if ( $debug );
+                                if ( doesWayTraverseRoundAbout( \@{$WAYS{$previous_way_id}->{'chain'}}, \@{$WAYS{$current_way_id}->{'chain'}} ) ) {
+                                    $relation_ptr->{'number_of_traversed_roundabouts'}++;
+                                    $relation_ptr->{'traversed_roundabout'}->{$current_way_id}->{$previous_way_id} = 1;
+                                    printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_traversed_roundabouts'}++ = %d at first, closed, single Way being traversed by previous way (%s) %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $WAYS{$previous_way_id}->{'tag'}->{'name'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                                }
+                            }
                         } else {
                             push( @sorted_nodes, 0 );      # mark a gap in the sorted nodes
-                            printf STDERR "SortRouteWayNodes() : handle Nodes of last, closed, isolated Way %s:\nNodes: %s\n", $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                            printf STDERR "SortRouteWayNodes() : handle Nodes of last, closed, isolated Way %s:\nNodes: %s\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                             push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                             $relation_ptr->{'number_of_segments'}++;
                             push( @{$relation_ptr->{'gap_at_way'}}, $current_way_id );
-                            printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d at Nodes of last, closed, isolated Way %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                            printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d at Nodes of last, closed, isolated Way %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                         }
                     } elsif ( 0 != ($entry_node_id=isOneway($current_way_id,undef)) ) {
                         if ( $connecting_node_id == $entry_node_id ) {
@@ -4796,14 +4884,14 @@ sub SortRouteWayNodes {
                                 #
                                 # perfect order for this way (oneway=yes, junction=roundabout): last node of former segment is first node of this way
                                 #
-                                printf STDERR "SortRouteWayNodes() : handle Nodes of oneway Way %s:\nNodes: %s\n", $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                                printf STDERR "SortRouteWayNodes() : handle Nodes of oneway Way %s:\nNodes: %s\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                                 pop( @sorted_nodes );     # don't add connecting node twice
                                 push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                             } else {
                                 #
                                 # not so perfect (oneway=-1), but we can take the nodes of this way in reverse order
                                 #
-                                printf STDERR "SortRouteWayNodes() : handle Nodes of oneway Way %s:\nNodes: reverse( %s )\n", $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                                printf STDERR "SortRouteWayNodes() : handle Nodes of oneway Way %s:\nNodes: reverse( %s )\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                                 pop( @sorted_nodes );     # don't add connecting node twice
                                 push( @sorted_nodes, reverse(@{$WAYS{$current_way_id}->{'chain'}}) );
                             }
@@ -4814,11 +4902,11 @@ sub SortRouteWayNodes {
                                 # oops! entering oneway in wrong direction, copying nodes assuming we are allowd to do so
                                 #
                                 if ( $entry_node_id == $WAYS{$current_way_id}->{'first_node'} ) {
-                                    printf STDERR "SortRouteWayNodes() : entering oneway in wrong direction Way %s:\nNodes: %s, reverse( %s )\n", $current_way_id, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
+                                    printf STDERR "SortRouteWayNodes() : entering oneway in wrong direction Way %s:\nNodes: %s, reverse( %s )\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
                                     push( @sorted_nodes, reverse(@{$WAYS{$current_way_id}->{'chain'}}) );
                                 } else {
                                     # not so perfect (oneway=-1), but we can take the nodes of this way in direct order
-                                    printf STDERR "SortRouteWayNodes() : entering oneway in wrong direction Way %s:\nNodes: %s, %s\n", $current_way_id, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
+                                    printf STDERR "SortRouteWayNodes() : entering oneway in wrong direction Way %s:\nNodes: %s, %s\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
                                     push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                                 }
                                 $relation_ptr->{'wrong_direction_oneways'}->{$current_way_id} = 1;
@@ -4828,34 +4916,34 @@ sub SortRouteWayNodes {
                                 #
                                 push( @sorted_nodes, 0 );      # mark a gap in the sorted nodes
                                 if ( $entry_node_id == $WAYS{$current_way_id}->{'first_node'} ) {
-                                    printf STDERR "SortRouteWayNodes() : mark a gap before oneway Way %s:\nNodes: %s, G, %s, G\n", $current_way_id, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
+                                    printf STDERR "SortRouteWayNodes() : mark a gap before oneway Way %s:\nNodes: %s, G, %s, G\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
                                     push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                                 } else {
                                     # not so perfect (oneway=-1), but we can take the nodes of this way in reverse order
-                                    printf STDERR "SortRouteWayNodes() : mark a gap before oneway Way %s:\nNodes: %s, G, reverse( %s ), G\n", $current_way_id, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
+                                    printf STDERR "SortRouteWayNodes() : mark a gap before oneway Way %s:\nNodes: %s, G, reverse( %s ), G\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
                                     push( @sorted_nodes, reverse(@{$WAYS{$current_way_id}->{'chain'}}) );
                                 }
                                 $relation_ptr->{'number_of_segments'}++;
                                 push( @{$relation_ptr->{'gap_at_way'}}, $current_way_id );
-                                printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d at gap between this (current) way and the way before, we will follow the oneway in the intended direction\n", $relation_ptr->{'number_of_segments'}, $current_way_id, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
+                                printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d at gap between this (current) way and the way before, we will follow the oneway in the intended direction\n", $relation_ptr->{'number_of_segments'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, $connecting_node_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )    if ( $debug );
                                 $connecting_node_id = 0;
                             }
                         }
                     } elsif ( $connecting_node_id eq $WAYS{$current_way_id}->{'first_node'} ) {
-                        printf STDERR "SortRouteWayNodes() : handle Nodes of last, connected Way %s:\nNodes: %s\n", $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                        printf STDERR "SortRouteWayNodes() : handle Nodes of last, connected Way %s:\nNodes: %s\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                         pop( @sorted_nodes );     # don't add connecting node twice
                         push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                     } elsif ( $connecting_node_id eq $WAYS{$current_way_id}->{'last_node'} ) {
-                        printf STDERR "SortRouteWayNodes() : handle Nodes of last, connected Way %s:\nNodes: reverse( %s )\n", $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                        printf STDERR "SortRouteWayNodes() : handle Nodes of last, connected Way %s:\nNodes: reverse( %s )\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                         pop( @sorted_nodes );     # don't add connecting node twice
                         push( @sorted_nodes, reverse(@{$WAYS{$current_way_id}->{'chain'}}) );
                     } else {
-                        printf STDERR "SortRouteWayNodes() : last, isolated Way %s and Node %s\n", $current_way_id, $connecting_node_id     if ( $debug );
+                        printf STDERR "SortRouteWayNodes() : last, isolated Way %s and Node %s\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, $connecting_node_id     if ( $debug );
                         push( @sorted_nodes, 0 );      # mark a gap in the sorted nodes
                         push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                         $relation_ptr->{'number_of_segments'}++;
                         push( @{$relation_ptr->{'gap_at_way'}}, $current_way_id );
-                        printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d last, isolated Way %s and Node %s\n", $relation_ptr->{'number_of_segments'}, $current_way_id, $connecting_node_id     if ( $debug );
+                        printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_segments'}++ = %d last, isolated Way %s and Node %s\n", $relation_ptr->{'number_of_segments'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, $connecting_node_id     if ( $debug );
                     }
                 } else {
                     #
@@ -4868,19 +4956,19 @@ sub SortRouteWayNodes {
                             #
                             # perfect order for this way (oneway=yes, junction=roundabout): we can take the nodes of this way in this order
                             #
-                            printf STDERR "SortRouteWayNodes() : handle Nodes of last, isolated, single oneway Way %s:\nNodes: %s\n", $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                            printf STDERR "SortRouteWayNodes() : handle Nodes of last, isolated, single oneway Way %s:\nNodes: %s\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                             pop( @sorted_nodes );     # don't add connecting node twice
                             push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                         } else {
                             #
                             # not so perfect (oneway=-1), but we can take the nodes of this way in reverse order
                             #
-                            printf STDERR "SortRouteWayNodes() : handle Nodes of last, isolated, single oneway Way %s:\nNodes: reverse( %s )\n", $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                            printf STDERR "SortRouteWayNodes() : handle Nodes of last, isolated, single oneway Way %s:\nNodes: reverse( %s )\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                             pop( @sorted_nodes );     # don't add connecting node twice
                             push( @sorted_nodes, reverse(@{$WAYS{$current_way_id}->{'chain'}}) );
                         }
                     } else {
-                        printf STDERR "SortRouteWayNodes() : handle Nodes of last, isolated Way %s:\nNodes: %s\n", $current_way_id, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
+                        printf STDERR "SortRouteWayNodes() : handle Nodes of last, isolated Way %s:\nNodes: %s\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                         push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                     }
                     $relation_ptr->{'number_of_segments'}++ unless ( $number_of_ways == 1 );  # a single way cannot have 2 segments
@@ -4961,7 +5049,7 @@ sub SortRouteWayNodes {
                     my $used_in_xxx_direction = 'unknown';
                     foreach my $forward_or_backward ( keys ( %{$WAYS{$current_way_id}->{'forward_backward_access_keys'}} ) ) {
                         foreach my $key ( keys ( %{$WAYS{$current_way_id}->{'forward_backward_access_keys'}->{$forward_or_backward}} ) ) {
-                            printf STDERR "WAY %s: has %s key '%s' = '%s'\n", $current_way_id, $forward_or_backward, $key, $WAYS{$current_way_id}->{'forward_backward_access_keys'}->{$forward_or_backward}->{$key}   if ( $debug );
+                            printf STDERR "WAY %s: has %s key '%s' = '%s'\n", $WAYS{$current_way_id}->{'tag'}->{'name'}, $forward_or_backward, $key, $WAYS{$current_way_id}->{'forward_backward_access_keys'}->{$forward_or_backward}->{$key}   if ( $debug );
                             #
                             # mark this way in relation as being used in backward and/or forward direction
                             # based on $connecting_node_id (last node of the trip so far) being first (then backward) or last (then forward) node of way
@@ -4973,7 +5061,7 @@ sub SortRouteWayNodes {
                             } else {
                                 $used_in_xxx_direction = 'unknown';
                             }
-                            printf STDERR "PTv2 route %s uses way %s in '%s' direction\n", $relation_ptr->{'id'}, $current_way_id, $used_in_xxx_direction   if ( $debug );
+                            printf STDERR "PTv2 route %s uses way %s in '%s' direction\n", $relation_ptr->{'id'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, $used_in_xxx_direction   if ( $debug );
                             $relation_ptr->{'ways_used_with_relevant_forward_backward_tags'}->{$current_way_id}->{$used_in_xxx_direction} = 1;
                         }
                     }
@@ -5241,6 +5329,90 @@ sub isNodeArrayClosedWay {
         }
     }
     printf STDERR "isNodeArrayClosedWay() : no\n"       if ( $debug );
+    return 0;
+}
+
+
+#############################################################################################
+#
+# check whether the way before or the way after the roundabout has some point(s) inside (geometry) the roundabout
+#
+# Prerequisites
+# - it is a closed way
+# - the way before/after is connected to the roundabout
+# - so, at least the connecting node of the way is on the roundabout (== geometry: inside)
+# - if there is a second one, then this is inside or on the roundabout
+#
+# iterate nodes of way until node_id is zero, node does not exist or is outside the roundabout
+#
+# Return
+# - TRUE:  if there is more than one node inside/on the roundabout
+# - FALSE: if there is no or only one node inside/on the roundabout
+# - FALSE: if the roundabout is not a close way
+#
+#############################################################################################
+
+sub doesWayTraverseRoundAbout {
+    my $ref_way              = shift || undef;
+    my $ref_roundabout      = shift || undef;
+    my $nodes_on_roundabout = 0;
+
+    if ( $ref_way && $ref_roundabout ) {
+        my $count_way_nodes         = scalar( @{$ref_way} );
+        my $count_roundabout_nodes = scalar( @{$ref_roundabout} );
+        if ( $count_way_nodes > 1 && $count_roundabout_nodes > 2 ) {
+            if ( $ref_roundabout->[0] && $ref_roundabout->[$count_roundabout_nodes-1] &&
+                 $ref_roundabout->[0] == $ref_roundabout->[$count_roundabout_nodes-1]    ) {
+                my @way_polygon             = ();
+                my @roundabout_polygon     = ();
+
+                for ( my $i = 0; $i < $count_way_nodes; $i++ ) {
+                    if ( $ref_way->[$i] && $NODES{$ref_way->[$i]} ) {
+                        if ( isNodeInNodeArray($ref_way->[$i],@{$ref_roundabout}) )
+                        {
+                            $nodes_on_roundabout++;
+                        } else {
+                            # the other nodes are outside or inside the roundabout
+                            push( @way_polygon, [$NODES{$ref_way->[$i]}->{'lat'},$NODES{$ref_way->[$i]}->{'lon'}] );
+                        }
+                    }
+                }
+                for ( my $i = 0; $i < $count_roundabout_nodes; $i++ ) {
+                    if ( $ref_roundabout->[$i] && $NODES{$ref_roundabout->[$i]} ) {
+                        push( @roundabout_polygon, [$NODES{$ref_roundabout->[$i]}->{'lat'},$NODES{$ref_roundabout->[$i]}->{'lon'}] );
+                    }
+                }
+                if ( scalar(@way_polygon) && scalar(@roundabout_polygon) ) {
+                    my $nodes_inside = OSM::Geo::NumberOfPointsInsidePolygon( \@way_polygon, \@roundabout_polygon );
+
+                    if ( ($nodes_on_roundabout+$nodes_inside) > 1 ) {
+                        if ( $nodes_on_roundabout > 1 && $nodes_inside == 0 && $count_way_nodes > 2 ) {
+                            # this might be a loop outside the roundabout, a bus_bay, separated from the way
+                            printf STDERR "doesWayTraverseRoundAbout() : no -> on-rim = %d, inside = %d\n", $nodes_on_roundabout, $nodes_inside     if ( $debug );
+                        } else {
+                            printf STDERR "doesWayTraverseRoundAbout() : yes -> on-rim = %d, inside = %d\n", $nodes_on_roundabout, $nodes_inside       if ( $debug );
+                            return 1;
+                        }
+                    } else {
+                        printf STDERR "doesWayTraverseRoundAbout() : no -> on-rim = %d, inside = %d\n", $nodes_on_roundabout, $nodes_inside     if ( $debug );
+                    }
+                } else {
+                    if ( scalar(@roundabout_polygon) && $nodes_on_roundabout == $count_way_nodes ) {
+                            printf STDERR "doesWayTraverseRoundAbout() : yes -> on-rim = %d, count_way_points=%d, count_roundabout_points=%d\n", $nodes_on_roundabout, scalar(@way_polygon), scalar(@roundabout_polygon)       if ( $debug );
+                            return 1;
+                    } else {
+                        printf STDERR "doesWayTraverseRoundAbout() : ?? -> on-rim = %d, count_way_points=%d, count_roundabout_points=%d\n", $nodes_on_roundabout, scalar(@way_polygon), scalar(@roundabout_polygon)       if ( $debug );
+                    }
+                }
+            } else {
+                printf STDERR "doesWayTraverseRoundAbout() : ?? -> roundabout is not closed way\n"       if ( $debug );
+            }
+        } else {
+            printf STDERR "doesWayTraverseRoundAbout() : ?? -> count_way_nodes=%d, count_roundabout_nodes=%d\n", $count_way_nodes, $count_roundabout_nodes       if ( $debug );
+        }
+    } else {
+        printf STDERR "doesWayTraverseRoundAbout() : ?? -> parameter(s) not defined\n"       if ( $debug );
+    }
     return 0;
 }
 
