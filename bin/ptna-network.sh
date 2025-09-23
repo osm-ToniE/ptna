@@ -903,25 +903,25 @@ then
                         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Checking for 'Error in input data: insufficient data for ...' in log file: $WORK_LOC/$HTML_FILE.log"
 
                         # ensure, file exists
-                        touch $WORK_LOC/$PREFIX-osmium-getid-from-$PTNA_EXTRACT_GETIDS.txt
+                        touch $WORK_LOC/$PREFIX-osmium-getid-id-file.txt
                         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Handling current ID input data for 'osmium getid ...'"
-                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Lines: " $(wc -l $WORK_LOC/$PREFIX-osmium-getid-from-$PTNA_EXTRACT_GETIDS.txt)
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Lines: " $(wc -l $WORK_LOC/$PREFIX-osmium-getid-id-file.txt)
 
-                        cat $WORK_LOC/$PREFIX-osmium-getid-from-$PTNA_EXTRACT_GETIDS.txt > $WORK_LOC/$PREFIX-tmp-getidlist.txt
-                        cat $WORK_LOC/$PREFIX-osmium-getid-from-$PTNA_EXTRACT_GETIDS.txt > $WORK_LOC/$PREFIX-osmium-getid-from-$PTNA_EXTRACT_GETIDS-old.txt
+                        cat $WORK_LOC/$PREFIX-osmium-getid-id-file.txt > $WORK_LOC/$PREFIX-tmp-getidlist.txt
+                        cat $WORK_LOC/$PREFIX-osmium-getid-id-file.txt > $WORK_LOC/$PREFIX-osmium-getid-id-file-old.txt
 
                         grep -F 'Error in input data: insufficient data for' $WORK_LOC/$HTML_FILE.log | \
                         sed  -e 's/^.* : \s*//' -e 's/ /\n/g' >> $WORK_LOC/$PREFIX-tmp-getidlist.txt
 
-                        sort -u $WORK_LOC/$PREFIX-tmp-getidlist.txt > $WORK_LOC/$PREFIX-osmium-getid-from-$PTNA_EXTRACT_GETIDS.txt
+                        sort -u $WORK_LOC/$PREFIX-tmp-getidlist.txt > $WORK_LOC/$PREFIX-osmium-getid-id-file.txt
 
                         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Created new ID input data for 'osmium getid ...'"
-                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Lines: " $(wc -l $WORK_LOC/$PREFIX-osmium-getid-from-$PTNA_EXTRACT_GETIDS.txt)
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Lines: " $(wc -l $WORK_LOC/$PREFIX-osmium-getid-id-file.txt)
                         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Diff between old and new ID input data for 'osmium getid ...'"
-                        diff $WORK_LOC/$PREFIX-osmium-getid-from-$PTNA_EXTRACT_GETIDS-old.txt $WORK_LOC/$PREFIX-osmium-getid-from-$PTNA_EXTRACT_GETIDS.txt
+                        diff $WORK_LOC/$PREFIX-osmium-getid-id-file-old.txt $WORK_LOC/$PREFIX-osmium-getid-id-file.txt
                         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "End diff ..."
 
-                        rm -f $WORK_LOC/$PREFIX-tmp-getidlist.txt $WORK_LOC/$PREFIX-osmium-getid-from-$PTNA_EXTRACT_GETIDS-old.txt
+                        rm -f $WORK_LOC/$PREFIX-tmp-getidlist.txt $WORK_LOC/$PREFIX-osmium-getid-id-file-old.txt
                     fi
                 else
                     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'$WORK_LOC/$HTML_FILE' is empty"
