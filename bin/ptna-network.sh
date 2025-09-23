@@ -894,6 +894,20 @@ then
                     #else
                         rm -f $WORK_LOC/$SAVE_FILE
                     #fi
+
+                    if [ -n "$PTNA_EXTRACT_GETIDS" ]
+                    then
+                        touch $WORK_LOC/$PREFIX-osmium-getid-from-$PTNA_EXTRACT_GETIDS.txt
+
+                        cat $WORK_LOC/$PREFIX-osmium-getid-from-$PTNA_EXTRACT_GETIDS.txt > $WORK_LOC/$PREFIX-tmp-getidlist.txt
+
+                        grep -F 'Error in input data: insufficient data for' $WORK_LOC/$HTML_FILE.log | \
+                        sed  -e 's/^.* : \s*//' -e 's/ /\n/g' >> $WORK_LOC/$PREFIX-tmp-getidlist.txt
+
+                        sort -u $WORK_LOC/$PREFIX-tmp-getidlist.txt > $WORK_LOC/$PREFIX-osmium-getid-from-$PTNA_EXTRACT_GETIDS.txt
+
+                        rm -f $WORK_LOC/$PREFIX-tmp-getidlist.txt
+                    fi
                 else
                     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'$WORK_LOC/$HTML_FILE' is empty"
                 fi
