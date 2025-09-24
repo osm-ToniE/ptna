@@ -287,7 +287,7 @@ then
                     if [ -f "$PTNA_EXTRACT_PARENT" -a -s "$PTNA_EXTRACT_PARENT" ]
                     then
                         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Size: " $(stat -c '%s' "$PTNA_EXTRACT_PARENT") $PTNA_EXTRACT_PARENT
-                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium getid --verbose --default-type=relation --add-referenced --fsync --id-file=$WORK_LOC/$PREFIX-osmium-getid-id-file.txt' --output-format=pbf -O --output $WORK_LOC/$PREFIX-osmium-getid.osm.pbf --input-format=pbf $PTNA_EXTRACT_PARENT"
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium getid --verbose --default-type=relation --add-referenced --fsync --id-file=$WORK_LOC/$PREFIX-osmium-getid-id-file.txt --output-header=generator=https://ptna.openstreetmap.de osmosis_replication_timestamp=$TS --output-format=pbf -O --output $WORK_LOC/$PREFIX-osmium-getid.osm.xml --input-format=xml $PTNA_EXTRACT_PARENT"
                         osmium getid --verbose --default-type=relation --add-referenced --fsync                                  \
                                      --id-file=$WORK_LOC/$PREFIX-osmium-getid-id-file.txt                                        \
                                      --output-header="generator=https://ptna.openstreetmap.de osmosis_replication_timestamp=$TS" \
