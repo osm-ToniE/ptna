@@ -338,20 +338,18 @@ then
 
         if [ -f $WORK_LOC/$PREFIX-osmium-merged.osm.$INPUTFORMAT -a -s $WORK_LOC/$PREFIX-osmium-merged.osm.$INPUTFORMAT ]
         then
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium cat -c user -c version -c timestamp -c uid -c changeset ... $WORK_LOC/$PREFIX-osmium-merged.osm.$INPUTFORMAT ...' and add timestamp '$TS' to output file"
-            osmium cat -c user -c version -c timestamp -c uid -c changeset --fsync -F "$INPUTFORMAT" -f "$OUTPUTFORMAT" -O \
-                    -o "$OSM_XML_FILE_ABSOLUTE" "$WORK_LOC/$PREFIX-osmium-merged.osm.$INPUTFORMAT" \
-                    --output-header="generator=https://ptna.openstreetmap.de osmosis_replication_timestamp=$TS"
-            osmium_ret=$?
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret (0 == all OK, 1 == error processing data, 2 == problems with command line arguments)"
+            OSMIUM_CAT_INPUT="$WORK_LOC/$PREFIX-osmium-merged.osm.$INPUTFORMAT"
         else
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium cat -c user -c version -c timestamp -c uid -c changeset ... $WORK_LOC/$PTNA_EXTRACT_SOURCE ...' and add timestamp '$TS' to output file"
-            osmium cat -c user -c version -c timestamp -c uid -c changeset --fsync -F "$INPUTFORMAT" -f "$OUTPUTFORMAT" -O \
-                    -o "$OSM_XML_FILE_ABSOLUTE" "$WORK_LOC/$PTNA_EXTRACT_SOURCE"                                           \
-                    --output-header="generator=https://ptna.openstreetmap.de osmosis_replication_timestamp=$TS"
-            osmium_ret=$?
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret (0 == all OK, 1 == error processing data, 2 == problems with command line arguments)"
+            OSMIUM_CAT_INPUT="$WORK_LOC/$PTNA_EXTRACT_SOURCE"
         fi
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium cat --clean user --clean version --clean timestamp --clean uid --clean changeset ... $OSMIUM_CAT_INPUT ...' and add timestamp '$TS' to output file"
+        osmium cat --clean user --clean version --clean timestamp --clean uid --clean changeset --fsync        \
+                    --output-header="generator=https://ptna.openstreetmap.de osmosis_replication_timestamp=$TS" \
+                    --input-format "$INPUTFORMAT" "$OSMIUM_CAT_INPUT"                              \
+                    --output-format "$OUTPUTFORMAT" --overwrite --output "$OSM_XML_FILE_ABSOLUTE"
+
+        osmium_ret=$?
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret (0 == all OK, 1 == error processing data, 2 == problems with command line arguments)"
 
         if [ -f "$OSM_XML_FILE_ABSOLUTE" -a -s "$OSM_XML_FILE_ABSOLUTE" ]
         then
