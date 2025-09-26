@@ -280,6 +280,7 @@ then
             # ptna-filter-extract.sh -p "$SETTINGS_DIR/osmium-positive-filters.txt" -n "$SETTINGS_DIR/osmium-negative-filters.txt" "$WORK_LOC/$PTNA_EXTRACT_SOURCE" "$OSM_XML_FILE_ABSOLUTE"
         fi
 
+        rm -f $WORK_LOC/$PREFIX-osmium-merged.osm.$INPUTFORMAT
         if [ -n "$PTNA_EXTRACT_GETIDS" ]
         then
             rm -f $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT
@@ -322,8 +323,8 @@ then
                             else
                                 rm -f $WORK_LOC/$PREFIX-osmium-merged.osm.$INPUTFORMAT
                             fi
-                            rm -f $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT
                         fi
+                        rm -f $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT
                     else
                         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Nothing to do: extract file '$PTNA_EXTRACT_PARENT' is not a file or empty"
                     fi
