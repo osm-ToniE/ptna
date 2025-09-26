@@ -310,11 +310,10 @@ then
                         then
                             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Size: " $(stat -c '%s' "$WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT") $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT
                             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Size: " $(stat -c '%s' "$WORK_LOC/$PTNA_EXTRACT_SOURCE") $WORK_LOC/$PTNA_EXTRACT_SOURCE
-                            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium merge --verbose --input-format=$INPUTFORMAT --output-format=$INPUTFORMAT --output=$WORK_LOC/$PREFIX-osmium-merged.osm.pbf $WORK_LOC/$PTNA_EXTRACT_SOURCE $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT'"
-                            osmium merge --verbose --input-format=$INPUTFORMAT --output-format=$INPUTFORMAT \
-                                         --output=$WORK_LOC/$PREFIX-osmium-merged.osm.$INPUTFORMAT          \
-                                         $WORK_LOC/$PTNA_EXTRACT_SOURCE                                     \
-                                         $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT
+                            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium merge --verbose --fsync ---output-format=$INPUTFORMAT --overwrite --output=$WORK_LOC/$PREFIX-osmium-merged.osm.pbf -input-format=$INPUTFORMAT $WORK_LOC/$PTNA_EXTRACT_SOURCE $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT'"
+                            osmium merge --verbose --fsync                                                                                           \
+                                         --output-format=$INPUTFORMAT --overwrite --output=$WORK_LOC/$PREFIX-osmium-merged.osm.$INPUTFORMAT          \
+                                         --input-format=$INPUTFORMAT $WORK_LOC/$PTNA_EXTRACT_SOURCE $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT
                             osmium_ret=$?
                             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret (0 == all OK, 1 == error processing data, 2 == problems with command line arguments)"
                             if [ $osmium_ret -eq 0 ]
