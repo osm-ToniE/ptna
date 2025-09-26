@@ -343,9 +343,9 @@ then
             OSMIUM_CAT_INPUT="$WORK_LOC/$PTNA_EXTRACT_SOURCE"
         fi
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium cat --clean user --clean version --clean timestamp --clean uid --clean changeset ... $OSMIUM_CAT_INPUT ...' and add timestamp '$TS' to output file"
-        osmium cat --clean user --clean version --clean timestamp --clean uid --clean changeset --fsync        \
+        osmium cat --clean user --clean version --clean timestamp --clean uid --clean changeset --fsync         \
                     --output-header="generator=https://ptna.openstreetmap.de osmosis_replication_timestamp=$TS" \
-                    --input-format "$INPUTFORMAT" "$OSMIUM_CAT_INPUT"                              \
+                    --input-format "$INPUTFORMAT" "$OSMIUM_CAT_INPUT"                                           \
                     --output-format "$OUTPUTFORMAT" --overwrite --output "$OSM_XML_FILE_ABSOLUTE"
 
         osmium_ret=$?
