@@ -971,7 +971,7 @@ then
                         grep -F 'Error in input data: insufficient data for' $WORK_LOC/$HTML_FILE.log | \
                         sed  -e 's/^.* : \s*//' -e 's/ /\n/g' >> $WORK_LOC/$PREFIX-tmp-getidlist.txt
 
-                        ERROR_MISSING_DATA=$(grep -F -c 'Error in input data: insufficient data for' $WORK_LOC/$HTML_FILE.log)
+                        ERROR_MISSING_DATA=$(grep -F ' Error in input data: insufficient data for' $WORK_LOC/$HTML_FILE.log | sed  -e 's/^.* : \s*//' -e 's/ /\n/g' | sort -u | wc -l)
 
                         sort -u $WORK_LOC/$PREFIX-tmp-getidlist.txt > $WORK_LOC/$PREFIX-osmium-getid-id-file.txt
 
