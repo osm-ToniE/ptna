@@ -971,6 +971,8 @@ then
                         grep -F 'Error in input data: insufficient data for' $WORK_LOC/$HTML_FILE.log | \
                         sed  -e 's/^.* : \s*//' -e 's/ /\n/g' >> $WORK_LOC/$PREFIX-tmp-getidlist.txt
 
+                        ERROR_MISSING_DATA=$(grep -F -c 'Error in input data: insufficient data for' $WORK_LOC/$HTML_FILE.log)
+
                         sort -u $WORK_LOC/$PREFIX-tmp-getidlist.txt > $WORK_LOC/$PREFIX-osmium-getid-id-file.txt
 
                         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Created new ID input data for 'osmium getid ...'"
@@ -1047,6 +1049,7 @@ then
             echo "EXTRACT_SIZE_BYTE=$EXTRACT_SIZE"                                                             >> $WORK_LOC/$DETAILS_FILE
         fi
         echo "START_ANALYSIS=$START_ANALYSIS"            >> $WORK_LOC/$DETAILS_FILE
+        echo "ERROR_MISSING_DATA=$ERROR_MISSING_DATA"    >> $WORK_LOC/$DETAILS_FILE
         echo "END_ANALYSIS=$END_ANALYSIS"                >> $WORK_LOC/$DETAILS_FILE
         echo "analysis-options=$ANALYSIS_OPTIONS"        >> $WORK_LOC/$DETAILS_FILE
         echo "expect-network-short-as=$EXPECT_NETWORK_SHORT_AS"    >> $WORK_LOC/$DETAILS_FILE
