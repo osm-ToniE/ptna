@@ -309,6 +309,17 @@ then
                         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret (0 == all found, 1 == not all found, 2 == problems with command line arguments)"
                         if [ $osmium_ret -lt 2 ]
                         then
+                            if [ $osmium_ret -eq 2 ]
+                            then
+                                if [ -f $PTNA_WORK_LOC/log/$PREFIX.log ]
+                                then
+                                    ERROR_GETID_NOTFOUND=$(grep -E '\] Did not find \d+ object(s).' | sed -e 's/^.*Did not find //' -e 's/ object.*$//')
+                                else
+                                    ERROR_GETID_NOTFOUND=1
+                                fi
+                            else
+                                ERROR_GETID_NOTFOUND=0
+                            fi
                             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Size: " $(stat -c '%s' "$WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT") $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT
                             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Size: " $(stat -c '%s' "$WORK_LOC/$PTNA_EXTRACT_SOURCE") $WORK_LOC/$PTNA_EXTRACT_SOURCE
                             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium merge --verbose --fsync ---output-format=$INPUTFORMAT --overwrite --output=$WORK_LOC/$PREFIX-osmium-merged.osm.pbf -input-format=$INPUTFORMAT $WORK_LOC/$PTNA_EXTRACT_SOURCE $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT'"
@@ -1044,6 +1055,7 @@ then
         if [ -n "$PTNA_EXTRACT_SOURCE" ]
         then
             echo "START_FILTER=$START_FILTER"                                                                  >> $WORK_LOC/$DETAILS_FILE
+            echo "ERROR_GETID_NOTFOUND=$ERROR_GETID_NOTFOUND"                                                  >> $WORK_LOC/$DETAILS_FILE
             echo "END_FILTER=$END_FILTER"                                                                      >> $WORK_LOC/$DETAILS_FILE
             echo "EXTRACT_FILE=$WORK_LOC/$PTNA_EXTRACT_SOURCE"                                                 >> $WORK_LOC/$DETAILS_FILE
             echo "EXTRACT_SIZE_BYTE=$EXTRACT_SIZE"                                                             >> $WORK_LOC/$DETAILS_FILE
