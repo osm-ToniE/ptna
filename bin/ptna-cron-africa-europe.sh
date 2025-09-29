@@ -46,9 +46,10 @@ done
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "removing no longer needed '*.pbf'"
 for pbf in $(find $PTNA_WORK_LOC -name '*.osm.pbf' ! -name "planet.osm.pbf")
 do
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "remove '$pbf', we don't need that any longer"
+    #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "remove '$pbf', we don't need that any longer"
     rm -f "$pbf"
 done
 
