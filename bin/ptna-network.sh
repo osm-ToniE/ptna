@@ -120,7 +120,7 @@ CATALOG_FILE="$PREFIX-catalog.json"
 STATISTICS_DB="$PREFIX-Analysis-statistics.db"
 SQ_OPTIONS="-init /dev/null -batch"
 
-if [ "$OVERPASS_REUSE_ID" ]
+if [ -n "$OVERPASS_REUSE_ID" -a -z "$PTNA_EXTRACT_SOURCE" ]
 then
     OSM_XML_FILE_ABSOLUTE="$PTNA_WORK_LOC/$OVERPASS_REUSE_ID-Data.xml"
 else
