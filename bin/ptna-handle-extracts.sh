@@ -47,6 +47,9 @@ then
         fi
     done
 
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "find '$NETWORKDIR' -maxdepth 1 -type f -name '*-osmium.config' | sort"
+    find "$NETWORKDIR" -maxdepth 1 -type f -name '*-osmium.config' | sort
+
     for config in $(find "$NETWORKDIR" -maxdepth 1 -type f -name '*-osmium.config' | sort)
     do
         PBF_FILE=$(basename ${config%-osmium.config}).osm.pbf
@@ -68,6 +71,9 @@ then
             exit 1
         fi
     done
+
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "find '$NETWORKDIR' -mindepth 1 -maxdepth 1 -type d -name '[A-Z0-9]*' | sort"
+    find "$NETWORKDIR" -mindepth 1 -maxdepth 1 -type d -name '[A-Z0-9]*' | sort
 
     for newdir in $(find "$NETWORKDIR" -mindepth 1 -maxdepth 1 -type d -name '[A-Z0-9]*' | sort)
     do
