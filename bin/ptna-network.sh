@@ -309,7 +309,7 @@ then
                         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret (0 == all found, 1 == not all found, 2 == problems with command line arguments)"
                         if [ $osmium_ret -lt 2 ]
                         then
-                            if [ $osmium_ret -eq 2 ]
+                            if [ $osmium_ret -eq 1 ]
                             then
                                 if [ -f $PTNA_WORK_LOC/log/$PREFIX.log ]
                                 then
