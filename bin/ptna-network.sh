@@ -4,6 +4,8 @@
 # Public Transport Network Analysis of a single network
 #
 
+OSM_DATA_COPYRIGHT="The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+
 PTNA_NETWORK_CALL_TIME=$(date --utc "+%s")
 PTNA_NETWORK_OPTIONS="$@"
 
@@ -354,9 +356,9 @@ then
             OSMIUM_CAT_INPUT="$WORK_LOC/$PTNA_EXTRACT_SOURCE"
         fi
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium cat --clean user --clean version --clean timestamp --clean uid --clean changeset ... $OSMIUM_CAT_INPUT ...' and add timestamp '$TS' to output file"
-        osmium cat --clean user --clean version --clean timestamp --clean uid --clean changeset --fsync         \
-                    --output-header="generator=https://ptna.openstreetmap.de osmosis_replication_timestamp=$TS" \
-                    --input-format "$INPUTFORMAT" "$OSMIUM_CAT_INPUT"                                           \
+        osmium cat --clean user --clean version --clean timestamp --clean uid --clean changeset --fsync                                       \
+                    --output-header="generator=https://ptna.openstreetmap.de osmosis_replication_timestamp=$TS copyright=$OSM_DATA_COPYRIGHT" \
+                    --input-format "$INPUTFORMAT" "$OSMIUM_CAT_INPUT"                                                                         \
                     --output-format "$OUTPUTFORMAT" --overwrite --output "$OSM_XML_FILE_ABSOLUTE"
 
         osmium_ret=$?
@@ -369,7 +371,7 @@ then
             then
                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "File '$OSM_XML_FILE_ABSOLUTE' first 10 lines:"
                 head -10 $OSM_XML_FILE_ABSOLUTE
-                OSM_BASE=$(head -10 $OSM_XML_FILE_ABSOLUTE | grep -F -m 1 'osmosis_replication_timestamp' | sed -e 's/^.*osmosis_replication_timestamp=//' -e 's/".*$//')
+                OSM_BASE=$(head -10 $OSM_XML_FILE_ABSOLUTE | grep -F -m 1 'osmosis_replication_timestamp' | sed -e 's/^.*osmosis_replication_timestamp=//' -e 's/Z.*$/Z/')
                 if [ -n "$OSM_BASE" ]
                 then
                     OSM_BASE=$(date --date "$OSM_BASE" "+%Y-%m-%d %H:%M:%S %Z")
