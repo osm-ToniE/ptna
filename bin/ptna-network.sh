@@ -315,7 +315,7 @@ then
                             then
                                 if [ -f $PTNA_WORK_LOC/log/$PREFIX.log ]
                                 then
-                                    ERROR_GETID_NOTFOUND=$(grep -E '\] Did not find \d+ object(s).' | sed -e 's/^.*Did not find //' -e 's/ object.*$//')
+                                    ERROR_GETID_NOTFOUND=$(grep -E ' Did not find .*? object' $PTNA_WORK_LOC/log/$PREFIX.log | sed -e 's/^.*Did not find //' -e 's/ object.*$//')
                                 else
                                     ERROR_GETID_NOTFOUND=1
                                 fi
