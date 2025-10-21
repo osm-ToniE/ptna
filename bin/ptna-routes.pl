@@ -1536,6 +1536,7 @@ printf STDERR "%s Printed others: %d\n", get_time(), $number_of_negative_relatio
 
 printf STDERR "%s Printing those w/o 'ref'\n", get_time()       if ( $verbose );
 $number_of_relations_without_ref = 0;
+$section = 'no-ref';
 
 my @route_types = sort( keys( %PT_relations_without_ref ) );
 
@@ -1669,6 +1670,7 @@ printf STDERR "%s Printed those with life-cycle prefix: %d\n", get_time(), $numb
 printf STDERR "%s Printing suspicious\n", get_time()       if ( $verbose );
 
 printTableInitialization( 'relation', 'type', 'route_type', 'ref', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'public_transport' );
+$section = 'suspicious';
 
 my @suspicious_relations = sort( keys( %suspicious_relations ) );
 
@@ -2369,7 +2371,7 @@ sub analyze_route_master_environment {
                     #
                     $issues_string = gettext( "Route does not exist in the given data set: %s" );
                     push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, printRelationTemplate($member_ref->{'ref'}) ) );
-                    printf STDERR "%s Error in input data: insufficient data for relations of route_master 'ref' = '%s' : r%s\n", get_time(), ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref', $member_ref->{'ref'} );
+                    printf STDERR "%s Error in input data (%s): insufficient data for relations of route_master 'ref' = '%s' : r%s\n", get_time(), $section, ($relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref', $member_ref->{'ref'});
                 }
             }
         }
@@ -6478,7 +6480,7 @@ sub CheckCompletenessOfData {
                 push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $issues_string, join(', ', map { printRelationTemplate($_); } @help_array )) );
             }
             $relation_ptr->{'missing_relation_data'}   = 1;
-            printf STDERR "%s Error in input data: insufficient data for relations of route 'ref' = '%s' : %s\n", get_time(), ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref', join( ' ', map { sprintf("r%s", $_) } @help_array ) ) ;
+            printf STDERR "%s Error in input data (%s): insufficient data for relations of route 'ref' = '%s' : %s\n", get_time(), $section, ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref', join( ' ', map { sprintf("r%s", $_) } @help_array ) );
         }
     }
     #
@@ -6507,7 +6509,7 @@ sub CheckCompletenessOfData {
                 push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $issues_string, join(', ', map { printWayTemplate($_); } @help_array )) );
             }
             $relation_ptr->{'missing_way_data'}   = 1;
-            printf STDERR "%s Error in input data: insufficient data for ways of route 'ref' = '%s' : %s\n", get_time(), ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref', join( ' ', map { sprintf("w%s", $_) } @help_array ) );
+            printf STDERR "%s Error in input data (%s): insufficient data for ways of route 'ref' = '%s' : %s\n", get_time(), $section, ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref', join( ' ', map { sprintf("w%s", $_) } @help_array ) );
         }
     }
     #
@@ -6535,7 +6537,7 @@ sub CheckCompletenessOfData {
                 push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $issues_string, join(', ', map { printNodeTemplate($_); } @help_array )) );
             }
             $relation_ptr->{'missing_node_data'}   = 1;
-            printf STDERR "%s Error in input data: insufficient data for nodes of route 'ref' = '%s' : %s\n", get_time(), ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref', join( ' ', map { sprintf("n%s", $_) } @help_array ) );
+            printf STDERR "%s Error in input data (%s): insufficient data for nodes of route 'ref' = '%s' : %s\n", get_time(), $section, ( $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : 'no ref', join( ' ', map { sprintf("n%s", $_) } @help_array ) );
         }
     }
 

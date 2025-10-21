@@ -966,14 +966,14 @@ then
                         rm -f $WORK_LOC/$SAVE_FILE
                     #fi
 
-                    ERROR_MISSING_DATA=$(grep -F ' Error in input data: insufficient data for' $WORK_LOC/$HTML_FILE.log | sed  -e 's/^.* : \s*//' -e 's/ /\n/g' | sort -u | wc -l)
+                    ERROR_MISSING_DATA=$(grep -F ' Error in input data (positive): insufficient data for' $WORK_LOC/$HTML_FILE.log | sed  -e 's/^.* : \s*//' -e 's/ /\n/g' | sort -u | wc -l)
 
                     if [ -n "$PTNA_EXTRACT_GETIDS" ]
                     then
                         # This is related to ptna issue #164 "Improve handling of missing/insufficient data when using planet extracts"
                         # First Step: collecting IDs of OSM object where data is missing
 
-                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Checking for 'Error in input data: insufficient data for ...' in log file: $WORK_LOC/$HTML_FILE.log"
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Checking for 'Error in input data (positive): insufficient data for ...' in log file: $WORK_LOC/$HTML_FILE.log"
 
                         # ensure, file exists
                         touch $WORK_LOC/$PREFIX-osmium-getid-id-file.txt
@@ -983,7 +983,7 @@ then
                         cat $WORK_LOC/$PREFIX-osmium-getid-id-file.txt > $WORK_LOC/$PREFIX-tmp-getidlist.txt
                         cat $WORK_LOC/$PREFIX-osmium-getid-id-file.txt > $WORK_LOC/$PREFIX-osmium-getid-id-file-old.txt
 
-                        grep -F 'Error in input data: insufficient data for' $WORK_LOC/$HTML_FILE.log | \
+                        grep -F 'Error in input data (positive): insufficient data for' $WORK_LOC/$HTML_FILE.log | \
                         sed  -e 's/^.* : \s*//' -e 's/ /\n/g' >> $WORK_LOC/$PREFIX-tmp-getidlist.txt
 
                         sort -u $WORK_LOC/$PREFIX-tmp-getidlist.txt > $WORK_LOC/$PREFIX-osmium-getid-id-file.txt
