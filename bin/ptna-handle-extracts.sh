@@ -60,6 +60,12 @@ then
         then
                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-split-extract.sh $PBF_FILE $config'"
 
+                # ensure directories for output files exist
+                for of in $(jq -r ' .extracts[] | .output' "$config")
+                do
+                    [ -d $(dirname "$of") ] || mkdir -p $(dirname "$of")
+                done
+
                 ptna-split-extract.sh "$PBF_FILE" "$config"
 
                 split_ret=$?
