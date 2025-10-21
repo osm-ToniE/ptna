@@ -100,7 +100,7 @@ then
         exit 1
     fi
 else
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "There is no source file (1st parameter) and/or no target file specified (2nd parameter)"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "There is no source file (1st parameter) and/or no target file specified (2nd parameter) or source file is empty"
     exit 1
 fi
 
