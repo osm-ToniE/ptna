@@ -76,7 +76,7 @@ msgid "To (to=)"
 msgstr ""
 
 msgid "Errors"
-msgstr ""
+msgstr "Ошибки"
 
 msgid "Notes"
 msgstr ""
@@ -106,7 +106,7 @@ msgid "GTFS feed"
 msgstr ""
 
 msgid "Date"
-msgstr ""
+msgstr "Дата"
 
 msgid "GTFS feed from"
 msgstr ""
@@ -130,7 +130,7 @@ msgid "Share-Taxi"
 msgstr ""
 
 msgid "Train/Suburban-Train"
-msgstr ""
+msgstr "Поезда/Электрички"
 
 msgid "Tram/Streetcar"
 msgstr ""
@@ -142,7 +142,7 @@ msgid "Light-Rail"
 msgstr ""
 
 msgid "Trolley Bus"
-msgstr ""
+msgstr "Троллейбусы"
 
 msgid "Ferry"
 msgstr "Паром"
@@ -170,19 +170,19 @@ msgid "Not clearly assigned routes"
 msgstr ""
 
 msgid "Other Public Transport Lines"
-msgstr ""
+msgstr "Другие маршруты общественного транспорта"
 
 msgid "Public Transport Lines"
-msgstr ""
+msgstr "Маршруты общественного транспорта"
 
 msgid "Public Transport Lines without 'ref'"
-msgstr ""
+msgstr "Маршруты без «ref»"
 
 msgid "Routes with life-cycle prefix"
-msgstr ""
+msgstr "Маршруты с префиксом жизненного цикла"
 
 msgid "More Relations"
-msgstr ""
+msgstr "Другие отношения"
 
 msgid "Details for 'network'-Values"
 msgstr ""
@@ -380,10 +380,10 @@ msgid "'%s' = '%s' of Route has a match with '%s' = '%s' of other Route(s)"
 msgstr ""
 
 msgid "'ref' is not set"
-msgstr ""
+msgstr "не указан 'ref'"
 
 msgid "'name' is not set"
-msgstr ""
+msgstr "не указан 'name'"
 
 #, perl-format
 msgid "'network' = '%s' should be short form"
@@ -394,7 +394,7 @@ msgid "'network' = '%s' should be long form"
 msgstr ""
 
 msgid "'network' is not set"
-msgstr ""
+msgstr "не указан 'network'"
 
 #, perl-format
 msgid "'%s' has unknown value '%s'. Add '#' as first character."
@@ -1061,7 +1061,7 @@ msgid "Error in input data: insufficient data for nodes"
 msgstr ""
 
 msgid "Date of Data"
-msgstr ""
+msgstr "Актуальность данных"
 
 msgid "Hints"
 msgstr "Подсказки"
@@ -1099,7 +1099,7 @@ msgid "Privacy policy"
 msgstr "Политика конфиденциальности"
 
 msgid "Contents"
-msgstr ""
+msgstr "Содержание"
 
 msgid "This section lists the lines that could not be clearly assigned."
 msgstr ""
@@ -1946,7 +1946,7 @@ msgid ""
 msgstr ""
 
 msgid "is not set"
-msgstr ""
+msgstr "не указан"
 
 msgid "GTFS database not found"
 msgstr ""
