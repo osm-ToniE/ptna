@@ -36,15 +36,15 @@ echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
 # first time handling of africa, so overwrite log file
-echo $(date "+%Y-%m-%d %H:%M:%S %Z") "calling ptna-handle-continent.sh africa"
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh africa"
 ptna-handle-continent.sh africa > $PTNA_WORK_LOC/ptna-handle-continent-africa.log 2>&1 < /dev/null &
 
 # last time handling of asia, so append to log file
-echo $(date "+%Y-%m-%d %H:%M:%S %Z") "calling ptna-handle-continent.sh asia"
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh asia"
 ptna-handle-continent.sh asia   > $PTNA_WORK_LOC/ptna-handle-continent-asia.log   2>&1 < /dev/null &
 
 # first time handling of europe, so overwrite log file
-echo $(date "+%Y-%m-%d %H:%M:%S %Z") "calling ptna-handle-continent.sh europe"
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh europe"
 ptna-handle-continent.sh europe > $PTNA_WORK_LOC/ptna-handle-continent-europe.log 2>&1 < /dev/null &
 
 # wait for the 3 background jobs to finish
@@ -64,9 +64,9 @@ echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "removing no longer needed '*.pbf'"
-for pbf in $(find $PTNA_WORK_LOC -name '*.osm.pbf' | grep -E -v 'africa\.|america\.|asia\.|europe\.|oceania\.')
+for pbf in $(find $PTNA_WORK_LOC -name '*.osm.pbf' | grep -E -v 'africa\.|america\.|asia\.|europe\.|oceania\.|russia\.')
 do
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "remove '$pbf', we don't need that any longer"
+    #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "remove '$pbf', we don't need that any longer"
     rm -f "$pbf"
 done
 

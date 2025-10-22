@@ -33,7 +33,7 @@ if [ -d "$PTNA_WORK_LOC" ]
 then
     cd "$PTNA_WORK_LOC"
 
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start handling continent file 'PREPARE_FOR_CONTINENT' in '$PWD'"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start handling continent file '$PREPARE_FOR_CONTINENT' in '$PWD'"
 
     if [ ! -f "$TARGET" ]
     then
