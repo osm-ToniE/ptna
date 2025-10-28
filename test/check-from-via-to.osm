@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' upload='never' generator='JOSM'>
+  <bounds minlat='48.069032' minlon='11.6330838' maxlat='48.0716416' maxlon='11.6389203' origin='CGImap 0.6.1 (13164 thorn-03.openstreetmap.org)' />
+  <bounds minlat='48.069032' minlon='11.6330838' maxlat='48.0716416' maxlon='11.6389203' origin='OpenStreetMap server' />
+  <node id='-162358' action='modify' lat='48.07137408838' lon='11.63365203155'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='Stop 1' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-162359' action='modify' lat='48.0712396603' lon='11.63570321901'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='Stop 2' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-162360' action='modify' lat='48.07051539141' lon='11.63777447658'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='Stop 4' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-162361' action='modify' lat='48.07129673329' lon='11.63363116335'>
+    <tag k='name' v='Stop 1' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-162362' action='modify' lat='48.07116184273' lon='11.63565809182'>
+    <tag k='name' v='Stop 2' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-162363' action='modify' lat='48.07059827622' lon='11.63762826179'>
+    <tag k='name' v='Stop 4' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-162364' action='modify' lat='48.07103561752' lon='11.63755480582'>
+    <tag k='name' v='Stop 3' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-162365' action='modify' lat='48.07110514179' lon='11.63775578094'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='Stop 3' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-162368' action='modify' lat='48.07060702858' lon='11.63579970528'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='Stop 5' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-162369' action='modify' lat='48.07069558371' lon='11.63580121306'>
+    <tag k='name' v='Stop 5' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <node id='-162370' action='modify' lat='48.0707064561' lon='11.63365704861'>
+    <tag k='bus' v='yes' />
+    <tag k='name' v='Stop 6' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='-162371' action='modify' lat='48.07080830262' lon='11.63368479482'>
+    <tag k='name' v='Stop 6' />
+    <tag k='public_transport' v='platform' />
+  </node>
+  <way id='-161964' action='modify'>
+    <nd ref='-162358' />
+    <nd ref='-162359' />
+    <nd ref='-162365' />
+    <tag k='highway' v='residential' />
+    <tag k='name' v='Main Street' />
+  </way>
+  <way id='-161965' action='modify'>
+    <nd ref='-162370' />
+    <nd ref='-162368' />
+    <tag k='highway' v='residential' />
+    <tag k='name' v='3rd Street' />
+  </way>
+  <way id='-161974' action='modify'>
+    <nd ref='-162360' />
+    <nd ref='-162365' />
+    <tag k='highway' v='residential' />
+    <tag k='name' v='3rd Street' />
+  </way>
+  <way id='-161990' action='modify'>
+    <nd ref='-162368' />
+    <nd ref='-162360' />
+    <tag k='highway' v='residential' />
+    <tag k='name' v='3rd Street' />
+  </way>
+  <relation id='-112975' action='modify'>
+    <member type='node' ref='-162358' role='stop' />
+    <member type='node' ref='-162361' role='platform' />
+    <member type='node' ref='-162359' role='stop' />
+    <member type='node' ref='-162362' role='platform' />
+    <member type='node' ref='-162365' role='stop' />
+    <member type='node' ref='-162364' role='platform' />
+    <member type='node' ref='-162360' role='stop' />
+    <member type='node' ref='-162363' role='platform' />
+    <member type='node' ref='-162368' role='stop' />
+    <member type='node' ref='-162369' role='platform' />
+    <member type='node' ref='-162370' role='stop' />
+    <member type='node' ref='-162371' role='platform' />
+    <member type='way' ref='-161964' role='' />
+    <member type='way' ref='-161974' role='' />
+    <member type='way' ref='-161990' role='' />
+    <member type='way' ref='-161965' role='' />
+    <tag k='from' v='Stop 1' />
+    <tag k='name' v='Good 1: Stop 1 =&gt; Stop 2 =&gt; Stop 3 =&gt; Stop 4 =&gt; Stop 5 =&gt; Stop 6' />
+    <tag k='network' v='Network' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='1' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='Stop 6' />
+    <tag k='type' v='route' />
+    <tag k='via' v='Stop 2;Stop 3;Stop 4;Stop 5' />
+  </relation>
+  <relation id='-113017' action='modify'>
+    <member type='node' ref='-162358' role='stop' />
+    <member type='node' ref='-162361' role='platform' />
+    <member type='node' ref='-162359' role='stop' />
+    <member type='node' ref='-162362' role='platform' />
+    <member type='node' ref='-162365' role='stop' />
+    <member type='node' ref='-162364' role='platform' />
+    <member type='node' ref='-162360' role='stop' />
+    <member type='node' ref='-162363' role='platform' />
+    <member type='node' ref='-162368' role='stop' />
+    <member type='node' ref='-162369' role='platform' />
+    <member type='way' ref='-161964' role='' />
+    <member type='way' ref='-161974' role='' />
+    <member type='way' ref='-161990' role='' />
+    <tag k='from' v='Stop 1' />
+    <tag k='name' v='Good 2: Stop 1 =&gt; Stop 3 =&gt; Stop 5' />
+    <tag k='network' v='Network' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='2' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='Stop 5' />
+    <tag k='type' v='route' />
+    <tag k='via' v='Stop 3' />
+  </relation>
+</osm>
