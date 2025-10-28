@@ -106,6 +106,7 @@ my $check_access                    = undef;
 my $check_against_gtfs              = undef;
 my $check_bus_stop                  = undef;
 my $check_dates                     = undef;
+my $check_from_via_to               = undef;
 my $check_gtfs                      = undef;
 my $check_motorway_link             = undef;
 my $check_name                      = undef;
@@ -156,6 +157,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'check-against-gtfs=s'          =>  \$check_against_gtfs,           # --check-against-gtfs              check against GTFS data using 'gtfs:*' tags in relation (=tags) or using CVS data in 'routes_file' (=csv) or both (=tags,csv)
             'check-bus-stop'                =>  \$check_bus_stop,               # --check-bus-stop                  check for strict highway=bus_stop on nodes only
             'check-dates'                   =>  \$check_dates,                  # --check-dates                     check dates to follo ISO format: YYYY-MM-DD
+            'check-from-via-to:s'           =>  \$check_from_via_to,            # --check-from-via-to               check 'from', 'via' and 'to' against corresponding 'name' of platforms
             'check-gtfs'                    =>  \$check_gtfs,                   # --check-gtfs                      check "gtfs:*" tags for validity/uniqueness/...
             'check-motorway-link'           =>  \$check_motorway_link,          # --check-motorway-link             check for motorway_link followed/preceeded by motorway or trunk
             'check-name'                    =>  \$check_name,                   # --check-name                      check for strict name conventions (name='... ref: from => to'
@@ -235,6 +237,10 @@ if ( $check_service_type ) {
     $check_way_type = 1;
 }
 
+if ( defined($check_from_via_to) && $check_from_via_to eq '' ) {
+    $check_from_via_to = 'ON';
+}
+
 if ( $csv_separator ) {
     if ( length($csv_separator) > 1 ) {
         printf STDERR "%s ptna-routes.pl: wrong value for option: '--separator' = '%s' - setting it to '--separator' = ';'\n", get_time(), $csv_separator;
@@ -288,6 +294,7 @@ if ( $verbose ) {
     printf STDERR "%20s--check-against-gtfs='%s'\n",       ' ', $check_against_gtfs         ? $check_against_gtfs          : '';
     printf STDERR "%20s--check-bus-stop='%s'\n",           ' ', $check_bus_stop             ? 'ON'          : 'OFF';
     printf STDERR "%20s--check-dates='%s'\n",              ' ', $check_dates                ? 'ON'          : 'OFF';
+    printf STDERR "%20s--check-from-via-to='%s'\n",        ' ', $check_from_via_to          ? $check_from_via_to           : 'OFF';
     printf STDERR "%20s--check-gtfs='%s'\n",               ' ', $check_gtfs                 ? 'ON'          : 'OFF';
     printf STDERR "%20s--check-motorway-link='%s'\n",      ' ', $check_motorway_link        ? 'ON'          : 'OFF';
     printf STDERR "%20s--check-name='%s'\n",               ' ', $check_name                 ? 'ON'          : 'OFF';
@@ -3340,6 +3347,10 @@ sub analyze_ptv2_route_relation {
         $return_code += CheckNameRefFromViaToPTV2( $relation_ptr );
     }
 
+    if ( $check_from_via_to ) {
+        $return_code += CheckFromViaToPlatformNamesPTV2( $relation_ptr );
+    }
+
     if ( $relation_route_highways[0] && $relation_route_highways[1] ) {
         #
         # special check for route being sorted in reverse order and starting with a oneway (except closed way)
@@ -5944,6 +5955,211 @@ sub CheckNameRefFromViaToPTV2 {
                 #push( @{$relation_ptr->{'__issues__'}}, $issues_string );
                 $return_code++;
             }
+        }
+    }
+
+    return $return_code;
+}
+
+
+#############################################################################################
+#
+# values of 'from', 'via' and 'to' against 'name' of platforms
+#
+#############################################################################################
+
+sub CheckFromViaToPlatformNamesPTV2 {
+    my $relation_ptr = shift;
+    my $return_code  = 0;
+
+    printf STDERR "CheckFromViaToPlatformNamesPTV2() : %s, ref = %s\n", $relation_ptr->{'id'}, $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : '';
+    if ( $relation_ptr && $relation_ptr->{'tag'} ) {
+        my $from                = $relation_ptr->{'tag'}->{'from'} || '';
+        my $to                  = $relation_ptr->{'tag'}->{'to'}   || '';
+        my $via                 = $relation_ptr->{'tag'}->{'via'}  || '';
+        my $number_of_platforms = scalar(@{$relation_ptr->{'role_platform'}});
+
+        if ( $from ) {
+            printf STDERR "    CheckFromViaToPlatformNamesPTV2() : from = %s, number of platforms = %d\n", $relation_ptr->{'tag'}->{'from'}, $number_of_platforms       if ( $debug );
+            # > 0: there must at least be one platform, the 'from' one
+            if ( $number_of_platforms                        > 0 &&
+                 ${$relation_ptr->{'role_platform'}}[0]          &&
+                 ${$relation_ptr->{'role_platform'}}[0]->{'ref'}    ) {
+                my $platform_id   = ${$relation_ptr->{'role_platform'}}[0]->{'ref'};
+                my $platform_type = ${$relation_ptr->{'role_platform'}}[0]->{'type'};
+                my $platform_name = '';
+                printf STDERR "        CheckFromViaToPlatformNamesPTV2() : platform id = %s, plattform type = %s\n", $platform_id, $platform_type       if ( $debug );
+                if ( $platform_type eq 'relation'                &&
+                     $RELATIONS{$platform_id}                    &&
+                     $RELATIONS{$platform_id}->{'tag'}           &&
+                     $RELATIONS{$platform_id}->{'tag'}->{'name'}    ) {
+                    $platform_name = $RELATIONS{$platform_id}->{'tag'}->{'name'} || '';
+                    printf STDERR "            CheckFromViaToPlatformNamesPTV2() Relation : platform name = %s\n", $platform_name       if ( $debug );
+                } elsif ( $platform_type eq 'way'                &&
+                          $WAYS{$platform_id}                    &&
+                          $WAYS{$platform_id}->{'tag'}           &&
+                          $WAYS{$platform_id}->{'tag'}->{'name'}    ) {
+                    my $first_platform_name = $WAYS{$platform_id}->{'tag'}->{'name'} || '';
+                    printf STDERR "            CheckFromViaToPlatformNamesPTV2() Way : platform name = %s\n", $first_platform_name       if ( $debug );
+                } elsif ( $platform_type eq 'node'                &&
+                          $NODES{$platform_id}                    &&
+                          $NODES{$platform_id}->{'tag'}           &&
+                          $NODES{$platform_id}->{'tag'}->{'name'}    ) {
+                    my $first_platform_name = $NODES{$platform_id}->{'tag'}->{'name'} || '';
+                    printf STDERR "            CheckFromViaToPlatformNamesPTV2() : platform name = %s\n", $first_platform_name       if ( $debug );
+                }
+                if ( $platform_name && $from ne $platform_name ) {
+                    if ( $check_from_via_to eq 'relaxed' ) {
+                        ;
+                    } else {    # strict check for being identical
+                        $notes_string = gettext( "PTv2 route: 'from' = '%s' is not equal to 'name' of first platform: %s" );
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, $from, printXxxTemplate($platform_type,$platform_id,'name')) );
+                        $return_code++;
+                    }
+                }
+            }
+        } else {
+            if ( ! $check_name ) {
+                $notes_string = gettext( "PTv2 route: 'from' is not set" );
+                push( @{$relation_ptr->{'__notes__'}}, $notes_string );
+                $return_code++;
+            }
+        }
+
+        if ( $to ) {
+            printf STDERR "    CheckFromViaToPlatformNamesPTV2() : to = %s, number of platforms = %d\n", $relation_ptr->{'tag'}->{'to'}, $number_of_platforms       if ( $debug );
+            # > 1 : first platform is always considered as representing 'from'
+            if ( $number_of_platforms                                             > 1 &&
+                 ${$relation_ptr->{'role_platform'}}[$number_of_platforms-1]          &&
+                 ${$relation_ptr->{'role_platform'}}[$number_of_platforms-1]->{'ref'}    ) {
+                my $platform_id   = ${$relation_ptr->{'role_platform'}}[$number_of_platforms-1]->{'ref'};
+                my $platform_type = ${$relation_ptr->{'role_platform'}}[$number_of_platforms-1]->{'type'};
+                my $platform_name = '';
+                printf STDERR "        CheckFromViaToPlatformNamesPTV2() : platform id = %s, plattform type = %s\n", $platform_id, $platform_type       if ( $debug );
+                if ( $platform_type eq 'relation'                &&
+                     $RELATIONS{$platform_id}                    &&
+                     $RELATIONS{$platform_id}->{'tag'}           &&
+                     $RELATIONS{$platform_id}->{'tag'}->{'name'}    ) {
+                    $platform_name = $RELATIONS{$platform_id}->{'tag'}->{'name'} || '';
+                    printf STDERR "            CheckFromViaToPlatformNamesPTV2() Relation : platform name = %s\n", $platform_name       if ( $debug );
+                } elsif ( $platform_type eq 'way'                &&
+                          $WAYS{$platform_id}                    &&
+                          $WAYS{$platform_id}->{'tag'}           &&
+                          $WAYS{$platform_id}->{'tag'}->{'name'}    ) {
+                    $platform_name = $WAYS{$platform_id}->{'tag'}->{'name'} || '';
+                    printf STDERR "            CheckFromViaToPlatformNamesPTV2() Way : platform name = %s\n", $platform_name       if ( $debug );
+                } elsif ( $platform_type eq 'node'                &&
+                          $NODES{$platform_id}                    &&
+                          $NODES{$platform_id}->{'tag'}           &&
+                          $NODES{$platform_id}->{'tag'}->{'name'}    ) {
+                    $platform_name = $NODES{$platform_id}->{'tag'}->{'name'} || '';
+                    printf STDERR "            CheckFromViaToPlatformNamesPTV2() Node : platform name = %s\n", $platform_name       if ( $debug );
+                }
+                if ( $platform_name && $to ne $platform_name ) {
+                    if ( $check_from_via_to eq 'relaxed' ) {
+                        ;
+                    } else {    # strict check for being identical
+                        $notes_string = gettext( "PTv2 route: 'to' = '%s' is not equal to 'name' of last platform: %s" );
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, $to, printXxxTemplate($platform_type,$platform_id,'name')) );
+                        $return_code++;
+                    }
+                }
+            }
+        } else {
+            if ( ! $check_name ) {
+                $notes_string = gettext( "PTv2 route: 'to' is not set" );
+                push( @{$relation_ptr->{'__notes__'}}, $notes_string );
+                $return_code++;
+            }
+        }
+
+        if ( $via ) {
+            printf STDERR "    CheckFromViaToPlatformNamesPTV2() : via = %s, number of platforms = %d\n", $relation_ptr->{'tag'}->{'via'}, $number_of_platforms       if ( $debug );
+            my @via_parts     = split( ";", $via );
+            my $via_number    = scalar(@via_parts);
+            # > 2: via platforms cannot be first ('from') and last ('to')
+            if ( $number_of_platforms > 2 ) {                   # we have more than first and last platform
+                my @via_parts     = split( ";", $via );
+                my $via_number    = scalar(@via_parts);
+                my $via_part      = '';
+                my $platform_id   = '';
+                my $platform_type = '';
+                my $platform_name = '';
+                my @via_matches   = ();
+                # collect the information
+                for ( my $vindex = 0; $vindex < $via_number; $vindex++ ) {
+                    $via_part = $via_parts[$vindex];
+                    $via_part =~ s/^\s*//;
+                    $via_part =~ s/\s*$//;
+                    printf STDERR "        CheckFromViaToPlatformNamesPTV2() via index = %d, via part = %s\n", $vindex, $via_part       if ( $debug );
+                    for ( my $pindex = 1; $pindex < $number_of_platforms-1; $pindex++ ) {
+                        $platform_id   = ${$relation_ptr->{'role_platform'}}[$pindex]->{'ref'};
+                        $platform_type = ${$relation_ptr->{'role_platform'}}[$pindex]->{'type'};
+                        $platform_name = '';
+                        printf STDERR "            CheckFromViaToPlatformNamesPTV2() : platform index = %d, platform id = %s, plattform type = %s\n", $pindex, $platform_id, $platform_type       if ( $debug );
+                        if ( $platform_type eq 'relation'                &&
+                             $RELATIONS{$platform_id}                    &&
+                             $RELATIONS{$platform_id}->{'tag'}           &&
+                             $RELATIONS{$platform_id}->{'tag'}->{'name'}    ) {
+                            $platform_name = $RELATIONS{$platform_id}->{'tag'}->{'name'} || '';
+                            printf STDERR "                    CheckFromViaToPlatformNamesPTV2() Relation : platform name = %s\n", $platform_name       if ( $debug );
+                        } elsif ( $platform_type eq 'way'                &&
+                                  $WAYS{$platform_id}                    &&
+                                  $WAYS{$platform_id}->{'tag'}           &&
+                                  $WAYS{$platform_id}->{'tag'}->{'name'}    ) {
+                            $platform_name = $WAYS{$platform_id}->{'tag'}->{'name'} || '';
+                            printf STDERR "                    CheckFromViaToPlatformNamesPTV2() Way : platform name = %s\n", $platform_name       if ( $debug );
+                        } elsif ( $platform_type eq 'node'                &&
+                                  $NODES{$platform_id}                    &&
+                                  $NODES{$platform_id}->{'tag'}           &&
+                                  $NODES{$platform_id}->{'tag'}->{'name'}    ) {
+                            $platform_name = $NODES{$platform_id}->{'tag'}->{'name'} || '';
+                            printf STDERR "                    CheckFromViaToPlatformNamesPTV2() Node : platform name = %s\n", $platform_name       if ( $debug );
+                        }
+                        if ( $platform_name ) {
+                            if ( $via_part eq $platform_name ) {
+                                $via_matches[$vindex]->{'exact'}->{$pindex}->{$platform_id}->{$platform_type} = $platform_name;
+                            } else {
+                                if ( $check_from_via_to eq 'relaxed' ) {
+                                    $via_matches[$vindex]->{'relaxed'}->{$pindex}->{$platform_id}->{$platform_type} = $platform_name;;
+                                }
+                            }
+                        }
+                    }
+                }
+                # print report
+                for ( my $vindex = 0; $vindex < $via_number; $vindex++ ) {
+                    my @vindex_pindex = keys ( %{$via_matches[$vindex]->{'exact'}} );
+                    my $matches       = scalar ( @vindex_pindex );
+
+                    if ( $matches == 0 ) {
+                        printf STDERR "    CheckFromViaToPlatformNamesPTV2(): no match for via index = %d, via part = %s\n", $vindex, $via_parts[$vindex]       if ( $debug );
+                        $notes_string = gettext( "PTv2 route: 'via' is set. %d. via-part ('%s') does not match with any platform name." );
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string,$vindex+1,$via_parts[$vindex]) );
+                        $return_code++;
+                    } elsif ( $matches > 1 ) {
+                        printf STDERR "    CheckFromViaToPlatformNamesPTV2(): multiple matches for via index = %d, via part = %s with platforms = %s\n", $vindex, $via_parts[$vindex], join( ',', @vindex_pindex)       if ( $debug );
+                        $notes_string     = gettext( "PTv2 route: 'via' is set. %d. via-part ('%s') matches more than one platform name" );
+                        my $helpstring    = sprintf( $notes_string, $vindex, $via_parts[$vindex] );
+                        my @help_array    = map { ${$relation_ptr->{'role_platform'}}[$_] } @vindex_pindex;
+                        my $num_of_errors = scalar(@help_array);
+                        if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                            push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printXxxTemplate($_->{'type'},$_->{'ref'},'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                        } else {
+                            push( @{$relation_ptr->{'__notes__'}}, sprintf("%s: %s", $helpstring, join(', ', map { printXxxTemplate($_->{'type'},$_->{'ref'},'name;ref'); } @help_array )) );
+                        }
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string,$vindex,$via_parts[$vindex]) );
+                        $return_code++;
+                    } else {
+                        printf STDERR "    CheckFromViaToPlatformNamesPTV2(): exact match for via index = %d, via part = %s with platform index = %d\n", $vindex, $via_parts[$vindex], $vindex_pindex[0]       if ( $debug );
+                    }
+                }
+            } else {
+                printf STDERR "    CheckFromViaToPlatformNamesPTV2(): 'via' is set (%d parts), but there are only %d platforms\n", $via_number, $number_of_platforms       if ( $debug );
+                $notes_string = gettext( "PTv2 route: 'via' is set (%d parts), but there are only %d platforms. Route should have at least %d platforms: 'from', 'via', ..., 'to'." );
+                push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string,$via_number,$number_of_platforms,$via_number+2) );
+                $return_code++;
+           }
         }
     }
 
