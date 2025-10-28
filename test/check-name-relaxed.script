@@ -23,7 +23,7 @@ then
         ROUTES_OPTION="--routes-file=$TEST-Routes.txt"
     fi
 
-    ptna-routes.pl --ptv1-compatibility=allow --max-error=10 --check-access --check-name-relaxed --check-stop-position --check-sequence --check-version --check-motorway-link \
+    ptna-routes.pl --ptv1-compatibility=allow --max-error=10 --check-access --check-name-relaxed --check-from-via-to --check-stop-position --check-sequence --check-version --check-motorway-link \
                    --multiple-ref-type-entries=analyze --positive-notes --coloured-sketchline --verbose --debug --relaxed-begin-end-for=train \
                    --test --osm-xml-file=$TESTFILE $ROUTES_OPTION > $TEST.html 2> $TEST.log
 
