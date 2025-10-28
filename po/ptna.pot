@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-09-22 18:23+0200\n"
+"POT-Creation-Date: 2025-10-28 17:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -850,6 +850,32 @@ msgid ""
 msgstr ""
 
 #, perl-format
+msgid "PTv2 route: 'from' = '%s' is not equal to 'name' of first platform: %s"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: 'to' = '%s' is not equal to 'name' of last platform: %s"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'via' is set. %d. via-part ('%s') does not match with any "
+"platform name."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'via' is set. %d. via-part ('%s') matches more than one platform "
+"name"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'via' is set (%d parts), but there are only %d platforms. Route "
+"should have at least %d platforms: 'from', 'via', ..., 'to'."
+msgstr ""
+
+#, perl-format
 msgid "PTv2 route: using wrong way type (%s)"
 msgstr ""
 
@@ -1567,9 +1593,7 @@ msgstr ""
 msgid "The access restriction does not comply with the map features."
 msgstr ""
 
-msgid ""
-"Please consult the OSM Wiki: https://wiki.openstreetmap.org/wiki/"
-"Map_Features#Restrictions"
+msgid "Please consult the OSM Wiki"
 msgstr ""
 
 msgid "This error is related to:"
@@ -1672,6 +1696,11 @@ msgstr ""
 msgid ""
 "More relaxed check of 'name' ='...: A => B', where 'A' must be part of "
 "'from' and 'B' must be part of 'to'."
+msgstr ""
+
+msgid ""
+"Check that 'from', 'via' and 'to' match with corresponding platform 'name' "
+"values."
 msgstr ""
 
 msgid ""
