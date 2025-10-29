@@ -1,0 +1,16 @@
+<pre>
+= Test file for --check-from-via-to=no/exact/relaxed
+
+== Positive, no errors
+
+1;bus;!All stops in via!;Stop 1;Stop 6;
+2;bus;!One stop in via!;Stop 1;Stop 5;
+
+== Negative
+- --check-from-via-to=''no'' => !!!no error!!!
+-
+- --check-from-via-to=''exact'' => !!!error = ...!!!
+-
+- --check-from-via-to=''relaxed'' => !!!error = ...!!!
+-
+</pre>
