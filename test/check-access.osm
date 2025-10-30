@@ -1,11 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <osm version='0.6' upload='never' generator='JOSM'>
-  <bounds minlat='48.7201523' minlon='13.532238' maxlat='48.7204213' maxlon='13.5327423' origin='CGImap 0.6.0 (30594 thorn-01.openstreetmap.org)' />
-  <bounds minlat='48.7201523' minlon='13.532238' maxlat='48.7204213' maxlon='13.5327423' origin='OpenStreetMap server' />
-  <bounds minlat='48.7198471' minlon='13.531601' maxlat='48.7205991' maxlon='13.5331674' origin='CGImap 0.6.0 (30584 thorn-01.openstreetmap.org)' />
-  <bounds minlat='48.7198471' minlon='13.531601' maxlat='48.7205991' maxlon='13.5331674' origin='OpenStreetMap server' />
-  <bounds minlat='48.7196427' minlon='13.5316157' maxlat='48.7205841' maxlon='13.5332894' origin='openstreetmap-cgimap 2.1.0 (740511 spike-06.openstreetmap.org)' />
-  <bounds minlat='48.7196427' minlon='13.5316157' maxlat='48.7205841' maxlon='13.5332894' origin='OpenStreetMap server' />
   <node id='-152043' action='modify' lat='48.72038791521' lon='13.53308975558'>
     <tag k='bus' v='yes' />
     <tag k='name' v='C-Village' />

@@ -9,8 +9,21 @@
 == Negative
 - --check-from-via-to=''no'' => !!!no error!!!
 -
-- --check-from-via-to=''exact'' => !!!error = ...!!!
+- --check-from-via-to=''exact'' => !!!error = PTv2 route: 'from' = 'Stop 6' is not equal to 'name' of first platform: Node 'Stop 1'!!!
 -
-- --check-from-via-to=''relaxed'' => !!!error = ...!!!
+- --check-from-via-to=''exact'' => !!!error = PTv2 route: 'to' = 'Stop 1' is not equal to 'name' of last platform: Node 'Stop 6'!!!
 -
+- --check-from-via-to=''relaxed'' => !!!no error!!!
+
+3;bus;!Wrong 'from' and 'to' 3!;Stop 6;Stop 1;
+-
+- --check-from-via-to=''no'' => !!!no error!!!
+-
+- --check-from-via-to=''exact'' => !!!no error!!!
+-
+- --check-from-via-to=''relaxed'' => !!!no error!!!
+-
+4;bus;!Wrong sequence in 'via' 4!;Stop 1;Stop 6;
+
+
 </pre>

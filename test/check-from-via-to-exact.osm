@@ -132,4 +132,58 @@
     <tag k='type' v='route' />
     <tag k='via' v='Stop 3' />
   </relation>
+  <relation id='-113030' action='modify'>
+    <member type='node' ref='-162358' role='stop' />
+    <member type='node' ref='-162361' role='platform' />
+    <member type='node' ref='-162359' role='stop' />
+    <member type='node' ref='-162362' role='platform' />
+    <member type='node' ref='-162365' role='stop' />
+    <member type='node' ref='-162364' role='platform' />
+    <member type='node' ref='-162360' role='stop' />
+    <member type='node' ref='-162363' role='platform' />
+    <member type='node' ref='-162368' role='stop' />
+    <member type='node' ref='-162369' role='platform' />
+    <member type='node' ref='-162370' role='stop' />
+    <member type='node' ref='-162371' role='platform' />
+    <member type='way' ref='-161964' role='' />
+    <member type='way' ref='-161974' role='' />
+    <member type='way' ref='-161990' role='' />
+    <member type='way' ref='-161965' role='' />
+    <tag k='from' v='Stop 1' />
+    <tag k='name' v='Wrong sequence in &apos;via&apos; 4: Stop 1 =&gt; Stop 3 =&gt; Stop 2 =&gt; Stop 5 =&gt; Stop 4 =&gt; Stop 6' />
+    <tag k='network' v='Network' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='4' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='Stop 6' />
+    <tag k='type' v='route' />
+    <tag k='via' v='Stop 3;Stop 2;Stop 5;Stop 4' />
+  </relation>
+  <relation id='-113032' action='modify'>
+    <member type='node' ref='-162358' role='stop' />
+    <member type='node' ref='-162361' role='platform' />
+    <member type='node' ref='-162359' role='stop' />
+    <member type='node' ref='-162362' role='platform' />
+    <member type='node' ref='-162365' role='stop' />
+    <member type='node' ref='-162364' role='platform' />
+    <member type='node' ref='-162360' role='stop' />
+    <member type='node' ref='-162363' role='platform' />
+    <member type='node' ref='-162368' role='stop' />
+    <member type='node' ref='-162369' role='platform' />
+    <member type='node' ref='-162370' role='stop' />
+    <member type='node' ref='-162371' role='platform' />
+    <member type='way' ref='-161964' role='' />
+    <member type='way' ref='-161974' role='' />
+    <member type='way' ref='-161990' role='' />
+    <member type='way' ref='-161965' role='' />
+    <tag k='from' v='Stop 6' />
+    <tag k='name' v='Wrong &apos;from&apos; and &apos;to&apos; 3: Stop 6 =&gt; Stop 2 =&gt; Stop 3 =&gt; Stop 4 =&gt; Stop 5 =&gt; Stop 1' />
+    <tag k='network' v='Network' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='3' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='Stop 1' />
+    <tag k='type' v='route' />
+    <tag k='via' v='Stop 2;Stop 3;Stop 4;Stop 5' />
+  </relation>
 </osm>
