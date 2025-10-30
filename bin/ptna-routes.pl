@@ -5999,15 +5999,16 @@ sub CheckFromViaToPlatformNamesPTV2 {
                           $WAYS{$platform_id}                    &&
                           $WAYS{$platform_id}->{'tag'}           &&
                           $WAYS{$platform_id}->{'tag'}->{'name'}    ) {
-                    my $first_platform_name = $WAYS{$platform_id}->{'tag'}->{'name'} || '';
-                    printf STDERR "            CheckFromViaToPlatformNamesPTV2() Way : platform name = %s\n", $first_platform_name       if ( $debug );
+                    $platform_name = $WAYS{$platform_id}->{'tag'}->{'name'} || '';
+                    printf STDERR "            CheckFromViaToPlatformNamesPTV2() Way : platform name = %s\n", $platform_name       if ( $debug );
                 } elsif ( $platform_type eq 'node'                &&
                           $NODES{$platform_id}                    &&
                           $NODES{$platform_id}->{'tag'}           &&
                           $NODES{$platform_id}->{'tag'}->{'name'}    ) {
-                    my $first_platform_name = $NODES{$platform_id}->{'tag'}->{'name'} || '';
-                    printf STDERR "            CheckFromViaToPlatformNamesPTV2() : platform name = %s\n", $first_platform_name       if ( $debug );
+                    $platform_name = $NODES{$platform_id}->{'tag'}->{'name'} || '';
+                    printf STDERR "            CheckFromViaToPlatformNamesPTV2() : platform name = %s\n", $platform_name       if ( $debug );
                 }
+                printf STDERR "                CheckFromViaToPlatformNamesPTV2() : from = %s, platform name = %s\n", $from, $platform_name       if ( $debug );
                 if ( $platform_name && $from ne $platform_name ) {
                     if ( $check_from_via_to eq 'relaxed' ) {
                         ;
@@ -6055,6 +6056,7 @@ sub CheckFromViaToPlatformNamesPTV2 {
                     $platform_name = $NODES{$platform_id}->{'tag'}->{'name'} || '';
                     printf STDERR "            CheckFromViaToPlatformNamesPTV2() Node : platform name = %s\n", $platform_name       if ( $debug );
                 }
+                printf STDERR "                CheckFromViaToPlatformNamesPTV2() : to = %s, platform name = %s\n", $to, $platform_name       if ( $debug );
                 if ( $platform_name && $to ne $platform_name ) {
                     if ( $check_from_via_to eq 'relaxed' ) {
                         ;
@@ -6116,6 +6118,7 @@ sub CheckFromViaToPlatformNamesPTV2 {
                             $platform_name = $NODES{$platform_id}->{'tag'}->{'name'} || '';
                             printf STDERR "                    CheckFromViaToPlatformNamesPTV2() Node : platform name = %s\n", $platform_name       if ( $debug );
                         }
+                        printf STDERR "                        CheckFromViaToPlatformNamesPTV2() : via-part = %s, platform name = %s\n", $via_part, $platform_name       if ( $debug );
                         if ( $platform_name ) {
                             if ( $via_part eq $platform_name ) {
                                 $via_matches[$vindex]->{'exact'}->{$pindex}->{$platform_id}->{$platform_type} = $platform_name;
