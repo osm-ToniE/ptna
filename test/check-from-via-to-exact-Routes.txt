@@ -1,29 +1,84 @@
 <pre>
 = Test file for --check-from-via-to=no/exact/relaxed
 
-== Positive, no errors
+== Positive, no notes
 
 1;bus;!All stops in via!;Stop 1;Stop 6;
 2;bus;!One stop in via!;Stop 1;Stop 5;
 
 == Negative
-- --check-from-via-to=''no'' => !!!no error!!!
+=== Bus 3
+- --check-from-via-to=''no'' => !!!no notes!!!
 -
-- --check-from-via-to=''exact'' => !!!error = PTv2 route: 'from' = 'Stop 6' is not equal to 'name' of first platform: Node 'Stop 1'!!!
+- --check-from-via-to=''exact'' => !!!notes = PTv2 route: 'from' = 'Stop 6' is not equal to 'name' of first platform: Node 'Stop 1'!!!
 -
-- --check-from-via-to=''exact'' => !!!error = PTv2 route: 'to' = 'Stop 1' is not equal to 'name' of last platform: Node 'Stop 6'!!!
+- --check-from-via-to=''exact'' => !!!notes = PTv2 route: 'to' = 'Stop 1' is not equal to 'name' of last platform: Node 'Stop 6'!!!
 -
-- --check-from-via-to=''relaxed'' => !!!no error!!!
-
+- --check-from-via-to=''relaxed'' => !!!no notes!!!
 3;bus;!Wrong 'from' and 'to' 3!;Stop 6;Stop 1;
+
+=== Bus 4
+- --check-from-via-to=''no'' => !!!no notes!!!
 -
-- --check-from-via-to=''no'' => !!!no error!!!
+- --check-from-via-to=''exact'' => !!!no notes!!!
 -
-- --check-from-via-to=''exact'' => !!!no error!!!
--
-- --check-from-via-to=''relaxed'' => !!!no error!!!
+- --check-from-via-to=''relaxed'' => !!!no notes!!!
 -
 4;bus;!Wrong sequence in 'via' 4!;Stop 1;Stop 6;
+
+=== Bus 5
+- --check-from-via-to=''no'' => !!!no notes!!!
+-
+- --check-from-via-to=''exact'' => !!!PTv2 route: 'via' is set, but there are less than 3 platforms (=0).!!!
+-
+- --check-from-via-to=''relaxed'' => !!!PTv2 route: 'via' is set, but there are less than 3 platforms (=0).!!!
+-
+5;bus;!Wrong number of platforms=0, via=1!;Stop 4;Stop 6;
+
+=== Bus 6
+- --check-from-via-to=''no'' => !!!no notes!!!
+-
+- --check-from-via-to=''exact'' => !!!PTv2 route: 'via' is set, but there are less than 3 platforms (=1).!!!
+-
+- --check-from-via-to=''relaxed'' => !!!PTv2 route: 'via' is set, but there are less than 3 platforms (=1).!!!
+-
+6;bus;!Wrong number of platforms=1, via=1!;Stop 4;Stop 6;
+
+=== Bus 7
+- --check-from-via-to=''no'' => !!!no notes!!!
+-
+- --check-from-via-to=''exact'' => !!!PTv2 route: 'via' is set, but there are less than 3 platforms (=2).!!!
+-
+- --check-from-via-to=''relaxed'' => !!!PTv2 route: 'via' is set, but there are less than 3 platforms (=2).!!!
+-
+7;bus;!Wrong number of platforms=2, via=1!;Stop 4;Stop 6;
+
+=== Bus 8
+- --check-from-via-to=''no'' => !!!no notes!!!
+-
+- --check-from-via-to=''exact'' => !!!PTv2 route: 'via' is set (2 parts), but there are less than 4 platforms (=0).!!!
+-
+- --check-from-via-to=''relaxed'' => !!!PTv2 route: 'via' is set (2 parts), but there are less than 4 platforms (=0).!!!
+-
+8;bus;!Wrong number of platforms=0, via=2!;Stop 3;Stop 6;
+
+=== Bus 9
+- --check-from-via-to=''no'' => !!!no notes!!!
+-
+- --check-from-via-to=''exact'' => !!!PTv2 route: 'via' is set (2 parts), but there are less than 4 platforms (=1).!!!
+-
+- --check-from-via-to=''relaxed'' => !!!PTv2 route: 'via' is set (2 parts), but there are less than 4 platforms (=1).!!!
+-
+9;bus;!Wrong number of platforms=1, via=2!;Stop 3;Stop 6;
+
+=== Bus 10
+- --check-from-via-to=''no'' => !!!no notes!!!
+-
+- --check-from-via-to=''exact'' => !!!PTv2 route: 'via' is set (2 parts), but there are less than 4 platforms (=2).!!!
+-
+- --check-from-via-to=''relaxed'' => !!!PTv2 route: 'via' is set (2 parts), but there are less than 4 platforms (=2).!!!
+-
+10;bus;!Wrong number of platforms=2, via=2!;Stop 3;Stop 6;
 
 
 </pre>

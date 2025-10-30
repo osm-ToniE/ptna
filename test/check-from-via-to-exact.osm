@@ -186,4 +186,97 @@
     <tag k='type' v='route' />
     <tag k='via' v='Stop 2;Stop 3;Stop 4;Stop 5' />
   </relation>
+  <relation id='-113036' action='modify'>
+    <member type='way' ref='-161990' role='' />
+    <member type='way' ref='-161965' role='' />
+    <tag k='from' v='Stop 4' />
+    <tag k='name' v='Wrong number of platforms=0, via=1 5: Stop 4 =&gt; Stop 5 =&gt; Stop 6' />
+    <tag k='network' v='Network' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='5' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='Stop 6' />
+    <tag k='type' v='route' />
+    <tag k='via' v='Stop 5' />
+  </relation>
+  <relation id='-113041' action='modify'>
+    <member type='node' ref='-162360' role='stop' />
+    <member type='node' ref='-162363' role='platform' />
+    <member type='way' ref='-161990' role='' />
+    <member type='way' ref='-161965' role='' />
+    <tag k='from' v='Stop 4' />
+    <tag k='name' v='Wrong number of platforms=1, via=1 6: Stop 4 =&gt; Stop 5 =&gt; Stop 6' />
+    <tag k='network' v='Network' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='6' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='Stop 6' />
+    <tag k='type' v='route' />
+    <tag k='via' v='Stop 5' />
+  </relation>
+  <relation id='-113046' action='modify'>
+    <member type='node' ref='-162360' role='stop' />
+    <member type='node' ref='-162363' role='platform' />
+    <member type='node' ref='-162370' role='stop' />
+    <member type='node' ref='-162371' role='platform' />
+    <member type='way' ref='-161990' role='' />
+    <member type='way' ref='-161965' role='' />
+    <tag k='from' v='Stop 4' />
+    <tag k='name' v='Wrong number of platforms=2, via=1 7: Stop 4 =&gt; Stop 5 =&gt; Stop 6' />
+    <tag k='network' v='Network' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='7' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='Stop 6' />
+    <tag k='type' v='route' />
+    <tag k='via' v='Stop 5' />
+  </relation>
+  <relation id='-113053' action='modify'>
+    <member type='way' ref='-161974' role='' />
+    <member type='way' ref='-161990' role='' />
+    <member type='way' ref='-161965' role='' />
+    <tag k='from' v='Stop 3' />
+    <tag k='name' v='Wrong number of platforms=0, via=2 8: Stop 3 =&gt; Stop 4 =&gt; Stop 5 =&gt; Stop 6' />
+    <tag k='network' v='Network' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='8' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='Stop 6' />
+    <tag k='type' v='route' />
+    <tag k='via' v='Stop 4;Stop 5' />
+  </relation>
+  <relation id='-113056' action='modify'>
+    <member type='node' ref='-162365' role='stop' />
+    <member type='node' ref='-162364' role='platform' />
+    <member type='way' ref='-161974' role='' />
+    <member type='way' ref='-161990' role='' />
+    <member type='way' ref='-161965' role='' />
+    <tag k='from' v='Stop 3' />
+    <tag k='name' v='Wrong number of platforms=1, via=2 9: Stop 3 =&gt; Stop 4 =&gt; Stop 5 =&gt; Stop 6' />
+    <tag k='network' v='Network' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='9' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='Stop 6' />
+    <tag k='type' v='route' />
+    <tag k='via' v='Stop 4;Stop 5' />
+  </relation>
+  <relation id='-113060' action='modify'>
+    <member type='node' ref='-162365' role='stop' />
+    <member type='node' ref='-162364' role='platform' />
+    <member type='node' ref='-162370' role='stop' />
+    <member type='node' ref='-162371' role='platform' />
+    <member type='way' ref='-161974' role='' />
+    <member type='way' ref='-161990' role='' />
+    <member type='way' ref='-161965' role='' />
+    <tag k='from' v='Stop 3' />
+    <tag k='name' v='Wrong number of platforms=2, via=2 10: Stop 3 =&gt; Stop 4 =&gt; Stop 5 =&gt; Stop 6' />
+    <tag k='network' v='Network' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='10' />
+    <tag k='route' v='bus' />
+    <tag k='to' v='Stop 6' />
+    <tag k='type' v='route' />
+    <tag k='via' v='Stop 4;Stop 5' />
+  </relation>
 </osm>

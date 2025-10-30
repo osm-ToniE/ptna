@@ -40,9 +40,27 @@
         </li>
         <li>2 <a href="#A2">Test file for --check-from-via-to=no/exact/relaxed</a>
         <ol>
-        <li>2.1 <a href="#A2.1">Positive, no errors</a>
+        <li>2.1 <a href="#A2.1">Positive, no notes</a>
         </li>
         <li>2.2 <a href="#A2.2">Negative</a>
+        <ol>
+        <li>2.2.1 <a href="#A2.2.1">Bus 3</a>
+        </li>
+        <li>2.2.2 <a href="#A2.2.2">Bus 4</a>
+        </li>
+        <li>2.2.3 <a href="#A2.2.3">Bus 5</a>
+        </li>
+        <li>2.2.4 <a href="#A2.2.4">Bus 6</a>
+        </li>
+        <li>2.2.5 <a href="#A2.2.5">Bus 7</a>
+        </li>
+        <li>2.2.6 <a href="#A2.2.6">Bus 8</a>
+        </li>
+        <li>2.2.7 <a href="#A2.2.7">Bus 9</a>
+        </li>
+        <li>2.2.8 <a href="#A2.2.8">Bus 10</a>
+        </li>
+        </ol>
         </li>
         </ol>
         </li>
@@ -63,33 +81,208 @@
         </p>
         <hr />
         <h1 id="A2">2 Test file for --check-from-via-to=no/exact/relaxed</h1>
-        <h2 id="A2.1">2.1 Positive, no errors</h2>
-<a href="#bus_1"><span class="foreign" dir="auto">1</span></a> <a href="#bus_2"><span class="foreign" dir="auto">2</span></a> </br></br>
+        <h2 id="A2.1">2.1 Positive, no notes</h2>
         <table class="oepnvtable">
             <thead>
-                <tr class="tableheaderrow"><th class="name" dir="auto">Name (name=)</th><th class="type" dir="auto">Type (type=)</th><th class="relation" dir="auto">Relation (id=)</th><th class="PTv" dir="auto">PTv</th><th class="issues" dir="auto">Errors</th><th class="notes" dir="auto">Notes</th></tr>
+                <tr class="tableheaderrow"><th class="name" dir="auto">Name (name=)</th><th class="type" dir="auto">Type (type=)</th><th class="relation" dir="auto">Relation (id=)</th><th class="from" dir="auto">From (from=)</th><th class="via" dir="auto">Via (via=)</th><th class="to" dir="auto">To (to=)</th><th class="PTv" dir="auto">PTv</th><th class="issues" dir="auto">Errors</th><th class="notes" dir="auto">Notes</th></tr>
             </thead>
             <tbody>
-                <tr id="bus_1" data-info="Comment: <span class=_foreign_ dir=_auto_><span class=_attention_>All stops in via</span></span>; From: <span class=_foreign_ dir=_auto_>Stop 1</span>; To: <span class=_foreign_ dir=_auto_>Stop 6</span>" data-ref="1" class="sketchline"><td class="sketch" dir="auto"><a href="https://overpass-api.de/api/sketch-line?ref=1&network=Network&operator=" title="Sketch-Line">1</a></td><td class="csvinfo" colspan="5" dir="auto">Comment: <span class="foreign" dir="auto"><span class="attention">All stops in via</span></span>; From: <span class="foreign" dir="auto">Stop 1</span>; To: <span class="foreign" dir="auto">Stop 6</span></td></tr>
-                <tr id="-112975" data-info="-112975" data-ref="1" class="line"><td class="name foreign" dir="auto">Good 1: Stop 1 =&gt; Stop 2 =&gt; Stop 3 =&gt; Stop 4 =&gt; Stop 5 =&gt; Stop 6</td><td class="type foreign" dir="auto">route</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -112975</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto"></td><td class="notes" dir="auto">'network' = '<span class="foreign" dir="auto">Network</span>'</td></tr>
-                <tr id="bus_2" data-info="Comment: <span class=_foreign_ dir=_auto_><span class=_attention_>One stop in via</span></span>; From: <span class=_foreign_ dir=_auto_>Stop 1</span>; To: <span class=_foreign_ dir=_auto_>Stop 5</span>" data-ref="2" class="sketchline"><td class="sketch" dir="auto"><a href="https://overpass-api.de/api/sketch-line?ref=2&network=Network&operator=" title="Sketch-Line">2</a></td><td class="csvinfo" colspan="5" dir="auto">Comment: <span class="foreign" dir="auto"><span class="attention">One stop in via</span></span>; From: <span class="foreign" dir="auto">Stop 1</span>; To: <span class="foreign" dir="auto">Stop 5</span></td></tr>
-                <tr id="-113017" data-info="-113017" data-ref="2" class="line"><td class="name foreign" dir="auto">Good 2: Stop 1 =&gt; Stop 3 =&gt; Stop 5</td><td class="type foreign" dir="auto">route</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -113017</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto"></td><td class="notes" dir="auto">'network' = '<span class="foreign" dir="auto">Network</span>'</td></tr>
+                <tr id="bus_1" data-info="Comment: <span class=_foreign_ dir=_auto_><span class=_attention_>All stops in via</span></span>; From: <span class=_foreign_ dir=_auto_>Stop 1</span>; To: <span class=_foreign_ dir=_auto_>Stop 6</span>" data-ref="1" class="sketchline"><td class="sketch" dir="auto"><a href="https://overpass-api.de/api/sketch-line?ref=1&network=Network&operator=" title="Sketch-Line">1</a></td><td class="csvinfo" colspan="8" dir="auto">Comment: <span class="foreign" dir="auto"><span class="attention">All stops in via</span></span>; From: <span class="foreign" dir="auto">Stop 1</span>; To: <span class="foreign" dir="auto">Stop 6</span></td></tr>
+                <tr id="-112975" data-info="-112975" data-ref="1" class="line"><td class="name foreign" dir="auto">Good 1: Stop 1 =&gt; Stop 2 =&gt; Stop 3 =&gt; Stop 4 =&gt; Stop 5 =&gt; Stop 6</td><td class="type foreign" dir="auto">route</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -112975</td><td class="from foreign" dir="auto">Stop 1</td><td class="via foreign" dir="auto">Stop 2;Stop 3;Stop 4;Stop 5</td><td class="to foreign" dir="auto">Stop 6</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto"></td><td class="notes" dir="auto"></td></tr>
+                <tr id="bus_2" data-info="Comment: <span class=_foreign_ dir=_auto_><span class=_attention_>One stop in via</span></span>; From: <span class=_foreign_ dir=_auto_>Stop 1</span>; To: <span class=_foreign_ dir=_auto_>Stop 5</span>" data-ref="2" class="sketchline"><td class="sketch" dir="auto"><a href="https://overpass-api.de/api/sketch-line?ref=2&network=Network&operator=" title="Sketch-Line">2</a></td><td class="csvinfo" colspan="8" dir="auto">Comment: <span class="foreign" dir="auto"><span class="attention">One stop in via</span></span>; From: <span class="foreign" dir="auto">Stop 1</span>; To: <span class="foreign" dir="auto">Stop 5</span></td></tr>
+                <tr id="-113017" data-info="-113017" data-ref="2" class="line"><td class="name foreign" dir="auto">Good 2: Stop 1 =&gt; Stop 3 =&gt; Stop 5</td><td class="type foreign" dir="auto">route</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -113017</td><td class="from foreign" dir="auto">Stop 1</td><td class="via foreign" dir="auto">Stop 3</td><td class="to foreign" dir="auto">Stop 5</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto"></td><td class="notes" dir="auto"></td></tr>
             </tbody>
         </table>
 
         <h2 id="A2.2">2.2 Negative</h2>
+        <h3 id="A2.2.1">2.2.1 Bus 3</h3>
 <p>
---check-from-via-to=<em>no</em> =&gt; <span class="attention">no error</span>
+--check-from-via-to=<em>no</em> =&gt; <span class="attention">no notes</span>
 
 </p>
 <p>
---check-from-via-to=<em>exact</em> =&gt; <span class="attention">error = ...</span>
+--check-from-via-to=<em>exact</em> =&gt; <span class="attention">notes = PTv2 route: &#039;from&#039; = &#039;Stop 6&#039; is not equal to &#039;name&#039; of first platform: Node &#039;Stop 1&#039;</span>
 
 </p>
 <p>
---check-from-via-to=<em>relaxed</em> =&gt; <span class="attention">error = ...</span>
+--check-from-via-to=<em>exact</em> =&gt; <span class="attention">notes = PTv2 route: &#039;to&#039; = &#039;Stop 1&#039; is not equal to &#039;name&#039; of last platform: Node &#039;Stop 6&#039;</span>
 
 </p>
+<p>
+--check-from-via-to=<em>relaxed</em> =&gt; <span class="attention">no notes</span>
+
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name" dir="auto">Name (name=)</th><th class="type" dir="auto">Type (type=)</th><th class="relation" dir="auto">Relation (id=)</th><th class="from" dir="auto">From (from=)</th><th class="via" dir="auto">Via (via=)</th><th class="to" dir="auto">To (to=)</th><th class="PTv" dir="auto">PTv</th><th class="issues" dir="auto">Errors</th><th class="notes" dir="auto">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr id="bus_3" data-info="Comment: <span class=_foreign_ dir=_auto_><span class=_attention_>Wrong &#039;from&#039; and &#039;to&#039; 3</span></span>; From: <span class=_foreign_ dir=_auto_>Stop 6</span>; To: <span class=_foreign_ dir=_auto_>Stop 1</span>" data-ref="3" class="sketchline"><td class="sketch" dir="auto"><a href="https://overpass-api.de/api/sketch-line?ref=3&network=Network&operator=" title="Sketch-Line">3</a></td><td class="csvinfo" colspan="8" dir="auto">Comment: <span class="foreign" dir="auto"><span class="attention">Wrong &#039;from&#039; and &#039;to&#039; 3</span></span>; From: <span class="foreign" dir="auto">Stop 6</span>; To: <span class="foreign" dir="auto">Stop 1</span></td></tr>
+                <tr id="-113032" data-info="-113032" data-ref="3" class="line"><td class="name foreign" dir="auto">Wrong &#039;from&#039; and &#039;to&#039; 3: Stop 6 =&gt; Stop 2 =&gt; Stop 3 =&gt; Stop 4 =&gt; Stop 5 =&gt; Stop 1</td><td class="type foreign" dir="auto">route</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -113032</td><td class="from foreign" dir="auto">Stop 6</td><td class="via foreign" dir="auto">Stop 2;Stop 3;Stop 4;Stop 5</td><td class="to foreign" dir="auto">Stop 1</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto"></td><td class="notes" dir="auto"></td></tr>
+            </tbody>
+        </table>
+
+        <h3 id="A2.2.2">2.2.2 Bus 4</h3>
+<p>
+--check-from-via-to=<em>no</em> =&gt; <span class="attention">no notes</span>
+
+</p>
+<p>
+--check-from-via-to=<em>exact</em> =&gt; <span class="attention">no notes</span>
+
+</p>
+<p>
+--check-from-via-to=<em>relaxed</em> =&gt; <span class="attention">no notes</span>
+
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name" dir="auto">Name (name=)</th><th class="type" dir="auto">Type (type=)</th><th class="relation" dir="auto">Relation (id=)</th><th class="from" dir="auto">From (from=)</th><th class="via" dir="auto">Via (via=)</th><th class="to" dir="auto">To (to=)</th><th class="PTv" dir="auto">PTv</th><th class="issues" dir="auto">Errors</th><th class="notes" dir="auto">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr id="bus_4" data-info="Comment: <span class=_foreign_ dir=_auto_><span class=_attention_>Wrong sequence in &#039;via&#039; 4</span></span>; From: <span class=_foreign_ dir=_auto_>Stop 1</span>; To: <span class=_foreign_ dir=_auto_>Stop 6</span>" data-ref="4" class="sketchline"><td class="sketch" dir="auto"><a href="https://overpass-api.de/api/sketch-line?ref=4&network=Network&operator=" title="Sketch-Line">4</a></td><td class="csvinfo" colspan="8" dir="auto">Comment: <span class="foreign" dir="auto"><span class="attention">Wrong sequence in &#039;via&#039; 4</span></span>; From: <span class="foreign" dir="auto">Stop 1</span>; To: <span class="foreign" dir="auto">Stop 6</span></td></tr>
+                <tr id="-113030" data-info="-113030" data-ref="4" class="line"><td class="name foreign" dir="auto">Wrong sequence in &#039;via&#039; 4: Stop 1 =&gt; Stop 3 =&gt; Stop 2 =&gt; Stop 5 =&gt; Stop 4 =&gt; Stop 6</td><td class="type foreign" dir="auto">route</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -113030</td><td class="from foreign" dir="auto">Stop 1</td><td class="via foreign" dir="auto">Stop 3;Stop 2;Stop 5;Stop 4</td><td class="to foreign" dir="auto">Stop 6</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto"></td><td class="notes" dir="auto"></td></tr>
+            </tbody>
+        </table>
+
+        <h3 id="A2.2.3">2.2.3 Bus 5</h3>
+<p>
+--check-from-via-to=<em>no</em> =&gt; <span class="attention">no notes</span>
+
+</p>
+<p>
+--check-from-via-to=<em>exact</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set, but there are less than 3 platforms (=0).</span>
+
+</p>
+<p>
+--check-from-via-to=<em>relaxed</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set, but there are less than 3 platforms (=0).</span>
+
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name" dir="auto">Name (name=)</th><th class="type" dir="auto">Type (type=)</th><th class="relation" dir="auto">Relation (id=)</th><th class="from" dir="auto">From (from=)</th><th class="via" dir="auto">Via (via=)</th><th class="to" dir="auto">To (to=)</th><th class="PTv" dir="auto">PTv</th><th class="issues" dir="auto">Errors</th><th class="notes" dir="auto">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr id="bus_5" data-info="Comment: <span class=_foreign_ dir=_auto_><span class=_attention_>Wrong number of platforms=0, via=1</span></span>; From: <span class=_foreign_ dir=_auto_>Stop 4</span>; To: <span class=_foreign_ dir=_auto_>Stop 6</span>" data-ref="5" class="sketchline"><td class="sketch" dir="auto"><a href="https://overpass-api.de/api/sketch-line?ref=5&network=Network&operator=" title="Sketch-Line">5</a></td><td class="csvinfo" colspan="8" dir="auto">Comment: <span class="foreign" dir="auto"><span class="attention">Wrong number of platforms=0, via=1</span></span>; From: <span class="foreign" dir="auto">Stop 4</span>; To: <span class="foreign" dir="auto">Stop 6</span></td></tr>
+                <tr id="-113036" data-info="-113036" data-ref="5" class="line"><td class="name foreign" dir="auto">Wrong number of platforms=0, via=1 5: Stop 4 =&gt; Stop 5 =&gt; Stop 6</td><td class="type foreign" dir="auto">route</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -113036</td><td class="from foreign" dir="auto">Stop 4</td><td class="via foreign" dir="auto">Stop 5</td><td class="to foreign" dir="auto">Stop 6</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto">PTv2 route: there is no 'public_transport' = 'stop_position' (Node) and no 'public_transport' = 'platform' (Node, Way, Area or Relation)</td><td class="notes" dir="auto"></td></tr>
+            </tbody>
+        </table>
+
+        <h3 id="A2.2.4">2.2.4 Bus 6</h3>
+<p>
+--check-from-via-to=<em>no</em> =&gt; <span class="attention">no notes</span>
+
+</p>
+<p>
+--check-from-via-to=<em>exact</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set, but there are less than 3 platforms (=1).</span>
+
+</p>
+<p>
+--check-from-via-to=<em>relaxed</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set, but there are less than 3 platforms (=1).</span>
+
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name" dir="auto">Name (name=)</th><th class="type" dir="auto">Type (type=)</th><th class="relation" dir="auto">Relation (id=)</th><th class="from" dir="auto">From (from=)</th><th class="via" dir="auto">Via (via=)</th><th class="to" dir="auto">To (to=)</th><th class="PTv" dir="auto">PTv</th><th class="issues" dir="auto">Errors</th><th class="notes" dir="auto">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr id="bus_6" data-info="Comment: <span class=_foreign_ dir=_auto_><span class=_attention_>Wrong number of platforms=1, via=1</span></span>; From: <span class=_foreign_ dir=_auto_>Stop 4</span>; To: <span class=_foreign_ dir=_auto_>Stop 6</span>" data-ref="6" class="sketchline"><td class="sketch" dir="auto"><a href="https://overpass-api.de/api/sketch-line?ref=6&network=Network&operator=" title="Sketch-Line">6</a></td><td class="csvinfo" colspan="8" dir="auto">Comment: <span class="foreign" dir="auto"><span class="attention">Wrong number of platforms=1, via=1</span></span>; From: <span class="foreign" dir="auto">Stop 4</span>; To: <span class="foreign" dir="auto">Stop 6</span></td></tr>
+                <tr id="-113041" data-info="-113041" data-ref="6" class="line"><td class="name foreign" dir="auto">Wrong number of platforms=1, via=1 6: Stop 4 =&gt; Stop 5 =&gt; Stop 6</td><td class="type foreign" dir="auto">route</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -113041</td><td class="from foreign" dir="auto">Stop 4</td><td class="via foreign" dir="auto">Stop 5</td><td class="to foreign" dir="auto">Stop 6</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto">PTv2 route: there is only one 'public_transport' = 'stop_position' (Node)<br>PTv2 route: there is only one 'public_transport' = 'platform' (Node, Way, Area or Relation)<br>PTv2 route: last node of way is not a stop position of this route: <img src="/img/Node.svg" alt="Node" /> '<span class="foreign" dir="auto">Stop 6</span>' -162370</td><td class="notes" dir="auto"></td></tr>
+            </tbody>
+        </table>
+
+        <h3 id="A2.2.5">2.2.5 Bus 7</h3>
+<p>
+--check-from-via-to=<em>no</em> =&gt; <span class="attention">no notes</span>
+
+</p>
+<p>
+--check-from-via-to=<em>exact</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set, but there are less than 3 platforms (=2).</span>
+
+</p>
+<p>
+--check-from-via-to=<em>relaxed</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set, but there are less than 3 platforms (=2).</span>
+
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name" dir="auto">Name (name=)</th><th class="type" dir="auto">Type (type=)</th><th class="relation" dir="auto">Relation (id=)</th><th class="from" dir="auto">From (from=)</th><th class="via" dir="auto">Via (via=)</th><th class="to" dir="auto">To (to=)</th><th class="PTv" dir="auto">PTv</th><th class="issues" dir="auto">Errors</th><th class="notes" dir="auto">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr id="bus_7" data-info="Comment: <span class=_foreign_ dir=_auto_><span class=_attention_>Wrong number of platforms=2, via=1</span></span>; From: <span class=_foreign_ dir=_auto_>Stop 4</span>; To: <span class=_foreign_ dir=_auto_>Stop 6</span>" data-ref="7" class="sketchline"><td class="sketch" dir="auto"><a href="https://overpass-api.de/api/sketch-line?ref=7&network=Network&operator=" title="Sketch-Line">7</a></td><td class="csvinfo" colspan="8" dir="auto">Comment: <span class="foreign" dir="auto"><span class="attention">Wrong number of platforms=2, via=1</span></span>; From: <span class="foreign" dir="auto">Stop 4</span>; To: <span class="foreign" dir="auto">Stop 6</span></td></tr>
+                <tr id="-113046" data-info="-113046" data-ref="7" class="line"><td class="name foreign" dir="auto">Wrong number of platforms=2, via=1 7: Stop 4 =&gt; Stop 5 =&gt; Stop 6</td><td class="type foreign" dir="auto">route</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -113046</td><td class="from foreign" dir="auto">Stop 4</td><td class="via foreign" dir="auto">Stop 5</td><td class="to foreign" dir="auto">Stop 6</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto"></td><td class="notes" dir="auto"></td></tr>
+            </tbody>
+        </table>
+
+        <h3 id="A2.2.6">2.2.6 Bus 8</h3>
+<p>
+--check-from-via-to=<em>no</em> =&gt; <span class="attention">no notes</span>
+
+</p>
+<p>
+--check-from-via-to=<em>exact</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set (2 parts), but there are less than 4 platforms (=0).</span>
+
+</p>
+<p>
+--check-from-via-to=<em>relaxed</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set (2 parts), but there are less than 4 platforms (=0).</span>
+
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name" dir="auto">Name (name=)</th><th class="type" dir="auto">Type (type=)</th><th class="relation" dir="auto">Relation (id=)</th><th class="from" dir="auto">From (from=)</th><th class="via" dir="auto">Via (via=)</th><th class="to" dir="auto">To (to=)</th><th class="PTv" dir="auto">PTv</th><th class="issues" dir="auto">Errors</th><th class="notes" dir="auto">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr id="bus_8" data-info="Comment: <span class=_foreign_ dir=_auto_><span class=_attention_>Wrong number of platforms=0, via=2</span></span>; From: <span class=_foreign_ dir=_auto_>Stop 3</span>; To: <span class=_foreign_ dir=_auto_>Stop 6</span>" data-ref="8" class="sketchline"><td class="sketch" dir="auto"><a href="https://overpass-api.de/api/sketch-line?ref=8&network=Network&operator=" title="Sketch-Line">8</a></td><td class="csvinfo" colspan="8" dir="auto">Comment: <span class="foreign" dir="auto"><span class="attention">Wrong number of platforms=0, via=2</span></span>; From: <span class="foreign" dir="auto">Stop 3</span>; To: <span class="foreign" dir="auto">Stop 6</span></td></tr>
+                <tr id="-113053" data-info="-113053" data-ref="8" class="line"><td class="name foreign" dir="auto">Wrong number of platforms=0, via=2 8: Stop 3 =&gt; Stop 4 =&gt; Stop 5 =&gt; Stop 6</td><td class="type foreign" dir="auto">route</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -113053</td><td class="from foreign" dir="auto">Stop 3</td><td class="via foreign" dir="auto">Stop 4;Stop 5</td><td class="to foreign" dir="auto">Stop 6</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto">PTv2 route: there is no 'public_transport' = 'stop_position' (Node) and no 'public_transport' = 'platform' (Node, Way, Area or Relation)</td><td class="notes" dir="auto"></td></tr>
+            </tbody>
+        </table>
+
+        <h3 id="A2.2.7">2.2.7 Bus 9</h3>
+<p>
+--check-from-via-to=<em>no</em> =&gt; <span class="attention">no notes</span>
+
+</p>
+<p>
+--check-from-via-to=<em>exact</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set (2 parts), but there are less than 4 platforms (=1).</span>
+
+</p>
+<p>
+--check-from-via-to=<em>relaxed</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set (2 parts), but there are less than 4 platforms (=1).</span>
+
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name" dir="auto">Name (name=)</th><th class="type" dir="auto">Type (type=)</th><th class="relation" dir="auto">Relation (id=)</th><th class="from" dir="auto">From (from=)</th><th class="via" dir="auto">Via (via=)</th><th class="to" dir="auto">To (to=)</th><th class="PTv" dir="auto">PTv</th><th class="issues" dir="auto">Errors</th><th class="notes" dir="auto">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr id="bus_9" data-info="Comment: <span class=_foreign_ dir=_auto_><span class=_attention_>Wrong number of platforms=1, via=2</span></span>; From: <span class=_foreign_ dir=_auto_>Stop 3</span>; To: <span class=_foreign_ dir=_auto_>Stop 6</span>" data-ref="9" class="sketchline"><td class="sketch" dir="auto"><a href="https://overpass-api.de/api/sketch-line?ref=9&network=Network&operator=" title="Sketch-Line">9</a></td><td class="csvinfo" colspan="8" dir="auto">Comment: <span class="foreign" dir="auto"><span class="attention">Wrong number of platforms=1, via=2</span></span>; From: <span class="foreign" dir="auto">Stop 3</span>; To: <span class="foreign" dir="auto">Stop 6</span></td></tr>
+                <tr id="-113056" data-info="-113056" data-ref="9" class="line"><td class="name foreign" dir="auto">Wrong number of platforms=1, via=2 9: Stop 3 =&gt; Stop 4 =&gt; Stop 5 =&gt; Stop 6</td><td class="type foreign" dir="auto">route</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -113056</td><td class="from foreign" dir="auto">Stop 3</td><td class="via foreign" dir="auto">Stop 4;Stop 5</td><td class="to foreign" dir="auto">Stop 6</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto">PTv2 route: there is only one 'public_transport' = 'stop_position' (Node)<br>PTv2 route: there is only one 'public_transport' = 'platform' (Node, Way, Area or Relation)<br>PTv2 route: last node of way is not a stop position of this route: <img src="/img/Node.svg" alt="Node" /> '<span class="foreign" dir="auto">Stop 6</span>' -162370</td><td class="notes" dir="auto"></td></tr>
+            </tbody>
+        </table>
+
+        <h3 id="A2.2.8">2.2.8 Bus 10</h3>
+<p>
+--check-from-via-to=<em>no</em> =&gt; <span class="attention">no notes</span>
+
+</p>
+<p>
+--check-from-via-to=<em>exact</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set (2 parts), but there are less than 4 platforms (=2).</span>
+
+</p>
+<p>
+--check-from-via-to=<em>relaxed</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set (2 parts), but there are less than 4 platforms (=2).</span>
+
+</p>
+        <table class="oepnvtable">
+            <thead>
+                <tr class="tableheaderrow"><th class="name" dir="auto">Name (name=)</th><th class="type" dir="auto">Type (type=)</th><th class="relation" dir="auto">Relation (id=)</th><th class="from" dir="auto">From (from=)</th><th class="via" dir="auto">Via (via=)</th><th class="to" dir="auto">To (to=)</th><th class="PTv" dir="auto">PTv</th><th class="issues" dir="auto">Errors</th><th class="notes" dir="auto">Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr id="bus_10" data-info="Comment: <span class=_foreign_ dir=_auto_><span class=_attention_>Wrong number of platforms=2, via=2</span></span>; From: <span class=_foreign_ dir=_auto_>Stop 3</span>; To: <span class=_foreign_ dir=_auto_>Stop 6</span>" data-ref="10" class="sketchline"><td class="sketch" dir="auto"><a href="https://overpass-api.de/api/sketch-line?ref=10&network=Network&operator=" title="Sketch-Line">10</a></td><td class="csvinfo" colspan="8" dir="auto">Comment: <span class="foreign" dir="auto"><span class="attention">Wrong number of platforms=2, via=2</span></span>; From: <span class="foreign" dir="auto">Stop 3</span>; To: <span class="foreign" dir="auto">Stop 6</span></td></tr>
+                <tr id="-113060" data-info="-113060" data-ref="10" class="line"><td class="name foreign" dir="auto">Wrong number of platforms=2, via=2 10: Stop 3 =&gt; Stop 4 =&gt; Stop 5 =&gt; Stop 6</td><td class="type foreign" dir="auto">route</td><td class="relation" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> -113060</td><td class="from foreign" dir="auto">Stop 3</td><td class="via foreign" dir="auto">Stop 4;Stop 5</td><td class="to foreign" dir="auto">Stop 6</td><td class="PTv foreign" dir="auto">2</td><td class="issues" dir="auto"></td><td class="notes" dir="auto"></td></tr>
+            </tbody>
+        </table>
+
         <hr />
         <h1 id="networkdetails">3 Details for &#039;network&#039;-Values</h1>
         <h2 id="considerednetworks">3.1 Considered &#039;network&#039;-Values</h2>
@@ -98,7 +291,7 @@
                 <tr class="tableheaderrow"><th class="network" dir="auto">&#x21C5;Network (network=)</th><th class="number js-sort-number" dir="auto">&#x21C5;Number</th><th class="relations" dir="auto">&#x21C5;Relations</th></tr>
             </thead>
             <tbody>
-                <tr data-info="Network" data-ref="???" class="line"><td class="network foreign" dir="auto">Network</td><td class="number foreign" dir="auto">2</td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">1</span>' -112975, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">2</span>' -113017</td></tr>
+                <tr data-info="Network" data-ref="???" class="line"><td class="network foreign" dir="auto">Network</td><td class="number foreign" dir="auto">10</td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">1</span>' -112975, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">2</span>' -113017, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">4</span>' -113030, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">3</span>' -113032, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">5</span>' -113036, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">6</span>' -113041, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">7</span>' -113046, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">8</span>' -113053, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">9</span>' -113056, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">10</span>' -113060</td></tr>
             </tbody>
         </table>
 
