@@ -6159,8 +6159,13 @@ sub CheckFromViaToPlatformNamesPTV2 {
                 }
             } else {
                 printf STDERR "    CheckFromViaToPlatformNamesPTV2(): 'via' is set (%d parts), but there are only %d platforms\n", $via_number, $number_of_platforms       if ( $debug );
-                $notes_string = gettext( "PTv2 route: 'via' is set (%d parts), but there are only %d platforms. Route should have at least %d platforms: 'from', 'via', ..., 'to'." );
-                push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string,$via_number,$number_of_platforms,$via_number+2) );
+                if ( $via_number == 1 ) {
+                        $notes_string = gettext( "PTv2 route: 'via' is set, but there are less than 3 platforms (=%d)." );
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string,$number_of_platforms) );
+                } else {
+                        $notes_string = gettext( "PTv2 route: 'via' is set (%d parts), but there are less than %d platforms (=%d)." );
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string,$via_number,$via_number+2,$number_of_platforms) );
+                }
                 $return_code++;
            }
         }
