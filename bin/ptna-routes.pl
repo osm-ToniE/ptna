@@ -7264,7 +7264,7 @@ sub printHintSuspiciousRelations {
     push( @HTML_main, gettext("but also 'type' = 'network', 'type' = 'set' or 'route' = 'network', i.e. a collection of all routes and route-masters belonging to the 'network'.") );
     push( @HTML_main, "\n        <ul>\n            <li>" );
     push( @HTML_main, gettext("such <strong>collections are strictly spoken errors</strong>, since relations shall not represent collections:") );
-    push( @HTML_main, gettext(" <a href=\"https://wiki.openstreetmap.org/wiki/Relations/Relations_are_not_Categories\">Relations/Relations are not Categories</a>") );
+    push( @HTML_main, " <a href=\"https://wiki.openstreetmap.org/wiki/Relations/Relations_are_not_Categories\">" . gettext("Relations/Relations are not Categories") . "</a>" );
     push( @HTML_main, "</li>\n        </ul>\n" );
     push( @HTML_main, "    </li>\n" );
     push( @HTML_main, "</ul>\n" );
