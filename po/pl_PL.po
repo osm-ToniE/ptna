@@ -5,17 +5,17 @@
 # 
 # Translators:
 # M L, 2020
-# A B <transifex@starsep.com>, 2022
-# ToniE <osm-ToniE@web.de>, 2023
+# 8ae3eb8de9f9a8c2dddbaf4ab7f6a2ec_aa47d74 <0a1a0cac8651465745cfdd64ec532e24_991346>, 2022
+# ToniE <osm-ToniE@web.de>, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-08-17 15:44+0200\n"
+"POT-Creation-Date: 2025-11-11 16:51+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: ToniE <osm-ToniE@web.de>, 2023\n"
+"Last-Translator: ToniE <osm-ToniE@web.de>, 2025\n"
 "Language-Team: Polish (Poland) (https://app.transifex.com/jungle-bus/teams/97874/pl_PL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -545,6 +545,14 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
+#, perl-format
+msgid "PTv2 route: way leads into/through roundabout/closed way %s"
+msgid_plural "PTv2 route: ways lead into/through roundabout/closed way %s"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
 msgid ""
 "PTv2 route: incorrect order of 'stop_position', 'platform' and 'way' "
 "(stop/platform after way)"
@@ -878,6 +886,44 @@ msgstr ""
 msgid ""
 "PTv2 route: 'name' should (at least) be of the form '... ref ...: from => "
 "to'"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: 'from' = '%s' does not match 'name' of first platform: %s"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: 'from' = '%s' is not equal to 'name' of first platform: %s"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: 'to' = '%s' does not match 'name' of last platform: %s"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: 'to' = '%s' is not equal to 'name' of last platform: %s"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'via' is set. %d. via-part ('%s') does not match any platform "
+"name."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'via' is set. %d. via-part ('%s') matches name of more than one "
+"platform (platform numbers: %s)"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: 'via' is set, but there are less than 3 platforms (=%d)."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'via' is set (%d parts), but there are less than %d platforms "
+"(=%d)."
 msgstr ""
 
 #, perl-format
@@ -1217,11 +1263,8 @@ msgid ""
 "relations shall not represent collections:"
 msgstr ""
 
-msgid ""
-" <a "
-"href=\"https://wiki.openstreetmap.org/wiki/Relations/Relations_are_not_Categories\">Relations/Relations"
-" are not Categories</a>"
-msgstr ""
+msgid "Relations/Relations are not Categories"
+msgstr "Relacje nie są kategoriami"
 
 msgid ""
 "The following values and combinations have been found in the provided data "
@@ -1640,12 +1683,8 @@ msgstr ""
 msgid "The access restriction does not comply with the map features."
 msgstr "Ograniczenia dostępu nie zgadzają z elementami mapy."
 
-msgid ""
-"Please consult the OSM Wiki: "
-"https://wiki.openstreetmap.org/wiki/Map_Features#Restrictions"
+msgid "Please consult the OSM Wiki"
 msgstr ""
-"Proszę sprawdź na OSM Wiki: "
-"https://wiki.openstreetmap.org/wiki/Template:Pl:Map_Features:restrictions"
 
 msgid "This error is related to:"
 msgstr "Ten błąd jest związany z:"
@@ -1749,6 +1788,11 @@ msgstr ""
 msgid ""
 "More relaxed check of 'name' ='...: A => B', where 'A' must be part of "
 "'from' and 'B' must be part of 'to'."
+msgstr ""
+
+msgid ""
+"Check that 'from', 'via' and 'to' match with corresponding platform 'name' "
+"values."
 msgstr ""
 
 msgid ""

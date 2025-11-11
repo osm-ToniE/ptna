@@ -238,7 +238,7 @@ if ( $check_service_type ) {
 }
 
 if ( defined($check_from_via_to) && $check_from_via_to eq '' ) {
-    $check_from_via_to = 'ON';
+    $check_from_via_to = 'exact';
 }
 
 if ( $csv_separator ) {
@@ -1311,7 +1311,7 @@ if ( scalar( @RouteList ) ) {
                 }
             } else {
                 #
-                # we do not have a line which fits to the requested 'ref' and 'route_type' combination
+                # we do not have a line which fits the requested 'ref' and 'route_type' combination
                 #
                 printTableSubHeader( 'ref-or-list'       => $entryref->{'ref-or-list'},
                                      'pt_type'           => $entryref->{'route'},
@@ -3247,7 +3247,7 @@ sub analyze_route_relation {
     }
 
     #
-    # check whether 'gtfs:agency_name' fits to 'gtfs_agancy_id'
+    # check whether 'gtfs:agency_name' fits 'gtfs_agancy_id'
     # check whether 'gtfs:route_id' belongs to 'gtfs:agency_id'
     # check whether 'gtfs:trip_id'/'gtfs:trip_id:sample' belongs to 'gtfs:route_id'
     # check whether 'gtfs:shape_id' belongs to 'gtfs:trip_id'/'gtfs:trip_id:sample'
@@ -5964,7 +5964,29 @@ sub CheckNameRefFromViaToPTV2 {
 
 #############################################################################################
 #
-# values of 'from', 'via' and 'to' against 'name' of platforms
+# does value of 'from', 'via' or 'to' match (relaxed) 'name' of platform
+#
+#############################################################################################
+
+sub TagNameMatchesPlatformName {
+    my $tag_name      = shift || '';
+    my $platform_name = shift || '';
+
+    return 1    if ( index($platform_name,$tag_name.' (') == 0 );                       # tag_name="City" name="City (..."
+    return 1    if ( index($tag_name,$platform_name.' (') == 0 );                       # tag_name="City (..." name="City"
+    return 1    if ( index($platform_name,$tag_name.',')  == 0 );                       # tag_name="City" name="City, Street"
+    return 1    if ( index($tag_name,$platform_name.',')  == 0 );                       # tag_name="City, Street" name="City"
+    return 1    if ( index($platform_name,','.$tag_name)  >  0 );                       # tag_name="Street" name="City,Street"
+    return 1    if ( index($tag_name,','.$platform_name)  >  0 );                       # tag_name="City,Street" name="Street"
+    return 1    if ( index($platform_name,', '.$tag_name) >  0 );                       # tag_name="Street" name="City, Street"
+    return 1    if ( index($tag_name,', '.$platform_name) >  0 );                       # tag_name="City, Street" name="Street"
+    return 0;
+}
+
+
+#############################################################################################
+#
+# check values of 'from', 'via' and 'to' against 'name' of platforms
 #
 #############################################################################################
 
@@ -5972,7 +5994,7 @@ sub CheckFromViaToPlatformNamesPTV2 {
     my $relation_ptr = shift;
     my $return_code  = 0;
 
-    printf STDERR "CheckFromViaToPlatformNamesPTV2() : %s, ref = %s\n", $relation_ptr->{'id'}, $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : '';
+    printf STDERR "CheckFromViaToPlatformNamesPTV2() : %s, ref = %s\n", $relation_ptr->{'id'}, $relation_ptr->{'tag'}->{'ref'} ? $relation_ptr->{'tag'}->{'ref'} : ''       if ( $debug );
     if ( $relation_ptr && $relation_ptr->{'tag'} ) {
         my $from                = $relation_ptr->{'tag'}->{'from'} || '';
         my $to                  = $relation_ptr->{'tag'}->{'to'}   || '';
@@ -6011,10 +6033,14 @@ sub CheckFromViaToPlatformNamesPTV2 {
                 printf STDERR "                CheckFromViaToPlatformNamesPTV2() : from = %s, platform name = %s\n", $from, $platform_name       if ( $debug );
                 if ( $platform_name && $from ne $platform_name ) {
                     if ( $check_from_via_to eq 'relaxed' ) {
-                        ;
+                        if ( !TagNameMatchesPlatformName($from,$platform_name) ) {
+                            $notes_string = gettext( "PTv2 route: 'from' = '%s' does not match 'name' of first platform: %s" );
+                            push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, $from, printXxxTemplate($platform_type,$platform_id,'name;ref')) );
+                            $return_code++;
+                        }
                     } else {    # strict check for being identical
                         $notes_string = gettext( "PTv2 route: 'from' = '%s' is not equal to 'name' of first platform: %s" );
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, $from, printXxxTemplate($platform_type,$platform_id,'name')) );
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, $from, printXxxTemplate($platform_type,$platform_id,'name;ref')) );
                         $return_code++;
                     }
                 }
@@ -6059,10 +6085,14 @@ sub CheckFromViaToPlatformNamesPTV2 {
                 printf STDERR "                CheckFromViaToPlatformNamesPTV2() : to = %s, platform name = %s\n", $to, $platform_name       if ( $debug );
                 if ( $platform_name && $to ne $platform_name ) {
                     if ( $check_from_via_to eq 'relaxed' ) {
-                        ;
+                        if ( !TagNameMatchesPlatformName($to,$platform_name) ) {
+                            $notes_string = gettext( "PTv2 route: 'to' = '%s' does not match 'name' of last platform: %s" );
+                            push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, $to, printXxxTemplate($platform_type,$platform_id,'name;ref')) );
+                            $return_code++;
+                        }
                     } else {    # strict check for being identical
                         $notes_string = gettext( "PTv2 route: 'to' = '%s' is not equal to 'name' of last platform: %s" );
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, $to, printXxxTemplate($platform_type,$platform_id,'name')) );
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, $to, printXxxTemplate($platform_type,$platform_id,'name;ref')) );
                         $return_code++;
                     }
                 }
@@ -6120,41 +6150,52 @@ sub CheckFromViaToPlatformNamesPTV2 {
                         }
                         printf STDERR "                        CheckFromViaToPlatformNamesPTV2() : via-part = %s, platform name = %s\n", $via_part, $platform_name       if ( $debug );
                         if ( $platform_name ) {
+                            #
+                            # a platform_id may appear more than once with different pindex if the platform name matches and the vehicle stops there more than once
+                            #
                             if ( $via_part eq $platform_name ) {
-                                $via_matches[$vindex]->{'exact'}->{$pindex}->{$platform_id}->{$platform_type} = $platform_name;
+                                $via_matches[$vindex]->{$pindex}->{$platform_id}->{$platform_type} = $platform_name;
                             } else {
                                 if ( $check_from_via_to eq 'relaxed' ) {
-                                    $via_matches[$vindex]->{'relaxed'}->{$pindex}->{$platform_id}->{$platform_type} = $platform_name;;
+                                    if ( TagNameMatchesPlatformName($via_part,$platform_name) ) {
+                                        $via_matches[$vindex]->{$pindex}->{$platform_id}->{$platform_type} = $platform_name;
+                                    }
                                 }
                             }
                         }
                     }
                 }
                 # print report
+                my $total_single_matches = 0;
                 for ( my $vindex = 0; $vindex < $via_number; $vindex++ ) {
-                    my @vindex_pindex = keys ( %{$via_matches[$vindex]->{'exact'}} );
-                    my $matches       = scalar ( @vindex_pindex );
+                    my @vindex_pindex  = sort ( keys ( %{$via_matches[$vindex]} ) );
+                    my @vindex_pnumber = map { $_ + 1 } @vindex_pindex;
+                    my $matches        = scalar ( @vindex_pindex );
 
                     if ( $matches == 0 ) {
                         printf STDERR "    CheckFromViaToPlatformNamesPTV2(): no match for via index = %d, via part = %s\n", $vindex, $via_parts[$vindex]       if ( $debug );
-                        $notes_string = gettext( "PTv2 route: 'via' is set. %d. via-part ('%s') does not match with any platform name." );
+                        $notes_string = gettext( "PTv2 route: 'via' is set. %d. via-part ('%s') does not match any platform name." );
                         push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string,$vindex+1,$via_parts[$vindex]) );
                         $return_code++;
                     } elsif ( $matches > 1 ) {
                         printf STDERR "    CheckFromViaToPlatformNamesPTV2(): multiple matches for via index = %d, via part = %s with platforms = %s\n", $vindex, $via_parts[$vindex], join( ',', @vindex_pindex)       if ( $debug );
-                        $notes_string     = gettext( "PTv2 route: 'via' is set. %d. via-part ('%s') matches more than one platform name" );
-                        my $helpstring    = sprintf( $notes_string, $vindex, $via_parts[$vindex] );
-                        my @help_array    = map { ${$relation_ptr->{'role_platform'}}[$_] } @vindex_pindex;
+                        $notes_string     = gettext( "PTv2 route: 'via' is set. %d. via-part ('%s') matches name of more than one platform (platform numbers: %s)" );
+                        my $helpstring    = sprintf( $notes_string, $vindex+1, $via_parts[$vindex], join( ', ',@vindex_pnumber) );
+                        my @help_array    = map { ${$relation_ptr->{'role_platform'}}[$_] } ( @vindex_pindex );
                         my $num_of_errors = scalar(@help_array);
                         if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
                             push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printXxxTemplate($_->{'type'},$_->{'ref'},'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
                         } else {
                             push( @{$relation_ptr->{'__notes__'}}, sprintf("%s: %s", $helpstring, join(', ', map { printXxxTemplate($_->{'type'},$_->{'ref'},'name;ref'); } @help_array )) );
                         }
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string,$vindex,$via_parts[$vindex]) );
                         $return_code++;
                     } else {
-                        printf STDERR "    CheckFromViaToPlatformNamesPTV2(): exact match for via index = %d, via part = %s with platform index = %d\n", $vindex, $via_parts[$vindex], $vindex_pindex[0]       if ( $debug );
+                        $total_single_matches++;
+                        printf STDERR "    CheckFromViaToPlatformNamesPTV2(): match for %d. via-part, via part = %s with platform index = %d\n", $vindex+1, $via_parts[$vindex], $vindex_pindex[0]       if ( $debug );
+                    }
+
+                    if ( $total_single_matches == $via_number ) {
+                        ; # check the sequence of the via parts
                     }
                 }
             } else {

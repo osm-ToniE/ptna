@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-08-17 15:44+0200\n"
+"POT-Creation-Date: 2025-11-11 16:51+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: Branko Kokanovic <branko@kokanovic.org>, 2022\n"
 "Language-Team: Serbian (https://app.transifex.com/jungle-bus/teams/97874/sr/)\n"
@@ -569,6 +569,13 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
+#, perl-format
+msgid "PTv2 route: way leads into/through roundabout/closed way %s"
+msgid_plural "PTv2 route: ways lead into/through roundabout/closed way %s"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 msgid ""
 "PTv2 route: incorrect order of 'stop_position', 'platform' and 'way' "
 "(stop/platform after way)"
@@ -944,6 +951,44 @@ msgid ""
 "to'"
 msgstr ""
 "PTv2 рута: 'name' ознака треба бити (бар) у облику '... ref ...: from => to'"
+
+#, perl-format
+msgid "PTv2 route: 'from' = '%s' does not match 'name' of first platform: %s"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: 'from' = '%s' is not equal to 'name' of first platform: %s"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: 'to' = '%s' does not match 'name' of last platform: %s"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: 'to' = '%s' is not equal to 'name' of last platform: %s"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'via' is set. %d. via-part ('%s') does not match any platform "
+"name."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'via' is set. %d. via-part ('%s') matches name of more than one "
+"platform (platform numbers: %s)"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: 'via' is set, but there are less than 3 platforms (=%d)."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'via' is set (%d parts), but there are less than %d platforms "
+"(=%d)."
+msgstr ""
 
 #, perl-format
 msgid "PTv2 route: using wrong way type (%s)"
@@ -1324,13 +1369,8 @@ msgstr ""
 "такви <strong>скупови су, строго говорећи, грешке</strong>, пошто релације "
 "не треба да представљају скупове:"
 
-msgid ""
-" <a "
-"href=\"https://wiki.openstreetmap.org/wiki/Relations/Relations_are_not_Categories\">Relations/Relations"
-" are not Categories</a>"
+msgid "Relations/Relations are not Categories"
 msgstr ""
-" <a "
-"href=\"https://wiki.openstreetmap.org/wiki/Relations/Relations_are_not_Categories\">Релације/Релације_Нису_Категорије</a>"
 
 msgid ""
 "The following values and combinations have been found in the provided data "
@@ -1801,12 +1841,8 @@ msgstr ""
 msgid "The access restriction does not comply with the map features."
 msgstr "Ограничење приступа се не поклапа са стварима на карти."
 
-msgid ""
-"Please consult the OSM Wiki: "
-"https://wiki.openstreetmap.org/wiki/Map_Features#Restrictions"
+msgid "Please consult the OSM Wiki"
 msgstr ""
-"Погледајте OSM вики: "
-"https://wiki.openstreetmap.org/wiki/Map_Features#Restrictions"
 
 msgid "This error is related to:"
 msgstr "Грешка је повезана са:"
@@ -1927,6 +1963,11 @@ msgid ""
 msgstr ""
 "Релаксиранија провера 'name' ='...: A => B', где 'A' мора да буде део 'from'"
 " ознаке, а 'B'  да буде део 'to' ознаке."
+
+msgid ""
+"Check that 'from', 'via' and 'to' match with corresponding platform 'name' "
+"values."
+msgstr ""
 
 msgid ""
 "Check that for instance 'bus' = 'yes' is set on a PTv2 bus stop having "

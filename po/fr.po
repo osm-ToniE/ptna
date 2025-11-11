@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-09-22 18:23+0200\n"
+"POT-Creation-Date: 2025-11-11 16:51+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2025\n"
 "Language-Team: French (https://app.transifex.com/jungle-bus/teams/97874/fr/)\n"
@@ -1072,6 +1072,44 @@ msgstr ""
 " ref ... : from => to'"
 
 #, perl-format
+msgid "PTv2 route: 'from' = '%s' does not match 'name' of first platform: %s"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: 'from' = '%s' is not equal to 'name' of first platform: %s"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: 'to' = '%s' does not match 'name' of last platform: %s"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: 'to' = '%s' is not equal to 'name' of last platform: %s"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'via' is set. %d. via-part ('%s') does not match any platform "
+"name."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'via' is set. %d. via-part ('%s') matches name of more than one "
+"platform (platform numbers: %s)"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: 'via' is set, but there are less than 3 platforms (=%d)."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'via' is set (%d parts), but there are less than %d platforms "
+"(=%d)."
+msgstr ""
+
+#, perl-format
 msgid "PTv2 route: using wrong way type (%s)"
 msgstr "Ligne PTv2 : utilise le mauvais type de voie (%s)"
 
@@ -1507,14 +1545,8 @@ msgstr ""
 "<strong>il s'agit au sens strict d'erreurs</strong>, car les relations ne "
 "doivent pas représenter des collections :"
 
-msgid ""
-" <a "
-"href=\"https://wiki.openstreetmap.org/wiki/Relations/Relations_are_not_Categories\">Relations/Relations"
-" are not Categories</a>"
-msgstr ""
-"<a "
-"href=\"https://wiki.openstreetmap.org/wiki/FR:Relations/Les_relations_ne_sont_pas_des_cat%C3%A9gories\">FR:Relations/Les"
-" relations ne sont pas des catégories</a>"
+msgid "Relations/Relations are not Categories"
+msgstr "Les relations ne sont pas des catégories"
 
 msgid ""
 "The following values and combinations have been found in the provided data "
@@ -2049,12 +2081,8 @@ msgstr ""
 msgid "The access restriction does not comply with the map features."
 msgstr "La restriction d'accès ne correspond pas aux fonctions de la carte."
 
-msgid ""
-"Please consult the OSM Wiki: "
-"https://wiki.openstreetmap.org/wiki/Map_Features#Restrictions"
+msgid "Please consult the OSM Wiki"
 msgstr ""
-"Veuillez consulter le Wiki OSM : "
-"https://wiki.openstreetmap.org/wiki/Map_Features#Restrictions"
 
 msgid "This error is related to:"
 msgstr "Cette erreur est liée à :"
@@ -2179,6 +2207,11 @@ msgid ""
 msgstr ""
 "Vérification plus souple de 'name'='...: A => B', où 'A' fait partie de "
 "'from' et 'B' de 'to'"
+
+msgid ""
+"Check that 'from', 'via' and 'to' match with corresponding platform 'name' "
+"values."
+msgstr ""
 
 msgid ""
 "Check that for instance 'bus' = 'yes' is set on a PTv2 bus stop having "
