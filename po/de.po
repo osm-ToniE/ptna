@@ -1043,12 +1043,12 @@ msgstr ""
 #, perl-format
 msgid "PTv2 route: 'to' = '%s' does not match 'name' of last platform: %s"
 msgstr ""
-"PTv2 Route: 'from' = '%s' passt nicht zu 'name' der letzten Platform: %s"
+"PTv2 Route: 'to' = '%s' passt nicht zu 'name' der letzten Platform: %s"
 
 #, perl-format
 msgid "PTv2 route: 'to' = '%s' is not equal to 'name' of last platform: %s"
 msgstr ""
-"PTv2 Route: 'from' = '%s' ist nicht gleich 'name' der letzten Platform: %s"
+"PTv2 Route: 'to' = '%s' ist nicht gleich 'name' der letzten Platform: %s"
 
 #, perl-format
 msgid ""
