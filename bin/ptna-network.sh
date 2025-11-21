@@ -1024,9 +1024,17 @@ if [ "$updateresult" = "true" ]
 then
     if [ -d "$WORK_LOC" ]
     then
-        RESULTS_LOC="$PTNA_TARGET_LOC/$PTNA_RESULTS_LOC/$SUB_DIR"
-
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Creating analysis details file '$WORK_LOC/$DETAILS_FILE'"
+
+        RESULTS_LOC="$PTNA_TARGET_LOC/$PTNA_RESULTS_LOC/$SUB_DIR"
+        OVERPASS_SEARCH_AREA=$(echo $OVERPASS_QUERY | \
+                               sed -e 's/^.*interpreter?data=//' \
+                                   -e 's/^\[timeout:[0-9]*\];//' \
+                                   -e 's/^area//'                \
+                                   -e 's/^(rel(//'               \
+                                   -e 's/;(.*$//'                \
+                                   -e 's/)\[~.*$//')
+
         echo "REGION_NAME=$PTNA_WWW_REGION_NAME"                            >  $WORK_LOC/$DETAILS_FILE
         echo "REGION_LINK=$PTNA_WWW_REGION_LINK"                            >> $WORK_LOC/$DETAILS_FILE
         echo "NETWORK_NAME=$PTNA_WWW_NETWORK_NAME"                          >> $WORK_LOC/$DETAILS_FILE
@@ -1043,6 +1051,7 @@ then
         echo "TZSHORT=$(TZ=${PTNA_TIMEZONE:-Europe/Berlin} date '+%Z')"     >> $WORK_LOC/$DETAILS_FILE
         echo "UTC=UTC$(TZ=${PTNA_TIMEZONE:-Europe/Berlin} date '+%:::z')"   >> $WORK_LOC/$DETAILS_FILE
         echo "OVERPASS_QUERY=$OVERPASS_QUERY"                               >> $WORK_LOC/$DETAILS_FILE
+        echo "OVERPASS_SEARCH_AREA=$OVERPASS_SEARCH_AREA"                   >> $WORK_LOC/$DETAILS_FILE
         echo "CALL_PARAMS=$CALL_PARAMS"                                     >> $WORK_LOC/$DETAILS_FILE
         echo "START_DOWNLOAD=$START_DOWNLOAD"                               >> $WORK_LOC/$DETAILS_FILE
         echo "END_DOWNLOAD=$END_DOWNLOAD"                                   >> $WORK_LOC/$DETAILS_FILE
@@ -1056,11 +1065,19 @@ then
         fi
         if [ -n "$PTNA_EXTRACT_SOURCE" ]
         then
+            EXTRACT_SEARCH_AREA=$(find $PTNA_NETWORKS_LOC -type f -name "$PREFIX.geojson" -o -name "$PREFIX.poly")
+            if [ -n "$PTNA_EXTRACT_GETIDS" ]
+            then
+                EXTRACT_GETID_AREA=$(find $PTNA_NETWORKS_LOC -type f -name "$PTNA_EXTRACT_GETIDS.geojson" -o -name "$PTNA_EXTRACT_GETIDS.poly")
+            fi
+
             echo "START_FILTER=$START_FILTER"                                                                  >> $WORK_LOC/$DETAILS_FILE
             echo "ERROR_GETID_NOTFOUND=$ERROR_GETID_NOTFOUND"                                                  >> $WORK_LOC/$DETAILS_FILE
             echo "END_FILTER=$END_FILTER"                                                                      >> $WORK_LOC/$DETAILS_FILE
             echo "EXTRACT_FILE=$WORK_LOC/$PTNA_EXTRACT_SOURCE"                                                 >> $WORK_LOC/$DETAILS_FILE
             echo "EXTRACT_SIZE_BYTE=$EXTRACT_SIZE"                                                             >> $WORK_LOC/$DETAILS_FILE
+            echo "EXTRACT_SEARCH_AREA=$EXTRACT_SEARCH_AREA"                                                    >> $WORK_LOC/$DETAILS_FILE
+            echo "EXTRACT_GETID_AREA=$EXTRACT_GETID_AREA"                                                      >> $WORK_LOC/$DETAILS_FILE
         fi
         echo "START_ANALYSIS=$START_ANALYSIS"            >> $WORK_LOC/$DETAILS_FILE
         echo "ERROR_MISSING_DATA=$ERROR_MISSING_DATA"    >> $WORK_LOC/$DETAILS_FILE
