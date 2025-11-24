@@ -1033,7 +1033,7 @@ then
                                    -e 's/^(rel(//'               \
                                    -e 's/;(.*$//'                \
                                    -e 's/)\[~.*$//')
-        lang=$(echo $ANALYSIS_OPTIONS | sed -e 's/^.*--language=\([a-z_][a-z_][a-z_]*\).*$/\1/' | grep '^[a-z_][a-z_][a-z_]*$')
+        lang=$(echo $ANALYSIS_OPTIONS | sed -e 's/^.*--language=\([a-z_][a-z_][A-Za-z_]*\)\s.*$/\1/' | grep '^[a-z_][a-z_][A-Za-z_]*$')
 
 
         echo "REGION_NAME=$PTNA_WWW_REGION_NAME"                            >  $WORK_LOC/$DETAILS_FILE
