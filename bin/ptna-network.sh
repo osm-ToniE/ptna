@@ -1033,6 +1033,8 @@ then
                                    -e 's/^(rel(//'               \
                                    -e 's/;(.*$//'                \
                                    -e 's/)\[~.*$//')
+        lang=$(echo $ANALYSIS_OPTIONS | sed -e 's/^.*--language=\([a-z_][a-z_][a-z_]*\).*$/\1/' | grep '^[a-z_][a-z_][a-z_]*$')
+
 
         echo "REGION_NAME=$PTNA_WWW_REGION_NAME"                            >  $WORK_LOC/$DETAILS_FILE
         echo "REGION_LINK=$PTNA_WWW_REGION_LINK"                            >> $WORK_LOC/$DETAILS_FILE
@@ -1082,6 +1084,7 @@ then
         echo "ERROR_MISSING_DATA=$ERROR_MISSING_DATA"    >> $WORK_LOC/$DETAILS_FILE
         echo "END_ANALYSIS=$END_ANALYSIS"                >> $WORK_LOC/$DETAILS_FILE
         echo "analysis-options=$ANALYSIS_OPTIONS"        >> $WORK_LOC/$DETAILS_FILE
+        echo "lang=$lang"                                >> $WORK_LOC/$DETAILS_FILE
         echo "expect-network-short-as=$EXPECT_NETWORK_SHORT_AS"    >> $WORK_LOC/$DETAILS_FILE
         echo "expect-network-short-for=$EXPECT_NETWORK_SHORT_FOR"  >> $WORK_LOC/$DETAILS_FILE
         echo "expect-network-long-as=$EXPECT_NETWORK_LONG_AS"      >> $WORK_LOC/$DETAILS_FILE
