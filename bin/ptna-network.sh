@@ -1030,7 +1030,6 @@ then
         OVERPASS_SEARCH_AREA=$(echo $OVERPASS_QUERY | \
                                sed -e 's/^.*interpreter?data=//' \
                                    -e 's/^\[timeout:[0-9]*\];//' \
-                                   -e 's/^area//'                \
                                    -e 's/^(rel(//'               \
                                    -e 's/;(.*$//'                \
                                    -e 's/)\[~.*$//')
