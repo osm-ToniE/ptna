@@ -1066,7 +1066,8 @@ then
         fi
         if [ -n "$PTNA_EXTRACT_SOURCE" ]
         then
-            EXTRACT_SEARCH_AREA=$(find $PTNA_NETWORKS_LOC -type f -name "$PREFIX.geojson" -o -name "$PREFIX.poly")
+            BASENAME=${PTNA_EXTRACT_SOURCE/.osm.*}
+            EXTRACT_SEARCH_AREA=$(find $PTNA_NETWORKS_LOC -type f -name "$BASENAME.geojson" -o -name "$BASENAME.poly")
             if [ -n "$PTNA_EXTRACT_GETIDS" ]
             then
                 EXTRACT_GETID_AREA=$(find $PTNA_NETWORKS_LOC -type f -name "$PTNA_EXTRACT_GETIDS.geojson" -o -name "$PTNA_EXTRACT_GETIDS.poly")
