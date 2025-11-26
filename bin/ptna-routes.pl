@@ -1147,7 +1147,7 @@ if ( $xml_has_ways ) {
         #    printf STDERR "Unmatched way type for way: %s\n", $way_id;
         #}
 
-        map { $NODES{$_}->{'member_of_way'}->{$way_id} = 1; } @{$WAYS{$way_id}->{'chain'}};
+        map { $NODES{$_}->{'member_of_way'}->{$way_id} = 1 if ( exists($NODES{$_}) ); } @{$WAYS{$way_id}->{'chain'}};
     }
 
     if ( $verbose ) {
@@ -1173,16 +1173,18 @@ if ( $xml_has_nodes ) {
         #
         # lets categorize the node as stop_position or platform or ...
         #
-        if ( $NODES{$node_id}->{'tag'}->{'public_transport'}                    &&
-             $NODES{$node_id}->{'tag'}->{'public_transport'} eq 'platform'    ) {
-            $platform_nodes{$node_id} = $NODES{$node_id};
-            $number_of_platformnodes++;
-        } elsif ( $NODES{$node_id}->{'tag'}->{'public_transport'}                    &&
-                  $NODES{$node_id}->{'tag'}->{'public_transport'} eq 'stop_position'    ) {
-            $stop_nodes{$node_id} = $NODES{$node_id};
-            $number_of_stop_positions++;
-        } else {
-            ; # printf STDERR "Other type for node: %s\n", $node_id if ( $debug );
+        if ( $NODES{$node_id} && exists($NODES{$node_id}->{'id'}) && exists($NODES{$node_id}->{'lat'}) && exists($NODES{$node_id}->{'lon'})) {
+            if ( $NODES{$node_id}->{'tag'}->{'public_transport'}                    &&
+                $NODES{$node_id}->{'tag'}->{'public_transport'} eq 'platform'    ) {
+                $platform_nodes{$node_id} = $NODES{$node_id};
+                $number_of_platformnodes++;
+            } elsif ( $NODES{$node_id}->{'tag'}->{'public_transport'}                    &&
+                    $NODES{$node_id}->{'tag'}->{'public_transport'} eq 'stop_position'    ) {
+                $stop_nodes{$node_id} = $NODES{$node_id};
+                $number_of_stop_positions++;
+            } else {
+                ; # printf STDERR "Other type for node: %s\n", $node_id if ( $debug );
+            }
         }
     }
 
@@ -4286,18 +4288,44 @@ sub analyze_ptv2_route_relation {
                                            ? $max_allowed_platform_distances{$relation_ptr->{'route_type_value'}}
                                            : 30;
                 my $distance = OSM::Geo::PlatformToNodeDistance( $first_platform_type, $first_platform_id, $sorted_way_nodes[0], $max_allowed_distance );
-                if ( $distance > $max_allowed_distance ) {
-                    $issues_string  = gettext( "PTv2 route: the beginning of the route on the first way (%s) is not near the first platform stop (%s)." );
-                    $issues_string .= " " . gettext( "Distance = %d metres / %d feet." );
-                    $help_string = sprintf( $issues_string, printWayTemplate($first_way_id,'name;ref'), printXxxTemplate($first_platform_type,$first_platform_id,'name;ref'), $distance, OSM::Geo::ConvertMetersToFeet($distance) );
+                if ( defined($distance) ) {
+                    if ( $distance > $max_allowed_distance ) {
+                        $issues_string  = gettext( "PTv2 route: the beginning of the route on the first way (%s) is not near the first platform stop (%s)." );
+                        $issues_string .= " " . gettext( "Distance = %d metres / %d feet." );
+                        $help_string = sprintf( $issues_string, printWayTemplate($first_way_id,'name;ref'), printXxxTemplate($first_platform_type,$first_platform_id,'name;ref'), $distance, OSM::Geo::ConvertMetersToFeet($distance) );
+                        push( @{$relation_ptr->{'__issues__'}}, $help_string );
+                        $return_code++;
+                    }
+                } else {
+                    if ( $first_platform_type eq 'node' ) {
+                        $issues_string  = gettext( "Error in input data: insufficient data for nodes" );
+                    } elsif ( $first_platform_type eq 'way' ) {
+                        $issues_string  = gettext( "Error in input data: insufficient data for ways" );
+                    } else {
+                        $issues_string  = gettext( "Error in input data: insufficient data for relations" );
+                    }
+                    $help_string = sprintf( "%s: %s, %s", $issues_string, printXxxTemplate($first_platform_type,$first_platform_id,'name;ref'), printNodeTemplate($sorted_way_nodes[0],'name;ref') );
                     push( @{$relation_ptr->{'__issues__'}}, $help_string );
                     $return_code++;
                 }
                 $distance = OSM::Geo::PlatformToNodeDistance( $last_platform_type, $last_platform_id, $sorted_way_nodes[$#sorted_way_nodes], $max_allowed_distance );
-                if ( $distance > $max_allowed_distance ) {
-                    $issues_string  = gettext( "PTv2 route: the end of the route on the last way (%s) is not near the last platform stop (%s)." );
-                    $issues_string .= " " . gettext( "Distance = %d metres / %d feet." );
-                    $help_string = sprintf( $issues_string, printWayTemplate($last_way_id,'name;ref'), printXxxTemplate($last_platform_type,$last_platform_id,'name;ref'), $distance, OSM::Geo::ConvertMetersToFeet($distance) );
+                if ( defined($distance) ) {
+                    if ( $distance > $max_allowed_distance ) {
+                        $issues_string  = gettext( "PTv2 route: the end of the route on the last way (%s) is not near the last platform stop (%s)." );
+                        $issues_string .= " " . gettext( "Distance = %d metres / %d feet." );
+                        $help_string = sprintf( $issues_string, printWayTemplate($last_way_id,'name;ref'), printXxxTemplate($last_platform_type,$last_platform_id,'name;ref'), $distance, OSM::Geo::ConvertMetersToFeet($distance) );
+                        push( @{$relation_ptr->{'__issues__'}}, $help_string );
+                        $return_code++;
+                    }
+                } else {
+                    if ( $last_platform_type eq 'node' ) {
+                        $issues_string  = gettext( "Error in input data: insufficient data for nodes" );
+                    } elsif ( $last_platform_type eq 'way' ) {
+                        $issues_string  = gettext( "Error in input data: insufficient data for ways" );
+                    } else {
+                        $issues_string  = gettext( "Error in input data: insufficient data for relations" );
+                    }
+                    $help_string = sprintf( "%s: %s, %s", $issues_string, printXxxTemplate($last_platform_type,$last_platform_id,'name;ref'), printNodeTemplate($sorted_way_nodes[$#sorted_way_nodes],'name;ref') );
                     push( @{$relation_ptr->{'__issues__'}}, $help_string );
                     $return_code++;
                 }
@@ -4558,7 +4586,7 @@ sub SortRouteWayNodes {
                                                                     join( ', ', @{$WAYS{$next_way_id}->{'chain'}} )     if ( $debug );
                                 if ( $previous_way_id && !isClosedWay($previous_way_id) ) {
                                     printf STDERR "SortRouteWayNodes() : call doesWayTraverseRoundAbout() for %s, %s, %s\n", $relation_ptr->{'tag'}->{'name'}, $WAYS{$previous_way_id}->{'tag'}->{'name'}, , $WAYS{$current_way_id}->{'tag'}->{'name'}    if ( $debug );
-                                    if ( doesWayTraverseRoundAbout( \@{$WAYS{$previous_way_id}->{'chain'}}, \@{$WAYS{$current_way_id}->{'chain'}} ) ) {
+                                    if ( doesWayTraverseRoundAbout( $relation_ptr, \@{$WAYS{$previous_way_id}->{'chain'}}, \@{$WAYS{$current_way_id}->{'chain'}} ) ) {
                                         $relation_ptr->{'number_of_traversed_roundabouts'}++;
                                         $relation_ptr->{'traversed_roundabout'}->{$current_way_id}->{$previous_way_id} = 1;
                                         printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_traversed_roundabouts'}++ = %d at first, closed, single Way being traversed by previous way (%s) %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $WAYS{$previous_way_id}->{'tag'}->{'name'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
@@ -4566,7 +4594,7 @@ sub SortRouteWayNodes {
                                 }
                                 if ( $next_way_id && !isClosedWay($next_way_id) ) {
                                     printf STDERR "SortRouteWayNodes() : call doesWayTraverseRoundAbout() for %s, %s, %s\n", $relation_ptr->{'tag'}->{'name'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, , $WAYS{$current_way_id}->{'tag'}->{'name'}    if ( $debug );
-                                    if ( doesWayTraverseRoundAbout( \@{$WAYS{$next_way_id}->{'chain'}}, \@{$WAYS{$current_way_id}->{'chain'}} ) ) {
+                                    if ( doesWayTraverseRoundAbout( $relation_ptr, \@{$WAYS{$next_way_id}->{'chain'}}, \@{$WAYS{$current_way_id}->{'chain'}} ) ) {
                                         $relation_ptr->{'number_of_traversed_roundabouts'}++;
                                         $relation_ptr->{'traversed_roundabout'}->{$current_way_id}->{$next_way_id} = 1;
                                         printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_traversed_roundabouts'}++ = %d at first, closed, single Way being traversed by previous way (%s) %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
@@ -4606,7 +4634,7 @@ sub SortRouteWayNodes {
 
                                     if ( $previous_way_id && !isClosedWay($previous_way_id) ) {
                                         printf STDERR "SortRouteWayNodes() : call doesWayTraverseRoundAbout() for %s, %s, %s\n", $relation_ptr->{'tag'}->{'name'}, $WAYS{$previous_way_id}->{'tag'}->{'name'}, , $WAYS{$current_way_id}->{'tag'}->{'name'}    if ( $debug );
-                                        if ( doesWayTraverseRoundAbout( \@{$WAYS{$previous_way_id}->{'chain'}}, \@{$WAYS{$current_way_id}->{'chain'}} ) ) {
+                                        if ( doesWayTraverseRoundAbout( $relation_ptr, \@{$WAYS{$previous_way_id}->{'chain'}}, \@{$WAYS{$current_way_id}->{'chain'}} ) ) {
                                             $relation_ptr->{'number_of_traversed_roundabouts'}++;
                                             $relation_ptr->{'traversed_roundabout'}->{$current_way_id}->{$previous_way_id} = 1;
                                             printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_traversed_roundabouts'}++ = %d at first, closed, single Way being traversed by previous way (%s) %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $WAYS{$previous_way_id}->{'tag'}->{'name'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
@@ -4614,7 +4642,7 @@ sub SortRouteWayNodes {
                                     }
                                     if ( $next_way_id && !isClosedWay($next_way_id) ) {
                                         printf STDERR "SortRouteWayNodes() : call doesWayTraverseRoundAbout() for %s, %s, %s\n", $relation_ptr->{'tag'}->{'name'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, , $WAYS{$current_way_id}->{'tag'}->{'name'}    if ( $debug );
-                                        if ( doesWayTraverseRoundAbout( \@{$WAYS{$next_way_id}->{'chain'}}, \@{$WAYS{$current_way_id}->{'chain'}} ) ) {
+                                        if ( doesWayTraverseRoundAbout( $relation_ptr, \@{$WAYS{$next_way_id}->{'chain'}}, \@{$WAYS{$current_way_id}->{'chain'}} ) ) {
                                             $relation_ptr->{'number_of_traversed_roundabouts'}++;
                                             $relation_ptr->{'traversed_roundabout'}->{$current_way_id}->{$next_way_id} = 1;
                                             printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_traversed_roundabouts'}++ = %d at first, closed, single Way being traversed by previous way (%s) %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
@@ -4743,7 +4771,7 @@ sub SortRouteWayNodes {
                             }
                             if ( $next_way_id && !isClosedWay($next_way_id) ) {
                                 printf STDERR "SortRouteWayNodes() : call doesWayTraverseRoundAbout() for %s, %s, %s\n", $relation_ptr->{'tag'}->{'name'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, , $WAYS{$current_way_id}->{'tag'}->{'name'}    if ( $debug );
-                                if ( doesWayTraverseRoundAbout( \@{$WAYS{$next_way_id}->{'chain'}}, \@{$WAYS{$current_way_id}->{'chain'}} ) ) {
+                                if ( doesWayTraverseRoundAbout( $relation_ptr, \@{$WAYS{$next_way_id}->{'chain'}}, \@{$WAYS{$current_way_id}->{'chain'}} ) ) {
                                     $relation_ptr->{'number_of_traversed_roundabouts'}++;
                                     $relation_ptr->{'traversed_roundabout'}->{$current_way_id}->{$next_way_id} = 1;
                                     printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_traversed_roundabouts'}++ = %d at first, closed, single Way being traversed by previous way (%s) %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
@@ -4774,7 +4802,7 @@ sub SortRouteWayNodes {
                         }
                         if ( $next_way_id && !isClosedWay($next_way_id) ) {
                             printf STDERR "SortRouteWayNodes() : call doesWayTraverseRoundAbout() for %s, %s, %s\n", $relation_ptr->{'tag'}->{'name'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, , $WAYS{$current_way_id}->{'tag'}->{'name'}    if ( $debug );
-                            if ( doesWayTraverseRoundAbout( \@{$WAYS{$next_way_id}->{'chain'}}, \@{$WAYS{$current_way_id}->{'chain'}} ) ) {
+                            if ( doesWayTraverseRoundAbout( $relation_ptr, \@{$WAYS{$next_way_id}->{'chain'}}, \@{$WAYS{$current_way_id}->{'chain'}} ) ) {
                                 $relation_ptr->{'number_of_traversed_roundabouts'}++;
                                 $relation_ptr->{'traversed_roundabout'}->{$current_way_id}->{$next_way_id} = 1;
                                 printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_traversed_roundabouts'}++ = %d at first, closed, single Way being traversed by previous way (%s) %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
@@ -4792,7 +4820,7 @@ sub SortRouteWayNodes {
                             printf STDERR "SortRouteWayNodes() : handle Nodes for last Node %s of first Way %s connecting to a closed Way %s with Index %d:\nNodes: %s\n", $WAYS{$current_way_id}->{'first_node'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, $index, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                             push( @sorted_nodes, @{$WAYS{$current_way_id}->{'chain'}} );
                             printf STDERR "SortRouteWayNodes() : call doesWayTraverseRoundAbout() for %s, %s, %s\n", $relation_ptr->{'tag'}->{'name'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, , $WAYS{$next_way_id}->{'tag'}->{'name'}    if ( $debug );
-                            if ( doesWayTraverseRoundAbout( \@{$WAYS{$current_way_id}->{'chain'}}, \@{$WAYS{$next_way_id}->{'chain'}} ) ) {
+                            if ( doesWayTraverseRoundAbout( $relation_ptr, \@{$WAYS{$current_way_id}->{'chain'}}, \@{$WAYS{$next_way_id}->{'chain'}} ) ) {
                                 $relation_ptr->{'number_of_traversed_roundabouts'}++;
                                 $relation_ptr->{'traversed_roundabout'}->{$next_way_id}->{$current_way_id} = 1;
                                 printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_traversed_roundabouts'}++ = %d at first, closed, single Way being traversed by previous way (%s) %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
@@ -4805,7 +4833,7 @@ sub SortRouteWayNodes {
                             printf STDERR "SortRouteWayNodes() : handle Nodes for first Node %s of first Way %s connecting to a closed Way %s with Index %s:\nNodes: reverse( %s )\n", $WAYS{$current_way_id}->{'first_node'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, $index, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
                             push( @sorted_nodes, reverse(@{$WAYS{$current_way_id}->{'chain'}}) );
                             printf STDERR "SortRouteWayNodes() : call doesWayTraverseRoundAbout() for %s, %s, %s\n", $relation_ptr->{'tag'}->{'name'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, , $WAYS{$next_way_id}->{'tag'}->{'name'}    if ( $debug );
-                            if ( doesWayTraverseRoundAbout( \@{$WAYS{$current_way_id}->{'chain'}}, \@{$WAYS{$next_way_id}->{'chain'}} ) ) {
+                            if ( doesWayTraverseRoundAbout( $relation_ptr, \@{$WAYS{$current_way_id}->{'chain'}}, \@{$WAYS{$next_way_id}->{'chain'}} ) ) {
                                 $relation_ptr->{'number_of_traversed_roundabouts'}++;
                                 $relation_ptr->{'traversed_roundabout'}->{$next_way_id}->{$current_way_id} = 1;
                                 printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_traversed_roundabouts'}++ = %d at first, closed, single Way being traversed by previous way (%s) %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $WAYS{$next_way_id}->{'tag'}->{'name'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
@@ -4874,7 +4902,7 @@ sub SortRouteWayNodes {
                             }
                             if ( $previous_way_id && !isClosedWay($previous_way_id) ) {
                                 printf STDERR "SortRouteWayNodes() : call doesWayTraverseRoundAbout() for %s, %s, %s\n", $relation_ptr->{'tag'}->{'name'}, $WAYS{$previous_way_id}->{'tag'}->{'name'}, , $WAYS{$current_way_id}->{'tag'}->{'name'}    if ( $debug );
-                                if ( doesWayTraverseRoundAbout( \@{$WAYS{$previous_way_id}->{'chain'}}, \@{$WAYS{$current_way_id}->{'chain'}} ) ) {
+                                if ( doesWayTraverseRoundAbout( $relation_ptr, \@{$WAYS{$previous_way_id}->{'chain'}}, \@{$WAYS{$current_way_id}->{'chain'}} ) ) {
                                     $relation_ptr->{'number_of_traversed_roundabouts'}++;
                                     $relation_ptr->{'traversed_roundabout'}->{$current_way_id}->{$previous_way_id} = 1;
                                     printf STDERR "SortRouteWayNodes() : relation_ptr->{'number_of_traversed_roundabouts'}++ = %d at first, closed, single Way being traversed by previous way (%s) %s:\nNodes: %s\n", $relation_ptr->{'number_of_segments'}, $WAYS{$previous_way_id}->{'tag'}->{'name'}, $WAYS{$current_way_id}->{'tag'}->{'name'}, join( ', ', @{$WAYS{$current_way_id}->{'chain'}} )     if ( $debug );
@@ -5359,11 +5387,12 @@ sub isNodeArrayClosedWay {
 #############################################################################################
 
 sub doesWayTraverseRoundAbout {
+    my $relation_ptr           = shift || undef;
     my $ref_way                = shift || undef;
     my $ref_roundabout         = shift || undef;
 
-    if ( $ref_way && $ref_roundabout ) {
-        my $count_way_nodes         = scalar( @{$ref_way} );
+    if ( $relation_ptr && $ref_way && $ref_roundabout ) {
+        my $count_way_nodes        = scalar( @{$ref_way} );
         my $count_roundabout_nodes = scalar( @{$ref_roundabout} );
         if ( $count_way_nodes > 1 && $count_roundabout_nodes > 2 ) {
             if ( $ref_roundabout->[0] && $ref_roundabout->[$count_roundabout_nodes-1] &&
@@ -5378,13 +5407,25 @@ sub doesWayTraverseRoundAbout {
                             push( @common_nodes, $ref_way->[$i] );
                         } else {
                             # the other nodes are outside or inside the roundabout
-                            push( @way_polygon, [$NODES{$ref_way->[$i]}->{'lat'},$NODES{$ref_way->[$i]}->{'lon'}] );
+                            if ( exists($NODES{$ref_way->[$i]}) && exists($NODES{$ref_way->[$i]}->{'lat'}) && exists($NODES{$ref_way->[$i]}->{'lon'}) && $NODES{$ref_way->[$i]}->{'lat'} && $NODES{$ref_way->[$i]}->{'lon'} ) {
+                                push( @way_polygon, [$NODES{$ref_way->[$i]}->{'lat'},$NODES{$ref_way->[$i]}->{'lon'}] );
+                            } else {
+                                printf STDERR "doesWayTraverseRoundAbout() relation: 'id' = %s, way_poly has unknwon values \$NODES{%s}->{'lat'} == %s, \$NODES{%s}->{'lon'} == %s\n", $relation_ptr->{'id'}, $ref_way->[$i], exists($NODES{$ref_way->[$i]}->{'lat'})?$NODES{$ref_way->[$i]}->{'lat'}:'?', $ref_way->[$i], exists($NODES{$ref_way->[$i]}->{'lon'})?$NODES{$ref_way->[$i]}->{'lon'}:'?';
+                                printf STDERR "\$RELATIONS{%s} = %s", $relation_ptr->{'id'}, Data::Dumper::Dumper($RELATIONS{$relation_ptr->{'id'}});
+                                printf STDERR "\$NODES{%s} = %s", $ref_way->[$i], Data::Dumper::Dumper($NODES{$ref_way->[$i]});
+                            }
                         }
                     }
                 }
                 for ( my $i = 0; $i < $count_roundabout_nodes; $i++ ) {
                     if ( $ref_roundabout->[$i] && $NODES{$ref_roundabout->[$i]} ) {
-                        push( @roundabout_polygon, [$NODES{$ref_roundabout->[$i]}->{'lat'},$NODES{$ref_roundabout->[$i]}->{'lon'}] );
+                        if ( exists($NODES{$ref_roundabout->[$i]}) && exists($NODES{$ref_roundabout->[$i]}->{'lat'}) && exists($NODES{$ref_roundabout->[$i]}->{'lon'}) && $NODES{$ref_roundabout->[$i]}->{'lat'} && $NODES{$ref_roundabout->[$i]}->{'lon'} ) {
+                            push( @roundabout_polygon, [$NODES{$ref_roundabout->[$i]}->{'lat'},$NODES{$ref_roundabout->[$i]}->{'lon'}] );
+                        } else {
+                            printf STDERR "doesWayTraverseRoundAbout() relation: 'id' = %s, roundabout_polygon has unknwon values \$NODES{%s}->{'lat'} == %s, \$NODES{%s}->{'lon'} == %s\n", $relation_ptr->{'id'}, $ref_roundabout->[$i], exists($NODES{$ref_roundabout->[$i]}->{'lat'})?$NODES{$ref_roundabout->[$i]}->{'lat'}:'?', $ref_roundabout->[$i], exists($NODES{$ref_roundabout->[$i]}->{'lon'})?$NODES{$ref_roundabout->[$i]}->{'lon'}:'?';
+                                printf STDERR "\$RELATIONS{%s} = %s", $relation_ptr->{'id'}, Data::Dumper::Dumper($RELATIONS{$relation_ptr->{'id'}});
+                                printf STDERR "\$NODES{%s} = %s", $ref_way->[$i], Data::Dumper::Dumper($NODES{$ref_way->[$i]});
+                        }
                     }
                 }
 

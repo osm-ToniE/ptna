@@ -76,7 +76,10 @@ sub ObjectToObjectDistance {
 
     if ( $type1 eq 'node' ) {
         if ( $type2 eq 'node' ) {
-            $min_distance = $gis->distance_metal( $NODES{$id1}->{'lat'}, $NODES{$id1}->{'lon'}, $NODES{$id2}->{'lat'},$NODES{$id2}->{'lon'} ) * 1000;
+            if ( exists($NODES{$id1}) && exists($NODES{$id1}->{'lat'}) && exists($NODES{$id1}->{'lon'}) && $NODES{$id1}->{'lat'} && $NODES{$id1}->{'lon'} &&
+                 exists($NODES{$id2}) && exists($NODES{$id2}->{'lat'}) && exists($NODES{$id2}->{'lon'}) && $NODES{$id2}->{'lat'} && $NODES{$id2}->{'lon'}    ) {
+                $min_distance = $gis->distance_metal( $NODES{$id1}->{'lat'}, $NODES{$id1}->{'lon'}, $NODES{$id2}->{'lat'},$NODES{$id2}->{'lon'} ) * 1000;
+            }
             printf STDERR "%s ObjectToObjectDistance( '%s', ['%s','%s'], '%s', ['%s','%s'], %d) = %f\n", get_time(), $type1, $NODES{$id1}->{'lat'}, $NODES{$id1}->{'lon'}, $type2, $NODES{$id2}->{'lat'},$NODES{$id2}->{'lon'}, $min_distance        if ( $debug );
         } elsif ( $type2 eq 'way' ) {
             my $current_platform_node_id  = 0;
@@ -174,8 +177,8 @@ sub PlatformToNodeDistance {
     my $node_id         = shift || 0;
     my $ok_if_le_than   = shift || 0;       # don't evaluate further if the distance is less than or equal to xx meters
     my $recursion_depth = shift || 0;
-    my $distance      = 0;
-    my $min_distance  = 100000000;
+    my $distance      = undef;
+    my $min_distance  = 10000000000;
 
     my $start_time    = Time::HiRes::time();
     $recursion_depth++;
@@ -183,13 +186,16 @@ sub PlatformToNodeDistance {
     printf STDERR "%s PlatformToNodeDistance( '%s', '%s', '%s', %d, %d )\n", get_time(), $platform_type, $platform_id, $node_id, $ok_if_le_than, $recursion_depth        if ( $debug );
 
     if ( $platform_type eq 'node' ) {
-        if ( exists($NODES{$platform_id}) && exists($NODES{$platform_id}->{'lat'}) && exists($NODES{$platform_id}->{'lon'}) &&
-             exists($NODES{$node_id})     && exists($NODES{$node_id}->{'lat'})     && exists($NODES{$node_id}->{'lon'})         ) {
+        if ( exists($NODES{$platform_id}) && exists($NODES{$platform_id}->{'lat'}) && exists($NODES{$platform_id}->{'lon'}) && $NODES{$platform_id}->{'lat'} && $NODES{$platform_id}->{'lon'} &&
+             exists($NODES{$node_id})     && exists($NODES{$node_id}->{'lat'})     && exists($NODES{$node_id}->{'lon'})     && $NODES{$node_id}->{'lat'}     && $NODES{$node_id}->{'lon'}         ) {
             $min_distance = $gis->distance_metal( $NODES{$platform_id}->{'lat'}, $NODES{$platform_id}->{'lon'}, $NODES{$node_id}->{'lat'}, $NODES{$node_id}->{'lon'} ) * 1000;
+            printf STDERR "%s PlatformToNodeDistance( '%s', ['%s','%s'], ['%s','%s'], %d, %d ) = %f\n", get_time(), $platform_type, $NODES{$platform_id}->{'lat'}, $NODES{$platform_id}->{'lon'}, $NODES{$node_id}->{'lat'}, $NODES{$node_id}->{'lon'}, $ok_if_le_than, $recursion_depth, $min_distance        if ( $debug );
         } else {
-            ;
+            printf STDERR "PlatformToNodeDistance(%s,%s,%s,%s,%s)\n", $platform_type, $platform_id, $node_id, $ok_if_le_than, $recursion_depth;
+            printf STDERR "Platform \$NODES{%s} = %s", $platform_id, Data::Dumper::Dumper($NODES{$platform_id});
+            printf STDERR "Node \$NODES{%s} = %s", $node_id, Data::Dumper::Dumper($NODES{$node_id});
+            $min_distance = undef;
         }
-        printf STDERR "%s PlatformToNodeDistance( '%s', ['%s','%s'], ['%s','%s'], %d, %d ) = %f\n", get_time(), $platform_type, $NODES{$platform_id}->{'lat'}, $NODES{$platform_id}->{'lon'}, $NODES{$node_id}->{'lat'}, $NODES{$node_id}->{'lon'}, $ok_if_le_than, $recursion_depth, $min_distance        if ( $debug );
     } elsif ( $platform_type eq 'way' ) {
         my $current_platform_node_id  = 0;
         my $previous_platform_node_id = 0;
@@ -197,12 +203,16 @@ sub PlatformToNodeDistance {
             $previous_platform_node_id = $current_platform_node_id  unless ( $i == 0 );
             $current_platform_node_id  = ${$WAYS{$platform_id}->{'chain'}}[$i];
             $distance = PlatformToNodeDistance( 'node', $current_platform_node_id, $node_id, $ok_if_le_than, $recursion_depth );
-            $min_distance = ($min_distance > $distance) ? $distance : $min_distance;
-            last if ( $min_distance <= $ok_if_le_than );
-            if (  $i > 0 && $previous_platform_node_id != $current_platform_node_id ) {
-                $distance = PointToSegmentDistance($node_id,$previous_platform_node_id,$current_platform_node_id );
+            if ( defined($distance) ) {
                 $min_distance = ($min_distance > $distance) ? $distance : $min_distance;
                 last if ( $min_distance <= $ok_if_le_than );
+            }
+            if (  $i > 0 && $previous_platform_node_id != $current_platform_node_id ) {
+                $distance = PointToSegmentDistance($node_id,$previous_platform_node_id,$current_platform_node_id );
+                if ( defined($distance) ) {
+                    $min_distance = ($min_distance > $distance) ? $distance : $min_distance;
+                    last if ( $min_distance <= $ok_if_le_than );
+                }
             }
         }
         printf STDERR "%s PlatformToNodeDistance( '%s', '%s', ['%s','%s'], %d, %d ) = %f\n", get_time(), $platform_type, $platform_id, $NODES{$node_id}->{'lat'}, $NODES{$node_id}->{'lon'}, $ok_if_le_than, $recursion_depth, $min_distance        if ( $debug );
@@ -212,8 +222,10 @@ sub PlatformToNodeDistance {
             if ( $platform_member_ref->{'type'} eq 'node' || $platform_member_ref->{'type'} eq 'way' ) {
                 printf STDERR "%s PlatformToNodeDistance( '%s', '%s', '%s', %d, %d ); handling '%s' member of this relation: 'role' = %s, 'ref' = %s\n", get_time(), $platform_type, $platform_id, $node_id, $ok_if_le_than, $recursion_depth, $platform_member_ref->{'type'}, $platform_member_ref->{'role'}, $platform_member_ref->{'ref'}   if ( $debug  );
                 $distance = PlatformToNodeDistance( $platform_member_ref->{'type'}, $platform_member_ref->{'ref'}, $node_id, $ok_if_le_than, $recursion_depth );
-                $min_distance = ($min_distance > $distance) ? $distance : $min_distance;
-                last if ( $min_distance <= $ok_if_le_than );
+                if ( defined($distance) ) {
+                    $min_distance = ($min_distance > $distance) ? $distance : $min_distance;
+                    last if ( $min_distance <= $ok_if_le_than );
+                }
             } else {
                 printf STDERR "%s PlatformToNodeDistance( '%s', '%s', '%s', %d, %d ); skipping '%s' member of this relation: 'role' = %s, 'ref' = %s\n", get_time(), $platform_type, $platform_id, $node_id, $ok_if_le_than, $recursion_depth, $platform_member_ref->{'type'}, $platform_member_ref->{'role'}, $platform_member_ref->{'ref'};
             }
@@ -222,7 +234,6 @@ sub PlatformToNodeDistance {
         # $debug = 0 if ( $platform_id == 6771456 ); # Bahnsteig der RB10 in Nauen DE-Bahnverkehr
     } else {
         printf STDERR "%s Internal error in PlatformToNodeDistance( '%s', '%s', '%s', %d, %d )\n", get_time(), $platform_type, $platform_id, $node_id, $ok_if_le_than, $recursion_depth;
-        $min_distance = 0;
     }
 
     push( @distance_measurements, { 'function' => 'PlatformToNodeDistance', 'param1' => $platform_type, 'param2' => $platform_id, 'param3' => $node_id, 'param4' => $ok_if_le_than, 'param5' => $recursion_depth, 'returns' => $min_distance } );
@@ -252,12 +263,12 @@ sub PointToSegmentDistance {
     my $segment_nodeA_id  = shift || 0;
     my $segment_nodeB_id  = shift || 0;
     my $distance          = 0;
-    my $Px = $NODES{$point_id}->{'lat'};
-    my $Py = $NODES{$point_id}->{'lon'};
-    my $Ax = $NODES{$segment_nodeA_id}->{'lat'};
-    my $Ay = $NODES{$segment_nodeA_id}->{'lon'};
-    my $Bx = $NODES{$segment_nodeB_id}->{'lat'};
-    my $By = $NODES{$segment_nodeB_id}->{'lon'};
+    my $Px = (exists($NODES{$point_id})         && exists($NODES{$point_id}->{'lat'})         && $NODES{$point_id}->{'lat'}        ) ? $NODES{$point_id}->{'lat'} : 0;
+    my $Py = (exists($NODES{$point_id})         && exists($NODES{$point_id}->{'lon'})         && $NODES{$point_id}->{'lon'}        ) ? $NODES{$point_id}->{'lon'} : 0;
+    my $Ax = (exists($NODES{$segment_nodeA_id}) && exists($NODES{$segment_nodeA_id}->{'lat'}) && $NODES{$segment_nodeA_id}->{'lat'}) ? $NODES{$segment_nodeA_id}->{'lat'} : 0;
+    my $Ay = (exists($NODES{$segment_nodeA_id}) && exists($NODES{$segment_nodeA_id}->{'lon'}) && $NODES{$segment_nodeA_id}->{'lon'}) ? $NODES{$segment_nodeA_id}->{'lon'} : 0;
+    my $Bx = (exists($NODES{$segment_nodeB_id}) && exists($NODES{$segment_nodeB_id}->{'lat'}) && $NODES{$segment_nodeB_id}->{'lat'}) ? $NODES{$segment_nodeB_id}->{'lat'} : 0;
+    my $By = (exists($NODES{$segment_nodeB_id}) && exists($NODES{$segment_nodeB_id}->{'lon'}) && $NODES{$segment_nodeB_id}->{'lon'}) ? $NODES{$segment_nodeB_id}->{'lon'} : 0;
 
     printf STDERR "%s PointToSegmentDistance( ['%s','%s'], ['%s','%s'], ['%s','%s'] )\n", get_time(), $Px, $Py, $Ax, $Ay, $Bx, $By        if ( $debug );
 
