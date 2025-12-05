@@ -1820,9 +1820,9 @@ sub InitOptionStrings {
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
-    $OptionList[$i]->{'option'}                 = "check-from-via-to";
+    $OptionList[$i]->{'option'}                 = "check-from-to";
     $OptionList[$i]->{'default'}                = "OFF";
-    $OptionList[$i]->{'description'}            = gettext( "Check that 'from', 'via' and 'to' match with corresponding platform 'name' values." );
+    $OptionList[$i]->{'description'}            = gettext( "Check that 'from' and 'to' match with corresponding platform 'name' values." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
@@ -1882,6 +1882,13 @@ sub InitOptionStrings {
     $OptionList[$i]->{'option'}                 = "check-version";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = gettext( "Check of 'public_transport:version' = '...' on Route-Master and Route." );
+    $OptionList[$i]->{'image'}                  = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+
+    $i++;
+    $OptionList[$i]->{'option'}                 = "check-via";
+    $OptionList[$i]->{'default'}                = "OFF";
+    $OptionList[$i]->{'description'}            = gettext( "Check that 'via' matches with corresponding platform 'name' values." );
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 

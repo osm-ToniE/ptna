@@ -38,7 +38,7 @@
         <ol>
         <li>1 <a href="#hints">Hints</a>
         </li>
-        <li>2 <a href="#A2">Test file for --check-from-via-to=no/exact/relaxed</a>
+        <li>2 <a href="#A2">Test file for --check-from-to=no/exact/relaxed --check-via=/exact/relaxed</a>
         <ol>
         <li>2.1 <a href="#A2.1">Positive, no notes</a>
         </li>
@@ -80,7 +80,7 @@
             An explanation of the error texts can be found in the documentation at '<a href='/en/index.php#messages'>Messages</a>'.
         </p>
         <hr />
-        <h1 id="A2">2 Test file for --check-from-via-to=no/exact/relaxed</h1>
+        <h1 id="A2">2 Test file for --check-from-to=no/exact/relaxed --check-via=/exact/relaxed</h1>
         <h2 id="A2.1">2.1 Positive, no notes</h2>
         <table class="oepnvtable">
             <thead>
@@ -97,19 +97,19 @@
         <h2 id="A2.2">2.2 Negative</h2>
         <h3 id="A2.2.1">2.2.1 Bus 3</h3>
 <p>
---check-from-via-to=<em>no</em> =&gt; <span class="attention">no notes</span>
+--check-from-to = --check-via=<em>no</em> =&gt; <span class="attention">no notes</span>
 
 </p>
 <p>
---check-from-via-to=<em>exact</em> =&gt; <span class="attention">notes = PTv2 route: &#039;from&#039; = &#039;Stop 6&#039; is not equal to &#039;name&#039; of first platform: Node &#039;Stop 1&#039;</span>
+--check-from-to = --check-via=<em>exact</em> =&gt; <span class="attention">notes = PTv2 route: &#039;from&#039; = &#039;Stop 6&#039; is not equal to &#039;name&#039; of first platform: Node &#039;Stop 1&#039;</span>
 
 </p>
 <p>
---check-from-via-to=<em>exact</em> =&gt; <span class="attention">notes = PTv2 route: &#039;to&#039; = &#039;Stop 1&#039; is not equal to &#039;name&#039; of last platform: Node &#039;Stop 6&#039;</span>
+--check-from-to = --check-via=<em>exact</em> =&gt; <span class="attention">notes = PTv2 route: &#039;to&#039; = &#039;Stop 1&#039; is not equal to &#039;name&#039; of last platform: Node &#039;Stop 6&#039;</span>
 
 </p>
 <p>
---check-from-via-to=<em>relaxed</em> =&gt; <span class="attention">no notes</span>
+--check-from-to = --check-via=<em>relaxed</em> =&gt; <span class="attention">no notes</span>
 
 </p>
         <table class="oepnvtable">
@@ -124,15 +124,15 @@
 
         <h3 id="A2.2.2">2.2.2 Bus 4</h3>
 <p>
---check-from-via-to=<em>no</em> =&gt; <span class="attention">no notes</span>
+--check-from-to = --check-via=<em>no</em> =&gt; <span class="attention">no notes</span>
 
 </p>
 <p>
---check-from-via-to=<em>exact</em> =&gt; <span class="attention">no notes</span>
+--check-from-to = --check-via=<em>exact</em> =&gt; <span class="attention">no notes</span>
 
 </p>
 <p>
---check-from-via-to=<em>relaxed</em> =&gt; <span class="attention">no notes</span>
+--check-from-to = --check-via=<em>relaxed</em> =&gt; <span class="attention">no notes</span>
 
 </p>
         <table class="oepnvtable">
@@ -147,15 +147,15 @@
 
         <h3 id="A2.2.3">2.2.3 Bus 5</h3>
 <p>
---check-from-via-to=<em>no</em> =&gt; <span class="attention">no notes</span>
+--check-from-to = --check-via=<em>no</em> =&gt; <span class="attention">no notes</span>
 
 </p>
 <p>
---check-from-via-to=<em>exact</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set, but there are less than 3 platforms (=0).</span>
+--check-from-to = --check-via=<em>exact</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set, but there are less than 3 platforms (=0).</span>
 
 </p>
 <p>
---check-from-via-to=<em>relaxed</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set, but there are less than 3 platforms (=0).</span>
+--check-from-to = --check-via=<em>relaxed</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set, but there are less than 3 platforms (=0).</span>
 
 </p>
         <table class="oepnvtable">
@@ -170,15 +170,15 @@
 
         <h3 id="A2.2.4">2.2.4 Bus 6</h3>
 <p>
---check-from-via-to=<em>no</em> =&gt; <span class="attention">no notes</span>
+--check-from-to = --check-via=<em>no</em> =&gt; <span class="attention">no notes</span>
 
 </p>
 <p>
---check-from-via-to=<em>exact</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set, but there are less than 3 platforms (=1).</span>
+--check-from-to = --check-via=<em>exact</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set, but there are less than 3 platforms (=1).</span>
 
 </p>
 <p>
---check-from-via-to=<em>relaxed</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set, but there are less than 3 platforms (=1).</span>
+--check-from-to = --check-via=<em>relaxed</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set, but there are less than 3 platforms (=1).</span>
 
 </p>
         <table class="oepnvtable">
@@ -193,15 +193,15 @@
 
         <h3 id="A2.2.5">2.2.5 Bus 7</h3>
 <p>
---check-from-via-to=<em>no</em> =&gt; <span class="attention">no notes</span>
+--check-from-to = --check-via=<em>no</em> =&gt; <span class="attention">no notes</span>
 
 </p>
 <p>
---check-from-via-to=<em>exact</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set, but there are less than 3 platforms (=2).</span>
+--check-from-to = --check-via=<em>exact</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set, but there are less than 3 platforms (=2).</span>
 
 </p>
 <p>
---check-from-via-to=<em>relaxed</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set, but there are less than 3 platforms (=2).</span>
+--check-from-to = --check-via=<em>relaxed</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set, but there are less than 3 platforms (=2).</span>
 
 </p>
         <table class="oepnvtable">
@@ -216,15 +216,15 @@
 
         <h3 id="A2.2.6">2.2.6 Bus 8</h3>
 <p>
---check-from-via-to=<em>no</em> =&gt; <span class="attention">no notes</span>
+--check-from-to = --check-via=<em>no</em> =&gt; <span class="attention">no notes</span>
 
 </p>
 <p>
---check-from-via-to=<em>exact</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set (2 parts), but there are less than 4 platforms (=0).</span>
+--check-from-to = --check-via=<em>exact</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set (2 parts), but there are less than 4 platforms (=0).</span>
 
 </p>
 <p>
---check-from-via-to=<em>relaxed</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set (2 parts), but there are less than 4 platforms (=0).</span>
+--check-from-to = --check-via=<em>relaxed</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set (2 parts), but there are less than 4 platforms (=0).</span>
 
 </p>
         <table class="oepnvtable">
@@ -239,15 +239,15 @@
 
         <h3 id="A2.2.7">2.2.7 Bus 9</h3>
 <p>
---check-from-via-to=<em>no</em> =&gt; <span class="attention">no notes</span>
+--check-from-to = --check-via=<em>no</em> =&gt; <span class="attention">no notes</span>
 
 </p>
 <p>
---check-from-via-to=<em>exact</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set (2 parts), but there are less than 4 platforms (=1).</span>
+--check-from-to = --check-via=<em>exact</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set (2 parts), but there are less than 4 platforms (=1).</span>
 
 </p>
 <p>
---check-from-via-to=<em>relaxed</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set (2 parts), but there are less than 4 platforms (=1).</span>
+--check-from-to = --check-via=<em>relaxed</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set (2 parts), but there are less than 4 platforms (=1).</span>
 
 </p>
         <table class="oepnvtable">
@@ -262,15 +262,15 @@
 
         <h3 id="A2.2.8">2.2.8 Bus 10</h3>
 <p>
---check-from-via-to=<em>no</em> =&gt; <span class="attention">no notes</span>
+--check-from-to = --check-via=<em>no</em> =&gt; <span class="attention">no notes</span>
 
 </p>
 <p>
---check-from-via-to=<em>exact</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set (2 parts), but there are less than 4 platforms (=2).</span>
+--check-from-to = --check-via=<em>exact</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set (2 parts), but there are less than 4 platforms (=2).</span>
 
 </p>
 <p>
---check-from-via-to=<em>relaxed</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set (2 parts), but there are less than 4 platforms (=2).</span>
+--check-from-to = --check-via=<em>relaxed</em> =&gt; <span class="attention">PTv2 route: &#039;via&#039; is set (2 parts), but there are less than 4 platforms (=2).</span>
 
 </p>
         <table class="oepnvtable">

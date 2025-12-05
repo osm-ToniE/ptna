@@ -106,7 +106,7 @@ my $check_access                    = undef;
 my $check_against_gtfs              = undef;
 my $check_bus_stop                  = undef;
 my $check_dates                     = undef;
-my $check_from_via_to               = undef;
+my $check_from_to                   = undef;
 my $check_gtfs                      = undef;
 my $check_motorway_link             = undef;
 my $check_name                      = undef;
@@ -119,6 +119,7 @@ my $check_sequence                  = undef;
 my $check_service_type              = undef;
 my $check_stop_position             = undef;
 my $check_version                   = undef;
+my $check_via                       = undef;
 my $check_way_type                  = undef;
 my $expect_network_long             = undef;
 my $expect_network_long_as          = undef;
@@ -157,7 +158,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'check-against-gtfs=s'          =>  \$check_against_gtfs,           # --check-against-gtfs              check against GTFS data using 'gtfs:*' tags in relation (=tags) or using CVS data in 'routes_file' (=csv) or both (=tags,csv)
             'check-bus-stop'                =>  \$check_bus_stop,               # --check-bus-stop                  check for strict highway=bus_stop on nodes only
             'check-dates'                   =>  \$check_dates,                  # --check-dates                     check dates to follo ISO format: YYYY-MM-DD
-            'check-from-via-to:s'           =>  \$check_from_via_to,            # --check-from-via-to               check 'from', 'via' and 'to' against corresponding 'name' of platforms
+            'check-from-to:s'               =>  \$check_from_to,                # --check-from-to                   check 'from' and 'to' against corresponding 'name' of platforms
             'check-gtfs'                    =>  \$check_gtfs,                   # --check-gtfs                      check "gtfs:*" tags for validity/uniqueness/...
             'check-motorway-link'           =>  \$check_motorway_link,          # --check-motorway-link             check for motorway_link followed/preceeded by motorway or trunk
             'check-name'                    =>  \$check_name,                   # --check-name                      check for strict name conventions (name='... ref: from => to'
@@ -170,6 +171,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'check-service-type'            =>  \$check_service_type,           # --check-service-type              check for routes: highway=service and correct service=* type?
             'check-stop-position'           =>  \$check_stop_position,          # --check-stop-position             check for bus=yes, tram=yes, ... on (stop_positions
             'check-version'                 =>  \$check_version,                # --check-version                   check for PTv2 on route_masters, ...
+            'check-via:s'                   =>  \$check_via,                    # --check-via                       check 'via' against corresponding 'name' of platforms
             'check-way-type'                =>  \$check_way_type,               # --check-way-type                  check for routes: do vehicles use the right way type
             'coloured-sketchline'           =>  \$coloured_sketchline,          # --coloured-sketchline             force SketchLine to print coloured icons
             'expect-network-long'           =>  \$expect_network_long,          # --expect-network-long             note if 'network' is not long form in general
@@ -237,8 +239,12 @@ if ( $check_service_type ) {
     $check_way_type = 1;
 }
 
-if ( defined($check_from_via_to) && $check_from_via_to eq '' ) {
-    $check_from_via_to = 'exact';
+if ( defined($check_from_to) && $check_from_to eq '' ) {
+    $check_from_to = 'exact';
+}
+
+if ( defined($check_via) && $check_via eq '' ) {
+    $check_via = 'exact';
 }
 
 if ( $csv_separator ) {
@@ -294,7 +300,7 @@ if ( $verbose ) {
     printf STDERR "%20s--check-against-gtfs='%s'\n",       ' ', $check_against_gtfs         ? $check_against_gtfs          : '';
     printf STDERR "%20s--check-bus-stop='%s'\n",           ' ', $check_bus_stop             ? 'ON'          : 'OFF';
     printf STDERR "%20s--check-dates='%s'\n",              ' ', $check_dates                ? 'ON'          : 'OFF';
-    printf STDERR "%20s--check-from-via-to='%s'\n",        ' ', $check_from_via_to          ? $check_from_via_to           : 'OFF';
+    printf STDERR "%20s--check-from-to='%s'\n",            ' ', $check_from_to              ? $check_from_to               : 'OFF';
     printf STDERR "%20s--check-gtfs='%s'\n",               ' ', $check_gtfs                 ? 'ON'          : 'OFF';
     printf STDERR "%20s--check-motorway-link='%s'\n",      ' ', $check_motorway_link        ? 'ON'          : 'OFF';
     printf STDERR "%20s--check-name='%s'\n",               ' ', $check_name                 ? 'ON'          : 'OFF';
@@ -307,6 +313,7 @@ if ( $verbose ) {
     printf STDERR "%20s--check-service-type='%s'\n",       ' ', $check_service_type         ? 'ON'          : 'OFF';
     printf STDERR "%20s--check-stop-position='%s'\n",      ' ', $check_stop_position        ? 'ON'          : 'OFF';
     printf STDERR "%20s--check-version='%s'\n",            ' ', $check_version              ? 'ON'          : 'OFF';
+    printf STDERR "%20s--check-via='%s'\n",                ' ', $check_via                  ? $check_via    : 'OFF';
     printf STDERR "%20s--check-way-type='%s'\n",           ' ', $check_way_type             ? 'ON'          : 'OFF';
     printf STDERR "%20s--coloured-sketchline='%s'\n",      ' ', $coloured_sketchline        ? 'ON'          : 'OFF';
     printf STDERR "%20s--expect-network-long='%s'\n",      ' ', $expect_network_long        ? 'ON'          : 'OFF';
@@ -3349,7 +3356,7 @@ sub analyze_ptv2_route_relation {
         $return_code += CheckNameRefFromViaToPTV2( $relation_ptr );
     }
 
-    if ( $check_from_via_to ) {
+    if ( $check_from_to || $check_via ) {
         $return_code += CheckFromViaToPlatformNamesPTV2( $relation_ptr );
     }
 
@@ -6042,7 +6049,7 @@ sub CheckFromViaToPlatformNamesPTV2 {
         my $via                 = $relation_ptr->{'tag'}->{'via'}  || '';
         my $number_of_platforms = scalar(@{$relation_ptr->{'role_platform'}});
 
-        if ( $from ) {
+        if ( $check_from_to && $from ) {
             printf STDERR "    CheckFromViaToPlatformNamesPTV2() : from = %s, number of platforms = %d\n", $relation_ptr->{'tag'}->{'from'}, $number_of_platforms       if ( $debug );
             # > 0: there must at least be one platform, the 'from' one
             if ( $number_of_platforms                        > 0 &&
@@ -6073,7 +6080,7 @@ sub CheckFromViaToPlatformNamesPTV2 {
                 }
                 printf STDERR "                CheckFromViaToPlatformNamesPTV2() : from = %s, platform name = %s\n", $from, $platform_name       if ( $debug );
                 if ( $platform_name && $from ne $platform_name ) {
-                    if ( $check_from_via_to eq 'relaxed' ) {
+                    if ( $check_from_to eq 'relaxed' ) {
                         if ( !TagNameMatchesPlatformName($from,$platform_name) ) {
                             $notes_string = gettext( "PTv2 route: 'from' = '%s' does not match 'name' of first platform: %s" );
                             push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, $from, printXxxTemplate($platform_type,$platform_id,'name;ref')) );
@@ -6094,7 +6101,7 @@ sub CheckFromViaToPlatformNamesPTV2 {
             }
         }
 
-        if ( $to ) {
+        if ( $check_from_to && $to ) {
             printf STDERR "    CheckFromViaToPlatformNamesPTV2() : to = %s, number of platforms = %d\n", $relation_ptr->{'tag'}->{'to'}, $number_of_platforms       if ( $debug );
             # > 1 : first platform is always considered as representing 'from'
             if ( $number_of_platforms                                             > 1 &&
@@ -6125,7 +6132,7 @@ sub CheckFromViaToPlatformNamesPTV2 {
                 }
                 printf STDERR "                CheckFromViaToPlatformNamesPTV2() : to = %s, platform name = %s\n", $to, $platform_name       if ( $debug );
                 if ( $platform_name && $to ne $platform_name ) {
-                    if ( $check_from_via_to eq 'relaxed' ) {
+                    if ( $check_from_to eq 'relaxed' ) {
                         if ( !TagNameMatchesPlatformName($to,$platform_name) ) {
                             $notes_string = gettext( "PTv2 route: 'to' = '%s' does not match 'name' of last platform: %s" );
                             push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, $to, printXxxTemplate($platform_type,$platform_id,'name;ref')) );
@@ -6146,7 +6153,7 @@ sub CheckFromViaToPlatformNamesPTV2 {
             }
         }
 
-        if ( $via ) {
+        if ( $check_via && $via ) {
             printf STDERR "    CheckFromViaToPlatformNamesPTV2() : via = %s, number of platforms = %d\n", $relation_ptr->{'tag'}->{'via'}, $number_of_platforms       if ( $debug );
             my @via_parts     = split( ";", $via );
             my $via_number    = scalar(@via_parts);
@@ -6197,7 +6204,7 @@ sub CheckFromViaToPlatformNamesPTV2 {
                             if ( $via_part eq $platform_name ) {
                                 $via_matches[$vindex]->{$pindex}->{$platform_id}->{$platform_type} = $platform_name;
                             } else {
-                                if ( $check_from_via_to eq 'relaxed' ) {
+                                if ( $check_via eq 'relaxed' ) {
                                     if ( TagNameMatchesPlatformName($via_part,$platform_name) ) {
                                         $via_matches[$vindex]->{$pindex}->{$platform_id}->{$platform_type} = $platform_name;
                                     }
