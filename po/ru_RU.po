@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-11-11 16:51+0100\n"
+"POT-Creation-Date: 2025-12-05 16:24+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2025\n"
 "Language-Team: Russian (Russia) (https://app.transifex.com/jungle-bus/teams/97874/ru_RU/)\n"
@@ -747,6 +747,15 @@ msgstr ""
 msgid "Distance = %d metres / %d feet."
 msgstr ""
 
+msgid "Error in input data: insufficient data for nodes"
+msgstr ""
+
+msgid "Error in input data: insufficient data for ways"
+msgstr ""
+
+msgid "Error in input data: insufficient data for relations"
+msgstr ""
+
 #, perl-format
 msgid ""
 "PTv2 route: the end of the route on the last way (%s) is not near the last "
@@ -1088,15 +1097,6 @@ msgstr ""
 
 #, perl-format
 msgid "(consider creating a 'route_ref' = '%s' tag for the stop)"
-msgstr ""
-
-msgid "Error in input data: insufficient data for relations"
-msgstr ""
-
-msgid "Error in input data: insufficient data for ways"
-msgstr ""
-
-msgid "Error in input data: insufficient data for nodes"
 msgstr ""
 
 msgid "Date of Data"
@@ -1768,8 +1768,7 @@ msgid ""
 msgstr ""
 
 msgid ""
-"Check that 'from', 'via' and 'to' match with corresponding platform 'name' "
-"values."
+"Check that 'from' and 'to' match with corresponding platform 'name' values."
 msgstr ""
 
 msgid ""
@@ -1817,6 +1816,9 @@ msgid ""
 msgstr ""
 
 msgid "Check of 'public_transport:version' = '...' on Route-Master and Route."
+msgstr ""
+
+msgid "Check that 'via' matches with corresponding platform 'name' values."
 msgstr ""
 
 msgid ""
