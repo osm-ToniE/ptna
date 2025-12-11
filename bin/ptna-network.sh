@@ -1081,7 +1081,7 @@ then
             if [ -n "$PTNA_EXTRACT_GETIDS" ]
             then
                 echo $(date "+%Y-%m-%d %H:%M:%S %Z")  "Searching input file for 'osmium getid': find $PTNA_NETWORKS_LOC -type f -name $PTNA_EXTRACT_GETIDS.geojson -o -name $PTNA_EXTRACT_GETIDS.poly"
-                EXTRACT_GETID_AREA=$(find $PTNA_NETWORKS_LOC -type f -name "$PTNA_EXTRACT_GETIDS.geojson" -o -name "$PTNA_EXTRACT_GETIDS.poly")
+                EXTRACT_GETID_AREA=$(find $(dirname $PTNA_NETWORKS_LOC) -type f -name "$PTNA_EXTRACT_GETIDS.geojson" -o -name "$PTNA_EXTRACT_GETIDS.poly")
             fi
 
             echo "START_FILTER=$START_FILTER"                                                                  >> $WORK_LOC/$DETAILS_FILE
