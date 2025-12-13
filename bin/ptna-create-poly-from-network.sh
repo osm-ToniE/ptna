@@ -14,12 +14,16 @@ then
         then
             URI_ENCODED=$(echo "relation$SEARCH_AREA;out ids;" | sed -e 's/ /%20/g' -e 's/"/%22/g' -e 's/\$/%24/g' -e 's/&/%26/g' -e "s/'/%27/g" -e 's/(/%28/g' -e 's/)/%29/g' -e 's/;/%3B/g' -e 's/=/%3D/g' -e 's/\?/%3F/g' -e 's/\[/%5B/g' -e 's/\]/%5D/g' -e 's/\^/%5E/g' -e 's/|/%7C/g' -e 's/~/%7E/g')
 
-            IDS=$(curl -s "https://overpass-api.de/api/interpreter?data=$URI_ENCODED" | grep -F "relation id=" | sed -e 's/.*relation id="//' -e 's/".*$//')
+            IDS=$(curl "https://overpass-api.de/api/interpreter?data=$URI_ENCODED" | grep -F "relation id=" | sed -e 's/.*relation id="//' -e 's/".*$//')
 
-            for id in $IDS
+           for id in $IDS
             do
-                curl -s "https://polygons.openstreetmap.fr/get_poly.py?id=$id&params=0.02000-0.00500-0.00500" > $HOME/tmp/$NETWORK-$id.poly
+                curl "https://polygons.openstreetmap.fr/get_poly.py?id=$id&params=0.02000-0.00500-0.00500" > $HOME/tmp/$NETWORK-$id.poly
             done
+            if [ -n "$id" ]     # rename the last or only one to represent the network
+            then
+                mv $HOME/tmp/$NETWORK-$id.poly $HOME/tmp/$NETWORK.poly
+            fi
         else
             echo "Search area not found"
         fi
