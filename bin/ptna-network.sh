@@ -291,7 +291,7 @@ then
             then
                 rm -f $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT
                 # This is related to ptna issue #164 "Improve handling of missing/insufficient data when using planet extracts"
-                # Second Step: retrieve missing data using 'osmium getid --id-file ...' and merge into "$WORK_LOC/$PTNA_EXTRACT_SOURCE"
+                # Second Step: retrieve missing data using 'osmium getid --id-file ...' and merge into "$WORK_LOC/$PREFIX-osmium-merged.osm.pbf"
                 #
                 # the data retrieved by 'osmium getid ...' will not be filtered -> PTNA reported that they were missing
 
