@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' upload='never' generator='JOSM'>
+  <node id='-102685' action='modify' lat='48.07150596465' lon='11.63343916259'>
+    <tag k='name' v='Nieuwegein-Zuid' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='tram' v='yes' />
+  </node>
+  <node id='-102687' action='modify' lat='48.07149537748' lon='11.63458195764'>
+    <tag k='name' v='Utrecht P+R Science Park' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='tram' v='yes' />
+  </node>
+  <node id='-102689' action='modify' lat='48.07150106195' lon='11.63396224892'>
+    <tag k='name' v='Zuilenstein' />
+    <tag k='public_transport' v='stop_position' />
+    <tag k='tram' v='yes' />
+  </node>
+  <way id='-102800' action='modify'>
+    <nd ref='-102687' />
+    <nd ref='-102689' />
+    <tag k='railway' v='tram' />
+  </way>
+  <way id='-102801' action='modify'>
+    <nd ref='-102689' />
+    <nd ref='-102685' />
+    <tag k='railway' v='tram' />
+  </way>
+  <relation id='-102812' action='modify'>
+    <member type='node' ref='-102685' role='stop' />
+    <member type='node' ref='-102689' role='stop' />
+    <member type='node' ref='-102687' role='stop' />
+    <member type='way' ref='-102801' role='' />
+    <member type='way' ref='-102800' role='' />
+    <tag k='from' v='Nieuwegein-Zuid' />
+    <tag k='name' v='Sneltram 20: Nieuwegein-Zuid - Utrecht P+R Science Park' />
+    <tag k='network' v='Utrecht Binnen' />
+    <tag k='operator' v='U-OV' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='20' />
+    <tag k='route' v='tram' />
+    <tag k='to' v='Utrecht P+R Science Park' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-102813' action='modify'>
+    <member type='node' ref='-102687' role='stop' />
+    <member type='node' ref='-102689' role='stop' />
+    <member type='node' ref='-102685' role='stop' />
+    <member type='way' ref='-102800' role='' />
+    <member type='way' ref='-102801' role='' />
+    <tag k='from' v='Utrecht P+R Science Park' />
+    <tag k='name' v='Sneltram 20: Utrecht P+R Science Park - Nieuwegein-Zuid' />
+    <tag k='network' v='Utrecht Binnen' />
+    <tag k='operator' v='U-OV' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='20' />
+    <tag k='route' v='tram' />
+    <tag k='to' v='Nieuwegein-Zuid' />
+    <tag k='type' v='route' />
+  </relation>
+  <relation id='-102814' action='modify'>
+    <member type='relation' ref='-102812' role='' />
+    <member type='relation' ref='-102813' role='' />
+    <tag k='name' v='Tram 20' />
+    <tag k='network' v='Utrecht Binnen' />
+    <tag k='operator' v='U-OV' />
+    <tag k='public_transport:version' v='2' />
+    <tag k='ref' v='20' />
+    <tag k='route_master' v='tram' />
+    <tag k='type' v='route_master' />
+  </relation>
+</osm>

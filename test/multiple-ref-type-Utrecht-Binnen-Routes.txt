@@ -1,0 +1,13 @@
+<pre>
+= Test for multiple ref-type entries
+- there are 2 identical CSV lines and only one OSM-line matches (1 route_master with 2 routes)
+-
+- PTNA does not complain and prints the two entries
+-
+- first seen (multiple times) for NL-UT-BI
+-
+
+== Trams
+20;tram;Tram;Science Park;Nieuwegein;U-OV
+20;tram;Tram;Science Park;Nieuwegein;U-OV
+</pre>
