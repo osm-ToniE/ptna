@@ -2,7 +2,7 @@ Perl Modules
 - List::MoreUtils
 - Getopt::Long
 - POSIX
-- Local::gettext
+- Locale::gettext
 - utf8
 - Encode
 - DBI
@@ -10,3 +10,6 @@ Perl Modules
 - Exporter
 - Geo::Parse::OSM
 - MediaWiki::API
+- GIS::Distance
+- Math::Units
+- Math::Polygon
