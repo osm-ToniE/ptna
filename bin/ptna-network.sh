@@ -267,13 +267,14 @@ then
 
     if [ -n "$PTNA_EXTRACT_SOURCE" -a -f "$WORK_LOC/$PTNA_EXTRACT_SOURCE" -a -s "$WORK_LOC/$PTNA_EXTRACT_SOURCE" ]
     then
+        PTNA_EXTRACT_FILE="$WORK_LOC/$PTNA_EXTRACT_SOURCE"
         start=$(date --utc "+%s")
         START_FILTER=$(date --date @$start "+%Y-%m-%d %H:%M:%S %Z")
-        EXTRACT_SIZE=$(stat -c '%s' "$WORK_LOC/$PTNA_EXTRACT_SOURCE")
-        INPUTFORMAT="${PTNA_EXTRACT_SOURCE##*.}"
+        EXTRACT_SIZE=$(stat -c '%s' "$PTNA_EXTRACT_FILE")
+        INPUTFORMAT="${PTNA_EXTRACT_FILE##*.}"
         OUTPUTFORMAT="${OSM_XML_FILE_ABSOLUTE##*.}"
-        TS=$(osmium fileinfo "$WORK_LOC/$PTNA_EXTRACT_SOURCE" | grep osmosis_replication_timestamp | head -1 | sed -e 's/^.*=//')
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Timestamp in '$WORK_LOC/$PTNA_EXTRACT_SOURCE': '$TS'"
+        TS=$(osmium fileinfo "$PTNA_EXTRACT_FILE" | grep osmosis_replication_timestamp | head -1 | sed -e 's/^.*=//')
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Timestamp in '$PTNA_EXTRACT_FILE': '$TS'"
 
         AGE_IN_SECS=$(( $(date "+%s") - $(date "+%s" -d "$TS") ))
 
@@ -281,9 +282,9 @@ then
         then
             if [ -f "$SETTINGS_DIR/osmium-positive-filters.txt" -o -f "$SETTINGS_DIR/osmium-negative-filters.txt"  ]
             then
-                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Not yet implemented: Call 'ptna-filter-extract.sh -p $SETTINGS_DIR/osmium-positive-filters.txt -n $SETTINGS_DIR/osmium-negative-filters.txt $WORK_LOC/$PTNA_EXTRACT_SOURCE $OSM_XML_FILE_ABSOLUTE'"
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Not yet implemented: Call 'ptna-filter-extract.sh -p $SETTINGS_DIR/osmium-positive-filters.txt -n $SETTINGS_DIR/osmium-negative-filters.txt $PTNA_EXTRACT_FILE $PTNA_EXTRACT_FILE-filtered'"
 
-                # ptna-filter-extract.sh -p "$SETTINGS_DIR/osmium-positive-filters.txt" -n "$SETTINGS_DIR/osmium-negative-filters.txt" "$WORK_LOC/$PTNA_EXTRACT_SOURCE" "$OSM_XML_FILE_ABSOLUTE"
+                # ptna-filter-extract.sh -p "$SETTINGS_DIR/osmium-positive-filters.txt" -n "$SETTINGS_DIR/osmium-negative-filters.txt" "$PTNA_EXTRACT_FILE" "$PTNA_EXTRACT_FILE-filtered"
             fi
 
             rm -f $WORK_LOC/$PREFIX-osmium-merged.osm.$INPUTFORMAT
@@ -327,11 +328,11 @@ then
                                     ERROR_GETID_NOTFOUND=0
                                 fi
                                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Size: " $(stat -c '%s' "$WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT") $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT
-                                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Size: " $(stat -c '%s' "$WORK_LOC/$PTNA_EXTRACT_SOURCE") $WORK_LOC/$PTNA_EXTRACT_SOURCE
-                                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium merge --verbose --fsync ---output-format=$INPUTFORMAT --overwrite --output=$WORK_LOC/$PREFIX-osmium-merged.osm.pbf -input-format=$INPUTFORMAT $WORK_LOC/$PTNA_EXTRACT_SOURCE $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT'"
+                                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Size: " $(stat -c '%s' "$PTNA_EXTRACT_FILE") $PTNA_EXTRACT_FILE
+                                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium merge --verbose --fsync ---output-format=$INPUTFORMAT --overwrite --output=$WORK_LOC/$PREFIX-osmium-merged.osm.pbf -input-format=$INPUTFORMAT $PTNA_EXTRACT_FILE $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT'"
                                 osmium merge --verbose --fsync                                                                                           \
                                             --output-format=$INPUTFORMAT --overwrite --output=$WORK_LOC/$PREFIX-osmium-merged.osm.$INPUTFORMAT          \
-                                            --input-format=$INPUTFORMAT $WORK_LOC/$PTNA_EXTRACT_SOURCE $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT
+                                            --input-format=$INPUTFORMAT $PTNA_EXTRACT_FILE $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT
                                 osmium_ret=$?
                                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret (0 == all OK, 1 == error processing data, 2 == problems with command line arguments)"
                                 if [ $osmium_ret -eq 0 ]
@@ -357,7 +358,7 @@ then
             then
                 OSMIUM_CAT_INPUT="$WORK_LOC/$PREFIX-osmium-merged.osm.$INPUTFORMAT"
             else
-                OSMIUM_CAT_INPUT="$WORK_LOC/$PTNA_EXTRACT_SOURCE"
+                OSMIUM_CAT_INPUT="$PTNA_EXTRACT_FILE"
             fi
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium cat --clean user --clean version --clean timestamp --clean uid --clean changeset ... $OSMIUM_CAT_INPUT ...' and add timestamp '$TS' to output file"
             osmium cat --clean user --clean version --clean timestamp --clean uid --clean changeset --fsync                                       \
@@ -396,7 +397,7 @@ then
             stop=$(date --utc "+%s")
             END_FILTER=$(date --date @$stop "+%Y-%m-%d %H:%M:%S %Z")
         else
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'use extracts': time stamp = '$TS' in file '$WORK_LOC/$PTNA_EXTRACT_SOURCE' is too old, handle as 'Overpass-API call'"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'use extracts': time stamp = '$TS' in file '$PTNA_EXTRACT_FILE' is too old, handle as 'Overpass-API call'"
             overpassquery=true
             overpassqueryonzeroxml=false
             use_extracts=false
