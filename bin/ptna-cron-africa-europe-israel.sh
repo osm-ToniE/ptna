@@ -47,7 +47,7 @@ ptna-handle-continent.sh asia   > $PTNA_WORK_LOC/ptna-handle-continent-asia.log 
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh europe"
 ptna-handle-continent.sh europe > $PTNA_WORK_LOC/ptna-handle-continent-europe.log 2>&1 < /dev/null &
 
-# wait for the 3 background jobs to finish
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "wait for the 3 background jobs to finish"
 wait
 
 # when finished, start analysis of timezones (which include further extracts in e.g. UTC+01/*-osimium.config)
