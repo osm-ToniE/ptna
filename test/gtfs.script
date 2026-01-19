@@ -18,7 +18,7 @@ then
         ROUTES_OPTION="--routes-file=$TEST-Routes.txt"
     fi
 
-    ptna-routes.pl --check-gtfs --link-gtfs --show-gtfs --gtfs-feed=DE-BY-MVV --max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-version --check-motorway-link \
+    ptna-routes.pl --timezone="Europe/Berlin" --check-gtfs --link-gtfs --show-gtfs --gtfs-feed=DE-BY-MVV --max-error=10 --check-access --check-name --check-stop-position --check-sequence --check-version --check-motorway-link \
                    --multiple-ref-type-entries=analyze --positive-notes --coloured-sketchline --verbose --debug \
                    --test --osm-xml-file=$TESTFILE $ROUTES_OPTION > $TEST.html 2> $TEST.log
 

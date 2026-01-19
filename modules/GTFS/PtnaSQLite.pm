@@ -5,6 +5,8 @@ use strict;
 use POSIX;
 use Locale::gettext qw();       # 'gettext()' will be overwritten in this file (at the end), so don't import from module into our name space
 
+use DateTime;
+
 use utf8;
 binmode STDOUT, ":utf8";
 binmode STDERR, ":utf8";
@@ -14,7 +16,7 @@ use Encode;
 use Exporter;
 use base qw (Exporter);
 
-our @EXPORT_OK  = qw( getRouteIdStatus getTripIdStatus getShapeIdStatus getGtfsRouteIdHtmlTag getGtfsRouteIdIconTag getGtfsTripIdHtmlTag getGtfsShapeIdHtmlTag getGtfsLinkToRoutes );
+our @EXPORT_OK  = qw( setTimeZoneDate getRouteIdStatus getTripIdStatus getShapeIdStatus getGtfsRouteIdHtmlTag getGtfsRouteIdIconTag getGtfsTripIdHtmlTag getGtfsShapeIdHtmlTag getGtfsLinkToRoutes );
 
 use DBI;
 
@@ -37,8 +39,28 @@ my %feed_of_open_db_file = ();
 # e.g. $gtfs_query_cache{'DE-BY-MVV'}{'trip_id'}{$trip_id}[0] = 'valid' / [1] = '2023-12-14' / [2] = '2024-05-31' / [3] = ''
 my %gtfs_query_cache     = ();
 
-$config{'path-to-work'} = '/osm/ptna/work';                 # location where to start looking for the SQLite
-$config{'name-suffix'}  = '-ptna-gtfs-sqlite.db';           # name suffix of current SQLite db
+$config{'path-to-work'}   = '/osm/ptna/work';                 # location where to start looking for the SQLite
+$config{'name-suffix'}    = '-ptna-gtfs-sqlite.db';           # name suffix of current SQLite db
+$config{'date_time_zone'} = '';
+
+
+#############################################################################################
+#
+#
+#
+#############################################################################################
+
+sub setTimeZoneDate {
+    my $timezone = shift || 'Europe/Berlin';
+
+    my $dt = DateTime->now();
+
+    $dt->set_time_zone( $timezone );
+
+    $config{'date_time_zone'} = sprintf( "%04d%02d%02d", $dt->year, $dt->month, $dt->day );
+
+    printf STDERR "%s Set PtnaSQLite::\$config{'date_time_zone'} to '%s'\n", get_time(), $config{'date_time_zone'};
+}
 
 
 #############################################################################################
@@ -321,7 +343,7 @@ sub getGtfsTripIdHtmlTag {
                                     html_escape(gettext("GTFS database not found")) );
         }
     };
-    warn sprintf( "getGtfsTripIdHtmlTag(%s,%s,%s): %s",$gtfs_feed,$release_date,$trip_id,$@ ) . $@ if ( $@ );
+    warn sprintf( "getGtfsTripIdHtmlTag(%s,%s,%s,%s): %s",$gtfs_feed,$release_date,$trip_id,$@ ) . $@ if ( $@ );
 
     return $gtfs_html_tag;
 }
@@ -426,7 +448,7 @@ sub getGtfsShapeIdHtmlTag {
                                     html_escape(gettext("GTFS database not found")) );
         }
     };
-    warn sprintf( "getGtfsShapeIdHtmlTag(%s,%s,%s): %s",$gtfs_feed,$release_date,$shape_id,$@ ) if ( $@ );
+    warn sprintf( "getGtfsShapeIdHtmlTag(%s,%s,%s,%s): %s",$gtfs_feed,$release_date,$shape_id,$@ ) if ( $@ );
 
     return $gtfs_html_tag;
 }
@@ -523,7 +545,7 @@ sub getRouteIdStatus {
             if ( _AttachToGtfsSqliteDb($feed,$release_date) ) {
 
                 my @row         = ();
-                my $today       = get_date();
+                my $today       = get_TimeZoneDate();
 
                 my $sth = $db_handle{$name_prefix}->prepare( "SELECT DISTINCT trip_id
                                                               FROM            trips
@@ -556,7 +578,7 @@ sub getRouteIdStatus {
                 @ret_array = ( '', '', '', gettext("GTFS database not found") );
             }
         };
-        warn sprintf( "getRouteIdStatus(%s,%s,%s): %s",$feed,$release_date,$route_id,$@ ) if ( $@ );
+        warn sprintf( "getRouteIdStatus(%s,%s,%s,%s): %s",$feed,$release_date,$route_id,$@ ) if ( $@ );
     } else {
         if ( defined($route_id) && $route_id ne '' ) {
             @ret_array = ( '', '', '', gettext("internal error") + ": \$feed " + gettext("is not set") );
@@ -590,7 +612,7 @@ sub getTripIdStatus {
             if ( _AttachToGtfsSqliteDb($feed,$release_date) ) {
 
                 my @row         = ();
-                my $today       = get_date();
+                my $today       = get_TimeZoneDate();
 
                 my ( $min_start, $max_end ) = _getStartEndDateOfIdenticalTrips( $feed, $release_date, $trip_id );
 
@@ -607,7 +629,7 @@ sub getTripIdStatus {
                 @ret_array = ( '', '', '', gettext("GTFS database not found") );
             }
          };
-        warn sprintf( "getTripIdStatus(%s,%s,%s): %s",$feed,$release_date,$trip_id,$@ ) if ( $@ );
+        warn sprintf( "getTripIdStatus(%s,%s,%s,%s): %s",$feed,$release_date,$trip_id,$@ ) if ( $@ );
     } else {
         if ( $trip_id ) {
             @ret_array = ( '', '', '', gettext("internal error") + ": \$feed " + gettext("is not set") );
@@ -642,7 +664,7 @@ sub getShapeIdStatus {
             if ( _AttachToGtfsSqliteDb($feed,$release_date) ) {
 
                 my @row                 = ();
-                my $today               = get_date();
+                my $today               = get_TimeZoneDate();
                 my $trips_has_shape_id  = 0;
 
 
@@ -690,7 +712,7 @@ sub getShapeIdStatus {
                 @ret_array = ( '', '', '', gettext("GTFS database not found") );
             }
         };
-        warn sprintf( "getShapeIdStatus(%s,%s,%s): %s",$feed,$release_date,$shape_id,$@ ) if ( $@ );
+        warn sprintf( "getShapeIdStatus(%s,%s,%s,%s): %s",$feed,$release_date,$shape_id,$@ ) if ( $@ );
     } else {
         if ( $shape_id ) {
             @ret_array = ( '', '', '', gettext("internal error") + ": \$feed " + gettext("is not set") );
@@ -881,11 +903,11 @@ sub get_time {
 
 #############################################################################################
 
-sub get_date {
+sub get_TimeZoneDate {
 
-    my ($sec,$min,$hour,$day,$month,$year) = localtime();
+    # printf STDERR "%s Using PtnaSQLite::\$config{'date_time_zone'} == '%s'\n", get_time(), $config{'date_time_zone'};
 
-    return sprintf( "%04d%02d%02d", $year+1900, $month+1, $day );
+    return $config{'date_time_zone'};
 }
 
 

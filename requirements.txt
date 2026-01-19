@@ -6,6 +6,7 @@ Perl Modules
 - utf8
 - Encode
 - DBI
+- DateTime
 - Data::Dumper
 - Exporter
 - Geo::Parse::OSM

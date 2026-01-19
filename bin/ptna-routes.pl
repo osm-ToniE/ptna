@@ -25,7 +25,7 @@ use OSM::XML            qw( parse );
 use OSM::Data           qw( %META %NODES %WAYS %RELATIONS );
 use OSM::Geo            qw( Init PlatformToNodeDistance ConvertMetersToFeet isNodeInsidePolygon NumberOfPointsInsidePolygon Summary );
 use RoutesList;
-use GTFS::PtnaSQLite    qw( getRouteIdStatus getTripIdStatus getShapeIdStatus getGtfsRouteIdHtmlTag getGtfsRouteIdIconTag getGtfsTripIdHtmlTag getGtfsShapeIdHtmlTag getGtfsLinkToRoutes );
+use GTFS::PtnaSQLite    qw( setTimeZoneDate getRouteIdStatus getTripIdStatus getShapeIdStatus getGtfsRouteIdHtmlTag getGtfsRouteIdIconTag getGtfsTripIdHtmlTag getGtfsShapeIdHtmlTag getGtfsLinkToRoutes );
 use Data::Dumper;
 use Time::Local         qw ( timelocal );
 use Time::HiRes;
@@ -142,9 +142,10 @@ my $help                            = undef;
 my $man_page                        = undef;
 my $positive_notes                  = undef;
 my $csv_separator                   = ';';
-my $or_separator                    = '|';                 # used to separate several 'ref' values in CSV entry "43|E43;bus;;;;"
-my $ref_separator                   = '/';                 # used to separate several 'ref' values in CSV entry "602/50;bus;;;;" for 'ref' from different 'network' (ref:xxx=602 and ref:yyy=50)
+my $or_separator                    = '|';                  # used to separate several 'ref' values in CSV entry "43|E43;bus;;;;"
+my $ref_separator                   = '/';                  # used to separate several 'ref' values in CSV entry "602/50;bus;;;;" for 'ref' from different 'network' (ref:xxx=602 and ref:yyy=50)
 my $coloured_sketchline             = undef;
+my $opt_timezone                    = "Europe/Berlin";      # local server time
 my $page_title                      = undef;
 
 
@@ -205,6 +206,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'strict-operator'               =>  \$strict_operator,              # --strict-operator                 do not consider empty operator tags
             'table-show-also=s'             =>  \$table_show_also,              # --table-show-also="from,via,to"   show also their values in columns in the list of 'psotive' routes
             'test'                          =>  \$opt_test,                     # --test                            to test the SW
+            'timezone:s'                    =>  \$opt_timezone,                 # --timezone="Europe/Berlin"        the time zone, the analysis is running for
             'title=s'                       =>  \$page_title,                   # --title=...                       Title for the HTML page
           );
 
@@ -293,6 +295,7 @@ unless ( $opt_gtfs_feed ) {
 if ( $verbose ) {
     printf STDERR "%s ptna-routes.pl -v\n", get_time();
     printf STDERR "%20s--title='%s'\n",                    ' ', $page_title                 ? $page_title   : '';
+    printf STDERR "%20s--timezone='%s'\n",                 ' ', $opt_timezone               ? $opt_timezone : '';
     printf STDERR "%20s--network-guid='%s'\n",             ' ', $network_guid               ? $network_guid : '';
     printf STDERR "%20s--language='%s'\n",                 ' ', $opt_language               ? $opt_language : 'en';
     printf STDERR "%20s--allow-coach='%s'\n",              ' ', $allow_coach                ? 'ON'          : 'OFF';
@@ -346,6 +349,8 @@ if ( $verbose ) {
     printf STDERR "%20s--osm-xml-file='%s'\n",             ' ', decode('utf8', $osm_xml_file )      if ( $osm_xml_file                );
     printf STDERR "%20s--path-to-work-dir='%s'\n",         ' ', decode('utf8', $path_to_work_dir )  if ( $path_to_work_dir            );
 }
+
+GTFS::PtnaSQLite::setTimeZoneDate( $opt_timezone );
 
 
 ####################################################################################################################
