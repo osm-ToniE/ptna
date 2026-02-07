@@ -48,6 +48,8 @@
         </li>
         </ol>
         </li>
+        <li>5 <a href="#operatordetails">Details for &#039;operator&#039;-Values</a>
+        </li>
         </ol>
         <hr />
         <h1 id="hints">1 Hints</h1>
@@ -147,6 +149,20 @@ Examples for an entry in the CSV file of the form: 'ref;type;Comment;From;To;Ope
             </thead>
             <tbody>
                 <tr data-info="Network" data-ref="???" class="line"><td class="network foreign" dir="auto">Network</td><td class="number foreign" dir="auto">12</td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">0</span>' -112868, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">0</span>' -112869, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">0</span>' -112870, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">0/1</span>' -112871, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">0/1</span>' -112872, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">0/1</span>' -112873, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">1/0</span>' -112874, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">1/0</span>' -112875, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">1/0</span>' -112876, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">0;1</span>' -112877 and more ...</td></tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <h1 id="operatordetails">5 Details for &#039;operator&#039;-Values</h1>
+<p>
+This section lists the 'operator'-values which have been found.
+</p>
+        <table class="oepnvtable js-sort-table">
+            <thead>
+                <tr class="tableheaderrow"><th class="operator" dir="auto">&#x21C5;Operator (operator=)</th><th class="number js-sort-number" dir="auto">&#x21C5;Number</th><th class="relations" dir="auto">&#x21C5;Relations</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="???" data-ref="???" class="line"><td class="operator foreign" dir="auto"></td><td class="number foreign" dir="auto">12</td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">0</span>' -112868, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">0</span>' -112869, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">0</span>' -112870, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">0/1</span>' -112871, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">0/1</span>' -112872, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">0/1</span>' -112873, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">1/0</span>' -112874, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">1/0</span>' -112875, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">1/0</span>' -112876, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">0;1</span>' -112877 and more ...</td></tr>
             </tbody>
         </table>
 

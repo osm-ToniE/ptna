@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>PTNA - Results</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="PTNA">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="keywords" content="OSM Public Transport PTv2">
+        <meta name="description" content="PTNA - Public Transport Network Analysis">
+        <style>
+            #analysis table           { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; max-width:100%; }
+            #analysis th              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+            #analysis td              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+            #analysis ol              { list-style: none; }
+            #analysis img             { width: 20px; vertical-align: top; }
+            #analysis .tableheaderrow { background-color: #bbbbbb;   }
+            #analysis .sketchline     { background-color: #cccccc;        }
+            #analysis .sketch         { text-align:left;  font-weight: 500; }
+            #analysis .csvinfo        { text-align:right; font-size: 0.8em; }
+            #analysis .ref            { text-align:left; }
+            #analysis .relation       { text-align:left; }
+            #analysis .PTv            { text-align:center; }
+            #analysis .number         { text-align:right; }
+            #analysis .gtfs_feed      { white-space:nowrap; }
+            #analysis .feed_from      { white-space:nowrap; }
+            #analysis .date           { white-space:nowrap; }
+            #analysis .date_from      { white-space:nowrap; }
+            #analysis .attention      { background-color: yellow; font-weight: 500; font-size: 1.2em; }
+            .gtfs-dateold             { text-align:center; background-color: orange; }
+            .gtfs-datenew             { text-align:center; background-color: lightgreen; }
+            .gtfs-dateprevious        { text-align:center; background-color: rgb(128, 128, 255); }
+            .bad-link                 { text-decoration: line-through; background-color: yellow; }
+        </style>
+    <style type='text/css'>
+.diff-old-a {
+  font-size: smaller;
+  color: red;
+}
+
+.diff-new { background-color: yellow; }
+.diff-chg { background-color: lime; }
+.diff-new:before,
+.diff-new:after
+    { content: "\2191" }
+.diff-chg:before, .diff-chg:after
+    { content: "\2195" }
+.diff-old { text-decoration: line-through; background-color: #FBB; }
+.diff-old:before,
+.diff-old:after
+    { content: "\2193" }
+</style>
+<script src="/script/htmldiff-nav-index.js"></script></head>
+    <body>
+<div id="analysis">
+<h1>
+Contents
+</h1>
+<ol>
+<li>
+1
+<a href="#hints">
+Hints
+</a>
+</li>
+<li>
+2
+<a href="#A2">
+Test
+for
+multiple
+ref-type
+entries
+</a>
+<ol>
+<li>
+2.1
+<a href="#A2.1">
+Trams
+</a>
+</li>
+</ol>
+</li>
+<li>
+3
+<a href="#networkdetails">
+Details
+for
+&#039;network&#039;-Values
+</a>
+<ol>
+<li>
+3.1
+<a href="#considerednetworks">
+Considered
+&#039;network&#039;-Values
+</a>
+</li>
+</ol>
+</li>
+<li>
+<ins class="diff-new">4
+</ins><a href="#operatordetails"><ins class="diff-new">
+Details
+for
+&#039;operator&#039;-Values
+</ins></a></li>
+</ol>
+<hr />
+<h1 id="hints">
+1
+Hints
+</h1>
+<p>
+The
+data
+will
+be
+updated
+when
+the
+result
+of
+the
+analysis
+has
+changed.
+</p>
+<p>
+An
+explanation
+of
+the
+error
+texts
+can
+be
+found
+in
+the
+documentation
+at
+'
+<a href='/en/index.php#messages'>
+Messages
+</a>
+'.
+</p>
+<hr />
+<h1 id="A2">
+2
+Test
+for
+multiple
+ref-type
+entries
+</h1>
+<p>
+there
+are
+2
+identical
+CSV
+lines
+and
+only
+one
+OSM-line
+matches
+(1
+route_master
+with
+2
+routes)
+</p>
+<p>
+PTNA
+does
+not
+complain
+and
+prints
+the
+two
+entries
+</p>
+<p>
+first
+seen
+(multiple
+times)
+for
+NL-UT-BI
+</p>
+<h2 id="A2.1">
+2.1
+Trams
+</h2>
+<a href="#tram_20">
+<span class="foreign" dir="auto">
+20
+</span>
+</a>
+<a href="#tram_20-2">
+<span class="foreign" dir="auto">
+20
+</span>
+</a>
+</br>
+</br>
+<table class="oepnvtable">
+<thead>
+<tr class="tableheaderrow">
+<th class="name" dir="auto">
+Name
+(name=)
+</th>
+<th class="type" dir="auto">
+Type
+(type=)
+</th>
+<th class="relation" dir="auto">
+Relation
+(id=)
+</th>
+<th class="PTv" dir="auto">
+PTv
+</th>
+<th class="issues" dir="auto">
+Errors
+</th>
+<th class="notes" dir="auto">
+Notes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr id="tram_20" data-info="Comment: <span class=_foreign_ dir=_auto_>
+Tram
+</span>
+; From: <span class=_foreign_ dir=_auto_>
+Science Park
+</span>
+; To: <span class=_foreign_ dir=_auto_>
+Nieuwegein
+</span>
+; Operator: <span class=_foreign_ dir=_auto_>
+U-OV
+</span>
+" data-ref="20" class="sketchline">
+<td class="sketch" dir="auto">
+<a href="https://overpass-api.de/api/sketch-line?ref=20&network=Utrecht%20Binnen&operator=U%2dOV" title="Sketch-Line">
+20
+</a>
+</td>
+<td class="csvinfo" colspan="5" dir="auto">
+Comment:
+<span class="foreign" dir="auto">
+Tram
+</span>
+;
+From:
+<span class="foreign" dir="auto">
+Science
+Park
+</span>
+;
+To:
+<span class="foreign" dir="auto">
+Nieuwegein
+</span>
+;
+Operator:
+<span class="foreign" dir="auto">
+U-OV
+</span>
+</td>
+</tr>
+<tr id="-102814" data-info="-102814" data-ref="20" class="line">
+<td class="name foreign" dir="auto">
+Tram
+20
+</td>
+<td class="type foreign" dir="auto">
+route_master
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-102814
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Utrecht
+Binnen
+</span>
+'
+<br>
+'
+<span class="foreign" dir="auto">
+operator
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+U-OV
+</span>
+'
+</td>
+</tr>
+<tr id="-102812" data-info="-102812" data-ref="20" class="line">
+<td class="name foreign" dir="auto">
+Sneltram
+20:
+Nieuwegein-Zuid
+-
+Utrecht
+P+R
+Science
+Park
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-102812
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Utrecht
+Binnen
+</span>
+'
+<br>
+'
+<span class="foreign" dir="auto">
+operator
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+U-OV
+</span>
+'
+<br>
+PTv2
+route:
+there
+is
+no
+'public_transport'
+=
+'platform'
+(Node,
+Way,
+Area
+or
+Relation)
+<br>
+PTv2
+route:
+'name'
+should
+(at
+least)
+be
+of
+the
+form
+'...
+ref
+...:
+from
+=>
+to'
+</td>
+</tr>
+<tr id="-102813" data-info="-102813" data-ref="20" class="line">
+<td class="name foreign" dir="auto">
+Sneltram
+20:
+Utrecht
+P+R
+Science
+Park
+-
+Nieuwegein-Zuid
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-102813
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Utrecht
+Binnen
+</span>
+'
+<br>
+'
+<span class="foreign" dir="auto">
+operator
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+U-OV
+</span>
+'
+<br>
+PTv2
+route:
+there
+is
+no
+'public_transport'
+=
+'platform'
+(Node,
+Way,
+Area
+or
+Relation)
+<br>
+PTv2
+route:
+'name'
+should
+(at
+least)
+be
+of
+the
+form
+'...
+ref
+...:
+from
+=>
+to'
+</td>
+</tr>
+<tr id="tram_20-2" data-info="Comment: <span class=_foreign_ dir=_auto_>
+Tram
+</span>
+; From: <span class=_foreign_ dir=_auto_>
+Science Park
+</span>
+; To: <span class=_foreign_ dir=_auto_>
+Nieuwegein
+</span>
+; Operator: <span class=_foreign_ dir=_auto_>
+U-OV
+</span>
+" data-ref="20" class="sketchline">
+<td class="sketch" dir="auto">
+<a href="https://overpass-api.de/api/sketch-line?ref=20&network=Utrecht%20Binnen&operator=U%2dOV" title="Sketch-Line">
+20
+</a>
+</td>
+<td class="csvinfo" colspan="5" dir="auto">
+Comment:
+<span class="foreign" dir="auto">
+Tram
+</span>
+;
+From:
+<span class="foreign" dir="auto">
+Science
+Park
+</span>
+;
+To:
+<span class="foreign" dir="auto">
+Nieuwegein
+</span>
+;
+Operator:
+<span class="foreign" dir="auto">
+U-OV
+</span>
+</td>
+</tr>
+<tr data-info="-102814" data-ref="20" class="line">
+<td class="name foreign" dir="auto">
+Tram
+20
+</td>
+<td class="type foreign" dir="auto">
+route_master
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-102814
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Utrecht
+Binnen
+</span>
+'
+<br>
+'
+<span class="foreign" dir="auto">
+operator
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+U-OV
+</span>
+'
+</td>
+</tr>
+<tr data-info="-102812" data-ref="20" class="line">
+<td class="name foreign" dir="auto">
+Sneltram
+20:
+Nieuwegein-Zuid
+-
+Utrecht
+P+R
+Science
+Park
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-102812
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Utrecht
+Binnen
+</span>
+'
+<br>
+'
+<span class="foreign" dir="auto">
+operator
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+U-OV
+</span>
+'
+<br>
+PTv2
+route:
+there
+is
+no
+'public_transport'
+=
+'platform'
+(Node,
+Way,
+Area
+or
+Relation)
+<br>
+PTv2
+route:
+'name'
+should
+(at
+least)
+be
+of
+the
+form
+'...
+ref
+...:
+from
+=>
+to'
+</td>
+</tr>
+<tr data-info="-102813" data-ref="20" class="line">
+<td class="name foreign" dir="auto">
+Sneltram
+20:
+Utrecht
+P+R
+Science
+Park
+-
+Nieuwegein-Zuid
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-102813
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Utrecht
+Binnen
+</span>
+'
+<br>
+'
+<span class="foreign" dir="auto">
+operator
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+U-OV
+</span>
+'
+<br>
+PTv2
+route:
+there
+is
+no
+'public_transport'
+=
+'platform'
+(Node,
+Way,
+Area
+or
+Relation)
+<br>
+PTv2
+route:
+'name'
+should
+(at
+least)
+be
+of
+the
+form
+'...
+ref
+...:
+from
+=>
+to'
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="networkdetails">
+3
+Details
+for
+&#039;network&#039;-Values
+</h1>
+<h2 id="considerednetworks">
+3.1
+Considered
+&#039;network&#039;-Values
+</h2>
+<table class="oepnvtable js-sort-table">
+<thead>
+<tr class="tableheaderrow">
+<th class="network" dir="auto">
+&#x21C5;Network
+(network=)
+</th>
+<th class="number js-sort-number" dir="auto">
+&#x21C5;Number
+</th>
+<th class="relations" dir="auto">
+&#x21C5;Relations
+</th>
+</tr>
+</thead>
+<tbody>
+<tr data-info="Utrecht Binnen" data-ref="???" class="line">
+<td class="network foreign" dir="auto">
+Utrecht
+Binnen
+</td>
+<td class="number foreign" dir="auto">
+<ins class="diff-new">3
+</ins></td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+20
+</ins></span><ins class="diff-new">
+'
+-102812,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+20
+</ins></span><ins class="diff-new">
+'
+-102813,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+20
+</ins></span><ins class="diff-new">
+'
+-102814
+</ins></td></tr></tbody></table><hr /><h1 id="operatordetails"><ins class="diff-new">
+4
+Details
+for
+&#039;operator&#039;-Values
+</ins></h1><p><ins class="diff-new">
+This
+section
+lists
+the
+'operator'-values
+which
+have
+been
+found.
+</ins></p><table class="oepnvtable js-sort-table"><thead><tr class="tableheaderrow"><th class="operator" dir="auto"><ins class="diff-new">
+&#x21C5;Operator
+(operator=)
+</ins></th><th class="number js-sort-number" dir="auto"><ins class="diff-new">
+&#x21C5;Number
+</ins></th><th class="relations" dir="auto"><ins class="diff-new">
+&#x21C5;Relations
+</ins></th></tr></thead><tbody><tr data-info="???" data-ref="???" class="line"><td class="operator foreign" dir="auto"><ins class="diff-new">
+U-OV
+</ins>
+</td>
+<td class="number foreign" dir="auto">
+3
+</td>
+<td class="relations" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+20
+</span>
+'
+-102812,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+20
+</span>
+'
+-102813,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+20
+</span>
+'
+-102814
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<iframe style="display:none" id="hiddenIframe" name="hiddenIframe">
+</iframe>
+</body>
+</html>

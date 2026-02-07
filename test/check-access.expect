@@ -60,7 +60,9 @@
         </li>
         </ol>
         </li>
-        <li>5 <a href="#conditional_on_ways">Conditional access statements found on ways</a>
+        <li>5 <a href="#operatordetails">Details for &#039;operator&#039;-Values</a>
+        </li>
+        <li>6 <a href="#conditional_on_ways">Conditional access statements found on ways</a>
         </li>
         </ol>
         <hr />
@@ -150,7 +152,22 @@
         </table>
 
         <hr />
-        <h1 id="conditional_on_ways">5 Conditional access statements found on ways</h1>
+        <h1 id="operatordetails">5 Details for &#039;operator&#039;-Values</h1>
+<p>
+This section lists the 'operator'-values which have been found.
+</p>
+        <table class="oepnvtable js-sort-table">
+            <thead>
+                <tr class="tableheaderrow"><th class="operator" dir="auto">&#x21C5;Operator (operator=)</th><th class="number js-sort-number" dir="auto">&#x21C5;Number</th><th class="relations" dir="auto">&#x21C5;Relations</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="???" data-ref="???" class="line"><td class="operator foreign" dir="auto"></td><td class="number foreign" dir="auto">9</td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">001</span>' -152367, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">001</span>' -152368, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">001</span>' -152369, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">011</span>' -152370, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">011</span>' -152371, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">011</span>' -152372, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">021</span>' -152373, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">021</span>' -152374, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">021</span>' -152375</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="operator foreign" dir="auto">operator</td><td class="number foreign" dir="auto">2</td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">SB01</span>' -152391, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">SB02</span>' -152393</td></tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <h1 id="conditional_on_ways">6 Conditional access statements found on ways</h1>
 <p>
 This section lists conditional access statements found on ways used by public transport vehicles.
 PTNA will not completely evaluate conditional access statements, they are too complex.

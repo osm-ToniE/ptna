@@ -1,0 +1,2246 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>PTNA - Results</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="PTNA">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="keywords" content="OSM Public Transport PTv2">
+        <meta name="description" content="PTNA - Public Transport Network Analysis">
+        <style>
+            #analysis table           { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; max-width:100%; }
+            #analysis th              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+            #analysis td              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+            #analysis ol              { list-style: none; }
+            #analysis img             { width: 20px; vertical-align: top; }
+            #analysis .tableheaderrow { background-color: #bbbbbb;   }
+            #analysis .sketchline     { background-color: #cccccc;        }
+            #analysis .sketch         { text-align:left;  font-weight: 500; }
+            #analysis .csvinfo        { text-align:right; font-size: 0.8em; }
+            #analysis .ref            { text-align:left; }
+            #analysis .relation       { text-align:left; }
+            #analysis .PTv            { text-align:center; }
+            #analysis .number         { text-align:right; }
+            #analysis .gtfs_feed      { white-space:nowrap; }
+            #analysis .feed_from      { white-space:nowrap; }
+            #analysis .date           { white-space:nowrap; }
+            #analysis .date_from      { white-space:nowrap; }
+            #analysis .attention      { background-color: yellow; font-weight: 500; font-size: 1.2em; }
+            .gtfs-dateold             { text-align:center; background-color: orange; }
+            .gtfs-datenew             { text-align:center; background-color: lightgreen; }
+            .gtfs-dateprevious        { text-align:center; background-color: rgb(128, 128, 255); }
+            .bad-link                 { text-decoration: line-through; background-color: yellow; }
+        </style>
+    <style type='text/css'>
+.diff-old-a {
+  font-size: smaller;
+  color: red;
+}
+
+.diff-new { background-color: yellow; }
+.diff-chg { background-color: lime; }
+.diff-new:before,
+.diff-new:after
+    { content: "\2191" }
+.diff-chg:before, .diff-chg:after
+    { content: "\2195" }
+.diff-old { text-decoration: line-through; background-color: #FBB; }
+.diff-old:before,
+.diff-old:after
+    { content: "\2193" }
+</style>
+<script src="/script/htmldiff-nav-index.js"></script></head>
+    <body>
+<div id="analysis">
+<h1>
+Contents
+</h1>
+<ol>
+<li>
+1
+<a href="#hints">
+Hints
+</a>
+</li>
+<li>
+2
+<a href="#otherslines">
+Public
+Transport
+Lines
+</a>
+<ol>
+<li>
+2.1
+<a href="#A2.1">
+Bus
+(bus)
+</a>
+</li>
+</ol>
+</li>
+<li>
+3
+<a href="#networkdetails">
+Details
+for
+&#039;network&#039;-Values
+</a>
+<ol>
+<li>
+3.1
+<a href="#considerednetworks">
+Considered
+&#039;network&#039;-Values
+</a>
+</li>
+</ol>
+</li>
+<li>
+<ins class="diff-new">4
+</ins><a href="#operatordetails"><ins class="diff-new">
+Details
+for
+&#039;operator&#039;-Values
+</ins></a></li>
+</ol>
+<hr />
+<h1 id="hints">
+1
+Hints
+</h1>
+<p>
+The
+data
+will
+be
+updated
+when
+the
+result
+of
+the
+analysis
+has
+changed.
+</p>
+<p>
+An
+explanation
+of
+the
+error
+texts
+can
+be
+found
+in
+the
+documentation
+at
+'
+<a href='/en/index.php#messages'>
+Messages
+</a>
+'.
+</p>
+<hr />
+<h1 id="otherslines">
+2
+Public
+Transport
+Lines
+</h1>
+<h2 id="A2.1">
+2.1
+Bus
+(bus)
+</h2>
+<table class="oepnvtable js-sort-table">
+<thead>
+<tr class="tableheaderrow">
+<th class="ref js-sort-number" dir="auto">
+&#x21C5;Line
+(ref=)
+</th>
+<th class="relation js-sort-number" dir="auto">
+&#x21C5;Relation
+(id=)
+</th>
+<th class="type" dir="auto">
+&#x21C5;Type
+(type=)
+</th>
+<th class="name" dir="auto">
+&#x21C5;Name
+(name=)
+</th>
+<th class="network" dir="auto">
+&#x21C5;Network
+(network=)
+</th>
+<th class="operator" dir="auto">
+&#x21C5;Operator
+(operator=)
+</th>
+<th class="from" dir="auto">
+&#x21C5;From
+(from=)
+</th>
+<th class="via" dir="auto">
+&#x21C5;Via
+(via=)
+</th>
+<th class="to" dir="auto">
+&#x21C5;To
+(to=)
+</th>
+<th class="PTv" dir="auto">
+&#x21C5;PTv
+</th>
+<th class="issues" dir="auto">
+&#x21C5;Errors
+</th>
+<th class="notes" dir="auto">
+&#x21C5;Notes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr id="-112895" data-info="-112895" data-ref="B003-1" class="line">
+<td class="ref foreign" dir="auto">
+B003-1
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112895
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Bad
+Bus
+B003-1:
+A-Town-3
+=&gt;
+B-Town-3
+=&gt;
+C-Town-3
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+A-Town-3
+</td>
+<td class="via foreign" dir="auto">
+B-Town-3
+</td>
+<td class="to foreign" dir="auto">
+C-Town-3
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+PTv2
+route:
+way
+leads
+into/through
+roundabout/closed
+way
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Roundabout-2-no-split-3
+</span>
+'
+-161879:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+1st-Street-3
+</span>
+'
+-161881
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112898" data-info="-112898" data-ref="B003-2" class="line">
+<td class="ref foreign" dir="auto">
+B003-2
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112898
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Bad
+Bus
+B003-2:
+C-Town-3
+=&gt;
+B-Town-3
+=&gt;
+A-Town-3
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+C-Town-3
+</td>
+<td class="via foreign" dir="auto">
+B-Town-3
+</td>
+<td class="to foreign" dir="auto">
+A-Town-3
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+PTv2
+route:
+way
+leads
+into/through
+roundabout/closed
+way
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Roundabout-2-no-split-3
+</span>
+'
+-161879:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+1st-Street-3
+</span>
+'
+-161881
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112897" data-info="-112897" data-ref="B004-1" class="line">
+<td class="ref foreign" dir="auto">
+B004-1
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112897
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Bad
+Bus
+B004-1:
+A-Town-4
+=&gt;
+B-Town-4
+=&gt;
+C-Town-4
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+A-Town-4
+</td>
+<td class="via foreign" dir="auto">
+B-Town-4
+</td>
+<td class="to foreign" dir="auto">
+C-Town-4
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+PTv2
+route:
+consists
+of
+2
+segments,
+has
+a
+gap.
+Gap
+appears
+at
+way:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+1st-Street-4
+</span>
+'
+-161890
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112896" data-info="-112896" data-ref="B004-2" class="line">
+<td class="ref foreign" dir="auto">
+B004-2
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112896
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Bad
+Bus
+B004-2:
+C-Town-4
+=&gt;
+B-Town-4
+=&gt;
+A-Town-4
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+C-Town-4
+</td>
+<td class="via foreign" dir="auto">
+B-Town-4
+</td>
+<td class="to foreign" dir="auto">
+A-Town-4
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+PTv2
+route:
+consists
+of
+2
+segments,
+has
+a
+gap.
+Gap
+appears
+at
+way:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+1st-Street-4
+</span>
+'
+-161890
+<br>
+PTv2
+route:
+the
+end
+of
+the
+route
+on
+the
+last
+way
+(
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+1st-Street-4
+</span>
+'
+-161890)
+is
+not
+near
+the
+last
+platform
+stop
+(
+<img src="/img/Node.svg" alt="Node" />
+'
+<span class="foreign" dir="auto">
+A-Town-4
+</span>
+'
+-162117).
+Distance
+=
+61
+metres
+/
+203
+feet.
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112899" data-info="-112899" data-ref="B005-1" class="line">
+<td class="ref foreign" dir="auto">
+B005-1
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112899
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Bad
+Bus
+B005-1:
+A-Town-5
+=&gt;
+B-Town-5
+=&gt;
+C-Town-5
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+A-Town-5
+</td>
+<td class="via foreign" dir="auto">
+B-Town-5
+</td>
+<td class="to foreign" dir="auto">
+C-Town-5
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+PTv2
+route:
+way
+leads
+into/through
+roundabout/closed
+way
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Roundabout-2-no-split-5
+</span>
+'
+-161891:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+1st-Street-3-5
+</span>
+'
+-161896
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112900" data-info="-112900" data-ref="B005-2" class="line">
+<td class="ref foreign" dir="auto">
+B005-2
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112900
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Bad
+Bus
+B005-2:
+C-Town-5
+=&gt;
+B-Town-5
+=&gt;
+A-Town-5
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+C-Town-5
+</td>
+<td class="via foreign" dir="auto">
+B-Town-5
+</td>
+<td class="to foreign" dir="auto">
+A-Town-5
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+PTv2
+route:
+way
+leads
+into/through
+roundabout/closed
+way
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Roundabout-2-no-split-5
+</span>
+'
+-161891:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+1st-Street-3-5
+</span>
+'
+-161896
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112901" data-info="-112901" data-ref="B007-1" class="line">
+<td class="ref foreign" dir="auto">
+B007-1
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112901
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Bad
+Bus
+B007-1:
+A-Town-7
+=&gt;
+B-Town-7
+=&gt;
+C-Town-7
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+A-Town-7
+</td>
+<td class="via foreign" dir="auto">
+B-Town-7
+</td>
+<td class="to foreign" dir="auto">
+C-Town-7
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+PTv2
+route:
+way
+leads
+into/through
+roundabout/closed
+way
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Roundabout-2-no-split-7
+</span>
+'
+-161898:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+1st-Street-3-7
+</span>
+'
+-161902
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112902" data-info="-112902" data-ref="B007-2" class="line">
+<td class="ref foreign" dir="auto">
+B007-2
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112902
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Bad
+Bus
+B007-2:
+C-Town-7
+=&gt;
+B-Town-7
+=&gt;
+A-Town-7
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+C-Town-7
+</td>
+<td class="via foreign" dir="auto">
+B-Town-7
+</td>
+<td class="to foreign" dir="auto">
+A-Town-7
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+PTv2
+route:
+way
+leads
+into/through
+roundabout/closed
+way
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Roundabout-2-no-split-7
+</span>
+'
+-161898:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+1st-Street-3-7
+</span>
+'
+-161902
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112903" data-info="-112903" data-ref="B009-3" class="line">
+<td class="ref foreign" dir="auto">
+B009-3
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112903
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Bad
+Bus
+B009-3:
+A-Town-9
+=&gt;
+B-Town-9
+=&gt;
+C-Town-9
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+A-Town-9
+</td>
+<td class="via foreign" dir="auto">
+B-Town-9
+</td>
+<td class="to foreign" dir="auto">
+C-Town-9
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+PTv2
+route:
+way
+leads
+into/through
+roundabout/closed
+way
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Roundabout-2-no-split-9
+</span>
+'
+-161906:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+1st-Street-2-9
+</span>
+'
+-161908
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112904" data-info="-112904" data-ref="B009-4" class="line">
+<td class="ref foreign" dir="auto">
+B009-4
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112904
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Bad
+Bus
+B009-4:
+C-Town-9
+=&gt;
+B-Town-9
+=&gt;
+A-Town-9
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+C-Town-9
+</td>
+<td class="via foreign" dir="auto">
+B-Town-9
+</td>
+<td class="to foreign" dir="auto">
+A-Town-9
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+PTv2
+route:
+way
+leads
+into/through
+roundabout/closed
+way
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Roundabout-2-no-split-9
+</span>
+'
+-161906:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+1st-Street-2-9
+</span>
+'
+-161908
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112907" data-info="-112907" data-ref="B011-1" class="line">
+<td class="ref foreign" dir="auto">
+B011-1
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112907
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Bad
+Bus
+B011-1:
+A-Town-11
+=&gt;
+B-Town-11
+=&gt;
+C-Town-11
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+A-Town-11
+</td>
+<td class="via foreign" dir="auto">
+B-Town-11
+</td>
+<td class="to foreign" dir="auto">
+C-Town-11
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+PTv2
+route:
+way
+leads
+into/through
+roundabout/closed
+way
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Roundabout-2-no-split-11
+</span>
+'
+-161912:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+1st-Street-3-11
+</span>
+'
+-161914
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112908" data-info="-112908" data-ref="B011-2" class="line">
+<td class="ref foreign" dir="auto">
+B011-2
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112908
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Bad
+Bus
+B011-2:
+C-Town-11
+=&gt;
+B-Town-11
+=&gt;
+A-Town-11
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+C-Town-11
+</td>
+<td class="via foreign" dir="auto">
+B-Town-11
+</td>
+<td class="to foreign" dir="auto">
+A-Town-11
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+PTv2
+route:
+way
+leads
+into/through
+roundabout/closed
+way
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Roundabout-2-no-split-11
+</span>
+'
+-161912:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+1st-Street-3-11
+</span>
+'
+-161914
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112909" data-info="-112909" data-ref="B013-1" class="line">
+<td class="ref foreign" dir="auto">
+B013-1
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112909
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Bad
+Bus
+B013-1:
+A-Town-13
+=&gt;
+B-Town-13
+=&gt;
+C-Town-13
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+A-Town-13
+</td>
+<td class="via foreign" dir="auto">
+B-Town-13
+</td>
+<td class="to foreign" dir="auto">
+C-Town-13
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+PTv2
+route:
+way
+leads
+into/through
+roundabout/closed
+way
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Roundabout-2-no-split-13
+</span>
+'
+-161918:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+1st-Street-2-13
+</span>
+'
+-161919
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112910" data-info="-112910" data-ref="B013-2" class="line">
+<td class="ref foreign" dir="auto">
+B013-2
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112910
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Bad
+Bus
+B013-2:
+C-Town-13
+=&gt;
+B-Town-13
+=&gt;
+A-Town-13
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+C-Town-13
+</td>
+<td class="via foreign" dir="auto">
+B-Town-13
+</td>
+<td class="to foreign" dir="auto">
+A-Town-13
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+PTv2
+route:
+way
+leads
+into/through
+roundabout/closed
+way
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Roundabout-2-no-split-13
+</span>
+'
+-161918:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+1st-Street-2-13
+</span>
+'
+-161919
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112913" data-info="-112913" data-ref="B015-1" class="line">
+<td class="ref foreign" dir="auto">
+B015-1
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112913
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Bad
+Bus
+B015-1:
+A-Town-15
+=&gt;
+B-Town-15
+=&gt;
+C-Town-15
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+A-Town-15
+</td>
+<td class="via foreign" dir="auto">
+B-Town-15
+</td>
+<td class="to foreign" dir="auto">
+C-Town-15
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+PTv2
+route:
+way
+leads
+into/through
+roundabout/closed
+way
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Roundabout-2-no-split-15
+</span>
+'
+-161928:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+1st-Street-2-15
+</span>
+'
+-161930
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112914" data-info="-112914" data-ref="B015-2" class="line">
+<td class="ref foreign" dir="auto">
+B015-2
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112914
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Bad
+Bus
+B015-2:
+C-Town-15
+=&gt;
+B-Town-15
+=&gt;
+A-Town-15
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+C-Town-15
+</td>
+<td class="via foreign" dir="auto">
+B-Town-15
+</td>
+<td class="to foreign" dir="auto">
+A-Town-15
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+PTv2
+route:
+way
+leads
+into/through
+roundabout/closed
+way
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Roundabout-2-no-split-15
+</span>
+'
+-161928:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+3rd-Street-3-15
+</span>
+'
+-161931
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112915" data-info="-112915" data-ref="B017-1" class="line">
+<td class="ref foreign" dir="auto">
+B017-1
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112915
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Bad
+Bus
+B017-1:
+A-Town-17
+=&gt;
+B-Town-17
+=&gt;
+C-Town-17
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+A-Town-17
+</td>
+<td class="via foreign" dir="auto">
+B-Town-17
+</td>
+<td class="to foreign" dir="auto">
+C-Town-17
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+PTv2
+route:
+consists
+of
+3
+segments,
+has
+gaps.
+Gaps
+appear
+at
+ways:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Roundabout-2-no-split-17
+</span>
+'
+-161938
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112916" data-info="-112916" data-ref="B017-2" class="line">
+<td class="ref foreign" dir="auto">
+B017-2
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112916
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Bad
+Bus
+B017-2:
+C-Town-17=&gt;
+B-Town-17
+=&gt;
+A-Town-17
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+C-Town-17
+</td>
+<td class="via foreign" dir="auto">
+B-Town-17
+</td>
+<td class="to foreign" dir="auto">
+A-Town-17
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+PTv2
+route:
+consists
+of
+3
+segments,
+has
+gaps.
+Gaps
+appear
+at
+ways:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+3rd-Street-17
+</span>
+'
+-161940,
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Roundabout-2-no-split-17
+</span>
+'
+-161938
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112891" data-info="-112891" data-ref="G001-1" class="line">
+<td class="ref foreign" dir="auto">
+G001-1
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112891
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Good
+Bus
+G001-1:
+A-Town-1
+=&gt;
+B-Town-1
+=&gt;
+C-Town-1
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+A-Town-1
+</td>
+<td class="via foreign" dir="auto">
+B-Town-1
+</td>
+<td class="to foreign" dir="auto">
+C-Town-1
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112893" data-info="-112893" data-ref="G001-2" class="line">
+<td class="ref foreign" dir="auto">
+G001-2
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112893
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Good
+Bus
+G001-2:
+C-Town-1
+=&gt;
+B-Town-1
+=&gt;
+A-Town-1
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+C-Town-1
+</td>
+<td class="via foreign" dir="auto">
+B-Town-1
+</td>
+<td class="to foreign" dir="auto">
+A-Town-1
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112892" data-info="-112892" data-ref="G002-1" class="line">
+<td class="ref foreign" dir="auto">
+G002-1
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112892
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Good
+Bus
+G002-1:
+A-Town-2
+=&gt;
+B-Town-2
+=&gt;
+C-Town-2
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+A-Town-2
+</td>
+<td class="via foreign" dir="auto">
+B-Town-2
+</td>
+<td class="to foreign" dir="auto">
+C-Town-2
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112894" data-info="-112894" data-ref="G002-2" class="line">
+<td class="ref foreign" dir="auto">
+G002-2
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112894
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Good
+Bus
+G002-2:
+C-Town-2
+=&gt;
+B-Town-2
+=&gt;
+A-Town-2
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+C-Town-2
+</td>
+<td class="via foreign" dir="auto">
+B-Town-2
+</td>
+<td class="to foreign" dir="auto">
+A-Town-2
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112911" data-info="-112911" data-ref="G006-1" class="line">
+<td class="ref foreign" dir="auto">
+G006-1
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112911
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Good
+Bus
+G006-1:
+A-Town-6
+=&gt;
+B-Town-6
+=&gt;
+C-Town-6
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+A-Town-6
+</td>
+<td class="via foreign" dir="auto">
+B-Town-6
+</td>
+<td class="to foreign" dir="auto">
+C-Town-6
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112918" data-info="-112918" data-ref="G006-2" class="line">
+<td class="ref foreign" dir="auto">
+G006-2
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112918
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Good
+Bus
+G006-2:
+C-Town-6
+=&gt;
+B-Town-6=&gt;
+A-Town-6
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+C-Town-6
+</td>
+<td class="via foreign" dir="auto">
+B-Town-6
+</td>
+<td class="to foreign" dir="auto">
+A-Town-6
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112917" data-info="-112917" data-ref="G008-1" class="line">
+<td class="ref foreign" dir="auto">
+G008-1
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112917
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Good
+Bus
+G008-1:
+A-Town-8
+=&gt;
+B-Town-8
+=&gt;
+C-Town-8
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+A-Town-8
+</td>
+<td class="via foreign" dir="auto">
+B-Town-8
+</td>
+<td class="to foreign" dir="auto">
+C-Town-8
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112912" data-info="-112912" data-ref="G008-2" class="line">
+<td class="ref foreign" dir="auto">
+G008-2
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112912
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Good
+Bus
+G008-2:
+C-Town-8
+=&gt;
+B-Town-8=&gt;
+A-Town-8
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+C-Town-8
+</td>
+<td class="via foreign" dir="auto">
+B-Town-8
+</td>
+<td class="to foreign" dir="auto">
+A-Town-8
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112905" data-info="-112905" data-ref="G009-1" class="line">
+<td class="ref foreign" dir="auto">
+G009-1
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112905
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Good
+Bus
+G009-1:
+A-Town-9
+=&gt;
+B-Town-9
+=&gt;
+C-Town-9
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+A-Town-9
+</td>
+<td class="via foreign" dir="auto">
+B-Town-9
+</td>
+<td class="to foreign" dir="auto">
+C-Town-9
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-112906" data-info="-112906" data-ref="G009-2" class="line">
+<td class="ref foreign" dir="auto">
+G009-2
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112906
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Good
+Bus
+G009-2:
+C-Town-9
+=&gt;
+B-Town-9
+=&gt;
+A-Town-9
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+C-Town-9
+</td>
+<td class="via foreign" dir="auto">
+B-Town-9
+</td>
+<td class="to foreign" dir="auto">
+A-Town-9
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="networkdetails">
+3
+Details
+for
+&#039;network&#039;-Values
+</h1>
+<h2 id="considerednetworks">
+3.1
+Considered
+&#039;network&#039;-Values
+</h2>
+<table class="oepnvtable js-sort-table">
+<thead>
+<tr class="tableheaderrow">
+<th class="network" dir="auto">
+&#x21C5;Network
+(network=)
+</th>
+<th class="number js-sort-number" dir="auto">
+&#x21C5;Number
+</th>
+<th class="relations" dir="auto">
+&#x21C5;Relations
+</th>
+</tr>
+</thead>
+<tbody>
+<tr data-info="Test" data-ref="???" class="line">
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="number foreign" dir="auto">
+<ins class="diff-new">28
+</ins></td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+G001-1
+</ins></span><ins class="diff-new">
+'
+-112891,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+G002-1
+</ins></span><ins class="diff-new">
+'
+-112892,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+G001-2
+</ins></span><ins class="diff-new">
+'
+-112893,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+G002-2
+</ins></span><ins class="diff-new">
+'
+-112894,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+B003-1
+</ins></span><ins class="diff-new">
+'
+-112895,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+B004-2
+</ins></span><ins class="diff-new">
+'
+-112896,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+B004-1
+</ins></span><ins class="diff-new">
+'
+-112897,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+B003-2
+</ins></span><ins class="diff-new">
+'
+-112898,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+B005-1
+</ins></span><ins class="diff-new">
+'
+-112899,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+B005-2
+</ins></span><ins class="diff-new">
+'
+-112900
+and
+more
+...
+</ins></td></tr></tbody></table><hr /><h1 id="operatordetails"><ins class="diff-new">
+4
+Details
+for
+&#039;operator&#039;-Values
+</ins></h1><p><ins class="diff-new">
+This
+section
+lists
+the
+'operator'-values
+which
+have
+been
+found.
+</ins></p><table class="oepnvtable js-sort-table"><thead><tr class="tableheaderrow"><th class="operator" dir="auto"><ins class="diff-new">
+&#x21C5;Operator
+(operator=)
+</ins></th><th class="number js-sort-number" dir="auto"><ins class="diff-new">
+&#x21C5;Number
+</ins></th><th class="relations" dir="auto"><ins class="diff-new">
+&#x21C5;Relations
+</ins></th></tr></thead><tbody><tr data-info="???" data-ref="???" class="line"><td class="operator foreign" dir="auto">
+</td>
+<td class="number foreign" dir="auto">
+28
+</td>
+<td class="relations" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+G001-1
+</span>
+'
+-112891,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+G002-1
+</span>
+'
+-112892,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+G001-2
+</span>
+'
+-112893,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+G002-2
+</span>
+'
+-112894,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+B003-1
+</span>
+'
+-112895,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+B004-2
+</span>
+'
+-112896,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+B004-1
+</span>
+'
+-112897,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+B003-2
+</span>
+'
+-112898,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+B005-1
+</span>
+'
+-112899,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+B005-2
+</span>
+'
+-112900
+and
+more
+...
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<iframe style="display:none" id="hiddenIframe" name="hiddenIframe">
+</iframe>
+</body>
+</html>

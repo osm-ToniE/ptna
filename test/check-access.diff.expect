@@ -1,0 +1,1952 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>PTNA - Results</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="PTNA">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="keywords" content="OSM Public Transport PTv2">
+        <meta name="description" content="PTNA - Public Transport Network Analysis">
+        <style>
+            #analysis table           { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; max-width:100%; }
+            #analysis th              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+            #analysis td              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+            #analysis ol              { list-style: none; }
+            #analysis img             { width: 20px; vertical-align: top; }
+            #analysis .tableheaderrow { background-color: #bbbbbb;   }
+            #analysis .sketchline     { background-color: #cccccc;        }
+            #analysis .sketch         { text-align:left;  font-weight: 500; }
+            #analysis .csvinfo        { text-align:right; font-size: 0.8em; }
+            #analysis .ref            { text-align:left; }
+            #analysis .relation       { text-align:left; }
+            #analysis .PTv            { text-align:center; }
+            #analysis .number         { text-align:right; }
+            #analysis .gtfs_feed      { white-space:nowrap; }
+            #analysis .feed_from      { white-space:nowrap; }
+            #analysis .date           { white-space:nowrap; }
+            #analysis .date_from      { white-space:nowrap; }
+            #analysis .attention      { background-color: yellow; font-weight: 500; font-size: 1.2em; }
+            .gtfs-dateold             { text-align:center; background-color: orange; }
+            .gtfs-datenew             { text-align:center; background-color: lightgreen; }
+            .gtfs-dateprevious        { text-align:center; background-color: rgb(128, 128, 255); }
+            .bad-link                 { text-decoration: line-through; background-color: yellow; }
+        </style>
+    <style type='text/css'>
+.diff-old-a {
+  font-size: smaller;
+  color: red;
+}
+
+.diff-new { background-color: yellow; }
+.diff-chg { background-color: lime; }
+.diff-new:before,
+.diff-new:after
+    { content: "\2191" }
+.diff-chg:before, .diff-chg:after
+    { content: "\2195" }
+.diff-old { text-decoration: line-through; background-color: #FBB; }
+.diff-old:before,
+.diff-old:after
+    { content: "\2193" }
+</style>
+<script src="/script/htmldiff-nav-index.js"></script></head>
+    <body>
+<div id="analysis">
+<h1>
+Contents
+</h1>
+<ol>
+<li>
+1
+<a href="#hints">
+Hints
+</a>
+</li>
+<li>
+2
+<a href="#A2">
+Test
+file
+for
+--check-access
+</a>
+<ol>
+<li>
+2.1
+<a href="#A2.1">
+Positive,
+normal
+situation
+</a>
+</li>
+<li>
+2.2
+<a href="#A2.2">
+Positive,
+no
+errors
+on
+ways
+and
+nodes,
+access
+explicitely
+allowed:
+access=yes,
+psv=yes,
+bus=yes
+,
+...
+</a>
+</li>
+<li>
+2.3
+<a href="#A2.3">
+Negative,
+with
+errors
+on
+ways
+and
+nodes
+</a>
+</li>
+</ol>
+</li>
+<li>
+3
+<a href="#otherlines">
+Other
+Public
+Transport
+Lines
+</a>
+<ol>
+<li>
+3.1
+<a href="#A3.1">
+Bus
+(bus)
+</a>
+</li>
+</ol>
+</li>
+<li>
+4
+<a href="#networkdetails">
+Details
+for
+&#039;network&#039;-Values
+</a>
+<ol>
+<li>
+4.1
+<a href="#considerednetworks">
+Considered
+&#039;network&#039;-Values
+</a>
+</li>
+</ol>
+</li>
+<li>
+5
+<a href="#operatordetails">
+<ins class="diff-new">Details
+for
+&#039;operator&#039;-Values
+</ins></a></li><li><ins class="diff-new">
+6
+</ins>
+<a href="#conditional_on_ways">
+Conditional
+access
+statements
+found
+on
+ways
+</a>
+</li>
+</ol>
+<hr />
+<h1 id="hints">
+1
+Hints
+</h1>
+<p>
+The
+data
+will
+be
+updated
+when
+the
+result
+of
+the
+analysis
+has
+changed.
+</p>
+<p>
+An
+explanation
+of
+the
+error
+texts
+can
+be
+found
+in
+the
+documentation
+at
+'
+<a href='/en/index.php#messages'>
+Messages
+</a>
+'.
+</p>
+<hr />
+<h1 id="A2">
+2
+Test
+file
+for
+--check-access
+</h1>
+<h2 id="A2.1">
+2.1
+Positive,
+normal
+situation
+</h2>
+<a href="#bus_001">
+<span class="foreign" dir="auto">
+001
+</span>
+</a>
+</br>
+</br>
+<table class="oepnvtable">
+<thead>
+<tr class="tableheaderrow">
+<th class="name" dir="auto">
+Name
+(name=)
+</th>
+<th class="type" dir="auto">
+Type
+(type=)
+</th>
+<th class="relation" dir="auto">
+Relation
+(id=)
+</th>
+<th class="PTv" dir="auto">
+PTv
+</th>
+<th class="issues" dir="auto">
+Errors
+</th>
+<th class="notes" dir="auto">
+Notes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr id="bus_001" data-info="From: <span class=_foreign_ dir=_auto_>
+A-Village
+</span>
+; To: <span class=_foreign_ dir=_auto_>
+C-Village
+</span>
+; Operator: <span class=_foreign_ dir=_auto_>
+Test
+</span>
+" data-ref="001" class="sketchline">
+<td class="sketch" dir="auto">
+<a href="https://overpass-api.de/api/sketch-line?ref=001&network=Test&operator=" title="Sketch-Line">
+001
+</a>
+</td>
+<td class="csvinfo" colspan="5" dir="auto">
+From:
+<span class="foreign" dir="auto">
+A-Village
+</span>
+;
+To:
+<span class="foreign" dir="auto">
+C-Village
+</span>
+;
+Operator:
+<span class="foreign" dir="auto">
+Test
+</span>
+</td>
+</tr>
+<tr id="-152369" data-info="-152369" data-ref="001" class="line">
+<td class="name foreign" dir="auto">
+Bus
+001
+</td>
+<td class="type foreign" dir="auto">
+route_master
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-152369
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-152367" data-info="-152367" data-ref="001" class="line">
+<td class="name foreign" dir="auto">
+Bus
+001:
+A-Village
+=&gt;
+B-Village
+=&gt;
+C-Village
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-152367
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-152368" data-info="-152368" data-ref="001" class="line">
+<td class="name foreign" dir="auto">
+Bus
+001:
+C-Village
+=&gt;
+B-Village
+=&gt;
+A-Village
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-152368
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+&nbsp;
+</p>
+<h2 id="A2.2">
+2.2
+Positive,
+no
+errors
+on
+ways
+and
+nodes,
+access
+explicitely
+allowed:
+access=yes,
+psv=yes,
+bus=yes
+,
+...
+</h2>
+<a href="#bus_021">
+<span class="foreign" dir="auto">
+021
+</span>
+</a>
+</br>
+</br>
+<table class="oepnvtable">
+<thead>
+<tr class="tableheaderrow">
+<th class="name" dir="auto">
+Name
+(name=)
+</th>
+<th class="type" dir="auto">
+Type
+(type=)
+</th>
+<th class="relation" dir="auto">
+Relation
+(id=)
+</th>
+<th class="PTv" dir="auto">
+PTv
+</th>
+<th class="issues" dir="auto">
+Errors
+</th>
+<th class="notes" dir="auto">
+Notes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr id="bus_021" data-info="From: <span class=_foreign_ dir=_auto_>
+A-City
+</span>
+; To: <span class=_foreign_ dir=_auto_>
+C-City
+</span>
+; Operator: <span class=_foreign_ dir=_auto_>
+Test
+</span>
+" data-ref="021" class="sketchline">
+<td class="sketch" dir="auto">
+<a href="https://overpass-api.de/api/sketch-line?ref=021&network=Test&operator=" title="Sketch-Line">
+021
+</a>
+</td>
+<td class="csvinfo" colspan="5" dir="auto">
+From:
+<span class="foreign" dir="auto">
+A-City
+</span>
+;
+To:
+<span class="foreign" dir="auto">
+C-City
+</span>
+;
+Operator:
+<span class="foreign" dir="auto">
+Test
+</span>
+</td>
+</tr>
+<tr id="-152375" data-info="-152375" data-ref="021" class="line">
+<td class="name foreign" dir="auto">
+Bus
+021
+</td>
+<td class="type foreign" dir="auto">
+route_master
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-152375
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-152373" data-info="-152373" data-ref="021" class="line">
+<td class="name foreign" dir="auto">
+Bus
+021:
+A-City
+=&gt;
+B-City
+=&gt;
+C-City
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-152373
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-152374" data-info="-152374" data-ref="021" class="line">
+<td class="name foreign" dir="auto">
+Bus
+021:
+C-City
+=&gt;
+B-City
+=&gt;
+A-City
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-152374
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+&nbsp;
+</p>
+<h2 id="A2.3">
+2.3
+Negative,
+with
+errors
+on
+ways
+and
+nodes
+</h2>
+<a href="#bus_011">
+<span class="foreign" dir="auto">
+011
+</span>
+</a>
+</br>
+</br>
+<table class="oepnvtable">
+<thead>
+<tr class="tableheaderrow">
+<th class="name" dir="auto">
+Name
+(name=)
+</th>
+<th class="type" dir="auto">
+Type
+(type=)
+</th>
+<th class="relation" dir="auto">
+Relation
+(id=)
+</th>
+<th class="PTv" dir="auto">
+PTv
+</th>
+<th class="issues" dir="auto">
+Errors
+</th>
+<th class="notes" dir="auto">
+Notes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr id="bus_011" data-info="From: <span class=_foreign_ dir=_auto_>
+A-Town
+</span>
+; To: <span class=_foreign_ dir=_auto_>
+C-Town
+</span>
+; Operator: <span class=_foreign_ dir=_auto_>
+Test
+</span>
+" data-ref="011" class="sketchline">
+<td class="sketch" dir="auto">
+<a href="https://overpass-api.de/api/sketch-line?ref=011&network=Test&operator=" title="Sketch-Line">
+011
+</a>
+</td>
+<td class="csvinfo" colspan="5" dir="auto">
+From:
+<span class="foreign" dir="auto">
+A-Town
+</span>
+;
+To:
+<span class="foreign" dir="auto">
+C-Town
+</span>
+;
+Operator:
+<span class="foreign" dir="auto">
+Test
+</span>
+</td>
+</tr>
+<tr id="-152372" data-info="-152372" data-ref="011" class="line">
+<td class="name foreign" dir="auto">
+Bus
+011
+</td>
+<td class="type foreign" dir="auto">
+route_master
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-152372
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+</td>
+</tr>
+<tr id="-152370" data-info="-152370" data-ref="011" class="line">
+<td class="name foreign" dir="auto">
+Bus
+011:
+A-Town
+=&gt;
+B-Town
+=&gt;
+C-Town
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-152370
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+<span class="foreign" dir="auto">
+Route:
+restricted
+access
+(&#039;access&#039;=&#039;private&#039;)
+to
+way
+without
+&#039;psv&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;designated&#039;,
+or
+...
+</span>:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Way
+15
+</span>
+'
+-152350
+<br>
+<span class="foreign" dir="auto">
+Route:
+suspicious
+access
+restriction
+(&#039;bus&#039;=&#039;yes|yes|designated&#039;)
+to
+way.
+Check
+whether
+this
+should
+be
+&#039;bus:lanes&#039;=&#039;yes|yes|designated&#039;
+</span>:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Way
+20
+</span>
+'
+-152354
+<br>
+<span class="foreign" dir="auto">
+Route:
+restricted
+access
+(&#039;highway&#039;=&#039;construction&#039;)
+to
+way
+without
+&#039;psv&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;designated&#039;,
+or
+...
+</span>:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Way
+11a
+</span>
+'
+-152453
+<br>
+<span class="foreign" dir="auto">
+Route:
+restricted
+access
+(&#039;highway&#039;=&#039;cycleway&#039;)
+to
+way
+without
+&#039;psv&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;designated&#039;,
+or
+...
+</span>:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Way
+12
+</span>
+'
+-152355
+<br>
+<span class="foreign" dir="auto">
+Route:
+restricted
+access
+(&#039;highway&#039;=&#039;footway&#039;)
+to
+way
+without
+&#039;psv&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;designated&#039;,
+or
+...
+</span>:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Way
+4
+</span>
+'
+-152353
+<br>
+<span class="foreign" dir="auto">
+Route:
+restricted
+access
+(&#039;highway&#039;=&#039;pedestrian&#039;)
+to
+way
+without
+&#039;psv&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;designated&#039;,
+or
+...
+</span>:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Way
+13
+</span>
+'
+-152352
+<br>
+<span class="foreign" dir="auto">
+Route:
+restricted
+access
+(&#039;motor_vehicle&#039;=&#039;no&#039;)
+to
+way
+without
+&#039;psv&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;designated&#039;,
+or
+...
+</span>:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Way
+17
+</span>
+'
+-152348
+<br>
+<span class="foreign" dir="auto">
+Route:
+restricted
+access
+(&#039;vehicle&#039;=&#039;private&#039;)
+to
+way
+without
+&#039;psv&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;designated&#039;,
+or
+...
+</span>:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Way
+16
+</span>
+'
+-152349
+<br>
+<span class="foreign" dir="auto">
+Route:
+restricted
+access
+at
+barrier
+(&#039;barrier&#039;=&#039;block&#039;
+with
+implied
+&#039;access&#039;=&#039;no&#039;)
+without
+&#039;psv&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;designated&#039;,
+or
+...
+</span>:
+<img src="/img/Node.svg" alt="Node" />
+-152303
+<br>
+<span class="foreign" dir="auto">
+Route:
+restricted
+access
+at
+barrier
+(&#039;barrier&#039;=&#039;bollard&#039;
+with
+implied
+&#039;access&#039;=&#039;no&#039;)
+without
+&#039;psv&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;designated&#039;,
+or
+...
+</span>:
+<img src="/img/Node.svg" alt="Node" />
+-152151
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+<br>
+<span class="foreign" dir="auto">
+Route:
+see
+</span>
+<a href="#conditional_on_ways">
+<span class="foreign" dir="auto">
+Conditional
+access
+statements
+found
+on
+ways
+</span>
+</a>
+<br>
+<span class="foreign" dir="auto">
+Route:
+suspicious
+&#039;construction&#039;=&#039;secondary&#039;
+along
+with
+&#039;highway&#039;
+unequal
+to
+&#039;construction&#039;
+on
+way
+</span>:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Way
+19
+</span>
+'
+-152346
+</td>
+</tr>
+<tr id="-152371" data-info="-152371" data-ref="011" class="line">
+<td class="name foreign" dir="auto">
+Bus
+011:
+C-Town
+=&gt;
+B-Town
+=&gt;
+A-Town
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-152371
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+<span class="foreign" dir="auto">
+Route:
+restricted
+access
+(&#039;access&#039;=&#039;private&#039;)
+to
+way
+without
+&#039;psv&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;designated&#039;,
+or
+...
+</span>:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Way
+15
+</span>
+'
+-152350
+<br>
+<span class="foreign" dir="auto">
+Route:
+restricted
+access
+(&#039;bus&#039;=&#039;no&#039;)
+to
+ways,
+The
+key
+&#039;bus&#039;
+also
+includes
+public
+transport
+buses
+</span>:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Way
+11-12
+</span>
+'
+-152345,
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Way
+12-15
+</span>
+'
+-152370
+<br>
+<span class="foreign" dir="auto">
+Route:
+restricted
+access
+(&#039;bus&#039;=&#039;school&#039;)
+to
+way
+for
+a
+route
+relation
+not
+tagged
+with
+&#039;bus&#039;=&#039;school&#039;
+</span>:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Way
+11b
+</span>
+'
+-152351
+<br>
+<span class="foreign" dir="auto">
+Route:
+suspicious
+access
+restriction
+(&#039;bus&#039;=&#039;yes|yes|designated&#039;)
+to
+way.
+Check
+whether
+this
+should
+be
+&#039;bus:lanes&#039;=&#039;yes|yes|designated&#039;
+</span>:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Way
+20
+</span>
+'
+-152354
+<br>
+<span class="foreign" dir="auto">
+Route:
+restricted
+access
+(&#039;highway&#039;=&#039;construction&#039;)
+to
+way
+without
+&#039;psv&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;designated&#039;,
+or
+...
+</span>:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Way
+11a
+</span>
+'
+-152453
+<br>
+<span class="foreign" dir="auto">
+Route:
+restricted
+access
+(&#039;motor_vehicle&#039;=&#039;no&#039;)
+to
+way
+without
+&#039;psv&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;designated&#039;,
+or
+...
+</span>:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Way
+17
+</span>
+'
+-152348
+<br>
+<span class="foreign" dir="auto">
+Route:
+restricted
+access
+(&#039;vehicle&#039;=&#039;private&#039;)
+to
+way
+without
+&#039;psv&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;designated&#039;,
+or
+...
+</span>:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Way
+16
+</span>
+'
+-152349
+<br>
+<span class="foreign" dir="auto">
+Route:
+restricted
+access
+at
+barrier
+(&#039;barrier&#039;=&#039;bollard&#039;
+with
+implied
+&#039;access&#039;=&#039;no&#039;)
+without
+&#039;psv&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;designated&#039;,
+or
+...
+</span>:
+<img src="/img/Node.svg" alt="Node" />
+-152151
+<br>
+<span class="foreign" dir="auto">
+Route:
+restricted
+access
+at
+barrier
+(&#039;barrier&#039;=&#039;entrance&#039;,
+&#039;motor_vehicle&#039;=&#039;no&#039;)
+without
+&#039;psv&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;designated&#039;,
+or
+...
+</span>:
+<img src="/img/Node.svg" alt="Node" />
+-152329
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+<br>
+<span class="foreign" dir="auto">
+Route:
+see
+</span>
+<a href="#conditional_on_ways">
+<span class="foreign" dir="auto">
+Conditional
+access
+statements
+found
+on
+ways
+</span>
+</a>
+<br>
+<span class="foreign" dir="auto">
+Route:
+suspicious
+&#039;construction&#039;=&#039;secondary&#039;
+along
+with
+&#039;highway&#039;
+unequal
+to
+&#039;construction&#039;
+on
+way
+</span>:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Way
+19
+</span>
+'
+-152346
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+&nbsp;
+</p>
+<hr />
+<h1 id="otherlines">
+3
+Other
+Public
+Transport
+Lines
+</h1>
+<h2 id="A3.1">
+3.1
+Bus
+(bus)
+</h2>
+<table class="oepnvtable js-sort-table">
+<thead>
+<tr class="tableheaderrow">
+<th class="ref js-sort-number" dir="auto">
+&#x21C5;Line
+(ref=)
+</th>
+<th class="relation js-sort-number" dir="auto">
+&#x21C5;Relation
+(id=)
+</th>
+<th class="type" dir="auto">
+&#x21C5;Type
+(type=)
+</th>
+<th class="name" dir="auto">
+&#x21C5;Name
+(name=)
+</th>
+<th class="network" dir="auto">
+&#x21C5;Network
+(network=)
+</th>
+<th class="operator" dir="auto">
+&#x21C5;Operator
+(operator=)
+</th>
+<th class="from" dir="auto">
+&#x21C5;From
+(from=)
+</th>
+<th class="via" dir="auto">
+&#x21C5;Via
+(via=)
+</th>
+<th class="to" dir="auto">
+&#x21C5;To
+(to=)
+</th>
+<th class="PTv" dir="auto">
+&#x21C5;PTv
+</th>
+<th class="issues" dir="auto">
+&#x21C5;Errors
+</th>
+<th class="notes" dir="auto">
+&#x21C5;Notes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr id="-152391" data-info="-152391" data-ref="SB01" class="line">
+<td class="ref foreign" dir="auto">
+SB01
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-152391
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Bus
+SB01:
+A-School
+=&gt;
+C-School
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+operator
+</td>
+<td class="from foreign" dir="auto">
+A-School
+</td>
+<td class="via foreign" dir="auto">
+</td>
+<td class="to foreign" dir="auto">
+C-School
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+'
+<span class="foreign" dir="auto">
+note
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+school=yes
+is
+not
+set
+on
+route
+relation,
+vehicle=no
+applies
+for
+Way
+41,
+Way
+43,
+and
+Way
+44
+</span>
+'
+<br>
+<span class="foreign" dir="auto">
+Route:
+restricted
+access
+(&#039;vehicle&#039;=&#039;no&#039;)
+to
+ways
+without
+&#039;psv&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;designated&#039;,
+or
+...
+</span>:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Way
+41
+</span>
+'
+-152481,
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Way
+43
+</span>
+'
+-152496,
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Way
+44
+</span>
+'
+-152590
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+<br>
+'
+<span class="foreign" dir="auto">
+operator
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+operator
+</span>
+'
+</td>
+</tr>
+<tr id="-152393" data-info="-152393" data-ref="SB02" class="line">
+<td class="ref foreign" dir="auto">
+SB02
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-152393
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Bus
+SB02:
+A-School
+=&gt;
+C-School
+</td>
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="operator foreign" dir="auto">
+operator
+</td>
+<td class="from foreign" dir="auto">
+A-School
+</td>
+<td class="via foreign" dir="auto">
+</td>
+<td class="to foreign" dir="auto">
+C-School
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+'
+<span class="foreign" dir="auto">
+note
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+school=yes
+is
+set
+on
+route
+relation,
+Way
+41
+and
+Way
+43
+are
+OK,
+but
+there
+is
+a
+single
+way
+(Way
+44)
+with
+school_bus=no
+in
+addition
+to
+vehicle=no
+</span>
+'
+<br>
+<span class="foreign" dir="auto">
+Route:
+restricted
+access
+(&#039;school_bus&#039;=&#039;no&#039;)
+to
+way
+without
+&#039;psv&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;yes&#039;,
+&#039;bus&#039;=&#039;designated&#039;,
+or
+...
+</span>:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Way
+44
+</span>
+'
+-152590
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Test
+</span>
+'
+<br>
+'
+<span class="foreign" dir="auto">
+operator
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+operator
+</span>
+'
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="networkdetails">
+4
+Details
+for
+&#039;network&#039;-Values
+</h1>
+<h2 id="considerednetworks">
+4.1
+Considered
+&#039;network&#039;-Values
+</h2>
+<table class="oepnvtable js-sort-table">
+<thead>
+<tr class="tableheaderrow">
+<th class="network" dir="auto">
+&#x21C5;Network
+(network=)
+</th>
+<th class="number js-sort-number" dir="auto">
+&#x21C5;Number
+</th>
+<th class="relations" dir="auto">
+&#x21C5;Relations
+</th>
+</tr>
+</thead>
+<tbody>
+<tr data-info="Test" data-ref="???" class="line">
+<td class="network foreign" dir="auto">
+Test
+</td>
+<td class="number foreign" dir="auto">
+11
+</td>
+<td class="relations" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+001
+</span>
+'
+-152367,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+001
+</span>
+'
+-152368,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+001
+</span>
+'
+-152369,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+011
+</span>
+'
+-152370,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+011
+</span>
+'
+-152371,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+011
+</span>
+'
+-152372,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+021
+</span>
+'
+-152373,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+021
+</span>
+'
+-152374,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+021
+</span>
+'
+-152375,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+SB01
+</span>
+'
+-152391
+and
+more
+...
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="operatordetails">
+5
+<ins class="diff-new">Details
+for
+&#039;operator&#039;-Values
+</ins></h1><p><ins class="diff-new">
+This
+section
+lists
+the
+'operator'-values
+which
+have
+been
+found.
+</ins></p><table class="oepnvtable js-sort-table"><thead><tr class="tableheaderrow"><th class="operator" dir="auto"><ins class="diff-new">
+&#x21C5;Operator
+(operator=)
+</ins></th><th class="number js-sort-number" dir="auto"><ins class="diff-new">
+&#x21C5;Number
+</ins></th><th class="relations" dir="auto"><ins class="diff-new">
+&#x21C5;Relations
+</ins></th></tr></thead><tbody><tr data-info="???" data-ref="???" class="line"><td class="operator foreign" dir="auto"></td><td class="number foreign" dir="auto"><ins class="diff-new">
+9
+</ins></td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+001
+</ins></span><ins class="diff-new">
+'
+-152367,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+001
+</ins></span><ins class="diff-new">
+'
+-152368,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+001
+</ins></span><ins class="diff-new">
+'
+-152369,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+011
+</ins></span><ins class="diff-new">
+'
+-152370,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+011
+</ins></span><ins class="diff-new">
+'
+-152371,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+011
+</ins></span><ins class="diff-new">
+'
+-152372,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+021
+</ins></span><ins class="diff-new">
+'
+-152373,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+021
+</ins></span><ins class="diff-new">
+'
+-152374,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+021
+</ins></span><ins class="diff-new">
+'
+-152375
+</ins></td></tr><tr data-info="???" data-ref="???" class="line"><td class="operator foreign" dir="auto"><ins class="diff-new">
+operator
+</ins></td><td class="number foreign" dir="auto"><ins class="diff-new">
+2
+</ins></td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+SB01
+</ins></span><ins class="diff-new">
+'
+-152391,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+SB02
+</ins></span><ins class="diff-new">
+'
+-152393
+</ins></td></tr></tbody></table><hr /><h1 id="conditional_on_ways"><ins class="diff-new">
+6
+</ins>
+Conditional
+access
+statements
+found
+on
+ways
+</h1>
+<p>
+This
+section
+lists
+conditional
+access
+statements
+found
+on
+ways
+used
+by
+public
+transport
+vehicles.
+PTNA
+will
+not
+completely
+evaluate
+conditional
+access
+statements,
+they
+are
+too
+complex.
+If
+a
+statement
+includes
+a
+'yes',
+'permissive',
+'permit',
+'official',
+'destination'
+or
+'designated'
+as
+first
+word,
+PTNA
+will
+assume
+'access
+granted'.
+Otherwise,
+PTNA
+will
+ignore
+the
+statement
+and
+search
+for
+and
+analyse
+further
+statements
+tagged
+on
+this
+way.
+</p>
+<p>
+Take
+a
+look
+at
+the
+list
+of
+conditional
+access
+statements.
+Some
+of
+them
+might
+be
+outdated,
+i.e.,
+the
+restriction
+was
+valid
+in
+the
+past.
+<br />
+Example:
+<br />
+<code>
+&nbsp;&nbsp;&nbsp;&nbsp;'access:conditional'='no
+@
+(2024
+Aug
+01-2024
+Oct
+30)'
+</code>
+<br />
+Consider
+removing
+these
+restrictions
+at
+some
+point.
+</p>
+<table class="oepnvtable js-sort-table">
+<thead>
+<tr class="tableheaderrow">
+<th class="conditional_access js-sort-string" dir="auto">
+&#x21C5;Conditional
+Access
+</th>
+<th class="ways js-sort-none" dir="auto">
+&#x21C5;Ways
+</th>
+<th class="relations js-sort-none" dir="auto">
+&#x21C5;Relations
+</th>
+</tr>
+</thead>
+<tbody>
+<tr data-info="???" data-ref="???" class="line">
+<td class="conditional_access foreign" dir="auto">
+&#039;bus:conditional&#039;=&#039;yes
+@
+operator&#039;
+</td>
+<td class="ways" dir="auto">
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+Way
+18
+</span>
+'
+-152347
+</td>
+<td class="relations" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+011
+</span>
+'
+-152370,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+011
+</span>
+'
+-152371
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<iframe style="display:none" id="hiddenIframe" name="hiddenIframe">
+</iframe>
+</body>
+</html>

@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>PTNA - Results</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="PTNA">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="keywords" content="OSM Public Transport PTv2">
+        <meta name="description" content="PTNA - Public Transport Network Analysis">
+        <style>
+            #analysis table           { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; max-width:100%; }
+            #analysis th              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+            #analysis td              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+            #analysis ol              { list-style: none; }
+            #analysis img             { width: 20px; vertical-align: top; }
+            #analysis .tableheaderrow { background-color: #bbbbbb;   }
+            #analysis .sketchline     { background-color: #cccccc;        }
+            #analysis .sketch         { text-align:left;  font-weight: 500; }
+            #analysis .csvinfo        { text-align:right; font-size: 0.8em; }
+            #analysis .ref            { text-align:left; }
+            #analysis .relation       { text-align:left; }
+            #analysis .PTv            { text-align:center; }
+            #analysis .number         { text-align:right; }
+            #analysis .gtfs_feed      { white-space:nowrap; }
+            #analysis .feed_from      { white-space:nowrap; }
+            #analysis .date           { white-space:nowrap; }
+            #analysis .date_from      { white-space:nowrap; }
+            #analysis .attention      { background-color: yellow; font-weight: 500; font-size: 1.2em; }
+            .gtfs-dateold             { text-align:center; background-color: orange; }
+            .gtfs-datenew             { text-align:center; background-color: lightgreen; }
+            .gtfs-dateprevious        { text-align:center; background-color: rgb(128, 128, 255); }
+            .bad-link                 { text-decoration: line-through; background-color: yellow; }
+        </style>
+    <style type='text/css'>
+.diff-old-a {
+  font-size: smaller;
+  color: red;
+}
+
+.diff-new { background-color: yellow; }
+.diff-chg { background-color: lime; }
+.diff-new:before,
+.diff-new:after
+    { content: "\2191" }
+.diff-chg:before, .diff-chg:after
+    { content: "\2195" }
+.diff-old { text-decoration: line-through; background-color: #FBB; }
+.diff-old:before,
+.diff-old:after
+    { content: "\2193" }
+</style>
+<script src="/script/htmldiff-nav-index.js"></script></head>
+    <body>
+<div id="analysis">
+<h1>
+Contents
+</h1>
+<ol>
+<li>
+1
+<a href="#hints">
+Hints
+</a>
+</li>
+<li>
+2
+<a href="#otherslines">
+Public
+Transport
+Lines
+</a>
+<ol>
+<li>
+2.1
+<a href="#A2.1">
+Train/Suburban-Train
+(train)
+</a>
+</li>
+</ol>
+</li>
+<li>
+3
+<a href="#networkdetails">
+Details
+for
+&#039;network&#039;-Values
+</a>
+<ol>
+<li>
+3.1
+<a href="#considerednetworks">
+Considered
+&#039;network&#039;-Values
+</a>
+</li>
+</ol>
+</li>
+<li>
+<ins class="diff-new">4
+</ins><a href="#operatordetails"><ins class="diff-new">
+Details
+for
+&#039;operator&#039;-Values
+</ins></a></li>
+</ol>
+<hr />
+<h1 id="hints">
+1
+Hints
+</h1>
+<p>
+The
+data
+will
+be
+updated
+when
+the
+result
+of
+the
+analysis
+has
+changed.
+</p>
+<p>
+An
+explanation
+of
+the
+error
+texts
+can
+be
+found
+in
+the
+documentation
+at
+'
+<a href='/en/index.php#messages'>
+Messages
+</a>
+'.
+</p>
+<hr />
+<h1 id="otherslines">
+2
+Public
+Transport
+Lines
+</h1>
+<h2 id="A2.1">
+2.1
+Train/Suburban-Train
+(train)
+</h2>
+<table class="oepnvtable js-sort-table">
+<thead>
+<tr class="tableheaderrow">
+<th class="ref js-sort-number" dir="auto">
+&#x21C5;Line
+(ref=)
+</th>
+<th class="relation js-sort-number" dir="auto">
+&#x21C5;Relation
+(id=)
+</th>
+<th class="type" dir="auto">
+&#x21C5;Type
+(type=)
+</th>
+<th class="name" dir="auto">
+&#x21C5;Name
+(name=)
+</th>
+<th class="network" dir="auto">
+&#x21C5;Network
+(network=)
+</th>
+<th class="operator" dir="auto">
+&#x21C5;Operator
+(operator=)
+</th>
+<th class="from" dir="auto">
+&#x21C5;From
+(from=)
+</th>
+<th class="via" dir="auto">
+&#x21C5;Via
+(via=)
+</th>
+<th class="to" dir="auto">
+&#x21C5;To
+(to=)
+</th>
+<th class="PTv" dir="auto">
+&#x21C5;PTv
+</th>
+<th class="issues" dir="auto">
+&#x21C5;Errors
+</th>
+<th class="notes" dir="auto">
+&#x21C5;Notes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr id="-160544" data-info="-160544" data-ref="1" class="line">
+<td class="ref foreign" dir="auto">
+1
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-160544
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Linie
+1:
+A
+1
+=&gt;
+E
+1
+</td>
+<td class="network foreign" dir="auto">
+Privat
+</td>
+<td class="operator foreign" dir="auto">
+Privat
+</td>
+<td class="from foreign" dir="auto">
+A
+1
+</td>
+<td class="via foreign" dir="auto">
+</td>
+<td class="to foreign" dir="auto">
+E
+1
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+PTv2
+route:
+consider
+removing
+the
+first
+way
+of
+the
+route
+from
+the
+relation,
+it
+is
+a
+way
+before
+the
+first
+stop
+position:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+L1-W1
+</span>
+'
+-160526
+<br>
+PTv2
+route:
+consider
+removing
+the
+last
+way
+of
+the
+route
+from
+the
+relation,
+it
+is
+a
+way
+after
+the
+last
+stop
+position:
+<img src="/img/Way.svg" alt="Way" />
+'
+<span class="foreign" dir="auto">
+L1-W6
+</span>
+'
+-160529
+</td>
+<td class="notes" dir="auto">
+'
+<span class="foreign" dir="auto">
+comment
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+PTv2
+route:
+consider
+removing
+the
+first
+way
+of
+the
+route
+from
+the
+relation,
+it
+is
+a
+way
+before
+the
+first
+stop
+position:
+Way
+&#039;L1-W1&#039;
+-39258
+PTv2
+route:
+consider
+removing
+the
+last
+way
+of
+the
+route
+from
+the
+relation,
+it
+is
+a
+way
+after
+the
+last
+stop
+position:
+Way
+&#039;L1-W6&#039;
+-39264
+</span>
+'
+<br>
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Privat
+</span>
+'
+<br>
+'
+<span class="foreign" dir="auto">
+operator
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+Privat
+</span>
+'
+</td>
+</tr>
+<tr id="-160545" data-info="-160545" data-ref="2" class="line">
+<td class="ref foreign" dir="auto">
+2
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-160545
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Linie
+2:
+A
+2
+=&gt;
+E
+2
+</td>
+<td class="network foreign" dir="auto">
+Privat
+</td>
+<td class="operator foreign" dir="auto">
+Privat
+</td>
+<td class="from foreign" dir="auto">
+A
+2
+</td>
+<td class="via foreign" dir="auto">
+</td>
+<td class="to foreign" dir="auto">
+E
+2
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'
+<span class="foreign" dir="auto">
+comment
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+No
+error
+if
+--relaxed-begin-end-for=train
+</span>
+'
+<br>
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Privat
+</span>
+'
+<br>
+'
+<span class="foreign" dir="auto">
+operator
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+Privat
+</span>
+'
+</td>
+</tr>
+<tr id="-160546" data-info="-160546" data-ref="3" class="line">
+<td class="ref foreign" dir="auto">
+3
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-160546
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Linie
+3:
+A
+3
+=&gt;
+E
+3
+</td>
+<td class="network foreign" dir="auto">
+Privat
+</td>
+<td class="operator foreign" dir="auto">
+Privat
+</td>
+<td class="from foreign" dir="auto">
+A
+3
+</td>
+<td class="via foreign" dir="auto">
+</td>
+<td class="to foreign" dir="auto">
+E
+3
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'
+<span class="foreign" dir="auto">
+comment
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+No
+error
+at
+all
+</span>
+'
+<br>
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Privat
+</span>
+'
+<br>
+'
+<span class="foreign" dir="auto">
+operator
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+Privat
+</span>
+'
+</td>
+</tr>
+<tr id="-160547" data-info="-160547" data-ref="4" class="line">
+<td class="ref foreign" dir="auto">
+4
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-160547
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Linie
+4:
+A
+4
+=&gt;
+E
+4
+</td>
+<td class="network foreign" dir="auto">
+Privat
+</td>
+<td class="operator foreign" dir="auto">
+Privat
+</td>
+<td class="from foreign" dir="auto">
+A
+4
+</td>
+<td class="via foreign" dir="auto">
+</td>
+<td class="to foreign" dir="auto">
+E
+4
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'
+<span class="foreign" dir="auto">
+comment
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+No
+error
+at
+all
+</span>
+'
+<br>
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Privat
+</span>
+'
+<br>
+'
+<span class="foreign" dir="auto">
+operator
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+Privat
+</span>
+'
+</td>
+</tr>
+<tr id="-160548" data-info="-160548" data-ref="5" class="line">
+<td class="ref foreign" dir="auto">
+5
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-160548
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Linie
+5:
+A
+5
+=&gt;
+E
+5
+</td>
+<td class="network foreign" dir="auto">
+Privat
+</td>
+<td class="operator foreign" dir="auto">
+Privat
+</td>
+<td class="from foreign" dir="auto">
+A
+5
+</td>
+<td class="via foreign" dir="auto">
+</td>
+<td class="to foreign" dir="auto">
+E
+5
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'
+<span class="foreign" dir="auto">
+comment
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+No
+error
+at
+all
+</span>
+'
+<br>
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Privat
+</span>
+'
+<br>
+'
+<span class="foreign" dir="auto">
+operator
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+Privat
+</span>
+'
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="networkdetails">
+3
+Details
+for
+&#039;network&#039;-Values
+</h1>
+<h2 id="considerednetworks">
+3.1
+Considered
+&#039;network&#039;-Values
+</h2>
+<table class="oepnvtable js-sort-table">
+<thead>
+<tr class="tableheaderrow">
+<th class="network" dir="auto">
+&#x21C5;Network
+(network=)
+</th>
+<th class="number js-sort-number" dir="auto">
+&#x21C5;Number
+</th>
+<th class="relations" dir="auto">
+&#x21C5;Relations
+</th>
+</tr>
+</thead>
+<tbody>
+<tr data-info="Privat" data-ref="???" class="line">
+<td class="network foreign" dir="auto">
+<ins class="diff-new">Privat
+</ins></td><td class="number foreign" dir="auto"><ins class="diff-new">
+5
+</ins></td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+1
+</ins></span><ins class="diff-new">
+'
+-160544,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+2
+</ins></span><ins class="diff-new">
+'
+-160545,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+3
+</ins></span><ins class="diff-new">
+'
+-160546,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+4
+</ins></span><ins class="diff-new">
+'
+-160547,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+5
+</ins></span><ins class="diff-new">
+'
+-160548
+</ins></td></tr></tbody></table><hr /><h1 id="operatordetails"><ins class="diff-new">
+4
+Details
+for
+&#039;operator&#039;-Values
+</ins></h1><p><ins class="diff-new">
+This
+section
+lists
+the
+'operator'-values
+which
+have
+been
+found.
+</ins></p><table class="oepnvtable js-sort-table"><thead><tr class="tableheaderrow"><th class="operator" dir="auto"><ins class="diff-new">
+&#x21C5;Operator
+(operator=)
+</ins></th><th class="number js-sort-number" dir="auto"><ins class="diff-new">
+&#x21C5;Number
+</ins></th><th class="relations" dir="auto"><ins class="diff-new">
+&#x21C5;Relations
+</ins></th></tr></thead><tbody><tr data-info="???" data-ref="???" class="line"><td class="operator foreign" dir="auto">
+Privat
+</td>
+<td class="number foreign" dir="auto">
+5
+</td>
+<td class="relations" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+1
+</span>
+'
+-160544,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+2
+</span>
+'
+-160545,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+3
+</span>
+'
+-160546,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+4
+</span>
+'
+-160547,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+5
+</span>
+'
+-160548
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<iframe style="display:none" id="hiddenIframe" name="hiddenIframe">
+</iframe>
+</body>
+</html>

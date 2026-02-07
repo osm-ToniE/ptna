@@ -1,0 +1,2553 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>PTNA - Results</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="PTNA">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="keywords" content="OSM Public Transport PTv2">
+        <meta name="description" content="PTNA - Public Transport Network Analysis">
+        <style>
+            #analysis table           { border-width: 1px; border-style: solid; border-collapse: collapse; vertical-align: center; max-width:100%; }
+            #analysis th              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+            #analysis td              { border-width: 1px; border-style: solid; border-collapse: collapse; padding: 0.2em; }
+            #analysis ol              { list-style: none; }
+            #analysis img             { width: 20px; vertical-align: top; }
+            #analysis .tableheaderrow { background-color: #bbbbbb;   }
+            #analysis .sketchline     { background-color: #cccccc;        }
+            #analysis .sketch         { text-align:left;  font-weight: 500; }
+            #analysis .csvinfo        { text-align:right; font-size: 0.8em; }
+            #analysis .ref            { text-align:left; }
+            #analysis .relation       { text-align:left; }
+            #analysis .PTv            { text-align:center; }
+            #analysis .number         { text-align:right; }
+            #analysis .gtfs_feed      { white-space:nowrap; }
+            #analysis .feed_from      { white-space:nowrap; }
+            #analysis .date           { white-space:nowrap; }
+            #analysis .date_from      { white-space:nowrap; }
+            #analysis .attention      { background-color: yellow; font-weight: 500; font-size: 1.2em; }
+            .gtfs-dateold             { text-align:center; background-color: orange; }
+            .gtfs-datenew             { text-align:center; background-color: lightgreen; }
+            .gtfs-dateprevious        { text-align:center; background-color: rgb(128, 128, 255); }
+            .bad-link                 { text-decoration: line-through; background-color: yellow; }
+        </style>
+    <style type='text/css'>
+.diff-old-a {
+  font-size: smaller;
+  color: red;
+}
+
+.diff-new { background-color: yellow; }
+.diff-chg { background-color: lime; }
+.diff-new:before,
+.diff-new:after
+    { content: "\2191" }
+.diff-chg:before, .diff-chg:after
+    { content: "\2195" }
+.diff-old { text-decoration: line-through; background-color: #FBB; }
+.diff-old:before,
+.diff-old:after
+    { content: "\2193" }
+</style>
+<script src="/script/htmldiff-nav-index.js"></script></head>
+    <body>
+<div id="analysis">
+<h1>
+Contents
+</h1>
+<ol>
+<li>
+1
+<a href="#hints">
+Hints
+</a>
+</li>
+<li>
+2
+<a href="#A2">
+Test
+file
+for
+--check-name
+(not
+relaxed)
+</a>
+<ol>
+<li>
+2.1
+<a href="#A2.1">
+Positive,
+no
+errors
+</a>
+<ol>
+<li>
+2.1.1
+<a href="#A2.1.1">
+Simple
+&#039;ref&#039;
+</a>
+</li>
+<li>
+2.1.2
+<a href="#A2.1.2">
+Combined
+&#039;ref&#039;
+</a>
+</li>
+<li>
+2.1.3
+<a href="#A2.1.3">
+Normal
+</a>
+</li>
+</ol>
+</li>
+<li>
+2.2
+<a href="#A2.2">
+Negative,
+with
+errors
+</a>
+<ol>
+<li>
+2.2.1
+<a href="#A2.2.1">
+Simple
+&#039;ref&#039;
+</a>
+</li>
+<li>
+2.2.2
+<a href="#A2.2.2">
+Combined
+&#039;ref&#039;
+</a>
+</li>
+<li>
+2.2.3
+<a href="#A2.2.3">
+Negative,
+with
+special
+characters
+</a>
+</li>
+<li>
+2.2.4
+<a href="#A2.2.4">
+Negative,
+identical
+&#039;name&#039;
+</a>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+3
+<a href="#withoutref">
+Public
+Transport
+Lines
+without
+&#039;ref&#039;
+</a>
+<ol>
+<li>
+3.1
+<a href="#A3.1">
+Bus
+(bus)
+</a>
+</li>
+</ol>
+</li>
+<li>
+4
+<a href="#networkdetails">
+Details
+for
+&#039;network&#039;-Values
+</a>
+<ol>
+<li>
+4.1
+<a href="#considerednetworks">
+Considered
+&#039;network&#039;-Values
+</a>
+</li>
+</ol>
+</li>
+<li>
+<ins class="diff-new">5
+</ins><a href="#operatordetails"><ins class="diff-new">
+Details
+for
+&#039;operator&#039;-Values
+</ins></a></li>
+</ol>
+<hr />
+<h1 id="hints">
+1
+Hints
+</h1>
+<p>
+The
+data
+will
+be
+updated
+when
+the
+result
+of
+the
+analysis
+has
+changed.
+</p>
+<p>
+An
+explanation
+of
+the
+error
+texts
+can
+be
+found
+in
+the
+documentation
+at
+'
+<a href='/en/index.php#messages'>
+Messages
+</a>
+'.
+</p>
+<hr />
+<h1 id="A2">
+2
+Test
+file
+for
+--check-name
+(not
+relaxed)
+</h1>
+<h2 id="A2.1">
+2.1
+Positive,
+no
+errors
+</h2>
+<h3 id="A2.1.1">
+2.1.1
+Simple
+&#039;ref&#039;
+</h3>
+<a href="#bus_1">
+<span class="foreign" dir="auto">
+1
+</span>
+</a>
+<a href="#bus_2">
+<span class="foreign" dir="auto">
+2
+</span>
+</a>
+<a href="#bus_3">
+<span class="foreign" dir="auto">
+3
+</span>
+</a>
+<a href="#bus_4">
+<span class="foreign" dir="auto">
+4
+</span>
+</a>
+<a href="#bus_5">
+<span class="foreign" dir="auto">
+5
+</span>
+</a>
+</br>
+</br>
+<table class="oepnvtable">
+<thead>
+<tr class="tableheaderrow">
+<th class="name" dir="auto">
+Name
+(name=)
+</th>
+<th class="type" dir="auto">
+Type
+(type=)
+</th>
+<th class="relation" dir="auto">
+Relation
+(id=)
+</th>
+<th class="PTv" dir="auto">
+PTv
+</th>
+<th class="issues" dir="auto">
+Errors
+</th>
+<th class="notes" dir="auto">
+Notes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr id="bus_1" data-info="???" data-ref="1" class="sketchline">
+<td class="sketch" dir="auto">
+<a href="https://overpass-api.de/api/sketch-line?ref=1&network=Network&operator=" title="Sketch-Line">
+1
+</a>
+</td>
+<td class="csvinfo" colspan="5" dir="auto">
+</td>
+</tr>
+<tr id="-112946" data-info="-112946" data-ref="1" class="line">
+<td class="name foreign" dir="auto">
+Bus
+1:
+Stop
+1
+=&gt;
+Stop
+4
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112946
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Network
+</span>
+'
+</td>
+</tr>
+<tr id="bus_2" data-info="???" data-ref="2" class="sketchline">
+<td class="sketch" dir="auto">
+<a href="https://overpass-api.de/api/sketch-line?ref=2&network=Network&operator=" title="Sketch-Line">
+2
+</a>
+</td>
+<td class="csvinfo" colspan="5" dir="auto">
+</td>
+</tr>
+<tr id="-112947" data-info="-112947" data-ref="2" class="line">
+<td class="name foreign" dir="auto">
+Bus
+2:
+Stop
+1
+=&gt;
+Stop
+2
+=&gt;
+Stop
+4
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112947
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Network
+</span>
+'
+</td>
+</tr>
+<tr id="bus_3" data-info="???" data-ref="3" class="sketchline">
+<td class="sketch" dir="auto">
+<a href="https://overpass-api.de/api/sketch-line?ref=3&network=Network&operator=" title="Sketch-Line">
+3
+</a>
+</td>
+<td class="csvinfo" colspan="5" dir="auto">
+</td>
+</tr>
+<tr id="-112948" data-info="-112948" data-ref="3" class="line">
+<td class="name foreign" dir="auto">
+Bus
+3:
+Stop
+1
+=&gt;
+Stop
+2
+=&gt;
+Stop
+3
+=&gt;
+Stop
+4
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112948
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Network
+</span>
+'
+</td>
+</tr>
+<tr id="bus_4" data-info="???" data-ref="4" class="sketchline">
+<td class="sketch" dir="auto">
+<a href="https://overpass-api.de/api/sketch-line?ref=4&network=Network&operator=" title="Sketch-Line">
+4
+</a>
+</td>
+<td class="csvinfo" colspan="5" dir="auto">
+</td>
+</tr>
+<tr id="-112949" data-info="-112949" data-ref="4" class="line">
+<td class="name foreign" dir="auto">
+Bus
+4:
+Stop
+1
+=&gt;
+Stop
+2
+=&gt;
+Stop
+3
+=&gt;
+Stop
+4
+=&gt;
+Stop
+5
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112949
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Network
+</span>
+'
+</td>
+</tr>
+<tr id="bus_5" data-info="???" data-ref="5" class="sketchline">
+<td class="sketch" dir="auto">
+<a href="https://overpass-api.de/api/sketch-line?ref=5&network=Network&operator=" title="Sketch-Line">
+5
+</a>
+</td>
+<td class="csvinfo" colspan="5" dir="auto">
+</td>
+</tr>
+<tr id="-112950" data-info="-112950" data-ref="5" class="line">
+<td class="name foreign" dir="auto">
+Bus
+5:
+Stop
+1
+=&gt;
+Stop
+2
+=&gt;
+Stop
+3
+=&gt;
+Stop
+4
+=&gt;
+Stop
+5
+=&gt;
+Stop
+6
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112950
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Network
+</span>
+'
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+&nbsp;
+</p>
+<h3 id="A2.1.2">
+2.1.2
+Combined
+&#039;ref&#039;
+</h3>
+<a href="#bus_11_21">
+<span class="foreign" dir="auto">
+11/21
+</span>
+</a>
+<a href="#bus_12_22">
+<span class="foreign" dir="auto">
+12/22
+</span>
+</a>
+</br>
+</br>
+<p>
+<strong>
+Notes:
+</strong>
+&#039;ref:LAVV&#039;
+=
+&#039;21&#039;;
+&#039;ref:RVO&#039;
+=
+&#039;11&#039;
+</p>
+<table class="oepnvtable">
+<thead>
+<tr class="tableheaderrow">
+<th class="name" dir="auto">
+Name
+(name=)
+</th>
+<th class="type" dir="auto">
+Type
+(type=)
+</th>
+<th class="relation" dir="auto">
+Relation
+(id=)
+</th>
+<th class="PTv" dir="auto">
+PTv
+</th>
+<th class="issues" dir="auto">
+Errors
+</th>
+<th class="notes" dir="auto">
+Notes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr id="bus_11_21" data-info="???" data-ref="11/21" class="sketchline">
+<td class="sketch" dir="auto">
+<a href="https://overpass-api.de/api/sketch-line?ref=11%2f21&network=Network&operator=" title="Sketch-Line">
+11/21
+</a>
+</td>
+<td class="csvinfo" colspan="5" dir="auto">
+</td>
+</tr>
+<tr id="-112954" data-info="-112954" data-ref="11/21" class="line">
+<td class="name foreign" dir="auto">
+Bus
+RVO
+11/LAVV
+21:
+Stop
+1
+=&gt;
+Stop
+4
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112954
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Network
+</span>
+'
+<br>
+'
+<span class="foreign" dir="auto">
+ref:LAVV
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+21
+</span>
+'
+<br>
+'
+<span class="foreign" dir="auto">
+ref:RVO
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+11
+</span>
+'
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+&nbsp;
+</p>
+<p>
+<strong>
+Notes:
+</strong>
+&#039;ref:LAVV&#039;
+=
+&#039;22&#039;;
+&#039;ref:RVO&#039;
+=
+&#039;12&#039;;
+&#039;ref_trips&#039;
+=
+&#039;012;015;0134&#039;
+</p>
+<table class="oepnvtable">
+<thead>
+<tr class="tableheaderrow">
+<th class="name" dir="auto">
+Name
+(name=)
+</th>
+<th class="type" dir="auto">
+Type
+(type=)
+</th>
+<th class="relation" dir="auto">
+Relation
+(id=)
+</th>
+<th class="PTv" dir="auto">
+PTv
+</th>
+<th class="issues" dir="auto">
+Errors
+</th>
+<th class="notes" dir="auto">
+Notes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr id="bus_12_22" data-info="???" data-ref="12/22" class="sketchline">
+<td class="sketch" dir="auto">
+<a href="https://overpass-api.de/api/sketch-line?ref=12%2f22&network=Network&operator=" title="Sketch-Line">
+12/22
+</a>
+</td>
+<td class="csvinfo" colspan="5" dir="auto">
+</td>
+</tr>
+<tr id="-112952" data-info="-112952" data-ref="12/22" class="line">
+<td class="name foreign" dir="auto">
+Bus
+RVO
+12/LAVV
+22
+(012,015,0134):
+Stop
+1
+=&gt;
+Stop
+4
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112952
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Network
+</span>
+'
+<br>
+'
+<span class="foreign" dir="auto">
+ref:LAVV
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+22
+</span>
+'
+<br>
+'
+<span class="foreign" dir="auto">
+ref:RVO
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+12
+</span>
+'
+<br>
+'
+<span class="foreign" dir="auto">
+ref_trips
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+012;015;0134
+</span>
+'
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+&nbsp;
+</p>
+<h3 id="A2.1.3">
+2.1.3
+Normal
+</h3>
+<a href="#bus_X1">
+<span class="foreign" dir="auto">
+X1
+</span>
+</a>
+</br>
+</br>
+<table class="oepnvtable">
+<thead>
+<tr class="tableheaderrow">
+<th class="name" dir="auto">
+Name
+(name=)
+</th>
+<th class="type" dir="auto">
+Type
+(type=)
+</th>
+<th class="relation" dir="auto">
+Relation
+(id=)
+</th>
+<th class="PTv" dir="auto">
+PTv
+</th>
+<th class="issues" dir="auto">
+Errors
+</th>
+<th class="notes" dir="auto">
+Notes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr id="bus_X1" data-info="???" data-ref="X1" class="sketchline">
+<td class="sketch" dir="auto">
+<a href="https://overpass-api.de/api/sketch-line?ref=X1&network=Network&operator=" title="Sketch-Line">
+X1
+</a>
+</td>
+<td class="csvinfo" colspan="5" dir="auto">
+</td>
+</tr>
+<tr id="-112943" data-info="-112943" data-ref="X1" class="line">
+<td class="name foreign" dir="auto">
+Bus
+X1:
+Stop
+1
+=&gt;
+Stop
+4
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112943
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Network
+</span>
+'
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+&nbsp;
+</p>
+<h2 id="A2.2">
+2.2
+Negative,
+with
+errors
+</h2>
+<h3 id="A2.2.1">
+2.2.1
+Simple
+&#039;ref&#039;
+</h3>
+<a href="#bus_101">
+<span class="foreign" dir="auto">
+101
+</span>
+</a>
+<a href="#bus_102">
+<span class="foreign" dir="auto">
+102
+</span>
+</a>
+<a href="#bus_103">
+<span class="foreign" dir="auto">
+103
+</span>
+</a>
+<a href="#bus_104">
+<span class="foreign" dir="auto">
+104
+</span>
+</a>
+<a href="#bus_105">
+<span class="foreign" dir="auto">
+105
+</span>
+</a>
+</br>
+</br>
+<p>
+<strong>
+Errors:
+</strong>
+&#039;name&#039;
+is
+not
+set;
+&#039;network&#039;
+is
+not
+set
+</p>
+<table class="oepnvtable">
+<thead>
+<tr class="tableheaderrow">
+<th class="name" dir="auto">
+Name
+(name=)
+</th>
+<th class="type" dir="auto">
+Type
+(type=)
+</th>
+<th class="relation" dir="auto">
+Relation
+(id=)
+</th>
+<th class="PTv" dir="auto">
+PTv
+</th>
+<th class="issues" dir="auto">
+Errors
+</th>
+<th class="notes" dir="auto">
+Notes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr id="bus_101" data-info="???" data-ref="101" class="sketchline">
+<td class="sketch" dir="auto">
+101
+</td>
+<td class="csvinfo" colspan="5" dir="auto">
+</td>
+</tr>
+<tr id="-112944" data-info="-112944" data-ref="101" class="line">
+<td class="name foreign" dir="auto">
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112944
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+'name'
+is
+not
+set
+<br>
+'network'
+is
+not
+set
+</td>
+<td class="notes" dir="auto">
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+&nbsp;
+</p>
+<p>
+<strong>
+Notes:
+</strong>
+PTv2
+route:
+&#039;name&#039;
+should
+(at
+least)
+be
+of
+the
+form
+&#039;...
+ref
+...:
+from
+=&gt;
+to&#039;
+</p>
+<table class="oepnvtable">
+<thead>
+<tr class="tableheaderrow">
+<th class="name" dir="auto">
+Name
+(name=)
+</th>
+<th class="type" dir="auto">
+Type
+(type=)
+</th>
+<th class="relation" dir="auto">
+Relation
+(id=)
+</th>
+<th class="PTv" dir="auto">
+PTv
+</th>
+<th class="issues" dir="auto">
+Errors
+</th>
+<th class="notes" dir="auto">
+Notes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr id="bus_102" data-info="???" data-ref="102" class="sketchline">
+<td class="sketch" dir="auto">
+<a href="https://overpass-api.de/api/sketch-line?ref=102&network=Network&operator=" title="Sketch-Line">
+102
+</a>
+</td>
+<td class="csvinfo" colspan="5" dir="auto">
+</td>
+</tr>
+<tr id="-112942" data-info="-112942" data-ref="102" class="line">
+<td class="name foreign" dir="auto">
+Bus
+102
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112942
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Network
+</span>
+'
+<br>
+PTv2
+route:
+'name'
+should
+(at
+least)
+be
+of
+the
+form
+'...
+ref
+...:
+from
+=>
+to'
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+&nbsp;
+</p>
+<p>
+<strong>
+Notes:
+</strong>
+PTv2
+route:
+&#039;ref&#039;
+is
+not
+part
+of
+&#039;name&#039;
+</p>
+<table class="oepnvtable">
+<thead>
+<tr class="tableheaderrow">
+<th class="name" dir="auto">
+Name
+(name=)
+</th>
+<th class="type" dir="auto">
+Type
+(type=)
+</th>
+<th class="relation" dir="auto">
+Relation
+(id=)
+</th>
+<th class="PTv" dir="auto">
+PTv
+</th>
+<th class="issues" dir="auto">
+Errors
+</th>
+<th class="notes" dir="auto">
+Notes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr id="bus_103" data-info="???" data-ref="103" class="sketchline">
+<td class="sketch" dir="auto">
+<a href="https://overpass-api.de/api/sketch-line?ref=103&network=Network&operator=" title="Sketch-Line">
+103
+</a>
+</td>
+<td class="csvinfo" colspan="5" dir="auto">
+</td>
+</tr>
+<tr id="-112955" data-info="-112955" data-ref="103" class="line">
+<td class="name foreign" dir="auto">
+Bus
+100+3:
+Stop
+1
+=&gt;
+Stop
+4
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112955
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Network
+</span>
+'
+<br>
+PTv2
+route:
+'ref'
+is
+not
+part
+of
+'name'
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+&nbsp;
+</p>
+<p>
+<strong>
+Notes:
+</strong>
+PTv2
+route:
+from-part
+(&#039;%s&#039;)
+of
+&#039;name&#039;
+is
+not
+equal
+to
+&#039;from&#039;
+=
+&#039;%s&#039;;
+PTv2
+route:
+to-part
+(&#039;%s&#039;)
+of
+&#039;name&#039;
+is
+not
+equal
+to
+&#039;to&#039;
+=
+&#039;%s&#039;
+</p>
+<table class="oepnvtable">
+<thead>
+<tr class="tableheaderrow">
+<th class="name" dir="auto">
+Name
+(name=)
+</th>
+<th class="type" dir="auto">
+Type
+(type=)
+</th>
+<th class="relation" dir="auto">
+Relation
+(id=)
+</th>
+<th class="PTv" dir="auto">
+PTv
+</th>
+<th class="issues" dir="auto">
+Errors
+</th>
+<th class="notes" dir="auto">
+Notes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr id="bus_104" data-info="???" data-ref="104" class="sketchline">
+<td class="sketch" dir="auto">
+<a href="https://overpass-api.de/api/sketch-line?ref=104&network=Network&operator=" title="Sketch-Line">
+104
+</a>
+</td>
+<td class="csvinfo" colspan="5" dir="auto">
+</td>
+</tr>
+<tr id="-112956" data-info="-112956" data-ref="104" class="line">
+<td class="name foreign" dir="auto">
+Bus
+104:
+Stop
+2
+=&gt;
+Stop
+5
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112956
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Network
+</span>
+'
+<br>
+PTv2
+route:
+from-part
+('
+<span class="foreign" dir="auto">
+Stop
+2
+</span>
+')
+of
+'name'
+is
+not
+equal
+to
+'from'
+=
+'
+<span class="foreign" dir="auto">
+Stop
+1
+</span>
+'
+<br>
+PTv2
+route:
+to-part
+('
+<span class="foreign" dir="auto">
+Stop
+5
+</span>
+')
+of
+'name'
+is
+not
+equal
+to
+'to'
+=
+'
+<span class="foreign" dir="auto">
+Stop
+4
+</span>
+'
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+&nbsp;
+</p>
+<p>
+<strong>
+Notes:
+</strong>
+PTv2
+route:
+&#039;via&#039;
+is
+set:
+%d.
+via-part
+(&#039;%s&#039;)
+of
+&#039;name&#039;
+is
+not
+equal
+to
+%d.
+via-value
+=
+&#039;%s&#039;
+</p>
+<table class="oepnvtable">
+<thead>
+<tr class="tableheaderrow">
+<th class="name" dir="auto">
+Name
+(name=)
+</th>
+<th class="type" dir="auto">
+Type
+(type=)
+</th>
+<th class="relation" dir="auto">
+Relation
+(id=)
+</th>
+<th class="PTv" dir="auto">
+PTv
+</th>
+<th class="issues" dir="auto">
+Errors
+</th>
+<th class="notes" dir="auto">
+Notes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr id="bus_105" data-info="???" data-ref="105" class="sketchline">
+<td class="sketch" dir="auto">
+<a href="https://overpass-api.de/api/sketch-line?ref=105&network=Network&operator=" title="Sketch-Line">
+105
+</a>
+</td>
+<td class="csvinfo" colspan="5" dir="auto">
+</td>
+</tr>
+<tr id="-112963" data-info="-112963" data-ref="105" class="line">
+<td class="name foreign" dir="auto">
+Bus
+105:
+Stop
+1
+=&gt;
+Stop
+2
+=&gt;
+Stop
+3
+=&gt;
+Stop
+x4
+=&gt;
+City
+D,
+Stop
+5
+=&gt;
+Stop
+6
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112963
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Network
+</span>
+'
+<br>
+PTv2
+route:
+'via'
+is
+set:
+3.
+via-part
+('
+<span class="foreign" dir="auto">
+Stop
+x4
+</span>
+')
+of
+'name'
+is
+not
+equal
+to
+3.
+via-value
+=
+'
+<span class="foreign" dir="auto">
+Stop
+4
+</span>
+'
+<br>
+PTv2
+route:
+'via'
+is
+set:
+4.
+via-part
+('
+<span class="foreign" dir="auto">
+City
+D,
+Stop
+5
+</span>
+')
+of
+'name'
+is
+not
+equal
+to
+4.
+via-value
+=
+'
+<span class="foreign" dir="auto">
+Stop
+5
+</span>
+'
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+&nbsp;
+</p>
+<h3 id="A2.2.2">
+2.2.2
+Combined
+&#039;ref&#039;
+</h3>
+<a href="#bus_111_121">
+<span class="foreign" dir="auto">
+111/121
+</span>
+</a>
+<a href="#bus_112_122">
+<span class="foreign" dir="auto">
+112/122
+</span>
+</a>
+</br>
+</br>
+<p>
+<strong>
+Notes:
+</strong>
+&#039;ref:RVO&#039;
+=
+&#039;111&#039;
+</p>
+<table class="oepnvtable">
+<thead>
+<tr class="tableheaderrow">
+<th class="name" dir="auto">
+Name
+(name=)
+</th>
+<th class="type" dir="auto">
+Type
+(type=)
+</th>
+<th class="relation" dir="auto">
+Relation
+(id=)
+</th>
+<th class="PTv" dir="auto">
+PTv
+</th>
+<th class="issues" dir="auto">
+Errors
+</th>
+<th class="notes" dir="auto">
+Notes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr id="bus_111_121" data-info="???" data-ref="111/121" class="sketchline">
+<td class="sketch" dir="auto">
+<a href="https://overpass-api.de/api/sketch-line?ref=111%2f121&network=Network&operator=" title="Sketch-Line">
+111/121
+</a>
+</td>
+<td class="csvinfo" colspan="5" dir="auto">
+</td>
+</tr>
+<tr id="-112953" data-info="-112953" data-ref="111/121" class="line">
+<td class="name foreign" dir="auto">
+Bus
+RVO
+111/LAVV
+121:
+Stop
+1
+=&gt;
+Stop
+4
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112953
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Network
+</span>
+'
+<br>
+'
+<span class="foreign" dir="auto">
+ref:RVO
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+111
+</span>
+'
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+&nbsp;
+</p>
+<p>
+<strong>
+Notes:
+</strong>
+ref:LAVV&#039;
+=
+&#039;122&#039;;
+&#039;ref:RVO&#039;
+=
+&#039;112&#039;;
+PTv2
+route:
+&#039;LAVV
+122&#039;
+is
+not
+part
+of
+&#039;name&#039;
+(derived
+from
+&#039;ref:LAVV&#039;
+=
+&#039;122&#039;)
+</p>
+<table class="oepnvtable">
+<thead>
+<tr class="tableheaderrow">
+<th class="name" dir="auto">
+Name
+(name=)
+</th>
+<th class="type" dir="auto">
+Type
+(type=)
+</th>
+<th class="relation" dir="auto">
+Relation
+(id=)
+</th>
+<th class="PTv" dir="auto">
+PTv
+</th>
+<th class="issues" dir="auto">
+Errors
+</th>
+<th class="notes" dir="auto">
+Notes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr id="bus_112_122" data-info="???" data-ref="112/122" class="sketchline">
+<td class="sketch" dir="auto">
+<a href="https://overpass-api.de/api/sketch-line?ref=112%2f122&network=Network&operator=" title="Sketch-Line">
+112/122
+</a>
+</td>
+<td class="csvinfo" colspan="5" dir="auto">
+</td>
+</tr>
+<tr id="-112951" data-info="-112951" data-ref="112/122" class="line">
+<td class="name foreign" dir="auto">
+Bus
+RVO
+112:
+Stop
+1
+=&gt;
+Stop
+4
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112951
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Network
+</span>
+'
+<br>
+'
+<span class="foreign" dir="auto">
+ref:LAVV
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+122
+</span>
+'
+<br>
+'
+<span class="foreign" dir="auto">
+ref:RVO
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+112
+</span>
+'
+<br>
+PTv2
+route:
+'
+<span class="foreign" dir="auto">
+122
+</span>
+'
+is
+not
+part
+of
+'name'
+(derived
+from
+'
+<span class="foreign" dir="auto">
+ref:LAVV
+</span>
+'
+=
+'
+<span class="foreign" dir="auto">
+122
+</span>
+')
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="A2.2.3">
+2.2.3
+Negative,
+with
+special
+characters
+</h3>
+<a href="#bus_X2">
+<span class="foreign" dir="auto">
+X2
+</span>
+</a>
+<a href="#bus_X3">
+<span class="foreign" dir="auto">
+X3
+</span>
+</a>
+</br>
+</br>
+<table class="oepnvtable">
+<thead>
+<tr class="tableheaderrow">
+<th class="name" dir="auto">
+Name
+(name=)
+</th>
+<th class="type" dir="auto">
+Type
+(type=)
+</th>
+<th class="relation" dir="auto">
+Relation
+(id=)
+</th>
+<th class="PTv" dir="auto">
+PTv
+</th>
+<th class="issues" dir="auto">
+Errors
+</th>
+<th class="notes" dir="auto">
+Notes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr id="bus_X2" data-info="???" data-ref="X2" class="sketchline">
+<td class="sketch" dir="auto">
+<a href="https://overpass-api.de/api/sketch-line?ref=X2&network=Network&operator=" title="Sketch-Line">
+X2
+</a>
+</td>
+<td class="csvinfo" colspan="5" dir="auto">
+</td>
+</tr>
+<tr id="-112957" data-info="-112957" data-ref="X2" class="line">
+<td class="name foreign" dir="auto">
+Bus
+X2:
+Stop
+1
+→
+Stop
+4
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112957
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Network
+</span>
+'
+<br>
+PTv2
+route:
+'name'
+should
+(at
+least)
+be
+of
+the
+form
+'...
+ref
+...:
+from
+=>
+to'
+</td>
+</tr>
+<tr id="bus_X3" data-info="???" data-ref="X3" class="sketchline">
+<td class="sketch" dir="auto">
+<a href="https://overpass-api.de/api/sketch-line?ref=X3&network=Network&operator=" title="Sketch-Line">
+X3
+</a>
+</td>
+<td class="csvinfo" colspan="5" dir="auto">
+</td>
+</tr>
+<tr id="-112958" data-info="-112958" data-ref="X3" class="line">
+<td class="name foreign" dir="auto">
+Bus
+X3:
+Stop
+1
+⇒
+Stop
+4
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112958
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Network
+</span>
+'
+<br>
+PTv2
+route:
+'name'
+should
+(at
+least)
+be
+of
+the
+form
+'...
+ref
+...:
+from
+=>
+to'
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+&nbsp;
+</p>
+<h3 id="A2.2.4">
+2.2.4
+Negative,
+identical
+&#039;name&#039;
+</h3>
+<a href="#bus_Y">
+<span class="foreign" dir="auto">
+Y
+</span>
+</a>
+</br>
+</br>
+<table class="oepnvtable">
+<thead>
+<tr class="tableheaderrow">
+<th class="name" dir="auto">
+Name
+(name=)
+</th>
+<th class="type" dir="auto">
+Type
+(type=)
+</th>
+<th class="relation" dir="auto">
+Relation
+(id=)
+</th>
+<th class="PTv" dir="auto">
+PTv
+</th>
+<th class="issues" dir="auto">
+Errors
+</th>
+<th class="notes" dir="auto">
+Notes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr id="bus_Y" data-info="???" data-ref="Y" class="sketchline">
+<td class="sketch" dir="auto">
+<a href="https://overpass-api.de/api/sketch-line?ref=Y&network=Network&operator=" title="Sketch-Line">
+Y
+</a>
+</td>
+<td class="csvinfo" colspan="5" dir="auto">
+</td>
+</tr>
+<tr id="-112962" data-info="-112962" data-ref="Y" class="line">
+<td class="name foreign" dir="auto">
+Bus
+Y
+</td>
+<td class="type foreign" dir="auto">
+route_master
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112962
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Network
+</span>
+'
+</td>
+</tr>
+<tr id="-112960" data-info="-112960" data-ref="Y" class="line">
+<td class="name foreign" dir="auto">
+Bus
+Y:
+Stop
+1
+=&gt;
+Stop
+4
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112960
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+PTv2
+route:
+'name'
+of
+Route
+is
+identical
+to
+'name'
+of
+other
+Route(s),
+consider
+setting
+an
+appropriate
+'via'
+value
+and
+include
+that
+into
+'name':
+<img src="/img/Relation.svg" alt="Relation" />
+-112961
+<br>
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Network
+</span>
+'
+<br>
+PTv2
+route:
+'name'
+has
+no
+via-parts
+but
+'via'
+is
+set
+</td>
+</tr>
+<tr id="-112961" data-info="-112961" data-ref="Y" class="line">
+<td class="name foreign" dir="auto">
+Bus
+Y:
+Stop
+1
+=&gt;
+Stop
+4
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112961
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+</td>
+<td class="notes" dir="auto">
+PTv2
+route:
+'name'
+of
+Route
+is
+identical
+to
+'name'
+of
+other
+Route(s),
+consider
+setting
+an
+appropriate
+'via'
+value
+and
+include
+that
+into
+'name':
+<img src="/img/Relation.svg" alt="Relation" />
+-112960
+<br>
+'network'
+=
+'
+<span class="foreign" dir="auto">
+Network
+</span>
+'
+<br>
+PTv2
+route:
+'name'
+has
+no
+via-parts
+but
+'via'
+is
+set
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+&nbsp;
+</p>
+<hr />
+<h1 id="withoutref">
+3
+Public
+Transport
+Lines
+without
+&#039;ref&#039;
+</h1>
+<h2 id="A3.1">
+3.1
+Bus
+(bus)
+</h2>
+<table class="oepnvtable js-sort-table">
+<thead>
+<tr class="tableheaderrow">
+<th class="relation js-sort-number" dir="auto">
+&#x21C5;Relation
+(id=)
+</th>
+<th class="type" dir="auto">
+&#x21C5;Type
+(type=)
+</th>
+<th class="name" dir="auto">
+&#x21C5;Name
+(name=)
+</th>
+<th class="network" dir="auto">
+&#x21C5;Network
+(network=)
+</th>
+<th class="operator" dir="auto">
+&#x21C5;Operator
+(operator=)
+</th>
+<th class="from" dir="auto">
+&#x21C5;From
+(from=)
+</th>
+<th class="via" dir="auto">
+&#x21C5;Via
+(via=)
+</th>
+<th class="to" dir="auto">
+&#x21C5;To
+(to=)
+</th>
+<th class="PTv" dir="auto">
+&#x21C5;PTv
+</th>
+<th class="issues" dir="auto">
+&#x21C5;Errors
+</th>
+<th class="notes" dir="auto">
+&#x21C5;Notes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr id="-112945" data-info="-112945" data-ref="???" class="line">
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112945
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+</td>
+<td class="network foreign" dir="auto">
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+</td>
+<td class="via foreign" dir="auto">
+</td>
+<td class="to foreign" dir="auto">
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+'ref'
+is
+not
+set
+<br>
+'name'
+is
+not
+set
+<br>
+'network'
+is
+not
+set
+</td>
+<td class="notes" dir="auto">
+</td>
+</tr>
+<tr id="-112959" data-info="-112959" data-ref="???" class="line">
+<td class="relation" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+-112959
+</td>
+<td class="type foreign" dir="auto">
+route
+</td>
+<td class="name foreign" dir="auto">
+Bus
+X:
+Stop
+1
+=&gt;
+Stop
+4
+</td>
+<td class="network foreign" dir="auto">
+</td>
+<td class="operator foreign" dir="auto">
+</td>
+<td class="from foreign" dir="auto">
+</td>
+<td class="via foreign" dir="auto">
+</td>
+<td class="to foreign" dir="auto">
+</td>
+<td class="PTv foreign" dir="auto">
+2
+</td>
+<td class="issues" dir="auto">
+'ref'
+is
+not
+set
+<br>
+'network'
+is
+not
+set
+</td>
+<td class="notes" dir="auto">
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="networkdetails">
+4
+Details
+for
+&#039;network&#039;-Values
+</h1>
+<h2 id="considerednetworks">
+4.1
+Considered
+&#039;network&#039;-Values
+</h2>
+<table class="oepnvtable js-sort-table">
+<thead>
+<tr class="tableheaderrow">
+<th class="network" dir="auto">
+&#x21C5;Network
+(network=)
+</th>
+<th class="number js-sort-number" dir="auto">
+&#x21C5;Number
+</th>
+<th class="relations" dir="auto">
+&#x21C5;Relations
+</th>
+</tr>
+</thead>
+<tbody>
+<tr data-info="Network" data-ref="???" class="line">
+<td class="network foreign" dir="auto">
+Network
+</td>
+<td class="number foreign" dir="auto">
+19
+</td>
+<td class="relations" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+102
+</span>
+'
+-112942,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+X1
+</span>
+'
+-112943,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+1
+</span>
+'
+-112946,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+2
+</span>
+'
+-112947,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+3
+</span>
+'
+-112948,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+4
+</span>
+'
+-112949,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+5
+</span>
+'
+-112950,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+112/122
+</span>
+'
+-112951,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+12/22
+</span>
+'
+-112952,
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+111/121
+</span>
+'
+-112953
+and
+more
+...
+</td>
+</tr>
+<tr data-info="???" data-ref="???" class="line">
+<td class="network foreign" dir="auto">
+</td>
+<td class="number foreign" dir="auto">
+3
+</td>
+<td class="relations" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
+'
+<span class="foreign" dir="auto">
+101
+</span>
+'
+-112944,
+<img src="/img/Relation.svg" alt="Relation" />
+-112945,
+<img src="/img/Relation.svg" alt="Relation" />
+-112959
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="operatordetails">
+<ins class="diff-new">5
+Details
+for
+&#039;operator&#039;-Values
+</ins></h1><p><ins class="diff-new">
+This
+section
+lists
+the
+'operator'-values
+which
+have
+been
+found.
+</ins></p><table class="oepnvtable js-sort-table"><thead><tr class="tableheaderrow"><th class="operator" dir="auto"><ins class="diff-new">
+&#x21C5;Operator
+(operator=)
+</ins></th><th class="number js-sort-number" dir="auto"><ins class="diff-new">
+&#x21C5;Number
+</ins></th><th class="relations" dir="auto"><ins class="diff-new">
+&#x21C5;Relations
+</ins></th></tr></thead><tbody><tr data-info="???" data-ref="???" class="line"><td class="operator foreign" dir="auto"></td><td class="number foreign" dir="auto"><ins class="diff-new">
+22
+</ins></td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+102
+</ins></span><ins class="diff-new">
+'
+-112942,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+X1
+</ins></span><ins class="diff-new">
+'
+-112943,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+101
+</ins></span><ins class="diff-new">
+'
+-112944,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+-112945,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+1
+</ins></span><ins class="diff-new">
+'
+-112946,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+2
+</ins></span><ins class="diff-new">
+'
+-112947,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+3
+</ins></span><ins class="diff-new">
+'
+-112948,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+4
+</ins></span><ins class="diff-new">
+'
+-112949,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+5
+</ins></span><ins class="diff-new">
+'
+-112950,
+</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+'
+</ins><span class="foreign" dir="auto"><ins class="diff-new">
+112/122
+</ins></span><ins class="diff-new">
+'
+-112951
+and
+more
+...
+</ins>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<iframe style="display:none" id="hiddenIframe" name="hiddenIframe">
+</iframe>
+</body>
+</html>

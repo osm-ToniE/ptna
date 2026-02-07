@@ -54,6 +54,8 @@
         </li>
         </ol>
         </li>
+        <li>6 <a href="#operatordetails">Details for &#039;operator&#039;-Values</a>
+        </li>
         </ol>
         <hr />
         <h1 id="hints">1 Hints</h1>
@@ -148,6 +150,21 @@ They represent so called 'well defined' values and are not considered as errors.
             <tbody>
                 <tr data-info="network" data-ref="???" class="line"><td class="network foreign" dir="auto">network</td><td class="number foreign" dir="auto">10</td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">43</span>' -113804, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">53</span>' -113809, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">43</span>' -113810, <img src="/img/Relation.svg" alt="Relation" /> -113811, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">63</span>' -113812, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">100</span>' -113855, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">100</span>' -113886, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">100</span>' -113964, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">100</span>' -113978, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">100</span>' -113982</td></tr>
                 <tr data-info="network2" data-ref="???" class="line"><td class="network foreign" dir="auto">network2</td><td class="number foreign" dir="auto">1</td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">43</span>' -113807</td></tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <h1 id="operatordetails">6 Details for &#039;operator&#039;-Values</h1>
+<p>
+This section lists the 'operator'-values which have been found.
+</p>
+        <table class="oepnvtable js-sort-table">
+            <thead>
+                <tr class="tableheaderrow"><th class="operator" dir="auto">&#x21C5;Operator (operator=)</th><th class="number js-sort-number" dir="auto">&#x21C5;Number</th><th class="relations" dir="auto">&#x21C5;Relations</th></tr>
+            </thead>
+            <tbody>
+                <tr data-info="???" data-ref="???" class="line"><td class="operator foreign" dir="auto">Operator</td><td class="number foreign" dir="auto">5</td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">100</span>' -113855, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">100</span>' -113886, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">100</span>' -113964, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">100</span>' -113978, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">100</span>' -113982</td></tr>
+                <tr data-info="???" data-ref="???" class="line"><td class="operator foreign" dir="auto"></td><td class="number foreign" dir="auto">7</td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">43</span>' -113804, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">43</span>' -113807, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">43</span>' -113808, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">53</span>' -113809, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">43</span>' -113810, <img src="/img/Relation.svg" alt="Relation" /> -113811, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">63</span>' -113812</td></tr>
             </tbody>
         </table>
 
