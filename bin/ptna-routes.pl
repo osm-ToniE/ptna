@@ -134,6 +134,7 @@ my $path_to_work_dir                = '/osm/ptna/work';
 my $ptv1_compatibility              = "no";
 my $roundtrip_distance              = 50;
 my $show_gtfs                       = undef;
+my $show_operators                  = undef;
 my $strict_network                  = undef;
 my $strict_operator                 = undef;
 my $table_show_also                 = undef;
@@ -202,6 +203,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'ref-separator=s'               =>  \$ref_separator,                # --ref-separator='/'               separator in the CSV file inside 'ref' values to show cooperations
             'roundtrip-distance=i'          =>  \$roundtrip_distance,           # --roundtrip-distance=0            if 'roundtrip'='yes' is set on route relation and start and end stops are not the same, start and end must be not more far away than xx metres
             'show-gtfs'                     =>  \$show_gtfs,                    # --show-gtfs                       print positive information for "gtfs:*" tags
+            'show-operators'                =>  \$show_operators,               # --show-operators                  print list of found operators
             'strict-network'                =>  \$strict_network,               # --strict-network                  do not consider empty network tags
             'strict-operator'               =>  \$strict_operator,              # --strict-operator                 do not consider empty operator tags
             'table-show-also=s'             =>  \$table_show_also,              # --table-show-also="from,via,to"   show also their values in columns in the list of 'psotive' routes
@@ -339,6 +341,7 @@ if ( $verbose ) {
     printf STDERR "%20s--relaxed-begin-end-for='%s'\n",    ' ', $relaxed_begin_end_for      ? $relaxed_begin_end_for       : '';
     printf STDERR "%20s--roundtrip-distance='%d'\n",       ' ', $roundtrip_distance         ? $roundtrip_distance          : 0;
     printf STDERR "%20s--show-gtfs='%s'\n",                ' ', $show_gtfs                  ? 'ON'          : 'OFF';
+    printf STDERR "%20s--show-operators='%s'\n",           ' ', $show_operators             ? 'ON'          : 'OFF';
     printf STDERR "%20s--strict-network='%s'\n",           ' ', $strict_network             ? 'ON'          : 'OFF';
     printf STDERR "%20s--strict-operator='%s'\n",          ' ', $strict_operator            ? 'ON'          : 'OFF';
     printf STDERR "%20s--table-show-also='%s'\n",          ' ', $table_show_also            ? $table_show_also             : '';
@@ -380,6 +383,7 @@ my %stop_nodes              = ();       # all nodes of the XML file that are sto
 my %used_networks           = ();       # 'network' values that did match
 my %added_networks          = ();       # 'network' values where the 'network'of their route_master matched
 my %unused_networks         = ();       # 'network' values that did not match
+my %seen_operators          = ();       # 'operator' values found
 my %unused_operators        = ();       # 'operator' values that did not match but 'network' values did match
 my %gtfs_relation_info_from = ();       # Relations reference to GTFS feed information using $gtfs_relation_info_from{feed-name}{feed_info_from}{release_date}{release_date_from}{relarionID} = 1;
 my %gtfs_csv_info_from      = ();       # CSV data  reference to GTFS feed information using $gtfs_csv_info_from{feed-name}{release_date} = ( feed_info_from, release_info_from );
@@ -1024,6 +1028,14 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
                                     $role_stop_index++;
                                 }
                             }
+                        }
+                    }
+                    if ( $show_operators ) {
+                        if ( $relation_ptr->{'tag'}->{'operator'} ) {
+                            $seen_operators{$relation_ptr->{'tag'}->{'operator'}}{$relation_id} = 1;
+                        }
+                        else {
+                            $seen_operators{'__unset_operator__'}->{$relation_id} = 1;
                         }
                     }
                 } elsif ( $verbose ) {
@@ -1778,6 +1790,26 @@ if ( scalar(keys(%used_networks)) || scalar(keys(%added_networks)) || scalar(key
 }
 
 printf STDERR "%s Printed network details\n", get_time()       if ( $verbose );
+
+
+#############################################################################################
+#
+# now we print the list of all operator values
+#
+#############################################################################################
+
+if ( $show_operators ) {
+    printf STDERR "%s Printing operator details\n", get_time()       if ( $verbose );
+
+    if ( scalar(keys(%seen_operators)) ) {
+
+        printHeader( gettext("Details for 'operator'-Values"), 1, 'operatordetails' );
+
+        printHintSeenOperators();
+    }
+
+    printf STDERR "%s Printed operator details\n", get_time()       if ( $verbose );
+}
 
 
 #############################################################################################
@@ -7588,6 +7620,44 @@ sub printHintUnusedNetworks {
                 printTableLine( 'network'           =>    $network,
                                 'number'            =>    scalar @relations_of_network,
                                 'relations'         =>    join( ',', splice(@relations_of_network,0,10) ),
+                                'and more'          =>    gettext( "and more ..." )
+                            );
+            }
+        }
+        printTableFooter();
+    }
+}
+
+
+#############################################################################################
+
+sub printHintSeenOperators {
+
+    my @relations_of_operator = ();
+
+    foreach my $operator ( sort( keys( %seen_operators ) ) ) {
+        push( @relations_of_operator, keys( %{$seen_operators{$operator}} ) );
+    }
+
+    if ( scalar @relations_of_operator > 0 ) {
+        push( @HTML_main, "<p>\n" );
+        push( @HTML_main, gettext("This section lists the 'operator'-values which have been found.") );
+        push( @HTML_main, "\n</p>\n" );
+
+        printTableInitialization( 'operator', 'number', 'relations' );
+        printTableHeader( 'number' => 'number' );
+        foreach my $operator ( sort( keys( %seen_operators ) ) ) {
+            @relations_of_operator    = sort( keys( %{$seen_operators{$operator}} ) );
+            $operator = $operator eq '__unset_operator__' ? '' : $operator;
+            if ( scalar @relations_of_operator <= 10 ) {
+                printTableLine( 'operator'          =>    $operator,
+                                'number'            =>    scalar @relations_of_operator,
+                                'relations'         =>    join( ',', @relations_of_operator )
+                            );
+            } else {
+                printTableLine( 'operator'          =>    $operator,
+                                'number'            =>    scalar @relations_of_operator,
+                                'relations'         =>    join( ',', splice(@relations_of_operator,0,10) ),
                                 'and more'          =>    gettext( "and more ..." )
                             );
             }
