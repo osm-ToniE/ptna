@@ -190,9 +190,6 @@ They might include typos in values which otherwise should have been considered.
 
         <hr />
         <h1 id="operatordetails">7 Details for &#039;operator&#039;-Values</h1>
-<p>
-This section lists the 'operator'-values which have been found.
-</p>
         <table class="oepnvtable js-sort-table">
             <thead>
                 <tr class="tableheaderrow"><th class="operator" dir="auto">&#x21C5;Operator (operator=)</th><th class="number js-sort-number" dir="auto">&#x21C5;Number</th><th class="relations" dir="auto">&#x21C5;Relations</th></tr>

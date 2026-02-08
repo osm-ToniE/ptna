@@ -127,12 +127,13 @@ Considered
 </ol>
 </li>
 <li>
-<ins class="diff-new">5
-</ins><a href="#operatordetails"><ins class="diff-new">
+5
+<a href="#operatordetails">
 Details
 for
 &#039;operator&#039;-Values
-</ins></a></li>
+</a>
+</li>
 </ol>
 <hr />
 <h1 id="hints">
@@ -1503,87 +1504,94 @@ Considered
 network
 </td>
 <td class="number foreign" dir="auto">
-<ins class="diff-new">19
-</ins></td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+19
+</td>
+<td class="relations" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 43
-</ins></span><ins class="diff-new">
+</span>
 '
 -106440,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 E43
-</ins></span><ins class="diff-new">
+</span>
 '
 -106441,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 43
-</ins></span><ins class="diff-new">
+</span>
 '
 -106442,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 250
-</ins></span><ins class="diff-new">
+</span>
 '
 -106443,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 250
-</ins></span><ins class="diff-new">
+</span>
 '
 -106444,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 250a
-</ins></span><ins class="diff-new">
+</span>
 '
 -106445,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 250b
-</ins></span><ins class="diff-new">
+</span>
 '
 -106446,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 53
-</ins></span><ins class="diff-new">
+</span>
 '
 -106447,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 E53
-</ins></span><ins class="diff-new">
+</span>
 '
 -106448,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 53
-</ins></span><ins class="diff-new">
+</span>
 '
 -106449
 and
 more
 ...
-</ins></td></tr></tbody></table><hr /><h1 id="operatordetails"><ins class="diff-new">
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="operatordetails">
 5
 Details
 for
 &#039;operator&#039;-Values
-</ins></h1><p><ins class="diff-new">
-This
+</h1>
+<del class="diff-old">This
 section
 lists
 the
@@ -1592,16 +1600,26 @@ which
 have
 been
 found.
-</ins></p><table class="oepnvtable js-sort-table"><thead><tr class="tableheaderrow"><th class="operator" dir="auto"><ins class="diff-new">
+</del>
+<table class="oepnvtable js-sort-table">
+<thead>
+<tr class="tableheaderrow">
+<th class="operator" dir="auto">
 &#x21C5;Operator
 (operator=)
-</ins></th><th class="number js-sort-number" dir="auto"><ins class="diff-new">
+</th>
+<th class="number js-sort-number" dir="auto">
 &#x21C5;Number
-</ins></th><th class="relations" dir="auto"><ins class="diff-new">
+</th>
+<th class="relations" dir="auto">
 &#x21C5;Relations
-</ins></th></tr></thead><tbody><tr data-info="???" data-ref="???" class="line"><td class="operator foreign" dir="auto"><ins class="diff-new">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr data-info="???" data-ref="???" class="line">
+<td class="operator foreign" dir="auto">
 operator
-</ins>
 </td>
 <td class="number foreign" dir="auto">
 19

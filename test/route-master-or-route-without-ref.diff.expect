@@ -119,12 +119,13 @@ Considered
 </ol>
 </li>
 <li>
-<ins class="diff-new">6
-</ins><a href="#operatordetails"><ins class="diff-new">
+6
+<a href="#operatordetails">
 Details
 for
 &#039;operator&#039;-Values
-</ins></a></li>
+</a>
+</li>
 </ol>
 <hr />
 <h1 id="hints">
@@ -787,46 +788,53 @@ Considered
 network
 </td>
 <td class="number foreign" dir="auto">
-<ins class="diff-new">6
-</ins></td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+6
+</td>
+<td class="relations" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 100
-</ins></span><ins class="diff-new">
+</span>
 '
 -130951,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 100
-</ins></span><ins class="diff-new">
+</span>
 '
 -130952,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 -130953,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 101
-</ins></span><ins class="diff-new">
+</span>
 '
 -131167,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 -131169,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 101
-</ins></span><ins class="diff-new">
+</span>
 '
 -131173
-</ins></td></tr></tbody></table><hr /><h1 id="operatordetails"><ins class="diff-new">
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="operatordetails">
 6
 Details
 for
 &#039;operator&#039;-Values
-</ins></h1><p><ins class="diff-new">
-This
+</h1>
+<del class="diff-old">This
 section
 lists
 the
@@ -835,16 +843,26 @@ which
 have
 been
 found.
-</ins></p><table class="oepnvtable js-sort-table"><thead><tr class="tableheaderrow"><th class="operator" dir="auto"><ins class="diff-new">
+</del>
+<table class="oepnvtable js-sort-table">
+<thead>
+<tr class="tableheaderrow">
+<th class="operator" dir="auto">
 &#x21C5;Operator
 (operator=)
-</ins></th><th class="number js-sort-number" dir="auto"><ins class="diff-new">
+</th>
+<th class="number js-sort-number" dir="auto">
 &#x21C5;Number
-</ins></th><th class="relations" dir="auto"><ins class="diff-new">
+</th>
+<th class="relations" dir="auto">
 &#x21C5;Relations
-</ins></th></tr></thead><tbody><tr data-info="???" data-ref="???" class="line"><td class="operator foreign" dir="auto"><ins class="diff-new">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr data-info="???" data-ref="???" class="line">
+<td class="operator foreign" dir="auto">
 Operator
-</ins>
 </td>
 <td class="number foreign" dir="auto">
 6

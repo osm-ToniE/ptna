@@ -97,12 +97,13 @@ Considered
 </ol>
 </li>
 <li>
-<ins class="diff-new">4
-</ins><a href="#operatordetails"><ins class="diff-new">
+4
+<a href="#operatordetails">
 Details
 for
 &#039;operator&#039;-Values
-</ins></a></li>
+</a>
+</li>
 </ol>
 <hr />
 <h1 id="hints">
@@ -2060,87 +2061,94 @@ Considered
 Test
 </td>
 <td class="number foreign" dir="auto">
-<ins class="diff-new">28
-</ins></td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+28
+</td>
+<td class="relations" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 G001-1
-</ins></span><ins class="diff-new">
+</span>
 '
 -112891,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 G002-1
-</ins></span><ins class="diff-new">
+</span>
 '
 -112892,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 G001-2
-</ins></span><ins class="diff-new">
+</span>
 '
 -112893,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 G002-2
-</ins></span><ins class="diff-new">
+</span>
 '
 -112894,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 B003-1
-</ins></span><ins class="diff-new">
+</span>
 '
 -112895,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 B004-2
-</ins></span><ins class="diff-new">
+</span>
 '
 -112896,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 B004-1
-</ins></span><ins class="diff-new">
+</span>
 '
 -112897,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 B003-2
-</ins></span><ins class="diff-new">
+</span>
 '
 -112898,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 B005-1
-</ins></span><ins class="diff-new">
+</span>
 '
 -112899,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 B005-2
-</ins></span><ins class="diff-new">
+</span>
 '
 -112900
 and
 more
 ...
-</ins></td></tr></tbody></table><hr /><h1 id="operatordetails"><ins class="diff-new">
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="operatordetails">
 4
 Details
 for
 &#039;operator&#039;-Values
-</ins></h1><p><ins class="diff-new">
-This
+</h1>
+<del class="diff-old">This
 section
 lists
 the
@@ -2149,14 +2157,25 @@ which
 have
 been
 found.
-</ins></p><table class="oepnvtable js-sort-table"><thead><tr class="tableheaderrow"><th class="operator" dir="auto"><ins class="diff-new">
+</del>
+<table class="oepnvtable js-sort-table">
+<thead>
+<tr class="tableheaderrow">
+<th class="operator" dir="auto">
 &#x21C5;Operator
 (operator=)
-</ins></th><th class="number js-sort-number" dir="auto"><ins class="diff-new">
+</th>
+<th class="number js-sort-number" dir="auto">
 &#x21C5;Number
-</ins></th><th class="relations" dir="auto"><ins class="diff-new">
+</th>
+<th class="relations" dir="auto">
 &#x21C5;Relations
-</ins></th></tr></thead><tbody><tr data-info="???" data-ref="???" class="line"><td class="operator foreign" dir="auto">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr data-info="???" data-ref="???" class="line">
+<td class="operator foreign" dir="auto">
 </td>
 <td class="number foreign" dir="auto">
 28

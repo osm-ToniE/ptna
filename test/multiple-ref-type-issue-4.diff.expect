@@ -184,12 +184,13 @@ Considered
 </ol>
 </li>
 <li>
-<ins class="diff-new">5
-</ins><a href="#operatordetails"><ins class="diff-new">
+5
+<a href="#operatordetails">
 Details
 for
 &#039;operator&#039;-Values
-</ins></a></li>
+</a>
+</li>
 </ol>
 <hr />
 <h1 id="hints">
@@ -1805,12 +1806,12 @@ more
 </table>
 <hr />
 <h1 id="operatordetails">
-<ins class="diff-new">5
+5
 Details
 for
 &#039;operator&#039;-Values
-</ins></h1><p><ins class="diff-new">
-This
+</h1>
+<del class="diff-old">This
 section
 lists
 the
@@ -1819,110 +1820,135 @@ which
 have
 been
 found.
-</ins></p><table class="oepnvtable js-sort-table"><thead><tr class="tableheaderrow"><th class="operator" dir="auto"><ins class="diff-new">
+</del>
+<table class="oepnvtable js-sort-table">
+<thead>
+<tr class="tableheaderrow">
+<th class="operator" dir="auto">
 &#x21C5;Operator
 (operator=)
-</ins></th><th class="number js-sort-number" dir="auto"><ins class="diff-new">
+</th>
+<th class="number js-sort-number" dir="auto">
 &#x21C5;Number
-</ins></th><th class="relations" dir="auto"><ins class="diff-new">
+</th>
+<th class="relations" dir="auto">
 &#x21C5;Relations
-</ins></th></tr></thead><tbody><tr data-info="???" data-ref="???" class="line"><td class="operator foreign" dir="auto"><ins class="diff-new">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr data-info="???" data-ref="???" class="line">
+<td class="operator foreign" dir="auto">
 KLM
-</ins></td><td class="number foreign" dir="auto"><ins class="diff-new">
+</td>
+<td class="number foreign" dir="auto">
 3
-</ins></td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+</td>
+<td class="relations" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 A
-</ins></span><ins class="diff-new">
+</span>
 '
 -39188,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 A
-</ins></span><ins class="diff-new">
+</span>
 '
 -39190,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 A
-</ins></span><ins class="diff-new">
+</span>
 '
 -39192
-</ins></td></tr><tr data-info="???" data-ref="???" class="line"><td class="operator foreign" dir="auto"><ins class="diff-new">
+</td>
+</tr>
+<tr data-info="???" data-ref="???" class="line">
+<td class="operator foreign" dir="auto">
 RBM
-</ins></td><td class="number foreign" dir="auto"><ins class="diff-new">
+</td>
+<td class="number foreign" dir="auto">
 3
-</ins></td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+</td>
+<td class="relations" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 A
-</ins></span><ins class="diff-new">
+</span>
 '
 -39182,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 A
-</ins></span><ins class="diff-new">
+</span>
 '
 -39184,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 A
-</ins></span><ins class="diff-new">
+</span>
 '
 -39186
-</ins></td></tr><tr data-info="???" data-ref="???" class="line"><td class="operator foreign" dir="auto"><ins class="diff-new">
+</td>
+</tr>
+<tr data-info="???" data-ref="???" class="line">
+<td class="operator foreign" dir="auto">
 RVE
-</ins></td><td class="number foreign" dir="auto"><ins class="diff-new">
+</td>
+<td class="number foreign" dir="auto">
 6
-</ins></td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+</td>
+<td class="relations" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 A
-</ins></span><ins class="diff-new">
+</span>
 '
 -39170,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 A
-</ins></span><ins class="diff-new">
+</span>
 '
 -39172,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 A
-</ins></span><ins class="diff-new">
+</span>
 '
 -39174,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 A
-</ins></span><ins class="diff-new">
+</span>
 '
 -39176,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 A
-</ins></span><ins class="diff-new">
+</span>
 '
 -39178,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 A
-</ins></span><ins class="diff-new">
+</span>
 '
 -39180
-</ins>
 </td>
 </tr>
 </tbody>

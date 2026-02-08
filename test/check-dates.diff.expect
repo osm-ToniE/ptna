@@ -116,12 +116,13 @@ Considered
 </ol>
 </li>
 <li>
-<ins class="diff-new">5
-</ins><a href="#operatordetails"><ins class="diff-new">
+5
+<a href="#operatordetails">
 Details
 for
 &#039;operator&#039;-Values
-</ins></a></li>
+</a>
+</li>
 </ol>
 <hr />
 <h1 id="hints">
@@ -1891,12 +1892,12 @@ more
 </table>
 <hr />
 <h1 id="operatordetails">
-<ins class="diff-new">5
+5
 Details
 for
 &#039;operator&#039;-Values
-</ins></h1><p><ins class="diff-new">
-This
+</h1>
+<del class="diff-old">This
 section
 lists
 the
@@ -1905,84 +1906,98 @@ which
 have
 been
 found.
-</ins></p><table class="oepnvtable js-sort-table"><thead><tr class="tableheaderrow"><th class="operator" dir="auto"><ins class="diff-new">
+</del>
+<table class="oepnvtable js-sort-table">
+<thead>
+<tr class="tableheaderrow">
+<th class="operator" dir="auto">
 &#x21C5;Operator
 (operator=)
-</ins></th><th class="number js-sort-number" dir="auto"><ins class="diff-new">
+</th>
+<th class="number js-sort-number" dir="auto">
 &#x21C5;Number
-</ins></th><th class="relations" dir="auto"><ins class="diff-new">
+</th>
+<th class="relations" dir="auto">
 &#x21C5;Relations
-</ins></th></tr></thead><tbody><tr data-info="???" data-ref="???" class="line"><td class="operator foreign" dir="auto"></td><td class="number foreign" dir="auto"><ins class="diff-new">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr data-info="???" data-ref="???" class="line">
+<td class="operator foreign" dir="auto">
+</td>
+<td class="number foreign" dir="auto">
 22
-</ins></td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+</td>
+<td class="relations" dir="auto">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 102
-</ins></span><ins class="diff-new">
+</span>
 '
 -112919,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 X1
-</ins></span><ins class="diff-new">
+</span>
 '
 -112920,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 101
-</ins></span><ins class="diff-new">
+</span>
 '
 -112921,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 -112922,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 1
-</ins></span><ins class="diff-new">
+</span>
 '
 -112923,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 2
-</ins></span><ins class="diff-new">
+</span>
 '
 -112924,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 3
-</ins></span><ins class="diff-new">
+</span>
 '
 -112925,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 4
-</ins></span><ins class="diff-new">
+</span>
 '
 -112926,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 5
-</ins></span><ins class="diff-new">
+</span>
 '
 -112927,
-</ins><img src="/img/Relation.svg" alt="Relation" /><ins class="diff-new">
+<img src="/img/Relation.svg" alt="Relation" />
 '
-</ins><span class="foreign" dir="auto"><ins class="diff-new">
+<span class="foreign" dir="auto">
 112/122
-</ins></span><ins class="diff-new">
+</span>
 '
 -112928
 and
 more
 ...
-</ins>
 </td>
 </tr>
 </tbody>
