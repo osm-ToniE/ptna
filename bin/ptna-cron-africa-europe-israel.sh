@@ -15,11 +15,11 @@ fi
 
 # where can we find config files for osmium to split the planet file into pieces
 
-PTNA_NETWORKS_LOC="${PTNA_NETWORKS_LOC:-/osm/ptna/ptna-networks}"
+PTNA_NETWORKS_LOC="${PTNA_NETWORKS_LOC:=/osm/ptna/ptna-networks}"
 
 # we are working in PTNA_WORK_LOC
 
-PTNA_WORK_LOC="${PTNA_WORK_LOC:-/osm/ptna/work}"
+PTNA_WORK_LOC="${PTNA_WORK_LOC:=/osm/ptna/work}"
 
 ###############################################################
 #

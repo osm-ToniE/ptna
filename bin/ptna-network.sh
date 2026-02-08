@@ -1059,8 +1059,8 @@ then
         echo "ROUTES_TIMESTAMP_LOC=$ROUTES_TIMESTAMP_LOC"                   >> $WORK_LOC/$DETAILS_FILE
         echo "ROUTES_RET=$ROUTES_RET"                                       >> $WORK_LOC/$DETAILS_FILE
         echo "TZ=${PTNA_TIMEZONE}"                                          >> $WORK_LOC/$DETAILS_FILE
-        echo "TZSHORT=$(TZ=${PTNA_TIMEZONE:-Europe/Berlin} date '+%Z')"     >> $WORK_LOC/$DETAILS_FILE
-        echo "UTC=UTC$(TZ=${PTNA_TIMEZONE:-Europe/Berlin} date '+%:::z')"   >> $WORK_LOC/$DETAILS_FILE
+        echo "TZSHORT=$(TZ=${PTNA_TIMEZONE:=Europe/Berlin} date '+%Z')"     >> $WORK_LOC/$DETAILS_FILE
+        echo "UTC=UTC$(TZ=${PTNA_TIMEZONE:=Europe/Berlin} date '+%:::z')"   >> $WORK_LOC/$DETAILS_FILE
         echo "OVERPASS_QUERY=$OVERPASS_QUERY"                               >> $WORK_LOC/$DETAILS_FILE
         echo "OVERPASS_SEARCH_AREA=$OVERPASS_SEARCH_AREA"                   >> $WORK_LOC/$DETAILS_FILE
         echo "CALL_PARAMS=$CALL_PARAMS"                                     >> $WORK_LOC/$DETAILS_FILE
@@ -1113,7 +1113,7 @@ then
             #if [ -s $WORK_LOC/$HTML_FILE ]
             #then
                 NEW_OSM_Base_Time="$(awk '/OSM-Base Time : .* UTC/ { print $4 "T" $5 "Z"; exit; }' $WORK_LOC/$HTML_FILE)"
-                NEW_Local_OSM_Base_Time="$(TZ=${PTNA_TIMEZONE:-Europe/Berlin} date --date "$NEW_OSM_Base_Time" '+%Y-%m-%d %H:%M:%S %Z' | sed -e 's/ \([+-][0-9]*\)$/ UTC\1/')"
+                NEW_Local_OSM_Base_Time="$(TZ=${PTNA_TIMEZONE:=Europe/Berlin} date --date "$NEW_OSM_Base_Time" '+%Y-%m-%d %H:%M:%S %Z' | sed -e 's/ \([+-][0-9]*\)$/ UTC\1/')"
 
                 echo "NEW_DATE_UTC=$NEW_OSM_Base_Time"       >> $WORK_LOC/$DETAILS_FILE
                 echo "NEW_DATE_LOC=$NEW_Local_OSM_Base_Time" >> $WORK_LOC/$DETAILS_FILE
@@ -1140,7 +1140,7 @@ then
                     if [ -f "$WORK_LOC/$SAVE_FILE" ]
                     then
                         OLD_OSM_Base_Time="$(awk '/OSM-Base Time : .* UTC/ { print $4 "T" $5 "Z"; exit; }' $WORK_LOC/$SAVE_FILE)"
-                        OLD_Local_OSM_Base_Time="$(TZ=${PTNA_TIMEZONE:-Europe/Berlin} date --date "$OLD_OSM_Base_Time" '+%Y-%m-%d %H:%M:%S %Z' | sed -e 's/ \([+-][0-9]*\)$/ UTC\1/')"
+                        OLD_Local_OSM_Base_Time="$(TZ=${PTNA_TIMEZONE:=Europe/Berlin} date --date "$OLD_OSM_Base_Time" '+%Y-%m-%d %H:%M:%S %Z' | sed -e 's/ \([+-][0-9]*\)$/ UTC\1/')"
 
                         diff $WORK_LOC/$SAVE_FILE $WORK_LOC/$HTML_FILE > $WORK_LOC/$DIFF_FILE
 

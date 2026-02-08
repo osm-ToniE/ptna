@@ -15,11 +15,11 @@ fi
 
 # where can we find config files for osmium to split the planet file into pieces
 
-PTNA_NETWORKS_LOC="${PTNA_NETWORKS_LOC:-/osm/ptna/ptna-networks}"
+PTNA_NETWORKS_LOC="${PTNA_NETWORKS_LOC:=/osm/ptna/ptna-networks}"
 
 # we are working in PTNA_WORK_LOC
 
-PTNA_WORK_LOC="${PTNA_WORK_LOC:-/osm/ptna/work}"
+PTNA_WORK_LOC="${PTNA_WORK_LOC:=/osm/ptna/work}"
 
 ANALYSIS_QUEUE="$PTNA_WORK_LOC/ptna-analysis-queue-sqlite.db"
 
@@ -66,12 +66,12 @@ then
         then
             queue_count=$(sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "SELECT COUNT(*) FROM queue WHERE status='queued';")
 
-            if [ ${queue_count:-0} -gt 0 ]
+            if [ ${queue_count:=0} -gt 0 ]
             then
                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
-                while [ ${queue_count:-0} -gt 0 ]
+                while [ ${queue_count:=0} -gt 0 ]
                 do
                     id=$(sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "SELECT id FROM queue WHERE status='queued' ORDER BY queued ASC LIMIT 1;")
                     if [ -n "$id" ]
