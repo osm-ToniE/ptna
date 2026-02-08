@@ -18,9 +18,11 @@ then
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
-        pyosmium-up-to-date -v "$SOURCE"
-
-        py_ret=$?
+        py_ret=1  # we want more data
+        while [ $py_ret -eq 1 ]; do
+            pyosmium-up-to-date -v "$SOURCE"
+            py_ret=$?
+        done
 
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "pyosmium returned $py_ret"
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
