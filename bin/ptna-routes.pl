@@ -7640,9 +7640,9 @@ sub printHintSeenOperators {
     }
 
     if ( scalar @relations_of_operator > 0 ) {
-        push( @HTML_main, "<p>\n" );
-        push( @HTML_main, gettext("This section lists the 'operator'-values which have been found.") );
-        push( @HTML_main, "\n</p>\n" );
+        #push( @HTML_main, "<p>\n" );
+        #push( @HTML_main, gettext("This section lists the 'operator'-values which have been found.") );
+        #push( @HTML_main, "\n</p>\n" );
 
         printTableInitialization( 'operator', 'number', 'relations' );
         printTableHeader( 'number' => 'number' );
