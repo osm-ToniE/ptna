@@ -2674,7 +2674,7 @@ sub analyze_route_environment {
             # 5. check for 'public_transport:version' being set to '2' if there is more than one route
 
             if ( !$relation_ptr->{'tag'}->{'public_transport:version'} || $relation_ptr->{'tag'}->{'public_transport:version'} ne '2' ) {
-                $issues_string = gettext( "Multiple Routes but 'public_transport:version' is not set to '2'" );
+                $issues_string = gettext( "Multiple Routes but 'public_transport:version' is not set to '2'" ) . printRelationInjectData($relation_ptr->{'id'},('public_transport:version=2'));
                 push( @{$relation_ptr->{'__issues__'}}, $issues_string );
             }
 
@@ -3022,8 +3022,12 @@ sub analyze_relation {
         }
 
         if ( $relation_ptr->{'tag'}->{'public_transport'} ) {
-            $issues_string = gettext( "The tag 'public_transport' (='%s') is not defined for 'route_master' and 'route' relations. Do you mean 'public_transport:version'='2'?" );
-            push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, handle_foreign($relation_ptr->{'tag'}->{'public_transport'}) ) );
+            $issues_string = gettext( "The tag 'public_transport' (='%s') is not defined for 'route_master' and 'route' relations. Do you mean 'public_transport:version'='2'" ). '%s?';
+            if ( exists($relation_ptr->{'tag'}->{'public_transport:version'}) && $relation_ptr->{'tag'}->{'public_transport:version'} == '2') {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, handle_foreign($relation_ptr->{'tag'}->{'public_transport'}), printRelationInjectData($relation_ptr->{'id'},('public_transport=')) ) );
+            } else {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, handle_foreign($relation_ptr->{'tag'}->{'public_transport'}), printRelationInjectData($relation_ptr->{'id'},('public_transport=','public_transport:version=2')) ) );
+            }
         }
 
         #
@@ -3174,7 +3178,7 @@ sub analyze_route_master_relation {
     }
     if ( $relation_ptr->{'tag'}->{'public_transport:version'} ) {
         if ( $relation_ptr->{'tag'}->{'public_transport:version'} !~ m/^2$/ ) {
-            $issues_string = gettext( "'public_transport:version' is not set to '2'" );
+            $issues_string = gettext( "'public_transport:version' is not set to '2'" ) . printRelationInjectData($relation_ptr->{'id'},('public_transport:version=2'));
             push( @{$relation_ptr->{'__issues__'}}, $issues_string )        if ( $check_version );
         } else {
             ; #push( @{$relation_ptr->{'__notes__'}}, sprintf("'public_transport:version' = '%s'",handle_foreign($relation_ptr->{'tag'}->{'public_transport:version'})) )    if ( $positive_notes );
@@ -3251,7 +3255,7 @@ sub analyze_route_relation {
         }
         if ( $relation_ptr->{'tag'}->{'public_transport:version'} ) {
             if ( $relation_ptr->{'tag'}->{'public_transport:version'} ne '1' ) {
-                $issues_string = gettext( "'public_transport:version' is neither '1' nor '2'" );
+                $issues_string = gettext( "'public_transport:version' is neither '1' nor '2'" ) . printRelationInjectData($relation_ptr->{'id'},('public_transport:version=2'));
                 push( @{$relation_ptr->{'__issues__'}}, $issues_string );
             } else {
                 #push( @{$relation_ptr->{'__notes__'}}, sprintf("'public_transport:version' = '%s'",handle_foreign($relation_ptr->{'tag'}->{'public_transport:version'})) )    if ( $positive_notes );
@@ -4377,26 +4381,26 @@ sub analyze_ptv2_route_relation {
             if ( $first_platform_type eq $last_platform_type && $first_platform_id == $last_platform_id ) {
                 if ( !defined($relation_ptr->{'tag'}->{'roundtrip'}) ) {
                     $notes_string  = gettext( "PTv2 route: 'roundtrip' is not set and the first and the last platform stops are the same." );
-                    $notes_string .= ' ' .  gettext( "Consider setting 'roundtrip' = '%s'." );
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, 'yes' ) );
+                    $notes_string .= ' ' .  gettext( "Consider setting 'roundtrip' = '%s'" ) . '%s.';
+                    push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, 'yes', printRelationInjectData($relation_ptr->{'id'},('roundtrip=yes')) ) );
                     $return_code++;
                 } elsif ( $relation_ptr->{'tag'}->{'roundtrip'} ne 'yes' ) {
                     $issues_string  = gettext( "PTv2 route: 'roundtrip' = '%s' and the first and the last platform stops are the same." );
-                    $issues_string .= ' ' . gettext( "Consider setting 'roundtrip' = '%s'." );
-                    push( @{$relation_ptr->{'__issues__'}},  sprintf( $issues_string, html_escape($relation_ptr->{'tag'}->{'roundtrip'}), 'yes' ) );
+                    $issues_string .= ' ' . gettext( "Consider setting 'roundtrip' = '%s'" ) . '%s.';
+                    push( @{$relation_ptr->{'__issues__'}},  sprintf( $issues_string, html_escape($relation_ptr->{'tag'}->{'roundtrip'}), 'yes', printRelationInjectData($relation_ptr->{'id'},('roundtrip=yes')) ) );
                     $return_code++;
                 }
             } elsif ( $roundtrip_distance > 0 && defined($relation_ptr->{'tag'}->{'roundtrip'}) && $relation_ptr->{'tag'}->{'roundtrip'} eq 'yes' ) {
                 my $distance = OSM::Geo::ObjectToObjectDistance( $first_platform_type, $first_platform_id, $last_platform_type, $last_platform_id );
                 if ( $distance < 0 ) {
                     $issues_string  = gettext( "PTv2 route: 'roundtrip' = '%s' but the first and the last platform stops are not the same."  );
-                    $issues_string .= ' ' . gettext( "Consider setting 'roundtrip' = '%s'." );
-                    push( @{$relation_ptr->{'__issues__'}},  sprintf( $issues_string, 'yes', 'no' ) );
+                    $issues_string .= ' ' . gettext( "Consider setting 'roundtrip' = '%s'" ) . '%s.';
+                    push( @{$relation_ptr->{'__issues__'}},  sprintf( $issues_string, 'yes', 'no', printRelationInjectData($relation_ptr->{'id'},('roundtrip=no')) ) );
                     $return_code++;
                 } elsif ( $distance > $roundtrip_distance ) {
                     $issues_string  = gettext( "PTv2 route: 'roundtrip' = 'yes' but the first and the last platform stops are more than %d metres / %d feet apart (actual distance = %d metres / %d feet)."  );
-                    $issues_string .= ' ' . gettext( "Consider setting 'roundtrip' = '%s'." );
-                    push( @{$relation_ptr->{'__issues__'}},  sprintf( $issues_string, $roundtrip_distance, OSM::Geo::ConvertMetersToFeet($roundtrip_distance), $distance, OSM::Geo::ConvertMetersToFeet($distance), 'no' ) );
+                    $issues_string .= ' ' . gettext( "Consider setting 'roundtrip' = '%s'" ) . '%s.';
+                    push( @{$relation_ptr->{'__issues__'}},  sprintf( $issues_string, $roundtrip_distance, OSM::Geo::ConvertMetersToFeet($roundtrip_distance), $distance, OSM::Geo::ConvertMetersToFeet($distance), 'no', printRelationInjectData($relation_ptr->{'id'},('roundtrip=no')) ) );
                     $return_code++;
                 } else {
                     $notes_string  = gettext( "PTv2 route: 'roundtrip' = 'yes' and the first and the last platform stops are less than %d metres / %d feet apart (actual distance = %d metres / %d feet)."  );
@@ -4407,8 +4411,8 @@ sub analyze_ptv2_route_relation {
             } else {
                 if ( defined($relation_ptr->{'tag'}->{'roundtrip'}) && $relation_ptr->{'tag'}->{'roundtrip'} ne 'no' ) {
                     $issues_string  = gettext( "PTv2 route: 'roundtrip' = '%s' but the first and the last platform stops are not the same."  );
-                    $issues_string .= ' ' . gettext( "Consider setting 'roundtrip' = '%s'." );
-                    push( @{$relation_ptr->{'__issues__'}},  sprintf( $issues_string, html_escape($relation_ptr->{'tag'}->{'roundtrip'}), 'no' ) );
+                    $issues_string .= ' ' . gettext( "Consider setting 'roundtrip' = '%s'" ) . '%s.';
+                    push( @{$relation_ptr->{'__issues__'}},  sprintf( $issues_string, html_escape($relation_ptr->{'tag'}->{'roundtrip'}), 'no', printRelationInjectData($relation_ptr->{'id'},('roundtrip=no')) ) );
                     $return_code++;
                 }
             }
@@ -8280,6 +8284,43 @@ sub printNodeTemplate {
         }
     } else {
         $val = '';
+    }
+
+    return $val;
+}
+
+
+#############################################################################################
+
+sub printRelationInjectData {
+    my $relation_id            = shift;
+    my @array_of_key_and_value = @_;
+    my $val                    = '';
+
+    if ( $relation_id && $RELATIONS{$relation_id} && scalar(@array_of_key_and_value) > 0 ) {
+        my $link_title = '';
+        my $uri_params = '&addtags=';
+
+        printf STDERR ( "printRelationInjectData(%s, ...)\n", $relation_id )    if ( $debug );
+        $link_title  = sprintf( "%s\n", gettext("Inject") );
+        foreach my $kv ( @array_of_key_and_value ) {
+            $uri_params .= uri_escape($kv.'|');
+            $kv =~ s/=/' = '/;
+            $link_title .= sprintf( "- '%s'\n", $kv );
+        }
+        $uri_params =~ s/%7c$//i;  # remove uri_escaped '|' from end of string
+        $link_title .= sprintf( gettext( "into relation %s using JOSM" ), $relation_id  );
+        my $html     = ' <a href="http://127.0.0.1:8111/load_object?new_layer=false&relation_members=true&objects=r'
+                     . $relation_id
+                     . $uri_params
+                     . '" target="hiddenIframe" title="'
+                     . html_escape($link_title)
+                     . '"><img src="/img/Inject32.png" alt="'
+                     . html_escape(gettext("Inject data using JOSM"))
+                     . '" height="18" width="18" /></a>';
+        printf STDERR ( "%s\n", $link_title )    if ( $debug );
+        printf STDERR ( "%s\n", $html )    if ( $debug );
+        $val = $html;
     }
 
     return $val;
