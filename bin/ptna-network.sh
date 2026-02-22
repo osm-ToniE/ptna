@@ -1324,6 +1324,6 @@ then
     rmdir $EXECUTION_MUTEX
 fi
 
-echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Analysis exists with: $ret_code"
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Analysis exits with: $ret_code"
 
 exit $ret_code
