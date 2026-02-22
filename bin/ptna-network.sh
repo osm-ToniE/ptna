@@ -170,6 +170,8 @@ fi
 # redirect logging to $PREFIX.log file
 #
 
+ret_code=0
+
 if [ "$logging" = "true" ]
 then
     if [ ! -d "$PTNA_WORK_LOC/log" ]
@@ -1008,11 +1010,13 @@ then
                     fi
                 else
                     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'$WORK_LOC/$HTML_FILE' is empty"
+                    ret_code=10
                 fi
                 size="$(stat -c '%s' $WORK_LOC/$HTML_FILE)"
                 sqlite3 $SQ_OPTIONS $WORK_LOC/$STATISTICS_DB "INSERT INTO analysis (id,start,stop,size) VALUES ($PTNA_NETWORK_DB_ID,$start,$stop,$size);"
             else
                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'$OSM_XML_FILE_ABSOLUTE' is empty"
+                ret_code=11
                 if [ -f "$WORK_LOC/$HTML_FILE" ]
                 then
                     echo $(date "+%Y-%m-%d %H:%M:%S %Z") $(ls -l $WORK_LOC/$HTML_FILE)
@@ -1319,3 +1323,7 @@ then
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Release MUTEX $EXECUTION_MUTEX, has been locked at $LOCKED_AT"
     rmdir $EXECUTION_MUTEX
 fi
+
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Analysis exists with: $ret_code"
+
+exit $ret_code
