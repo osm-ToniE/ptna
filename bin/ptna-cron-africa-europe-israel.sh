@@ -39,7 +39,7 @@ echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh africa"
 ptna-handle-continent.sh africa > $PTNA_WORK_LOC/ptna-handle-continent-africa.log 2>&1 < /dev/null &
 
-# last time handling of asia, so append to log file
+# currently, first time handling of asia, so overwrite log file
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh asia"
 ptna-handle-continent.sh asia   > $PTNA_WORK_LOC/ptna-handle-continent-asia.log   2>&1 < /dev/null &
 
