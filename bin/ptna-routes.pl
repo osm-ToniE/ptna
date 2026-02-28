@@ -6269,15 +6269,15 @@ sub CheckFromViaToPlatformNamesPTV2 {
                     } elsif ( $matches > 1 ) {
                         printf STDERR "    CheckFromViaToPlatformNamesPTV2(): multiple matches for via index = %d, via part = %s with platforms = %s\n", $vindex, $via_parts[$vindex], join( ',', @vindex_pindex)       if ( $debug );
                         $notes_string     = gettext( "PTv2 route: 'via' is set. %d. via-part ('%s') matches name of more than one platform (platform numbers: %s)" );
-                        my $helpstring    = sprintf( $notes_string, $vindex+1, $via_parts[$vindex], join( ', ',@vindex_pnumber) );
-                        my @help_array    = map { ${$relation_ptr->{'role_platform'}}[$_] } ( @vindex_pindex );
-                        my $num_of_errors = scalar(@help_array);
-                        if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                            push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printXxxTemplate($_->{'type'},$_->{'ref'},'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
-                        } else {
-                            push( @{$relation_ptr->{'__notes__'}}, sprintf("%s: %s", $helpstring, join(', ', map { printXxxTemplate($_->{'type'},$_->{'ref'},'name;ref'); } @help_array )) );
-                        }
-                        $return_code++;
+                        #my $helpstring    = sprintf( $notes_string, $vindex+1, $via_parts[$vindex], join( ', ',@vindex_pnumber) );
+                        #my @help_array    = map { ${$relation_ptr->{'role_platform'}}[$_] } ( @vindex_pindex );
+                        #my $num_of_errors = scalar(@help_array);
+                        #if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                        #    push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printXxxTemplate($_->{'type'},$_->{'ref'},'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                        #} else {
+                        #    push( @{$relation_ptr->{'__notes__'}}, sprintf("%s: %s", $helpstring, join(', ', map { printXxxTemplate($_->{'type'},$_->{'ref'},'name;ref'); } @help_array )) );
+                        #}
+                        #$return_code++;
                     } else {
                         $total_single_matches++;
                         printf STDERR "    CheckFromViaToPlatformNamesPTV2(): match for %d. via-part, via part = %s with platform index = %d\n", $vindex+1, $via_parts[$vindex], $vindex_pindex[0]       if ( $debug );
