@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2026-02-16 13:00+0100\n"
+"POT-Creation-Date: 2026-02-28 13:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -806,7 +806,7 @@ msgid "PTv2 route: 'ref' is not part of 'name'"
 msgstr ""
 
 #, perl-format
-msgid "PTv2 route: from-part ('%s') of 'name' is not part of 'from' = '%s'"
+msgid "PTv2 route: from-part ('%s') of 'name' does not match 'from' = '%s'"
 msgstr ""
 
 #, perl-format
@@ -817,7 +817,7 @@ msgid "PTv2 route: 'from' is not set"
 msgstr ""
 
 #, perl-format
-msgid "PTv2 route: to-part ('%s') of 'name' is not part of 'to' = '%s'"
+msgid "PTv2 route: to-part ('%s') of 'name' does not match 'to' = '%s'"
 msgstr ""
 
 #, perl-format
@@ -829,7 +829,7 @@ msgstr ""
 
 #, perl-format
 msgid ""
-"PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' is not part of %d. "
+"PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' does not match %d. "
 "via-value = '%s'"
 msgstr ""
 

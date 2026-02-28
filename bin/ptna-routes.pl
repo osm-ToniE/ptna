@@ -5936,12 +5936,8 @@ sub CheckNameRefFromViaToPTV2 {
                 if ( $from ) {
                     if ( $from_in_name ne $from ) {
                         if ( $check_name_relaxed ) {
-                            my $temp_from         = $from;
-                            my $temp_from_in_name = $from_in_name;
-                            $temp_from            =~ s/,//g;
-                            $temp_from_in_name    =~ s/,//g;
-                            if ( index($temp_from,$temp_from_in_name) == -1 ) {
-                                $notes_string = gettext( "PTv2 route: from-part ('%s') of 'name' is not part of 'from' = '%s'" );
+                            if ( !TagNameMatchesOtherName($from,$from_in_name) ) {
+                                $notes_string = gettext( "PTv2 route: from-part ('%s') of 'name' does not match 'from' = '%s'" );
                                 push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, handle_foreign($from_in_name), handle_foreign($from)) );
                                 $return_code++;
                             }
@@ -5960,12 +5956,8 @@ sub CheckNameRefFromViaToPTV2 {
                 if ( $to ) {
                     if ( $to_in_name ne $to ) {
                         if ( $check_name_relaxed ) {
-                            my $temp_to         = $to;
-                            my $temp_to_in_name = $to_in_name;
-                            $temp_to            =~ s/,//g;
-                            $temp_to_in_name    =~ s/,//g;
-                            if ( index($temp_to,$temp_to_in_name) == -1 ) {
-                                $notes_string = gettext( "PTv2 route: to-part ('%s') of 'name' is not part of 'to' = '%s'" );
+                            if ( !TagNameMatchesOtherName($to,$to_in_name) ) {
+                                $notes_string = gettext( "PTv2 route: to-part ('%s') of 'name' does not match 'to' = '%s'" );
                                 push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, handle_foreign($to_in_name), handle_foreign($to)) );
                                 $return_code++;
                             }
@@ -5990,8 +5982,8 @@ sub CheckNameRefFromViaToPTV2 {
                                 if ( $via_parts_in_name[$index] ne $via_values[$index] ) {
                                     if ( $check_name_relaxed ) {
                                         #printf STDERR "check %d via = %s against %s\n", $index, $via_values[$index], $via_parts_in_name[$index];
-                                        if ( index($via_values[$index],$via_parts_in_name[$index]) == -1 ) {
-                                            $notes_string = gettext( "PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' is not part of %d. via-value = '%s'" );
+                                        if ( !TagNameMatchesOtherName($via_values[$index],$via_parts_in_name[$index]) ) {
+                                            $notes_string = gettext( "PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' does not match %d. via-value = '%s'" );
                                             push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string,$index+1,handle_foreign($via_parts_in_name[$index]),$index+1,handle_foreign($via_values[$index])) );
                                             $return_code++;
                                         }
@@ -6053,22 +6045,46 @@ sub CheckNameRefFromViaToPTV2 {
 
 #############################################################################################
 #
-# does value of 'from', 'via' or 'to' match (relaxed) 'name' of platform
+# does value of 'from', 'via' or 'to' match (relaxed) other 'name'
 #
 #############################################################################################
 
-sub TagNameMatchesPlatformName {
-    my $tag_name      = shift || '';
-    my $platform_name = shift || '';
+sub TagNameMatchesOtherName {
+    my $tag_name   = shift || '';
+    my $other_name = shift || '';
 
-    return 1    if ( index($platform_name,$tag_name.' (') == 0 );                       # tag_name="City" name="City (..."
-    return 1    if ( index($tag_name,$platform_name.' (') == 0 );                       # tag_name="City (..." name="City"
-    return 1    if ( index($platform_name,$tag_name.',')  == 0 );                       # tag_name="City" name="City, Street"
-    return 1    if ( index($tag_name,$platform_name.',')  == 0 );                       # tag_name="City, Street" name="City"
-    return 1    if ( index($platform_name,','.$tag_name)  >  0 );                       # tag_name="Street" name="City,Street"
-    return 1    if ( index($tag_name,','.$platform_name)  >  0 );                       # tag_name="City,Street" name="Street"
-    return 1    if ( index($platform_name,', '.$tag_name) >  0 );                       # tag_name="Street" name="City, Street"
-    return 1    if ( index($tag_name,', '.$platform_name) >  0 );                       # tag_name="City, Street" name="Street"
+    $tag_name   =~ s/\s*\(.*?\)//;
+    $other_name =~ s/\s*\(.*?\)//;
+    return 1    if ( $tag_name   eq $other_name );
+    return 1    if ( $other_name =~ m|^\Q$tag_name\E\.$|           );
+    return 1    if ( $tag_name   =~ m|^\Q$other_name\E\.$|         );
+    return 1    if ( $other_name =~ m|^\Q$tag_name\E[ /,-]\s*\S|   );
+    return 1    if ( $tag_name   =~ m|^\Q$other_name\E[ /,-]\s*\S| );
+    return 1    if ( $other_name =~ m|\S\s*[ /,-]\Q$tag_name\E$|   );
+    return 1    if ( $tag_name   =~ m|\S\s*[ /,-]\Q$other_name\E$| );
+    return 1    if ( $other_name =~ m|\S\s*[ /,-]\Q$tag_name\E[ /,-]\s*\S|   );
+    return 1    if ( $tag_name   =~ m|\S\s*[ /,-]\Q$other_name\E[ /,-]\s*\S| );
+
+    if ( $tag_name =~ m|[ /,-]| && $other_name =~ m|[ /,-]| ) {
+        my @tag_name_array   = split( '\s*[ /,-]\s*', $tag_name,   2 );
+        my @other_name_array = split( '\s*[ /,-]\s*', $other_name, 2 );
+        if ( ($tag_name_array[0] eq $other_name_array[0] &&
+              $tag_name_array[1] eq $other_name_array[1]   ) ||
+             ($tag_name_array[0] eq $other_name_array[1] &&
+              $tag_name_array[1] eq $other_name_array[0]   )    ) {
+            return 1;
+        }
+    }
+#    return 1    if ( index($other_name,$tag_name.' ')  == 0 );                       # tag_name="City" other_name="City ..."
+#    return 1    if ( index($tag_name,$other_name.' ')  == 0 );                       # tag_name="City ..." other_name="City"
+#    return 1    if ( index($other_name,$tag_name.',')  == 0 );                       # tag_name="City" other_name="City, Street"
+#    return 1    if ( index($tag_name,$other_name.',')  == 0 );                       # tag_name="City, Street" other_name="City"
+#    return 1    if ( index($other_name,','.$tag_name)  >  0 );                       # tag_name="Street" other_name="City,Street"
+#    return 1    if ( index($tag_name,','.$other_name)  >  0 );                       # tag_name="City,Street" other_name="Street"
+#    return 1    if ( index($other_name,', '.$tag_name) >  0 );                       # tag_name="Street" other_name="City, Street"
+#    return 1    if ( index($tag_name,', '.$other_name) >  0 );                       # tag_name="City, Street" other_name="Street"
+#    return 1    if ( index($other_name,' '.$tag_name)  >  0 );                       # tag_name="Street" other_name="City Street"
+#    return 1    if ( index($tag_name,' '.$other_name)  >  0 );                       # tag_name="City Street" other_name="Street"
     return 0;
 }
 
@@ -6122,7 +6138,7 @@ sub CheckFromViaToPlatformNamesPTV2 {
                 printf STDERR "                CheckFromViaToPlatformNamesPTV2() : from = %s, platform name = %s\n", $from, $platform_name       if ( $debug );
                 if ( $platform_name && $from ne $platform_name ) {
                     if ( $check_from_to eq 'relaxed' ) {
-                        if ( !TagNameMatchesPlatformName($from,$platform_name) ) {
+                        if ( !TagNameMatchesOtherName($from,$platform_name) ) {
                             $notes_string = gettext( "PTv2 route: 'from' = '%s' does not match 'name' of first platform: %s" );
                             push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, $from, printXxxTemplate($platform_type,$platform_id,'name;ref')) );
                             $return_code++;
@@ -6174,7 +6190,7 @@ sub CheckFromViaToPlatformNamesPTV2 {
                 printf STDERR "                CheckFromViaToPlatformNamesPTV2() : to = %s, platform name = %s\n", $to, $platform_name       if ( $debug );
                 if ( $platform_name && $to ne $platform_name ) {
                     if ( $check_from_to eq 'relaxed' ) {
-                        if ( !TagNameMatchesPlatformName($to,$platform_name) ) {
+                        if ( !TagNameMatchesOtherName($to,$platform_name) ) {
                             $notes_string = gettext( "PTv2 route: 'to' = '%s' does not match 'name' of last platform: %s" );
                             push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, $to, printXxxTemplate($platform_type,$platform_id,'name;ref')) );
                             $return_code++;
@@ -6246,7 +6262,7 @@ sub CheckFromViaToPlatformNamesPTV2 {
                                 $via_matches[$vindex]->{$pindex}->{$platform_id}->{$platform_type} = $platform_name;
                             } else {
                                 if ( $check_via eq 'relaxed' ) {
-                                    if ( TagNameMatchesPlatformName($via_part,$platform_name) ) {
+                                    if ( TagNameMatchesOtherName($via_part,$platform_name) ) {
                                         $via_matches[$vindex]->{$pindex}->{$platform_id}->{$platform_type} = $platform_name;
                                     }
                                 }

@@ -630,7 +630,7 @@ sub InitMessageStrings {
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
-    $MessageList[$i]->{'message'}                = gettext( "PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' is not part of %d. via-value = '%s'" );
+    $MessageList[$i]->{'message'}                = gettext( "PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' does not match %d. via-value = '%s'" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
     $MessageList[$i]->{'option'}                 = "check-name-relaxed";
     $MessageList[$i]->{'description'}            = "";
@@ -774,7 +774,7 @@ sub InitMessageStrings {
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
-    $MessageList[$i]->{'message'}                = gettext( "PTv2 route: from-part ('%s') of 'name' is not part of 'from' = '%s'" );
+    $MessageList[$i]->{'message'}                = gettext( "PTv2 route: from-part ('%s') of 'name' does not match 'from' = '%s'" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
     $MessageList[$i]->{'option'}                 = "check-name-relaxed";
     $MessageList[$i]->{'description'}            = "";
@@ -987,7 +987,7 @@ sub InitMessageStrings {
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
-    $MessageList[$i]->{'message'}                = gettext( "PTv2 route: to-part ('%s') of 'name' is not part of 'to' = '%s'" );
+    $MessageList[$i]->{'message'}                = gettext( "PTv2 route: to-part ('%s') of 'name' does not match 'to' = '%s'" );
     $MessageList[$i]->{'type'}                   = gettext( "Notes" );
     $MessageList[$i]->{'option'}                 = "check-name-relaxed";
     $MessageList[$i]->{'description'}            = "";

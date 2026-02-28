@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2026-02-16 13:00+0100\n"
+"POT-Creation-Date: 2026-02-28 13:26+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2026\n"
 "Language-Team: German (https://app.transifex.com/jungle-bus/teams/97874/de/)\n"
@@ -191,7 +191,7 @@ msgid "Details for 'network'-Values"
 msgstr "Details zu 'network'-Werten"
 
 msgid "Details for 'operator'-Values"
-msgstr ""
+msgstr "Details zu 'operator'-Werten"
 
 msgid "References to GTFS feeds and releases"
 msgstr "Verweise auf GTFS Quellen und Versionen"
@@ -968,10 +968,9 @@ msgid "PTv2 route: 'ref' is not part of 'name'"
 msgstr "PTv2 Route: 'ref' ist nicht Teil von 'name'"
 
 #, perl-format
-msgid "PTv2 route: from-part ('%s') of 'name' is not part of 'from' = '%s'"
+msgid "PTv2 route: from-part ('%s') of 'name' does not match 'from' = '%s'"
 msgstr ""
-"PTv2 Route: der 'Von'-Anteil ('%s') von 'name' ist nicht Teil von 'from' = "
-"'%s'"
+"PTv2 Route: der 'Von'-Anteil ('%s') von 'name' passt nicht zu 'from' = '%s'"
 
 #, perl-format
 msgid "PTv2 route: from-part ('%s') of 'name' is not equal to 'from' = '%s'"
@@ -983,10 +982,9 @@ msgid "PTv2 route: 'from' is not set"
 msgstr "PTv2 Route: 'from' ist nicht gesetzt"
 
 #, perl-format
-msgid "PTv2 route: to-part ('%s') of 'name' is not part of 'to' = '%s'"
+msgid "PTv2 route: to-part ('%s') of 'name' does not match 'to' = '%s'"
 msgstr ""
-"PTv2 Route: der 'Nach'-Anteil ('%s') von 'name' ist nicht Teil von 'to' = "
-"'%s'"
+"PTv2 Route: der 'Nach'-Anteil ('%s') von 'name' passt nicht zu 'to' = '%s'"
 
 #, perl-format
 msgid "PTv2 route: to-part ('%s') of 'name' is not equal to 'to' = '%s'"
@@ -999,11 +997,11 @@ msgstr "PTv2 Route: 'to' ist nicht gesetzt"
 
 #, perl-format
 msgid ""
-"PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' is not part of %d. "
+"PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' does not match %d. "
 "via-value = '%s'"
 msgstr ""
-"PTv2 Route: 'via' ist gesetzt: der %d. 'Über'-Anteil ('%s') von 'name' ist "
-"nicht Teil von %d. via-Teil = '%s'"
+"PTv2 Route: 'via' ist gesetzt: der %d. 'Über'-Anteil ('%s') von 'name' passt"
+" nicht zum %d. via-Teil = '%s'"
 
 #, perl-format
 msgid ""

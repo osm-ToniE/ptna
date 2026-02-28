@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-11-11 16:51+0100\n"
+"POT-Creation-Date: 2026-02-28 13:26+0100\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: Carlos Sánchez López <erielkhan@gmail.com>, 2024\n"
 "Language-Team: Catalan (https://app.transifex.com/jungle-bus/teams/97874/ca/)\n"
@@ -187,6 +187,9 @@ msgstr "Més relacions"
 
 msgid "Details for 'network'-Values"
 msgstr "Detalls per 'network'-Valors"
+
+msgid "Details for 'operator'-Values"
+msgstr ""
 
 msgid "References to GTFS feeds and releases"
 msgstr "Referencies a orígens GTFS i llançaments"
@@ -474,7 +477,7 @@ msgstr ""
 #, perl-format
 msgid ""
 "The tag 'public_transport' (='%s') is not defined for 'route_master' and "
-"'route' relations. Do you mean 'public_transport:version'='2'?"
+"'route' relations. Do you mean 'public_transport:version'='2'"
 msgstr ""
 
 #, perl-format
@@ -824,6 +827,15 @@ msgstr ""
 msgid "Distance = %d metres / %d feet."
 msgstr ""
 
+msgid "Error in input data: insufficient data for nodes"
+msgstr "Error a les dades d'entrada: dades insuficients per als nodes"
+
+msgid "Error in input data: insufficient data for ways"
+msgstr "Error a les dades d'entrada: dades insuficients per a les vies"
+
+msgid "Error in input data: insufficient data for relations"
+msgstr ""
+
 #, perl-format
 msgid ""
 "PTv2 route: the end of the route on the last way (%s) is not near the last "
@@ -836,7 +848,7 @@ msgid ""
 msgstr ""
 
 #, perl-format
-msgid "Consider setting 'roundtrip' = '%s'."
+msgid "Consider setting 'roundtrip' = '%s'"
 msgstr ""
 
 #, perl-format
@@ -898,8 +910,8 @@ msgid "PTv2 route: 'ref' is not part of 'name'"
 msgstr "Ruta PTv2: 'ref' no és part del 'name'"
 
 #, perl-format
-msgid "PTv2 route: from-part ('%s') of 'name' is not part of 'from' = '%s'"
-msgstr "Ruta PTv2: from-part ('%s') de 'name' no és part de 'from' = '%s'"
+msgid "PTv2 route: from-part ('%s') of 'name' does not match 'from' = '%s'"
+msgstr ""
 
 #, perl-format
 msgid "PTv2 route: from-part ('%s') of 'name' is not equal to 'from' = '%s'"
@@ -909,8 +921,8 @@ msgid "PTv2 route: 'from' is not set"
 msgstr "Ruta PTv2: 'from' no es troba definit"
 
 #, perl-format
-msgid "PTv2 route: to-part ('%s') of 'name' is not part of 'to' = '%s'"
-msgstr "Ruta PTv2: to-part ('%s') de 'name' no és part de 'to' = '%s'"
+msgid "PTv2 route: to-part ('%s') of 'name' does not match 'to' = '%s'"
+msgstr ""
 
 #, perl-format
 msgid "PTv2 route: to-part ('%s') of 'name' is not equal to 'to' = '%s'"
@@ -921,11 +933,9 @@ msgstr "Ruta PTv2: 'to' no es troba definit"
 
 #, perl-format
 msgid ""
-"PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' is not part of %d. "
+"PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' does not match %d. "
 "via-value = '%s'"
 msgstr ""
-"Ruta PTv2: s'ha definit 'via': %d. via-part ('%s') de 'name' no és part de "
-"%d. via-value = '%s'"
 
 #, perl-format
 msgid ""
@@ -1181,15 +1191,6 @@ msgstr ""
 #, perl-format
 msgid "(consider creating a 'route_ref' = '%s' tag for the stop)"
 msgstr "(considera crear una etiqueta 'route_ref' = '%s' per a la parada)"
-
-msgid "Error in input data: insufficient data for relations"
-msgstr ""
-
-msgid "Error in input data: insufficient data for ways"
-msgstr "Error a les dades d'entrada: dades insuficients per a les vies"
-
-msgid "Error in input data: insufficient data for nodes"
-msgstr "Error a les dades d'entrada: dades insuficients per als nodes"
 
 msgid "Date of Data"
 msgstr "Data de les Dades"
@@ -1549,6 +1550,16 @@ msgstr "Mostra la relació a un mapa especial"
 msgid "Show route details on jungle-bus' unroll page"
 msgstr "Mostra detalls de ruta a la pàgina de desplegament de jungle-bus"
 
+msgid "Inject"
+msgstr ""
+
+#, perl-format
+msgid "into relation %s using JOSM"
+msgstr ""
+
+msgid "Inject data using JOSM"
+msgstr ""
+
 #, perl-format
 msgid ""
 "'%s' = '%s' includes the separator value ';' (semi-colon) with sourrounding "
@@ -1873,6 +1884,12 @@ msgid ""
 " for ways, nodes or relations."
 msgstr ""
 
+#, perl-format
+msgid ""
+"The tag 'public_transport' (='%s') is not defined for 'route_master' and "
+"'route' relations. Do you mean 'public_transport:version'='2'?"
+msgstr ""
+
 msgid ""
 "Route-Master: There is more than one Route-Master for this line = 'ref' "
 "(different 'network'-tags?)."
@@ -1985,8 +2002,7 @@ msgstr ""
 "'from' i 'B' ha de ser part de 'to'."
 
 msgid ""
-"Check that 'from', 'via' and 'to' match with corresponding platform 'name' "
-"values."
+"Check that 'from' and 'to' match with corresponding platform 'name' values."
 msgstr ""
 
 msgid ""
@@ -2051,6 +2067,9 @@ msgstr ""
 msgid "Check of 'public_transport:version' = '...' on Route-Master and Route."
 msgstr ""
 "Comprovació de 'public_transport:version' = '...' a la Ruta Mestra i Ruta."
+
+msgid "Check that 'via' matches with corresponding platform 'name' values."
+msgstr ""
 
 msgid ""
 "Check whether the used way types are appropriate for the vehicle type "
