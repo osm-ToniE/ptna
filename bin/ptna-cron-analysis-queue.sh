@@ -95,7 +95,7 @@ then
                                 if [ $ret_code -eq 0 ]
                                 then
                                     sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='outdated' WHERE network='$network' AND status='finished';"
-                                    sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='finished'  WHERE id=$id;"
+                                    sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='finished' WHERE id=$id;"
                                     details_file=$(find $PTNA_WORK_LOC -type f -name "$network-Analysis-details.txt")
                                     if [ -n "$details_file" ]
                                     then
@@ -105,6 +105,9 @@ then
                                             sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET changes=$htmldiff WHERE id=$id;"
                                         fi
                                     fi
+                                elif [ $ret_code -eq 11 ]
+                                then
+                                    sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='failed (Overpass-API: no data)' WHERE id=$id;"
                                 elif [ $ret_code -eq 99 ]
                                 then
                                     sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='locked'           WHERE id=$id;"
