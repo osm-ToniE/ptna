@@ -821,7 +821,9 @@ then
 
         if [ -n "$WIKI_ROUTES_PAGE" ]
         then
-            location="$WIKI_ROUTES_PAGE"
+            # special handling of ' in a location name
+            location="$(echo $WIKI_ROUTES_PAGE | sed -e 's/Kar.Ouest/Kar%27Ouest/')"
+
 
             if [ -f "$WORK_LOC/$ROUTES_FILE" ]
             then
