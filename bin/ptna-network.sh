@@ -309,8 +309,8 @@ then
                         if [ -f "$PTNA_EXTRACT_PARENT" -a -s "$PTNA_EXTRACT_PARENT" ]
                         then
                             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Size: " $(stat -c '%s' "$PTNA_EXTRACT_PARENT") $PTNA_EXTRACT_PARENT
-                            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium getid --verbose --default-type=relation --add-referenced --fsync --id-file=$WORK_LOC/$PREFIX-osmium-getid-id-file.txt --output-format=$INPUTFORMAT --overwrite --output $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT --input-format=pbf $PTNA_EXTRACT_PARENT"
-                            osmium getid --verbose --default-type=relation --add-referenced --fsync                                  \
+                            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium getid --verbose --verbose-ids --default-type=relation --add-referenced --fsync --id-file=$WORK_LOC/$PREFIX-osmium-getid-id-file.txt --output-format=$INPUTFORMAT --overwrite --output $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT --input-format=pbf $PTNA_EXTRACT_PARENT"
+                            osmium getid --verbose --verbose-ids --default-type=relation --add-referenced --fsync                                  \
                                         --id-file=$WORK_LOC/$PREFIX-osmium-getid-id-file.txt                                        \
                                         --output-format=$INPUTFORMAT --overwrite --output $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT    \
                                         --input-format=pbf $PTNA_EXTRACT_PARENT
