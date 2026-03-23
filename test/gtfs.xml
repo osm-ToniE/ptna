@@ -4,6 +4,7 @@
   <bounds minlat='48.069032' minlon='11.6330838' maxlat='48.0716416' maxlon='11.6389203' origin='OpenStreetMap server' />
   <relation id='-99756' action='modify'>
     <tag k='from' v='from' />
+    <tag k='gtfs:feed' v='GTFS-Test' />
     <tag k='gtfs:trip_id' v='was weiß ich' />
     <tag k='name' v='Bus 605: from =&gt; to' />
     <tag k='network' v='network' />
@@ -17,6 +18,7 @@
   </relation>
   <relation id='-99757' action='modify'>
     <tag k='from' v='from' />
+    <tag k='gtfs:feed' v='GTFS-Test' />
     <tag k='gtfs:trip_id' v='43.T0.19-222-s20-2.4.R' />
     <tag k='name' v='Bus 222: from =&gt; to' />
     <tag k='network' v='network' />
@@ -30,6 +32,7 @@
   </relation>
   <relation id='-99758' action='modify'>
     <tag k='from' v='from2' />
+    <tag k='gtfs:feed' v='GTFS-Test' />
     <tag k='gtfs:trip_id' v='43.T0.19-222-s20-2.4.R;93.T0.19-222-s20-4.2.H' />
     <tag k='name' v='Bus 222: from2 =&gt; to2' />
     <tag k='network' v='network' />
@@ -43,7 +46,7 @@
   </relation>
   <relation id='-99767' action='modify'>
     <tag k='from' v='from3' />
-    <tag k='gtfs:feed' v='DE-BY-MVV' />
+    <tag k='gtfs:feed' v='GTFS-Test' />
     <tag k='gtfs:trip_id' v='93.T0.19-222-s20-4.2.H' />
     <tag k='name' v='Bus 222: from3 =&gt; to3' />
     <tag k='network' v='network' />
@@ -57,7 +60,7 @@
   </relation>
   <relation id='-99769' action='modify'>
     <tag k='from' v='from4' />
-    <tag k='gtfs:feed' v='DE-BY-MVV' />
+    <tag k='gtfs:feed' v='GTFS-Test' />
     <tag k='gtfs:release_date' v='2020-07-24' />
     <tag k='gtfs:route_id' v='19-222-s20-4' />
     <tag k='name' v='Bus 222: from4 =&gt; to4' />
@@ -72,7 +75,7 @@
   </relation>
   <relation id='-99776' action='modify'>
     <tag k='from' v='from5' />
-    <tag k='gtfs:feed' v='DE-BY-MVV' />
+    <tag k='gtfs:feed' v='GTFS-Test' />
     <tag k='gtfs:shape_id' v='19-222-s20-4.2.H' />
     <tag k='name' v='Bus 222: from5 =&gt; to5' />
     <tag k='network' v='network' />
@@ -90,6 +93,7 @@
     <member type='relation' ref='-99767' role='' />
     <member type='relation' ref='-99769' role='' />
     <member type='relation' ref='-99776' role='' />
+    <tag k='gtfs:feed' v='GTFS-Test' />
     <tag k='gtfs:route_id' v='19-222-s20-2;;19-222-s20-4;20-222-s20-4' />
     <tag k='name' v='Bus 222' />
     <tag k='network' v='network' />
@@ -103,7 +107,7 @@
   <relation id='-99780' action='modify'>
     <member type='relation' ref='-99786' role='' />
     <member type='relation' ref='-99790' role='' />
-    <tag k='gtfs:feed' v='DE-BY-MVV' />
+    <tag k='gtfs:feed' v='GTFS-Test' />
     <tag k='gtfs:release_date' v='2020-12-10' />
     <tag k='gtfs:route_id' v='19-210-s21-1' />
     <tag k='name' v='Bus 210' />
@@ -117,7 +121,7 @@
   </relation>
   <relation id='-99786' action='modify'>
     <tag k='from' v='Neuperlach Süd' />
-    <tag k='gtfs:feed' v='DE-BY-MMV' />
+    <tag k='gtfs:feed' v='GTFS-Test' />
     <tag k='gtfs:release_date' v='2020-12-11' />
     <tag k='gtfs:route_id' v='19-210-s21-2' />
     <tag k='gtfs:trip_id' v='1.T0.19-210-s21-1.1.R' />
@@ -133,7 +137,7 @@
   </relation>
   <relation id='-99790' action='modify'>
     <tag k='from' v='Brunnthal, Zusestraße' />
-    <tag k='gtfs:feed' v='DE-BY-MMV' />
+    <tag k='gtfs:feed' v='GTFS-Test' />
     <tag k='gtfs:release_date' v='2020-12-11' />
     <tag k='gtfs:route_id' v='19-210-s21-2' />
     <tag k='gtfs:trip_id' v='1.T0.19-210-s21-1.1.R' />

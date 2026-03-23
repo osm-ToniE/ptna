@@ -16,7 +16,7 @@ use Encode;
 use Exporter;
 use base qw (Exporter);
 
-our @EXPORT_OK  = qw( setTimeZoneDate getRouteIdStatus getTripIdStatus getShapeIdStatus getGtfsRouteIdHtmlTag getGtfsRouteIdIconTag getGtfsTripIdHtmlTag getGtfsShapeIdHtmlTag getGtfsLinkToRoutes );
+our @EXPORT_OK  = qw( setTimeZoneDate setPathToWork getRouteIdStatus getTripIdStatus getShapeIdStatus getGtfsRouteIdHtmlTag getGtfsRouteIdIconTag getGtfsTripIdHtmlTag getGtfsShapeIdHtmlTag getGtfsLinkToRoutes );
 
 use DBI;
 
@@ -59,7 +59,22 @@ sub setTimeZoneDate {
 
     $config{'date_time_zone'} = sprintf( "%04d%02d%02d", $dt->year, $dt->month, $dt->day );
 
-    printf STDERR "%s Set PtnaSQLite::\$config{'date_time_zone'} to '%s'\n", get_time(), $config{'date_time_zone'};
+    # printf STDERR "%s Set PtnaSQLite::\$config{'date_time_zone'} to '%s'\n", get_time(), $config{'date_time_zone'};
+}
+
+
+#############################################################################################
+#
+#
+#
+#############################################################################################
+
+sub setPathToWork {
+    my $pathtowork = shift || '/osm/ptna/work';
+
+    $config{'path-to-work'} = $pathtowork;
+
+    # printf STDERR "%s Set PtnaSQLite::\$config{'path-to-work'} to '%s'\n", get_time(), $config{'path-to-work'};
 }
 
 

@@ -25,7 +25,7 @@ use OSM::XML            qw( parse );
 use OSM::Data           qw( %META %NODES %WAYS %RELATIONS );
 use OSM::Geo            qw( Init PlatformToNodeDistance ConvertMetersToFeet isNodeInsidePolygon NumberOfPointsInsidePolygon Summary );
 use RoutesList;
-use GTFS::PtnaSQLite    qw( setTimeZoneDate getRouteIdStatus getTripIdStatus getShapeIdStatus getGtfsRouteIdHtmlTag getGtfsRouteIdIconTag getGtfsTripIdHtmlTag getGtfsShapeIdHtmlTag getGtfsLinkToRoutes );
+use GTFS::PtnaSQLite    qw( setTimeZoneDate setPathToWork getRouteIdStatus getTripIdStatus getShapeIdStatus getGtfsRouteIdHtmlTag getGtfsRouteIdIconTag getGtfsTripIdHtmlTag getGtfsShapeIdHtmlTag getGtfsLinkToRoutes );
 use Data::Dumper;
 use Time::Local         qw ( timelocal );
 use Time::HiRes;
@@ -354,6 +354,7 @@ if ( $verbose ) {
 }
 
 GTFS::PtnaSQLite::setTimeZoneDate( $opt_timezone );
+GTFS::PtnaSQLite::setPathToWork( $path_to_work_dir );
 
 
 ####################################################################################################################

@@ -80,7 +80,7 @@
 #                           Der Wert von 'operator' darf ';' enthalten, muss dann aber in "..." stehen.
 #
 # gtfs-feed         kann leer sein
-#                       == Hinweis auf eine Quelle in der GTFS-Analyse von PTNA, in der diese Route gefunden werden kann (z.B.: "DE-BY-MVV")
+#                       == Hinweis auf eine Quelle in der GTFS-Analyse von PTNA, in der diese Route gefunden werden kann (z.B.: "GTFS-Test")
 #
 # gtfs-route-id     kann leer sein
 #                       == Hinweis auf eine "route_id" in den GTFS-Daten, die zu dieser Linie gehört
@@ -94,36 +94,36 @@
 = Test file for GTFS integration
 
 
-100;bus;!GTFS database not found!;;;;DE-XX-YYY
-101;bus;!GTFS database not found!;;;;DE-XX-YYY;
+100;bus;!GTFS database not found!;;;;GTFS-Test-does-not-exist
+101;bus;!GTFS database not found!;;;;GTFS-Test-does-not-exist;
 102;bus;!GTFS-Feed is not set!;;;;;1-102-s20-1
-103;bus;!GTFS database not found!;;;;DE-XX-YYY;1-103-s20-1
-104;bus;!GTFS database not found!;;;;DE-XX-YYY;"1-104-s20-1;1-104-s20-2"
+103;bus;!GTFS database not found!;;;;GTFS-Test-does-not-exist;1-103-s20-1
+104;bus;!GTFS database not found!;;;;GTFS-Test-does-not-exist;"1-104-s20-1;1-104-s20-2"
 
-200;bus;!Route-Id not set!;;;;DE-BY-MVV
-210;bus;!values of routes differ from route_master, routes have identical values!;Neuperlach Süd;Brunnthal, Zusestraße;;DE-BY-MVV;19-211-s21-1;2020-12-10
-211;bus;!Valid Route-Id in latest GTFS release, no 'gtfs-release-date'!;;;;DE-BY-MVV;19-211-s20-1
-211;bus;!Multiple valid Route-Id in latest GTFS release, no 'gtfs-release-date'!;;;;DE-BY-MVV;"19-211-s20-1;19-211-s20-2;19-211-s20-3"
-211;bus;!Multiple valid/not existing Route-Id in latest GTFS release, no 'gtfs-release-date'!;;;;DE-BY-MVV;"19-211-s20-1;20-211-s20-5"
-211;bus;!Multiple valid/not set/not existing Route-Id in latest GTFS release, no 'gtfs-release-date'!;;;;DE-BY-MVV;"19-211-s20-1;;20-211-s20-5"
-211;bus;!Valid Route-Id in dedicated GTFS release: '2020-07-24'!;;;;DE-BY-MVV;19-211-s20-1;2020-07-24
-211;bus;!Multiple valid Route-Id in dedicated GTFS release: '2020-07-24'!;;;;DE-BY-MVV;"19-211-s20-1;19-211-s20-2;19-211-s20-3";2020-07-24
-211;bus;!Multiple valid/not existing Route-Id in dedicated GTFS release: '2020-07-24'!;;;;DE-BY-MVV;"19-211-s20-1;20-211-s20-3";2020-07-24
-212;bus;!Route-Id does not exist!;;;;DE-BY-MVV;20-212-s20-1
-212;bus;!Multiple Route-Id does not exist!;;;;DE-BY-MVV;"20-212-s20-1;20-212-s20-2"
+200;bus;!Route-Id not set!;;;;GTFS-Test
+210;bus;!values of routes differ from route_master, routes have identical values!;Neuperlach Süd;Brunnthal, Zusestraße;;GTFS-Test;19-211-s21-1;2020-12-10
+211;bus;!Valid Route-Id in latest GTFS release, no 'gtfs-release-date'!;;;;GTFS-Test;19-211-s20-1
+211;bus;!Multiple valid Route-Id in latest GTFS release, no 'gtfs-release-date'!;;;;GTFS-Test;"19-211-s20-1;19-211-s20-2;19-211-s20-3"
+211;bus;!Multiple valid/not existing Route-Id in latest GTFS release, no 'gtfs-release-date'!;;;;GTFS-Test;"19-211-s20-1;20-211-s20-5"
+211;bus;!Multiple valid/not set/not existing Route-Id in latest GTFS release, no 'gtfs-release-date'!;;;;GTFS-Test;"19-211-s20-1;;20-211-s20-5"
+211;bus;!Valid Route-Id in dedicated GTFS release: '2020-07-24'!;;;;GTFS-Test;19-211-s20-1;2020-07-24
+211;bus;!Multiple valid Route-Id in dedicated GTFS release: '2020-07-24'!;;;;GTFS-Test;"19-211-s20-1;19-211-s20-2;19-211-s20-3";2020-07-24
+211;bus;!Multiple valid/not existing Route-Id in dedicated GTFS release: '2020-07-24'!;;;;GTFS-Test;"19-211-s20-1;20-211-s20-3";2020-07-24
+212;bus;!Route-Id does not exist!;;;;GTFS-Test;20-212-s20-1
+212;bus;!Multiple Route-Id does not exist!;;;;GTFS-Test;"20-212-s20-1;20-212-s20-2"
 
-736;bus;!Old Route-Id, no 'gtfs-release-date'!;;;;DE-BY-MVV;33-736-s21-1
+736;bus;!Old Route-Id, no 'gtfs-release-date'!;;;;GTFS-Test;33-736-s21-1
 
-736;bus;!Route-Id of dedicated GTFS release: '2020-05-15'!;;;;DE-BY-MVV;33-736-s19-2;2020-05-15
+736;bus;!Route-Id of dedicated GTFS release: '2020-05-15'!;;;;GTFS-Test;33-736-s19-2;2020-05-15
 
-736;bus;!Route-Id of dedicated GTFS release: 'previous'!;;;;DE-BY-MVV;33-736-s20-1;previous
+736;bus;!Route-Id of dedicated GTFS release: 'previous'!;;;;GTFS-Test;33-736-s20-1;previous
 
-S2T-E;bus;!Route-Id valid since 2020-09-14!;;;;DE-BW-SWEG;14-S2T-E-j20-3
+S2T-E;bus;!Route-Id valid since 2020-09-14!;;;;GTFS-Test;14-S2T-E-j20-3
 
 222;bus;(Multiple) valid Trip-Id in Route-Relation;;;;;;
 605;bus;Unknown Trip-Id in Route-Relation;;;;;;
 
-9999;bus;!Missing double quotes around double route_id!;;;;DE-BY-MVV;20-9999-s20-1;20-9999-s20-2
+9999;bus;!Missing double quotes around double route_id!;;;;GTFS-Test;20-9999-s20-1;20-9999-s20-2
 
 -
 
