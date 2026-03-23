@@ -970,6 +970,8 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
                     @{$relation_ptr->{'role_stop'}}             = ();
                     @{$relation_ptr->{'__issues__'}}            = ();
                     @{$relation_ptr->{'__notes__'}}             = ();
+                    @{$relation_ptr->{'__GTFS__'}}              = ();
+                    $relation_ptr->{'gtfs-scores'}              = { 'route_master' => (), 'route' => () };
                     $relation_ptr->{'__sort_name__'} = $relation_id     unless ( $relation_ptr->{'__sort_name__'} );        # will be set to "rel_ID_of_route_master - member_index"  for route relations having a parent route_master
                     $relation_ptr->{'__printed__'}   = 0;
                     $relation_index                  = 0;   # counts the number of members which are relations (any relation: 'route' or with 'role' = 'platform', ...
@@ -1256,6 +1258,9 @@ if ( scalar( @RouteList ) ) {
         map { $columns_hash{$_} = 1; } ( @start_columns, @end_columns );
         map { push(@show_also_columns,$_) unless ( $columns_hash{$_} ) } split(',', $table_show_also );
     }
+    if ( $check_against_gtfs ) {
+        push( @end_columns, 'GTFS' );
+    }
 
     printTableInitialization( @start_columns, @show_also_columns, @end_columns );
 
@@ -1308,6 +1313,7 @@ if ( scalar( @RouteList ) ) {
 
                     @{$relation_ptr->{'__issues__'}} = ();  # just in case that this route has already been analyzed before (--multiple-ref-type-enries=allow)
                     @{$relation_ptr->{'__notes__'}}  = ();  # just in case that this route has already been analyzed before (--multiple-ref-type-enries=allow)
+                    @{$relation_ptr->{'__GTFS__'}}   = ();  # just in case that this route has already been analyzed before (--multiple-ref-type-enries=allow)
 
                     $status = analyze_environment( \@list_of_matching_relation_ids, $entryref->{'ref-or-list'}, $relation_ptr->{'tag'}->{'type'}, $entryref->{'route'}, $relation_id );
 
@@ -1325,7 +1331,8 @@ if ( scalar( @RouteList ) ) {
                                     'to'            =>    $relation_ptr->{'tag'}->{'to'},
                                     'PTv'           =>    $relation_ptr->{'tag'}->{'public_transport:version'},
                                     'issues'        =>    join( '__separator__', @{$relation_ptr->{'__issues__'}} ),
-                                    'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}}  )
+                                    'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}}  ),
+                                    'GTFS'          =>    join( '__separator__', @{$relation_ptr->{'__GTFS__'}} )
                                   );
                     $relation_ptr->{'__printed__'}++;
                     $number_of_positive_relations++;
@@ -1432,7 +1439,12 @@ if ( scalar( @RouteList ) ) {
 
     if ( scalar(@relation_ids) ) {
 
-        printTableInitialization( 'ref', 'relation', 'type', 'route_type', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'issues', 'notes' );
+        my @columns = ( 'ref', 'relation', 'type', 'route_type', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'issues', 'notes' );
+        if ( $check_against_gtfs ) {
+            push( @columns, 'GTFS' );
+        }
+
+        printTableInitialization( @columns );
 
         # xgettext: This section will list all routes which could not be clearly assigned because the combination of "ref;type" appears more than once and information like 'operator', 'from' and 'to' is missing
         printHeader( gettext('Not clearly assigned routes'), 1, 'unassigned' );
@@ -1444,6 +1456,7 @@ if ( scalar( @RouteList ) ) {
 
             @{$relation_ptr->{'__issues__'}} = ();  # just in case that this route has already been analyzed before (--multiple-ref-type-enries=allow)
             @{$relation_ptr->{'__notes__'}}  = ();  # just in case that this route has already been analyzed before (--multiple-ref-type-enries=allow)
+            @{$relation_ptr->{'__GTFS__'}}   = ();  # just in case that this route has already been analyzed before (--multiple-ref-type-enries=allow)
 
             $status = analyze_relation( $relation_ptr, $relation_id );
 
@@ -1459,7 +1472,8 @@ if ( scalar( @RouteList ) ) {
                             'to'            =>    $relation_ptr->{'tag'}->{'to'},
                             'PTv'           =>    $relation_ptr->{'tag'}->{'public_transport:version'},
                             'issues'        =>    join( '__separator__', @{$relation_ptr->{'__issues__'}} ),
-                            'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}} )
+                            'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}} ),
+                            'GTFS'          =>    join( '__separator__', @{$relation_ptr->{'__GTFS__'}} )
                           );
             $number_of_unassigned_relations++;
 
@@ -1497,7 +1511,12 @@ if ( scalar(@line_refs) ) {
     my $route_type_lines = 0;
     my $CheckNetwork     = '';
 
-    printTableInitialization( 'ref', 'relation', 'type', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'issues', 'notes' );
+    my @columns = ( 'ref', 'relation', 'type', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'issues', 'notes' );
+    if ( $check_against_gtfs ) {
+        push( @columns, 'GTFS' );
+    }
+
+    printTableInitialization( @columns );
 
     if ( scalar( @RouteList ) ) {
         printHeader( gettext('Other Public Transport Lines'), 1, 'otherlines' );
@@ -1527,6 +1546,7 @@ if ( scalar(@line_refs) ) {
 
                         @{$relation_ptr->{'__issues__'}} = ();  # just in case that this route has already been analyzed before (--multiple-ref-type-enries=allow)
                         @{$relation_ptr->{'__notes__'}}  = ();  # just in case that this route has already been analyzed before (--multiple-ref-type-enries=allow)
+                        @{$relation_ptr->{'__GTFS__'}}   = ();  # just in case that this route has already been analyzed before (--multiple-ref-type-enries=allow)
 
                         $status = analyze_relation( $relation_ptr, $relation_id );
 
@@ -1542,7 +1562,8 @@ if ( scalar(@line_refs) ) {
                                         'to'            =>    $relation_ptr->{'tag'}->{'to'},
                                         'PTv'           =>    $relation_ptr->{'tag'}->{'public_transport:version'},
                                         'issues'        =>    join( '__separator__', @{$relation_ptr->{'__issues__'}} ),
-                                        'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}} )
+                                        'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}} ),
+                                        'GTFS'          =>    join( '__separator__', @{$relation_ptr->{'__GTFS__'}} )
                                       );
                         $number_of_negative_relations++;
 
@@ -1577,7 +1598,12 @@ my @route_types = sort( keys( %PT_relations_without_ref ) );
 if ( scalar(@route_types) ) {
     my $help;
 
-    printTableInitialization( 'relation', 'type', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'issues', 'notes' );
+    my @columns = ( 'relation', 'type', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'issues', 'notes' );
+    if ( $check_against_gtfs ) {
+        push( @columns, 'GTFS' );
+    }
+
+    printTableInitialization( @columns );
 
     printHeader( gettext("Public Transport Lines without 'ref'"), 1, 'withoutref' );
 
@@ -1589,6 +1615,10 @@ if ( scalar(@route_types) ) {
                                        $PT_relations_without_ref{$route_type}->{$b}->{'__sort_name__'}     }
                                      keys(%{$PT_relations_without_ref{$route_type}})) ) {
             $relation_ptr = $PT_relations_without_ref{$route_type}->{$relation_id};
+
+            @{$relation_ptr->{'__issues__'}} = ();  # just in case that this route has already been analyzed before (--multiple-ref-type-enries=allow)
+            @{$relation_ptr->{'__notes__'}}  = ();  # just in case that this route has already been analyzed before (--multiple-ref-type-enries=allow)
+            @{$relation_ptr->{'__GTFS__'}}   = ();  # just in case that this route has already been analyzed before (--multiple-ref-type-enries=allow)
 
             $status = analyze_relation( $relation_ptr, $relation_id );
 
@@ -1603,7 +1633,8 @@ if ( scalar(@route_types) ) {
                             'to'            =>    $relation_ptr->{'tag'}->{'to'},
                             'PTv'           =>    $relation_ptr->{'tag'}->{'public_transport:version'},
                             'issues'        =>    join( '__separator__', @{$relation_ptr->{'__issues__'}} ),
-                            'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}} )
+                            'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}} ),
+                            'GTFS'          =>    join( '__separator__', @{$relation_ptr->{'__GTFS__'}} )
                           );
             $number_of_relations_without_ref++;
         }
@@ -1633,7 +1664,12 @@ if ( scalar(@line_refs) ) {
     my $route_type_lines = 0;
     my $CheckNetwork     = '';
 
-    printTableInitialization( 'ref', 'relation', 'type', 'life-cycle-prefix', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'issues', 'notes' );
+    my @columns = ( 'ref', 'relation', 'type', 'life-cycle-prefix', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'issues', 'notes' );
+    if ( $check_against_gtfs ) {
+        push( @columns, 'GTFS' );
+    }
+
+    printTableInitialization( @columns );
 
     printHeader( gettext('Routes with life-cycle prefix'), 1, 'life-cycle-prefix' );
 
@@ -1659,6 +1695,7 @@ if ( scalar(@line_refs) ) {
 
                         @{$relation_ptr->{'__issues__'}} = ();  # just in case that this route has already been analyzed before (--multiple-ref-type-enries=allow)
                         @{$relation_ptr->{'__notes__'}}  = ();  # just in case that this route has already been analyzed before (--multiple-ref-type-enries=allow)
+                        @{$relation_ptr->{'__GTFS__'}}   = ();  # just in case that this route has already been analyzed before (--multiple-ref-type-enries=allow)
 
                         $status = analyze_relation( $relation_ptr, $relation_id );
 
@@ -1675,7 +1712,8 @@ if ( scalar(@line_refs) ) {
                                         'to'                =>    $relation_ptr->{'tag'}->{'to'},
                                         'PTv'               =>    $relation_ptr->{'tag'}->{'public_transport:version'},
                                         'issues'            =>    join( '__separator__', @{$relation_ptr->{'__issues__'}} ),
-                                        'notes'             =>    join( '__separator__', @{$relation_ptr->{'__notes__'}} )
+                                        'notes'             =>    join( '__separator__', @{$relation_ptr->{'__notes__'}} ),
+                                        'GTFS'              =>    join( '__separator__', @{$relation_ptr->{'__GTFS__'}} )
                                       );
                         $number_of_life_cycle_prefix_relations++;
 
