@@ -1,0 +1,3 @@
+﻿"route_id","service_id","trip_id","shape_id","trip_headsign","trip_short_name","direction_id"
+"PTNA-1","MoTuWeThFrSaSu","PTNA-1-1-MoTuWeThFrSaSu-0","","B","A - B","0"
+"PTNA-1","MoTuWeThFrSaSu","PTNA-1-1-MoTuWeThFrSaSu-1","","A","B - A","1"
