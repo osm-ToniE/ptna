@@ -21,3 +21,8 @@
 # currently ignore also old test data
 OldTest/*
 
+# ignore GTFS test data / results
+*-sqlite.db
+*.zip
+osm_routes.txt
+gtfs_route_types.txt
