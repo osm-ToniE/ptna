@@ -1,3 +1,454 @@
-﻿"route_id","service_id","trip_id","shape_id","trip_headsign","trip_short_name","direction_id"
-"PTNA-1","MoTuWeThFrSaSu","PTNA-1-1-MoTuWeThFrSaSu-0","","B","A - B","0"
-"PTNA-1","MoTuWeThFrSaSu","PTNA-1-1-MoTuWeThFrSaSu-1","","A","B - A","1"
+route_id,service_id,trip_id,shape_id,trip_headsign,trip_short_name,direction_id
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-1-1,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-3-2,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-4-3,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-38-4,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-39-5,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-40-6,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-41-7,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-42-8,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-43-9,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-44-10,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-45-11,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-46-12,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-47-13,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-48-14,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-49-15,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-50-16,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-51-17,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-52-18,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-53-19,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-54-20,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-55-21,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-56-22,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-57-23,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-58-24,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-59-25,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-60-26,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-61-27,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-62-28,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-63-29,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-64-30,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-65-31,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-66-32,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-67-33,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-88-34,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-89-35,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-90-36,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-91-37,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-92-38,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-93-39,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-94-40,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-95-41,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-96-42,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-97-43,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-98-44,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-99-45,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-100-46,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-101-47,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-102-48,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-103-49,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-104-50,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-105-51,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-106-52,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-107-53,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-108-54,"","Zusestraße","",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-4-R-0-Su#5-109-55,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-1-56,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-105-57,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-51-58,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-130-59,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-64-60,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-131-61,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-132-62,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-10-63,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-133-64,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-134-65,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-65-66,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-135-67,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-136-68,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-66-69,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-137-70,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-209-71,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-138-72,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-67-73,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-139-74,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-208-75,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-140-76,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-68-77,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-141-78,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-207-79,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-142-80,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-69-81,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-143-82,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-206-83,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-144-84,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-70-85,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-207-86,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-205-87,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-145-88,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-71-89,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-209-90,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-204-91,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-146-92,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-72-93,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-99-94,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-203-95,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-147-96,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-73-97,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-98-98,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-202-99,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-148-100,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-74-101,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-97-102,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-201-103,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-149-104,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-75-105,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-96-106,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-200-107,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-150-108,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-76-109,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-95-110,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-199-111,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-151-112,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-77-113,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-94-114,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-198-115,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-152-116,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-78-117,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-93-118,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-197-119,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-153-120,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-79-121,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-92-122,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-196-123,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-154-124,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-80-125,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-91-126,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-195-127,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-155-128,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-81-129,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-90-130,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-194-131,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-156-132,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-82-133,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-89-134,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-193-135,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-157-136,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-83-137,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-88-138,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-192-139,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-158-140,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-84-141,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-87-142,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-191-143,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-159-144,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-85-145,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-86-146,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-190-147,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-160-148,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-86-149,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-85-150,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-189-151,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-161-152,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-87-153,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-162-154,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-188-155,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-163-156,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-88-157,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-164-158,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-187-159,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-165-160,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-89-161,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-166-162,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-186-163,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-167-164,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-90-165,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-168-166,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-185-167,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-169-168,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-91-169,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-170-170,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-184-171,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-171-172,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-92-173,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-172-174,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-183-175,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-173-176,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-93-177,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-174-178,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-182-179,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-175-180,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-94-181,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-176-182,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-181-183,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-177-184,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-95-185,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-178-186,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-180-187,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-179-188,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-96-189,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-180-190,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-179-191,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-181-192,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-97-193,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-182-194,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-178-195,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-183-196,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-98-197,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-184-198,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-177-199,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-185-200,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-99-201,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-210-202,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-176-203,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-186-204,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-100-205,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-211-206,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-175-207,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-187-208,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-101-209,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-212-210,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-174-211,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-188-212,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-102-213,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-213-214,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-173-215,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-189-216,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-103-217,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-100-218,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-172-219,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-190-220,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-104-221,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-101-222,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-171-223,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-191-224,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-105-225,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-102-226,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-170-227,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-192-228,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-1-229,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-103-230,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-169-231,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-193-232,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-106-233,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-104-234,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-168-235,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-194-236,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-3-237,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-361-238,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-195-239,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-107-240,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-363-241,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-196-242,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-116-243,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-364-244,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-197-245,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-108-246,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-319-247,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-198-248,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-109-249,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-199-250,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-120-251,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-200-252,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-6-253,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-108-254,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-110-255,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-111-256,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-119-257,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-201-258,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-111-259,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-214-260,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-121-261,"","Zusestraße","",1
+mvv-19-210-1,TuWe,mvv-19-210-1-1-4-R-0-TuWe-202-262,"","Zusestraße","",1
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-4-R-0-Sa#5-112-263,"","Zusestraße","",1
+mvv-19-210-1,TuWeFrSa,mvv-19-210-1-1-4-R-0-TuWeFrSa-216-264,"","Zusestraße","",1
+mvv-19-210-1,TuWeFrSa,mvv-19-210-1-1-4-R-0-TuWeFrSa-203-265,"","Zusestraße","",1
+mvv-19-210-1,FrSa#5,mvv-19-210-1-1-4-R-0-FrSa#5-204-266,"","Zusestraße","",1
+mvv-19-210-1,FrSa#5,mvv-19-210-1-1-4-R-0-FrSa#5-106-267,"","Zusestraße","",1
+mvv-19-210-1,MoTuWe#4,mvv-19-210-1-1-7-R-1-MoTuWe#4-225-268,"",Ortsmitte,"",1
+mvv-19-210-1,MoTuWe#4,mvv-19-210-1-1-7-R-1-MoTuWe#4-226-269,"",Ortsmitte,"",1
+mvv-19-210-1,MoTuWe#4,mvv-19-210-1-1-7-R-1-MoTuWe#4-227-270,"",Ortsmitte,"",1
+mvv-19-210-1,MoTuWe#4,mvv-19-210-1-1-7-R-1-MoTuWe#4-228-271,"",Ortsmitte,"",1
+mvv-19-210-1,MoTuWe#4,mvv-19-210-1-1-7-R-1-MoTuWe#4-229-272,"",Ortsmitte,"",1
+mvv-19-210-1,MoTuWe#4,mvv-19-210-1-1-7-R-1-MoTuWe#4-230-273,"",Ortsmitte,"",1
+mvv-19-210-1,MoTuWe#4,mvv-19-210-1-1-7-R-1-MoTuWe#4-231-274,"",Ortsmitte,"",1
+mvv-19-210-1,MoTuWe#4,mvv-19-210-1-1-7-R-1-MoTuWe#4-232-275,"",Ortsmitte,"",1
+mvv-19-210-1,MoTuWe#4,mvv-19-210-1-1-7-R-1-MoTuWe#4-233-276,"",Ortsmitte,"",1
+mvv-19-210-1,MoTuWe#4,mvv-19-210-1-1-7-R-1-MoTuWe#4-234-277,"",Ortsmitte,"",1
+mvv-19-210-1,MoTuWe#4,mvv-19-210-1-1-7-R-1-MoTuWe#4-235-278,"",Ortsmitte,"",1
+mvv-19-210-1,MoTuWe#4,mvv-19-210-1-1-7-R-1-MoTuWe#4-236-279,"",Ortsmitte,"",1
+mvv-19-210-1,MoTuWe#4,mvv-19-210-1-1-7-R-1-MoTuWe#4-237-280,"",Ortsmitte,"",1
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-2-281,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-5-282,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-6-283,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-7-284,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-8-285,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-9-286,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-10-287,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-11-288,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-12-289,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-13-290,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-14-291,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-15-292,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-16-293,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-17-294,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-18-295,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-19-296,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-20-297,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-21-298,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-22-299,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-23-300,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-24-301,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-25-302,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-26-303,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-27-304,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-28-305,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-29-306,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-30-307,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-31-308,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-32-309,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-33-310,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-34-311,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-35-312,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-36-313,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-37-314,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-68-315,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-71-316,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-72-317,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-73-318,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-74-319,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-75-320,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-76-321,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-77-322,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-78-323,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-79-324,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-80-325,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-81-326,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-82-327,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-83-328,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-84-329,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-85-330,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-86-331,"","Neuperlach Süd","",0
+mvv-19-210-1,Su#5,mvv-19-210-1-1-1-H-0-Su#5-87-332,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWe,mvv-19-210-1-1-1-H-0-TuWe-320-333,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWe,mvv-19-210-1-1-1-H-0-TuWe-112-334,"","Neuperlach Süd","",0
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-1-H-0-Sa#5-53-335,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWe,mvv-19-210-1-1-1-H-0-TuWe-113-336,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWe,mvv-19-210-1-1-1-H-0-TuWe-114-337,"","Neuperlach Süd","",0
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-1-H-0-Sa#5-54-338,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWe,mvv-19-210-1-1-1-H-0-TuWe-3-339,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-115-340,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWe,mvv-19-210-1-1-1-H-0-TuWe-2-341,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-117-342,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWe,mvv-19-210-1-1-1-H-0-TuWe-118-343,"","Neuperlach Süd","",0
+mvv-19-210-1,MoTuWeThFrSaSu,mvv-19-210-1-1-1-H-0-MoTuWeThFrSaSu-119-344,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWe,mvv-19-210-1-1-1-H-0-TuWe-120-345,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-121-346,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-122-347,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-123-348,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-124-349,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-125-350,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-205-351,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-126-352,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-206-353,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-127-354,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-116-355,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-128-356,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-208-357,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-129-358,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-4-359,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-5-360,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-6-361,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-7-362,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-8-363,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-9-364,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-10-365,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-11-366,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-12-367,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-13-368,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-14-369,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-15-370,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-27-371,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-26-372,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-25-373,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-24-374,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-23-375,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-22-376,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-21-377,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-20-378,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-19-379,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-18-380,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-17-381,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-16-382,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-39-383,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-38-384,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-37-385,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-36-386,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-35-387,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-34-388,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-33-389,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-32-390,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-31-391,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-30-392,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-29-393,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-28-394,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-51-395,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-50-396,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-49-397,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-48-398,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-47-399,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-46-400,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-45-401,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-44-402,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-43-403,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-42-404,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-41-405,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-40-406,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-63-407,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-62-408,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-61-409,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-60-410,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-59-411,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-58-412,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-57-413,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-56-414,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-55-415,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-54-416,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-53-417,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-52-418,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-75-419,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-74-420,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-73-421,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-72-422,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-71-423,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-70-424,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-69-425,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-68-426,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-67-427,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-66-428,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-109-429,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-65-430,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWe,mvv-19-210-1-1-1-H-0-TuWe-358-431,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-64-432,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWe,mvv-19-210-1-1-1-H-0-TuWe-359-433,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-76-434,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-77-435,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-79-436,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-107-437,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-78-438,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-110-439,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-80-440,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeSa,mvv-19-210-1-1-1-H-0-TuWeSa-81-441,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeFrSa,mvv-19-210-1-1-1-H-0-TuWeFrSa-215-442,"","Neuperlach Süd","",0
+mvv-19-210-1,TuWeFrSa,mvv-19-210-1-1-1-H-0-TuWeFrSa-82-443,"","Neuperlach Süd","",0
+mvv-19-210-1,FrSa#5,mvv-19-210-1-1-1-H-0-FrSa#5-83-444,"","Neuperlach Süd","",0
+mvv-19-210-1,Sa#5,mvv-19-210-1-1-1-H-0-Sa#5-50-445,"","Neuperlach Süd","",0
+mvv-19-210-1,FrSu,mvv-19-210-1-1-1-H-0-FrSu-160-446,"","Neuperlach Süd","",0
+mvv-19-210-1,Fr#12,mvv-19-210-1-1-1-H-0-Fr#12-84-447,"","Neuperlach Süd","",0
+mvv-19-210-1,MoTuWe#4,mvv-19-210-1-1-2-H-1-MoTuWe#4-219-448,"","Neuperlach Süd","",0
+mvv-19-210-1,MoTuWe#4,mvv-19-210-1-1-2-H-1-MoTuWe#4-221-449,"","Neuperlach Süd","",0
+mvv-19-210-1,MoTuWe#4,mvv-19-210-1-1-2-H-1-MoTuWe#4-240-450,"","Neuperlach Süd","",0
+mvv-19-210-1,MoTuWe#4,mvv-19-210-1-1-2-H-1-MoTuWe#4-220-451,"","Neuperlach Süd","",0
+mvv-19-210-1,MoTuWe#4,mvv-19-210-1-1-2-H-1-MoTuWe#4-223-452,"","Neuperlach Süd","",0
+mvv-19-210-1,MoTuWe#4,mvv-19-210-1-1-2-H-1-MoTuWe#4-239-453,"","Neuperlach Süd","",0

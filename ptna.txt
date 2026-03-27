@@ -1,3 +1,0 @@
-SELECT * FROM ptna;
-id,network_name,network_name_url,prepared,aggregated,analyzed,normalized,feed_publisher_name,feed_publisher_url,release_date,release_url,license,license_url,original_license,original_license_url,has_shapes,consider_calendar,comment,details
-1,"","",2026-03-23,"","","","","",2026-03-23,"","","","","",0,0,"",""

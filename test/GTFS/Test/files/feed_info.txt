@@ -1,2 +1,2 @@
 feed_publisher_name,feed_publisher_url,feed_lang,feed_start_date,feed_end_date,feed_version
-"PTNA","https://ptna.openstreetmap.de","en","20260101","20361231","20260326"
+"Münchner VerkehrsVerbund (MVV)",https://www.mvv-auskunft.de,DE,20260216,20361231,20260301

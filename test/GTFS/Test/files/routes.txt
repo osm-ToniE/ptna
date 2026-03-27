@@ -1,14 +1,2 @@
-﻿"route_id","agency_id","route_short_name","route_long_name","route_type","route_color","route_text_color"
-"PTNA-1",1,"1","A - B","3","005262","FFFFFF"
-"PTNA-2",1,"2","C - D","3","005262","FFFFFF"
-"PTNA-3",1,"3","E - F","3","005262","FFFFFF"
-"PTNA-4",1,"4","G - H","3","005262","FFFFFF"
-"PTNA-5",1,"5","I - J","3","005262","FFFFFF"
-"PTNA-6",1,"6","K - L","3","005262","FFFFFF"
-"PTNA-7",1,"7","M - N","3","005262","FFFFFF"
-"PTNA-8",1,"8","O - P","3","005262","FFFFFF"
-"PTNA-9",1,"9","Q - R","3","005262","FFFFFF"
-"PTNA-10",1,"10","S - T","3","005262","FFFFFF"
-"PTNA-11",1,"11","U - V","3","005262","FFFFFF"
-"PTNA-12",1,"12","W - X","3","005262","FFFFFF"
-"PTNA-13",1,"13","Y - Z","3","005262","FFFFFF"
+route_id,agency_id,route_short_name,route_long_name,route_type,route_color,route_text_color,route_url,ticketing_deep_link_id
+mvv-19-210-1,mvv-1179,210,"Neuperlach Süd - Ottobrunn - Brunnthal, Zusestraße",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19210___H_s26_1.pdf,MVV_ticketing
