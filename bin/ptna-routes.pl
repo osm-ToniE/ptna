@@ -2859,12 +2859,14 @@ sub analyze_relation {
             $issues_string = gettext( "'ref' is not set" );
             push( @{$relation_ptr->{'__issues__'}}, $issues_string );
         }
-        unless ( exists($relation_ptr->{'tag'}->{'name'}) ) {
-            $issues_string = gettext( "'name' is not set" );
-            push( @{$relation_ptr->{'__issues__'}}, $issues_string );
-            foreach my $tag ( @relation_tags ) {
-                if ( $tag =~ m/^name:/ || $tag =~ m/_name$/ ) {
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf( "'%s' = '%s'", handle_foreign($tag), handle_foreign($relation_ptr->{'tag'}->{$tag}) ) );
+        if ( $check_name ) {
+            unless ( exists($relation_ptr->{'tag'}->{'name'}) ) {
+                $issues_string = gettext( "'name' is not set" );
+                push( @{$relation_ptr->{'__issues__'}}, $issues_string );
+                foreach my $tag ( @relation_tags ) {
+                    if ( $tag =~ m/^name:/ || $tag =~ m/_name$/ ) {
+                        push( @{$relation_ptr->{'__notes__'}}, sprintf( "'%s' = '%s'", handle_foreign($tag), handle_foreign($relation_ptr->{'tag'}->{$tag}) ) );
+                    }
                 }
             }
         }
