@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "start: ptna-cron-eastern-america.sh"
+
 # source $HOME/.ptna-config to overwrite the settings above
 # and mybe to set some perl related variables (copied from .bashrc)
 
@@ -26,8 +28,6 @@ PTNA_WORK_LOC="${PTNA_WORK_LOC:=/osm/ptna/work}"
 # start working for UTC-03, UTC-04, UTC-05 and UTC-06 - covers South America, Central America and eastern part of North America
 #
 ###############################################################
-
-echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-cron-eastern-america.sh"
 
 #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-planet.sh UTC-03"
 #ptna-handle-planet.sh UTC-03 > $PTNA_WORK_LOC/ptna-handle-planet-UTC-03.log 2>&1 < /dev/null
@@ -72,3 +72,4 @@ done
 
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "done: ptna-cron-eastern-america.sh"
