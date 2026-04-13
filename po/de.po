@@ -5,6 +5,7 @@
 # 
 # Translators:
 # Noémie <nlehuby@zaclys.net>, 2019
+# mcliquid <info@mcliquid.de>, 2026
 # ToniE <osm-ToniE@web.de>, 2026
 # 
 #, fuzzy
@@ -835,12 +836,18 @@ msgid ""
 "'public_transport'='stop_position' set. For PTv2, "
 "'public_transport'='stop_position' is allow on nodes only"
 msgstr ""
+"PTv2 Route: leere 'role' für ein way Objekt welches das Tag "
+"'public_transport'='stop_position' hat. Bei PTv2 ist "
+"'public_transport'='stop_position' nur auf nodes erlaubt."
 
 msgid ""
 "PTv2 route: empty 'role' for a relation object which has "
 "'public_transport'='stop_position' set. For PTv2, "
 "'public_transport'='stop_position' is allow on nodes only"
 msgstr ""
+"PTv2 Route: leere 'role' für ein relation Objekt welches das Tag "
+"'public_transport'='stop_position' hat. Bei PTv2 ist "
+"'public_transport'='stop_position' nur auf nodes erlaubt."
 
 #, perl-format
 msgid "PTv2 route: wrong 'role' = '%s' for first stop"
@@ -1617,7 +1624,7 @@ msgid ""
 "public transport vehicles."
 msgstr ""
 "Dieser Abschnitt listet gefundenen Anweisungen über bedingte "
-"Zufahrtsberechtigungen auf Wegen auf, die auf von ÖPNV-Fahrzeugen benutzt "
+"Zufahrtsberechtigungen auf Wegen auf, die von ÖPNV-Fahrzeugen benutzt "
 "werden."
 
 msgid ""
@@ -1676,14 +1683,14 @@ msgid "Show route details on jungle-bus' unroll page"
 msgstr "Zeige Routendetails auf der 'unroll' Seite von jungle-bus"
 
 msgid "Inject"
-msgstr ""
+msgstr "Einfügen"
 
 #, perl-format
 msgid "into relation %s using JOSM"
-msgstr ""
+msgstr "in die Relation %s mithilfe von JOSM"
 
 msgid "Inject data using JOSM"
-msgstr ""
+msgstr "Daten mit JOSM einfügen"
 
 #, perl-format
 msgid ""
@@ -2166,6 +2173,8 @@ msgstr ""
 msgid ""
 "Check that 'from' and 'to' match with corresponding platform 'name' values."
 msgstr ""
+"Prüfe, dass 'from' und 'to' mit den korrespondierenden Platform 'name' "
+"Werten übereinstimmen."
 
 msgid ""
 "Check that for instance 'bus' = 'yes' is set on a PTv2 bus stop having "
@@ -2233,6 +2242,8 @@ msgstr ""
 
 msgid "Check that 'via' matches with corresponding platform 'name' values."
 msgstr ""
+"Prüfe, dass 'via' mit den korrespondierenden Platform 'name' Werten "
+"übereinstimmen."
 
 msgid ""
 "Check whether the used way types are appropriate for the vehicle type "
