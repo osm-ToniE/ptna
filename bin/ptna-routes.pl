@@ -3182,6 +3182,8 @@ sub analyze_route_master_relation {
     my $route_highway_index            = scalar( @{$relation_ptr->{'route_highway'}} );
     my $node_index                     = scalar( @{$relation_ptr->{'node'}} );
     my $members_with_role              = 0;
+    my %members_with_role_hash         = ();
+    my %members_roles                  = ();
 
     $relation_ptr->{'missing_way_data'}   = 0;
     $relation_ptr->{'missing_node_data'}  = 0;
@@ -3211,11 +3213,26 @@ sub analyze_route_master_relation {
     }
     foreach my $member ( @{$relation_ptr->{'members'}} )
     {
-        $members_with_role++    if ( $member->{'role'} );
+        if ( $member->{'role'} ) {
+            $members_with_role++;
+            $members_with_role_hash{$member->{'ref'}} = $member->{'type'};
+            $members_roles{$member->{'role'}}         = 1;
+        }
     }
     if ( $members_with_role ) {
         $issues_string = ngettext( "Route-Master has %d member with 'role' being set", "Route-Master has %d members with 'role' being set", $members_with_role );
-        push( @{$relation_ptr->{'__issues__'}}, sprintf($issues_string,$members_with_role) );
+        my $helpstring = sprintf( $issues_string, $members_with_role );
+        if ( 1 ) {
+            my @help_array = sort ( keys ( %members_roles ) );
+            push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: 'role' = %s'.", $helpstring, join("', 'role' = '", map { $_; } @help_array )) );
+        } else {
+            my @help_array = sort ( keys ( %members_with_role_hash ) );
+            if ( $max_error && $max_error > 0 && $members_with_role > $max_error ) {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printXxxTemplate($members_with_role_hash{$_},$_,'name;ref'); } splice(@help_array,0,$max_error) ), ($members_with_role-$max_error) ) );
+            } else {
+                push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $helpstring, join(', ', map { printXxxTemplate($members_with_role_hash{$_},$_,'name;ref'); } @help_array )) );
+            }
+        }
     }
     if ( $relation_ptr->{'tag'}->{'public_transport:version'} ) {
         if ( $relation_ptr->{'tag'}->{'public_transport:version'} !~ m/^2$/ ) {
