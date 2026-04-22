@@ -29,26 +29,40 @@ PTNA_WORK_LOC="${PTNA_WORK_LOC:=/osm/ptna/work}"
 #
 ###############################################################
 
-#echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-planet.sh UTC-03"
-#ptna-handle-planet.sh UTC-03 > $PTNA_WORK_LOC/ptna-handle-planet-UTC-03.log 2>&1 < /dev/null
-
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
-# first time handling of africa, so overwrite log file
-echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh south-america"
-ptna-handle-continent.sh south-america   > $PTNA_WORK_LOC/ptna-handle-continent-south-america.log     2>&1 < /dev/null &
+if [ -f $PTNA_WORK_LOC/update-from-planet ]
+then
+    rm -f $PTNA_WORK_LOC/ptna-handle-continent-central-america.log
+    rm -f $PTNA_WORK_LOC/ptna-handle-continent-north-america.log
+    rm -f $PTNA_WORK_LOC/ptna-handle-continent-south-america.log
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-planet.sh UTC-03"
+    ptna-handle-planet.sh UTC-03 > $PTNA_WORK_LOC/ptna-handle-planet-UTC-03.log 2>&1 < /dev/null
 
-# last time handling of asia, so append to log file
-echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh central-america"
-ptna-handle-continent.sh central-america > $PTNA_WORK_LOC/ptna-handle-continent-central-america.log   2>&1 < /dev/null &
+else
+    # update from continent extracts from other server
 
-# first time handling of north america, so overwrite log file
-echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh north-america"
-ptna-handle-continent.sh north-america   > $PTNA_WORK_LOC/ptna-handle-continent-north-america.log     2>&1 < /dev/null &
+    rm -f $PTNA_WORK_LOC/ptna-handle-planet-UTC-03.log
 
-echo $(date "+%Y-%m-%d %H:%M:%S %Z") "wait for the 3 background jobs to finish"
-wait
+    # first time handling of south america, so overwrite log file
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh south-america"
+    ptna-handle-continent.sh south-america   > $PTNA_WORK_LOC/ptna-handle-continent-south-america.log     2>&1 < /dev/null &
+
+    # first time handling of central america, so append to log file
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh central-america"
+    ptna-handle-continent.sh central-america > $PTNA_WORK_LOC/ptna-handle-continent-central-america.log   2>&1 < /dev/null &
+
+    # first time handling of north america, so overwrite log file
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh north-america"
+    ptna-handle-continent.sh north-america   > $PTNA_WORK_LOC/ptna-handle-continent-north-america.log     2>&1 < /dev/null &
+
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "wait for the 3 background jobs to finish"
+    wait
+fi
+
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
 # when finished, start analysis of timezones (which include further extracts in e.g. UTC+01/*-osimium.config)
 

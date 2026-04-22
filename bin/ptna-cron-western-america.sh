@@ -29,18 +29,30 @@ PTNA_WORK_LOC="${PTNA_WORK_LOC:=/osm/ptna/work}"
 #
 ###############################################################
 
-#echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-planet.sh UTC-07"
-#ptna-handle-planet.sh UTC-07 > $PTNA_WORK_LOC/ptna-handle-planet-UTC-07.log 2>&1 < /dev/null
-
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
-# second time handling of north america, so append to log file
-echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh north-america"
-ptna-handle-continent.sh north-america >> $PTNA_WORK_LOC/ptna-handle-continent-north-america.log 2>&1 < /dev/null &
+if [ -f $PTNA_WORK_LOC/update-from-planet ]
+then
+    rm -f $PTNA_WORK_LOC/ptna-handle-continent-north-america.log
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-planet.sh UTC-07"
+    ptna-handle-planet.sh UTC-07 > $PTNA_WORK_LOC/ptna-handle-planet-UTC-07.log 2>&1 < /dev/null
 
-echo $(date "+%Y-%m-%d %H:%M:%S %Z") "wait for the background job to finish"
-wait
+else
+    # update from continent extracts from other server
+
+    rm -f $PTNA_WORK_LOC/ptna-handle-planet-UTC-07.log
+
+    # second time handling of north america this day, so append to log file
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh north-america"
+    ptna-handle-continent.sh north-america >> $PTNA_WORK_LOC/ptna-handle-continent-north-america.log 2>&1 < /dev/null &
+
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "wait for the background job to finish"
+    wait
+fi
+
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
 # when finished, start analysis of timezones (which include further extracts in e.g. UTC-07/*-osimium.config)
 
