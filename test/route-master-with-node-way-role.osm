@@ -72,6 +72,7 @@
     <nd ref='-113832' />
     <nd ref='-113833' />
     <tag k='highway' v='unclassified' />
+    <tag k='name' v='Role-street' />
   </way>
   <way id='-113828' action='modify'>
     <nd ref='-113829' />
