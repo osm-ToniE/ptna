@@ -284,9 +284,9 @@ then
         then
             if [ -f "$SETTINGS_DIR/osmium-positive-filters.txt" -o -f "$SETTINGS_DIR/osmium-negative-filters.txt"  ]
             then
-                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Not yet implemented: Call 'ptna-filter-extract.sh -p $SETTINGS_DIR/osmium-positive-filters.txt -n $SETTINGS_DIR/osmium-negative-filters.txt $PTNA_EXTRACT_FILE $PTNA_EXTRACT_FILE-filtered'"
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Not yet implemented: Call 'ptna-filter-extract.sh -p $SETTINGS_DIR/osmium-positive-filters.txt -n $SETTINGS_DIR/osmium-negative-filters.txt $PTNA_EXTRACT_FILE $PTNA_EXTRACT_FILE_filtered'"
 
-                # ptna-filter-extract.sh -p "$SETTINGS_DIR/osmium-positive-filters.txt" -n "$SETTINGS_DIR/osmium-negative-filters.txt" "$PTNA_EXTRACT_FILE" "$PTNA_EXTRACT_FILE-filtered"
+                # ptna-filter-extract.sh -p "$SETTINGS_DIR/osmium-positive-filters.txt" -n "$SETTINGS_DIR/osmium-negative-filters.txt" "$PTNA_EXTRACT_FILE" "$PTNA_EXTRACT_FILE_filtered"
             fi
 
             rm -f $WORK_LOC/$PREFIX-osmium-merged.osm.$INPUTFORMAT
