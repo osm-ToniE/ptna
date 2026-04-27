@@ -71,10 +71,8 @@ then
                 split_ret=$?
 
                 #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-plit-extract.sh returned $split_ret"
-
         else
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'$PBF_FILE' file not found in '$PWD' or the file is empty for '$config'"
-            exit 1
         fi
     done
 
