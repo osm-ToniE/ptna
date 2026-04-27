@@ -283,7 +283,7 @@ then
 
         if [ $AGE_IN_SECS -le 43200 ]        # age is max 12 hours
         then
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Checking for individual 'osmium tags-filter' files ...'"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Checking for individual 'osmium tags-filter' files ..."
             if [ -f "$SETTINGS_DIR/osmium-positive-filters.txt" -o -f "$SETTINGS_DIR/osmium-negative-filters.txt" ]
             then
                 PTNA_EXTRACT_FILE_filtered="${PTNA_EXTRACT_FILE%.*}-filtered.$INPUTFORMAT"
