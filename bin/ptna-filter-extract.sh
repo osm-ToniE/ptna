@@ -50,7 +50,7 @@ then
                     fsizep=$(stat -c '%s' "$TMP1")
                     if [ $fsizes -gt 0 ]
                     then
-                        percentage=$(echo "scale = 2; $fsizep * 100 / $fsizes" | bc)
+                        percentage=$(perl -e "printf('%.2f', $fsizep * 100 / $fsizes);")
                     else
                         percentage=0
                     fi
@@ -83,12 +83,12 @@ then
                     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret"
                     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
 
-                    if [ $osmium_ret -ne 0 ]
+                    if [ $osmium_ret -eq 0 ]
                     then
                         fsizen=$(stat -c '%s' "$TMP2")
                         if [ $fsizes -gt 0 ]
                         then
-                            percentage=$(echo "scale = 2; $fsizen * 100 / $fsizes" | bc)
+                            percentage=$(perl -e "printf('%.2f', $fsizen * 100 / $fsizes);")
                         else
                             percentage=0
                         fi
