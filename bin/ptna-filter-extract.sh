@@ -1,106 +1,130 @@
 #!/bin/bash
 
-SOURCE=$1
-TARGET=$2
+TEMP=$(getopt -o n:p:s:t: --long negative:,positive:,source:,target: -n 'ptna-filter-extract.sh' -- "$@")
+
+if [ $? != 0 ] ; then echo "Terminating..." ; exit 2 ; fi
+
+eval set -- "$TEMP"
+
+while true ; do
+    case "$1" in
+        -n|--negative)  NEGATIVE_FILTER_FILE=$2                 ; shift 2 ;;
+        -p|--positive)  POSITIVE_FILTER_FILE=$2                 ; shift 2 ;;
+        -s|--source)    SOURCE=$2                               ; shift 2 ;;
+        -t|--target)    TARGET=$2                               ; shift 2 ;;
+        --) shift ; break ;;
+        *) echo "Internal error!" ; exit 3 ;;
+    esac
+done
 
 if [ -n "$SOURCE" -a -f "$SOURCE" -a -s "$SOURCE" -a -n "$TARGET" ]
 then
     INPUTFORMAT="${SOURCE##*.}"
     OUTPUTFORMAT="${TARGET##*.}"
-    TMP1="${TARGET%.*}.$$-1.$INPUTFORMAT"
-    TMP2="${TARGET%.*}.$$-2.$OUTPUTFORMAT"
 
-    rm -f "$TMP1" "$TMP2"
-
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium tags-filter' for '$SOURCE' to filter with standard positive filter list"
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
-
-    osmium tags-filter -v -F "$INPUTFORMAT" -f "$INPUTFORMAT" -O -o "$TMP1" "$SOURCE" \
-           r/type=*route r/type=public_transport,network r/*:type \
-           r/route_master r/*:route_master \
-           r/route r/*:route \
-           r/network r/name r/ref r/from r/to r/via r/public_transport:version r/ref_trips \
-           public_transport highway=bus_stop,platform railway=stop,tram_stop,halt,station,platform route_ref* gtfs*
-
-    osmium_ret=$?
-
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret"
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
-
-    if [ $osmium_ret -eq 0 -a -f "$TMP1" -a -s "$TMP1" ]
+    if [ "$INPUTFORMAT" = "$OUTPUTFORMAT" ]
     then
-        if [ "$OUTPUTFORMAT" == 'xml' ]
+        TMP1="${TARGET%.*}.$$-1.$INPUTFORMAT"
+        TMP2="${TARGET%.*}.$$-2.$INPUTFORMAT"
+
+        rm -f "$TMP1" "$TMP2"
+
+        fsizes=$(stat -c '%s' "$SOURCE")
+
+        if [ -n "$POSITIVE_FILTER_FILE" ]
         then
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Filter extract: call 'osmium fileinfo' for '$SOURCE' to get replication timestamp"
-
-            TS=$(osmium fileinfo "$SOURCE" | grep osmosis_replication_timestamp | head -1 | sed -e 's/^.*=//')
-
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'osmium replication timestamp' = '$TS'"
-
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium tags-filter' for '$TMP1' to filter with standard negative filter list (output format '$OUTPUTFORMAT')"
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
-
-            osmium tags-filter -v -F "$INPUTFORMAT" -f "$OUTPUTFORMAT" -O -o "$TMP2" "$TMP1" \
-                   --output-header="generator=https://ptna.openstreetmap.de osmosis_replication_timestamp=$TS" \
-                   -i r/route_master=tracks,railway,rail,bicycle,mtb,hiking,road,foot,inline_skates,canoe,detour,fitness_trail,horse,waterway,motorboat,boat,nordic_walking,pipeline,piste,power,running,ski,snowmobile,cycling,historic,motorcycle,riding,junction \
-                      r/route=tracks,railway,rail,bicycle,mtb,hiking,road,foot,inline_skates,canoe,detour,fitness_trail,horse,waterway,motorboat,boat,nordic_walking,pipeline,piste,power,running,ski,snowmobile,cycling,historic,motorcycle,riding,junction,canyoning,climbing,sled,TMC,procession  \
-                      r/type=defaults,area,destination_sign,enforcement,person,treaty,cemetery,pipeline,election,level,restriction,boundary,building,waterway,building:part,organization,set,bridge,site,health,junction,right_of_way,dual_carriageway,street,associated_street,cluster,tunnel,tmc,TMC,tmc:point,tmc:area,traffic_signals,place_numbers,shop,group,collection,power,node \
-                      r/type=*golf r/highway=pedestrian,service,living_street,footway r/network=lcn,rcn,ncn,icn,lwn,rwn,nwn,iwn,foot,bicycle,hiking r/adr_les \
-                      n/highway=stop,give_way,street_lamp,crossing,traffic_signals n/emergency=fire_hydrant,assemply_point,emergency_access_point indoor=room indoor=corridor attraction area:highway aeroway cemetery historic power amenity boundary admin_level place tourism junction parking landuse landcover building roof:shape room natural shop sport telecom office craft leisure playground golf piste:type  healthcare geological \
-                      wikidata=Q55085720 heritage
-
-
-            osmium_ret=$?
-        else
-
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium tags-filter' for '$TMP1' to filter with standard negative filter list (output format '$OUTPUTFORMAT')"
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
-
-            osmium tags-filter -v -F "$INPUTFORMAT" -f "$OUTPUTFORMAT" -O -o "$TMP2" "$TMP1" \
-                   -i r/route_master=tracks,railway,rail,bicycle,mtb,hiking,road,foot,walking,inline_skates,canoe,detour,alpine_coaster,fitness_trail,horse,waterway,motorboat,boat,worship,roller_coaster,nordic_walking,pipeline,piste,power,running,ski,snowmobile,cycling,historic,motorcycle,riding,junction \
-                      r/route=tracks,railway,rail,bicycle,mtb,hiking,road,foot,walking,inline_skates,canoe,detour,alpine_coaster,fitness_trail,horse,waterway,motorboat,boat,worship,roller_coaster,nordic_walking,pipeline,piste,power,running,ski,snowmobile,cycling,historic,motorcycle,riding,junction,canyoning,climbing,sled,TMC,procession  \
-                      r/type=defaults,area,destination_sign,enforcement,person,treaty,cemetery,pipeline,election,level,restriction,boundary,building,waterway,building:part,organization,set,bridge,site,health,junction,right_of_way,dual_carriageway,street,associated_street,cluster,tunnel,tmc,TMC,tmc:point,tmc:area,traffic_signals,place_numbers,shop,group,collection,power,node \
-                      r/route_master=*historic r/route=*historic r/type=*golf r/type=*whitewater r/highway=pedestrian,service,living_street,footway r/network=lcn,rcn,ncn,icn,lwn,rwn,nwn,iwn,foot,bicycle,hiking,waterway r/adr_les \
-                      n/highway=stop,give_way,street_lamp,crossing,traffic_signals ra/highway=rest_area,services n/emergency=fire_hydrant,assemply_point,emergency_access_point indoor=room indoor=corridor attraction area:highway aeroway cemetery historic power amenity boundary admin_level place tourism junction parking pipeline landuse landcover building roof:shape room natural shop sport telecom office craft leisure playground golf piste:type healthcare geological \
-                      wikidata=Q55085720 heritage
-
-            osmium_ret=$?
-        fi
-
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret"
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
-
-        if [ $osmium_ret -eq 0 ]
-        then
-            fsizep=$(stat -c '%s' "$SOURCE")
-            fsize1=$(stat -c '%s' "$TMP1")
-            fsize2=$(stat -c '%s' "$TMP2")
-
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "File sizes: source = '$fsizep', after positive filter = '$fsize1', after negative filter (=target) = '$fsize2'"
-
-            mv "$TMP2" "$TARGET"
-
-            rm -f "$TMP1" "$TMP2"
-
-            if [ "$OUTPUTFORMAT" != 'xml' ]
+            if [ -f "$POSITIVE_FILTER_FILE" -a -r "$POSITIVE_FILTER_FILE" ]
             then
-                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium fileinfo' for '$TARGET'"
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium tags-filter' for '$SOURCE' to filter with positive filter list from file '$POSITIVE_FILTER_FILE'"
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
 
-                osmium fileinfo "$TARGET"
+                osmium tags-filter -v --expressions "$POSITIVE_FILTER_FILE" -F "$INPUTFORMAT" -f "$INPUTFORMAT" -O -o "$TMP1" "$SOURCE"
 
-                fileinfo_ret=$?
+                osmium_ret=$?
 
-                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $fileinfo_ret"
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret"
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
+
+                if [ $osmium_ret -eq 0 ]
+                then
+                    fsizep=$(stat -c '%s' "$TMP1")
+                    if [ $fsizes -gt 0 ]
+                    then
+                        percentage=$(echo "scale = 2; $fsizep * 100 / $fsizes" | bc)
+                    else
+                        percentage=0
+                    fi
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "File sizes: source = '$fsizes', after positive filter = '$fsizep': $percentage %"
+                else
+                    TMP1="$SOURCE"
+                fi
+            else
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Positive filter list '$POSITIVE_FILTER_FILE' is not a file or cannot be read"
+                exit 1
             fi
+        else
+            TMP1="$SOURCE"
         fi
 
-        exit $osmium_ret
+        if [ -n "$NEGATIVE_FILTER_FILE" ]
+        then
+            if [ -f "$NEGATIVE_FILTER_FILE" -a -r "$NEGATIVE_FILTER_FILE" ]
+            then
+                if [ -f "$TMP1" -a -s "$TMP1" ]
+                then
+
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium tags-filter' for '$TMP1' to filter with negative filter list from file '$NEGATIVE_FILTER_FILE'"
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
+
+                    osmium tags-filter -v -i --expressions "$NEGATIVE_FILTER_FILE" -F "$INPUTFORMAT" -f "$OUTPUTFORMAT" -O -o "$TMP2" "$TMP1"
+
+                    osmium_ret=$?
+
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret"
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
+
+                    if [ $osmium_ret -ne 0 ]
+                    then
+                        fsizen=$(stat -c '%s' "$TMP2")
+                        if [ $fsizes -gt 0 ]
+                        then
+                            percentage=$(echo "scale = 2; $fsizen * 100 / $fsizes" | bc)
+                        else
+                            percentage=0
+                        fi
+                        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "File sizes: source = '$fsizes', after negative filter = '$fsizen': $percentage %"
+                    else
+                        TMP2="$TMP1"
+                    fi
+                else
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Filtered file (positive list) has not been created"
+                    exit 1
+                fi
+            else
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Negative filter list '$NEGATIVE_FILTER_FILE' is not a file or cannot be read"
+                exit 1
+            fi
+        else
+            TMP2="$TMP1"
+        fi
+
+        cp "$TMP2" "$TARGET"
+
+        rm -f "$TMP1" "$TMP2"
+
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium fileinfo' for '$TARGET'"
+
+        osmium fileinfo "$TARGET"
+
+        fileinfo_ret=$?
+
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium fileinfo returned $fileinfo_ret"
     else
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Filtered file (positive list) has not been created or is empty"
+        echo "Format of source '$SOURCE' and target '$TARGET' files must be identical"
         exit 1
     fi
 else
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "There is no source file (1st parameter) and/or no target file specified (2nd parameter) or source file is empty"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "There is no source file and/or no target file specified or source file is empty"
     exit 1
 fi
 

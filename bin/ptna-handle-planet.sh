@@ -59,36 +59,39 @@ then
 
     if [ -n "$PREPARE_FOR_TIMEZONE" ]
     then
-        FILTEREDTARGET="${TARGET%%.*}-filtered.osm.pbf"
         if [ -f "$TARGET" -a $(stat -c '%s' $TARGET) -gt 4096 ]
         then
-            #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-filter-extract.sh $TARGET $FILTEREDTARGET'"
+            FILTERSOURCE="${TARGET%%.*}.osm.pbf"
+            FILTERTARGET="${TARGET%%.*}-filtered.osm.pbf"
+            POSITIVEFILTER=$PTNA_NETWORKS_LOC/general-positive-filter-osmium.txt
+            NEGATIVEFILTER=$PTNA_NETWORKS_LOC/general-negative-filter-osmium.txt
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-filter-extract.sh --positive $POSITIVEFILTER --negative $NEGATIVEFILTER --source $FILTERSOURCE --target $FILTERTARGET'"
 
-            ptna-filter-extract.sh "$TARGET" "$FILTEREDTARGET"
+            ptna-filter-extract.sh --positive "$POSITIVEFILTER" --negative "$NEGATIVEFILTER" --source "$FILTERSOURCE" --target "$FILTERTARGET"
 
             filter_ret=$?
 
             #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-filter-extract.sh returned $filter_ret"
 
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium fileinfo' for '$FILTEREDTARGET'"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium fileinfo' for '$FILTERTARGET'"
 
-            osmium fileinfo "$FILTEREDTARGET"
+            osmium fileinfo "$FILTERTARGET"
 
             osmium_ret=$?
 
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret"
         fi
 
-        if [ -f "$FILTEREDTARGET" -a $(stat -c '%s' $FILTEREDTARGET) -gt 4096 ]
+        if [ -f "$FILTERTARGET" -a $(stat -c '%s' $FILTERTARGET) -gt 4096 ]
         then
             UTC_CONFIG="$PTNA_NETWORKS_LOC/${TARGET%%.*}-$PREPARE_FOR_TIMEZONE-osmium.config"
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Looking for osmium config file '$UTC_CONFIG'"
 
             if [ -f "$UTC_CONFIG" -a -s "$UTC_CONFIG" ]
             then
-                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-split-extract.sh $FILTEREDTARGET $UTC_CONFIG'"
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-split-extract.sh $FILTERTARGET $UTC_CONFIG'"
 
-                ptna-split-extract.sh "$FILTEREDTARGET" "$UTC_CONFIG"
+                ptna-split-extract.sh "$FILTERTARGET" "$UTC_CONFIG"
 
                 split_ret=$?
 
@@ -96,14 +99,14 @@ then
 
                 if [ $split_ret -eq 0 ]
                 then
-                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "remove '$FILTEREDTARGET', we don't need that any longer"
-                    rm -f "$FILTEREDTARGET"
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "remove '$FILTERTARGET', we don't need that any longer"
+                    rm -f "$FILTERTARGET"
                 fi
             fi
         fi
     else
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "No preparation for a timezome, and no filtering of planet data"
-        rm -f "$FILTEREDTARGET"
+        rm -f "$FILTERTARGET"
     fi
 else
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'$PTNA_WORK_LOC' does not exist"

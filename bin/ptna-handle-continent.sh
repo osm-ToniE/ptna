@@ -67,20 +67,23 @@ then
         #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-update-extract.sh returned $update_ret"
     fi
 
-    FILTEREDTARGET="${TARGET%%.*}-filtered.osm.pbf"
     if [ -f "$TARGET" -a $(stat -c '%s' $TARGET) -gt 4096 ]
     then
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-filter-extract.sh $TARGET $FILTEREDTARGET'"
+        FILTERSOURCE="${TARGET%%.*}.osm.pbf"
+        FILTERTARGET="${TARGET%%.*}-filtered.osm.pbf"
+        POSITIVEFILTER=$PTNA_NETWORKS_LOC/general-positive-filter-osmium.txt
+        NEGATIVEFILTER=$PTNA_NETWORKS_LOC/general-negative-filter-osmium.txt
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-filter-extract.sh --positive $POSITIVEFILTER --negative $NEGATIVEFILTER --source $FILTERSOURCE --target $FILTERTARGET'"
 
-        ptna-filter-extract.sh "$TARGET" "$FILTEREDTARGET"
+        ptna-filter-extract.sh --positive "$POSITIVEFILTER" --negative "$NEGATIVEFILTER" --source "$FILTERSOURCE" --target "$FILTERTARGET"
 
         filter_ret=$?
 
         #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-filter-extract.sh returned $filter_ret"
 
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium fileinfo' for '$FILTEREDTARGET'"
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium fileinfo' for '$FILTERTARGET'"
 
-        osmium fileinfo "$FILTEREDTARGET"
+        osmium fileinfo "$FILTERTARGET"
 
         osmium_ret=$?
 
