@@ -63,8 +63,8 @@ then
         then
             FILTERSOURCE="${TARGET%%.*}.osm.pbf"
             FILTERTARGET="${TARGET%%.*}-filtered.osm.pbf"
-            POSITIVEFILTER=$PTNA_NETWORKS_LOC/general-positive-filter-osmium.txt
-            NEGATIVEFILTER=$PTNA_NETWORKS_LOC/general-negative-filter-osmium.txt
+            POSITIVEFILTER=$PTNA_NETWORKS_LOC/general-osmium-positive-filter.txt
+            NEGATIVEFILTER=$PTNA_NETWORKS_LOC/general-osmium-negative-filter.txt
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-filter-extract.sh --positive $POSITIVEFILTER --negative $NEGATIVEFILTER --source $FILTERSOURCE --target $FILTERTARGET'"
 
             ptna-filter-extract.sh --positive "$POSITIVEFILTER" --negative "$NEGATIVEFILTER" --source "$FILTERSOURCE" --target "$FILTERTARGET"

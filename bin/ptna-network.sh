@@ -284,23 +284,23 @@ then
         if [ $AGE_IN_SECS -le 43200 ]        # age is max 12 hours
         then
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Checking for individual 'osmium tags-filter' files ..."
-            if [ -f "$SETTINGS_DIR/osmium-positive-filters.txt" -o -f "$SETTINGS_DIR/osmium-negative-filters.txt" ]
+            if [ -f "$SETTINGS_DIR/osmium-positive-filter.txt" -o -f "$SETTINGS_DIR/osmium-negative-filter.txt" ]
             then
                 PTNA_EXTRACT_FILE_filtered="${PTNA_EXTRACT_FILE%.*}-filtered.$INPUTFORMAT"
                 OSMIUM_MERGE_EXTRACT_INPUT="$PTNA_EXTRACT_FILE_filtered"
                 OSMIUM_CAT_INPUT="$PTNA_EXTRACT_FILE_filtered"
 
-                if [ -f "$SETTINGS_DIR/osmium-positive-filters.txt" -a -f "$SETTINGS_DIR/osmium-negative-filters.txt" ]
+                if [ -f "$SETTINGS_DIR/osmium-positive-filter.txt" -a -f "$SETTINGS_DIR/osmium-negative-filter.txt" ]
                 then
-                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-filter-extract.sh --positive $SETTINGS_DIR/osmium-positive-filters.txt --negative $SETTINGS_DIR/osmium-negative-filters.txt --source $PTNA_EXTRACT_FILE --target $PTNA_EXTRACT_FILE_filtered'"
-                    ptna-filter-extract.sh --positive "$SETTINGS_DIR/osmium-positive-filters.txt" --negative "$SETTINGS_DIR/osmium-negative-filters.txt" --source "$PTNA_EXTRACT_FILE" --target "$PTNA_EXTRACT_FILE_filtered"
-                elif [ -f "$SETTINGS_DIR/osmium-positive-filters.txt" ]
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-filter-extract.sh --positive $SETTINGS_DIR/osmium-positive-filter.txt --negative $SETTINGS_DIR/osmium-negative-filter.txt --source $PTNA_EXTRACT_FILE --target $PTNA_EXTRACT_FILE_filtered'"
+                    ptna-filter-extract.sh --positive "$SETTINGS_DIR/osmium-positive-filter.txt" --negative "$SETTINGS_DIR/osmium-negative-filter.txt" --source "$PTNA_EXTRACT_FILE" --target "$PTNA_EXTRACT_FILE_filtered"
+                elif [ -f "$SETTINGS_DIR/osmium-positive-filter.txt" ]
                 then
-                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-filter-extract.sh --positive $SETTINGS_DIR/osmium-positive-filters.txt --source $PTNA_EXTRACT_FILE --target $PTNA_EXTRACT_FILE_filtered'"
-                    ptna-filter-extract.sh --positive "$SETTINGS_DIR/osmium-positive-filters.txt" --source "$PTNA_EXTRACT_FILE" --target "$PTNA_EXTRACT_FILE_filtered"
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-filter-extract.sh --positive $SETTINGS_DIR/osmium-positive-filter.txt --source $PTNA_EXTRACT_FILE --target $PTNA_EXTRACT_FILE_filtered'"
+                    ptna-filter-extract.sh --positive "$SETTINGS_DIR/osmium-positive-filter.txt" --source "$PTNA_EXTRACT_FILE" --target "$PTNA_EXTRACT_FILE_filtered"
                 else
-                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-filter-extract.sh --negative $SETTINGS_DIR/osmium-negative-filters.txt --source $PTNA_EXTRACT_FILE --target $PTNA_EXTRACT_FILE_filtered'"
-                    ptna-filter-extract.sh --negative "$SETTINGS_DIR/osmium-negative-filters.txt" --source "$PTNA_EXTRACT_FILE" --target "$PTNA_EXTRACT_FILE_filtered"
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-filter-extract.sh --negative $SETTINGS_DIR/osmium-negative-filter.txt --source $PTNA_EXTRACT_FILE --target $PTNA_EXTRACT_FILE_filtered'"
+                    ptna-filter-extract.sh --negative "$SETTINGS_DIR/osmium-negative-filter.txt" --source "$PTNA_EXTRACT_FILE" --target "$PTNA_EXTRACT_FILE_filtered"
                 fi
             else
                 OSMIUM_MERGE_EXTRACT_INPUT="$PTNA_EXTRACT_FILE"
