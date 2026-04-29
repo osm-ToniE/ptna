@@ -349,7 +349,7 @@ then
                                 fi
                                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Size: " $(stat -c '%s' "$WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT") $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT
                                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Size: " $(stat -c '%s' "$OSMIUM_MERGE_EXTRACT_INPUT") $OSMIUM_MERGE_EXTRACT_INPUT
-                                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium merge --verbose --fsync ---output-format=$INPUTFORMAT --overwrite --output=$WORK_LOC/$PREFIX-osmium-merged.osm.pbf -input-format=$INPUTFORMAT $PTNA_EXTRACT_FILE $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT'"
+                                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium merge --verbose --fsync ---output-format=$INPUTFORMAT --overwrite --output=$WORK_LOC/$PREFIX-osmium-merged.osm.pbf -input-format=$INPUTFORMAT $OSMIUM_MERGE_EXTRACT_INPUT $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT'"
                                 osmium merge --verbose --fsync                                                                                           \
                                             --output-format=$INPUTFORMAT --overwrite --output=$WORK_LOC/$PREFIX-osmium-merged.osm.$INPUTFORMAT          \
                                             --input-format=$INPUTFORMAT $OSMIUM_MERGE_EXTRACT_INPUT $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT
