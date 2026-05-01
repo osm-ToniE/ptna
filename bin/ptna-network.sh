@@ -1097,8 +1097,8 @@ then
         fi
         if [ -n "$PTNA_EXTRACT_SOURCE" ]
         then
-            BASENAME=${PTNA_EXTRACT_SOURCE/.osm.*}
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z")  "Searching area file for 'osmium extract': find $PTNA_NETWORKS_LOC -type f -name $BASENAME.geojson -o -name $BASENAME.poly"
+            BASENAME=$(basename ${PTNA_EXTRACT_SOURCE/.osm.*})
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z")  "Searching area file for 'osmium extract': find $PTNA_NETWORKS_LOC -type f -wholename $BASENAME.geojson -o -wholename $BASENAME.poly"
             EXTRACT_SEARCH_AREA=$(find $PTNA_NETWORKS_LOC -type f -name "$BASENAME.geojson" -o -name "$BASENAME.poly")
             if [ -n "$PTNA_EXTRACT_GETIDS" ]
             then
