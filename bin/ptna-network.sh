@@ -1186,13 +1186,28 @@ then
                         then
                             if [ -f "$WORK_LOC/$SAVE_FILE" ]
                             then
-                                htmldiff.pl -c $WORK_LOC/$SAVE_FILE $WORK_LOC/$HTML_FILE > $WORK_LOC/$DIFF_HTML_FILE
-                                HTML_DIFF=$(grep -F -c 'class="diff-' $WORK_LOC/$DIFF_HTML_FILE)
-                                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "HTML diff:  '$HTML_DIFF'"
-                                echo "HTML_DIFF=$HTML_DIFF" >> $WORK_LOC/$DETAILS_FILE
+                                timeout 900 htmldiff.pl -c $WORK_LOC/$SAVE_FILE $WORK_LOC/$HTML_FILE > $WORK_LOC/$DIFF_HTML_FILE
+                                ret_code=$?
+                                if [ $ret_code -eq 124 ]
+                                then
+                                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "htmldiff.pl:  killed after 900 seconds"
+                                    HTML_DIFF=99999999
+                                    rm -f $WORK_LOC/$DIFF_HTML_FILE
+                                else
+                                    HTML_DIFF=$(grep -F -c 'class="diff-' $WORK_LOC/$DIFF_HTML_FILE)
+                                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "HTML diff:  '$HTML_DIFF'"
+                                    echo "HTML_DIFF=$HTML_DIFF" >> $WORK_LOC/$DETAILS_FILE
+                                fi
                             else
-                                htmldiff.pl -c $WORK_LOC/$HTML_FILE $WORK_LOC/$HTML_FILE > $WORK_LOC/$DIFF_HTML_FILE
-                                HTML_DIFF=$DIFF_LINES
+                                timeout 900 htmldiff.pl -c $WORK_LOC/$HTML_FILE $WORK_LOC/$HTML_FILE > $WORK_LOC/$DIFF_HTML_FILE
+                                if [ $ret_code -eq 124 ]
+                                then
+                                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "htmldiff.pl:  killed after 900 seconds"
+                                    HTML_DIFF=99999999
+                                    rm -f $WORK_LOC/$DIFF_HTML_FILE
+                                else
+                                    HTML_DIFF=$DIFF_LINES
+                                fi
                             fi
 
                             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Copying '$WORK_LOC/$DIFF_HTML_FILE' to '$RESULTS_LOC'"
