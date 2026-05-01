@@ -286,7 +286,9 @@ then
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Checking for individual 'osmium tags-filter' files ..."
             if [ -f "$SETTINGS_DIR/osmium-positive-filter.txt" -o -f "$SETTINGS_DIR/osmium-negative-filter.txt" ]
             then
-                PTNA_EXTRACT_FILE_filtered="${PTNA_EXTRACT_FILE%.*}-filtered.$INPUTFORMAT"
+                # next line: just in case, the PTNA-EXTRACT_SOURCE starts with ""../" or an absolute path
+                PTNA_EXTRACT_SOURCE_basename=$(basename $PTNA_EXTRACT_SOURCE)
+                PTNA_EXTRACT_FILE_filtered="$WORK_LOC/${PTNA_EXTRACT_SOURCE_basename%.*}-filtered.$INPUTFORMAT"
                 OSMIUM_MERGE_EXTRACT_INPUT="$PTNA_EXTRACT_FILE_filtered"
                 OSMIUM_CAT_INPUT="$PTNA_EXTRACT_FILE_filtered"
 
