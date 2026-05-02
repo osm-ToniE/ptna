@@ -284,11 +284,13 @@ then
         if [ $AGE_IN_SECS -le 43200 ]        # age is max 12 hours
         then
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Checking for individual 'osmium tags-filter' files ..."
+
+            PTNA_EXTRACT_FILE_filtered="$WORK_LOC/$PREFIX-osmium-filtered.$INPUTFORMAT"
+            rm -f "$PTNA_EXTRACT_FILE_filtered"
             if [ -f "$SETTINGS_DIR/osmium-positive-filter.txt" -o -f "$SETTINGS_DIR/osmium-negative-filter.txt" ]
             then
-                # next line: just in case, the PTNA-EXTRACT_SOURCE starts with ""../" or an absolute path
-                PTNA_EXTRACT_SOURCE_basename=$(basename $PTNA_EXTRACT_SOURCE)
-                PTNA_EXTRACT_FILE_filtered="$WORK_LOC/${PTNA_EXTRACT_SOURCE_basename%.*}-filtered.$INPUTFORMAT"
+                # whatever the PTNA_EXTRACT_FILE name is ($PRIFIX.osm.pbf or ../europe-filtered.osm.pbf, germay.osm.pbf, ...),
+                # the filtered (any created) output file name will depend on $PREFIX
                 OSMIUM_MERGE_EXTRACT_INPUT="$PTNA_EXTRACT_FILE_filtered"
                 OSMIUM_CAT_INPUT="$PTNA_EXTRACT_FILE_filtered"
 
@@ -309,19 +311,21 @@ then
                 OSMIUM_CAT_INPUT="$PTNA_EXTRACT_FILE"
             fi
 
-            rm -f $WORK_LOC/$PREFIX-osmium-merged.osm.$INPUTFORMAT
+            OSMIUM_MERGE_EXTRACT_OUTPUT="$WORK_LOC/$PREFIX-osmium-merged.osm.$INPUTFORMAT"
+            OSMIUM_GETID_ID_FILE="$WORK_LOC/$PREFIX-osmium-getid-id-file.txt"
+            OSMIUM_GETID_OUTPUT="$WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT"
+            rm -f "$OSMIUM_MERGE_EXTRACT_OUTPUT"
             if [ -n "$PTNA_EXTRACT_GETIDS" ]
             then
-                rm -f $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT
                 # This is related to ptna issue #164 "Improve handling of missing/insufficient data when using planet extracts"
                 # Second Step: retrieve missing data using 'osmium getid --id-file ...' and merge into "$WORK_LOC/$PREFIX-osmium-merged.osm.pbf"
                 #
                 # the data retrieved by 'osmium getid ...' will not be filtered -> PTNA reported that they were missing
 
-                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Checking for input file for 'osmium getid --id-file=$WORK_LOC/$PREFIX-osmium-getid-id-file.txt ...'"
-                if [ -f $WORK_LOC/$PREFIX-osmium-getid-id-file.txt -a -s $WORK_LOC/$PREFIX-osmium-getid-id-file.txt ]
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Checking for input file for 'osmium getid --id-file=$OSMIUM_GETID_ID_FILE ...'"
+                if [ -f "$OSMIUM_GETID_ID_FILE" -a -s "$OSMIUM_GETID_ID_FILE" ]
                 then
-                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Lines: " $(wc -l $WORK_LOC/$PREFIX-osmium-getid-id-file.txt)
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Lines: " $(wc -l $OSMIUM_GETID_ID_FILE)
                     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Find parent extract file '$PTNA_EXTRACT_GETIDS.osm.$INPUTFORMAT'"
                     PTNA_EXTRACT_PARENT=$(find $PTNA_WORK_LOC -type f -name "$PTNA_EXTRACT_GETIDS.osm.$INPUTFORMAT" | head -1)
                     if [ -n "$PTNA_EXTRACT_PARENT" ]
@@ -329,11 +333,11 @@ then
                         if [ -f "$PTNA_EXTRACT_PARENT" -a -s "$PTNA_EXTRACT_PARENT" ]
                         then
                             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Size: " $(stat -c '%s' "$PTNA_EXTRACT_PARENT") $PTNA_EXTRACT_PARENT
-                            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium getid --verbose --verbose-ids --default-type=relation --add-referenced --fsync --id-file=$WORK_LOC/$PREFIX-osmium-getid-id-file.txt --output-format=$INPUTFORMAT --overwrite --output $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT --input-format=pbf $PTNA_EXTRACT_PARENT"
-                            osmium getid --verbose --verbose-ids --default-type=relation --add-referenced --fsync                                  \
-                                        --id-file=$WORK_LOC/$PREFIX-osmium-getid-id-file.txt                                        \
-                                        --output-format=$INPUTFORMAT --overwrite --output $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT    \
-                                        --input-format=pbf $PTNA_EXTRACT_PARENT
+                            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium getid --verbose --verbose-ids --default-type=relation --add-referenced --fsync --id-file=$OSMIUM_GETID_ID_FILE --output-format=$INPUTFORMAT --overwrite --output $OSMIUM_GETID_OUTPUT --input-format=pbf $PTNA_EXTRACT_PARENT"
+                            osmium getid --verbose --verbose-ids --default-type=relation --add-referenced --fsync                                   \
+                                         --id-file=$OSMIUM_GETID_ID_FILE                                                                            \
+                                         --output-format=$INPUTFORMAT --overwrite --output $OSMIUM_GETID_OUTPUT                                     \
+                                         --input-format=pbf $PTNA_EXTRACT_PARENT
                             osmium_ret=$?
                             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret (0 == all found, 1 == not all found, 2 == problems with command line arguments)"
                             if [ $osmium_ret -lt 2 ]
@@ -349,23 +353,23 @@ then
                                 else
                                     ERROR_GETID_NOTFOUND=0
                                 fi
-                                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Size: " $(stat -c '%s' "$WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT") $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT
+                                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Size: " $(stat -c '%s' "$OSMIUM_GETID_OUTPUT") $OSMIUM_GETID_OUTPUT
                                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Size: " $(stat -c '%s' "$OSMIUM_MERGE_EXTRACT_INPUT") $OSMIUM_MERGE_EXTRACT_INPUT
-                                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium merge --verbose --fsync ---output-format=$INPUTFORMAT --overwrite --output=$WORK_LOC/$PREFIX-osmium-merged.osm.pbf -input-format=$INPUTFORMAT $OSMIUM_MERGE_EXTRACT_INPUT $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT'"
-                                osmium merge --verbose --fsync                                                                                           \
-                                            --output-format=$INPUTFORMAT --overwrite --output=$WORK_LOC/$PREFIX-osmium-merged.osm.$INPUTFORMAT          \
-                                            --input-format=$INPUTFORMAT $OSMIUM_MERGE_EXTRACT_INPUT $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT
+                                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium merge --verbose --fsync ---output-format=$INPUTFORMAT --overwrite --output=$OSMIUM_MERGE_EXTRACT_OUTPUT -input-format=$INPUTFORMAT $OSMIUM_MERGE_EXTRACT_INPUT $OSMIUM_GETID_OUTPUT'"
+                                osmium merge --verbose --fsync                                                                       \
+                                             --output-format=$INPUTFORMAT --overwrite --output=$OSMIUM_MERGE_EXTRACT_OUTPUT          \
+                                             --input-format=$INPUTFORMAT $OSMIUM_MERGE_EXTRACT_INPUT $OSMIUM_GETID_OUTPUT
                                 osmium_ret=$?
                                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret (0 == all OK, 1 == error processing data, 2 == problems with command line arguments)"
                                 if [ $osmium_ret -eq 0 ]
                                 then
-                                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Size: " $(stat -c '%s' "$WORK_LOC/$PREFIX-osmium-merged.osm.$INPUTFORMAT") $WORK_LOC/$PREFIX-osmium-merged.osm.$INPUTFORMAT
-                                    OSMIUM_CAT_INPUT="$WORK_LOC/$PREFIX-osmium-merged.osm.$INPUTFORMAT"
+                                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Size: " $(stat -c '%s' "$OSMIUM_GETID_OUTPUT") $OSMIUM_GETID_OUTPUT
+                                    OSMIUM_CAT_INPUT="$OSMIUM_GETID_OUTPUT"
                                 else
-                                    rm -f $WORK_LOC/$PREFIX-osmium-merged.osm.$INPUTFORMAT
+                                    rm -f $OSMIUM_GETID_OUTPUT
                                 fi
                             fi
-                            rm -f $WORK_LOC/$PREFIX-osmium-getid.osm.$INPUTFORMAT
+                            rm -f $OSMIUM_GETID_OUTPUT
                         else
                             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Nothing to do: extract file '$PTNA_EXTRACT_PARENT' is not a file or empty"
                         fi
@@ -373,11 +377,15 @@ then
                         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Nothing to do: extract file '$PTNA_EXTRACT_GETIDS.osm.$INPUTFORMAT' not found in '$PTNA_WORK_LOC'"
                     fi
                 else
-                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Nothing to do: file '$WORK_LOC/$PREFIX-osmium-getid-id-file.txt' does not exist or is empty"
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Nothing to do: file '$OSMIUM_GETID_ID_FILE' does not exist or is empty"
                 fi
             fi
 
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium cat --clean user --clean version --clean timestamp --clean uid --clean changeset ... $OSMIUM_CAT_INPUT ...' and add timestamp '$TS' to output file"
+            #
+            # now convert the input data (usually *.pbf*) into the output data (usually *.xml) and add the Timestamp and Copyright information
+            #
+            rm -f "$OSM_XML_FILE_ABSOLUTE"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium cat --clean user --clean version --clean timestamp --clean uid --clean changeset ... $OSMIUM_CAT_INPUT ... --output $OSM_XML_FILE_ABSOLUTE' and add timestamp '$TS' to output file"
             osmium cat --clean user --clean version --clean timestamp --clean uid --clean changeset --fsync                                       \
                         --output-header="generator=https://ptna.openstreetmap.de osmosis_replication_timestamp=$TS copyright=$OSM_DATA_COPYRIGHT" \
                         --input-format "$INPUTFORMAT" "$OSMIUM_CAT_INPUT"                                                                         \
@@ -386,6 +394,10 @@ then
             osmium_ret=$?
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret (0 == all OK, 1 == error processing data, 2 == problems with command line arguments)"
 
+            #
+            # finally, check if the output of the commands exists and has a reasonable size
+            # if not, configure using Overpass-API
+            #
             if [ -f "$OSM_XML_FILE_ABSOLUTE" -a -s "$OSM_XML_FILE_ABSOLUTE" ]
             then
                 fsize=$(stat -c '%s' "$OSM_XML_FILE_ABSOLUTE")
