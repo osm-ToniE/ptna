@@ -363,10 +363,10 @@ then
                                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret (0 == all OK, 1 == error processing data, 2 == problems with command line arguments)"
                                 if [ $osmium_ret -eq 0 ]
                                 then
-                                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Size: " $(stat -c '%s' "$OSMIUM_GETID_OUTPUT") $OSMIUM_GETID_OUTPUT
-                                    OSMIUM_CAT_INPUT="$OSMIUM_GETID_OUTPUT"
+                                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Size: " $(stat -c '%s' "$OSMIUM_MERGE_EXTRACT_OUTPUT") $OSMIUM_MERGE_EXTRACT_OUTPUT
+                                    OSMIUM_CAT_INPUT="$OSMIUM_MERGE_EXTRACT_OUTPUT"
                                 else
-                                    rm -f $OSMIUM_GETID_OUTPUT
+                                    rm -f $OSMIUM_MERGE_EXTRACT_OUTPUT
                                 fi
                             fi
                             rm -f $OSMIUM_GETID_OUTPUT
