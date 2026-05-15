@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo $(date "+%Y-%m-%d %H:%M:%S %Z") "start: ptna-cron-western-america.sh"
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "start: $(basename $0)"
 
 # source $HOME/.ptna-config to overwrite the settings above
 # and mybe to set some perl related variables (copied from .bashrc)
@@ -61,13 +61,13 @@ do
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-timezone.sh $utc"
 
     ptna-handle-timezone.sh $utc > $PTNA_WORK_LOC/ptna-handle-timezone-$utc.log 2>&1 < /dev/null
-
 done
 
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "removing no longer needed '*.pbf'"
+# central-america-filtered.osm.pbf, north-america-filtered.osm.pbf and south-america-filtered.osm.pbf may be deleted
 for pbf in $(find $PTNA_WORK_LOC -name '*.osm.pbf' | grep -E -v 'africa|america\.|asia|europe|oceania|russia')
 do
     #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "remove '$pbf', we don't need that any longer"
@@ -76,4 +76,4 @@ done
 
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
-echo $(date "+%Y-%m-%d %H:%M:%S %Z") "done: ptna-cron-western-america.sh"
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "done: $(basename $0)"
