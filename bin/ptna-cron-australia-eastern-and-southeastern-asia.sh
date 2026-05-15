@@ -43,9 +43,9 @@ else
 
     rm -f $PTNA_WORK_LOC/ptna-handle-planet-UTC+10.log
 
-    # first time handling of ozeania, so overwrite log file
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh ozeania"
-    ptna-handle-continent.sh ozeania > $PTNA_WORK_LOC/ptna-handle-continent-ozeania.log 2>&1 < /dev/null &
+    # first time handling of oceania, so overwrite log file
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh oceania"
+    ptna-handle-continent.sh oceania > $PTNA_WORK_LOC/ptna-handle-continent-oceania.log 2>&1 < /dev/null &
 
     # first time handling of asia, so overwrite log file
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh asia"
