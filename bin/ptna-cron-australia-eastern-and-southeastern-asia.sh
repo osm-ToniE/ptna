@@ -58,7 +58,7 @@ fi
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
-# when finished, start analysis of timezones (which include further extracts in e.g. UTC+01/*-osimium.config)
+# when finished, start analysis of timezones (which include further extracts in e.g. UTC+10/*-osimium.config)
 
 for utc in UTC+10 UTC+09.30 UTC+08 UTC+07
 do
