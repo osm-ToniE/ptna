@@ -1741,20 +1741,11 @@ printf STDERR "%s Printed those with life-cycle prefix: %d\n", get_time(), $numb
 
 printf STDERR "%s Printing suspicious\n", get_time()       if ( $verbose );
 
-printTableInitialization( 'relation', 'type', 'route_type', 'ref', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'public_transport' );
-$section = 'suspicious';
-
-my @suspicious_relations = sort( keys( %suspicious_relations ) );
+my @suspicious_relations       = sort( keys( %suspicious_relations ) );
+my @print_suspicious_relations = ();
+my @skip_suspicious_relations  = ();
 
 if ( scalar(@suspicious_relations) ) {
-
-    $number_of_suspicious_relations = 0;
-
-    printHeader( gettext('More Relations'), 1, 'morerelations' );
-
-    printHintSuspiciousRelations();
-
-    printTableHeader( 'relation' => 'number', 'ref' => 'number' );
 
     my $print_it = 0;
 
@@ -1783,6 +1774,26 @@ if ( scalar(@suspicious_relations) ) {
         }
 
         if ( $print_it ) {
+            push( @print_suspicious_relations, $relation_id );
+        } else {
+            push( @skip_suspicious_relations, $relation_id );
+        }
+    }
+
+    if ( scalar(@print_suspicious_relations) ) {
+
+        printTableInitialization( 'relation', 'type', 'route_type', 'ref', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'public_transport' );
+        $section = 'suspicious';
+
+        printHeader( gettext('More Relations'), 1, 'morerelations' );
+
+        printHintSuspiciousRelations();
+
+        printTableHeader( 'relation' => 'number', 'ref' => 'number' );
+
+        foreach $relation_id ( @print_suspicious_relations ) {
+            $relation_ptr = $RELATIONS{$relation_id};
+
             printTableLine( 'relation'          =>    $relation_id,
                             'type'              =>    getRelationType( $relation_ptr ),
                             'route_type'        =>    getRelationRouteType( $relation_ptr ),
@@ -1796,13 +1807,16 @@ if ( scalar(@suspicious_relations) ) {
                             'PTv'               =>    $relation_ptr->{'tag'}->{'public_transport:version'},
                             'public_transport'  =>    $relation_ptr->{'tag'}->{'public_transport'},
                         );
-            $number_of_suspicious_relations++;
         }
     }
     printTableFooter();
+
+    if  ( scalar(@skip_suspicious_relations) ) {
+        printf STDERR "%s Not printed suspicious relations: %s\n", get_time(), join(' ',@skip_suspicious_relations);
+    }
 }
 
-printf STDERR "%s Printed suspicious: %d out of %d candidates\n", get_time(), $number_of_suspicious_relations, scalar(@suspicious_relations)       if ( $verbose );
+printf STDERR "%s Printed suspicious: %d out of %d candidates\n", get_time(), scalar(@print_suspicious_relations), scalar(@suspicious_relations)       if ( $verbose );
 
 
 #############################################################################################
