@@ -1,1 +1,1 @@
-
+id,prepared,aggregated,analyzed,normalized,release_date
