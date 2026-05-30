@@ -35,6 +35,8 @@ then
 
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start handling planet file in '$PWD'"
 
+    touch $TARGET
+
     if [ ! -f "$TARGET" -o $(stat -c '%s' $TARGET) -lt 4096 ]
     then
         #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-get-extract.sh $BASEURL $SOURCE $TARGET"
