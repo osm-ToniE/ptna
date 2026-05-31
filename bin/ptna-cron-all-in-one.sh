@@ -34,47 +34,23 @@ echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
 if [ -f $PTNA_WORK_LOC/update-from-planet ]
 then
-    rm -f $PTNA_WORK_LOC/ptna-handle-continent-oceania.log
-    rm -f $PTNA_WORK_LOC/ptna-handle-continent-asia.log
     rm -f $PTNA_WORK_LOC/ptna-handle-continent-africa.log
-    rm -f $PTNA_WORK_LOC/ptna-handle-continent-europe.log
     rm -f $PTNA_WORK_LOC/ptna-handle-continent-central-america.log
     rm -f $PTNA_WORK_LOC/ptna-handle-continent-north-america.log
     rm -f $PTNA_WORK_LOC/ptna-handle-continent-south-america.log
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-planet.sh UTC+10"
-    ptna-handle-planet.sh UTC+10 > $PTNA_WORK_LOC/ptna-handle-planet-UTC+10.log 2>&1 < /dev/null
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-planet.sh UTC+05.30"
-    ptna-handle-planet.sh UTC+05.30 > $PTNA_WORK_LOC/ptna-handle-planet-UTC+05.30.log 2>&1 < /dev/null
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-planet.sh UTC+03"
-    ptna-handle-planet.sh UTC+03 > $PTNA_WORK_LOC/ptna-handle-planet-UTC+03.log 2>&1 < /dev/null
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-planet.sh UTC-03"
-    ptna-handle-planet.sh UTC-03 > $PTNA_WORK_LOC/ptna-handle-planet-UTC-03.log 2>&1 < /dev/null
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-planet.sh UTC-07"
-    ptna-handle-planet.sh UTC-07 > $PTNA_WORK_LOC/ptna-handle-planet-UTC-07.log 2>&1 < /dev/null
+    rm -f $PTNA_WORK_LOC/ptna-handle-continent-asia.log
+    rm -f $PTNA_WORK_LOC/ptna-handle-continent-europe.log
+    rm -f $PTNA_WORK_LOC/ptna-handle-continent-oceania.log
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-planet.sh UTC-all"
+    ptna-handle-planet.sh UTC-all > $PTNA_WORK_LOC/ptna-handle-planet-UTC-all.log 2>&1 < /dev/null
 else
     # update from continent extracts from other server
 
-    rm -f $PTNA_WORK_LOC/ptna-handle-planet-UTC+10.log
-    rm -f $PTNA_WORK_LOC/ptna-handle-planet-UTC+05.30.log
-    rm -f $PTNA_WORK_LOC/ptna-handle-planet-UTC+03.log
-    rm -f $PTNA_WORK_LOC/ptna-handle-planet-UTC-03.log
-    rm -f $PTNA_WORK_LOC/ptna-handle-planet-UTC-07.log
+    rm -f $PTNA_WORK_LOC/ptna-handle-planet-UTC-all.log
 
-    # first time handling of oceania, so overwrite log file
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh oceania"
-    ptna-handle-continent.sh oceania > $PTNA_WORK_LOC/ptna-handle-continent-oceania.log 2>&1 < /dev/null
-
-    # first time handling of asia, so overwrite log file
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh asia"
-    ptna-handle-continent.sh asia    > $PTNA_WORK_LOC/ptna-handle-continent-asia.log    2>&1 < /dev/null
-
-    # first time handling of  africa, so overwrite log file
+    # first time handling of africa, so overwrite log file
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh africa"
     ptna-handle-continent.sh africa > $PTNA_WORK_LOC/ptna-handle-continent-africa.log 2>&1 < /dev/null
-
-    # first time handling of europe, so overwrite log file
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh europe"
-    ptna-handle-continent.sh europe >  $PTNA_WORK_LOC/ptna-handle-continent-europe.log 2>&1 < /dev/null
 
     # first time handling of central america, so overwrite log file
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh central-america"
@@ -87,6 +63,18 @@ else
     # first time handling of south america, so overwrite log file
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh south-america"
     ptna-handle-continent.sh south-america   > $PTNA_WORK_LOC/ptna-handle-continent-south-america.log     2>&1 < /dev/null
+
+    # first time handling of asia, so overwrite log file
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh asia"
+    ptna-handle-continent.sh asia    > $PTNA_WORK_LOC/ptna-handle-continent-asia.log    2>&1 < /dev/null
+
+    # first time handling of europe, so overwrite log file
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh europe"
+    ptna-handle-continent.sh europe >  $PTNA_WORK_LOC/ptna-handle-continent-europe.log 2>&1 < /dev/null
+
+    # first time handling of oceania, so overwrite log file
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh oceania"
+    ptna-handle-continent.sh oceania > $PTNA_WORK_LOC/ptna-handle-continent-oceania.log 2>&1 < /dev/null
 
 fi
 
@@ -107,9 +95,9 @@ echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "removing no longer needed '*.pbf'"
 # *-filtered.osm.pbf may be deleted
-for pbf in $(find $PTNA_WORK_LOC -name '*.osm.pbf' | grep -E -v 'africa\.|america\.|asia\.|europe\.|oceania\.|russia\.')
+for pbf in $(find $PTNA_WORK_LOC -name '*.osm.pbf' | sort | grep -E -v 'planet\.|africa\.|america\.|asia\.|europe\.|oceania\.|russia\.')
 do
-    #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "remove '$pbf', we don't need that any longer"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "remove '$pbf', we don't need that any longer"
     rm -f "$pbf"
 done
 
