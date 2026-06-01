@@ -1,0 +1,58 @@
+#!/bin/bash
+
+ERRORS=0
+
+#######################################################################
+#
+# script to test PTv1 compatibility
+
+if [ -n "$1" ]
+then
+    TESTFILE=$1
+    TEST=$(basename $TESTFILE .osm)   # strip '.osm' from end of file name (if exists)
+    TEST=$(basename $TEST     .xml)   # strip '.xml' from end of file name (if exists)
+
+    ROUTES_OPTION=""
+    if [ -f "$TEST-Routes.txt" ]
+    then
+        ROUTES_OPTION="--routes-file=$TEST-Routes.txt"
+    fi
+
+    EXCLUDE_OPTIONS="--exclude-if-key-value 'gtfs:feed=DE-BY-MVV'    \
+                     --exclude-if-key-value \"gtfs:feed=DE-BY-MVG\"  \
+                     --exclude-if-key-value gtfs:feed=DE-BY-RVO      \
+                     --exclude-if-key-value=key=value                \
+                     --exclude-if-key-value obsolete"
+
+    ptna-routes.pl --timezone="Europe/Berlin" $EXCLUDE_OPTIONS --ptv1-compatibility=allow --max-error=10 --check-access --check-name --check-from-to --check-via --check-stop-position --check-sequence --check-version --check-motorway-link \
+                   --multiple-ref-type-entries=analyze --positive-notes --coloured-sketchline --verbose --debug --relaxed-begin-end-for=train \
+                   --table-show-also=from,via,to --test --osm-xml-file=$TESTFILE $ROUTES_OPTION > $TEST.html 2> $TEST.log
+
+    if [ -e $TEST.expect -a -s $TEST.html ]
+    then
+        diff $TEST.expect $TEST.html > $TEST.diff
+
+        if [ -s $TEST.diff ]
+        then
+            echo -e "failed with diff\t$TEST"
+            htmldiff.pl $TEST.expect $TEST.html > $TEST.diff.html
+            ERRORS=$(( $ERRORS + 1 ))
+        else
+            rm -f $TEST.diff $TEST.diff.html
+            echo -e "passed\t\t\t$TEST"
+        fi
+    else
+        echo -e "failed\t\t\t$TEST"
+        ERRORS=$(( $ERRORS + 1 ))
+    fi
+
+else
+
+    echo -e "failed\t\t\tParameter: 'test file' not sprcified"
+    ERRORS=$(( $ERRORS + 1 ))
+
+fi
+
+#######################################################################
+
+exit $ERRORS
