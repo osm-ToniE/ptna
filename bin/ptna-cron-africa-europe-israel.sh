@@ -83,7 +83,7 @@ echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "removing no longer needed '*.pbf'"
 # africa-filtered.osm.pbf, asia-filtered.osm.pbf and europe-filtered.osm.pbf may be deleted
-for pbf in $(find $PTNA_WORK_LOC -name '*.osm.pbf' | grep -E -v 'africa\.|america|asia\.|europe\.|oceania|russia')
+for pbf in $(find $PTNA_WORK_LOC -name '*.osm.pbf' | grep -E -v 'planet\.|africa\.|america|asia\.|europe\.|oceania|russia')
 do
     #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "remove '$pbf', we don't need that any longer"
     rm -f "$pbf"
