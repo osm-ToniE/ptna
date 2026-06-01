@@ -121,6 +121,7 @@ my $check_stop_position             = undef;
 my $check_version                   = undef;
 my $check_via                       = undef;
 my $check_way_type                  = undef;
+my @exclude_if_key_value_opt        = ();
 my $expect_network_long             = undef;
 my $expect_network_long_as          = undef;
 my $expect_network_long_for         = undef;
@@ -176,6 +177,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'check-via:s'                   =>  \$check_via,                    # --check-via                       check 'via' against corresponding 'name' of platforms
             'check-way-type'                =>  \$check_way_type,               # --check-way-type                  check for routes: do vehicles use the right way type
             'coloured-sketchline'           =>  \$coloured_sketchline,          # --coloured-sketchline             force SketchLine to print coloured icons
+            'exclude-if-key-value=s@'       =>  \@exclude_if_key_value_opt,     # --exclude-if-key-vallue gtfs:feed=DE-BY-MVV exclude all relations with this key=valeu pair
             'expect-network-long'           =>  \$expect_network_long,          # --expect-network-long             note if 'network' is not long form in general
             'expect-network-long-as:s'      =>  \$expect_network_long_as,       # --expect-network-long-as="Münchner Verkehrs- und Tarifverbund|Biberger Bürgerbus"
             'expect-network-long-for:s'     =>  \$expect_network_long_for,      # --expect-network-long-for="MVV|BBB"         note if 'network' is not long form for ...
@@ -293,6 +295,8 @@ unless ( $opt_gtfs_feed ) {
     $opt_gtfs_feed = $network_guid;
 }
 
+my %excluded_key_value_relations    = ();
+
 
 if ( $verbose ) {
     printf STDERR "%s ptna-routes.pl -v\n", get_time();
@@ -321,6 +325,26 @@ if ( $verbose ) {
     printf STDERR "%20s--check-via='%s'\n",                ' ', $check_via                  ? $check_via    : 'OFF';
     printf STDERR "%20s--check-way-type='%s'\n",           ' ', $check_way_type             ? 'ON'          : 'OFF';
     printf STDERR "%20s--coloured-sketchline='%s'\n",      ' ', $coloured_sketchline        ? 'ON'          : 'OFF';
+    if ( scalar(@exclude_if_key_value_opt)) {
+        foreach my $key_value ( sort(@exclude_if_key_value_opt) ) {
+            if ( $key_value ) {
+                $key_value =~ s/^"(.*)"$/$1/;
+                $key_value =~ s/^'(.*)'$/$1/;
+                if ( $key_value =~ m/^(.+?)=(.+)$/ ) {
+                    printf STDERR "%20s--exclude-if-key-value='%s=%s'\n", ' ', $1, $2;
+                    $excluded_key_value_relations{$1}{$2} = {};
+                    printf STDERR "\$excluded_key_value_relations{%s}{%s} = {}\n ", $1, $2           if ( $debug );
+                } else {
+                    printf STDERR "%20s--exclude-if-key-value='%s'\n", ' ', $key_value;
+                    printf STDERR "Error: missing value for key '%s'\n", $key_value;
+                }
+            } else {
+                printf STDERR "%20s--exclude-if-key-value=''\n", ' ';
+            }
+        }
+    } else {
+        printf STDERR "%20s--exclude-if-key-value\n", ' ';
+    }
     printf STDERR "%20s--expect-network-long='%s'\n",      ' ', $expect_network_long        ? 'ON'          : 'OFF';
     printf STDERR "%20s--expect-network-long-as='%s'\n",   ' ', $expect_network_long_as     ? $expect_network_long_as      : '';
     printf STDERR "%20s--expect-network-long-for='%s'\n",  ' ', $expect_network_long_for    ? $expect_network_long_for     : '';
