@@ -37,6 +37,11 @@ then
     rm -f $PTNA_WORK_LOC/ptna-handle-continent-africa.log
     rm -f $PTNA_WORK_LOC/ptna-handle-continent-asia.log
     rm -f $PTNA_WORK_LOC/ptna-handle-continent-europe.log
+    for utc in UTC+03 UTC+02 UTC+01 UTC+00
+    do
+        rm -f $PTNA_WORK_LOC/ptna-handle-timezone-$utc.log
+    done
+
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-planet.sh UTC+03"
     ptna-handle-planet.sh UTC+03 > $PTNA_WORK_LOC/ptna-handle-planet-UTC+03.log 2>&1 < /dev/null
 else

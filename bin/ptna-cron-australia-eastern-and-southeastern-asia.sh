@@ -36,6 +36,11 @@ if [ -f $PTNA_WORK_LOC/update-from-planet ]
 then
     rm -f $PTNA_WORK_LOC/ptna-handle-continent-asia.log
     rm -f $PTNA_WORK_LOC/ptna-handle-continent-oceania.log
+    for utc in UTC+10 UTC+09.30 UTC+08 UTC+07
+    do
+        rm -f $PTNA_WORK_LOC/ptna-handle-timezone-$utc.log
+    done
+
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-planet.sh UTC+10"
     ptna-handle-planet.sh UTC+10 > $PTNA_WORK_LOC/ptna-handle-planet-UTC+10.log 2>&1 < /dev/null
 else

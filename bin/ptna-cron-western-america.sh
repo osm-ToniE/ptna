@@ -35,6 +35,11 @@ echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 if [ -f $PTNA_WORK_LOC/update-from-planet ]
 then
     rm -f $PTNA_WORK_LOC/ptna-handle-continent-north-america.log
+    for utc in UTC-07 UTC-08 UTC-09
+    do
+        rm -f $PTNA_WORK_LOC/ptna-handle-timezone-$utc.log
+    done
+
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-planet.sh UTC-07"
     ptna-handle-planet.sh UTC-07 > $PTNA_WORK_LOC/ptna-handle-planet-UTC-07.log 2>&1 < /dev/null
 
