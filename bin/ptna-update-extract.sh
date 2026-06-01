@@ -20,7 +20,8 @@ then
 
         py_ret=1  # we want more data
         while [ $py_ret -eq 1 ]; do
-            pyosmium-up-to-date -v "$SOURCE"
+            # download max 10G in evety step (defaults to 1G)
+            pyosmium-up-to-date -v --size=10000 "$SOURCE"
             py_ret=$?
         done
 
