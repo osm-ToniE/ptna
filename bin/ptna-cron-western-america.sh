@@ -38,6 +38,7 @@ then
     for utc in UTC-07 UTC-08 UTC-09
     do
         rm -f $PTNA_WORK_LOC/ptna-handle-timezone-$utc.log
+        rm -f $PTNA_WORK_LOC/log/ptna-*-$utc.log
     done
 
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-planet.sh UTC-07"
