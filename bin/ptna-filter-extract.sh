@@ -17,6 +17,8 @@ while true ; do
     esac
 done
 
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "start: $(basename $0) $*"
+
 if [ -n "$SOURCE" -a -f "$SOURCE" -a -s "$SOURCE" -a -n "$TARGET" ]
 then
     INPUTFORMAT="${SOURCE##*.}"
@@ -127,5 +129,7 @@ else
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "There is no source file and/or no target file specified or source file is empty"
     exit 1
 fi
+
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "done: $(basename $0) $*"
 
 exit 0

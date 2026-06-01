@@ -14,6 +14,8 @@ SOURCE="$1"
 # example for state   'bavaria' in 'germany': /osm/ptna/ptna-networks/UTC+01/DE/BY/osmium.config
 CONFIG="$2"
 
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "start: $(basename $0) $*"
+
 if [ -n "$SOURCE" -a -f "$SOURCE" -a -s "$SOURCE" -a -n "$CONFIG" -a -f "$CONFIG" -a -s "$CONFIG" ]
 then
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Split extract: call 'osmium extract' for '$SOURCE' and '$CONFIG'"
@@ -28,6 +30,8 @@ then
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret"
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
+
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "done: $(basename $0) $*"
 
     exit $osmium_ret
 else

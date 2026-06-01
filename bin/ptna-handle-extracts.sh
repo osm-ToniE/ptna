@@ -8,7 +8,7 @@ NETWORKDIR="${1%/}"
 
 if [ -n "$NETWORKDIR" -a -d "$NETWORKDIR" ]
 then
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start handling planet extracts for '$NETWORKDIR' in '$PWD'"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "start: $(basename $0) $* for '$NETWORKDIR' in '$PWD'"
 
     for setting in $(find "$NETWORKDIR" -maxdepth 1 -type f -name '*-extract-settings.sh')
     do
@@ -95,7 +95,7 @@ then
         fi
     done
 
-    #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "End handling planet extracts for '$NETWORKDIR' in '$PWD'"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "done: $(basename $0) $* for '$NETWORKDIR' in '$PWD'"
 
 else
     if [ -n "$NETWORKDIR" ]

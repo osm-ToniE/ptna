@@ -33,9 +33,12 @@ if [ -d "$PTNA_WORK_LOC" ]
 then
     cd "$PTNA_WORK_LOC"
 
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start handling planet file in '$PWD'"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "start: $(basename $0) $* in '$PWD'"
 
     touch $TARGET
+
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Planet file in '$PWD'"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(ls -l $TARGET)"
 
     if [ ! -f "$TARGET" -o $(stat -c '%s' $TARGET) -lt 4096 ]
     then
@@ -110,6 +113,9 @@ then
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "No preparation for a timezome, and no filtering of planet data"
         rm -f "$FILTERTARGET"
     fi
+
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "done: $(basename $0)"
+
 else
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'$PTNA_WORK_LOC' does not exist"
     exit 1

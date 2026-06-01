@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo $(date "+%Y-%m-%d %H:%M:%S %Z") "start: $(basename $0)"
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "start: $(basename $0) $*"
 
 # source $HOME/.ptna-config to overwrite the settings above
 # and mybe to set some perl related variables (copied from .bashrc)

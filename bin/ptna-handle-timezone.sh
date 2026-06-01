@@ -81,7 +81,7 @@ then
 
         LOGFILE=${PTNA_WORK_LOC}/log/ptna-all-networks-$LOGFILE_SUFFIX.log
 
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start Cron Job"                >  $LOGFILE
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "start: $(basename $0) $*" > $LOGFILE
 
         if [ "$1" = "UTC+01" -a "$(date '+%H')" = "02" ]
         then
@@ -207,7 +207,7 @@ then
 
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"    >> $LOGFILE
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"               >> $LOGFILE
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Cron Job finished"                >> $LOGFILE
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "done: $(basename $0)"             >> $LOGFILE
 
     else
         echo "directory $PTNA_WORK_LOC does not exist ... terminating"

@@ -4,7 +4,7 @@ BASEURL="${1%/}"
 SOURCE="$2"
 TARGET="$3"
 
-echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Get extract: call wget for '$TARGET' from '$BASEURL/$SOURCE'"
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "start: $(basename $0) call wget for '$TARGET' from '$BASEURL/$SOURCE'"
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
@@ -33,6 +33,8 @@ then
     osmium_ret=$?
 
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret"
+
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "done: $(basename $0)"
 
     exit $osmium_ret
 else

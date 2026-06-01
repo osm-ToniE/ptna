@@ -2,6 +2,8 @@
 
 SOURCE="$1"
 
+echo $(date "+%Y-%m-%d %H:%M:%S %Z") "start: $(basename $0) $* in '$PWD'"
+
 if [ -n "$SOURCE" -a -f "$SOURCE" -a -s "$SOURCE" ]
 then
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Update extract: call 'osmium fileinfo' for '$SOURCE'"
@@ -38,6 +40,8 @@ then
             osmium_ret=$?
 
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret"
+
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "done: $(basename $0) $*"
 
             exit $osmium_ret
         else

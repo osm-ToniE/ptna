@@ -33,7 +33,7 @@ if [ -d "$PTNA_WORK_LOC" ]
 then
     cd "$PTNA_WORK_LOC"
 
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start handling continent file '$PREPARE_FOR_CONTINENT' in '$PWD'"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "start: $(basename $0) $* in '$PWD'"
 
     if [ ! -f "$TARGET" ]
     then
@@ -89,6 +89,8 @@ then
 
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret"
     fi
+
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "done: $(basename $0)"
 
 else
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'$PTNA_WORK_LOC' does not exist"
