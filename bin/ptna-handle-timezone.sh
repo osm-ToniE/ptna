@@ -196,14 +196,12 @@ then
 
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start clean-up" >> $LOGFILE
 
-        #if [ "$(date '+%u')" = "7" ]    # = Sunday
-        #then
-        #    # on Sundays, do not delete the downloaded XML data
-        #
-        #    ptna-all-networks-parallel.sh -lc  >> $LOGFILE 2>&1 < /dev/null
-        #else
+        if [ "$HOSTNAME" = "quiety" ]
+        then
+            ptna-all-networks-parallel.sh -lc  >> $LOGFILE 2>&1 < /dev/null
+        else
             ptna-all-networks-parallel.sh -lcC >> $LOGFILE 2>&1 < /dev/null
-        #fi
+        fi
 
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"    >> $LOGFILE
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"               >> $LOGFILE
