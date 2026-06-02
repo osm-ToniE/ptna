@@ -393,6 +393,7 @@ then
 
             osmium_ret=$?
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret (0 == all OK, 1 == error processing data, 2 == problems with command line arguments)"
+            rm -f $PTNA_EXTRACT_FILE_filtered
 
             #
             # finally, check if the output of the commands exists and has a reasonable size
