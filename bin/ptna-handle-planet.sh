@@ -35,7 +35,10 @@ then
 
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "start: $(basename $0) $* in '$PWD'"
 
-    touch $TARGET
+    if [ ! -f "$TARGET" ] then
+        # esure, file exists
+        touch $TARGET
+    fi
 
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Planet file in '$PWD'"
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(ls -l $TARGET)"
