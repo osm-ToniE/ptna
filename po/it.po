@@ -4,17 +4,17 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Marco <marcxosm@gmail.com>, 2019
 # ToniE <osm-ToniE@web.de>, 2023
+# Marco <marcxosm@gmail.com>, 2026
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2025-07-14 17:51+0200\n"
+"POT-Creation-Date: 2026-04-22 16:15+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
-"Last-Translator: ToniE <osm-ToniE@web.de>, 2023\n"
+"Last-Translator: Marco <marcxosm@gmail.com>, 2026\n"
 "Language-Team: Italian (https://app.transifex.com/jungle-bus/teams/97874/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,28 +23,28 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 msgid "Message"
-msgstr ""
+msgstr "Messaggio"
 
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 msgid "Option"
-msgstr ""
+msgstr "Opzione"
 
 msgid "Description"
-msgstr ""
+msgstr "Descrizione"
 
 msgid "How to fix it"
-msgstr ""
+msgstr "Come risolverlo"
 
 msgid "Image"
-msgstr ""
+msgstr "Immagine"
 
 msgid "Default Value"
-msgstr ""
+msgstr "Valore predefinito"
 
 msgid "Language test"
-msgstr ""
+msgstr "Test della lingua"
 
 msgid "Line (ref=)"
 msgstr "Linea (ref=)"
@@ -107,13 +107,19 @@ msgid "GTFS feed"
 msgstr ""
 
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 msgid "GTFS feed from"
 msgstr ""
 
 msgid "Date from"
-msgstr ""
+msgstr "Data dal"
+
+msgid "Conditional Access"
+msgstr "Accesso condizionale"
+
+msgid "Ways"
+msgstr "Percorsi"
 
 msgid "Bus"
 msgstr "Bus"
@@ -182,7 +188,13 @@ msgstr "Altre relazioni"
 msgid "Details for 'network'-Values"
 msgstr "Dettagli per valori di ‘network’"
 
+msgid "Details for 'operator'-Values"
+msgstr "Dettagli per i valori di ‘operator’"
+
 msgid "References to GTFS feeds and releases"
+msgstr ""
+
+msgid "Conditional access statements found on ways"
 msgstr ""
 
 msgid "There is more than one Route-Master"
@@ -227,6 +239,8 @@ msgid ""
 "Route has 'network' = '%s' value which is part of 'network' = '%s' of Route-"
 "Master: %s"
 msgstr ""
+"L'itinerario ha ‘network’=‘%s’ che è parte di ‘network’=‘%s’ della route-"
+"master: %s"
 
 #, perl-format
 msgid ""
@@ -290,15 +304,15 @@ msgstr ""
 
 #, perl-format
 msgid "'route' tag is not set: %s"
-msgstr ""
+msgstr "il tag ‘route’ non è impostato: %s"
 
 #, perl-format
 msgid "'type' = '%s' is not 'route': %s"
-msgstr ""
+msgstr "‘type’=‘%s’ non è ‘route’: %s"
 
 #, perl-format
 msgid "'type' tag is not set: %s"
-msgstr ""
+msgstr "il tag ‘type’ non è impostato: %s"
 
 #, perl-format
 msgid "Route does not exist in the given data set: %s"
@@ -417,11 +431,11 @@ msgstr "‘name’ non è impostata"
 
 #, perl-format
 msgid "'network' = '%s' should be short form"
-msgstr ""
+msgstr "‘network’=‘%s’ dovrebbe essere la forma breve"
 
 #, perl-format
 msgid "'network' = '%s' should be long form"
-msgstr ""
+msgstr "‘network’=‘%s’ dovrebbe essere la forma estesa"
 
 msgid "'network' is not set"
 msgstr "‘network‘ non è impostata"
@@ -437,10 +451,10 @@ msgid ""
 msgstr ""
 
 msgid "'network:long' is long form"
-msgstr ""
+msgstr "‘network:long’ è la forma estesa"
 
 msgid "'network:long' matches long form"
-msgstr ""
+msgstr "‘network:long’  corrisponde alla forma estesa"
 
 #, perl-format
 msgid ""
@@ -457,7 +471,7 @@ msgstr ""
 #, perl-format
 msgid ""
 "The tag 'public_transport' (='%s') is not defined for 'route_master' and "
-"'route' relations. Do you mean 'public_transport:version'='2'?"
+"'route' relations. Do you mean 'public_transport:version'='2'"
 msgstr ""
 
 #, perl-format
@@ -483,7 +497,7 @@ msgid ""
 msgstr ""
 
 msgid "The date does not exist"
-msgstr ""
+msgstr "La data è inesistente"
 
 msgid "Route-Master without Route(s)"
 msgstr "Itinerario ‘master’ senza itinerari"
@@ -517,10 +531,10 @@ msgid "Route with only 1 Way"
 msgstr "Itinerario con un solo percorso"
 
 msgid "Route without Stops(Nodes)"
-msgstr ""
+msgstr "Itinerario senza fermate (nodi)"
 
 msgid "Route with only 1 Stop(Node)"
-msgstr ""
+msgstr "Itinerario con una sola fermata (nodo)"
 
 msgid "Route with Relation(s)"
 msgstr "Itinerario con almeno una relazione"
@@ -556,9 +570,16 @@ msgid ""
 msgstr ""
 
 #, perl-format
-msgid "PTv2 route: has a gap, consists of %d segments. Gap appears at way"
+msgid "PTv2 route: consists of %d segments, has a gap. Gap appears at way"
 msgid_plural ""
-"PTv2 route: has gaps, consists of %d segments. Gaps appear at ways"
+"PTv2 route: consists of %d segments, has gaps. Gaps appear at ways"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, perl-format
+msgid "PTv2 route: way leads into/through roundabout/closed way %s"
+msgid_plural "PTv2 route: ways lead into/through roundabout/closed way %s"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
@@ -649,9 +670,25 @@ msgstr ""
 
 #, perl-format
 msgid "PTv2 route: wrong 'role' = '%s'"
+msgstr "Itinerario PTv2: ‘role’=‘%s’ errato"
+
+msgid ""
+"PTv2 route: empty 'role'. Consider setting 'role'='stop' or "
+"'role'='stop_entry_only' or 'role'='stop_exit_only'"
 msgstr ""
 
-msgid "PTv2 route: empty 'role'"
+msgid ""
+"PTv2 route: empty 'role'. Consider setting 'role'='platform' or "
+"'role'='platform_entry_only' or 'role'='platform_exit_only'"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: empty 'role'. Unknown value for 'public_transport' on object "
+"(='%s')"
+msgstr ""
+
+msgid "PTv2 route: empty 'role' and 'public_transport' is not set on object"
 msgstr ""
 
 #, perl-format
@@ -708,21 +745,33 @@ msgstr ""
 msgid "PTv2 route: last node of way is not a stop position of this route: %s"
 msgstr ""
 
+msgid ""
+"PTv2 route: empty 'role' for a way object which has "
+"'public_transport'='stop_position' set. For PTv2, "
+"'public_transport'='stop_position' is allow on nodes only"
+msgstr ""
+
+msgid ""
+"PTv2 route: empty 'role' for a relation object which has "
+"'public_transport'='stop_position' set. For PTv2, "
+"'public_transport'='stop_position' is allow on nodes only"
+msgstr ""
+
 #, perl-format
 msgid "PTv2 route: wrong 'role' = '%s' for first stop"
-msgstr ""
+msgstr "Itinerario PTv2: ‘role’=‘%s’ errato per la prima fermata"
 
 #, perl-format
 msgid "PTv2 route: wrong 'role' = '%s' for last stop"
-msgstr ""
+msgstr "Itinerario PTv2: ‘role’=‘%s’ errato per l'ultima fermata"
 
 #, perl-format
 msgid "PTv2 route: wrong 'role' = '%s' for first platform"
-msgstr ""
+msgstr "Itinerario PTv2: ‘role’=‘%s’ errato per la prima banchina"
 
 #, perl-format
 msgid "PTv2 route: wrong 'role' = '%s' for last platform"
-msgstr ""
+msgstr "Itinerario PTv2: ‘role’=‘%s’ errato per l'ultima banchina"
 
 #, perl-format
 msgid ""
@@ -732,22 +781,35 @@ msgstr ""
 
 #, perl-format
 msgid "Distance = %d metres / %d feet."
-msgstr ""
+msgstr "Distanza = %d metri / %d piedi."
+
+msgid "Error in input data: insufficient data for nodes"
+msgstr "Errore nei dati di ingresso: dati insufficienti per i nodi"
+
+msgid "Error in input data: insufficient data for ways"
+msgstr "Errore nei dati di ingresso: dati insufficienti per i percorsi"
+
+msgid "Error in input data: insufficient data for relations"
+msgstr "Errore nei dati di ingresso: dati insufficienti per le relazioni"
 
 #, perl-format
 msgid ""
 "PTv2 route: the end of the route on the last way (%s) is not near the last "
 "platform stop (%s)."
 msgstr ""
+"Itinerario PTv2: la fine dell'itinerario nell'ultimo percorso (%s) non si "
+"trova vicino all'ultima fermata (%s)."
 
 msgid ""
 "PTv2 route: 'roundtrip' is not set and the first and the last platform stops"
 " are the same."
 msgstr ""
+"Itinerario PTv2: ‘roundtrip’ non è impostato e la prima e l'ultima fermata "
+"coincidono."
 
 #, perl-format
-msgid "Consider setting 'roundtrip' = '%s'."
-msgstr ""
+msgid "Consider setting 'roundtrip' = '%s'"
+msgstr "Considera l'impostazione di ‘roundtrip’=‘%s’"
 
 #, perl-format
 msgid ""
@@ -757,25 +819,42 @@ msgstr ""
 
 #, perl-format
 msgid ""
-"PTv2 route: 'roundtrip' = '%s' and the first and the last platform stops are"
+"PTv2 route: 'roundtrip' = '%s' but the first and the last platform stops are"
 " not the same."
 msgstr ""
 
-msgid "wrong value"
+#, perl-format
+msgid ""
+"PTv2 route: 'roundtrip' = 'yes' but the first and the last platform stops "
+"are more than %d metres / %d feet apart (actual distance = %d metres / %d "
+"feet)."
 msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'roundtrip' = 'yes' and the first and the last platform stops "
+"are less than %d metres / %d feet apart (actual distance = %d metres / %d "
+"feet)."
+msgstr ""
+
+msgid "This is considered acceptable."
+msgstr "Ciò è considerato accettabile."
+
+msgid "wrong value"
+msgstr "valore errato"
 
 msgid "or"
 msgstr "oppure"
 
 msgid "missing key"
-msgstr ""
+msgstr "chiave mancante"
 
 msgid "suspicious sub-type"
-msgstr ""
+msgstr "sotto-tipo sospetto"
 
 #, perl-format
 msgid "'barrier'='%s' with implied 'access'='no'"
-msgstr ""
+msgstr "‘barrier’=‘%s’ che implica ‘access’=‘no’"
 
 msgid "PTv2 route: 'name' includes deprecated '&lt;=&gt;'"
 msgstr ""
@@ -791,7 +870,7 @@ msgid "PTv2 route: 'ref' is not part of 'name'"
 msgstr ""
 
 #, perl-format
-msgid "PTv2 route: from-part ('%s') of 'name' is not part of 'from' = '%s'"
+msgid "PTv2 route: from-part ('%s') of 'name' does not match 'from' = '%s'"
 msgstr ""
 
 #, perl-format
@@ -802,7 +881,7 @@ msgid "PTv2 route: 'from' is not set"
 msgstr "Itinerario PTv2: ‘from’ non è impostata"
 
 #, perl-format
-msgid "PTv2 route: to-part ('%s') of 'name' is not part of 'to' = '%s'"
+msgid "PTv2 route: to-part ('%s') of 'name' does not match 'to' = '%s'"
 msgstr ""
 
 #, perl-format
@@ -814,7 +893,7 @@ msgstr "Itinerario PTv2: ‘to’ non è impostata"
 
 #, perl-format
 msgid ""
-"PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' is not part of %d. "
+"PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' does not match %d. "
 "via-value = '%s'"
 msgstr ""
 
@@ -848,6 +927,44 @@ msgid ""
 msgstr ""
 
 #, perl-format
+msgid "PTv2 route: 'from' = '%s' does not match 'name' of first platform: %s"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: 'from' = '%s' is not equal to 'name' of first platform: %s"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: 'to' = '%s' does not match 'name' of last platform: %s"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: 'to' = '%s' is not equal to 'name' of last platform: %s"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'via' is set. %d. via-part ('%s') does not match any platform "
+"name."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'via' is set. %d. via-part ('%s') matches name of more than one "
+"platform (platform numbers: %s)"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: 'via' is set, but there are less than 3 platforms (=%d)."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'via' is set (%d parts), but there are less than %d platforms "
+"(=%d)."
+msgstr ""
+
+#, perl-format
 msgid "PTv2 route: using wrong way type (%s)"
 msgstr ""
 
@@ -855,12 +972,60 @@ msgstr ""
 msgid "Route: using way type (%s)"
 msgstr ""
 
+msgid "Route: see"
+msgstr ""
+
+#, perl-format
 msgid ""
-"Route: restricted access ('bus'='school') to way for a route relation not "
+"Route: suspicious access restriction (%s) to way. Check whether this should "
+"be '%s:lanes%s'='%s'"
+msgid_plural ""
+"Route: suspicious access restriction (%s) to ways. Check whether this should"
+" be '%s:lanes%s'='%s'"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, perl-format
+msgid ""
+"Route: restricted access ('%s'='school') to way for a route relation not "
 "tagged with 'bus'='school'"
 msgid_plural ""
-"Route: restricted access ('bus'='school') to ways for a route relation not "
+"Route: restricted access ('%s'='school') to ways for a route relation not "
 "tagged with 'bus'='school'"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, perl-format
+msgid ""
+"Route: incorrect access restriction (%s) to way. Consider tagging as "
+"'busway'='%s'"
+msgid_plural ""
+"Route: incorrect access restriction (%s) to ways. Consider tagging as "
+"'busway'='%s'"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, perl-format
+msgid ""
+"Route: restricted access (%s) to way. The key '%s' also includes public "
+"transport buses"
+msgid_plural ""
+"Route: restricted access (%s) to ways, The key '%s' also includes public "
+"transport buses"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, perl-format
+msgid ""
+"Route: restricted access (%s) to way. Consider tagging as '%s'='yes', "
+"'%s'=designated, or ... along with 'motor_vehicle='no'"
+msgid_plural ""
+"Route: restricted access (%s) to ways. Consider tagging as '%s'='yes', "
+"'%s'=designated, or ... along with 'motor_vehicle='no'"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
@@ -879,28 +1044,10 @@ msgstr[2] ""
 #, perl-format
 msgid ""
 "Route: suspicious access restriction (%s) to way. Check whether this should "
-"be '%s:lanes'='%s'"
-msgid_plural ""
-"Route: suspicious access restriction (%s) to ways. Check whether this should"
-" be '%s:lanes'='%s'"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-#, perl-format
-msgid ""
-"Route: suspicious access restriction (%s) to way. Check whether this should "
 "be '%s'='yes' or 'psv'='yes'"
 msgid_plural ""
 "Route: suspicious access restriction (%s) to ways. Check whether this should"
 " be '%s'='yes' or 'psv'='yes'"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-#, perl-format
-msgid "Route: unclear access (%s) to way"
-msgid_plural "Route: unclear access (%s) to ways"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
@@ -979,15 +1126,6 @@ msgstr ""
 
 #, perl-format
 msgid "(consider creating a 'route_ref' = '%s' tag for the stop)"
-msgstr ""
-
-msgid "Error in input data: insufficient data for relations"
-msgstr ""
-
-msgid "Error in input data: insufficient data for ways"
-msgstr ""
-
-msgid "Error in input data: insufficient data for nodes"
 msgstr ""
 
 msgid "Date of Data"
@@ -1141,10 +1279,7 @@ msgid ""
 "relations shall not represent collections:"
 msgstr ""
 
-msgid ""
-" <a "
-"href=\"https://wiki.openstreetmap.org/wiki/Relations/Relations_are_not_Categories\">Relations/Relations"
-" are not Categories</a>"
+msgid "Relations/Relations are not Categories"
 msgstr ""
 
 msgid ""
@@ -1249,22 +1384,63 @@ msgstr ""
 msgid "key = value"
 msgstr ""
 
-msgid "Browse on map"
+msgid ""
+"This section lists conditional access statements found on ways used by "
+"public transport vehicles."
 msgstr ""
+
+msgid ""
+"PTNA will not completely evaluate conditional access statements, they are "
+"too complex."
+msgstr ""
+
+msgid ""
+"If a statement includes a 'yes', 'permissive', 'permit', 'official', "
+"'destination' or 'designated' as first word, PTNA will assume 'access "
+"granted'."
+msgstr ""
+
+msgid ""
+"Otherwise, PTNA will ignore the statement and search for and analyse further"
+" statements tagged on this way."
+msgstr ""
+
+msgid "Take a look at the list of conditional access statements."
+msgstr ""
+
+msgid ""
+"Some of them might be outdated, i.e., the restriction was valid in the past."
+msgstr ""
+
+msgid "Consider removing these restrictions at some point."
+msgstr ""
+
+msgid "Browse on map"
+msgstr "Vedi la mappa"
 
 msgid "Edit in iD"
-msgstr ""
+msgstr "Modifica con iD"
 
 msgid "Edit in JOSM"
-msgstr ""
+msgstr "Modifica con JOSM"
 
 msgid "Edit in Relatify"
-msgstr ""
+msgstr "Modifica con Relatify"
 
 msgid "Show relation on special map"
-msgstr ""
+msgstr "Mostra relazione su mappa speciale"
 
 msgid "Show route details on jungle-bus' unroll page"
+msgstr ""
+
+msgid "Inject"
+msgstr ""
+
+#, perl-format
+msgid "into relation %s using JOSM"
+msgstr ""
+
+msgid "Inject data using JOSM"
 msgstr ""
 
 #, perl-format
@@ -1495,16 +1671,23 @@ msgid "and"
 msgstr ""
 
 msgid "instead of"
-msgstr ""
+msgstr "invece di"
 
 msgid "Check whether the construction works are finished or not."
-msgstr ""
+msgstr "Verifica se i lavori in corso sono terminati oppure no."
 
 msgid "If yes, delete the key 'construction'."
-msgstr ""
+msgstr "Se lo sono, elimina la chiave ‘construction’."
 
 msgid "If no, check for an appropriate value of the key 'highway'."
 msgstr ""
+
+#, perl-format
+msgid "Route: unclear access (%s) to way"
+msgid_plural "Route: unclear access (%s) to ways"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid ""
 "A conditional access is mapped to a way. PTNA will not analyze the value of "
@@ -1519,17 +1702,21 @@ msgstr ""
 msgid "The access restriction does not comply with the map features."
 msgstr ""
 
-msgid ""
-"Please consult the OSM Wiki: "
-"https://wiki.openstreetmap.org/wiki/Map_Features#Restrictions"
-msgstr ""
+msgid "Please consult the OSM Wiki"
+msgstr "Consulta la wiki OSM"
 
 msgid "This error is related to:"
-msgstr ""
+msgstr "Questo errore è associato con:"
 
 msgid ""
 "Further analysis of this Route relation does not make sense without the data"
 " for ways, nodes or relations."
+msgstr ""
+
+#, perl-format
+msgid ""
+"The tag 'public_transport' (='%s') is not defined for 'route_master' and "
+"'route' relations. Do you mean 'public_transport:version'='2'?"
 msgstr ""
 
 msgid ""
@@ -1565,10 +1752,10 @@ msgid "Values of tags must not be empty."
 msgstr ""
 
 msgid "See also:"
-msgstr ""
+msgstr "Vedi anche:"
 
 msgid "Defines the language for the output."
-msgstr ""
+msgstr "Definisce la lingua per il risultato."
 
 msgid ""
 "Allow 'route_master' = 'coach' and 'route' = 'coach' (although they are "
@@ -1627,6 +1814,10 @@ msgid ""
 msgstr ""
 
 msgid ""
+"Check that 'from' and 'to' match with corresponding platform 'name' values."
+msgstr ""
+
+msgid ""
 "Check that for instance 'bus' = 'yes' is set on a PTv2 bus stop having "
 "'public_transport' = 'platform'. PTv2 does not require this though."
 msgstr ""
@@ -1663,7 +1854,7 @@ msgid "Check value of 'service' tag for 'highway' = 'service'."
 msgstr ""
 
 msgid "Suspicious values"
-msgstr ""
+msgstr "Valori sospetti"
 
 msgid ""
 "Check that for instance 'bus' = 'yes' is set on a PTv2 bus stop having "
@@ -1671,6 +1862,9 @@ msgid ""
 msgstr ""
 
 msgid "Check of 'public_transport:version' = '...' on Route-Master and Route."
+msgstr ""
+
+msgid "Check that 'via' matches with corresponding platform 'name' values."
 msgstr ""
 
 msgid ""
@@ -1791,6 +1985,11 @@ msgid ""
 msgstr ""
 
 msgid ""
+"Consider a route tagged with 'roundtrip'='yes' as OK if the distance between"
+" first and last platform stops does not exceed the defined value."
+msgstr ""
+
+msgid ""
 "Similar to option '--positive-notes': show values of 'gtfs*' tags in the "
 "'Notes' column."
 msgstr ""
@@ -1834,22 +2033,22 @@ msgid ""
 msgstr ""
 
 msgid "is not set"
-msgstr ""
+msgstr "non è impostato"
 
 msgid "GTFS database not found"
-msgstr ""
+msgstr "Impossibile trovare il database GTFS"
 
 msgid "is no longer valid (in the past)"
-msgstr ""
+msgstr "non è più valido (nel passato)"
 
 msgid "is not yet valid (in the future)"
-msgstr ""
+msgstr "non è ancora valido (nel futuro)"
 
 msgid "is outdated, fits to older GTFS version only"
-msgstr ""
+msgstr "è scaduto, funziona solo con una versione più vecchia del GTFS"
 
 msgid "does not exist"
-msgstr ""
+msgstr "non esiste"
 
 msgid "Compare GTFS route with OSM route_master/route"
 msgstr ""
@@ -1861,4 +2060,4 @@ msgid "does not provide any 'shape' data"
 msgstr ""
 
 msgid "internal error"
-msgstr ""
+msgstr "errore interno"
