@@ -35,8 +35,9 @@ then
 
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "start: $(basename $0) $* in '$PWD'"
 
-    if [ ! -f "$TARGET" ] then
-        # esure, file exists
+    if [ ! -f "$TARGET" ]
+    then
+        # eshure, file exists
         touch $TARGET
     fi
 
