@@ -1927,6 +1927,24 @@ printf STDERR "%s Printed conditional access details\n", get_time()       if ( $
 
 #############################################################################################
 #
+# now we print the list of explicitely excluded relations
+#
+#############################################################################################
+
+printf STDERR "%s Printing excluded relations\n", get_time()       if ( $verbose );
+
+if ( scalar(keys(%excluded_key_value_relations)) ) {
+
+    printHeader( gettext("Excluded relations - excluded by 'key-value' pair"), 1, 'excluded' );
+
+    printExcludedRelations();
+}
+
+printf STDERR "%s Printed excluded relations\n", get_time()       if ( $verbose );
+
+
+#############################################################################################
+#
 # Did we print anything
 #
 #############################################################################################
@@ -7902,6 +7920,29 @@ sub printConditionalAccessOnWays {
                         'ways'               =>  join( ',', sort( keys( %{$conditional_access{$access_restriction}->{'ways'}} ) ) ),
                         'relations'          =>  join( ',', sort( keys( %{$conditional_access{$access_restriction}->{'relations'}} ) ) )
                       );
+    }
+    printTableFooter();
+
+}
+
+
+#############################################################################################
+
+sub printExcludedRelations {
+
+    push( @HTML_main, "        <p>\n" );
+    push( @HTML_main, "            " . gettext("This section lists relations which have been excluded from the ... section of the analysis.") . "\n" );
+    push( @HTML_main, "        </p>\n" );
+
+    printTableInitialization( 'key', 'value', 'relations' );
+    printTableHeader( 'key' => 'string', 'value' => 'none', 'relations' => 'none' );
+    foreach my $key ( sort( keys( %excluded_key_value_relations ) ) ) {
+        foreach my $value ( sort( keys( %{$excluded_key_value_relations{$key}} ))) {
+            printTableLine( 'key'       =>  $key,
+                            'value'     =>  $value,
+                            'relations' =>  join( ',', sort( keys( %{$excluded_key_value_relations{$key}{$value}} ) ) )
+                          );
+        }
     }
     printTableFooter();
 

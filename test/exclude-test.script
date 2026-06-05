@@ -21,7 +21,7 @@ then
     EXCLUDE_OPTIONS="--exclude-if-key-value 'gtfs:feed=DE-BY-MVV'    \
                      --exclude-if-key-value \"gtfs:feed=DE-BY-MVG\"  \
                      --exclude-if-key-value gtfs:feed=DE-BY-RVO      \
-                     --exclude-if-key-value=key=value                \
+                     --exclude-if-key-value=test-key=test-value      \
                      --exclude-if-key-value obsolete"
 
     ptna-routes.pl --timezone="Europe/Berlin" $EXCLUDE_OPTIONS --ptv1-compatibility=allow --max-error=10 --check-access --check-name --check-from-to --check-via --check-stop-position --check-sequence --check-version --check-motorway-link \
