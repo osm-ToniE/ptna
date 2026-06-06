@@ -6805,6 +6805,19 @@ sub CheckRouteRefOnStops {
                                         }
                                         $issues_string = gettext( "Route: 'route_ref' = '%s' of stop does not include 'ref' = '%s' value of this route%s" );
                                         $not_set_on{sprintf($issues_string,handle_foreign($object_ref->{'tag'}->{'route_ref'}),handle_foreign($sub_ref),$hint)}->{$member->{'ref'}} = $member->{'type'};
+
+                                        if ( exists($object_ref->{'tag'}->{'ref'}) ) {
+                                            $temp_stop_ref =  ';' . $object_ref->{'tag'}->{'ref'} . ';';
+                                            $temp_stop_ref =~ s/\s*;\s*/;/g;
+
+                                            foreach my $sub_ref ( split( $ref_separator, $ref ) ) {
+                                                if ( $temp_stop_ref =~ m/;\Q$sub_ref\E;/ ) {
+                                                    $hint = sprintf( gettext( "(consider adding '%s' to the 'route_ref' tag of the stop)" ), handle_foreign($sub_ref) );
+                                                    $notes_string = gettext( "Route: 'ref' = '%s' of stop should represent the reference of the stop, but includes the 'ref' = '%s' of this route %s" );
+                                                    $to_be_replaced{sprintf($notes_string,handle_foreign($object_ref->{'tag'}->{'ref'}),handle_foreign($sub_ref),$hint)}->{$member->{'ref'}} = $member->{'type'};
+                                                }
+                                            }
+                                        }
                                     }
                                 }
 
@@ -6824,18 +6837,6 @@ sub CheckRouteRefOnStops {
                                     if ( $object_ref->{'tag'}->{$tag} ) {
                                         $notes_string = gettext( "Route: '%s' = '%s' of stop should be deleted, 'route_ref' = '%s' exists" );
                                         $to_be_deleted{sprintf($notes_string,$tag,handle_foreign($object_ref->{'tag'}->{$tag}),handle_foreign($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
-                                    }
-                                }
-                                if ( exists($object_ref->{'tag'}->{'ref'}) ) {
-                                    $temp_stop_ref =  ';' . $object_ref->{'tag'}->{'ref'} . ';';
-                                    $temp_stop_ref =~ s/\s*;\s*/;/g;
-
-                                    foreach my $sub_ref ( split( $ref_separator, $ref ) ) {
-                                        if ( $temp_stop_ref =~ m/;\Q$sub_ref\E;/ ) {
-                                            $hint = sprintf( gettext( "(consider adding '%s' to the 'route_ref' tag of the stop)" ), handle_foreign($sub_ref) );
-                                            $notes_string = gettext( "Route: 'ref' = '%s' of stop should represent the reference of the stop, but includes the 'ref' = '%s' of this route %s" );
-                                            $to_be_replaced{sprintf($notes_string,handle_foreign($object_ref->{'tag'}->{'ref'}),handle_foreign($sub_ref),$hint)}->{$member->{'ref'}} = $member->{'type'};
-                                        }
                                     }
                                 }
                             } else {
