@@ -5963,7 +5963,6 @@ sub noAccessOnPlatform {
     my $ret_val             = '';
 
     my @list_of_access_levels = ( 'psv', 'motorcar', 'motor_vehicle', 'vehicle', 'access' );
-    my $tmp_access_level      = undef;
 
     if ( $vehicle_type && $transport_type_to_restriction_type{$vehicle_type} ) {
         $access_type = $transport_type_to_restriction_type{$vehicle_type};
