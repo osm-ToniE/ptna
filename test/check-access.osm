@@ -109,6 +109,7 @@
     <tag k='bus' v='yes' />
     <tag k='name' v='B-City' />
     <tag k='public_transport' v='platform' />
+    <tag k='school_bus' v='no' />
   </node>
   <node id='-152119' action='modify' lat='48.72007777758' lon='13.53169106807'>
     <tag k='name' v='A-City' />
@@ -133,6 +134,7 @@
     <tag k='bus' v='yes' />
     <tag k='name' v='C-City' />
     <tag k='public_transport' v='platform' />
+    <tag k='school_bus' v='designated' />
   </node>
   <node id='-152129' action='modify' lat='48.71997509169' lon='13.53169220557'>
     <tag k='name' v='A-City' />
@@ -183,6 +185,7 @@
     <tag k='barrier' v='sally_port' />
   </node>
   <node id='-152409' action='modify' lat='48.7198219958' lon='13.53169643603'>
+    <tag k='access' v='no' />
     <tag k='name' v='A-School' />
     <tag k='public_transport' v='platform' />
   </node>
@@ -192,9 +195,11 @@
     <tag k='public_transport' v='stop_position' />
   </node>
   <node id='-152420' action='modify' lat='48.71981799168' lon='13.53250587703'>
+    <tag k='access' v='no' />
     <tag k='bus' v='yes' />
     <tag k='name' v='B-School' />
     <tag k='public_transport' v='platform' />
+    <tag k='school_bus' v='no' />
   </node>
   <node id='-152421' action='modify' lat='48.71987075193' lon='13.53250368789'>
     <tag k='bus' v='yes' />
@@ -209,9 +214,11 @@
     <tag k='public_transport' v='stop_position' />
   </node>
   <node id='-152456' action='modify' lat='48.7198173603' lon='13.53311716816'>
+    <tag k='access' v='no' />
     <tag k='bus' v='yes' />
     <tag k='name' v='C-School' />
     <tag k='public_transport' v='platform' />
+    <tag k='school_bus' v='yes' />
   </node>
   <node id='-152462' action='modify' lat='48.71986993567' lon='13.53265492296' />
   <way id='-152334' action='modify'>

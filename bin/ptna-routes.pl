@@ -5743,7 +5743,7 @@ sub noAccessOnWay {
     if ( $access_type ) {
         unshift( @list_of_access_levels, $access_type );
     }
-    if ( $vehicle_type && $vehicle_type eq 'bus' && $more_info =~ m/;school=.*?;/ ) {
+    if ( $vehicle_type && $vehicle_type eq 'bus' && $more_info =~ m/;school=yes;/ ) {
         unshift( @list_of_access_levels, 'school_bus' );
     }
 
@@ -5946,6 +5946,82 @@ sub noAccessOnNode {
     }
     printf STDERR "noAccessOnNode() : access for all for node %d\n", $node_id       if ( $debug );
     return ();
+}
+
+
+#############################################################################################
+
+sub noAccessOnPlatform {
+    my $platform_id         = shift;
+    my $platform_type       = shift;
+    my $vehicle_type        = shift || 'bus';
+    my $is_school_bus       = shift || 0;
+    my $access_type         = $vehicle_type;
+
+    printf STDERR "Check: noAccessOnPlatform() : access %s for %s %d\n", $vehicle_type?$vehicle_type:'?', $platform_type?$platform_type:'?', $platform_id?$platform_id:-99999       if ( $debug );
+
+    my $ret_val             = '';
+
+    my @list_of_access_levels = ( 'psv', 'motorcar', 'motor_vehicle', 'vehicle', 'access' );
+    my $tmp_access_level      = undef;
+
+    if ( $vehicle_type && $transport_type_to_restriction_type{$vehicle_type} ) {
+        $access_type = $transport_type_to_restriction_type{$vehicle_type};
+    }
+    if ( $access_type ) {
+        unshift( @list_of_access_levels, $access_type );
+    }
+    if ( $is_school_bus ) {
+        unshift( @list_of_access_levels, 'school_bus' );
+    }
+
+    if ( defined($platform_id) && defined($platform_type) ) {
+        my $platform_tag_ref = undef;
+        if ( $platform_type eq 'node' && $NODES{$platform_id} ) {
+            $platform_tag_ref = $NODES{$platform_id}->{'tag'};
+        } elsif ( $platform_type eq 'way' &&  $WAYS{$platform_id} ) {
+            $platform_tag_ref = $WAYS{$platform_id}->{'tag'};
+        } elsif ( $platform_type eq 'relation' && $RELATIONS{$platform_id} ) {
+            $platform_tag_ref = $RELATIONS{$platform_id}->{'tag'};
+        } else {
+            return sprintf("Internal error: unknown object type '%s' and object ID '%s'", $platform_type, $platform_id );
+        }
+
+        printf STDERR "Details: noAccessOnPlatform() : platform name = %s\n", $platform_tag_ref->{'name'}?$platform_tag_ref->{'name'}:'?'       if ( $debug );
+
+        if ( $vehicle_type ne 'bus' ) {
+            if ( $vehicle_type eq 'foot' ) {
+                @list_of_access_levels = ( 'foot', 'access' );
+            } elsif ( $vehicle_type eq 'ferry' && $platform_tag_ref->{'route'} && ($platform_tag_ref->{'route'} eq 'ferry' || $platform_tag_ref->{'route'} eq 'boat') ) {
+                #
+                # fine for ferries on ferry ways
+                #
+                printf STDERR "noAccessOnPlatform() : access for %s for %s %d\n", $vehicle_type, $platform_type, $platform_id       if ( $debug );
+                return $ret_val;
+            } elsif ( ($vehicle_type eq 'tram' || $vehicle_type eq 'train' || $vehicle_type eq 'light_rail' || $vehicle_type eq 'subway') &&
+                       $platform_tag_ref->{'railway'}                                                                                          &&
+                      ($platform_tag_ref->{'railway'} eq 'tram' || $platform_tag_ref->{'railway'} eq 'train' || $platform_tag_ref->{'railway'} eq 'light_rail' || $platform_tag_ref->{'railway'} eq 'subway' || $platform_tag_ref->{'railway'} eq 'rail')  ) {
+                #
+                # fine for rail bounded vehicles rails
+                #
+                printf STDERR "noAccessOnPlatform() : access for %s for %s %d railway=%s)\n", $vehicle_type, $platform_type, $platform_id, $platform_tag_ref->{'railway'}       if ( $debug );
+                return $ret_val;
+            }
+        }
+        foreach my $access_level ( @list_of_access_levels ) {
+            if ( $platform_tag_ref->{$access_level} ) {
+                if ( $platform_tag_ref->{$access_level} =~ m/^[a-z; ]*(yes|permissive|permit|official|destination|designated)[a-z; ]*$/ ) {
+                    # fine, we have access permission
+                    return $ret_val;
+                } else {
+                    printf STDERR "noAccessOnPlatform() : no access %s for %s %d (%s=%s)\n", $vehicle_type, $platform_type, $platform_id, $access_level, $platform_tag_ref->{$access_level}       if ( $debug );
+                    return sprintf( "'%s'='%s'", $access_level, $platform_tag_ref->{$access_level} );
+                }
+            }
+        }
+    }
+    printf STDERR "noAccessOnPlatform() : access %s for %s %d\n", $vehicle_type?$vehicle_type:'?', $platform_type?$platform_type:'?', $platform_id?$platform_id:-99999       if ( $debug );
+    return $ret_val;
 }
 
 
@@ -6523,13 +6599,40 @@ sub CheckAccessOnWaysAndNodes {
         if ( $relation_ptr->{'route_type_value'} ne 'aerialway' &&
              $relation_ptr->{'route_type_value'} ne 'funicular' &&
              $relation_ptr->{'route_type_value'} ne 'monorail'     ) {
-            my $access_restriction          = undef;
-            my @access_restrictions         = ();
-            my %restricted_access_on_ways   = ();
-            my %restricted_access_on_nodes  = ();
+            my $access_restriction                  = undef;
+            my @access_restrictions                 = ();
+            my %restricted_access_on_ways           = ();
+            my %restricted_access_on_nodes          = ();
+            my %restricted_access_on_platforms      = ();
+            my %restricted_foot_access_on_platforms = ();
 
-            if ( $relation_ptr->{'route_type_value'} eq 'bus' && $relation_ptr->{'tag'}->{'school'} ) {
-                $more_info .= ';school=' . $relation_ptr->{'tag'}->{'school'} . ';';
+            if ( $relation_ptr->{'route_type_value'} eq 'bus' ) {
+                my $is_school_bus = 0;
+                if ( $relation_ptr->{'tag'}->{'school'} && $relation_ptr->{'tag'}->{'school'} eq 'yes' ) {
+                    $more_info .= ';school=' . $relation_ptr->{'tag'}->{'school'} . ';';
+                    $is_school_bus = 1;
+                }
+                if ( scalar(@{$relation_ptr->{'role_platform'}}) ) {
+                    my $number_of_platforms = scalar(@{$relation_ptr->{'role_platform'}});
+                    for ( my $pindex = 0; $pindex < $number_of_platforms; $pindex++ ) {
+                        my $platform_id   = ${$relation_ptr->{'role_platform'}}[$pindex]->{'ref'};
+                        my $platform_type = ${$relation_ptr->{'role_platform'}}[$pindex]->{'type'};
+                        $access_restriction = noAccessOnPlatform( $platform_id,
+                                                                  $platform_type,
+                                                                  $relation_ptr->{'route_type_value'},
+                                                                  $is_school_bus                       );
+                        if ( $access_restriction ) {
+                            $restricted_access_on_platforms{$access_restriction}->{$platform_id}->{'type'} = $platform_type;
+                        }
+                        $access_restriction = noAccessOnPlatform( $platform_id,
+                                                                  $platform_type,
+                                                                  'foot',
+                                                                  $is_school_bus );
+                        if ( $access_restriction ) {
+                            $restricted_foot_access_on_platforms{$access_restriction}->{$platform_id}->{'type'} = $platform_type;
+                        }
+                    }
+                }
             }
             foreach my $route_highway ( @{$relation_ptr->{'route_highway'}} ) {
                 if ( $relation_ptr->{'ways_used_with_relevant_forward_backward_tags'} &&
@@ -6696,6 +6799,44 @@ sub CheckAccessOnWaysAndNodes {
                         push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printNodeTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
                     } else {
                         push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $helpstring, join(', ', map { printNodeTemplate($_,'name;ref'); } @help_array )) );
+                    }
+                }
+            }
+            if ( scalar(keys(%restricted_access_on_platforms)) ) {
+                my $helpstring     = '';
+                my @help_array     = ();
+                my $num_of_errors  = 0;
+                my $vehicle        = $relation_ptr->{'route_type_value'};
+                foreach $access_restriction ( sort(keys(%restricted_access_on_platforms)) ) {
+                    @help_array     = sort(keys(%{$restricted_access_on_platforms{$access_restriction}}));
+                    $num_of_errors  = scalar(@help_array);
+                    if ( $access_restriction =~ m/school_bus/ ) {
+                        $issues_string  = ngettext( "Route: restricted access (%s) for a school bus at platform", "Route: restricted access (%s) for a school bus at platforms", $num_of_errors );
+                        $helpstring     = handle_foreign(sprintf( $issues_string, $access_restriction ));
+                    } else {
+                        $issues_string  = ngettext( "Route: restricted access (%s) at platform without 'psv'='yes', '%s'='yes', '%s'='designated', or ...", "Route: restricted access (%s) at platforms without 'psv'='yes', '%s'='yes', '%s'='designated', or ...", $num_of_errors );
+                        $helpstring     = handle_foreign(sprintf( $issues_string, $access_restriction, $transport_type_to_restriction_type{$vehicle} ? $transport_type_to_restriction_type{$vehicle} : $vehicle, $transport_type_to_restriction_type{$vehicle} ? $transport_type_to_restriction_type{$vehicle} : $vehicle ));
+                    }
+                    if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printXxxTemplate($restricted_access_on_platforms{$access_restriction}->{$_}->{'type'},$_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                    } else {
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $helpstring, join(', ', map { printXxxTemplate($restricted_access_on_platforms{$access_restriction}->{$_}->{'type'},$_,'name;ref'); } @help_array )) );
+                    }
+                }
+            }
+            if ( scalar(keys(%restricted_foot_access_on_platforms)) ) {
+                my $helpstring     = '';
+                my @help_array     = ();
+                my $num_of_errors  = 0;
+                foreach $access_restriction ( sort(keys(%restricted_foot_access_on_platforms)) ) {
+                    @help_array     = sort(keys(%{$restricted_foot_access_on_platforms{$access_restriction}}));
+                    $num_of_errors  = scalar(@help_array);
+                    $issues_string  = ngettext( "Route: restricted access (%s) for pedestrians at platform", "Route: restricted access (%s) for pedestrians at platforms", $num_of_errors );
+                    $helpstring     = handle_foreign(sprintf( $issues_string, $access_restriction ));
+                    if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printXxxTemplate($restricted_foot_access_on_platforms{$access_restriction}->{$_}->{'type'},$_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                    } else {
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf("%s: %s", $helpstring, join(', ', map { printXxxTemplate($restricted_foot_access_on_platforms{$access_restriction}->{$_}->{'type'},$_,'name;ref'); } @help_array )) );
                     }
                 }
             }
