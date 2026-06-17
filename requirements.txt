@@ -14,3 +14,4 @@ Perl Modules
 - GIS::Distance
 - Math::Units
 - Math::Polygon
+- URI::Escape
