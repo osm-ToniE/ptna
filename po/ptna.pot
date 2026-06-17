@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2026-06-12 14:41+0200\n"
+"POT-Creation-Date: 2026-06-15 14:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -176,6 +176,9 @@ msgstr ""
 msgid "Routes with life-cycle prefix"
 msgstr ""
 
+msgid "Excluded relations - excluded by 'key-value' pair"
+msgstr ""
+
 msgid "More Relations"
 msgstr ""
 
@@ -189,9 +192,6 @@ msgid "References to GTFS feeds and releases"
 msgstr ""
 
 msgid "Conditional access statements found on ways"
-msgstr ""
-
-msgid "Excluded relations - excluded by 'key-value' pair"
 msgstr ""
 
 msgid "There is more than one Route-Master"
@@ -795,124 +795,6 @@ msgstr ""
 msgid "'barrier'='%s' with implied 'access'='no'"
 msgstr ""
 
-msgid "PTv2 route: 'name' includes deprecated '&lt;=&gt;'"
-msgstr ""
-
-msgid "PTv2 route: 'name' includes deprecated '==&gt;'"
-msgstr ""
-
-#, perl-format
-msgid "PTv2 route: '%s' is not part of 'name' (derived from '%s' = '%s')"
-msgstr ""
-
-msgid "PTv2 route: 'ref' is not part of 'name'"
-msgstr ""
-
-#, perl-format
-msgid "PTv2 route: from-part ('%s') of 'name' does not match 'from' = '%s'"
-msgstr ""
-
-#, perl-format
-msgid "PTv2 route: from-part ('%s') of 'name' is not equal to 'from' = '%s'"
-msgstr ""
-
-msgid "PTv2 route: 'from' is not set"
-msgstr ""
-
-#, perl-format
-msgid "PTv2 route: to-part ('%s') of 'name' does not match 'to' = '%s'"
-msgstr ""
-
-#, perl-format
-msgid "PTv2 route: to-part ('%s') of 'name' is not equal to 'to' = '%s'"
-msgstr ""
-
-msgid "PTv2 route: 'to' is not set"
-msgstr ""
-
-#, perl-format
-msgid ""
-"PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' does not match %d. "
-"via-value = '%s'"
-msgstr ""
-
-#, perl-format
-msgid ""
-"PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' is not equal to %d. "
-"via-value = '%s'"
-msgstr ""
-
-#, perl-format
-msgid "PTv2 route: there are more via-parts in 'name' (%d) than in 'via' (%d)"
-msgstr ""
-
-#, perl-format
-msgid "PTv2 route: there are less via-parts in 'name' (%d) than in 'via' (%d)"
-msgstr ""
-
-msgid "PTv2 route: 'name' has more than one '=>' but 'via' is not set"
-msgstr ""
-
-msgid "PTv2 route: 'name' has no via-parts but 'via' is set"
-msgstr ""
-
-msgid ""
-"PTv2 route: 'name' should be similar to the form '... ref ...: from => to'"
-msgstr ""
-
-msgid ""
-"PTv2 route: 'name' should (at least) be of the form '... ref ...: from => to'"
-msgstr ""
-
-#, perl-format
-msgid "PTv2 route: 'from' = '%s' does not match 'name' of first platform: %s"
-msgstr ""
-
-#, perl-format
-msgid "PTv2 route: 'from' = '%s' is not equal to 'name' of first platform: %s"
-msgstr ""
-
-#, perl-format
-msgid "PTv2 route: 'to' = '%s' does not match 'name' of last platform: %s"
-msgstr ""
-
-#, perl-format
-msgid "PTv2 route: 'to' = '%s' is not equal to 'name' of last platform: %s"
-msgstr ""
-
-#, perl-format
-msgid ""
-"PTv2 route: 'via' is set. %d. via-part ('%s') does not match any platform "
-"name."
-msgstr ""
-
-#, perl-format
-msgid ""
-"PTv2 route: 'via' is set. %d. via-part ('%s') matches name of more than one "
-"platform (platform numbers: %s)"
-msgstr ""
-
-#, perl-format
-msgid "PTv2 route: 'via' is set, but there are less than 3 platforms (=%d)."
-msgstr ""
-
-#, perl-format
-msgid ""
-"PTv2 route: 'via' is set (%d parts), but there are less than %d platforms "
-"(=%d)."
-msgstr ""
-
-#, perl-format
-msgid "PTv2 route: using wrong way type (%s)"
-msgstr ""
-
-#, perl-format
-msgid "Route: using way type (%s)"
-msgstr ""
-
-msgid "Route: see"
-msgstr ""
-
 #, perl-format
 msgid ""
 "Route: suspicious access restriction (%s) to way. Check whether this should "
@@ -1008,6 +890,28 @@ msgid ""
 msgid_plural ""
 "Route: restricted access at barriers (%s) without 'psv'='yes', '%s'='yes', "
 "'%s'='designated', or ..."
+msgstr[0] ""
+msgstr[1] ""
+
+#, perl-format
+msgid "Route: restricted access (%s) for a school bus at platform"
+msgid_plural "Route: restricted access (%s) for a school bus at platforms"
+msgstr[0] ""
+msgstr[1] ""
+
+#, perl-format
+msgid ""
+"Route: restricted access (%s) at platform without 'psv'='yes', '%s'='yes', "
+"'%s'='designated', or ..."
+msgid_plural ""
+"Route: restricted access (%s) at platforms without 'psv'='yes', '%s'='yes', "
+"'%s'='designated', or ..."
+msgstr[0] ""
+msgstr[1] ""
+
+#, perl-format
+msgid "Route: restricted access (%s) for pedestrians at platform"
+msgid_plural "Route: restricted access (%s) for pedestrians at platforms"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -1447,6 +1351,97 @@ msgid ""
 msgstr ""
 
 #, perl-format
+msgid "PTv2 route: '%s' is not part of 'name' (derived from '%s' = '%s')"
+msgstr ""
+
+msgid "PTv2 route: 'from' is not set"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: 'from' = '%s' does not match 'name' of first platform: %s"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: 'from' = '%s' is not equal to 'name' of first platform: %s"
+msgstr ""
+
+msgid "PTv2 route: 'name' has no via-parts but 'via' is set"
+msgstr ""
+
+msgid "PTv2 route: 'name' has more than one '=>' but 'via' is not set"
+msgstr ""
+
+msgid "PTv2 route: 'name' includes deprecated '&lt;=&gt;'"
+msgstr ""
+
+msgid "PTv2 route: 'name' includes deprecated '==&gt;'"
+msgstr ""
+
+msgid ""
+"PTv2 route: 'name' should (at least) be of the form '... ref ...: from => to'"
+msgstr ""
+
+msgid ""
+"PTv2 route: 'name' should be similar to the form '... ref ...: from => to'"
+msgstr ""
+
+msgid "PTv2 route: 'ref' is not part of 'name'"
+msgstr ""
+
+msgid "PTv2 route: 'to' is not set"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: 'to' = '%s' does not match 'name' of last platform: %s"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: 'to' = '%s' is not equal to 'name' of last platform: %s"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'via' is set (%d parts), but there are less than %d platforms "
+"(=%d)."
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: 'via' is set, but there are less than 3 platforms (=%d)."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'via' is set. %d. via-part ('%s') does not match any platform "
+"name."
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'via' is set. %d. via-part ('%s') matches name of more than one "
+"platform (platform numbers: %s)"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' is not equal to %d. "
+"via-value = '%s'"
+msgstr ""
+
+#, perl-format
+msgid ""
+"PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' does not match %d. "
+"via-value = '%s'"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: from-part ('%s') of 'name' is not equal to 'from' = '%s'"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: from-part ('%s') of 'name' does not match 'from' = '%s'"
+msgstr ""
+
+#, perl-format
 msgid ""
 "The starting point on the first way ('role' = '') of the relation is far "
 "from the first 'role' = 'platform', more than %d meters."
@@ -1483,6 +1478,22 @@ msgid ""
 "the trip before using 'Relatify'."
 msgstr ""
 
+#, perl-format
+msgid "PTv2 route: there are less via-parts in 'name' (%d) than in 'via' (%d)"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: there are more via-parts in 'name' (%d) than in 'via' (%d)"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: to-part ('%s') of 'name' is not equal to 'to' = '%s'"
+msgstr ""
+
+#, perl-format
+msgid "PTv2 route: to-part ('%s') of 'name' does not match 'to' = '%s'"
+msgstr ""
+
 msgid ""
 "The vehicle uses a motorway entrance or exit without using a motorway/trunk "
 "road immediately after or before it."
@@ -1507,6 +1518,10 @@ msgid "Precondition: the route is without gap(s)."
 msgstr ""
 
 #, perl-format
+msgid "PTv2 route: using wrong way type (%s)"
+msgstr ""
+
+#, perl-format
 msgid ""
 "The Route is member of this Route-Master, but has no 'ref' tag (%s = ID of "
 "the route)."
@@ -1522,6 +1537,10 @@ msgid ""
 msgstr ""
 
 msgid "This is currently deactivated."
+msgstr ""
+
+#, perl-format
+msgid "Route: using way type (%s)"
 msgstr ""
 
 msgid ""
@@ -1568,6 +1587,9 @@ msgstr ""
 msgid ""
 "Route: 'route_ref' = '%s' of stop includes the separator value ';' (semi-"
 "colon) with sourrounding blank"
+msgstr ""
+
+msgid "Route: see"
 msgstr ""
 
 msgid ""
@@ -1797,6 +1819,11 @@ msgstr ""
 
 msgid ""
 "SketchLine considers the value of 'colour' = '...' of Route-Master or Route."
+msgstr ""
+
+msgid ""
+"Exclude route_master and route relations from analysis if they have 'key' = "
+"'value' set."
 msgstr ""
 
 msgid ""

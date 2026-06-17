@@ -1470,6 +1470,33 @@ sub InitMessageStrings {
     $MessageHash{$MessageList[$i]->{'message'}}  = $i;
 
     $i++;
+    $MessageList[$i]->{'message'}                = ngettext( "Route: restricted access (%s) at platform without 'psv'='yes', '%s'='yes', '%s'='designated', or ...", "Route: restricted access (%s) at platforms without 'psv'='yes', '%s'='yes', '%s'='designated', or ...", 1 );
+    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
+    $MessageList[$i]->{'message'}                = ngettext( "Route: restricted access (%s) for a school bus at platform", "Route: restricted access (%s) for a school bus at platforms", 1 );
+    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
+    $MessageList[$i]->{'message'}                = ngettext( "Route: restricted access (%s) for pedestrians at platform", "Route: restricted access (%s) for pedestrians at platforms", 1 );
+    $MessageList[$i]->{'type'}                   = gettext( "Errors" );
+    $MessageList[$i]->{'option'}                 = "";
+    $MessageList[$i]->{'description'}            = "";
+    $MessageList[$i]->{'fix'}                    = "";
+    $MessageList[$i]->{'image'}                  = "";
+    $MessageHash{$MessageList[$i]->{'message'}}  = $i;
+
+    $i++;
     $MessageList[$i]->{'message'}                = ngettext( "Route: suspicious access restriction (%s) to way. Check whether this should be '%s'='yes' or 'psv'='yes'", "Route: suspicious access restriction (%s) to ways. Check whether this should be '%s'='yes' or 'psv'='yes'", 1 );
     $MessageList[$i]->{'type'}                   = gettext( "Errors" );
     $MessageList[$i]->{'option'}                 = "";
@@ -1903,6 +1930,14 @@ sub InitOptionStrings {
     $OptionList[$i]->{'option'}                 = "coloured-sketchline";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = gettext( "SketchLine considers the value of 'colour' = '...' of Route-Master or Route." );
+    $OptionList[$i]->{'image'}                  = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+
+    $i++;
+    $OptionList[$i]->{'option'}                 = "exclude-if-key-value";
+    $OptionList[$i]->{'default'}                = "";
+    $OptionList[$i]->{'description'}            = gettext( "Exclude route_master and route relations from analysis if they have 'key' = 'value' set." ) . "\n" .
+                                                  gettext( "Example" ) . ": --exclude-if-key-value='network=TransLink'";
     $OptionList[$i]->{'image'}                  = "";
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 

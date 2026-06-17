@@ -30,6 +30,7 @@ use Data::Dumper;
 use Time::Local         qw ( timelocal );
 use Time::HiRes;
 use Encode;
+use URI::Escape         qw ( uri_unescape );
 
 
 ####################################################################################################################
@@ -326,20 +327,25 @@ if ( $verbose ) {
     printf STDERR "%20s--check-way-type='%s'\n",           ' ', $check_way_type             ? 'ON'          : 'OFF';
     printf STDERR "%20s--coloured-sketchline='%s'\n",      ' ', $coloured_sketchline        ? 'ON'          : 'OFF';
     if ( scalar(@exclude_if_key_value_opt)) {
+        my $key   = undef;
+        my $value = undef;
         foreach my $key_value ( sort(@exclude_if_key_value_opt) ) {
+            printf STDERR "%20s--exclude-if-key-value=%s (1)\n", ' ', $key_value    if ( $debug );
             if ( $key_value ) {
                 $key_value =~ s/^"(.*)"$/$1/;
                 $key_value =~ s/^'(.*)'$/$1/;
                 if ( $key_value =~ m/^(.+?)=(.+)$/ ) {
-                    printf STDERR "%20s--exclude-if-key-value='%s=%s'\n", ' ', $1, $2;
-                    $excluded_key_value_relations{$1}{$2} = {};
-                    printf STDERR "\$excluded_key_value_relations{%s}{%s} = {}\n ", $1, $2           if ( $debug );
+                    $key   = $1;
+                    $value = uri_unescape( $2 );
+                    printf STDERR "%20s--exclude-if-key-value='%s=%s'\n", ' ', $key, $value;
+                    $excluded_key_value_relations{$key}{$value} = {};
+                    printf STDERR "\$excluded_key_value_relations{%s}{%s} = {}\n", $key, $value           if ( $debug );
                 } else {
-                    printf STDERR "%20s--exclude-if-key-value='%s'\n", ' ', $key_value;
+                    printf STDERR "%20s--exclude-if-key-value='%s' (3)\n", ' ', $key_value;
                     printf STDERR "Error: missing value for key '%s'\n", $key_value;
                 }
             } else {
-                printf STDERR "%20s--exclude-if-key-value=''\n", ' ';
+                printf STDERR "%20s--exclude-if-key-value='' (4)\n", ' ';
             }
         }
     } else {
@@ -769,6 +775,7 @@ my $number_of_unassigned_relations              = 0;
 my $number_of_negative_relations                = 0;
 my $number_of_life_cycle_prefix_relations       = 0;
 my $number_of_suspicious_relations              = 0;
+my $number_of_excluded_relations                = 0;
 my $number_of_relations_without_ref             = 0;
 my $number_of_ways                              = 0;
 my $number_of_routeways                         = 0;
@@ -852,6 +859,10 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
 
                     $status = 'keep';
 
+                    # match_exclude() returns either "keep" or "exclude"
+                    # "exclude" returned if relation matches with --exclude-if-key=value option
+                    if ( $status =~ m/keep/ ) { $status = match_exclude( $relation_id ); }
+
                     # match_route_type() returns either "keep" or "suspicious" or "skip"
                     # is this route_type of general interest? 'hiking', 'bicycle', ... routes are not of interest here
                     # "keep"        route_type matches exactly the supported route types            m/^'type'$/
@@ -918,7 +929,7 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
                         } else {
                             $section = $1;
                         }
-                    } elsif ( $status =~ m/(skip|other|suspicious|well_known)/ ) {
+                    } elsif ( $status =~ m/(skip|other|suspicious|well_known|exclude)/ ) {
                         $section = $1;
                     }
 
@@ -1144,7 +1155,7 @@ $number_of_platform_multipolygon_relations  = scalar( keys ( %platform_multipoly
 $number_of_relations_without_ref            = scalar( keys ( %PT_relations_without_ref ) );
 
 if ( $verbose ) {
-    printf STDERR "%s Relations converted: %d, route_relations: %d, platform_mp_relations: %d, positive: %d, negative: %d, life-cycle-prefix: %d, w/o ref: %d, suspicious: %d\n",
+    printf STDERR "%s Relations converted: %d, route_relations: %d, platform_mp_relations: %d, positive: %d, negative: %d, life-cycle-prefix: %d, w/o ref: %d, suspicious: %d, excluded: %d\n",
                    get_time(),
                    $number_of_relations,
                    $number_of_route_relations,
@@ -1153,7 +1164,8 @@ if ( $verbose ) {
                    $number_of_negative_relations,
                    $number_of_life_cycle_prefix_relations,
                    $number_of_relations_without_ref,
-                   $number_of_suspicious_relations;
+                   $number_of_suspicious_relations,
+                   $number_of_excluded_relations;
 }
 
 
@@ -1962,6 +1974,43 @@ printFinalFooter();
 OSM::Geo::Summary();
 
 printf STDERR "%s Done ...\n", get_time()       if ( $verbose );
+
+
+#############################################################################################
+
+sub match_exclude {
+    my $relation_id = shift;
+
+    if ( $relation_ptr && defined($RELATIONS{$relation_id}) && defined($RELATIONS{$relation_id}->{'tag'}) ) {
+        printf STDERR "Checking relation %s for 'exclude'\n", $relation_id       if ( $debug );
+        foreach my $key ( keys( %excluded_key_value_relations ) ) {
+            if ( defined($RELATIONS{$relation_id}->{'tag'}->{$key}) ) {
+                foreach my $value (keys(%{$excluded_key_value_relations{$key}})) {
+                    printf STDERR "Checking relation %s for key = %s and value = %s\n", $relation_id, $key, $value       if ( $debug );
+                    if ( $RELATIONS{$relation_id}->{'tag'}->{$key} eq $value ) {
+                        printf STDERR "Checking relation %s for key = %s and value = %s to be excluded\n", $relation_id, $key, $value       if ( $debug );
+                        $excluded_key_value_relations{$key}{$value}{$relation_id} = 1;
+                        return 'exclude';
+                    }
+                }
+            } else {
+                return 'keep';
+            }
+        }
+    } else {
+        if ( $relation_id ) {
+            if ( exists($RELATIONS{$relation_id}) ) {
+                printf STDERR "%s Do not exclude realtion: %s - %s\n", get_time(), $relation_id, 'relation has no tags'      if ( $debug );
+            } else {
+                printf STDERR "%s Do not exclude realtion: %s - %s\n", get_time(), $relation_id, 'relation not found'      if ( $debug );
+            }
+        } else {
+            printf STDERR "%s Do not exclude realtion: %s\n", get_time(), 'relation_id is not defined'      if ( $debug );
+        }
+    }
+
+    return 'keep';
+}
 
 
 #############################################################################################
@@ -7379,6 +7428,8 @@ sub printInitialHeader {
         push( @HTML_start, "            #analysis .number         { text-align:right; }\n" );
         push( @HTML_start, "            #analysis .gtfs_feed      { white-space:nowrap; }\n" );
         push( @HTML_start, "            #analysis .feed_from      { white-space:nowrap; }\n" );
+        push( @HTML_start, "            #analysis .key            { white-space:nowrap; }\n" );
+        push( @HTML_start, "            #analysis .value          { white-space:nowrap; }\n" );
         push( @HTML_start, "            #analysis .date           { white-space:nowrap; }\n" );
         push( @HTML_start, "            #analysis .date_from      { white-space:nowrap; }\n" );
         push( @HTML_start, "            #analysis .attention      { background-color: yellow; font-weight: 500; font-size: 1.2em; }\n" );
@@ -8055,7 +8106,7 @@ sub printConditionalAccessOnWays {
     push( @HTML_main, "</p>\n" );
 
     printTableInitialization( 'conditional_access', 'ways', 'relations' );
-    printTableHeader( 'conditional_access' => 'string', 'ways' => 'none', 'relations' => 'none' );
+    printTableHeader( 'conditional_access' => 'string' );
     foreach my $access_restriction ( sort( keys( %conditional_access ) ) ) {
         printTableLine( 'conditional_access' =>  $access_restriction,
                         'ways'               =>  join( ',', sort( keys( %{$conditional_access{$access_restriction}->{'ways'}} ) ) ),
@@ -8076,7 +8127,7 @@ sub printExcludedRelations {
     push( @HTML_main, "        </p>\n" );
 
     printTableInitialization( 'key', 'value', 'number', 'relations' );
-    printTableHeader( 'key' => 'string', 'value' => 'none', 'number' => 'number', 'relations' => 'none' );
+    printTableHeader( 'key' => 'string', 'value' => 'string', 'number' => 'number' );
     foreach my $key ( sort( keys( %excluded_key_value_relations ) ) ) {
         foreach my $value ( sort( keys( %{$excluded_key_value_relations{$key}} ))) {
             printTableLine( 'key'       =>  $key,

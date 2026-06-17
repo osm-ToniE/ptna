@@ -2,8 +2,23 @@
 <osm version='0.6' upload='never' generator='JOSM'>
   <bounds minlat='48.069032' minlon='11.6330838' maxlat='48.0716416' maxlon='11.6389203' origin='CGImap 0.6.1 (13164 thorn-03.openstreetmap.org)' />
   <bounds minlat='48.069032' minlon='11.6330838' maxlat='48.0716416' maxlon='11.6389203' origin='OpenStreetMap server' />
-  <relation id='-39096' action='modify'>
+  <node id='-26133' action='modify' lat='48.07073919489' lon='11.63406279641' />
+  <node id='-26135' action='modify' lat='48.07077387368' lon='11.63814542752'>
+    <tag k='bus' v='yes' />
+    <tag k='highway' v='bus_stop' />
+    <tag k='name' v='Stop1' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <way id='-581' action='modify'>
+    <nd ref='-26133' />
+    <nd ref='-26135' />
+    <tag k='highway' v='residential' />
+  </way>
+  <relation id='-39098' action='modify'>
+    <member type='node' ref='-26135' role='stop' />
+    <member type='way' ref='-581' role='' />
     <tag k='from' v='from' />
+    <tag k='gtfs:feed' v='DE-BY-MVV' />
     <tag k='name' v='Bus 605: from =&gt; to' />
     <tag k='network' v='network' />
     <tag k='operator' v='operator' />

@@ -18,11 +18,12 @@ then
         ROUTES_OPTION="--routes-file=$TEST-Routes.txt"
     fi
 
-    EXCLUDE_OPTIONS="--exclude-if-key-value 'gtfs:feed=DE-BY-MVV'    \
-                     --exclude-if-key-value \"gtfs:feed=DE-BY-MVG\"  \
-                     --exclude-if-key-value gtfs:feed=DE-BY-RVO      \
-                     --exclude-if-key-value=test-key=test-value      \
-                     --exclude-if-key-value obsolete"
+    EXCLUDE_OPTIONS="--exclude-if-key-value='gtfs:feed=DE-BY-MVV'     \
+                     --exclude-if-key-value=\"gtfs:feed=DE-BY-MVG\"   \
+                     --exclude-if-key-value=gtfs:feed=DE-BY-RVO       \
+                     --exclude-if-key-value='network=Transport%20Buses' \
+                     --exclude-if-key-value=test-key=test-value       \
+                     --exclude-if-key-value=obsolete"
 
     ptna-routes.pl --timezone="Europe/Berlin" $EXCLUDE_OPTIONS --ptv1-compatibility=allow --max-error=10 --check-access --check-name --check-from-to --check-via --check-stop-position --check-sequence --check-version --check-motorway-link \
                    --multiple-ref-type-entries=analyze --positive-notes --coloured-sketchline --verbose --debug --relaxed-begin-end-for=train \
