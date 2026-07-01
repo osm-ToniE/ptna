@@ -1994,8 +1994,6 @@ sub match_exclude {
                         return 'exclude';
                     }
                 }
-            } else {
-                return 'keep';
             }
         }
     } else {
