@@ -1984,6 +1984,7 @@ sub match_exclude {
     if ( $relation_ptr && defined($RELATIONS{$relation_id}) && defined($RELATIONS{$relation_id}->{'tag'}) ) {
         printf STDERR "Checking relation %s for 'exclude'\n", $relation_id       if ( $debug );
         foreach my $key ( keys( %excluded_key_value_relations ) ) {
+            printf STDERR "Checking relation %s for key = %s\n", $relation_id, $key      if ( $debug );
             if ( defined($RELATIONS{$relation_id}->{'tag'}->{$key}) ) {
                 foreach my $value (keys(%{$excluded_key_value_relations{$key}})) {
                     printf STDERR "Checking relation %s for key = %s and value = %s\n", $relation_id, $key, $value       if ( $debug );
