@@ -7294,7 +7294,11 @@ sub getRelationRouteType {
 sub getGtfsInfo {
     my $relation_ptr  = shift;
 
-    my $gtfs_guid         = $opt_gtfs_feed;
+    my %gtfs_information = ();
+    my @gtfs_info_order  = ( 'gtfs:feed', 'operator:guid', 'network:guid', '--gtfs:feed' );
+    my $key;
+    my $value;
+
     my $gtfs_feed         = $opt_gtfs_feed;
     my $feed_info_from    = '--gtfs-feed';
     my $gtfs_release_date = '';
@@ -7314,19 +7318,45 @@ sub getGtfsInfo {
             $gtfs_feed      = $relation_ptr->{'tag'}->{'network:guid'};
             $feed_info_from = 'network:guid';
         }
-        $gtfs_guid    =  $gtfs_feed;
         $gtfs_country =  $gtfs_feed;
         $gtfs_country =~ s/-.*$//;
 
         if ( $relation_ptr->{'tag'}->{'gtfs:release_date'} ) {
             $gtfs_release_date  = $relation_ptr->{'tag'}->{'gtfs:release_date'};
             $release_date_from  = 'gtfs:release_date';
-            $gtfs_guid         .= '-' .  $relation_ptr->{'tag'}->{'gtfs:release_date'};
         } elsif ( $relation_ptr->{'tag'}->{'gtfs:source_date'} ) {
             $gtfs_release_date  = $relation_ptr->{'tag'}->{'gtfs:source_date'};
             $release_date_from  = 'gtfs:source_date';
-            $gtfs_guid         .= '-' .  $relation_ptr->{'tag'}->{'gtfs:source_date'};
         }
+
+        foreach $key ( keys(%{$relation_ptr->{'tag'}}) ) {
+            if ( $key =~ m/^gtfs:[rst]/ ) {
+                $value = $relation_ptr->{'tag'}->{$key};
+                if ( $key eq 'gtfs:route_id' ) {
+                    $gtfs_information{$feed_info_from}{$gtfs_feed}{$key} = $value;
+                } elsif ( $key eq 'gtfs:trip_id' ) {
+                    $gtfs_information{$feed_info_from}{$gtfs_feed}{$key} = $value;
+                } elsif ( $key eq 'gtfs:trip_id:sample' ) {
+                    $gtfs_information{$feed_info_from}{$gtfs_feed}{$key} = $value;
+                } elsif ( $key eq 'gtfs:shape_id' ) {
+                    $gtfs_information{$feed_info_from}{$gtfs_feed}{$key} = $value;
+                } elsif ( $key eq 'gtfs:release_date' ) {
+                    $gtfs_information{$feed_info_from}{$gtfs_feed}{$key} = $value;
+                } elsif ( $key =~ m/^(gtfs:route_id):([a-zA-Z0-9_.-]+)$/ ) {
+                    $gtfs_information{$key}{$2}{$1} = $value;
+                } elsif ( $key =~ m/^(gtfs:trip_id):([a-zA-Z0-9_.-]+)$/ ) {
+                    $gtfs_information{$key}{$2}{$1} = $value;
+                } elsif ( $key =~ m/^(gtfs:trip_id:sample):([a-zA-Z0-9_.-]+)$/ ) {
+                    $gtfs_information{$key}{$2}{$1} = $value;
+                } elsif ( $key =~ m/^(gtfs:shape_id):([a-zA-Z0-9_.-]+)$/ ) {
+                    $gtfs_information{$key}{$2}{$1} = $value;
+                } elsif ( $key =~ m/^(gtfs:release_date):([a-zA-Z0-9_.-]+)$/ ) {
+                    $gtfs_information{$key}{$2}{$1} = $value;
+                }
+            }
+        }
+
+        printf STDERR "gtfs_information = %s\n", Data::Dumper::Dumper(\%gtfs_information);
 
         if ( $relation_ptr->{'tag'}->{'type'} eq 'route' ) {
             if ( defined($relation_ptr->{'tag'}->{'gtfs:trip_id'}) && $relation_ptr->{'tag'}->{'gtfs:trip_id'} ne '' ) {
