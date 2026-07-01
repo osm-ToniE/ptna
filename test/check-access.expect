@@ -23,6 +23,8 @@
             #analysis .number         { text-align:right; }
             #analysis .gtfs_feed      { white-space:nowrap; }
             #analysis .feed_from      { white-space:nowrap; }
+            #analysis .key            { white-space:nowrap; }
+            #analysis .value          { white-space:nowrap; }
             #analysis .date           { white-space:nowrap; }
             #analysis .date_from      { white-space:nowrap; }
             #analysis .attention      { background-color: yellow; font-weight: 500; font-size: 1.2em; }
@@ -181,7 +183,7 @@ Consider removing these restrictions at some point.
 </p>
         <table class="oepnvtable js-sort-table">
             <thead>
-                <tr class="tableheaderrow"><th class="conditional_access js-sort-string" dir="auto">&#x21C5;Conditional Access</th><th class="ways js-sort-none" dir="auto">&#x21C5;Ways</th><th class="relations js-sort-none" dir="auto">&#x21C5;Relations</th></tr>
+                <tr class="tableheaderrow"><th class="conditional_access js-sort-string" dir="auto">&#x21C5;Conditional Access</th><th class="ways" dir="auto">&#x21C5;Ways</th><th class="relations" dir="auto">&#x21C5;Relations</th></tr>
             </thead>
             <tbody>
                 <tr data-info="???" data-ref="???" class="line"><td class="conditional_access foreign" dir="auto">&#039;bus:conditional&#039;=&#039;yes @ operator&#039;</td><td class="ways" dir="auto"><img src="/img/Way.svg" alt="Way" /> '<span class="foreign" dir="auto">Way 18</span>' -152347</td><td class="relations" dir="auto"><img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">011</span>' -152370, <img src="/img/Relation.svg" alt="Relation" /> '<span class="foreign" dir="auto">011</span>' -152371</td></tr>
