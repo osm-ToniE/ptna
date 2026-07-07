@@ -3215,19 +3215,22 @@ sub analyze_relation {
         # Link to GTFS data shall be shown and/or problems shall be reported
         #
         if ( $link_gtfs || $check_gtfs ) {
-            my $gtfs_info = getGtfsInfo( $relation_ptr );
+            my @gtfs_infos = getGtfsInfos( $relation_ptr );
+            printf STDERR "gtfs_infos = %s\n", Data::Dumper::Dumper(\@gtfs_infos)   if ( $debug );
             if ( $link_gtfs ) {
-                $relation_ptr->{'GTFS-HTML-TAG'} = $gtfs_info;
+                $relation_ptr->{'GTFS-HTML-TAG'} = join( ', ', @gtfs_infos );
             }
             if ( $check_gtfs ) {
-                if ( $gtfs_info =~ m/>GTFS[!?]/ || $gtfs_info =~ m/>GTFS\(r\)[!?]/ ) {
-                    $gtfs_info =~ s/^.*"GTFS-Feed:/GTFS-Feed:/;
-                    $gtfs_info =~ s/^.*'gtfs:/'gtfs:/;
-                    $gtfs_info =~ s/\.\".*$//;
-                    $gtfs_info =~ s/GTFS-Release-Date: , //;
-                    $gtfs_info =~ s/GTFS-Release-Date: previous, //;
-                    # printf STDERR "%s : %s -> %s\n", $ref, $relation_id, $gtfs_info;
-                    push( @{$relation_ptr->{'__issues__'}}, $gtfs_info );
+                foreach my $gtfs_info ( @gtfs_infos ) {
+                    if ( $gtfs_info =~ m/>GTFS[!?]/ || $gtfs_info =~ m/>GTFS\(r\)[!?]/ ) {
+                        $gtfs_info =~ s/^.*"GTFS-Feed:/GTFS-Feed:/;
+                        $gtfs_info =~ s/^.*'gtfs:/'gtfs:/;
+                        $gtfs_info =~ s/\.\".*$//;
+                        $gtfs_info =~ s/GTFS-Release-Date: , //;
+                        $gtfs_info =~ s/GTFS-Release-Date: previous, //;
+                        # printf STDERR "%s : %s -> %s\n", $ref, $relation_id, $gtfs_info;
+                        push( @{$relation_ptr->{'__issues__'}}, $gtfs_info );
+                    }
                 }
             }
         }
@@ -7290,11 +7293,11 @@ sub getRelationRouteType {
 #
 #############################################################################################
 
-sub getGtfsInfo {
+sub getGtfsInfos {
     my $relation_ptr  = shift;
 
-    my %gtfs_information = ();
-    my @gtfs_info_order  = ( 'gtfs:feed', 'operator:guid', 'network:guid', '--gtfs:feed' );
+    my %gtfs_feed_info = ();
+    my @feed_suffix    = ( '' );        # that's the generic one, if keys "gtfs:feed" or "operator:guid" or "network:guid" or option "--gtfs-feed" are used
     my $key;
     my $value;
 
@@ -7302,8 +7305,7 @@ sub getGtfsInfo {
     my $feed_info_from    = '--gtfs-feed';
     my $gtfs_release_date = '';
     my $release_date_from = '';
-    my $gtfs_country      = '';
-    my $gtfs_html_tag     = '';
+    my @gtfs_html_tags    = ();
 
 
     if ( $relation_ptr && $relation_ptr->{'tag'} ) {
@@ -7317,90 +7319,140 @@ sub getGtfsInfo {
             $gtfs_feed      = $relation_ptr->{'tag'}->{'network:guid'};
             $feed_info_from = 'network:guid';
         }
-        $gtfs_country =  $gtfs_feed;
-        $gtfs_country =~ s/-.*$//;
 
-        if ( $relation_ptr->{'tag'}->{'gtfs:release_date'} ) {
-            $gtfs_release_date  = $relation_ptr->{'tag'}->{'gtfs:release_date'};
-            $release_date_from  = 'gtfs:release_date';
-        } elsif ( $relation_ptr->{'tag'}->{'gtfs:source_date'} ) {
-            $gtfs_release_date  = $relation_ptr->{'tag'}->{'gtfs:source_date'};
-            $release_date_from  = 'gtfs:source_date';
-        }
+        $gtfs_feed_info{'explicit'}->{$gtfs_feed} = $feed_info_from;
 
         foreach $key ( keys(%{$relation_ptr->{'tag'}}) ) {
             if ( $key =~ m/^gtfs:[rst]/ ) {
-                $value = $relation_ptr->{'tag'}->{$key};
-                if ( $key eq 'gtfs:route_id' ) {
-                    $gtfs_information{$feed_info_from}{$gtfs_feed}{$key} = $value;
-                } elsif ( $key eq 'gtfs:trip_id' ) {
-                    $gtfs_information{$feed_info_from}{$gtfs_feed}{$key} = $value;
-                } elsif ( $key eq 'gtfs:trip_id:sample' ) {
-                    $gtfs_information{$feed_info_from}{$gtfs_feed}{$key} = $value;
-                } elsif ( $key eq 'gtfs:shape_id' ) {
-                    $gtfs_information{$feed_info_from}{$gtfs_feed}{$key} = $value;
-                } elsif ( $key eq 'gtfs:release_date' ) {
-                    $gtfs_information{$feed_info_from}{$gtfs_feed}{$key} = $value;
-                } elsif ( $key =~ m/^(gtfs:route_id):([a-zA-Z0-9_.-]+)$/ ) {
-                    $gtfs_information{$key}{$2}{$1} = $value;
-                } elsif ( $key =~ m/^(gtfs:trip_id):([a-zA-Z0-9_.-]+)$/ ) {
-                    $gtfs_information{$key}{$2}{$1} = $value;
-                } elsif ( $key =~ m/^(gtfs:trip_id:sample):([a-zA-Z0-9_.-]+)$/ ) {
-                    $gtfs_information{$key}{$2}{$1} = $value;
-                } elsif ( $key =~ m/^(gtfs:shape_id):([a-zA-Z0-9_.-]+)$/ ) {
-                    $gtfs_information{$key}{$2}{$1} = $value;
-                } elsif ( $key =~ m/^(gtfs:release_date):([a-zA-Z0-9_.-]+)$/ ) {
-                    $gtfs_information{$key}{$2}{$1} = $value;
+                # GTFS feed names always start with ISO two letter code of country in capital letters
+                if ( $key =~ m/^gtfs:route_id:([A-Z][A-Z][a-zA-Z0-9_.-]+)$/ ) {
+                    $gtfs_feed_info{'implicit'}->{$1} = 1;
+                } elsif ( $key =~ m/^gtfs:trip_id:sample:([A-Z][A-Z][a-zA-Z0-9_.-]+)$/ ) {
+                    $gtfs_feed_info{'implicit'}->{$1} = 1;
+                } elsif ( $key =~ m/^gtfs:trip_id:like:([A-Z][A-Z][a-zA-Z0-9_.-]+)$/ ) {
+                    $gtfs_feed_info{'implicit'}->{$1} = 1;
+                } elsif ( $key =~ m/^gtfs:trip_id:([A-Z][A-Z][a-zA-Z0-9_.-]+)$/ ) {
+                    $gtfs_feed_info{'implicit'}->{$1} = 1;
+                } elsif ( $key =~ m/^gtfs:shape_id:([A-Z][A-Z][a-zA-Z0-9_.-]+)$/ ) {
+                    $gtfs_feed_info{'implicit'}->{$1} = 1;
+                } elsif ( $key =~ m/^gtfs:release_date:([A-Z][A-Z][a-zA-Z0-9_.-]+)$/ ) {
+                    $gtfs_feed_info{'implicit'}->{$1} = 1;
                 }
             }
         }
+        foreach $key ( sort ( keys ( %{$gtfs_feed_info{'implicit'}} ))) {
+            push( @feed_suffix, ':'.$key );
+        }
 
-        printf STDERR "gtfs_information = %s\n", Data::Dumper::Dumper(\%gtfs_information);
+        printf STDERR "gtfs_feed_info = %s\n", Data::Dumper::Dumper(\%gtfs_feed_info)   if ( $debug );
+        printf STDERR "feed_suffix = %s\n", Data::Dumper::Dumper(\@feed_suffix)   if ( $debug );
 
-        if ( $relation_ptr->{'tag'}->{'type'} eq 'route' ) {
-            if ( defined($relation_ptr->{'tag'}->{'gtfs:trip_id'}) && $relation_ptr->{'tag'}->{'gtfs:trip_id'} ne '' ) {
-                $relation_ptr->{'tag'}->{'gtfs:trip_id'} =~ s/\s*;\s*/;/g;
-                $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsTripIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'}, 'gtfs:trip_id' ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:trip_id'} ) );
-            } elsif ( defined($relation_ptr->{'tag'}->{'gtfs:trip_id:sample'}) && $relation_ptr->{'tag'}->{'gtfs:trip_id:sample'} ne '' ) {
-                $relation_ptr->{'tag'}->{'gtfs:trip_id:sample'} =~ s/\s*;\s*/;/g;
-                $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsTripIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'}, 'gtfs:trip_id:sample' ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:trip_id:sample'} ) );
-            } elsif ( defined($relation_ptr->{'tag'}->{'gtfs:shape_id'}) && $relation_ptr->{'tag'}->{'gtfs:shape_id'} ne '' ) {
-                $relation_ptr->{'tag'}->{'gtfs:shape_id'} =~ s/\s*;\s*/;/g;
-                $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsShapeIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'}, 'gtfs:shape_id' ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:shape_id'} ) );
-            } elsif ( defined($relation_ptr->{'tag'}->{'gtfs:route_id'}) && $relation_ptr->{'tag'}->{'gtfs:route_id'} ne '' ) {
-                $relation_ptr->{'tag'}->{'gtfs:route_id'} =~ s/\s*;\s*/;/g;
-                $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'}, 'gtfs:route_id' ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:route_id'} ) );
-                # we do expect a trip_id or shape_id here, mark that route_id is used here
-                $gtfs_html_tag =~ s/>GTFS/>GTFS(r)/g;
-                if ( $gtfs_html_tag !~ m/bad-link/ ) {
-                    if ( $relation_ptr->{'tag'}->{'gtfs:route_id'} !~ m/;/ || $gtfs_html_tag !~ m/gtfs-dateprevious/ ) {
-                        my $grd = ( $gtfs_html_tag =~ m/gtfs-dateprevious/ ) ? 'previous' : $gtfs_release_date;
-                        $gtfs_html_tag .= GTFS::PtnaSQLite::getGtfsRouteIdIconTag( $gtfs_feed, $grd, $relation_ptr->{'tag'}->{'gtfs:route_id'}, $relation_ptr->{'id'}, 'gtfs:route_id' );
+        foreach my $feed_suffix ( @feed_suffix ) {
+            if ( $feed_suffix ) {
+                $gtfs_feed =  $feed_suffix;
+                $gtfs_feed =~ s/^://;
+            } else {
+                $gtfs_feed      = (keys(%{$gtfs_feed_info{'explicit'}}))[0];
+                $feed_info_from = $gtfs_feed_info{'explicit'}->{$gtfs_feed};
+            }
+            if ( $relation_ptr->{'tag'}->{'gtfs:release_date'.$feed_suffix} ) {
+                $gtfs_release_date = $relation_ptr->{'tag'}->{'gtfs:release_date'.$feed_suffix};
+                $release_date_from = 'gtfs:release_date'.$feed_suffix;
+            } else {
+                $gtfs_release_date = '';
+                $release_date_from = '';
+            }
+
+            printf STDERR "feed_suffix = %s, gtfs_feed = %s, feed_info_from = %s, release_date = %s, release_date_from = %s\n", $feed_suffix, $gtfs_feed, $feed_info_from, $gtfs_release_date, $release_date_from    if ( $debug );
+            my $gtfs_html_tag_created = 0;
+            my $last_gtfs_html_tag    = '';
+            if ( $relation_ptr->{'tag'}->{'type'} eq 'route' ) {
+                if ( defined($relation_ptr->{'tag'}->{'gtfs:trip_id'.$feed_suffix}) && $relation_ptr->{'tag'}->{'gtfs:trip_id'.$feed_suffix} ne '' ) {
+                    $feed_info_from = 'gtfs:trip_id'.$feed_suffix if ( $feed_suffix );
+                    printf STDERR "key = %s, value = %s\n", 'gtfs:trip_id'.$feed_suffix, $relation_ptr->{'tag'}->{'gtfs:trip_id'.$feed_suffix}    if ( $debug );
+                    $relation_ptr->{'tag'}->{'gtfs:trip_id'.$feed_suffix} =~ s/\s*;\s*/;/g;
+                    foreach my $gtfs_html_tag ( map { GTFS::PtnaSQLite::getGtfsTripIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'}, 'gtfs:trip_id'.$feed_suffix ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:trip_id'.$feed_suffix} ) ) {
+                        if ( $gtfs_html_tag ne $last_gtfs_html_tag ) {
+                            # do not report same things twice or more times
+                            push( @gtfs_html_tags, $gtfs_html_tag );
+                            $gtfs_html_tag_created++;
+                            $last_gtfs_html_tag = $gtfs_html_tag;
+                        }
+                    }
+                } elsif ( defined($relation_ptr->{'tag'}->{'gtfs:trip_id:sample'.$feed_suffix}) && $relation_ptr->{'tag'}->{'gtfs:trip_id:sample'.$feed_suffix} ne '' ) {
+                    $feed_info_from = 'gtfs:trip_id:sample'.$feed_suffix if ( $feed_suffix );
+                    printf STDERR "key = %s, value = %s\n", 'gtfs:trip_id:sample'.$feed_suffix, $relation_ptr->{'tag'}->{'gtfs:trip_id:sample'.$feed_suffix}    if ( $debug );
+                    $relation_ptr->{'tag'}->{'gtfs:trip_id:sample'.$feed_suffix} =~ s/\s*;\s*/;/g;
+                    foreach my $gtfs_html_tag ( map { GTFS::PtnaSQLite::getGtfsTripIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'}, 'gtfs:trip_id:sample'.$feed_suffix ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:trip_id:sample'.$feed_suffix} ) ) {
+                        if ( $gtfs_html_tag ne $last_gtfs_html_tag ) {
+                            # do not report same things twice or more times
+                            push( @gtfs_html_tags, $gtfs_html_tag );
+                            $gtfs_html_tag_created++;
+                            $last_gtfs_html_tag = $gtfs_html_tag;
+                        }
+                    }
+                } elsif ( defined($relation_ptr->{'tag'}->{'gtfs:shape_id'.$feed_suffix}) && $relation_ptr->{'tag'}->{'gtfs:shape_id'.$feed_suffix} ne '' ) {
+                    $feed_info_from = 'gtfs:shape_id'.$feed_suffix if ( $feed_suffix );
+                    printf STDERR "key = %s, value = %s\n", 'gtfs:shape_id'.$feed_suffix, $relation_ptr->{'tag'}->{'gtfs:shape_id'.$feed_suffix}    if ( $debug );
+                    $relation_ptr->{'tag'}->{'gtfs:shape_id'.$feed_suffix} =~ s/\s*;\s*/;/g;
+                    foreach my $gtfs_html_tag ( map { GTFS::PtnaSQLite::getGtfsShapeIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'}, 'gtfs:shape_id'.$feed_suffix ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:shape_id'.$feed_suffix} ) ) {
+                        if ( $gtfs_html_tag ne $last_gtfs_html_tag ) {
+                            # do not report same things twice or more times
+                            push( @gtfs_html_tags, $gtfs_html_tag );
+                            $gtfs_html_tag_created++;
+                            $last_gtfs_html_tag = $gtfs_html_tag;
+                        }
+                    }
+                } elsif ( defined($relation_ptr->{'tag'}->{'gtfs:route_id'.$feed_suffix}) && $relation_ptr->{'tag'}->{'gtfs:route_id'.$feed_suffix} ne '' ) {
+                    $feed_info_from = 'gtfs:route_id'.$feed_suffix if ( $feed_suffix );
+                    printf STDERR "key = %s, value = %s\n", 'gtfs:route_id'.$feed_suffix, $relation_ptr->{'tag'}->{'gtfs:route_id'.$feed_suffix}    if ( $debug );
+                    $relation_ptr->{'tag'}->{'gtfs:route_id'.$feed_suffix} =~ s/\s*;\s*/;/g;
+                    foreach my $gtfs_html_tag ( map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'}, 'gtfs:route_id'.$feed_suffix ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:route_id'.$feed_suffix} ) ) {
+                        # we do expect a trip_id or shape_id here, mark that route_id is used here
+                        $gtfs_html_tag =~ s/>GTFS/>GTFS(r)/g;
+                        if ( $gtfs_html_tag !~ m/bad-link/ ) {
+                            if ( $relation_ptr->{'tag'}->{'gtfs:route_id'.$feed_suffix} !~ m/;/ || $gtfs_html_tag !~ m/gtfs-dateprevious/ ) {
+                                my $grd = ( $gtfs_html_tag =~ m/gtfs-dateprevious/ ) ? 'previous' : $gtfs_release_date;
+                                $gtfs_html_tag .= GTFS::PtnaSQLite::getGtfsRouteIdIconTag( $gtfs_feed, $grd, $relation_ptr->{'tag'}->{'gtfs:route_id'.$feed_suffix}, $relation_ptr->{'id'}, 'gtfs:route_id'.$feed_suffix );
+                            }
+                        }
+                        if ( $gtfs_html_tag ne $last_gtfs_html_tag ) {
+                            # do not report same things twice or more times
+                            push( @gtfs_html_tags, $gtfs_html_tag );
+                            $gtfs_html_tag_created++;
+                            $last_gtfs_html_tag = $gtfs_html_tag;
+                        }
+                    }
+                }
+            } elsif ( defined($relation_ptr->{'tag'}->{'gtfs:route_id'.$feed_suffix}) && $relation_ptr->{'tag'}->{'gtfs:route_id'.$feed_suffix} ne '' ) {
+                $feed_info_from = 'gtfs:route_id'.$feed_suffix if ( $feed_suffix );
+                printf STDERR "key = %s, value = %s\n", 'gtfs:route_id'.$feed_suffix, $relation_ptr->{'tag'}->{'gtfs:route_id'.$feed_suffix}    if ( $debug );
+                $relation_ptr->{'tag'}->{'gtfs:route_id'.$feed_suffix} =~ s/\s*;\s*/;/g;
+                foreach my $gtfs_html_tag ( map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'}, 'gtfs:route_id'.$feed_suffix ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:route_id'.$feed_suffix} ) ) {
+                    # printf STDERR "getGtfsInfos() handling gtfs:route_id eq '0' -> %s\n", $gtfs_html_tag    if ( $relation_ptr->{'tag'}->{'gtfs:route_id'.$feed_suffix} eq '0' );
+                    if ( $gtfs_html_tag !~ m/bad-link/ ) {
+                        if ( $relation_ptr->{'tag'}->{'gtfs:route_id'.$feed_suffix} !~ m/;/ || $gtfs_html_tag !~ m/gtfs-dateprevious/ ) {
+                            my $grd = ( $gtfs_html_tag =~ m/gtfs-dateprevious/ ) ? 'previous' : $gtfs_release_date;
+                            $gtfs_html_tag .= GTFS::PtnaSQLite::getGtfsRouteIdIconTag( $gtfs_feed, $grd, $relation_ptr->{'tag'}->{'gtfs:route_id'.$feed_suffix}, $relation_ptr->{'id'}, 'gtfs:route_id'.$feed_suffix );
+                        }
+                    }
+                    if ( $gtfs_html_tag ne $last_gtfs_html_tag ) {
+                        # do not report same things twice or more times
+                        push( @gtfs_html_tags, $gtfs_html_tag );
+                        $gtfs_html_tag_created++;
+                        $last_gtfs_html_tag = $gtfs_html_tag;
                     }
                 }
             }
-        } elsif ( defined($relation_ptr->{'tag'}->{'gtfs:route_id'}) && $relation_ptr->{'tag'}->{'gtfs:route_id'} ne '' ) {
-            $relation_ptr->{'tag'}->{'gtfs:route_id'} =~ s/\s*;\s*/;/g;
-            $gtfs_html_tag = join( ', ', map { GTFS::PtnaSQLite::getGtfsRouteIdHtmlTag( $gtfs_feed, $gtfs_release_date, $_, $relation_ptr->{'id'}, 'gtfs:route_id' ); } split ( ';', $relation_ptr->{'tag'}->{'gtfs:route_id'} ) );
-            # printf STDERR "getGtfsInfo() handling gtfs:route_id eq '0' -> %s\n", $gtfs_html_tag    if ( $relation_ptr->{'tag'}->{'gtfs:route_id'} eq '0' );
-            if ( $gtfs_html_tag !~ m/bad-link/ ) {
-                if ( $relation_ptr->{'tag'}->{'gtfs:route_id'} !~ m/;/ || $gtfs_html_tag !~ m/gtfs-dateprevious/ ) {
-                    my $grd = ( $gtfs_html_tag =~ m/gtfs-dateprevious/ ) ? 'previous' : $gtfs_release_date;
-                    $gtfs_html_tag .= GTFS::PtnaSQLite::getGtfsRouteIdIconTag( $gtfs_feed, $grd, $relation_ptr->{'tag'}->{'gtfs:route_id'}, $relation_ptr->{'id'}, 'gtfs:route_id' );
-                }
+            if ( $gtfs_html_tag_created ) {
+                my $grd = $gtfs_release_date ? $gtfs_release_date : ' latest ';
+                my $rdf = $release_date_from ? $release_date_from : ' empty ';
+                $gtfs_relation_info_from{$gtfs_feed}{$feed_info_from}{$grd}{$rdf}{$relation_ptr->{'id'}} = 1;
             }
         }
     }
 
-    if ( $gtfs_html_tag ) {
-        if ( $gtfs_release_date eq '' ) {
-            $gtfs_release_date = ' latest ';
-            $release_date_from = ' empty ';
-        }
-        $gtfs_relation_info_from{$gtfs_feed}{$feed_info_from}{$gtfs_release_date}{$release_date_from}{$relation_ptr->{'id'}} = 1;
-    }
-
-    return $gtfs_html_tag;
+    return @gtfs_html_tags;
 }
 
 
