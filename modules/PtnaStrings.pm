@@ -1991,6 +1991,13 @@ sub InitOptionStrings {
     $OptionHash{$OptionList[$i]->{'option'}}    = $i;
 
     $i++;
+    $OptionList[$i]->{'option'}                 = "inherit-tags";
+    $OptionList[$i]->{'default'}                = "OFF";
+    $OptionList[$i]->{'description'}            = gettext( "Route relations inherit tags from their route_master relation." );
+    $OptionList[$i]->{'image'}                  = "";
+    $OptionHash{$OptionList[$i]->{'option'}}    = $i;
+
+    $i++;
     $OptionList[$i]->{'option'}                 = "link-gtfs";
     $OptionList[$i]->{'default'}                = "OFF";
     $OptionList[$i]->{'description'}            = gettext( "Provide links to GTFS-Analysis for 'gtfs:route_id' or 'gtfs:trip_id' tags." );
