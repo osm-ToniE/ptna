@@ -129,6 +129,7 @@ my $expect_network_long_for         = undef;
 my $expect_network_short            = undef;
 my $expect_network_short_as         = undef;
 my $expect_network_short_for        = undef;
+my $inherit_tags                    = undef;
 my $opt_gtfs_feed                   = undef;
 my $link_gtfs                       = undef;
 my $multiple_ref_type_entries       = "analyze";
@@ -186,6 +187,7 @@ GetOptions( 'help'                          =>  \$help,                         
             'expect-network-short-as:s'     =>  \$expect_network_short_as,      # --expect-network-short-as='BOB'
             'expect-network-short-for:s'    =>  \$expect_network_short_for,     # --expect-network-short-for='Bayerische Oberlandbahn'        note if 'network' is not short form for ...
             'gtfs-feed=s'                   =>  \$opt_gtfs_feed,                # --gtfs-feed='DE-BY-MVV'
+            'inherit-tags'                  =>  \$inherit_tags,                 # --inherit-tags
             'link-gtfs'                     =>  \$link_gtfs,                    # --link-gtfs                       create a link to GTFS-Analysis for "gtfs:*" tags
             'routes-file=s'                 =>  \$routes_file,                  # --routes-file=zzz                 CSV file with a list of routes of the of the network
             'max-error=i'                   =>  \$max_error,                    # --max-error=10                    limit number of templates printed for identical error messages
@@ -2735,9 +2737,13 @@ sub analyze_route_environment {
                         $issues_string = gettext( "'%s' = '%s' of Route is set but '%s' of Route-Master is not set: %s" );
                         push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, , $colour_tag, handle_foreign($relation_ptr->{'tag'}->{$colour_tag}), $colour_tag, printRelationTemplate($route_master_rel_id)) );
                     }
-                } elsif ( $RELATIONS{$route_master_rel_id}->{'tag'}->{$colour_tag} ) {
-                    $issues_string = gettext( "'%s' of Route is not set but '%s' = '%s' of Route-Master is set: %s" );
-                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, $colour_tag, $colour_tag, $RELATIONS{$route_master_rel_id}->{'tag'}->{$colour_tag}, printRelationTemplate($route_master_rel_id)) );
+                } else {
+                    unless ( $inherit_tags ) {
+                        if ( $RELATIONS{$route_master_rel_id}->{'tag'}->{$colour_tag} ) {
+                            $issues_string = gettext( "'%s' of Route is not set but '%s' = '%s' of Route-Master is set: %s" );
+                            push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, $colour_tag, $colour_tag, $RELATIONS{$route_master_rel_id}->{'tag'}->{$colour_tag}, printRelationTemplate($route_master_rel_id)) );
+                        }
+                    }
                 }
             }
 
@@ -2749,7 +2755,17 @@ sub analyze_route_environment {
                 my $help_mtag = '';
                 my $mcount    = 0;
                 my $tcount    = 0;
-                foreach my $gtfs_tag ( 'gtfs:feed', 'gtfs:release_date', 'gtfs:route_id' ) {
+                my %gtfs_keys = ();
+                foreach my $key ( keys(%{$relation_ptr->{'tag'}}), keys(%{$RELATIONS{$route_master_rel_id}->{'tag'}}) ) {
+                    if ( $key =~ m/^gtfs:/ ) {
+                        if ( $key eq 'gtfs:feed'                                                 ||
+                             $key =~ m/^gtfs:(release_date|route_id)$/                           ||
+                             $key =~ m/^gtfs:(release_date|route_id):[A-Z][A-Z][a-zA-Z0-9_.-]+$/    ) {
+                            $gtfs_keys{$key} = 1;
+                        }
+                    }
+                }
+                foreach my $gtfs_tag ( sort( keys(%gtfs_keys) ) ) {
                     if ( $relation_ptr->{'tag'}->{$gtfs_tag} ) {
                         if ( $RELATIONS{$route_master_rel_id}->{'tag'}->{$gtfs_tag} ) {
                             $help_rtag = $relation_ptr->{'tag'}->{$gtfs_tag};
@@ -2767,12 +2783,18 @@ sub analyze_route_environment {
                                 push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, $gtfs_tag, $relation_ptr->{'tag'}->{$gtfs_tag}, $gtfs_tag, $RELATIONS{$route_master_rel_id}->{'tag'}->{$gtfs_tag}, printRelationTemplate($route_master_rel_id)) );
                             }
                         } else {
+                            # route_masters do not inherit keys from routes
                             $issues_string = gettext( "'%s' = '%s' of Route is set but '%s' of Route-Master is not set: %s" );
                             push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, $gtfs_tag, $relation_ptr->{'tag'}->{$gtfs_tag}, $gtfs_tag, printRelationTemplate($route_master_rel_id)) );
                         }
-                    } elsif ( $RELATIONS{$route_master_rel_id}->{'tag'}->{$gtfs_tag} ) {
-                        $issues_string = gettext( "'%s' of Route is not set but '%s' = '%s' of Route-Master is set: %s" );
-                        push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, $gtfs_tag, $gtfs_tag, $RELATIONS{$route_master_rel_id}->{'tag'}->{$gtfs_tag}, printRelationTemplate($route_master_rel_id)) );
+                    } else {
+                        unless ( $inherit_tags ) {
+                            if ( $RELATIONS{$route_master_rel_id}->{'tag'}->{$gtfs_tag} ) {
+                                # route deoes not inherit 'gtfs:*' from route_master
+                                $issues_string = gettext( "'%s' of Route is not set but '%s' = '%s' of Route-Master is set: %s" );
+                                push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, $gtfs_tag, $gtfs_tag, $RELATIONS{$route_master_rel_id}->{'tag'}->{$gtfs_tag}, printRelationTemplate($route_master_rel_id)) );
+                            }
+                        }
                     }
                 }
             }
@@ -2830,8 +2852,18 @@ sub analyze_route_environment {
                 my %gtfs_match = ();
                 my $help_val   = '';
                 my $help_pval  = '';
-
-                foreach my $gtfs_tag ( 'gtfs:trip_id', 'gtfs:trip_id:sample', 'gtfs:trip_id:like' ) {
+                my %gtfs_keys  = ();
+                foreach my $key ( keys(%{$relation_ptr->{'tag'}}) ) {
+                    if ( $key =~ m/^gtfs:trip_id/    ) {
+                        if ( $key =~ m/^gtfs:trip_id$/                                          ||
+                             $key =~ m/^gtfs:trip_id:(sample|like)$/                            ||
+                             $key =~ m/^gtfs:trip_id:[A-Z][A-Z][a-zA-Z0-9_.-]+$/                ||
+                             $key =~ m/^gtfs:trip_id:(sample|like):[A-Z][A-Z][a-zA-Z0-9_.-]+$/     ) {
+                            $gtfs_keys{$key} = 1;
+                        }
+                    }
+                }
+                foreach my $gtfs_tag ( sort( keys(%gtfs_keys) ) ) {
                     %gtfs_ident = ();
                     %gtfs_match = ();
 
