@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2026-06-15 14:58+0200\n"
+"POT-Creation-Date: 2026-07-12 12:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -412,6 +412,40 @@ msgstr ""
 msgid ""
 "'%s' = '%s': ',' (comma) as separator value should be replaced by ';' (semi-"
 "colon) without blank"
+msgstr ""
+
+#, perl-format
+msgid "Invalid GTFS key '%s'. For valid key names, see the"
+msgstr ""
+
+#, perl-format
+msgid "Invalid GTFS key '%s'. This key must not have any feed code as suffix."
+msgstr ""
+
+#, perl-format
+msgid ""
+"Invalid GTFS feed code ('%s') in GTFS key '%s'. For valid feed codes, see the"
+msgstr ""
+
+#, perl-format
+msgid ""
+"'%s' = '%s' is set but neither '%s' nor '%s' is set: consider setting one of "
+"them as they provide additional information about stops (their names, "
+"sequence and locations)."
+msgstr ""
+
+#, perl-format
+msgid "Deprecated GTFS key '%s'. For valid key names, see the"
+msgstr ""
+
+#, perl-format
+msgid ""
+"Mixed use of GTFS keys with and without feed code as suffix. E.g.: '%s' and "
+"'%s'."
+msgstr ""
+
+#, perl-format
+msgid "Orphaned GTFS key '%s' = '%s' with no other GTFS-specific information."
 msgstr ""
 
 #, perl-format
@@ -1332,15 +1366,15 @@ msgid ""
 "'%s'"
 msgstr ""
 
+msgid ""
+"This Route relation has been included into the input data as a side-effect, "
+"the members (relations, ways, nodes) of this Route have not been included."
+msgstr ""
+
 #, perl-format
 msgid ""
 "First character of line ('%s') is reserved. Please put the first CSV field "
 "into double quotes (\"...\"). Line %s of Routes-Data. Contents: '%s'"
-msgstr ""
-
-msgid ""
-"This Route relation has been included into the input data as a side-effect, "
-"the members (relations, ways, nodes) of this Route have not been included."
 msgstr ""
 
 #, perl-format
@@ -1856,6 +1890,9 @@ msgstr ""
 msgid ""
 "Take this value as GTFS feed for option 'link-gtfs' if the relation does not "
 "provide the tags 'gtfs:feed', 'operator:guid' or 'network:guid'."
+msgstr ""
+
+msgid "Route relations inherit tags from their route_master relation."
 msgstr ""
 
 msgid ""
