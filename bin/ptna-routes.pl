@@ -369,6 +369,7 @@ if ( $verbose ) {
     printf STDERR "%20s--expect-network-short-as='%s'\n",  ' ', $expect_network_short_as    ? $expect_network_short_as     : '';
     printf STDERR "%20s--expect-network-short-for='%s'\n", ' ', $expect_network_short_for   ? $expect_network_short_for    : '';
     printf STDERR "%20s--gtfs-feed='%s'\n",                ' ', $opt_gtfs_feed              ? $opt_gtfs_feed : '';
+    printf STDERR "%20s--inherit-tags='%s'\n",             ' ', $inherit_tags               ? 'ON'          : 'OFF';
     printf STDERR "%20s--link-gtfs='%s'\n",                ' ', $link_gtfs                  ? 'ON'          : 'OFF';
     printf STDERR "%20s--max-error='%s'\n",                ' ', $max_error                  ? $max_error                   : '';
     printf STDERR "%20s--multiple-ref-type-entries='%s'\n",' ', $multiple_ref_type_entries  ? $multiple_ref_type_entries   : '';
