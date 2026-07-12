@@ -83,6 +83,15 @@ my %max_allowed_platform_distances     = ( 'train'      => 30,
                                            'trolleybus' => 30
                                         );
 
+my %deprecated_gtfs_terms              = ( 'id'          => '',
+                                           'name'        => '',
+                                           'dataset_id'  => '',
+                                           'short_name'  => '',
+                                           'long_name'   => '',
+                                           'description' => '',
+                                           'addr'        => ''
+                                         );
+
 ####################################################################################################################
 #
 # Handling options from command line
@@ -1008,6 +1017,7 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
                     @{$relation_ptr->{'__issues__'}}            = ();
                     @{$relation_ptr->{'__notes__'}}             = ();
                     @{$relation_ptr->{'__GTFS__'}}              = ();
+                    $relation_ptr->{'gtfs_keys'}                = ();
                     $relation_ptr->{'gtfs-scores'}              = { 'route_master' => (), 'route' => () };
                     $relation_ptr->{'__sort_name__'} = $relation_id     unless ( $relation_ptr->{'__sort_name__'} );        # will be set to "rel_ID_of_route_master - member_index"  for route relations having a parent route_master
                     $relation_ptr->{'__printed__'}   = 0;
@@ -1019,6 +1029,11 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
                     $node_index                      = 0;   # counts the number of node members
                     $role_platform_index             = 0;   # counts the number of members which have 'role' '^platform.*'
                     $role_stop_index                 = 0;   # counts the number of members which have 'role' '^stop.*'
+                    foreach my $key ( keys(%{$relation_ptr->{'tag'}}) ) {
+                        if ( $key =~ m/^gtfs/ ) {
+                            $relation_ptr->{'gtfs_keys'}->{$key} = $relation_ptr->{'tag'}->{$key};
+                        }
+                    }
                     foreach $member ( @{$relation_ptr->{'members'}} ) {
                         if ( $member->{'type'} ) {
                             if ( $member->{'type'} eq 'relation' ) {
@@ -2756,7 +2771,7 @@ sub analyze_route_environment {
                 my $mcount    = 0;
                 my $tcount    = 0;
                 my %gtfs_keys = ();
-                foreach my $key ( keys(%{$relation_ptr->{'tag'}}), keys(%{$RELATIONS{$route_master_rel_id}->{'tag'}}) ) {
+                foreach my $key ( keys(%{$relation_ptr->{'gtfs_keys'}}), keys(%{$RELATIONS{$route_master_rel_id}->{'gtfs_keys'}}) ) {
                     if ( $key =~ m/^gtfs:/ ) {
                         if ( $key eq 'gtfs:feed'                                                 ||
                              $key =~ m/^gtfs:(release_date|route_id)$/                           ||
@@ -2853,7 +2868,7 @@ sub analyze_route_environment {
                 my $help_val   = '';
                 my $help_pval  = '';
                 my %gtfs_keys  = ();
-                foreach my $key ( keys(%{$relation_ptr->{'tag'}}) ) {
+                foreach my $key ( keys(%{$relation_ptr->{'gtfs_keys'}}) ) {
                     if ( $key =~ m/^gtfs:trip_id/    ) {
                         if ( $key =~ m/^gtfs:trip_id$/                                          ||
                              $key =~ m/^gtfs:trip_id:(sample|like)$/                            ||
@@ -3185,12 +3200,79 @@ sub analyze_relation {
             if ( $entryref ) {
                 ;
             }
-        #    if ( $relation_ptr->{'tag'}->{'gtfs:shape_id'}                 &&
-        #         !defined($relation_ptr->{'tag'}->{'gtfs:trip_id'})        &&
-        #         !defined($relation_ptr->{'tag'}->{'gtfs:trip_id:sample'})    ) {
-        #        $notes_string = gettext( "'gtfs:shape_id' = '%s' is set but neither 'gtfs:trip_id' nor 'gtfs:trip_id:sample' is set: consider setting one of them as they provide additional information about stops (their names, sequence and locations)." );
-        #        push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, handle_foreign($relation_ptr->{'tag'}->{'gtfs:shape_id'}) ) );
-        #    }
+            my $num_short_gtfs_keys = 0;
+            my $num_long_gtfs_keys  = 0;
+            my $example_long_gtfs_key = '';
+            my $example_short_gtfs_key = '';
+            printf STDERR "relation_ptr->{'gtfs_keys'} = %s\n", Data::Dumper::Dumper($relation_ptr->{'gtfs_keys'})  if ( $debug );
+            foreach my $gtfs_key ( sort( keys(%{$relation_ptr->{'gtfs_keys'}}) ) ) {
+                if ( $gtfs_key =~ m/^gtfs:/ ) {
+                    if ( $gtfs_key =~ m/^gtfs:([a-z][a-z_]+[a-z])$/                                 ||
+                         $gtfs_key =~ m/^gtfs:(trip_id):(like|sample)$/                             ||
+                         $gtfs_key =~ m/^gtfs:([a-z][a-z_]+[a-z])(:)([A-Z][A-Z][a-zA-Z0-9_.-]+)$/   ||
+                         $gtfs_key =~ m/^gtfs:(trip_id):(like|sample):([A-Z][A-Z][a-zA-Z0-9_.-]+)$/    ) {
+                        my $first = $1;
+                        my $third = $3;
+                        if ( exists($deprecated_gtfs_terms{$first}) ) {
+                            $issues_string = gettext( "Invalid GTFS key '%s'. For valid key names, see the" );
+                            push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string." %s", handle_foreign($gtfs_key), '<a target="_blank" href="https://wiki.openstreetmap.org/wiki/GTFS#General_rules" title="OSM Wiki - GTFS tags">OSM Wiki</a>' ) );
+                        } else {
+                            if ( $third ) {
+                                if ( $first eq 'feed' ) {
+                                    $issues_string = gettext( "Invalid GTFS key '%s'. This key must not have any feed code as suffix." );
+                                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, handle_foreign($gtfs_key), '<a target="_blank" href="https://wiki.openstreetmap.org/wiki/GTFS#Tags" title="OSM Wiki - GTFS tags">OSM Wiki</a>' ) );
+                                } else {
+                                    if ( $third =~ m/^[A-Z][A-Z]-[a-zA-Z0-9_.-]+$/ ||
+                                        ($opt_test && $third eq 'GTFS-Test')          ) {
+                                        $num_long_gtfs_keys++;
+                                        $example_long_gtfs_key = $gtfs_key;
+                                    } else {
+                                        $issues_string = gettext( "Invalid GTFS feed code ('%s') in GTFS key '%s'. For valid feed codes, see the" );
+                                        push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string." %s", handle_foreign($third), handle_foreign($gtfs_key), '<a target="_blank" href="https://wiki.openstreetmap.org/wiki/GTFS#Step_2:_Document_the_feed" title="OSM Wiki - GTFS tags">OSM Wiki</a>' ) );
+                                    }
+                                }
+                                $num_long_gtfs_keys++;
+                                $example_long_gtfs_key = $gtfs_key;
+                            } else {
+                                $num_short_gtfs_keys++;
+                                $example_short_gtfs_key = $gtfs_key;
+                            }
+                        }
+                        if ( $opt_test && $first eq 'shape_id' ) {
+                            my $key0 = 'gtfs:shape_id';
+                            my $key1 = 'gtfs:trip_id';
+                            my $key2 = 'gtfs:trip_id:sample';
+                            if ( $third ) {
+                                $key0 .= ':'.$third;
+                                $key1 .= ':'.$third;
+                                $key2 .= ':'.$third;
+                            }
+                            if ( !defined($relation_ptr->{'tag'}->{$key1}) &&
+                                 !defined($relation_ptr->{'tag'}->{$key2})    ) {
+                                $notes_string = gettext( "'%s' = '%s' is set but neither '%s' nor '%s' is set: consider setting one of them as they provide additional information about stops (their names, sequence and locations)." );
+                                push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, $key0, handle_foreign($relation_ptr->{'tag'}->{'gtfs:shape_id'}), $key1, $key2 ) );
+                            }
+                        }
+                    } else {
+                        $issues_string = gettext( "Invalid GTFS key '%s'. For valid key names, see the" );
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string." %s", handle_foreign($gtfs_key), '<a target="_blank" href="https://wiki.openstreetmap.org/wiki/GTFS#Tags" title="OSM Wiki - GTFS tags">OSM Wiki</a>' ) );
+                    }
+                } else {
+                    $issues_string = gettext( "Deprecated GTFS key '%s'. For valid key names, see the" );
+                    push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string." %s", handle_foreign($gtfs_key), '<a target="_blank" href="https://wiki.openstreetmap.org/wiki/GTFS#Tags" title="OSM Wiki - GTFS tags">OSM Wiki</a>' ) );
+                }
+            }
+            if ( $num_short_gtfs_keys && $num_long_gtfs_keys ) {
+                $issues_string = gettext( "Mixed use of GTFS keys with and without feed code as suffix. E.g.: '%s' and '%s'." );
+                push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, handle_foreign($example_long_gtfs_key), handle_foreign($example_short_gtfs_key) ) );
+            } else {
+                if ( $relation_ptr->{'gtfs_keys'}->{'gtfs:release_date'} ) {
+                    if ( $num_short_gtfs_keys == 1 ) {
+                        $issues_string = gettext( "Orphaned GTFS key '%s' = '%s' with no other GTFS-specific information." );
+                        push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, 'gtfs:release_date', handle_foreign($relation_ptr->{'gtfs_keys'}->{'gtfs:release_date'}) ) );
+                    }
+                }
+            }
         }
 
         if ( $relation_ptr->{'tag'}->{'line'} ) {
