@@ -184,7 +184,13 @@ The value '--gtfs-feed' refers to the corresponding global analysis option, beca
 
 </p>
 <p>
-Example (key = value):<br />
+Preferred example (key = value):<br />
+<code>&nbsp;&nbsp;&nbsp;&nbsp;gtfs:release_date:DE-BY-MVV&nbsp;=&nbsp;2026-07-13</code><br />
+<code>&nbsp;&nbsp;&nbsp;&nbsp;gtfs:route_id:DE-BY-MVV&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;19-210-s20-1</code><br />
+
+</p>
+<p>
+Deprecated example (key = value):<br />
 <code>&nbsp;&nbsp;&nbsp;&nbsp;gtfs:feed&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;DE-BY-MVV</code><br />
 <code>&nbsp;&nbsp;&nbsp;&nbsp;gtfs:release_date&nbsp;=&nbsp;2020-07-24</code><br />
 <code>&nbsp;&nbsp;&nbsp;&nbsp;gtfs:route_id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;19-210-s20-1</code><br />
