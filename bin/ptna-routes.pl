@@ -8239,7 +8239,13 @@ sub printGtfsReferences {
         push( @HTML_main, "\n</p>\n" );
 
         push( @HTML_main, "<p>\n" );
-        push( @HTML_main, gettext("Example" ) . " (" . gettext("key = value") . "):<br />\n" );
+        push( @HTML_main, gettext("Preferred example" ) . " (" . gettext("key = value") . "):<br />\n" );
+        push( @HTML_main, "<code>&nbsp;&nbsp;&nbsp;&nbsp;gtfs:release_date:DE-BY-MVV&nbsp;=&nbsp;2026-07-13</code><br />\n" );
+        push( @HTML_main, "<code>&nbsp;&nbsp;&nbsp;&nbsp;gtfs:route_id:DE-BY-MVV&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;19-210-s20-1</code><br />\n" );
+        push( @HTML_main, "\n</p>\n" );
+
+        push( @HTML_main, "<p>\n" );
+        push( @HTML_main, gettext("Deprecated example" ) . " (" . gettext("key = value") . "):<br />\n" );
         push( @HTML_main, "<code>&nbsp;&nbsp;&nbsp;&nbsp;gtfs:feed&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;DE-BY-MVV</code><br />\n" );
         push( @HTML_main, "<code>&nbsp;&nbsp;&nbsp;&nbsp;gtfs:release_date&nbsp;=&nbsp;2020-07-24</code><br />\n" );
         push( @HTML_main, "<code>&nbsp;&nbsp;&nbsp;&nbsp;gtfs:route_id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;19-210-s20-1</code><br />\n" );

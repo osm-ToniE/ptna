@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ptna 2.0.2\n"
 "Report-Msgid-Bugs-To: osm-ToniE@web.de\n"
-"POT-Creation-Date: 2026-06-15 14:58+0200\n"
+"POT-Creation-Date: 2026-07-13 13:42+0200\n"
 "PO-Revision-Date: 2019-04-05 14:25+0000\n"
 "Last-Translator: ToniE <osm-ToniE@web.de>, 2026\n"
 "Language-Team: German (https://app.transifex.com/jungle-bus/teams/97874/de/)\n"
@@ -478,6 +478,41 @@ msgid ""
 msgstr ""
 "'%s' = '%s': ',' (Komma) als Trennzeichen sollte durch ';' (Semikolon, ohne "
 "Leerzeichen) ersetzt werden"
+
+#, perl-format
+msgid "Invalid GTFS key '%s'. For valid key names, see the"
+msgstr ""
+
+#, perl-format
+msgid "Invalid GTFS key '%s'. This key must not have any feed code as suffix."
+msgstr ""
+
+#, perl-format
+msgid ""
+"Invalid GTFS feed code ('%s') in GTFS key '%s'. For valid feed codes, see "
+"the"
+msgstr ""
+
+#, perl-format
+msgid ""
+"'%s' = '%s' is set but neither '%s' nor '%s' is set: consider setting one of"
+" them as they provide additional information about stops (their names, "
+"sequence and locations)."
+msgstr ""
+
+#, perl-format
+msgid "Deprecated GTFS key '%s'. For valid key names, see the"
+msgstr ""
+
+#, perl-format
+msgid ""
+"Mixed use of GTFS keys with and without feed code as suffix. E.g.: '%s' and "
+"'%s'."
+msgstr ""
+
+#, perl-format
+msgid "Orphaned GTFS key '%s' = '%s' with no other GTFS-specific information."
+msgstr ""
 
 #, perl-format
 msgid ""
@@ -1504,8 +1539,14 @@ msgstr ""
 "hin, in den Route-Master und Route Relationen wurden keine Informationen "
 "über die GTFS Quelle gefunden."
 
+msgid "Preferred example"
+msgstr "Bevorzugtes Beispiel"
+
 msgid "key = value"
 msgstr "Schlüssel = Wert"
+
+msgid "Deprecated example"
+msgstr "Veraltetes Beispiel"
 
 msgid ""
 "This section lists conditional access statements found on ways used by "
@@ -1663,6 +1704,14 @@ msgstr ""
 "(JJJJ-MM-TT) sein, oder 'latest', 'previous' oder 'long-term'. Zeile %s der "
 "Routen-Daten. Inhalt: '%s'"
 
+msgid ""
+"This Route relation has been included into the input data as a side-effect, "
+"the members (relations, ways, nodes) of this Route have not been included."
+msgstr ""
+"Diese Routen-Relation wurde durch einen Seiteneffekt in die Input-Daten "
+"einbezogen, die zugehörigen Elemente (Relations, Ways und Nodes) sind nicht "
+"in den Input-Daten enthalten."
+
 #, perl-format
 msgid ""
 "First character of line ('%s') is reserved. Please put the first CSV field "
@@ -1671,14 +1720,6 @@ msgstr ""
 "Das erste Zeichen der Zeile ('%s') ist reserviert. Bitte das erste CSV-Feld "
 "in doppelte Anführungszeichen setzten (\"...\"). Zeile %s der Routen-Daten. "
 "Inhalt: '%s'"
-
-msgid ""
-"This Route relation has been included into the input data as a side-effect, "
-"the members (relations, ways, nodes) of this Route have not been included."
-msgstr ""
-"Diese Routen-Relation wurde durch einen Seiteneffekt in die Input-Daten "
-"einbezogen, die zugehörigen Elemente (Relations, Ways und Nodes) sind nicht "
-"in den Input-Daten enthalten."
 
 #, perl-format
 msgid ""
@@ -2352,6 +2393,9 @@ msgstr ""
 "Verwende diesen Wert als GTFS-Feed für die Option 'link-gtfs' wenn die "
 "Relation keinen der Tags 'gtfs:feed', 'operator:guid' oder 'network:guid' "
 "enthält."
+
+msgid "Route relations inherit tags from their route_master relation."
+msgstr ""
 
 msgid ""
 "Provide links to GTFS-Analysis for 'gtfs:route_id' or 'gtfs:trip_id' tags."
