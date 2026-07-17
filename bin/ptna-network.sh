@@ -976,8 +976,7 @@ then
                 START_ANALYSIS=$(date --date @$start "+%Y-%m-%d %H:%M:%S %Z")
                 ptna-routes.pl --v\
                                 --title="$PREFIX" \
-                                --network-guid=$PREFIX \
-                                $ANALYSIS_OPTIONS \
+                               $ANALYSIS_OPTIONS \
                                 --expect-network-short-as="$EXPECT_NETWORK_SHORT_AS" \
                                 --expect-network-short-for="$EXPECT_NETWORK_SHORT_FOR" \
                                 --expect-network-long-as="$EXPECT_NETWORK_LONG_AS" \

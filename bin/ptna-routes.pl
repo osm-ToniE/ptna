@@ -303,10 +303,6 @@ if ( $ptv1_compatibility ne 'no' && $ptv1_compatibility ne 'allow' && $ptv1_comp
     $ptv1_compatibility = 'no';
 }
 
-unless ( $opt_gtfs_feed ) {
-    $opt_gtfs_feed = $network_guid;
-}
-
 my %excluded_key_value_relations    = ();
 
 
