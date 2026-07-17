@@ -7412,8 +7412,8 @@ sub getGtfsInfos {
     my $key;
     my $value;
 
-    my $gtfs_feed         = $opt_gtfs_feed;
-    my $feed_info_from    = '--gtfs-feed';
+    my $gtfs_feed         = '';
+    my $feed_info_from    = '';
     my $gtfs_release_date = '';
     my $release_date_from = '';
     my @gtfs_html_tags    = ();
@@ -7429,6 +7429,12 @@ sub getGtfsInfos {
         } elsif ( $relation_ptr->{'tag'}->{'network:guid'} ) {
             $gtfs_feed      = $relation_ptr->{'tag'}->{'network:guid'};
             $feed_info_from = 'network:guid';
+        } elsif ( $opt_gtfs_feed ) {
+            $gtfs_feed      = $opt_gtfs_feed;
+            $feed_info_from = '--gtfs-feed';
+        } else {
+            $gtfs_feed      = '__undefined__';
+            $feed_info_from = '__undefined__';
         }
 
         $gtfs_feed_info{'explicit'}->{$gtfs_feed} = $feed_info_from;
@@ -7465,6 +7471,10 @@ sub getGtfsInfos {
             } else {
                 $gtfs_feed      = (keys(%{$gtfs_feed_info{'explicit'}}))[0];
                 $feed_info_from = $gtfs_feed_info{'explicit'}->{$gtfs_feed};
+                if ( $gtfs_feed eq '__undefined__' ) {
+                    $gtfs_feed      = '';
+                    $feed_info_from = '';
+                }
             }
             if ( $relation_ptr->{'tag'}->{'gtfs:release_date'.$feed_suffix} ) {
                 $gtfs_release_date = $relation_ptr->{'tag'}->{'gtfs:release_date'.$feed_suffix};
@@ -7556,9 +7566,11 @@ sub getGtfsInfos {
                 }
             }
             if ( $gtfs_html_tag_created ) {
+                my $gf  = $gtfs_feed         ? $gtfs_feed         : ' empty ';
+                my $fif = $feed_info_from    ? $feed_info_from    : ' empty ';
                 my $grd = $gtfs_release_date ? $gtfs_release_date : ' latest ';
                 my $rdf = $release_date_from ? $release_date_from : ' empty ';
-                $gtfs_relation_info_from{$gtfs_feed}{$feed_info_from}{$grd}{$rdf}{$relation_ptr->{'id'}} = 1;
+                $gtfs_relation_info_from{$gf}{$fif}{$grd}{$rdf}{$relation_ptr->{'id'}} = 1;
             }
         }
     }
@@ -8250,25 +8262,29 @@ sub printGtfsReferences {
         printTableInitialization( 'gtfs_feed', 'feed_from', 'date', 'date_from', 'number', 'relations' );
         printTableHeader( 'number' => 'number' );
         foreach my $gtfs_feed ( sort( keys( %gtfs_relation_info_from ) ) ) {
+            my $gf  = $gtfs_feed;
+               $gf  =~ s/ empty //;
             foreach my $feed_from ( sort( keys( %{$gtfs_relation_info_from{$gtfs_feed}} ) ) ) {
+                my $ff  = $feed_from;
+                   $ff  =~ s/ empty //;
                 foreach my $gtfs_release_date ( sort( keys( %{$gtfs_relation_info_from{$gtfs_feed}{$feed_from}} ) ) ) {
+                    my $grd = $gtfs_release_date;
+                       $grd =~ s/ latest //;
                     foreach my $date_from ( sort( keys( %{$gtfs_relation_info_from{$gtfs_feed}{$feed_from}{$gtfs_release_date}} ) ) ) {
-                        my $grd = $gtfs_release_date;
-                           $grd =~ s/ latest //;
                         my $df  = $date_from;
                            $df  =~ s/ empty //;
                         @relations_of_feed    = sort( keys( %{$gtfs_relation_info_from{$gtfs_feed}{$feed_from}{$gtfs_release_date}{$date_from}} ) );
                         if ( scalar @relations_of_feed <= 10 ) {
-                            printTableLine( 'gtfs_feed' =>  $gtfs_feed,
-                                            'feed_from' =>  $feed_from,
+                            printTableLine( 'gtfs_feed' =>  $gf,
+                                            'feed_from' =>  $ff,
                                             'date'      =>  $grd,
                                             'date_from' =>  $df,
                                             'number'    =>  scalar @relations_of_feed,
                                             'relations' =>  join( ',', @relations_of_feed )
                                         );
                         } else {
-                            printTableLine( 'gtfs_feed' =>  $gtfs_feed,
-                                            'feed_from' =>  $feed_from,
+                            printTableLine( 'gtfs_feed' =>  $gf,
+                                            'feed_from' =>  $ff,
                                             'date'      =>  $grd,
                                             'date_from' =>  $df,
                                             'number'    =>  scalar @relations_of_feed,
