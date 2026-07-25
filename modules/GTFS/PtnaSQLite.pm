@@ -32,12 +32,6 @@ my %db_handle            = ();
 my %list_separator       = ();
 my %feed_of_open_db_file = ();
 
-# install a cache for query results
-# e.g. $gtfs_query_cache{'DE-BY-MVV-2024-03-27'}{'route_id'}{$route_id}[0] = 'valid' / [1] = '2023-12-14' / [2] = '2024-05-31' / [3] = ''
-# e.g. $gtfs_query_cache{'DE-BY-MVV-2024-03-27'}{'route_id'}{$route_id}[0] = 'past'  / [1] = '2023-12-14' / [2] = '2024-01-31' / [3] = gettext("is no longer valid (in the past)"
-# e.g. $gtfs_query_cache{'DE-BY-MVV-2024-03-27'}{'route_id'}{$route_id}[0] = ''      / [1] = ''           / [2] = ''           / [3] = gettext("does not exist")
-# e.g. $gtfs_query_cache{'DE-BY-MVV'}{'trip_id'}{$trip_id}[0] = 'valid' / [1] = '2023-12-14' / [2] = '2024-05-31' / [3] = ''
-my %gtfs_query_cache     = ();
 
 $config{'path-to-work'}   = '/osm/ptna/work';                 # location where to start looking for the SQLite
 $config{'name-suffix'}    = '-ptna-gtfs-sqlite.db';           # name suffix of current SQLite db
