@@ -36,7 +36,7 @@ sub Init {
 
 
 sub Summary {
-    printf STDERR "%s total duration of distance measurements = %.9f seconds\n", , get_time(),  $duration_distance_measurements;
+    printf STDERR "%s total duration of distance measurements = %.9f seconds\n", get_time(), $duration_distance_measurements;
     if ( $debug ) {
         foreach my $item ( @distance_measurements ) {
             printf STDERR "%s function = '%s', param1 = '%s', param2 = '%s', param3 = '%s', param4 = '%s', param5 = '%s', returns = '%s'\n",
@@ -50,7 +50,7 @@ sub Summary {
                                                                                                                           $item->{'returns'} || '';
         }
     }
-    printf STDERR "%s total duration of 'isPointInsidePolygon()' measurements = %.9f seconds\n", , get_time(),  $duration_is_inside_polygon_measurements;
+    printf STDERR "%s total duration of 'isPointInsidePolygon()' measurements = %.9f seconds\n", get_time(), $duration_is_inside_polygon_measurements;
 }
 
 #############################################################################################
