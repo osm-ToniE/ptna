@@ -25,6 +25,7 @@ use OSM::XML            qw( parse );
 use OSM::Data           qw( %META %NODES %WAYS %RELATIONS );
 use OSM::Geo            qw( Init PlatformToNodeDistance ConvertMetersToFeet isNodeInsidePolygon NumberOfPointsInsidePolygon Summary );
 use RoutesList;
+use GTFS::GTFSvsOSM     qw( Init Summary );
 use GTFS::PtnaSQLite    qw( setTimeZoneDate setPathToWork getRouteIdStatus getTripIdStatus getShapeIdStatus getGtfsRouteIdHtmlTag getGtfsRouteIdIconTag getGtfsTripIdHtmlTag getGtfsShapeIdHtmlTag getGtfsLinkToRoutes );
 use Data::Dumper;
 use Time::Local         qw ( timelocal );
@@ -458,6 +459,8 @@ my $issues_string                   = '';   # to be used with ALL 'issues' and g
 my $notes_string                    = '';   # to be used with ALL 'notes'  and gettext/ngettext - a separate tool parses this code, extracts those statements and creates a list of all notes
 
 OSM::Geo::Init( 'debug' => $debug, 'verbose' => $verbose );
+
+GTFS::GTFSvsOSM::Init( 'debug' => $debug, 'verbose' => $verbose );
 
 my %column_name             = ( 'ref'               => gettext('Line (ref=)'),
                                 'relation'          => gettext('Relation (id=)'),
@@ -1986,6 +1989,8 @@ if ( $xml_has_relations == 0 ) {
 printFinalFooter();
 
 OSM::Geo::Summary();
+
+GTFS::GTFSvsOSM::Summary();
 
 printf STDERR "%s Done ...\n", get_time()       if ( $verbose );
 
