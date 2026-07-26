@@ -15,6 +15,7 @@ use Encode;
 
 use Exporter;
 use base qw (Exporter);
+use Data::Dumper;
 
 our @EXPORT_OK  = qw( setTimeZoneDate setPathToWork getRouteIdStatus getTripIdStatus getShapeIdStatus getGtfsRouteIdHtmlTag getGtfsRouteIdIconTag getGtfsTripIdHtmlTag getGtfsShapeIdHtmlTag getGtfsLinkToRoutes );
 
@@ -37,6 +38,10 @@ $config{'path-to-work'}   = '/osm/ptna/work';                 # location where t
 $config{'name-suffix'}    = '-ptna-gtfs-sqlite.db';           # name suffix of current SQLite db
 $config{'date_time_zone'} = '';
 
+
+my %gtfs_route_id_status_cache = ();
+my %gtfs_trip_id_status_cache  = ();
+my %gtfs_shape_id_status_cache = ();
 
 #############################################################################################
 #
@@ -550,44 +555,49 @@ sub getRouteIdStatus {
     my $name_prefix    = ( $release_date ) ? $feed . '-' . $release_date : $feed;
 
     if ( $name_prefix && defined($route_id) && $route_id ne '' ) {
-        eval {
-            if ( _AttachToGtfsSqliteDb($feed,$release_date) ) {
+        if ( defined($gtfs_route_id_status_cache{$name_prefix}) && defined($gtfs_route_id_status_cache{$name_prefix}{$route_id}) ) {
+            @ret_array = @{$gtfs_route_id_status_cache{$name_prefix}{$route_id}};
+        } else {
+            eval {
+                if ( _AttachToGtfsSqliteDb($feed,$release_date) ) {
 
-                my @row         = ();
-                my $today       = get_TimeZoneDate();
+                    my @row         = ();
+                    my $today       = get_TimeZoneDate();
 
-                my $sth = $db_handle{$name_prefix}->prepare( "SELECT DISTINCT trip_id
-                                                              FROM            trips
-                                                              WHERE           trips.route_id=?;" );
-                    $sth->execute( $route_id );
+                    my $sth = $db_handle{$name_prefix}->prepare( "SELECT DISTINCT trip_id
+                                                                FROM            trips
+                                                                WHERE           trips.route_id=?;" );
+                        $sth->execute( $route_id );
 
-                my $min_start = 20500101;
-                my $max_end   = 19700101;
-                my $tms       = 0;
-                my $tme       = 0;
+                    my $min_start = 20500101;
+                    my $max_end   = 19700101;
+                    my $tms       = 0;
+                    my $tme       = 0;
 
-                while ( @row = $sth->fetchrow_array() ) {
-                    if ( $row[0] ) {
-                        ( $tms, $tme ) = _getStartEndDateOfIdenticalTrips( $feed, $release_date, $row[0] );
+                    while ( @row = $sth->fetchrow_array() ) {
+                        if ( $row[0] ) {
+                            ( $tms, $tme ) = _getStartEndDateOfIdenticalTrips( $feed, $release_date, $row[0] );
 
-                        $min_start = ($tms < $min_start) ? $tms : $min_start;
-                        $max_end   = ($tme > $max_end)   ? $tme : $max_end;
+                            $min_start = ($tms < $min_start) ? $tms : $min_start;
+                            $max_end   = ($tme > $max_end)   ? $tme : $max_end;
+                        }
                     }
-                }
-                if ( $min_start != 20500101 && $max_end != 19700101 ) {
-                    if  ( $today > $max_end ) {
-                        @ret_array = ( 'past', expand_date($min_start), expand_date($max_end), gettext("is no longer valid (in the past)") );
-                    } elsif ( $today < $min_start ) {
-                        @ret_array = ( 'future', expand_date($min_start), expand_date($max_end), gettext("is not yet valid (in the future)") );
-                    } else {
-                        @ret_array = ( 'valid', expand_date($min_start), expand_date($max_end), '' );
+                    if ( $min_start != 20500101 && $max_end != 19700101 ) {
+                        if  ( $today > $max_end ) {
+                            @ret_array = ( 'past', expand_date($min_start), expand_date($max_end), gettext("is no longer valid (in the past)") );
+                        } elsif ( $today < $min_start ) {
+                            @ret_array = ( 'future', expand_date($min_start), expand_date($max_end), gettext("is not yet valid (in the future)") );
+                        } else {
+                            @ret_array = ( 'valid', expand_date($min_start), expand_date($max_end), '' );
+                        }
                     }
+                } else {
+                    @ret_array = ( '', '', '', gettext("GTFS database not found") );
                 }
-            } else {
-                @ret_array = ( '', '', '', gettext("GTFS database not found") );
-            }
-        };
-        warn sprintf( "getRouteIdStatus(%s,%s,%s,%s): %s",$feed,$release_date,$route_id,$@ ) if ( $@ );
+            };
+            warn sprintf( "getRouteIdStatus(%s,%s,%s,%s): %s",$feed,$release_date,$route_id,$@ ) if ( $@ );
+            @{$gtfs_route_id_status_cache{$name_prefix}{$route_id}} = @ret_array;
+        }
     } else {
         if ( defined($route_id) && $route_id ne '' ) {
             @ret_array = ( '', '', '', gettext("internal error") + ": \$feed " + gettext("is not set") );
@@ -610,35 +620,40 @@ sub getTripIdStatus {
     my $feed           = shift;
     my $release_date   = shift || '';
     my $trip_id        = shift;
-    my $route_id       = shift || '';       # if set, also check if trip_id belongs to route_id
+    my $route_id       = shift || '';       # todo: if set, also check if trip_id belongs to route_id
 
     my @ret_array = ( '', '', '', gettext("does not exist") );
 
     my $name_prefix    = ( $release_date ) ? $feed . '-' . $release_date : $feed;
 
     if ( $name_prefix && $trip_id ) {
-        eval {
-            if ( _AttachToGtfsSqliteDb($feed,$release_date) ) {
+        if ( defined($gtfs_trip_id_status_cache{$name_prefix}) && defined($gtfs_trip_id_status_cache{$name_prefix}{$trip_id}) ) {
+            @ret_array = @{$gtfs_trip_id_status_cache{$name_prefix}{$trip_id}};
+        } else {
+            eval {
+                if ( _AttachToGtfsSqliteDb($feed,$release_date) ) {
 
-                my @row         = ();
-                my $today       = get_TimeZoneDate();
+                    my @row         = ();
+                    my $today       = get_TimeZoneDate();
 
-                my ( $min_start, $max_end ) = _getStartEndDateOfIdenticalTrips( $feed, $release_date, $trip_id );
+                    my ( $min_start, $max_end ) = _getStartEndDateOfIdenticalTrips( $feed, $release_date, $trip_id );
 
-                if ( $min_start != 20500101 && $max_end != 19700101 ) {
-                    if  ( $today > $max_end ) {
-                        @ret_array = ( 'past', expand_date($min_start), expand_date($max_end), gettext("is no longer valid (in the past)") );
-                    } elsif ( $today < $min_start ) {
-                        @ret_array = ( 'future', expand_date($min_start), expand_date($max_end), gettext("is not yet valid (in the future)") );
-                    } else {
-                        @ret_array = ( 'valid', expand_date($min_start), expand_date($max_end), '' );
+                    if ( $min_start != 20500101 && $max_end != 19700101 ) {
+                        if  ( $today > $max_end ) {
+                            @ret_array = ( 'past', expand_date($min_start), expand_date($max_end), gettext("is no longer valid (in the past)") );
+                        } elsif ( $today < $min_start ) {
+                            @ret_array = ( 'future', expand_date($min_start), expand_date($max_end), gettext("is not yet valid (in the future)") );
+                        } else {
+                            @ret_array = ( 'valid', expand_date($min_start), expand_date($max_end), '' );
+                        }
                     }
+                } else {
+                    @ret_array = ( '', '', '', gettext("GTFS database not found") );
                 }
-            } else {
-                @ret_array = ( '', '', '', gettext("GTFS database not found") );
-            }
-         };
-        warn sprintf( "getTripIdStatus(%s,%s,%s,%s): %s",$feed,$release_date,$trip_id,$@ ) if ( $@ );
+            };
+            warn sprintf( "getTripIdStatus(%s,%s,%s,%s): %s",$feed,$release_date,$trip_id,$@ ) if ( $@ );
+            @{$gtfs_trip_id_status_cache{$name_prefix}{$trip_id}} = @ret_array;
+        }
     } else {
         if ( $trip_id ) {
             @ret_array = ( '', '', '', gettext("internal error") + ": \$feed " + gettext("is not set") );
@@ -661,67 +676,72 @@ sub getShapeIdStatus {
     my $feed           = shift;
     my $release_date   = shift || '';
     my $shape_id       = shift;
-    my $route_id       = shift || '';       # if set, also check if shape_id belongs to route_id
-    my $trip_id        = shift || '';       # if set, also check if shape_id belongs to trip_id
+    my $route_id       = shift || '';       # todo: if set, also check if shape_id belongs to route_id
+    my $trip_id        = shift || '';       # todo: if set, also check if shape_id belongs to trip_id
 
     my @ret_array = ( '', '', '', gettext("does not exist") );
 
     my $name_prefix    = ( $release_date ) ? $feed . '-' . $release_date : $feed;
 
     if ( $name_prefix && $shape_id ) {
-        eval {
-            if ( _AttachToGtfsSqliteDb($feed,$release_date) ) {
+        if ( defined($gtfs_shape_id_status_cache{$name_prefix}) && defined($gtfs_shape_id_status_cache{$name_prefix}{$shape_id}) ) {
+            @ret_array = @{$gtfs_shape_id_status_cache{$name_prefix}{$shape_id}};
+        } else {
+            eval {
+                if ( _AttachToGtfsSqliteDb($feed,$release_date) ) {
 
-                my @row                 = ();
-                my $today               = get_TimeZoneDate();
-                my $trips_has_shape_id  = 0;
+                    my @row                 = ();
+                    my $today               = get_TimeZoneDate();
+                    my $trips_has_shape_id  = 0;
 
 
-                my $sth =  $db_handle{$name_prefix}->prepare( "PRAGMA table_info(trips);" );
-                $sth->execute();
+                    my $sth =  $db_handle{$name_prefix}->prepare( "PRAGMA table_info(trips);" );
+                    $sth->execute();
 
-                while ( @row = $sth->fetchrow_array() ) {
-                    if ( $row[1] && $row[1] eq 'shape_id' ) {
-                        $trips_has_shape_id = 1;
-                        last;
-                    }
-                }
-
-                if ( $trips_has_shape_id ) {
-                    $sth = $db_handle{$name_prefix}->prepare( "SELECT DISTINCT trip_id
-                                                               FROM            trips
-                                                               WHERE           shape_id=?;" );
-                    $sth->execute( $shape_id );
-
-                    my $min_start = 20500101;
-                    my $max_end   = 19700101;
-                    my $tms       = 0;
-                    my $tme       = 0;
                     while ( @row = $sth->fetchrow_array() ) {
-                        if ( $row[0] ) {
-                            ( $tms, $tme ) = _getStartEndDateOfIdenticalTrips( $feed, $release_date, $row[0] );
-
-                            $min_start = ($tms < $min_start) ? $tms : $min_start;
-                            $max_end   = ($tme > $max_end)   ? $tme : $max_end;
+                        if ( $row[1] && $row[1] eq 'shape_id' ) {
+                            $trips_has_shape_id = 1;
+                            last;
                         }
                     }
-                    if ( $min_start != 20500101 && $max_end != 19700101 ) {
-                        if  ( $today > $max_end ) {
-                            @ret_array = ( 'past', expand_date($min_start), expand_date($max_end), gettext("is no longer valid (in the past)") );
-                        } elsif ( $today < $min_start ) {
-                            @ret_array = ( 'future', expand_date($min_start), expand_date($max_end), gettext("is not yet valid (in the future)") );
-                        } else {
-                            @ret_array = ( 'valid', expand_date($min_start), expand_date($max_end), '' );
+
+                    if ( $trips_has_shape_id ) {
+                        $sth = $db_handle{$name_prefix}->prepare( "SELECT DISTINCT trip_id
+                                                                FROM            trips
+                                                                WHERE           shape_id=?;" );
+                        $sth->execute( $shape_id );
+
+                        my $min_start = 20500101;
+                        my $max_end   = 19700101;
+                        my $tms       = 0;
+                        my $tme       = 0;
+                        while ( @row = $sth->fetchrow_array() ) {
+                            if ( $row[0] ) {
+                                ( $tms, $tme ) = _getStartEndDateOfIdenticalTrips( $feed, $release_date, $row[0] );
+
+                                $min_start = ($tms < $min_start) ? $tms : $min_start;
+                                $max_end   = ($tme > $max_end)   ? $tme : $max_end;
+                            }
                         }
+                        if ( $min_start != 20500101 && $max_end != 19700101 ) {
+                            if  ( $today > $max_end ) {
+                                @ret_array = ( 'past', expand_date($min_start), expand_date($max_end), gettext("is no longer valid (in the past)") );
+                            } elsif ( $today < $min_start ) {
+                                @ret_array = ( 'future', expand_date($min_start), expand_date($max_end), gettext("is not yet valid (in the future)") );
+                            } else {
+                                @ret_array = ( 'valid', expand_date($min_start), expand_date($max_end), '' );
+                            }
+                        }
+                    } else {
+                        @ret_array = ( 'no shapes', '', '', gettext("does not provide any 'shape' data") );
                     }
                 } else {
-                    @ret_array = ( 'no shapes', '', '', gettext("does not provide any 'shape' data") );
+                    @ret_array = ( '', '', '', gettext("GTFS database not found") );
                 }
-            } else {
-                @ret_array = ( '', '', '', gettext("GTFS database not found") );
-            }
-        };
-        warn sprintf( "getShapeIdStatus(%s,%s,%s,%s): %s",$feed,$release_date,$shape_id,$@ ) if ( $@ );
+            };
+            warn sprintf( "getShapeIdStatus(%s,%s,%s,%s): %s",$feed,$release_date,$shape_id,$@ ) if ( $@ );
+            @{$gtfs_shape_id_status_cache{$name_prefix}{$shape_id}} = @ret_array;
+        }
     } else {
         if ( $shape_id ) {
             @ret_array = ( '', '', '', gettext("internal error") + ": \$feed " + gettext("is not set") );
