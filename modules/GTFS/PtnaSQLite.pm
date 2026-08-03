@@ -16,6 +16,8 @@ use Encode;
 use Exporter;
 use base qw (Exporter);
 use Data::Dumper;
+use Time::HiRes;
+
 
 our @EXPORT_OK  = qw( setTimeZoneDate setPathToWork getRouteIdStatus getTripIdStatus getShapeIdStatus getGtfsRouteIdHtmlTag getGtfsRouteIdIconTag getGtfsTripIdHtmlTag getGtfsShapeIdHtmlTag getGtfsLinkToRoutes );
 
