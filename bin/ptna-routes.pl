@@ -250,6 +250,10 @@ if ( $opt_language ) {
     printf STDERR "%s\n", gettext("Language test");
 }
 
+if ( $check_against_gtfs ) {
+    $check_gtfs = 1;
+}
+
 if ( $check_name_relaxed ) {
     $check_name = 1;
 }
@@ -460,7 +464,9 @@ my $notes_string                    = '';   # to be used with ALL 'notes'  and g
 
 OSM::Geo::Init( 'debug' => $debug, 'verbose' => $verbose );
 
-GTFS::GTFSvsOSM::Init( 'debug' => $debug, 'verbose' => $verbose );
+if ( $check_against_gtfs ) {
+    GTFS::GTFSvsOSM::Init( 'debug' => $debug, 'verbose' => $verbose );
+}
 
 my %column_name             = ( 'ref'               => gettext('Line (ref=)'),
                                 'relation'          => gettext('Relation (id=)'),
@@ -1311,9 +1317,6 @@ if ( scalar( @RouteList ) ) {
         map { $columns_hash{$_} = 1; } ( @start_columns, @end_columns );
         map { push(@show_also_columns,$_) unless ( $columns_hash{$_} ) } split(',', $table_show_also );
     }
-    if ( $check_against_gtfs ) {
-        push( @end_columns, 'GTFS' );
-    }
 
     printTableInitialization( @start_columns, @show_also_columns, @end_columns );
 
@@ -1345,6 +1348,16 @@ if ( scalar( @RouteList ) ) {
                     printf STDERR "%s Found: Relation-ID %s, Type: %s, Ref: %s, RouteType: %s\n", get_time(), $relation_id, $RELATIONS{$relation_id}->{'tag'}->{'type'}, $RELATIONS{$relation_id}->{'tag'}->{'ref'}, $RELATIONS{$relation_id}->{'tag'}->{$RELATIONS{$relation_id}->{'tag'}->{'type'}}    if ( $debug );
 
                     if ( $i == 0 ) {
+                        my $gtfs_csv_based_scores = '';
+
+                        if ( $check_against_gtfs =~ m/csv/ && $entryref->{'gtfs-feed'} && $entryref->{'gtfs-route-id'} ) {
+                            $gtfs_csv_based_scores = GTFS::GTFSvsOSM::getCSVbasedScoreListHTML( $entryref->{'gtfs-feed'},
+                                                                                                $entryref->{'gtfs-release-date'},
+                                                                                                $entryref->{'gtfs-route-id'},
+                                                                                                \@list_of_matching_relation_ids
+                                                                                              );
+                        }
+
                         printTableSubHeader( 'ref-or-list'       => $entryref->{'ref-or-list'},              # is a pointer to an array: ('23') or also ('43', 'E43') for multiple 'ref' values
                                              'network'           => $relation_ptr->{'tag'}->{'network'},     # take 'network' value from first relation, undef outside this for-loop
                                              'operator'          => $relation_ptr->{'tag'}->{'operator'},    # take 'operator' value from first relation, undef outside this for-loop
@@ -1360,6 +1373,7 @@ if ( scalar( @RouteList ) ) {
                                              'GTFS-Feed'         => $entryref->{'gtfs-feed'},
                                              'GTFS-Route-Id'     => $entryref->{'gtfs-route-id'},
                                              'GTFS-Release-Date' => $entryref->{'gtfs-release-date'},
+                                             'GTFS-Scores'       => $gtfs_csv_based_scores,
                                              'relation'          => $relation_id
                                            );
                     }
@@ -1384,8 +1398,7 @@ if ( scalar( @RouteList ) ) {
                                     'to'            =>    $relation_ptr->{'tag'}->{'to'},
                                     'PTv'           =>    $relation_ptr->{'tag'}->{'public_transport:version'},
                                     'issues'        =>    join( '__separator__', @{$relation_ptr->{'__issues__'}} ),
-                                    'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}}  ),
-                                    'GTFS'          =>    join( '__separator__', @{$relation_ptr->{'__GTFS__'}} )
+                                    'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}}  )
                                   );
                     $relation_ptr->{'__printed__'}++;
                     $number_of_positive_relations++;
@@ -1493,9 +1506,6 @@ if ( scalar( @RouteList ) ) {
     if ( scalar(@relation_ids) ) {
 
         my @columns = ( 'ref', 'relation', 'type', 'route_type', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'issues', 'notes' );
-        if ( $check_against_gtfs ) {
-            push( @columns, 'GTFS' );
-        }
 
         printTableInitialization( @columns );
 
@@ -1525,8 +1535,7 @@ if ( scalar( @RouteList ) ) {
                             'to'            =>    $relation_ptr->{'tag'}->{'to'},
                             'PTv'           =>    $relation_ptr->{'tag'}->{'public_transport:version'},
                             'issues'        =>    join( '__separator__', @{$relation_ptr->{'__issues__'}} ),
-                            'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}} ),
-                            'GTFS'          =>    join( '__separator__', @{$relation_ptr->{'__GTFS__'}} )
+                            'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}} )
                           );
             $number_of_unassigned_relations++;
 
@@ -1565,9 +1574,6 @@ if ( scalar(@line_refs) ) {
     my $CheckNetwork     = '';
 
     my @columns = ( 'ref', 'relation', 'type', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'issues', 'notes' );
-    if ( $check_against_gtfs ) {
-        push( @columns, 'GTFS' );
-    }
 
     printTableInitialization( @columns );
 
@@ -1615,8 +1621,7 @@ if ( scalar(@line_refs) ) {
                                         'to'            =>    $relation_ptr->{'tag'}->{'to'},
                                         'PTv'           =>    $relation_ptr->{'tag'}->{'public_transport:version'},
                                         'issues'        =>    join( '__separator__', @{$relation_ptr->{'__issues__'}} ),
-                                        'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}} ),
-                                        'GTFS'          =>    join( '__separator__', @{$relation_ptr->{'__GTFS__'}} )
+                                        'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}} )
                                       );
                         $number_of_negative_relations++;
 
@@ -1652,9 +1657,6 @@ if ( scalar(@route_types) ) {
     my $help;
 
     my @columns = ( 'relation', 'type', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'issues', 'notes' );
-    if ( $check_against_gtfs ) {
-        push( @columns, 'GTFS' );
-    }
 
     printTableInitialization( @columns );
 
@@ -1686,8 +1688,7 @@ if ( scalar(@route_types) ) {
                             'to'            =>    $relation_ptr->{'tag'}->{'to'},
                             'PTv'           =>    $relation_ptr->{'tag'}->{'public_transport:version'},
                             'issues'        =>    join( '__separator__', @{$relation_ptr->{'__issues__'}} ),
-                            'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}} ),
-                            'GTFS'          =>    join( '__separator__', @{$relation_ptr->{'__GTFS__'}} )
+                            'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}} )
                           );
             $number_of_relations_without_ref++;
         }
@@ -1718,9 +1719,6 @@ if ( scalar(@line_refs) ) {
     my $CheckNetwork     = '';
 
     my @columns = ( 'ref', 'relation', 'type', 'life-cycle-prefix', 'name', 'network', 'operator', 'from', 'via', 'to', 'PTv', 'issues', 'notes' );
-    if ( $check_against_gtfs ) {
-        push( @columns, 'GTFS' );
-    }
 
     printTableInitialization( @columns );
 
@@ -1765,8 +1763,7 @@ if ( scalar(@line_refs) ) {
                                         'to'                =>    $relation_ptr->{'tag'}->{'to'},
                                         'PTv'               =>    $relation_ptr->{'tag'}->{'public_transport:version'},
                                         'issues'            =>    join( '__separator__', @{$relation_ptr->{'__issues__'}} ),
-                                        'notes'             =>    join( '__separator__', @{$relation_ptr->{'__notes__'}} ),
-                                        'GTFS'              =>    join( '__separator__', @{$relation_ptr->{'__GTFS__'}} )
+                                        'notes'             =>    join( '__separator__', @{$relation_ptr->{'__notes__'}} )
                                       );
                         $number_of_life_cycle_prefix_relations++;
 
@@ -1990,7 +1987,9 @@ printFinalFooter();
 
 OSM::Geo::Summary();
 
-GTFS::GTFSvsOSM::Summary();
+if ( $check_against_gtfs ) {
+    GTFS::GTFSvsOSM::Summary();
+}
 
 printf STDERR "%s Done ...\n", get_time()       if ( $verbose );
 
@@ -8597,6 +8596,9 @@ sub printTableSubHeader {
                     $csv_text .= GTFS::PtnaSQLite::getGtfsRouteIdIconTag( $hash{'GTFS-Feed'}, $grd, $hash{'GTFS-Route-Id'}, $relation_id, 'GTFS-Route-Id' );
                 }
             }
+        }
+        if ( $hash{'GTFS-Scores'} ) {
+            $csv_text .= ', ' . $hash{'GTFS-Scores'};
         }
     } else {
         if ( $hash{'GTFS-Feed'} ) {

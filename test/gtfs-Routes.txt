@@ -101,7 +101,7 @@
 104;bus;!GTFS database not found!;;;;GTFS-Test-does-not-exist;"1-104-s20-1;1-104-s20-2"
 
 200;bus;!Route-Id not set!;;;;GTFS-Test
-210;bus;!values of routes differ from route_master, routes have identical values!;Neuperlach Süd;Brunnthal, Zusestraße;;GTFS-Test;19-211-s21-1;2020-12-10
+210;bus;!values of routes differ from route_master, routes have identical values!;Neuperlach Süd;Brunnthal, Zusestraße;;GTFS-Test;mvv-19-210-1
 211;bus;!Valid Route-Id in latest GTFS release, no 'gtfs-release-date'!;;;;GTFS-Test;19-211-s20-1
 211;bus;!Multiple valid Route-Id in latest GTFS release, no 'gtfs-release-date'!;;;;GTFS-Test;"19-211-s20-1;19-211-s20-2;19-211-s20-3"
 211;bus;!Multiple valid/not existing Route-Id in latest GTFS release, no 'gtfs-release-date'!;;;;GTFS-Test;"19-211-s20-1;20-211-s20-5"
