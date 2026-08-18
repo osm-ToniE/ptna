@@ -1350,7 +1350,7 @@ if ( scalar( @RouteList ) ) {
                     if ( $i == 0 ) {
                         my $gtfs_csv_based_scores = '';
 
-                        if ( $check_against_gtfs =~ m/csv/ && $entryref->{'gtfs-feed'} && $entryref->{'gtfs-route-id'} ) {
+                        if ( $check_against_gtfs && $check_against_gtfs =~ m/csv/ && $entryref->{'gtfs-feed'} && $entryref->{'gtfs-route-id'} ) {
                             $gtfs_csv_based_scores = GTFS::GTFSvsOSM::getCSVbasedScoreListHTML( $entryref->{'gtfs-feed'},
                                                                                                 $entryref->{'gtfs-release-date'},
                                                                                                 $entryref->{'gtfs-route-id'},
