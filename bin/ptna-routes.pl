@@ -6149,7 +6149,11 @@ sub noAccessOnPlatform {
         } elsif ( $platform_type eq 'relation' && $RELATIONS{$platform_id} ) {
             $platform_tag_ref = $RELATIONS{$platform_id}->{'tag'};
         } else {
-            return sprintf("Internal error: unknown object type '%s' and object ID '%s'", $platform_type, $platform_id );
+            if ( $platform_type ne 'node' && $platform_type ne 'way' && $platform_type ne 'relation' ) {
+                return sprintf("Internal error: unknown object type '%s' for object ID '%s'", $platform_type, $platform_id );
+            } else {
+                return sprintf("Internal error: object type '%s' and unknown object ID '%s'", $platform_type, $platform_id );
+            }
         }
 
         printf STDERR "Details: noAccessOnPlatform() : platform name = %s\n", $platform_tag_ref->{'name'}?$platform_tag_ref->{'name'}:'?'       if ( $debug );
