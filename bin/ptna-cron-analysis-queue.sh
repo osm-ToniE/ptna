@@ -134,8 +134,8 @@ then
                                 fi
                                 sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET finished=$(date '+%s') WHERE id=$id;"
                             else
-                                sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='failed'                 WHERE id=$id;"
-                                sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET remarks='"network" not found"'  WHERE id=$id;"
+                                sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='failed'              WHERE id=$id;"
+                                sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET remarks='network not found'  WHERE id=$id;"
                             fi
                         else
                             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "sqlite3 DB '$ANALYSIS_QUEUE' could not get 'network' of task to be started"
