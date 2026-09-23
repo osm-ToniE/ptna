@@ -49,7 +49,7 @@ SQ_OPTIONS="-init /dev/null -noheader -csv"
 
 if [ ! -f "$ANALYSIS_QUEUE" ]
 then
-    sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "CREATE TABLE queue (id INTEGER DEFAULT 1 PRIMARY KEY, network TEXT DEFAULT '', status TEXT DEFAULT '', queued INTEGER DEFAULT 0, started INTEGER DEFAULT 0, finished INTEGER DEFAULT 0, changes INTEGER DEFAULT 0, ip TEXT DEFAULT '');"
+    sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "CREATE TABLE queue (id INTEGER DEFAULT 1 PRIMARY KEY, network TEXT DEFAULT '', status TEXT DEFAULT '', queued INTEGER DEFAULT 0, started INTEGER DEFAULT 0, finished INTEGER DEFAULT 0, changes INTEGER DEFAULT 0, ip TEXT DEFAULT '', osm_base_sec INTEGER DEFAULT 0, remarks TEXT DEFAULT '');"
     chmod 666 $ANALYSIS_QUEUE
     chmod 777 $(dirname $ANALYSIS_QUEUE)
 fi
@@ -83,6 +83,7 @@ then
                             settings_dir=$(find $PTNA_NETWORKS_LOC -type d -name "$network")
                             if [ -n "$settings_dir" ]
                             then
+                                started_at=$(date '+%s')
                                 sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='started'      WHERE id=$id;"
                                 sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET started=$(date '+%s') WHERE id=$id;"
 
@@ -104,19 +105,37 @@ then
                                         then
                                             sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET changes=$htmldiff WHERE id=$id;"
                                         fi
+                                        OSM_BASE=$(grep "OSM_BASE" $details_file | sed -e 's/^.*=//' | grep -E '^[0-9 A-Z:-]+$')
+                                        if [ -n "$OSM_BASE" ]
+                                        then
+                                            OSM_BASE_SEC=$(date --utc --date "$OSM_BASE" "+%s")
+                                            NOW_SEC=$(date --utc "+%s")
+                                            OSM_AGE=$(( $NOW_SEC - $OSM_BASE_SEC ))
+                                            MAX_AGE=$(( 6 * 3600 ))
+                                            sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET osm_base_sec=$OSM_BASE_SEC WHERE id=$id;"
+                                            if [ $OSM_AGE -gt $MAX_AGE ]
+                                            then
+                                                OSM_BASE_UTC=$(date --utc --date "$OSM_BASE" "+%Y-%m-%d %H:%M:%S %Z")
+                                                sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET remarks='OSM data is quite old, older than 6 hours : $OSM_BASE_UTC' WHERE id=$id;"
+                                            fi
+                                        fi
                                     fi
                                 elif [ $ret_code -eq 11 ]
                                 then
-                                    sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='failed (Overpass-API: no data)' WHERE id=$id;"
+                                    sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='failed'                  WHERE id=$id;"
+                                    sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET remarks='Overpass-API: no data'  WHERE id=$id;"
                                 elif [ $ret_code -eq 99 ]
                                 then
-                                    sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='locked'           WHERE id=$id;"
+                                    sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='locked' WHERE id=$id;"
+                                    sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET remarks='Another analysis for this "network" was already running when this one was ready to be started'           WHERE id=$id;"
                                 else
-                                    sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='failed $ret_code' WHERE id=$id;"
+                                    sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='failed'               WHERE id=$id;"
+                                    sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET remarks='ret_code $ret_code'  WHERE id=$id;"
                                 fi
                                 sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET finished=$(date '+%s') WHERE id=$id;"
                             else
-                                sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='failed dir'   WHERE id=$id;"
+                                sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET status='failed'                 WHERE id=$id;"
+                                sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET remarks='"network" not found"'  WHERE id=$id;"
                             fi
                         else
                             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "sqlite3 DB '$ANALYSIS_QUEUE' could not get 'network' of task to be started"
