@@ -112,12 +112,11 @@ then
                                             NOW_SEC=$(date --utc "+%s")
                                             OSM_AGE=$(( $NOW_SEC - $OSM_BASE_SEC ))
                                             OSM_AGE_HOURS=$(( $OSM_AGE / 3600 ))
-                                            MAX_AGE=$(( 3 * 3600 ))
                                             sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET osm_base_sec=$OSM_BASE_SEC WHERE id=$id;"
-                                            if [ $OSM_AGE -gt $MAX_AGE ]
+                                            if [ $OSM_AGE_HOURS -gt 0 ]
                                             then
                                                 OSM_BASE_UTC=$(date --utc --date "$OSM_BASE" "+%Y-%m-%d %H:%M:%S %Z")
-                                                sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET remarks='OSM data is quite old, older than $OSM_AGE_HOURS hours : $OSM_BASE_UTC' WHERE id=$id;"
+                                                sqlite3 $SQ_OPTIONS $ANALYSIS_QUEUE "UPDATE queue SET remarks='OSM data is quite old, older than $OSM_AGE_HOURS hour(s) : $OSM_BASE_UTC' WHERE id=$id;"
                                             fi
                                         fi
                                     fi
