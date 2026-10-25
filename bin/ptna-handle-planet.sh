@@ -19,7 +19,7 @@ fi
 
 # where can we find the planet file?
 
-PLANET_LOC="${PLANET_LOC:=/osm/planetfile}"
+PLANET_LOC="${PLANET_LOC:=/osm/ptna/work}"
 
 # where can we find config files for osmium to split the planet file into pieces
 
@@ -32,6 +32,7 @@ PTNA_WORK_LOC="${PTNA_WORK_LOC:=/osm/ptna/work}"
 BASEURL="https://planet.openstreetmap.org"
 SOURCE="pbf/planet-latest.osm.pbf"
 PLANET="$PLANET_LOC/planet.osm.pbf"
+TARGET="$(basename $PLANET .osm.pbf)"
 
 if [ -d "$PLANET_LOC" -a -d "$PTNA_WORK_LOC" ]
 then
@@ -75,7 +76,7 @@ then
         if [ -f "$PLANET" -a $(stat -c '%s' $PLANET) -gt 4096 ]
         then
             FILTERSOURCE="$PLANET"
-            FILTERTARGET="$(basename $PLANET .osm.pbf)-filtered.osm.pbf"
+            FILTERTARGET="$TARGET-filtered.osm.pbf"
             POSITIVEFILTER=$PTNA_NETWORKS_LOC/general-osmium-positive-filter.txt
             NEGATIVEFILTER=$PTNA_NETWORKS_LOC/general-osmium-negative-filter.txt
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-filter-extract.sh --positive $POSITIVEFILTER --negative $NEGATIVEFILTER --source $FILTERSOURCE --target $FILTERTARGET'"
@@ -88,7 +89,7 @@ then
 
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium fileinfo' for '$FILTERTARGET'"
 
-            osmium fileinfo "$FILTERTARGET"
+            ionice -c Idle nice -n 19 osmium fileinfo "$FILTERTARGET"
 
             osmium_ret=$?
 
@@ -97,7 +98,7 @@ then
 
         if [ -f "$FILTERTARGET" -a $(stat -c '%s' $FILTERTARGET) -gt 4096 ]
         then
-            UTC_CONFIG="$PTNA_NETWORKS_LOC/${TARGET%%.*}-$PREPARE_FOR_TIMEZONE-osmium.config"
+            UTC_CONFIG="$PTNA_NETWORKS_LOC/${TARGET}-$PREPARE_FOR_TIMEZONE-osmium.config"
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Looking for osmium config file '$UTC_CONFIG'"
 
             if [ -f "$UTC_CONFIG" -a -s "$UTC_CONFIG" ]

@@ -8,7 +8,7 @@ if [ -n "$SOURCE" -a -f "$SOURCE" -a -s "$SOURCE" ]
 then
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Update extract: call 'osmium fileinfo' for '$SOURCE'"
 
-    osmium fileinfo $SOURCE
+    ionice -c Idle nice -n 19 osmium fileinfo $SOURCE
 
     osmium_ret=$?
 
@@ -22,8 +22,8 @@ then
 
         py_ret=1  # we want more data
         while [ $py_ret -eq 1 ]; do
-            # download max 10G in evety step (defaults to 1G)
-            pyosmium-up-to-date -v --size=10000 "$SOURCE"
+            # download max 10G in every step (defaults to 1G)
+            ionice -c Idle nice -n 19 pyosmium-up-to-date -v --size=10000 "$SOURCE"
             py_ret=$?
         done
 
@@ -35,7 +35,7 @@ then
         then
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium fileinfo' for '$SOURCE'"
 
-            osmium fileinfo "$SOURCE"
+            ionice -c Idle nice -n 19 osmium fileinfo "$SOURCE"
 
             osmium_ret=$?
 

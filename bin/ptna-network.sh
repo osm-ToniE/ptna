@@ -334,6 +334,7 @@ then
                         then
                             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Size: " $(stat -c '%s' "$PTNA_EXTRACT_PARENT") $PTNA_EXTRACT_PARENT
                             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium getid --verbose --verbose-ids --default-type=relation --add-referenced --fsync --id-file=$OSMIUM_GETID_ID_FILE --output-format=$INPUTFORMAT --overwrite --output $OSMIUM_GETID_OUTPUT --input-format=pbf $PTNA_EXTRACT_PARENT"
+                            ionice -c Idle nice -n 19 \
                             osmium getid --verbose --verbose-ids --default-type=relation --add-referenced --fsync                                   \
                                          --id-file=$OSMIUM_GETID_ID_FILE                                                                            \
                                          --output-format=$INPUTFORMAT --overwrite --output $OSMIUM_GETID_OUTPUT                                     \
@@ -356,6 +357,7 @@ then
                                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Size: " $(stat -c '%s' "$OSMIUM_GETID_OUTPUT") $OSMIUM_GETID_OUTPUT
                                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Size: " $(stat -c '%s' "$OSMIUM_MERGE_EXTRACT_INPUT") $OSMIUM_MERGE_EXTRACT_INPUT
                                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium merge --verbose --fsync ---output-format=$INPUTFORMAT --overwrite --output=$OSMIUM_MERGE_EXTRACT_OUTPUT -input-format=$INPUTFORMAT $OSMIUM_MERGE_EXTRACT_INPUT $OSMIUM_GETID_OUTPUT'"
+                                ionice -c Idle nice -n 19 \
                                 osmium merge --verbose --fsync                                                                       \
                                              --output-format=$INPUTFORMAT --overwrite --output=$OSMIUM_MERGE_EXTRACT_OUTPUT          \
                                              --input-format=$INPUTFORMAT $OSMIUM_MERGE_EXTRACT_INPUT $OSMIUM_GETID_OUTPUT
@@ -386,10 +388,11 @@ then
             #
             rm -f "$OSM_XML_FILE_ABSOLUTE"
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium cat --clean user --clean version --clean timestamp --clean uid --clean changeset ... $OSMIUM_CAT_INPUT ... --output $OSM_XML_FILE_ABSOLUTE' and add timestamp '$TS' to output file"
-            osmium cat --clean user --clean version --clean timestamp --clean uid --clean changeset --fsync                                       \
-                        --output-header="generator=https://ptna.openstreetmap.de osmosis_replication_timestamp=$TS copyright=$OSM_DATA_COPYRIGHT" \
-                        --input-format "$INPUTFORMAT" "$OSMIUM_CAT_INPUT"                                                                         \
-                        --output-format "$OUTPUTFORMAT" --overwrite --output "$OSM_XML_FILE_ABSOLUTE"
+            ionice -c Idle nice -n 19 \
+            osmium cat --clean user --clean version --clean timestamp --clean uid --clean changeset --fsync                                      \
+                       --output-header="generator=https://ptna.openstreetmap.de osmosis_replication_timestamp=$TS copyright=$OSM_DATA_COPYRIGHT" \
+                       --input-format "$INPUTFORMAT" "$OSMIUM_CAT_INPUT"                                                                         \
+                       --output-format "$OUTPUTFORMAT" --overwrite --output "$OSM_XML_FILE_ABSOLUTE"
 
             osmium_ret=$?
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret (0 == all OK, 1 == error processing data, 2 == problems with command line arguments)"

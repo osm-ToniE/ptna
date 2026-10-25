@@ -22,6 +22,7 @@ then
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
+    ionice -c Idle nice -n 19 \
     osmium extract --verbose --strategy=smart --option=types=any --option=complete-partial-relations=1 \
                    --config="$CONFIG" --overwrite --fsync "$SOURCE"
 

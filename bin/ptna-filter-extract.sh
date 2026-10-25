@@ -40,7 +40,7 @@ then
                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium tags-filter' for '$SOURCE' to filter with positive filter list from file '$POSITIVE_FILTER_FILE'"
                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
 
-                osmium tags-filter -v --expressions "$POSITIVE_FILTER_FILE" -F "$INPUTFORMAT" -f "$INPUTFORMAT" -O -o "$TMP1" "$SOURCE"
+                ionice -c Idle nice -n 19 osmium tags-filter -v --expressions "$POSITIVE_FILTER_FILE" -F "$INPUTFORMAT" -f "$INPUTFORMAT" -O -o "$TMP1" "$SOURCE"
 
                 osmium_ret=$?
 
@@ -78,7 +78,7 @@ then
                     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium tags-filter' for '$TMP1' to filter with negative filter list from file '$NEGATIVE_FILTER_FILE'"
                     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
 
-                    osmium tags-filter -v -i --expressions "$NEGATIVE_FILTER_FILE" -F "$INPUTFORMAT" -f "$OUTPUTFORMAT" -O -o "$TMP2" "$TMP1"
+                    ionice -c Idle nice -n 19 osmium tags-filter -v -i --expressions "$NEGATIVE_FILTER_FILE" -F "$INPUTFORMAT" -f "$OUTPUTFORMAT" -O -o "$TMP2" "$TMP1"
 
                     osmium_ret=$?
 
@@ -116,7 +116,7 @@ then
 
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium fileinfo' for '$TARGET'"
 
-        osmium fileinfo "$TARGET"
+        ionice -c Idle nice -n 19 osmium fileinfo "$TARGET"
 
         fileinfo_ret=$?
 

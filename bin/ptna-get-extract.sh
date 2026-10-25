@@ -28,7 +28,7 @@ then
 
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium fileinfo' for '$TARGET'"
 
-    osmium fileinfo "$TARGET"
+    ionice -c Idle nice -n 19 osmium fileinfo "$TARGET"
 
     osmium_ret=$?
 
