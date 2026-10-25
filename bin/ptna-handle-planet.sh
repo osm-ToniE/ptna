@@ -17,6 +17,10 @@ then
     export PATH="$PTNA_BIN:$HOME/bin:$PATH"
 fi
 
+# where can we find the planet file?
+
+PLANET_LOC="${PLANET_LOC:=/osm/planetfile}"
+
 # where can we find config files for osmium to split the planet file into pieces
 
 PTNA_NETWORKS_LOC="${PTNA_NETWORKS_LOC:=/osm/ptna/ptna-networks}"
@@ -27,39 +31,39 @@ PTNA_WORK_LOC="${PTNA_WORK_LOC:=/osm/ptna/work}"
 
 BASEURL="https://planet.openstreetmap.org"
 SOURCE="pbf/planet-latest.osm.pbf"
-TARGET="planet.osm.pbf"
+PLANET="$PLANET_LOC/planet.osm.pbf"
 
-if [ -d "$PTNA_WORK_LOC" ]
+if [ -d "$PLANET_LOC" -a -d "$PTNA_WORK_LOC" ]
 then
     cd "$PTNA_WORK_LOC"
 
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "start: $(basename $0) $* in '$PWD'"
 
-    if [ ! -f "$TARGET" ]
+    if [ ! -f "$PLANET" ]
     then
-        # eshure, file exists
-        touch $TARGET
+        # ensure, file exists
+        touch $PLANET
     fi
 
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Planet file in '$PWD'"
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(ls -l $TARGET)"
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(ls -l $PLANET)"
 
-    if [ ! -f "$TARGET" -o $(stat -c '%s' $TARGET) -lt 4096 ]
+    if [ ! -f "$PLANET" -o $(stat -c '%s' $PLANET) -lt 4096 ]
     then
-        #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-get-extract.sh $BASEURL $SOURCE $TARGET"
+        #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-get-extract.sh $BASEURL $SOURCE $PLANET"
 
-        ptna-get-extract.sh "$BASEURL" "$SOURCE" "$TARGET"
+        ptna-get-extract.sh "$BASEURL" "$SOURCE" "$PLANET"
 
         get_ret=$?
 
         #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-get-extract.sh returned $get_ret"
     fi
 
-    if [ -f "$TARGET" -a $(stat -c '%s' $TARGET) -gt 4096 ]
+    if [ -f "$PLANET" -a $(stat -c '%s' $PLANET) -gt 4096 ]
     then
-        #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-update-extract.sh $TARGET'"
+        #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-update-extract.sh $PLANET'"
 
-        ptna-update-extract.sh "$TARGET"
+        ptna-update-extract.sh "$PLANET"
 
         update_ret=$?
 
@@ -68,10 +72,10 @@ then
 
     if [ -n "$PREPARE_FOR_TIMEZONE" ]
     then
-        if [ -f "$TARGET" -a $(stat -c '%s' $TARGET) -gt 4096 ]
+        if [ -f "$PLANET" -a $(stat -c '%s' $PLANET) -gt 4096 ]
         then
-            FILTERSOURCE="${TARGET%%.*}.osm.pbf"
-            FILTERTARGET="${TARGET%%.*}-filtered.osm.pbf"
+            FILTERSOURCE="$PLANET"
+            FILTERTARGET="$(basename $PLANET .osm.pbf)-filtered.osm.pbf"
             POSITIVEFILTER=$PTNA_NETWORKS_LOC/general-osmium-positive-filter.txt
             NEGATIVEFILTER=$PTNA_NETWORKS_LOC/general-osmium-negative-filter.txt
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-filter-extract.sh --positive $POSITIVEFILTER --negative $NEGATIVEFILTER --source $FILTERSOURCE --target $FILTERTARGET'"
