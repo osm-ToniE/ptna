@@ -977,20 +977,21 @@ then
                 fi
                 start=$(date --utc "+%s")
                 START_ANALYSIS=$(date --date @$start "+%Y-%m-%d %H:%M:%S %Z")
-                ptna-routes.pl --v\
-                                --title="$PREFIX" \
+                ionice -c Idle nice -n 19 \
+                ptna-routes.pl --v \
+                               --title="$PREFIX" \
                                $ANALYSIS_OPTIONS \
-                                --expect-network-short-as="$EXPECT_NETWORK_SHORT_AS" \
-                                --expect-network-short-for="$EXPECT_NETWORK_SHORT_FOR" \
-                                --expect-network-long-as="$EXPECT_NETWORK_LONG_AS" \
-                                --expect-network-long-for="$EXPECT_NETWORK_LONG_FOR" \
-                                --network-long-regex="$NETWORK_LONG" \
-                                --network-short-regex="$NETWORK_SHORT" \
-                                --operator-regex="$OPERATOR_REGEX" \
-                                --routes-file=$WORK_LOC/$ROUTES_FILE \
-                                --osm-xml-file=$OSM_XML_FILE_ABSOLUTE \
-                                $OPTION_NOPRE \
-                                2>&1 > $WORK_LOC/$HTML_FILE | tee $WORK_LOC/$HTML_FILE.log
+                               --expect-network-short-as="$EXPECT_NETWORK_SHORT_AS" \
+                               --expect-network-short-for="$EXPECT_NETWORK_SHORT_FOR" \
+                               --expect-network-long-as="$EXPECT_NETWORK_LONG_AS" \
+                               --expect-network-long-for="$EXPECT_NETWORK_LONG_FOR" \
+                               --network-long-regex="$NETWORK_LONG" \
+                               --network-short-regex="$NETWORK_SHORT" \
+                               --operator-regex="$OPERATOR_REGEX" \
+                               --routes-file=$WORK_LOC/$ROUTES_FILE \
+                               --osm-xml-file=$OSM_XML_FILE_ABSOLUTE \
+                               $OPTION_NOPRE \
+                               2>&1 > $WORK_LOC/$HTML_FILE | tee $WORK_LOC/$HTML_FILE.log
                 stop=$(date --utc "+%s")
                 END_ANALYSIS=$(date --date @$stop "+%Y-%m-%d %H:%M:%S %Z")
 
