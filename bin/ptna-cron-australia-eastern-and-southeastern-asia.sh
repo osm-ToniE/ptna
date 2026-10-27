@@ -51,14 +51,14 @@ else
 
     # first time handling of asia, so overwrite log file
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh asia"
-    ptna-handle-continent.sh asia    > $PTNA_WORK_LOC/ptna-handle-continent-asia.log    2>&1 < /dev/null &
+    ptna-handle-continent.sh asia    > $PTNA_WORK_LOC/ptna-handle-continent-asia.log    2>&1 < /dev/null
 
     # first time handling of oceania, so overwrite log file
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh oceania"
-    ptna-handle-continent.sh oceania > $PTNA_WORK_LOC/ptna-handle-continent-oceania.log 2>&1 < /dev/null &
+    ptna-handle-continent.sh oceania > $PTNA_WORK_LOC/ptna-handle-continent-oceania.log 2>&1 < /dev/null
 
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "wait for the 2 background jobs to finish"
-    wait
+    #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "wait for the 2 background jobs to finish"
+    #wait
 fi
 
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"

@@ -53,18 +53,18 @@ else
 
     # first time handling of central america, so append to log file
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh central-america"
-    ptna-handle-continent.sh central-america > $PTNA_WORK_LOC/ptna-handle-continent-central-america.log   2>&1 < /dev/null &
+    ptna-handle-continent.sh central-america > $PTNA_WORK_LOC/ptna-handle-continent-central-america.log   2>&1 < /dev/null
 
     # first time handling of north america, so overwrite log file
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh north-america"
-    ptna-handle-continent.sh north-america   > $PTNA_WORK_LOC/ptna-handle-continent-north-america.log     2>&1 < /dev/null &
+    ptna-handle-continent.sh north-america   > $PTNA_WORK_LOC/ptna-handle-continent-north-america.log     2>&1 < /dev/null
 
     # first time handling of south america, so overwrite log file
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh south-america"
-    ptna-handle-continent.sh south-america   > $PTNA_WORK_LOC/ptna-handle-continent-south-america.log     2>&1 < /dev/null &
+    ptna-handle-continent.sh south-america   > $PTNA_WORK_LOC/ptna-handle-continent-south-america.log     2>&1 < /dev/null
 
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "wait for the 3 background jobs to finish"
-    wait
+    #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "wait for the 3 background jobs to finish"
+    #wait
 fi
 
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"

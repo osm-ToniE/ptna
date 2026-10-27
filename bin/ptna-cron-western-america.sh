@@ -51,10 +51,10 @@ else
 
     # second time handling of north america this day, so append to log file
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh north-america"
-    ptna-handle-continent.sh north-america >> $PTNA_WORK_LOC/ptna-handle-continent-north-america.log 2>&1 < /dev/null &
+    ptna-handle-continent.sh north-america >> $PTNA_WORK_LOC/ptna-handle-continent-north-america.log 2>&1 < /dev/null
 
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "wait for the background job to finish"
-    wait
+    #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "wait for the background job to finish"
+    #wait
 fi
 
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
