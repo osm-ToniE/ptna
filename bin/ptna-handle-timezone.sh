@@ -123,9 +123,22 @@ then
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"        >> $LOGFILE
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"                   >> $LOGFILE
 
-        emptyxml=$(find ${PTNA_WORK_LOC} -name '*.xml' -size 0 | wc -l)
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Search for failed executions, empty *-Data.xml files" >> $LOGFILE
+        emptyxml=0
+        for settings_file in $(find $PTNA_NETWORKS_LOC -name settings.sh)
+        do
+            network=$(basename $(dirname $settings_file))
+            isempty=$(find ${PTNA_WORK_LOC} -name "$network-Data.xml" -size 0 | tee -a $LOGFILE | wc -l)
 
-        if [ "$emptyxml" -gt 0 -a "$emptyxml" -lt 130 ]
+            if [ $isempty -gt 0 ]
+            then
+                emtyxml=$(( $emptyxml + $isempty ))
+            fi
+        done
+#        emptyxml=$(find ${PTNA_WORK_LOC} -name '*.xml' -size 0 | tee -a $LOGFILE | wc -l)
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "End of list" >> $LOGFILE
+
+        if [ "$emptyxml" -gt 0 -a "$emptyxml" -lt 20 ]
         then
             # most of the analysis succeeded,
             # let's try a second time for the others
@@ -136,8 +149,6 @@ then
             sleep 300
 
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start catch-up with selected overpass api server '$PTNA_OVERPASS_API_SERVER' for '$emptyxml' networks (single execution)" >> $LOGFILE
-            find ${PTNA_WORK_LOC} -name '*.xml' -size 0        >> $LOGFILE
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "End of list" >> $LOGFILE
 
             # l == log (append) to 'network' specific logfile
             # O == do the overpassapi query only if the downloaded XML data is empty, otherwise skip the rest
@@ -151,8 +162,6 @@ then
         elif [ "$emptyxml" -gt 0 ]
         then
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "No catch-up with selected overpass api server '$PTNA_OVERPASS_API_SERVER, there are too many failed downloads ($emptyxml)'" >> $LOGFILE
-            find ${PTNA_WORK_LOC} -name '*.xml' -size 0        >> $LOGFILE
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "End of list" >> $LOGFILE
         fi
 
         if [ -n "$PTNA_OVERPASS_API_SERVER" ]
@@ -161,9 +170,9 @@ then
             # let's check again for empty XML files and
             # restart analysis with standard overpass api server
 
-            emptyxml=$(find ${PTNA_WORK_LOC} -name '*.xml' -size 0 | wc -l)
+            # emptyxml=$(find ${PTNA_WORK_LOC} -name '*.xml' -size 0 | wc -l)
 
-            # if [ "$emptyxml" -gt 0 -a "$emptyxml" -lt 130 ]
+            # if [ "$emptyxml" -gt 0 -a "$emptyxml" -lt 20 ]
             # then
                 # most (> 50%) of the analysis succeeded,
                 # let's try a third time for the others
