@@ -793,9 +793,16 @@ sub _getStartEndDateOfIdenticalTrips {
 
             for ( my $i = 0; $i < 2 && $representative_trip_id eq ''; $i++ ) {
                 if ( $i == 0 ) {
-                    $sth = $db_handle{$name_prefix}->prepare( "SELECT DISTINCT *
-                                                               FROM            ptna_trips
-                                                               WHERE           trip_id=?"   );
+                    if ( $trip_id =~ m/%/ ) {
+                        $sth = $db_handle{$name_prefix}->prepare( "SELECT DISTINCT *
+                                                                   FROM            ptna_trips
+                                                                   WHERE           trip_id LIKE ?"   );
+
+                    } else {
+                        $sth = $db_handle{$name_prefix}->prepare( "SELECT DISTINCT *
+                                                                   FROM            ptna_trips
+                                                                   WHERE           trip_id=?"   );
+                    }
                     $sth->execute( $trip_id );
                 } else {
                     $sth = $db_handle{$name_prefix}->prepare( "SELECT DISTINCT *
