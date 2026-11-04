@@ -3336,7 +3336,7 @@ sub analyze_relation {
                 $relation_ptr->{'GTFS-HTML-TAG'} = join( ', ', @gtfs_infos );
             }
             if ( $check_gtfs ) {
-                my %already_reported = {};
+                my %already_reported = ();
                 foreach my $gtfs_info ( @gtfs_infos ) {
                     if ( $gtfs_info =~ m/>GTFS[!?]/ || $gtfs_info =~ m/>GTFS\([rs]\)[!?]/ ) {
                         $gtfs_info =~ s/^.*"GTFS-Feed:/GTFS-Feed:/;
@@ -7476,7 +7476,7 @@ sub getGtfsInfos {
         printf STDERR "gtfs_feed_info = %s\n", Data::Dumper::Dumper(\%gtfs_feed_info)   if ( $debug );
         printf STDERR "feed_suffix = %s\n", Data::Dumper::Dumper(\@feed_suffix)   if ( $debug );
 
-        my %already_reported = {};
+        my %already_reported = ();
         foreach my $feed_suffix ( @feed_suffix ) {
             if ( $feed_suffix ) {
                 $gtfs_feed =  $feed_suffix;
