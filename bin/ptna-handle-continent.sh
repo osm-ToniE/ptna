@@ -79,7 +79,19 @@ then
 
         filter_ret=$?
 
-        #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-filter-extract.sh returned $filter_ret"
+        if [ $filter_ret -eq 0 ]
+        then
+            if [ $(echo $FILTERSOURCE | grep -F -c 'planet') -eq 0 ]
+            then
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "remove $FILTERSOURCE"
+                rm -f $FILTERSOURCE
+            else
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "keep $FILTERSOURCE"
+            fi
+        else
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-filter-extract.sh returned $filter_ret"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "keep $FILTERSOURCE"
+        fi
 
         echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium fileinfo' for '$FILTERTARGET'"
 
