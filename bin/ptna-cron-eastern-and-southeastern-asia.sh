@@ -25,7 +25,7 @@ PTNA_WORK_LOC="${PTNA_WORK_LOC:=/osm/ptna/work}"
 
 ###############################################################
 #
-# start working for UTC+10 UTC+09.30 UTC+08 UTC+07 - covers east and southeast Asia and Australia
+# start working for UTC+08 UTC+07 - covers east and southeast Asia
 #
 ###############################################################
 
@@ -35,27 +35,22 @@ echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 if [ -f $PTNA_WORK_LOC/update-from-planet ]
 then
     rm -f $PTNA_WORK_LOC/ptna-handle-continent-asia.log
-    rm -f $PTNA_WORK_LOC/ptna-handle-continent-oceania.log
-    for utc in UTC+10 UTC+09.30 UTC+08 UTC+07
+    for utc in UTC+08 UTC+07
     do
         rm -f $PTNA_WORK_LOC/ptna-handle-timezone-$utc.log
         rm -f $PTNA_WORK_LOC/log/ptna-*-$utc.log
     done
 
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-planet.sh UTC+10"
-    ptna-handle-planet.sh UTC+10 > $PTNA_WORK_LOC/ptna-handle-planet-UTC+10.log 2>&1 < /dev/null
+    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-planet.sh UTC+08"
+    ptna-handle-planet.sh UTC+08 > $PTNA_WORK_LOC/ptna-handle-planet-UTC+08.log 2>&1 < /dev/null
 else
     # update from continent extracts from other server
 
-    rm -f $PTNA_WORK_LOC/ptna-handle-planet-UTC+10.log
+    rm -f $PTNA_WORK_LOC/ptna-handle-planet-UTC+08.log
 
     # first time handling of asia, so overwrite log file
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh asia"
     ptna-handle-continent.sh asia    > $PTNA_WORK_LOC/ptna-handle-continent-asia.log    2>&1 < /dev/null
-
-    # first time handling of oceania, so overwrite log file
-    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-continent.sh oceania"
-    ptna-handle-continent.sh oceania > $PTNA_WORK_LOC/ptna-handle-continent-oceania.log 2>&1 < /dev/null
 
     #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "wait for the 2 background jobs to finish"
     #wait
@@ -66,7 +61,7 @@ echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
 # when finished, start analysis of timezones (which include further extracts in e.g. UTC+10/*-osimium.config)
 
-for utc in UTC+10 UTC+09.30 UTC+08 UTC+07
+for utc in UTC+08 UTC+07
 do
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-timezone.sh $utc"
 
@@ -77,8 +72,8 @@ echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(top -bn1 | grep -i '^.CPU')"
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "removing no longer needed '*.pbf'"
-# asia-filtered.osm.pbf and oceania-filtered.osm.pbf may be deleted
-for pbf in $(find $PTNA_WORK_LOC -name '*.osm.pbf' | grep -E -v 'planet\.') # |africa|america|asia\.|europe|oceania\.|russia')
+# asia-filtered.osm.pbf may be deleted
+for pbf in $(find $PTNA_WORK_LOC -name '*.osm.pbf' | grep -E -v 'planet\.') # |africa|america|asia\.|europe|oceania|russia')
 do
     #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "remove '$pbf', we don't need that any longer"
     rm -f "$pbf"

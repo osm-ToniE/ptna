@@ -41,7 +41,7 @@ then
     rm -f $PTNA_WORK_LOC/ptna-handle-continent-asia.log
     rm -f $PTNA_WORK_LOC/ptna-handle-continent-europe.log
     rm -f $PTNA_WORK_LOC/ptna-handle-continent-oceania.log
-    for utc in UTC+10 UTC+09.30 UTC+08 UTC+07 UTC+05.30 UTC+04 UTC+03.30 UTC+03 UTC+02 UTC+01 UTC+00 UTC-03 UTC-04 UTC-05 UTC-06 UTC-07 UTC-08 UTC-09
+    for utc in UTC+12 UTC+10 UTC+09.30 UTC+08 UTC+07 UTC+05.30 UTC+04 UTC+03.30 UTC+03 UTC+02 UTC+01 UTC+00 UTC-03 UTC-04 UTC-05 UTC-06 UTC-07 UTC-08 UTC-09
     do
         rm -f $PTNA_WORK_LOC/ptna-handle-timezone-$utc.log
         rm -f $PTNA_WORK_LOC/log/ptna-*-$utc.log
@@ -89,7 +89,7 @@ echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
 # when finished, start analysis of timezones (which include further extracts in e.g. UTC+01/*-osimium.config)
 
-for utc in UTC+10 UTC+09.30 UTC+08 UTC+07 UTC+05.30 UTC+04 UTC+03.30 UTC+03 UTC+02 UTC+01 UTC+00 UTC-03 UTC-04 UTC-05 UTC-06 UTC-07 UTC-08 UTC-09
+for utc in UTC+12 UTC+10 UTC+09.30 UTC+08 UTC+07 UTC+05.30 UTC+04 UTC+03.30 UTC+03 UTC+02 UTC+01 UTC+00 UTC-03 UTC-04 UTC-05 UTC-06 UTC-07 UTC-08 UTC-09
 do
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-handle-timezone.sh $utc"
 
