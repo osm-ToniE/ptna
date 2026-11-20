@@ -2,9 +2,9 @@
 
 source ~/.ptna-config
 
-mingigs=${1:=35}
+mingigs=${1:-35}
 
-avail=$(df | awk '$6 == "/" && $4 < '$mingigs' * 1024*1024 { print $4/1024/1024 }')
+avail=$(df | awk '$6 == "/osm" && $4 < '$mingigs' * 1024*1024 { print $4/1024/1024 }')
 
 topicurl=https://ntfy.sh/$PTNA_NTFY_TOPIC
 
