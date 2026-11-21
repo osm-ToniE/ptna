@@ -281,7 +281,7 @@ then
 
         AGE_IN_SECS=$(( $(date "+%s") - $(date "+%s" -d "$TS") ))
 
-        if [ $AGE_IN_SECS -le 43200 ]        # age is max 12 hours
+        if [ $AGE_IN_SECS -le 86400 ]        # age is max 24 hours
         then
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Checking for individual 'osmium tags-filter' files ..."
 
@@ -415,40 +415,56 @@ then
                         OSM_BASE=$(date --date "$OSM_BASE" "+%Y-%m-%d %H:%M:%S %Z")
                     fi
                 else
-                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'use extracts': result file '$OSM_XML_FILE_ABSOLUTE' is too small (size=$fsize), handle as 'Overpass-API call'"
-                    overpassquery=true
-                    overpassqueryonzeroxml=false
-                    use_extracts=false
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'use extracts': result file '$OSM_XML_FILE_ABSOLUTE' is too small (size=$fsize), stop this execution"
+                    # an empty $OSM_XML_FILE_ABSOLUTE indicates that the creation of the same failed and a retry via Overpass-API shall be triggered in a separate step (sequential execution)
+                    rm -f $OSM_XML_FILE_ABSOLUTE
+                    touch $OSM_XML_FILE_ABSOLUTE
+                    inject=false
+                    getroutes=false
+                    analyze=false
+                    updateresult=false
                 fi
             else
-                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'use extracts': result file '$OSM_XML_FILE_ABSOLUTE' does not exist or is empty handle as 'Overpass-API call'"
-                overpassquery=true
-                overpassqueryonzeroxml=false
-                use_extracts=false
-            fi
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'use extracts': result file '$OSM_XML_FILE_ABSOLUTE' does not exist or is empty, stop this execution"
+                # an empty $OSM_XML_FILE_ABSOLUTE indicates that the creation of the same failed and a retry via Overpass-API shall be triggered in a separate step (sequential execution)
+                rm -f $OSM_XML_FILE_ABSOLUTE
+                touch $OSM_XML_FILE_ABSOLUTE
+                inject=false
+                getroutes=false
+                analyze=false
+                updateresult=false
+           fi
 
             stop=$(date --utc "+%s")
             END_FILTER=$(date --date @$stop "+%Y-%m-%d %H:%M:%S %Z")
         else
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'use extracts': time stamp = '$TS' in file '$PTNA_EXTRACT_FILE' is too old, handle as 'Overpass-API call'"
-            overpassquery=true
-            overpassqueryonzeroxml=false
-            use_extracts=false
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'use extracts': time stamp = '$TS' in file '$PTNA_EXTRACT_FILE' is too old, stop this execution"
+            # an empty $OSM_XML_FILE_ABSOLUTE indicates that the creation of the same failed and a retry via Overpass-API shall be triggered in a separate step (sequential execution)
+            rm -f $OSM_XML_FILE_ABSOLUTE
+            touch $OSM_XML_FILE_ABSOLUTE
+            inject=false
+            getroutes=false
+            analyze=false
+            updateresult=false
         fi
     else
         if [ -z "$PTNA_EXTRACT_SOURCE" ]
         then
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'use extracts' is not (yet) configured, for the time being, handle as 'Overpass-API call'"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'use extracts' is not (yet) configured, for the time being, stop this execution"
         elif [ ! -f "$WORK_LOC/$PTNA_EXTRACT_SOURCE" ]
         then
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'use extracts': file '$WORK_LOC/$PTNA_EXTRACT_SOURCE' does not exist, handle as 'Overpass-API call'"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'use extracts': file '$WORK_LOC/$PTNA_EXTRACT_SOURCE' does not exist, stop this execution"
         else
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'use extracts': file '$WORK_LOC/$PTNA_EXTRACT_SOURCE' is empty, handle as 'Overpass-API call'"
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "'use extracts': file '$WORK_LOC/$PTNA_EXTRACT_SOURCE' is empty, stop this execution"
         fi
-        overpassquery=true
-        overpassqueryonzeroxml=false
-        use_extracts=false
-    fi
+        # an empty $OSM_XML_FILE_ABSOLUTE indicates that the creation of the same failed and a retry via Overpass-API shall be triggered in a separate step (sequential execution)
+        rm -f $OSM_XML_FILE_ABSOLUTE
+        touch $OSM_XML_FILE_ABSOLUTE
+        inject=false
+        getroutes=false
+        analyze=false
+        updateresult=false
+   fi
 fi
 
 #
