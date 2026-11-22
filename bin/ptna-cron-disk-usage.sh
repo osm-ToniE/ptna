@@ -13,7 +13,7 @@ topicurl=https://ntfy.sh/$PTNA_NTFY_TOPIC
 if [ -n "$PTNA_NTFY_TOPIC" -a -n "$avail" ]
 then
     curl \
-      -d "Only $avail GB available on the root disk. Better clean that up." \
+      -d "Only $avail GB available on the '/osm' disk." \
       -H "Title: Low disk space alert on $(hostname)" \
       -H "Priority: high" \
       -H "Tags: warning,cd" \
