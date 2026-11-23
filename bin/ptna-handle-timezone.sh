@@ -140,7 +140,7 @@ then
 
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "End of list" >> $LOGFILE
 
-            if [ "$emptyxml" -gt 0 -a "$emptyxml" -lt 20 ]
+            if [ $emptyxml -gt 0 -a $emptyxml -lt 20 ]
             then
                 # most of the analysis succeeded,
                 # let's try a second time for the others
@@ -161,48 +161,45 @@ then
 
                 # run this using the selected overpass-api server
                 ptna-all-networks-parallel.sh -lOigau >> $LOGFILE 2>&1 < /dev/null
-            elif [ "$emptyxml" -gt 0 ]
+            elif [ $emptyxml -gt 0 ]
             then
                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "No catch-up with selected overpass api server '$PTNA_OVERPASS_API_SERVER, there are too many failed downloads ($emptyxml)'" >> $LOGFILE
             fi
         fi
 
-        if [ "$emptyxml" -gt 0 ]
-        then
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Search for failed executions, empty *-Data.xml files" >> $LOGFILE
-            emptyxml=0
-            for settings_file in $(find $PTNA_NETWORKS_LOC -name settings.sh)
-            do
-                network=$(basename $(dirname $settings_file))
-                isempty=$(find ${PTNA_WORK_LOC} -name "$network-Data.xml" -size 0 | tee -a $LOGFILE | wc -l)
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Search for failed executions, empty *-Data.xml files" >> $LOGFILE
+        emptyxml=0
+        for settings_file in $(find $PTNA_NETWORKS_LOC -name settings.sh)
+        do
+            network=$(basename $(dirname $settings_file))
+            isempty=$(find ${PTNA_WORK_LOC} -name "$network-Data.xml" -size 0 | tee -a $LOGFILE | wc -l)
 
-                if [ $isempty -gt 0 ]
-                then
-                    emtyxml=$(( $emptyxml + $isempty ))
-                fi
-            done
-
-            if [ "$emptyxml" -gt 0 ]
+            if [ $isempty -gt 0 ]
             then
-                # this forces also single, sequential execution
-                export PTNA_OVERPASS_API_SERVER=""
-
-                sleep 300
-
-                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start catch-up with standard overpass api server for '$emptyxml' networks (single execution)" >> $LOGFILE
-                find ${PTNA_WORK_LOC} -name '*.xml' -size 0        >> $LOGFILE
-                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "End of list" >> $LOGFILE
-
-                # l == log (append) to 'network' specific logfile
-                # O == do the overpassapi query only if the downloaded XML data is empty, otherwise skip the rest
-                #      i == inject GTFS data into OSM-Wiki routes data (read raw, inject, write back)
-                #      g == get the OSM-Wiki data for the routes (read parsed)
-                #      a == do the analysis (in work area)
-                #      u == update the result from the work area to the location of the web service
-
-                # run this using the standard overpass-api server, although called 'parallel' this is sequential execution now: PTNA_OVERPASS_API_SERVER=""
-                ptna-all-networks-parallel.sh -lOigau >> $LOGFILE 2>&1 < /dev/null
+                emtyxml=$(( $emptyxml + $isempty ))
             fi
+        done
+
+        if [ $emptyxml -gt 0 ]
+        then
+            # this forces also single, sequential execution
+            export PTNA_OVERPASS_API_SERVER=""
+
+            sleep 300
+
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Start catch-up with standard overpass api server for '$emptyxml' networks (single execution)" >> $LOGFILE
+            find ${PTNA_WORK_LOC} -name '*.xml' -size 0        >> $LOGFILE
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "End of list" >> $LOGFILE
+
+            # l == log (append) to 'network' specific logfile
+            # O == do the overpassapi query only if the downloaded XML data is empty, otherwise skip the rest
+            #      i == inject GTFS data into OSM-Wiki routes data (read raw, inject, write back)
+            #      g == get the OSM-Wiki data for the routes (read parsed)
+            #      a == do the analysis (in work area)
+            #      u == update the result from the work area to the location of the web service
+
+            # run this using the standard overpass-api server, although called 'parallel' this is sequential execution now: PTNA_OVERPASS_API_SERVER=""
+            ptna-all-networks-parallel.sh -lOigau >> $LOGFILE 2>&1 < /dev/null
         fi
 
 
