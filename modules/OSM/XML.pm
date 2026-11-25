@@ -35,7 +35,7 @@ sub parse {
         if ( -f $infile && -r $infile ) {
             #
             # this is a hack, because Goe::Parse::OSM does not find 'meta' information
-            if ( open(DATA,"< $infile") ) {
+            if ( open(DATA, "<", $infile) ) {
                 my ($sec,$min,$hour,$day,$month,$year) = localtime();
                 my $date_and_time = sprintf( "%04d-%02d-%02d %02d:%02d:%02d", $year+1900, $month+1, $day, $hour, $min, $sec );
                 my $count = 0;

@@ -178,7 +178,7 @@ if ( $parse ) {
                 printf STDERR "%s ref = %s\n",  get_time(), Dumper($ref)     if ( $verbose );
                 if ( $ref->{'parse'}->{'text'} && $ref->{'parse'}->{'text'}->{'*'} ) {
                     if ( $file ) {
-                        if ( open(OUT,">$file") ) {
+                        if ( open(OUT, ">", $file) ) {
                             printf STDERR "%s writing parsed Wiki page '%s' to file '%s'\n", get_time(), $page, $file;
                             binmode OUT, ":encoding(UTF-8)";
                             printf OUT "%s", $ref->{'parse'}->{'text'}->{'*'};
@@ -221,7 +221,7 @@ if ( $parse ) {
             printf STDERR "%s timestamp = %s\n", get_time(), ($timestamp ? $timestamp : '?');
 
             if ( $file ) {
-                if ( open(OUT,">$file") ) {
+                if ( open(OUT, ">", $file) ) {
                     printf STDERR "%s Writing Wiki page '%s' to file '%s'\n", get_time(), $page, $file;
                     binmode OUT, ":encoding(UTF-8)";
                     printf OUT "%s", $ref->{'*'};
@@ -266,7 +266,7 @@ if ( $parse ) {
                 printf STDERR "%s Reading file '%s'\n", get_time(), $file;
                 printf STDERR "%s\n", $text   if ( $debug );
 
-                if ( open(IN,"<$file") ) {
+                if ( open(IN, "<", $file) ) {
                     $text = '';
                     binmode IN, ":encoding(UTF-8)";
                     while ( <IN> ) {

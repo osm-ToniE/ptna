@@ -63,7 +63,7 @@ sub ReadStringsFromFile {
 
     my %strings_to_statement = ();
 
-    if ( open(F,"< $filename") ) {
+    if ( open(F, "<", $filename) ) {
 
         while ( <F> ) {
             s/^\s+//;

@@ -79,7 +79,7 @@ sub ReadRoutes {
     if ( $infile ) {
         if ( -e $infile && -f $infile && -r $infile ) {
 
-            if ( open(CSV,"< $infile") ) {
+            if ( open(CSV, "<", $infile) ) {
                 binmode CSV, ":encoding(UTF-8)";
 
                 $csv_module = Text::CSV_XS->new( { sep_char            => ';',
