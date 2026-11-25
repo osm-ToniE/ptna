@@ -63,9 +63,9 @@ sub ReadStringsFromFile {
 
     my %strings_to_statement = ();
 
-    if ( open(F, "<", $filename) ) {
+    if ( open(my $fh, "<", $filename) ) {
 
-        while ( <F> ) {
+        while ( <$fh> ) {
             s/^\s+//;
             s/\s+$//;
             if ( m/^\$(issues|notes)_string\s*=\s*(gettext\(\s*\")(.*)(\"\s*\)\s*;)/ ) {
@@ -76,7 +76,7 @@ sub ReadStringsFromFile {
                 printf STDERR "--> \$strings_to_statement{%s}->{%s} = %s\n", $3, $1, $strings_to_statement{$3}->{$1}    if ( $debug );
             }
         }
-        close( F );
+        close( $fh );
     } else {
         printf STDERR "Could not read file '%s'\n", $filename;
     }

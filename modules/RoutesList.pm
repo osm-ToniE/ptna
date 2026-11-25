@@ -79,8 +79,8 @@ sub ReadRoutes {
     if ( $infile ) {
         if ( -e $infile && -f $infile && -r $infile ) {
 
-            if ( open(CSV, "<", $infile) ) {
-                binmode CSV, ":encoding(UTF-8)";
+            if ( open(my $fh, "<", $infile) ) {
+                binmode $fh, ":encoding(UTF-8)";
 
                 $csv_module = Text::CSV_XS->new( { sep_char            => ';',
                                                    quote_char          => '"',
@@ -88,7 +88,7 @@ sub ReadRoutes {
                                                  }
                                                );
 
-                while ( <CSV> ) {
+                while ( <$fh> ) {
                     chomp();                                        # remove NewLine
                     s/\r$//;                                        # remove 'CR'
                     s/^\s*//;                                       # remove space at the beginning
@@ -290,7 +290,7 @@ sub ReadRoutes {
                     $last_type = $routes_hash{$NR}->{'type'};
                     push( @routes_list, $hashref );
                 }
-                close( CSV );
+                close( $fh );
                 #printf STDERR "%s read\n", decode('utf8', $infile )                                     if ( $debug );
             } else {
                 return sprintf( "Could not open file : '%s': %s", decode('utf8', $infile ), $! );
