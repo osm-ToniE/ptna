@@ -3,10 +3,11 @@
 # Copyright 2025 Nitai Sasson
 # Licensed under GNU GPLv3 or later
 
-import re
 import argparse
 import json
+import re
 from collections import Counter
+
 
 def main(routes_file, template_file, out_file, show_hidden_variables):
     routes = load_routes(routes_file)
