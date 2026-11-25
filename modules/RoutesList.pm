@@ -306,8 +306,8 @@ sub ReadRoutes {
 
     if ( $debug ) {
         if ( $analyze eq 'analyze' ) {
-            foreach $ExpRef ( sort ( keys ( %seen_ref_type ) ) ) {
-                foreach $ExpRouteType ( sort ( keys %{$seen_ref_type{$ExpRef}} ) ) {
+            foreach my $ExpRef ( sort ( keys ( %seen_ref_type ) ) ) {
+                foreach my $ExpRouteType ( sort ( keys %{$seen_ref_type{$ExpRef}} ) ) {
                     if ( $seen_ref_type{$ExpRef}->{$ExpRouteType} > 1 ) {
                         printf STDERR "CSV-File %s: entry: ref=%s and type=%s found %d times\n", $infile, $ExpRef, $ExpRouteType, $seen_ref_type{$ExpRef}->{$ExpRouteType}           if ( $debug );
                         if ( $seen_ref_type_operator{$ExpRef}                  &&
@@ -317,7 +317,7 @@ sub ReadRoutes {
                             if ( scalar(keys(%{$seen_ref_type_operator{$ExpRef}->{$ExpRouteType}})) < $seen_ref_type{$ExpRef}->{$ExpRouteType} ) {
                                 printf STDERR "CSV-File %s: potential problem with entry: ref=%s and type=%s\n", $infile, $ExpRef, $ExpRouteType          if ( $debug );
 
-                                foreach $ExpOperator ( sort ( keys %{$seen_ref_type_operator{$ExpRef}->{$ExpRouteType}} ) ) {
+                                foreach my $ExpOperator ( sort ( keys %{$seen_ref_type_operator{$ExpRef}->{$ExpRouteType}} ) ) {
                                     if ( $seen_ref_type_operator{$ExpRef}->{$ExpRouteType}->{$ExpOperator} > 1 ) {
                                         printf STDERR "CSV-File %s: problem with entry: ref=%s, type=%s and operator=%s == %d\n", $infile, $ExpRef, $ExpRouteType, $ExpOperator, $seen_ref_type_operator{$ExpRef}->{$ExpRouteType}->{$ExpOperator}           if ( $debug );
 
@@ -526,7 +526,7 @@ sub GetRefTypeOperatorFromAndTo {
                     # minimum one of each pair must be defined
 
                     $match = undef;
-                    foreach $CombFrom ( @CombFromArray ) {
+                    foreach my $CombFrom ( @CombFromArray ) {
                         if ( $CombFrom ) {
                             if ( $RelFrom ) {
                                 if ( $CombFrom =~ m/\Q$RelFrom\E/ ) {
@@ -549,7 +549,7 @@ sub GetRefTypeOperatorFromAndTo {
                         }
                     }
                     if ( !defined($match) ) {
-                        foreach $CombTo ( @CombToArray ) {
+                        foreach my $CombTo ( @CombToArray ) {
                             if ( $CombTo ) {
                                 if ( $RelFrom ) {
                                     if ( $CombTo =~ m/\Q$RelFrom\E/ ) {

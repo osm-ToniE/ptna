@@ -809,7 +809,7 @@ my $number_of_unused_networks                   = 0;
 
 printf STDERR "%s Converting relations\n", get_time()       if ( $verbose );
 
-foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
+foreach my $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
 
     $number_of_relations++;
 
@@ -1040,7 +1040,7 @@ foreach $relation_id ( sort ( keys ( %RELATIONS ) ) ) {
                             $relation_ptr->{'gtfs_keys'}->{$key} = $relation_ptr->{'tag'}->{$key};
                         }
                     }
-                    foreach $member ( @{$relation_ptr->{'members'}} ) {
+                    foreach my $member ( @{$relation_ptr->{'members'}} ) {
                         if ( $member->{'type'} ) {
                             if ( $member->{'type'} eq 'relation' ) {
                                 ${$relation_ptr->{'relation'}}[$relation_index]->{'ref'}  = $member->{'ref'};
@@ -1201,7 +1201,7 @@ if ( $verbose ) {
 if ( $xml_has_ways ) {
     printf STDERR "%s Converting ways\n", get_time()       if ( $verbose );
 
-    foreach $way_id ( keys ( %WAYS ) ) {
+    foreach my $way_id ( keys ( %WAYS ) ) {
 
         $number_of_ways++;
 
@@ -1252,7 +1252,7 @@ if ( $xml_has_ways ) {
 if ( $xml_has_nodes ) {
     printf STDERR "%s Converting nodes\n", get_time()       if ( $verbose );
 
-    foreach $node_id ( keys ( %NODES ) ) {
+    foreach my $node_id ( keys ( %NODES ) ) {
 
         $number_of_nodes++;
 
@@ -1491,10 +1491,10 @@ if ( scalar( @RouteList ) ) {
     my $CheckNetwork = '';
     my @relation_ids = ();
 
-    foreach $ref ( sort( keys( %{$PT_relations_with_ref{$section}} ) ) ) {
-        foreach $type ( reverse ( sort( keys( %{$PT_relations_with_ref{$section}->{$ref}} ) ) ) ) {
-            foreach $route_type ( sort( keys( %{$PT_relations_with_ref{$section}->{$ref}->{$type}} ) ) ) {
-                foreach $relation_id ( sort( keys( %{$PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}} ) ) ) {
+    foreach my $ref ( sort( keys( %{$PT_relations_with_ref{$section}} ) ) ) {
+        foreach my $type ( reverse ( sort( keys( %{$PT_relations_with_ref{$section}->{$ref}} ) ) ) ) {
+            foreach my $route_type ( sort( keys( %{$PT_relations_with_ref{$section}->{$ref}->{$type}} ) ) ) {
+                foreach my $relation_id ( sort( keys( %{$PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}} ) ) ) {
                     if ( $PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}->{$relation_id}->{'__printed__'} < 1 ) {
                         push( @relation_ids, $relation_id );
                     }
@@ -1514,7 +1514,7 @@ if ( scalar( @RouteList ) ) {
         printHintUnassignedRelations();
         printTableHeader( 'ref' => 'number', 'relation' => 'number' );
 
-        foreach $relation_id ( @relation_ids ) {
+        foreach my $relation_id ( @relation_ids ) {
             $relation_ptr = $RELATIONS{$relation_id};
 
             @{$relation_ptr->{'__issues__'}} = ();  # just in case that this route has already been analyzed before (--multiple-ref-type-enries=allow)
@@ -1584,11 +1584,11 @@ if ( scalar(@line_refs) ) {
     }
 
 
-    foreach $route_type ( @supported_route_types ) {
+    foreach my $route_type ( @supported_route_types ) {
 
         $route_type_lines = 0;
-        foreach $ref ( @line_refs ) {
-            foreach $type ( 'route_master', 'route' ) {
+        foreach my $ref ( @line_refs ) {
+            foreach my $type ( 'route_master', 'route' ) {
                 $route_type_lines += scalar(keys(%{$PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}}));
             }
         }
@@ -1596,9 +1596,9 @@ if ( scalar(@line_refs) ) {
             $help = sprintf( "%s (%s)", ($transport_types{$route_type} ? $transport_types{$route_type} : $route_type), $route_type );
             printHeader( $help, 2 );
             printTableHeader( 'ref' => 'number', 'relation' => 'number' );
-            foreach $ref ( @line_refs ) {
-                foreach $type ( 'route_master', 'route' ) {
-                    foreach $relation_id ( sort( { $PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}->{$a}->{'__sort_name__'} cmp
+            foreach my $ref ( @line_refs ) {
+                foreach my $type ( 'route_master', 'route' ) {
+                    foreach my $relation_id ( sort( { $PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}->{$a}->{'__sort_name__'} cmp
                                                    $PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}->{$b}->{'__sort_name__'}     }
                                                  keys(%{$PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}})) ) {
                         $relation_ptr = $PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}->{$relation_id};
@@ -1662,11 +1662,11 @@ if ( scalar(@route_types) ) {
 
     printHeader( gettext("Public Transport Lines without 'ref'"), 1, 'withoutref' );
 
-    foreach $route_type ( @route_types ) {
+    foreach my $route_type ( @route_types ) {
         $help = sprintf( "%s (%s)", ($transport_types{$route_type} ? $transport_types{$route_type} : $route_type), $route_type );
         printHeader( $help, 2 );
         printTableHeader( 'relation' => 'number' );
-        foreach $relation_id ( sort( { $PT_relations_without_ref{$route_type}->{$a}->{'__sort_name__'} cmp
+        foreach my $relation_id ( sort( { $PT_relations_without_ref{$route_type}->{$a}->{'__sort_name__'} cmp
                                        $PT_relations_without_ref{$route_type}->{$b}->{'__sort_name__'}     }
                                      keys(%{$PT_relations_without_ref{$route_type}})) ) {
             $relation_ptr = $PT_relations_without_ref{$route_type}->{$relation_id};
@@ -1725,11 +1725,11 @@ if ( scalar(@line_refs) ) {
     printHeader( gettext('Routes with life-cycle prefix'), 1, 'life-cycle-prefix' );
 
 
-    foreach $route_type ( @supported_route_types ) {
+    foreach my $route_type ( @supported_route_types ) {
 
         $route_type_lines = 0;
-        foreach $ref ( @line_refs ) {
-            foreach $type ( 'route_master', 'route' ) {
+        foreach my $ref ( @line_refs ) {
+            foreach my $type ( 'route_master', 'route' ) {
                 $route_type_lines += scalar(keys(%{$PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}}));
             }
         }
@@ -1737,9 +1737,9 @@ if ( scalar(@line_refs) ) {
             $help = sprintf( "%s (%s)", ($transport_types{$route_type} ? $transport_types{$route_type} : $route_type), $route_type );
             printHeader( $help, 2 );
             printTableHeader( 'ref' => 'number', 'relation' => 'number' );
-            foreach $ref ( @line_refs ) {
-                foreach $type ( 'route_master', 'route' ) {
-                    foreach $relation_id ( sort( { $PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}->{$a}->{'__sort_name__'} cmp
+            foreach my $ref ( @line_refs ) {
+                foreach my $type ( 'route_master', 'route' ) {
+                    foreach my $relation_id ( sort( { $PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}->{$a}->{'__sort_name__'} cmp
                                                    $PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}->{$b}->{'__sort_name__'}     }
                                                  keys(%{$PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}})) ) {
                         $relation_ptr = $PT_relations_with_ref{$section}->{$ref}->{$type}->{$route_type}->{$relation_id};
@@ -1817,7 +1817,7 @@ if ( scalar(@suspicious_relations) ) {
 
     my $print_it = 0;
 
-    foreach $relation_id ( @suspicious_relations ) {
+    foreach my $relation_id ( @suspicious_relations ) {
         $relation_ptr = $RELATIONS{$relation_id};
         foreach my $tag ( keys ( %{$relation_ptr->{'tag'}} ) ) {
             $print_it     = 0;
@@ -1859,7 +1859,7 @@ if ( scalar(@suspicious_relations) ) {
 
         printTableHeader( 'relation' => 'number', 'ref' => 'number' );
 
-        foreach $relation_id ( @print_suspicious_relations ) {
+        foreach my $relation_id ( @print_suspicious_relations ) {
             $relation_ptr = $RELATIONS{$relation_id};
 
             printTableLine( 'relation'          =>    $relation_id,
@@ -2490,7 +2490,7 @@ sub analyze_route_master_environment {
                                         $masters_ref = $RELATIONS{$relation_id}->{'tag'}->{'ref'};
                                     }
                                     if ( exists($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'ref'}) ) {
-                                        foreach $members_ref ( @{$ref_or_list} ) {
+                                        foreach my $members_ref ( @{$ref_or_list} ) {
                                             $allowed_refs{$members_ref} = 1;
                                         }
                                         $members_ref = $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'ref'};
@@ -2697,7 +2697,7 @@ sub analyze_route_environment {
                 push( @{$relation_ptr->{'__issues__'}}, sprintf( $issues_string, $relation_ptr->{'route_type_value'}, $RELATIONS{$route_master_rel_id}->{'route_master_type_value'}, printRelationTemplate($route_master_rel_id)) );
             }
             if ( exists($RELATIONS{$route_master_rel_id}->{'tag'}->{'ref'}) && defined($RELATIONS{$route_master_rel_id}->{'tag'}->{'ref'}) && $RELATIONS{$route_master_rel_id}->{'tag'}->{'ref'} ne '' ) {
-                foreach $masters_ref ( @{$ref_or_list} ) {
+                foreach my $masters_ref ( @{$ref_or_list} ) {
                     $allowed_refs{$masters_ref} = 1;
                 }
                 $masters_ref = $RELATIONS{$route_master_rel_id}->{'tag'}->{'ref'};
@@ -2986,7 +2986,7 @@ sub analyze_relation {
         # now, check existing and defined tags and report them to front of list (ISSUES, NOTES)
         #
 
-        foreach $specialtag ( @specialtags ) {
+        foreach my $specialtag ( @specialtags ) {
             foreach my $tag ( @relation_tags ) {
                 if ( $tag =~ m/^\Q$specialtag\E/i ) {
                     if ( defined($relation_ptr->{'tag'}->{$tag}) ) {
@@ -3167,7 +3167,7 @@ sub analyze_relation {
         }
 
         if ( $check_osm_separator ) {
-            foreach $check_osm_separator_tag ( @check_osm_separator_tags ) {
+            foreach my $check_osm_separator_tag ( @check_osm_separator_tags ) {
                 foreach my $tag ( @relation_tags ) {
                     if ( $tag ne 'ref_trips' && $tag ne 'ref_name' && $tag !~ m/:wiki/ && $tag =~ m/^\Q$check_osm_separator_tag\E/ ) {
                         if ( defined($relation_ptr->{'tag'}->{$tag}) ) {
@@ -3357,7 +3357,7 @@ sub analyze_relation {
         #
         #
         if ( $check_dates ) {
-            foreach $datetag ( @datetags ) {
+            foreach my $datetag ( @datetags ) {
                 foreach my $tag ( @relation_tags ) {
                     if ( $tag =~ m/^\Q$datetag\E$/ ) {
                         if ( defined($relation_ptr->{'tag'}->{$tag}) ) {
@@ -4714,7 +4714,7 @@ sub FindRouteWays {
     my $highway_ref             = undef;
     my @relations_route_ways    = ();
 
-    foreach $highway_ref ( @{$relation_ptr->{'way'}} ) {
+    foreach my $highway_ref ( @{$relation_ptr->{'way'}} ) {
         push( @relations_route_ways, $highway_ref->{'ref'} )    unless ( $platform_ways{$highway_ref->{'ref'}} );
         #printf STDERR "FindRouteWays(): not pushed() %s\n", $highway_ref->{'ref'}   if ( $platform_ways{$highway_ref->{'ref'}} );
         #printf STDERR "FindRouteWays(): pushed() %s\n", $highway_ref->{'ref'}       unless ( $platform_ways{$highway_ref->{'ref'}} );
@@ -4731,7 +4731,7 @@ sub FindRouteHighWays {
     my $highway_ref                 = undef;
     my @relations_route_highways    = ();
 
-    foreach $highway_ref ( @{$relation_ptr->{'route_highway'}} ) {
+    foreach my $highway_ref ( @{$relation_ptr->{'route_highway'}} ) {
         push( @relations_route_highways, $highway_ref->{'ref'} )    unless ( $platform_ways{$highway_ref->{'ref'}} );
         #printf STDERR "FindRouteHighWays(): not pushed() %s\n", $highway_ref->{'ref'}   if ( $platform_ways{$highway_ref->{'ref'}} );
         #printf STDERR "FindRouteHighWays(): pushed() %s\n", $highway_ref->{'ref'}       unless ( $platform_ways{$highway_ref->{'ref'}} );
@@ -4748,7 +4748,7 @@ sub FindRouteStopPositions {
     my $node_ref                        = undef;
     my @relations_route_stop_positions  = ();
 
-    foreach $node_ref ( @{$relation_ptr->{'node'}} ) {
+    foreach my $node_ref ( @{$relation_ptr->{'node'}} ) {
         if ( $stop_nodes{$node_ref->{'ref'}} ) {
             push( @relations_route_stop_positions, $node_ref->{'ref'} );
         } elsif ( $ptv1_compatibility ne "no" && $node_ref->{'role'} =~ m/^stop/ ) {
@@ -4770,7 +4770,7 @@ sub FindRoutePlatformNodes {
     my $node_ref                        = undef;
     my @relations_route_platform_nodes  = ();
 
-    foreach $node_ref ( @{$relation_ptr->{'node'}} ) {
+    foreach my $node_ref ( @{$relation_ptr->{'node'}} ) {
         if ( $platform_nodes{$node_ref->{'ref'}} ) {
             push( @relations_route_platform_nodes, $node_ref->{'ref'} );
         } elsif ( $ptv1_compatibility ne "no"  ) {
@@ -4792,7 +4792,7 @@ sub FindRoutePlatformWays {
     my $way_ref                         = undef;
     my @relations_route_platform_ways   = ();
 
-    foreach $way_ref ( @{$relation_ptr->{'way'}} ) {
+    foreach my $way_ref ( @{$relation_ptr->{'way'}} ) {
         push( @relations_route_platform_ways, $way_ref->{'ref'} )    if ( $platform_ways{$way_ref->{'ref'}} );
     }
 
@@ -4807,7 +4807,7 @@ sub FindRoutePlatformRelations {
     my $rel_ref                             = undef;
     my @relations_route_platform_relations  = ();
 
-    foreach $rel_ref ( @{$relation_ptr->{'relation'}} ) {
+    foreach my $rel_ref ( @{$relation_ptr->{'relation'}} ) {
         push( @relations_route_platform_relations, $rel_ref->{'ref'} )    if ( $platform_multipolygon_relations{$rel_ref->{'ref'}} );
     }
 
@@ -5447,7 +5447,7 @@ sub SortRouteWayNodes {
         }
 
         if ( $debug ) {
-            foreach $node_id ( @control_nodes ) {
+            foreach my $node_id ( @control_nodes ) {
                 $counter = isNodeInNodeArray( $node_id, @sorted_nodes );
                 printf STDERR "SortRouteWayNodes() : Node %s has been considered %d times\n", $node_id, $counter   if ( $counter != 1 );
             }
@@ -5488,7 +5488,7 @@ sub isNodeInNodeArray {
     my $return_code     = 0;
 
     if ( $node_id && @node_array ) {
-        foreach $node_of_way ( @node_array ) {
+        foreach my $node_of_way ( @node_array ) {
             if ( $node_of_way eq $node_id ) {
                 $return_code++;
                 printf STDERR "... match found for Node-ID %d\n", $node_id       if ( $debug );
@@ -6727,7 +6727,7 @@ sub CheckWayType {
             }
         }
         if ( $PTv2 && scalar(keys(%using_wrong_way_type)) ) {
-            foreach $this_is_wrong ( sort(keys(%using_wrong_way_type)) ) {
+            foreach my $this_is_wrong ( sort(keys(%using_wrong_way_type)) ) {
                 $issues_string = gettext( "PTv2 route: using wrong way type (%s)" );
                 $helpstring    = sprintf( $issues_string, $this_is_wrong );
                 @help_array    = sort(keys(%{$using_wrong_way_type{$this_is_wrong}}));
@@ -6740,7 +6740,7 @@ sub CheckWayType {
             }
         }
         if ( scalar(keys(%using_wrong_way_sub_type)) ) {
-            foreach $this_is_wrong ( sort(keys(%using_wrong_way_sub_type)) ) {
+            foreach my $this_is_wrong ( sort(keys(%using_wrong_way_sub_type)) ) {
                 $notes_string  = gettext( "Route: using way type (%s)" );
                 $helpstring    = sprintf( $notes_string, $this_is_wrong );
                 @help_array    = sort(keys(%{$using_wrong_way_sub_type{$this_is_wrong}}));
@@ -6817,7 +6817,7 @@ sub CheckAccessOnWaysAndNodes {
                                                               $relation_ptr->{'tag'}->{'public_transport:version'},
                                                               $forward_or_backward,
                                                               $more_info                                            );
-                        foreach $access_restriction ( @access_restrictions ) {
+                        foreach my $access_restriction ( @access_restrictions ) {
                             printf STDERR "noAccessOnWay() = '%s'\n", $access_restriction    if ($debug );
                             $restricted_access_on_ways{$access_restriction}->{$route_highway->{'ref'}} = 1;
                             $ret_val++;
@@ -6830,7 +6830,7 @@ sub CheckAccessOnWaysAndNodes {
                                                           $relation_ptr->{'tag'}->{'public_transport:version'},
                                                           '',
                                                           $more_info                                                );
-                    foreach $access_restriction ( @access_restrictions ) {
+                    foreach my $access_restriction ( @access_restrictions ) {
                         printf STDERR "noAccessOnWay() = '%s'\n", $access_restriction    if ($debug );
                         $restricted_access_on_ways{$access_restriction}->{$route_highway->{'ref'}} = 1;
                         $ret_val++;
@@ -6840,7 +6840,7 @@ sub CheckAccessOnWaysAndNodes {
                 foreach my $highway_node_ID ( @{$WAYS{$route_highway->{'ref'}}->{'chain'}} ) {
                     @access_restrictions = noAccessOnNode( $highway_node_ID,
                                                            $relation_ptr->{'route_type_value'} );
-                     foreach $access_restriction ( @access_restrictions ) {
+                     foreach my $access_restriction ( @access_restrictions ) {
                         $restricted_access_on_nodes{$access_restriction}->{$highway_node_ID} = 1;
                         $ret_val++;
                     }
@@ -6850,7 +6850,7 @@ sub CheckAccessOnWaysAndNodes {
                 my $helpstring     = '';
                 my @help_array     = ();
                 my $num_of_errors  = 0;
-                foreach $access_restriction ( sort(keys(%restricted_access_on_ways)) ) {
+                foreach my $access_restriction ( sort(keys(%restricted_access_on_ways)) ) {
                     @help_array     = sort(keys(%{$restricted_access_on_ways{$access_restriction}}));
                     $num_of_errors  = scalar(@help_array);
                     if ( $access_restriction =~ m/conditional/ ) {
@@ -6963,7 +6963,7 @@ sub CheckAccessOnWaysAndNodes {
                 my @help_array     = ();
                 my $num_of_errors  = 0;
                 my $vehicle        = $relation_ptr->{'route_type_value'};
-                foreach $access_restriction ( sort(keys(%restricted_access_on_nodes)) ) {
+                foreach my $access_restriction ( sort(keys(%restricted_access_on_nodes)) ) {
                     @help_array     = sort(keys(%{$restricted_access_on_nodes{$access_restriction}}));
                     $num_of_errors  = scalar(@help_array);
                     $issues_string  = ngettext( "Route: restricted access at barrier (%s) without 'psv'='yes', '%s'='yes', '%s'='designated', or ...", "Route: restricted access at barriers (%s) without 'psv'='yes', '%s'='yes', '%s'='designated', or ...", $num_of_errors );
@@ -6980,7 +6980,7 @@ sub CheckAccessOnWaysAndNodes {
                 my @help_array     = ();
                 my $num_of_errors  = 0;
                 my $vehicle        = $relation_ptr->{'route_type_value'};
-                foreach $access_restriction ( sort(keys(%restricted_access_on_platforms)) ) {
+                foreach my $access_restriction ( sort(keys(%restricted_access_on_platforms)) ) {
                     @help_array     = sort(keys(%{$restricted_access_on_platforms{$access_restriction}}));
                     $num_of_errors  = scalar(@help_array);
                     if ( $access_restriction =~ m/school_bus/ ) {
@@ -7001,7 +7001,7 @@ sub CheckAccessOnWaysAndNodes {
                 my $helpstring     = '';
                 my @help_array     = ();
                 my $num_of_errors  = 0;
-                foreach $access_restriction ( sort(keys(%restricted_foot_access_on_platforms)) ) {
+                foreach my $access_restriction ( sort(keys(%restricted_foot_access_on_platforms)) ) {
                     @help_array     = sort(keys(%{$restricted_foot_access_on_platforms{$access_restriction}}));
                     $num_of_errors  = scalar(@help_array);
                     $issues_string  = ngettext( "Route: restricted access (%s) for pedestrians at platform", "Route: restricted access (%s) for pedestrians at platforms", $num_of_errors );
@@ -7083,7 +7083,7 @@ sub CheckRouteRefOnStops {
             my %included_refs           = ();
             my @help_array              = ();
 
-            foreach $member ( @{$relation_ptr->{'members'}} ) {
+            foreach my $member ( @{$relation_ptr->{'members'}} ) {
                 if ( $member->{'ref'} && $member->{'type'} ) {
                     if ( $member->{'type'} eq 'node' ) {
                         $object_ref = $NODES{$member->{'ref'}};
@@ -7451,7 +7451,7 @@ sub getGtfsInfos {
 
         $gtfs_feed_info{'explicit'}->{$gtfs_feed} = $feed_info_from;
 
-        foreach $key ( keys(%{$relation_ptr->{'tag'}}) ) {
+        foreach my $key ( keys(%{$relation_ptr->{'tag'}}) ) {
             if ( $key =~ m/^gtfs:[rst]/ ) {
                 # GTFS feed names always start with ISO two letter code of country in capital letters
                 if ( $key =~ m/^gtfs:route_id:([A-Z][A-Z][a-zA-Z0-9_.-]+)$/ ) {
@@ -7469,7 +7469,7 @@ sub getGtfsInfos {
                 }
             }
         }
-        foreach $key ( sort ( keys ( %{$gtfs_feed_info{'implicit'}} ))) {
+        foreach my $key ( sort ( keys ( %{$gtfs_feed_info{'implicit'}} ))) {
             push( @feed_suffix, ':'.$key );
         }
 
@@ -7806,7 +7806,7 @@ sub printTableOfContents {
     print "        <h1>";
     print gettext("Contents");
     printf "</h1>\n";
-    foreach $toc_line ( @html_header_anchors ) {
+    foreach my $toc_line ( @html_header_anchors ) {
         if ( $toc_line =~ m/^A(\d+)\s+N([0-9\.]+)\s+L([^ ]+)\s+T(.*)$/ ) {
             $anchor_level   = $1;
             $header_number  = $2;
@@ -8522,7 +8522,7 @@ sub printTableHeader {
             push( @HTML_main, sprintf( "<th class=\"issues\">%sFehler</th>", $prefix ) );
             push( @HTML_main, sprintf( "<th class=\"notes\">%sAnmerkungen</th>", $prefix ) );
         } else {
-            foreach $element ( @columns ) {
+            foreach my $element ( @columns ) {
                 if ( $js_sort_hash{$element} ) {
                     push( @HTML_main, sprintf( "<th class=\"%s js-sort-%s\" dir=\"auto\">%s%s</th>", $element, $js_sort_hash{$element}, $prefix, ($column_name{$element} ? $column_name{$element} : $element ) ) );
                 } else {
