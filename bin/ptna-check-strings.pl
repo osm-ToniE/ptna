@@ -14,9 +14,9 @@ BEGIN { my $PATH = $0; $PATH =~ s|bin/[^/]*$|modules|; unshift( @INC, $PATH ); }
 use POSIX;
 
 use utf8;
-binmode STDIN,  ":utf8";
-binmode STDOUT, ":utf8";
-binmode STDERR, ":utf8";
+binmode STDIN,  ":encoding(UTF-8)";
+binmode STDOUT, ":encoding(UTF-8)";
+binmode STDERR, ":encoding(UTF-8)";
 
 use Getopt::Long;
 use PtnaStrings     qw( InitMessageStrings GetMessageKeys GetMessageValue );

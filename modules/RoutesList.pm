@@ -7,8 +7,8 @@ use Locale::gettext;
 use Text::CSV_XS;
 
 use utf8;
-binmode STDOUT, ":utf8";
-binmode STDERR, ":utf8";
+binmode STDOUT, ":encoding(UTF-8)";
+binmode STDERR, ":encoding(UTF-8)";
 
 use Encode;
 
@@ -80,7 +80,7 @@ sub ReadRoutes {
         if ( -e $infile && -f $infile && -r $infile ) {
 
             if ( open(CSV,"< $infile") ) {
-                binmode CSV, ":utf8";
+                binmode CSV, ":encoding(UTF-8)";
 
                 $csv_module = Text::CSV_XS->new( { sep_char            => ';',
                                                    quote_char          => '"',

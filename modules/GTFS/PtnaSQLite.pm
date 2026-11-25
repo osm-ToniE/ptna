@@ -8,8 +8,8 @@ use Locale::gettext qw();       # 'gettext()' will be overwritten in this file (
 use DateTime;
 
 use utf8;
-binmode STDOUT, ":utf8";
-binmode STDERR, ":utf8";
+binmode STDOUT, ":encoding(UTF-8)";
+binmode STDERR, ":encoding(UTF-8)";
 
 use Encode;
 

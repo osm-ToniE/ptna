@@ -4,8 +4,8 @@ use warnings;
 use strict;
 
 use utf8;
-binmode STDOUT, ":utf8";
-binmode STDERR, ":utf8";
+binmode STDOUT, ":encoding(UTF-8)";
+binmode STDERR, ":encoding(UTF-8)";
 
 
 use Getopt::Long;
@@ -180,7 +180,7 @@ if ( $parse ) {
                     if ( $file ) {
                         if ( open(OUT,">$file") ) {
                             printf STDERR "%s writing parsed Wiki page '%s' to file '%s'\n", get_time(), $page, $file;
-                            binmode OUT, ":utf8";
+                            binmode OUT, ":encoding(UTF-8)";
                             printf OUT "%s", $ref->{'parse'}->{'text'}->{'*'};
                             close( OUT );
                             printf STDERR "%s Done ... parsing Wiki page '%s' to file '%s'\n", get_time(), $page, $file;
@@ -223,7 +223,7 @@ if ( $parse ) {
             if ( $file ) {
                 if ( open(OUT,">$file") ) {
                     printf STDERR "%s Writing Wiki page '%s' to file '%s'\n", get_time(), $page, $file;
-                    binmode OUT, ":utf8";
+                    binmode OUT, ":encoding(UTF-8)";
                     printf OUT "%s", $ref->{'*'};
                     close( OUT );
                     printf STDERR "%s Done ... writing Wiki page '%s' to file '%s'\n", get_time(), $page, $file;
@@ -268,7 +268,7 @@ if ( $parse ) {
 
                 if ( open(IN,"<$file") ) {
                     $text = '';
-                    binmode IN, ":utf8";
+                    binmode IN, ":encoding(UTF-8)";
                     while ( <IN> ) {
                         $text .= $_;
                     }
