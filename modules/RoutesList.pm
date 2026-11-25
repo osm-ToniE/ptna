@@ -337,7 +337,7 @@ sub ReadRoutes {
         }
     }
 
-    return undef;
+    return;
 }
 
 

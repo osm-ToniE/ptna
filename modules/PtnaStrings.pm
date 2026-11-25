@@ -1825,7 +1825,7 @@ sub GetMessageValue {
     my $string  = shift;
 
     return $MessageList[$MessageHash{$key}]->{$string}    if ( $key && defined $MessageHash{$key} && $string && exists $MessageList[$MessageHash{$key}]->{$string} );
-    return undef;
+    return;
 }
 
 
@@ -2215,7 +2215,7 @@ sub GetOptionValue {
     my $string  = shift;
 
     return $OptionList[$OptionHash{$key}]->{$string}    if ( $key && defined $OptionHash{$key} && $string && exists $OptionList[$OptionHash{$key}]->{$string} );
-    return undef;
+    return;
 }
 
 
