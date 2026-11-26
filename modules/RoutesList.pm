@@ -7,8 +7,8 @@ use Locale::gettext;
 use Text::CSV_XS;
 
 use utf8;
-binmode STDOUT, ":utf8";
-binmode STDERR, ":utf8";
+binmode STDOUT, ":encoding(UTF-8)";
+binmode STDERR, ":encoding(UTF-8)";
 
 use Encode;
 
@@ -79,8 +79,8 @@ sub ReadRoutes {
     if ( $infile ) {
         if ( -e $infile && -f $infile && -r $infile ) {
 
-            if ( open(CSV,"< $infile") ) {
-                binmode CSV, ":utf8";
+            if ( open(my $fh, "<", $infile) ) {
+                binmode $fh, ":encoding(UTF-8)";
 
                 $csv_module = Text::CSV_XS->new( { sep_char            => ';',
                                                    quote_char          => '"',
@@ -88,7 +88,7 @@ sub ReadRoutes {
                                                  }
                                                );
 
-                while ( <CSV> ) {
+                while ( <$fh> ) {
                     chomp();                                        # remove NewLine
                     s/\r$//;                                        # remove 'CR'
                     s/^\s*//;                                       # remove space at the beginning
@@ -290,7 +290,7 @@ sub ReadRoutes {
                     $last_type = $routes_hash{$NR}->{'type'};
                     push( @routes_list, $hashref );
                 }
-                close( CSV );
+                close( $fh );
                 #printf STDERR "%s read\n", decode('utf8', $infile )                                     if ( $debug );
             } else {
                 return sprintf( "Could not open file : '%s': %s", decode('utf8', $infile ), $! );
@@ -306,8 +306,8 @@ sub ReadRoutes {
 
     if ( $debug ) {
         if ( $analyze eq 'analyze' ) {
-            foreach $ExpRef ( sort ( keys ( %seen_ref_type ) ) ) {
-                foreach $ExpRouteType ( sort ( keys %{$seen_ref_type{$ExpRef}} ) ) {
+            foreach my $ExpRef ( sort ( keys ( %seen_ref_type ) ) ) {
+                foreach my $ExpRouteType ( sort ( keys %{$seen_ref_type{$ExpRef}} ) ) {
                     if ( $seen_ref_type{$ExpRef}->{$ExpRouteType} > 1 ) {
                         printf STDERR "CSV-File %s: entry: ref=%s and type=%s found %d times\n", $infile, $ExpRef, $ExpRouteType, $seen_ref_type{$ExpRef}->{$ExpRouteType}           if ( $debug );
                         if ( $seen_ref_type_operator{$ExpRef}                  &&
@@ -317,7 +317,7 @@ sub ReadRoutes {
                             if ( scalar(keys(%{$seen_ref_type_operator{$ExpRef}->{$ExpRouteType}})) < $seen_ref_type{$ExpRef}->{$ExpRouteType} ) {
                                 printf STDERR "CSV-File %s: potential problem with entry: ref=%s and type=%s\n", $infile, $ExpRef, $ExpRouteType          if ( $debug );
 
-                                foreach $ExpOperator ( sort ( keys %{$seen_ref_type_operator{$ExpRef}->{$ExpRouteType}} ) ) {
+                                foreach my $ExpOperator ( sort ( keys %{$seen_ref_type_operator{$ExpRef}->{$ExpRouteType}} ) ) {
                                     if ( $seen_ref_type_operator{$ExpRef}->{$ExpRouteType}->{$ExpOperator} > 1 ) {
                                         printf STDERR "CSV-File %s: problem with entry: ref=%s, type=%s and operator=%s == %d\n", $infile, $ExpRef, $ExpRouteType, $ExpOperator, $seen_ref_type_operator{$ExpRef}->{$ExpRouteType}->{$ExpOperator}           if ( $debug );
 
@@ -337,7 +337,7 @@ sub ReadRoutes {
         }
     }
 
-    return undef;
+    return;
 }
 
 
@@ -526,7 +526,7 @@ sub GetRefTypeOperatorFromAndTo {
                     # minimum one of each pair must be defined
 
                     $match = undef;
-                    foreach $CombFrom ( @CombFromArray ) {
+                    foreach my $CombFrom ( @CombFromArray ) {
                         if ( $CombFrom ) {
                             if ( $RelFrom ) {
                                 if ( $CombFrom =~ m/\Q$RelFrom\E/ ) {
@@ -549,7 +549,7 @@ sub GetRefTypeOperatorFromAndTo {
                         }
                     }
                     if ( !defined($match) ) {
-                        foreach $CombTo ( @CombToArray ) {
+                        foreach my $CombTo ( @CombToArray ) {
                             if ( $CombTo ) {
                                 if ( $RelFrom ) {
                                     if ( $CombTo =~ m/\Q$RelFrom\E/ ) {

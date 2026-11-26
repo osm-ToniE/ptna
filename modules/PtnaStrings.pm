@@ -6,8 +6,8 @@ use POSIX;
 use Locale::gettext qw();       # 'gettext()' will be overwritten in this file (at the end), so don't import from module into our name space
 
 use utf8;
-binmode STDOUT, ":utf8";
-binmode STDERR, ":utf8";
+binmode STDOUT, ":encoding(UTF-8)";
+binmode STDERR, ":encoding(UTF-8)";
 
 use Encode;
 
@@ -1825,7 +1825,7 @@ sub GetMessageValue {
     my $string  = shift;
 
     return $MessageList[$MessageHash{$key}]->{$string}    if ( $key && defined $MessageHash{$key} && $string && exists $MessageList[$MessageHash{$key}]->{$string} );
-    return undef;
+    return;
 }
 
 
@@ -2215,7 +2215,7 @@ sub GetOptionValue {
     my $string  = shift;
 
     return $OptionList[$OptionHash{$key}]->{$string}    if ( $key && defined $OptionHash{$key} && $string && exists $OptionList[$OptionHash{$key}]->{$string} );
-    return undef;
+    return;
 }
 
 

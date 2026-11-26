@@ -4,8 +4,8 @@ use warnings;
 use strict;
 
 use utf8;
-binmode STDOUT, ":utf8";
-binmode STDERR, ":utf8";
+binmode STDOUT, ":encoding(UTF-8)";
+binmode STDERR, ":encoding(UTF-8)";
 
 
 use Getopt::Long;
@@ -178,11 +178,11 @@ if ( $parse ) {
                 printf STDERR "%s ref = %s\n",  get_time(), Dumper($ref)     if ( $verbose );
                 if ( $ref->{'parse'}->{'text'} && $ref->{'parse'}->{'text'}->{'*'} ) {
                     if ( $file ) {
-                        if ( open(OUT,">$file") ) {
+                        if ( open(my $fh, ">", $file) ) {
                             printf STDERR "%s writing parsed Wiki page '%s' to file '%s'\n", get_time(), $page, $file;
-                            binmode OUT, ":utf8";
-                            printf OUT "%s", $ref->{'parse'}->{'text'}->{'*'};
-                            close( OUT );
+                            binmode $fh, ":encoding(UTF-8)";
+                            printf $fh "%s", $ref->{'parse'}->{'text'}->{'*'};
+                            close( $fh );
                             printf STDERR "%s Done ... parsing Wiki page '%s' to file '%s'\n", get_time(), $page, $file;
                         } else {
                             printf STDERR "%s Can't open file '%s' for writing parsed Wiki page\n", get_time(), $file;
@@ -221,11 +221,11 @@ if ( $parse ) {
             printf STDERR "%s timestamp = %s\n", get_time(), ($timestamp ? $timestamp : '?');
 
             if ( $file ) {
-                if ( open(OUT,">$file") ) {
+                if ( open(my $fh, ">", $file) ) {
                     printf STDERR "%s Writing Wiki page '%s' to file '%s'\n", get_time(), $page, $file;
-                    binmode OUT, ":utf8";
-                    printf OUT "%s", $ref->{'*'};
-                    close( OUT );
+                    binmode $fh, ":encoding(UTF-8)";
+                    printf $fh "%s", $ref->{'*'};
+                    close( $fh );
                     printf STDERR "%s Done ... writing Wiki page '%s' to file '%s'\n", get_time(), $page, $file;
                 } else {
                     printf STDERR "%s Can't open file '%s' for writing\n", get_time(), $file;
@@ -266,13 +266,13 @@ if ( $parse ) {
                 printf STDERR "%s Reading file '%s'\n", get_time(), $file;
                 printf STDERR "%s\n", $text   if ( $debug );
 
-                if ( open(IN,"<$file") ) {
+                if ( open(my $fh, "<", $file) ) {
                     $text = '';
-                    binmode IN, ":utf8";
-                    while ( <IN> ) {
+                    binmode $fh, ":encoding(UTF-8)";
+                    while ( <$fh> ) {
                         $text .= $_;
                     }
-                    close( IN );
+                    close( $fh );
 
                     printf STDERR "%s Pushing file '%s' to Wiki page '%s' with summary '%s'\n", get_time(), $file, $page, $summary;
 

@@ -14,9 +14,9 @@ BEGIN { my $PATH = $0; $PATH =~ s|bin/[^/]*$|modules|; unshift( @INC, $PATH ); }
 use POSIX;
 
 use utf8;
-binmode STDIN,  ":utf8";
-binmode STDOUT, ":utf8";
-binmode STDERR, ":utf8";
+binmode STDIN,  ":encoding(UTF-8)";
+binmode STDOUT, ":encoding(UTF-8)";
+binmode STDERR, ":encoding(UTF-8)";
 
 use Locale::gettext qw();
 
@@ -135,7 +135,7 @@ sub ListMessageStringsDetailsHtml {
     printf STDOUT "            </tr>\n";
     printf STDOUT "        </thead>\n";
     printf STDOUT "        <tbody>\n";
-    foreach $key ( sort ( GetMessageKeys() ) ) {
+    foreach my $key ( sort ( GetMessageKeys() ) ) {
         $msg   =  html_escape( GetMessageValue( $key, 'message'     ) );
         $opt   =  html_escape( GetMessageValue( $key, 'option'      ) );
         $opt   =~ s|\n|<br />|g;
@@ -219,7 +219,7 @@ sub ListOptionStringsDetailsHtml {
     printf STDOUT "            </tr>\n";
     printf STDOUT "        </thead>\n";
     printf STDOUT "        <tbody>\n";
-    foreach $key ( sort ( GetOptionKeys() ) ) {
+    foreach my $key ( sort ( GetOptionKeys() ) ) {
         $opt     =  html_escape( GetOptionValue( $key, 'option'      ) );
         $default =  html_escape( GetOptionValue( $key, 'default' ) );
         $descr   =  html_escape( GetOptionValue( $key, 'description' ) );
@@ -259,7 +259,7 @@ sub ListOptionStringsDetailsWiki {
 
     my $key = undef;
 
-    foreach $key ( sort ( GetOptionKeys() ) ) {
+    foreach my $key ( sort ( GetOptionKeys() ) ) {
         printf STDOUT "|-\n";
         printf STDOUT "|- | %s ||", GetOptionValue( $key, 'option' );
         printf STDOUT " | %s ||",   GetOptionValue( $key, 'default' );
