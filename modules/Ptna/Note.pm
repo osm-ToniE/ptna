@@ -209,8 +209,13 @@ my %TO_STRING = (
         return sprintf $notes_string, @args;
     },
     'route.way_type' => sub {
+        my ( $reason, @args ) = @_;
+        my $detail = '';
+        if ( $reason eq 'suspicious_sub_type' ) {
+            $detail = sprintf q{%s: 'service'='%s'}, gettext( 'suspicious sub-type' ), @args;
+        }
         my $notes_string = gettext( q{Route: using way type (%s)} );
-        return sprintf $notes_string, @_;
+        return sprintf $notes_string, $detail;
     },
     'stop_ref.comma_separator' => sub {
         my $notes_string = gettext( q{Route: 'route_ref' = '%s' of stop: ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank} );

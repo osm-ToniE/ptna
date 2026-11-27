@@ -5777,7 +5777,6 @@ sub doesWayTraverseRoundAbout {
 sub CheckThisWayTypeForThisVehicle {
     my $way_id          = shift;
     my $vehicle_type    = shift;
-    my $help_string     = '';
     my $waykey_list     = '';
 
     if ( $way_id && $WAYS{$way_id} && $WAYS{$way_id}->{'tag'} && $vehicle_type ) {
@@ -5790,11 +5789,11 @@ sub CheckThisWayTypeForThisVehicle {
                         foreach my $wayvalue ( @{${$transport_type_uses_way_type{$vehicle_type}}{$waykey}}) {
                             if ( $wayvalue eq $WAYS{$way_id}->{'tag'}->{$waykey} ) {
                                 printf STDERR "CheckThisWayTypeForThisVehicle() : way %d has appropriate '%s' = '%s' for vehicle '%s'\n", $way_id, $waykey, $wayvalue, $vehicle_type       if ( $debug );
-                                return '';
+                                return ();
                             }
                         }
                         printf STDERR "CheckThisWayTypeForThisVehicle() : way %d has wrong '%s' = '%s' for vehicle '%s'\n", $way_id, $waykey, $WAYS{$way_id}->{'tag'}->{$waykey}, $vehicle_type       if ( $debug );
-                        return sprintf( "%s: '%s' = '%s'", gettext("wrong value"), $waykey, $WAYS{$way_id}->{'tag'}->{$waykey} );
+                        return ( 'wrong_value', $waykey, $WAYS{$way_id}->{'tag'}->{$waykey} );
                     }
                 }
                 if ( $WAYS{$way_id}->{'tag'}->{'route'} && $WAYS{$way_id}->{'tag'}->{'route'} eq 'ferry' ) {
@@ -5806,21 +5805,21 @@ sub CheckThisWayTypeForThisVehicle {
                                  $WAYS{$way_id}->{'tag'}->{$v} eq 'designated' ||
                                  $WAYS{$way_id}->{'tag'}->{$v} eq 'official'      ) ) {
                                 printf STDERR "CheckThisWayTypeForThisVehicle() : way %d has appropriate 'route' = 'ferry' for vehicle '%s': '%s' = '%s'\n", $way_id, $vehicle_type, $v, $WAYS{$way_id}->{'tag'}->{$v}       if ( $debug );
-                                return '';
+                                return ();
                             }
                         }
                     }
                 }
-                $help_string = ' ' . gettext( 'or' ) . ' ';
-                $waykey_list = join( $help_string, sort ( keys( %{$transport_type_uses_way_type{$vehicle_type}} ) ) );
+                my @waykeys = sort ( keys( %{$transport_type_uses_way_type{$vehicle_type}} ) );
+                $waykey_list = join( ' or ', @waykeys );
                 printf STDERR "CheckThisWayTypeForThisVehicle() : way %d has missing key(s) '%s' for vehicle '%s'\n", $way_id, $waykey_list, $vehicle_type       if ( $debug );
-                return sprintf( "%s: '%s'", gettext("missing key"), $waykey_list );
+                return ( 'missing_key', @waykeys );
             }
         }
     }
 
     printf STDERR "CheckThisWayTypeForThisVehicle() : way %d is globally appropriate for vehicle '%s'\n", $way_id, $vehicle_type       if ( $debug );
-    return '';
+    return ();
 }
 
 
@@ -5842,9 +5841,9 @@ sub CheckThisWaySubTypeForThisVehicle {
           $WAYS{$way_id}->{'tag'}->{'service'} eq 'alley'           ||
           $WAYS{$way_id}->{'tag'}->{'service'} eq 'emergency_access'  )    ) {
         printf STDERR "CheckThisWaySubTypeForThisVehicle() : way %d has wrong 'highway' = 'service' and 'service' = '%s' for vehicle '%s'\n", $way_id, $WAYS{$way_id}->{'tag'}->{'service'}, $vehicle_type       if ( $debug );
-        return sprintf( "%s: 'service'='%s'", gettext("suspicious sub-type"), $WAYS{$way_id}->{'tag'}->{'service'} );
+        return ( 'suspicious_sub_type', $WAYS{$way_id}->{'tag'}->{'service'} );
     }
-    return '';
+    return ();
 }
 
 
@@ -6652,8 +6651,9 @@ sub CheckWayType {
     my $ret_val      = 0;
 
     if ( $relation_ptr ) {
-        my $this_is_wrong            = '';
         my %using_wrong_way_type     = ();
+        my %wrong_way_type_args      = ();
+        my %wrong_way_sub_type_args  = ();
         my %using_wrong_way_sub_type = ();
         my $PTv2                     = undef;
         my $num_of_errors            = 0;
@@ -6667,23 +6667,27 @@ sub CheckWayType {
 
         foreach my $route_highway ( @{$relation_ptr->{'route_highway'}} ) {
             if ( $PTv2 ) {
-                $this_is_wrong = CheckThisWayTypeForThisVehicle( $route_highway->{'ref'}, $relation_ptr->{'route_type_value'} );
-                if ( $this_is_wrong ) {
-                    $using_wrong_way_type{$this_is_wrong}->{$route_highway->{'ref'}} = 1;
+                my @this_is_wrong = CheckThisWayTypeForThisVehicle( $route_highway->{'ref'}, $relation_ptr->{'route_type_value'} );
+                if ( @this_is_wrong ) {
+                    my $key = join "\x1f", @this_is_wrong;
+                    $wrong_way_type_args{$key} = \@this_is_wrong;
+                    $using_wrong_way_type{$key}->{$route_highway->{'ref'}} = 1;
                     $ret_val++;
                 }
             }
             if ( $check_service_type ) {
-                $this_is_wrong = CheckThisWaySubTypeForThisVehicle( $route_highway->{'ref'}, $relation_ptr->{'route_type_value'} );
-                if ( $this_is_wrong ) {
-                    $using_wrong_way_sub_type{$this_is_wrong}->{$route_highway->{'ref'}} = 1;
+                my @this_is_wrong = CheckThisWaySubTypeForThisVehicle( $route_highway->{'ref'}, $relation_ptr->{'route_type_value'} );
+                if ( @this_is_wrong ) {
+                    my $key = join "\x1f", @this_is_wrong;
+                    $wrong_way_sub_type_args{$key} = \@this_is_wrong;
+                    $using_wrong_way_sub_type{$key}->{$route_highway->{'ref'}} = 1;
                     $ret_val++;
                 }
             }
         }
         if ( $PTv2 && scalar(keys(%using_wrong_way_type)) ) {
             foreach my $this_is_wrong ( sort(keys(%using_wrong_way_type)) ) {
-                my $issue      = Ptna::Issue->new( 'ptv2.wrong_way_type', $this_is_wrong );
+                my $issue      = Ptna::Issue->new( 'ptv2.wrong_way_type', @{$wrong_way_type_args{$this_is_wrong}} );
                 my @help_array = sort(keys(%{$using_wrong_way_type{$this_is_wrong}}));
                 $num_of_errors = scalar(@help_array);
                 if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
@@ -6697,7 +6701,7 @@ sub CheckWayType {
         }
         if ( scalar(keys(%using_wrong_way_sub_type)) ) {
             foreach my $this_is_wrong ( sort(keys(%using_wrong_way_sub_type)) ) {
-                my $note          = Ptna::Note->new( 'route.way_type', $this_is_wrong );
+                my $note          = Ptna::Note->new( 'route.way_type', @{$wrong_way_sub_type_args{$this_is_wrong}} );
                 my @help_array    = sort(keys(%{$using_wrong_way_sub_type{$this_is_wrong}}));
                 $num_of_errors = scalar(@help_array);
                 if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
@@ -7076,10 +7080,7 @@ sub CheckRouteRefOnStops {
                                     if ( $temp_route_ref =~ m/;\Q$sub_ref\E;/ ) {
                                         ; # fine
                                     } else {
-                                        $hint = '';
-                                        if ( $object_ref->{'tag'}->{'route_ref'} =~ m/,/ ) {
-                                            $hint = ' (' . gettext("separate multiple values by ';' (semi-colon) without blank") . ')';
-                                        }
+                                        $hint = ( $object_ref->{'tag'}->{'route_ref'} =~ m/,/ ) ? 1 : 0;
                                         my $issue = Ptna::Issue->new( 'stop_ref.lacks_route_ref', handle_foreign($object_ref->{'tag'}->{'route_ref'}), handle_foreign($sub_ref), $hint );
                                         my $key = $issue->key();
                                         $not_set_on{$key} //= { 'message' => $issue, 'objects' => {} };

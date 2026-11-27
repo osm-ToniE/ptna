@@ -429,8 +429,15 @@ my %TO_STRING = (
         return sprintf $issues_string, @_;
     },
     'ptv2.wrong_way_type' => sub {
+        my ( $reason, @args ) = @_;
+        my $detail = '';
+        if ( $reason eq 'wrong_value' ) {
+            $detail = sprintf q{%s: '%s' = '%s'}, gettext( 'wrong value' ), @args;
+        } elsif ( $reason eq 'missing_key' ) {
+            $detail = sprintf q{%s: '%s'}, gettext( 'missing key' ), join( ' ' . gettext( 'or' ) . ' ', @args );
+        }
         my $issues_string = gettext( 'PTv2 route: using wrong way type (%s)' );
-        return sprintf $issues_string, @_;
+        return sprintf $issues_string, $detail;
     },
     'ref.not_set' => sub {
         return gettext( q{'ref' is not set} );
@@ -529,7 +536,8 @@ my %TO_STRING = (
         my ( $route_ref, $ref, $hint ) = @_;
         my $issues_string = gettext( q{Route: 'route_ref' = '%s' of stop does not include 'ref' = '%s' value of this route} );
         $issues_string .= '%s';
-        return sprintf $issues_string, $route_ref, $ref, $hint;
+        my $hint_string = $hint ? ' (' . gettext( q{separate multiple values by ';' (semi-colon) without blank} ) . ')' : '';
+        return sprintf $issues_string, $route_ref, $ref, $hint_string;
     },
     'tag.differs_from_master' => sub {
         my $issues_string = gettext( q{'%s' = '%s' of Route does not fit to '%s' = '%s' of Route-Master: %s} );
