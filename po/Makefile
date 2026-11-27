@@ -1,6 +1,6 @@
 MO_PATH=../locale/
 
-LOCALIZABLE=../bin/*.pl ../modules/*.pm ../modules/GTFS/*.pm
+LOCALIZABLE=../bin/*.pl ../modules/*.pm ../modules/GTFS/*.pm ../modules/Ptna/*.pm
 
 TEMPLATE=ptna.pot
 
