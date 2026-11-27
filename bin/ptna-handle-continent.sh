@@ -56,50 +56,56 @@ then
         #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-get-extract.sh returned $get_ret"
     fi
 
-    if [ -f "$TARGET" -a $(stat -c '%s' $TARGET) -gt 4096 ]
+    if [ -f "$TARGET" ]
     then
-        #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-update-extract.sh $TARGET'"
+        if [ $(stat -c '%s' $TARGET) -gt 4096 ]
+        then
+            #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-update-extract.sh $TARGET'"
 
-        ptna-update-extract.sh "$TARGET"
+            ptna-update-extract.sh "$TARGET"
 
-        update_ret=$?
+            update_ret=$?
 
-        #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-update-extract.sh returned $update_ret"
+            #echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-update-extract.sh returned $update_ret"
+        fi
     fi
 
-    if [ -f "$TARGET" -a $(stat -c '%s' $TARGET) -gt 4096 ]
+    if [ -f "$TARGET" ]
     then
-        FILTERSOURCE="${TARGET%%.*}.osm.pbf"
-        FILTERTARGET="${TARGET%%.*}-filtered.osm.pbf"
-        POSITIVEFILTER=$PTNA_NETWORKS_LOC/general-osmium-positive-filter.txt
-        NEGATIVEFILTER=$PTNA_NETWORKS_LOC/general-osmium-negative-filter.txt
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-filter-extract.sh --positive $POSITIVEFILTER --negative $NEGATIVEFILTER --source $FILTERSOURCE --target $FILTERTARGET'"
-
-        ptna-filter-extract.sh --positive "$POSITIVEFILTER" --negative "$NEGATIVEFILTER" --source "$FILTERSOURCE" --target "$FILTERTARGET"
-
-        filter_ret=$?
-
-        if [ $filter_ret -eq 0 ]
+        if [ $(stat -c '%s' $TARGET) -gt 4096 ]
         then
-            if [ $(echo $FILTERSOURCE | grep -F -c 'planet') -eq 0 ]
+            FILTERSOURCE="${TARGET%%.*}.osm.pbf"
+            FILTERTARGET="${TARGET%%.*}-filtered.osm.pbf"
+            POSITIVEFILTER=$PTNA_NETWORKS_LOC/general-osmium-positive-filter.txt
+            NEGATIVEFILTER=$PTNA_NETWORKS_LOC/general-osmium-negative-filter.txt
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'ptna-filter-extract.sh --positive $POSITIVEFILTER --negative $NEGATIVEFILTER --source $FILTERSOURCE --target $FILTERTARGET'"
+
+            ptna-filter-extract.sh --positive "$POSITIVEFILTER" --negative "$NEGATIVEFILTER" --source "$FILTERSOURCE" --target "$FILTERTARGET"
+
+            filter_ret=$?
+
+            if [ $filter_ret -eq 0 ]
             then
-                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "remove $FILTERSOURCE"
-                rm -f $FILTERSOURCE
+                if [ $(echo $FILTERSOURCE | grep -F -c 'planet') -eq 0 ]
+                then
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "remove $FILTERSOURCE"
+                    rm -f $FILTERSOURCE
+                else
+                    echo $(date "+%Y-%m-%d %H:%M:%S %Z") "keep $FILTERSOURCE"
+                fi
             else
+                echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-filter-extract.sh returned $filter_ret"
                 echo $(date "+%Y-%m-%d %H:%M:%S %Z") "keep $FILTERSOURCE"
             fi
-        else
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "ptna-filter-extract.sh returned $filter_ret"
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "keep $FILTERSOURCE"
+
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium fileinfo' for '$FILTERTARGET'"
+
+            ionice -c Idle nice -n 19 osmium fileinfo "$FILTERTARGET"
+
+            osmium_ret=$?
+
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret"
         fi
-
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Call 'osmium fileinfo' for '$FILTERTARGET'"
-
-        ionice -c Idle nice -n 19 osmium fileinfo "$FILTERTARGET"
-
-        osmium_ret=$?
-
-        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "osmium returned $osmium_ret"
     fi
 
     echo $(date "+%Y-%m-%d %H:%M:%S %Z") "done: $(basename $0)"
