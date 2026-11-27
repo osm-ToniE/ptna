@@ -29,6 +29,7 @@ use GTFS::GTFSvsOSM     qw( Init Summary );
 use GTFS::PtnaSQLite    qw( setTimeZoneDate setPathToWork getRouteIdStatus getTripIdStatus getShapeIdStatus getGtfsRouteIdHtmlTag getGtfsRouteIdIconTag getGtfsTripIdHtmlTag getGtfsShapeIdHtmlTag getGtfsLinkToRoutes );
 use Data::Dumper;
 use Ptna::Issue;
+use Ptna::Note;
 use Time::Local         qw ( timelocal );
 use Time::HiRes;
 use Encode;
@@ -461,7 +462,6 @@ my @HTML_start                      = ();
 my @HTML_main                       = ();
 
 my $issues_string                   = '';   # to be used with ALL 'issues' and gettext/ngettext - a separate tool parses this code, extracts those statements and creates a list of all issues
-my $notes_string                    = '';   # to be used with ALL 'notes'  and gettext/ngettext - a separate tool parses this code, extracts those statements and creates a list of all notes
 
 OSM::Geo::Init( 'debug' => $debug, 'verbose' => $verbose );
 
@@ -1387,6 +1387,7 @@ if ( scalar( @RouteList ) ) {
 
                     $status = analyze_relation( $relation_ptr, $relation_id, $entryref );
                     my @issues_strings = map { $_->to_string() } @{$relation_ptr->{'__issues__'}};
+                    my @notes_strings  = map { $_->to_string() } @{$relation_ptr->{'__notes__'}};
 
                     printTableLine( 'ref'           =>    $relation_ptr->{'tag'}->{'ref'},
                                     'relation'      =>    $relation_id,
@@ -1400,7 +1401,7 @@ if ( scalar( @RouteList ) ) {
                                     'to'            =>    $relation_ptr->{'tag'}->{'to'},
                                     'PTv'           =>    $relation_ptr->{'tag'}->{'public_transport:version'},
                                     'issues'        =>    join( '__separator__', @issues_strings ),
-                                    'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}}  )
+                                    'notes'         =>    join( '__separator__', @notes_strings )
                                   );
                     $relation_ptr->{'__printed__'}++;
                     $number_of_positive_relations++;
@@ -1525,6 +1526,7 @@ if ( scalar( @RouteList ) ) {
 
             $status = analyze_relation( $relation_ptr, $relation_id );
             my @issues_strings = map { $_->to_string() } @{$relation_ptr->{'__issues__'}};
+            my @notes_strings  = map { $_->to_string() } @{$relation_ptr->{'__notes__'}};
 
             printTableLine( 'ref'           =>    $relation_ptr->{'tag'}->{'ref'},
                             'relation'      =>    $relation_id,
@@ -1538,7 +1540,7 @@ if ( scalar( @RouteList ) ) {
                             'to'            =>    $relation_ptr->{'tag'}->{'to'},
                             'PTv'           =>    $relation_ptr->{'tag'}->{'public_transport:version'},
                             'issues'        =>    join( '__separator__', @issues_strings ),
-                            'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}} )
+                            'notes'         =>    join( '__separator__', @notes_strings )
                           );
             $number_of_unassigned_relations++;
 
@@ -1612,6 +1614,7 @@ if ( scalar(@line_refs) ) {
 
                         $status = analyze_relation( $relation_ptr, $relation_id );
                         my @issues_strings = map { $_->to_string() } @{$relation_ptr->{'__issues__'}};
+                        my @notes_strings  = map { $_->to_string() } @{$relation_ptr->{'__notes__'}};
 
                         printTableLine( 'ref'           =>    $relation_ptr->{'tag'}->{'ref'},
                                         'relation'      =>    $relation_id,
@@ -1625,7 +1628,7 @@ if ( scalar(@line_refs) ) {
                                         'to'            =>    $relation_ptr->{'tag'}->{'to'},
                                         'PTv'           =>    $relation_ptr->{'tag'}->{'public_transport:version'},
                                         'issues'        =>    join( '__separator__', @issues_strings ),
-                                        'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}} )
+                                        'notes'         =>    join( '__separator__', @notes_strings )
                                       );
                         $number_of_negative_relations++;
 
@@ -1681,6 +1684,7 @@ if ( scalar(@route_types) ) {
 
             $status = analyze_relation( $relation_ptr, $relation_id );
             my @issues_strings = map { $_->to_string() } @{$relation_ptr->{'__issues__'}};
+            my @notes_strings  = map { $_->to_string() } @{$relation_ptr->{'__notes__'}};
 
             printTableLine( 'relation'      =>    $relation_id,
                             'type'          =>    $relation_ptr->{'tag'}->{'type'},
@@ -1693,7 +1697,7 @@ if ( scalar(@route_types) ) {
                             'to'            =>    $relation_ptr->{'tag'}->{'to'},
                             'PTv'           =>    $relation_ptr->{'tag'}->{'public_transport:version'},
                             'issues'        =>    join( '__separator__', @issues_strings ),
-                            'notes'         =>    join( '__separator__', @{$relation_ptr->{'__notes__'}} )
+                            'notes'         =>    join( '__separator__', @notes_strings )
                           );
             $number_of_relations_without_ref++;
         }
@@ -1755,6 +1759,7 @@ if ( scalar(@line_refs) ) {
 
                         $status = analyze_relation( $relation_ptr, $relation_id );
                         my @issues_strings = map { $_->to_string() } @{$relation_ptr->{'__issues__'}};
+                        my @notes_strings  = map { $_->to_string() } @{$relation_ptr->{'__notes__'}};
 
                         printTableLine( 'ref'               =>    $relation_ptr->{'tag'}->{'ref'},
                                         'relation'          =>    $relation_id,
@@ -1769,7 +1774,7 @@ if ( scalar(@line_refs) ) {
                                         'to'                =>    $relation_ptr->{'tag'}->{'to'},
                                         'PTv'               =>    $relation_ptr->{'tag'}->{'public_transport:version'},
                                         'issues'            =>    join( '__separator__', @issues_strings ),
-                                        'notes'             =>    join( '__separator__', @{$relation_ptr->{'__notes__'}} )
+                                        'notes'             =>    join( '__separator__', @notes_strings )
                                       );
                         $number_of_life_cycle_prefix_relations++;
 
@@ -2512,8 +2517,8 @@ sub analyze_route_master_environment {
                                                      $route_master_network =~ m/;\Q$RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}\E;/          ) {
 
                                                     if ( $route_master_network =~ m/;\Q$RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}\E;/  ) {
-                                                        $notes_string = gettext( "Route has 'network' = '%s' value which is part of 'network' = '%s' of Route-Master: %s" );
-                                                        push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, handle_foreign($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}), handle_foreign($relation_ptr->{'tag'}->{'network'}), printRelationTemplate($member_ref->{'ref'})) );
+                                                        my $note = Ptna::Note->new( 'network.part_of_master_value', handle_foreign($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}), handle_foreign($relation_ptr->{'tag'}->{'network'}), printRelationTemplate($member_ref->{'ref'}) );
+                                                        push @{$relation_ptr->{'__notes__'}}, $note;
                                                     }
 
                                                     #printf STDERR "%s Route of Route-Master not found although 'ref' is valid and 'network' are equal. Route-Master: %s, Route: %s, 'ref': %s, 'network': %s\n", get_time(), $relation_id, $member_ref->{'ref'}, $members_ref, html_escape($relation_ptr->{'tag'}->{'network'});
@@ -2540,8 +2545,8 @@ sub analyze_route_master_environment {
                                                 }
                                             } elsif ( $RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'} ) {
                                                 # 'ref' tag is valid (in the list) but 'network' is strange
-                                                $notes_string = gettext( "Route has 'network' = '%s' value which is considered as not relevant: %s" );
-                                                push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, handle_foreign($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}), printRelationTemplate($member_ref->{'ref'}) ) );
+                                                my $note = Ptna::Note->new( 'network.irrelevant_value', handle_foreign($RELATIONS{$member_ref->{'ref'}}->{'tag'}->{'network'}), printRelationTemplate($member_ref->{'ref'}) );
+                                                push @{$relation_ptr->{'__notes__'}}, $note;
                                             }
                                             if ( $members_ref ne $masters_ref ) {
                                                 # 'members_ref' is valid (in the list) but differs from 'ref' of route-master, so we have at least two refs in the list (a real list)
@@ -2727,8 +2732,8 @@ sub analyze_route_environment {
                 $route_master_network = ';' . $RELATIONS{$route_master_rel_id}->{'tag'}->{'network'} . ';';
 
                 if ( $route_master_network =~ m/;\Q$relation_ptr->{'tag'}->{'network'}\E;/  ) {
-                    $notes_string = gettext( "'network' = '%s' of Route is a part of 'network' = '%s' of Route-Master: %s" );
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, handle_foreign($relation_ptr->{'tag'}->{'network'}), handle_foreign($RELATIONS{$route_master_rel_id}->{'tag'}->{'network'}), printRelationTemplate($route_master_rel_id)) );
+                    my $note = Ptna::Note->new( 'network.part_of_master', handle_foreign($relation_ptr->{'tag'}->{'network'}), handle_foreign($RELATIONS{$route_master_rel_id}->{'tag'}->{'network'}), printRelationTemplate($route_master_rel_id) );
+                    push @{$relation_ptr->{'__notes__'}}, $note;
                 } else {
                     my $issue = Ptna::Issue->new( 'network.differs_from_master', handle_foreign($relation_ptr->{'tag'}->{'network'}), handle_foreign($RELATIONS{$route_master_rel_id}->{'tag'}->{'network'}), printRelationTemplate($route_master_rel_id) );
                     push @{$relation_ptr->{'__issues__'}}, $issue;
@@ -2843,12 +2848,13 @@ sub analyze_route_environment {
                 if ( scalar( keys ( %name_matches ) ) ) {
                     my @help_array    = sort( keys ( %name_matches ) );
                     my $num_of_errors = scalar(@help_array);
-                    $notes_string = gettext( "PTv2 route: 'name' of Route is identical to 'name' of other Route(s), consider setting an appropriate 'via' value and include that into 'name'" );
+                    my $note = Ptna::Note->new( 'ptv2.name_identical_other' );
                     if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("%s: %s and %d more ..."), $notes_string, join(', ', map { printRelationTemplate($_); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                        $note->list_items( [ map { printRelationTemplate($_); } splice(@help_array,0,$max_error) ], ($num_of_errors-$max_error) );
                     } else {
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf("%s: %s", $notes_string, join(', ', map { printRelationTemplate($_); } @help_array )) );
+                        $note->list_items( [ map { printRelationTemplate($_); } @help_array ] );
                     }
+                    push @{$relation_ptr->{'__notes__'}}, $note;
                 }
             }
 
@@ -2994,21 +3000,22 @@ sub analyze_relation {
                 if ( $tag =~ m/^\Q$specialtag\E/i ) {
                     if ( defined($relation_ptr->{'tag'}->{$tag}) ) {
                         $reporttype = ( $specialtag2reporttype{$specialtag} ) ? $specialtag2reporttype{$specialtag} : '__notes__';
-                        my $issue = undef;
+                        my $class  = ( $reporttype eq '__issues__' ) ? 'Ptna::Issue' : 'Ptna::Note';
+                        my $report = undef;
                         if ( $tag =~ m/^note$/i && $relation_ptr->{'tag'}->{$tag} =~ m|^https{0,1}://wiki.openstreetmap.org\S+\s*[;,_+#\.\-]*\s*(.*)| ) {
                             if ( $1 ) {
-                                $issue = Ptna::Issue->new( 'note.tag_url', handle_foreign($tag), handle_foreign($1) );
+                                $report = $class->new( 'note.tag_url', handle_foreign($tag), handle_foreign($1) );
                             }
                         } elsif ( $tag =~ m/^note$/i && $relation_ptr->{'tag'}->{$tag} =~ m|^https{0,1}://ptna.openstreetmap.de\S+\s*[;,_+#\.\-]*\s*(.*)| ) {
                             if ( $1 ) {
-                                $issue = Ptna::Issue->new( 'note.tag_url', handle_foreign($tag), handle_foreign($1) );
+                                $report = $class->new( 'note.tag_url', handle_foreign($tag), handle_foreign($1) );
                             }
                         } else {
-                            $issue = Ptna::Issue->new( 'note.tag_value', handle_foreign($tag), handle_foreign($relation_ptr->{'tag'}->{$tag}) );
+                            $report = $class->new( 'note.tag_value', handle_foreign($tag), handle_foreign($relation_ptr->{'tag'}->{$tag}) );
                         }
-                        # only the list of issues holds Ptna::Issue objects, the list of notes holds plain strings
-                        if ( $issue ) {
-                            unshift( @{$relation_ptr->{$reporttype}}, ( $reporttype eq '__issues__' ) ? $issue : $issue->to_string() );
+                        # the list of issues holds Ptna::Issue objects, the list of notes holds Ptna::Note objects
+                        if ( $report ) {
+                            unshift( @{$relation_ptr->{$reporttype}}, $report );
                         }
                     }
                 }
@@ -3027,7 +3034,7 @@ sub analyze_relation {
                 push @{$relation_ptr->{'__issues__'}}, Ptna::Issue->new( 'name.not_set' );
                 foreach my $tag ( @relation_tags ) {
                     if ( $tag =~ m/^name:/ || $tag =~ m/_name$/ ) {
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf( "'%s' = '%s'", handle_foreign($tag), handle_foreign($relation_ptr->{'tag'}->{$tag}) ) );
+                        push @{$relation_ptr->{'__notes__'}}, Ptna::Note->new( 'note.tag_value', handle_foreign($tag), handle_foreign($relation_ptr->{'tag'}->{$tag}) );
                     }
                 }
             }
@@ -3047,9 +3054,9 @@ sub analyze_relation {
                         $match = $1;
                         if ( $positive_notes ) {
                             if ( $network eq $match ) {
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf( "'network' = '%s'", handle_foreign($match)) );
+                                push @{$relation_ptr->{'__notes__'}}, Ptna::Note->new( 'note.network_equal', handle_foreign($match) );
                             } else {
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf( "'network' ~ '%s'", handle_foreign($match) ) );
+                                push @{$relation_ptr->{'__notes__'}}, Ptna::Note->new( 'note.network_similar', handle_foreign($match) );
                             }
                         }
                         $we_have_a_match++;
@@ -3062,9 +3069,9 @@ sub analyze_relation {
                         $match = $1;
                         if ( $positive_notes ) {
                             if ( $network eq $match ) {
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' = '%s'",handle_foreign($match)) );
+                                push @{$relation_ptr->{'__notes__'}}, Ptna::Note->new( 'note.network_equal', handle_foreign($match) );
                             } else {
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' ~ '%s'",handle_foreign($match)) );
+                                push @{$relation_ptr->{'__notes__'}}, Ptna::Note->new( 'note.network_similar', handle_foreign($match) );
                             }
                         }
                         $we_have_a_match++;
@@ -3072,10 +3079,10 @@ sub analyze_relation {
                 }
             }
             if ( $we_have_a_match == 0 && ($network_long_regex || $network_short_regex) ) {
-                $notes_string = gettext( "Route has 'network' = '%s' value which is considered as not relevant: %s" );
-                push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, handle_foreign($network), printRelationTemplate($relation_id) ) );
+                my $note = Ptna::Note->new( 'network.irrelevant_value', handle_foreign($network), printRelationTemplate($relation_id) );
+                push @{$relation_ptr->{'__notes__'}}, $note;
                 if ( $positive_notes ) {
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf( "'network' = '%s'", handle_foreign($network)) );
+                    push @{$relation_ptr->{'__notes__'}}, Ptna::Note->new( 'note.network_equal', handle_foreign($network) );
                 }
             }
 
@@ -3092,13 +3099,13 @@ sub analyze_relation {
 
                 if ( $match_long ) {
                     if ( $match_long ne $expect_long_as ) {
-                        $notes_string = gettext( "'network' = '%s' should be short form" );
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, handle_foreign($match_long) ) );
+                        my $note = Ptna::Note->new( 'network.should_be_short', handle_foreign($match_long) );
+                        push @{$relation_ptr->{'__notes__'}}, $note;
                     }
                 } elsif ( $match_short ) {
                     if ( $match_short eq $expect_long_for ) {
-                        $notes_string = gettext( "'network' = '%s' should be long form" );
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, handle_foreign($match_short) ) );
+                        my $note = Ptna::Note->new( 'network.should_be_long', handle_foreign($match_short) );
+                        push @{$relation_ptr->{'__notes__'}}, $note;
                     }
                 }
             } elsif ( $expect_network_long  ) {
@@ -3114,13 +3121,13 @@ sub analyze_relation {
 
                 if ( $match_short ) {
                     if ( $match_short ne $expect_short_as ) {
-                        $notes_string = gettext( "'network' = '%s' should be long form" );
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, handle_foreign($match_short) ) );
+                        my $note = Ptna::Note->new( 'network.should_be_long', handle_foreign($match_short) );
+                        push @{$relation_ptr->{'__notes__'}}, $note;
                     }
                 } elsif ( $match_long ) {
                     if ( $match_long eq $expect_short_for ) {
-                        $notes_string = gettext( "'network' = '%s' should be short form" );
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, handle_foreign($match_long) ) );
+                        my $note = Ptna::Note->new( 'network.should_be_short', handle_foreign($match_long) );
+                        push @{$relation_ptr->{'__notes__'}}, $note;
                     }
                 }
             }
@@ -3148,7 +3155,7 @@ sub analyze_relation {
             if ( !$network_long_regex && !$network_short_regex ) {
                 # we do not filter for any 'network' values, so let's print also the value of 'network'
                 if ( $relation_ptr->{'tag'}->{'network'} ) {
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf("'network' = '%s'", handle_foreign($relation_ptr->{'tag'}->{'network'})) )
+                    push @{$relation_ptr->{'__notes__'}}, Ptna::Note->new( 'note.network_equal', handle_foreign($relation_ptr->{'tag'}->{'network'}) );
                 }
             }
 
@@ -3158,16 +3165,16 @@ sub analyze_relation {
                         if ( defined($relation_ptr->{'tag'}->{$tag}) ) {
                             if ( $tag =~ m/^network:long$/i && $network_long_regex ){
                                 if ( $relation_ptr->{'tag'}->{$tag} =~ m/^$network_long_regex$/ ) {
-                                    $notes_string = gettext( "'network:long' is long form" );
-                                    push( @{$relation_ptr->{'__notes__'}}, $notes_string );
+                                    my $note = Ptna::Note->new( 'network.long_form_set' );
+                                    push @{$relation_ptr->{'__notes__'}}, $note;
                                 } elsif ( $relation_ptr->{'tag'}->{$tag} =~ m/$network_long_regex/ ) {
-                                    $notes_string = gettext( "'network:long' matches long form" );
-                                    push( @{$relation_ptr->{'__notes__'}}, $notes_string );
+                                    my $note = Ptna::Note->new( 'network.matches_long_form' );
+                                    push @{$relation_ptr->{'__notes__'}}, $note;
                                 } else {
-                                    push( @{$relation_ptr->{'__notes__'}}, sprintf("'network:long' = '%s'", handle_foreign($relation_ptr->{'tag'}->{$tag})) )
+                                    push @{$relation_ptr->{'__notes__'}}, Ptna::Note->new( 'note.network_long_equal', handle_foreign($relation_ptr->{'tag'}->{$tag}) );
                                 }
                             } else {
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf("'%s' = '%s'", handle_foreign($tag), handle_foreign($relation_ptr->{'tag'}->{$tag})) )
+                                push @{$relation_ptr->{'__notes__'}}, Ptna::Note->new( 'note.tag_value', handle_foreign($tag), handle_foreign($relation_ptr->{'tag'}->{$tag}) );
                             }
                         }
                     }
@@ -3185,8 +3192,8 @@ sub analyze_relation {
 #                                push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, handle_foreign($tag), handle_foreign($relation_ptr->{'tag'}->{$tag})) );
 #                            }
                             if ( $relation_ptr->{'tag'}->{$tag} =~ m/,/ ) {
-                                $notes_string = gettext( "'%s' = '%s': ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank" );
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, handle_foreign($tag), handle_foreign($relation_ptr->{'tag'}->{$tag})) );
+                                my $note = Ptna::Note->new( 'tag.comma_separator', handle_foreign($tag), handle_foreign($relation_ptr->{'tag'}->{$tag}) );
+                                push @{$relation_ptr->{'__notes__'}}, $note;
                             }
                         }
                     }
@@ -3199,7 +3206,7 @@ sub analyze_relation {
                 foreach my $tag ( @relation_tags ) {
                     if ( $tag =~ m/^\Q$special\E/i ) {
                         if ( defined($relation_ptr->{'tag'}->{$tag}) ) {
-                            push( @{$relation_ptr->{'__notes__'}}, sprintf("'%s' = '%s'", handle_foreign($tag), handle_foreign($relation_ptr->{'tag'}->{$tag})) )
+                            push @{$relation_ptr->{'__notes__'}}, Ptna::Note->new( 'note.tag_value', handle_foreign($tag), handle_foreign($relation_ptr->{'tag'}->{$tag}) );
                         }
                     }
                 }
@@ -3259,8 +3266,8 @@ sub analyze_relation {
                             }
                             if ( !defined($relation_ptr->{'tag'}->{$key1}) &&
                                  !defined($relation_ptr->{'tag'}->{$key2})    ) {
-                                $notes_string = gettext( "'%s' = '%s' is set but neither '%s' nor '%s' is set: consider setting one of them as they provide additional information about stops (their names, sequence and locations)." );
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, $key0, handle_foreign($relation_ptr->{'tag'}->{'gtfs:shape_id'}), $key1, $key2 ) );
+                                my $note = Ptna::Note->new( 'tag.missing_alternatives', $key0, handle_foreign($relation_ptr->{'tag'}->{'gtfs:shape_id'}), $key1, $key2 );
+                                push @{$relation_ptr->{'__notes__'}}, $note;
                             }
                         }
                     } else {
@@ -3286,8 +3293,8 @@ sub analyze_relation {
         }
 
         if ( $relation_ptr->{'tag'}->{'line'} ) {
-            $notes_string = gettext( "The tag 'line' (='%s') is reserved for 'power' = 'line' related tagging. For public transport 'route_master' and 'route' are used." );
-            push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, handle_foreign($relation_ptr->{'tag'}->{'line'}) ) );
+            my $note = Ptna::Note->new( 'tag.line_reserved', handle_foreign($relation_ptr->{'tag'}->{'line'}) );
+            push @{$relation_ptr->{'__notes__'}}, $note;
         }
 
         if ( $relation_ptr->{'tag'}->{'public_transport'} ) {
@@ -3327,11 +3334,11 @@ sub analyze_relation {
                 $char = $1;
                 $value = defined($relation_ptr->{'tag'}->{$tag}) ? $relation_ptr->{'tag'}->{$tag} : '';
                 if ( $char eq ' ' || $char eq "\r" || $char eq "\n" || $char eq "\t" ) {
-                    $notes_string = gettext( "The tag '%s' includes whitespace character '%s' (=%#2x) in key. Value of tag: '%s'" );
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, $tag, $char, ord($char), $value ) );
+                    my $note = Ptna::Note->new( 'tag.whitespace_in_key', $tag, $char, ord($char), $value );
+                    push @{$relation_ptr->{'__notes__'}}, $note;
                } else {
-                    $notes_string = gettext( "The tag '%s' includes potentially problematic character '%s' in key. Value of tag: '%s'" );
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, $tag, $char, $value ) );
+                    my $note = Ptna::Note->new( 'tag.problematic_char_key', $tag, $char, $value );
+                    push @{$relation_ptr->{'__notes__'}}, $note;
                 }
             }
         }
@@ -3372,8 +3379,8 @@ sub analyze_relation {
                         if ( defined($relation_ptr->{'tag'}->{$tag}) ) {
                             $datevalue = $relation_ptr->{'tag'}->{$tag};
                             if ( $datevalue !~ m/^([0-9][0-9][0-9][0-9])-([01][0-9])-([0-3][0-9])$/ ) {
-                                $notes_string = gettext( "The value of '%s' (= '%s') should be specified in ISO 8601 format: YYYY-MM-DD" );
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, $tag, $datevalue ) );
+                                my $note = Ptna::Note->new( 'date.not_iso8601', $tag, $datevalue );
+                                push @{$relation_ptr->{'__notes__'}}, $note;
                             } else {
                                 printf STDERR "Checking for correct date: '%s' = '%s-%s-%s'\n", $tag, $1, $2, $3  if ( $debug );
                                 eval {
@@ -3646,15 +3653,15 @@ sub analyze_ptv2_route_relation {
         push @{$relation_ptr->{'__issues__'}}, Ptna::Issue->new( 'ptv2.no_stop_no_platform' );
     } else {
         unless ( $number_of_route_stop_positions ) {
-            $notes_string = gettext( "PTv2 route: there is no 'public_transport' = 'stop_position' (Node)" );
-            push( @{$relation_ptr->{'__notes__'}}, $notes_string );
+            my $note = Ptna::Note->new( 'ptv2.no_stop' );
+            push @{$relation_ptr->{'__notes__'}}, $note;
         }
         if ( $number_of_route_stop_positions == 1 ) {
             push @{$relation_ptr->{'__issues__'}}, Ptna::Issue->new( 'ptv2.one_stop' );
         }
         unless ( $number_of_route_platforms ) {
-            $notes_string = gettext( "PTv2 route: there is no 'public_transport' = 'platform' (Node, Way, Area or Relation)" );
-            push( @{$relation_ptr->{'__notes__'}},$notes_string );
+            my $note = Ptna::Note->new( 'ptv2.no_platform' );
+            push @{$relation_ptr->{'__notes__'}}, $note;
         }
         if ( $number_of_route_platforms == 1 ) {
             push @{$relation_ptr->{'__issues__'}}, Ptna::Issue->new( 'ptv2.one_platform' );
@@ -3826,13 +3833,13 @@ sub analyze_ptv2_route_relation {
         my @help_array    = sort( keys( %{$relation_ptr->{'roundabout_segments_at'}} ) );
         my $num_of_errors = scalar( @help_array );
         if ( $num_of_errors ) {
-            $notes_string = ngettext( "PTv2 route: includes %d entire roundabout but uses only segments", "PTv2 route: includes %d entire roundabouts but uses only segments", $num_of_errors );
-            my $issue   = sprintf( $notes_string, $num_of_errors );
+            my $note = Ptna::Note->new( 'ptv2.roundabout_partial', $num_of_errors );
             if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("%s: %s and %d more ..."), $issue, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                $note->list_items( [ map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ], ($num_of_errors-$max_error) );
             } else {
-                push( @{$relation_ptr->{'__notes__'}}, sprintf("%s: %s", $issue, join(', ', map { printWayTemplate($_,'name;ref'); } @help_array )) );
+                $note->list_items( [ map { printWayTemplate($_,'name;ref'); } @help_array ] );
             }
+            push @{$relation_ptr->{'__notes__'}}, $note;
             $return_code++;
         }
     }
@@ -4620,9 +4627,8 @@ sub analyze_ptv2_route_relation {
             }
             if ( $first_platform_type eq $last_platform_type && $first_platform_id == $last_platform_id ) {
                 if ( !defined($relation_ptr->{'tag'}->{'roundtrip'}) ) {
-                    $notes_string  = gettext( "PTv2 route: 'roundtrip' is not set and the first and the last platform stops are the same." );
-                    $notes_string .= ' ' .  gettext( "Consider setting 'roundtrip' = '%s'" ) . '%s.';
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf( $notes_string, 'yes', printRelationInjectData($relation_ptr->{'id'},('roundtrip=yes')) ) );
+                    my $note = Ptna::Note->new( 'ptv2.roundtrip_unset_same_stops', 'yes', printRelationInjectData($relation_ptr->{'id'},('roundtrip=yes')) );
+                    push @{$relation_ptr->{'__notes__'}}, $note;
                     $return_code++;
                 } elsif ( $relation_ptr->{'tag'}->{'roundtrip'} ne 'yes' ) {
                     my $issue = Ptna::Issue->new( 'ptv2.roundtrip_same_stops', html_escape($relation_ptr->{'tag'}->{'roundtrip'}), 'yes', printRelationInjectData($relation_ptr->{'id'},('roundtrip=yes')) );
@@ -4640,9 +4646,8 @@ sub analyze_ptv2_route_relation {
                     push @{$relation_ptr->{'__issues__'}}, $issue;
                     $return_code++;
                 } else {
-                    $notes_string  = gettext( "PTv2 route: 'roundtrip' = 'yes' and the first and the last platform stops are less than %d metres / %d feet apart (actual distance = %d metres / %d feet)."  );
-                    $notes_string .= ' ' . gettext( "This is considered acceptable." );
-                    push( @{$relation_ptr->{'__notes__'}},  sprintf( $notes_string, $roundtrip_distance, OSM::Geo::ConvertMetersToFeet($roundtrip_distance), $distance, OSM::Geo::ConvertMetersToFeet($distance) ) );
+                    my $note = Ptna::Note->new( 'ptv2.roundtrip_yes_near', $roundtrip_distance, OSM::Geo::ConvertMetersToFeet($roundtrip_distance), $distance, OSM::Geo::ConvertMetersToFeet($distance) );
+                    push @{$relation_ptr->{'__notes__'}}, $note;
                     $return_code++;
                 }
             } else {
@@ -6176,14 +6181,14 @@ sub CheckNameRefFromViaToPTV2 {
             # basic checks for 'name' w/o any other dependencies to 'ref', 'from', 'to' and 'via'
             #
             if ( $name =~ m/<=>/ ) {
-                $notes_string = gettext( "PTv2 route: 'name' includes deprecated '&lt;=&gt;'" );
-                push( @{$relation_ptr->{'__notes__'}}, $notes_string );
+                my $note = Ptna::Note->new( 'ptv2.name_deprecated_bidir_arrow' );
+                push @{$relation_ptr->{'__notes__'}}, $note;
                 $preconditions_failed++;
                 $return_code++;
             }
             if ( $name =~ m/==>/ ) {
-                $notes_string = gettext( "PTv2 route: 'name' includes deprecated '==&gt;'" );
-                push( @{$relation_ptr->{'__notes__'}}, $notes_string );
+                my $note = Ptna::Note->new( 'ptv2.name_deprecated_arrow' );
+                push @{$relation_ptr->{'__notes__'}}, $note;
                 $preconditions_failed++;
                 $return_code++;
             }
@@ -6235,15 +6240,15 @@ sub CheckNameRefFromViaToPTV2 {
                             $number_of_ref_colon_tags++;
                             $ref_string = $relation_ptr->{'tag'}->{$tag};
                             if ( $ref_in_name_w_boundary !~ m|[ ;/]$ref_string[ ;/:]| ) {
-                                $notes_string = gettext( "PTv2 route: '%s' is not part of 'name' (derived from '%s' = '%s')" );
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string,handle_foreign($ref_string),handle_foreign($tag),handle_foreign($relation_ptr->{'tag'}->{$tag})) );
+                                my $note = Ptna::Note->new( 'ptv2.name_lacks_value', handle_foreign($ref_string), handle_foreign($tag), handle_foreign($relation_ptr->{'tag'}->{$tag}) );
+                                push @{$relation_ptr->{'__notes__'}}, $note;
                                 $return_code++;
                             }
                         }
                     }
                     if ( $number_of_ref_colon_tags == 0 ) {     # there are no 'ref:*' tags, so check 'ref' being present in 'name'
-                        $notes_string = gettext( "PTv2 route: 'ref' is not part of 'name'" );
-                        push( @{$relation_ptr->{'__notes__'}}, $notes_string );
+                        my $note = Ptna::Note->new( 'ptv2.ref_not_in_name' );
+                        push @{$relation_ptr->{'__notes__'}}, $note;
                         $return_code++;
                     }
                 }
@@ -6252,19 +6257,19 @@ sub CheckNameRefFromViaToPTV2 {
                     if ( $from_in_name ne $from ) {
                         if ( $check_name_relaxed ) {
                             if ( !TagNameMatchesOtherName($from,$from_in_name) ) {
-                                $notes_string = gettext( "PTv2 route: from-part ('%s') of 'name' does not match 'from' = '%s'" );
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, handle_foreign($from_in_name), handle_foreign($from)) );
+                                my $note = Ptna::Note->new( 'ptv2.name_from_mismatch', handle_foreign($from_in_name), handle_foreign($from) );
+                                push @{$relation_ptr->{'__notes__'}}, $note;
                                 $return_code++;
                             }
                         } else {
-                            $notes_string = gettext( "PTv2 route: from-part ('%s') of 'name' is not equal to 'from' = '%s'" );
-                            push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, handle_foreign($from_in_name), handle_foreign($from)) );
+                            my $note = Ptna::Note->new( 'ptv2.name_from_differs', handle_foreign($from_in_name), handle_foreign($from) );
+                            push @{$relation_ptr->{'__notes__'}}, $note;
                             $return_code++;
                         }
                     }
                 } else {
-                    $notes_string = gettext( "PTv2 route: 'from' is not set" );
-                    push( @{$relation_ptr->{'__notes__'}}, $notes_string );
+                    my $note = Ptna::Note->new( 'ptv2.from_not_set' );
+                    push @{$relation_ptr->{'__notes__'}}, $note;
                     $return_code++;
                 }
 
@@ -6272,19 +6277,19 @@ sub CheckNameRefFromViaToPTV2 {
                     if ( $to_in_name ne $to ) {
                         if ( $check_name_relaxed ) {
                             if ( !TagNameMatchesOtherName($to,$to_in_name) ) {
-                                $notes_string = gettext( "PTv2 route: to-part ('%s') of 'name' does not match 'to' = '%s'" );
-                                push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, handle_foreign($to_in_name), handle_foreign($to)) );
+                                my $note = Ptna::Note->new( 'ptv2.name_to_mismatch', handle_foreign($to_in_name), handle_foreign($to) );
+                                push @{$relation_ptr->{'__notes__'}}, $note;
                                 $return_code++;
                             }
                         } else {
-                            $notes_string = gettext( "PTv2 route: to-part ('%s') of 'name' is not equal to 'to' = '%s'" );
-                            push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, handle_foreign($to_in_name), handle_foreign($to)) );
+                            my $note = Ptna::Note->new( 'ptv2.name_to_differs', handle_foreign($to_in_name), handle_foreign($to) );
+                            push @{$relation_ptr->{'__notes__'}}, $note;
                             $return_code++;
                         }
                     }
                 } else {
-                    $notes_string = gettext( "PTv2 route: 'to' is not set" );
-                    push( @{$relation_ptr->{'__notes__'}}, $notes_string );
+                    my $note = Ptna::Note->new( 'ptv2.to_not_set' );
+                    push @{$relation_ptr->{'__notes__'}}, $note;
                     $return_code++;
                 }
 
@@ -6298,43 +6303,43 @@ sub CheckNameRefFromViaToPTV2 {
                                     if ( $check_name_relaxed ) {
                                         #printf STDERR "check %d via = %s against %s\n", $index, $via_values[$index], $via_parts_in_name[$index];
                                         if ( !TagNameMatchesOtherName($via_values[$index],$via_parts_in_name[$index]) ) {
-                                            $notes_string = gettext( "PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' does not match %d. via-value = '%s'" );
-                                            push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string,$index+1,handle_foreign($via_parts_in_name[$index]),$index+1,handle_foreign($via_values[$index])) );
+                                            my $note = Ptna::Note->new( 'ptv2.via_part_mismatch', $index+1, handle_foreign($via_parts_in_name[$index]), $index+1, handle_foreign($via_values[$index]) );
+                                            push @{$relation_ptr->{'__notes__'}}, $note;
                                             $return_code++;
                                         }
                                     } else {
-                                        $notes_string = gettext( "PTv2 route: 'via' is set: %d. via-part ('%s') of 'name' is not equal to %d. via-value = '%s'" );
-                                        push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string,$index+1,handle_foreign($via_parts_in_name[$index]),$index+1,handle_foreign($via_values[$index])) );
+                                        my $note = Ptna::Note->new( 'ptv2.via_part_differs', $index+1, handle_foreign($via_parts_in_name[$index]), $index+1, handle_foreign($via_values[$index]) );
+                                        push @{$relation_ptr->{'__notes__'}}, $note;
                                         $return_code++;
                                     }
                                 }
                             }
                         } elsif ( scalar(@via_parts_in_name) > scalar(@via_values) ) {
-                            $notes_string = gettext( "PTv2 route: there are more via-parts in 'name' (%d) than in 'via' (%d)" );
-                            push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string,scalar(@via_parts_in_name),scalar(@via_values)) );
+                            my $note = Ptna::Note->new( 'ptv2.via_name_more', scalar(@via_parts_in_name), scalar(@via_values) );
+                            push @{$relation_ptr->{'__notes__'}}, $note;
                             $return_code++;
                         } else {
-                            $notes_string = gettext( "PTv2 route: there are less via-parts in 'name' (%d) than in 'via' (%d)" );
-                            push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string,scalar(@via_parts_in_name),scalar(@via_values)) );
+                            my $note = Ptna::Note->new( 'ptv2.via_name_fewer', scalar(@via_parts_in_name), scalar(@via_values) );
+                            push @{$relation_ptr->{'__notes__'}}, $note;
                             $return_code++;
                         }
                     } else {
-                        $notes_string = gettext( "PTv2 route: 'name' has more than one '=>' but 'via' is not set" );
-                        push( @{$relation_ptr->{'__notes__'}}, $notes_string );
+                        my $note = Ptna::Note->new( 'ptv2.name_multi_arrow_no_via' );
+                        push @{$relation_ptr->{'__notes__'}}, $note;
                         $return_code++;
                     }
                 } elsif ( $via ) {
-                    $notes_string = gettext( "PTv2 route: 'name' has no via-parts but 'via' is set" );
-                    push( @{$relation_ptr->{'__notes__'}}, $notes_string );
+                    my $note = Ptna::Note->new( 'ptv2.name_no_via_but_via_set' );
+                    push @{$relation_ptr->{'__notes__'}}, $note;
                     $return_code++;
                 }
             } else {
                 if ( $check_name_relaxed ) {
-                    $notes_string = gettext( "PTv2 route: 'name' should be similar to the form '... ref ...: from => to'" );
-                    push( @{$relation_ptr->{'__notes__'}}, $notes_string );
+                    my $note = Ptna::Note->new( 'ptv2.name_form_similar' );
+                    push @{$relation_ptr->{'__notes__'}}, $note;
                 } else {
-                    $notes_string = gettext( "PTv2 route: 'name' should (at least) be of the form '... ref ...: from => to'" );
-                    push( @{$relation_ptr->{'__notes__'}}, $notes_string );
+                    my $note = Ptna::Note->new( 'ptv2.name_form_required' );
+                    push @{$relation_ptr->{'__notes__'}}, $note;
                 }
                 $return_code++;
             }
@@ -6454,21 +6459,21 @@ sub CheckFromViaToPlatformNamesPTV2 {
                 if ( $platform_name && $from ne $platform_name ) {
                     if ( $check_from_to eq 'relaxed' ) {
                         if ( !TagNameMatchesOtherName($from,$platform_name) ) {
-                            $notes_string = gettext( "PTv2 route: 'from' = '%s' does not match 'name' of first platform: %s" );
-                            push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, $from, printXxxTemplate($platform_type,$platform_id,'name;ref')) );
+                            my $note = Ptna::Note->new( 'ptv2.from_mismatch_platform', $from, printXxxTemplate($platform_type,$platform_id,'name;ref') );
+                            push @{$relation_ptr->{'__notes__'}}, $note;
                             $return_code++;
                         }
                     } else {    # strict check for being identical
-                        $notes_string = gettext( "PTv2 route: 'from' = '%s' is not equal to 'name' of first platform: %s" );
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, $from, printXxxTemplate($platform_type,$platform_id,'name;ref')) );
+                        my $note = Ptna::Note->new( 'ptv2.from_differs_platform', $from, printXxxTemplate($platform_type,$platform_id,'name;ref') );
+                        push @{$relation_ptr->{'__notes__'}}, $note;
                         $return_code++;
                     }
                 }
             }
         } else {
             if ( ! $check_name ) {
-                $notes_string = gettext( "PTv2 route: 'from' is not set" );
-                push( @{$relation_ptr->{'__notes__'}}, $notes_string );
+                my $note = Ptna::Note->new( 'ptv2.from_not_set' );
+                push @{$relation_ptr->{'__notes__'}}, $note;
                 $return_code++;
             }
         }
@@ -6506,21 +6511,21 @@ sub CheckFromViaToPlatformNamesPTV2 {
                 if ( $platform_name && $to ne $platform_name ) {
                     if ( $check_from_to eq 'relaxed' ) {
                         if ( !TagNameMatchesOtherName($to,$platform_name) ) {
-                            $notes_string = gettext( "PTv2 route: 'to' = '%s' does not match 'name' of last platform: %s" );
-                            push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, $to, printXxxTemplate($platform_type,$platform_id,'name;ref')) );
+                            my $note = Ptna::Note->new( 'ptv2.to_mismatch_platform', $to, printXxxTemplate($platform_type,$platform_id,'name;ref') );
+                            push @{$relation_ptr->{'__notes__'}}, $note;
                             $return_code++;
                         }
                     } else {    # strict check for being identical
-                        $notes_string = gettext( "PTv2 route: 'to' = '%s' is not equal to 'name' of last platform: %s" );
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string, $to, printXxxTemplate($platform_type,$platform_id,'name;ref')) );
+                        my $note = Ptna::Note->new( 'ptv2.to_differs_platform', $to, printXxxTemplate($platform_type,$platform_id,'name;ref') );
+                        push @{$relation_ptr->{'__notes__'}}, $note;
                         $return_code++;
                     }
                 }
             }
         } else {
             if ( ! $check_name ) {
-                $notes_string = gettext( "PTv2 route: 'to' is not set" );
-                push( @{$relation_ptr->{'__notes__'}}, $notes_string );
+                my $note = Ptna::Note->new( 'ptv2.to_not_set' );
+                push @{$relation_ptr->{'__notes__'}}, $note;
                 $return_code++;
             }
         }
@@ -6594,20 +6599,20 @@ sub CheckFromViaToPlatformNamesPTV2 {
 
                     if ( $matches == 0 ) {
                         printf STDERR "    CheckFromViaToPlatformNamesPTV2(): no match for via index = %d, via part = %s\n", $vindex, $via_parts[$vindex]       if ( $debug );
-                        $notes_string = gettext( "PTv2 route: 'via' is set. %d. via-part ('%s') does not match any platform name." );
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string,$vindex+1,$via_parts[$vindex]) );
+                        my $note = Ptna::Note->new( 'ptv2.via_part_no_platform', $vindex+1, $via_parts[$vindex] );
+                        push @{$relation_ptr->{'__notes__'}}, $note;
                         $return_code++;
                     } elsif ( $matches > 1 ) {
                         printf STDERR "    CheckFromViaToPlatformNamesPTV2(): multiple matches for via index = %d, via part = %s with platforms = %s\n", $vindex, $via_parts[$vindex], join( ',', @vindex_pindex)       if ( $debug );
-                        $notes_string     = gettext( "PTv2 route: 'via' is set. %d. via-part ('%s') matches name of more than one platform (platform numbers: %s)" );
-                        #my $helpstring    = sprintf( $notes_string, $vindex+1, $via_parts[$vindex], join( ', ',@vindex_pnumber) );
+                        #my $note          = Ptna::Note->new( 'ptv2.via_part_multi_platform', $vindex+1, $via_parts[$vindex], join( ', ',@vindex_pnumber) );
                         #my @help_array    = map { ${$relation_ptr->{'role_platform'}}[$_] } ( @vindex_pindex );
                         #my $num_of_errors = scalar(@help_array);
                         #if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                        #    push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printXxxTemplate($_->{'type'},$_->{'ref'},'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                        #    $note->list_items( [ map { printXxxTemplate($_->{'type'},$_->{'ref'},'name;ref'); } splice(@help_array,0,$max_error) ], ($num_of_errors-$max_error) );
                         #} else {
-                        #    push( @{$relation_ptr->{'__notes__'}}, sprintf("%s: %s", $helpstring, join(', ', map { printXxxTemplate($_->{'type'},$_->{'ref'},'name;ref'); } @help_array )) );
+                        #    $note->list_items( [ map { printXxxTemplate($_->{'type'},$_->{'ref'},'name;ref'); } @help_array ] );
                         #}
+                        #push @{$relation_ptr->{'__notes__'}}, $note;
                         #$return_code++;
                     } else {
                         $total_single_matches++;
@@ -6621,11 +6626,11 @@ sub CheckFromViaToPlatformNamesPTV2 {
             } else {
                 printf STDERR "    CheckFromViaToPlatformNamesPTV2(): 'via' is set (%d parts), but there are only %d platforms\n", $via_number, $number_of_platforms       if ( $debug );
                 if ( $via_number == 1 ) {
-                        $notes_string = gettext( "PTv2 route: 'via' is set, but there are less than 3 platforms (=%d)." );
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string,$number_of_platforms) );
+                        my $note = Ptna::Note->new( 'ptv2.via_few_platforms', $number_of_platforms );
+                        push @{$relation_ptr->{'__notes__'}}, $note;
                 } else {
-                        $notes_string = gettext( "PTv2 route: 'via' is set (%d parts), but there are less than %d platforms (=%d)." );
-                        push( @{$relation_ptr->{'__notes__'}}, sprintf($notes_string,$via_number,$via_number+2,$number_of_platforms) );
+                        my $note = Ptna::Note->new( 'ptv2.via_few_platforms_n', $via_number, $via_number+2, $number_of_platforms );
+                        push @{$relation_ptr->{'__notes__'}}, $note;
                 }
                 $return_code++;
            }
@@ -6692,15 +6697,15 @@ sub CheckWayType {
         }
         if ( scalar(keys(%using_wrong_way_sub_type)) ) {
             foreach my $this_is_wrong ( sort(keys(%using_wrong_way_sub_type)) ) {
-                my $notes_string  = gettext( "Route: using way type (%s)" );
-                my $helpstring    = sprintf( $notes_string, $this_is_wrong );
+                my $note          = Ptna::Note->new( 'route.way_type', $this_is_wrong );
                 my @help_array    = sort(keys(%{$using_wrong_way_sub_type{$this_is_wrong}}));
                 $num_of_errors = scalar(@help_array);
                 if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                    $note->list_items( [ map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ], ($num_of_errors-$max_error) );
                 } else {
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf("%s: %s", $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } @help_array )) );
+                    $note->list_items( [ map { printWayTemplate($_,'name;ref'); } @help_array ] );
                 }
+                push @{$relation_ptr->{'__notes__'}}, $note;
             }
         }
     }
@@ -6798,7 +6803,6 @@ sub CheckAccessOnWaysAndNodes {
                 }
             }
             if ( scalar(keys(%restricted_access_on_ways)) ) {
-                my $helpstring     = '';
                 my @help_array     = ();
                 my $num_of_errors  = 0;
                 foreach my $access_restriction ( sort(keys(%restricted_access_on_ways)) ) {
@@ -6810,9 +6814,8 @@ sub CheckAccessOnWaysAndNodes {
                             $conditional_access{$access_restriction}->{'relations'}->{$relation_ptr->{'id'}}->{$way_id} = 1;
                         }
                         unless ( exists($relation_ptr->{'notes_on_conditional_access_added'}) ) {
-                            $notes_string = gettext( "Route: see" );
-                            $helpstring   = sprintf( "%s <a href=\"#conditional_on_ways\">%s</a>",handle_foreign($notes_string),handle_foreign(gettext("Conditional access statements found on ways")) );
-                            push( @{$relation_ptr->{'__notes__'}}, $helpstring );
+                            my $note = Ptna::Note->new( 'route.see_conditional' );
+                            push @{$relation_ptr->{'__notes__'}}, $note;
                             $relation_ptr->{'notes_on_conditional_access_added'} = 1;
                         }
                         #$notes_string = ngettext( "Route: unclear access (%s) to way", "Route: unclear access (%s) to ways", $num_of_errors );
@@ -6896,13 +6899,13 @@ sub CheckAccessOnWaysAndNodes {
                             push @{$relation_ptr->{'__issues__'}}, $issue;
                         }
                     } elsif ( $access_restriction =~ m/^\'construction\'=\'/ ) {
-                        $notes_string = ngettext( "Route: suspicious %s along with 'highway' unequal to 'construction' on way", "Route: suspicious %s along with 'highway' unequal to 'construction' on ways", $num_of_errors );
-                        $helpstring   = handle_foreign(sprintf( $notes_string, $access_restriction ));
+                        my $note = Ptna::Note->new( 'route.suspicious_construction', $num_of_errors, handle_foreign( $access_restriction ) );
                         if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                            push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("%s: %s and %d more ..."), $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                            $note->list_items( [ map { printWayTemplate($_,'name;ref'); } splice(@help_array,0,$max_error) ], ($num_of_errors-$max_error) );
                         } else {
-                            push( @{$relation_ptr->{'__notes__'}}, sprintf("%s: %s", $helpstring, join(', ', map { printWayTemplate($_,'name;ref'); } @help_array )) );
+                            $note->list_items( [ map { printWayTemplate($_,'name;ref'); } @help_array ] );
                         }
+                        push @{$relation_ptr->{'__notes__'}}, $note;
                     } else {
                         my $vehicle = $relation_ptr->{'route_type_value'};
                         my $issue = Ptna::Issue->new( 'access.way_no_psv', $num_of_errors, handle_foreign( $access_restriction ), $transport_type_to_restriction_type{$vehicle} ? $transport_type_to_restriction_type{$vehicle} : $vehicle, $transport_type_to_restriction_type{$vehicle} ? $transport_type_to_restriction_type{$vehicle} : $vehicle );
@@ -7088,9 +7091,10 @@ sub CheckRouteRefOnStops {
 
                                             foreach my $sub_ref ( split( $ref_separator, $ref ) ) {
                                                 if ( $temp_stop_ref =~ m/;\Q$sub_ref\E;/ ) {
-                                                    $hint = sprintf( gettext( "(consider adding '%s' to the 'route_ref' tag of the stop)" ), handle_foreign($sub_ref) );
-                                                    $notes_string = gettext( "Route: 'ref' = '%s' of stop should represent the reference of the stop, but includes the 'ref' = '%s' of this route %s" );
-                                                    $to_be_replaced{sprintf($notes_string,handle_foreign($object_ref->{'tag'}->{'ref'}),handle_foreign($sub_ref),$hint)}->{$member->{'ref'}} = $member->{'type'};
+                                                    my $note = Ptna::Note->new( 'stop_ref.represents_stop_add', handle_foreign($object_ref->{'tag'}->{'ref'}), handle_foreign($sub_ref) );
+                                                    my $key = $note->key();
+                                                    $to_be_replaced{$key} //= { 'message' => $note, 'objects' => {} };
+                                                    $to_be_replaced{$key}->{'objects'}->{$member->{'ref'}} = $member->{'type'};
                                                 }
                                             }
                                         }
@@ -7104,15 +7108,19 @@ sub CheckRouteRefOnStops {
 #                                        $separator_with_blank_on{sprintf($notes_string,handle_foreign($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
 #                                    }
                                     if ( $object_ref->{'tag'}->{'route_ref'} =~ m/,/ ) {
-                                        $notes_string = gettext( "Route: 'route_ref' = '%s' of stop: ',' (comma) as separator value should be replaced by ';' (semi-colon) without blank" );
-                                        $comma_as_separator{sprintf($notes_string,handle_foreign($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
+                                        my $note = Ptna::Note->new( 'stop_ref.comma_separator', handle_foreign($object_ref->{'tag'}->{'route_ref'}) );
+                                        my $key = $note->key();
+                                        $comma_as_separator{$key} //= { 'message' => $note, 'objects' => {} };
+                                        $comma_as_separator{$key}->{'objects'}->{$member->{'ref'}} = $member->{'type'};
                                     }
                                 }
 
                                 foreach my $tag ( 'bus_lines', 'bus_routes', 'lines', 'routes', 'line' ) {
                                     if ( $object_ref->{'tag'}->{$tag} ) {
-                                        $notes_string = gettext( "Route: '%s' = '%s' of stop should be deleted, 'route_ref' = '%s' exists" );
-                                        $to_be_deleted{sprintf($notes_string,$tag,handle_foreign($object_ref->{'tag'}->{$tag}),handle_foreign($object_ref->{'tag'}->{'route_ref'}))}->{$member->{'ref'}} = $member->{'type'};
+                                        my $note = Ptna::Note->new( 'stop_ref.delete', $tag, handle_foreign($object_ref->{'tag'}->{$tag}), handle_foreign($object_ref->{'tag'}->{'route_ref'}) );
+                                        my $key = $note->key();
+                                        $to_be_deleted{$key} //= { 'message' => $note, 'objects' => {} };
+                                        $to_be_deleted{$key}->{'objects'}->{$member->{'ref'}} = $member->{'type'};
                                     }
                                 }
                             } else {
@@ -7129,8 +7137,10 @@ sub CheckRouteRefOnStops {
                                         }
                                         delete( $included_refs{'yes'} );
                                         $replace_by = join( ';', sort( { if ( $a =~ m/^[0-9]+$/ && $b =~ m/^[0-9]+$/ ) { $a <=> $b } else { $a cmp $b } } keys( %included_refs ) ) );
-                                        $notes_string = gettext( "Route: '%s' = '%s' of stop should be replaced by 'route_ref' = '%s'" );
-                                        $to_be_replaced{sprintf($notes_string,$tag,handle_foreign($object_ref->{'tag'}->{$tag}),handle_foreign($replace_by))}->{$member->{'ref'}} = $member->{'type'};
+                                        my $note = Ptna::Note->new( 'stop_ref.replace', $tag, handle_foreign($object_ref->{'tag'}->{$tag}), handle_foreign($replace_by) );
+                                        my $key = $note->key();
+                                        $to_be_replaced{$key} //= { 'message' => $note, 'objects' => {} };
+                                        $to_be_replaced{$key}->{'objects'}->{$member->{'ref'}} = $member->{'type'};
                                     }
                                 }
                                 if ( exists($object_ref->{'tag'}->{'ref'}) ) {
@@ -7139,9 +7149,10 @@ sub CheckRouteRefOnStops {
 
                                     foreach my $sub_ref ( split( $ref_separator, $ref ) ) {
                                         if ( $temp_stop_ref =~ m/;\Q$sub_ref\E;/ ) {
-                                            $hint = sprintf( gettext( "(consider creating a 'route_ref' = '%s' tag for the stop)" ), handle_foreign($sub_ref) );
-                                            $notes_string = gettext( "Route: 'ref' = '%s' of stop should represent the reference of the stop, but includes the 'ref' = '%s' of this route %s" );
-                                            $to_be_replaced{sprintf($notes_string,handle_foreign($object_ref->{'tag'}->{'ref'}),handle_foreign($sub_ref),$hint)}->{$member->{'ref'}} = $member->{'type'};
+                                            my $note = Ptna::Note->new( 'stop_ref.represents_stop_create', handle_foreign($object_ref->{'tag'}->{'ref'}), handle_foreign($sub_ref) );
+                                            my $key = $note->key();
+                                            $to_be_replaced{$key} //= { 'message' => $note, 'objects' => {} };
+                                            $to_be_replaced{$key}->{'objects'}->{$member->{'ref'}} = $member->{'type'};
                                         }
                                     }
                                 }
@@ -7164,44 +7175,52 @@ sub CheckRouteRefOnStops {
                 }
             }
             foreach my $message ( sort( keys( %separator_with_blank_on ) ) ) {
-                @help_array     = sort( keys( %{$separator_with_blank_on{$message}} ) );
+                @help_array     = sort( keys( %{$separator_with_blank_on{$message}->{'objects'}} ) );
                 $num_of_errors  = scalar( @help_array );
                 $ret_val       += $num_of_errors;
+                my $note        = $separator_with_blank_on{$message}->{'message'};
                 if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("%s: %s and %d more ..."), $message, join(', ', map { printXxxTemplate($separator_with_blank_on{$message}->{$_},$_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                    $note->list_items( [ map { printXxxTemplate($separator_with_blank_on{$message}->{'objects'}->{$_},$_,'name'); } splice(@help_array,0,$max_error) ], ($num_of_errors-$max_error) );
                 } else {
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf("%s: %s", $message, join(', ', map { printXxxTemplate($separator_with_blank_on{$message}->{$_},$_,'name'); } @help_array )) );
+                    $note->list_items( [ map { printXxxTemplate($separator_with_blank_on{$message}->{'objects'}->{$_},$_,'name'); } @help_array ] );
                 }
+                push @{$relation_ptr->{'__notes__'}}, $note;
             }
             foreach my $message ( sort( keys( %comma_as_separator ) ) ) {
-                @help_array     = sort( keys( %{$comma_as_separator{$message}} ) );
+                @help_array     = sort( keys( %{$comma_as_separator{$message}->{'objects'}} ) );
                 $num_of_errors  = scalar( @help_array );
                 $ret_val       += $num_of_errors;
+                my $note        = $comma_as_separator{$message}->{'message'};
                 if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("%s: %s and %d more ..."), $message, join(', ', map { printXxxTemplate($comma_as_separator{$message}->{$_},$_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                    $note->list_items( [ map { printXxxTemplate($comma_as_separator{$message}->{'objects'}->{$_},$_,'name'); } splice(@help_array,0,$max_error) ], ($num_of_errors-$max_error) );
                 } else {
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf("%s: %s", $message, join(', ', map { printXxxTemplate($comma_as_separator{$message}->{$_},$_,'name'); } @help_array )) );
+                    $note->list_items( [ map { printXxxTemplate($comma_as_separator{$message}->{'objects'}->{$_},$_,'name'); } @help_array ] );
                 }
+                push @{$relation_ptr->{'__notes__'}}, $note;
             }
             foreach my $message ( sort( keys( %to_be_replaced ) ) ) {
-                @help_array     = sort( keys( %{$to_be_replaced{$message}} ) );
+                @help_array     = sort( keys( %{$to_be_replaced{$message}->{'objects'}} ) );
                 $num_of_errors  = scalar( @help_array );
                 $ret_val       += $num_of_errors;
+                my $note        = $to_be_replaced{$message}->{'message'};
                 if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("%s: %s and %d more ..."), $message, join(', ', map { printXxxTemplate($to_be_replaced{$message}->{$_},$_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                    $note->list_items( [ map { printXxxTemplate($to_be_replaced{$message}->{'objects'}->{$_},$_,'name'); } splice(@help_array,0,$max_error) ], ($num_of_errors-$max_error) );
                 } else {
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf("%s: %s", $message, join(', ', map { printXxxTemplate($to_be_replaced{$message}->{$_},$_,'name'); } @help_array )) );
+                    $note->list_items( [ map { printXxxTemplate($to_be_replaced{$message}->{'objects'}->{$_},$_,'name'); } @help_array ] );
                 }
+                push @{$relation_ptr->{'__notes__'}}, $note;
             }
             foreach my $message ( sort( keys( %to_be_deleted ) ) ) {
-                @help_array     = sort( keys( %{$to_be_deleted{$message}} ) );
+                @help_array     = sort( keys( %{$to_be_deleted{$message}->{'objects'}} ) );
                 $num_of_errors  = scalar( @help_array );
                 $ret_val       += $num_of_errors;
+                my $note        = $to_be_deleted{$message}->{'message'};
                 if ( $max_error && $max_error > 0 && $num_of_errors > $max_error ) {
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf(gettext("%s: %s and %d more ..."), $message, join(', ', map { printXxxTemplate($to_be_deleted{$message}->{$_},$_,'name'); } splice(@help_array,0,$max_error) ), ($num_of_errors-$max_error) ) );
+                    $note->list_items( [ map { printXxxTemplate($to_be_deleted{$message}->{'objects'}->{$_},$_,'name'); } splice(@help_array,0,$max_error) ], ($num_of_errors-$max_error) );
                 } else {
-                    push( @{$relation_ptr->{'__notes__'}}, sprintf("%s: %s", $message, join(', ', map { printXxxTemplate($to_be_deleted{$message}->{$_},$_,'name'); } @help_array )) );
+                    $note->list_items( [ map { printXxxTemplate($to_be_deleted{$message}->{'objects'}->{$_},$_,'name'); } @help_array ] );
                 }
+                push @{$relation_ptr->{'__notes__'}}, $note;
             }
         }
     }
