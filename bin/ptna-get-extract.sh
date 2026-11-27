@@ -12,7 +12,7 @@ echo $(date "+%Y-%m-%d %H:%M:%S %Z") "$(df | grep 'osm')"
 
 touch "$TARGET.part.$$"
 
-wget --server-response --no-verbose --user-agent="PTNA script on https://ptna.openstreetmap.de" -O "$TARGET.part.$$" "$BASEURL/$SOURCE"
+wget --server-response --read-timeout=1200 --tries=3 --wait=20 --no-verbose --user-agent="PTNA script on https://ptna.openstreetmap.de" -O "$TARGET.part.$$" "$BASEURL/$SOURCE"
 
 wget_ret=$?
 
