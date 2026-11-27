@@ -125,7 +125,7 @@ then
 
         if [ -n "$PTNA_OVERPASS_API_SERVER" ]
         then
-            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Search for failed executions, empty *-Data.xml files" >> $LOGFILE
+            echo $(date "+%Y-%m-%d %H:%M:%S %Z") "Search for failed executions with server '$PTNA_OVERPASS_API_SERVER', empty *-Data.xml files" >> $LOGFILE
             emptyxml=0
             for settings_file in $(find $PTNA_NETWORKS_LOC -name settings.sh)
             do
@@ -134,10 +134,9 @@ then
 
                 if [ $isempty -gt 0 ]
                 then
-                    emtyxml=$(( $emptyxml + $isempty ))
+                    emptyxml=$(( $emptyxml + $isempty ))
                 fi
             done
-
             echo $(date "+%Y-%m-%d %H:%M:%S %Z") "End of list" >> $LOGFILE
 
             if [ $emptyxml -gt 0 -a $emptyxml -lt 20 ]
@@ -176,9 +175,10 @@ then
 
             if [ $isempty -gt 0 ]
             then
-                emtyxml=$(( $emptyxml + $isempty ))
+                emptyxml=$(( $emptyxml + $isempty ))
             fi
         done
+        echo $(date "+%Y-%m-%d %H:%M:%S %Z") "End of list" >> $LOGFILE
 
         if [ $emptyxml -gt 0 ]
         then
